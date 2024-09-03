@@ -1,0 +1,8 @@
+{
+  "name": "test-program1",
+  "type": "Program",
+  "data": {
+    "vertex": "shader://textured2d",
+    "fragment": "shader://textured2d"
+  }
+}

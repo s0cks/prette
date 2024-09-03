@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft-04/schema",
+  "$id": "mcc/texture.schema.json",
+  "title": "Texture",
+  "description": "A texture resource",
+  "definitions": {
+    "TextureFilterComponent": {
+      "type": "string",
+      "enum": [
+        "Nearest",
+        "Linear",
+        "NearestMipmapNearest",
+        "NearestMipmapLinear",
+        "LinearMipmapNearest",
+        "LinearMipmapLinear",
+        "Default"
+      ]
+    },
+    "TextureFilter": {
+      "type": "object",
+      "properties": {
+        "min": {
+          "$ref": "#/definitions/TextureFilterComponent",
+          "default": "Default"
+        },
+        "mag": {
+          "$ref": "#/definitions/TextureFilterComponent",
+          "default": "Default"
+        }
+      }
+    },
+    "TextureAlignment": {
+      "anyOf": [
+        {
+          "type": "number",
+          "enum": [
+            1, 2, 4, 8
+          ]
+        },
+        {
+          "type": "string",
+          "enum": [
+            "byte",
+            "row",
+            "word",
+            "dword",
+            "default"
+          ]
+        }
+      ],
+      "default": "Default"
+    },
+    "PixelStoreAlignment": {
+      "type": "object",
+      "properties": {
+        "pack": {
+          "$ref": "#/definitions/TextureAlignment"
+        },
+        "unpack": {
+          "$ref": "#/definitions/TextureAlignment"
+        }
+      }
+    },
+    "TextureWrapMode": {
+      "type": "string",
+      "enum": [
+        "repeat",
+        "clamp2edge",
+        "clamp2border",
+        "default"
+      ],
+      "default": "default"
+    },
+    "TextureWrap": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/TextureWrapMode"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextureWrapMode"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        {
+          "type": "object",
+          "properties": {
+            "r": {
+              "$ref": "#/definitions/TextureWrapMode"
+            },
+            "s": {
+              "$ref": "#/definitions/TextureWrapMode"
+            },
+            "t": {
+              "$ref": "#/definitions/TextureWrapMode"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "cubemap",
+        "texture"
+      ]
+    },
+    "texture": {
+      "type": "object",
+      "properties": {
+        "filename": {
+          "type": "string"
+        },
+        "filter": {
+          "$ref": "#/definitions/TextureFilter"
+        },
+        "alignment": {
+          "$ref": "#/definitions/PixelStoreAlignment"
+        },
+        "wrap": {
+          "$ref": "#/definitions/TextureWrap"
+        }
+      },
+      "required": [ "filename" ],
+      "additionalProperties": false
+    },
+    "cubemap": {
+      
+    }
+  },
+  "required": [ "type" ],
+  "additionalProperties": false
+}

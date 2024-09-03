@@ -1,0 +1,27 @@
+{
+  "dependencies": [
+    "backward-cpp",
+    "benchmark",
+    "flatbuffers",
+    "fmt",
+    "freetype",
+    "gflags",
+    "glew",
+    "glfw3",
+    "glm",
+    "glog",
+    "gtest",
+    "harfbuzz",
+    "leveldb",
+    "libuv",
+    "libvorbis",
+    "nuklear",
+    "opengl",
+    "openssl",
+    "rxcpp",
+    "stduuid",
+    "tweeny",
+    "units",
+    "rapidjson"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "name": "invalid-program3",
+  "type": "program",
+  "data": {
+    "vertex": false,
+    "fragment": ""
+  }
+}

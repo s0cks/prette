@@ -1,0 +1,413 @@
+{
+  "configurations": [
+    {
+      "name": "minecraft-tests",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/Tests/minecraft-tests",
+      "args": [
+
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb"
+    }, // All Tests
+    {
+      "name": ".obj parser tests",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/Tests/minecraft-tests",
+      "args": [
+        "--resources", "${workspaceFolder}/resources",
+        "--gtest_filter=*ObjParserTest.*"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb"
+    }, // .obj Tests
+    {
+      "name": "Class Tests",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/Tests/minecraft-tests",
+      "args": [
+        "--resources", "${workspaceFolder}/resources",
+        "--gtest_filter=*Class*.*"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb"
+    }, // Class Tests
+    {
+      "name": "IBO Tests",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/Tests/minecraft-tests",
+      "args": [
+        "--resources", "${workspaceFolder}/resources",
+        "--gtest_filter=*Ibo*.*"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb"
+    }, // .obj Tests
+    {
+      "name": "Keyboard Tests",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/Tests/minecraft-tests",
+      "args": [
+        "--resources", "${workspaceFolder}/resources",
+        "--gtest_filter=*Key*.*:*Keyboard*.*"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb"
+    }, // .obj Tests
+    {
+      "name": "Resolution Tests",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/Tests/minecraft-tests",
+      "args": [
+        "--resources", "${workspaceFolder}/resources",
+        "--gtest_filter=*Resolution*Test*.*"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb"
+    }, // .Resolution Tests
+    {
+      "name": "File Resolver Tests",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/Tests/minecraft-tests",
+      "args": [
+        "--resources", "${workspaceFolder}/resources",
+        "--gtest_filter=*FileResolver*Test*.*"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb"
+    }, // FileResolver Tests
+    {
+      "name": "rapidjson tests",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/Tests/minecraft-tests",
+      "args": [
+        "--resources", "${workspaceFolder}/resources",
+        "--gtest_filter=*RapidJsonTest.*"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb"
+    }, // .json Tests
+    {
+      "name": "Material Tests",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/Tests/minecraft-tests",
+      "args": [
+        "--resources", "${workspaceFolder}/resources",
+        "--gtest_filter=*Material*Test*.*"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb"
+    }, // Material Tests
+    {
+      "name": "Texture Tests",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/Tests/minecraft-tests",
+      "args": [
+        "--resources", "${workspaceFolder}/resources",
+        "--gtest_filter=*Texture*Test*.*"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb"
+    }, // Texture Tests
+    {
+      "name": "Image Tests",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/Tests/minecraft-tests",
+      "args": [
+        "--resources", "${workspaceFolder}/resources",
+        "--gtest_filter=*Image*Test*.*"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb"
+    }, // Image Tests
+    {
+      "name": "Shader Tests",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/Tests/minecraft-tests",
+      "args": [
+        "--resources", "${workspaceFolder}/resources",
+        "--gtest_filter=*Shader*Test*.*"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb"
+    }, // Shader Tests
+    {
+      "name": "Hash Tests",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/Tests/minecraft-tests",
+      "args": [
+        "--resources", "${workspaceFolder}/resources",
+        "--gtest_filter=*Hash*Test*.*"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb"
+    }, // Hash Tests
+    {
+      "name": "uint256 Tests",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/Tests/minecraft-tests",
+      "args": [
+        "--resources", "${workspaceFolder}/resources",
+        "--gtest_filter=*UInt256*Test*.*"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb"
+    }, // uint256 Tests
+    {
+      "name": "Cursor Tests",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/Tests/minecraft-tests",
+      "args": [
+        "--resources", "${workspaceFolder}/resources",
+        "--gtest_filter=*Cursor*Test*.*"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb"
+    }, // Cursor Tests
+    {
+      "name": "Property Tests",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/Tests/minecraft-tests",
+      "args": [
+        "--resources", "${workspaceFolder}/resources",
+        "--gtest_filter=*Property*Test*.*"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb"
+    }, // Property Tests
+    {
+      "name": "Properties Tests",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/Tests/minecraft-tests",
+      "args": [
+        "--resources", "${workspaceFolder}/resources",
+        "--gtest_filter=*Properties*Test*.*"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb"
+    }, // Properties Tests
+    {
+      "name": "Uri Tests",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/Tests/minecraft-tests",
+      "args": [
+        "--resources", "${workspaceFolder}/resources",
+        "--gtest_filter=*Uri*Test.*"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb"
+    }, // URI Tests
+    {
+      "name": "Color Tests",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/Tests/minecraft-tests",
+      "args": [
+        "--resources", "${workspaceFolder}/resources",
+        "--gtest_filter=*Color*Test.*"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb"
+    }, // Color Tests
+    {
+      "name": "Program Tests",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/Tests/minecraft-tests",
+      "args": [
+        "--resources", "${workspaceFolder}/resources",
+        "--gtest_filter=*Program*Test.*"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb"
+    }, // Program Tests
+    {
+      "name": "Vao Tests",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/Tests/minecraft-tests",
+      "args": [
+        "--resources", "${workspaceFolder}/resources",
+        "--gtest_filter=*Vao*Test.*"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb"
+    }, // Vao Tests
+    {
+      "name": "Resource tests",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/Tests/minecraft-tests",
+      "args": [
+        "--resources", "${workspaceFolder}/resources",
+        "--gtest_filter=*ResourceTest.*"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb"
+    }, // Resource Tests
+    {
+      "name": "Blend Tests",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/Tests/minecraft-tests",
+      "args": [
+        "--resources", "${workspaceFolder}/resources",
+        "--gtest_filter=*Blend*Test*.*"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb"
+    }, // Blend Tests
+    {
+      "name": "Tag Tests",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/Tests/minecraft-tests",
+      "args": [
+        "--resources", "${workspaceFolder}/resources",
+        "--gtest_filter=*Tag*Test*.*"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb"
+    }, // Blend Tests
+    {
+      "name": "Merkle Tests",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/Tests/minecraft-tests",
+      "args": [
+        "--resources", "${workspaceFolder}/resources",
+        "--gtest_filter=*Merkle*Test*.*"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb"
+    }, // Merkle Tests
+    {
+      "name": "minecraft-benchmarks",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/Benchmarks/minecraft-benchmarks",
+      "args": [
+        "--undefok=benchmark_filter,resources",
+        "--resources", "${workspaceFolder}/resources",
+        "--benchmark_filter=ObjParser*"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb"
+    }, // Benchmarks
+    {
+      "name": "minecraft",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/Sources/minecraft-client",
+      "args": [
+        "--resources", "${workspaceFolder}/resources"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [
+        {
+          "name": "UV_THREADPOOL_SIZE",
+          "value": "0"
+        }
+      ],
+      "externalConsole": false,
+      "MIMode": "lldb"
+    } // Client
+  ]
+}

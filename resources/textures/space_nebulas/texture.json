@@ -1,0 +1,12 @@
+{
+  "name": "space_nebulas",
+  "type": "cubemap",
+  "data": {
+    "left": "left.png",
+    "right": "right.png",
+    "bottom": "top.png",
+    "top": "bottom.png",
+    "front": "front.png",
+    "back": "back.png"
+  }
+}

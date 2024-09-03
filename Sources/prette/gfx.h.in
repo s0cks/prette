@@ -1,0 +1,43 @@
+#ifndef PRT_GFX_H
+#define PRT_GFX_H
+
+#include "prette/common.h"
+#ifdef OS_IS_OSX
+
+#define GL_SILENCE_DEPRECATION 1
+#include <OpenGL/gl3.h>
+
+#else
+
+#include <GL/gl3.h>
+
+#endif // OS_IS_OSX
+
+#define GLFW_INCLUDE_NONE
+#include <GLFW/glfw3.h>
+
+#include <units.h>
+#include <iostream>
+#include <glog/logging.h>
+
+#include "prette/glm.h"
+#include "prette/gfx_error.h"
+#include "prette/gfx_debug.h"
+#include "prette/gfx_misc.h"
+
+#define PRT_GLFW_CTX_VERSION_MAJOR @PROJECT_GLFW_CONTEXT_VERSION_MAJOR@
+#define PRT_GLFW_CTX_VERSION_MINOR @PROJECT_GLFW_CONTEXT_VERSION_MINOR@
+
+#ifdef M_PI
+#define PI M_PI
+#endif //M_PI
+
+#ifndef PI
+#define PI 3.141592654
+#endif //PI
+
+namespace prt::gfx {
+  void Init();
+}
+
+#endif //PRT_GFX_H

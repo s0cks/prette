@@ -1,0 +1,8 @@
+{
+  "name": "text",
+  "type": "Program",
+  "data": {
+    "vertex": "shader:text",
+    "fragment": "shader:text"
+  }
+}

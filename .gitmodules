@@ -1,0 +1,6 @@
+[submodule "lib/semver"]
+	path = lib/semver
+	url = git@github.com:h2non/semver.c.git
+[submodule "lib/utf8"]
+	path = lib/utf8
+	url = git@github.com:s0cks/utf8.h.git

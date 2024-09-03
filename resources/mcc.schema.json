@@ -1,0 +1,573 @@
+{
+  "$schema": "https://json-schema.org/draft-04/schema",
+  "$id": "mcc.schema.json",
+  "title": "MCC",
+  "description": "A MCC resource definition",
+  "type": "object",
+  "definitions": {
+    "Uri": {
+      "type": "string",
+      "pattern": "([a-z0-9]+):\\/\\/([a-z0-9_/\\.]+)"
+    },
+    "ShaderUri": {
+      "type": "string",
+      "pattern": "shader:(\/\/)?([a-z0-9_/\\.]+)"
+    },
+    "TextureUri": {
+      "type": "string",
+      "pattern": "texture:\/\/([a-z0-9_/\\.]+)"
+    },
+    "TextureFilterComponent": {
+      "type": "string",
+      "enum": [
+        "Nearest",
+        "Linear",
+        "NearestMipmapNearest",
+        "NearestMipmapLinear",
+        "LinearMipmapNearest",
+        "LinearMipmapLinear",
+        "Default"
+      ]
+    },
+    "TextureFilter": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "min": {
+              "$ref": "#/definitions/TextureFilterComponent",
+              "default": "Default"
+            },
+            "mag": {
+              "$ref": "#/definitions/TextureFilterComponent",
+              "default": "Default"
+            }
+          }
+        },
+        {
+          "$ref": "#/definitions/TextureFilterComponent"
+        }
+      ]
+    },
+    "TextureAlignment": {
+      "anyOf": [
+        {
+          "type": "number",
+          "enum": [
+            1, 2, 4, 8
+          ]
+        },
+        {
+          "type": "string",
+          "enum": [
+            "byte",
+            "row",
+            "word",
+            "dword",
+            "default"
+          ]
+        }
+      ],
+      "default": "Default"
+    },
+    "TextureWrapMode": {
+      "type": "string",
+      "enum": [
+        "repeat",
+        "clamp2edge",
+        "clamp2border",
+        "default"
+      ],
+      "default": "default"
+    },
+    "TextureWrap": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/TextureWrapMode"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextureWrapMode"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        {
+          "type": "object",
+          "properties": {
+            "r": {
+              "$ref": "#/definitions/TextureWrapMode"
+            },
+            "s": {
+              "$ref": "#/definitions/TextureWrapMode"
+            },
+            "t": {
+              "$ref": "#/definitions/TextureWrapMode"
+            }
+          }
+        }
+      ]
+    },
+    "Texture": {
+      "type": "object",
+      "description": "",
+      "additionalProperties": false,
+      "properties": {
+        "file": {
+          "type": "string"
+        },
+        "filter": {
+          "$ref": "#/definitions/TextureFilter"
+        },
+        "alignment": {
+          "$ref": "#/definitions/TextureAlignment"
+        },
+        "wrap": {
+          "$ref": "#/definitions/TextureWrap"
+        }
+      },
+      "required": [ "file" ]
+    },
+    "TextureDocument": {
+      "type": "object",
+      "description": "A texture document",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [ 
+            "Texture2d",
+            "Texture3d"
+          ],
+          "description": ""
+        },
+        "name": {
+          "type": "string",
+          "description": ""
+        },
+        "data": {
+          "$ref": "#/definitions/Texture",
+          "description": ""
+        }
+      }
+    },
+    "CubeMapFace": {
+      "type": "object",
+      "description": "",
+      "additionalProperties": false,
+      "properties": {
+        "file": {
+          "type": "string",
+          "description": ""
+        },
+        "level": {
+          "type": "number",
+          "description": "",
+          "default": 0
+        },
+        "border": {
+          "type": "number",
+          "description": "",
+          "default": 0
+        }
+      },
+      "required": [ "file" ]
+    },
+    "CubeMap": {
+      "oneOf": [
+        {
+          "type": "object",
+          "description": "",
+          "additionalProperties": false,
+          "properties": {
+            "filter": {
+              "$ref": "#/definitions/TextureFilter"
+            },
+            "alignment": {
+              "$ref": "#/definitions/TextureAlignment"
+            },
+            "wrap": {
+              "$ref": "#/definitions/TextureWrap"
+            },
+            "front": {
+              "$ref": "#/definitions/CubeMapFace"
+            },
+            "back": {
+              "$ref": "#/definitions/CubeMapFace"
+            },
+            "top": {
+              "$ref": "#/definitions/CubeMapFace"
+            },
+            "bottom": {
+              "$ref": "#/definitions/CubeMapFace"
+            },
+            "left": {
+              "$ref": "#/definitions/CubeMapFace"
+            },
+            "right": {
+              "$ref": "#/definitions/CubeMapFace"
+            }
+          }
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CubeMapFace"
+          },
+          "minItems": 0,
+          "maxItems": 6
+        }
+      ]
+    },
+    "CubeMapDocument": {
+      "type": "object",
+      "description": "A CubeMap document",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [ 
+            "CubeMap"
+          ],
+          "description": ""
+        },
+        "name": {
+          "type": "string",
+          "description": ""
+        },
+        "data": {
+          "$ref": "#/definitions/CubeMap",
+          "description": ""
+        }
+      },
+      "required": [ "type", "name", "data" ]
+    },
+    "Shader": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": ""
+        },
+        "sources": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "$ref": "#/definitions/ShaderUri"
+          }
+        }
+      },
+      "required": [ "source" ]
+    },
+    "ShaderDocument": {
+      "type": "object",
+      "description": "A shader document",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [ 
+            "VertexShader",
+            "FragmentShader",
+            "GeometryShader",
+            "TessEvalShader",
+            "TessControlShader" 
+          ],
+          "description": ""
+        },
+        "name": {
+          "type": "string",
+          "description": ""
+        },
+        "data": {
+          "$ref": "#/definitions/Shader",
+          "description": ""
+        }
+      },
+      "required": [ "type", "name", "data" ]
+    },
+    "Material": {
+      "description": "",
+      "oneOf": [
+        {
+          "type": "object",
+          "description": "",
+          "additionalProperties": false,
+          "properties": {
+            "albedo": {
+              "$ref": "#/definitions/Texture",
+              "description": ""
+            },
+            "ao": {
+              "$ref": "#/definitions/Texture",
+              "description": ""
+            },
+            "height": {
+              "$ref": "#/definitions/Texture",
+              "description": ""
+            },
+            "normal": {
+              "$ref": "#/definitions/Texture",
+              "description": ""
+            },
+            "roughness": {
+              "$ref": "#/definitions/Texture",
+              "description": ""
+            }
+          }
+        },
+        {
+          "type": "array",
+          "description": "",
+          "items": {
+            "$ref": "#/definitions/Texture",
+            "minItems": 0,
+            "maxItems": 10
+          }
+        }
+      ]
+    },
+    "MaterialDocument": {
+      "type": "object",
+      "description": "A shader document",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [ 
+            "Material"
+          ],
+          "description": ""
+        },
+        "name": {
+          "type": "string",
+          "description": ""
+        },
+        "data": {
+          "$ref": "#/definitions/Material",
+          "description": ""
+        }
+      },
+      "required": [ "type", "name", "data" ]
+    },
+    "Mesh": {
+
+    },
+    "MeshDocument": {
+      "type": "object",
+      "description": "A mesh document",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [ 
+            "Mesh"
+          ],
+          "description": ""
+        },
+        "name": {
+          "type": "string",
+          "description": ""
+        },
+        "data": {
+          "$ref": "#/definitions/Mesh",
+          "description": ""
+        }
+      },
+      "required": [ "type", "name", "data" ]
+    },
+    "Program": {
+      "type": "object",
+      "description": "A program document",
+      "additionalProperties": false,
+      "properties": {
+        "vertex": {
+          "oneOf": [
+            { "$ref": "#/definitions/ShaderUri" },
+            { "$ref": "#/definitions/Shader" }
+          ]
+        },
+        "fragment": {
+          "oneOf": [
+            { "$ref": "#/definitions/ShaderUri" },
+            { "$ref": "#/definitions/Shader" }
+          ]
+        },
+        "geometry": {
+          "oneOf": [
+            { "$ref": "#/definitions/ShaderUri" },
+            { "$ref": "#/definitions/Shader" }
+          ]
+        },
+        "tesscontrol": {
+          "oneOf": [
+            { "$ref": "#/definitions/ShaderUri" },
+            { "$ref": "#/definitions/Shader" }
+          ]
+        },
+        "tesseval": {
+          "oneOf": [
+            { "$ref": "#/definitions/ShaderUri" },
+            { "$ref": "#/definitions/Shader" }
+          ]
+        }
+      }
+    },
+    "ProgramDocument": {
+      "type": "object",
+      "description": "A shader document",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [ 
+            "Program"
+          ],
+          "description": ""
+        },
+        "name": {
+          "type": "string",
+          "description": ""
+        },
+        "data": {
+          "$ref": "#/definitions/Program",
+          "description": ""
+        }
+      },
+      "required": [ "type", "name", "data" ]
+    },
+    "Font": {
+      
+    },
+    "FontDocument": {
+      "type": "object",
+      "description": "A font document",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [ 
+            "Font"
+          ],
+          "description": ""
+        },
+        "name": {
+          "type": "string",
+          "description": ""
+        },
+        "data": {
+          "$ref": "#/definitions/Font",
+          "description": ""
+        }
+      },
+      "required": [ "type", "name", "data" ]
+    },
+    "Pipeline": {
+
+    },
+    "PipelineDocument": {
+      "type": "object",
+      "description": "A pipeline document",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [ 
+            "Pipeline"
+          ],
+          "description": ""
+        },
+        "name": {
+          "type": "string",
+          "description": ""
+        },
+        "data": {
+          "$ref": "#/definitions/Pipeline",
+          "description": ""
+        }
+      },
+      "required": [ "type", "name", "data" ]
+    },
+    "Skybox": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "texture": {
+          "description": "",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Texture",
+              "description": ""
+            },
+            {
+              "type": "string",
+              "description": ""
+            }
+          ]
+        },
+        "mesh": {
+          "description": "",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Mesh",
+              "description": ""
+            },
+            {
+              "type": "string",
+              "description": ""
+            }
+          ]
+        },
+        "program": {
+          "description": "",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Program",
+              "description": ""
+            },
+            {
+              "type": "string",
+              "description": ""
+            }
+          ]
+        }
+      }
+    },
+    "SkyboxDocument": {
+      "type": "object",
+      "description": "A skybox document",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [ 
+            "Skybox"
+          ],
+          "description": ""
+        },
+        "name": {
+          "type": "string",
+          "description": ""
+        },
+        "data": {
+          "$ref": "#/definitions/Skybox",
+          "description": ""
+        }
+      },
+      "required": [ "type", "name", "data" ]
+    }
+  },
+  "oneOf": [
+    { "$ref": "#/definitions/TextureDocument" },
+    { "$ref": "#/definitions/CubeMapDocument" },
+    { "$ref": "#/definitions/ShaderDocument" },
+    { "$ref": "#/definitions/MaterialDocument" },
+    { "$ref": "#/definitions/MeshDocument" },
+    { "$ref": "#/definitions/ProgramDocument" },
+    { "$ref": "#/definitions/FontDocument" },
+    { "$ref": "#/definitions/PipelineDocument" },
+    { "$ref": "#/definitions/SkyboxDocument" }
+  ]
+}

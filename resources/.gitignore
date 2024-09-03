@@ -1,0 +1,15 @@
+# Ignore Everything
+/*
+/*/
+
+# Except These
+!/.gitignore
+!/.gitkeep
+!/cursors/
+!/fonts/
+!/materials/
+!/meshes/
+!/shaders/
+!/textures/
+!/*.schema.json
+!/*.properties

@@ -1,0 +1,24 @@
+# Ignore Everything
+/*
+/*/
+
+# Except These
+!/build/
+!/cmake/
+!/lib/
+!/resources/
+!/Sources/
+!/Tests/
+!/.gitignore
+!/.gitmodules
+!/.gitattributes
+!/.suppress.cppcheck
+!/Doxyfile.in
+!/vcpkg*.json
+!/CMakeLists.txt
+!/CMakePresets.json
+!/*.md
+!/.vscode/
+!/.cmake-format.yaml
+!/.clang-format
+!/Benchmarks/

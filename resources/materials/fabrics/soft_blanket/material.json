@@ -1,0 +1,9 @@
+{
+  "name": "fabrics/soft_blanket",
+  "albedo": true,
+  "ao": true,
+  "height": true,
+  "metallic": true,
+  "normal": true,
+  "roughness": true
+}

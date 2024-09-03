@@ -1,0 +1,19 @@
+#ifndef MCC_H
+#define MCC_H
+
+#include <string>
+#include <glog/logging.h>
+
+namespace prt {
+#define PRT_VERSION_MAJOR @PROJECT_VERSION_MAJOR@
+#define PRT_VERSION_MINOR @PROJECT_VERSION_MINOR@
+#define PRT_VERSION_PATCH @PROJECT_VERSION_PATCH@
+
+#define PRT_GIT_BRANCH "@PROJECT_GIT_BRANCH@"
+#define PRT_GIT_COMMIT_HASH "@PROJECT_GIT_COMMIT_HASH@"
+
+  std::string GetVersion();
+  void OnGlfwError(int code, const char* description);
+}
+
+#endif //MCC_H

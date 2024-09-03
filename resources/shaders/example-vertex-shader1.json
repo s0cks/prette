@@ -1,0 +1,7 @@
+{
+  "name": "example",
+  "type": "VertexShader",
+  "data": {
+    "source": "file://example.vs"
+  }
+}
