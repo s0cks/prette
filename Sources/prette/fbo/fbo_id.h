@@ -18,13 +18,20 @@ namespace prt {
       return id == kDefaultFboId;
     }
 
+    void GenerateFboIds(FboId* ids, const int num);
+
+    static inline FboId
+    GenerateFboId() {
+      FboId id;
+      GenerateFboIds(&id, 1);
+      return id;
+    }
+
     static inline rx::observable<FboId>
-    GenerateFboId(const int num = 1) {
+    GenerateFboIdsAsync(const int num) {
       return rx::observable<>::create<FboId>([num](rx::subscriber<FboId> s) {
         FboId ids[num];
-        glGenFramebuffers(num, &ids[0]);
-        CHECK_GL(FATAL);
-
+        GenerateFboIds(&ids[0], num);
         for(auto idx = 0; idx < num; idx++)
           s.on_next(ids[idx]);
         s.on_completed();

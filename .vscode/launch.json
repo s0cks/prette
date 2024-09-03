@@ -5,9 +5,7 @@
       "type": "cppdbg",
       "request": "launch",
       "program": "${workspaceFolder}/build/Tests/minecraft-tests",
-      "args": [
-
-      ],
+      "args": [],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
       "environment": [],
@@ -20,7 +18,8 @@
       "request": "launch",
       "program": "${workspaceFolder}/build/Tests/minecraft-tests",
       "args": [
-        "--resources", "${workspaceFolder}/resources",
+        "--resources",
+        "${workspaceFolder}/resources",
         "--gtest_filter=*ObjParserTest.*"
       ],
       "stopAtEntry": false,
@@ -35,7 +34,8 @@
       "request": "launch",
       "program": "${workspaceFolder}/build/Tests/minecraft-tests",
       "args": [
-        "--resources", "${workspaceFolder}/resources",
+        "--resources",
+        "${workspaceFolder}/resources",
         "--gtest_filter=*Class*.*"
       ],
       "stopAtEntry": false,
@@ -50,7 +50,8 @@
       "request": "launch",
       "program": "${workspaceFolder}/build/Tests/minecraft-tests",
       "args": [
-        "--resources", "${workspaceFolder}/resources",
+        "--resources",
+        "${workspaceFolder}/resources",
         "--gtest_filter=*Ibo*.*"
       ],
       "stopAtEntry": false,
@@ -65,7 +66,8 @@
       "request": "launch",
       "program": "${workspaceFolder}/build/Tests/minecraft-tests",
       "args": [
-        "--resources", "${workspaceFolder}/resources",
+        "--resources",
+        "${workspaceFolder}/resources",
         "--gtest_filter=*Key*.*:*Keyboard*.*"
       ],
       "stopAtEntry": false,
@@ -80,7 +82,8 @@
       "request": "launch",
       "program": "${workspaceFolder}/build/Tests/minecraft-tests",
       "args": [
-        "--resources", "${workspaceFolder}/resources",
+        "--resources",
+        "${workspaceFolder}/resources",
         "--gtest_filter=*Resolution*Test*.*"
       ],
       "stopAtEntry": false,
@@ -95,7 +98,8 @@
       "request": "launch",
       "program": "${workspaceFolder}/build/Tests/minecraft-tests",
       "args": [
-        "--resources", "${workspaceFolder}/resources",
+        "--resources",
+        "${workspaceFolder}/resources",
         "--gtest_filter=*FileResolver*Test*.*"
       ],
       "stopAtEntry": false,
@@ -110,7 +114,8 @@
       "request": "launch",
       "program": "${workspaceFolder}/build/Tests/minecraft-tests",
       "args": [
-        "--resources", "${workspaceFolder}/resources",
+        "--resources",
+        "${workspaceFolder}/resources",
         "--gtest_filter=*RapidJsonTest.*"
       ],
       "stopAtEntry": false,
@@ -125,7 +130,8 @@
       "request": "launch",
       "program": "${workspaceFolder}/build/Tests/minecraft-tests",
       "args": [
-        "--resources", "${workspaceFolder}/resources",
+        "--resources",
+        "${workspaceFolder}/resources",
         "--gtest_filter=*Material*Test*.*"
       ],
       "stopAtEntry": false,
@@ -140,7 +146,8 @@
       "request": "launch",
       "program": "${workspaceFolder}/build/Tests/minecraft-tests",
       "args": [
-        "--resources", "${workspaceFolder}/resources",
+        "--resources",
+        "${workspaceFolder}/resources",
         "--gtest_filter=*Texture*Test*.*"
       ],
       "stopAtEntry": false,
@@ -155,7 +162,8 @@
       "request": "launch",
       "program": "${workspaceFolder}/build/Tests/minecraft-tests",
       "args": [
-        "--resources", "${workspaceFolder}/resources",
+        "--resources",
+        "${workspaceFolder}/resources",
         "--gtest_filter=*Image*Test*.*"
       ],
       "stopAtEntry": false,
@@ -170,7 +178,8 @@
       "request": "launch",
       "program": "${workspaceFolder}/build/Tests/minecraft-tests",
       "args": [
-        "--resources", "${workspaceFolder}/resources",
+        "--resources",
+        "${workspaceFolder}/resources",
         "--gtest_filter=*Shader*Test*.*"
       ],
       "stopAtEntry": false,
@@ -185,7 +194,8 @@
       "request": "launch",
       "program": "${workspaceFolder}/build/Tests/minecraft-tests",
       "args": [
-        "--resources", "${workspaceFolder}/resources",
+        "--resources",
+        "${workspaceFolder}/resources",
         "--gtest_filter=*Hash*Test*.*"
       ],
       "stopAtEntry": false,
@@ -200,7 +210,8 @@
       "request": "launch",
       "program": "${workspaceFolder}/build/Tests/minecraft-tests",
       "args": [
-        "--resources", "${workspaceFolder}/resources",
+        "--resources",
+        "${workspaceFolder}/resources",
         "--gtest_filter=*UInt256*Test*.*"
       ],
       "stopAtEntry": false,
@@ -215,7 +226,8 @@
       "request": "launch",
       "program": "${workspaceFolder}/build/Tests/minecraft-tests",
       "args": [
-        "--resources", "${workspaceFolder}/resources",
+        "--resources",
+        "${workspaceFolder}/resources",
         "--gtest_filter=*Cursor*Test*.*"
       ],
       "stopAtEntry": false,
@@ -230,7 +242,8 @@
       "request": "launch",
       "program": "${workspaceFolder}/build/Tests/minecraft-tests",
       "args": [
-        "--resources", "${workspaceFolder}/resources",
+        "--resources",
+        "${workspaceFolder}/resources",
         "--gtest_filter=*Property*Test*.*"
       ],
       "stopAtEntry": false,
@@ -245,7 +258,8 @@
       "request": "launch",
       "program": "${workspaceFolder}/build/Tests/minecraft-tests",
       "args": [
-        "--resources", "${workspaceFolder}/resources",
+        "--resources",
+        "${workspaceFolder}/resources",
         "--gtest_filter=*Properties*Test*.*"
       ],
       "stopAtEntry": false,
@@ -260,7 +274,8 @@
       "request": "launch",
       "program": "${workspaceFolder}/build/Tests/minecraft-tests",
       "args": [
-        "--resources", "${workspaceFolder}/resources",
+        "--resources",
+        "${workspaceFolder}/resources",
         "--gtest_filter=*Uri*Test.*"
       ],
       "stopAtEntry": false,
@@ -275,7 +290,8 @@
       "request": "launch",
       "program": "${workspaceFolder}/build/Tests/minecraft-tests",
       "args": [
-        "--resources", "${workspaceFolder}/resources",
+        "--resources",
+        "${workspaceFolder}/resources",
         "--gtest_filter=*Color*Test.*"
       ],
       "stopAtEntry": false,
@@ -290,7 +306,8 @@
       "request": "launch",
       "program": "${workspaceFolder}/build/Tests/minecraft-tests",
       "args": [
-        "--resources", "${workspaceFolder}/resources",
+        "--resources",
+        "${workspaceFolder}/resources",
         "--gtest_filter=*Program*Test.*"
       ],
       "stopAtEntry": false,
@@ -305,7 +322,8 @@
       "request": "launch",
       "program": "${workspaceFolder}/build/Tests/minecraft-tests",
       "args": [
-        "--resources", "${workspaceFolder}/resources",
+        "--resources",
+        "${workspaceFolder}/resources",
         "--gtest_filter=*Vao*Test.*"
       ],
       "stopAtEntry": false,
@@ -320,7 +338,8 @@
       "request": "launch",
       "program": "${workspaceFolder}/build/Tests/minecraft-tests",
       "args": [
-        "--resources", "${workspaceFolder}/resources",
+        "--resources",
+        "${workspaceFolder}/resources",
         "--gtest_filter=*ResourceTest.*"
       ],
       "stopAtEntry": false,
@@ -335,7 +354,8 @@
       "request": "launch",
       "program": "${workspaceFolder}/build/Tests/minecraft-tests",
       "args": [
-        "--resources", "${workspaceFolder}/resources",
+        "--resources",
+        "${workspaceFolder}/resources",
         "--gtest_filter=*Blend*Test*.*"
       ],
       "stopAtEntry": false,
@@ -350,7 +370,8 @@
       "request": "launch",
       "program": "${workspaceFolder}/build/Tests/minecraft-tests",
       "args": [
-        "--resources", "${workspaceFolder}/resources",
+        "--resources",
+        "${workspaceFolder}/resources",
         "--gtest_filter=*Tag*Test*.*"
       ],
       "stopAtEntry": false,
@@ -365,7 +386,8 @@
       "request": "launch",
       "program": "${workspaceFolder}/build/Tests/minecraft-tests",
       "args": [
-        "--resources", "${workspaceFolder}/resources",
+        "--resources",
+        "${workspaceFolder}/resources",
         "--gtest_filter=*Merkle*Test*.*"
       ],
       "stopAtEntry": false,
@@ -381,7 +403,8 @@
       "program": "${workspaceFolder}/build/Benchmarks/minecraft-benchmarks",
       "args": [
         "--undefok=benchmark_filter,resources",
-        "--resources", "${workspaceFolder}/resources",
+        "--resources",
+        "${workspaceFolder}/resources",
         "--benchmark_filter=ObjParser*"
       ],
       "stopAtEntry": false,
@@ -391,14 +414,14 @@
       "MIMode": "lldb"
     }, // Benchmarks
     {
-      "name": "minecraft",
+      "name": "prette",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/build/Sources/minecraft-client",
+      "program": "${workspaceFolder}/build/Sources/prette-client",
       "args": [
-        "--resources", "${workspaceFolder}/resources"
+        "--resources",
+        "${workspaceFolder}/resources"
       ],
-      "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
       "environment": [
         {
@@ -406,8 +429,13 @@
           "value": "0"
         }
       ],
-      "externalConsole": false,
-      "MIMode": "lldb"
+      "MIMode": "lldb",
+      "setupCommands": [
+        {
+          "description": "Load .lldbinit",
+          "text": "command source ~/.lldbinit"
+        }
+      ]
     } // Client
   ]
 }

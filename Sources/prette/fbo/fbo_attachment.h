@@ -94,6 +94,7 @@ namespace prt::fbo {
 
   class Attachment {
     friend class FboFactory;
+    friend class FboBuilder;
   public:
     enum Type : uint8_t {
 #define DEFINE_ATTACHMENT(Name) k##Name,

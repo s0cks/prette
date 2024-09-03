@@ -43,7 +43,15 @@ namespace prt {
   public:
     ~BuilderTemplate() override = default;
     virtual T* Build() const = 0;
-    virtual rx::observable<T*> BuildAsync() const = 0;
+    virtual rx::observable<T*> BuildAsync() const {
+      return rx::observable<>::create<T*>([this](rx::subscriber<T*> s) {
+        const auto result = Build();
+        if(!result)
+          return s.on_error(rx::util::make_error_ptr(std::runtime_error("failed to build.")));
+        s.on_next(result);
+        s.on_completed();
+      });
+    }
   };
 }
 

@@ -97,5 +97,8 @@
     "csignal": "cpp"
   },
   "cmake.useCMakePresets": "always",
-  "cmake.options.statusBarVisibility": "visible"
+  "cmake.options.statusBarVisibility": "visible",
+  "workbench.colorCustomizations": {
+    "debugConsole.errorForeground": "#ff0000"
+  }
 }

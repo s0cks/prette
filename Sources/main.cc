@@ -34,7 +34,6 @@
 #include "prette/gui/gui_window.h"
 
 #include "prette/fbo/fbo.h"
-#include "prette/fbo/fbo_factory.h"
 #include "prette/render/render_settings.h"
 
 #include "prette/ibo/ibo_scope.h"
@@ -114,9 +113,38 @@ OnUnhandledException() {
   report.Print(std::cerr);
 }
 
+static inline const char*
+GetSeverityName(const google::LogSeverity sev) {
+  switch(sev) {
+    case google::INFO:
+      return "INFO";
+    default:
+      return "Unknown";
+  }
+}
+// void MyPrefixFormatter(std::ostream& s, const google::LogMessage& m, void* /*data*/) {
+
+//   using namespace std;
+//   s << GetSeverityName(m.severity())
+//   << setw(4) << 1900 + m.time().year()
+//   << setw(2) << 1 + m.time().month()
+//   << setw(2) << m.time().day()
+//   << ' '
+//   << setw(2) << m.time().hour() << ':'
+//   << setw(2) << m.time().min()  << ':'
+//   << setw(2) << m.time().sec() << "."
+//   << setw(6) << m.time().usec()
+//   << ' '
+//   << setfill(' ') << setw(5)
+//   << m.thread_id() << setfill('0')
+//   << ' '
+//   << m.basename() << ':' << m.line() << "]";
+// }
+
 int main(int argc, char** argv) {  
   srand(time(NULL));
 
+  // ::google::InstallPrefixFormatter(&MyPrefixFormatter);
   ::google::InitGoogleLogging(argv[0]);
   ::google::LogToStderr();
   ::google::ParseCommandLineFlags(&argc, &argv, true);

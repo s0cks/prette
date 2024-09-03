@@ -1,5 +1,7 @@
 #include "prette/fbo/fbo.h"
 
+#include "prette/fbo/fbo_builder.h"
+
 namespace prt::fbo {
   using namespace texture;
 

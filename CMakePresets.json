@@ -101,14 +101,18 @@
     {
       "name": "debug-osx-arm64",
       "displayName": "Debug OSX/arm64",
-      "cleanFirst": true,
       "configurePreset": "debug-osx-arm64"
     },
     {
       "name": "debug",
       "displayName": "Debug",
-      "cleanFirst": true,
       "configurePreset": "debug"
+    },
+    {
+      "name": "release",
+      "displayName": "Release",
+      "configurePreset": "release",
+      "cleanFirst": true
     }
   ]
 }

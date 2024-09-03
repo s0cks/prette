@@ -39,6 +39,7 @@ namespace prt {
     class FboFactory;
     class Fbo : public Object,
                 public FboEventSource {
+      friend class FboBuilder;
       friend class FboFactory;
       friend class FboBindScope;
       friend class ColorAttachment;

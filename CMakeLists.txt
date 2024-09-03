@@ -4,6 +4,7 @@ project(prette)
 include(GitInfo)
 include(DoxygenConfig)
 include(CppCheckConfig)
+# include(ClangTidyConfig)
 
 # cppcheck
 find_package(Threads REQUIRED)
