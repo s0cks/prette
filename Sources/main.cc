@@ -9,6 +9,7 @@
 
 #include <units.h>
 #include <backward.hpp>
+#include <termcolor/termcolor.hpp>
 
 #define NK_GLFW_GL3_IMPLEMENTATION
 
@@ -34,6 +35,7 @@
 #include "prette/gui/gui_window.h"
 
 #include "prette/fbo/fbo.h"
+#include "prette/fbo/fbo_builder.h"
 #include "prette/render/render_settings.h"
 
 #include "prette/ibo/ibo_scope.h"
@@ -113,32 +115,37 @@ OnUnhandledException() {
   report.Print(std::cerr);
 }
 
-static inline const char*
-GetSeverityName(const google::LogSeverity sev) {
-  switch(sev) {
+
+static inline std::ostream& 
+operator<<(std::ostream& s, const google::LogSeverity& severity) {
+  switch(severity) {
     case google::INFO:
-      return "INFO";
-    default:
-      return "Unknown";
+      return s << termcolor::white << "I";
+    case google::WARNING:
+      return s << termcolor::yellow << "W";
+    case google::ERROR:
+      return s << termcolor::red << "E";
+    case google::FATAL:
+      return s << termcolor::bright_red << "F";
   }
 }
-// void MyPrefixFormatter(std::ostream& s, const google::LogMessage& m, void* /*data*/) {
 
+// void MyPrefixFormatter(std::ostream& s, const google::LogMessage& m, void* /*data*/) {
 //   using namespace std;
-//   s << GetSeverityName(m.severity())
-//   << setw(4) << 1900 + m.time().year()
-//   << setw(2) << 1 + m.time().month()
-//   << setw(2) << m.time().day()
-//   << ' '
-//   << setw(2) << m.time().hour() << ':'
-//   << setw(2) << m.time().min()  << ':'
-//   << setw(2) << m.time().sec() << "."
-//   << setw(6) << m.time().usec()
-//   << ' '
-//   << setfill(' ') << setw(5)
-//   << m.thread_id() << setfill('0')
-//   << ' '
-//   << m.basename() << ':' << m.line() << "]";
+//   s << m.severity()
+//     << setw(4) << 1900 + m.time().year()
+//     << setw(2) << 1 + m.time().month()
+//     << setw(2) << m.time().day()
+//     << ' '
+//     << setw(2) << m.time().hour() << ':'
+//     << setw(2) << m.time().min()  << ':'
+//     << setw(2) << m.time().sec() << "."
+//     << setw(6) << m.time().usec()
+//     << ' '
+//     << setfill(' ') << setw(5)
+//     << m.thread_id() << setfill('0')
+//     << ' '
+//     << m.basename() << ':' << m.line() << "]";
 // }
 
 int main(int argc, char** argv) {  
@@ -146,13 +153,12 @@ int main(int argc, char** argv) {
 
   // ::google::InstallPrefixFormatter(&MyPrefixFormatter);
   ::google::InitGoogleLogging(argv[0]);
-  ::google::LogToStderr();
   ::google::ParseCommandLineFlags(&argc, &argv, true);
   PrintRuntimeInfo();
   InitSignalHandlers();
   std::set_terminate(OnUnhandledException);
   LOG_IF(FATAL, !SetCurrentThreadName("main")) << "failed to set main thread name.";
-  
+
   gfx::Init();
   engine::InitEngine();
   window::InitWindows();
@@ -163,23 +169,29 @@ int main(int argc, char** argv) {
   Class::Init();
   gui::Vertex::InitClass();
 
-  uword counter = 0;
-  keyboard::OnKeyPressedEvent()
-    .subscribe(LogEvent<keyboard::KeyPressedEvent>());
-  keyboard::OnKeyPressedEvent()
-    .filter(keyboard::KeyPressedEvent::FilterBy(GLFW_KEY_SPACE))
-    .subscribe([&counter](keyboard::KeyPressedEvent* e) {
-      DLOG(INFO) << "opening gui...";
-      new TestWindow(counter++);
-    });
-  keyboard::OnKeyPressedEvent()
-    .filter(keyboard::KeyPressedEvent::FilterBy(GLFW_KEY_GRAVE_ACCENT))
-    .subscribe([](keyboard::KeyPressedEvent* e) {
-      PrintRuntimeInfo();
-    });
+  fbo::FboBuilder builder(render::GetTargetResolution());
+  
+  const auto fbo = builder.Build();
+  PRT_ASSERT(fbo);
+  DLOG(INFO) << "created: " << fbo->ToString();
 
-  const auto engine = engine::GetEngine();
-  PRT_ASSERT(engine);
-  engine->Run();
+  // uword counter = 0;
+  // keyboard::OnKeyPressedEvent()
+  //   .subscribe(LogEvent<keyboard::KeyPressedEvent>());
+  // keyboard::OnKeyPressedEvent()
+  //   .filter(keyboard::KeyPressedEvent::FilterBy(GLFW_KEY_SPACE))
+  //   .subscribe([&counter](keyboard::KeyPressedEvent* e) {
+  //     DLOG(INFO) << "opening gui...";
+  //     new TestWindow(counter++);
+  //   });
+  // keyboard::OnKeyPressedEvent()
+  //   .filter(keyboard::KeyPressedEvent::FilterBy(GLFW_KEY_GRAVE_ACCENT))
+  //   .subscribe([](keyboard::KeyPressedEvent* e) {
+  //     PrintRuntimeInfo();
+  //   });
+
+  // const auto engine = engine::GetEngine();
+  // PRT_ASSERT(engine);
+  // engine->Run();
   return EXIT_SUCCESS;
 }

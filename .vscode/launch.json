@@ -420,7 +420,9 @@
       "program": "${workspaceFolder}/build/Sources/prette-client",
       "args": [
         "--resources",
-        "${workspaceFolder}/resources"
+        "${workspaceFolder}/resources",
+        "--logtostdout",
+        "--colorlogtostdout"
       ],
       "cwd": "${workspaceFolder}",
       "environment": [

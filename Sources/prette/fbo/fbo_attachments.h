@@ -17,6 +17,10 @@ namespace prt::fbo {
     AttachmentSet() = default;
     virtual ~AttachmentSet() = default;
 
+    bool IsEmpty() const {
+      return attachments_.size() == 0;
+    }
+
     Attachments::const_iterator begin() const {
       return std::begin(attachments_);
     }

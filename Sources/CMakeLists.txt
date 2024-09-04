@@ -7,10 +7,13 @@ file(GLOB_RECURSE PRT_SOURCES
   "${CMAKE_CURRENT_SOURCE_DIR}/prette/*.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/prette/**/*.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/prette/**/*.cc")
+find_path(TERMCOLOR_INCLUDE_DIRS "termcolor/termcolor.hpp")
+
 add_library(${PROJECT_NAME}
   ${PROJECT_BINARY_DIR}/Sources/prette/prette.h prette/prette.cc
   ${PROJECT_BINARY_DIR}/Sources/prette/gfx.h
   ${PRT_SOURCES})
+target_include_directories(${PROJECT_NAME} PRIVATE ${TERMCOLOR_INCLUDE_DIRS})
 target_link_libraries(${PROJECT_NAME}
   PNG::PNG
   JPEG::JPEG

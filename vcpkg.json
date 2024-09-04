@@ -18,10 +18,11 @@
     "nuklear",
     "opengl",
     "openssl",
+    "rapidjson",
     "rxcpp",
     "stduuid",
     "tweeny",
     "units",
-    "rapidjson"
+    "termcolor"
   ]
 }

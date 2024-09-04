@@ -4,32 +4,88 @@
 #include "prette/gfx.h"
 
 namespace prt::texture {
-#define FOR_EACH_TEXTURE_FORMAT(V)        \
-  V(RGB,        GL_RGB)                   \
-  V(RGBA,       GL_RGBA)
+  class TextureFormat {
+  private:
+    GLenum value_;
+  public:
+    constexpr TextureFormat() = default;
+    constexpr TextureFormat(const GLenum value):
+      value_(value) {
+    }
+    constexpr TextureFormat(const TextureFormat& rhs):
+      value_(rhs.value()) {
+    }
+    ~TextureFormat() = default;
 
-  enum TextureFormat : GLenum {
-#define DEFINE_TEXTURE_FORMAT(Name, GlValue) k##Name = (GlValue),
-    FOR_EACH_TEXTURE_FORMAT(DEFINE_TEXTURE_FORMAT)
-#undef DEFINE_TEXTURE_FORMAT
-    kDefaultTextureFormat = kRGBA,
+    constexpr GLenum value() const {
+      return value_;
+    }
+
+    constexpr bool IsDepthFormat() const;
+    constexpr bool IsStencilFormat() const;
+    constexpr bool IsSRGB() const;
+    constexpr bool IsUnsignedNormalized() const;
+    constexpr bool IsSignedInt() const;
+    constexpr bool IsUnsignedInt() const;
+    constexpr bool IsFloatingPoint() const;
+
+    TextureFormat& operator=(const TextureFormat& rhs) = default;
+
+    constexpr bool operator==(const TextureFormat& rhs) const {
+      return value() == rhs.value();
+    }
+
+    constexpr bool operator==(const GLenum& rhs) const {
+      return value() == rhs;
+    }
+
+    constexpr bool operator!=(const TextureFormat& rhs) const {
+      return value() != rhs.value();
+    }
+
+    constexpr bool operator!=(const GLenum& rhs) const {
+      return value() != rhs;
+    }
+
+    constexpr bool operator<(const TextureFormat& rhs) const {
+      return value() < rhs.value();
+    }
+
+    constexpr bool operator<(const GLenum& rhs) const {
+      return value() < rhs;
+    }
+
+    constexpr bool operator>(const TextureFormat& rhs) const {
+      return value() > rhs.value();
+    }
+
+    constexpr bool operator>(const GLenum& rhs) const {
+      return value() > rhs;
+    }
+
+    constexpr explicit operator GLenum() const {
+      return value_;
+    }
+
+    friend std::ostream& operator<<(std::ostream& stream, const TextureFormat& rhs) {
+      switch(rhs.value()) {
+        case GL_RG:
+          return stream << "RG";
+        case GL_RGB:
+          return stream << "RGB";
+        case GL_RGBA:
+          return stream << "RGBA";
+        default:
+          return stream << "unknwon texture::TextureFormat: " << rhs.value();
+      }
+    }
   };
 
-  static inline constexpr const char*
-  ToString(const TextureFormat& rhs) {
-    switch(rhs) {
-#define DEFINE_TO_STRING(Name, GlValue)               \
-      case k##Name: return #Name;
-      FOR_EACH_TEXTURE_FORMAT(DEFINE_TO_STRING)
-#undef DEFINE_TO_STRING
-      default: return "Unknown TextureFormat";
-    }
-  }
+  static constexpr const auto kRG = TextureFormat(GL_RG);
+  static constexpr const auto kRGB = TextureFormat(GL_RGB);
+  static constexpr const auto kRGBA = TextureFormat(GL_RGBA);
 
-  static inline std::ostream&
-  operator<<(std::ostream& stream, const TextureFormat& rhs) {
-    return stream << ToString(rhs);
-  }
+  static constexpr const auto kDefaultTextureFormat = kRGBA;
 }
 
 #endif //PRT_TEXTURE_FORMAT_H

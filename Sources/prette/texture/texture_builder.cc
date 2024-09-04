@@ -30,7 +30,7 @@ namespace prt::texture {
     PRT_ASSERT(IsValidTextureId(id));
     switch(GetTarget()) {
       case k2D: {
-        glTexImage2D(GetTarget(), GetLevel(), GetInternalFormat(), GetWidth(), GetHeight(), GetBorder(), GetFormat(), GetType(), GetData());
+        glTexImage2D(GetTarget(), GetLevel(), (GLenum) GetInternalFormat(), GetWidth(), GetHeight(), GetBorder(), (GLenum) GetFormat(), GetType(), GetData());
         CHECK_GL(FATAL);
         break;
       }

@@ -10,6 +10,7 @@ namespace prt {
   static inline void
   OnAbort(const int signal) {
     LOG(FATAL) << "abort.";
+    exit(signal);
   }
 
   static inline void

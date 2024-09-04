@@ -49,11 +49,11 @@ namespace prt::texture {
       glTexImage2D(
         face.face,
         face.level,
-        face.internal_format,
+        (GLenum) face.internal_format,
         face.size[0],
         face.size[1],
         face.border,
-        face.format,
+        (GLenum) face.format,
         face.type,
         face.bytes
       );
