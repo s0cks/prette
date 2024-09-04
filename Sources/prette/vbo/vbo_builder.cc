@@ -46,14 +46,15 @@ namespace prt::vbo {
   };
 
   Vbo* VboBuilderBase::Build() const {
+    const auto source = GetSource();
+    PRT_ASSERT(source.GetStartingAddress() >= 0);
+    PRT_ASSERT(!source.IsEmpty());
+
     const auto id = GenerateVboId();
     PRT_ASSERT(IsValidVboId(id));
-
-    const auto source = GetSource();
     Vbo::BindVbo(id);
     VboAttributeBinder::BindAll(GetClass());
-    if(source.GetEndingAddress() != 0 && !source.IsEmpty())
-      Vbo::InitData(source, GetUsage());
+    Vbo::InitData(source, GetUsage());
     Vbo::Unbind();
     return Vbo::New(id, GetClass(), GetLength(), GetUsage());
   }

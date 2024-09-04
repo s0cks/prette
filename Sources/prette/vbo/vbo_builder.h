@@ -61,30 +61,38 @@ namespace prt::vbo {
   public:
     typedef std::vector<V> VertexList;
   private:
-    std::vector<V> data_;
-    uword length_;
+    VertexList data_;
 
     Region GetSource() const override {
-      if(data_.empty())
-        return Region(0, GetTotalSize());
-      return Region((uword) &data_[0], GetTotalSize());
+      const auto address = !data_.empty()
+        ? ((uword) &data_[0])
+        : 0;
+      return Region(address, GetTotalSize());
     }
   public:
-    VboBuilder(Class* cls,
-               const VertexList& data = {}):
+    explicit VboBuilder(Class* cls):
       VboBuilderBase(cls),
-      data_(data),
-      length_(0) {
+      data_() {
+    }
+    VboBuilder(Class* cls, const VertexList& data):
+      VboBuilderBase(cls),
+      data_(data) {
+    }
+    VboBuilder(Class* cls, const uword length):
+      VboBuilderBase(cls),
+      data_() {
+      data_.reserve(length);
     }
     ~VboBuilder() override = default;
 
     uword GetLength() const override {
-      return !data_.empty() ? data_.size() : length_;
+      return data_.empty() ? data_.capacity() : data_.size();
     }
 
     void SetLength(const uword length) {
       PRT_ASSERT(length >= 0);
-      length_ = length;
+      PRT_ASSERT(length >= data_.capacity());
+      data_.reserve(length);
     }
 
     void Append(const VertexList& data) {
