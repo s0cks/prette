@@ -83,9 +83,9 @@ namespace prt::texture {
 
     void Apply() const {
       glPixelStorei(GL_PACK_ALIGNMENT, pack);
-      CHECK_GL(FATAL);
+      CHECK_GL;
       glPixelStorei(GL_UNPACK_ALIGNMENT, unpack);
-      CHECK_GL(FATAL);
+      CHECK_GL;
     }
 
     PixelStoreAlignment& operator=(const PixelStoreAlignment& rhs) = default;

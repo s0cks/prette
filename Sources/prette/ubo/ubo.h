@@ -43,26 +43,23 @@ namespace prt {
     FOR_EACH_UBO_EVENT(DEFINE_ON_UBO_EVENT)
 #undef DEFINE_ON_UBO_EVENT
 
-    class Ubo : public gfx::BufferObject<UboId> {
+    static constexpr const auto kGlTarget = GL_UNIFORM_BUFFER;
+
+    class Ubo : public gfx::BufferObject<UboId, kGlTarget> {
       friend class UboBindScope;
       friend class UboUpdateScope;
       friend class UboBuilderBase;
       friend class UboBuilderScope;
     public:
-      static constexpr const auto kGlTarget = GL_UNIFORM_BUFFER;
-
       struct IdComparator {
         bool operator()(Ubo* lhs, Ubo* rhs) const {
           return lhs->GetId() < rhs->GetId();
         }
       };
     protected:
-      uword elem_size_;
-      uword length_;
-
       explicit Ubo(const UboId id,
-                   const uword elem_size,
-                   const uword len,
+                   Class* cls,
+                   const uword length,
                    const gfx::Usage usage);
 
       static void Publish(UboEvent* event);
@@ -96,14 +93,6 @@ namespace prt {
     public:
       ~Ubo() override;
       std::string ToString() const override;
-
-      uword GetElementSize() const override {
-        return elem_size_;
-      }
-
-      uword GetLength() const override {
-        return length_;
-      }
 
       bool Accept(UboVisitor* vis) {
         PRT_ASSERT(vis);

@@ -40,17 +40,17 @@ namespace prt::texture {
 
   void Texture::BindTexture(const TextureTarget target, const TextureId id) {
     glBindTexture(target, id);
-    CHECK_GL(FATAL);
+    CHECK_GL;
   }
 
   void Texture::DeleteTextures(const TextureId* ids, const uint64_t num_ids) {
     glDeleteTextures(num_ids, ids);
-    CHECK_GL(FATAL);
+    CHECK_GL;
   }
 
   void Texture::ActiveTexture(const int32_t slot) {
     glActiveTexture(GL_TEXTURE0 + slot);
-    CHECK_GL(FATAL);
+    CHECK_GL;
   }
 
   rx::observable<TextureId> Texture::GenerateTextureId(const int num) {
@@ -58,7 +58,7 @@ namespace prt::texture {
     return rx::observable<>::create<TextureId>([num](rx::subscriber<TextureId> s) {
       TextureId ids[num];
       glGenTextures(num, ids);
-      CHECK_GL(FATAL);
+      CHECK_GL;
 
       for(auto idx = 0; idx < num; idx++)
         s.on_next(ids[idx]);

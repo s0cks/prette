@@ -105,9 +105,9 @@ namespace prt::texture {
 
     void ApplyTo(const TextureTarget target) const {
       glTexParameteri(target, GL_TEXTURE_MIN_FILTER, min);
-      CHECK_GL(FATAL);
+      CHECK_GL;
       glTexParameteri(target, GL_TEXTURE_MAG_FILTER, mag);
-      CHECK_GL(FATAL);
+      CHECK_GL;
     }
 
     friend std::ostream& operator<<(std::ostream& stream, const TextureFilter& rhs) {

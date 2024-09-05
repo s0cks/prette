@@ -19,7 +19,7 @@ namespace prt::ibo {
 
     void Draw(const gfx::DrawMode mode, const word count, const GLvoid* indices = nullptr) {
       glDrawElements(mode, count, GetIbo()->GetGlType(), indices);
-      CHECK_GL(FATAL);
+      CHECK_GL;
     }
 
     void Draw(const gfx::DrawMode mode) override {

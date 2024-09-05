@@ -1,7 +1,8 @@
 #ifndef PRT_VBO_SCOPE_H
 #define PRT_VBO_SCOPE_H
 
-#include "prette/vbo/vbo.h"
+#include "prette/vbo/vbo_id.h"
+#include "prette/vbo/vbo_target.h"
 #include "prette/gfx_mapped_buffer_scope.h"
 
 namespace prt::vbo {
@@ -24,13 +25,13 @@ namespace prt::vbo {
     VboId GetVboId() const;
   };
 
-  class ReadOnlyVboScope : public gfx::ReadOnlyMappedBufferScope<Vbo::kGlTarget> { //TODO: use Vbo::kGlType
+  class ReadOnlyVboScope : public gfx::ReadOnlyMappedBufferScope<kGlTarget> {
   public:
     explicit ReadOnlyVboScope(Vbo* vbo);
     ~ReadOnlyVboScope() override = default;
   };
 
-  class WriteOnlyVboScope : public gfx::WriteOnlyMappedBufferScope<Vbo::kGlTarget> { //TODO: use Vbo::kGlType
+  class WriteOnlyVboScope : public gfx::WriteOnlyMappedBufferScope<kGlTarget> {
   public:
     explicit WriteOnlyVboScope(Vbo* vbo);
     ~WriteOnlyVboScope() override = default;

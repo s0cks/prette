@@ -4,7 +4,7 @@ namespace prt::ibo {
   void GenerateIboIds(IboId* ids, const int num_ids) {
     PRT_ASSERT(num_ids >= 1);
     glGenBuffers(num_ids, &ids[0]);
-    CHECK_GL(FATAL);
+    CHECK_GL;
   }
 
   rx::observable<IboId> GenerateIboIdsAsync(const int num_ids) {

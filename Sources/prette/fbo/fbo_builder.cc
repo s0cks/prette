@@ -2,8 +2,8 @@
 
 namespace prt::fbo {
   Fbo* FboBuilder::Build() const {
-    const auto id = GenerateFboId();
-    PRT_ASSERT(IsValidFboId(id));
+    const auto id = FboId::GenerateId();
+    PRT_ASSERT(id);
     PRT_ASSERT(!attachments_.IsEmpty());
 
     Fbo::BindFbo(id);

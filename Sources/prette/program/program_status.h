@@ -138,7 +138,7 @@ namespace prt::program {
     explicit ProgramStatusTemplate(const ProgramId id):
       ProgramStatus(id) {
       glGetProgramiv(id, StatusType, &status_);
-      CHECK_GL(FATAL);
+      CHECK_GL;
     }
     ProgramStatusTemplate(const ProgramStatusTemplate& rhs) = default;
     ~ProgramStatusTemplate() override = default;

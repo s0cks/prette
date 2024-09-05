@@ -6,7 +6,7 @@ namespace prt::program {
 
     GLint len = 0;
     glGetProgramiv(id, GL_INFO_LOG_LENGTH, &len);
-    CHECK_GL(FATAL);
+    CHECK_GL;
 
     if(len < 0) {
       DLOG(WARNING) << "not getting program info log of length: " << len;
@@ -26,7 +26,7 @@ namespace prt::program {
     }
 
     glGetProgramInfoLog(id, len, &len, (GLchar*) data);
-    CHECK_GL(FATAL);
+    CHECK_GL;
     (*result) = data;
     (*length) = len;
   }

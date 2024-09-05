@@ -25,9 +25,7 @@ namespace prt::ibo {
            Class* cls,
            const uword length,
            const gfx::Usage usage):
-    BufferObject(id, usage),
-    cls_(cls),
-    length_(length) {
+    BufferObject<IboId, kGlTarget>(id, cls, length, usage) {
     Register(this);
   }
 
@@ -63,17 +61,17 @@ namespace prt::ibo {
 
   void Ibo::BindIbo(const IboId id) {
     glBindBuffer(kGlTarget, id);
-    CHECK_GL(FATAL);
+    CHECK_GL;
   }
 
   void Ibo::InitBufferData(const Region& region, const gfx::Usage usage) {
     glBufferData(kGlTarget, region.GetSize(), (const GLvoid*) region, usage);
-    CHECK_GL(FATAL);
+    CHECK_GL;
   }
 
   void Ibo::UpdateBufferData(const uword offset, const Region& region) {
     glBufferSubData(kGlTarget, offset, region.GetSize(), (const GLvoid*) region);
-    CHECK_GL(FATAL);
+    CHECK_GL;
   }
 
   rx::observable<IboEvent*> OnIboEvent() {

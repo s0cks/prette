@@ -29,7 +29,7 @@ namespace prt {
 #undef DEFINE_ON_RBO_EVENT
 
     class RboFactory;
-    class Rbo : public gfx::ObjectTemplate<RboId> {
+    class Rbo : public gfx::Object<RboId> {
       friend class RboFactory;
     public:
       static int32_t GetMaxSize();
@@ -56,7 +56,7 @@ namespace prt {
       explicit Rbo(const RboId id,
                    const RboFormat format,
                    const RboSize& size):
-        ObjectTemplate(id),
+        Object<RboId>(id),
         format_(format),
         size_(size) {
       }

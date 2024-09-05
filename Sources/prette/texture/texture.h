@@ -55,7 +55,7 @@ namespace prt {
   //TODO:
 #undef DEFINE_ON_TEXTURE_EVENT
 
-    class Texture : public gfx::ObjectTemplate<TextureId> {
+    class Texture : public gfx::Object<TextureId> {
       template<const TextureSlot Slot>
       friend class TextureBindScope;
 
@@ -96,7 +96,7 @@ namespace prt {
     public:
       Texture() = default;
       explicit Texture(const TextureId id):
-        ObjectTemplate(id) {
+        Object<TextureId>(id) {
       }
       ~Texture() override = default;
       virtual TextureTarget GetTextureTarget() const = 0;

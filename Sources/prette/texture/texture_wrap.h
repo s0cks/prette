@@ -97,11 +97,11 @@ namespace prt::texture {
 
     void ApplyTo(const TextureTarget target) const {
       glTexParameteri(target, GL_TEXTURE_WRAP_R, r);
-      CHECK_GL(FATAL);
+      CHECK_GL;
       glTexParameteri(target, GL_TEXTURE_WRAP_S, s);
-      CHECK_GL(FATAL);
+      CHECK_GL;
       glTexParameteri(target, GL_TEXTURE_WRAP_T, t);
-      CHECK_GL(FATAL);
+      CHECK_GL;
     }
 
     TextureWrap& operator=(const TextureWrap& rhs) = default;
@@ -149,7 +149,7 @@ namespace prt::texture {
     GetTextureWrapMode(const GLenum coord) {
       GLint mode;
       glGetTexParameteriv(Target, coord, &mode);
-      CHECK_GL(FATAL);
+      CHECK_GL;
       return static_cast<TextureWrapMode>(mode);
     }
 

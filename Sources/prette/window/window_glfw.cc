@@ -114,7 +114,7 @@ namespace prt::window {
 
   void Window::SwapBuffers() {
     glfwSwapBuffers(GetHandle());
-    CHECK_GL(FATAL);
+    CHECK_GL;
   }
 }
 

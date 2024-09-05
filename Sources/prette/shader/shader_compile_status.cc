@@ -7,7 +7,7 @@ namespace prt::shader {
     PRT_ASSERT(IsValidShaderId(id));
     GLint status;
     glGetShaderiv(id, GL_COMPILE_STATUS, &status);
-    CHECK_GL(FATAL);
+    CHECK_GL;
     return status == GL_TRUE;
   }
 

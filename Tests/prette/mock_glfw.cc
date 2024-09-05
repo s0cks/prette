@@ -12,10 +12,11 @@ namespace prt {
     mock_.Set(nullptr);
   }
 }
+using prt::MockGlfw;
 
-static inline mcc::MockGlfw*
+static inline MockGlfw*
 GetMock() {
-  const auto mock = mcc::mock_.Get();
+  const auto mock = prt::mock_.Get();
   assert(mock != nullptr);
   return mock;
 }

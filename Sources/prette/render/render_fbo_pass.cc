@@ -62,7 +62,7 @@ namespace prt::render {
 
   void RenderFboPass::Render() {
     glBindFramebuffer(GL_FRAMEBUFFER, fbo_->GetId());
-    CHECK_GL(FATAL);
+    CHECK_GL;
 
     DLOG(INFO) << "rendering " << fbo_->ToString() << "....";
     const auto vao = GetVao();
@@ -72,7 +72,7 @@ namespace prt::render {
     InvertedCullFaceScope cull_face;
     InvertedDepthTestScope depth_test;
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-    CHECK_GL(FATAL);
+    CHECK_GL;
     
     const auto attachments = fbo_->GetAttachments();
     const auto attachment = attachments.GetAllColorAttachments()

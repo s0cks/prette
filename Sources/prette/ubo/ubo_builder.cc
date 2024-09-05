@@ -21,9 +21,11 @@ namespace prt::ubo {
   }
 
   Ubo* UboBuilderBase::Build() const {
-    const auto id = GenerateUboId();
-    Init(id);
-    return new Ubo(id, GetElementSize(), GetLength(), GetUsage());
+    NOT_IMPLEMENTED(ERROR); //TODO: implement
+    // const auto id = GenerateUboId();
+    // Init(id);
+    // return new Ubo(id, GetElementSize(), GetLength(), GetUsage());
+    return nullptr;
   }
 
   rx::observable<Ubo*> UboBuilderBase::BuildAsync() const {

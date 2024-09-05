@@ -7,10 +7,10 @@ namespace prt::vbo {
   }
 
   WriteOnlyVboScope::WriteOnlyVboScope(Vbo* vbo):
-    gfx::WriteOnlyMappedBufferScope<Vbo::kGlTarget>(vbo->GetTotalSize()) { //TODO: use Vbo::kGlType
+    gfx::WriteOnlyMappedBufferScope<kGlTarget>(vbo->GetTotalSize()) {
   }
 
   ReadOnlyVboScope::ReadOnlyVboScope(Vbo* vbo):
-    gfx::ReadOnlyMappedBufferScope<Vbo::kGlTarget>(vbo->GetTotalSize()) { //TODO: use Vbo::kGlType
+    gfx::ReadOnlyMappedBufferScope<kGlTarget>(vbo->GetTotalSize()) {
   }
 }

@@ -20,12 +20,12 @@ namespace prt::shader {
     PRT_ASSERT(IsValidShaderId(id));
     GLint result;
     glGetShaderiv(id, GL_INFO_LOG_LENGTH, &result);
-    CHECK_GL(FATAL);
+    CHECK_GL;
     return static_cast<uword>(result);
   }
 
   void ShaderInfoLog::GetShaderInfoLogData(const ShaderId id, uint8_t* bytes, const uword max_size, uword* length) {
     glGetShaderInfoLog(id, max_size, (GLsizei*)length, (GLchar*) bytes);
-    CHECK_GL(FATAL);
+    CHECK_GL;
   }
 }

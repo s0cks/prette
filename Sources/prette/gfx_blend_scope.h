@@ -28,9 +28,9 @@ namespace prt {
         if(ShouldRestore())
           BlendFunc::GetCurrent(previous_);
         glBlendFunc(sfactor, dfactor);
-        CHECK_GL(FATAL);
+        CHECK_GL;
         glBlendEquation(equation);
-        CHECK_GL(FATAL);
+        CHECK_GL;
       }
       ~BlendTestCapabilityScope() override {
         if(ShouldRestore())

@@ -3,42 +3,18 @@
 
 #include "prette/rx.h"
 #include "prette/gfx.h"
+#include "prette/gfx_object_id.h"
 
 namespace prt {
   namespace vao {
-    typedef GLuint VaoId;
-    static constexpr const VaoId kInvalidVaoId = 0;
+    typedef gfx::ObjectId<GLuint, &glGenVertexArrays> VaoId;
 
-    static inline bool
-    IsValidVaoId(const VaoId id) {
-      return id != kInvalidVaoId;
-    }
-
-    static inline bool
-    IsInvalidVaoId(const VaoId id) {
-      return id == kInvalidVaoId;
-    }
-
-    void GenerateVaoIds(VaoId* ids, const int num_ids);
-
-    static inline VaoId
-    GenerateVaoId() {
-      VaoId id;
-      GenerateVaoIds(&id, 1);
-      return id;
-    }
-
-    rx::observable<VaoId> GenerateVaoIdsAsync(const int num_ids);
-
-    static inline rx::observable<VaoId>
-    GenerateVaoIdAsync() {
-      return GenerateVaoIdsAsync(1);
-    }
+    static constexpr const VaoId kDefaultVaoId = 0;
+    static constexpr const VaoId kInvalidVaoId = -1;
   }
   using vao::VaoId;
+  using vao::kDefaultVaoId;
   using vao::kInvalidVaoId;
-  using vao::IsValidVaoId;
-  using vao::IsInvalidVaoId;
 }
 
 #endif //PRT_VAO_ID_H

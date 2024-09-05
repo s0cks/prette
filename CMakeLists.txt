@@ -31,6 +31,9 @@ find_package(unofficial-nuklear CONFIG REQUIRED)
 find_package(RapidJSON CONFIG REQUIRED)
 find_package(stduuid CONFIG REQUIRED)
 find_package(Vorbis CONFIG REQUIRED)
+
+find_path(SEMVER_INCLUDE_DIRS "semver/semver.hpp")
+
 #TODO: convert to vcpkg
 find_package(utf8 REQUIRED)
 find_package(OpenAL REQUIRED)

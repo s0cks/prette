@@ -3,11 +3,9 @@
 
 namespace prt::vao {
   Vao* VaoBuilder::Build() const {
-    const auto id = IsInvalidVaoId(id_)
-      ? GenerateVaoId()
-      : id_;
-    LOG_IF(FATAL, IsInvalidVaoId(id)) << "cannot build Vao w/ invalid id.";
-    const auto vao = new Vao(id, this);
+    const auto id = id_ ? id_ : VaoId::GenerateId();
+    LOG_IF(FATAL, !id) << "cannot build Vao w/ invalid id.";
+    const auto vao = new Vao(id);
     Vao::Publish<VaoCreatedEvent>(vao);
     return vao;
   }

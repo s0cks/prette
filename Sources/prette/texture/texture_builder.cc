@@ -31,7 +31,7 @@ namespace prt::texture {
     switch(GetTarget()) {
       case k2D: {
         glTexImage2D(GetTarget(), GetLevel(), (GLenum) GetInternalFormat(), GetWidth(), GetHeight(), GetBorder(), (GLenum) GetFormat(), GetType(), GetData());
-        CHECK_GL(FATAL);
+        CHECK_GL;
         break;
       }
       default: {

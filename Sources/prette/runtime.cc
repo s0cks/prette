@@ -5,6 +5,8 @@
 #include "prette/engine/engine.h"
 #include "prette/pretty_logger.h"
 
+#include <semver/semver.hpp>
+
 namespace prt {
 #ifdef PRT_DEBUG
 
@@ -204,7 +206,19 @@ namespace prt {
       google::LogMessage(GetFile(), GetLine(), GetSeverity()).stream() << "Runtime Information:";
       __ << "Version: " << prt::GetVersion() << " (" << PRT_GIT_BRANCH << "/" << PRT_GIT_COMMIT_HASH << ")";
       __ << "Resources: " << FLAGS_resources;
-      __ << "GLFW Version: ";
+      __ << "OpenGL:";
+      Indent();
+      {
+        __ << "Version: " << gfx::GetGlVersionString();
+        __ << "Vendor: " << gfx::GetGlVendorString();
+        __ << "Renderer: " << gfx::GetGlRendererString();
+        __ << "GLFW Version: " << gfx::GetGlfwVersion();
+        __ << "GLSL Version: " << gfx::GetGlslVersion();
+      }
+      Deindent();
+#ifndef OS_IS_OSX
+      __ << "GLEW Version: " << gfx::GetGlewVersion();
+#endif //OS_IS_OSX
       PrintEngineInfo();
       PrintMouseInfo();
       PrintAllShaders();

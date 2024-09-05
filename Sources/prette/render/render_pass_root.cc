@@ -18,9 +18,9 @@ namespace prt::render {
 
     const auto renderer = GetRenderer();
     glPolygonMode(GL_FRONT_AND_BACK, renderer->GetMode());
-    CHECK_GL(FATAL);
+    CHECK_GL;
     glClear(GL_COLOR_BUFFER_BIT);
-    CHECK_GL(FATAL);
+    CHECK_GL;
     gfx::SetClearColor(clear_);
   }
 }

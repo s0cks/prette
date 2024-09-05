@@ -40,27 +40,27 @@ namespace prt::program {
   void Program::UseProgram(const ProgramId id) {
     PRT_ASSERT(IsValidProgramId(id) || id == 0);
     glUseProgram(id);
-    CHECK_GL(FATAL);
+    CHECK_GL;
   }
 
   void Program::DeleteProgram(const ProgramId id) {
     PRT_ASSERT(IsValidProgramId(id) && id != 0); //TODO: better assertion
     glDeleteProgram(id);
-    CHECK_GL(FATAL);
+    CHECK_GL;
   }
 
   void Program::Attach(const ProgramId programId, const ShaderId shaderId) {
     glAttachShader(programId, shaderId);
-    CHECK_GL(FATAL);
+    CHECK_GL;
   }
 
   void Program::Detach(const ProgramId programId, const ShaderId shaderId) {
     glDetachShader(programId, shaderId);
-    CHECK_GL(FATAL);
+    CHECK_GL;
   }
 
   Program::Program(const Metadata& meta, const ProgramId id):
-    gfx::ObjectTemplate<ProgramId>(id) {
+    gfx::Object<ProgramId>(id) {
     SetMeta(meta);
     Register(this);
   }

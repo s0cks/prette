@@ -129,6 +129,18 @@ namespace prt::texture {
       PRT_ASSERT(img);
       data_ = img;
     }
+
+    friend std::ostream& operator<<(std::ostream& stream, const TextureBuilder& rhs) {
+      stream << "TextureBuilder(";
+      stream << "target=" << rhs.GetTarget() << ", ";
+      stream << "filter=" << rhs.GetFilter() << ", ";
+      stream << "wrap=" << rhs.GetWrap() << ", ";
+      stream << "border=" << rhs.GetBorder() << ", ";
+      stream << "level=" << rhs.GetLevel() << ", ";
+      stream << "data=" << rhs.data_;
+      stream << ")";
+      return stream;
+    }
   };
 }
 

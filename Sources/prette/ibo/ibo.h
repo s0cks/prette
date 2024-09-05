@@ -40,7 +40,9 @@ namespace prt {
     FOR_EACH_IBO_EVENT(DEFINE_ON_IBO_EVENT)
 #undef DEFINE_ON_IBO_EVENT
 
-    class Ibo : public gfx::BufferObject<IboId>,
+    static constexpr const auto kGlTarget = gfx::kIboTarget;
+
+    class Ibo : public gfx::BufferObject<IboId, kGlTarget>,
                 public IboEventSource {
       friend class IboBuilderBase;
       
@@ -52,7 +54,6 @@ namespace prt {
       friend class IboUpdateScope;
     public:
       static constexpr const auto kDefaultUsage = gfx::kDynamicDrawUsage;
-      static constexpr const auto kGlTarget = gfx::kIboTarget;
       struct IdComparator {
         bool operator() (Ibo* lhs, Ibo* rhs) const {
           return lhs->GetId() < rhs->GetId();
@@ -93,31 +94,12 @@ namespace prt {
         return Publish((IboEvent*) &event);
       }
     protected:
-      Class* cls_;
-      uword length_;
-
       Ibo(const IboId id,
           Class* cls,
           const uword length,
           const gfx::Usage usage);
-
-      void SetLength(const uword length) {
-        length_ = length;
-      }
     public:
       ~Ibo() override;
-
-      Class* GetClass() const {
-        return cls_;
-      }
-
-      uword GetElementSize() const override {
-        return GetClass()->GetAllocationSize();
-      }
-
-      uword GetLength() const override {
-        return length_;
-      }
 
       GLenum GetGlType() const {
         return GetClass()->GetGlType();

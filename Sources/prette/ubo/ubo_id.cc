@@ -3,7 +3,7 @@
 namespace prt::ubo {
   void GenerateUboIds(UboId* ids, const int num_ids) {
     glGenBuffers(num_ids, &ids[0]);
-    CHECK_GL(FATAL);
+    CHECK_GL;
   }
 
   rx::observable<UboId> GenerateUboIdsAsync(const int num_ids) {

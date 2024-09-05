@@ -39,14 +39,14 @@ namespace prt {
       GetCurrentMode() {
         GLint mode;
         glGetIntegerv(GL_CULL_FACE_MODE, &mode);
-        CHECK_GL(FATAL);
+        CHECK_GL;
         return static_cast<Mode>(mode);
       }
 
       static inline void
       SetMode(const Mode& rhs) {
         glFrontFace(rhs);
-        CHECK_GL(FATAL);
+        CHECK_GL;
       }
 
       enum Face : GLenum {
@@ -71,14 +71,14 @@ namespace prt {
       GetCurrentFace() {
         GLint face;
         glGetIntegerv(GL_FRONT_FACE, &face);
-        CHECK_GL(FATAL);
+        CHECK_GL;
         return static_cast<Face>(face);
       }
 
       static inline void
       SetFace(const Face& rhs) {
         glCullFace(rhs);
-        CHECK_GL(FATAL);
+        CHECK_GL;
       }
     protected:
       Mode old_mode_;

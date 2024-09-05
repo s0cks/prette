@@ -25,7 +25,7 @@ namespace prt {
       return rx::observable<>::create<RboId>([num](rx::subscriber<RboId> s) {
         RboId ids[num];
         glGenRenderbuffers(num, &ids[0]);
-        CHECK_GL(FATAL);
+        CHECK_GL;
 
         for(auto idx = 0; idx < num; idx++)
           s.on_next(ids[idx]);

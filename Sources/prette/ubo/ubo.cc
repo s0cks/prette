@@ -31,43 +31,41 @@ namespace prt::ubo {
 
   void Ubo::BindUbo(const UboId id) {
     PRT_ASSERT(IsValidUboId(id));
-    glBindBuffer(Ubo::kGlTarget, id);
-    CHECK_GL(FATAL);
+    glBindBuffer(kGlTarget, id);
+    CHECK_GL;
   }
 
   void Ubo::DeleteUbos(const UboId* ids, const uint64_t num_ids) {
     PRT_ASSERT(num_ids > 0);
     glDeleteBuffers(num_ids, ids);
-    CHECK_GL(FATAL);
+    CHECK_GL;
   }
 
   void Ubo::InitUbo(const uint8_t* bytes, const uint64_t num_bytes, const GLenum usage) {
     PRT_ASSERT(num_bytes > 0);
-    glBufferData(Ubo::kGlTarget, num_bytes, bytes, usage);
-    CHECK_GL(FATAL);
+    glBufferData(kGlTarget, num_bytes, bytes, usage);
+    CHECK_GL;
   }
 
   void Ubo::UpdateUbo(const uint64_t offset, const uint8_t* bytes, const uint64_t num_bytes) {
     PRT_ASSERT(offset >= 0);
     PRT_ASSERT(num_bytes > 0);
-    glBufferSubData(Ubo::kGlTarget, offset, num_bytes, bytes);
-    CHECK_GL(FATAL);
+    glBufferSubData(kGlTarget, offset, num_bytes, bytes);
+    CHECK_GL;
   }
 
   Ubo::Ubo(const UboId id,
-           const uword elem_size,
+           Class* cls,
            const uword length,
            const gfx::Usage usage):
-    BufferObject<UboId>(id, usage),
-    length_(length),
-    elem_size_(elem_size) {
+    BufferObject<UboId, kGlTarget>(id, cls, length, usage) {
     Register(this);
-    Publish<UboCreatedEvent>(this);
+    Publish<UboCreatedEvent>(this); //TODO: remove - undefined behaviour
   }
 
   Ubo::~Ubo() {
     Deregister(this);
-    Publish<UboDestroyedEvent>(this);
+    Publish<UboDestroyedEvent>(this); //TODO: remove - undefined behaviour
   }
 
   std::string Ubo::ToString() const {

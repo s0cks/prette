@@ -20,40 +20,11 @@ namespace prt::vbo {
     LOG_IF(ERROR, removed != 1) << "failed to deregister: " << vbo->ToString();
   }
 
-  // bind
-  void Vbo::BindVbo(const VboId id) {
-    PRT_ASSERT(IsValidVboId(id));
-    DLOG(INFO) << "binding: " << id;
-    glBindBuffer(kGlTarget, id);
-    CHECK_GL(FATAL);
-  }
-
-  // init
-  void Vbo::InitData(const Region& region, const gfx::Usage usage) {
-    glBufferData(kGlTarget, region.GetSize(), (const GLvoid*) region, usage);
-    CHECK_GL(FATAL);
-  }
-
-  // write
-  void Vbo::UpdateVboData(const uword offset, const Region& region) {
-    glBufferSubData(kGlTarget, (GLintptr) offset, (GLsizeiptr) region.GetSize(), (const GLvoid*) region);
-    CHECK_GL(FATAL);
-  }
-
-  // delete
-  void Vbo::DeleteVbos(const VboId* ids, const int num_ids) {
-    //TODO: check ids?
-    glDeleteBuffers(num_ids, ids);
-    CHECK_GL(FATAL);
-  }
-
   Vbo::Vbo(const VboId id,
            Class* cls,
            const uword length,
            const gfx::Usage usage):
-    gfx::BufferObject<VboId>(id, usage),
-    class_(cls),
-    length_(length) {
+    gfx::BufferObject<VboId, kGlTarget>(id, cls, length, usage) {
     Register(this);
   }
 
@@ -101,7 +72,7 @@ namespace prt::vbo {
                 Class* cls,
                 const uword length,
                 const gfx::Usage usage) {
-    PRT_ASSERT(IsValidVboId(id));
+    PRT_ASSERT(id.IsValid());
     PRT_ASSERT(cls);
     PRT_ASSERT(length >= 0);
     const auto vbo = new Vbo(id, cls, length, usage);
@@ -125,6 +96,15 @@ namespace prt::vbo {
     PRT_ASSERT(vis);
     for(const auto& vbo : all_) {
       if(!vbo->Accept(vis))
+        return false;
+    }
+    return true;
+  }
+
+  bool VisitAllVbos(VboVisitor* vis, const VboPredicate& predicate) {
+    PRT_ASSERT(vis);
+    for(const auto& vbo : all_) {
+      if(predicate(vbo) && !vbo->Accept(vis))
         return false;
     }
     return true;

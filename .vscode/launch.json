@@ -397,6 +397,22 @@
       "MIMode": "lldb"
     }, // Merkle Tests
     {
+      "name": "Vbo Tests",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/Tests/prette-tests",
+      "args": [
+        "--resources",
+        "${workspaceFolder}/resources",
+        "--gtest_filter=*Vbo*Test*.*"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb"
+    }, // Vbo Tests
+    {
       "name": "minecraft-benchmarks",
       "type": "cppdbg",
       "request": "launch",

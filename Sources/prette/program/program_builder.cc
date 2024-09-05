@@ -25,7 +25,7 @@ namespace prt::program {
   Program* ProgramBuilder::Build() const { //TODO: code cleanup
     // create program
     const auto id = glCreateProgram();
-    CHECK_GL(FATAL);
+    CHECK_GL;
     if(!IsValidProgramId(id)) {
       DLOG(ERROR) << "failed to create program.";
       return nullptr;

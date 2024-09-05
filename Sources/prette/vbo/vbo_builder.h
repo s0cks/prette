@@ -1,10 +1,13 @@
 #ifndef PRT_VBO_FACTORY_H
 #define PRT_VBO_FACTORY_H
 
+#include "prette/class.h"
 #include "prette/region.h"
-#include "prette/vbo/vbo.h"
+#include "prette/gfx_usage.h"
+#include "prette/vbo/vbo_id.h"
 
 namespace prt::vbo {
+  class Vbo;
   class VboBuilderBase {
   protected:
     Class* class_;

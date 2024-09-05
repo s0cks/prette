@@ -44,7 +44,7 @@ namespace prt::program {
   ProgramUniform UniformIterator::Next() {
     memset(name_, 0, sizeof(name_));
     glGetActiveUniform(GetProgramId(), cur_uniform_, name_asize_, &length_, &size_, &type_, (GLchar*) name_);
-    CHECK_GL(FATAL);
+    CHECK_GL;
     const auto uniform = ProgramUniform(cur_uniform_, type_, size_, name_, length_);
     cur_uniform_++;
     return uniform;

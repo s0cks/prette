@@ -20,7 +20,7 @@ namespace prt::program {
       return;
     }
     glBindBufferRange(GL_UNIFORM_BUFFER, index, ubo->GetId(), 0, ubo->GetTotalSize());
-    CHECK_GL(FATAL);
+    CHECK_GL;
     GetProgram()->SetUniformBlock(name, index);
   }
 }

@@ -1,32 +1,85 @@
 #ifndef PRT_GFX_BUFFER_H
 #define PRT_GFX_BUFFER_H
 
-
+#include "prette/class.h"
+#include "prette/region.h"
 #include "prette/gfx_usage.h"
 #include "prette/gfx_object.h"
 
 namespace prt {
   namespace gfx {
-    template<typename Id>
-    class BufferObject : public Object {
+    template<typename Id, const GLenum Target>
+    class BufferObject : public Object<Id> {
     protected:
-      Id id_;
+      Class* class_;
+      uword length_;
       Usage usage_;
 
-      BufferObject(const Id id, const Usage usage):
-        Object(),
-        id_(id),
+      BufferObject() = default;
+      BufferObject(const Id id, Class* cls, const uword length, const Usage usage):
+        Object<Id>(id),
+        class_(cls),
+        length_(length), 
         usage_(usage) {
+        PRT_ASSERT(cls);
+        PRT_ASSERT(length >= 0);
+      }
+
+      void SetLength(const uword length) {
+        PRT_ASSERT(length >= 0);
+        length_ = length;
+      }
+    protected:
+      static inline void
+      Bind(const Id id) {
+        PRT_ASSERT(id.IsValid());
+        glBindBuffer(Target, id);
+        CHECK_GL;
+      }
+
+      static inline void
+      InitData(const Region& src, const gfx::Usage usage) {
+        glBufferData(Target, src.GetSize(), (const GLvoid*) src, usage);
+        CHECK_GL;
+      }
+
+      static inline void
+      PutData(const uword offset, const Region& src) {
+        glBufferSubData(Target, (GLintptr) offset, (GLsizeiptr) src.GetSize(), (const GLvoid*) src);
+        CHECK_GL;
+      }
+
+      static inline void
+      PutData(const Region& src) {
+        return PutData(0, src);
+      }
+
+      static inline void
+      Delete(const Id* ids, const int num_ids) {
+        PRT_ASSERT(num_ids >= 1);
+        glDeleteBuffers(num_ids, (const GLuint*) &ids[0]);
+        CHECK_GL;
+      }
+
+      static inline void
+      Delete(const Id id) {
+        return Delete(&id, 1);
       }
     public:
       ~BufferObject() override = default;
-      virtual uword GetElementSize() const = 0;
-      virtual uword GetLength() const = 0;
 
-      Id GetId() const {
-        return id_;
+      Class* GetClass() const {
+        return class_;
       }
-      
+
+      uword GetElementSize() const {
+        return GetClass()->GetAllocationSize();
+      }
+
+      uword GetLength() const {
+        return length_;
+      }
+
       Usage GetUsage() const {
         return usage_;
       }

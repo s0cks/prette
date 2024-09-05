@@ -4,33 +4,28 @@
 #include "prette/class.h"
 #include "prette/region.h"
 #include "prette/vbo/vbo_id.h"
+#include "prette/vbo/vbo_scope.h"
+#include "prette/vbo/vbo_target.h"
 #include "prette/vbo/vbo_events.h"
+#include "prette/vbo/vbo_visitor.h"
+#include "prette/vbo/vbo_builder.h"
 
 #include "prette/gfx_usage.h"
 #include "prette/gfx_buffer_object.h"
 
 namespace prt {
   namespace vbo {
-    class Vbo;
-    class VboVisitor {
-    protected:
-      VboVisitor() = default;
-    public:
-      virtual ~VboVisitor() = default;
-      virtual bool VisitVbo(Vbo* vbo) = 0;
-    };
-
-    rx::observable<VboEvent*> OnVboEvent();
-    rx::observable<VboEvent*> OnVboEvent(const VboId id);
+    VboEventObservable OnVboEvent();
+    VboEventObservable OnVboEvent(const VboId id);
 
 #define DEFINE_ON_VBO_EVENT(Name)                 \
-    static inline rx::observable<Name##Event*>    \
+    static inline Name##EventObservable           \
     On##Name##Event() {                           \
       return OnVboEvent()                         \
         .filter(Name##Event::Filter)              \
         .map(Name##Event::Cast);                  \
     }                                             \
-    static inline rx::observable<Name##Event*>    \
+    static inline Name##EventObservable           \
     On##Name##Event(const VboId id) {             \
       return OnVboEvent()                         \
         .filter(Name##Event::FilterBy(id))        \
@@ -39,16 +34,16 @@ namespace prt {
     FOR_EACH_VBO_EVENT(DEFINE_ON_VBO_EVENT)
 #undef DEFINE_ON_VBO_EVENT
 
-    class Vbo : public gfx::BufferObject<VboId>,
+    class Vbo : public gfx::BufferObject<VboId, kGlTarget>,
                 public VboEventSource {
       friend class VboScope;
       friend class VboBindScope;
 
       template<typename V>
       friend class VboUpdateScope;
+      friend class VboUpdateScopeBase;
       friend class VboBuilderBase;
     public:
-      static constexpr const auto kGlTarget = GL_ARRAY_BUFFER;
       struct IdComparator {
         bool operator()(Vbo* lhs, Vbo* rhs) const {
           return lhs->GetId() < rhs->GetId();
@@ -57,46 +52,16 @@ namespace prt {
     private:
       static void PublishEvent(VboEvent* event);
 
-      // bind
-      static void BindVbo(const VboId id);
-
       static inline void
       BindDefaultVbo() {
-        return BindVbo(kDefaultVboId);
+        return Bind(kDefaultVboId);
       }
 
       static inline void
       Unbind() {
-        return BindVbo(kDefaultVboId);
-      }
-
-      // init
-      static void InitData(const Region& region, const gfx::Usage usage);
-
-      static inline void
-      InitData(const uword num_bytes, const gfx::Usage usage) {
-        return InitData(Region(0, num_bytes), usage);
-      }
-
-      // write
-      static void UpdateVboData(const uword offset, const Region& region);
-
-      static inline void
-      UpdateVboData(const Region& region) {
-        return UpdateVboData(0, region); //TODO: causes issues if new size is larger than allocated size
-      }
-      
-      // delete
-      static void DeleteVbos(const VboId* ids, const int num_ids);
-
-      static inline void
-      DeleteVbo(const VboId id) {
-        return DeleteVbos(&id, 1);
+        return Bind(kDefaultVboId);
       }
     protected:
-      Class* class_;
-      uword length_;
-
       Vbo(const VboId id,
           Class* cls,
           const uword length,
@@ -105,48 +70,49 @@ namespace prt {
       void Publish(VboEvent* event) override {
         return PublishEvent(event);
       }
-
-      void SetLength(const uword length) {
-        length_ = length;
-      }
     public:
       ~Vbo() override;
-
-      Class* GetClass() const {
-        return class_;
-      }
-
-      uword GetLength() const override {
-        return length_;
-      }
-
-      uword GetElementSize() const override {
-        return GetClass()->GetAllocationSize();
-      }
-      
-      bool IsInvalid() const {
-        return IsInvalidVboId(GetId());
-      }
-
-      bool IsValid() const {
-        return IsValidVboId(GetId());
-      }
 
       bool Accept(VboVisitor* vis);
       std::string ToString() const override;
 
-      rx::observable<VboEvent*> OnEvent() const override {
+      VboEventObservable OnEvent() const override {
         return vbo::OnVboEvent(GetId());
       }
+
+#define DEFINE_ON_EVENT(Name)                             \
+      Name##EventObservable On##Name() const override {   \
+        return vbo::On##Name##Event(GetId());             \
+      }
+      FOR_EACH_VBO_EVENT(DEFINE_ON_EVENT)
+#undef DEFINE_ON_EVENT
     private:
       static Vbo* New(const VboId id, Class* cls, const uword length, const gfx::Usage usage);
     };
 
-    typedef std::set<Vbo*, Vbo::IdComparator> VboSet;
+    static inline std::ostream&
+    operator<<(std::ostream& stream, const Vbo*& rhs) {
+      return stream << rhs->ToString();
+    }
     
+    typedef std::set<Vbo*, Vbo::IdComparator> VboSet;
+
+    typedef std::function<bool(Vbo*)> VboPredicate;
+
     const VboSet& GetAllVbos();
     uword GetTotalNumberOfVbos();
     bool VisitAllVbos(VboVisitor* vis);
+    bool VisitAllVbos(VboVisitor* vis, const VboPredicate& predicate);
+
+    static inline bool
+    VisitAllVbosWithClass(VboVisitor* vis, Class* cls) {
+      PRT_ASSERT(vis);
+      PRT_ASSERT(cls);
+      return VisitAllVbos(vis, [cls](Vbo* vbo) {
+        return vbo
+            && vbo->GetClass()->Equals(cls);
+      });
+    }
 
 #ifdef PRT_DEBUG
     class VboPrinter : public VboVisitor {

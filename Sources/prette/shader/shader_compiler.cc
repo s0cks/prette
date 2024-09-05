@@ -63,7 +63,7 @@ namespace prt::shader {
         DLOG(INFO) << " -\n" << std::string(sources_[idx], lengths_[idx]);
 
       glShaderSource(GetTarget(), num_sources_, &sources_[0], &lengths_[0]);
-      CHECK_GL(ERROR);
+      CHECK_GL;
       return true;
     }
   };
@@ -71,7 +71,7 @@ namespace prt::shader {
   static inline void
   Compile(const ShaderId id) {
     glCompileShader(id);
-    CHECK_GL(ERROR);
+    CHECK_GL;
   }
 
   static inline void

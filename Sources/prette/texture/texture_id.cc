@@ -3,7 +3,7 @@
 namespace prt::texture {
   void GenerateTextureIds(TextureId* ids, const int num) {
     glGenTextures(num, &ids[0]);
-    CHECK_GL(FATAL);
+    CHECK_GL;
   }
 
   rx::observable<TextureId> GenerateTextureIdsAsync(const int num) {

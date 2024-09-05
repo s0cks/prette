@@ -71,15 +71,15 @@ namespace prt::fbo {
   }
 
   void Fbo::BindFbo(const FboId id) {
-    PRT_ASSERT(IsValidFboId(id));
+    PRT_ASSERT(id);
     glBindFramebuffer(GL_FRAMEBUFFER, id);
-    CHECK_GL(FATAL);
+    CHECK_GL;
   }
 
   void Fbo::DeleteFbos(const FboId* ids, const int num_ids) {
     PRT_ASSERT(num_ids >= 1);
-    glDeleteFramebuffers(num_ids, ids);
-    CHECK_GL(FATAL);
+    glDeleteFramebuffers(num_ids, (const GLuint*)ids);
+    CHECK_GL;
   }
 
   static inline bool
@@ -101,7 +101,7 @@ namespace prt::fbo {
     PRT_ASSERT(level == 0); // TODO: ??
     PRT_ASSERT(IsValidTextureId(texid));
     glFramebufferTexture2D(target, p, textarget, texid, level);
-    CHECK_GL(FATAL);
+    CHECK_GL;
   }
 
   const FboSet& GetAllFbos() {

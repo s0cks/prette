@@ -44,7 +44,7 @@ namespace prt::program {
   ProgramAttribute AttributeIterator::Next() {
     memset(name_, 0, sizeof(name_));
     glGetActiveAttrib(GetProgramId(), cur_attr_, name_asize_, &length_, &size_, &type_, (GLchar*) name_);
-    CHECK_GL(FATAL);
+    CHECK_GL;
     const auto attr = ProgramAttribute(cur_attr_, type_, size_, name_, length_);
     cur_attr_++;
     return attr;

@@ -26,13 +26,13 @@ namespace prt::rbo {
   void Rbo::BindRbo(const RboId id) {
     PRT_ASSERT(IsValidRboId(id));
     glBindRenderbuffer(GL_RENDERBUFFER, id);
-    CHECK_GL(FATAL);
+    CHECK_GL;
   }
 
   void Rbo::SetRboStorage(const RboFormat format, const RboSize& size) {
     PRT_ASSERT(IsValidRboSize(size));
     glRenderbufferStorage(GL_RENDERBUFFER, format, size[0], size[1]);
-    CHECK_GL(FATAL);
+    CHECK_GL;
   }
 
   std::string Rbo::ToString() const {

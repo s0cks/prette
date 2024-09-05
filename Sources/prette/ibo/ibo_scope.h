@@ -22,13 +22,13 @@ namespace prt::ibo {
     IboId GetIboId() const;
   };
 
-  class ReadOnlyIboScope : public gfx::ReadOnlyMappedBufferScope<Ibo::kGlTarget> {
+  class ReadOnlyIboScope : public gfx::ReadOnlyMappedBufferScope<kGlTarget> {
   public:
     explicit ReadOnlyIboScope(Ibo* ibo);
     ~ReadOnlyIboScope() override = default;
   };
 
-  class WriteOnlyIboScope : public gfx::WriteOnlyMappedBufferScope<Ibo::kGlTarget> {
+  class WriteOnlyIboScope : public gfx::WriteOnlyMappedBufferScope<kGlTarget> {
   public:
     explicit WriteOnlyIboScope(Ibo* ibo);
     ~WriteOnlyIboScope() override = default;

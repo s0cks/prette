@@ -6,9 +6,11 @@
 
 #define GL_SILENCE_DEPRECATION 1
 #include <OpenGL/gl3.h>
+#include <OpenGL/gl3ext.h>
 
 #else
 
+#include <glew.h>
 #include <GL/gl3.h>
 
 #endif // OS_IS_OSX
@@ -25,6 +27,8 @@
 #include "prette/gfx_debug.h"
 #include "prette/gfx_misc.h"
 
+#include <semver/semver.hpp>
+
 #define PRT_GLFW_CTX_VERSION_MAJOR @PROJECT_GLFW_CONTEXT_VERSION_MAJOR@
 #define PRT_GLFW_CTX_VERSION_MINOR @PROJECT_GLFW_CONTEXT_VERSION_MINOR@
 
@@ -38,6 +42,44 @@
 
 namespace prt::gfx {
   void Init();
+
+  static inline semver::version
+  GetGlfwVersion() {
+    return semver::version(GLFW_VERSION_MAJOR, GLFW_VERSION_MINOR, GLFW_VERSION_REVISION);
+  }
+
+  static inline std::string
+  GetGlVersionString() {
+    return (const char*) glGetString(GL_VERSION);
+  }
+
+  static inline std::string
+  GetGlslVersionString() {
+    return (const char*) glGetString(GL_SHADING_LANGUAGE_VERSION);
+  }
+
+  static inline semver::version
+  GetGlslVersion() {
+    return semver::version::parse(GetGlslVersionString());
+  }
+
+#ifndef OS_IS_OSX
+  static inline semver::version
+  GetGlewVersion() {
+    const auto glewVersion = (const char*) glewGetString(GLEW_VERSION);
+    return semver::version::parse(glewVersion);
+  }
+#endif //OS_IS_OSX
+
+  static inline std::string
+  GetGlVendorString() {
+    return (const char*) glGetString(GL_VENDOR);
+  }
+
+  static inline std::string
+  GetGlRendererString() {
+    return (const char*) glGetString(GL_RENDERER);
+  }
 }
 
 #endif //PRT_GFX_H

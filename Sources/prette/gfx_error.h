@@ -5,6 +5,7 @@
 #ifndef PRT_GFX_ERROR_H
 #define PRT_GFX_ERROR_H
 
+#include "prette/gfx.h"
 #include <exception>
 
 namespace prt::gfx {
@@ -16,74 +17,97 @@ namespace prt::gfx {
   V(InvalidFramebufferOperation,  GL_INVALID_FRAMEBUFFER_OPERATION)   \
   V(OutOfMemory,                  GL_OUT_OF_MEMORY)
 
-  enum ErrorCode : GLenum {
-#define DEFINE_ERROR_CODE(Name, GlValue)    \
-    k##Name = (GlValue),
-    FOR_EACH_GL_ERROR(DEFINE_ERROR_CODE)
-#undef DEFINE_ERROR_CODE
-  };
-
   static inline const char*
-  GetName(const ErrorCode& rhs) {
-    switch(rhs) {
-#define DEFINE_GET_NAME(Name, GlValue)        \
-      case GlValue: return #Name;
-      FOR_EACH_GL_ERROR(DEFINE_GET_NAME)
-#undef DEFINE_GET_NAME
-      default: return "Unknown";
+  glErrorString(const GLenum err) {
+    switch(err) {
+#define DEFINE_TO_STRING(Name, GlValue)         \
+      case GlValue: return #Name;               
+      FOR_EACH_GL_ERROR(DEFINE_TO_STRING)
+#undef DEFINE_TO_STRING
+      default:
+        return "Unknown GlError";
     }
   }
 
-  static inline std::string
-  GetMessage(const ErrorCode& rhs) {
-    switch(rhs) {
-#define DEFINE_GET_NAME(Name, GlValue)        \
-      case GlValue: return #Name;
-      FOR_EACH_GL_ERROR(DEFINE_GET_NAME)
-#undef DEFINE_GET_NAME
-      default: {
-        std::stringstream ss;
-        ss << "Unknown GlError: " << rhs;
-        return ss.str();
-      }
+  class GlError {
+  public:
+    enum Code : GLenum {
+#define DEFINE_CODE(Name, GlValue) k##Name = (GlValue),
+      FOR_EACH_GL_ERROR(DEFINE_CODE)
+#undef DEFINE_CODE
+    };
+  private:
+    Code code_;
+  public:
+    constexpr GlError(const Code code = static_cast<Code>(glGetError())):
+      code_(code) {
     }
-  }
+    constexpr GlError(const GlError& rhs):
+      code_(rhs.GetCode()) {
+    }
+    ~GlError() = default;
 
+    constexpr Code GetCode() const {
+      return code_;
+    }
+
+    constexpr bool IsOk() const {
+      return GetCode() == kNoError;
+    }
+
+#define DEFINE_CODE_CHECK(Name, GlValue)    \
+    constexpr bool Is##Name() const {       \
+      return GetCode() == Code::k##Name;    \
+    }
+    FOR_EACH_GL_ERROR(DEFINE_CODE_CHECK)
+#undef DEFINE_CODE_CHECK
+
+    std::string ToString() const;
+
+    constexpr operator bool () const {
+      return IsOk(); 
+    }
+
+    GlError& operator=(const GlError& rhs) = default;
+
+    friend std::ostream& operator<<(std::ostream& stream, const GlError& rhs) {
+      return stream << rhs.ToString();
+    }
+  };
+  
   class GlException : public std::exception {
   private:
-    ErrorCode value_;
+    GlError error_;
     std::string message_;
   public:
-    explicit GlException(const ErrorCode value):
-      std::exception(),
-      value_(value),
-      message_(GetMessage(value)) {
-    }
+    explicit GlException(const GlError error);
     ~GlException() override = default;
 
-    ErrorCode value() const {
-      return value_;
+    GlError GetError() const {
+      return error_;
+    }
+
+    const std::string& GetMessage() const {
+      return message_;
     }
 
     const char* what() const throw() override {
-      return message_.data();
+      return message_.c_str();
     }
   };
 
 #ifdef PRT_DEBUG
 
-#define _CHECK_GL_(Severity, File, Line) ({                                                  \
-  gfx::ErrorCode error;                                                                      \
-  while((error = static_cast<gfx::ErrorCode>(glGetError())) != gfx::ErrorCode::kNoError)     \
-    throw gfx::GlException(error);                                                           \
-})
-
-#define CHECK_GL(Severity)  \
-  _CHECK_GL_(Severity, __FILE__, __LINE__)
+#define CHECK_GL                             \
+  do {                                       \
+    const auto error = gfx::GlError();       \
+    if(!error)                               \
+      throw gfx::GlException(error);         \
+  } while(0);
 
 #else
 
-#define CHECK_GL(Severity)
+#define CHECK_GL
 
 #endif//PRT_DEBUG
 }

@@ -27,16 +27,8 @@ namespace prt::vao {
     return events_.get_observable();
   }
 
-  Vao::Vao(const VaoId id, const Metadata& meta):
-    ObjectTemplate(id) {
-    SetMeta(meta);
-    Register(this);
-  }
-
-  Vao::Vao(const VaoId id, const VaoBuilder* builder):
-    ObjectTemplate(id) {
-    if(builder)
-      SetMeta(builder->GetMeta());
+  Vao::Vao(const VaoId id):
+    Object<VaoId>(id) {
     Register(this);
   }
 
@@ -45,9 +37,9 @@ namespace prt::vao {
   }
 
   void Vao::BindVao(const VaoId id) {
-    PRT_ASSERT(IsValidVaoId(id) || id == 0);
+    PRT_ASSERT(id);
     glBindVertexArray(id);
-    CHECK_GL(FATAL);
+    CHECK_GL;
   }
 
   bool Vao::Accept(VaoVisitor* vis) {
@@ -58,8 +50,8 @@ namespace prt::vao {
   void Vao::DeleteVaos(const VaoId* ids, const uint64_t num_ids) {
     PRT_ASSERT(ids != nullptr);
     PRT_ASSERT(num_ids >= 1);
-    glDeleteVertexArrays(num_ids, ids);
-    CHECK_GL(FATAL);
+    glDeleteVertexArrays(num_ids, (const GLuint*)ids);
+    CHECK_GL;
   }
 
   void Vao::Publish(VaoEvent* event) {
@@ -75,6 +67,14 @@ namespace prt::vao {
     ss << "id=" << GetId();
     ss << ")";
     return ss.str();
+  }
+
+  Vao* Vao::New(const VaoId id) {
+    PRT_ASSERT(id);
+    const auto vao = new Vao(id);
+    PRT_ASSERT(vao);
+    //TODO: publish VaoCreatedEvent
+    return vao;
   }
 
   Vao* Vao::FromJson(const uri::Uri& uri) {

@@ -21,8 +21,9 @@
     "rapidjson",
     "rxcpp",
     "stduuid",
+    "termcolor",
     "tweeny",
     "units",
-    "termcolor"
+    "z4kn4fein-semver"
   ]
 }

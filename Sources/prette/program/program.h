@@ -66,7 +66,7 @@ namespace prt {
     FOR_EACH_PROGRAM_EVENT(DEFINE_ON_PROGRAM_EVENT)
 #undef DEFINE_ON_PROGRAM_EVENT
 
-    class Program : public gfx::ObjectTemplate<ProgramId>,
+    class Program : public gfx::Object<ProgramId>,
                     public ProgramEventSource {
       friend class ProgramLinker;
       friend class ProgramBuilder;
@@ -140,7 +140,7 @@ namespace prt {
 
       virtual void SetUniformBlock(const std::string& name, const GLuint binding) const {
         glUniformBlockBinding(id_, GetUniformBlockIndex(name), binding);
-        CHECK_GL(FATAL);
+        CHECK_GL;
       }
 
       bool Accept(ProgramVisitor* vis);

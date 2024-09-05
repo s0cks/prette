@@ -64,6 +64,11 @@ namespace prt::vbo {
   };
 
   typedef rx::subject<VboEvent*> VboEventSubject;
+  typedef rx::observable<VboEvent*> VboEventObservable;
+#define DEFINE_EVENT_OBSERVABLE(Name)                           \
+  typedef rx::observable<Name##Event*> Name##EventObservable;
+  FOR_EACH_VBO_EVENT(DEFINE_EVENT_OBSERVABLE)
+#undef DEFINE_EVENT_OBSERVABLE
 
   class VboEventSource {
   protected:
@@ -77,15 +82,9 @@ namespace prt::vbo {
     }
   public:
     virtual ~VboEventSource() = default;
-    virtual rx::observable<VboEvent*> OnEvent() const = 0;
-
-#define DEFINE_ON_VBO_EVENT(Name)             \
-    inline rx::observable<Name##Event*>       \
-    On##Name() const {                        \
-      return OnEvent()                        \
-          .filter(Name##Event::Filter)        \
-          .map(Name##Event::Cast);            \
-    }
+    virtual VboEventObservable OnEvent() const = 0;
+#define DEFINE_ON_VBO_EVENT(Name)                                 \
+    virtual Name##EventObservable On##Name() const = 0;
     FOR_EACH_VBO_EVENT(DEFINE_ON_VBO_EVENT)
 #undef DEFINE_ON_VBO_EVENT
   };

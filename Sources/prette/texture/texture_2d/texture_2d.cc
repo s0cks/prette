@@ -38,8 +38,10 @@ namespace prt::texture {
   Texture2d* Texture2d::New(const uri::Uri& uri) {
     if(uri.HasExtension("png") || uri.HasExtension("jpeg")) {
       const auto img = img::Decode(uri.ToFileUri(fmt::format("{0}/textures", FLAGS_resources)));
+      DLOG(INFO) << "decoded img: " << img->ToString();
       TextureBuilder builder(k2D);
       builder << img;
+      DLOG(INFO) << builder;
       return new Texture2d(builder.Build());
     } else if(uri.HasExtension("json")) {
       NOT_IMPLEMENTED(FATAL); //TODO: implement

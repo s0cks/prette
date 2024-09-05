@@ -8,29 +8,31 @@
 #include "prette/vbo/vbo_scope.h"
 
 namespace prt::vbo {
+  class VboUpdateScopeBase : public VboBindScope {
+  protected:
+    explicit VboUpdateScopeBase(Vbo* vbo):
+      VboBindScope(vbo) {
+    }
+
+    uword GetElementSize() const;
+    void Update(const uword offset, const Region& source);
+  public:
+    ~VboUpdateScopeBase() override = default;
+  };
+
   template<typename V>
-  class VboUpdateScope : public VboBindScope {
+  class VboUpdateScope : public VboUpdateScopeBase {
   public:
     typedef std::vector<V> VertexList;
   public:
     explicit VboUpdateScope(Vbo* vbo):
-      VboBindScope(vbo) {
+      VboUpdateScopeBase(vbo) {
     }
     ~VboUpdateScope() override = default;
 
     void Update(const uword offset, const V* data, const uword length) {
-      PRT_ASSERT(offset >= 0);
-      PRT_ASSERT(data);
-      PRT_ASSERT(length > 0);
-      const auto total_size = GetVbo()->GetElementSize() * length;
-      const auto src = Region((uword) data, total_size);
-      if(GetVbo()->IsEmpty()) {
-        PRT_ASSERT(offset == 0);
-        Vbo::InitData(src, GetVbo()->GetUsage());
-      } else {
-        Vbo::UpdateVboData(offset, src);
-      }
-      GetVbo()->SetLength(length);
+      const auto src = Region((uword) data, length * GetElementSize());
+      VboUpdateScopeBase::Update(offset, src);
     }
 
     void Update(const V* data, const uword length) {

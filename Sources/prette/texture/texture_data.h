@@ -95,7 +95,7 @@ namespace prt::texture {
       stream << "format=" << rhs.format() << ", ";
       stream << "internal_format=" << rhs.internal_format() << ", ";
       stream << "type=" << rhs.type() << ", ";
-      stream << "bytes=" << rhs.bytes() << ", ";
+      stream << "bytes=" << (rhs.bytes() ? rhs.bytes() : 0) << ", ";
       stream << "num_bytes=" << byte_t(rhs.GetNumberOfBytes()) << ", ";
       stream << "size=" << glm::to_string(rhs.size());
       stream << ")";

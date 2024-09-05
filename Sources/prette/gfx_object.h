@@ -5,28 +5,29 @@
 #include "prette/object.h"
 
 namespace prt::gfx {
-  class Object : public prt::Object {
-  protected:
-    Object() = default;
-  public:
-    ~Object() override = default;
-  };
-
   template<typename Id>
-  class ObjectTemplate : public Object {
+  class Object : public prt::Object {
   protected:
     Id id_;
 
-    ObjectTemplate() = default;
-    explicit ObjectTemplate(const Id id):
-      Object(),
+    Object() = default;
+    explicit Object(const Id id):
+      prt::Object(),
       id_(id) {
     }
   public:
-    ~ObjectTemplate() override = default;
+    ~Object() override = default;
 
     Id GetId() const {
-      return (Id) id_;
+      return id_;
+    }
+
+    bool IsValid() const {
+      return (bool) id_;
+    }
+
+    bool IsInvalid() const {
+      return !IsValid();
     }
   };
 }

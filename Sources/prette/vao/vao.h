@@ -37,7 +37,7 @@ namespace prt {
 #undef DEFINE_ON_VAO_EVENT
 
     class VaoBuilder;
-    class Vao : public gfx::ObjectTemplate<VaoId>,
+    class Vao : public gfx::Object<VaoId>,
                 public VaoEventSource {
       friend class VaoTest;
       friend class VaoFinalizer;
@@ -71,37 +71,22 @@ namespace prt {
         return BindVao(kInvalidVaoId);
       }
     protected:
-      Vao(const VaoId id, const Metadata& meta = {});
-      Vao(const VaoId id, const VaoBuilder* builder);
+      Vao(const VaoId id);
     public:
       ~Vao() override;
       bool Accept(VaoVisitor* vis);
       std::string ToString() const override;
 
-      inline bool IsValid() const {
-        return IsValidVaoId(GetId());
-      }
-
-      inline bool IsInvalid() const {
-        return IsInvalidVaoId(GetId());
-      }
-
       rx::observable<VaoEvent*> OnEvent() const override {
         return vao::OnEvent(GetId());
       }
     public:
+      static Vao* New(const VaoId id);
       static Vao* FromJson(const uri::Uri& uri);
 
       static inline Vao*
-      New(const VaoId id, const Metadata& meta = {}) {
-        VaoBuilder builder(id);
-        builder.SetMeta(meta);
-        return builder.Build();
-      }
-
-      static inline Vao*
-      New(const Metadata& meta = {}) {
-        return New(kInvalidVaoId, meta);
+      New() {
+        return New(VaoId::GenerateId());
       }
     };
 

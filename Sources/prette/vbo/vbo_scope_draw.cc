@@ -5,7 +5,7 @@ namespace prt::vbo {
   void VboDrawScope::Draw(const gfx::DrawMode mode, const int64_t first, const int64_t count) const {
     DLOG(INFO) << "drawing " << count << " vertices starting @" << first;
     glDrawArrays(mode, first, count);
-    CHECK_GL(FATAL);
+    CHECK_GL;
   }
 
   void VboDrawScope::Draw(const gfx::DrawMode mode, const int64_t first) const {

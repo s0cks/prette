@@ -33,6 +33,9 @@ target_link_libraries(${PROJECT_NAME}
   Backward::Backward
   OpenSSL::Crypto
   rapidjson
+  OpenGL::GL
+  glfw
+  GLEW::GLEW
   Vorbis::vorbis
   libuv::uv_a)
 target_compile_options(${PROJECT_NAME}
@@ -43,7 +46,4 @@ target_include_directories(${PROJECT_NAME}
 add_executable(${PROJECT_NAME}-client
   main.cc)
 target_link_libraries(${PROJECT_NAME}-client
-  ${PROJECT_NAME}
-  OpenGL::GL
-  glfw
-  GLEW::GLEW)
+  ${PROJECT_NAME})

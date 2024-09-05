@@ -3,7 +3,7 @@
 
 namespace prt::vbo {
   void VboBindScope::Bind() const {
-    Vbo::BindVbo(GetVboId());
+    Vbo::Bind(GetVboId());
   }
 
   void VboBindScope::Unbind() const {

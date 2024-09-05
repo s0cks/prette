@@ -49,7 +49,7 @@ namespace prt {
     GetContextFlags() {
       int flags;
       glGetIntegerv(GL_CONTEXT_FLAGS, &flags);
-      CHECK_GL(FATAL);
+      CHECK_GL;
       return flags;
     }
 
@@ -69,7 +69,7 @@ namespace prt {
         } else {
           glEnable(Capability);
         }
-        CHECK_GL(FATAL);
+        CHECK_GL;
       }
       virtual ~CapabilityScope() {
         if(Inverted) {
@@ -77,7 +77,7 @@ namespace prt {
         } else {
           glDisable(Capability);
         }
-        CHECK_GL(FATAL);
+        CHECK_GL;
       }
 
       bool IsInverted() const {
@@ -102,7 +102,7 @@ namespace prt {
     static inline DepthFunction GetCurrentDepthFunction() {
       GLint value;
       glGetIntegerv(GL_DEPTH_FUNC, &value);
-      CHECK_GL(FATAL);
+      CHECK_GL;
       return static_cast<DepthFunction>(value);
     }
     
@@ -117,12 +117,12 @@ namespace prt {
         previous_(GetCurrentDepthFunction()),
         restore_(restore) {
         glDepthFunc(func);
-        CHECK_GL(FATAL);
+        CHECK_GL;
       }
       ~DepthTestCapabilityScope() override {
         if(restore_) {
           glDepthFunc(previous_);
-          CHECK_GL(FATAL);
+          CHECK_GL;
         }
       }
     };

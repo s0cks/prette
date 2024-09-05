@@ -154,11 +154,9 @@ int main(int argc, char** argv) {
   // ::google::InstallPrefixFormatter(&MyPrefixFormatter);
   ::google::InitGoogleLogging(argv[0]);
   ::google::ParseCommandLineFlags(&argc, &argv, true);
-  PrintRuntimeInfo();
   InitSignalHandlers();
   std::set_terminate(OnUnhandledException);
   LOG_IF(FATAL, !SetCurrentThreadName("main")) << "failed to set main thread name.";
-
   gfx::Init();
   engine::InitEngine();
   window::InitWindows();
@@ -169,29 +167,26 @@ int main(int argc, char** argv) {
   Class::Init();
   gui::Vertex::InitClass();
 
-  fbo::FboBuilder builder(render::GetTargetResolution());
-  
-  const auto fbo = builder.Build();
-  PRT_ASSERT(fbo);
-  DLOG(INFO) << "created: " << fbo->ToString();
+#ifdef PRT_DEBUG
+  PrintRuntimeInfo();
+#endif //PRT_DEBUG
 
-  // uword counter = 0;
-  // keyboard::OnKeyPressedEvent()
-  //   .subscribe(LogEvent<keyboard::KeyPressedEvent>());
-  // keyboard::OnKeyPressedEvent()
-  //   .filter(keyboard::KeyPressedEvent::FilterBy(GLFW_KEY_SPACE))
-  //   .subscribe([&counter](keyboard::KeyPressedEvent* e) {
-  //     DLOG(INFO) << "opening gui...";
-  //     new TestWindow(counter++);
-  //   });
-  // keyboard::OnKeyPressedEvent()
-  //   .filter(keyboard::KeyPressedEvent::FilterBy(GLFW_KEY_GRAVE_ACCENT))
-  //   .subscribe([](keyboard::KeyPressedEvent* e) {
-  //     PrintRuntimeInfo();
-  //   });
+  uword counter = 0;
+  keyboard::OnKeyPressedEvent()
+    .subscribe(LogEvent<keyboard::KeyPressedEvent>());
+  keyboard::OnKeyPressedEvent()
+    .filter(keyboard::KeyPressedEvent::FilterBy(GLFW_KEY_SPACE))
+    .subscribe([&counter](keyboard::KeyPressedEvent* e) {
+      new TestWindow(counter++);
+    });
+  keyboard::OnKeyPressedEvent()
+    .filter(keyboard::KeyPressedEvent::FilterBy(GLFW_KEY_GRAVE_ACCENT))
+    .subscribe([](keyboard::KeyPressedEvent* e) {
+      PrintRuntimeInfo();
+    });
 
-  // const auto engine = engine::GetEngine();
-  // PRT_ASSERT(engine);
-  // engine->Run();
+  const auto engine = engine::GetEngine();
+  PRT_ASSERT(engine);
+  engine->Run();
   return EXIT_SUCCESS;
 }

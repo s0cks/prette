@@ -5,13 +5,15 @@
 #include "prette/prette.h"
 
 int main(int argc, char** argv) {
-  ::google::InitGoogleLogging(argv[0]);
-  ::google::LogToStderr();
+  using namespace google;
+  using namespace prt;
 
+  InitGoogleLogging(argv[0]);
+  LogToStderr();
   ::testing::InitGoogleTest(&argc, argv);
-  ::google::ParseCommandLineFlags(&argc, &argv, false);
-  LOG(INFO) << "Running unit tests for minecraft-clone v" << mcc::GetVersion() << "....";
+  ParseCommandLineFlags(&argc, &argv, false);
+  LOG(INFO) << "Running unit tests for minecraft-clone v" << GetVersion() << "....";
 
-  mcc::Class::Init();
+  Class::Init();
   return RUN_ALL_TESTS();
 }

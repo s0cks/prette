@@ -25,7 +25,7 @@ namespace prt::program {
   ProgramLinkStatus ProgramLinkScope::Link() const {
     const auto id = GetProgramId();
     glLinkProgram(id);
-    CHECK_GL(FATAL);
+    CHECK_GL;
     return ProgramLinkStatus(id);
   }
 }
