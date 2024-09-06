@@ -13,6 +13,7 @@
 
 namespace prt {
   namespace uri {
+    typedef std::unordered_set<std::string> ExtensionSet;
     typedef std::string basic_uri;
     typedef std::string Path;
     typedef std::string Scheme;

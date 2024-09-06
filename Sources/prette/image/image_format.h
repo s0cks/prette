@@ -10,7 +10,7 @@ namespace prt::img {
   V(RGBA)
 
   class ImageFormat {
-    typedef GLint RawType;
+    using RawType = GLint;
   private:
     RawType value_;
   public:
@@ -18,14 +18,15 @@ namespace prt::img {
     constexpr ImageFormat(const RawType value):
       value_(value) {
     }
+    constexpr ImageFormat(ImageFormat&& rhs) = default;
     constexpr ImageFormat(const ImageFormat& rhs) = default;
     ~ImageFormat() = default;
 
-    constexpr RawType value() const {
+    constexpr auto value() const -> RawType {
       return value_;
     }
 
-    constexpr uword GetNumberOfChannels() const {
+    constexpr auto GetNumberOfChannels() const -> uword {
       switch(value()) {
         case GL_RGB:
           return 3;
@@ -41,29 +42,30 @@ namespace prt::img {
       return value();
     }
 
-    ImageFormat& operator=(const ImageFormat& rhs) = default;
+    auto operator=(const ImageFormat& rhs) -> ImageFormat& = default;
+    auto operator=(ImageFormat&& rhs) -> ImageFormat& = default;
 
-    constexpr bool operator==(const ImageFormat& rhs) const {
+    constexpr auto operator==(const ImageFormat& rhs) const -> bool {
       return value() == rhs.value();
     }
 
-    constexpr bool operator!=(const ImageFormat& rhs) const {
+    constexpr auto operator!=(const ImageFormat& rhs) const -> bool {
       return value() != rhs.value();
     }
 
-    constexpr bool operator<(const ImageFormat& rhs) const {
+    constexpr auto operator<(const ImageFormat& rhs) const -> bool {
       return value() < rhs.value();
     }
 
-    constexpr bool operator>(const ImageFormat& rhs) const {
+    constexpr auto operator>(const ImageFormat& rhs) const -> bool {
       return value() > rhs.value();
     }
 
-    constexpr uword operator*(const Resolution& rhs) const {
+    constexpr auto operator*(const Resolution& rhs) const -> uword {
       return GetNumberOfChannels() * rhs.width() * rhs.height();
     }
 
-    friend std::ostream& operator<<(std::ostream& stream, const ImageFormat& rhs) {
+    friend auto operator<<(std::ostream& stream, const ImageFormat& rhs) -> std::ostream& {
       switch(rhs.value()) {
 #define DEFINE_TO_STRING(Name)                    \
         case GL_##Name: return stream << #Name;

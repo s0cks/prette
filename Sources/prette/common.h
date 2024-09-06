@@ -58,8 +58,8 @@
 #define DEFINE_NON_COPYABLE_TYPE(Name)                      \
   public:                                                   \
     Name(const Name& rhs) = delete;                         \
-    Name(const Name&& rhs) = delete;                        \
-    auto operator=(const Name&& rhs) -> Name& = delete;     \
+    Name(Name&& rhs) = delete;                              \
+    auto operator=(Name&& rhs) -> Name& = delete;           \
     auto operator=(const Name& rhs) -> Name& = delete;
 
 #define DEFINE_NON_INSTANTIABLE_TYPE(Name) \

@@ -1,16 +1,16 @@
 #ifndef PRT_IMAGE_H
 #define PRT_IMAGE_H
 
-#include "prette/gfx.h"
 #include "prette/uri.h"
-#include "prette/object.h"
 #include "prette/resolution.h"
 #include "prette/image/image_format.h"
 
 namespace prt::img {
-  const std::unordered_set<std::string>& GetValidExtensions();
+  using uri::ExtensionSet;
 
-  class Image : public Object {
+  auto GetValidExtensions() -> const ExtensionSet&;
+
+  class Image {
     DEFINE_NON_COPYABLE_TYPE(Image);
   private:
     ImageFormat format_;
@@ -18,53 +18,60 @@ namespace prt::img {
 
     Image(const ImageFormat format, const Resolution& resolution);
   public:
-    ~Image() override;
+    ~Image() = delete;
 
-    ImageFormat GetFormat() const {
+    auto GetFormat() const -> ImageFormat {
       return format_;
     }
 
-    const Resolution& GetResolution() const {
+    auto GetResolution() const -> const Resolution& {
       return resolution_;
     }
 
-    inline uword GetWidth() const {
+    inline auto GetWidth() const -> uword {
       return static_cast<uword>(GetResolution().width());
     }
 
-    inline uword GetHeight() const {
+    inline auto GetHeight() const -> uword {
       return static_cast<uword>(GetResolution().height());
     }
 
-    inline uword GetArea() const {
+    inline auto GetArea() const -> uword {
       return GetWidth() * GetHeight();
     }
 
-    inline uword GetNumberOfChannels() const {
+    inline auto GetNumberOfChannels() const -> uword {
       return GetFormat().GetNumberOfChannels();
     }
 
-    inline uword GetTotalSize() const {
+    inline auto GetTotalSize() const -> uword {
       return GetArea() * GetNumberOfChannels();
     }
     
-    uint8_t* data() const {
+    auto data() const -> uint8_t* {
+      // NOLINTNEXTLINE
       return (uint8_t*) (((uword)this) + sizeof(Image));
     }
 
-    std::string ToString() const override;
+    auto ToString() const -> std::string;
     void Flip(); //TODO: reduce visibility
   public:
-    void* operator new(const size_t sz, const uword num_bytes);
-    static Image* New(const ImageFormat format, const Resolution& resolution);
+    void operator delete(void* ptr) = delete;
+    void operator delete(void* ptr, const size_t sz);
+    auto operator new(const size_t sz, const uword num_bytes) -> void*;
+    auto operator new(const size_t sz) -> void* = delete;
+
+    void operator delete[](void* ptr) = delete;
+    void operator delete[](void* ptr, const uword num_bytes) = delete;
+    auto operator new[](const size_t sz, const uword num_bytes) -> void* = delete;
+    auto operator new[](const size_t sz) -> void* = delete;
+
+    static auto New(const ImageFormat format, const Resolution& resolution) -> Image*;
   };
   
-  bool Filter(const uri::Uri& uri);
-  Image* Decode(const uri::Uri& uri);
-  rx::observable<Image*> DecodeAsync(const uri::Uri& uri);
+  auto Filter(const uri::Uri& uri) -> bool;
+  auto Decode(const uri::Uri& uri) -> Image*;
+  auto DecodeAsync(const uri::Uri& uri) -> rx::observable<Image*>;
 }
-
-#include "prette/image/image_png.h"
-#include "prette/image/image_jpeg.h"
 
 #endif //PRT_IMAGE_H
