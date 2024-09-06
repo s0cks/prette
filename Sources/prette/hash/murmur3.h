@@ -8,38 +8,46 @@
 #include "prette/platform.h"
 
 namespace prt {
-  uint32_t murmur3_32(const uint8_t* bytes, const uword num_bytes);
+  namespace murmur3_32 {
+    using Digest = uint32_t;
 
-  static inline uint32_t
-  murmur3_32(const char* value, const uword len) {
-    return murmur3_32((const uint8_t*) value, len);
+    auto of(const uint8_t* bytes, const uword num_bytes) -> Digest;
+
+    static inline auto
+    of(const char* value, const uword len) -> Digest {
+      return of((const uint8_t*) value, len); // NOLINT(cppcoreguidelines-pro-type-cstyle-cast)
+    }
+
+    static inline auto
+    of(const char* value) -> Digest {
+      return of(value, strlen(value));
+    }
+
+    static inline auto
+    of(const std::string& value) -> Digest {
+      return of(value.data(), value.length());
+    }
   }
 
-  static inline uint32_t
-  murmur3_32(const char* value) {
-    return murmur3_32(value, strlen(value));
-  }
+  namespace murmur3_128 {
+    using Digest = uint128;
 
-  static inline uint32_t
-  murmur3_32(const std::string& value) {
-    return murmur3_32(value.data(), value.length());
-  }
+    auto of(const uint8_t* bytes, const uword num_bytes) -> Digest;
 
-  uint128 murmur3_128(const uint8_t* bytes, const uword num_bytes);
+    static inline auto
+    of(const char* value, const uword len) -> Digest {
+      return of((const uint8_t*) value, len); // NOLINT(cppcoreguidelines-pro-type-cstyle-cast)
+    }
 
-  static inline uint128
-  murmur3_128(const char* value, const uword len) {
-    return murmur3_128((const uint8_t*) value, len);
-  }
+    static inline auto
+    of(const char* value) -> Digest {
+      return of(value, strlen(value));
+    }
 
-  static inline uint128
-  murmur3_128(const char* value) {
-    return murmur3_128(value, strlen(value));
-  }
-
-  static inline uint128
-  murmur3_128(const std::string& value) {
-    return murmur3_128(value.data(), value.length());
+    static inline auto
+    of(const std::string& value) -> Digest {
+      return of(value.data(), value.length());
+    }
   }
 }
 

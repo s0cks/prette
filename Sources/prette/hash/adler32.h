@@ -5,22 +5,24 @@
 #include <cstring>
 #include "prette/platform.h"
 
-namespace prt {
-  uint32_t adler32(const uint8_t* bytes, const uword num_bytes);
+namespace prt::adler32 {
+  using Digest = uint32_t;
 
-  static inline uint32_t
-  adler32(const char* value, const uword length) {
-    return adler32(reinterpret_cast<const uint8_t*>(value), length);
+  auto of(const uint8_t* bytes, const uword num_bytes) -> Digest;
+
+  static inline auto
+  of(const char* value, const uword length) -> Digest {
+    return of((const uint8_t*) value, length); // NOLINT(cppcoreguidelines-pro-type-cstyle-cast)
   }
 
-  static inline uint32_t
-  adler32(const char* value) {
-    return adler32(value, strlen(value));
+  static inline auto
+  of(const char* value) -> Digest {
+    return of(value, strlen(value));
   }
 
-  static inline uint32_t
-  adler32(const std::string& value) {
-    return adler32(value.data(), value.length());
+  static inline auto
+  of(const std::string& value) -> Digest {
+    return of(value.data(), value.length());
   }
 }
 
