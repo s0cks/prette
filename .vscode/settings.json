@@ -100,5 +100,23 @@
   "cmake.options.statusBarVisibility": "visible",
   "workbench.colorCustomizations": {
     "debugConsole.errorForeground": "#ff0000"
-  }
+  },
+  "githubIssues.queries": [
+    {
+      "label": "My Issues",
+      "query": "default"
+    },
+    {
+      "label": "Created Issues",
+      "query": "author:${user} state:open repo:${owner}/${repository} sort:created-desc"
+    },
+    {
+      "label": "Recent Issues",
+      "query": "state:open repo:${owner}/${repository} sort:updated-desc"
+    },
+    {
+      "label": "Closed Issues",
+      "query": "state:closed repo:${owner}/${repository} sort:updated-desc"
+    }
+  ]
 }
