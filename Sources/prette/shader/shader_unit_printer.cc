@@ -3,7 +3,7 @@
 namespace prt::shader {
 #define __ \
   google::LogMessage(GetFile(), GetLine(), GetSeverity()).stream() << GetIndentString()
-  bool ShaderUnitPrinter::VisitShaderCode(ShaderCode* code) {
+  auto ShaderUnitPrinter::VisitShaderCode(ShaderCode* code) -> bool {
     PRT_ASSERT(code);
     __ << "- " << code->ToString();
     return true;

@@ -9,10 +9,12 @@
 namespace prt::shader {
   class ShaderUnit;
   class ShaderUnitBuilder : public BuilderTemplate<ShaderUnit> {
-  protected:
+    DEFINE_NON_COPYABLE_TYPE(ShaderUnitBuilder);
+  private:
     ShaderType type_;
     ShaderCodeList code_;
   public:
+    //TODO: pass-by-reference & move semantics for ShaderCodeList
     explicit ShaderUnitBuilder(const ShaderType type, const ShaderCodeList& code = {}):
       BuilderTemplate<ShaderUnit>(),
       type_(type),
@@ -20,11 +22,11 @@ namespace prt::shader {
     }
     ~ShaderUnitBuilder() override = default;
 
-    ShaderType GetType() const {
+    auto GetType() const -> ShaderType {
       return type_;
     }
 
-    const ShaderCodeList& GetCode() const {
+    auto GetCode() const -> const ShaderCodeList& {
       return code_;
     }
 
@@ -44,8 +46,8 @@ namespace prt::shader {
       });
     }
 
-    ShaderUnit* Build() const override;
-    rx::observable<ShaderUnit*> BuildAsync() const override;
+    auto Build() const -> ShaderUnit* override;
+    auto BuildAsync() const -> rx::observable<ShaderUnit*> override;
   };
 }
 

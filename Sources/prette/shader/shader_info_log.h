@@ -7,9 +7,12 @@
 
 namespace prt::shader {
   class ShaderInfoLog {
-    static uword GetShaderInfoLogLength(const ShaderId id);
+    //TODO: define proper copy & move ctor & dtor
+    //TODO: cleanup string buffer utilization
+  private:
+    static auto GetShaderInfoLogLength(const ShaderId id) -> uword;
     static void GetShaderInfoLogData(const ShaderId id, uint8_t* bytes, const uword max_size, uword* length);
-  protected:
+  private:
     ShaderId id_;
     uword length_;
     uint8_t* data_;
@@ -56,32 +59,33 @@ namespace prt::shader {
       Release();
     }
 
-    ShaderId GetShaderId() const {
+    auto GetShaderId() const -> ShaderId {
       return id_;
     }
 
-    uword length() const {
+    auto length() const -> uword {
       return length_;
     }
 
-    const uint8_t* data() const {
+    auto data() const -> const uint8_t* {
       return data_;
     }
 
-    bool IsEmpty() const {
+    auto IsEmpty() const -> bool {
       return data_ == nullptr || length_ == 0;
     }
 
     operator std::string() const {
-      return std::string((const char*) data(), length());
+      return { (const char*) data(), length() };
     }
 
-    void operator=(const ShaderInfoLog& rhs) {
+    auto operator=(const ShaderInfoLog& rhs) -> ShaderInfoLog& {
       id_ = rhs.id_;
       CopyFrom(rhs);
+      return *this;
     }
 
-    friend std::ostream& operator<<(std::ostream& stream, const ShaderInfoLog& rhs) {
+    friend auto operator<<(std::ostream& stream, const ShaderInfoLog& rhs) -> std::ostream& {
       return stream << ((const std::string&) rhs);
     }
   };

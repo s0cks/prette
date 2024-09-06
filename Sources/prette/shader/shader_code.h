@@ -6,27 +6,27 @@
 
 #include "prette/buffer.h"
 #include "prette/object.h"
-#include "prette/merkle.h"
 #include "prette/uint256.h"
 #include "prette/shader/shader_type.h"
 
 namespace prt::shader {
-  typedef const uint8_t* RawShaderCode;
+  using RawShaderCode = const uint8_t*;
 
   class ShaderCode;
   class ShaderCodeVisitor {
+    DEFINE_NON_COPYABLE_TYPE(ShaderCodeVisitor);
   protected:
     ShaderCodeVisitor() = default;
   public:
     virtual ~ShaderCodeVisitor() = default;
-    virtual bool VisitShaderCode(ShaderCode* code) = 0;
+    virtual auto VisitShaderCode(ShaderCode* code) -> bool = 0;
   };
 
   class ShaderCode : public Object { //TODO: implement Region
     DEFINE_NON_COPYABLE_TYPE(ShaderCode);
-
-    static inline uword
-    CalculateAllocateSize(const uword length) {
+  private:
+    static inline auto
+    CalculateAllocateSize(const uword length) -> uword {
       uword total_size = sizeof(ShaderCode);
       total_size += sizeof(uword); // type;
       total_size += sizeof(uword); // length
@@ -41,56 +41,63 @@ namespace prt::shader {
       (*length_ptr()) = length;
     }
 
-    inline uword type_address() const {
+    inline auto type_address() const -> uword {
       return GetStartingAddress() + sizeof(ShaderCode) + (sizeof(uword) * 0);
     }
 
-    inline ShaderType* type_ptr() const {
+    inline auto type_ptr() const -> ShaderType* {
+      // NOLINTNEXTLINE(cppcoreguidelines-pro-type-cstyle-cast)
       return (ShaderType*) type_address();
     }
 
-    inline uword length_address() const {
+    inline auto length_address() const -> uword {
       return GetStartingAddress() + sizeof(ShaderCode) + (sizeof(uword) * 1);
     }
 
-    inline uword* length_ptr() const {
+    inline auto length_ptr() const -> uword* {
+      // NOLINTNEXTLINE(cppcoreguidelines-pro-type-cstyle-cast)
       return (uword*) length_address();
     }
 
-    inline uword raw_address() const {
+    inline auto raw_address() const -> uword {
       return GetStartingAddress() + sizeof(ShaderCode) + (sizeof(uword) * 2);
     }
 
-    inline RawShaderCode raw_ptr() const {
+    inline auto raw_ptr() const -> RawShaderCode {
+      // NOLINTNEXTLINE(cppcoreguidelines-pro-type-cstyle-cast)
       return (RawShaderCode) raw_address();
     }
 
-    inline uword GetStartingAddress() const {
+    inline auto GetStartingAddress() const -> uword {
+      // NOLINTNEXTLINE(cppcoreguidelines-pro-type-cstyle-cast)
       return (uword)this;
     }
 
-    inline void* GetStartingAddressPointer() const {
+    inline auto GetStartingAddressPointer() const -> void* {
+      // NOLINTNEXTLINE(cppcoreguidelines-pro-type-cstyle-cast)
       return (void*) GetStartingAddress();
     }
 
-    inline uword GetSize() const {
+    inline auto GetSize() const -> uword {
       return CalculateAllocateSize(GetLength());
     }
 
-    inline uword GetEndingAddress() const {
+    inline auto GetEndingAddress() const -> uword {
       return GetStartingAddress() + GetSize();
     }
 
-    inline void* GetEndingAddressPointer() const {
+    inline auto GetEndingAddressPointer() const -> void* {
+      // NOLINTNEXTLINE(cppcoreguidelines-pro-type-cstyle-cast)
       return (void*) GetEndingAddress();
     }
 
-    inline bool Contains(const uword address) const {
+    inline auto Contains(const uword address) const -> bool {
       return GetStartingAddress() <= address
           && GetEndingAddress() >= address;
     }
 
-    inline bool Contains(const void* ptr) const {
+    inline auto Contains(const void* ptr) const -> bool {
+      // NOLINTNEXTLINE(cppcoreguidelines-pro-type-cstyle-cast)
       return Contains((uword) ptr);
     }
 
@@ -106,133 +113,138 @@ namespace prt::shader {
     }
   public:
     ~ShaderCode() override = default;
-    std::string ToString() const override;
+    auto ToString() const -> std::string override;
 
-    ShaderType GetType() const {
+    auto GetType() const -> ShaderType {
       return *type_ptr();
     }
 
 #define DEFINE_TYPE_CHECK(Name, Ext, GlValue)             \
-    inline bool Is##Name##ShaderCode() const {            \
+    inline auto Is##Name##ShaderCode() const -> bool {    \
       return GetType() == ShaderType::k##Name##Shader;    \
     }
     FOR_EACH_SHADER_TYPE(DEFINE_TYPE_CHECK)
 #undef DEFINE_TYPE_CHECK
 
-    uword GetLength() const {
+    auto GetLength() const -> uword {
       return *length_ptr();
     }
 
-    inline RawShaderCode GetData() const {
+    inline auto GetData() const -> RawShaderCode {
       return raw_ptr();
     }
 
-    int Compare(const RawShaderCode bytes, const uword num_bytes) const;
+    auto Compare(const RawShaderCode bytes, const uword num_bytes) const -> int;
     
-    inline int Compare(const char* data, const uword length) const {
+    inline auto Compare(const char* data, const uword length) const -> int {
+      // NOLINTNEXTLINE(cppcoreguidelines-pro-type-cstyle-cast)
       return Compare((const RawShaderCode) data, length);
     }
 
-    inline int Compare(const char* data) const {
+    inline auto Compare(const char* data) const -> int {
       if(!data)
         return +1;
       return Compare(data, strlen(data));
     }
 
-    inline int Compare(const std::string& rhs) const {
+    inline auto Compare(const std::string& rhs) const -> int {
       return Compare(rhs.data(), rhs.length());
     }
 
-    inline bool Equals(const RawShaderCode bytes, const uword num_bytes) const {
+    inline auto Equals(const RawShaderCode bytes, const uword num_bytes) const -> bool {
       return Compare(bytes, num_bytes) == 0;
     }
 
-    inline bool Equals(const char* data, const uword length) const {
+    inline auto Equals(const char* data, const uword length) const -> bool {
       return Compare(data, length) == 0;
     }
 
-    inline bool Equals(const char* data) const {
+    inline auto Equals(const char* data) const -> bool {
       if(!data)
         return false;
       return Equals(data, strlen(data));
     }
 
-    inline bool Equals(const std::string& rhs) const {
+    inline auto Equals(const std::string& rhs) const -> bool {
       return Equals(rhs.data(), rhs.length());
     }
 
-    uint256 GetSHA256() const;
+    auto GetSHA256() const -> uint256;
 
     operator std::string () const {
-      return std::string((const char*) GetData(), GetLength());
+      // NOLINTNEXTLINE
+      return { (const char*) GetData(), GetLength()};
     }
 
-    friend std::ostream& operator<<(std::ostream& stream, const ShaderCode& rhs) {
+    friend auto operator<<(std::ostream& stream, const ShaderCode& rhs) -> std::ostream& {
       return stream << (const std::string&) rhs;
     }
   public:
-    void* operator new(size_t size, const uword length);
+    auto operator new(size_t size, const uword length) -> void*;
   public:
-    static ShaderCode* New(const ShaderType type, const RawShaderCode bytes, const uword num_bytes);
+    static auto New(const ShaderType type, const RawShaderCode bytes, const uword num_bytes) -> ShaderCode*;
 
-    static inline ShaderCode*
-    New(const ShaderType type, const char* bytes, const uword num_bytes) {
+    static inline auto
+    New(const ShaderType type, const char* bytes, const uword num_bytes) -> ShaderCode* {
+      // NOLINTNEXTLINE(cppcoreguidelines-pro-type-cstyle-cast)
       return New(type, (const RawShaderCode) bytes, num_bytes);
     }
 
-    static inline ShaderCode*
-    New(const ShaderType type, const std::string& code) {
+    static inline auto
+    New(const ShaderType type, const std::string& code) -> ShaderCode* {
       return New(type, code.data(), code.length());
     }
 
-#define DEFINE_NEW_SHADER_TYPE(Name, Ext, GlValue)                              \
-    static inline ShaderCode*                                                   \
-    New##Name##ShaderCode(const RawShaderCode bytes, const uword num_bytes) {   \
-      return New(ShaderType::k##Name##Shader, bytes, num_bytes);                \
-    }                                                                           \
-    static inline ShaderCode*                                                   \
-    New##Name##ShaderCode(const char* bytes, const uword length) {              \
-      return New##Name##ShaderCode((const RawShaderCode) bytes, length);        \
-    }                                                                           \
-    static inline ShaderCode*                                                   \
-    New##Name##ShaderCode(const char* bytes) {                                  \
-      return New##Name##ShaderCode((const char*) bytes, strlen(bytes));         \
-    }                                                                           \
-    static inline ShaderCode*                                                   \
-    New##Name##ShaderCode(const std::string& code) {                            \
-      return New##Name##ShaderCode(code.data(), code.length());                 \
+#define DEFINE_NEW_SHADER_TYPE(Name, Ext, GlValue)                                              \
+    static inline auto                                                                          \
+    New##Name##ShaderCode(const RawShaderCode bytes, const uword num_bytes) -> ShaderCode* {    \
+      return New(ShaderType::k##Name##Shader, bytes, num_bytes);                                \
+    }                                                                                           \
+    static inline auto                                                                          \
+    New##Name##ShaderCode(const char* bytes, const uword length) -> ShaderCode* {               \
+      return New##Name##ShaderCode((const RawShaderCode) bytes, length);                        \
+    }                                                                                           \
+    static inline auto                                                                          \
+    New##Name##ShaderCode(const char* bytes) -> ShaderCode* {                                   \
+      return New##Name##ShaderCode((const char*) bytes, strlen(bytes));                         \
+    }                                                                                           \
+    static inline auto                                                                          \
+    New##Name##ShaderCode(const std::string& code) -> ShaderCode* {                             \
+      return New##Name##ShaderCode(code.data(), code.length());                                 \
     }
+    // NOLINTBEGIN(cppcoreguidelines-pro-type-cstyle-cast)
     FOR_EACH_SHADER_TYPE(DEFINE_NEW_SHADER_TYPE)
+    // NOLINTEND(cppcoreguidelines-pro-type-cstyle-cast)
 #undef DEFINE_NEW_SHADER_TYPE
 
-    static ShaderCode* Copy(const ShaderCode* rhs);
-    static ShaderCode* FromFile(const ShaderType type, const uri::Uri& uri);
-    static ShaderCode* FromFile(const uri::Uri& uri);
+    static auto Copy(const ShaderCode* rhs) -> ShaderCode*;
+    static auto FromFile(const ShaderType type, const uri::Uri& uri) -> ShaderCode*;
+    static auto FromFile(const uri::Uri& uri) -> ShaderCode*;
     
-    static inline ShaderCode*
-    FromFile(const ShaderType type, const uri::basic_uri uri) {
+    static inline auto
+    FromFile(const ShaderType type, const uri::basic_uri uri) -> ShaderCode* {
       return FromFile(type, uri::Uri(uri));
     }
 
-    static inline ShaderCode*
-    FromFile(const uri::basic_uri& uri) { //TODO: normalize uri
+    static inline auto
+    FromFile(const uri::basic_uri& uri) -> ShaderCode* { //TODO: normalize uri
       return FromFile(uri::Uri(uri));
     }
 
-#define DEFINE_FROM_FILE_TYPE(Name, Ext, GlValue)                     \
-    static inline ShaderCode*                                         \
-    Name##ShaderCodeFromFile(const uri::Uri& uri) {                   \
-      return FromFile(k##Name##Shader, uri);                          \
-    }                                                                 \
-    static inline ShaderCode*                                         \
-    Name##ShaderCodeFromFile(const uri::basic_uri& uri) {             \
-      return Name##ShaderCodeFromFile(uri::Uri(uri));                 \
+#define DEFINE_FROM_FILE_TYPE(Name, Ext, GlValue)                           \
+    static inline auto                                                      \
+    Name##ShaderCodeFromFile(const uri::Uri& uri) -> ShaderCode* {          \
+      return FromFile(k##Name##Shader, uri);                                \
+    }                                                                       \
+    static inline auto                                                      \
+    Name##ShaderCodeFromFile(const uri::basic_uri& uri) -> ShaderCode* {    \
+      return Name##ShaderCodeFromFile(uri::Uri(uri));                       \
     }
     FOR_EACH_SHADER_TYPE(DEFINE_FROM_FILE_TYPE)
 #undef DEFINE_FROM_FILE_TYPE
   };
 
-  typedef std::vector<ShaderCode*> ShaderCodeList;
+  using ShaderCodeList = std::vector<ShaderCode*>;
 }
 
 #endif //PRT_SHADER_CODE_H

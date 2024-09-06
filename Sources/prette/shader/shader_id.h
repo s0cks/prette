@@ -6,20 +6,20 @@
 
 namespace prt {
   namespace shader {
-    typedef GLuint ShaderId;
+    using ShaderId = GLuint;
     static constexpr const ShaderId kInvalidShaderId = 0;
 
-    static inline bool
-    IsInvalidShaderId(const ShaderId id) {
+    static inline auto
+    IsInvalidShaderId(const ShaderId id) -> bool {
       return id == kInvalidShaderId;
     }
 
-    static inline bool
-    IsValidShaderId(const ShaderId id) {
+    static inline auto
+    IsValidShaderId(const ShaderId id) -> bool {
       return id != kInvalidShaderId;
     }
 
-    typedef std::vector<ShaderId> ShaderIdList;
+    using ShaderIdList = std::vector<ShaderId>;
   }
   using shader::ShaderId;
   using shader::kInvalidShaderId;

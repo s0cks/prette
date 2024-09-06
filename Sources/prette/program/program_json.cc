@@ -1,6 +1,7 @@
 #include "prette/program/program_json.h"
 #include <glog/logging.h>
-#include "prette/shader/shader.h"
+#include "prette/shader/shader_vertex.h"
+#include "prette/shader/shader_fragment.h"
 
 namespace prt::program {
   Shader* ProgramShader::GetShader() const {

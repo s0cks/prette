@@ -68,10 +68,12 @@
     ~Name() = delete;                      \
     DEFINE_NON_COPYABLE_TYPE(Name);
 
-#define DEFINE_DEFAULT_COPYABLE_TYPE(Name)            \
-  public:                                             \
-    Name(const Name& rhs) = default;                  \
-    Name& operator=(const Name& rhs) = default;
+#define DEFINE_DEFAULT_COPYABLE_TYPE(Name)                \
+  public:                                                 \
+    Name(Name&& rhs) = default;                           \
+    Name(const Name& rhs) = default;                      \
+    auto operator=(Name&& rhs) -> Name& = default;        \
+    auto operator=(const Name& rhs) -> Name& = default;   \
 
 #define NOT_IMPLEMENTED(Level) \
   LOG(Level) << __FUNCTION__ << " is not implemented!";

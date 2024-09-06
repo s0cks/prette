@@ -4,33 +4,33 @@
 #include <set>
 #include <optional>
 #include "prette/uri.h"
-#include "prette/reference.h"
-#include "prette/resource/resource.h"
-
+#include "prette/object.h"
 #include "prette/shader/shader_id.h"
-#include "prette/shader/shader_unit.h"
 #include "prette/shader/shader_type.h"
 #include "prette/shader/shader_events.h"
 
 namespace prt {
   namespace shader {
+    using uri::ExtensionSet;
+
     class Shader;
     class ShaderVisitor {
+      DEFINE_NON_COPYABLE_TYPE(ShaderVisitor);
     protected:
       ShaderVisitor() = default;
     public:
       virtual ~ShaderVisitor() = default;
-#define DEFINE_VISIT_SHADER(Name, Ext, GlValue)                     \
-      virtual bool Visit##Name##Shader(Name##Shader* shader) = 0;
+#define DEFINE_VISIT_SHADER(Name, Ext, GlValue)                             \
+      virtual auto Visit##Name##Shader(Name##Shader* shader) -> bool = 0;
       FOR_EACH_SHADER_TYPE(DEFINE_VISIT_SHADER)
 #undef DEFINE_VISIT_SHADER
     };
 
-    const std::set<std::string>& GetValidFileExtensions();
-    rx::observable<ShaderEvent*> OnEvent();
+    auto GetValidFileExtensions() -> const ExtensionSet&;
+    auto OnEvent() -> ShaderEventObservable;
     
-    static inline rx::observable<ShaderEvent*>
-    OnEvent(const ShaderId id) {
+    static inline auto 
+    OnEvent(const ShaderId id) -> ShaderEventObservable {
       return OnEvent()
         .filter([id](ShaderEvent* event) {
           return event
@@ -38,34 +38,34 @@ namespace prt {
         });
     }
 
-#define DEFINE_ON_SHADER_EVENT(Name)                              \
-    static inline rx::observable<Name##Event*>                    \
-    On##Name##Event() {                                           \
-      return OnEvent()                                            \
-        .filter([](ShaderEvent* event) {                          \
-          return event                                            \
-              && event->Is##Name##Event();                        \
-        })                                                        \
-        .map([](ShaderEvent* event) {                             \
-          PRT_ASSERT(event);                                      \
-          PRT_ASSERT(event->Is##Name##Event());                   \
-          return event->As##Name##Event();                        \
-        });                                                       \
-    }                                                             \
-    static inline rx::observable<Name##Event*>                    \
-    On##Name##Event(const ShaderId id) {                          \
-      return OnEvent()                                            \
-        .filter([id](ShaderEvent* event) {                        \
-          return event                                            \
-              && event->Is##Name##Event()                         \
-              && event->GetShaderId() == id;                      \
-        })                                                        \
-        .map([id](ShaderEvent* event) {                           \
-          PRT_ASSERT(event);                                      \
-          PRT_ASSERT(event->Is##Name##Event());                   \
-          PRT_ASSERT(event->GetShaderId() == id);                 \
-          return event->As##Name##Event();                        \
-        });                                                       \
+#define DEFINE_ON_SHADER_EVENT(Name)                                \
+    static inline auto                                              \
+    On##Name##Event() -> Name##EventObservable {                    \
+      return OnEvent()                                              \
+        .filter([](ShaderEvent* event) {                            \
+          return event                                              \
+              && event->Is##Name##Event();                          \
+        })                                                          \
+        .map([](ShaderEvent* event) {                               \
+          PRT_ASSERT(event);                                        \
+          PRT_ASSERT(event->Is##Name##Event());                     \
+          return event->As##Name##Event();                          \
+        });                                                         \
+    }                                                               \
+    static inline auto                                              \
+    On##Name##Event(const ShaderId id) -> Name##EventObservable {   \
+      return OnEvent()                                              \
+        .filter([id](ShaderEvent* event) {                          \
+          return event                                              \
+              && event->Is##Name##Event()                           \
+              && event->GetShaderId() == id;                        \
+        })                                                          \
+        .map([id](ShaderEvent* event) {                             \
+          PRT_ASSERT(event);                                        \
+          PRT_ASSERT(event->Is##Name##Event());                     \
+          PRT_ASSERT(event->GetShaderId() == id);                   \
+          return event->As##Name##Event();                          \
+        });                                                         \
     }
     FOR_EACH_SHADER_EVENT(DEFINE_ON_SHADER_EVENT)
 #undef DEFINE_ON_SHADER_EVENT
@@ -79,16 +79,18 @@ namespace prt {
       friend class GeometryShader;
       friend class TessEvalShader;
       friend class TessControlShader;
+      DEFINE_NON_COPYABLE_TYPE(Shader);
     public:
+      // @deprecated
       struct IdComparator {
-        bool operator()(Shader* lhs, Shader* rhs) const {
+        auto operator()(Shader* lhs, Shader* rhs) const -> bool {
           return lhs->GetId() < rhs->GetId();
         }
       };
 
       struct Comparator {
-        bool operator()(const Shader* lhs,
-                        const Shader* rhs) const {
+        auto operator()(const Shader* lhs,
+                        const Shader* rhs) const -> bool {
           return lhs->GetId() == rhs->GetId()
               && lhs->GetType() == rhs->GetType();
         }
@@ -102,47 +104,48 @@ namespace prt {
         E event(args...);
         return Publish(&event);
       }
-    protected:
+    private:
       ShaderId id_;
-
+    protected:
       Shader(const Metadata& meta, const ShaderId id);
     public:
-      virtual ~Shader();
-      virtual ShaderType GetType() const = 0;
-      virtual std::string ToString() const = 0;
-      virtual bool Accept(ShaderVisitor* vis) = 0;
+      ~Shader() override;
+      virtual auto GetType() const -> ShaderType = 0;
+      virtual auto Accept(ShaderVisitor* vis) -> bool = 0;
+      auto ToString() const -> std::string override = 0;
       
-      ShaderId GetId() const {
+      auto GetId() const -> ShaderId {
         return id_;
       }
 
-      virtual bool Equals(const Shader* rhs) const {
+      virtual auto Equals(const Shader* rhs) const -> bool {
         return GetType() == rhs->GetType()
             && GetId() == rhs->GetId();
       }
 
-#define DEFINE_TYPE_CHECK(Name, Ext, GlValue)                             \
-      virtual Name##Shader* As##Name##Shader() { return nullptr; }        \
-      bool Is##Name##Shader() { return As##Name##Shader() != nullptr; }
+#define DEFINE_TYPE_CHECK(Name, Ext, GlValue)                                     \
+      virtual auto As##Name##Shader() -> Name##Shader* { return nullptr; }        \
+      auto Is##Name##Shader() -> bool { return As##Name##Shader() != nullptr; }
       FOR_EACH_SHADER_TYPE(DEFINE_TYPE_CHECK)
 #undef DEFINE_TYPE_CHECK
 
-      ShaderEventObservable OnEvent() const {
+      auto OnEvent() const -> ShaderEventObservable {
         return shader::OnEvent(GetId());
       }
 
-#define DEFINE_ON_SHADER_EVENT(Name)                    \
-      Name##EventObservable On##Name##Event() const {   \
-        return shader::On##Name##Event(GetId());        \
+#define DEFINE_ON_SHADER_EVENT(Name)                            \
+      auto On##Name##Event() const -> Name##EventObservable {   \
+        return shader::On##Name##Event(GetId());                \
       }
       FOR_EACH_SHADER_EVENT(DEFINE_ON_SHADER_EVENT)
 #undef DEFINE_ON_SHADER_EVENT
     };
 
-    typedef std::set<Shader*, Shader::IdComparator> ShaderSet;
+    using ShaderSet = std::set<Shader*, Shader::IdComparator>;
 
     template<const ShaderType Type>
     class ShaderTemplate : public Shader {
+      DEFINE_NON_COPYABLE_TYPE(ShaderTemplate<Type>);
     protected:
       explicit ShaderTemplate(const Metadata& meta, const ShaderId id):
         Shader(meta, id) {
@@ -150,41 +153,41 @@ namespace prt {
     public:
       ~ShaderTemplate() override = default;
 
-      ShaderType GetType() const override {
+      auto GetType() const -> ShaderType override {
         return Type;
       }
     };
 
-#define DECLARE_SHADER_TYPE(Name)                                   \
-    public:                                                         \
-      std::string ToString() const override;                        \
-      Name##Shader* As##Name##Shader() override { return this; }    \
-      bool Accept(ShaderVisitor* vis) override {                    \
-        PRT_ASSERT(vis);                                            \
-        return vis->Visit##Name##Shader(this);                      \
-      }                                                             \
-    private:                                                        \
-      static inline Name##Shader*                                   \
-      New(const Metadata& meta, const ShaderId id) {                \
-        return new Name##Shader(meta, id);                          \
-      }                                                             \
-    public:                                                         \
-      static Name##Shader* New(ShaderUnit* unit);                   \
-      static const std::set<std::string> kValidExtensions;
+#define DECLARE_SHADER_TYPE(Name)                                           \
+    public:                                                                 \
+      auto ToString() const -> std::string override;                        \
+      auto As##Name##Shader() -> Name##Shader* override { return this; }    \
+      auto Accept(ShaderVisitor* vis) -> bool override {                    \
+        PRT_ASSERT(vis);                                                    \
+        return vis->Visit##Name##Shader(this);                              \
+      }                                                                     \
+    private:                                                                \
+      static inline auto                                                    \
+      New(const Metadata& meta, const ShaderId id) -> Name##Shader* {       \
+        return new Name##Shader(meta, id);                                  \
+      }                                                                     \
+    public:                                                                 \
+      static auto New(ShaderUnit* unit) -> Name##Shader*;                   \
+      static const ExtensionSet kValidExtensions;
 
-    const ShaderSet& GetAllShaders();
-    uword GetTotalNumberOfShaders();
-    bool VisitAllShaders(ShaderVisitor* vis);
-#define DECLARE_VISIT_SHADERS(Name, Ext, GlValue)                   \
-    bool VisitAll##Name##Shaders(ShaderVisitor* vis);
+    auto GetAllShaders() -> const ShaderSet&;
+    auto GetTotalNumberOfShaders() -> uword;
+    auto VisitAllShaders(ShaderVisitor* vis) -> bool;
+#define DECLARE_VISIT_SHADERS(Name, Ext, GlValue)               \
+    auto VisitAll##Name##Shaders(ShaderVisitor* vis) -> bool;
     FOR_EACH_SHADER_TYPE(DECLARE_VISIT_SHADERS)
 #undef DECLARE_VISIT_SHADERS
 
 #ifdef PRT_DEBUG
-    bool PrintAllShaders(const google::LogSeverity severity = google::INFO);
+    auto PrintAllShaders(const google::LogSeverity severity = google::INFO) -> bool;
 
-#define DECLARE_PRINT_ALL_SHADERS(Name, Ext, GlValue)                                   \
-    bool PrintAll##Name##Shaders(const google::LogSeverity severity = google::INFO);
+#define DECLARE_PRINT_ALL_SHADERS(Name, Ext, GlValue)                                           \
+    auto PrintAll##Name##Shaders(const google::LogSeverity severity = google::INFO) -> bool;
     FOR_EACH_SHADER_TYPE(DECLARE_PRINT_ALL_SHADERS)
 #undef DECLARE_PRINT_ALL_SHADERS
 #endif //PRT_DEBUG
@@ -196,13 +199,5 @@ namespace prt {
   FOR_EACH_SHADER_TYPE(DEFINE_USE_SHADER_TYPE)
 #undef DEFINE_USE_SHADER_TYPE
 }
-
-#include "prette/shader/shader_vertex.h"
-#include "prette/shader/shader_fragment.h"
-#include "prette/shader/shader_geometry.h"
-#include "prette/shader/shader_tess_eval.h"
-#include "prette/shader/shader_tess_control.h"
-
-#undef DECLARE_SHADER_TYPE
 
 #endif //PRT_SHADER_H

@@ -1,34 +1,33 @@
 #ifndef PRT_SHADER_COMPILE_STATUS_H
 #define PRT_SHADER_COMPILE_STATUS_H
 
-#include "prette/gfx.h"
 #include "prette/shader/shader_id.h"
 #include "prette/shader/shader_info_log.h"
 
 namespace prt::shader {
   class ShaderCompileStatus {
-  protected:
-    ShaderId id_;
-    bool compiled_;
-    ShaderInfoLog info_;
+    DEFINE_DEFAULT_COPYABLE_TYPE(ShaderCompileStatus);
+  private:
+    ShaderId id_{};
+    bool compiled_{};
+    ShaderInfoLog info_{};
   public:
     ShaderCompileStatus(const ShaderId id);
-    ShaderCompileStatus(const ShaderCompileStatus& rhs) = default;
     ~ShaderCompileStatus() = default;
 
-    ShaderId GetShaderId() const {
+    auto GetShaderId() const -> ShaderId {
       return id_;
     }
 
-    bool IsCompiled() const {
+    auto IsCompiled() const -> bool {
       return compiled_;
     }
 
-    const ShaderInfoLog& GetInfo() const {
+    auto GetInfo() const -> const ShaderInfoLog& {
       return info_;
     }
 
-    bool HasMessage() const {
+    auto HasMessage() const -> bool {
       return !GetInfo().IsEmpty();
     }
 
@@ -36,11 +35,9 @@ namespace prt::shader {
       return IsCompiled();
     }
 
-    std::string ToString() const;
+    auto ToString() const -> std::string;
 
-    ShaderCompileStatus& operator=(const ShaderCompileStatus& rhs) = default;
-
-    friend std::ostream& operator<<(std::ostream& stream, const ShaderCompileStatus& rhs) {
+    friend auto operator<<(std::ostream& stream, const ShaderCompileStatus& rhs) -> std::ostream& {
       if(rhs) {
         return stream << "Compiled";
       } else if(!rhs && rhs.HasMessage()) {

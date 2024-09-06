@@ -1,20 +1,18 @@
 #include "prette/shader/shader_compiler.h"
 
-#include "prette/flags.h"
-#include "prette/uv/utils.h"
 #include "prette/thread_local.h"
-
 #include "prette/shader/shader_unit_printer.h"
 #include "prette/shader/shader_compile_status.h"
 
 namespace prt::shader {
   class ShaderSourceAttacher : public ShaderCodeVisitor {
-  protected:
+    DEFINE_NON_COPYABLE_TYPE(ShaderSourceAttacher);
+  private:
     ShaderId target_;
     ShaderUnit* unit_;
     std::vector<GLchar*> sources_;
     std::vector<GLint> lengths_;
-    uword num_sources_;
+    uword num_sources_ = 0;
   public:
     ShaderSourceAttacher(const ShaderId target,
                          ShaderUnit* unit):
@@ -22,8 +20,7 @@ namespace prt::shader {
       target_(target),
       unit_(unit),
       sources_(),
-      lengths_(),
-      num_sources_(0) {
+      lengths_() {
       PRT_ASSERT(unit);
       const auto num_sources = unit->GetSize();
       sources_.reserve(num_sources);
@@ -31,28 +28,29 @@ namespace prt::shader {
     }
     ~ShaderSourceAttacher() override = default;
 
-    ShaderId GetTarget() const {
+    auto GetTarget() const -> ShaderId {
       return target_;
     }
 
-    ShaderUnit* GetUnit() const {
+    auto GetUnit() const -> ShaderUnit* {
       return unit_;
     }
 
     void Append(ShaderCode* code) {
       PRT_ASSERT(code);
+      // NOLINTNEXTLINE
       sources_.push_back((GLchar*) code->GetData());
       lengths_.push_back((GLint) code->GetLength());
       num_sources_++;
     }
 
-    bool VisitShaderCode(ShaderCode* code) override {
+    auto VisitShaderCode(ShaderCode* code) -> bool override {
       DLOG(INFO) << "attaching: " << code->ToString();
       Append(code);
       return true;
     }
 
-    bool AttachSources() {
+    auto AttachSources() -> bool {
       if(!GetUnit()->Accept(this)) {
         DLOG(ERROR) << "failed to visit sources of: " << GetUnit()->ToString();
         return false;
@@ -62,6 +60,7 @@ namespace prt::shader {
       for(auto idx = 0; idx < num_sources_; idx++)
         DLOG(INFO) << " -\n" << std::string(sources_[idx], lengths_[idx]);
 
+      // NOLINTNEXTLINE
       glShaderSource(GetTarget(), num_sources_, &sources_[0], &lengths_[0]);
       CHECK_GL;
       return true;
@@ -87,7 +86,7 @@ namespace prt::shader {
     Compile(id);
   }
 
-  ShaderId ShaderCompiler::CompileShaderUnit(ShaderUnit* unit) {
+  auto ShaderCompiler::CompileShaderUnit(ShaderUnit* unit) -> ShaderId {
     if(!unit)
       return kInvalidShaderId;
     using namespace units::time;
@@ -105,6 +104,7 @@ namespace prt::shader {
     const auto total_ns = (stop_ns - start_ns);
     duration_.Append(total_ns);
     compiled_ += 1;
+    // NOLINTNEXTLINE
     DLOG(INFO) << "compilation finished (" << nanosecond_t(total_ns) << ").";
     const auto status = ShaderCompileStatus(id);
 #ifdef PRT_DEBUG
@@ -116,6 +116,7 @@ namespace prt::shader {
     LOG_AT_LEVEL(severity) << "Stats:";
     LOG_AT_LEVEL(severity) << " - Total Compiled: " << GetCompiled();
     const auto& duration = GetDurationSeries();
+    // NOLINTNEXTLINE
     LOG_AT_LEVEL(severity) << " - Duration: " << nanosecond_t(total_ns) << "; (Avg/Min/Max): " << nanosecond_t(duration_.average()) << ", " << nanosecond_t(duration_.min()) << ", " << nanosecond_t(duration_.min());
 #endif //PRT_DEBUG
     if(!status)
@@ -124,14 +125,15 @@ namespace prt::shader {
     return id;
   }
 
+  // NOLINTNEXTLINE
   static ThreadLocal<ShaderCompiler> compiler_;
 
-  static inline bool
-  HasCompiler() {
+  static inline auto
+  HasCompiler() -> bool {
     return (bool) compiler_;
   }
 
-  ShaderCompiler* ShaderCompiler::GetCompiler() {
+  auto ShaderCompiler::GetCompiler() -> ShaderCompiler* {
     if(HasCompiler())
       return compiler_.Get();
     const auto compiler = new ShaderCompiler();
@@ -139,14 +141,14 @@ namespace prt::shader {
     return compiler;
   }
 
-  ShaderId ShaderCompiler::Compile(ShaderUnit* unit) {
+  auto ShaderCompiler::Compile(ShaderUnit* unit) -> ShaderId {
     PRT_ASSERT(unit);
     const auto compiler = GetCompiler();
     PRT_ASSERT(compiler);
     return compiler->CompileShaderUnit(unit);
   }
 
-  rx::observable<ShaderId> ShaderCompiler::CompileAsync(ShaderUnit* unit) {
+  auto ShaderCompiler::CompileAsync(ShaderUnit* unit) -> rx::observable<ShaderId> {
     if(!unit)
       return rx::observable<>::empty<ShaderId>();
 

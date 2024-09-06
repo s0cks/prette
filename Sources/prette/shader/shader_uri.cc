@@ -3,8 +3,8 @@
 #include "prette/shader/shader_flags.h"
 
 namespace prt::shader {
-  const std::set<std::string>&
-  GetValidUriSchemes() {
+  auto
+  GetValidUriSchemes() -> const std::set<std::string>& {
     static std::set<std::string> kValidSchemes;
     if(kValidSchemes.empty()) {
       kValidSchemes.insert("shader");
@@ -13,11 +13,11 @@ namespace prt::shader {
     return kValidSchemes;
   }
 
-  bool IsValidShaderUri(const uri::Uri& uri) {
+  auto IsValidShaderUri(const uri::Uri& uri) -> bool {
     return uri.HasScheme(GetValidUriSchemes());
   }
 
-  bool IsValidShaderJsonUri(const uri::Uri& uri) {
+  auto IsValidShaderJsonUri(const uri::Uri& uri) -> bool {
     return IsValidShaderUri(uri) && uri.HasExtension("json");
   }
 
@@ -29,7 +29,7 @@ namespace prt::shader {
     path = fmt::format("{0:s}/{1:s}", root, path);
   }
 
-  std::optional<std::string> GetShaderFileExtension(const uri::Uri& uri) {
+  auto GetShaderFileExtension(const uri::Uri& uri) -> std::optional<std::string> {
     PRT_ASSERT(uri.HasScheme("file"));
     const auto extension = uri.GetExtension();
     if(extension.empty())

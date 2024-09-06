@@ -2,10 +2,10 @@
 #include <sstream>
 
 namespace prt::shader {
-  static inline bool
-  GetCompileStatus(const ShaderId id) {
+  static inline auto
+  GetCompileStatus(const ShaderId id) -> bool {
     PRT_ASSERT(IsValidShaderId(id));
-    GLint status;
+    GLint status = GL_FALSE;
     glGetShaderiv(id, GL_COMPILE_STATUS, &status);
     CHECK_GL;
     return status == GL_TRUE;
@@ -17,7 +17,7 @@ namespace prt::shader {
     info_(id) {
   }
 
-  std::string ShaderCompileStatus::ToString() const {
+  auto ShaderCompileStatus::ToString() const -> std::string {
     std::stringstream ss;
     ss << "ShaderCompileStatus(";
     ss << "id=" << GetShaderId() << ", ";

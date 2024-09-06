@@ -1,26 +1,25 @@
-#include "prette/shader/shader.h"
+#include "prette/shader/shader_vertex.h"
 
 #include "prette/shader/shader_json.h"
 #include "prette/shader/shader_compiler.h"
-
 #include "prette/shader/shader_unit_builder.h"
 
 namespace prt::shader {
-  const std::set<std::string> VertexShader::kValidExtensions = {
+  const ExtensionSet VertexShader::kValidExtensions = {
     "json",
     "glsl",
     "vert",
   };
 
-  VertexShader* VertexShader::New(ShaderUnit* unit) {
+  auto VertexShader::New(ShaderUnit* unit) -> VertexShader* {
     PRT_ASSERT(unit);
     const auto& meta = unit->GetMeta();
     const auto id = ShaderCompiler::Compile(unit);
     return VertexShader::New(meta, id);
   }
 
-  static inline uri::Uri
-  NormalizeSourceUri(const uri::Uri& uri) {
+  static inline auto
+  NormalizeSourceUri(const uri::Uri& uri) -> uri::Uri {
     const auto shaders_dir = fmt::format("{0:s}/shaders", FLAGS_resources);
     uri::Uri normalized(uri);
     if(!normalized.HasScheme("file"))
@@ -33,8 +32,8 @@ namespace prt::shader {
     return normalized;
   }
 
-  static inline std::string
-  GetShaderNameFromSourceUri(const uri::Uri& uri) {
+  static inline auto
+  GetShaderNameFromSourceUri(const uri::Uri& uri) -> std::string {
     const auto& path = uri.path;
     auto name = path;
     const auto slashpos = name.find_last_of('/');
@@ -47,7 +46,7 @@ namespace prt::shader {
   }
 
 
-  VertexShader* VertexShader::FromSource(const uri::Uri& uri) {
+  auto VertexShader::FromSource(const uri::Uri& uri) -> VertexShader* {
     if(uri.HasScheme("shader")) {
       return FromSource(NormalizeSourceUri(uri));
     } else if(!uri.HasScheme("file")) {
@@ -63,7 +62,7 @@ namespace prt::shader {
     return New(builder.Build());
   }
 
-  VertexShader* VertexShader::FromJson(const uri::Uri& uri) {
+  auto VertexShader::FromJson(const uri::Uri& uri) -> VertexShader* {
     if(uri.HasScheme("shader")) {
       const auto shaders_dir = fmt::format("{0:s}/shaders", FLAGS_resources);
       
@@ -93,7 +92,7 @@ namespace prt::shader {
     return New(unit);
   }
 
-  VertexShader* VertexShader::New(const uri::Uri& uri) {
+  auto VertexShader::New(const uri::Uri& uri) -> VertexShader* {
     if(uri.HasExtension("json")) {
       return FromJson(uri);
     } else if(uri.HasExtension("vert")) {
@@ -105,7 +104,7 @@ namespace prt::shader {
     return nullptr;
   }
 
-  std::string VertexShader::ToString() const {
+  auto VertexShader::ToString() const -> std::string {
     std::stringstream ss;
     ss << "VertexShader(";
     ss << "id=" << GetId();

@@ -7,7 +7,11 @@
 #include "prette/vbo/vbo.h"
 #include "prette/ibo/ibo.h"
 #include "prette/fbo/fbo.h"
-#include "prette/shader/shader.h"
+#include "prette/shader/shader_vertex.h"
+#include "prette/shader/shader_fragment.h"
+#include "prette/shader/shader_geometry.h"
+#include "prette/shader/shader_tess_eval.h"
+#include "prette/shader/shader_tess_control.h"
 #include "prette/program/program.h"
 #include "prette/texture/texture.h"
 

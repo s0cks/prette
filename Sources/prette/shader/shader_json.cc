@@ -1,7 +1,7 @@
 #include "prette/shader/shader_json.h"
 
 namespace prt::shader {
-  bool ShaderReaderHandler::String(const char* value, const rapidjson::SizeType length, const bool b) {
+  auto ShaderReaderHandler::String(const char* value, const rapidjson::SizeType length, const bool b) -> bool {
     switch(GetState()) {
       case kSources:
         return OnParseSource(std::string(value, length));
@@ -10,7 +10,7 @@ namespace prt::shader {
     }
   }
 
-  bool ShaderReaderHandler::StartArray() {
+  auto ShaderReaderHandler::StartArray() -> bool {
     switch(GetState()) {
       case kSources:
         return NoTransition();
@@ -19,7 +19,7 @@ namespace prt::shader {
     }
   }
 
-  bool ShaderReaderHandler::EndArray(const json::SizeType size) {
+  auto ShaderReaderHandler::EndArray(const json::SizeType size) -> bool {
     switch(GetState()) {
       case kSources:
         return TransitionTo(kData);
@@ -28,12 +28,12 @@ namespace prt::shader {
     }
   }
 
-  bool ShaderReaderHandler::OnParseSource(const std::string& source) {
+  auto ShaderReaderHandler::OnParseSource(const std::string& source) -> bool {
     sources_.push_back(source);
     return NoTransition();
   }
 
-  bool ShaderReaderHandler::OnParseDataField(const std::string& name) {
+  auto ShaderReaderHandler::OnParseDataField(const std::string& name) -> bool {
     if(EqualsIgnoreCase(name, "sources")) {
       return TransitionTo(kSources);
     }

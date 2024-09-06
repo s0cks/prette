@@ -15,8 +15,8 @@ namespace prt::shader {
 #undef DEFINE_STATE
   };
 
-  static inline std::ostream&
-  operator<<(std::ostream& stream, const ShaderReaderState& rhs) {
+  static inline auto
+  operator<<(std::ostream& stream, const ShaderReaderState& rhs) -> std::ostream& {
     switch(rhs) {
 #define DEFINE_TO_STRING(Name) \
       case k##Name: return stream << #Name;
@@ -27,8 +27,10 @@ namespace prt::shader {
   }
 
   class ShaderReaderHandler : public json::ReaderHandlerTemplate<ShaderReaderState, ShaderReaderHandler> {
-    static inline constexpr const char*
-    GetExpectedType(const ShaderType type) {
+    DEFINE_NON_COPYABLE_TYPE(ShaderReaderHandler);
+  private:
+    static inline constexpr auto
+    GetExpectedType(const ShaderType type) -> const char* {
       switch(type) {
         case kVertexShader:
           return "VertexShader";
@@ -38,17 +40,17 @@ namespace prt::shader {
           return "Shader";
       }
     }
-  protected:
+  private:
     ShaderType type_;
     std::vector<std::string> sources_;
 
-#define DEFINE_STATE_CHECK(Name)                                                        \
-    inline bool Is##Name() const { return GetState() == ShaderReaderState::k##Name; }
+#define DEFINE_STATE_CHECK(Name)                                                                \
+    inline auto Is##Name() const -> bool { return GetState() == ShaderReaderState::k##Name; }
     FOR_EACH_SHADER_READER_STATE(DEFINE_STATE_CHECK)
 #undef DEFINE_STATE_CHECK
 
-    bool OnParseDataField(const std::string& name) override;
-    bool OnParseSource(const std::string& value);
+    auto OnParseDataField(const std::string& name) -> bool override;
+    auto OnParseSource(const std::string& value) -> bool;
   public:
     explicit ShaderReaderHandler(const ShaderType type):
       json::ReaderHandlerTemplate<ShaderReaderState, ShaderReaderHandler>(GetExpectedType(type)),
@@ -57,18 +59,17 @@ namespace prt::shader {
     }
     ~ShaderReaderHandler() override = default;
 
-    bool StartArray() override;
-    bool EndArray(const json::SizeType size) override;
-
-    bool String(const char* value, const rapidjson::SizeType length, const bool) override;
-
-    ShaderType GetShaderTye() const {
+    auto GetShaderTye() const -> ShaderType {
       return type_;
     }
 
-    const std::vector<std::string>& GetSources() const {
+    auto GetSources() const -> const std::vector<std::string>& {
       return sources_;
     }
+
+    auto StartArray() -> bool override;
+    auto EndArray(const json::SizeType size) -> bool override;
+    auto String(const char* value, const rapidjson::SizeType length, const bool) -> bool override;
   };
 }
 

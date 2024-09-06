@@ -4,30 +4,30 @@
 #include "prette/shader/shader.h"
 
 namespace prt::shader {
-  ShaderId ShaderEvent::GetShaderId() const {
+  auto ShaderEvent::GetShaderId() const -> ShaderId {
     return GetShader()->GetId();
   }
 
-  std::string ShaderCreatedEvent::ToString() const {
+  auto ShaderCreatedEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "ShaderCreatedEvent(";
-    ss << "id=" << GetShaderId();
+    ss << "shader=" << GetShader()->ToString();
     ss << ")";
     return ss.str();
   }
 
-  std::string ShaderDestroyedEvent::ToString() const {
+  auto ShaderDestroyedEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "ShaderDestroyedEvent(";
-    ss << "id=" << GetShaderId();
+    ss << "shader=" << GetShader()->ToString();
     ss << ")";
     return ss.str();
   }
 
-  std::string ShaderCompiledEvent::ToString() const {
+  auto ShaderCompiledEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "ShaderCompiledEvent(";
-    ss << "id=" << GetShaderId();
+    ss << "shader=" << GetShader()->ToString();
     ss << ")";
     return ss.str();
   }

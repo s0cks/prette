@@ -9,6 +9,7 @@
 namespace prt::shader {
   class ShaderPrinter : public ShaderVisitor,
                         public PrettyLogger {
+    DEFINE_NON_COPYABLE_TYPE(ShaderPrinter);
   public:
     ShaderPrinter(const google::LogSeverity severity,
                   const char* file,
@@ -20,8 +21,8 @@ namespace prt::shader {
       PrettyLogger(parent) {
     }
     ~ShaderPrinter() override = default;
-#define DECLARE_VISIT_SHADER(Name, Ext, GlValue)                \
-    bool Visit##Name##Shader(Name##Shader* shader) override;
+#define DECLARE_VISIT_SHADER(Name, Ext, GlValue)                        \
+    auto Visit##Name##Shader(Name##Shader* shader) -> bool override;
     FOR_EACH_SHADER_TYPE(DECLARE_VISIT_SHADER)
 #undef DECLARE_VISIT_SHADER
   };

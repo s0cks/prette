@@ -19,9 +19,10 @@ namespace prt::shader {
 #undef FORWARD_DECLARE
 
   class ShaderEvent : public Event {
-  protected:
+    DEFINE_NON_COPYABLE_TYPE(ShaderEvent);
+  private:
     const Shader* shader_;
-
+  protected:
     explicit ShaderEvent(const Shader* shader):
       Event(),
       shader_(shader) {
@@ -30,13 +31,13 @@ namespace prt::shader {
   public:
     ~ShaderEvent() override = default;
 
-    const Shader* GetShader() const {
+    auto GetShader() const -> const Shader* {
       return shader_;
     }
 
-    ShaderId GetShaderId() const;
+    auto GetShaderId() const -> ShaderId;
 
-    virtual bool IsCompilerEvent() const {
+    virtual auto IsCompilerEvent() const -> bool {
       return false;
     }
 
@@ -69,6 +70,7 @@ namespace prt::shader {
   };
 
   class ShaderCompilerEvent : public ShaderEvent {
+    DEFINE_NON_COPYABLE_TYPE(ShaderCompilerEvent);
   protected:
     explicit ShaderCompilerEvent(const Shader* shader):
       ShaderEvent(shader) {
@@ -76,7 +78,7 @@ namespace prt::shader {
   public:
     ~ShaderCompilerEvent() override = default;
 
-    bool IsCompilerEvent() const override {
+    auto IsCompilerEvent() const -> bool override {
       return true;
     }
   };
@@ -90,22 +92,23 @@ namespace prt::shader {
     DECLARE_SHADER_EVENT(ShaderCompiled);
   };
 
-  typedef rx::subject<ShaderEvent*> ShaderEventSubject;
-  typedef rx::observable<ShaderEvent*> ShaderEventObservable;
+  using ShaderEventSubject = rx::subject<ShaderEvent*>;
+  using ShaderEventObservable = rx::observable<ShaderEvent*>;
 #define DEFINE_SHADER_EVENT_OBSERVABLE(Name)                      \
-  typedef rx::observable<Name##Event*> Name##EventObservable;
+  using Name##EventObservable = rx::observable<Name##Event*>;
   FOR_EACH_SHADER_EVENT(DEFINE_SHADER_EVENT_OBSERVABLE)
 #undef DEFINE_SHADER_EVENT_OBSERVABLE
 
   class ShaderEventSource : public EventSource<ShaderEvent> {
+    DEFINE_NON_COPYABLE_TYPE(ShaderEventSource);
   protected:
     ShaderEventSource() = default;
   public:
     ~ShaderEventSource() override = default;
 
 #define DEFINE_ON_EVENT(Name)                     \
-    inline rx::observable<Name##Event*>           \
-    On##Name() {                                  \
+    inline auto                                   \
+    On##Name() -> Name##EventObservable {         \
       return OnEvent()                            \
         .filter([](ShaderEvent* event) {          \
           return event                            \

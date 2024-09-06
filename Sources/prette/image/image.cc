@@ -97,7 +97,7 @@ namespace prt::img {
     using namespace units::data;
     const auto total_size = sz + num_bytes;
     const auto ptr = malloc(total_size);
-    // NOLINTNEXTLINE
+    // NOLINTNEXTLINE(cppcoreguidelines-narrowing-conversions)
     LOG_IF(FATAL, !ptr) << "failed to allocate data " << byte_t(total_size) << " for Image of " << byte_t(num_bytes) << " size.";
     return ptr;
   }

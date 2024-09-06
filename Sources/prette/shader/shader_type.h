@@ -2,11 +2,10 @@
 #define PRT_SHADER_TYPE_H
 
 #include <optional>
-
 #include "prette/gfx.h"
-#include "prette/json.h"
 
 namespace prt::shader {
+  //TODO: cleanup this macro
 #define FOR_EACH_SHADER_TYPE(V)                             \
   V(Vertex, vert, GL_VERTEX_SHADER)                         \
   V(Fragment, frag, GL_FRAGMENT_SHADER)                     \
@@ -28,8 +27,8 @@ namespace prt::shader {
     kNumberOfShaderTypes,
   };
 
-  static inline std::optional<ShaderType>
-  ParseShaderType(const std::string& value) {
+  static inline auto
+  ParseShaderType(const std::string& value) -> std::optional<ShaderType> {
     if(value.empty())
       return std::nullopt;
 #define DEFINE_PARSE(Name, Ext, GlValue) \
@@ -39,15 +38,8 @@ namespace prt::shader {
     return std::nullopt;
   }
 
-  static inline std::optional<ShaderType>
-  ParseShaderType(const json::Value& value) {
-    if(!value.IsString())
-      return std::nullopt;
-    std::string type(value.GetString(), value.GetStringLength());
-    return ParseShaderType(type);
-  }
-
-  static inline std::ostream& operator<<(std::ostream& stream, const ShaderType& rhs) {
+  static inline auto
+  operator<<(std::ostream& stream, const ShaderType& rhs) -> std::ostream& {
     switch(rhs) {
 #define DEFINE_TOSTRING(Name, Ext, GlValue) \
       case ShaderType::k##Name##Shader: return stream << #Name;
@@ -57,8 +49,8 @@ namespace prt::shader {
     }
   }
 
-  static inline const char*
-  GetExtensionForType(const ShaderType& type) {
+  static inline auto
+  GetExtensionForType(const ShaderType& type) -> const char* {
     switch(type) {
 #define DEFINE_GET_EXTENSION(Name, Ext, GlValue) \
       case ShaderType::k##Name##Shader: return (#Ext);
@@ -68,8 +60,8 @@ namespace prt::shader {
     }
   }
 
-  static inline std::optional<ShaderType>
-  DetectShaderTypeFromExtension(const std::string& extension) {
+  static inline auto
+  DetectShaderTypeFromExtension(const std::string& extension) -> std::optional<ShaderType> {
     if(extension.empty())
       return std::nullopt;
 #define DETECT_SHADER_TYPE(Name, Ext, GlValue) \
@@ -79,8 +71,8 @@ namespace prt::shader {
     return std::nullopt;
   }
 
-  static inline std::optional<ShaderType>
-  DetectShaderTypeFromExtension(const std::optional<std::string>& extension) {
+  static inline auto
+  DetectShaderTypeFromExtension(const std::optional<std::string>& extension) -> std::optional<ShaderType> {
     return extension ? DetectShaderTypeFromExtension(*extension) : std::nullopt;
   }
 }

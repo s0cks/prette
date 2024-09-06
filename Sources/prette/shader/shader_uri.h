@@ -7,12 +7,11 @@
 #include "prette/uri.h"
 
 namespace prt::shader {
-  const std::set<std::string>& GetValidUriSchemes();
-  bool IsValidShaderUri(const uri::Uri& uri);
-  bool IsValidShaderJsonUri(const uri::Uri& uri);
+  auto GetValidUriSchemes() -> const std::set<std::string>&;
+  auto IsValidShaderUri(const uri::Uri& uri) -> bool;
+  auto IsValidShaderJsonUri(const uri::Uri& uri) -> bool;
+  auto GetShaderFileExtension(const uri::Uri& uri) -> std::optional<std::string>;
   void NormalizeShaderUriPath(uri::Uri& uri);
-
-  std::optional<std::string> GetShaderFileExtension(const uri::Uri& uri);
 }
 
 #endif //PRT_SHADER_URI_H

@@ -3,9 +3,15 @@
 #include "prette/shader/shader.h"
 #include "prette/shader/shader_printer.h"
 
+#include "prette/shader/shader_vertex.h"
+#include "prette/shader/shader_fragment.h"
+#include "prette/shader/shader_geometry.h"
+#include "prette/shader/shader_tess_eval.h"
+#include "prette/shader/shader_tess_control.h"
+
 namespace prt::shader {
-  const std::set<std::string>& GetValidFileExtensions() {
-    static std::set<std::string> kValidExtensions;
+  auto GetValidFileExtensions() -> const ExtensionSet& {
+    static ExtensionSet kValidExtensions;
     if(kValidExtensions.empty()) {
       kValidExtensions.insert(std::begin(VertexShader::kValidExtensions), std::end(VertexShader::kValidExtensions));
       kValidExtensions.insert(std::begin(FragmentShader::kValidExtensions), std::end(FragmentShader::kValidExtensions));
@@ -16,8 +22,10 @@ namespace prt::shader {
     return kValidExtensions;
   }
 
+  // NOLINTBEGIN
   static ShaderEventSubject events_;
   static ShaderSet all_;
+  // NOLINTEND
 
   static inline void
   Register(Shader* shader) {
@@ -43,7 +51,7 @@ namespace prt::shader {
     Deregister(this);
   }
 
-  ShaderEventObservable OnEvent() {
+  auto OnEvent() -> ShaderEventObservable {
     return events_.get_observable();
   }
 
@@ -51,15 +59,15 @@ namespace prt::shader {
     events_.get_subscriber().on_next(event);
   }
 
-  const ShaderSet& GetAllShaders() {
+  auto GetAllShaders() -> const ShaderSet& {
     return all_;
   }
 
-  uword GetTotalNumberOfShaders() {
+  auto GetTotalNumberOfShaders() -> uword {
     return all_.size();
   }
 
-  bool VisitAllShaders(ShaderVisitor* vis) {
+  auto VisitAllShaders(ShaderVisitor* vis) -> bool {
     PRT_ASSERT(vis);
     for(const auto& shader : all_) {
       if(!shader->Accept(vis))
@@ -69,7 +77,7 @@ namespace prt::shader {
   }
 
 #define DEFINE_VISIT_SHADERS(Name, Ext, GlValue)                        \
-  bool VisitAll##Name##Shaders(ShaderVisitor* vis) {                    \
+  auto VisitAll##Name##Shaders(ShaderVisitor* vis) -> bool {            \
     PRT_ASSERT(vis);                                                    \
     for(const auto& shader : all_) {                                    \
       if(shader->Is##Name##Shader() && !shader->Accept(vis))            \
@@ -80,16 +88,16 @@ namespace prt::shader {
   FOR_EACH_SHADER_TYPE(DEFINE_VISIT_SHADERS);
 #undef DEFINE_VISIT_SHADERS
 
-  bool PrintAllShaders(const google::LogSeverity severity) {
+  auto PrintAllShaders(const google::LogSeverity severity) -> bool {
     DLOG(INFO) << GetTotalNumberOfShaders() << " Shaders:";
     ShaderPrinter printer(severity, __FILE__, __LINE__, 0);
     return VisitAllShaders(&printer);
   }
 
-#define DEFINE_PRINT_ALL_SHADERS(Name, Ext, GlValue)                   \
-  bool PrintAll##Name##Shaders(const google::LogSeverity severity) {   \
-    ShaderPrinter printer(severity, __FILE__, __LINE__, 0);            \
-    return VisitAll##Name##Shaders(&printer);                          \
+#define DEFINE_PRINT_ALL_SHADERS(Name, Ext, GlValue)                            \
+  auto PrintAll##Name##Shaders(const google::LogSeverity severity) -> bool {    \
+    ShaderPrinter printer(severity, __FILE__, __LINE__, 0);                     \
+    return VisitAll##Name##Shaders(&printer);                                   \
   }
   FOR_EACH_SHADER_TYPE(DEFINE_PRINT_ALL_SHADERS)
 #undef DEFINE_PRINT_ALL_SHADERS

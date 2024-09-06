@@ -1,14 +1,12 @@
-#ifndef PRT_SHADER_H
-#error "Please #include <prette/shader/shader.h> instead."
-#endif //PRT_SHADER_H
-
 #ifndef PRT_SHADER_GEOMETRY_H
 #define PRT_SHADER_GEOMETRY_H
 
 #include "prette/shader/shader.h"
+#include "prette/shader/shader_unit.h"
 
 namespace prt::shader {
   class GeometryShader : public ShaderTemplate<kGeometryShader> {
+    DEFINE_NON_COPYABLE_TYPE(GeometryShader);
   protected:
     explicit GeometryShader(const Metadata& meta, const ShaderId id):
       ShaderTemplate<kGeometryShader>(meta, id) {

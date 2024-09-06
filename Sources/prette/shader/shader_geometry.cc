@@ -1,13 +1,13 @@
-#include "prette/shader/shader.h"
+#include "prette/shader/shader_geometry.h"
 
 namespace prt::shader {
-  const std::set<std::string> GeometryShader::kValidExtensions = {
+  const ExtensionSet GeometryShader::kValidExtensions = {
     "json",
     "glsl",
     "geom",
   };
 
-  std::string GeometryShader::ToString() const {
+  auto GeometryShader::ToString() const -> std::string {
     std::stringstream ss;
     ss << "GeometryShader(";
     ss << "id=" << GetId();

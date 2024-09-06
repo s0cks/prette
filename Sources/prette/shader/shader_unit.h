@@ -10,87 +10,69 @@
 
 namespace prt::shader {
   class ShaderUnit : public Object {
-  protected:
+    DEFINE_NON_COPYABLE_TYPE(ShaderUnit);
+  private:
     ShaderType type_;
     ShaderCodeList code_;
     uint256 hash_;
 
     explicit ShaderUnit(const Metadata& meta,
                         const ShaderType type,
-                        const ShaderCodeList& code):
-      Object(meta),
-      type_(type),
-      code_(code),
-      hash_() {
-      std::vector<uint256> hashes;
-      hashes.reserve(code.size());
-      std::for_each(std::begin(code), std::end(code), [&hashes](ShaderCode* code) {
-        hashes.push_back(code->GetSHA256());
-      });
-      merkle::Tree tree(hashes);
-      hash_ = tree.GetRootHash();
-    }
+                        const ShaderCodeList& code);
   public:
     ~ShaderUnit() override = default;
-    std::string ToString() const override;
+    auto ToString() const -> std::string override;
 
-    ShaderType GetType() const {
+    auto GetType() const -> ShaderType {
       return type_;
     }
 
-    uword GetSize() const {
+    auto GetSize() const -> uword {
       return code_.size();
     }
 
-    bool IsEmpty() const {
+    auto IsEmpty() const -> bool {
       return code_.empty();
     }
 
-    ShaderCode* GetSource(const uword idx) const {
+    auto GetSource(const uword idx) const -> ShaderCode* {
       PRT_ASSERT(idx >= 0 && idx <= GetSize());
       return code_[idx];
     }
 
-    ShaderCodeList::const_iterator begin() const {
+    auto begin() const -> ShaderCodeList::const_iterator {
       return std::begin(code_);
     }
 
-    ShaderCodeList::const_iterator end() const {
+    auto end() const -> ShaderCodeList::const_iterator {
       return std::end(code_);
     }
 
-    const ShaderCodeList& GetCode() const {
+    auto GetCode() const -> const ShaderCodeList& {
       return code_;
     }
 
-    const uint256& GetHash() const {
+    auto GetHash() const -> const uint256& {
       return hash_;
     }
 
-    bool Accept(ShaderCodeVisitor* vis) {
-      PRT_ASSERT(vis);
-      for(const auto& code : code_) {
-        if(!vis->VisitShaderCode(code))
-          return false;
-      }
-      return true;
-    }
+    auto Accept(ShaderCodeVisitor* vis) -> bool;
   public:
-    static inline ShaderUnit*
-    New(const Metadata& meta, const ShaderType type, const ShaderCodeList& code = {}) {
+    static inline auto
+    New(const Metadata& meta, const ShaderType type, const ShaderCodeList& code = {}) -> ShaderUnit* {
       return new ShaderUnit(meta, type, code);
     }
 
-    static inline ShaderUnit*
-    New(const ShaderType type, const ShaderCodeList& code = {}) {
+    static inline auto
+    New(const ShaderType type, const ShaderCodeList& code = {}) -> ShaderUnit* {
       Metadata meta;
       return New(meta, type, code);
     }
 
-#define DEFINE_NEW_SHADER_UNIT_BY_TYPE(Name, Ext, GlValue)                                 \
-    static inline ShaderUnit*                                                              \
-    New##Name##ShaderUnit(const Metadata& meta = {}, const ShaderCodeList& code = {}) {    \
-      return New(meta, k##Name##Shader, code);                                             \
+#define DEFINE_NEW_SHADER_UNIT_BY_TYPE(Name, Ext, GlValue)                                                \
+    static inline auto                                                                                    \
+    New##Name##ShaderUnit(const Metadata& meta = {}, const ShaderCodeList& code = {}) -> ShaderUnit* {    \
+      return New(meta, k##Name##Shader, code);                                                            \
     }
 
     FOR_EACH_SHADER_TYPE(DEFINE_NEW_SHADER_UNIT_BY_TYPE)

@@ -7,7 +7,7 @@
 
 namespace prt::img {
   static const ExtensionSet kValidExtensions = {
-    ".png",
+    "png",
   };
 
   auto Png::GetValidExtensions() -> const ExtensionSet& {

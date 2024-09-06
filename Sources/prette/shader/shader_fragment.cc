@@ -1,17 +1,17 @@
-#include "prette/shader/shader.h"
+#include "prette/shader/shader_fragment.h"
 #include "prette/shader/shader_unit.h"
 #include "prette/shader/shader_json.h"
 #include "prette/shader/shader_compiler.h"
 #include "prette/shader/shader_unit_builder.h"
 
 namespace prt::shader {
-  const std::set<std::string> FragmentShader::kValidExtensions = {
+  const ExtensionSet FragmentShader::kValidExtensions = {
     "json",
     "glsl",
     "frag",
   };
 
-  std::string FragmentShader::ToString() const {
+  auto FragmentShader::ToString() const -> std::string {
     std::stringstream ss;
     ss << "FragmentShader(";
     ss << "id=" << GetId();
@@ -19,14 +19,14 @@ namespace prt::shader {
     return ss.str();
   }
 
-  FragmentShader* FragmentShader::New(ShaderUnit* unit) {
+  auto FragmentShader::New(ShaderUnit* unit) -> FragmentShader* {
     PRT_ASSERT(unit);
     const auto& meta = unit->GetMeta();
     const auto id = ShaderCompiler::Compile(unit);
     return New(meta, id);
   }
 
-  FragmentShader* FragmentShader::New(const uri::Uri& uri) {
+  auto FragmentShader::New(const uri::Uri& uri) -> FragmentShader* {
     if(uri.HasExtension("json")) {
       return FromJson(uri);
     } else if(uri.HasExtension("frag")) {
@@ -39,8 +39,8 @@ namespace prt::shader {
     return nullptr;
   }
 
-  static inline uri::Uri
-  NormalizeSourceUri(const uri::Uri& uri) {
+  static inline auto
+  NormalizeSourceUri(const uri::Uri& uri) -> uri::Uri {
     const auto shaders_dir = fmt::format("{0:s}/shaders", FLAGS_resources);
     uri::Uri normalized(uri);
     if(!normalized.HasScheme("file"))
@@ -53,8 +53,8 @@ namespace prt::shader {
     return normalized;
   }
 
-  static inline std::string
-  GetShaderNameFromSourceUri(const uri::Uri& uri) {
+  static inline auto
+  GetShaderNameFromSourceUri(const uri::Uri& uri) -> std::string {
     const auto& path = uri.path;
     auto name = path;
     const auto slashpos = name.find_last_of('/');
@@ -66,7 +66,7 @@ namespace prt::shader {
     return name;
   }
 
-  FragmentShader* FragmentShader::FromSource(const uri::Uri& uri) {
+  auto FragmentShader::FromSource(const uri::Uri& uri) -> FragmentShader* {
     if(uri.HasScheme("shader")) {
       return FromSource(NormalizeSourceUri(uri));
     } else if(!uri.HasScheme("file")) {
@@ -82,8 +82,8 @@ namespace prt::shader {
     return New(builder.Build());
   }
 
-  static inline uri::Uri
-  NormalizeJsonUri(const uri::Uri& uri) {
+  static inline auto
+  NormalizeJsonUri(const uri::Uri& uri) -> uri::Uri {
     const auto shaders_dir = fmt::format("{0:s}/shaders", FLAGS_resources);
     uri::Uri normalized(uri);
     if(!normalized.HasScheme("file"))
@@ -96,7 +96,7 @@ namespace prt::shader {
     return normalized;
   }
 
-  FragmentShader* FragmentShader::FromJson(const uri::Uri& uri) {
+  auto FragmentShader::FromJson(const uri::Uri& uri) -> FragmentShader* {
     auto target = NormalizeJsonUri(uri);
     ShaderReaderHandler handler(kFragmentShader);
     const auto result = json::ParseJson(uri, handler);
@@ -112,7 +112,7 @@ namespace prt::shader {
     return New(unit);
   }
 
-  FragmentShader* FragmentShader::FromJson(const std::string& value) {
+  auto FragmentShader::FromJson(const std::string& value) -> FragmentShader* {
     NOT_IMPLEMENTED(FATAL); //TODO: implement
     return nullptr;
   }

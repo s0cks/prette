@@ -1,13 +1,13 @@
-#include "prette/shader/shader.h"
+#include "prette/shader/shader_tess_control.h"
 
 namespace prt::shader {
-  const std::set<std::string> TessControlShader::kValidExtensions = {
+  const ExtensionSet TessControlShader::kValidExtensions = {
     "json",
     "glsl",
     "tesc",
   };
 
-  std::string TessControlShader::ToString() const {
+  auto TessControlShader::ToString() const -> std::string {
     std::stringstream ss;
     ss << "TessControlShader(";
     ss << "id=" << GetId();

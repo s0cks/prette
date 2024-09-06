@@ -15,9 +15,9 @@ namespace prt {
     virtual std::string ToString() const = 0;
   };
 
-#define DEFINE_EVENT_PROTOTYPE_TYPE_CHECK(Name)                           \
-  virtual Name##Event* As##Name##Event() { return nullptr; }              \
-  bool Is##Name##Event() { return As##Name##Event() != nullptr; }
+#define DEFINE_EVENT_PROTOTYPE_TYPE_CHECK(Name)                             \
+  virtual auto As##Name##Event() -> Name##Event* { return nullptr; }        \
+  auto Is##Name##Event() -> bool { return As##Name##Event() != nullptr; }
 
 #define DEFINE_EVENT_PROTOTYPE(Types)                                     \
   Types(DEFINE_EVENT_PROTOTYPE_TYPE_CHECK)
@@ -25,16 +25,16 @@ namespace prt {
 #define DECLARE_EVENT_TYPE(Proto, Name)                                   \
     DEFINE_NON_COPYABLE_TYPE(Name##Event);                                \
   public:                                                                 \
-    std::string ToString() const override;                                \
-    const char* GetName() const override { return #Name; }                \
-    Name##Event* As##Name##Event() override { return this; }              \
-    static inline bool                                                    \
-    Filter(Proto* event) {                                                \
+    auto ToString() const -> std::string override;                        \
+    auto GetName() const -> const char* override { return #Name; }        \
+    auto As##Name##Event() -> Name##Event* override { return this; }      \
+    static inline auto                                                    \
+    Filter(Proto* event) -> bool {                                        \
       return event                                                        \
           && event->Is##Name##Event();                                    \
     }                                                                     \
-    static inline Name##Event*                                            \
-    Cast(Proto* event) {                                                  \
+    static inline auto                                                    \
+    Cast(Proto* event) -> Name##Event* {                                  \
       PRT_ASSERT(event);                                                  \
       PRT_ASSERT(event->Is##Name##Event());                               \
       return event->As##Name##Event();                                    \

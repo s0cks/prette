@@ -5,11 +5,10 @@
 #include "prette/flags.h"
 #include "prette/sha256.h"
 #include "prette/common.h"
-#include "prette/shader/shader.h"
 #include "prette/shader/shader_uri.h"
 
 namespace prt::shader {
-  int ShaderCode::Compare(const RawShaderCode bytes, const uword num_bytes) const {
+  auto ShaderCode::Compare(const RawShaderCode bytes, const uword num_bytes) const -> int {
     if(GetLength() < num_bytes)
       return -1;
     else if(!bytes || GetLength() > num_bytes)
@@ -17,29 +16,20 @@ namespace prt::shader {
     return memcmp(raw_ptr(), bytes, num_bytes);
   }
 
-  std::string ShaderCode::ToString() const {
+  auto ShaderCode::ToString() const -> std::string {
     using namespace units::data;
     std::stringstream ss;
     ss << "ShaderCode(";
     ss << "type=" << GetType() << ", ";
     ss << "length=" << GetLength() << ", ";
+    // NOLINTNEXTLINE(cppcoreguidelines-narrowing-conversions)
     ss << "total_size=" << byte_t(GetSize()) << ", ";
     ss << "code=" << GetSHA256();
     ss << ")";
     return ss.str();
   }
 
-  void* ShaderCode::operator new(const size_t size, const uword length) { // TODO: round up pow2
-    using namespace units::data;
-    const auto total_size = CalculateAllocateSize(length);
-    const auto ptr = malloc(total_size);
-    memset(ptr, 0, sizeof(ptr));
-    LOG_IF(FATAL, !ptr) << "failed to allocate ShaderCode of " << byte_t(total_size) << " size.";
-    DLOG(INFO) << "allocated " << byte_t(total_size) << " for ShaderCode.";
-    return ptr;
-  }
-
-  ShaderCode* ShaderCode::New(const ShaderType type, const RawShaderCode bytes, const uword num_bytes) {
+  auto ShaderCode::New(const ShaderType type, const RawShaderCode bytes, const uword num_bytes) -> ShaderCode* {
     if(!bytes || num_bytes == 0)
       return nullptr;
     const auto code = new(num_bytes) ShaderCode(type, num_bytes);
@@ -47,7 +37,7 @@ namespace prt::shader {
     return code;
   }
 
-  ShaderCode* ShaderCode::Copy(const ShaderCode* rhs) {
+  auto ShaderCode::Copy(const ShaderCode* rhs) -> ShaderCode* {
     if(!rhs)
       return nullptr;
     const auto code = new(rhs->GetLength()) ShaderCode(rhs->GetType(), rhs->GetLength());
@@ -55,7 +45,7 @@ namespace prt::shader {
     return code;
   }
 
-  ShaderCode* ShaderCode::FromFile(const ShaderType type, const uri::Uri& uri) {
+  auto ShaderCode::FromFile(const ShaderType type, const uri::Uri& uri) -> ShaderCode* {
     if(uri.HasScheme("shader")) {
       const auto new_uri = fmt::format("file://{0:s}/shaders/{1:s}", FLAGS_resources, uri.path[0] == '/' ? &uri.path[1] : uri.path);
       return FromFile(type, new_uri);
@@ -83,7 +73,7 @@ namespace prt::shader {
     return code;
   }
   
-  ShaderCode* ShaderCode::FromFile(const uri::Uri& uri) {
+  auto ShaderCode::FromFile(const uri::Uri& uri) -> ShaderCode* {
     if(uri.HasScheme("shader")) {
       const auto new_uri = fmt::format("file://{0:s}/shaders/{1:s}", FLAGS_resources, uri.path[0] == '/' ? &uri.path[1] : uri.path);
       return FromFile(new_uri);
@@ -106,7 +96,17 @@ namespace prt::shader {
     return FromFile(*type, uri);
   }
 
-  uint256 ShaderCode::GetSHA256() const {
+  auto ShaderCode::GetSHA256() const -> uint256 {
     return sha256::Of(GetData(), GetLength());
+  }
+
+  auto ShaderCode::operator new(const size_t size, const uword length) -> void* { // TODO: round up pow2
+    using namespace units::data;
+    const auto total_size = CalculateAllocateSize(length);
+    const auto ptr = malloc(total_size);
+    memset(ptr, 0, sizeof(ptr));
+    LOG_IF(FATAL, !ptr) << "failed to allocate ShaderCode of " << byte_t(total_size) << " size."; // NOLINT(cppcoreguidelines-narrowing-conversions)
+    DLOG(INFO) << "allocated " << byte_t(total_size) << " for ShaderCode."; // NOLINT(cppcoreguidelines-narrowing-conversions)
+    return ptr;
   }
 }

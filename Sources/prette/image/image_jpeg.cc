@@ -19,8 +19,8 @@ namespace prt::img {
   }
 
   static const ExtensionSet kValidExtensions = {
-    ".jpeg",
-    ".jpg",
+    "jpeg",
+    "jpg",
   };
 
   auto Jpeg::GetValidExtensions() -> const ExtensionSet& {

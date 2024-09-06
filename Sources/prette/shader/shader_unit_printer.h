@@ -7,7 +7,7 @@
 namespace prt::shader {
   class ShaderUnitPrinter : public PrettyLogger,
                             public ShaderCodeVisitor {
-  protected:
+    DEFINE_NON_COPYABLE_TYPE(ShaderUnitPrinter);
   public:
     ShaderUnitPrinter(const google::LogSeverity severity,
                       const char* file,
@@ -19,7 +19,7 @@ namespace prt::shader {
       PrettyLogger(parent) {
     }
     ~ShaderUnitPrinter() override = default;
-    bool VisitShaderCode(ShaderCode* code) override;
+    auto VisitShaderCode(ShaderCode* code) -> bool override;
     void PrintShaderUnit(ShaderUnit* unit);
   public:
     template<const google::LogSeverity Severity = google::INFO>

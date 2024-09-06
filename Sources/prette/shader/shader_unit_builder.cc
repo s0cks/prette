@@ -2,11 +2,11 @@
 #include "prette/shader/shader_unit.h"
 
 namespace prt::shader {
-  ShaderUnit* ShaderUnitBuilder::Build() const {
+  auto ShaderUnitBuilder::Build() const -> ShaderUnit* {
     return ShaderUnit::New(GetMeta(), GetType(), GetCode());
   }
 
-  rx::observable<ShaderUnit*> ShaderUnitBuilder::BuildAsync() const {
+  auto ShaderUnitBuilder::BuildAsync() const -> rx::observable<ShaderUnit*> {
     return rx::observable<>::create<ShaderUnit*>([this](rx::subscriber<ShaderUnit*> s) {
       const auto unit = Build();
       if(!unit) {

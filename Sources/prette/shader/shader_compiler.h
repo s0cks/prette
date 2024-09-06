@@ -4,17 +4,18 @@
 #include <fmt/format.h>
 
 #include "prette/rx.h"
+#include "prette/common.h"
 #include "prette/series.h"
 #include "prette/counter.h"
-#include "prette/shader/shader.h"
-#include "prette/shader/shader_code.h"
 #include "prette/shader/shader_unit.h"
+#include "prette/shader/shader_events.h"
 
 namespace prt::shader {
-  typedef rx::observable<ShaderCompilerEvent*> ShaderCompilerEventObservable;
-  typedef rx::subject<ShaderCompilerEvent*> ShaderCompilerEventSubject;
+  using ShaderCompilerEventObservable = rx::observable<ShaderCompilerEvent*>;
+  using ShaderCompilerEventSubject = rx::subject<ShaderCompilerEvent*>;
 
   class ShaderCompilerEventSource {
+    DEFINE_NON_COPYABLE_TYPE(ShaderCompilerEventSource);
   protected:
     ShaderCompilerEventSource() = default;
 
@@ -27,9 +28,9 @@ namespace prt::shader {
     }
   public:
     virtual ~ShaderCompilerEventSource() = default;
-    virtual ShaderCompilerEventObservable OnEvent() const = 0;
+    virtual auto OnEvent() const -> ShaderCompilerEventObservable = 0;
 
-    inline rx::observable<ShaderCompiledEvent*> OnCompiled() const {
+    inline auto OnCompiled() const -> rx::observable<ShaderCompiledEvent*> {
       return OnEvent()
         .filter(ShaderCompiledEvent::Filter)
         .map([](ShaderCompilerEvent* event) {
@@ -43,9 +44,10 @@ namespace prt::shader {
   class ShaderCompiler : public ShaderCompilerEventSource {
     DEFINE_NON_COPYABLE_TYPE(ShaderCompiler);
   public:
-    typedef TimeSeries<10> DurationSeries;
-    typedef Counter<uint64_t> CompiledCounter;
-  protected:
+    static constexpr const auto kDurationSeriesSize = 10;
+    using DurationSeries = TimeSeries<kDurationSeriesSize>;
+    using CompiledCounter = Counter<uint64_t>;
+  private:
     CompiledCounter compiled_;
     DurationSeries duration_;
     ShaderCompilerEventSubject events_;
@@ -57,34 +59,34 @@ namespace prt::shader {
     }
   public:
     ShaderCompiler() = default;
-    virtual ~ShaderCompiler() = default;
-    virtual ShaderId CompileShaderUnit(ShaderUnit* unit);
+     ~ShaderCompiler() override = default;
+    virtual auto CompileShaderUnit(ShaderUnit* unit) -> ShaderId;
 
-    const DurationSeries& GetDurationSeries() const {
+    auto GetDurationSeries() const -> const DurationSeries& {
       return duration_;
     }
 
-    const CompiledCounter& GetCompiled() const {
+    auto GetCompiled() const -> const CompiledCounter& {
       return compiled_;
     }
     
-    ShaderCompilerEventObservable OnEvent() const override {
+    auto OnEvent() const -> ShaderCompilerEventObservable override {
       return events_.get_observable();
     }
   private:
-    static inline uri::Uri
-    FormatBasicUri(const uri::basic_uri& uri) {
+    static inline auto
+    FormatBasicUri(const uri::basic_uri& uri) -> uri::Uri {
       if(!(StartsWith(uri, "shader:") || StartsWith(uri, "file:"))) {
         if(StartsWith(uri, "/"))
-          return uri::Uri(fmt::format("file://{0:s}", uri));
-        return uri::Uri(fmt::format("shader:{0:s}", uri));
+          return { fmt::format("file://{0:s}", uri) };
+        return { fmt::format("shader:{0:s}", uri) };
       }
-      return uri::Uri(uri);
+      return { uri };
     }
   public:
-    static ShaderCompiler* GetCompiler();
-    static ShaderId Compile(ShaderUnit* unit);
-    static rx::observable<ShaderId> CompileAsync(ShaderUnit* unit);
+    static auto GetCompiler() -> ShaderCompiler*;
+    static auto Compile(ShaderUnit* unit) -> ShaderId;
+    static auto CompileAsync(ShaderUnit* unit) -> rx::observable<ShaderId>;
   };
 }
 
