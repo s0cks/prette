@@ -31,7 +31,7 @@ namespace prt::program {
       return nullptr;
     }
 
-    const auto program = new Program(meta_, id);
+    const auto program = new Program(GetMeta(), id);
     ProgramLinkScope link_scope(program);
     for(const auto& shader : GetShaders())
       link_scope << shader->GetId();

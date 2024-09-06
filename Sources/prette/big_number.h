@@ -2,6 +2,7 @@
 #define PRT_BIG_NUMBER_H
 
 #include <string>
+#include <sstream>
 #include <cstdint>
 #include <iomanip>
 
@@ -13,15 +14,15 @@ namespace prt {
     BigNumber() = default;
   public:
     virtual ~BigNumber() = default;
-    virtual const uword* data() const = 0;
-    virtual uword size() const = 0;
+    virtual auto data() const -> const uword* = 0;
+    virtual auto size() const -> uword = 0;
     virtual void clear() = 0;
 
-    const uword* const_begin() const {
+    auto const_begin() const -> const uword* {
       return data();
     }
 
-    const uword* const_end() const {
+    auto const_end() const -> const uword* {
       return data() + size();
     }
   };
@@ -60,11 +61,11 @@ namespace prt {
   public:
     ~BigNumberTemplate() override = default;
 
-    const uword* data() const override {
+    auto data() const -> const uword* override {
       return data_;
     }
 
-    uword size() const override {
+    auto size() const -> uword override {
       return kSizeInWords;
     }
 
@@ -72,7 +73,7 @@ namespace prt {
       memset(&data_[0], 0, sizeof(data_));
     }
 
-    virtual std::string ToHexString() const {
+    virtual auto ToHexString() const -> std::string {
       std::stringstream ss;
       ss << std::hex;
       for(auto i = 0; i < size(); ++i )
@@ -80,7 +81,7 @@ namespace prt {
       return ss.str();
     }
     
-    virtual std::string ToBinaryString() const {
+    virtual auto ToBinaryString() const -> std::string {
       std::stringstream ss;
       std::bitset<kSizeInBits> bits;
       for(auto idx = 0; idx < size(); idx++) {

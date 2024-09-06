@@ -3,7 +3,6 @@
 
 #include "prette/image/image.h"
 #include "prette/texture/texture_id.h"
-#include "prette/texture/texture_data.h"
 #include "prette/texture/texture_wrap.h"
 #include "prette/texture/texture_target.h"
 #include "prette/texture/texture_format.h"
@@ -53,7 +52,7 @@ namespace prt::texture {
   protected:
     int level_;
     int border_;
-    TextureData data_;
+    img::Image* data_;
 
     void InitTexture(const TextureId id) const override;
   public:
@@ -61,73 +60,44 @@ namespace prt::texture {
       TextureBuilderBase(target),
       level_(0),
       border_(0),
-      data_() {
+      data_(nullptr) {
     }
     virtual ~TextureBuilder() = default;
 
-    const TextureFormat GetFormat() const {
-      return data_.format();
-    }
-
-    virtual void SetFormat(const TextureFormat format) {
-      data_.format_ = format;
-    }
-
-    const TextureFormat GetInternalFormat() const {
-      return data_.internal_format();
-    }
-
-    virtual void SetInternalFormat(const TextureFormat format) {
-      data_.internal_format_ = format;
-    }
-
-    const glm::vec2& GetSize() const {
-      return data_.size();
-    }
-
-    virtual void SetSize(const TextureSize& size) {
-      data_.size_ = size;
-    }
-
-    float GetWidth() const {
-      return data_.width();
-    }
-
-    float GetHeight() const {
-      return data_.height();
-    }
-
-    const int& GetLevel() const {
-      return level_;
-    }
-
-    virtual void SetLevel(const int level) {
+    void SetLevel(const int level) {
+      PRT_ASSERT(level >= 0);
       level_ = level;
     }
 
-    const int& GetBorder() const {
+    int GetBorder() const {
       return border_;
     }
 
-    virtual void SetBorder(const int border) {
+    void SetBorder(const int border) {
+      PRT_ASSERT(border >= 0);
       border_ = border;
     }
-    
-    GLenum GetType() const {
-      return data_.type();
+
+    int GetLevel() const {
+      return level_;
     }
 
-    virtual void SetType(const GLenum type) {
-      data_.type_ = type;
+    img::Image* GetData() const {
+      return data_;
     }
 
-    virtual const GLvoid* GetData() const {
-      return (const GLvoid*) data_.bytes();
+    void SetData(img::Image* rhs) {
+      PRT_ASSERT(rhs);
+      data_ = rhs;
     }
 
-    void operator<<(const img::Image* img) {
-      PRT_ASSERT(img);
-      data_ = img;
+    inline bool HasData() const {
+      return data_ != nullptr;
+    }
+
+    TextureBuilder& operator<<(img::Image* rhs) {
+      SetData(rhs);
+      return *this;
     }
 
     friend std::ostream& operator<<(std::ostream& stream, const TextureBuilder& rhs) {

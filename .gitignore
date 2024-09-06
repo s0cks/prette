@@ -20,5 +20,5 @@
 !/*.md
 !/.vscode/
 !/.cmake-format.yaml
-!/.clang-format
+!/.clang*
 !/Benchmarks/

@@ -2,19 +2,19 @@
 #include "prette/dimension.h"
 
 namespace prt {
-  static inline Dimension*
-  GetDimension(const DimensionParser* parser) {
+  static inline auto
+  GetDimension(const DimensionParser* parser) -> Dimension* {
     return (Dimension*) parser->data();
   }
 
-  static inline bool
-  OnParseWidth(const DimensionParser* parser, const int32_t& width) {
+  static inline auto
+  OnParseWidth(const DimensionParser* parser, const int32_t& width) -> bool {
     GetDimension(parser)->width() = width;
     return true;
   }
 
-  static inline bool
-  OnParseHeight(const DimensionParser* parser, const int32_t& height) {
+  static inline auto
+  OnParseHeight(const DimensionParser* parser, const int32_t& height) -> bool {
     GetDimension(parser)->height() = height;
     return true;
   }
@@ -29,7 +29,7 @@ namespace prt {
     LOG_IF(ERROR, !parser.ParseDimension()) << "failed to parse Dimension from: " << value;
   }
 
-  bool DimensionParser::ParseInt32(int32_t* result) {
+  auto DimensionParser::ParseInt32(int32_t* result) -> bool {
     token_len_ = 0;
     do {
       const auto next = PeekChar();
@@ -52,11 +52,11 @@ namespace prt {
     return true;
   }
 
-  bool DimensionParser::ParseDimension() {
+  auto DimensionParser::ParseDimension() -> bool {
     if(!OnParseStarted())
       return false;
 
-    int32_t width;
+    int32_t width = 0;
     if(!ParseInt32(&width))
       return false;
     if(!OnParseWidth(width))
@@ -71,7 +71,7 @@ namespace prt {
         return false;
     }
     
-    int32_t height;
+    int32_t height = 0;
     if(!ParseInt32(&height))
       return false;
     if(!OnParseHeight(height))

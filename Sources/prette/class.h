@@ -4,28 +4,30 @@
 #include <set>
 #include <unordered_map>
 #include "prette/gfx.h"
-#include "prette/platform.h"
+#include "prette/common.h"
 
 namespace prt {
   class Class;
   class Attribute;
   class AttributeVisitor {
+    DEFINE_NON_COPYABLE_TYPE(AttributeVisitor);
   protected:
     AttributeVisitor() = default;
   public:
     virtual ~AttributeVisitor() = default;
-    virtual bool VisitAttribute(Attribute* attr) = 0;
+    virtual auto VisitAttribute(Attribute* attr) -> bool = 0;
   };
 
   class Attribute {
     friend class Class;
+    DEFINE_NON_COPYABLE_TYPE(Attribute);
   public:
     struct IndexComparator {
-      bool operator()(Attribute* lhs, Attribute* rhs) const {
+      auto operator()(Attribute* lhs, Attribute* rhs) const -> bool {
         return lhs->GetIndex() < rhs->GetIndex();
       }
     };
-  protected:
+  private:
     Class* owner_;
     std::string name_;
     uword index_;
@@ -41,46 +43,46 @@ namespace prt {
               const bool normalized);
     ~Attribute();
 
-    Class* GetOwner() const {
+    auto GetOwner() const -> Class* {
       return owner_;
     }
 
-    const std::string& GetName() const {
+    auto GetName() const -> const std::string& {
       return name_;
     }
 
-    uword GetIndex() const {
+    auto GetIndex() const -> uword {
       return index_;
     }
 
-    uword GetSize() const {
+    auto GetSize() const -> uword {
       return size_;
     }
 
-    Class* GetType() const {
+    auto GetType() const -> Class* {
       return type_;
     }
 
-    uword GetAllocationSize() const;
+    auto GetAllocationSize() const -> uword;
 
-    bool IsNormalized() const {
+    auto IsNormalized() const -> bool {
       return normalized_;
     }
 
-    bool Accept(AttributeVisitor* vis) {
+    auto Accept(AttributeVisitor* vis) -> bool {
       PRT_ASSERT(vis);
       return vis->VisitAttribute(this);
     }
 
-    int Compare(Attribute* rhs) const;
-    bool Equals(Attribute* rhs) const;
-    std::string ToString() const;
+    auto Compare(Attribute* rhs) const -> int;
+    auto Equals(Attribute* rhs) const -> bool;
+    auto ToString() const -> std::string;
   };
 
-  typedef std::set<Attribute*, Attribute::IndexComparator> AttributeSet;
+  using AttributeSet = std::set<Attribute *, Attribute::IndexComparator>;
 
-  static inline std::ostream&
-  operator<<(std::ostream& stream, const AttributeSet& rhs) {
+  static inline auto
+  operator<<(std::ostream& stream, const AttributeSet& rhs) -> std::ostream& {
     stream << "[";
     auto idx = 0;
     for(const auto& attr : rhs) {
@@ -94,6 +96,7 @@ namespace prt {
 
 #ifdef PRT_DEBUG
   class AttributePrinter : public AttributeVisitor {
+    DEFINE_NON_COPYABLE_TYPE(AttributePrinter);
   private:
     google::LogSeverity severity_;
   public:
@@ -103,11 +106,11 @@ namespace prt {
     }
     ~AttributePrinter() override = default;
 
-    google::LogSeverity GetSeverity() const {
+    auto GetSeverity() const -> google::LogSeverity {
       return severity_;
     }
 
-    bool VisitAttribute(Attribute* attr) override {
+    auto VisitAttribute(Attribute* attr) -> bool override {
       PRT_ASSERT(attr);
       LOG_AT_LEVEL(GetSeverity()) << " - " << attr->ToString();
       return true;
@@ -132,15 +135,17 @@ namespace prt {
   };
 
   class ClassVisitor {
+    DEFINE_NON_COPYABLE_TYPE(ClassVisitor);
   protected:
     ClassVisitor() = default;
   public:
     virtual ~ClassVisitor() = default;
-    virtual bool VisitClass(Class* cls) = 0;
+    virtual auto VisitClass(Class* cls) -> bool = 0;
   };
 
   class Class {
-  protected:
+    DEFINE_NON_COPYABLE_TYPE(Class);
+  private:
     ClassId id_;
     std::string name_;
     AttributeSet attrs_;
@@ -148,106 +153,107 @@ namespace prt {
     Class(const ClassId id,
           const std::string& name);
 
-    uword CalculateAllocationSize() const;
+    auto CalculateAllocationSize() const -> uword;
   public:
     ~Class();
 
-    ClassId GetId() const {
+    auto GetId() const -> ClassId {
       return id_;
     }
 
-    const std::string& GetName() const {
+    auto GetName() const -> const std::string& {
       return name_;
     }
 
-    const AttributeSet& GetAttributes() const {
+    auto GetAttributes() const -> const AttributeSet& {
       return attrs_;
     }
 
-    bool Accept(ClassVisitor* vis) {
+    auto Accept(ClassVisitor* vis) -> bool {
       PRT_ASSERT(vis);
       return vis->VisitClass(this);
     }
 
-    Attribute* CreateAttribute(const std::string& name,
+    auto CreateAttribute(const std::string& name,
                                Class* type,
                                const uword size,
-                               const bool normalized);
+                               const bool normalized) -> Attribute*;
     
-    inline Attribute* CreateByteAttr(const std::string& name,
+    inline auto CreateByteAttr(const std::string& name,
                                      const uword size,
-                                     const bool normalized) {
+                                     const bool normalized) -> Attribute* {
       return CreateAttribute(name, Class::kByte, size, normalized);
     }
 
-    inline Attribute* CreateUByteAttr(const std::string& name,
+    inline auto CreateUByteAttr(const std::string& name,
                                       const uword size,
-                                      const bool normalized) {
+                                      const bool normalized) -> Attribute* {
       return CreateAttribute(name, Class::kUnsignedByte, size, normalized);
     }
 
-    inline Attribute* CreateShortAttr(const std::string& name,
+    inline auto CreateShortAttr(const std::string& name,
                                       const uword size,
-                                      const bool normalized = false) {
+                                      const bool normalized = false) -> Attribute* {
       return CreateAttribute(name, Class::kShort, size, normalized);
     }
 
-    inline Attribute* CreateUShortAttr(const std::string& name,
+    inline auto CreateUShortAttr(const std::string& name,
                                        const uword size,
-                                       const bool normalized = false) {
+                                       const bool normalized = false) -> Attribute* {
       return CreateAttribute(name, Class::kUnsignedShort, size, normalized);
     }
 
-    inline Attribute* CreateIntAttr(const std::string& name,
+    inline auto CreateIntAttr(const std::string& name,
                                     const uword size,
-                                    const bool normalized = false) {
+                                    const bool normalized = false) -> Attribute* {
       return CreateAttribute(name, Class::kInt, size, normalized);
     }
 
-    inline Attribute* CreateUIntAttr(const std::string& name,
+    inline auto CreateUIntAttr(const std::string& name,
                                      const uword size,
-                                     const bool normalized = false) {
+                                     const bool normalized = false) -> Attribute* {
       return CreateAttribute(name, Class::kUnsignedInt, size, normalized);
     }
 
-    inline Attribute* CreateFloatAttr(const std::string& name,
+    inline auto CreateFloatAttr(const std::string& name,
                                       const uword size,
-                                      const bool normalized = false) {
+                                      const bool normalized = false) -> Attribute* {
       return CreateAttribute(name, Class::kFloat, size, normalized);
     }
 
-    inline Attribute* CreateVec2fAttr(const std::string& name,
-                                      const bool normalized = false) {
+    inline auto CreateVec2fAttr(const std::string& name,
+                                      const bool normalized = false) -> Attribute* {
       return CreateFloatAttr(name, 2, normalized);
     }
 
-    inline Attribute* CreateVec3fAttr(const std::string& name,
-                                      const bool normalized = false) {
+    inline auto CreateVec3fAttr(const std::string& name,
+                                      const bool normalized = false) -> Attribute* {
       return CreateFloatAttr(name, 3, normalized);
     }
 
-    inline Attribute* CreateColorAttr(const std::string& name) {
+    inline auto CreateColorAttr(const std::string& name) -> Attribute* {
       return CreateUByteAttr(name, 4, true);
     }
 
-    GLenum GetGlType() const;
-    uword GetAllocationSize() const;
-    bool IsPrimative() const;
-    bool Equals(const Class* rhs) const;
-    bool VisitAllAttributes(AttributeVisitor* vis) const;
-    std::string ToString() const;
+    auto GetGlType() const -> GLenum;
+    auto GetAllocationSize() const -> uword;
+    auto IsPrimative() const -> bool;
+    auto Equals(const Class* rhs) const -> bool;
+    auto VisitAllAttributes(AttributeVisitor* vis) const -> bool;
+    auto ToString() const -> std::string;
 
 #ifdef PRT_DEBUG
-    bool PrintAttributes(const google::LogSeverity severity = google::INFO) const;
+    auto PrintAttributes(const google::LogSeverity severity = google::INFO) const -> bool;
 #endif //PRT_DEBUG
   private:
-    static inline Class* New(const ClassId id, const std::string& name) {
+    static inline auto 
+    New(const ClassId id, const std::string& name) -> Class* {
       return new Class(id, name);
     }
   public:
     static void Init();
-    static Class* Find(const std::string& name);
-    static Class* New(const std::string& name);
+    static auto Find(const std::string& name) -> Class*;
+    static auto New(const std::string& name) -> Class*;
 
     // byte (8 bits)
     static Class* kUnsignedByte;
@@ -262,7 +268,7 @@ namespace prt {
     static Class* kFloat;
   };
 
-  typedef std::unordered_map<std::string, Class*> ClassMap;
+  using ClassMap = std::unordered_map<std::string, Class*>;
 }
 
 #endif //PRT_CLASS_H

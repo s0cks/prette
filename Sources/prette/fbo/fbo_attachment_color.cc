@@ -11,6 +11,18 @@ namespace prt::fbo {
     return GetTexture()->GetId();
   }
 
+  int ColorAttachment::CompareTo(Attachment* rhs) const {
+    NOT_IMPLEMENTED(ERROR); //TODO: implement
+    return 0;
+  }
+
+  bool ColorAttachment::Equals(Attachment* rhs) const {
+    if(!rhs->IsColorAttachment())
+      return false;
+    const auto other = rhs->AsColorAttachment();
+    return GetTextureId() == other->GetTextureId(); 
+  }
+ 
   std::string ColorAttachment::ToString() const {
     std::stringstream ss;
     ss << "fbo::ColorAttachment(";
@@ -28,12 +40,13 @@ namespace prt::fbo {
                                         const Level level) {
     using namespace texture;
     TextureBuilder builder(k2D);
-    builder.SetFormat(format);
-    builder.SetInternalFormat(format);
-    builder.SetSize(size);
-    builder.SetFilter(texture::kLinearFilter);
-    builder.SetWrap(texture::kClampToEdgeWrap);
-    builder.SetType(GL_UNSIGNED_BYTE);
+    //TODO:
+    // builder.SetFormat(format);
+    // builder.SetInternalFormat(format);
+    // builder.SetSize(size);
+    // builder.SetFilter(texture::kLinearFilter);
+    // builder.SetWrap(texture::kClampToEdgeWrap);
+    // builder.SetType(GL_UNSIGNED_BYTE);
     const auto texture = Texture2d::New(builder.Build());
     return new ColorAttachment(texture, size, level);
   }

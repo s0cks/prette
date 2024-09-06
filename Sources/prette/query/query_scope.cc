@@ -19,4 +19,14 @@ namespace prt::query {
   Target QueryScope::GetQueryTarget() const {
     return GetQuery()->GetTarget();
   }
+
+  QueryTimeScope::QueryTimeScope(Query* query):
+    QueryScope(query) {
+    PRT_ASSERT(query->IsTimeElapsed());
+  }
+
+  uword QueryTimeScope::GetTimestamp() const {
+    Query::CounterQuery(GetQueryId());
+    return Query::GetQueryULong(GetQueryId(), kResult);
+  }
 }

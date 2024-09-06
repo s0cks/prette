@@ -1,6 +1,7 @@
 #ifndef PRT_TEXTURE_H
 #define PRT_TEXTURE_H
 
+#include <set>
 #include <optional>
 #include "prette/gfx.h"
 #include "prette/uri.h"
@@ -64,7 +65,7 @@ namespace prt {
     public:
       static rx::observable<TextureId> GenerateTextureId(const int num = 1);
 
-      struct IdComparator {
+      struct Comparator {
         bool operator()(Texture* lhs, Texture* rhs) const {
           return lhs->GetId() < rhs->GetId();
         }
@@ -94,17 +95,14 @@ namespace prt {
         return Publish(&event);
       }
     public:
-      Texture() = default;
-      explicit Texture(const TextureId id):
-        Object<TextureId>(id) {
-      }
-      ~Texture() override = default;
+      explicit Texture(const TextureId id);
+      ~Texture() override;
       virtual TextureTarget GetTextureTarget() const = 0;
 
       bool Accept(TextureVisitor* vis);
       TextureWrap GetTextureWrap() const;
     };
-
+    
     template<const TextureTarget Target>
     class TextureTemplate : public Texture {
     protected:
@@ -119,7 +117,7 @@ namespace prt {
       }
     };
 
-    typedef std::set<Texture*, Texture::IdComparator> TextureSet;
+    typedef std::set<Texture*, Texture::Comparator> TextureSet;
 
     const TextureSet& GetAllTextures();
     uword GetTotalNumberOfTextures();

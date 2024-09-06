@@ -7,7 +7,6 @@
 
 #include "prette/rx.h"
 #include "prette/gfx.h"
-#include "prette/bitset.h"
 
 namespace prt::mouse {
 #define FOR_EACH_MOUSE_BUTTON_STATE(V)    \

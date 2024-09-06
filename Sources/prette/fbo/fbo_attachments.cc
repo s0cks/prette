@@ -2,13 +2,9 @@
 
 namespace prt::fbo {
   bool AttachmentSet::AttachmentComparator::operator()(Attachment* lhs, Attachment* rhs) const {
-    {
-      const int result = Attachment::CompareType(lhs->GetType(), rhs->GetType());
-        if(result != 0)
-          return false;
-      //TODO: compare more
-      return true;
-    }
+    PRT_ASSERT(lhs);
+    PRT_ASSERT(rhs);
+    return lhs->Equals(rhs);
   }
 
   void AttachmentSet::Insert(Attachment* attachment) {

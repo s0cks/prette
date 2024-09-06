@@ -4,41 +4,41 @@
 namespace prt::texture {
   void CubeMapBuilder::SetFace(const CubeMapFace face, const img::Image* image, const int level, const int border) {
     PRT_ASSERT(image);
-    switch(image->format()) {
-      case img::kRGB: {
+    switch(image->GetFormat().value()) {
+      case GL_RGB: {
         const auto data = FaceData {
           .face = face,
           .border = border,
           .level = level,
           .bytes = (const uint8_t*) image->data(),
-          .num_bytes = image->GetNumberOfBytes(),
+          .num_bytes = image->GetTotalSize(),
           .internal_format = kRGB,
           .format = kRGB,
           .type = GL_UNSIGNED_BYTE,
-          .size = image->size(),
+          .size = glm::vec2(image->GetWidth(), image->GetHeight()),
         };
         const auto result = faces_.insert(data);
         LOG_IF(ERROR, !result.second) << "failed to insert: " << data;
         break;
       }
-      case img::kRGBA: {
+      case GL_RGBA: {
         const auto data = FaceData {
           .face = face,
           .border = border,
           .level = level,
           .bytes = (const uint8_t*) image->data(),
-          .num_bytes = image->GetNumberOfBytes(),
+          .num_bytes = image->GetTotalSize(),
           .internal_format = kRGBA,
           .format = kRGBA,
           .type = GL_UNSIGNED_BYTE,
-          .size = image->size(),
+          .size = glm::vec2(image->GetWidth(), image->GetHeight()),
         };
         const auto result = faces_.insert(data);
         LOG_IF(ERROR, !result.second) << "failed to insert: " << data;
         break;
       }
       default:
-        LOG(ERROR) << "invalid image type: " << image->format();
+        LOG(ERROR) << "invalid image type: " << image->GetFormat();
         break;
     }
   }

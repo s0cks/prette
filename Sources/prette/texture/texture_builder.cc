@@ -28,9 +28,15 @@ namespace prt::texture {
 
   void TextureBuilder::InitTexture(const TextureId id) const {
     PRT_ASSERT(IsValidTextureId(id));
+    if(!HasData())
+      return;
+    const auto format = GetData()->GetFormat();
+    const auto data = GetData()->data();
+    const auto width = GetData()->GetWidth();
+    const auto height = GetData()->GetHeight(); 
     switch(GetTarget()) {
       case k2D: {
-        glTexImage2D(GetTarget(), GetLevel(), (GLenum) GetInternalFormat(), GetWidth(), GetHeight(), GetBorder(), (GLenum) GetFormat(), GetType(), GetData());
+        glTexImage2D(GetTarget(), GetLevel(), (GLint) format, width, height, GetBorder(), (GLint) format, GL_UNSIGNED_BYTE, data); 
         CHECK_GL;
         break;
       }

@@ -17,8 +17,8 @@ namespace prt::mouse {
   Cursor* GlfwCursor::New(const img::Image* img) {
     PRT_ASSERT(img);
     GLFWimage image;
-    image.height = img->height();
-    image.width = img->width();
+    image.height = img->GetWidth();
+    image.width = img->GetHeight();
     image.pixels = (unsigned char*)img->data();
     const auto handle = glfwCreateCursor(&image, 0, 0);
     return handle ? New(handle) : nullptr;

@@ -2,34 +2,47 @@
 #include <sstream>
 
 namespace prt::img {
+  Image::Image(const ImageFormat format, const Resolution& resolution):
+    Object(),
+    format_(format),
+    resolution_(resolution) {
+    memset(data(), 0, GetTotalSize());
+  }
+
+  Image::~Image() {
+    // do nothing
+  }
+
   void* Image::operator new(const size_t sz, const uword num_bytes) {
     using namespace units::data;
-    const auto total_size = sz + CalculateAllocationSize(num_bytes);
+    const auto total_size = sz + num_bytes;
     const auto ptr = malloc(total_size);
     LOG_IF(FATAL, !ptr) << "failed to allocate data " << byte_t(total_size) << " for Image of " << byte_t(num_bytes) << " size.";
     return ptr;
   }
 
   void Image::Flip() {
-    const auto components = GetNumberOfColorComponents();
-    const auto total_size = width() * height() * GetNumberOfColorComponents();
-    uint8_t data[total_size];
-    for (auto i = 0; i < width(); i++) {
-      for (auto j = 0; j < height(); j++) {
-        for(auto k = 0; k < components; k++) {
-          data[(i + j * width()) * components + k] = data_ptr()[(i + (height() - 1 - j) * width()) * components + k];
+    const auto channels = GetNumberOfChannels();
+    const auto width = GetWidth();
+    const auto height = GetHeight();
+    const auto total_size = GetTotalSize();
+    uint8_t tmp[total_size];
+    for (auto i = 0; i < width; i++) {
+      for (auto j = 0; j < height; j++) {
+        for(auto k = 0; k < channels; k++) {
+          tmp[(i + j * width) * channels + k] = data()[(i + (height - 1 - j) * width) * channels + k];
         }
       }
     }
-    memcpy(data_ptr(), &data[0], total_size);
+    memcpy(data(), &tmp[0], total_size);
   }
 
   std::string Image::ToString() const {
     std::stringstream ss;
     ss << "Image(";
-    ss << "format=" << *format_ptr() << ", ";
-    ss << "size=" << glm::to_string(*size_ptr()) << ", ";
-    ss << "data=" << (void*)data_ptr();
+    ss << "format=" << GetFormat() << ", ";
+    ss << "resolution=" << GetResolution() << ", ";
+    ss << "data=" << (void*) data();
     ss << ")";
     return ss.str();
   }
@@ -84,15 +97,8 @@ namespace prt::img {
     });
   }
 
-  uword Image::GetNumberOfBytes() const {
-    return CalculateNumberOfBytes(format(), size());
-  }
-
-  uword Image::GetTotalNumberOfBytes() const {
-    return CalculateAllocationSize(format(), size());
-  }
-
-  Image* Image::New(const ImageFormat format, const ImageSize& size, const uword num_bytes) {
-    return new(num_bytes)Image(format, size);
+  Image* Image::New(const ImageFormat format, const Resolution& resolution) {
+    const auto total_size = format * resolution;
+    return new(total_size)Image(format, resolution);
   }
 }

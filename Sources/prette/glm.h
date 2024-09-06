@@ -9,8 +9,8 @@
 #include <glm/gtc/type_ptr.hpp>
 
 namespace prt {
-  static inline bool
-  Clamp(glm::vec2& pos, const glm::vec4& bounds) {
+  static inline auto
+  Clamp(glm::vec2& pos, const glm::vec4& bounds) -> bool {
     bool changed = false;
     if(pos.x < bounds[0]) {
       pos.x = bounds[0];
@@ -28,8 +28,8 @@ namespace prt {
     return changed;
   }
 
-  static inline bool
-  Clamp(glm::vec2& pos, const glm::vec2& size) {
+  static inline auto
+  Clamp(glm::vec2& pos, const glm::vec2& size) -> bool {
     return Clamp(pos, glm::vec4(0.0f, 0.0f, size));
   }
 }

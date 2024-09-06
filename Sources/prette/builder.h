@@ -6,12 +6,16 @@
 
 namespace prt {
   class BuilderBase {
-  protected:
+  private:
     Metadata meta_;
+  protected:
+    BuilderBase() = default;
   public:
+    BuilderBase(const BuilderBase& rhs) = delete;
+    BuilderBase(const BuilderBase&& rhs) = delete;
     virtual ~BuilderBase() = default;
 
-    const Metadata& GetMeta() const {
+    auto GetMeta() const -> const Metadata& {
       return meta_;
     }
 
@@ -34,6 +38,9 @@ namespace prt {
     void Append(const TagList& rhs) {
       return meta_.Append(rhs);
     }
+
+    auto operator=(const BuilderBase&& rhs) -> BuilderBase& = delete;
+    auto operator=(const BuilderBase& rhs) -> BuilderBase& = delete;
   };
 
   template<class T>
@@ -41,9 +48,11 @@ namespace prt {
   protected:
     BuilderTemplate() = default;
   public:
+    BuilderTemplate(const BuilderTemplate<T>&& rhs) = delete;
+    BuilderTemplate(const BuilderTemplate<T>& rhs) = delete;
     ~BuilderTemplate() override = default;
-    virtual T* Build() const = 0;
-    virtual rx::observable<T*> BuildAsync() const {
+    virtual auto Build() const -> T* = 0;
+    virtual auto BuildAsync() const -> rx::observable<T*> {
       return rx::observable<>::create<T*>([this](rx::subscriber<T*> s) {
         const auto result = Build();
         if(!result)
@@ -52,6 +61,9 @@ namespace prt {
         s.on_completed();
       });
     }
+
+    auto operator=(const BuilderTemplate<T>&& rhs) -> BuilderTemplate<T>& = delete;
+    auto operator=(const BuilderTemplate<T>& rhs) -> BuilderTemplate<T>& = delete;
   };
 }
 

@@ -20,12 +20,21 @@ namespace prt::texture {
     const auto [iter,inserted] = all_.insert(value);
     LOG_IF(ERROR, !inserted) << "failed to register: " << value->ToString();
   }
-
+  
   static inline void
   Deregister(Texture* value) {
     PRT_ASSERT(value);
     const auto removed = all_.erase(value);
     LOG_IF(ERROR, removed != 1) << "failed to deregister: " << value->ToString();
+  }
+
+  Texture::Texture(const TextureId id):
+    Object<TextureId>(id) {
+    Register(this);
+  }
+
+  Texture::~Texture() {
+    Deregister(this);
   }
 
   rx::observable<TextureEvent*> OnTextureEvent() {

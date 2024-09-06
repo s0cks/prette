@@ -19,6 +19,7 @@ namespace prt::query {
 
   class Query {
     friend class QueryScope;
+    friend class QueryTimeScope;
   public:
     struct Comparator {
       bool operator()(Query* lhs, Query* rhs) const {
@@ -29,6 +30,7 @@ namespace prt::query {
     static void BeginQuery(const Target target, const QueryId id);
     static void EndQuery(const Target target);
     static void DeleteQueries(QueryId* ids, const int num_ids);
+    static void CounterQuery(const QueryId id);
 
     static int32_t GetQueryInt(const QueryId id, const Property name);
     static uint32_t GetQueryUInt(const QueryId id, const Property name);
@@ -76,18 +78,37 @@ namespace prt::query {
     }
 
     uint64_t GetTimestamp() const {
+      PRT_ASSERT(IsAvailable());
       return GetQueryULong(GetId(), Property::kResult);
+    }
+
+    void Counter() {
+      PRT_ASSERT(IsTimeElapsed());
+      Query::CounterQuery(GetId());
     }
 
     bool Accept(QueryVisitor* vis);
     bool IsAvailable() const;
     std::string ToString() const;
+  private:
+    static Query* New(const QueryId id, const Target target);
+  public:
+    static inline Query*
+    NewTimeElapsed() {
+      const auto id = QueryId::GenerateId();
+      PRT_ASSERT(id);
+      return New(id, Target::kTimeElapsed);
+    }
   };
 
   typedef std::set<Query*, Query::Comparator> QuerySet;
 
   const QuerySet& GetAllQueries();
   bool VisitAllQueries(QueryVisitor* vis);
+}
+
+namespace prt {
+  using query::Query;
 }
 
 #endif //PRT_QUERY_H

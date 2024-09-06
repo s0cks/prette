@@ -6,40 +6,38 @@
 #include <cstdlib>
 #include <glog/logging.h>
 
+#include "prette/common.h"
+
 namespace prt {
   template<typename T, const uint64_t Capacity>
   class CircularBuffer {
+    DEFINE_NON_COPYABLE_TYPE(CircularBuffer);
   public:
-    typedef std::array<T, Capacity> Container;
-    typedef typename Container::iterator iterator;
-    typedef typename Container::const_iterator const_iterator;
+    using Container = std::array<T, Capacity>;
+    using iterator = typename Container::iterator;
+    using const_iterator = typename Container::const_iterator;
   private:
     std::array<T, Capacity> data_;
-    uint64_t head_ = 0;
-    uint64_t tail_ = 0;
-    bool full_ : 1;
+    uint64_t head_{};
+    uint64_t tail_{};
+    bool full_ : 1{};
   public:
-    CircularBuffer():
-      head_(0),
-      tail_(0),
-      full_(false) {
-      DLOG_IF(ERROR, Capacity <= 0) << "allocating CircularBuffer<" << (typeid(T).name()) << "> w/ capacity of " << Capacity;
-    }
+    CircularBuffer() = default; 
     ~CircularBuffer() = default;
 
-    iterator begin() {
+    auto begin() -> iterator {
       return data_.begin();
     }
 
-    const_iterator begin() const {
+    auto begin() const -> const_iterator {
       return data_.begin();
     }
 
-    iterator end() {
+    auto end() -> iterator {
       return data_.end();
     }
 
-    const_iterator end() const {
+    auto end() const -> const_iterator {
       return data_.end();
     }
 
@@ -51,7 +49,7 @@ namespace prt {
       full_ = head_ == tail_;
     }
 
-    T get() const {
+    auto get() const -> T {
       if(empty())
         return (T)nullptr;
       auto val = data_[tail_];
@@ -65,19 +63,19 @@ namespace prt {
       full_ = false;
     }
 
-    bool empty() const {
+    auto empty() const -> bool {
       return !full_ && (head_ == tail_);
     }
 
-    bool full() const {
+    auto full() const -> bool {
       return full_;
     }
 
-    uint64_t capacity() const {
+    auto capacity() const -> uint64_t {
       return Capacity;
     }
 
-    uint64_t size() const {
+    auto size() const -> uint64_t {
       if(full_)
         return Capacity;
       return head_ >= tail_
@@ -85,7 +83,7 @@ namespace prt {
         : Capacity + head_ - tail_;
     }
 
-    T& operator[](const uint64_t idx) const {
+    auto operator[](const uint64_t idx) const -> T& {
       return data_[(tail_ + idx) % Capacity];
     }
   };

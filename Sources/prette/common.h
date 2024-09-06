@@ -55,10 +55,12 @@
 #define UNALLOCATED 0
 #endif //UNALLOCATED
 
-#define DEFINE_NON_COPYABLE_TYPE(Name) \
-  public:                              \
-    Name(const Name& rhs) = delete;    \
-    Name& operator=(const Name& rhs) = delete;
+#define DEFINE_NON_COPYABLE_TYPE(Name)                      \
+  public:                                                   \
+    Name(const Name& rhs) = delete;                         \
+    Name(const Name&& rhs) = delete;                        \
+    auto operator=(const Name&& rhs) -> Name& = delete;     \
+    auto operator=(const Name& rhs) -> Name& = delete;
 
 #define DEFINE_NON_INSTANTIABLE_TYPE(Name) \
   public:                                  \
@@ -76,14 +78,14 @@
 
 namespace prt {
   template<typename A, typename B>
-  std::optional<B> map(std::optional<A> a, std::function<std::optional<B>(const A&)> f) {
+  auto map(std::optional<A> a, std::function<std::optional<B>(const A&)> f) -> std::optional<B> {
     if(a.has_value())
       return f(a.value());
     return std::optional<B>{};
   }
 
-  static inline uint64_t
-  GetFilesize(FILE* file) {
+  static inline auto
+  GetFilesize(FILE* file) -> uint64_t {
     const auto pos = ftell(file);
     fseek(file, 0, SEEK_END);
     const auto sz = ftell(file);
@@ -91,8 +93,8 @@ namespace prt {
     return sz;
   }
 
-  static inline uword
-  RoundUpPow2(uword x) {
+  static inline auto
+  RoundUpPow2(uword x) -> uword {
     x = x - 1;
     x = x | (x >> 1);
     x = x | (x >> 2);
@@ -105,8 +107,8 @@ namespace prt {
     return x + 1;
   }
 
-  static inline bool
-  FileExists(const std::string& name){
+  static inline auto
+  FileExists(const std::string& name) -> bool{
 #if defined(OS_IS_OSX) || defined(OS_IS_LINUX)
     return access(name.data(), F_OK) == 0;
 #else
@@ -114,10 +116,10 @@ namespace prt {
 #endif
   }
 
-  static inline bool
-  IsDirectory(const std::string& filename) {
+  static inline auto
+  IsDirectory(const std::string& filename) -> bool {
 #if defined(OS_IS_OSX) || defined(OS_IS_LINUX) 
-    struct stat s;
+    struct stat s{};
     if(stat(filename.c_str(), &s) != 0)
       return false;
     return S_ISDIR(s.st_mode);
@@ -127,8 +129,8 @@ namespace prt {
 
   }
 
-  static inline bool
-  DeleteDirectory(const std::string& name){
+  static inline auto
+  DeleteDirectory(const std::string& name) -> bool{
 #if defined(OS_IS_OSX) || defined(OS_IS_LINUX)
     return access(name.data(), F_OK) == 0;
 #else
@@ -136,36 +138,36 @@ namespace prt {
 #endif
   }
 
-  static inline bool
-  StartsWith(const char* str, const uword str_len, const char* prefix, const uword prefix_len) {
+  static inline auto
+  StartsWith(const char* str, const uword str_len, const char* prefix, const uword prefix_len) -> bool {
     return str_len >= prefix_len
         && strncmp(&str[0], &prefix[0], prefix_len) == 0;
   }
 
-  static inline bool
-  StartsWith(const char* str, const uword str_len, const char* prefix) {
+  static inline auto
+  StartsWith(const char* str, const uword str_len, const char* prefix) -> bool {
     return StartsWith(str, str_len, prefix, strlen(prefix));
   }
 
-  static inline bool
-  StartsWith(const std::string& str, const std::string& prefix) {
+  static inline auto
+  StartsWith(const std::string& str, const std::string& prefix) -> bool {
      return str.size() >= prefix.size() 
          && str.compare(0, prefix.size(), prefix) == 0;
   }
 
-  static bool
-  EndsWith(const std::string& str, const std::string& suffix){
+  static auto
+  EndsWith(const std::string& str, const std::string& suffix) -> bool{
     return str.size() >= suffix.size() 
         && str.compare(str.size() - suffix.size(), suffix.size(), suffix) == 0;
   }
 
-  static inline bool
-  CharEqualsIgnoreCase(const char& lhs, const char& rhs) {
+  static inline auto
+  CharEqualsIgnoreCase(const char& lhs, const char& rhs) -> bool {
     return std::tolower(static_cast<unsigned char>(lhs)) == std::tolower(static_cast<unsigned char>(rhs));
   }
 
-  static inline bool
-  EqualsIgnoreCase(const std::string& lhs, const std::string& rhs) {
+  static inline auto
+  EqualsIgnoreCase(const std::string& lhs, const std::string& rhs) -> bool {
     return lhs.size() == rhs.size()
         && std::equal(rhs.begin(), rhs.end(), lhs.begin(), lhs.end(), CharEqualsIgnoreCase);
   }

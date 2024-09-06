@@ -6,13 +6,13 @@
 #include "prette/parser.h"
 
 namespace prt {
-  typedef glm::i32vec2 RawDimension;
+  using RawDimension = glm::i32vec2;
   class Dimension {
     static constexpr const auto kWidthComponent = 0;
     static constexpr const auto kHeightComponent = 1;
   public:
-    static inline int
-    CompareArea(const Dimension& lhs, const Dimension& rhs) {
+    static inline auto
+    CompareArea(const Dimension& lhs, const Dimension& rhs) -> int {
       const auto larea = lhs.width() * rhs.height();
       const auto rarea = rhs.width() * rhs.height();
       if(larea < rarea) {
@@ -23,8 +23,8 @@ namespace prt {
       return 0;
     }
 
-    static inline int
-    CompareWidth(const Dimension& lhs, const Dimension& rhs) {
+    static inline auto
+    CompareWidth(const Dimension& lhs, const Dimension& rhs) -> int {
       if(lhs.width() < rhs.width()) {
         return -1;
       } else if(lhs.width() > rhs.width()) {
@@ -33,8 +33,8 @@ namespace prt {
       return 0;
     }
 
-    static inline int
-    CompareHeight(const Dimension& lhs, const Dimension& rhs) {
+    static inline auto
+    CompareHeight(const Dimension& lhs, const Dimension& rhs) -> int {
       if(lhs.height() < rhs.height()) {
         return -1;
       } else if(lhs.height() > rhs.height()) {
@@ -43,9 +43,9 @@ namespace prt {
       return 0;
     }
 
-    static inline int
-    Compare(const Dimension& lhs, const Dimension& rhs) {
-      int result;
+    static inline auto
+    Compare(const Dimension& lhs, const Dimension& rhs) -> int {
+      int result = 0;
       if((result = CompareArea(lhs, rhs)) != 0)
         return result;
       if((result = CompareWidth(lhs, rhs)) != 0)
@@ -54,7 +54,7 @@ namespace prt {
         return result;
       return 0;
     }
-  protected:
+  private:
     RawDimension data_;
   public:
     Dimension() = default;
@@ -66,53 +66,55 @@ namespace prt {
     }
     explicit Dimension(const std::string& value);
     Dimension(const Dimension& rhs) = default;
+    Dimension(const Dimension&& rhs) = delete;
     ~Dimension() = default;
 
-    inline const RawDimension& data() const {
+    inline auto data() const -> const RawDimension& {
       return data_;
     }
 
-    int32_t& width() {
+    auto width() -> int32_t& {
       return data_[kWidthComponent];
     }
 
-    const int32_t& width() const {
+    auto width() const -> const int32_t& {
       return data_[kWidthComponent];
     }
 
-    int32_t& height() {
+    auto height() -> int32_t& {
       return data_[kHeightComponent];
     }
 
-    const int32_t& height() const {
+    auto height() const -> const int32_t& {
       return data_[kHeightComponent];
     }
 
-    Dimension& operator=(const Dimension& rhs) = default;
+    auto operator=(Dimension&& rhs) -> Dimension& = default;
+    auto operator=(const Dimension& rhs) -> Dimension& = default;
 
     operator std::string() const {
       return fmt::format("{0:d}x{1:d}", width(), height());
     }
 
-    bool operator==(const Dimension& rhs) const {
+    auto operator==(const Dimension& rhs) const -> bool {
       return width() == rhs.width()
           && height() == rhs.height();
     }
 
-    bool operator!=(const Dimension& rhs) const {
+    auto operator!=(const Dimension& rhs) const -> bool {
       return width() != rhs.width()
           || height() != rhs.height();
     }
 
-    bool operator<(const Dimension& rhs) const {
+    auto operator<(const Dimension& rhs) const -> bool {
       return Compare(*this, rhs) < 0;
     }
 
-    bool operator>(const Dimension& rhs) const {
+    auto operator>(const Dimension& rhs) const -> bool {
       return Compare(*this, rhs) > 0;
     }
 
-    friend std::ostream& operator<<(std::ostream& stream, const Dimension& rhs) {
+    friend auto operator<<(std::ostream& stream, const Dimension& rhs) -> std::ostream& {
       return stream << rhs.width() << "x" << rhs.height();
     }
   };
@@ -120,6 +122,7 @@ namespace prt {
   static constexpr const uint64_t kDefaultDimensionParserBufferSize = 4096;
   static constexpr const uint64_t kDefaultDimensionTokenBufferSize = 1024;
   class DimensionParser : public ParserTemplate<kDefaultDimensionParserBufferSize, kDefaultDimensionTokenBufferSize> {
+    DEFINE_NON_COPYABLE_TYPE(DimensionParser);
   public:
     struct Config {
       bool (*OnParseStarted)(const DimensionParser*);
@@ -128,40 +131,40 @@ namespace prt {
       bool (*OnParseFinished)(const DimensionParser*);
       bool (*OnParseError)(const DimensionParser*);
     };
-  protected:
+  private:
     Config config_;
 
-    bool OnParseStarted() const {
+    auto OnParseStarted() const -> bool {
       return config_.OnParseStarted
            ? config_.OnParseStarted(this)
            : true;
     }
 
-    bool OnParseWidth(const int32_t value) const {
+    auto OnParseWidth(const int32_t value) const -> bool {
       return config_.OnParseWidth
            ? config_.OnParseWidth(this, value)
            : true;
     }
 
-    bool OnParseHeight(const int32_t value) const {
+    auto OnParseHeight(const int32_t value) const -> bool {
       return config_.OnParseHeight
            ? config_.OnParseHeight(this, value)
            : true;
     }
 
-    bool OnParseFinished() const {
+    auto OnParseFinished() const -> bool {
       return config_.OnParseFinished
            ? config_.OnParseFinished(this)
            : true;
     }
 
-    bool OnParseError() const {
+    auto OnParseError() const -> bool {
       return config_.OnParseError
            ? config_.OnParseError(this)
            : false;
     }
 
-    bool ParseInt32(int32_t* value);
+    auto ParseInt32(int32_t* value) -> bool;
   public:
     DimensionParser(const Config& config, const std::string& value, void* data = nullptr):
       ParserTemplate(data, value),
@@ -172,7 +175,7 @@ namespace prt {
       config_() {
     }
     ~DimensionParser() override = default;
-    virtual bool ParseDimension();
+    virtual auto ParseDimension() -> bool;
   };
 }
 

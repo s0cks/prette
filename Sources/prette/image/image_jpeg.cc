@@ -12,17 +12,16 @@ namespace prt::img::jpeg {
   GetFormat(const int channels) {
     switch(channels) {
       case 4:
-        return kRGBA;
+        return img::kRGBAFormat;
       case 3:
       default:
-        return kRGB;
+        return img::kRGBFormat;
     }
   }
 
   Image* Decode(FILE* file) {
     PRT_ASSERT(file);
     ImageFormat format;
-    ImageSize size;
 
     unsigned long data_size;
     int channels;
@@ -35,13 +34,13 @@ namespace prt::img::jpeg {
     jpeg_read_header(&info, TRUE);
     jpeg_start_decompress(&info);
     channels = info.num_components;
-    size[0] = info.output_width;
-    size[1] = info.output_height;
+    const auto width = info.output_width;
+    const auto height = info.output_height;
+    const auto resolution = Resolution(width, height);
     format = GetFormat(channels);
-    const auto total_size = size[0] * size[1] * channels;
-    const auto image = Image::New(format, size, total_size);
-    while (info.output_scanline < info.output_height) {
-      const auto row_ptr = &image->data()[channels * info.output_width * info.output_scanline];
+    const auto image = Image::New(format, resolution);
+    while (info.output_scanline < height) {
+      const auto row_ptr = &image->data()[channels * width * info.output_scanline];
       jpeg_read_scanlines(&info, (JSAMPARRAY)&row_ptr, 1);
     }
     jpeg_finish_decompress(&info);

@@ -6,10 +6,10 @@
 
 namespace prt {
   namespace rgb {
-    typedef glm::u8vec4 Color;
+    using Color = glm::u8vec4;
 
-    static inline constexpr uint8_t
-    GetAlphaComponent(const uint32_t& rhs) {
+    static inline constexpr auto
+    GetAlphaComponent(const uint32_t& rhs) -> uint8_t {
       return (rhs >> 24) & 0xFF;
     }
 
@@ -28,8 +28,8 @@ namespace prt {
       return rhs & 0xFF;
     }
 
-    static inline constexpr const Color
-    Hex(const uint32_t value) {
+    static inline constexpr auto
+    Hex(const uint32_t value) -> Color {
       return {
         GetRedComponent(value),
         GetGreenComponent(value),
@@ -45,8 +45,8 @@ namespace prt {
       kAlphaComponent = 3,
     };
 
-    static inline std::ostream&
-    operator<<(std::ostream& stream, const ColorComponent& rhs) {
+    static inline auto
+    operator<<(std::ostream& stream, const ColorComponent& rhs) -> std::ostream& {
       switch(rhs) {
         case kRedComponent: return stream << "Red (" << static_cast<int>(rhs) << ")";
         case kGreenComponent: return stream << "Green (" << static_cast<int>(rhs) << ")";
@@ -61,8 +61,8 @@ namespace prt {
     static constexpr const Color kGreen     = Hex(0x00FF00);
     static constexpr const Color kBlue      = Hex(0x0000FF);
 
-    static inline constexpr Color
-    operator&(const Color& lhs, const Color& rhs) {
+    static inline constexpr auto
+    operator&(const Color& lhs, const Color& rhs) -> Color {
       return Color {
         lhs[kRedComponent] & rhs[kRedComponent],
         lhs[kGreenComponent] & rhs[kGreenComponent],
@@ -71,8 +71,8 @@ namespace prt {
       };
     }
 
-    static inline constexpr Color
-    operator&(const Color& lhs, const uint32_t& rhs) {
+    static inline constexpr auto
+    operator&(const Color& lhs, const uint32_t& rhs) -> Color {
       return Color {
         lhs[kRedComponent] & GetRedComponent(rhs),
         lhs[kGreenComponent] & GetGreenComponent(rhs),
@@ -81,8 +81,8 @@ namespace prt {
       };
     }
 
-    static inline std::ostream&
-    operator<<(std::ostream& stream, const Color& rhs) {
+    static inline auto
+    operator<<(std::ostream& stream, const Color& rhs) -> std::ostream& {
       stream << "rgb::Color(";
       stream << "r=" << rhs.r << ", ";
       stream << "g=" << rhs.g << ", ";

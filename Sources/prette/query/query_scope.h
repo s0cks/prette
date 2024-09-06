@@ -21,6 +21,13 @@ namespace prt::query {
     QueryId GetQueryId() const;
     Target GetQueryTarget() const;
   };
+
+  class QueryTimeScope : public QueryScope {
+  public:
+    explicit QueryTimeScope(Query* query);
+    ~QueryTimeScope() override = default;
+    uword GetTimestamp() const;
+  };
 }
 
 #endif //PRT_QUERY_SCOPE_H

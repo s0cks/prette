@@ -7,19 +7,30 @@
 namespace prt {
   template<typename T>
   class Counter {
-  protected:
+  private:
     RelaxedAtomic<T> value_;
   public:
     explicit Counter(const T init_value = 0):
       value_(init_value) {
     }
+    Counter(const Counter<T>&& rhs) = default;
     Counter(const Counter<T>& rhs) = default;
     virtual ~Counter() = default;
 
-    Counter<T>& operator=(const Counter<T>& rhs) = default;
+    auto value() const -> T {
+      return (T) value_;
+    }
+
+    auto operator=(Counter<T>&& rhs) -> Counter<T>& = default;
+    auto operator=(const Counter<T>& rhs) -> Counter<T>& = default;
 
     operator T () const {
-      return (T) value_;
+      return value();
+    }
+
+    auto operator=(const T& rhs) -> Counter<T>& {
+      value_ = rhs;
+      return *this;    
     }
 
     void operator++() {
@@ -38,19 +49,19 @@ namespace prt {
       value_ -= rhs;
     }
 
-    friend std::ostream& operator<<(std::ostream& stream, const Counter<T>& rhs) {
+    friend auto operator<<(std::ostream& stream, const Counter<T>& rhs) -> std::ostream& {
       return stream << (T)rhs;
     }
   };
 
   template<typename T>
   class PerSecondCounter : public Counter<T> {
-  protected:
+  private:
     uint64_t last_second_;
     T per_second_;
 
-    inline bool
-    SecondHasElapsed(const uint64_t ts) {
+    inline auto
+    SecondHasElapsed(const uint64_t ts) -> bool {
       return (ts - last_second_) >= NSEC_PER_SEC;
     }
   public:
@@ -59,27 +70,29 @@ namespace prt {
       last_second_(uv_hrtime()),
       per_second_(0) {
     }
+    PerSecondCounter(const PerSecondCounter<T>&& rhs) = default;
+    PerSecondCounter(const PerSecondCounter<T>& rhs) = default;
     ~PerSecondCounter() override = default;
 
-    T per_sec() const {
+    auto per_sec() const -> T {
       return per_second_;
     }
 
     void Increment(const T value = 1, const uint64_t ts = uv_hrtime()) {
-      Counter<T>::value_ += value;
+      Counter<T>::operator+=(value);
       if(SecondHasElapsed(ts)) {
-        per_second_ = (T) Counter<T>::value_;
+        per_second_ = (T) Counter<T>::value();
         last_second_ = ts;
-        Counter<T>::value_ = 0;
+        Counter<T>::operator=(0);
       }
     }
 
     void Decrement(const T value = 1, const uint64_t ts = uv_hrtime()) {
-      Counter<T>::value_ -= value;
+      Counter<T>::operator-=(value);
       if(SecondHasElapsed(ts)) {
-        per_second_ = (T) Counter<T>::value_;
+        per_second_ = (T) Counter<T>::value();
         last_second_ = ts;
-        Counter<T>::value_ = 0;
+        Counter<T>::operator=(0);
       }
     }
 
@@ -100,12 +113,15 @@ namespace prt {
     }
 
     operator T () const {
-      return (T) Counter<T>::value_;
+      return (T) Counter<T>::value();
     }
 
-    friend std::ostream& operator<<(std::ostream& stream, const PerSecondCounter<T>& rhs) {
+    friend auto operator<<(std::ostream& stream, const PerSecondCounter<T>& rhs) -> std::ostream& {
       return stream << (T)rhs << " (" << rhs.per_sec() << "/s)";
     }
+
+    auto operator=(const PerSecondCounter<T>& rhs) -> PerSecondCounter<T>& = default;
+    auto operator=(PerSecondCounter<T>&& rhs) -> PerSecondCounter<T>& = default;
   };
 }
 

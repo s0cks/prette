@@ -25,7 +25,7 @@ namespace prt {
         kDefaultMode = kCounterClockwiseMode,
       };
 
-      friend std::ostream& operator<<(std::ostream& stream, const Mode& rhs) {
+      friend auto operator<<(std::ostream& stream, const Mode& rhs) -> std::ostream& {
         switch(rhs) {
 #define DEFINE_TO_STRING(Name, GlValue)                                                                 \
           case k##Name##Mode: return stream << #Name << " (" << #GlValue << ":" << (GlValue) << ")";
@@ -35,9 +35,9 @@ namespace prt {
         }
       }
 
-      static inline Mode
-      GetCurrentMode() {
-        GLint mode;
+      static inline auto
+      GetCurrentMode() -> Mode {
+        GLint mode{};
         glGetIntegerv(GL_CULL_FACE_MODE, &mode);
         CHECK_GL;
         return static_cast<Mode>(mode);
@@ -57,7 +57,7 @@ namespace prt {
         kDefaultFace = kBackFace,
       };
 
-      friend std::ostream& operator<<(std::ostream& stream, const Face& rhs) {
+      friend auto operator<<(std::ostream& stream, const Face& rhs) -> std::ostream& {
         switch(rhs) {
 #define DEFINE_TO_STRING(Name, GlValue)                                                                   \
           case k##Name##Face: return stream << #Name << " (" << #GlValue << ":" << (GlValue) << ")";
@@ -67,9 +67,9 @@ namespace prt {
         }
       }
 
-      static inline Face
-      GetCurrentFace() {
-        GLint face;
+      static inline auto
+      GetCurrentFace() -> Face {
+        GLint face{};
         glGetIntegerv(GL_FRONT_FACE, &face);
         CHECK_GL;
         return static_cast<Face>(face);
@@ -80,7 +80,7 @@ namespace prt {
         glCullFace(rhs);
         CHECK_GL;
       }
-    protected:
+    private:
       Mode old_mode_;
       Mode new_mode_;
       Face old_face_;
@@ -110,24 +110,24 @@ namespace prt {
         }
       }
 
-      Mode GetMode() const {
+      auto GetMode() const -> Mode {
         return new_mode_;
       }
 
-      Mode GetPreviousMode() const {
+      auto GetPreviousMode() const -> Mode {
         return old_mode_;
       }
 
-      Face GetFace() const {
+      auto GetFace() const -> Face {
         return new_face_;
       }
 
-      Face GetPreviousFace() const {
+      auto GetPreviousFace() const -> Face {
         return old_face_;
       }
     };
-    typedef CullFaceCapabilityScope<false> CullFaceScope;
-    typedef CullFaceCapabilityScope<true> InvertedCullFaceScope;
+    using CullFaceScope = CullFaceCapabilityScope<false>;
+    using InvertedCullFaceScope = CullFaceCapabilityScope<true>;
   }
   using gfx::CullFaceScope;
   using gfx::InvertedCullFaceScope;

@@ -19,8 +19,8 @@ namespace prt {
     LOG_IF(ERROR, removed != 1) << "failed to deregister: " << cls->ToString();
   }
 
-  static inline ClassId
-  GetNextClassId() {
+  static inline auto
+  GetNextClassId() -> ClassId {
     return static_cast<ClassId>(current_id_ += 1);
   }
 
@@ -41,14 +41,14 @@ namespace prt {
   }
 
   Attribute::~Attribute() {
-    
+    // do nothing 
   }
 
-  uword Attribute::GetAllocationSize() const {
+  auto Attribute::GetAllocationSize() const -> uword {
     return GetSize() * GetType()->GetAllocationSize();
   }
 
-  int Attribute::Compare(Attribute* rhs) const {
+  auto Attribute::Compare(Attribute* rhs) const -> int {
     if(GetIndex() < rhs->GetIndex()) {
       return -1;
     } else if(GetIndex() > rhs->GetIndex()) {
@@ -64,7 +64,7 @@ namespace prt {
     return 0;
   }
 
-  bool Attribute::Equals(Attribute* rhs) const {
+  auto Attribute::Equals(Attribute* rhs) const -> bool {
     return GetIndex() == rhs->GetIndex()
         && GetSize() == rhs->GetSize()
         && GetType() == rhs->GetType()
@@ -73,7 +73,7 @@ namespace prt {
         && GetOwner()->Equals(rhs->GetOwner());
   }
 
-  std::string Attribute::ToString() const {
+  auto Attribute::ToString() const -> std::string {
     using units::data::byte_t;
     std::stringstream ss;
     ss << "vertex::Attribute(";
@@ -98,10 +98,10 @@ namespace prt {
     Deregister(this);
   }
 
-  Attribute* Class::CreateAttribute(const std::string& name,
+  auto Class::CreateAttribute(const std::string& name,
                                     Class* type,
                                     const uword size,
-                                    const bool normalized) {
+                                    const bool normalized) -> Attribute* {
     const auto index = attrs_.size();
     const auto attr = new Attribute(this, name, index, size, type, normalized);
     PRT_ASSERT(attr);
@@ -110,7 +110,7 @@ namespace prt {
     return attr;
   }
 
-  uword Class::CalculateAllocationSize() const {
+  auto Class::CalculateAllocationSize() const -> uword {
     PRT_ASSERT(!IsPrimative());
     uword total_size = 0;
     for(const auto& attr : attrs_)
@@ -118,7 +118,7 @@ namespace prt {
     return total_size;
   }
 
-  uword Class::GetAllocationSize() const {
+  auto Class::GetAllocationSize() const -> uword {
     switch(GetId()) {
       case kByteClassId:
       case kUnsignedByteClassId:
@@ -136,7 +136,7 @@ namespace prt {
     }
   }
 
-  GLenum Class::GetGlType() const {
+  auto Class::GetGlType() const -> GLenum {
     switch(GetId()) {
       case kByteClassId:
         return GL_BYTE;
@@ -157,19 +157,19 @@ namespace prt {
     }
   }
 
-  bool Class::IsPrimative() const {
+  auto Class::IsPrimative() const -> bool {
     switch(GetId()) {
       default:
         return false;
     }
   }
 
-  bool Class::Equals(const Class* rhs) const {
+  auto Class::Equals(const Class* rhs) const -> bool {
     return rhs
         && GetId() == rhs->GetId();
   }
 
-  bool Class::VisitAllAttributes(AttributeVisitor* vis) const {
+  auto Class::VisitAllAttributes(AttributeVisitor* vis) const -> bool {
     PRT_ASSERT(vis);
     for(const auto& attr : attrs_) {
       if(!attr->Accept(vis))
@@ -178,7 +178,7 @@ namespace prt {
     return true;
   }
 
-  std::string Class::ToString() const {
+  auto Class::ToString() const -> std::string {
     std::stringstream ss;
     ss << "Class(";
     ss << "id=" << GetId() << ", ";
@@ -213,7 +213,7 @@ namespace prt {
     kFloat = New(kFloatClassId, "Float");
   }
 
-  Class* Class::New(const std::string& name) {
+  auto Class::New(const std::string& name) -> Class* {
     return New(GetNextClassId(), name);
   }
 }

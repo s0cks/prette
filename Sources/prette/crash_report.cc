@@ -6,8 +6,8 @@ namespace prt {
   using backward::Printer;
   using backward::StackTrace;
 
-  static inline std::string
-  What(const std::exception_ptr& cause = std::current_exception()) {
+  static inline auto
+  What(const std::exception_ptr& cause = std::current_exception()) -> std::string {
     if(!cause)
       throw std::bad_exception();
 

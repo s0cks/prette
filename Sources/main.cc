@@ -1,9 +1,8 @@
 #include <cstdlib>
 #include <glog/logging.h>
 
-#include <time.h>
-#include <cstdlib>
 #include <uv.h>
+#include <cstdlib>
 #include <stdexcept>
 #include <exception>
 
@@ -13,53 +12,17 @@
 
 #define NK_GLFW_GL3_IMPLEMENTATION
 
-#include "prette/rx.h"
-#include "prette/prette.h"
-#include "prette/flags.h"
-#include "prette/ibo/ibo.h"
-#include "prette/font/font.h"
-#include "prette/os_thread.h"
-#include "prette/mouse/mouse.h"
-#include "prette/entity/entity.h"
-#include "prette/window/window.h"
-#include "prette/engine/engine.h"
-#include "prette/shader/shader.h"
-#include "prette/render/renderer.h"
-#include "prette/resource/resource.h"
-#include "prette/keyboard/keyboard.h"
-#include "prette/material/material.h"
-
-#include "prette/class.h"
-#include "prette/gfx_debug.h"
-
-#include "prette/gui/gui_window.h"
-
-#include "prette/fbo/fbo.h"
-#include "prette/fbo/fbo_builder.h"
-#include "prette/render/render_settings.h"
-
-#include "prette/ibo/ibo_scope.h"
-#include "prette/ibo/ibo_builder.h"
-
-#include "prette/vbo/vbo_scope.h"
-#include "prette/vao/vao_scope.h"
-#include "prette/vbo/vbo_builder.h"
-
-#include "prette/os_thread.h"
-
-#include "prette/signals.h"
-#include "prette/mouse/cursor.h"
-
-#include "prette/vbo/vbo_scope.h"
-
 #include "prette/runtime.h"
+#include "prette/mouse/mouse.h"
+#include "prette/gui/gui_window.h"
 #include "prette/gui/gui_context.h"
+#include "prette/keyboard/keyboard.h"
 
 using namespace prt;
 
 template<class Event, const google::LogSeverity Severity = google::INFO>
-static inline std::function<void(Event*)>
-LogEvent() {
+static inline auto
+LogEvent() -> std::function<void(Event*)> {
   return [](Event* event) {
     LOG_AT_LEVEL(Severity) << event->ToString();
   };
@@ -108,27 +71,19 @@ public:
   ~TestWindow() override = default;
 };
 
-static inline void
-OnUnhandledException() {
-  CrashReportCause cause(std::current_exception());
-  CrashReport report(cause);
-  report.Print(std::cerr);
-}
-
-
-static inline std::ostream& 
-operator<<(std::ostream& s, const google::LogSeverity& severity) {
-  switch(severity) {
-    case google::INFO:
-      return s << termcolor::white << "I";
-    case google::WARNING:
-      return s << termcolor::yellow << "W";
-    case google::ERROR:
-      return s << termcolor::red << "E";
-    case google::FATAL:
-      return s << termcolor::bright_red << "F";
-  }
-}
+// static inline std::ostream& 
+// operator<<(std::ostream& s, const google::LogSeverity& severity) {
+//   switch(severity) {
+//     case google::INFO:
+//       return s << termcolor::white << "I";
+//     case google::WARNING:
+//       return s << termcolor::yellow << "W";
+//     case google::ERROR:
+//       return s << termcolor::red << "E";
+//     case google::FATAL:
+//       return s << termcolor::bright_red << "F";
+//   }
+// }
 
 // void MyPrefixFormatter(std::ostream& s, const google::LogMessage& m, void* /*data*/) {
 //   using namespace std;
@@ -148,28 +103,8 @@ operator<<(std::ostream& s, const google::LogSeverity& severity) {
 //     << m.basename() << ':' << m.line() << "]";
 // }
 
-int main(int argc, char** argv) {  
-  srand(time(NULL));
-
-  // ::google::InstallPrefixFormatter(&MyPrefixFormatter);
-  ::google::InitGoogleLogging(argv[0]);
-  ::google::ParseCommandLineFlags(&argc, &argv, true);
-  InitSignalHandlers();
-  std::set_terminate(OnUnhandledException);
-  LOG_IF(FATAL, !SetCurrentThreadName("main")) << "failed to set main thread name.";
-  gfx::Init();
-  engine::InitEngine();
-  window::InitWindows();
-  mouse::InitMouse();
-  keyboard::InitKeyboard();
-  render::InitRenderer();
-  // init classes
-  Class::Init();
-  gui::Vertex::InitClass();
-
-#ifdef PRT_DEBUG
-  PrintRuntimeInfo();
-#endif //PRT_DEBUG
+auto main(int argc, char** argv) -> int {  
+  Runtime::Init(argc, argv);
 
   uword counter = 0;
   keyboard::OnKeyPressedEvent()
@@ -184,9 +119,5 @@ int main(int argc, char** argv) {
     .subscribe([](keyboard::KeyPressedEvent* e) {
       PrintRuntimeInfo();
     });
-
-  const auto engine = engine::GetEngine();
-  PRT_ASSERT(engine);
-  engine->Run();
-  return EXIT_SUCCESS;
+  return Runtime::Run();
 }

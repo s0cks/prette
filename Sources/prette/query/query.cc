@@ -19,7 +19,7 @@ namespace prt::query {
   }
 
   void Query::BeginQuery(const Target target, const QueryId id) {
-    PRT_ASSERT(IsValidQueryId(id));
+    PRT_ASSERT(id);
     glBeginQuery(target, id);
     CHECK_GL;
   }
@@ -31,7 +31,13 @@ namespace prt::query {
 
   void Query::DeleteQueries(QueryId* ids, const int num_ids) {
     PRT_ASSERT(num_ids >= 1);
-    glDeleteQueries(num_ids, ids);
+    glDeleteQueries(num_ids, (const GLuint*)ids);
+    CHECK_GL;
+  }
+
+  void Query::CounterQuery(const QueryId id) {
+    PRT_ASSERT(id);
+    glQueryCounter(id, GL_TIMESTAMP);
     CHECK_GL;
   }
 
@@ -66,7 +72,7 @@ namespace prt::query {
   Query::Query(const QueryId id, const Target target):
     id_(id),
     target_(target) {
-    PRT_ASSERT(IsValidQueryId(id));
+    PRT_ASSERT(id);
     Register(this);
   }
 
@@ -106,5 +112,12 @@ namespace prt::query {
         return false;
     }
     return true;
+  }
+
+  Query* Query::New(const QueryId id, const Target target) {
+    PRT_ASSERT(id);
+    const auto q = new Query(id, target);
+    PRT_ASSERT(q);
+    return q;
   }
 }

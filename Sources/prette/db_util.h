@@ -5,13 +5,13 @@
 #include <leveldb/db.h>
 
 namespace prt::db {
-  static inline std::ostream&
-  operator<<(std::ostream& stream, const leveldb::Status& rhs) {
+  static inline auto
+  operator<<(std::ostream& stream, const leveldb::Status& rhs) -> std::ostream& {
     return stream << rhs.ToString();
   }
 
-  static inline leveldb::Status
-  OpenWith(const std::string& path, const leveldb::Options& options, leveldb::DB** result) {
+  static inline auto
+  OpenWith(const std::string& path, const leveldb::Options& options, leveldb::DB** result) -> leveldb::Status {
     return leveldb::DB::Open(options, path, result);
   }
 

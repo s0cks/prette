@@ -43,11 +43,11 @@ namespace prt::img::png {
     png_get_IHDR(png, info, &width, &height, &bit_depth, &color_type, NULL, NULL, NULL);
     switch(color_type) {
       case PNG_COLOR_TYPE_RGBA:
-        format = kRGBA;
+        format = kRGBAFormat;
         break;
       case PNG_COLOR_TYPE_RGB:
       case PNG_COLOR_TYPE_GRAY:
-        format = kRGB;
+        format = kRGBFormat;
         break;
       default:
         DLOG(ERROR) << "unknown color type: " << color_type;
@@ -74,7 +74,8 @@ namespace prt::img::png {
 
     const auto row_bytes = png_get_rowbytes(png, info);
     const auto total_size = row_bytes * height;
-    const auto image = Image::New(format, ImageSize(width, height), total_size);
+    const auto resolution = Resolution(width, height);
+    const auto image = Image::New(format, resolution);
     png_bytepp rows = png_get_rows(png, info);
     for(auto i = 0; i < height; i++) {
       memcpy(image->data() + (row_bytes * (height - 1 - i)), rows[i], row_bytes);

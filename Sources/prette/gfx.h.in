@@ -60,7 +60,7 @@ namespace prt::gfx {
 
   static inline semver::version
   GetGlslVersion() {
-    return semver::version::parse(GetGlslVersionString());
+    return semver::version::parse(GetGlslVersionString(), false);
   }
 
 #ifndef OS_IS_OSX

@@ -44,25 +44,26 @@ namespace prt {
     }
     ~CrashReportCause() = default;
 
-    const std::exception_ptr& GetException() const {
+    auto GetException() const -> const std::exception_ptr& {
       return cause_;
     }
 
-    const StackTrace& GetTrace() const {
+    auto GetTrace() const -> const StackTrace& {
       return trace_;
     }
 
-    int GetDepth() const {
+    auto GetDepth() const -> int {
       return depth_;
     }
 
-    int GetOffset() const {
+    auto GetOffset() const -> int {
       return offset_;
     }
 
-    void operator=(const std::exception_ptr& cause) {
+    auto operator=(const std::exception_ptr& cause) -> CrashReportCause& {
       cause_ = cause;
       LoadTrace();
+      return *this;
     }
 
     explicit operator bool() const {
@@ -85,7 +86,7 @@ namespace prt {
       cause_(cause) {
     }
 
-    ColorMode GetColorMode() const {
+    auto GetColorMode() const -> ColorMode {
       return color_mode_;
     }
 
