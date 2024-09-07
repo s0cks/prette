@@ -103,7 +103,7 @@ public:
 //     << m.basename() << ':' << m.line() << "]";
 // }
 
-auto main(int argc, char** argv) -> int {  
+auto main(int argc, char** argv) -> int {
   Runtime::Init(argc, argv);
 
   uword counter = 0;

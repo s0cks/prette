@@ -4,12 +4,11 @@
       "type": "cppbuild",
       "label": "C/C++: cpp build active file",
       "command": "/usr/bin/cmake",
-      "args": [ ],
+      "args": [],
       "options": {
         "cwd": "${fileDirname}"
       },
-      "problemMatcher": [
-      ],
+      "problemMatcher": [],
       "group": {
         "kind": "build",
         "isDefault": true

@@ -18,7 +18,6 @@ namespace prt::program {
       LOG(ERROR) << "failed to attach: " << shader->ToString();
       return false;
     }
-    DLOG(INFO) << "attached: " << shader->ToString();
     return true;
   }
 

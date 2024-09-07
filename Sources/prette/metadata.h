@@ -10,10 +10,11 @@ namespace prt {
   }
 
   class Metadata {
-    DEFINE_DEFAULT_COPYABLE_TYPE(Metadata);
     friend class BuilderBase;
+    
     template<typename State, class D>
     friend class json::ReaderHandlerTemplate;
+    DEFINE_DEFAULT_COPYABLE_TYPE(Metadata);
   protected:
     std::string name_;
     TagSet tags_;

@@ -10,7 +10,8 @@ namespace prt::shader {
   auto GeometryShader::ToString() const -> std::string {
     std::stringstream ss;
     ss << "GeometryShader(";
-    ss << "id=" << GetId();
+    ss << "id=" << GetId() << ", ";
+    ss << "meta=" << GetMeta();
     ss << ")";
     return ss.str();
   }

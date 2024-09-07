@@ -107,7 +107,8 @@ namespace prt::shader {
   auto VertexShader::ToString() const -> std::string {
     std::stringstream ss;
     ss << "VertexShader(";
-    ss << "id=" << GetId();
+    ss << "id=" << GetId() << ", ";
+    ss << "meta=" << GetMeta();
     ss << ")";
     return ss.str();
   }

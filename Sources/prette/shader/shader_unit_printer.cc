@@ -11,15 +11,13 @@ namespace prt::shader {
 
   void ShaderUnitPrinter::PrintShaderUnit(ShaderUnit* unit) {
     PRT_ASSERT(unit);
-    __ << unit->GetType() << " Shader Unit: ";
     const auto& meta = unit->GetMeta();
     __ << "Name: " << meta.GetName();
+    __ << "Type: " << unit->GetType();
     __ << "Hash: " << unit->GetHash();
     __ << "Sources (" << unit->GetSize() << "):";
     Indent();
-    {
-      unit->Accept(this);
-    }
+    unit->Accept(this);
     Deindent();
   }
 #undef __

@@ -106,7 +106,6 @@ namespace prt::shader {
     const auto ptr = malloc(total_size);
     memset(ptr, 0, sizeof(ptr));
     LOG_IF(FATAL, !ptr) << "failed to allocate ShaderCode of " << byte_t(total_size) << " size."; // NOLINT(cppcoreguidelines-narrowing-conversions)
-    DLOG(INFO) << "allocated " << byte_t(total_size) << " for ShaderCode."; // NOLINT(cppcoreguidelines-narrowing-conversions)
     return ptr;
   }
 }

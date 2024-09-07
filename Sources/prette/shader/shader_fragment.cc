@@ -14,7 +14,8 @@ namespace prt::shader {
   auto FragmentShader::ToString() const -> std::string {
     std::stringstream ss;
     ss << "FragmentShader(";
-    ss << "id=" << GetId();
+    ss << "id=" << GetId() << ", ";
+    ss << "meta=" << GetMeta();
     ss << ")";
     return ss.str();
   }

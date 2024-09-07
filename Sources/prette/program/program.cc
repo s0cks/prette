@@ -161,8 +161,7 @@ namespace prt::program {
     }
     PRT_ASSERT(uri.HasScheme("file"));
     PRT_ASSERT(uri.HasExtension("json"));
-    DLOG(INFO) << "getting program from: " << uri;
-
+    
     ProgramReaderHandler handler;
     const auto result = json::ParseJson<ProgramReaderHandler>(uri, handler);
     if(!result) {

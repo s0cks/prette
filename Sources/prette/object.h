@@ -2,16 +2,18 @@
 #define PRT_OBJECT_H
 
 #include <string>
+#include <utility>
 #include "prette/metadata.h"
 
 namespace prt {
   class Object {
+    DEFINE_NON_COPYABLE_TYPE(Object);
+  private:
+    Metadata meta_{};
   protected:
-    Metadata meta_;
-
     Object() = default;
-    explicit Object(const Metadata& meta):
-      meta_(meta) {  
+    explicit Object(Metadata meta):
+      meta_(std::move(meta)) {  
     }
 
     void SetMeta(const Metadata& rhs) {
@@ -20,11 +22,11 @@ namespace prt {
   public:
     virtual ~Object() = default;
 
-    const Metadata& GetMeta() const {
+    auto GetMeta() const -> const Metadata& {
       return meta_;
     }
 
-    virtual std::string ToString() const = 0;
+    virtual auto ToString() const -> std::string = 0;
   };
 }
 

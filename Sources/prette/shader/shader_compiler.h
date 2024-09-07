@@ -9,6 +9,7 @@
 #include "prette/counter.h"
 #include "prette/shader/shader_unit.h"
 #include "prette/shader/shader_events.h"
+#include "prette/shader/shader_compile_status.h"
 
 namespace prt::shader {
   using ShaderCompilerEventObservable = rx::observable<ShaderCompilerEvent*>;
@@ -73,6 +74,11 @@ namespace prt::shader {
     auto OnEvent() const -> ShaderCompilerEventObservable override {
       return events_.get_observable();
     }
+
+#ifdef PRT_DEBUG
+    void PrintCompilationStatus(ShaderUnit* unit, const ShaderCompileStatus& status, const google::LogSeverity severity, const char* file, const int line);
+    void PrintStats(const google::LogSeverity severity, const char* file, const int line);
+#endif //PRT_DEBUG
   private:
     static inline auto
     FormatBasicUri(const uri::basic_uri& uri) -> uri::Uri {

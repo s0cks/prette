@@ -7,59 +7,76 @@
 namespace prt {
   template<typename T>
   class ThreadLocal {
-  protected:
-    ThreadLocalKey key_;
+    DEFINE_NON_COPYABLE_TYPE(ThreadLocal<T>);
+  private:
+    ThreadLocalKey key_{};
   public:
-    ThreadLocal():
-      key_() {
-        LOG_IF(FATAL, !InitializeThreadLocal(key_));  
+    ThreadLocal() {
+      LOG_IF(FATAL, !InitializeThreadLocal(key_));
     }
     virtual ~ThreadLocal() = default;
 
-    bool Set(T* value) {
-      return SetCurrentThreadLocal(key_, reinterpret_cast<void*>(value));
+    auto GetKey() const -> const ThreadLocalKey& {
+      return key_;
     }
 
-    T* Get() const {
-      return reinterpret_cast<T*>(GetCurrentThreadLocal(key_));
+    virtual auto Set(T* value) const -> bool {
+      return SetCurrentThreadLocal(GetKey(), (void*) value);
+    }
+
+    virtual auto Get() const -> T* {
+      return (T*) GetCurrentThreadLocal(GetKey());
+    }
+
+    auto Has() const -> bool {
+      return Get() != nullptr;
     }
 
     operator bool () const {
-      return Get() != nullptr;
+      return Has();
+    }
+
+    friend auto operator<<(std::ostream& stream, const ThreadLocal<T>& rhs) -> std::ostream& {
+      return stream << *rhs.Get();
     }
   };
 
   template<typename T>
-  class LazyThreadLocal {
+  class LazyThreadLocal : public ThreadLocal<T> {
+    DEFINE_NON_COPYABLE_TYPE(LazyThreadLocal<T>);
   public:
-    typedef std::function<T*()> Supplier;
-  protected:
-    ThreadLocalKey local_;
+    using Supplier=std::function<T*()>;
+  private:
+    static inline auto
+    CreateDefaultSupplier() -> Supplier {
+      return []() {
+        return new T();
+      };
+    }
+  private:
     Supplier supplier_;
 
-    inline bool SetLocal(const T* value) const {
-      return SetCurrentThreadLocal(local_, (const void*) value);
-    }
-
-    inline T* GetLocal() const {
-      return (T*) GetCurrentThreadLocal(local_);
-    }
-
-    inline T* Supply() const {
+    inline auto Supply() const -> T* {
       return supplier_();
     }
   public:
-    explicit LazyThreadLocal(Supplier supplier):
-      local_(),
+    explicit LazyThreadLocal(const Supplier& supplier = CreateDefaultSupplier()):
       supplier_(supplier) {
     }
     virtual ~LazyThreadLocal() = default;
 
-    T* Get() const {
-      auto value = GetLocal();
-      if(value == nullptr)
-        SetLocal(value = Supply());
-      return value;
+    auto GetSupplier() const -> const Supplier& {
+      return supplier_;
+    }
+
+    auto Get() const -> T* override {
+      const auto value = ThreadLocal<T>::Get();
+      if(value)
+        return value;
+      const auto supplied = Supply();
+      LOG_IF(FATAL, !supplied) << "failed to supply value for ThreadLocal.";
+      LOG_IF(FATAL, !ThreadLocal<T>::Set(supplied)) << "failed to set ThreadLocal value.";
+      return supplied;
     }
   };
 }

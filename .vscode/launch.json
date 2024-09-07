@@ -11,7 +11,7 @@
       "environment": [],
       "externalConsole": false,
       "MIMode": "lldb"
-    }, // All Tests
+    },
     {
       "name": ".obj parser tests",
       "type": "cppdbg",
@@ -27,7 +27,7 @@
       "environment": [],
       "externalConsole": false,
       "MIMode": "lldb"
-    }, // .obj Tests
+    },
     {
       "name": "Class Tests",
       "type": "cppdbg",
@@ -43,7 +43,7 @@
       "environment": [],
       "externalConsole": false,
       "MIMode": "lldb"
-    }, // Class Tests
+    },
     {
       "name": "IBO Tests",
       "type": "cppdbg",
@@ -59,7 +59,7 @@
       "environment": [],
       "externalConsole": false,
       "MIMode": "lldb"
-    }, // .obj Tests
+    },
     {
       "name": "Keyboard Tests",
       "type": "cppdbg",
@@ -75,7 +75,7 @@
       "environment": [],
       "externalConsole": false,
       "MIMode": "lldb"
-    }, // .obj Tests
+    },
     {
       "name": "Resolution Tests",
       "type": "cppdbg",
@@ -91,7 +91,7 @@
       "environment": [],
       "externalConsole": false,
       "MIMode": "lldb"
-    }, // .Resolution Tests
+    },
     {
       "name": "File Resolver Tests",
       "type": "cppdbg",
@@ -107,7 +107,7 @@
       "environment": [],
       "externalConsole": false,
       "MIMode": "lldb"
-    }, // FileResolver Tests
+    },
     {
       "name": "rapidjson tests",
       "type": "cppdbg",
@@ -123,7 +123,7 @@
       "environment": [],
       "externalConsole": false,
       "MIMode": "lldb"
-    }, // .json Tests
+    },
     {
       "name": "Material Tests",
       "type": "cppdbg",
@@ -139,7 +139,7 @@
       "environment": [],
       "externalConsole": false,
       "MIMode": "lldb"
-    }, // Material Tests
+    },
     {
       "name": "Texture Tests",
       "type": "cppdbg",
@@ -155,7 +155,7 @@
       "environment": [],
       "externalConsole": false,
       "MIMode": "lldb"
-    }, // Texture Tests
+    },
     {
       "name": "Image Tests",
       "type": "cppdbg",
@@ -171,7 +171,7 @@
       "environment": [],
       "externalConsole": false,
       "MIMode": "lldb"
-    }, // Image Tests
+    },
     {
       "name": "Shader Tests",
       "type": "cppdbg",
@@ -187,7 +187,7 @@
       "environment": [],
       "externalConsole": false,
       "MIMode": "lldb"
-    }, // Shader Tests
+    },
     {
       "name": "Hash Tests",
       "type": "cppdbg",
@@ -203,7 +203,7 @@
       "environment": [],
       "externalConsole": false,
       "MIMode": "lldb"
-    }, // Hash Tests
+    },
     {
       "name": "uint256 Tests",
       "type": "cppdbg",
@@ -219,7 +219,7 @@
       "environment": [],
       "externalConsole": false,
       "MIMode": "lldb"
-    }, // uint256 Tests
+    },
     {
       "name": "Cursor Tests",
       "type": "cppdbg",
@@ -235,7 +235,7 @@
       "environment": [],
       "externalConsole": false,
       "MIMode": "lldb"
-    }, // Cursor Tests
+    },
     {
       "name": "Property Tests",
       "type": "cppdbg",
@@ -251,7 +251,7 @@
       "environment": [],
       "externalConsole": false,
       "MIMode": "lldb"
-    }, // Property Tests
+    },
     {
       "name": "Properties Tests",
       "type": "cppdbg",
@@ -267,7 +267,7 @@
       "environment": [],
       "externalConsole": false,
       "MIMode": "lldb"
-    }, // Properties Tests
+    },
     {
       "name": "Uri Tests",
       "type": "cppdbg",
@@ -283,7 +283,7 @@
       "environment": [],
       "externalConsole": false,
       "MIMode": "lldb"
-    }, // URI Tests
+    },
     {
       "name": "Color Tests",
       "type": "cppdbg",
@@ -299,7 +299,7 @@
       "environment": [],
       "externalConsole": false,
       "MIMode": "lldb"
-    }, // Color Tests
+    },
     {
       "name": "Program Tests",
       "type": "cppdbg",
@@ -315,7 +315,7 @@
       "environment": [],
       "externalConsole": false,
       "MIMode": "lldb"
-    }, // Program Tests
+    },
     {
       "name": "Vao Tests",
       "type": "cppdbg",
@@ -331,7 +331,7 @@
       "environment": [],
       "externalConsole": false,
       "MIMode": "lldb"
-    }, // Vao Tests
+    },
     {
       "name": "Resource tests",
       "type": "cppdbg",
@@ -347,7 +347,7 @@
       "environment": [],
       "externalConsole": false,
       "MIMode": "lldb"
-    }, // Resource Tests
+    },
     {
       "name": "Blend Tests",
       "type": "cppdbg",
@@ -363,7 +363,7 @@
       "environment": [],
       "externalConsole": false,
       "MIMode": "lldb"
-    }, // Blend Tests
+    },
     {
       "name": "Tag Tests",
       "type": "cppdbg",
@@ -379,7 +379,7 @@
       "environment": [],
       "externalConsole": false,
       "MIMode": "lldb"
-    }, // Blend Tests
+    },
     {
       "name": "Merkle Tests",
       "type": "cppdbg",
@@ -395,7 +395,7 @@
       "environment": [],
       "externalConsole": false,
       "MIMode": "lldb"
-    }, // Merkle Tests
+    },
     {
       "name": "Vbo Tests",
       "type": "cppdbg",
@@ -411,7 +411,7 @@
       "environment": [],
       "externalConsole": false,
       "MIMode": "lldb"
-    }, // Vbo Tests
+    },
     {
       "name": "minecraft-benchmarks",
       "type": "cppdbg",
@@ -428,7 +428,7 @@
       "environment": [],
       "externalConsole": false,
       "MIMode": "lldb"
-    }, // Benchmarks
+    },
     {
       "name": "prette",
       "type": "cppdbg",
@@ -454,6 +454,41 @@
           "text": "command source ~/.lldbinit"
         }
       ]
-    } // Client
+    },
+    {
+      "name": "prette (verbose)",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/Sources/prette-client",
+      "args": [
+        "--resources",
+        "${workspaceFolder}/resources",
+        "--logtostdout",
+        "--colorlogtostdout",
+        "--v=10"
+      ],
+      "cwd": "${workspaceFolder}",
+      "environment": [
+        {
+          "name": "UV_THREADPOOL_SIZE",
+          "value": "0"
+        }
+      ],
+      "MIMode": "lldb",
+      "setupCommands": [
+        {
+          "description": "Load .lldbinit",
+          "text": "command source ~/.lldbinit"
+        }
+      ]
+    },
+    {
+      "type": "cmake",
+      "request": "launch",
+      "name": "Debug portfile(s)",
+      "cmakeDebugType": "external",
+      "pipeName": "/tmp/vcpkg_ext_portfile_dbg",
+      "preLaunchTask": "Debug vcpkg commands"
+    }
   ]
 }

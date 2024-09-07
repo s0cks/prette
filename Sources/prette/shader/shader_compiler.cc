@@ -1,72 +1,11 @@
 #include "prette/shader/shader_compiler.h"
 
 #include "prette/thread_local.h"
+#include "prette/pretty_logger.h"
 #include "prette/shader/shader_unit_printer.h"
-#include "prette/shader/shader_compile_status.h"
+#include "prette/shader/shader_source_attacher.h"
 
 namespace prt::shader {
-  class ShaderSourceAttacher : public ShaderCodeVisitor {
-    DEFINE_NON_COPYABLE_TYPE(ShaderSourceAttacher);
-  private:
-    ShaderId target_;
-    ShaderUnit* unit_;
-    std::vector<GLchar*> sources_;
-    std::vector<GLint> lengths_;
-    uword num_sources_ = 0;
-  public:
-    ShaderSourceAttacher(const ShaderId target,
-                         ShaderUnit* unit):
-      ShaderCodeVisitor(),
-      target_(target),
-      unit_(unit),
-      sources_(),
-      lengths_() {
-      PRT_ASSERT(unit);
-      const auto num_sources = unit->GetSize();
-      sources_.reserve(num_sources);
-      lengths_.reserve(num_sources);
-    }
-    ~ShaderSourceAttacher() override = default;
-
-    auto GetTarget() const -> ShaderId {
-      return target_;
-    }
-
-    auto GetUnit() const -> ShaderUnit* {
-      return unit_;
-    }
-
-    void Append(ShaderCode* code) {
-      PRT_ASSERT(code);
-      // NOLINTNEXTLINE
-      sources_.push_back((GLchar*) code->GetData());
-      lengths_.push_back((GLint) code->GetLength());
-      num_sources_++;
-    }
-
-    auto VisitShaderCode(ShaderCode* code) -> bool override {
-      DLOG(INFO) << "attaching: " << code->ToString();
-      Append(code);
-      return true;
-    }
-
-    auto AttachSources() -> bool {
-      if(!GetUnit()->Accept(this)) {
-        DLOG(ERROR) << "failed to visit sources of: " << GetUnit()->ToString();
-        return false;
-      }
-
-      DLOG(INFO) << "sources:";
-      for(auto idx = 0; idx < num_sources_; idx++)
-        DLOG(INFO) << " -\n" << std::string(sources_[idx], lengths_[idx]);
-
-      // NOLINTNEXTLINE
-      glShaderSource(GetTarget(), num_sources_, &sources_[0], &lengths_[0]);
-      CHECK_GL;
-      return true;
-    }
-  };
-
   static inline void
   Compile(const ShaderId id) {
     glCompileShader(id);
@@ -77,47 +16,100 @@ namespace prt::shader {
   AttachAndCompile(const ShaderId id, ShaderUnit* unit) {
     PRT_ASSERT(IsValidShaderId(id));
     PRT_ASSERT(unit);
-    ShaderSourceAttacher attacher(id, unit);
-    if(!attacher.AttachSources()) {
+    ShaderSourceAttacher attacher(unit);
+    if(!attacher.AttachSources(id)) {
       DLOG(ERROR) << "failed to attach sources.";
       return;
     }
-    
     Compile(id);
   }
+
+#ifdef PRT_DEBUG
+#define __ google::LogMessage(GetFile(), GetLine(), GetSeverity()).stream() << GetIndentString()
+  class ShaderCompilerStatsPrinter : public PrettyLogger {
+    DEFINE_NON_COPYABLE_TYPE(ShaderCompilerStatsPrinter);
+  public:
+    ShaderCompilerStatsPrinter(const google::LogSeverity severity,
+                               const char* file,
+                               int line,
+                               const int indent = 0):
+      PrettyLogger(severity, file, line, indent) {
+    }
+    explicit ShaderCompilerStatsPrinter(PrettyLogger* parent):
+      PrettyLogger(parent) {
+    }
+    ~ShaderCompilerStatsPrinter() override = default;
+
+    void PrintStats(ShaderCompiler* compiler) {
+      using units::time::nanosecond_t;
+      PRT_ASSERT(compiler);
+      __ << "Shader Compiler Stats:";
+      Indent();
+      {
+        __ << "Total Compiled: " << compiler->GetCompiled();
+        __ << "Duration: ";
+        Indent();
+        {
+          // NOLINTBEGIN(cppcoreguidelines-narrowing-conversions)
+          const auto& duration = compiler->GetDurationSeries();
+          __ << "Avg: " << nanosecond_t(duration.average());
+          __ << "Min: " << nanosecond_t(duration.min());
+          __ << "Max: " << nanosecond_t(duration.max());
+          // NOLINTEND(cppcoreguidelines-narrowing-conversions)
+        }
+        Deindent();
+      }
+      Deindent();
+    }
+  public:
+    static inline void
+    Print(ShaderCompiler* compiler, google::LogSeverity severity, const char* file, const int line, const int indent = 0) {
+      ShaderCompilerStatsPrinter printer(severity, file, line, 0);
+      printer.PrintStats(compiler);
+    }
+  };
+#undef __
+
+  void ShaderCompiler::PrintStats(const google::LogSeverity severity, const char* file, const int line) {
+    ShaderCompilerStatsPrinter::Print(this, severity, file, line);
+  }
+
+#define __ google::LogMessage(file, line, severity).stream()
+  void ShaderCompiler::PrintCompilationStatus(ShaderUnit* unit, const ShaderCompileStatus& status, const google::LogSeverity severity, const char *file, const int line) {
+    PRT_ASSERT(unit);
+    using units::time::nanosecond_t;
+    const auto duration = duration_.first();
+    __ << "Id: " << status.GetShaderId();
+    const auto& meta = unit->GetMeta();
+    __ << "Status: " << status;
+    __ << "Duration: " << nanosecond_t(duration); // NOLINT(cppcoreguidelines-narrowing-conversions)
+    ShaderUnitPrinter::Print<>(unit, file, line);
+  }
+#undef __
+
+#endif //PRT_DEBUG
 
   auto ShaderCompiler::CompileShaderUnit(ShaderUnit* unit) -> ShaderId {
     if(!unit)
       return kInvalidShaderId;
     using namespace units::time;
-#ifdef PRT_DEBUG
-    DLOG(INFO) << "compiling:";
-    ShaderUnitPrinter::Print<>(unit, __FILE__, __LINE__);
-#else
-    LOG(INFO) << "compiling " << unit->ToString() << "....";
-#endif //PRT_DEBUG
+    VLOG(1) << "compiling " << unit << "....";
     const auto start_ns = uv_hrtime();
     const auto id = glCreateShader(unit->GetType());
+    CHECK_GL;
     if(IsValidShaderId(id))
       AttachAndCompile(id, unit);
     const auto stop_ns = uv_hrtime();
     const auto total_ns = (stop_ns - start_ns);
     duration_.Append(total_ns);
     compiled_ += 1;
-    // NOLINTNEXTLINE
-    DLOG(INFO) << "compilation finished (" << nanosecond_t(total_ns) << ").";
     const auto status = ShaderCompileStatus(id);
 #ifdef PRT_DEBUG
-    using namespace units::data;
     const auto severity = status ? google::INFO : google::ERROR;
-    LOG_AT_LEVEL(severity) << "Shader: " << id;
-    LOG_AT_LEVEL(severity) << "Status: " << status;
-    LOG_AT_LEVEL(severity) << "Unit: " << unit->ToString();
-    LOG_AT_LEVEL(severity) << "Stats:";
-    LOG_AT_LEVEL(severity) << " - Total Compiled: " << GetCompiled();
-    const auto& duration = GetDurationSeries();
-    // NOLINTNEXTLINE
-    LOG_AT_LEVEL(severity) << " - Duration: " << nanosecond_t(total_ns) << "; (Avg/Min/Max): " << nanosecond_t(duration_.average()) << ", " << nanosecond_t(duration_.min()) << ", " << nanosecond_t(duration_.min());
+    PrintCompilationStatus(unit, status, severity, __FILE__, __LINE__);
+    PrintStats(severity, __FILE__, __LINE__);
+#else
+    VLOG(1) << unit << " compilation finished in " << nanosecond_t(total_ns); // NOLINT(cppcoreguidelines-narrowing-conversions)
 #endif //PRT_DEBUG
     if(!status)
       return kInvalidShaderId; //TODO: cleanup shader id
@@ -125,8 +117,7 @@ namespace prt::shader {
     return id;
   }
 
-  // NOLINTNEXTLINE
-  static ThreadLocal<ShaderCompiler> compiler_;
+  static LazyThreadLocal<ShaderCompiler> compiler_; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 
   static inline auto
   HasCompiler() -> bool {
@@ -134,29 +125,21 @@ namespace prt::shader {
   }
 
   auto ShaderCompiler::GetCompiler() -> ShaderCompiler* {
-    if(HasCompiler())
-      return compiler_.Get();
-    const auto compiler = new ShaderCompiler();
-    compiler_.Set(compiler);
+    const auto compiler = compiler_.Get();
+    PRT_ASSERT(compiler);
     return compiler;
   }
 
   auto ShaderCompiler::Compile(ShaderUnit* unit) -> ShaderId {
     PRT_ASSERT(unit);
-    const auto compiler = GetCompiler();
-    PRT_ASSERT(compiler);
-    return compiler->CompileShaderUnit(unit);
+    return GetCompiler()->CompileShaderUnit(unit);
   }
 
   auto ShaderCompiler::CompileAsync(ShaderUnit* unit) -> rx::observable<ShaderId> {
     if(!unit)
       return rx::observable<>::empty<ShaderId>();
-
     return rx::observable<>::create<ShaderId>([unit](rx::subscriber<ShaderId> s) {
-      const auto compiler = GetCompiler();
-      if(!compiler)
-        return s.on_error(rx::util::make_error_ptr(std::runtime_error("no ShaderCompiler available on thread.")));
-      const auto id = compiler->CompileShaderUnit(unit);
+      const auto id = GetCompiler()->CompileShaderUnit(unit);
       s.on_next(id);
       s.on_completed();
     });

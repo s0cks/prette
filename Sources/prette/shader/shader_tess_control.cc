@@ -10,7 +10,8 @@ namespace prt::shader {
   auto TessControlShader::ToString() const -> std::string {
     std::stringstream ss;
     ss << "TessControlShader(";
-    ss << "id=" << GetId();
+    ss << "id=" << GetId() << ", ";
+    ss << "meta=" << GetMeta();
     ss << ")";
     return ss.str();
   }

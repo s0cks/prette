@@ -78,6 +78,11 @@ namespace prt::shader {
     FOR_EACH_SHADER_TYPE(DEFINE_NEW_SHADER_UNIT_BY_TYPE)
 #undef DEFINE_NEW_SHADER_UNIT_BY_TYPE
   };
+
+  static inline auto
+  operator<<(std::ostream& stream, ShaderUnit* rhs) -> std::ostream& {
+    return stream << (rhs ? rhs->ToString() : "null");
+  }
 }
 
 #endif //PRT_SHADER_UNIT_H
