@@ -2,7 +2,7 @@
 #include "prette/program/program.h"
 
 namespace prt::program {
-  ProgramId ProgramScope::GetProgramId() const {
+  auto ProgramScope::GetProgramId() const -> ProgramId {
     return GetProgram()->GetId();
   }
 

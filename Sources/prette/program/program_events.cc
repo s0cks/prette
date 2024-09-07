@@ -3,7 +3,7 @@
 #include <sstream>
 
 namespace prt::program {
-  std::string ProgramCreatedEvent::ToString() const {
+  auto ProgramCreatedEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "ProgramCreatedEvent(";
     ss << "id=" << GetProgramId();
@@ -11,7 +11,7 @@ namespace prt::program {
     return ss.str();
   }
 
-  std::string ProgramShaderAttachedEvent::ToString() const {
+  auto ProgramShaderAttachedEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "ProgramShaderAttachedEvent(";
     ss << "id=" << GetProgramId() << ", ";
@@ -20,7 +20,7 @@ namespace prt::program {
     return ss.str();
   }
 
-  std::string ProgramShaderDetachedEvent::ToString() const {
+  auto ProgramShaderDetachedEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "ProgramShaderDetachedEvent(";
     ss << "id=" << GetProgramId() << ", ";
@@ -29,7 +29,7 @@ namespace prt::program {
     return ss.str();
   }
 
-  std::string ProgramLinkedEvent::ToString() const {
+  auto ProgramLinkedEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "ProgramLinkedEvent(";
     ss << "id=" << GetProgramId();
@@ -37,7 +37,7 @@ namespace prt::program {
     return ss.str();
   }
 
-  std::string ProgramDestroyedEvent::ToString() const {
+  auto ProgramDestroyedEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "ProgramDestroyedEvent(";
     ss << "id=" << GetProgramId();

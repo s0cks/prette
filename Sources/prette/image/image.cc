@@ -76,7 +76,6 @@ namespace prt::img {
       LOG(ERROR) << "invalid image uri: " << uri;
       return nullptr;
     }
-    DLOG(INFO) << "decoded: " << image->ToString();
     image->Flip();
     return image;
   }

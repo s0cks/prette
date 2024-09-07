@@ -10,8 +10,8 @@
 #include "prette/program/program_builder.h"
 
 namespace prt::program {
-  static ProgramSet all_;
-  static rx::subject<ProgramEvent*> events_;
+  static ProgramSet all_; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
+  static rx::subject<ProgramEvent*> events_; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 
   static inline void
   Register(Program* p) {
@@ -27,7 +27,7 @@ namespace prt::program {
     LOG_IF(ERROR, removed != 1) << "failed to deregister: " << p->ToString();
   }
 
-  rx::observable<ProgramEvent*> OnProgramEvent() {
+  auto OnProgramEvent() -> rx::observable<ProgramEvent*> {
     return events_.get_observable();
   }
 
@@ -38,13 +38,13 @@ namespace prt::program {
   }
 
   void Program::UseProgram(const ProgramId id) {
-    PRT_ASSERT(IsValidProgramId(id) || id == 0);
+    PRT_ASSERT(id);
     glUseProgram(id);
     CHECK_GL;
   }
 
   void Program::DeleteProgram(const ProgramId id) {
-    PRT_ASSERT(IsValidProgramId(id) && id != 0); //TODO: better assertion
+    PRT_ASSERT(id);
     glDeleteProgram(id);
     CHECK_GL;
   }
@@ -69,13 +69,13 @@ namespace prt::program {
     Deregister(this);
   }
 
-  int Program::GetProgramiv(const Property property) const {
-    GLint value;
+  auto Program::GetProgramiv(const Property property) const -> int {
+    GLint value = 0;
     glGetProgramiv(GetId(), property, &value);
     return static_cast<int>(value);
   }
 
-  bool Program::VisitAllAttributes(AttributeVisitor* vis) const {
+  auto Program::VisitAllAttributes(AttributeVisitor* vis) const -> bool {
     AttributeIterator iter(this);
     while(iter.HasNext()) {
       const auto next = iter.Next();
@@ -85,7 +85,7 @@ namespace prt::program {
     return true;
   }
 
-  bool Program::VisitAllUniforms(UniformVisitor* vis) const {
+  auto Program::VisitAllUniforms(UniformVisitor* vis) const -> bool {
     UniformIterator iter(this);
     while(iter.HasNext()) {
       const auto next = iter.Next();
@@ -95,7 +95,7 @@ namespace prt::program {
     return true;
   }
 
-  rx::observable<ProgramAttribute> Program::GetActiveAttributes() const {
+  auto Program::GetActiveAttributes() const -> rx::observable<ProgramAttribute> {
     return rx::observable<>::create<ProgramAttribute>([this](rx::subscriber<ProgramAttribute> s) {
       AttributeIterator iter(this);
       while(iter.HasNext()) {
@@ -106,7 +106,7 @@ namespace prt::program {
     });
   }
 
-  rx::observable<ProgramUniform> Program::GetActiveUniforms() const {
+  auto Program::GetActiveUniforms() const -> rx::observable<ProgramUniform> {
     return rx::observable<>::create<ProgramUniform>([this](rx::subscriber<ProgramUniform> s) {
       UniformIterator iter(this);
       while(iter.HasNext()) {
@@ -117,7 +117,7 @@ namespace prt::program {
     });
   }
 
-  std::string Program::ToString() const {
+  auto Program::ToString() const -> std::string {
     std::stringstream ss;
     ss << "Program(";
     ss << "meta=" << GetMeta() << ", ";
@@ -126,24 +126,24 @@ namespace prt::program {
     return ss.str();
   }
 
-  bool Program::Accept(ProgramVisitor* vis) {
+  auto Program::Accept(ProgramVisitor* vis) -> bool {
     PRT_ASSERT(vis);
     return vis->VisitProgram(this);
   }
 
-  ProgramEventObservable Program::OnEvent() const {
+  auto Program::OnEvent() const -> ProgramEventObservable {
     return events_.get_observable();
   }
 
-  static inline std::string
-  GetProgramNameFromDirectory(const std::string& dir) {
+  static inline auto
+  GetProgramNameFromDirectory(const std::string& dir) -> std::string {
     const auto slashpos = dir.find_last_of('/');
     if(slashpos == std::string::npos)
       return {};
     return {};
   }
 
-  Program* Program::FromJson(const uri::Uri& uri) {
+  auto Program::FromJson(const uri::Uri& uri) -> Program* {
     if(uri.HasScheme("program")) {
       const auto programs_dir = fmt::format("{0:s}/shaders", FLAGS_resources);
 
@@ -174,23 +174,20 @@ namespace prt::program {
     builder.SetMeta(handler.GetMeta());
 
     const auto& shaders = handler.shaders();
-    DLOG(INFO) << "shaders:";
-    for(const auto& shader : shaders) {
-      DLOG(INFO) << " - " << shader;
+    for(const auto& shader : shaders)
       builder.Attach(shader.GetShader());
-    }
     return builder.Build();
   }
 
-  const ProgramSet& GetAllPrograms() {
+  auto GetAllPrograms() -> const ProgramSet& {
     return all_;
   }
   
-  uword GetTotalNumberOfPrograms() {
+  auto GetTotalNumberOfPrograms() -> uword {
     return all_.size();
   }
 
-  bool VisitAllPrograms(ProgramVisitor* vis) {
+  auto VisitAllPrograms(ProgramVisitor* vis) -> bool {
     PRT_ASSERT(vis);
     for(const auto& p : all_) {
       if(!vis->VisitProgram(p))

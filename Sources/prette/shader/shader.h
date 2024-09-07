@@ -194,8 +194,10 @@ namespace prt {
   }
 
   using shader::Shader;
+  using ShaderPtr=Shader*;
 #define DEFINE_USE_SHADER_TYPE(Name, Ext, GlValue)      \
-  using shader::Name##Shader;
+  using shader::Name##Shader;                           \
+  using Name##ShaderPtr=Name##Shader*;
   FOR_EACH_SHADER_TYPE(DEFINE_USE_SHADER_TYPE)
 #undef DEFINE_USE_SHADER_TYPE
 }

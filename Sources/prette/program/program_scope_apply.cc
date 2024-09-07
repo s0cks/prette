@@ -11,16 +11,16 @@ namespace prt::program {
     Unapply();
   }
 
-  UniformLocation ApplyProgramScope::GetUniformLocation(const char* name) const {
+  auto ApplyProgramScope::GetUniformLocation(const char* name) const -> UniformLocation {
     const auto location = glGetUniformLocation(GetProgramId(), name);
     CHECK_GL;
     return location;
   }
 
-  UniformBlockIndex ApplyProgramScope::GetUniformBlockIndex(const char* name) const {
+  auto ApplyProgramScope::GetUniformBlockIndex(const char* name) const -> UniformBlockIndex {
     const auto index = glGetUniformBlockIndex(GetProgramId(), name);
     CHECK_GL;
-    return index;
+    return static_cast<UniformBlockIndex>(index);
   }
 
   void ApplyProgramScope::Set(const char* name, const glm::vec2& value) const {

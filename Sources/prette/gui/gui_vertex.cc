@@ -8,7 +8,6 @@ namespace prt::gui {
 
   void Vertex::InitClass() {
     PRT_ASSERT(!kClass);
-    DLOG(INFO) << "initializing gui::Vertex class....";
     kClass = Class::New("gui::Vertex");
     PRT_ASSERT(kClass);
     // .pos

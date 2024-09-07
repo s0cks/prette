@@ -29,7 +29,7 @@ namespace prt {
     protected:
       Color clear_color_;
       GLbitfield clear_flags_;
-      ProgramRef shader_;
+      Program* program_;
 
       explicit RenderFboPipeline(const Fbo* fbo):
         FboPipeline(fbo) {

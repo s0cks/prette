@@ -4,12 +4,12 @@
 #include "prette/program/program_id.h"
 
 namespace prt::program {
-  class ProgramInfoLog {
-  protected:
+  class ProgramInfoLog { //TODO: extract & cleanup
+  private:
     ProgramId id_;
     uint8_t* data_;
     uint32_t length_;
-
+  protected:
     inline uint8_t* data() const {
       return data_;
     }
@@ -39,7 +39,7 @@ namespace prt::program {
       id_(id),
       data_(nullptr),
       length_(0) {
-      if(IsValidProgramId(id))
+      if(id)
         GetProgramInfoLog(id, &data_, &length_); 
     }
     ProgramInfoLog(const ProgramInfoLog& rhs):
@@ -131,8 +131,9 @@ namespace prt::program {
 
   template<const ProgramStatus::Type StatusType>
   class ProgramStatusTemplate : public ProgramStatus {
-  protected:
-    GLint status_;
+    DEFINE_DEFAULT_COPYABLE_TYPE(ProgramStatusTemplate<StatusType>);
+  private:
+    GLint status_{};
   public:
     ProgramStatusTemplate() = default;
     explicit ProgramStatusTemplate(const ProgramId id):
@@ -140,45 +141,41 @@ namespace prt::program {
       glGetProgramiv(id, StatusType, &status_);
       CHECK_GL;
     }
-    ProgramStatusTemplate(const ProgramStatusTemplate& rhs) = default;
     ~ProgramStatusTemplate() override = default;
 
-    GLint status() const {
+    auto status() const -> GLint {
       return status_;
     }
 
-    Type type() const {
+    auto type() const -> Type {
       return StatusType;
     }
-
-    ProgramStatusTemplate& operator=(const ProgramStatusTemplate& rhs) = default;
   };
 
-#define DEFINE_PROGRAM_STATUS(Name, GlValue)                                                          \
-  class Program##Name##Status : public ProgramStatusTemplate<ProgramStatus::k##Name##Status> {        \
-  public:                                                                                             \
-    explicit Program##Name##Status(const ProgramId id = kInvalidProgramId):                           \
-      ProgramStatusTemplate<ProgramStatus::k##Name##Status>(id) {                                     \
-    }                                                                                                 \
-    Program##Name##Status(const Program##Name##Status& rhs) = default;                                \
-    ~Program##Name##Status() = default;                                                               \
-    bool Is##Name() const {                                                                           \
-      return status() == GL_TRUE;                                                                     \
-    }                                                                                                 \
-    operator bool () const {                                                                          \
-      return Is##Name();                                                                              \
-    }                                                                                                 \
-    friend std::ostream& operator<<(std::ostream& stream, const Program##Name##Status& rhs) {         \
-      stream << "Program" << #Name << "Status(";                                                      \
-      stream << "id=" << rhs.id() << ", ";                                                            \
-      stream << "status=" << (rhs.Is##Name() ? 'y' : 'n');                                            \
-      const auto& info = rhs.info();                                                                  \
-      if(!info.IsEmpty())                                                                             \
-        stream << ", info=" << (const std::string&) info;                                             \
-      stream << ")";                                                                                  \
-      return stream;                                                                                  \
-    }                                                                                                 \
-    Program##Name##Status& operator=(const Program##Name##Status& rhs) = default;                     \
+#define DEFINE_PROGRAM_STATUS(Name, GlValue)                                                            \
+  class Program##Name##Status : public ProgramStatusTemplate<ProgramStatus::k##Name##Status> {          \
+    DEFINE_DEFAULT_COPYABLE_TYPE(Program##Name##Status);                                                \
+  public:                                                                                               \
+    explicit Program##Name##Status(const ProgramId id = kInvalidProgramId):                             \
+      ProgramStatusTemplate<ProgramStatus::k##Name##Status>(id) {                                       \
+    }                                                                                                   \
+    ~Program##Name##Status() = default;                                                                 \
+    auto Is##Name() const -> bool {                                                                     \
+      return status() == GL_TRUE;                                                                       \
+    }                                                                                                   \
+    operator bool () const {                                                                            \
+      return Is##Name();                                                                                \
+    }                                                                                                   \
+    friend auto operator<<(std::ostream& stream, const Program##Name##Status& rhs) -> std::ostream& {   \
+      stream << "Program" << #Name << "Status(";                                                        \
+      stream << "id=" << rhs.id() << ", ";                                                              \
+      stream << "status=" << (rhs.Is##Name() ? 'y' : 'n');                                              \
+      const auto& info = rhs.info();                                                                    \
+      if(!info.IsEmpty())                                                                               \
+        stream << ", info=" << (const std::string&) info;                                               \
+      stream << ")";                                                                                    \
+      return stream;                                                                                    \
+    }                                                                                                   \
   };                                                                         
   FOR_EACH_PROGRAM_STATUS(DEFINE_PROGRAM_STATUS)
 #undef DEFINE_PROGRAM_STATUS

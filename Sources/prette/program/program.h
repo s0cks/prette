@@ -1,11 +1,8 @@
 #ifndef PRT_PROGRAM_H
 #define PRT_PROGRAM_H
 
-#include "prette/rx.h"
-#include "prette/reference.h"
+#include "prette/uri.h"
 #include "prette/gfx_object.h"
-#include "prette/resource/resource.h"
-
 #include "prette/shader/shader_id.h"
 #include "prette/program/program_id.h"
 #include "prette/program/program_events.h"
@@ -16,19 +13,15 @@ namespace prt {
   namespace program {
     class Program;
     class ProgramVisitor {
+      DEFINE_NON_COPYABLE_TYPE(ProgramVisitor);
     protected:
       ProgramVisitor() = default;
     public:
       virtual ~ProgramVisitor() = default;
-      virtual bool VisitProgram(Program* p) = 0;
+      virtual auto VisitProgram(Program* p) -> bool = 0;
     };
   }
   using program::Program;
-
-  namespace resource {
-    typedef Reference<Program> ProgramRef;
-  }
-  using res::ProgramRef;
 
 #define FOR_EACH_PROGRAM_PROPERTY(V)                              \
   V(AttachedShaders, GL_ATTACHED_SHADERS)                         \
@@ -38,10 +31,10 @@ namespace prt {
   V(ActiveUniformsMaxLength, GL_ACTIVE_UNIFORM_MAX_LENGTH)
 
   namespace program {
-    rx::observable<ProgramEvent*> OnProgramEvent();
+    auto OnProgramEvent() -> rx::observable<ProgramEvent*>;
 
-    static inline rx::observable<ProgramEvent*>
-    OnProgramEvent(const ProgramId id) {
+    static inline auto
+    OnProgramEvent(const ProgramId id) -> rx::observable<ProgramEvent*> {
       return OnProgramEvent()
         .filter([id](ProgramEvent* event) {
           //TODO: cleanup
@@ -50,18 +43,18 @@ namespace prt {
         });
     }
 
-  #define DEFINE_ON_PROGRAM_EVENT(Name)                           \
-    static inline rx::observable<Name##Event*>                    \
-    On##Name##Event() {                                           \
-      return OnProgramEvent()                                     \
-        .filter(Name##Event::Filter)                              \
-        .map(Name##Event::Cast);                                  \
-    }                                                             \
-    static inline rx::observable<Name##Event*>                    \
-    On##Name##Event(const ProgramId id) {                         \
-      return OnProgramEvent()                                     \
-        .filter(Name##Event::FilterBy(id))                        \
-        .map(Name##Event::Cast);                                  \
+  #define DEFINE_ON_PROGRAM_EVENT(Name)                               \
+    static inline auto                                                \
+    On##Name##Event() -> Name##EventObservable {                      \
+      return OnProgramEvent()                                         \
+        .filter(Name##Event::Filter)                                  \
+        .map(Name##Event::Cast);                                      \
+    }                                                                 \
+    static inline auto                                                \
+    On##Name##Event(const ProgramId id) -> Name##EventObservable {    \
+      return OnProgramEvent()                                         \
+        .filter(Name##Event::FilterBy(id))                            \
+        .map(Name##Event::Cast);                                      \
     }
     FOR_EACH_PROGRAM_EVENT(DEFINE_ON_PROGRAM_EVENT)
 #undef DEFINE_ON_PROGRAM_EVENT
@@ -72,12 +65,12 @@ namespace prt {
       friend class ProgramBuilder;
       friend class ApplyProgramScope;
       friend class ProgramLinkScope;
-
       friend class UniformIterator;
       friend class AttributeIterator;
+      DEFINE_NON_COPYABLE_TYPE(Program);
     public:
       struct IdComparator {
-        bool operator()(Program* lhs, Program* rhs) const {
+        auto operator()(Program* lhs, Program* rhs) const -> bool {
           return lhs->GetId() < rhs->GetId();
         }
       };
@@ -100,13 +93,13 @@ namespace prt {
     protected:
       explicit Program(const Metadata& meta, const ProgramId id);
 
-      int GetProgramiv(const Property property) const;
+      auto GetProgramiv(const Property property) const -> int;
 
-      inline int GetActiveAttributesMaxLength() const {
+      inline auto GetActiveAttributesMaxLength() const -> int {
         return GetProgramiv(kActiveAttributesMaxLength);
       }
 
-      inline int GetActiveUniformsMaxLength() const {
+      inline auto GetActiveUniformsMaxLength() const -> int {
         return GetProgramiv(kActiveUniformsMaxLength);
       }
 
@@ -114,27 +107,27 @@ namespace prt {
     public:
       ~Program() override;
 
-      virtual int GetNumberOfAttachedShaders() const {
+      virtual auto GetNumberOfAttachedShaders() const -> int {
         return GetProgramiv(kAttachedShaders);
       }
 
-      virtual int GetNumberOfActiveAttributes() const {
+      virtual auto GetNumberOfActiveAttributes() const -> int {
         return GetProgramiv(kActiveAttributes);
       }
 
-      virtual rx::observable<ProgramAttribute> GetActiveAttributes() const;
+      virtual auto GetActiveAttributes() const -> rx::observable<ProgramAttribute>;
 
-      virtual int GetNumberOfActiveUniforms() const {
+      virtual auto GetNumberOfActiveUniforms() const -> int {
         return GetProgramiv(kActiveUniforms);
       }
 
-      virtual rx::observable<ProgramUniform> GetActiveUniforms() const;
+      virtual auto GetActiveUniforms() const -> rx::observable<ProgramUniform>;
 
-      virtual GLint GetUniformLocation(const std::string& name) const {
+      virtual auto GetUniformLocation(const std::string& name) const -> GLint {
         return glGetUniformLocation(GetId(), name.c_str());
       }
 
-      virtual GLint GetUniformBlockIndex(const std::string& name) const {
+      virtual auto GetUniformBlockIndex(const std::string& name) const -> GLuint {
         return glGetUniformBlockIndex(GetId(), name.c_str());
       }
 
@@ -143,38 +136,38 @@ namespace prt {
         CHECK_GL;
       }
 
-      bool Accept(ProgramVisitor* vis);
-      bool VisitAllUniforms(UniformVisitor* vis) const;
-      bool VisitAllAttributes(AttributeVisitor* vis) const;
-      std::string ToString() const override;
-      ProgramEventObservable OnEvent() const override;
+      auto Accept(ProgramVisitor* vis) -> bool;
+      auto VisitAllUniforms(UniformVisitor* vis) const -> bool;
+      auto VisitAllAttributes(AttributeVisitor* vis) const -> bool;
+      auto ToString() const -> std::string override;
+      auto OnEvent() const -> ProgramEventObservable override;
     private:
-      static inline Program*
-      New(const Metadata& meta, const ProgramId id) {
-        PRT_ASSERT(IsValidProgramId(id));
+      static inline auto
+      New(const Metadata& meta, const ProgramId id) -> Program* {
+        PRT_ASSERT(id);
         return new Program(meta, id);
       }
     public:
-      static inline Program*
-      New(const ProgramId id) {
-        PRT_ASSERT(IsValidProgramId(id));
+      static inline auto
+      New(const ProgramId id) -> Program* {
+        PRT_ASSERT(id);
         Metadata meta;
         return New(meta, id);
       }
 
-      static Program* FromJson(const uri::Uri& uri);
+      static auto FromJson(const uri::Uri& uri) -> Program*;
 
-      static inline Program*
-      FromJson(const uri::basic_uri& uri) {
+      static inline auto
+      FromJson(const uri::basic_uri& uri) -> Program* {
         return FromJson(uri::Uri(uri)); //TODO: sanitize uri -> uri::Uri("file://{0:s}/{1:s}.json", programs_dir, uri.path)
       }
     };
 
-    typedef std::set<Program*, Program::IdComparator> ProgramSet;
+    using ProgramSet = std::set<Program *, Program::IdComparator>;
 
-    const ProgramSet& GetAllPrograms();
-    uword GetTotalNumberOfPrograms();
-    bool VisitAllPrograms(ProgramVisitor* vis);
+    auto GetAllPrograms() -> const ProgramSet&;
+    auto GetTotalNumberOfPrograms() -> uword;
+    auto VisitAllPrograms(ProgramVisitor* vis) -> bool;
   }
 }
 

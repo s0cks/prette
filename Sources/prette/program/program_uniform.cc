@@ -33,19 +33,19 @@ namespace prt::program {
       free(name_);
   }
 
-  ProgramId UniformIterator::GetProgramId() const {
+  auto UniformIterator::GetProgramId() const -> ProgramId {
     return GetProgram()->GetId();
   }
 
-  bool UniformIterator::HasNext() const {
+  auto UniformIterator::HasNext() const -> bool {
     return cur_uniform_ < num_uniforms_;
   }
 
-  ProgramUniform UniformIterator::Next() {
+  auto UniformIterator::Next() -> ProgramUniform { //TODO: fix casting
     memset(name_, 0, sizeof(name_));
-    glGetActiveUniform(GetProgramId(), cur_uniform_, name_asize_, &length_, &size_, &type_, (GLchar*) name_);
+    glGetActiveUniform(GetProgramId(), cur_uniform_, (GLsizei)name_asize_, &length_, &size_, &type_, (GLchar*) name_);
     CHECK_GL;
-    const auto uniform = ProgramUniform(cur_uniform_, type_, size_, name_, length_);
+    const auto uniform = ProgramUniform((GLint)cur_uniform_, type_, size_, name_, length_);
     cur_uniform_++;
     return uniform;
   }

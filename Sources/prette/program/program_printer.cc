@@ -4,7 +4,7 @@
 namespace prt::program {
 #define __ google::LogMessage(GetFile(), GetLine(), GetSeverity()).stream() << GetIndentString()
 
-  bool ProgramPrinter::VisitProgram(Program* program) {
+  auto ProgramPrinter::VisitProgram(Program* program) -> bool {
     PRT_ASSERT(program);
     const auto id = program->GetId();
     __ << "Program:";
@@ -40,12 +40,12 @@ namespace prt::program {
     return true;
   }
 
-  bool ProgramPrinter::VisitAttribute(const ProgramAttribute& attr) {
+  auto ProgramPrinter::VisitAttribute(const ProgramAttribute& attr) -> bool {
     __ << "- " << attr;
     return true;
   }
 
-  bool ProgramPrinter::VisitUniform(const ProgramUniform& uniform) {
+  auto ProgramPrinter::VisitUniform(const ProgramUniform& uniform) -> bool {
     __ << "- " << uniform;
     return true;
   }

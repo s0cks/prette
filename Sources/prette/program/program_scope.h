@@ -7,30 +7,32 @@
 namespace prt::program {
   class Program;
   class ProgramScope {
-  protected:
+    DEFINE_NON_COPYABLE_TYPE(ProgramScope);
+  private:
     Program* program_;
-
+  protected:
     explicit ProgramScope(Program* program):
       program_(program) {
     }
   public:
     virtual ~ProgramScope() = default;
 
-    Program* GetProgram() const {
+    auto GetProgram() const -> Program* {
       return program_;
     }
 
-    ProgramId GetProgramId() const;
+    auto GetProgramId() const -> ProgramId;
   };
 
   class ProgramUboBindScope : public ProgramScope {
+    DEFINE_NON_COPYABLE_TYPE(ProgramUboBindScope);
   public:
     struct BoundUbo {
       GLint index;
       std::string name;
       Ubo* ubo;
 
-      friend std::ostream& operator<<(std::ostream& stream, const BoundUbo& rhs) {
+      friend auto operator<<(std::ostream& stream, const BoundUbo& rhs) -> std::ostream& {
         stream << "BoundUbo(";
         stream << "index=" << rhs.index << ", ";
         stream << "name=" << rhs.name << ", ";
@@ -39,30 +41,29 @@ namespace prt::program {
         return stream;
       }
 
-      bool operator==(const BoundUbo& rhs) const {
+      auto operator==(const BoundUbo& rhs) const -> bool {
         return index == rhs.index;
       }
 
-      bool operator!=(const BoundUbo& rhs) const {
+      auto operator!=(const BoundUbo& rhs) const -> bool {
         return index != rhs.index;
       }
 
-      bool operator<(const BoundUbo& rhs) const {
+      auto operator<(const BoundUbo& rhs) const -> bool {
         return index < rhs.index;
       }
 
-      bool operator>(const BoundUbo& rhs) const {
+      auto operator>(const BoundUbo& rhs) const -> bool {
         return index > rhs.index;
       }
     };
-  protected:
+  private:
     std::set<BoundUbo> bound_;
-    GLint index_;
+    GLint index_{};
   public:
     explicit ProgramUboBindScope(Program* program):
       ProgramScope(program),
-      bound_(),
-      index_(0) {
+      bound_() {
     }
     ~ProgramUboBindScope() override = default;
     void Bind(const std::string& name, Ubo* ubo);

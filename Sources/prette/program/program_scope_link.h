@@ -12,11 +12,12 @@
 
 namespace prt::program {
   class ProgramLinkScope : public ProgramScope {
-  protected:
+    DEFINE_NON_COPYABLE_TYPE(ProgramLinkScope);
+  private:
     ShaderIdList linked_;
   public:
     explicit ProgramLinkScope(Program* program);
-    ~ProgramLinkScope();
+    ~ProgramLinkScope() override;
 
     void Attach(const ShaderId id);
     void AttachAll(const ShaderId* ids, const uword num_ids);
@@ -25,22 +26,22 @@ namespace prt::program {
       return AttachAll(&ids[0], ids.size());
     }
 
-    ProgramLinkStatus Link() const;
+    auto Link() const -> ProgramLinkStatus;
 
-    ShaderIdList::const_iterator begin() const {
+    auto begin() const -> ShaderIdList::const_iterator {
       return std::begin(linked_);
     }
 
-    ShaderIdList::const_iterator end() const {
+    auto end() const -> ShaderIdList::const_iterator {
       return std::end(linked_);
     }
 
-    ProgramLinkScope& operator<<(const ShaderId id) {
+    auto operator<<(const ShaderId id) -> ProgramLinkScope& {
       Attach(id);
       return *this;
     }
 
-    ProgramLinkScope& operator<<(const ShaderIdList& shaders) {
+    auto operator<<(const ShaderIdList& shaders) -> ProgramLinkScope& {
       if(!shaders.empty())
         AttachAll(shaders);
       return *this;

@@ -4,49 +4,31 @@
 namespace prt::program {
   AttributeIterator::AttributeIterator(const Program* program):
     program_(program),
-    cur_attr_(0),
-    num_attrs_(0),
-    length_(0),
-    size_(0),
-    type_(0),
-    name_asize_(0),
-    name_(nullptr) {
+    name_() {
     PRT_ASSERT(program);
     const auto num_attrs = program->GetNumberOfActiveAttributes();
     if(num_attrs <= 0) {
       DLOG(WARNING) << "no attributes for: " << program->ToString();
       return;
     }
-    
+    num_attrs_ = num_attrs;
     const auto name_asize = program->GetActiveAttributesMaxLength();
     PRT_ASSERT(name_asize >= 1);
-    const auto name = (char*) malloc(sizeof(char) * name_asize);
-    PRT_ASSERT(name);
-
-    num_attrs_ = num_attrs;
-    name_ = name;
-    name_asize_ = name_asize;
+    name_.reserve(name_asize);
   }
-
-  AttributeIterator::~AttributeIterator() {
-    if(name_)
-      free(name_);
-  }
-
-  ProgramId AttributeIterator::GetProgramId() const {
+  
+  auto AttributeIterator::GetProgramId() const -> ProgramId {
     return GetProgram()->GetId();
   }
 
-  bool AttributeIterator::HasNext() const {
-    return cur_attr_ < num_attrs_;
+  auto AttributeIterator::HasNext() const -> bool {
+    return index_ < num_attrs_;
   }
 
-  ProgramAttribute AttributeIterator::Next() {
-    memset(name_, 0, sizeof(name_));
-    glGetActiveAttrib(GetProgramId(), cur_attr_, name_asize_, &length_, &size_, &type_, (GLchar*) name_);
+  auto AttributeIterator::Next() -> ProgramAttribute {
+    name_.clear();
+    glGetActiveAttrib(GetProgramId(), index_, (GLsizei) name_.capacity(), &length_, &size_, &type_, &name_[0]);
     CHECK_GL;
-    const auto attr = ProgramAttribute(cur_attr_, type_, size_, name_, length_);
-    cur_attr_++;
-    return attr;
+    return { index_++, type_, size_, (const char*) &name_[0], length_ };
   }
 }

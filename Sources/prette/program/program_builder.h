@@ -11,20 +11,21 @@ namespace prt::program {
 
   class Program;
   class ProgramBuilder : public BuilderTemplate<Program> {
-  protected:
+    DEFINE_NON_COPYABLE_TYPE(ProgramBuilder);
+  private:
     ShaderSet shaders_;
   public:
     ProgramBuilder() = default;
     ~ProgramBuilder() override = default;
 
-    const ShaderSet& GetShaders() const {
+    auto GetShaders() const -> const ShaderSet& {
       return shaders_;
     }
 
-    virtual bool Attach(Shader* shader);
+    virtual auto Attach(Shader* shader) -> bool;
 
-    Program* Build() const override;
-    rx::observable<Program*> BuildAsync() const override;
+    auto Build() const -> Program* override;
+    auto BuildAsync() const -> rx::observable<Program*> override;
   };
 }
 

@@ -2,71 +2,70 @@
 #define PRT_PROGRAM_ATTRIBUTE_H
 
 #include <fmt/format.h>
-
-#include "prette/gfx.h"
 #include "prette/program/program_id.h"
 
 namespace prt::program {
   class ProgramAttribute {
+    friend class AttributeIterator;
     DEFINE_DEFAULT_COPYABLE_TYPE(ProgramAttribute);
-  protected:
-    uword index_;
-    GLenum type_;
-    uword size_;
-    std::string name_;
+  private:
+    GLint index_{};
+    GLenum type_{};
+    GLint size_{};
+    std::string name_{};
   public:
     ProgramAttribute() = default;
     ProgramAttribute(const GLint index,
                      const GLenum type,
                      const GLint size,
                      const char* name,
-                     const int name_length):
-      index_(static_cast<uword>(index)),
+                     const GLint name_length):
+      index_(index),
       type_(type),
-      size_(static_cast<uword>(size)),
-      name_(name, name_length) {  
+      size_(size),
+      name_(name, name_length) {
     }
     ~ProgramAttribute() = default;
 
-    uword GetIndex() const {
+    auto GetIndex() const -> uword {
       return index_;
     }
 
-    GLenum GetType() const {
+    auto GetType() const -> GLenum {
       return type_;
     }
 
-    uword GetSize() const {
+    auto GetSize() const -> uword {
       return size_;
     }
 
-    const std::string& GetName() const {
+    auto GetName() const -> const std::string& {
       return name_;
     }
 
-    bool operator==(const ProgramAttribute& rhs) const {
+    auto operator==(const ProgramAttribute& rhs) const -> bool {
       return index_ == rhs.index_
           && type_ == rhs.type_
           && size_ == rhs.size_
           && name_ == rhs.name_;
     }
 
-    bool operator!=(const ProgramAttribute& rhs) const {
+    auto operator!=(const ProgramAttribute& rhs) const -> bool {
       return index_ != rhs.index_
           || type_ != rhs.type_
           || size_ != rhs.size_
           || name_ != rhs.name_;
     }
 
-    bool operator<(const ProgramAttribute& rhs) const {
+    auto operator<(const ProgramAttribute& rhs) const -> bool {
       return index_ < rhs.index_;
     }
 
-    bool operator>(const ProgramAttribute& rhs) const {
+    auto operator>(const ProgramAttribute& rhs) const -> bool {
       return index_ > rhs.index_;
     }
 
-    friend std::ostream& operator<<(std::ostream& stream, const ProgramAttribute& rhs) {
+    friend auto operator<<(std::ostream& stream, const ProgramAttribute& rhs) -> std::ostream& {
       stream << "ProgramAttribute(";
       stream << "index=" << rhs.GetIndex() << ", ";
       stream << "type=" << rhs.GetType() << ", ";
@@ -78,38 +77,36 @@ namespace prt::program {
   };
 
   class AttributeVisitor {
+    DEFINE_NON_COPYABLE_TYPE(AttributeVisitor);
   protected:
     AttributeVisitor() = default;
   public:
     virtual ~AttributeVisitor() = default;
-    virtual bool VisitAttribute(const ProgramAttribute& attr) = 0;
+    virtual auto VisitAttribute(const ProgramAttribute& attr) -> bool = 0;
   };
 
   class Program;
   class AttributeIterator {
+    DEFINE_NON_COPYABLE_TYPE(AttributeIterator);
   private:
     const Program* program_;
-    uword cur_attr_;
-    uword num_attrs_;
-
-    GLint length_;
-    GLint size_;
-    GLenum type_;
-
-    uword name_asize_;
-    char* name_;
+    uword num_attrs_{};
+    GLint index_{};
+    GLenum type_{};
+    GLsizei length_{};
+    GLint size_{};
+    std::vector<GLchar> name_;
   public:
     explicit AttributeIterator(const Program* program);
-    ~AttributeIterator();
+    ~AttributeIterator() = default;
 
-    const Program* GetProgram() const {
+    auto GetProgram() const -> const Program* {
       return program_;
     }
 
-    ProgramId GetProgramId() const;
-
-    bool HasNext() const;
-    ProgramAttribute Next();
+    auto GetProgramId() const -> ProgramId;
+    auto HasNext() const -> bool;
+    auto Next() -> ProgramAttribute;
   };
 }
 
@@ -118,7 +115,7 @@ namespace fmt {
 
   template<>
   struct formatter<ProgramAttribute> : formatter<std::string_view> {
-    auto format(const ProgramAttribute& uniform, format_context& ctx) const {
+    auto format(const ProgramAttribute& uniform, format_context& ctx) -> decltype(ctx.out()) const {
       return formatter<std::string_view>::format(uniform.GetName(), ctx);
     }
   };

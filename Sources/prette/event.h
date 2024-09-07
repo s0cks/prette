@@ -11,8 +11,8 @@ namespace prt {
     Event() = default;
   public:
     virtual ~Event() = default;
-    virtual const char* GetName() const = 0;
-    virtual std::string ToString() const = 0;
+    virtual auto GetName() const -> const char* = 0;
+    virtual auto ToString() const -> std::string = 0;
   };
 
 #define DEFINE_EVENT_PROTOTYPE_TYPE_CHECK(Name)                             \
@@ -42,6 +42,7 @@ namespace prt {
 
   template<class E>
   class EventSource {
+    DEFINE_NON_COPYABLE_TYPE(EventSource<E>);
   protected:
     EventSource() = default;
     virtual void Publish(E* event) = 0;
@@ -53,9 +54,10 @@ namespace prt {
     }
   public:
     virtual ~EventSource() = default;
-    virtual rx::observable<E*> OnEvent() const = 0;
+    virtual auto OnEvent() const -> rx::observable<E*> = 0;
   };
 
+  // @deprecated
   template<class E>
   class EventPublisher {
   private:

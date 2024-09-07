@@ -11,15 +11,16 @@
 #include "prette/program/program_scope.h"
 
 namespace prt::program {
-  typedef GLint UniformLocation;
-  typedef GLint UniformBlockIndex;
+  using UniformLocation = GLint;
+  using UniformBlockIndex = GLuint;
 
   class ApplyProgramScope : public ProgramScope {
+    DEFINE_NON_COPYABLE_TYPE(ApplyProgramScope);
   public:
     explicit ApplyProgramScope(Program* program);
     ~ApplyProgramScope() override;
-    virtual UniformLocation GetUniformLocation(const char* name) const; //TODO: cache value, reduce visibility?
-    virtual UniformBlockIndex GetUniformBlockIndex(const char* name) const;
+    virtual auto GetUniformLocation(const char* name) const -> UniformLocation; //TODO: cache value, reduce visibility?
+    virtual auto GetUniformBlockIndex(const char* name) const -> UniformBlockIndex;
     virtual void Set(const char* name, const glm::vec2& value) const;
     virtual void Set(const char* name, const glm::vec3& value) const;
     virtual void Set(const char* name, const glm::vec4& value) const;

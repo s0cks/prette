@@ -29,10 +29,10 @@ namespace prt::program {
     friend class ProgramReaderHandler;
     friend class std::allocator<ProgramShader>;
     DEFINE_DEFAULT_COPYABLE_TYPE(ProgramShader);
-  protected:
-    shader::ShaderType type_;
-    uri::Uri uri_;
-
+  private:
+    shader::ShaderType type_{};
+    uri::Uri uri_{};
+    
     ProgramShader(const shader::ShaderType type,
                   const uri::Uri& uri):
       type_(type),
@@ -42,17 +42,17 @@ namespace prt::program {
     ProgramShader() = default;
     ~ProgramShader() = default;
 
-    shader::ShaderType GetType() const {
+    auto GetType() const -> shader::ShaderType {
       return type_;
     }
 
-    const uri::Uri& GetUri() const {
+    auto GetUri() const -> const uri::Uri& {
       return uri_;
     }
 
-    Shader* GetShader() const;
+    auto GetShader() const -> Shader*;
 
-    friend std::ostream& operator<<(std::ostream& stream, const ProgramShader& rhs) {
+    friend auto operator<<(std::ostream& stream, const ProgramShader& rhs) -> std::ostream& {
       stream << "ProgramShader(";
       stream << "type=" << rhs.GetType() << ", ";
       stream << "uri=" << rhs.GetUri();
@@ -60,7 +60,7 @@ namespace prt::program {
       return stream;
     }
   };
-  typedef std::vector<ProgramShader> ProgramShaderList;
+  using ProgramShaderList = std::vector<ProgramShader>;
 
   enum ProgramReaderState {
 #define DEFINE_STATE(Name) k##Name,
@@ -68,8 +68,8 @@ namespace prt::program {
 #undef DEFINE_STATE
   };
     
-  static inline std::ostream&
-  operator<<(std::ostream& stream, const ProgramReaderState& rhs) {
+  static inline auto
+  operator<<(std::ostream& stream, const ProgramReaderState& rhs) -> std::ostream& {
     switch(rhs) {
 #define DEFINE_TO_STRING(Name) \
       case k##Name: return stream << #Name;
@@ -82,34 +82,35 @@ namespace prt::program {
   class ShaderCode;
   class ProgramReaderHandler : public json::ReaderHandlerTemplate<ProgramReaderState, ProgramReaderHandler> {
     static constexpr const auto kExpectedType = "Program";
-  protected:
+    DEFINE_NON_COPYABLE_TYPE(ProgramReaderHandler);
+  private:
     ProgramShaderList shaders_;
 
 #define DEFINE_STATE_CHECK(Name)                                                          \
-    inline bool Is##Name() const { return GetState() == ProgramReaderState::k##Name; }
+    inline auto Is##Name() const -> bool { return GetState() == ProgramReaderState::k##Name; }
     FOR_EACH_PROGRAM_READER_STATE(DEFINE_STATE_CHECK)
 #undef DEFINE_STATE_CHECK
 
-    bool OnParseDataField(const std::string& name) override;
-    bool OnParseProgramShaderRef(const shader::ShaderType type, const uri::Uri& uri);
+    auto OnParseDataField(const std::string& name) -> bool override;
+    auto OnParseProgramShaderRef(const shader::ShaderType type, const uri::Uri& uri) -> bool;
   public:
     ProgramReaderHandler():
       json::ReaderHandlerTemplate<ProgramReaderState, ProgramReaderHandler>(kExpectedType),
       shaders_() {
       shaders_.reserve(5);
     }
-    ~ProgramReaderHandler() = default;
-    bool String(const char* value, const rapidjson::SizeType length, const bool) override;
+    ~ProgramReaderHandler() override = default;
+    auto String(const char* value, const rapidjson::SizeType length, const bool) -> bool override;
 
-    const ProgramShaderList& shaders() const {
+    auto shaders() const -> const ProgramShaderList& {
       return shaders_;
     }
 
-    ProgramShaderList::const_iterator shaders_begin() const {
+    auto shaders_begin() const -> ProgramShaderList::const_iterator {
       return shaders_.begin();
     }
 
-    ProgramShaderList::const_iterator shaders_end() const {
+    auto shaders_end() const -> ProgramShaderList::const_iterator {
       return shaders_.end();
     }
   };

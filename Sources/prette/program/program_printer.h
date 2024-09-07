@@ -11,6 +11,7 @@ namespace prt::program {
                          public ProgramVisitor,
                          public AttributeVisitor,
                          public UniformVisitor {
+    DEFINE_NON_COPYABLE_TYPE(ProgramPrinter);
   public:
     ProgramPrinter(const google::LogSeverity severity,
                    const char* file,
@@ -23,9 +24,9 @@ namespace prt::program {
     }
     ~ProgramPrinter() override = default;
 
-    bool VisitProgram(Program* program) override;
-    bool VisitAttribute(const ProgramAttribute& attr) override;
-    bool VisitUniform(const ProgramUniform& uniform) override;
+    auto VisitProgram(Program* program) -> bool override;
+    auto VisitAttribute(const ProgramAttribute& attr) -> bool override;
+    auto VisitUniform(const ProgramUniform& uniform) -> bool override;
   public:
     template<const google::LogSeverity Severity = google::INFO>
     static inline void

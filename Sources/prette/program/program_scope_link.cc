@@ -22,7 +22,7 @@ namespace prt::program {
       Attach(ids[idx]);
   }
 
-  ProgramLinkStatus ProgramLinkScope::Link() const {
+  auto ProgramLinkScope::Link() const -> ProgramLinkStatus {
     const auto id = GetProgramId();
     glLinkProgram(id);
     CHECK_GL;

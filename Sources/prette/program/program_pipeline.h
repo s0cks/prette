@@ -1,15 +1,18 @@
 #ifndef PRT_PROGRAM_PIPELINE_H
 #define PRT_PROGRAM_PIPELINE_H
 
+#include <utility>
+
 #include "prette/pipeline.h"
 #include "prette/program/program.h"
 #include "prette/program/program_scope.h"
 
 namespace prt::program {
   class ProgramPipeline : public Pipeline {
-  protected:
+    DEFINE_NON_COPYABLE_TYPE(ProgramPipeline);
+  private:
     Program* program_;
-
+  protected:
     explicit ProgramPipeline(Program* program):
       Pipeline(),
       program_(program) {
@@ -17,33 +20,34 @@ namespace prt::program {
   public:
     ~ProgramPipeline() override = default;
 
-    Program* GetProgram() const {
+    auto GetProgram() const -> Program* {
       return program_;
     }
   };
 
   class ApplyProgramPipeline : public ProgramPipeline {
+    DEFINE_NON_COPYABLE_TYPE(ApplyProgramPipeline);
   public:
-    typedef std::function<void(ApplyProgramScope&)> SetUniformsCallback;
+    using SetUniformsCallback = std::function<void(ApplyProgramScope&)>;
     static const SetUniformsCallback kDoNothing;
   private:
     SetUniformsCallback set_uniforms_;
 
     ApplyProgramPipeline(Program* program, SetUniformsCallback callback):
       ProgramPipeline(program),
-      set_uniforms_(callback) {
+      set_uniforms_(std::move(callback)) {
     }
   public:
     ~ApplyProgramPipeline() override = default;
 
-    const char* GetName() const override {
+    auto GetName() const -> const char* override {
       return "ApplyProgram";
     }
 
-    bool Apply() override;
+    auto Apply() -> bool override;
   public:
-    static inline ApplyProgramPipeline*
-    New(Program* program, SetUniformsCallback callback = kDoNothing) {
+    static inline auto
+    New(Program* program, const SetUniformsCallback& callback = kDoNothing) -> ApplyProgramPipeline* {
       return new ApplyProgramPipeline(program, callback);
     }
   };

@@ -45,11 +45,10 @@ namespace prt {
 
   template<class T>
   class BuilderTemplate : public BuilderBase {
+    DEFINE_NON_COPYABLE_TYPE(BuilderTemplate<T>);
   protected:
     BuilderTemplate() = default;
   public:
-    BuilderTemplate(const BuilderTemplate<T>&& rhs) = delete;
-    BuilderTemplate(const BuilderTemplate<T>& rhs) = delete;
     ~BuilderTemplate() override = default;
     virtual auto Build() const -> T* = 0;
     virtual auto BuildAsync() const -> rx::observable<T*> {
@@ -61,9 +60,6 @@ namespace prt {
         s.on_completed();
       });
     }
-
-    auto operator=(const BuilderTemplate<T>&& rhs) -> BuilderTemplate<T>& = delete;
-    auto operator=(const BuilderTemplate<T>& rhs) -> BuilderTemplate<T>& = delete;
   };
 }
 

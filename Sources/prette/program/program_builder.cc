@@ -11,7 +11,7 @@
 #include "prette/program/program_printer.h"
 
 namespace prt::program {
-  bool ProgramBuilder::Attach(Shader* shader) {
+  auto ProgramBuilder::Attach(Shader* shader) -> bool {
     PRT_ASSERT(shader);
     const auto [iter,success] = shaders_.insert(shader);
     if(!success) {
@@ -22,11 +22,11 @@ namespace prt::program {
     return true;
   }
 
-  Program* ProgramBuilder::Build() const { //TODO: code cleanup
+  auto ProgramBuilder::Build() const -> Program* { //TODO: code cleanup
     // create program
     const auto id = glCreateProgram();
     CHECK_GL;
-    if(!IsValidProgramId(id)) {
+    if(!id) {
       DLOG(ERROR) << "failed to create program.";
       return nullptr;
     }
@@ -45,7 +45,7 @@ namespace prt::program {
     return program;
   }
 
-  rx::observable<Program*> ProgramBuilder::BuildAsync() const {
+  auto ProgramBuilder::BuildAsync() const -> rx::observable<Program*> {
     return rx::observable<>::create<Program*>([this](rx::subscriber<Program*> s) {
       const auto program = Build();
       if(!program) {

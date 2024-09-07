@@ -19,10 +19,13 @@ namespace prt::program {
   FOR_EACH_PROGRAM_EVENT(FORWARD_DECLARE)
 #undef FORWARD_DECLARE
 
-  class ProgramEvent : public Event {
-  protected:
-    ProgramId id_;
+  using ProgramEventPredicate = std::function<bool(ProgramEvent*)>;
 
+  class ProgramEvent : public Event {
+    DEFINE_NON_COPYABLE_TYPE(ProgramEvent);
+  private:
+    ProgramId id_;
+  protected:
     explicit ProgramEvent(const ProgramId id):
       Event(),
       id_(id) {
@@ -30,21 +33,21 @@ namespace prt::program {
   public:
     ~ProgramEvent() override = default;
 
-    ProgramId GetProgramId() const {
+    auto GetProgramId() const -> ProgramId {
       return id_;
     }
     DEFINE_EVENT_PROTOTYPE(FOR_EACH_PROGRAM_EVENT);
   };
 
-#define DEFINE_PROGRAM_EVENT(Name)                        \
-  DECLARE_EVENT_TYPE(ProgramEvent, Name)                  \
-  static inline std::function<bool(ProgramEvent*)>        \
-  FilterBy(const ProgramId id) {                          \
-    return [id](ProgramEvent* event) {                    \
-      return event                                        \
-          && event->Is##Name##Event()                     \
-          && event->GetProgramId() == id;                 \
-    };                                                    \
+#define DEFINE_PROGRAM_EVENT(Name)                          \
+  DECLARE_EVENT_TYPE(ProgramEvent, Name)                    \
+  static inline auto                                        \
+  FilterBy(const ProgramId id) -> ProgramEventPredicate {   \
+    return [id](ProgramEvent* event) {                      \
+      return event                                          \
+          && event->Is##Name##Event()                       \
+          && event->GetProgramId() == id;                   \
+    };                                                      \
   }
 
   class ProgramCreatedEvent : public ProgramEvent {
@@ -57,16 +60,18 @@ namespace prt::program {
   };
 
   class ProgramShaderEvent : public ProgramEvent {
-  protected:
+    DEFINE_NON_COPYABLE_TYPE(ProgramShaderEvent);
+  private:
     ShaderId shader_;
-  public:
+  protected:
     explicit ProgramShaderEvent(const ProgramId id, const ShaderId shader):
       ProgramEvent(id),
       shader_(shader) {
     }
+  public:
     ~ProgramShaderEvent() override = default;
 
-    ShaderId GetShaderId() const {
+    auto GetShaderId() const -> ShaderId {
       return shader_;
     }
   };
@@ -107,20 +112,21 @@ namespace prt::program {
     DEFINE_PROGRAM_EVENT(ProgramDestroyed);
   };
 
-  typedef rx::subject<ProgramEvent*> ProgramEventSubject;
-  typedef rx::observable<ProgramEvent*> ProgramEventObservable;
-#define DEFINE_EVENT_OBSERVABLE(Name)     \
-  typedef rx::observable<Name##Event*> Name##EventObservable;
+  using ProgramEventSubject=rx::subject<ProgramEvent *>;
+  using ProgramEventObservable=rx::observable<ProgramEvent *>;
+#define DEFINE_EVENT_OBSERVABLE(Name)                         \
+  using Name##EventObservable=rx::observable<Name##Event*>;
   FOR_EACH_PROGRAM_EVENT(DEFINE_EVENT_OBSERVABLE)
 #undef DEFINE_EVENT_OBSERVABLE
 
   class ProgramEventSource : public EventSource<ProgramEvent> {
+    DEFINE_NON_COPYABLE_TYPE(ProgramEventSource);
   protected:
     ProgramEventSource() = default;
   public:
     ~ProgramEventSource() override = default;
 #define DEFINE_ON_EVENT(Name)                           \
-    inline Name##EventObservable On##Name() {           \
+    inline auto On##Name() -> Name##EventObservable {   \
       return OnEvent()                                  \
         .filter([](ProgramEvent* event) {               \
           return event                                  \

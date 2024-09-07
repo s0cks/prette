@@ -5,7 +5,7 @@ namespace prt::program {
     // do nothing.
   };
 
-  bool ApplyProgramPipeline::Apply() {
+  auto ApplyProgramPipeline::Apply() -> bool {
     ApplyProgramScope scope(GetProgram());
     set_uniforms_(scope);
     return true;
