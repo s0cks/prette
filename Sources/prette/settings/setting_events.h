@@ -15,9 +15,10 @@ namespace prt::settings {
 #undef FORWARD_DECLARE
 
   class SettingEvent : public Event {
-  protected:
+    DEFINE_NON_COPYABLE_TYPE(SettingEvent);
+  private:
     const Setting* setting_;
-
+  protected:
     explicit SettingEvent(const Setting* setting):
       Event(),
       setting_(setting) {
@@ -25,19 +26,18 @@ namespace prt::settings {
   public:
     ~SettingEvent() override = default;
 
-    const Setting* GetSetting() const {
+    auto GetSetting() const -> const Setting* {
       return setting_;
     }
+
     DEFINE_EVENT_PROTOTYPE(FOR_EACH_SETTING_EVENT);
   };
 
-  typedef rx::subject<SettingEvent*> SettingEventSubject;
-
-#define DECLARE_SETTING_EVENT(Name)                                             \
+#define DECLARE_SETTING_EVENT(Name)         \
   DECLARE_EVENT_TYPE(SettingEvent, Name)
 
   class SettingChangedEvent : public SettingEvent {
-  protected:
+  private:
     uword old_;
     uword new_;
   public:
@@ -50,41 +50,47 @@ namespace prt::settings {
     }
     ~SettingChangedEvent() override = default;
 
-    uword GetOldValueAddress() const {
+    auto GetOldValueAddress() const -> uword {
       return old_;
     }
 
     template<typename T>
-    T* GetOld() const {
+    auto GetOld() const -> T* {
       return (T*) GetOldValueAddress();
     }
 
-    uword GetNewValueAddress() const {
+    auto GetNewValueAddress() const -> uword {
       return new_;
     }
 
     template<typename T>
-    T* GetNew() const {
+    auto GetNew() const -> T* {
       return (T*) GetNewValueAddress();
     }
     DECLARE_SETTING_EVENT(SettingChanged);
   };
 
-  class SettingEventPublisher : public EventPublisher<SettingEvent> {
-  protected:
-    SettingEventPublisher() = default;
-  public:
-    ~SettingEventPublisher() override = default;
+  using SettingEventSubject = rx::subject<SettingEvent*>;
+  using SettingEventObservable = rx::observable<SettingEvent*>;
+#define DEFINE_EVENT_OBSERVABLE(Name)   \
+  using Name##EventObservable = rx::observable<Name##Event*>;
+  FOR_EACH_SETTING_EVENT(DEFINE_EVENT_OBSERVABLE)
+#undef DEFINE_EVENT_OBSERVABLE
 
-#define DEFINE_ON_SETTING_EVENT(Name)             \
-    inline rx::observable<Name##Event*>           \
-    On##Name##Event() const {                     \
-      return OnEvent()                            \
-        .filter(Name##Event::Filter)              \
-        .map(Name##Event::Cast);                  \
+  class SettingEventSource : public EventSource<SettingEvent> {
+    DEFINE_NON_COPYABLE_TYPE(SettingEventSource);
+  protected:
+    SettingEventSource() = default;
+  public:
+    ~SettingEventSource() override = default;
+#define DEFINE_ON_EVENT(Name)                           \
+    auto On##Name() const -> Name##EventObservable {    \
+      return OnEvent()                                  \
+        .filter(Name##Event::Filter)                    \
+        .map(Name##Event::Cast);                        \
     }
-    FOR_EACH_SETTING_EVENT(DEFINE_ON_SETTING_EVENT)
-#undef DEFINE_ON_SETTING_EVENT
+    FOR_EACH_SETTING_EVENT(DEFINE_ON_EVENT)
+#undef DEFINE_ON_EVENT
   };
 }
 

@@ -13,14 +13,14 @@ namespace prt::settings {
     virtual bool Visit(Setting* rhs) = 0;
   };
 
-  class Setting : public SettingEventPublisher {
+  class Setting : public SettingEventSource {
   protected:
     Setting() = default;
   public:
     ~Setting() override = default;
     virtual const char* GetName() const = 0;
     virtual std::string ToString() const = 0;
-    
+
     virtual bool Accept(SettingVisitor* vis) {
       PRT_ASSERT(vis);
       return vis->Visit(this);

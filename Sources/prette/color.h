@@ -3,6 +3,7 @@
 
 #include <ostream>
 #include "prette/glm.h"
+#include "prette/platform.h"
 
 namespace prt {
   namespace rgb {
@@ -13,18 +14,18 @@ namespace prt {
       return (rhs >> 24) & 0xFF;
     }
 
-    static inline constexpr uint8_t
-    GetRedComponent(const uint32_t& rhs) {
+    static inline constexpr auto
+    GetRedComponent(const uint32_t& rhs) -> uint8_t {
       return (rhs >> 16) & 0xFF;
     }
 
-    static inline constexpr uint8_t
-    GetGreenComponent(const uint32_t& rhs) {
+    static inline constexpr auto
+    GetGreenComponent(const uint32_t& rhs) -> uint8_t {
       return (rhs >> 8) & 0xFF;
     }
 
-    static inline constexpr uint8_t
-    GetBlueComponent(const uint32_t& rhs) {
+    static inline constexpr auto
+    GetBlueComponent(const uint32_t& rhs) -> uint8_t {
       return rhs & 0xFF;
     }
 
@@ -52,6 +53,8 @@ namespace prt {
         case kGreenComponent: return stream << "Green (" << static_cast<int>(rhs) << ")";
         case kBlueComponent: return stream << "Blue (" << static_cast<int>(rhs) << ")";
         case kAlphaComponent: return stream << "Alpha (" << static_cast<int>(rhs) << ")";
+        default:
+          return stream << "Unknown ColorComponent: " << static_cast<uword>(rhs);
       }
     }
 

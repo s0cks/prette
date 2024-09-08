@@ -19,9 +19,10 @@ namespace prt {
     private:
       KeySet keys_;
       KeyStateSet state_;
+      KeyboardEventSubject events_;
 
-      void ProcessKeys(const rx::subscriber<KeyboardEvent*>& s);
-      void ProcessKey(const rx::subscriber<KeyboardEvent*>& s, int index, const Key& key);
+      void ProcessKeys();
+      void ProcessKey(int index, const Key& key);
       void OnPreTick(engine::PreTickEvent* event) override;
 
       inline void SetState(const KeyStateSet& state) {
@@ -29,6 +30,7 @@ namespace prt {
       }
 
       static auto GetKeyState(const Key& key) -> KeyState;
+      void PublishEvent(KeyboardEvent* event) override;
     public:
       explicit Keyboard(engine::Engine* engine);
       ~Keyboard() override = default;
@@ -41,11 +43,17 @@ namespace prt {
         return state_;
       }
 
+      auto OnEvent() const -> KeyboardEventObservable override {
+        return events_.get_observable();
+      }
+
       auto ToString() const -> std::string override;
+    public:
+      static auto New(Engine* engine) -> Keyboard*;
     };
 
-    auto GetKeyboard() -> Keyboard*;
     void InitKeyboard();
+    auto GetKeyboard() -> Keyboard*;
 
     static inline auto
     HasKeyboard() -> bool {

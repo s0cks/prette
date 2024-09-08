@@ -36,6 +36,12 @@ namespace prt {
       return Has();
     }
 
+    auto operator=(T* value) -> ThreadLocal<T>& {
+      PRT_ASSERT(value);
+      Set(value);
+      return *this;
+    }
+
     friend auto operator<<(std::ostream& stream, const ThreadLocal<T>& rhs) -> std::ostream& {
       return stream << *rhs.Get();
     }

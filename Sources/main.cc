@@ -61,9 +61,11 @@ auto main(int argc, char** argv) -> int {
   Runtime::Init(argc, argv);
 
   uword counter = 0;
-  keyboard::OnKeyPressedEvent()
+  const auto kb = keyboard::GetKeyboard();
+  PRT_ASSERT(kb);
+  kb->OnKeyPressed()
     .subscribe(LogEvent<keyboard::KeyPressedEvent>());
-  keyboard::OnKeyPressedEvent()
+  kb->OnKeyPressed()
     .filter(keyboard::KeyPressedEvent::FilterBy(GLFW_KEY_GRAVE_ACCENT))
     .subscribe([](keyboard::KeyPressedEvent* e) {
       PrintRuntimeInfo();

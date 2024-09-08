@@ -40,7 +40,7 @@ namespace prt {
       virtual void GetCursorPos(Point& pos) const;
     public:
       explicit Mouse(engine::Engine* engine);
-      ~Mouse() override;
+      ~Mouse() override = default;
 
       auto GetCursorMode() const -> CursorMode;
 #define DEFINE_CURSOR_MODE_CHECK(Name)                                                          \
