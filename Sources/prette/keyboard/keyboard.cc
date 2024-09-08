@@ -31,6 +31,10 @@ namespace prt::keyboard {
   }
 
   void Keyboard::ProcessKeys() {
+#ifdef PRT_DEBUG
+    const auto start_ns = uv::Now();
+#endif //PRT_DEBUG
+
     int idx = 0;
     for(const auto& key : keys_) {
       try {
@@ -39,6 +43,13 @@ namespace prt::keyboard {
         LOG(FATAL) << "error: " << e.what();
       }
     }
+
+#ifdef PRT_DEBUG
+    using units::time::nanosecond_t;
+    const auto stop_ns = uv::Now();
+    const auto total_ns = (stop_ns - start_ns);
+    DLOG_EVERY_T(INFO, 30) << __FUNCTION__ << " finished in " << nanosecond_t(total_ns); // NOLINT(cppcoreguidelines-narrowing-conversions)
+#endif //PRT_DEBUG
   }
 
   void Keyboard::PublishEvent(KeyboardEvent* event) {
