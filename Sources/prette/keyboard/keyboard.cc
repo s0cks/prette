@@ -2,6 +2,7 @@
 
 #include <sstream>
 #include "prette/thread_local.h"
+#include "prette/keyboard/keyboard_flags.h"
 
 namespace prt::keyboard {
   static ThreadLocal<Keyboard> keyboard_; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
@@ -70,9 +71,25 @@ namespace prt::keyboard {
     return keyboard_.Get();
   }
 
-  void InitKeyboard() {
+  void InitKeyboard() { 
+    //TODO: only allow Keyboard initialization if an instance of Window exists
+#ifdef PRT_DEBUG
+    const auto start_ns = uv::Now();
+#endif //PRT_DEBUG
+    const auto mode = GetKeyboardMode();
+    if(mode == Mode::kDisabled) {
+      DLOG(WARNING) << "Keyboard is disabled.";
+      return;
+    }
+    PRT_ASSERT(mode == Mode::kEnabled);
     LOG_IF(FATAL, HasKeyboard()) << "cannot re-initialize Keyboard.";
     DLOG(INFO) << "initializing Keyboard....";
     keyboard_ = Keyboard::New(GetEngine());
+#ifdef PRT_DEBUG
+    using units::time::nanosecond_t;
+    const auto stop_ns = uv::Now();
+    const auto total_ns = (stop_ns - start_ns);
+    DLOG(INFO) << "Keyboard initialized in " << nanosecond_t(total_ns); // NOLINT(cppcoreguidelines-narrowing-conversions)
+#endif //PRT_DEBUG
   }
 }

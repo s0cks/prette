@@ -2,25 +2,14 @@
 #define PRT_KEYBOARD_FLAGS_H
 
 #include <gflags/gflags.h>
+#include "prette/keyboard/keyboard_mode.h"
 
 namespace prt::keyboard {
-  static constexpr const auto kFlagKeyboardDefault = "";
-  static constexpr const auto kFlagKeyboardDisabled = "disabled";
-  DECLARE_string(keyboard); // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
+DECLARE_string(keyboard_mode); // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 
   static inline auto
-  IsKeyboardEnabled() -> bool {
-    return strncasecmp(FLAGS_keyboard.data(), kFlagKeyboardDisabled, 8) != 0;
-  }
-
-  static inline auto
-  IsKeyboardDisabled() -> bool {
-    return strncasecmp(FLAGS_keyboard.data(), kFlagKeyboardDisabled, 8) == 0;
-  }
-
-  static inline auto
-  HasKeyboardConfig() -> bool {
-    return !FLAGS_keyboard.empty();
+  GetKeyboardMode() -> std::optional<Mode> {
+    return ParseMode(FLAGS_keyboard_mode);
   }
 }
 
