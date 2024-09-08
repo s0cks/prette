@@ -2,11 +2,10 @@
 
 #include <units.h>
 #include "prette/thread_local.h"
-#include "prette/window/window.h"
 #include "prette/engine/engine.h"
 
 namespace prt::mouse {
-  static ThreadLocal<Mouse> mouse_;
+  static ThreadLocal<Mouse> mouse_; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 
   Mouse::Mouse(engine::Engine* engine):
     Input(),
@@ -21,35 +20,12 @@ namespace prt::mouse {
       buttons_.insert(MouseButton(static_cast<MouseButton::Code>(idx)));
   }
 
-  static inline auto
-  SetMouse(Mouse* mouse) -> Mouse* {
-    PRT_ASSERT(mouse);
-    mouse_.Set(mouse);
-    return mouse;
-  }
-
-  auto GetMouse() -> Mouse* {
-    PRT_ASSERT(mouse_);
-    return mouse_.Get();
-  }
-
   auto Mouse::ToString() const -> std::string {
     std::stringstream ss;
     ss << "Mouse(";
     ss << "id=" << GetId();
     ss << ")";
     return ss.str();
-  }
-
-  void InitMouse() {
-    if(IsMouseDisabled()) {
-      LOG(INFO) << "Mouse is disabled.";
-      return;
-    }
-
-    DLOG(INFO) << "initializing Mouse....";
-    const auto engine = engine::GetEngine();
-    SetMouse(new Mouse(engine));
   }
 
   static inline auto
@@ -64,8 +40,9 @@ namespace prt::mouse {
   }
 
   void Mouse::OnPreTick(engine::PreTickEvent* event) {
-    if(!HasMouse())
-      return;
+#ifdef PRT_DEBUG
+    const auto start_ns = uv::Now();
+#endif //PRT_DEBUG
     // update mouse pos_ & last_pos_
     GetCursorPos(pos_);
     // send mouse move event if has motion.
@@ -91,5 +68,43 @@ namespace prt::mouse {
         states_[idx] = GLFW_RELEASE;
       }
     }
+#ifdef PRT_DEBUG
+    using units::time::nanosecond_t;
+    const auto stop_ns = uv::Now();
+    const auto total_ns = (stop_ns - start_ns);
+    DLOG_EVERY_T(INFO, 30) << __FUNCTION__ << " finished in " << nanosecond_t(total_ns); // NOLINT(cppcoreguidelines-narrowing-conversions)
+#endif //PRT_DEBUG
+  }
+
+  auto Mouse::New(Engine* engine) -> Mouse* {
+    const auto mouse = new Mouse(engine);
+    PRT_ASSERT(mouse);
+    mouse->Publish<MouseCreatedEvent>(mouse);
+    return mouse;
+  }
+
+  auto GetMouse() -> Mouse* {
+    return mouse_.Get();
+  }
+
+  void InitMouse() {
+#ifdef PRT_DEBUG
+    const auto start_ns = uv::Now();
+#endif //PRT_DEBUG
+    const auto mode = GetMouseMode();
+    if(mode == Mode::kDisabled) {
+      DLOG(WARNING) << "Mouse is disabled.";
+      return;
+    }
+    PRT_ASSERT(mode == Mode::kEnabled);
+    LOG_IF(FATAL, HasMouse()) << "cannot re-initialize Mouse.";
+    DLOG(INFO) << "initializing Mouse....";
+    mouse_ = Mouse::New(GetEngine());
+#ifdef PRT_DEBUG
+    using units::time::nanosecond_t;
+    const auto stop_ns = uv::Now();
+    const auto total_ns = (stop_ns - start_ns);
+    DLOG(INFO) << "Mouse initialized in " << nanosecond_t(total_ns); // NOLINT(cppcoreguidelines-narrowing-conversions)
+#endif //PRT_DEBUG
   }
 }

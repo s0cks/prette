@@ -92,6 +92,8 @@ namespace prt {
       }
 
       auto ToString() const -> std::string override;
+    public:
+      static Mouse* New(Engine* engine);
     };
 
     void InitMouse();
@@ -99,7 +101,7 @@ namespace prt {
 
     static inline auto
     HasMouse() -> bool {
-      return IsMouseEnabled() && GetMouse() != nullptr;
+      return GetMouse() != nullptr;
     }
   }
 

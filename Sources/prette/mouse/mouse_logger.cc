@@ -4,14 +4,9 @@
 namespace prt::mouse {
 #define __ google::LogMessage(GetFile(), GetLine(), GetSeverity()).stream() << std::string(indent_ * 2, ' ')
   void MouseLogger::Print() {
-    //TODO: better debug information
     __ << "Mouse:";
     Indent();
-    if(IsMouseDisabled()) {
-      __ << "State: Disabled";
-    } else {
-      __ << "State: Enabled.";
-    }
+    __ << "Mode: " << GetMouseMode();
     Deindent();
   }
 #undef __
