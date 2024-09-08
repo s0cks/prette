@@ -22,8 +22,9 @@ namespace prt::mouse {
   FOR_EACH_MOUSE_EVENT(FORWARD_DECLARE)
 #undef FORWARD_DECLARE
 
-  typedef rx::subject<MouseEvent*> MouseEventSubject;
-  typedef rx::observable<MouseEvent*> MouseEventObservable;
+  DEFINE_EVENT_SUBJECT(Mouse);
+  DEFINE_EVENT_OBSERVABLE(Mouse);
+  FOR_EACH_MOUSE_EVENT(DEFINE_EVENT_OBSERVABLE);
 
   class Mouse;
   class MouseEvent : public Event {
@@ -156,13 +157,9 @@ namespace prt::mouse {
     DECLARE_MOUSE_EVENT(MouseMove);
   };
 
-  typedef rx::observable<MouseEvent*> MouseEventObservable;
-#define DEFINE_EVENT_OBSERVABLE(Name)                           \
-  typedef rx::observable<Name##Event*> Name##EventObservable;
-  FOR_EACH_MOUSE_EVENT(DEFINE_EVENT_OBSERVABLE)
-#undef DEFINE_EVENT_OBSERVABLE
-
-  typedef rx::subject<MouseEvent*> MouseEventSubject;
+  DEFINE_EVENT_SUBJECT(Mouse);
+  DEFINE_EVENT_OBSERVABLE(Mouse);
+  FOR_EACH_MOUSE_EVENT(DEFINE_EVENT_OBSERVABLE);
 
   class MouseEventSource : public EventSource<MouseEvent> {
   protected:

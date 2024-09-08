@@ -55,7 +55,7 @@ namespace prt::mouse {
     ~CursorDeletedEvent() override = default;
     DECLARE_CURSOR_EVENT(CursorDeleted);
   };
-  
+
   class CursorChangedEvent : public CursorEvent {
   public:
     explicit CursorChangedEvent(const Cursor* cursor):
@@ -64,6 +64,10 @@ namespace prt::mouse {
     ~CursorChangedEvent() override = default;
     DECLARE_CURSOR_EVENT(CursorChanged);
   };
+
+  DEFINE_EVENT_SUBJECT(Cursor);
+  DEFINE_EVENT_OBSERVABLE(Cursor);
+  FOR_EACH_CURSOR_EVENT(DEFINE_EVENT_OBSERVABLE);
 }
 
 #endif //PRT_CURSOR_EVENTS_H

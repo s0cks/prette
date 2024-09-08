@@ -70,12 +70,9 @@ namespace prt::settings {
     DECLARE_SETTING_EVENT(SettingChanged);
   };
 
-  using SettingEventSubject = rx::subject<SettingEvent*>;
-  using SettingEventObservable = rx::observable<SettingEvent*>;
-#define DEFINE_EVENT_OBSERVABLE(Name)   \
-  using Name##EventObservable = rx::observable<Name##Event*>;
+  DEFINE_EVENT_SUBJECT(Setting);
+  DEFINE_EVENT_OBSERVABLE(Setting);
   FOR_EACH_SETTING_EVENT(DEFINE_EVENT_OBSERVABLE)
-#undef DEFINE_EVENT_OBSERVABLE
 
   class SettingEventSource : public EventSource<SettingEvent> {
     DEFINE_NON_COPYABLE_TYPE(SettingEventSource);

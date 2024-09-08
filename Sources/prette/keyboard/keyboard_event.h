@@ -141,12 +141,9 @@ namespace prt::keyboard {
     DECLARE_KEYBOARD_KEY_EVENT(KeyReleased);
   };
 
-  using KeyboardEventSubject = rx::subject<KeyboardEvent*>;
-  using KeyboardEventObservable = rx::observable<KeyboardEvent*>;
-#define DEFINE_EVENT_OBSERVABLE(Name) \
-  using Name##EventObservable = rx::observable<Name##Event*>;
-  FOR_EACH_KEYBOARD_EVENT(DEFINE_EVENT_OBSERVABLE)
-#undef DEFINE_EVENT_OBSERVABLE
+  DEFINE_EVENT_SUBJECT(Keyboard);
+  DEFINE_EVENT_OBSERVABLE(Keyboard);
+  FOR_EACH_KEYBOARD_EVENT(DEFINE_EVENT_OBSERVABLE);
 
   class KeyboardEventSource : public EventSource<KeyboardEvent> {
     DEFINE_NON_COPYABLE_TYPE(KeyboardEventSource);

@@ -187,12 +187,10 @@ namespace prt::window {
     DECLARE_WINDOW_EVENT(WindowContentScale);
   };
 
-  using WindowEventSubject = rx::subject<WindowEvent*>;
-  using WindowEventObservable = rx::observable<WindowEvent*>;
-#define DEFINE_EVENT_OBSERVABLE(Name) \
-  using Name##EventObservable = rx::observable<Name##Event*>;
+
+  DEFINE_EVENT_SUBJECT(Window);
+  DEFINE_EVENT_OBSERVABLE(Window);
   FOR_EACH_WINDOW_EVENT(DEFINE_EVENT_OBSERVABLE)
-#undef DEFINE_EVENT_OBSERVABLE
 
   class WindowEventSource : public EventSource<WindowEvent> {
     DEFINE_NON_COPYABLE_TYPE(WindowEventSource);

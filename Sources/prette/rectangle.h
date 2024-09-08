@@ -23,6 +23,9 @@ namespace prt {
       width_(width),
       height_(height) {
     }
+    Rectangle(const uword xPos, const uword yPos, const uword width, const uword height):
+      Rectangle(Point(xPos, yPos), width, height) {
+    }
     Rectangle(const Rectangle& rhs) = default;
     ~Rectangle() override = default;
 

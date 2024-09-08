@@ -57,6 +57,12 @@ namespace prt {
     virtual ~EventSource() = default;
     virtual auto OnEvent() const -> rx::observable<E*> = 0;
   };
+
+#define DEFINE_EVENT_SUBJECT(Name)                        \
+  using Name##EventSubject = rx::subject<Name##Event*>;
+
+#define DEFINE_EVENT_OBSERVABLE(Name)                           \
+  using Name##EventObservable = rx::observable<Name##Event*>;
 }
 
 #endif //PRT_EVENT_H

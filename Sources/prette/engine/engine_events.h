@@ -145,12 +145,9 @@ namespace prt::engine {
     DECLARE_ENGINE_EVENT(Initialized);
   };
 
-  using EngineEventSubject = rx::subject<EngineEvent*>;
-  using EngineEventObservable = rx::observable<EngineEvent*>;
-#define DEFINE_EVENT_OBSERVABLE(Name)   \
-  using Name##EventObservable = rx::observable<Name##Event*>;
-  FOR_EACH_ENGINE_EVENT(DEFINE_EVENT_OBSERVABLE)
-#undef DEFINE_EVENT_OBSERVABLE
+  DEFINE_EVENT_SUBJECT(Engine);
+  DEFINE_EVENT_OBSERVABLE(Engine);
+  FOR_EACH_ENGINE_EVENT(DEFINE_EVENT_OBSERVABLE);
 
   class EngineEventSource : public EventSource<EngineEvent> {
     DEFINE_NON_COPYABLE_TYPE(EngineEventSource);
