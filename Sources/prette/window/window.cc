@@ -1,18 +1,17 @@
 #include "prette/window/window.h"
 
 #include <unordered_map>
-#include "prette/os_thread.h"
 #include "prette/thread_local.h"
 #include "prette/engine/engine.h"
-#include "prette/render/renderer.h"
+#include "prette/window/window_events.h"
 #include "prette/window/window_flags.h"
 #include "prette/window/window_builder.h"
 
 namespace prt::window {
-  static ThreadLocal<Window> app_;
+  static ThreadLocal<Window> app_; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 
-  static inline Window*
-  CreateAppWindow() {
+  static inline auto
+  CreateAppWindow() -> Window* {
     WindowBuilder builder("App Demo");
     builder.SetFocusOnShow(true);
     builder.SetVisible(false);
@@ -26,8 +25,8 @@ namespace prt::window {
     builder.SetHeight(size.height());
     const auto window = builder.Build();
     if(!window->IsMaximized()) {
-      const auto resolution = render::GetTargetResolution();
-      window->SetMinSize(glm::i32vec2(resolution.width(), resolution.height()));
+      //TODO: set Window min-size
+      // window->SetMinSize(glm::i32vec2(resolution.width(), resolution.height()));
     }
     return window;
   }
@@ -38,7 +37,7 @@ namespace prt::window {
     app_.Set(window);
   }
 
-  Window* GetAppWindow() {
+  auto GetAppWindow() -> Window* {
     return app_.Get();
   }
 
@@ -48,31 +47,27 @@ namespace prt::window {
   }
 
   Window::Window(Handle* handle):
-    WindowEventPublisher(),
+    WindowEventSource(),
     handle_(handle),
+    events_(),
     id_(),
-    frame_(),
     on_terminating_(),
     on_post_init_() {
     PRT_ASSERT(handle);
     const auto size = GetSize();
-    frame_.SetBounds(Rectangle(Point(), size[0], size[1]));
     const auto engine = engine::GetEngine();
     PRT_ASSERT(engine);
-    on_terminating_ = engine->OnTerminatingEvent()
+    //TODO: on_terminating_ & on_post_init discard 16 bytes of data?
+    on_terminating_ = engine->OnTerminating() // NOLINT(cppcoreguidelines-slicing)
       .subscribe([this](engine::TerminatingEvent* event) {
         Close();
       });
-    on_post_init_ = engine->OnPostInitEvent()
+    on_post_init_ = engine->OnPostInit() // NOLINT(cppcoreguidelines-slicing)
       .subscribe([this](engine::PostInitEvent* event) {
         Show();
       });
 #ifdef PRT_GLFW
     glfwSetWindowUserPointer(handle, this);
-    on_post_render_ = render::OnPostRenderEvent()
-      .subscribe([this](render::PostRenderEvent* event) {
-        SwapBuffers();
-      });
 #else
 #error "Unsupported Platform."
 #endif //PRT_GLFW
@@ -86,14 +81,29 @@ namespace prt::window {
 #endif //PRT_GLFW
   }
 
-  rx::observable<WindowEvent*> OnWindowEvent() {
+  auto OnWindowEvent() -> WindowEventObservable {
     const auto window = GetAppWindow();
     PRT_ASSERT(window);
     return window->OnEvent();
   }
 
-  bool VisitAllWindows(WindowVisitor* vis) {
+  void Window::PublishEvent(WindowEvent* event) {
+    PRT_ASSERT(event);
+    const auto& subscriber = events_.get_subscriber();
+    return subscriber.on_next(event);
+  }
+
+  auto VisitAllWindows(WindowVisitor* vis) -> bool {
     NOT_IMPLEMENTED(FATAL); //TODO: implement
     return false;
+  }
+
+  auto Window::ToString() const -> std::string {
+    std::stringstream ss;
+    ss << "Window(";
+    ss << "title=" << GetTitle() << ", ";
+    ss << "size=" << GetSize();
+    ss << ")";
+    return ss.str();
   }
 }

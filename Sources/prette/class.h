@@ -235,7 +235,6 @@ namespace prt {
       return CreateUByteAttr(name, 4, true);
     }
 
-    auto GetGlType() const -> GLenum;
     auto GetAllocationSize() const -> uword;
     auto IsPrimative() const -> bool;
     auto Equals(const Class* rhs) const -> bool;
@@ -246,7 +245,7 @@ namespace prt {
     auto PrintAttributes(const google::LogSeverity severity = google::INFO) const -> bool;
 #endif //PRT_DEBUG
   private:
-    static inline auto 
+    static inline auto
     New(const ClassId id, const std::string& name) -> Class* {
       return new Class(id, name);
     }

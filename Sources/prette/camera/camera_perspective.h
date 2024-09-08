@@ -5,7 +5,6 @@
 
 #include "prette/rx.h"
 #include "prette/uri.h"
-#include "prette/ubo/ubo.h"
 #include "prette/uv/utils.h"
 #include "prette/mouse/mouse.h"
 #include "prette/camera/camera.h"
@@ -57,7 +56,6 @@ namespace prt::camera {
     static constexpr const auto kDefaultUp = glm::vec3(0.0f, 1.0f, 0.0f);
   protected:
     PerspectiveCameraData data_;
-    Ubo* ubo_;
     rx::subscription on_key_pressed_;
     rx::subscription on_mouse_moved_;
 
@@ -73,10 +71,6 @@ namespace prt::camera {
 
     const PerspectiveCameraData& GetData() const {
       return data_;
-    }
-
-    Ubo* GetUbo() const {
-      return ubo_;
     }
 
     float GetYaw() const {
@@ -118,7 +112,7 @@ namespace prt::camera {
     static PerspectiveCamera* FromJson(const uri::Uri& uri);
     static PerspectiveCamera* FromJson(const std::string& value);
   };
-  
+
   PerspectiveCamera* GetPerspectiveCamera();
 }
 

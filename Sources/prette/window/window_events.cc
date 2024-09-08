@@ -1,68 +1,78 @@
 #include "prette/window/window_events.h"
 
 #include <sstream>
+#include "prette/window/window.h"
 
-namespace prt {
-  std::string WindowOpenedEvent::ToString() const {
+namespace prt::window {
+  auto WindowOpenedEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "WindowOpenedEvent(";
+    ss << "window=" << GetWindow()->ToString();
     ss << ")";
     return ss.str();
   }
 
-  std::string WindowClosedEvent::ToString() const {
+  auto WindowClosedEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "WindowClosedEvent(";
+    ss << "window=" << GetWindow()->ToString();
     ss << ")";
     return ss.str();
   }
 
-  std::string WindowPosEvent::ToString() const {
+  auto WindowPosEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "WindowPosEvent(";
+    ss << "window=" << GetWindow()->ToString();
     ss << ")";
     return ss.str();
   }
 
-  std::string WindowSizeEvent::ToString() const {
+  auto WindowSizeEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "WindowSizeEvent(";
-    ss << "size=" << size();
+    ss << "window=" << GetWindow()->ToString();
+    ss << "size=" << GetSize();
     ss << ")";
     return ss.str();
   }
 
-  std::string WindowFocusEvent::ToString() const {
+  auto WindowFocusEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "WindowFocusEvent(";
+    ss << "window=" << GetWindow()->ToString();
     ss << ")";
     return ss.str();
   }
 
-  std::string WindowIconifyEvent::ToString() const {
+  auto WindowIconifyEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "WindowIconifyEvent(";
+    ss << "window=" << GetWindow()->ToString();
     ss << ")";
     return ss.str();
   }
 
-  std::string WindowRefreshEvent::ToString() const {
+  auto WindowRefreshEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "WindowRefreshEvent(";
+    ss << "window=" << GetWindow()->ToString();
     ss << ")";
     return ss.str();
   }
 
-  std::string WindowMaximizeEvent::ToString() const {
+  auto WindowMaximizeEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "WindowMaximizeEvent(";
+    ss << "window=" << GetWindow()->ToString();
     ss << ")";
     return ss.str();
   }
 
-  std::string WindowContentScaleEvent::ToString() const {
+  auto WindowContentScaleEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "WindowContentScaleEvent(";
+    ss << "window=" << GetWindow()->ToString();
     ss << ")";
     return ss.str();
   }

@@ -7,7 +7,6 @@
 
 #include "prette/engine/engine.h"
 #include "prette/window/monitor.h"
-#include "prette/render/renderer.h"
 
 namespace prt::window {
   void Window::OnWindowClosed(Handle* handle) {
@@ -25,7 +24,6 @@ namespace prt::window {
   void Window::OnWindowSize(Handle* handle, const int width, const int height) {
     const auto window = GetWindow(handle);
     PRT_ASSERT(window);
-    window->GetFrame()->SetBounds(Rectangle(Point(0, 0), width, height));
     return window->Publish<WindowSizeEvent>(window, width, height);
   }
 
@@ -59,8 +57,8 @@ namespace prt::window {
     return window->Publish<WindowContentScaleEvent>(window, xScale, yScale);
   }
 
-  std::string Window::GetTitle() const {
-    return std::string(glfwGetWindowTitle(GetHandle()));
+  auto Window::GetTitle() const -> std::string {
+    return {glfwGetWindowTitle(GetHandle())};
   }
 
   void Window::SetTitle(const std::string& title) {
@@ -81,13 +79,13 @@ namespace prt::window {
     glfwSetWindowSizeLimits(GetHandle(), size[0], size[1], GLFW_DONT_CARE, GLFW_DONT_CARE);
   }
 
-  glm::vec2 Window::GetContentScale() const {
+  auto Window::GetContentScale() const -> glm::vec2 {
     glm::vec2 scale;
     glfwGetWindowContentScale(GetHandle(), &scale[0], &scale[1]);
     return scale;
   }
 
-  glm::i32vec2 Window::GetSize() const {
+  auto Window::GetSize() const -> glm::i32vec2 {
     glm::i32vec2 size;
     glfwGetWindowSize(GetHandle(), &size[0], &size[1]);
     return size;
@@ -101,7 +99,7 @@ namespace prt::window {
     glfwSetWindowPos(GetHandle(), pos[0], pos[1]);
   }
 
-  Point Window::GetPos() const {
+  auto Window::GetPos() const -> Point {
     glm::i32vec2 pos;
     glfwGetWindowPos(GetHandle(), &pos[0], &pos[1]);
     return Point(pos);
@@ -114,7 +112,6 @@ namespace prt::window {
 
   void Window::SwapBuffers() {
     glfwSwapBuffers(GetHandle());
-    CHECK_GL;
   }
 }
 

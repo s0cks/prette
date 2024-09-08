@@ -16,6 +16,7 @@ namespace prt::camera {
 #undef FORWARD_DECLARE
 
   class CameraEvent : public Event {
+    DEFINE_NON_COPYABLE_TYPE(CameraEvent);
   protected:
     CameraEvent() = default;
   public:
@@ -32,7 +33,7 @@ namespace prt::camera {
     ~CameraCreatedEvent() override = default;
     DECLARE_CAMERA_EVENT(CameraCreated);
   };
-  
+
   class CameraDestroyedEvent : public CameraEvent {
   public:
     CameraDestroyedEvent() = default;

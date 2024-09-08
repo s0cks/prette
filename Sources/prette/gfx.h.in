@@ -2,6 +2,12 @@
 #define PRT_GFX_H
 
 #include "prette/common.h"
+#ifdef PRT_VK
+
+#include <vulkan/vulkan.h>
+
+#elif PRT_GL
+
 #ifdef OS_IS_OSX
 
 #define GL_SILENCE_DEPRECATION 1
@@ -15,6 +21,13 @@
 
 #endif // OS_IS_OSX
 
+#define PRT_GLFW_CTX_VERSION_MAJOR @PROJECT_GLFW_CONTEXT_VERSION_MAJOR@
+#define PRT_GLFW_CTX_VERSION_MINOR @PROJECT_GLFW_CONTEXT_VERSION_MINOR@
+
+#else
+#error "Unsupported Graphics Library"
+#endif
+
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 
@@ -23,14 +36,7 @@
 #include <glog/logging.h>
 
 #include "prette/glm.h"
-#include "prette/gfx_error.h"
-#include "prette/gfx_debug.h"
-#include "prette/gfx_misc.h"
-
 #include <semver/semver.hpp>
-
-#define PRT_GLFW_CTX_VERSION_MAJOR @PROJECT_GLFW_CONTEXT_VERSION_MAJOR@
-#define PRT_GLFW_CTX_VERSION_MINOR @PROJECT_GLFW_CONTEXT_VERSION_MINOR@
 
 #ifdef M_PI
 #define PI M_PI
@@ -41,44 +47,13 @@
 #endif //PI
 
 namespace prt::gfx {
+  using semver::version;
+
   void Init();
 
-  static inline semver::version
-  GetGlfwVersion() {
-    return semver::version(GLFW_VERSION_MAJOR, GLFW_VERSION_MINOR, GLFW_VERSION_REVISION);
-  }
-
-  static inline std::string
-  GetGlVersionString() {
-    return (const char*) glGetString(GL_VERSION);
-  }
-
-  static inline std::string
-  GetGlslVersionString() {
-    return (const char*) glGetString(GL_SHADING_LANGUAGE_VERSION);
-  }
-
-  static inline semver::version
-  GetGlslVersion() {
-    return semver::version::parse(GetGlslVersionString(), false);
-  }
-
-#ifndef OS_IS_OSX
-  static inline semver::version
-  GetGlewVersion() {
-    const auto glewVersion = (const char*) glewGetString(GLEW_VERSION);
-    return semver::version::parse(glewVersion);
-  }
-#endif //OS_IS_OSX
-
-  static inline std::string
-  GetGlVendorString() {
-    return (const char*) glGetString(GL_VENDOR);
-  }
-
-  static inline std::string
-  GetGlRendererString() {
-    return (const char*) glGetString(GL_RENDERER);
+  static inline auto
+  GetGlfwVersion() -> version {
+    return version(GLFW_VERSION_MAJOR, GLFW_VERSION_MINOR, GLFW_VERSION_REVISION);
   }
 }
 

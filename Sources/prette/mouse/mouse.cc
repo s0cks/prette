@@ -1,12 +1,9 @@
 #include "prette/mouse/mouse.h"
 
 #include <units.h>
-#include "prette/uv/utils.h"
 #include "prette/thread_local.h"
 #include "prette/window/window.h"
 #include "prette/engine/engine.h"
-
-#include "prette/properties/properties.h"
 
 namespace prt::mouse {
   static ThreadLocal<Mouse> mouse_;
@@ -24,23 +21,19 @@ namespace prt::mouse {
       buttons_.insert(MouseButton(static_cast<MouseButton::Code>(idx)));
   }
 
-  Mouse::~Mouse() {
-    
-  }
-  
-  static inline Mouse*
-  SetMouse(Mouse* mouse) {
+  static inline auto
+  SetMouse(Mouse* mouse) -> Mouse* {
     PRT_ASSERT(mouse);
     mouse_.Set(mouse);
     return mouse;
   }
 
-  Mouse* GetMouse() {
+  auto GetMouse() -> Mouse* {
     PRT_ASSERT(mouse_);
     return mouse_.Get();
   }
 
-  std::string Mouse::ToString() const {
+  auto Mouse::ToString() const -> std::string {
     std::stringstream ss;
     ss << "Mouse(";
     ss << "id=" << GetId();
@@ -59,12 +52,12 @@ namespace prt::mouse {
     SetMouse(new Mouse(engine));
   }
 
-  static inline bool
-  HasMotion(const glm::vec2& delta) {
+  static inline auto
+  HasMotion(const glm::vec2& delta) -> bool {
     return delta[0] != 0.0f && delta[1] != 0.0f;
   }
 
-  void Mouse::Publish(MouseEvent* event) {
+  void Mouse::PublishEvent(MouseEvent* event) {
     PRT_ASSERT(event);
     const auto& subscriber = events_.get_subscriber();
     subscriber.on_next(event);
@@ -89,7 +82,7 @@ namespace prt::mouse {
       const auto cur_state = IsButtonPressed(btn);
       if(old_state == cur_state)
         continue;
-      
+
       if(cur_state == GLFW_PRESS) {
         MouseEventSource::Publish<MouseButtonPressedEvent>(this, pos_, btn);
         states_[idx] = GLFW_PRESS;

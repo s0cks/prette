@@ -1,12 +1,13 @@
 #ifndef PRT_ON_SHUTDOWN_H
 #define PRT_ON_SHUTDOWN_H
 
-#include "prette/uv/utils.h"
+#include "prette/uv/uv_handle.h"
 
 namespace prt {
   class ShutdownListenerHandle;
   class ShutdownListener {
     friend class ShutdownListenerHandle;
+    DEFINE_NON_COPYABLE_TYPE(ShutdownListener);
   protected:
     ShutdownListener() = default;
     virtual void OnShutdown() = 0;
@@ -15,6 +16,7 @@ namespace prt {
   };
 
   class ShutdownListenerHandle : public uv::AsyncHandleBase {
+    DEFINE_NON_COPYABLE_TYPE(ShutdownListenerHandle);
   private:
     static inline void
     OnCall(uv_async_t* handle) {

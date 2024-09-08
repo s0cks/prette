@@ -12,31 +12,13 @@
 #include <uv.h>
 #include <units.h>
 
-#include "platform.h"
+#include "prette/platform.h"
 
 #if defined(OS_IS_LINUX) || defined(OS_IS_OSX)
 #include <unistd.h>
 #include <sys/stat.h>
 #else
 #error "unsupported operating system"
-#endif
-
-#if defined(_M_X64) || defined(__x86_64__)
-
-#define ARCH_IS_X64 1
-
-#elif defined(_M_IX86) || defined(__i386__)
-
-#define ARCH_IS_X32 1
-
-#elif defined(__ARMEL__)
-
-#define ARCH_IS_ARM 1
-
-#elif defined(__aarch64__)
-
-#define ARCH_IS_ARM64 1
-
 #endif
 
 
@@ -47,7 +29,7 @@
 
 #else
 
-#define PRT_ASSERT(x) \
+#define PRT_ASSERT(x) (x)
 
 #endif //PRT_DEBUG
 

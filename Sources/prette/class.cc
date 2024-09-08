@@ -136,27 +136,6 @@ namespace prt {
     }
   }
 
-  auto Class::GetGlType() const -> GLenum {
-    switch(GetId()) {
-      case kByteClassId:
-        return GL_BYTE;
-      case kUnsignedByteClassId:
-        return GL_UNSIGNED_BYTE;
-      case kShortClassId:
-        return GL_SHORT;
-      case kUnsignedShortClassId:
-        return GL_UNSIGNED_SHORT;
-      case kIntClassId:
-        return GL_INT;
-      case kUnsignedIntClassId:
-        return GL_UNSIGNED_INT;
-      case kFloatClassId:
-        return GL_FLOAT;
-      default:
-        return GL_NONE;
-    }
-  }
-
   auto Class::IsPrimative() const -> bool {
     switch(GetId()) {
       default:

@@ -19,7 +19,6 @@
 namespace prt {
   namespace component {
     class Component;
-    
     class ComponentVisitor {
     protected:
       ComponentVisitor() = default;

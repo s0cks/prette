@@ -12,28 +12,28 @@ namespace prt::window {
     DEFINE_NON_COPYABLE_TYPE(Monitor);
 #ifdef PRT_GLFW
   public:
-    typedef GLFWmonitor Handle;
+    using Handle = GLFWmonitor;
   private:
-    const GLFWvidmode* GetVideoMode() const;
+    auto GetVideoMode() const -> const GLFWvidmode*;
 #else
 #error "Unsupported Platform."
 #endif //PRT_GLFW
-  protected:
+  private:
     Handle* handle_;
 
     explicit Monitor(Handle* handle);
 
-    inline Handle* GetHandle() const {
+    inline auto GetHandle() const -> Handle* {
       return handle_;
     }
   public:
-    ~Monitor();
-    int GetRedBits() const;
-    int GetBlueBits() const;
-    int GetGreenBits() const;
-    int GetRefreshRateInHertz() const;
-    Resolution GetResolution() const;
-    std::string GetName() const;
+    ~Monitor() = default;
+    auto GetRedBits() const -> int;
+    auto GetBlueBits() const -> int;
+    auto GetGreenBits() const -> int;
+    auto GetRefreshRateInHertz() const -> int;
+    auto GetResolution() const -> Resolution;
+    auto GetName() const -> std::string;
   };
 }
 

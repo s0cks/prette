@@ -7,6 +7,7 @@
 
 namespace prt {
   class Event {
+    DEFINE_NON_COPYABLE_TYPE(Event);
   protected:
     Event() = default;
   public:
@@ -45,77 +46,16 @@ namespace prt {
     DEFINE_NON_COPYABLE_TYPE(EventSource<E>);
   protected:
     EventSource() = default;
-    virtual void Publish(E* event) = 0;
+    virtual void PublishEvent(E* event) = 0;
 
     template<class T, typename... Args>
-    inline void Publish(Args... args) {
+    void Publish(Args... args) {
       T event(args...);
-      return Publish((E*) &event);
+      return PublishEvent((E*) &event);
     }
   public:
     virtual ~EventSource() = default;
     virtual auto OnEvent() const -> rx::observable<E*> = 0;
-  };
-
-  // @deprecated
-  template<class E>
-  class EventPublisher {
-  private:
-    rx::subject<E*> events_;
-    rx::subscription fwd_;
-  protected:
-    EventPublisher() = default;
-    EventPublisher(const rx::subject<E*>& fwd):
-      events_(),
-      fwd_() {
-      ForwardTo(fwd);
-    }
-
-    inline void Publish(E* event) {
-      PRT_ASSERT(event);
-      const auto& subscriber = events_.get_subscriber();
-      subscriber.on_next(event);
-    }
-
-    template<class T, typename... Args>
-    inline void Publish(Args... args) {
-      T event(args...);
-      return Publish((E*) &event);
-    }
-
-    rx::subscriber<E*> GetSubscriber() const {
-      return events_.get_subscriber();
-    }
-
-    inline void ForwardTo(const rx::subject<E*>& dst) {
-      if(fwd_.is_subscribed())
-        fwd_.unsubscribe();
-      fwd_ = OnEvent().subscribe(dst.get_subscriber());
-    }
-
-    inline void ForwardTo(EventPublisher<E>* dst) {
-      PRT_ASSERT(dst);
-      return ForwardTo(dst->events_);
-    }
-  public:
-    virtual ~EventPublisher() {
-      if(fwd_.is_subscribed())
-        fwd_.unsubscribe();
-      const auto& subscriber = events_.get_subscriber();
-      subscriber.on_completed();
-    }
-
-    rx::observable<E*> OnEvent() const {
-      return events_.get_observable();
-    }
-
-    explicit operator rx::subject<E*>& () {
-      return events_;
-    }
-
-    explicit operator const rx::subject<E*>& () const {
-      return events_;
-    }
   };
 }
 

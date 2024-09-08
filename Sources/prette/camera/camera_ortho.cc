@@ -1,13 +1,7 @@
 #include "prette/camera/camera_ortho.h"
 
-#include "prette/thread_local.h"
-#include "prette/window/window.h"
-
-#include "prette/render/renderer.h"
-#include "prette/keyboard/keyboard.h"
-
 namespace prt::camera {
-  static OrthoCameraSet all_;
+  static OrthoCameraSet all_; //NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 
   static inline void
   Register(OrthoCamera* value) {
@@ -33,11 +27,11 @@ namespace prt::camera {
     Deregister(this);
   }
 
-  const OrthoCameraSet& GetAllOrthoCameras() {
+  auto GetAllOrthoCameras() -> const OrthoCameraSet& {
     return all_;
   }
 
-  uword GetTotalNumberOfOrthoCameras() {
+  auto GetTotalNumberOfOrthoCameras() -> uword {
     return all_.size();
   }
 }

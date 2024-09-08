@@ -20,26 +20,13 @@ namespace prt::keyboard {
 #undef FORWARD_DECLARE
 
 #define DECLARE_KEYBOARD_EVENT(Name)                            \
-  public:                                                       \
-    Name##Event* As##Name##Event() override { return this; }    \
-    const char* GetName() const override { return #Name; }      \
-    std::string ToString() const override;                      \
-    static inline bool                                          \
-    Filter(KeyboardEvent* event) {                              \
-      return event                                              \
-          && event->Is##Name##Event();                          \
-    }                                                           \
-    static inline Name##Event*                                  \
-    Cast(KeyboardEvent* event) {                                \
-      PRT_ASSERT(event);                                        \
-      PRT_ASSERT(event->Is##Name##Event());                     \
-      return event->As##Name##Event();                          \
-    }
+  DECLARE_EVENT_TYPE(KeyboardEvent, Name)
 
   class KeyboardEvent : public Event {
-  protected:
+    DEFINE_NON_COPYABLE_TYPE(KeyboardEvent);
+  private:
     const Keyboard* keyboard_;
-
+  protected:
     explicit KeyboardEvent(const Keyboard* keyboard):
       Event(),
       keyboard_(keyboard) {
@@ -47,22 +34,22 @@ namespace prt::keyboard {
   public:
     ~KeyboardEvent() override = default;
 
-    const Keyboard* keyboard() const {
+    auto keyboard() const -> const Keyboard* {
       return keyboard_;
     }
 
 
-    virtual KeyEvent* AsKeyEvent() {
+    virtual auto AsKeyEvent() -> KeyEvent* {
       return nullptr;
     }
 
-    bool IsKeyEvent() {
+    auto IsKeyEvent() -> bool {
       return AsKeyEvent() != nullptr;
     }
 
-#define DEFINE_TYPE_CHECK(Name)                                         \
-    virtual Name##Event* As##Name##Event() { return nullptr; }          \
-    bool Is##Name##Event() { return As##Name##Event() != nullptr; }
+#define DEFINE_TYPE_CHECK(Name)                                               \
+    virtual auto As##Name##Event() -> Name##Event* { return nullptr; }        \
+    auto Is##Name##Event() -> bool { return As##Name##Event() != nullptr; }
     FOR_EACH_KEYBOARD_EVENT(DEFINE_TYPE_CHECK)
 #undef DEFINE_TYPE_CHECK
   };
@@ -86,7 +73,8 @@ namespace prt::keyboard {
   };
 
   class KeyEvent : public KeyboardEvent {
-  protected:
+    DEFINE_NON_COPYABLE_TYPE(KeyEvent);
+  private:
     Key key_;
   public:
     KeyEvent(const Keyboard* keyboard, const Key& key):
@@ -95,26 +83,26 @@ namespace prt::keyboard {
     }
     ~KeyEvent() override = default;
 
-    const Key& GetKey() const {
+    auto GetKey() const -> const Key& {
       return key_;
     }
 
-    KeyCode GetKeyCode() const {
+    auto GetKeyCode() const -> KeyCode {
       return key_.GetCode();
     }
 
-    KeyEvent* AsKeyEvent() override {
+    auto AsKeyEvent() -> KeyEvent* override {
       return this;
     }
   public:
-    static inline KeyEvent*
-    Cast(KeyboardEvent* event) {
+    static inline auto
+    Cast(KeyboardEvent* event) -> KeyEvent* {
       PRT_ASSERT(event);
       return event->AsKeyEvent();
     }
 
-    static inline std::function<bool(KeyboardEvent*)>
-    FilterBy(const KeyCode code) {
+    static inline auto
+    FilterBy(const KeyCode code) -> std::function<bool(KeyboardEvent*)> {
       return [code](KeyboardEvent* event) {
         return event
             && event->IsKeyEvent()
@@ -123,18 +111,18 @@ namespace prt::keyboard {
     }
   };
 
-#define DECLARE_KEYBOARD_KEY_EVENT(Name)                            \
-  DECLARE_KEYBOARD_EVENT(Name)                                      \
-  public:                                                           \
-    static inline std::function<bool(KeyboardEvent*)>               \
-    FilterBy(const KeyCode code) {                                  \
-      return [code](KeyboardEvent* event) {                         \
-        return event                                                \
-            && event->Is##Name##Event()                             \
-            && event->As##Name##Event()->GetKeyCode() == code;      \
-      };                                                            \
+#define DECLARE_KEYBOARD_KEY_EVENT(Name)                                    \
+  DECLARE_KEYBOARD_EVENT(Name)                                              \
+  public:                                                                   \
+    static inline auto                                                      \
+    FilterBy(const KeyCode code) -> std::function<bool(KeyboardEvent*)> {   \
+      return [code](KeyboardEvent* event) {                                 \
+        return event                                                        \
+            && event->Is##Name##Event()                                     \
+            && event->As##Name##Event()->GetKeyCode() == code;              \
+      };                                                                    \
     }
-  
+
   class KeyPressedEvent : public KeyEvent {
   public:
     KeyPressedEvent(const Keyboard* keyboard, const Key& key):
@@ -153,38 +141,27 @@ namespace prt::keyboard {
     DECLARE_KEYBOARD_KEY_EVENT(KeyReleased);
   };
 
-  typedef rx::subject<KeyboardEvent*> KeyboardEventSubject;
+  using KeyboardEventSubject = rx::subject<KeyboardEvent*>;
+  using KeyboardEventObservable = rx::observable<KeyboardEvent*>;
+#define DEFINE_EVENT_OBSERVABLE(Name) \
+  using Name##EventObservable = rx::observable<Name##Event*>;
+  FOR_EACH_KEYBOARD_EVENT(DEFINE_EVENT_OBSERVABLE)
+#undef DEFINE_EVENT_OBSERVABLE
 
-  class KeyboardEventPublisher : public EventPublisher<KeyboardEvent> {
+  class KeyboardEventSource : public EventSource<KeyboardEvent> {
+    DEFINE_NON_COPYABLE_TYPE(KeyboardEventSource);
   protected:
-    KeyboardEventPublisher() = default;
-    explicit KeyboardEventPublisher(const KeyboardEventSubject& fwd):
-      EventPublisher<KeyboardEvent>(fwd) {
-    }
+    KeyboardEventSource() = default;
   public:
-    ~KeyboardEventPublisher() override = default;
-
-#define DEFINE_ON_EVENT(Name)                 \
-    inline rx::observable<Name##Event*>       \
-    On##Name##Event() {                       \
-      return OnEvent()                        \
-        .filter(Name##Event::Filter)          \
-        .map(Name##Event::Cast);              \
+    ~KeyboardEventSource() override = default;
+#define DEFINE_ON_EVENT(Name)                           \
+    auto On##Name() const -> Name##EventObservable {    \
+      return OnEvent()                                  \
+        .filter(Name##Event::Filter)                    \
+        .map(Name##Event::Cast);                        \
     }
     FOR_EACH_KEYBOARD_EVENT(DEFINE_ON_EVENT)
 #undef DEFINE_ON_EVENT
-
-    inline rx::observable<KeyPressedEvent*> OnPressed(const KeyCode code) const {
-      return OnEvent()
-        .filter(KeyPressedEvent::FilterBy(code))
-        .map(KeyPressedEvent::Cast);
-    }
-
-    inline rx::observable<KeyReleasedEvent*> OnReleased(const KeyCode code) const {
-      return OnEvent()
-        .filter(KeyReleasedEvent::FilterBy(code))
-        .map(KeyReleasedEvent::Cast);
-    }
   };
 }
 

@@ -8,53 +8,52 @@
 namespace prt::window {
   class Window;
   class WindowBuilder : public BuilderTemplate<Window> {
-  protected:
+    DEFINE_NON_COPYABLE_TYPE(WindowBuilder);
+  private:
     std::string title_;
     glm::i32vec2 size_;
-    Monitor* monitor_;
-    Window* share_;
+    Monitor* monitor_{};
+    Window* share_{};
   private:
-    GLFWwindow* GetShareHandle() const;
-    GLFWmonitor* GetMonitorHandle() const;
+    auto GetShareHandle() const -> GLFWwindow*;
+    auto GetMonitorHandle() const -> GLFWmonitor*;
   public:
-    WindowBuilder(const std::string& title = ""):
+    WindowBuilder(const char* title = ""):
       BuilderTemplate<Window>(),
       title_(title),
-      size_(),
-      monitor_(nullptr),
-      share_(nullptr) {
+      size_() {
     }
-    virtual ~WindowBuilder() = default;
+    ~WindowBuilder() override = default;
 
-    bool HasMonitor() const {
+    auto HasMonitor() const -> bool {
       return monitor_ != nullptr;
     }
 
-    Monitor* GetMonitor() const {
+    auto GetMonitor() const -> Monitor* {
       return monitor_;
     }
 
     void SetSize(const glm::i32vec2& size) {
       size_ = size;
     }
-    
+
     void SetWidth(const int32_t width) {
       size_[0] = width;
     }
-    
+
     void SetHeight(const int32_t height) {
       size_[1] = height;
     }
 
-    const glm::i32vec2 GetSize() const {
+    auto GetSize() const -> const glm::i32vec2 {
       return size_;
     }
 
-    bool HasShare() const {
+    auto HasShare() const -> bool {
       return share_ != nullptr;
     }
 
-    Window* GetShare() const {
+    auto GetShare() const -> Window* {
       return share_;
     }
 
@@ -78,9 +77,9 @@ namespace prt::window {
     void SetGraphicsSwitching(const bool value);
 #endif
 
-    Window* Build() const override;
+    auto Build() const -> Window* override;
 
-    rx::observable<Window*> BuildAsync() const override {
+    auto BuildAsync() const -> rx::observable<Window*> override {
       return rx::observable<>::create<Window*>([this](rx::subscriber<Window*> s) {
         const auto value = Build();
         if(!value)

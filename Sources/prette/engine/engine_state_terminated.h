@@ -1,13 +1,12 @@
-#ifndef PRT_ENGINE_STATE_H
-#error "Please #include <prette/engine/engine_state.h> instead."
-#endif //PRT_ENGINE_STATE_H
-
 #ifndef PRT_ENGINE_STATE_TERMINATED_H
 #define PRT_ENGINE_STATE_TERMINATED_H
+
+#include "prette/engine/engine_state.h"
 
 namespace prt::engine {
   class TerminatingState : public EngineState {
     friend class Engine;
+    DEFINE_NON_COPYABLE_TYPE(TerminatingState);
   protected:
     explicit TerminatingState(Engine* engine):
       EngineState(engine) {
@@ -19,6 +18,7 @@ namespace prt::engine {
 
   class TerminatedState : public EngineState {
     friend class Engine;
+    DEFINE_NON_COPYABLE_TYPE(TerminatedState);
   protected:
     explicit TerminatedState(Engine* engine):
       EngineState(engine) {

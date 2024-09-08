@@ -22,3 +22,4 @@
 !/.cmake-format.yaml
 !/.clang*
 !/Benchmarks/
+!/.pre-commit-config.yaml

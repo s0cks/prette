@@ -6,15 +6,15 @@
 
 namespace prt::window {
 static constexpr const auto kDefaultWindowSize = "512x512";
-DECLARE_string(window_size);
+DECLARE_string(window_size); // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 
-  static inline bool
-  HasWindowSize() {
+  static inline auto
+  HasWindowSize() -> bool {
     return !FLAGS_window_size.empty();
   }
 
-  static inline Dimension
-  GetWindowSize() {
+  static inline auto
+  GetWindowSize() -> Dimension {
     return Dimension(FLAGS_window_size);
   }
 }

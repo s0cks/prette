@@ -1,7 +1,7 @@
 #include "prette/window/window_builder.h"
 
-namespace prt::window { 
-  GLFWwindow* WindowBuilder::GetShareHandle() const {
+namespace prt::window {
+  auto WindowBuilder::GetShareHandle() const -> GLFWwindow* {
 #ifdef PRT_GLFW
     return HasShare() ? GetShare()->GetHandle() : nullptr;
 #else
@@ -9,7 +9,7 @@ namespace prt::window {
 #endif
   }
 
-  GLFWmonitor* WindowBuilder::GetMonitorHandle() const {
+  auto WindowBuilder::GetMonitorHandle() const -> GLFWmonitor* {
 #ifdef PRT_GLFW
     return HasMonitor() ? GetMonitor()->GetHandle() : nullptr;
 #else
@@ -83,17 +83,17 @@ namespace prt::window {
 
   Window* WindowBuilder::Build() const {
 #ifdef PRT_GLFW
-    gfx::EnableDebug();
 #ifdef __APPLE__
     glfwWindowHintString(GLFW_COCOA_FRAME_NAME, title_.data());
 #endif
+
     const auto handle = glfwCreateWindow(size_[0], size_[1], title_.data(), GetMonitorHandle(), GetShareHandle());
     if(!handle) {
       glfwTerminate();
       LOG(FATAL) << "failed to create Window handle.";
       return nullptr;
     }
-    
+
     glfwSetWindowCloseCallback(handle, &Window::OnWindowClosed);
     glfwSetWindowPosCallback(handle, &Window::OnWindowPos);
     glfwSetWindowSizeCallback(handle, &Window::OnWindowSize);

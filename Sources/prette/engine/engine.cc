@@ -2,18 +2,22 @@
 
 #include "prette/common.h"
 #include "prette/thread_local.h"
-#include "prette/render/renderer.h"
-
 #include "prette/keyboard/keyboard.h"
+
+#include "prette/engine/engine_state_init.h"
+#include "prette/engine/engine_state_error.h"
+#include "prette/engine/engine_state_running.h"
+#include "prette/engine/engine_state_terminated.h"
 
 namespace prt::engine {
   Engine::Engine():
-    EngineEventPublisher(),
+    EngineEventSource(),
     loop_(),
     running_(false),
     state_(nullptr),
     ticker_(&loop_),
-    cause_() {
+    cause_(),
+    events_() {
   }
 
   Engine::~Engine() {
@@ -27,7 +31,7 @@ namespace prt::engine {
     state->Run();
     const auto& duration = state->GetDurationSeries();
     using namespace units::time;
-    DLOG(INFO) << state->GetName() << " done in " << nanosecond_t(duration.last()) << ", avg=" << nanosecond_t(duration.average()) << ", max=" << nanosecond_t(duration.max()) << ", min=" << nanosecond_t(duration.min());
+    DLOG(INFO) << state->GetName() << " done in " << nanosecond_t(duration.last()) << ", avg=" << nanosecond_t(duration.average()) << ", max=" << nanosecond_t(duration.max()) << ", min=" << nanosecond_t(duration.min()); // NOLINT(cppcoreguidelines-narrowing-conversions)
   }
 
   void Engine::Run() {
@@ -45,7 +49,17 @@ namespace prt::engine {
       GetState()->Stop();
   }
 
-  static ThreadLocal<Engine> engine_;
+  void Engine::PublishEvent(EngineEvent* event) {
+    PRT_ASSERT(event);
+    const auto& subscriber = events_.get_subscriber();
+    return subscriber.on_next(event);
+  }
+
+  auto Engine::OnEvent() const -> EngineEventObservable {
+    return events_.get_observable();
+  }
+
+  static ThreadLocal<Engine> engine_; //NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 
   static inline void
   SetEngine(Engine* engine) {
@@ -53,7 +67,7 @@ namespace prt::engine {
     engine_.Set(engine);
   }
 
-  Engine* GetEngine() {
+  auto GetEngine() -> Engine* {
     return engine_.Get();
   }
 

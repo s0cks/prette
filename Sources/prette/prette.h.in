@@ -1,5 +1,5 @@
-#ifndef MCC_H
-#define MCC_H
+#ifndef PRT_H
+#define PRT_H
 
 #include <string>
 #include <glog/logging.h>
@@ -12,8 +12,8 @@ namespace prt {
 #define PRT_GIT_BRANCH "@PROJECT_GIT_BRANCH@"
 #define PRT_GIT_COMMIT_HASH "@PROJECT_GIT_COMMIT_HASH@"
 
-  std::string GetVersion();
+  auto GetVersion() -> std::string;
   void OnGlfwError(int code, const char* description);
 }
 
-#endif //MCC_H
+#endif //PRT_H

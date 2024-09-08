@@ -28,45 +28,38 @@ namespace prt::engine {
     void Run() override;                                                        \
     void Stop() override;                                                       \
   public:                                                                       \
-    const char* GetName() const override { return #Name; }                      \
-    Name##State* As##Name##State() override { return this; }
+    auto GetName() const -> const char* override { return #Name; }                      \
+    auto As##Name##State() -> Name##State* override { return this; }
 
-  class EngineState : public State {
+  class EngineState : public State,
+                      public EngineEventSource {
     friend class Engine;
-  protected:
+    DEFINE_NON_COPYABLE_TYPE(EngineState);
+  private:
     Engine* engine_;
-
+  protected:
     explicit EngineState(Engine* engine):
       State(),
       engine_(engine) {
       PRT_ASSERT(engine);
     }
 
-    void Publish(EngineEvent* event);
-
-    template<class T, typename... Args>
-    inline void Publish(Args... args) {
-      T event(args...);
-      return Publish((EngineEvent*) &event);
-    }
+    void PublishEvent(EngineEvent* event) override;
   public:
     ~EngineState() override = default;
 
-    inline Engine* GetEngine() const {
+    inline auto GetEngine() const -> Engine* {
       return engine_;
     }
 
+    auto OnEvent() const -> EngineEventObservable override;
+
 #define DEFINE_TYPE_CHECK(Name)                                                 \
-    virtual Name##State* As##Name##State() { return nullptr; }                  \
-    bool Is##Name##State() { return As##Name##State() != nullptr;  }
+    virtual auto As##Name##State() -> Name##State* { return nullptr; }          \
+    auto Is##Name##State() -> bool { return As##Name##State() != nullptr;  }
     FOR_EACH_ENGINE_STATE(DEFINE_TYPE_CHECK)
 #undef DEFINE_TYPE_CHECK
   };
 }
-
-#include "prette/engine/engine_state_init.h"
-#include "prette/engine/engine_state_error.h"
-#include "prette/engine/engine_state_running.h"
-#include "prette/engine/engine_state_terminated.h"
 
 #endif //PRT_ENGINE_STATE_H

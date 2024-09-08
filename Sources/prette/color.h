@@ -93,10 +93,6 @@ namespace prt {
     }
   }
   using namespace rgb;
-
-  namespace gfx {
-    void SetClearColor(const Color& c);
-  }
 }
 
 #endif //PRT_COLOR_H

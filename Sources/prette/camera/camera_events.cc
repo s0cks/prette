@@ -2,14 +2,14 @@
 #include <sstream>
 
 namespace prt::camera {
-  std::string CameraCreatedEvent::ToString() const {
+  auto CameraCreatedEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "CameraCreatedEvent(";
     ss << ")";
     return ss.str();
   }
 
-  std::string CameraDestroyedEvent::ToString() const {
+  auto CameraDestroyedEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "CameraDestroyedEvent(";
     ss << ")";

@@ -1,14 +1,14 @@
 #include "prette/runtime.h"
 
-#include "prette/prette.h"
+#include "prette/class.h"
 #include "prette/mouse/mouse.h"
 #include "prette/engine/engine.h"
 
 #include "prette/os_thread.h"
 #include "prette/window/window.h"
-#include "prette/render/renderer.h"
 #include "prette/keyboard/keyboard.h"
 
+#include "prette/signals.h"
 #include "prette/thread_local.h"
 #include "prette/runtime_info_printer.h"
 
@@ -41,23 +41,11 @@ namespace prt {
     window::InitWindows();
     mouse::InitMouse();
     keyboard::InitKeyboard();
-    render::InitRenderer();
     // init classes
     Class::Init();
-    gui::Vertex::InitClass();
   }
 
-  static ThreadLocal<Query> kTimeQuery;
-
-  Query* Runtime::GetTimeQuery() {
-    if(kTimeQuery)
-      return kTimeQuery.Get();
-    const auto query = Query::NewTimeElapsed();
-    kTimeQuery.Set(query);
-    return query;
-  }
-
-  int Runtime::Run() {
+  auto Runtime::Run() -> int {
 #ifdef PRT_DEBUG
     PrintRuntimeInfo();
 #endif //PRT_DEBUG

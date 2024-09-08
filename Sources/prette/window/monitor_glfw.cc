@@ -2,38 +2,38 @@
 #ifdef PRT_GLFW
 
 namespace prt::window {
-  const GLFWvidmode* Monitor::GetVideoMode() const {
+  auto Monitor::GetVideoMode() const -> const GLFWvidmode* {
     return glfwGetVideoMode(GetHandle());
   }
 
-  Resolution Monitor::GetResolution() const {
+  auto Monitor::GetResolution() const -> Resolution {
     const auto mode = GetVideoMode();
-    return Resolution(mode->width, mode->height);
+    return {mode->width, mode->height};
   }
 
-  int Monitor::GetRedBits() const {
+  auto Monitor::GetRedBits() const -> int {
     const auto mode = GetVideoMode();
     return mode->redBits;
   }
 
-  int Monitor::GetBlueBits() const {
+  auto Monitor::GetBlueBits() const -> int {
     const auto mode = GetVideoMode();
     return mode->blueBits;
   }
 
-  int Monitor::GetGreenBits() const {
+  auto Monitor::GetGreenBits() const -> int {
     const auto mode = GetVideoMode();
     return mode->greenBits;
   }
 
-  int Monitor::GetRefreshRateInHertz() const {
+  auto Monitor::GetRefreshRateInHertz() const -> int {
     const auto mode = GetVideoMode();
     return mode->refreshRate;
   }
 
-  std::string Monitor::GetName() const {
+  auto Monitor::GetName() const -> std::string {
     const auto name = glfwGetMonitorName(GetHandle());
-    return std::string(name);
+    return {name};
   }
 }
 

@@ -4,8 +4,4 @@ namespace prt::window {
   Monitor::Monitor(Handle* handle):
     handle_(handle) {
   }
-
-  Monitor::~Monitor() {
-    
-  }
 }

@@ -3,46 +3,33 @@
 
 #include "prette/uuid.h"
 #include "prette/shape.h"
-#include "prette/input.h"
-#include "prette/gui/gui_frame.h"
 #include "prette/window/monitor.h"
-#include "prette/relaxed_atomic.h"
 #include "prette/window/window_events.h"
 
 namespace prt {
   namespace window {
-    rx::observable<WindowEvent*> OnWindowEvent();
-
-#define DEFINE_ON_WINDOW_EVENT(Name)                            \
-    static inline rx::observable<Name##Event*>                  \
-    On##Name##Event() {                                         \
-      return OnWindowEvent()                                    \
-        .filter(Name##Event::Filter)                            \
-        .map(Name##Event::Cast);                                \
-    }
-    FOR_EACH_WINDOW_EVENT(DEFINE_ON_WINDOW_EVENT)
-#undef DEFINE_ON_WINDOW_EVENT
-
     class Window;
     class WindowVisitor {
+      DEFINE_NON_COPYABLE_TYPE(WindowVisitor);
     protected:
       WindowVisitor() = default;
     public:
       virtual ~WindowVisitor() = default;
-      virtual bool VisitWindow(Window* window) = 0;
+      virtual auto VisitWindow(Window* window) -> bool = 0;
     };
 
-    class Window : public WindowEventPublisher {
+    class Window : public WindowEventSource {
       friend class WindowBuilder;
+      DEFINE_NON_COPYABLE_TYPE(Window);
 #ifdef PRT_GLFW
     public:
-      typedef GLFWwindow Handle;
+      using Handle = GLFWwindow;
     private:
       template<const int Attribute>
       class WindowAttribute {
       public:
-        static inline int
-        Get(Handle* handle) {
+        static inline auto
+        Get(Handle* handle) -> int {
           return glfwGetWindowAttrib(handle, Attribute);
         }
       };
@@ -67,7 +54,6 @@ namespace prt {
       class FloatingAttr : public EditableWindowAttribute<GLFW_FLOATING>{};
       class AutoIconifyAttr : public EditableWindowAttribute<GLFW_AUTO_ICONIFY>{};
       class FocusOnShowAttr : public EditableWindowAttribute<GLFW_FOCUS_ON_SHOW>{};
-
       class FocusedAttr : public WindowAttribute<GLFW_FOCUSED>{};
       class IconifiedAttr : public WindowAttribute<GLFW_ICONIFIED>{};
       class MaximizedAttr : public WindowAttribute<GLFW_MAXIMIZED>{};
@@ -75,9 +61,9 @@ namespace prt {
       class VisibleAttr : public WindowAttribute<GLFW_VISIBLE>{};
       class TransparentFramebufferAttr : public WindowAttribute<GLFW_TRANSPARENT_FRAMEBUFFER>{};
 
-      static inline Window*
-      GetWindow(Handle* handle) {
-        return (Window*) glfwGetWindowUserPointer(handle);
+      static inline auto
+      GetWindow(Handle* handle) -> Window*{
+        return (Window*) glfwGetWindowUserPointer(handle); // NOLINT(cppcoreguidelines-pro-type-cstyle-cast)
       }
 
       static void OnWindowClosed(Handle* handle);
@@ -91,10 +77,10 @@ namespace prt {
 #else
 #error "Unsupported Platform."
 #endif
-    protected:
+    private:
+      WindowEventSubject events_;
       Handle* handle_;
       UUID id_;
-      gui::Frame frame_;
       rx::subscription on_terminating_;
       rx::subscription on_post_init_;
 #ifdef PRT_GLFW
@@ -102,22 +88,19 @@ namespace prt {
 #endif //PRT_GLFW
 
       explicit Window(Handle* handle);
+      void PublishEvent(WindowEvent* event) override;
     public:
       ~Window() override;
 
-      inline Handle* GetHandle() const {
+      inline auto GetHandle() const -> Handle* {
         return handle_;
       }
 
-      gui::Frame* GetFrame() { //TODO: reduce visibility
-        return &frame_;
-      }
-
-      std::string GetTitle() const;
+      auto GetTitle() const -> std::string;
       void SetTitle(const std::string& value);
-      Point GetPos() const;
+      auto GetPos() const -> Point;
       void SetPos(const Point& value);
-      glm::i32vec2 GetSize() const;
+      auto GetSize() const -> glm::i32vec2;
       void SetSize(const glm::i32vec2& value);
       void Show();
       void Hide();
@@ -138,73 +121,78 @@ namespace prt {
       void SetAutoIconify(const bool value) {
         return AutoIconifyAttr::Set(GetHandle(), value);
       }
-      
+
       void SetFocusOnShow(const bool value) {
         return FocusOnShowAttr::Set(GetHandle(), value);
       }
 
-      bool IsFocused() const {
+      auto IsFocused() const -> bool {
         return FocusedAttr::Get(GetHandle());
       }
 
-      bool IsIconified() const {
+      auto IsIconified() const -> bool {
         return IconifiedAttr::Get(GetHandle());
       }
 
-      bool IsMaximized() const {
+      auto IsMaximized() const -> bool {
         return MaximizedAttr::Get(GetHandle());
       }
 
-      bool IsHovered() const {
+      auto IsHovered() const -> bool {
         return HoveredAttr::Get(GetHandle());
       }
 
-      bool IsVisible() const {
+      auto IsVisible() const -> bool {
         return VisibleAttr::Get(GetHandle());
       }
 
-      bool IsResizable() const {
+      auto IsResizable() const -> bool {
         return ResizableAttr::Get(GetHandle());
       }
 
-      bool IsDecorated() const {
+      auto IsDecorated() const -> bool {
         return DecoratedAttr::Get(GetHandle());
       }
 
-      bool IsAutoIconify() const {
+      auto IsAutoIconify() const -> bool {
         return AutoIconifyAttr::Get(GetHandle());
       }
 
-      bool IsFloating() const {
+      auto IsFloating() const -> bool {
         return FloatingAttr::Get(GetHandle());
       }
 
-      bool IsTransparentFramebuffer() const {
+      auto IsTransparentFramebuffer() const -> bool {
         return TransparentFramebufferAttr::Get(GetHandle());
       }
 
-      bool IsFocusOnShow() const {
+      auto IsFocusOnShow() const -> bool {
         return FocusOnShowAttr::Get(GetHandle());
       }
 
       void SwapBuffers();
+      auto ToString() const -> std::string;
       void SetMinSize(const glm::i32vec2& size);
 
-      glm::vec2 GetContentScale() const;
+      auto GetContentScale() const -> glm::vec2;
 
-      bool Accept(WindowVisitor* vis) {
+      auto Accept(WindowVisitor* vis) -> bool {
         return vis->VisitWindow(this);
       }
 
-      Rectangle GetBounds() const {
+      auto GetBounds() const -> Rectangle {
         const auto size = GetSize();
         return Rectangle(Point(), size[0], size[1]);
+      }
+
+      auto OnEvent() const -> WindowEventObservable override {
+        return events_.get_observable();
       }
     };
 
     void InitWindows();
-    Window* GetAppWindow();
-    bool VisitAllWindows(WindowVisitor* vis);
+    auto GetAppWindow() -> Window*;
+    auto VisitAllWindows(WindowVisitor* vis) -> bool;
   }
   using window::Window;
   using window::GetAppWindow;

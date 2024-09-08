@@ -2,29 +2,30 @@
 #define PRT_ENGINE_H
 
 #include <units.h>
-#include "prette/signals.h"
-#include "prette/counter.h"
 #include "prette/uv/utils.h"
 #include "prette/uv/uv_loop.h"
+#include "prette/uv/uv_ticker.h"
 #include "prette/crash_report.h"
 #include "prette/engine/engine_state.h"
 #include "prette/engine/engine_events.h"
 
 namespace prt::engine {
-  class Engine : public EngineEventPublisher {
+  class Engine : public EngineEventSource {
     friend class EngineState;
     friend class InitState;
     friend class ErrorState;
     friend class RunningState;
     friend class EngineTicker;
     friend class TerminatedState;
-  protected:
+    DEFINE_NON_COPYABLE_TYPE(Engine);
+  private:
     uv::Loop loop_;
     uv::Ticker ticker_;
     rx::subscription on_tick_;
     RelaxedAtomic<bool> running_;
     EngineState* state_;
     CrashReportCause cause_;
+    EngineEventSubject events_;
 
     virtual void SetRunning(const bool running = true) {
       running_ = running;
@@ -53,22 +54,24 @@ namespace prt::engine {
       cause_ = cause;
     }
 
-    inline bool HasCause() const {
+    inline auto HasCause() const -> bool {
       return (bool) cause_;
     }
 
-    const CrashReportCause& GetCause() const {
+    auto GetCause() const -> const CrashReportCause& {
       return cause_;
     }
+
+    void PublishEvent(EngineEvent* event) override;
   public:
     Engine();
     ~Engine() override;
 
-    const uv::Loop& GetLoop() const {
+    auto GetLoop() const -> const uv::Loop& {
       return loop_;
     }
 
-    uv::Loop& GetLoop() {
+    auto GetLoop() -> uv::Loop& {
       return loop_;
     }
 
@@ -80,34 +83,23 @@ namespace prt::engine {
       return Shutdown((const std::exception_ptr&) std::make_exception_ptr<E>(E(args...)));
     }
 
-    virtual bool IsRunning() const {
+    virtual auto IsRunning() const -> bool {
       return (bool) running_;
     }
 
-    inline bool HasState() const {
+    inline auto HasState() const -> bool {
       return state_ != nullptr;
     }
 
-    virtual EngineState* GetState() const {
+    virtual auto GetState() const -> EngineState* {
       return state_;
     }
 
-#define DEFINE_ON_ENGINE_EVENT(Name)                                   \
-    rx::observable<Name##Event*> On##Name##Event() const {             \
-      return OnEvent()                                                 \
-        .filter([](EngineEvent* event) {                               \
-          return event->Is##Name##Event();                             \
-        })                                                             \
-        .map([](EngineEvent* event) {                                  \
-          return event->As##Name##Event();                             \
-        });                                                            \
-    }
-  FOR_EACH_ENGINE_EVENT(DEFINE_ON_ENGINE_EVENT)
-#undef DEFINE_ON_ENGINE_EVENT
+    auto OnEvent() const -> EngineEventObservable override;
   };
 
   void InitEngine();
-  Engine* GetEngine();
+  auto GetEngine() -> Engine*;
 }
 
 namespace prt {

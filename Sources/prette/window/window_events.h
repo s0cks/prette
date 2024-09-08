@@ -5,14 +5,7 @@
 #include "prette/shape.h"
 #include "prette/dimension.h"
 
-namespace prt {
-  namespace window {
-    class Window;
-  }
-  using window::Window;
-
-  class WindowEvent;
-
+namespace prt::window {
 #define FOR_EACH_WINDOW_EVENT(V)   \
   V(WindowOpened)                  \
   V(WindowClosed)                  \
@@ -24,6 +17,8 @@ namespace prt {
   V(WindowMaximize)                \
   V(WindowContentScale)
 
+  class Window;
+  class WindowEvent;
 #define FORWARD_DECLARE(Name) class Name##Event;
   FOR_EACH_WINDOW_EVENT(FORWARD_DECLARE)
 #undef FORWARD_DECLARE
@@ -31,7 +26,7 @@ namespace prt {
   class WindowFocusEvent;
   class WindowEvent : public Event {
     DEFINE_NON_COPYABLE_TYPE(WindowEvent);
-  protected:
+  private:
     Window* window_;
   public:
     WindowEvent() = delete;
@@ -40,7 +35,7 @@ namespace prt {
     }
     ~WindowEvent() override = default;
 
-    Window* window() const {
+    auto GetWindow() const -> Window* {
       return window_;
     }
 
@@ -69,7 +64,7 @@ namespace prt {
   };
 
   class WindowPosEvent : public WindowEvent {
-  protected:
+  private:
     Point pos_;
   public:
     WindowPosEvent(Window* window, const Point& pos):
@@ -81,16 +76,8 @@ namespace prt {
     }
     ~WindowPosEvent() override = default;
 
-    Point pos() const {
+    auto GetPos() const -> const Point& {
       return pos_;
-    }
-
-    inline int32_t x() const {
-      return pos_[0];
-    }
-
-    inline int32_t y() const {
-      return pos_[1];
     }
 
     DECLARE_WINDOW_EVENT(WindowPos);
@@ -111,24 +98,16 @@ namespace prt {
       WindowSizeEvent(window, 0, 0) {
     }
     ~WindowSizeEvent() override = default;
-  
-    Dimension size() const {
+
+    auto GetSize() const -> const Dimension& {
       return size_;
-    }
-
-    inline int32_t width() const {
-      return size_.width();
-    }
-
-    inline int32_t height() const {
-      return size_.height();
     }
 
     DECLARE_WINDOW_EVENT(WindowSize);
   };
 
   class WindowFocusEvent : public WindowEvent {
-  protected:
+  private:
     bool focused_;
   public:
     WindowFocusEvent(Window* window, const bool focused):
@@ -137,7 +116,7 @@ namespace prt {
     }
     ~WindowFocusEvent() override = default;
 
-    bool IsFocused() const {
+    auto IsFocused() const -> bool {
       return focused_;
     }
 
@@ -154,7 +133,7 @@ namespace prt {
     }
     ~WindowIconifyEvent() override = default;
 
-    bool iconified() const {
+    auto IsIconified() const -> bool {
       return iconified_;
     }
 
@@ -166,7 +145,7 @@ namespace prt {
     WindowRefreshEvent(Window* window):
       WindowEvent(window) {
     }
-    ~WindowRefreshEvent() = default;
+    ~WindowRefreshEvent() override = default;
     DECLARE_WINDOW_EVENT(WindowRefresh);
   };
 
@@ -180,7 +159,7 @@ namespace prt {
     }
     ~WindowMaximizeEvent() override = default;
 
-    bool maximized() const {
+    auto IsMaximized() const -> bool {
       return maximized_;
     }
 
@@ -188,39 +167,46 @@ namespace prt {
   };
 
   class WindowContentScaleEvent : public WindowEvent {
+    using Scale = glm::vec2;
   private:
-    glm::vec2 scale_;
+    Scale scale_;
   public:
-    WindowContentScaleEvent(Window* window, const glm::vec2 scale):
+    WindowContentScaleEvent(Window* window, const Scale& scale):
       WindowEvent(window),
       scale_(scale) {
     }
     WindowContentScaleEvent(Window* window, const float xScale, const float yScale):
-      WindowContentScaleEvent(window, glm::vec2(xScale, yScale)) {
+      WindowContentScaleEvent(window, { xScale, yScale }) {
     }
     ~WindowContentScaleEvent() override = default;
 
-    glm::vec2 scale() const {
+    auto GetScale() const -> const Scale& {
       return scale_;
     }
 
     DECLARE_WINDOW_EVENT(WindowContentScale);
   };
 
-  typedef rx::subject<WindowEvent*> WindowEventSubject;
+  using WindowEventSubject = rx::subject<WindowEvent*>;
+  using WindowEventObservable = rx::observable<WindowEvent*>;
+#define DEFINE_EVENT_OBSERVABLE(Name) \
+  using Name##EventObservable = rx::observable<Name##Event*>;
+  FOR_EACH_WINDOW_EVENT(DEFINE_EVENT_OBSERVABLE)
+#undef DEFINE_EVENT_OBSERVABLE
 
-  class WindowEventPublisher : public EventPublisher<WindowEvent> {
+  class WindowEventSource : public EventSource<WindowEvent> {
+    DEFINE_NON_COPYABLE_TYPE(WindowEventSource);
   protected:
-    WindowEventPublisher() = default;
+    WindowEventSource() = default;
   public:
-    ~WindowEventPublisher() override = default;
+    ~WindowEventSource() override = default;
 
-#define DEFINE_ON_WINDOW_EVENT(Name)      \
-    inline rx::observable<Name##Event*>   \
-    On##Name##Event() {                   \
-      return OnEvent()                    \
-        .filter(Name##Event::Filter)      \
-        .map(Name##Event::Cast);          \
+#define DEFINE_ON_WINDOW_EVENT(Name)              \
+    inline auto                                   \
+    On##Name##Event() -> Name##EventObservable {  \
+      return OnEvent()                            \
+        .filter(Name##Event::Filter)              \
+        .map(Name##Event::Cast);                  \
     }
     FOR_EACH_WINDOW_EVENT(DEFINE_ON_WINDOW_EVENT);
 #undef DEFINE_ON_WINDOW_EVENT

@@ -9,12 +9,7 @@ file(GLOB_RECURSE PRT_SOURCES
   "${CMAKE_CURRENT_SOURCE_DIR}/prette/**/*.cc")
 find_path(TERMCOLOR_INCLUDE_DIRS "termcolor/termcolor.hpp")
 
-add_library(${PROJECT_NAME}
-  ${PROJECT_BINARY_DIR}/Sources/prette/prette.h prette/prette.cc
-  ${PROJECT_BINARY_DIR}/Sources/prette/gfx.h
-  ${PRT_SOURCES})
-target_include_directories(${PROJECT_NAME} PRIVATE ${TERMCOLOR_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME}
+list(APPEND PRT_LIBRARIES
   PNG::PNG
   JPEG::JPEG
   leveldb::leveldb
@@ -33,11 +28,24 @@ target_link_libraries(${PROJECT_NAME}
   Backward::Backward
   OpenSSL::Crypto
   rapidjson
-  OpenGL::GL
   glfw
-  GLEW::GLEW
   Vorbis::vorbis
   libuv::uv_a)
+if(PRT_ENABLE_VK)
+  list(APPEND PRT_LIBRARIES
+    Vulkan::Vulkan)
+else()
+  list(APPEND PRT_LIBRARIES
+    OpenGL::GL
+    GLEW::GLEW)
+endif()
+
+add_library(${PROJECT_NAME}
+  ${PROJECT_BINARY_DIR}/Sources/prette/prette.h prette/prette.cc
+  ${PROJECT_BINARY_DIR}/Sources/prette/gfx.h
+  ${PRT_SOURCES})
+target_include_directories(${PROJECT_NAME} PRIVATE ${TERMCOLOR_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME} ${PRT_LIBRARIES})
 target_compile_options(${PROJECT_NAME}
   PRIVATE ${PRT_COMPILE_OPTS})
 target_include_directories(${PROJECT_NAME}

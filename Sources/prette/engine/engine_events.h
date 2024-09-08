@@ -16,25 +16,26 @@ namespace prt::engine {
   V(Terminated)                  \
   V(Initialized)
 
+  class Engine;
   class EngineEvent;
   class StateEvent;
 #define FORWARD_DECLARE_ENGINE_EVENT(Name) class Name##Event;
   FOR_EACH_ENGINE_EVENT(FORWARD_DECLARE_ENGINE_EVENT)
 #undef FORWARD_DECLARE_ENGINE_EVENT
 
-  class Engine;
   class EngineEvent : public Event {
-  protected:
+    DEFINE_NON_COPYABLE_TYPE(EngineEvent);
+  private:
     Engine* engine_;
-
+  protected:
     explicit EngineEvent(Engine* engine):
       Event(),
       engine_(engine) {
     }
   public:
-    virtual ~EngineEvent() = default;
+    ~EngineEvent() override = default;
 
-    Engine* engine() const {
+    auto GetEngine() const -> Engine* {
       return engine_;
     }
 
@@ -43,7 +44,7 @@ namespace prt::engine {
 
 #define DECLARE_ENGINE_EVENT(Name)        \
   DECLARE_EVENT_TYPE(EngineEvent, Name)
-  
+
   class PreInitEvent : public EngineEvent {
   public:
     explicit PreInitEvent(Engine* engine):
@@ -72,7 +73,7 @@ namespace prt::engine {
   };
 
   class TickEvent : public EngineEvent {
-  protected:
+  private:
     const uv::Tick& current_;
     const uv::Tick& previous_;
   public:
@@ -85,15 +86,15 @@ namespace prt::engine {
     }
     ~TickEvent() override = default;
 
-    const uv::Tick& GetCurrentTick() const {
+    auto GetCurrentTick() const -> const uv::Tick& {
       return current_;
     }
 
-    const uv::Tick& GetPreviousTick() const {
+    auto GetPreviousTick() const -> const uv::Tick& {
       return previous_;
     }
 
-    uv::TickDelta GetTimeSinceLast() const {
+    auto GetTimeSinceLast() const -> uv::TickDelta {
       return GetCurrentTick() - GetPreviousTick();
     }
 
@@ -101,16 +102,16 @@ namespace prt::engine {
   };
 
   class PostTickEvent : public EngineEvent {
-  public:
+  private:
     uv::Tick tick_;
-
+  public:
     explicit PostTickEvent(Engine* engine, const uv::Tick& tick):
       EngineEvent(engine),
       tick_(tick) {
     }
     ~PostTickEvent() override = default;
 
-    const uv::Tick& tick() const {
+    auto GetTick() const -> const uv::Tick& {
       return tick_;
     }
 
@@ -144,13 +145,27 @@ namespace prt::engine {
     DECLARE_ENGINE_EVENT(Initialized);
   };
 
-  typedef rx::subject<EngineEvent*> EngineEventSubject;
+  using EngineEventSubject = rx::subject<EngineEvent*>;
+  using EngineEventObservable = rx::observable<EngineEvent*>;
+#define DEFINE_EVENT_OBSERVABLE(Name)   \
+  using Name##EventObservable = rx::observable<Name##Event*>;
+  FOR_EACH_ENGINE_EVENT(DEFINE_EVENT_OBSERVABLE)
+#undef DEFINE_EVENT_OBSERVABLE
 
-  class EngineEventPublisher : public EventPublisher<EngineEvent> {
+  class EngineEventSource : public EventSource<EngineEvent> {
+    DEFINE_NON_COPYABLE_TYPE(EngineEventSource);
   protected:
-    EngineEventPublisher() = default;
+    EngineEventSource() = default;
   public:
-    ~EngineEventPublisher() override = default;
+    ~EngineEventSource() override = default;
+#define DEFINE_ON_EVENT(Name)   \
+    auto On##Name() const -> Name##EventObservable {    \
+      return OnEvent()                                  \
+        .filter(Name##Event::Filter)                    \
+        .map(Name##Event::Cast);                        \
+    }
+    FOR_EACH_ENGINE_EVENT(DEFINE_ON_EVENT)
+#undef DEFINE_ON_EVENT
   };
 }
 

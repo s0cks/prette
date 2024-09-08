@@ -1,21 +1,14 @@
 #include "prette/keyboard/keyboard.h"
 
+#include <sstream>
 #include "prette/uv/utils.h"
 #include "prette/thread_local.h"
 #include "prette/window/window.h"
 
 namespace prt::keyboard {
-  static KeyboardEventSubject events_;
-  static ThreadLocal<Keyboard> keyboard_;
+  static ThreadLocal<Keyboard> keyboard_; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 
-  template<typename E>
-  static inline void
-  Publish(Keyboard* keyboard) {
-    E event(keyboard);
-    return events_.get_subscriber().on_next(&event);
-  }
-
-  Keyboard* GetKeyboard() {
+  auto GetKeyboard() -> Keyboard* {
     return keyboard_.Get();
   }
 
@@ -25,8 +18,8 @@ namespace prt::keyboard {
     keyboard_.Set(kb);
   }
 
-  static inline Keyboard*
-  CreateKeyboard(engine::Engine* engine) {
+  static inline auto
+  CreateKeyboard(engine::Engine* engine) -> Keyboard* {
     PRT_ASSERT(engine);
     const auto keyboard = new Keyboard(engine);
     Publish<KeyboardCreatedEvent>(keyboard);
@@ -66,23 +59,19 @@ namespace prt::keyboard {
 
   Keyboard::Keyboard(engine::Engine* engine):
     Input(),
-    KeyboardEventPublisher(keyboard::events_),
+    KeyboardEventSource(),
     PreTickEventListener(engine),
     keys_(),
     state_() {
     state_.reset();
   }
 
-  std::string Keyboard::ToString() const {
+  auto Keyboard::ToString() const -> std::string {
     std::stringstream ss;
     ss << "Keyboard(";
     ss << "id=" << GetId();
     ss << ")";
     return ss.str();
-  }
-
-  rx::observable<KeyboardEvent*> OnKeyboardEvent() {
-    return events_.get_observable();
   }
 
   void Keyboard::OnPreTick(engine::PreTickEvent* event) {

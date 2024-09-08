@@ -13,9 +13,6 @@
 #define NK_GLFW_GL3_IMPLEMENTATION
 
 #include "prette/runtime.h"
-#include "prette/mouse/mouse.h"
-#include "prette/gui/gui_window.h"
-#include "prette/gui/gui_context.h"
 #include "prette/keyboard/keyboard.h"
 
 using namespace prt;
@@ -27,49 +24,6 @@ LogEvent() -> std::function<void(Event*)> {
     LOG_AT_LEVEL(Severity) << event->ToString();
   };
 }
-
-class TestWindow : public gui::Window,
-                   public mouse::MouseMoveEventSubscriber {
-protected:
-  rx::subscription on_key_;
-  uword count_;
-
-  void Render(gui::Context* ctx) override {
-    ctx->SetColor(GetBackground());
-    auto transform = glm::mat4(1.0f);
-    if((count_ % 2) == 0)
-      transform = glm::rotate(transform, glm::radians((count_ % 4) * 45.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-    ctx->DrawTexturedRect(transform, GetBounds());
-  }
-
-  void OnMouseMove(mouse::MouseMoveEvent* event) override {
-    const auto& bounds = GetBounds();
-    const auto& mpos = event->pos();
-    if(bounds.Contains(mpos)) {
-      SetBackground(kRed);
-    } else {
-      SetBackground(kBlack);
-    }
-  }
-public:
-  TestWindow(const uword count):
-    Window(),
-    mouse::MouseMoveEventSubscriber(mouse::GetMouse()),
-    count_(count),
-    on_key_() {
-    SetPos({ count * 50.0f, count * 50.0f });
-    SetSize({ 128, 128 });
-    SetBackground(kBlack);
-    on_key_ = keyboard::OnKeyPressedEvent()
-      .filter(keyboard::KeyEvent::FilterBy(GLFW_KEY_E))
-      .map(keyboard::KeyEvent::Cast)
-      .subscribe([this](keyboard::KeyEvent* event) {
-        DLOG(INFO) << event->ToString();
-        SetBackground(kGreen);
-      });
-  }
-  ~TestWindow() override = default;
-};
 
 // static inline std::ostream& 
 // operator<<(std::ostream& s, const google::LogSeverity& severity) {
@@ -109,11 +63,6 @@ auto main(int argc, char** argv) -> int {
   uword counter = 0;
   keyboard::OnKeyPressedEvent()
     .subscribe(LogEvent<keyboard::KeyPressedEvent>());
-  keyboard::OnKeyPressedEvent()
-    .filter(keyboard::KeyPressedEvent::FilterBy(GLFW_KEY_SPACE))
-    .subscribe([&counter](keyboard::KeyPressedEvent* e) {
-      new TestWindow(counter++);
-    });
   keyboard::OnKeyPressedEvent()
     .filter(keyboard::KeyPressedEvent::FilterBy(GLFW_KEY_GRAVE_ACCENT))
     .subscribe([](keyboard::KeyPressedEvent* e) {

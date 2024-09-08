@@ -1,11 +1,10 @@
 #ifndef PRT_CAMERA_ORTHO_H
 #define PRT_CAMERA_ORTHO_H
 
+#include <set>
 #include <utility>
-
-#include "prette/uri.h"
+#include <unordered_set>
 #include "prette/uuid.h"
-#include "prette/keyboard/key.h"
 #include "prette/camera/camera.h"
 
 namespace prt {
@@ -61,7 +60,7 @@ namespace prt {
         rotation = rot;
         Update();
       }
-      
+
       inline void MoveUp() {
         return SetPosition(pos + kUp);
       }
@@ -90,32 +89,32 @@ namespace prt {
     };
 
     class OrthoCamera : public Camera {
+      DEFINE_NON_COPYABLE_TYPE(OrthoCamera);
     public:
       struct IdComparator {
-        bool operator()(OrthoCamera* lhs, OrthoCamera* rhs) const {
+        auto operator()(OrthoCamera* lhs, OrthoCamera* rhs) const -> bool {
           return lhs->GetId() < rhs->GetId();
         }
       };
-    protected:
+    private:
       OrthoCameraData data_;
-
       explicit OrthoCamera(const OrthoCameraData& data);
     public:
       ~OrthoCamera() override;
 
-      const glm::mat4& GetProjection() const override {
+      auto GetProjection() const -> const glm::mat4& override {
         return data_.p;
       }
 
-      const glm::mat4& GetView() const override {
+      auto GetView() const -> const glm::mat4& override {
         return data_.v;
       }
 
-      const glm::mat4& GetViewProjection() const {
+      auto GetViewProjection() const -> const glm::mat4& {
         return data_.vp;
       }
 
-      const glm::vec3& GetPos() const {
+      auto GetPos() const -> const glm::vec3& {
         return data_.pos;
       }
 
@@ -136,29 +135,29 @@ namespace prt {
         return data_.SetPosition(pos);
       }
 
-      std::string ToString() const override {
+      auto ToString() const -> std::string override {
         return "OrthoCamera()";
       }
     public:
-      static OrthoCamera* New(const OrthoCameraData& data) {
+      static auto New(const OrthoCameraData& data) -> OrthoCamera* {
         return new OrthoCamera(data);
       }
 
-      static inline OrthoCamera*
+      static inline auto
       New(const float left,
           const float right,
           const float bottom,
           const float top,
           const float zNear = OrthoCameraData::kDefaultZNear,
-          const float zFar = OrthoCameraData::kDefaultZFar) {
+          const float zFar = OrthoCameraData::kDefaultZFar) -> OrthoCamera* {
         return New(OrthoCameraData(left, right, bottom, top, zNear, zFar));
       }
     };
 
-    typedef std::set<OrthoCamera*, OrthoCamera::IdComparator> OrthoCameraSet;
+    using OrthoCameraSet = std::set<OrthoCamera *, OrthoCamera::IdComparator>; //TODO: convert to std::unordered_set
 
-    const OrthoCameraSet& GetAllOrthoCameras();
-    uword GetTotalNumberOfOrthoCameras();
+    auto GetAllOrthoCameras() -> const OrthoCameraSet&;
+    auto GetTotalNumberOfOrthoCameras() -> uword;
   }
   using camera::OrthoCamera;
 }

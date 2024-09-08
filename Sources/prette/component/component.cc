@@ -10,7 +10,7 @@ namespace prt::component {
     tracker_(),
     pre_init_sub_() {
     const auto engine = engine::GetEngine();
-    pre_init_sub_ = engine->OnPreInitEvent()
+    pre_init_sub_ = engine->OnPreInit()
       .subscribe([this](engine::PreInitEvent* event) {
         Components::Register(this);
       });

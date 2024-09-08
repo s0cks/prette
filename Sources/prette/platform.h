@@ -4,13 +4,13 @@
 #include <cstdint>
 
 #if defined(_M_X64) || defined(__x86_64__)
-#define ARCHITECTURE_IS_X64 1
+#define ARCH_IS_X64 1
 #elif defined(_M_IX86) || defined(__i386__)
-#define ARCHITECTURE_IS_X32 1
+#define ARCH_IS_X32 1
 #elif defined(__ARMEL__)
-#define ARCHITECTURE_IS_ARM 1
+#define ARCH_IS_ARM 1
 #elif defined(__aarch64__)
-#define ARCHITECTURE_IS_ARM64 1
+#define ARCH_IS_ARM64 1
 #endif
 
 #if defined(__linux__) || defined(__FreeBSD__)
@@ -38,15 +38,14 @@ namespace prt { //TODO: cleanup this file
  static constexpr int kBitsPerInt32 = kInt32Size * kBitsPerByte;
  static constexpr int kBitsPerInt64 = kInt64Size * kBitsPerByte;
 
-typedef int8_t byte;
-typedef uint8_t ubyte;
+using byte = int8_t;
+using ubyte = uint8_t;
+using word = intptr_t;
+using uword = uintptr_t;
 
- typedef intptr_t word;
- typedef uintptr_t uword;
-
-#ifdef ARCHITECTURE_IS_X32
+#ifdef ARCH_IS_X32
  static constexpr int kWordSizeLog2 = kInt32SizeLog2;
-#else
+#elif defined(ARCH_IS_ARM64) || defined(ARCH_IS_X64)
  static constexpr int kWordSizeLog2 = kInt64SizeLog2;
 #endif
   // cppcheck-suppress truncLongCastAssignment

@@ -1,6 +1,7 @@
-#include "prette/engine/engine_state.h"
+#include "prette/engine/engine_state_running.h"
+
+#include "prette/gfx.h"
 #include "prette/engine/engine.h"
-#include "prette/render/renderer.h"
 
 namespace prt::engine {
   RunningState::RunningState(Engine* engine):
@@ -8,7 +9,8 @@ namespace prt::engine {
     shutdown_(engine->GetLoop(), this),
     on_tick_() {
     auto& ticker = engine->ticker_;
-    on_tick_ = ticker.ToObservable()
+    //TODO: slicing
+    on_tick_ = ticker.ToObservable() // NOLINT(cppcoreguidelines-slicing)
       .subscribe([engine,this,&ticker](const uv::Tick& tick) {
         Publish<PreTickEvent>(engine);
         glfwPollEvents();
@@ -16,19 +18,9 @@ namespace prt::engine {
       });
   }
 
-  RunningState::~RunningState() {
-    
-  }
-
   void RunningState::RunTick() {
     auto& loop = GetEngine()->GetLoop();
     loop.RunOnce();
-  }
-
-  void RunningState::RunRenderer() {
-    const auto renderer = GetRenderer();
-    PRT_ASSERT(renderer);
-    renderer->Run();
   }
 
   void RunningState::Run() {
@@ -37,7 +29,6 @@ namespace prt::engine {
     engine->SetRunning(true);
     while(engine->IsRunning()) {
       RunTick();
-      RunRenderer();
     }
     PRT_ASSERT(!engine->IsRunning());
   }
@@ -47,10 +38,6 @@ namespace prt::engine {
   }
 
   void RunningState::OnShutdown() {
-    const auto renderer = GetRenderer();
-    PRT_ASSERT(renderer);
-    renderer->Stop();
-
     const auto engine = GetEngine();
     PRT_ASSERT(engine);
     engine->Stop();

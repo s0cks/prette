@@ -3,7 +3,6 @@
 
 #include <glog/logging.h>
 #include "prette/common.h"
-#include "prette/query/query.h"
 
 namespace prt {
 #ifdef PRT_DEBUG
@@ -20,11 +19,9 @@ namespace prt {
     DEFINE_NON_INSTANTIABLE_TYPE(Runtime);
   private:
     static void OnUnhandledException();
-
-    static Query* GetTimeQuery();
   public:
     static void Init(int argc, char** argv);
-    static int Run();
+    static auto Run() -> int;
   };
 }
 

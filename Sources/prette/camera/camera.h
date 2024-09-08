@@ -8,33 +8,34 @@
 namespace gpu {
   struct CameraData {
     glm::mat4 projection;
-    glm::mat4 view;   
+    glm::mat4 view;
   };
 }
 
 namespace prt {
   namespace camera {
     class Camera : public Object {
-    protected:
+      DEFINE_NON_COPYABLE_TYPE(Camera);
+    private:
       UUID id_;
-
+    protected:
       explicit Camera(const Metadata& meta = {}):
         Object(meta),
         id_() {
       }
     public:
-      virtual ~Camera() = default;
+      ~Camera() override = default;
 
-      const UUID& GetId() const {
+      auto GetId() const -> const UUID& {
         return id_;
       }
 
-      virtual const glm::mat4& GetProjection() const = 0;
-      virtual const glm::mat4& GetView() const = 0;
+      virtual auto GetProjection() const -> const glm::mat4& = 0;
+      virtual auto GetView() const -> const glm::mat4& = 0;
     };
 
-    static inline bool
-    IsCameraUri(const std::string& value) {
+    static inline auto
+    IsCameraUri(const std::string& value) -> bool {
       return StartsWith(value, "camera://")
           || StartsWith(value, "file://");
     }

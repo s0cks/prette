@@ -4,13 +4,20 @@ project(prette)
 include(GitInfo)
 include(DoxygenConfig)
 include(CppCheckConfig)
-# include(ClangTidyConfig)
+
+set(PRT_ENABLE_VK 1)
+if(PRT_ENABLE_VK)
+  find_package(Vulkan REQUIRED)
+  add_compile_definitions(PRT_VK)
+else()
+  find_package(OpenGL REQUIRED COMPONENTS OpenGL)
+  find_package(GLEW REQUIRED)
+  add_compile_definitions(PRT_GL)
+endif()
 
 # cppcheck
 find_package(Threads REQUIRED)
 find_package(glfw3 CONFIG REQUIRED)
-find_package(OpenGL REQUIRED COMPONENTS OpenGL)
-find_package(GLEW REQUIRED)
 find_package(glog CONFIG REQUIRED)
 find_package(glm CONFIG REQUIRED)
 find_package(libuv CONFIG REQUIRED)
@@ -47,7 +54,7 @@ set(PROJECT_GLFW_CONTEXT_VERSION_MINOR 1)
 
 include_directories(${PROJECT_BINARY_DIR}/Sources/)
 
-list(APPEND PRT_COMPILE_OPTS 
+list(APPEND PRT_COMPILE_OPTS
   -frtti
   -Wno-deprecated
   -Wno-sizeof-pointer-memaccess)

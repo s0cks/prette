@@ -1,4 +1,4 @@
-#include "prette/engine/engine_state.h"
+#include "prette/engine/engine_state_terminated.h"
 #include "prette/engine/engine.h"
 
 namespace prt::engine {

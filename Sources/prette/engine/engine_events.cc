@@ -1,69 +1,69 @@
 #include "prette/engine/engine_events.h"
 
 #include <sstream>
-#include "prette/common.h"
+#include "prette/engine/engine.h"
 
 namespace prt::engine {
-  std::string PreInitEvent::ToString() const {
+  auto PreInitEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "PreInitEvent(";
-    ss << "engine=" << engine();
+    ss << "engine=" << GetEngine();
     ss << ")";
     return ss.str();
   }
 
-  std::string PostInitEvent::ToString() const {
+  auto PostInitEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "PostInitEvent(";
-    ss << "engine=" << engine();
+    ss << "engine=" << GetEngine();
     ss << ")";
     return ss.str();
   }
 
-  std::string PreTickEvent::ToString() const {
+  auto PreTickEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "PreTickEvent(";
-    ss << "engine=" << engine();
+    ss << "engine=" << GetEngine();
     ss << ")";
     return ss.str();
   }
 
-  std::string TickEvent::ToString() const {
+  auto TickEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "TickEvent(";
-    ss << "engine=" << engine() << ", ";
+    ss << "engine=" << GetEngine() << ", ";
     ss << "current=" << GetCurrentTick() << ", ";
     ss << "previous=" << GetPreviousTick();
     ss << ")";
     return ss.str();
   }
 
-  std::string PostTickEvent::ToString() const {
+  auto PostTickEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "PostTickEvent(";
-    ss << "engine=" << engine() << ", ";
-    ss << "current=" << tick();
+    ss << "engine=" << GetEngine() << ", ";
+    ss << "current=" << GetTick();
     ss << ")";
     return ss.str();
   }
 
-  std::string TerminatingEvent::ToString() const {
+  auto TerminatingEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "TerminatingEvent(";
-    ss << "engine=" << engine();
+    ss << "engine=" << GetEngine();
     ss << ")";
     return ss.str();
   }
 
-  std::string TerminatedEvent::ToString() const {
+  auto TerminatedEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "TerminatedEvent(";
-    ss << "engine=" << engine();
+    ss << "engine=" << GetEngine();
     ss << ")";
     return ss.str();
   }
 
-  std::string InitializedEvent::ToString() const {
+  auto InitializedEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "InitializedEvent(";
     ss << ")";

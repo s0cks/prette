@@ -3,12 +3,9 @@
 #include <sstream>
 #include "prette/thread_local.h"
 #include "prette/window/window.h"
-
-#include "prette/ubo/ubo_scope.h"
-#include "prette/ubo/ubo_builder.h"
-
 #include "prette/mouse/mouse.h"
-#include "prette/keyboard/keyboard.h"
+
+// NOLINTBEGIN(cppcoreguidelines-avoid-magic-numbers) TODO: remove
 
 namespace prt::camera {
   PerspectiveCameraData::PerspectiveCameraData():
@@ -48,30 +45,18 @@ namespace prt::camera {
     view = CalculateView();
   }
 
-  glm::mat4 PerspectiveCameraData::CalculateProjection() const {
+  auto PerspectiveCameraData::CalculateProjection() const -> glm::mat4 {
     const auto v = viewport[2] / viewport[3];
     return glm::perspective(glm::radians(zoom), v, 0.1f, 100.0f);
   }
 
-  glm::mat4 PerspectiveCameraData::CalculateView() const {
+  auto PerspectiveCameraData::CalculateView() const -> glm::mat4 {
     return glm::lookAt(pos, pos + front, up);
   }
 
   PerspectiveCamera::PerspectiveCamera(const Metadata& meta, const PerspectiveCameraData& data):
     Camera(meta),
-    data_(data),
-    ubo_(nullptr) {
-    ubo::UboBuilder<gpu::CameraData> builder;
-    builder.Append( gpu::CameraData {
-      .projection = GetProjection(),
-      .view = GetView(), 
-    });
-    ubo_ = builder.Build();
-    LOG_IF(ERROR, !ubo_) << "failed to create PerspectiveCameraData ubo.";
-    on_mouse_moved_ = mouse::OnMouseMoveEvent()
-      .subscribe([this](mouse::MouseMoveEvent* event) {
-        return OnMouseMoved(event);
-      });
+    data_(data) {
   }
 
   PerspectiveCamera::~PerspectiveCamera() {
@@ -79,15 +64,6 @@ namespace prt::camera {
       on_mouse_moved_.unsubscribe();
     if(on_key_pressed_.is_subscribed())
       on_key_pressed_.unsubscribe();
-    delete ubo_; //TODO: remove
-  }
-
-  void PerspectiveCamera::UpdateUbo() {
-    ubo::UboUpdateScope update(GetUbo());
-    update.Update(gpu::CameraData {
-      .projection = GetProjection(),
-      .view = GetView(),
-    });
   }
 
   void PerspectiveCamera::Update() {
@@ -137,7 +113,7 @@ namespace prt::camera {
     Update();
   }
 
-  std::string PerspectiveCamera::ToString() const {
+  auto PerspectiveCamera::ToString() const -> std::string {
     std::stringstream ss;
     ss << "PerspectiveCamera(";
     ss << "data=" << data_;
@@ -145,10 +121,10 @@ namespace prt::camera {
     return ss.str();
   }
 
-  static ThreadLocal<PerspectiveCamera> camera_;
+  static ThreadLocal<PerspectiveCamera> camera_; //NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 
-  static inline PerspectiveCamera*
-  CreatePerspectiveCamera() {
+  static inline auto
+  CreatePerspectiveCamera() -> PerspectiveCamera* {
     const auto window = GetAppWindow();
     PRT_ASSERT(window);
     const auto viewport_size = window->GetSize();
@@ -156,7 +132,7 @@ namespace prt::camera {
     return PerspectiveCamera::New(data);
   }
 
-  PerspectiveCamera* GetPerspectiveCamera() {
+  auto GetPerspectiveCamera() -> PerspectiveCamera* {
     if(camera_)
       return camera_.Get();
     const auto camera = CreatePerspectiveCamera();
@@ -164,12 +140,12 @@ namespace prt::camera {
     return camera;
   }
 
-  PerspectiveCamera* PerspectiveCamera::FromJson(const uri::Uri& uri) {
+  auto PerspectiveCamera::FromJson(const uri::Uri& uri) -> PerspectiveCamera* {
     NOT_IMPLEMENTED(FATAL); //TODO: implement
     return nullptr;
   }
 
-  PerspectiveCamera* PerspectiveCamera::FromJson(const std::string& value) {
+  auto PerspectiveCamera::FromJson(const std::string& value) -> PerspectiveCamera* {
     if(IsCameraUri(value)) {
       auto path = value;
       if(!EndsWith(path, ".json"))
@@ -180,3 +156,5 @@ namespace prt::camera {
     return nullptr;
   }
 }
+
+// NOLINTEND(cppcoreguidelines-avoid-magic-numbers) TODO: remove

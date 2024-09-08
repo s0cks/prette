@@ -118,5 +118,6 @@
       "label": "Closed Issues",
       "query": "state:closed repo:${owner}/${repository} sort:updated-desc"
     }
-  ]
+  ],
+  "C_Cpp.errorSquiggles": "disabled"
 }

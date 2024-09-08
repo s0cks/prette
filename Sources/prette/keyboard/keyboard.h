@@ -1,9 +1,6 @@
 #ifndef PRT_KEYBOARD_H
 #define PRT_KEYBOARD_H
 
-#include "prette/rx.h"
-#include "prette/gfx.h"
-#include "prette/uuid.h"
 #include "prette/input.h"
 #include "prette/keyboard/keyboard_event.h"
 #include "prette/engine/engine_event_listener.h"
@@ -14,22 +11,12 @@ namespace prt {
   }
 
   namespace keyboard {
-    rx::observable<KeyboardEvent*> OnKeyboardEvent();
-#define DEFINE_ON_KEYBOARD_EVENT(Name)                  \
-    static inline rx::observable<Name##Event*>          \
-    On##Name##Event() {                                 \
-      return OnKeyboardEvent()                          \
-        .filter(Name##Event::Filter)                    \
-        .map(Name##Event::Cast);                        \
-    }
-    FOR_EACH_KEYBOARD_EVENT(DEFINE_ON_KEYBOARD_EVENT)
-#undef DEFINE_ON_KEYBOARD_EVENT
-
     class Keyboard : public Input,
-                     public KeyboardEventPublisher,
+                     public KeyboardEventSource,
                      public engine::PreTickEventListener {
       friend class engine::Engine;
-    protected:
+      DEFINE_NON_COPYABLE_TYPE(Keyboard);
+    private:
       KeySet keys_;
       KeyStateSet state_;
 
@@ -41,27 +28,27 @@ namespace prt {
         state_ = state;
       }
 
-      static KeyState GetKeyState(const Key& key);
+      static auto GetKeyState(const Key& key) -> KeyState;
     public:
       explicit Keyboard(engine::Engine* engine);
       ~Keyboard() override = default;
 
-      const KeySet& GetKeys() const {
+      auto GetKeys() const -> const KeySet& {
         return keys_;
       }
 
-      const KeyStateSet& GetState() const {
+      auto GetState() const -> const KeyStateSet& {
         return state_;
       }
 
-      std::string ToString() const override;
+      auto ToString() const -> std::string override;
     };
 
-    Keyboard* GetKeyboard();
+    auto GetKeyboard() -> Keyboard*;
     void InitKeyboard();
 
-    static inline bool
-    HasKeyboard() {
+    static inline auto
+    HasKeyboard() -> bool {
       return GetKeyboard() != nullptr;
     }
   }

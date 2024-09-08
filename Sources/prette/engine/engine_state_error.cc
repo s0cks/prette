@@ -1,16 +1,10 @@
-#include <backward.hpp>
-
+#include "prette/engine/engine_state_error.h"
 #include "prette/crash_report.h"
 #include "prette/engine/engine.h"
-#include "prette/engine/engine_state.h"
 
 namespace prt::engine {
   ErrorState::ErrorState(Engine* engine):
     EngineState(engine) {
-  }
-
-  ErrorState::~ErrorState() {
-    
   }
 
   void ErrorState::Run() {

@@ -3,14 +3,8 @@
 
 #include <utility>
 #include <optional>
-
-#include "prette/rx.h"
-#include "prette/gfx.h"
 #include "prette/shape.h"
 #include "prette/input.h"
-#include "prette/platform.h"
-#include "prette/entity/entity.h"
-
 #include "prette/mouse/cursor_mode.h"
 #include "prette/mouse/mouse_flags.h"
 #include "prette/mouse/mouse_events.h"
@@ -31,55 +25,56 @@ namespace prt {
                   public MouseEventSource,
                   protected engine::PreTickEventListener {
       friend class engine::Engine;
-    protected:
+      DEFINE_NON_COPYABLE_TYPE(Mouse);
+    private:
       MouseEventSubject events_;
       Point pos_;
       Point last_pos_;
       MouseButtonSet buttons_;
       MouseButtonBitset states_;
 
-      void Publish(MouseEvent* event) override;
+      void PublishEvent(MouseEvent* event) override;
       void OnPreTick(engine::PreTickEvent* event) override;
       virtual void SetCursorMode(const CursorMode mode);
       virtual void SetCursorPos(const Point& pos);
       virtual void GetCursorPos(Point& pos) const;
     public:
       explicit Mouse(engine::Engine* engine);
-      virtual ~Mouse();
+      ~Mouse() override;
 
-      CursorMode GetCursorMode() const;
-#define DEFINE_CURSOR_MODE_CHECK(Name)                                                  \
-      bool IsCursor##Name() const { return GetCursorMode() == CursorMode::k##Name; }
+      auto GetCursorMode() const -> CursorMode;
+#define DEFINE_CURSOR_MODE_CHECK(Name)                                                          \
+      auto IsCursor##Name() const -> bool { return GetCursorMode() == CursorMode::k##Name; }
       FOR_EACH_CURSOR_MODE(DEFINE_CURSOR_MODE_CHECK)
 #undef DEFINE_CURSOR_MODE_CHECK
 
-      Point GetPos() const {
+      auto GetPos() const -> Point {
         return pos_;
       }
 
-      Point GetLastPos() const {
+      auto GetLastPos() const -> Point {
         return last_pos_;
       }
 
-      MouseButton::State GetButtonState(const MouseButton::Code code) const;
-      
-      inline MouseButton::State GetButtonState(const MouseButton& rhs) const {
+      auto GetButtonState(const MouseButton::Code code) const -> MouseButton::State;
+
+      inline auto GetButtonState(const MouseButton& rhs) const -> MouseButton::State {
         return GetButtonState(rhs.GetCode());
       }
 
-      inline bool IsButtonPressed(const MouseButton::Code code) const {
+      inline auto IsButtonPressed(const MouseButton::Code code) const -> bool {
         return GetButtonState(code) == MouseButton::kPressed;
       }
 
-      inline bool IsButtonPressed(const MouseButton& rhs) const {
+      inline auto IsButtonPressed(const MouseButton& rhs) const -> bool {
         return GetButtonState(rhs) == MouseButton::kPressed;
       }
 
-      inline bool IsButtonReleased(const MouseButton::Code code) const {
+      inline auto IsButtonReleased(const MouseButton::Code code) const -> bool {
         return GetButtonState(code) == MouseButton::kReleased;
       }
 
-      inline bool IsButtonReleased(const MouseButton& rhs) const {
+      inline auto IsButtonReleased(const MouseButton& rhs) const -> bool {
         return GetButtonState(rhs) == MouseButton::kReleased;
       }
 
@@ -87,52 +82,29 @@ namespace prt {
         for(const auto btn : buttons_)
           states[btn.GetCode()] = IsButtonPressed(btn);
       }
-      
-      virtual rx::observable<MouseButton> GetAllButtons() const {
+
+      virtual auto GetAllButtons() const -> rx::observable<MouseButton> {
         return rx::observable<>::iterate(buttons_);
       }
-      
-      MouseEventObservable OnEvent() const override {
+
+      auto OnEvent() const -> MouseEventObservable override {
         return events_.get_observable();
       }
 
-      std::string ToString() const override;
+      auto ToString() const -> std::string override;
     };
-    
-    void InitMouse();
-    Mouse* GetMouse();
 
-    static inline bool
-    HasMouse() {
+    void InitMouse();
+    auto GetMouse() -> Mouse*;
+
+    static inline auto
+    HasMouse() -> bool {
       return IsMouseEnabled() && GetMouse() != nullptr;
     }
-
-    static inline MouseEventObservable
-    OnEvent() {
-      const auto mouse = GetMouse();
-      PRT_ASSERT(mouse);
-      return mouse->OnEvent();
-    }
-
-#define DEFINE_ON_MOUSE_EVENT(Name)               \
-    static inline Name##EventObservable           \
-    On##Name##Event() {                           \
-      return mouse::OnEvent()                     \
-        .filter(Name##Event::Filter)              \
-        .map(Name##Event::Cast);                  \
-    }
-    FOR_EACH_MOUSE_EVENT(DEFINE_ON_MOUSE_EVENT)
-#undef DEFINE_ON_MOUSE_EVENT
   }
-  
+
   using mouse::Mouse;
   using mouse::GetMouse;
-//TODO: remove
-#define DEFINE_USE_ON_MOUSE_EVENT(Name)             \
-  using mouse::On##Name##Event;
-  FOR_EACH_MOUSE_EVENT(DEFINE_USE_ON_MOUSE_EVENT)
-#undef DEFINE_USE_ON_MOUSE_EVENT
-//-------------------------------------------------------
 }
 
 #include "prette/mouse/mouse_logger.h"
