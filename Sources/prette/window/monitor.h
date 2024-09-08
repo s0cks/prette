@@ -70,6 +70,13 @@ namespace prt::window {
   auto GetTotalNumberOfMonitors() -> uword;
   auto GetPrimaryMonitor() -> Monitor*;
   auto VisitAllMonitors(MonitorVisitor* vis) -> bool;
+
+#ifdef PRT_DEBUG
+  void PrintAllMonitors(const google::LogSeverity severity = google::INFO,
+                        const char* file = __FILE__,
+                        const int line = __LINE__,
+                        const int indent = 0);
+#endif //PRT_DEBUG
 }
 
 #endif //PRT_MONITOR_H

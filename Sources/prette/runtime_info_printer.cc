@@ -6,6 +6,8 @@
 #include "prette/mouse/mouse.h"
 #include "prette/engine/engine.h"
 
+#include "prette/window/monitor.h"
+
 namespace prt {
 #define __  google::LogMessage(GetFile(), GetLine(), GetSeverity()).stream() << std::string(indent_ * 2, ' ')
   bool RuntimeInfoPrinter::PrintObject(Object* obj) {
@@ -49,6 +51,12 @@ namespace prt {
 #endif //OS_IS_OSX
     PrintEngineInfo();
     PrintMouseInfo();
+    {
+      __ << "Monitors:";
+      Indent();
+      window::PrintAllMonitors(GetSeverity(), GetFile(), GetLine(), GetIndent());
+      Deindent();
+    }
   }
 #undef __
 }
