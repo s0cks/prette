@@ -9,7 +9,7 @@
 #include "prette/gfx.h"
 
 namespace prt::keyboard {
-  typedef int32_t KeyCode;
+  using KeyCode = int32_t;
 
 #ifdef PRT_GLFW
   static constexpr const int32_t kKeyUnknown = GLFW_KEY_UNKNOWN;
@@ -20,56 +20,54 @@ namespace prt::keyboard {
 
   class Key {
     friend class KeySet;
-  protected:
+    DEFINE_DEFAULT_COPYABLE_TYPE(Key);
+  private:
     KeyCode code_;
   public:
     constexpr Key(const KeyCode code = kKeyUnknown):
       code_(code) {
     }
-    constexpr Key(const Key& rhs) = default;
     ~Key() = default;
 
-    constexpr KeyCode GetCode() const {
+    constexpr auto GetCode() const -> KeyCode {
       return code_;
     }
 
-    std::string GetName() const;
+    auto GetName() const -> std::string;
 
-    constexpr bool IsUnknown() const {
+    constexpr auto IsUnknown() const -> bool {
       return GetCode() == kKeyUnknown;
     }
 
-    inline constexpr bool IsCode(const KeyCode code) const {
+    inline constexpr auto IsCode(const KeyCode code) const -> bool {
       return GetCode() == code;
     }
 
-    constexpr Key& operator=(const Key& rhs) = default;
-    
-    constexpr bool operator<(const Key& rhs) const {
+    constexpr auto operator<(const Key& rhs) const -> bool {
       return GetCode() < rhs.GetCode();
     }
 
-    constexpr bool operator>(const Key& rhs) const {
+    constexpr auto operator>(const Key& rhs) const -> bool {
       return GetCode() > rhs.GetCode();
     }
 
-    constexpr bool operator==(const Key& rhs) const {
+    constexpr auto operator==(const Key& rhs) const -> bool {
       return GetCode() == rhs.GetCode();
     }
 
-    constexpr bool operator==(const KeyCode rhs) const {
+    constexpr auto operator==(const KeyCode rhs) const -> bool {
       return GetCode() == rhs;
     }
 
-    constexpr bool operator!=(const Key& rhs) const {
+    constexpr auto operator!=(const Key& rhs) const -> bool {
       return GetCode() != rhs.GetCode();
     }
 
-    constexpr bool operator!=(const KeyCode rhs) const {
+    constexpr auto operator!=(const KeyCode rhs) const -> bool {
       return GetCode() != rhs;
     }
 
-    friend std::ostream& operator<<(std::ostream& stream, const Key& rhs) {
+    friend auto operator<<(std::ostream& stream, const Key& rhs) -> std::ostream& {
       stream << "Key(";
       stream << "name=" << rhs.GetName() << ", ";
       stream << "code=" << rhs.GetCode();
@@ -78,11 +76,12 @@ namespace prt::keyboard {
     }
   };
 
-  typedef std::bitset<kTotalNumberOfKeys> KeyStateSet;
+  using KeyStateSet = std::bitset<kTotalNumberOfKeys>;
 
   class KeyState {
+    DEFINE_DEFAULT_COPYABLE_TYPE(KeyState);
   public:
-    typedef int RawType;
+    using RawType = int;
 #ifdef PRT_GLFW
 
     static constexpr const RawType kPressed = GLFW_PRESS;
@@ -91,7 +90,7 @@ namespace prt::keyboard {
 #else
 #error "Unsupported Platform."
 #endif //PRT_GLFW
-  protected:
+  private:
     RawType value_;
   public:
     constexpr KeyState(const RawType raw = kReleased):
@@ -106,36 +105,33 @@ namespace prt::keyboard {
     explicit KeyState(const KeyStateSet& states, const Key& k):
       KeyState(states, k.GetCode()) {
     }
-    constexpr KeyState(const KeyState& rhs) = default;
     ~KeyState() = default;
 
-    RawType value() const {
+    auto value() const -> RawType {
       return value_;
     }
 
-    constexpr bool IsPressed() const {
+    constexpr auto IsPressed() const -> bool {
       return value() == GLFW_PRESS;
     }
 
-    constexpr bool IsReleased() const {
+    constexpr auto IsReleased() const -> bool {
       return value() == GLFW_RELEASE;
     }
 
-    KeyState& operator=(const KeyState& rhs) = default;
-
-    constexpr bool operator==(const KeyState& rhs) const {
+    constexpr auto operator==(const KeyState& rhs) const -> bool {
       return value() == rhs.value();
     }
-    
-    constexpr bool operator!=(const KeyState& rhs) const {
+
+    constexpr auto operator!=(const KeyState& rhs) const -> bool {
       return value() != rhs.value();
     }
 
-    constexpr bool operator<(const KeyState& rhs) const {
+    constexpr auto operator<(const KeyState& rhs) const -> bool {
       return value() < rhs.value();
     }
 
-    constexpr bool operator>(const KeyState& rhs) const {
+    constexpr auto operator>(const KeyState& rhs) const -> bool {
       return value() < rhs.value();
     }
 
@@ -151,17 +147,17 @@ namespace prt::keyboard {
       return IsPressed();
     }
 
-    friend std::ostream& operator<<(std::ostream& stream, const KeyState& rhs) {
+    friend auto operator<<(std::ostream& stream, const KeyState& rhs) -> std::ostream& {
       return stream << rhs;
     }
   public:
-    static constexpr KeyState
-    Pressed() {
+    static constexpr auto
+    Pressed() -> KeyState {
       return kPressed;
     }
 
-    static constexpr KeyState
-    Released() {
+    static constexpr auto
+    Released() -> KeyState {
       return kReleased;
     }
   };
@@ -170,12 +166,12 @@ namespace prt::keyboard {
     DEFINE_NON_COPYABLE_TYPE(KeySet);
   private:
     struct Compare {
-      bool operator()(const Key& lhs, const Key& rhs) const {
+      auto operator()(const Key& lhs, const Key& rhs) const -> bool {
         return lhs.GetCode() < rhs.GetCode();
       }
     };
-    typedef std::set<Key> SetType;
-  protected:
+    using SetType = std::set<Key>;
+  private:
     SetType all_;
 
     inline void Insert(const Key& k) {
@@ -190,28 +186,28 @@ namespace prt::keyboard {
     KeySet();
     ~KeySet() = default;
 
-    bool Contains(const Key& k) const {
+    auto Contains(const Key& k) const -> bool {
       const auto pos = all_.find(k);
       return pos != end();
     }
 
-    bool Contains(const KeyCode code) const {
+    auto Contains(const KeyCode code) const -> bool {
       return Contains(Key(code));
     }
 
-    size_t size() const {
+    auto size() const -> size_t {
       return all_.size();
     }
 
-    SetType::const_iterator begin() const {
+    auto begin() const -> SetType::const_iterator {
       return all_.begin();
     }
 
-    SetType::const_iterator end() const {
+    auto end() const -> SetType::const_iterator {
       return all_.end();
     }
 
-    rx::observable<Key> ToObservable() const {
+    auto ToObservable() const -> rx::observable<Key> {
       return rx::observable<>::iterate(all_);
     }
   };

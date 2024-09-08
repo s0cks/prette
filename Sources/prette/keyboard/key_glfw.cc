@@ -2,7 +2,7 @@
 #ifdef PRT_GLFW
 
 namespace prt::keyboard {
-  std::string Key::GetName() const {
+  auto Key::GetName() const -> std::string {
     const auto name = glfwGetKeyName(GetCode(), 0);
     return name ? std::string(name) : std::string{};
   }
@@ -11,8 +11,8 @@ namespace prt::keyboard {
     all_() {
     Insert(GLFW_KEY_SPACE);
     Insert(GLFW_KEY_APOSTROPHE);
-    Insert(GLFW_KEY_COMMA); 
-    Insert(GLFW_KEY_MINUS); 
+    Insert(GLFW_KEY_COMMA);
+    Insert(GLFW_KEY_MINUS);
     Insert(GLFW_KEY_PERIOD);
     Insert(GLFW_KEY_SLASH);
     Insert(GLFW_KEY_0);
@@ -25,8 +25,8 @@ namespace prt::keyboard {
     Insert(GLFW_KEY_7);
     Insert(GLFW_KEY_8);
     Insert(GLFW_KEY_9);
-    Insert(GLFW_KEY_SEMICOLON); 
-    Insert(GLFW_KEY_EQUAL); 
+    Insert(GLFW_KEY_SEMICOLON);
+    Insert(GLFW_KEY_EQUAL);
     Insert(GLFW_KEY_A);
     Insert(GLFW_KEY_B);
     Insert(GLFW_KEY_C);
@@ -53,10 +53,10 @@ namespace prt::keyboard {
     Insert(GLFW_KEY_X);
     Insert(GLFW_KEY_Y);
     Insert(GLFW_KEY_Z);
-    Insert(GLFW_KEY_LEFT_BRACKET); 
-    Insert(GLFW_KEY_BACKSLASH); 
-    Insert(GLFW_KEY_RIGHT_BRACKET); 
-    Insert(GLFW_KEY_GRAVE_ACCENT);  
+    Insert(GLFW_KEY_LEFT_BRACKET);
+    Insert(GLFW_KEY_BACKSLASH);
+    Insert(GLFW_KEY_RIGHT_BRACKET);
+    Insert(GLFW_KEY_GRAVE_ACCENT);
     // Insert(GLFW_KEY_WORLD_1);
     // Insert(GLFW_KEY_WORLD_2);
     Insert(GLFW_KEY_ESCAPE);

@@ -4,5 +4,5 @@
 #include "prette/keyboard/keyboard.h"
 
 namespace prt::keyboard {
-  
+
 }

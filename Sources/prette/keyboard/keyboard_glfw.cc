@@ -5,12 +5,12 @@
 #include "prette/window/window.h"
 
 namespace prt::keyboard {
-  KeyState Keyboard::GetKeyState(const Key& key) {
+  auto Keyboard::GetKeyState(const Key& key) -> KeyState {
     const auto window =  GetAppWindow();
     PRT_ASSERT(window);
     const auto handle = window->GetHandle();
     PRT_ASSERT(handle);
-    return KeyState(glfwGetKey(handle, key.GetCode()));
+    return { glfwGetKey(handle, key.GetCode()) };
   }
 }
 
