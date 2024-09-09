@@ -15,7 +15,7 @@ namespace prt::window {
     WindowBuilder builder("App Demo");
     builder.SetFocusOnShow(true);
     builder.SetVisible(false);
-    builder.SetResizable(true);
+    builder.SetResizable(false);
 #ifdef OS_IS_OSX
     builder.SetRetinaFramebuffer(true);
     builder.SetGraphicsSwitching(true);

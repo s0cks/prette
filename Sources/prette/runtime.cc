@@ -9,7 +9,6 @@
 #include "prette/keyboard/keyboard.h"
 
 #include "prette/signals.h"
-#include "prette/thread_local.h"
 #include "prette/runtime_info_printer.h"
 
 namespace prt {
@@ -28,7 +27,7 @@ namespace prt {
   }
 
   void Runtime::Init(int argc, char** argv) {
-    srand(time(NULL));
+    srand(time(nullptr));
 
     // ::google::InstallPrefixFormatter(&MyPrefixFormatter);
     ::google::InitGoogleLogging(argv[0]);

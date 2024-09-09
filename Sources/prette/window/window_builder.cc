@@ -81,10 +81,16 @@ namespace prt::window {
   }
 #endif
 
-  Window* WindowBuilder::Build() const {
+  auto WindowBuilder::Build() const -> Window* {
 #ifdef PRT_GLFW
 #ifdef __APPLE__
     glfwWindowHintString(GLFW_COCOA_FRAME_NAME, title_.data());
+#endif
+
+#ifdef PRT_VK
+    glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+#else
+#error "Unsupported Graphics Library"
 #endif
 
     const auto handle = glfwCreateWindow(size_[0], size_[1], title_.data(), GetMonitorHandle(), GetShareHandle());
@@ -102,8 +108,11 @@ namespace prt::window {
     glfwSetWindowRefreshCallback(handle, &Window::OnWindowRefresh);
     glfwSetWindowMaximizeCallback(handle, &Window::OnWindowMaximize);
     glfwSetWindowContentScaleCallback(handle, &Window::OnWindowContentScale);
+
+#ifdef PRT_GL
     glfwMakeContextCurrent(handle);
     glfwSwapInterval(0);
+#endif //PRT_GL
     return new Window(handle);
 #else
 #error "Unsupported Platform"
