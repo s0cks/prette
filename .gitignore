@@ -1,25 +1,12 @@
-# Ignore Everything
-/*
-/*/
+.cache/
+vcpkg_installed/
 
-# Except These
-!/build/
-!/cmake/
-!/lib/
-!/resources/
-!/Sources/
-!/Tests/
-!/.gitignore
-!/.gitmodules
-!/.gitattributes
-!/.suppress.cppcheck
-!/Doxyfile.in
-!/vcpkg*.json
-!/CMakeLists.txt
-!/CMakePresets.json
-!/*.md
-!/.vscode/
-!/.cmake-format.yaml
-!/.clang*
-!/Benchmarks/
-!/.pre-commit-config.yaml
+# keep build dir
+build/*
+!/build/.gitkeep
+
+# ignore osx DS_Store
+.DS_Store
+._.DS_Store
+**/.DS_Store
+**/._.DS_Store
