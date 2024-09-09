@@ -2,8 +2,6 @@
 
 #include "prette/common.h"
 #include "prette/thread_local.h"
-#include "prette/keyboard/keyboard.h"
-
 #include "prette/engine/engine_state_init.h"
 #include "prette/engine/engine_state_error.h"
 #include "prette/engine/engine_state_running.h"
@@ -39,6 +37,7 @@ namespace prt::engine {
     RunState<RunningState>();
     if(HasCause())
       RunState<ErrorState>();
+    RunState<TerminatingState>();
     RunState<TerminatedState>();
   }
 

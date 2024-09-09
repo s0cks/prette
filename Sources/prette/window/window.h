@@ -21,6 +21,14 @@ namespace prt {
     class Window : public WindowEventSource {
       friend class WindowBuilder;
       DEFINE_NON_COPYABLE_TYPE(Window);
+    public:
+      struct Comparator {
+        auto operator()(Window* lhs, Window* rhs) const -> bool {
+          PRT_ASSERT(lhs);
+          PRT_ASSERT(rhs);
+          return lhs->GetTitle() < rhs->GetTitle(); //TODO: investigate using UUIDs?
+        }
+      };
 #ifdef PRT_GLFW
     public:
       using Handle = GLFWwindow;
@@ -81,11 +89,7 @@ namespace prt {
       WindowEventSubject events_;
       Handle* handle_;
       UUID id_;
-      rx::subscription on_terminating_;
-      rx::subscription on_post_init_;
-#ifdef PRT_GLFW
-      rx::subscription on_post_render_;
-#endif //PRT_GLFW
+      rx::subscription on_post_init_{};
 
       explicit Window(Handle* handle);
       void PublishEvent(WindowEvent* event) override;
@@ -188,10 +192,19 @@ namespace prt {
       auto OnEvent() const -> WindowEventObservable override {
         return events_.get_observable();
       }
+
+      friend auto operator<<(std::ostream& stream, Window* rhs) -> std::ostream& {
+        return stream << rhs->ToString();
+      }
     };
+
+    using WindowSet = std::set<Window*, Window::Comparator>;
 
     void InitWindows();
     auto GetAppWindow() -> Window*;
+    auto GetAllWindows() -> const WindowSet&;
+    auto GetTotalNumberOfWindows() -> uword;
+    auto VisitAllWindows(const std::function<bool(Window*)>& vis) -> bool;
     auto VisitAllWindows(WindowVisitor* vis) -> bool;
   }
   using window::Window;
