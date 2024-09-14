@@ -1,6 +1,7 @@
 #ifndef PRT_IMAGE_H
 #define PRT_IMAGE_H
 
+#include "prette/rx.h"
 #include "prette/uri.h"
 #include "prette/resolution.h"
 #include "prette/image/image_format.h"
@@ -47,7 +48,7 @@ namespace prt::img {
     inline auto GetTotalSize() const -> uword {
       return GetArea() * GetNumberOfChannels();
     }
-    
+
     auto data() const -> uint8_t* {
       // NOLINTNEXTLINE
       return (uint8_t*) (((uword)this) + sizeof(Image));
@@ -68,7 +69,7 @@ namespace prt::img {
 
     static auto New(const ImageFormat format, const Resolution& resolution) -> Image*;
   };
-  
+
   auto Filter(const uri::Uri& uri) -> bool;
   auto Decode(const uri::Uri& uri) -> Image*;
   auto DecodeAsync(const uri::Uri& uri) -> rx::observable<Image*>;

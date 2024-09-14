@@ -1,7 +1,7 @@
 #include "prette/uri_parser.h"
 
 namespace prt::uri {
-  bool Parser::ParseScheme() {
+  auto Parser::ParseScheme() -> bool {
     const auto start_pos = pos_;
 
     token_len_ = 0;
@@ -42,7 +42,7 @@ namespace prt::uri {
     } while(true);
   }
 
-  bool Parser::ParsePath() {
+  auto Parser::ParsePath() -> bool {
     token_len_ = 0;
     do {
       switch(PeekChar()) {
@@ -58,7 +58,7 @@ namespace prt::uri {
     return false;
   }
 
-  bool Parser::ParseQueryParameterKey() {
+  auto Parser::ParseQueryParameterKey() -> bool {
     token_len_ = 0;
     do {
       switch(PeekChar()) {
@@ -75,7 +75,7 @@ namespace prt::uri {
     return false;
   }
 
-  bool Parser::ParseQueryParameterValue() {
+  auto Parser::ParseQueryParameterValue() -> bool {
     token_len_ = 0;
     do {
       switch(PeekChar()) {
@@ -93,13 +93,13 @@ namespace prt::uri {
     return false;
   }
 
-  bool Parser::ParseQueryParameter() {
+  auto Parser::ParseQueryParameter() -> bool {
     if(!ParseQueryParameterKey()) {
       DLOG(ERROR) << "failed to parse query parameter key.";
       return false;
     }
     const auto key = token();
-    
+
     switch(PeekChar()) {
       case '=':
         NextChar();
@@ -126,7 +126,7 @@ namespace prt::uri {
     return true;
   }
 
-  bool Parser::ParseQueryParameterList() {
+  auto Parser::ParseQueryParameterList() -> bool {
     do {
       switch(PeekChar()) {
         case '#':
@@ -144,7 +144,7 @@ namespace prt::uri {
     return false;
   }
 
-  bool Parser::ParseFragment() {
+  auto Parser::ParseFragment() -> bool {
     token_len_ = 0;
     do {
       switch(PeekChar()) {
@@ -159,7 +159,7 @@ namespace prt::uri {
     return false;
   }
 
-  bool Parser::TryParseScheme() {
+  auto Parser::TryParseScheme() -> bool {
     if(!ParseScheme()) {
       if(!config_.HasDefaultScheme() && config_.IsStrict())
         return false;
@@ -168,22 +168,7 @@ namespace prt::uri {
     return OnParseScheme((const char*) token_, token_len_);
   }
 
-  /*
-   * http:(//)?google.com?test&size=sm#json
-   
-   * ident (http)
-   * :(//)? <-- scheme
-   * ident (google.com)
-   * ? <-- query
-   * ident (test)
-   * & <-- query
-   * ident (size)
-   * = <-- qassign
-   * ident (sm)
-   * # <-- fragment
-   * ident (json)
-  */
-  ParseResult Parser::Parse() {
+  auto Parser::Parse() -> ParseResult {
     if(!TryParseScheme())
       return ParseResult::Failure("Failed to parse uri scheme.");
 

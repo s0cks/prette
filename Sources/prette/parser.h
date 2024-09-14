@@ -329,6 +329,11 @@ namespace prt {
     void* data() const {
       return data_;
     }
+
+    template<typename D>
+    auto GetData() const -> D* {
+      return reinterpret_cast<D*>(data()); //NOLINT(cppcoreguidelines-pro-type-reinterpret-cast)
+    }
   };
 
   template<const uint64_t ParserBufferSize,

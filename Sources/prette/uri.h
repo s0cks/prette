@@ -62,26 +62,7 @@ namespace prt {
 
       auto HasScheme() const -> bool;
       auto HasScheme(const Scheme& a) const -> bool;
-      auto HasScheme(const Scheme& a,
-                     const Scheme& b) const -> bool;
-      auto HasScheme(const Scheme& a,
-                     const Scheme& b,
-                     const Scheme& c) const -> bool;
-      auto HasScheme(const Scheme& a,
-                     const Scheme& b,
-                     const Scheme& c,
-                     const Scheme& d) const -> bool;
-      auto HasScheme(const Scheme& a,
-                     const Scheme& b,
-                     const Scheme& c,
-                     const Scheme& d,
-                     const Scheme& e) const -> bool;
-      auto HasScheme(const Scheme& a,
-                     const Scheme& b,
-                     const Scheme& c,
-                     const Scheme& d,
-                     const Scheme& e,
-                     const Scheme& f) const -> bool;
+      auto HasScheme(const std::vector<Scheme>& values) const -> bool;
       auto HasScheme(const std::unordered_set<Scheme>& values) const -> bool;
       auto HasScheme(const std::set<Scheme>& values) const -> bool;
 
@@ -96,26 +77,7 @@ namespace prt {
       auto GetExtension() const -> Extension;
       auto HasExtension() const -> bool;
       auto HasExtension(const Extension& a) const -> bool;
-      auto HasExtension(const Extension& a,
-                        const Extension& b) const -> bool;
-      auto HasExtension(const Extension& a,
-                        const Extension& b,
-                        const Extension& c) const -> bool;
-      auto HasExtension(const Extension& a,
-                        const Extension& b,
-                        const Extension& c,
-                        const Extension& d) const -> bool;
-      auto HasExtension(const Extension& a,
-                        const Extension& b,
-                        const Extension& c,
-                        const Extension& d,
-                        const Extension& e) const -> bool;
-      auto HasExtension(const Extension& a,
-                        const Extension& b,
-                        const Extension& c,
-                        const Extension& d,
-                        const Extension& e,
-                        const Extension& f) const -> bool;
+      auto HasExtension(const std::vector<Extension>& extensions) const -> bool;
       auto HasExtension(const std::set<Extension>& extensions) const -> bool;
       auto HasExtension(const std::unordered_set<Extension>& extensions) const -> bool;
 

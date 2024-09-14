@@ -3,6 +3,7 @@
 
 #include <cstdint>
 #include <ostream>
+#include <utility>
 
 #include "prette/uri.h"
 #include "prette/parser.h"
@@ -14,23 +15,24 @@ namespace prt::uri {
   V(UnexpectedEndOfStream)
 
   class ParseResult {
-  protected:
-    bool success_;
-    std::string message_;
+  private:
+    bool success_{};
+    std::string message_{};
   public:
     ParseResult() = default;
     ParseResult(const bool success, const std::string& message):
       success_(success),
       message_(message) {
     }
+    ParseResult(ParseResult&& rhs) = default;
     ParseResult(const ParseResult& rhs) = default;
     ~ParseResult() = default;
 
-    bool IsSuccess() const {
+    auto IsSuccess() const -> bool {
       return success_;
     }
 
-    const std::string& GetMessage() const {
+    auto GetMessage() const -> const std::string& {
       return message_;
     }
 
@@ -38,9 +40,10 @@ namespace prt::uri {
       return IsSuccess();
     }
 
-    ParseResult& operator=(const ParseResult& rhs) = default;
+    auto operator=(ParseResult&& rhs) -> ParseResult& = default;
+    auto operator=(const ParseResult& rhs) -> ParseResult& = default;
 
-    friend std::ostream& operator<<(std::ostream& stream, const ParseResult& rhs) {
+    friend auto operator<<(std::ostream& stream, const ParseResult& rhs) -> std::ostream& {
       stream << "uri::ParseResult(";
       stream << "success=" << (rhs.IsSuccess() ? 'y' : 'n');
       if(!rhs)
@@ -49,24 +52,25 @@ namespace prt::uri {
       return stream;
     }
   public:
-    static inline ParseResult
-    Success(const std::string& message = "Success.") {
-      return ParseResult(true, message);
+    static inline auto
+    Success(const std::string& message = "Success.") -> ParseResult {
+      return {true, message};
     }
 
-    static inline ParseResult
-    Failure(const std::string& message) {
-      return ParseResult(false, message);
+    static inline auto
+    Failure(const std::string& message) -> ParseResult {
+    return {false, message};
     }
   };
 
   static constexpr const uint64_t kDefaultParserBufferSize = 4096;
   static constexpr const uint64_t kDefaultTokenBufferSize = 1024;
   class Parser : public ParserTemplate<kDefaultParserBufferSize, kDefaultTokenBufferSize> {
+    DEFINE_NON_COPYABLE_TYPE(Parser);
   public:
     struct Config {
     public:
-      typedef uint8_t Flags;
+      using Flags = uint8_t;
       static constexpr const Flags kNoFlags = 0x0;
     private:
       enum FlagsLayout {
@@ -91,63 +95,63 @@ namespace prt::uri {
       bool (*OnParseFragment)(const Parser* parser, const char* fragment, const uint64_t length);
       bool (*OnParseError)(const Parser* parser);
 
-      bool IsStrict() const {
+      auto IsStrict() const -> bool {
         return StrictField::Decode(flags);
       }
 
-      bool ShouldParseQueries() const {
+      auto ShouldParseQueries() const -> bool {
         return ParseQueriesField::Decode(flags);
       }
 
-      bool ShouldParseFragments() const {
+      auto ShouldParseFragments() const -> bool {
         return ParseFragmentsField::Decode(flags);
       }
 
-      bool HasDefaultScheme() const {
+      auto HasDefaultScheme() const -> bool {
         return !default_scheme.empty();
       }
     };
   public:
-    static inline constexpr Config::Flags
-    NoFlags() {
+    static inline constexpr auto
+    NoFlags() -> Config::Flags {
       return Config::kNoFlags;
     }
 
-    static inline constexpr Config::Flags
-    Strict(const bool value = true) {
+    static inline constexpr auto
+    Strict(const bool value = true) -> Config::Flags {
       return NoFlags() | Config::StrictField::Encode(value);
     }
 
-    static inline constexpr Config::Flags
-    ParseFragments(const bool value = true) {
+    static inline constexpr auto
+    ParseFragments(const bool value = true) -> Config::Flags {
       return NoFlags() | Config::ParseFragmentsField::Encode(value);
     }
 
-    static inline constexpr Config::Flags
-    ParseQueries(const bool value = true) {
+    static inline constexpr auto
+    ParseQueries(const bool value = true) -> Config::Flags {
       return NoFlags() | Config::ParseQueriesField::Encode(value);
     }
 
-    static inline constexpr Config::Flags
-    DefaultFlags() {
+    static inline constexpr auto
+    DefaultFlags() -> Config::Flags {
       return Strict(true)
            | ParseFragments(false)
            | ParseQueries(false);
     }
-  protected:
+  private:
     Config config_;
     uint64_t num_query_params_;
 
-    bool ParseScheme();
-    bool ParsePath();
-    bool ParseQueryParameterKey();
-    bool ParseQueryParameterValue();
-    bool ParseQueryParameter();
-    bool ParseQueryParameterList();
-    bool ParseFragment();
+    auto ParseScheme() -> bool;
+    auto ParsePath() -> bool;
+    auto ParseQueryParameterKey() -> bool;
+    auto ParseQueryParameterValue() -> bool;
+    auto ParseQueryParameter() -> bool;
+    auto ParseQueryParameterList() -> bool;
+    auto ParseFragment() -> bool;
 
-    static inline bool
-    IsQueryDelimiter(const char c) {
+    static inline auto
+    IsQueryDelimiter(const char c) -> bool {
       switch(c) {
         case '&':
         case ';':
@@ -158,46 +162,46 @@ namespace prt::uri {
     }
 
     template<typename Func, typename... Args>
-    inline bool
-    CallIfExists(Func* func, Args... args) const {
+    inline auto
+    CallIfExists(Func* func, Args... args) const -> bool {
       return func ? func(this, args...) : true;
     }
 
-    inline bool
-    OnParseScheme(const char* scheme, const uint64_t length) const {
+    inline auto
+    OnParseScheme(const char* scheme, const uint64_t length) const -> bool {
       return CallIfExists(config_.OnParseScheme, scheme, length);
     }
 
-    inline bool
-    OnParsePath(const char* path, const uint64_t length) const {
+    inline auto
+    OnParsePath(const char* path, const uint64_t length) const -> bool {
       return CallIfExists(config_.OnParsePath, path, length);
     }
 
-    inline bool
-    OnParseQuery0(const uint64_t idx, const std::string& key) const {
+    inline auto
+    OnParseQuery0(const uint64_t idx, const std::string& key) const -> bool {
       return CallIfExists(config_.OnParseQuery0, idx, key);
     }
 
-    inline bool
-    OnParseQuery1(const uint64_t idx, const std::string& key, const std::string& value) const {
+    inline auto
+    OnParseQuery1(const uint64_t idx, const std::string& key, const std::string& value) const -> bool {
       return CallIfExists(config_.OnParseQuery1, idx, key, value);
     }
 
-    inline bool
-    OnParseFragment(const char* fragment, const uint64_t length) const {
+    inline auto
+    OnParseFragment(const char* fragment, const uint64_t length) const -> bool {
       return CallIfExists(config_.OnParseFragment, fragment, length);
     }
 
-    inline bool
-    OnParseError() const {
+    inline auto
+    OnParseError() const -> bool {
       return CallIfExists(config_.OnParseError);
     }
 
-    bool TryParseScheme();
+    auto TryParseScheme() -> bool;
   public:
-    explicit Parser(const Config& config, const basic_uri& uri, void* data = nullptr):
+    explicit Parser(Config config, const basic_uri& uri, void* data = nullptr):
       ParserTemplate(data, uri),
-      config_(config),
+      config_(std::move(config)),
       num_query_params_(0) {
     }
     Parser(const basic_uri& uri, void* data = nullptr):
@@ -206,7 +210,7 @@ namespace prt::uri {
       num_query_params_(0) {
     }
     ~Parser() override = default;
-    ParseResult Parse();
+    auto Parse() -> ParseResult;
   };
 }
 

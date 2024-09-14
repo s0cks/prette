@@ -19,23 +19,26 @@ namespace prt::uri {
       path = path.substr(1);
   }
 
-  static inline bool
-  OnSchemeParsed(const Parser* parser, const char* scheme, const uint64_t scheme_len) {
-    auto uri = (Uri*)parser->data();
+  static inline auto
+  OnSchemeParsed(const Parser* parser, const char* scheme, const uint64_t scheme_len) -> bool {
+    auto uri = parser->GetData<Uri>();
+    PRT_ASSERT(uri);
     uri->scheme = Scheme(scheme, scheme_len);
     return true;
   }
 
-  static inline bool
-  OnPathParsed(const Parser* parser, const char* path, const uint64_t path_len) {
-    auto uri = (Uri*)parser->data();
+  static inline auto
+  OnPathParsed(const Parser* parser, const char* path, const uint64_t path_len) -> bool {
+    auto uri = parser->GetData<Uri>();
+    PRT_ASSERT(uri);
     uri->path = Path(path, path_len);
     return true;
   }
 
-  static inline bool
-  OnQueryParsed0(const Parser* parser, const uint64_t idx, const std::string& key) {
-    auto uri = (Uri*)parser->data();
+  static inline auto
+  OnQueryParsed0(const Parser* parser, const uint64_t idx, const std::string& key) -> bool {
+    auto uri = parser->GetData<Uri>();
+    PRT_ASSERT(uri);
     const auto pos = uri->query.insert({ key, "" });
     if(!pos.second) {
       DLOG(ERROR) << "failed to insert query parameter #" << idx << " " << key;
@@ -44,9 +47,10 @@ namespace prt::uri {
     return true;
   }
 
-  static inline bool
-  OnQueryParsed1(const Parser* parser, const uint64_t idx, const std::string& key, const std::string& value) {
-    auto uri = (Uri*)parser->data();
+  static inline auto
+  OnQueryParsed1(const Parser* parser, const uint64_t idx, const std::string& key, const std::string& value) -> bool {
+    auto uri = parser->GetData<Uri>();
+    PRT_ASSERT(uri);
     const auto pos = uri->query.insert({ key, value });
     if(!pos.second) {
       DLOG(ERROR) << "failed to insert query parameter #" << idx << " " << key << "=" << value;
@@ -55,9 +59,10 @@ namespace prt::uri {
     return true;
   }
 
-  static inline bool
-  OnFragmentParsed(const Parser* parser, const char* fragment, const uint64_t fragment_len) {
-    auto uri = (Uri*)parser->data();
+  static inline auto
+  OnFragmentParsed(const Parser* parser, const char* fragment, const uint64_t fragment_len) -> bool {
+    auto uri = parser->GetData<Uri>();
+    PRT_ASSERT(uri);
     uri->fragment = Fragment(fragment, fragment_len);
     return true;
   }
@@ -76,9 +81,9 @@ namespace prt::uri {
     LOG_IF(ERROR, !parser.Parse()) << "failed to parse uri: " << uri;
   }
 
-  bool TryParseUri(uri::Uri& result,
+  auto TryParseUri(uri::Uri& result,
                    const basic_uri uri,
-                   const uri::Scheme& default_scheme) {
+                   const uri::Scheme& default_scheme) -> bool {
     Parser::Config config = {
       .default_scheme = default_scheme,
       .flags = Parser::DefaultFlags(),
@@ -92,85 +97,34 @@ namespace prt::uri {
     return parser.Parse();
   }
 
-  bool Uri::HasScheme() const {
+  auto Uri::HasScheme() const -> bool {
     return !scheme.empty();
   }
 
-  bool Uri::HasScheme(const Scheme& a) const {
-    return HasScheme() 
+  auto Uri::HasScheme(const Scheme& a) const -> bool {
+    return HasScheme()
         && EqualsIgnoreCase(scheme, a);
   }
 
-  bool Uri::HasScheme(const Scheme& a,
-                      const Scheme& b) const {
-    return HasScheme()
-        && (EqualsIgnoreCase(scheme, a)
-        || EqualsIgnoreCase(scheme, b));
+  template<class Container>
+  auto Has(const Scheme& value, const Container& values) -> bool {
+    return !value.empty()
+        && std::find(std::begin(values), std::end(values), value) != std::end(values);
   }
 
-  bool Uri::HasScheme(const Scheme& a,
-                      const Scheme& b,
-                      const Scheme& c) const {
-    return HasScheme()
-        && (EqualsIgnoreCase(scheme, a)
-        || EqualsIgnoreCase(scheme, b)
-        || EqualsIgnoreCase(scheme, c));
+  auto Uri::HasScheme(const std::vector<Scheme>& values) const -> bool {
+    return Has(scheme, values);
   }
 
-  bool Uri::HasScheme(const Scheme& a,
-                      const Scheme& b,
-                      const Scheme& c,
-                      const Scheme& d) const {
-    return HasScheme()
-        && (EqualsIgnoreCase(scheme, a)
-        || EqualsIgnoreCase(scheme, b)
-        || EqualsIgnoreCase(scheme, c)
-        || EqualsIgnoreCase(scheme, d));
+  auto Uri::HasScheme(const std::unordered_set<Scheme>& values) const -> bool {
+    return Has(scheme, values);
   }
 
-  bool Uri::HasScheme(const Scheme& a,
-                      const Scheme& b,
-                      const Scheme& c,
-                      const Scheme& d,
-                      const Scheme& e) const {
-    return HasScheme()
-        && (EqualsIgnoreCase(scheme, a)
-        || EqualsIgnoreCase(scheme, b)
-        || EqualsIgnoreCase(scheme, c)
-        || EqualsIgnoreCase(scheme, d)
-        || EqualsIgnoreCase(scheme, e));
+  auto Uri::HasScheme(const std::set<Scheme>& values) const -> bool {
+    return Has(scheme, values);
   }
 
-  bool Uri::HasScheme(const Scheme& a,
-                      const Scheme& b,
-                      const Scheme& c,
-                      const Scheme& d,
-                      const Scheme& e,
-                      const Scheme& f) const {
-    return HasScheme()
-        && (EqualsIgnoreCase(scheme, a)
-        || EqualsIgnoreCase(scheme, b)
-        || EqualsIgnoreCase(scheme, c)
-        || EqualsIgnoreCase(scheme, d)
-        || EqualsIgnoreCase(scheme, e)
-        || EqualsIgnoreCase(scheme, f));
-  }
-
-  bool Uri::HasScheme(const std::unordered_set<Scheme>& values) const {
-    if(!HasScheme())
-      return false;
-    const auto pos = values.find(scheme);
-    return pos != values.end();
-  }
-
-  bool Uri::HasScheme(const std::set<Scheme>& values) const {
-    if(!HasScheme())
-      return false;
-    const auto pos = values.find(scheme);
-    return pos != values.end();
-  }
-
-  Extension Uri::GetExtension() const {
+  auto Uri::GetExtension() const -> Extension {
     const auto dotpos = path.find_last_of('.');
     if(dotpos == std::string::npos)
       return {};
@@ -179,132 +133,36 @@ namespace prt::uri {
     return extension;
   }
 
-  bool Uri::HasExtension() const {
+  auto Uri::HasExtension() const -> bool {
     const auto dotpos = path.find_last_of('.');
     return dotpos != std::string::npos;
   }
 
-  bool Uri::HasExtension(const Extension& a) const {
+  auto Uri::HasExtension(const Extension& a) const -> bool {
     auto extension = a;
     SanitizeExtension(extension);
     return EqualsIgnoreCase(extension, GetExtension());
   }
 
-  bool Uri::HasExtension(const Extension& a,
-                         const Extension& b) const {
-    auto e1 = a;
-    SanitizeExtension(e1);
-    auto e2 = b;
-    SanitizeExtension(e2);
+  auto Uri::HasExtension(const std::vector<Extension>& extensions) const -> bool {
     auto extension = GetExtension();
     SanitizeExtension(extension);
-    return EqualsIgnoreCase(extension, e1)
-        || EqualsIgnoreCase(extension, e2);
+    return Has(extension, extensions);
   }
 
-  bool Uri::HasExtension(const Extension& a,
-                         const Extension& b,
-                         const Extension& c) const {
-    auto e1 = a;
-    SanitizeExtension(e1);
-    auto e2 = b;
-    SanitizeExtension(e2);
-    auto e3 = c;
-    SanitizeExtension(e3);
+  auto Uri::HasExtension(const std::set<Extension>& extensions) const -> bool {
     auto extension = GetExtension();
     SanitizeExtension(extension);
-    return EqualsIgnoreCase(extension, e1)
-        || EqualsIgnoreCase(extension, e2)
-        || EqualsIgnoreCase(extension, e3);
+    return Has(extension, extensions);
   }
 
-  bool Uri::HasExtension(const Extension& a,
-                         const Extension& b,
-                         const Extension& c,
-                         const Extension& d) const {
-    auto e1 = a;
-    SanitizeExtension(e1);
-    auto e2 = b;
-    SanitizeExtension(e2);
-    auto e3 = c;
-    SanitizeExtension(e3);
-    auto e4 = d;
-    SanitizeExtension(e3);
+  auto Uri::HasExtension(const std::unordered_set<Extension>& extensions) const -> bool {
     auto extension = GetExtension();
     SanitizeExtension(extension);
-    return EqualsIgnoreCase(extension, e1)
-        || EqualsIgnoreCase(extension, e2)
-        || EqualsIgnoreCase(extension, e3)
-        || EqualsIgnoreCase(extension, e4);
+    return Has(extension, extensions);
   }
 
-  bool Uri::HasExtension(const Extension& a,
-                         const Extension& b,
-                         const Extension& c,
-                         const Extension& d,
-                         const Extension& e) const {
-    auto e1 = a;
-    SanitizeExtension(e1);
-    auto e2 = b;
-    SanitizeExtension(e2);
-    auto e3 = c;
-    SanitizeExtension(e3);
-    auto e4 = d;
-    SanitizeExtension(e4);
-    auto e5 = e;
-    SanitizeExtension(e5);
-    auto extension = GetExtension();
-    SanitizeExtension(extension);
-    return EqualsIgnoreCase(extension, e1)
-        || EqualsIgnoreCase(extension, e2)
-        || EqualsIgnoreCase(extension, e3)
-        || EqualsIgnoreCase(extension, e4)
-        || EqualsIgnoreCase(extension, e5);
-  }
-
-  bool Uri::HasExtension(const Extension& a,
-                         const Extension& b,
-                         const Extension& c,
-                         const Extension& d,
-                         const Extension& e,
-                         const Extension& f) const {
-    auto e1 = a;
-    SanitizeExtension(e1);
-    auto e2 = b;
-    SanitizeExtension(e2);
-    auto e3 = c;
-    SanitizeExtension(e3);
-    auto e4 = d;
-    SanitizeExtension(e4);
-    auto e5 = e;
-    SanitizeExtension(e5);
-    auto e6 = f;
-    SanitizeExtension(e6);
-    auto extension = GetExtension();
-    SanitizeExtension(extension);
-    return EqualsIgnoreCase(extension, e1)
-        || EqualsIgnoreCase(extension, e2)
-        || EqualsIgnoreCase(extension, e3)
-        || EqualsIgnoreCase(extension, e4)
-        || EqualsIgnoreCase(extension, e5)
-        || EqualsIgnoreCase(extension, e6);
-  }
-
-  bool Uri::HasExtension(const std::set<Extension>& extensions) const {
-    auto extension = GetExtension();
-    SanitizeExtension(extension);
-    const auto pos = extensions.find(extension);
-    return pos != extensions.end();
-  }
-
-  bool Uri::HasExtension(const std::unordered_set<Extension>& extensions) const {
-    auto extension = GetExtension();
-    SanitizeExtension(extension);
-    const auto pos = extensions.find(extension);
-    return pos != extensions.end();
-  }
-
-  std::string Uri::ToString() const {
+  auto Uri::ToString() const -> std::string {
     std::stringstream stream;
     stream << "Uri(";
     stream << "scheme=" << scheme << ", ";
@@ -329,20 +187,20 @@ namespace prt::uri {
     return stream.str();
   }
 
-  static const std::regex kAnyUriRegex("([a-z][a-z0-9_]*):(\\/\\/)?([a-z][a-z0-9_\\.]*)", std::regex_constants::icase);
+  static const std::regex kAnyUriRegex(R"(([a-z][a-z0-9_]*):(\/\/)?([a-z][a-z0-9_\.]*))", std::regex_constants::icase);
 
-  bool IsValidUri(const basic_uri& value) {
+  auto IsValidUri(const basic_uri& value) -> bool {
     return std::regex_match(value, kAnyUriRegex);
   }
 
-  bool IsValidUri(const basic_uri& value, const std::string& scheme) {
-    std::regex regex(fmt::format("{0:s}:(\\/\\/)?([a-z][a-z0-9_\\.]*)", scheme), std::regex_constants::icase);
+  auto IsValidUri(const basic_uri& value, const std::string& scheme) -> bool {
+    std::regex regex(fmt::format(R"({0:s}:(\/\/)?([a-z][a-z0-9_\.]*))", scheme), std::regex_constants::icase);
     return std::regex_match(value, regex);
   }
 
   template<typename Container>
-  static inline bool
-  IsValidUri(const basic_uri& value, const Container& schemes) {
+  static inline auto
+  IsValidUri(const basic_uri& value, const Container& schemes) -> bool {
     PRT_ASSERT(!value.empty());
     PRT_ASSERT(!schemes.empty());
     int idx = 0;
@@ -352,15 +210,15 @@ namespace prt::uri {
         filter << "|";
       filter << scheme;
     }
-    std::regex regex(fmt::format("({0:s}):(\\/\\/)?([a-z][a-z0-9_\\.]*)", filter.str()), std::regex_constants::icase);
+    std::regex regex(fmt::format(R"(({0:s}):(\/\/)?([a-z][a-z0-9_\.]*))", filter.str()), std::regex_constants::icase);
     return std::regex_match(value, regex);
   }
 
-  bool IsValidUri(const basic_uri& value, const std::set<Scheme>& schemes) {
+  auto IsValidUri(const basic_uri& value, const std::set<Scheme>& schemes) -> bool {
     return IsValidUri<std::set<Scheme>>(value, schemes);
   }
 
-  bool IsValidUri(const basic_uri& value, const std::unordered_set<Scheme>& schemes) {
+  auto IsValidUri(const basic_uri& value, const std::unordered_set<Scheme>& schemes) -> bool {
     return IsValidUri<std::unordered_set<Scheme>>(value, schemes);
   }
 }
