@@ -3,12 +3,11 @@
 
 #include <units.h>
 #include "prette/gfx.h"
-#include "prette/shape.h"
 #include "prette/object.h"
 #include "prette/common.h"
 #include "prette/dimension.h"
 #include "prette/resolution.h"
-
+#include "prette/geometry/rectangle.h"
 #include "prette/window/monitor_events.h"
 
 namespace prt::window {

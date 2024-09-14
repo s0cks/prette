@@ -27,9 +27,8 @@
         "CMAKE_CXX_STANDARD": "20",
         "CMAKE_CXX_STANDARD_REQUIRED": "ON",
         "CMAKE_CXX_COMPILER": "clang++",
-        "CMAKE_CXX_EXTENSIONS": "OFF"
-        //"CPPCHECK_EXIT_CODE": "0",
-        //"CPPCHECK_EXCLUDES": "${sourceDir}/lib"
+        "CMAKE_CXX_EXTENSIONS": "OFF",
+        "VCPKG_APPLOCAL_DEPS": "ON"
       }
     },
     {

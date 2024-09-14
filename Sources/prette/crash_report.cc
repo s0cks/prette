@@ -24,7 +24,7 @@ namespace prt {
     }
   }
 
-  void CrashReport::PrintStackTrace(std::ostream& stream) {  
+  void CrashReport::PrintStackTrace(std::ostream& stream) {
     Printer p;
     p.snippet = true;
     p.object = true;
@@ -32,10 +32,11 @@ namespace prt {
     p.color_mode = GetColorMode();
     p.print(cause_.GetTrace(), stream);
   }
-  
-  void CrashReport::Print(std::ostream& stream) {
-    PrintRuntimeInfo();
 
+  void CrashReport::Print(std::ostream& stream) {
+#ifdef PRT_DEBUG
+    PrintRuntimeInfo();
+#endif //PRT_DEBUG
     stream << "Cause: " << What(cause_.GetException()) << std::endl;
     PrintStackTrace(stream);
   }

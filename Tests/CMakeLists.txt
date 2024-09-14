@@ -7,7 +7,6 @@ file(GLOB_RECURSE PRT_TEST_SOURCES
   "${CMAKE_CURRENT_SOURCE_DIR}/prette/**/*.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/prette/**/*.cc")
 
-
 add_executable(${PROJECT_NAME}-tests
   main.cc
   ${PRT_TEST_SOURCES})

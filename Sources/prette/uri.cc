@@ -19,71 +19,67 @@ namespace prt::uri {
       path = path.substr(1);
   }
 
-  static inline auto
-  OnSchemeParsed(const Parser* parser, const char* scheme, const uint64_t scheme_len) -> bool {
+  auto Uri::OnSchemeParsed(const Parser* parser, const char* scheme, const uint64_t scheme_len) -> bool {
     auto uri = parser->GetData<Uri>();
     PRT_ASSERT(uri);
     uri->scheme = Scheme(scheme, scheme_len);
     return true;
   }
 
-  static inline auto
-  OnPathParsed(const Parser* parser, const char* path, const uint64_t path_len) -> bool {
+  auto Uri::OnPathParsed(const Parser* parser, const char* path, const uint64_t path_len) -> bool {
     auto uri = parser->GetData<Uri>();
     PRT_ASSERT(uri);
     uri->path = Path(path, path_len);
     return true;
   }
 
-  static inline auto
-  OnQueryParsed0(const Parser* parser, const uint64_t idx, const std::string& key) -> bool {
+  auto Uri::OnQueryParsed0(const Parser* parser, const uint64_t idx, const char* key, const uword key_length) -> bool {
     auto uri = parser->GetData<Uri>();
     PRT_ASSERT(uri);
-    const auto pos = uri->query.insert({ key, "" });
+    const auto k = std::string(key, key_length);
+    const auto pos = uri->query.insert({ k, "" });
     if(!pos.second) {
-      DLOG(ERROR) << "failed to insert query parameter #" << idx << " " << key;
+      DLOG(ERROR) << "failed to insert query parameter #" << idx << " " << k;
       return false;
     }
     return true;
   }
 
-  static inline auto
-  OnQueryParsed1(const Parser* parser, const uint64_t idx, const std::string& key, const std::string& value) -> bool {
+  auto Uri::OnQueryParsed1(const Parser* parser, const uint64_t idx, const char* key, const uword key_length, const char* value, const uword value_length) -> bool {
     auto uri = parser->GetData<Uri>();
     PRT_ASSERT(uri);
-    const auto pos = uri->query.insert({ key, value });
-    if(!pos.second) {
-      DLOG(ERROR) << "failed to insert query parameter #" << idx << " " << key << "=" << value;
-      return false;
-    }
-    return true;
+    const auto k = std::string(key, key_length);
+    const auto v = std::string(value, value_length);
+    const auto [iter,success] = uri->query.insert({ k, v });
+    DLOG_IF(ERROR, !success) << "failed to insert query parameter #" << idx << " " << k << "=" << v;
+    return success;
   }
 
-  static inline auto
-  OnFragmentParsed(const Parser* parser, const char* fragment, const uint64_t fragment_len) -> bool {
+  auto Uri::OnFragmentParsed(const Parser* parser, const char* fragment, const uint64_t fragment_len) -> bool {
     auto uri = parser->GetData<Uri>();
     PRT_ASSERT(uri);
     uri->fragment = Fragment(fragment, fragment_len);
     return true;
   }
 
-  Uri::Uri(const basic_uri& uri):
+  Uri::Uri(const basic_uri& uri, const uint8_t flags):
     scheme(),
     path() {
     Parser::Config config = {
+      .flags = flags,
       .OnParseScheme = &OnSchemeParsed,
       .OnParsePath = &OnPathParsed,
       .OnParseQuery0 = &OnQueryParsed0,
       .OnParseQuery1 = &OnQueryParsed1,
       .OnParseFragment = &OnFragmentParsed,
     };
-    Parser parser(config, uri, this);
-    LOG_IF(ERROR, !parser.Parse()) << "failed to parse uri: " << uri;
+    Parser parser(config, this);
+    LOG_IF(ERROR, !parser.Parse(uri)) << "failed to parse uri: " << uri;
   }
 
-  auto TryParseUri(uri::Uri& result,
-                   const basic_uri uri,
-                   const uri::Scheme& default_scheme) -> bool {
+  auto Uri::TryParse(uri::Uri& result,
+                     const basic_uri& uri,
+                     const uri::Scheme& default_scheme) -> bool {
     Parser::Config config = {
       .default_scheme = default_scheme,
       .flags = Parser::DefaultFlags(),
@@ -93,8 +89,8 @@ namespace prt::uri {
       .OnParseQuery1 = &OnQueryParsed1,
       .OnParseFragment = &OnFragmentParsed,
     };
-    Parser parser(config, uri, &result);
-    return parser.Parse();
+    Parser parser(config, &result);
+    return parser.Parse(uri);
   }
 
   auto Uri::HasScheme() const -> bool {

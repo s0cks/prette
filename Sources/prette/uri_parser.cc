@@ -59,24 +59,16 @@ namespace prt::uri {
   }
 
   auto Parser::ParseQueryParameterKey() -> bool {
-    token_len_ = 0;
-    do {
-      switch(PeekChar()) {
-        case '#':
-        case '=':
-        case '\0':
-        case EOF:
-          return true;
-        default:
-          token_[token_len_++] = NextChar();
-          continue;
-      }
-    } while(true);
-    return false;
+    memset(key_.data(), 0, key_.size());
+    key_length_ = 0;
+    while(IsValidQueryKeyChar(PeekChar()))
+      key_.at(key_length_++) = NextChar();
+    return key_length_ >= 1;
   }
 
   auto Parser::ParseQueryParameterValue() -> bool {
-    token_len_ = 0;
+    memset(value_.data(), 0, value_.size());
+    value_length_ = 0;
     do {
       switch(PeekChar()) {
         case '&':
@@ -86,7 +78,7 @@ namespace prt::uri {
         case EOF:
           return true;
         default:
-          token_[token_len_++] = NextChar();
+          value_.at(value_length_++) = NextChar();
           continue;
       }
     } while(true);
@@ -98,8 +90,6 @@ namespace prt::uri {
       DLOG(ERROR) << "failed to parse query parameter key.";
       return false;
     }
-    const auto key = token();
-
     switch(PeekChar()) {
       case '=':
         NextChar();
@@ -108,7 +98,7 @@ namespace prt::uri {
       case '#':
       case '\0':
       case EOF:
-        if(!OnParseQuery0(num_query_params_++, key))
+        if(!OnParseQuery0(num_query_params_++, key_.data(), key_length_))
           return false;
         return true;
       default:
@@ -120,8 +110,7 @@ namespace prt::uri {
       DLOG(ERROR) << "failed to parse query parameter value.";
       return false;
     }
-    const auto value = std::string(token_.data(), token_len_);
-    if(!OnParseQuery1(num_query_params_++, key, value))
+    if(!OnParseQuery1(num_query_params_++, key_.data(), key_length_, value_.data(), value_length_))
       return false;
     return true;
   }
@@ -168,7 +157,10 @@ namespace prt::uri {
     return OnParseScheme(token_.data(), token_len_);
   }
 
-  auto Parser::Parse() -> ParseResult {
+  auto Parser::Parse(const basic_uri& uri) -> ParseResult {
+    Reset();
+    CopyBufferFrom((const uint8_t*) uri.data(), uri.length()); // NOLINT(cppcoreguidelines-pro-type-cstyle-cast)
+
     if(!TryParseScheme())
       return ParseResult::Failure("Failed to parse uri scheme.");
 

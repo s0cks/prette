@@ -1,3 +1,4 @@
+#ifdef PRT_DEBUG
 #include "prette/window/monitor_printer.h"
 
 namespace prt::window {
@@ -9,3 +10,4 @@ namespace prt::window {
   }
 #undef __
 }
+#endif //PRT_DEBUG

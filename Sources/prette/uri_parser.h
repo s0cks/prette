@@ -90,8 +90,8 @@ namespace prt::uri {
       Flags flags;
       bool (*OnParseScheme)(const Parser* parser, const char* scheme, const uint64_t length);
       bool (*OnParsePath)(const Parser* parser, const char* path, const uint64_t length);
-      bool (*OnParseQuery0)(const Parser* parser, const uint64_t idx, const std::string& key);
-      bool (*OnParseQuery1)(const Parser* parser, const uint64_t idx, const std::string& key, const std::string& value);
+      bool (*OnParseQuery0)(const Parser* parser, const uint64_t idx, const char* key, const uword key_length);
+      bool (*OnParseQuery1)(const Parser* parser, const uint64_t idx, const char* key, const uword key_len, const char* value, const uword value_len);
       bool (*OnParseFragment)(const Parser* parser, const char* fragment, const uint64_t length);
       bool (*OnParseError)(const Parser* parser);
 
@@ -141,6 +141,10 @@ namespace prt::uri {
   private:
     Config config_;
     uint64_t num_query_params_;
+    std::array<char, kDefaultTokenBufferSize> key_;
+    uword key_length_;
+    std::array<char, kDefaultTokenBufferSize> value_;
+    uword value_length_;
 
     auto ParseScheme() -> bool;
     auto ParsePath() -> bool;
@@ -161,6 +165,19 @@ namespace prt::uri {
       }
     }
 
+    static inline auto
+    IsValidQueryKeyChar(const char c) -> bool {
+      switch(c) {
+        case '#':
+        case '=':
+        case '\0':
+        case EOF:
+          return false;
+        default:
+          return true;
+      }
+    }
+
     template<typename Func, typename... Args>
     inline auto
     CallIfExists(Func* func, Args... args) const -> bool {
@@ -178,13 +195,13 @@ namespace prt::uri {
     }
 
     inline auto
-    OnParseQuery0(const uint64_t idx, const std::string& key) const -> bool {
-      return CallIfExists(config_.OnParseQuery0, idx, key);
+    OnParseQuery0(const uint64_t idx, const char* key, const uword key_length) const -> bool {
+      return CallIfExists(config_.OnParseQuery0, idx, key, key_length);
     }
 
     inline auto
-    OnParseQuery1(const uint64_t idx, const std::string& key, const std::string& value) const -> bool {
-      return CallIfExists(config_.OnParseQuery1, idx, key, value);
+    OnParseQuery1(const uint64_t idx, const char* key, const uword key_len, const char* value, const uword value_len) const -> bool {
+      return CallIfExists(config_.OnParseQuery1, idx, key, key_len, value, value_len);
     }
 
     inline auto
@@ -198,19 +215,35 @@ namespace prt::uri {
     }
 
     auto TryParseScheme() -> bool;
-  public:
-    explicit Parser(Config config, const basic_uri& uri, void* data = nullptr):
-      ParserTemplate(data, uri),
-      config_(std::move(config)),
-      num_query_params_(0) {
+
+    inline void Reset() {
+      pos_ = Position();
+      memset(buffer_.data(), 0, buffer_.size());
+      wpos_ = 0;
+      rpos_ = 0;
+      memset(token_.data(), 0, token_.size());
+      token_len_ = 0;
+      memset(key_.data(), 0, key_.size());
+      memset(value_.data(), 0, value_.size());
     }
-    Parser(const basic_uri& uri, void* data = nullptr):
-      ParserTemplate(data, uri),
-      config_(),
-      num_query_params_(0) {
+  public:
+    explicit Parser(Config config, void* data = nullptr):
+      ParserTemplate(data),
+      config_(std::move(config)),
+      num_query_params_(0),
+      key_(),
+      key_length_(0),
+      value_(),
+      value_length_(0) {
+    }
+    Parser(const Config::Flags flags, void* data = nullptr):
+      Parser(Config { .flags = flags }, data) {
+    }
+    Parser(void* data = nullptr):
+      Parser(DefaultFlags(), data) {
     }
     ~Parser() override = default;
-    auto Parse() -> ParseResult;
+    auto Parse(const basic_uri& raw) -> ParseResult;
   };
 }
 

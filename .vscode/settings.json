@@ -94,7 +94,8 @@
     "charconv": "cpp",
     "format": "cpp",
     "random": "cpp",
-    "csignal": "cpp"
+    "csignal": "cpp",
+    "utility": "cpp"
   },
   "cmake.useCMakePresets": "always",
   "cmake.options.statusBarVisibility": "visible",

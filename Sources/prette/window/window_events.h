@@ -2,8 +2,8 @@
 #define PRT_WINDOW_EVENTS_H
 
 #include "prette/event.h"
-#include "prette/shape.h"
 #include "prette/dimension.h"
+#include "prette/geometry/shape.h"
 
 namespace prt::window {
 #define FOR_EACH_WINDOW_EVENT(V)   \

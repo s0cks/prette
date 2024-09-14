@@ -65,10 +65,12 @@ auto main(int argc, char** argv) -> int {
   PRT_ASSERT(kb);
   kb->OnKeyPressed()
     .subscribe(LogEvent<keyboard::KeyPressedEvent>());
+#ifdef PRT_DEBUG
   kb->OnKeyPressed()
     .filter(keyboard::KeyPressedEvent::FilterBy(GLFW_KEY_GRAVE_ACCENT))
     .subscribe([](keyboard::KeyPressedEvent* e) {
       PrintRuntimeInfo();
     });
+#endif //PRT_DEBUG
   return Runtime::Run();
 }

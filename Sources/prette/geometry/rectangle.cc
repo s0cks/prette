@@ -1,8 +1,8 @@
-#include "prette/shape.h"
+#include "prette/geometry/rectangle.h"
 #include <sstream>
 
 namespace prt {
-  bool Rectangle::Contains(const Point& p) const {
+  auto Rectangle::Contains(const Point& p) const -> bool {
     const auto bottom_right = GetBottomRight();
     return pos_.x <= p.x
         && pos_.y <= p.y
@@ -10,7 +10,7 @@ namespace prt {
         && bottom_right.y >= p.y;
   }
 
-  std::string Rectangle::ToString() const {
+  auto Rectangle::ToString() const -> std::string {
     std::stringstream ss;
     ss << "Rectangle(";
     ss << "pos=" << GetPos() << ", ";

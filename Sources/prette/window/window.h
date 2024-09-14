@@ -2,7 +2,7 @@
 #define PRT_WINDOW_H
 
 #include "prette/uuid.h"
-#include "prette/shape.h"
+#include "prette/geometry/shape.h"
 #include "prette/window/monitor.h"
 #include "prette/window/window_events.h"
 

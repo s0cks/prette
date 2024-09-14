@@ -3,8 +3,8 @@
 
 #include <utility>
 #include <optional>
-#include "prette/shape.h"
 #include "prette/input.h"
+#include "prette/geometry/shape.h"
 #include "prette/mouse/cursor_mode.h"
 #include "prette/mouse/mouse_flags.h"
 #include "prette/mouse/mouse_events.h"

@@ -272,7 +272,7 @@
       "name": "Uri Tests",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/build/Tests/minecraft-tests",
+      "program": "${workspaceFolder}/build/Tests/prette-tests",
       "args": [
         "--resources",
         "${workspaceFolder}/resources",

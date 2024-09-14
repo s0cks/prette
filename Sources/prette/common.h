@@ -29,7 +29,7 @@
 
 #else
 
-#define PRT_ASSERT(x) (x)
+#define PRT_ASSERT(x)
 
 #endif //PRT_DEBUG
 

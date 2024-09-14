@@ -1,16 +1,12 @@
-#ifndef PRT_SHAPE_H
-#error "Please #include <prette/shape.h> instead."
-#endif //PRT_SHAPE_H
-
 #ifndef PRT_RECTANGLE_H
 #define PRT_RECTANGLE_H
 
 #include <iostream>
-#include "prette/shape.h"
-#include "prette/platform.h"
+#include "prette/geometry/shape.h"
 
 namespace prt {
-  class Rectangle : public Shape {
+  class Rectangle : public Shape { // NOLINT(cppcoreguidelines-pro-type-member-init)
+    DEFINE_DEFAULT_COPYABLE_TYPE(Rectangle);
   private:
     Point pos_;
     uword width_;
@@ -26,10 +22,9 @@ namespace prt {
     Rectangle(const uword xPos, const uword yPos, const uword width, const uword height):
       Rectangle(Point(xPos, yPos), width, height) {
     }
-    Rectangle(const Rectangle& rhs) = default;
     ~Rectangle() override = default;
 
-    const Point& GetPos() const {
+    auto GetPos() const -> const Point& {
       return pos_;
     }
 
@@ -37,36 +32,34 @@ namespace prt {
       pos_ = rhs;
     }
 
-    Point GetTopLeft() const {
+    auto GetTopLeft() const -> Point {
       return pos_;
     }
 
-    Point GetBottomRight() const {
+    auto GetBottomRight() const -> Point {
       return pos_ + glm::vec2(width_, height_);
     }
 
-    Point GetTopRight() const {
-      return Point(pos_[0] + width_, pos_[1]);
+    auto GetTopRight() const -> Point {
+      return { pos_[0] + width_, pos_[1] };
     }
 
-    Point GetBottomLeft() const {
-      return Point(pos_[0], pos_[1] + height_);
+    auto GetBottomLeft() const -> Point {
+      return { pos_[0], pos_[1] + height_ };
     }
 
-    float GetWidth() const {
+    auto GetWidth() const -> uword {
       return width_;
     }
 
-    float GetHeight() const {
+    auto GetHeight() const -> uword {
       return height_;
     }
 
-    bool Contains(const Point& p) const override;
-    std::string ToString() const override;
+    auto Contains(const Point& p) const -> bool override;
+    auto ToString() const -> std::string override;
 
-    Rectangle& operator=(const Rectangle& rhs) = default;
-
-    friend std::ostream& operator<<(std::ostream& stream, const Rectangle& rhs) {
+    friend auto operator<<(std::ostream& stream, const Rectangle& rhs) -> std::ostream& {
       return stream << rhs.ToString();
     }
   };

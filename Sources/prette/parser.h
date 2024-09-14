@@ -251,21 +251,19 @@ namespace prt {
 
     inline auto ParseUntil(const char expected) -> int {
       auto skipped = 0;
-      do {
+      while(true) {
         switch(PeekChar()) {
           case '\0':
           case EOF:
-            goto finished_parsing_until;
+            return skipped;
           default:
             if(PeekChar() == expected)
-              goto finished_parsing_until;
+              return skipped;
             NextChar();
             skipped += 1;
             continue;
         }
-      } while(true);
-    finished_parsing_until:
-      return skipped;
+      }
     }
 
     void set_data(const void* data) {
@@ -343,9 +341,9 @@ namespace prt {
   class FileParserTemplate : public ParserTemplate<ParserBufferSize, TokenBufferSize> {
   private:
     using Parent = ParserTemplate<ParserBufferSize, TokenBufferSize>;
-  protected:
+  private:
     FILE* file_;
-
+  protected:
     FileParserTemplate(FILE* file, void* data):
       ParserTemplate<ParserBufferSize, TokenBufferSize>(data),
       file_(file) {

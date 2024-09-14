@@ -7,7 +7,7 @@ namespace prt::mouse {
         const std::string raw_uri(value, length);
 
         uri::Uri uri;
-        if(!uri::TryParseUri(uri, raw_uri, "img")) {
+        if(!uri::Uri::TryParse(uri, raw_uri, "img")) {
           LOG(ERROR) << "failed to parse Cursor image uri: " << raw_uri;
           return TransitionTo(kError);
         }

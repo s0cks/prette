@@ -27,6 +27,9 @@ namespace prt {
     class Parser;
     struct Uri {
     public:
+      static constexpr const auto kMaxQueryParamNameLength = 512;
+      static constexpr const auto kMaxQueryParamValueLength = 1024;
+    public:
       Scheme scheme;
       Path path;
       Fragment fragment;
@@ -44,9 +47,15 @@ namespace prt {
         fragment(path.fragment),
         query(path.query) {
       }
+
+      static auto OnSchemeParsed(const Parser* parser, const char* scheme, const uint64_t length) -> bool;
+      static auto OnPathParsed(const Parser* parser, const char* path, const uint64_t length) -> bool;
+      static auto OnQueryParsed0(const Parser* parser, const uint64_t idx, const char* key, const uword key_length) -> bool;
+      static auto OnQueryParsed1(const Parser* parser, const uint64_t idx, const char* key, const uword key_length, const char* value, const uword value_length) -> bool;
+      static auto OnFragmentParsed(const Parser* parser, const char* fragment, const uint64_t length) -> bool;
     public:
       Uri() = default;
-      Uri(const basic_uri& uri);
+      Uri(const basic_uri& uri, const uint8_t flags = 0);
       Uri(Scheme s,
           Path p,
           Fragment f,
@@ -185,6 +194,8 @@ namespace prt {
       friend auto operator<<(std::ostream& stream, const Uri& rhs) -> std::ostream& {
         return stream << ((const std::string&) rhs);
       }
+    public:
+      static auto TryParse(uri::Uri& result, const basic_uri& uri, const uri::Scheme& default_scheme) -> bool;
     };
 
     static inline auto
@@ -202,10 +213,6 @@ namespace prt {
     FileExists(const uri::Uri& uri) -> bool {
       return prt::FileExists(uri.path);
     }
-
-    auto TryParseUri(uri::Uri& result,
-                     const basic_uri uri,
-                     const uri::Scheme& default_scheme) -> bool;
 
     auto IsValidUri(const basic_uri& rhs) -> bool;
     auto IsValidUri(const basic_uri& rhs, const std::string& scheme) -> bool;

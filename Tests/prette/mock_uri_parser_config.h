@@ -11,21 +11,22 @@ namespace prt::uri {
   class MockUriParserConfig {
   public:
     MockUriParserConfig() {
-      ON_CALL(*this, OnParseScheme(::testing::_))
-        .WillByDefault(::testing::Return(true));
-      ON_CALL(*this, OnParsePath(::testing::_))
-        .WillByDefault(::testing::Return(true));
-      ON_CALL(*this, OnParseQuery0(::testing::_, ::testing::_))
-        .WillByDefault(::testing::Return(true));
-      ON_CALL(*this, OnParseQuery1(::testing::_, ::testing::_, ::testing::_))
-        .WillByDefault(::testing::Return(true));
-      ON_CALL(*this, OnParseFragment(::testing::_))
-        .WillByDefault(::testing::Return(true));
+      using namespace ::testing;
+      ON_CALL(*this, OnParseScheme(_))
+        .WillByDefault(Return(true));
+      ON_CALL(*this, OnParsePath(_))
+        .WillByDefault(Return(true));
+      ON_CALL(*this, OnParseQuery0(_, _, _))
+        .WillByDefault(Return(true));
+      ON_CALL(*this, OnParseQuery1(_, _, _))
+        .WillByDefault(Return(true));
+      ON_CALL(*this, OnParseFragment(_))
+        .WillByDefault(Return(true));
     }
     virtual ~MockUriParserConfig() = default;
     MOCK_METHOD1(OnParseScheme, bool(const std::string& scheme)); // NOLINT(modernize-use-trailing-return-type)
     MOCK_METHOD1(OnParsePath, bool(const std::string& path)); // NOLINT(modernize-use-trailing-return-type)
-    MOCK_METHOD2(OnParseQuery0, bool(const uint64_t idx, const std::string& key)); // NOLINT(modernize-use-trailing-return-type)
+    MOCK_METHOD3(OnParseQuery0, bool(const uint64_t idx, const char* key, const uword key_length)); // NOLINT(modernize-use-trailing-return-type)
     MOCK_METHOD3(OnParseQuery1, bool(const uint64_t idx, const std::string& key, const std::string& value)); // NOLINT(modernize-use-trailing-return-type)
     MOCK_METHOD1(OnParseFragment, bool(const std::string& fragment)); // NOLINT(modernize-use-trailing-return-type)
     MOCK_METHOD0(OnParseError, bool()); // NOLINT(modernize-use-trailing-return-type)
@@ -35,6 +36,13 @@ namespace prt::uri {
       const auto config = parser->GetData<MockUriParserConfig>();
       PRT_ASSERT(config);
       return config->OnParseScheme(std::string(scheme, scheme_len));
+    }
+
+    static inline auto
+    OnParseQuery0Wrapper(const Parser* parser, const uint64_t idx, const char* key, const uword key_length) -> bool {
+      const auto config = parser->GetData<MockUriParserConfig>();
+      PRT_ASSERT(config);
+      return config->OnParseQuery0(idx, key, key_length);
     }
   };
 }
