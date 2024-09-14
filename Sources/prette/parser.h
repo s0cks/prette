@@ -9,6 +9,8 @@
 
 namespace prt {
   struct Position {
+    DEFINE_DEFAULT_COPYABLE_TYPE(Position);
+  public:
     uint64_t row;
     uint64_t column;
 
@@ -17,12 +19,9 @@ namespace prt {
       row(r),
       column(c) {
     }
-    Position(const Position& rhs) = default;
     ~Position() = default;
 
-    Position& operator=(const Position& rhs) = default;
-
-    friend std::ostream& operator<<(std::ostream& stream, const Position& rhs) {
+    friend auto operator<<(std::ostream& stream, const Position& rhs) -> std::ostream& {
       stream << "(" << rhs.row << ", " << rhs.column << ")";
       return stream;
     }
@@ -89,30 +88,31 @@ namespace prt {
     }
     ~TokenTemplate() {}
 
-    bool valid() const {
+    auto valid() const -> bool {
       return kind != Kind::kUnknown;
     }
 
-    bool invalid() const {
+    auto invalid() const -> bool {
       return kind == Kind::kUnknown;
     }
 
-    uint64_t as_u64() const {
+    auto as_u64() const -> uint64_t {
       return static_cast<uint64_t>(atoll((const char*) data));
     }
 
-    float as_float() const {
+    auto as_float() const -> float {
       return static_cast<float>(atof((const char*) data));
     }
 
-    void operator=(const TokenTemplate<Kind>& rhs) {
+    auto operator=(const auto rhs) -> TokenTemplate<Kind>& {
       kind = rhs.kind;
       pos = rhs.pos;
       data = rhs.data;
       length = rhs.length;
+      return *this;
     }
 
-    friend std::ostream& operator<<(std::ostream& stream, const TokenTemplate<Kind>& rhs) {
+    friend auto operator<<(std::ostream& stream, const TokenTemplate<Kind>& rhs) -> std::ostream& {
       stream << "Token(";
       stream << "kind=" << rhs.kind << ", ";
       stream << "pos=" << rhs.pos;
@@ -128,20 +128,22 @@ namespace prt {
   template<const uint64_t ParserBufferSize,
            const uint64_t TokenBufferSize>
   class ParserTemplate {
+    using ParserBuffer = std::array<char, ParserBufferSize>;
+    using TokenBuffer = std::array<char, TokenBufferSize>;
   protected:
     void* data_;
     Position pos_;
-    uint8_t buffer_[ParserBufferSize];
-    uint64_t buffer_len_;
-    uint64_t rpos_;
-    uint8_t token_[TokenBufferSize];
-    uint64_t token_len_;
+    ParserBuffer buffer_;
+    uword wpos_;
+    uword rpos_;
+    TokenBuffer token_;
+    uword token_len_;
 
     explicit ParserTemplate(void* data):
       data_(data),
       pos_(1, 1),
       buffer_(),
-      buffer_len_(0),
+      wpos_(0),
       rpos_(0),
       token_(),
       token_len_(0) {
@@ -150,7 +152,7 @@ namespace prt {
       data_(data),
       pos_(1, 1),
       buffer_(),
-      buffer_len_(0),
+      wpos_(0),
       rpos_(0),
       token_(),
       token_len_(0) {
@@ -165,22 +167,22 @@ namespace prt {
         return;
       const auto len = std::min(nbytes, ParserBufferSize);
       memcpy(&buffer_[0], data, len);
-      buffer_len_ = len;
+      wpos_ = len;
     }
 
-    inline uint64_t row() const {
+    inline auto row() const -> uint64_t {
       return pos_.row;
     }
 
-    inline uint64_t column() const {
+    inline auto column() const -> uint64_t {
       return pos_.column;
     }
 
-    inline Position token_start() const {
+    inline auto token_start() const -> Position {
       return Position(row(), column() - token_len_);
     }
 
-    static inline bool IsWhitespace(const char c) {
+    static inline auto IsWhitespace(const char c) -> bool {
       switch(c) {
         case ' ':
         case '\t':
@@ -192,30 +194,30 @@ namespace prt {
       }
     }
 
-    static inline bool IsDigit(const char c) {
+    static inline auto IsDigit(const char c) -> bool {
       return (c >= '0') && (c <= '9');
     }
 
-    virtual bool ReadNextChunk() {
+    virtual auto ReadNextChunk() -> bool {
       return false;
     }
 
-    inline char PeekChar(const uint64_t offset = 0) {
+    inline auto PeekChar(const uint64_t offset = 0) -> char {
       const auto idx = rpos_ + offset;
-      if(idx >= buffer_len_) {
-        if(!ReadNextChunk() || idx >= buffer_len_)
+      if(idx >= wpos_) {
+        if(!ReadNextChunk() || idx >= wpos_)
           return EOF;
       }
       return (char) buffer_[rpos_ + offset];
     }
 
-    inline char NextChar() {
-      if((rpos_ + 1) > buffer_len_) {
+    inline auto NextChar() -> char {
+      if((rpos_ + 1) > wpos_) {
         if(!ReadNextChunk())
           return EOF;
       }
 
-      const auto c = (char)buffer_[rpos_];
+      const auto c = buffer_.at(rpos_);
       rpos_ += 1;
       switch(c) {
         case '\n':
@@ -228,8 +230,8 @@ namespace prt {
       }
     }
 
-    inline char NextRealChar() {
-      char next;
+    inline auto NextRealChar() -> char {
+      char next{};
       do {
         next = NextChar();
       } while(IsWhitespace(next));
@@ -247,7 +249,7 @@ namespace prt {
       while(idx-- > 0) NextChar();
     }
 
-    inline int ParseUntil(const char expected) {
+    inline auto ParseUntil(const char expected) -> int {
       auto skipped = 0;
       do {
         switch(PeekChar()) {
@@ -271,7 +273,7 @@ namespace prt {
     }
 
     template<const google::LogSeverity Severity = google::FATAL>
-    inline bool ExpectNextRealChar(const char token) {
+    inline auto ExpectNextRealChar(const char token) -> bool {
       if(PeekChar() != token) {
         LOG_AT_LEVEL(Severity) << "unexpected token: " << NextChar();
         return false;
@@ -281,7 +283,7 @@ namespace prt {
     }
 
     template<typename T, const bool IsWhole, T(*ParseFunction)(const char*)>
-    inline bool ParseNumber(T* result) {
+    inline auto ParseNumber(T* result) -> bool {
       token_len_ = 0;
       do {
         const auto next = PeekChar();
@@ -296,7 +298,7 @@ namespace prt {
         token_[token_len_++] = NextChar();
         continue;
       } while(true);
-      
+
       if(token_len_ <= 0)
         return false;
 
@@ -304,29 +306,29 @@ namespace prt {
       return true;
     }
 
-    inline bool ParseInt(int32_t* result) {
+    inline auto ParseInt(int32_t* result) -> bool {
       return ParseNumber<int32_t, true, atoi>(result);
     }
 
-    inline bool ParseLong(int64_t* result) {
+    inline auto ParseLong(int64_t* result) -> bool {
       return ParseNumber<int64_t, true, atol>(result);
     }
 
-    inline bool ParseDouble(double* result) {
+    inline auto ParseDouble(double* result) -> bool {
       return ParseNumber<double, false, atof>(result);
     }
 
-    inline bool ParseFloat(float* result) {
+    inline auto ParseFloat(float* result) -> bool {
       return ParseNumber<float, false, atof>(result);
     }
 
-    std::string token() const {
-      return std::string((const char*) token_, token_len_);
+    auto token() const -> std::string {
+      return std::string(token_.data(), token_len_);
     }
   public:
     virtual ~ParserTemplate() = default;
 
-    void* data() const {
+    auto data() const -> void* {
       return data_;
     }
 
@@ -340,7 +342,7 @@ namespace prt {
            const uint64_t TokenBufferSize>
   class FileParserTemplate : public ParserTemplate<ParserBufferSize, TokenBufferSize> {
   private:
-    typedef ParserTemplate<ParserBufferSize, TokenBufferSize> Parent;
+    using Parent = ParserTemplate<ParserBufferSize, TokenBufferSize>;
   protected:
     FILE* file_;
 
@@ -349,16 +351,16 @@ namespace prt {
       file_(file) {
     }
 
-    bool ReadNextChunk() override {
-      memset(Parent::buffer_, 0, sizeof(Parent::buffer_));
-      Parent::buffer_len_ = fread(Parent::buffer_, sizeof(uint8_t), ParserBufferSize, file_);
+    auto ReadNextChunk() -> bool override {
+      memset(Parent::buffer_.data(), 0, Parent::buffer_.size());
+      Parent::wpos_ = fread(Parent::buffer_.data(), sizeof(uint8_t), Parent::buffer_.size(), file_);
       Parent::rpos_ = 0;
-      return Parent::buffer_len_ > 0;
+      return Parent::wpos_ > 0;
     }
   public:
     ~FileParserTemplate() override = default;
 
-    FILE* file() const {
+    auto file() const -> FILE* {
       return file_;
     }
   };

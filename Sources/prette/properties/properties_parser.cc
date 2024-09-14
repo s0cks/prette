@@ -62,15 +62,15 @@ namespace prt::properties {
 
   parsed_number:
     if(token_len_ <= 0) {
-      LOG(ERROR) << "unexpected token: " << std::string((const char*) token_, token_len_);
+      LOG(ERROR) << "unexpected token: " << std::string(token_.data(), token_len_);
       (*result) = nullptr;
       return false;
     }
 
     if(whole) {
-      (*result) = LongProperty::New(name, atol((const char*) token_));
+      (*result) = LongProperty::New(name, atol(token_.data()));
     } else {
-      (*result) = DoubleProperty::New(name, atof((const char*) token_));
+      (*result) = DoubleProperty::New(name, atof(token_.data()));
     }
     return true;
   }
@@ -108,7 +108,7 @@ namespace prt::properties {
 
   new_string_value:
     PRT_ASSERT(!quote);
-    (*result) = StringProperty::New(name, std::string((const char*) token_, token_len_));
+    (*result) = StringProperty::New(name, std::string(token_.data(), token_len_));
     return true;
   }
 
@@ -140,7 +140,7 @@ namespace prt::properties {
       return false;
     }
 
-    const auto name = std::string((const char*) token_, token_len_);
+    const auto name = std::string(token_.data(), token_len_);
     SkipWhitespace();
     ExpectNextRealChar('=');
     SkipWhitespace();

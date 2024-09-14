@@ -120,7 +120,7 @@ namespace prt::uri {
       DLOG(ERROR) << "failed to parse query parameter value.";
       return false;
     }
-    const auto value = std::string((const char*) token_, token_len_);
+    const auto value = std::string(token_.data(), token_len_);
     if(!OnParseQuery1(num_query_params_++, key, value))
       return false;
     return true;
@@ -135,7 +135,7 @@ namespace prt::uri {
           return true;
         default:
           if(!ParseQueryParameter()) {
-            DLOG(ERROR) << "failed to parse query: " << std::string((const char*) &buffer_[rpos_], buffer_len_ - rpos_);
+            DLOG(ERROR) << "failed to parse query: " << std::string(&buffer_[rpos_], wpos_ - rpos_);
             return false;
           }
           continue;
@@ -165,7 +165,7 @@ namespace prt::uri {
         return false;
       return OnParseScheme(config_.default_scheme.data(), config_.default_scheme.length());
     }
-    return OnParseScheme((const char*) token_, token_len_);
+    return OnParseScheme(token_.data(), token_len_);
   }
 
   auto Parser::Parse() -> ParseResult {
@@ -174,7 +174,7 @@ namespace prt::uri {
 
     if(!ParsePath())
       return ParseResult::Failure("Failed to parse uri path.");
-    if(!OnParsePath((const char*) token_, token_len_))
+    if(!OnParsePath(token_.data(), token_len_))
       return ParseResult::Failure(fmt::format("Failed to parse uri path: {0:s}", token()));
 
     do {
@@ -194,7 +194,7 @@ namespace prt::uri {
           NextChar();
           if(!ParseFragment())
             return ParseResult::Failure("failed to parse uri fragment.");
-          if(!OnParseFragment((const char*) token_, token_len_))
+          if(!OnParseFragment(token_.data(), token_len_))
             return ParseResult::Failure(fmt::format("failed to parse uri fragment: {0:s}", token()));
           continue;
         }
