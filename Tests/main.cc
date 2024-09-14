@@ -4,11 +4,11 @@
 #include "prette/class.h"
 #include "prette/prette.h"
 
-auto main(int argc, char** argv) -> int {
-  using namespace google;
-  using namespace prt;
-  using namespace ::testing;
+using namespace google;
+using namespace prt;
+using namespace ::testing;
 
+auto main(int argc, char** argv) -> int {
   InitGoogleLogging(argv[0]);
   InitGoogleTest(&argc, argv);
   ParseCommandLineFlags(&argc, &argv, false);
