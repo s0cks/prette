@@ -8,7 +8,12 @@ namespace prt {
       uri::Parser parser(kBenchmarkUri);
       LOG_IF(FATAL, !parser.Parse()) << "failed to parse: " << kBenchmarkUri;
     }
+    state.SetBytesProcessed(state.iterations() * static_cast<int64_t>(strlen(kBenchmarkUri)));
   }
 
-  BENCHMARK(BM_UriParser); //NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
+  // NOLINTNEXTLINE(cppcoreguidelines-avoid-non-const-global-variables)
+  BENCHMARK(BM_UriParser)
+    ->Name("Parse")
+    ->Unit(benchmark::TimeUnit::kNanosecond)
+    ->ThreadPerCpu();
 }
