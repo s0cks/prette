@@ -71,6 +71,14 @@ link_libraries(Threads::Threads
                gflags::gflags)
 
 add_subdirectory(lib/semver)
-add_subdirectory(Tests)
 add_subdirectory(Sources)
-add_subdirectory(Benchmarks)
+
+option(PRT_BUILD_BENCHMARKS "Build the benchmarks" ON)
+if(PRT_BUILD_BENCHMARKS)
+  add_subdirectory(Benchmarks)
+endif()
+
+option(PRT_BUILD_TESTS "Build the tests" ON)
+if(PRT_BUILD_TESTS)
+  add_subdirectory(Tests)
+endif()

@@ -7,12 +7,12 @@
 auto main(int argc, char** argv) -> int {
   using namespace google;
   using namespace prt;
+  using namespace ::testing;
 
   InitGoogleLogging(argv[0]);
-  LogToStderr();
-  ::testing::InitGoogleTest(&argc, argv);
+  InitGoogleTest(&argc, argv);
   ParseCommandLineFlags(&argc, &argv, false);
-  LOG(INFO) << "Running unit tests for minecraft-clone v" << GetVersion() << "....";
+  LOG(INFO) << "Running unit tests for prette v" << GetVersion() << "....";
 
   Class::Init();
   return RUN_ALL_TESTS();
