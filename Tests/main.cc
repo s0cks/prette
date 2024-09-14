@@ -4,7 +4,7 @@
 #include "prette/class.h"
 #include "prette/prette.h"
 
-int main(int argc, char** argv) {
+auto main(int argc, char** argv) -> int {
   using namespace google;
   using namespace prt;
 

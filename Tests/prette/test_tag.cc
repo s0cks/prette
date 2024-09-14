@@ -11,14 +11,14 @@ namespace prt {
     ~TagTest() override = default;
   };
 
-  static inline AssertionResult
-  IsTag(const Tag& actual, const std::string& expected) {
+  static inline auto
+  IsTag(const Tag& actual, const std::string& expected) -> AssertionResult {
     if(actual != expected)
       return AssertionFailure() << "expected " << actual << " to equal: " << expected;
     return AssertionSuccess();
   }
 
-  TEST_F(TagTest, Test) {
+  TEST_F(TagTest, Test) { // NOLINT(modernize-use-trailing-return-type,cppcoreguidelines-avoid-non-const-global-variables)
     Tag t1("test");
     ASSERT_TRUE(IsTag(t1, "test"));
 

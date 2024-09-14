@@ -23,16 +23,16 @@ namespace prt::uri {
         .WillByDefault(::testing::Return(true));
     }
     virtual ~MockUriParserConfig() = default;
-    MOCK_METHOD1(OnParseScheme, bool(const std::string& scheme));
-    MOCK_METHOD1(OnParsePath, bool(const std::string& path));
-    MOCK_METHOD2(OnParseQuery0, bool(const uint64_t idx, const std::string& key));
-    MOCK_METHOD3(OnParseQuery1, bool(const uint64_t idx, const std::string& key, const std::string& value));
-    MOCK_METHOD1(OnParseFragment, bool(const std::string& fragment));
-    MOCK_METHOD0(OnParseError, bool());
+    MOCK_METHOD1(OnParseScheme, bool(const std::string& scheme)); // NOLINT(modernize-use-trailing-return-type)
+    MOCK_METHOD1(OnParsePath, bool(const std::string& path)); // NOLINT(modernize-use-trailing-return-type)
+    MOCK_METHOD2(OnParseQuery0, bool(const uint64_t idx, const std::string& key)); // NOLINT(modernize-use-trailing-return-type)
+    MOCK_METHOD3(OnParseQuery1, bool(const uint64_t idx, const std::string& key, const std::string& value)); // NOLINT(modernize-use-trailing-return-type)
+    MOCK_METHOD1(OnParseFragment, bool(const std::string& fragment)); // NOLINT(modernize-use-trailing-return-type)
+    MOCK_METHOD0(OnParseError, bool()); // NOLINT(modernize-use-trailing-return-type)
   public:
-    static inline bool
-    OnParseSchemeWrapper(const Parser* parser, const char* scheme, const uint64_t scheme_len) {
-      const auto config = ((MockUriParserConfig*) parser->data());
+    static inline auto
+    OnParseSchemeWrapper(const Parser* parser, const char* scheme, const uint64_t scheme_len) -> bool {
+      const auto config = parser->GetData<MockUriParserConfig>();
       PRT_ASSERT(config);
       return config->OnParseScheme(std::string(scheme, scheme_len));
     }

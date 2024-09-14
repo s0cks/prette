@@ -13,7 +13,7 @@ namespace prt::mouse {
     ~CursorTest() override = default;
   };
 
-  TEST_F(CursorTest, Test_ListAvailableCursors) {
+  TEST_F(CursorTest, Test_ListAvailableCursors) { // NOLINT(modernize-use-trailing-return-type,cppcoreguidelines-avoid-non-const-global-variables)
     rx::MockSubscription<std::string> sub;
     EXPECT_CALL(sub, OnNext(StrEq("bibata-modern-ice/bd_double_arrow.png")));
     EXPECT_CALL(sub, OnNext(StrEq("bibata-modern-ice/bottom_left_corner.png")));

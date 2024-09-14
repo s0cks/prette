@@ -8,7 +8,7 @@ namespace prt::properties {
     ~LongPropertyTest() override = default;
   };
 
-  TEST_F(LongPropertyTest, Test_New) {
+  TEST_F(LongPropertyTest, Test_New) { // NOLINT(modernize-use-trailing-return-type,cppcoreguidelines-avoid-non-const-global-variables)
     static constexpr const auto kPropertyName = "test";
     static constexpr const uint64_t kPropertyValue = 10;
     const auto prop = LongProperty::New(kPropertyName, kPropertyValue);

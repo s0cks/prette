@@ -1,7 +1,7 @@
 #include "prette/test_cache.h"
 
 namespace prt {
-  TEST_F(CacheTest, Test_Get_WillPass_UsesCacheLoader) {
+  TEST_F(CacheTest, Test_Get_WillPass_UsesCacheLoader) { // NOLINT(modernize-use-trailing-return-type,cppcoreguidelines-avoid-non-const-global-variables)
     const auto k1 = "key1";
     const auto v1 = 1;
 

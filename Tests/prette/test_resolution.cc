@@ -13,7 +13,7 @@ namespace prt {
     ~ResolutionTest() override = default;
   };
 
-  TEST_F(ResolutionTest, Test_0) {
+  TEST_F(ResolutionTest, Test_0) { // NOLINT(modernize-use-trailing-return-type,cppcoreguidelines-avoid-non-const-global-variables)
     Resolution resolution("1440x1080");
     ASSERT_EQ(resolution.width(), 1440);
     ASSERT_EQ(resolution.height(), 1080);

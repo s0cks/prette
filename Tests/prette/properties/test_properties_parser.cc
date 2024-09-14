@@ -15,14 +15,14 @@ namespace prt::properties {
     ~PropertiesParserTest() override = default;
   };
 
-  TEST_F(PropertiesParserTest, Test_Parse) {
+  TEST_F(PropertiesParserTest, Test_Parse) { // NOLINT(modernize-use-trailing-return-type,cppcoreguidelines-avoid-non-const-global-variables)
     static constexpr const auto kTestPropertiesFileName = "test1.properties";
 
     const auto filename = fmt::format("{0:s}/{1:s}", FLAGS_resources, kTestPropertiesFileName);
     PRT_ASSERT(FileExists(filename));
     const auto file = fopen(filename.c_str(), "rb");
     Parser parser(file);
-    
+
     PropertySet properties;
     ASSERT_TRUE(parser.ParseProperties(properties));
 

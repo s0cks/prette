@@ -12,36 +12,36 @@ namespace prt::uri {
     ~UriParserTest() override = default;
   };
 
-  static inline AssertionResult
-  IsSuccess(const uri::ParseResult& result) {
+  static inline auto
+  IsSuccess(const uri::ParseResult& result) -> AssertionResult {
     if(!result)
       return AssertionFailure() << "expected " << result << " to be successful.";
     return AssertionSuccess() << result << " is successful.";
   }
 
-  static inline AssertionResult
-  IsSuccess(uri::Parser& parser) {
+  static inline auto
+  IsSuccess(uri::Parser& parser) -> AssertionResult {
     return IsSuccess(parser.Parse());
   }
 
-  static inline AssertionResult
-  IsFailure(const uri::ParseResult& result) {
+  static inline auto
+  IsFailure(const uri::ParseResult& result) -> AssertionResult {
     if(!result)
       return AssertionSuccess() << result << " is not successful.";
     return AssertionFailure() << "expected " << result << " to not be successful.";
   }
 
-  static inline AssertionResult
-  IsFailure(Parser& parser) {
+  static inline auto
+  IsFailure(Parser& parser) -> AssertionResult {
     return IsFailure(parser.Parse());
   }
 
-  TEST_F(UriParserTest, Test_ParseFails_InvalidScheme1) {
+  TEST_F(UriParserTest, Test_ParseFails_InvalidScheme1) { // NOLINT(modernize-use-trailing-return-type,cppcoreguidelines-avoid-non-const-global-variables)
     Parser parser("tex:/test.png");
     ASSERT_TRUE(IsFailure(parser));
   }
 
-  TEST_F(UriParserTest, Test_Parse_DefaultScheme) {
+  TEST_F(UriParserTest, Test_Parse_DefaultScheme) { // NOLINT(modernize-use-trailing-return-type,cppcoreguidelines-avoid-non-const-global-variables)
     MockUriParserConfig config;
     EXPECT_CALL(config, OnParseScheme(Eq("default")));
     Parser parser(Parser::Config {
@@ -51,62 +51,62 @@ namespace prt::uri {
     ASSERT_TRUE(IsSuccess(parser));
   }
 
-  TEST_F(UriParserTest, Test_ParseFails_InvalidScheme) {
+  TEST_F(UriParserTest, Test_ParseFails_InvalidScheme) { // NOLINT(modernize-use-trailing-return-type,cppcoreguidelines-avoid-non-const-global-variables)
     Parser parser(":test.png");
     ASSERT_TRUE(IsFailure(parser));
   }
 
-  TEST_F(UriParserTest, Test_Parse0) {
+  TEST_F(UriParserTest, Test_Parse0) { // NOLINT(modernize-use-trailing-return-type,cppcoreguidelines-avoid-non-const-global-variables)
     Parser parser("t:test");
     ASSERT_TRUE(IsSuccess(parser));
   }
 
-  TEST_F(UriParserTest, Test_Parse1) {
+  TEST_F(UriParserTest, Test_Parse1) { // NOLINT(modernize-use-trailing-return-type,cppcoreguidelines-avoid-non-const-global-variables)
     Parser parser("t://test");
     ASSERT_TRUE(IsSuccess(parser));
   }
 
-  TEST_F(UriParserTest, Test_Parse2) {
+  TEST_F(UriParserTest, Test_Parse2) { // NOLINT(modernize-use-trailing-return-type,cppcoreguidelines-avoid-non-const-global-variables)
     Parser parser("tex://test.png");
     ASSERT_TRUE(IsSuccess(parser));
   }
 
-  TEST_F(UriParserTest, Test_Parse3) {
+  TEST_F(UriParserTest, Test_Parse3) { // NOLINT(modernize-use-trailing-return-type,cppcoreguidelines-avoid-non-const-global-variables)
     Parser parser(Parser::Config {
       .flags = Parser::Strict() | Parser::ParseQueries(),
     }, "tex://test.png?");
     ASSERT_TRUE(IsSuccess(parser));
   }
 
-  TEST_F(UriParserTest, Test_Parse4) {
+  TEST_F(UriParserTest, Test_Parse4) { // NOLINT(modernize-use-trailing-return-type,cppcoreguidelines-avoid-non-const-global-variables)
     Parser parser(Parser::Config {
       .flags = Parser::Strict() | Parser::ParseQueries(),
     }, "tex://test.png?test");
     ASSERT_TRUE(IsSuccess(parser));
   }
 
-  TEST_F(UriParserTest, Test_Parse5) {
+  TEST_F(UriParserTest, Test_Parse5) { // NOLINT(modernize-use-trailing-return-type,cppcoreguidelines-avoid-non-const-global-variables)
     Parser parser(Parser::Config {
       .flags = Parser::Strict() | Parser::ParseQueries(),
     }, "tex://test.png?message=hello");
     ASSERT_TRUE(IsSuccess(parser));
   }
 
-  TEST_F(UriParserTest, Test_Parse6) {
+  TEST_F(UriParserTest, Test_Parse6) { // NOLINT(modernize-use-trailing-return-type,cppcoreguidelines-avoid-non-const-global-variables)
     Parser parser(Parser::Config {
       .flags = Parser::Strict() | Parser::ParseQueries(),
     }, "tex://test.png?message=hello&");
     ASSERT_TRUE(IsSuccess(parser));
   }
 
-  TEST_F(UriParserTest, Test_Parse7) {
+  TEST_F(UriParserTest, Test_Parse7) { // NOLINT(modernize-use-trailing-return-type,cppcoreguidelines-avoid-non-const-global-variables)
     Parser parser(Parser::Config {
       .flags = Parser::Strict() | Parser::ParseQueries(),
     }, "tex://test.png?message=hello&test");
     ASSERT_TRUE(IsSuccess(parser));
   }
 
-  TEST_F(UriParserTest, Test_Parse8) {
+  TEST_F(UriParserTest, Test_Parse8) { // NOLINT(modernize-use-trailing-return-type,cppcoreguidelines-avoid-non-const-global-variables)
     Parser parser(Parser::Config {
       .flags = Parser::Strict() | Parser::ParseQueries() | Parser::ParseFragments(),
     }, "tex://test.png?message=hello&test#test");

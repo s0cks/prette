@@ -14,30 +14,30 @@ namespace prt {
   };
 
   template<const ColorComponent Component>
-  static inline AssertionResult
-  HasComponent(const Color& actual, const float expected) {
+  static inline auto
+  HasComponent(const Color& actual, const float expected) -> AssertionResult {
     return actual[Component] == expected
          ? AssertionSuccess()
          : AssertionFailure() << "expected " << glm::to_string(actual) << " to have a " << Component << " component of: " << expected << ", not: " << actual[Component];
   }
 
-  static inline AssertionResult
-  HasRedComponent(const Color& actual, const float expected) {
+  static inline auto
+  HasRedComponent(const Color& actual, const float expected) -> AssertionResult {
     return HasComponent<kRedComponent>(actual, expected);
   }
 
-  static inline AssertionResult
-  HasBlueComponent(const Color& actual, const float expected) {
+  static inline auto
+  HasBlueComponent(const Color& actual, const float expected) -> AssertionResult {
     return HasComponent<kBlueComponent>(actual, expected);
   }
 
-  static inline AssertionResult
-  HasGreenComponent(const Color& actual, const float expected) {
+  static inline auto
+  HasGreenComponent(const Color& actual, const float expected) -> AssertionResult {
     return HasComponent<kGreenComponent>(actual, expected);
   }
 
-  static inline AssertionResult
-  IsColor(const Color& actual, const float r, const float g, const float b) {
+  static inline auto
+  IsColor(const Color& actual, const float r, const float g, const float b) -> AssertionResult {
     {
       const auto result = HasRedComponent(actual, r);
       if(!result)
@@ -56,23 +56,23 @@ namespace prt {
     return AssertionSuccess();
   }
 
-  TEST_F(ColorTest, Test_Black) {
+  TEST_F(ColorTest, Test_Black) { // NOLINT(modernize-use-trailing-return-type,cppcoreguidelines-avoid-non-const-global-variables)
     ASSERT_TRUE(IsColor(kBlack, 0.0f, 0.0f, 0.0f));
   }
 
-  TEST_F(ColorTest, Test_White) {
+  TEST_F(ColorTest, Test_White) { // NOLINT(modernize-use-trailing-return-type,cppcoreguidelines-avoid-non-const-global-variables)
     ASSERT_TRUE(IsColor(kWhite, 1.0f, 1.0f, 1.0f));
   }
 
-  TEST_F(ColorTest, Test_Red) {
+  TEST_F(ColorTest, Test_Red) { // NOLINT(modernize-use-trailing-return-type,cppcoreguidelines-avoid-non-const-global-variables)
     ASSERT_TRUE(IsColor(kRed, 1.0f, 0.0f, 0.0f));
   }
 
-  TEST_F(ColorTest, Test_Green) {
+  TEST_F(ColorTest, Test_Green) { // NOLINT(modernize-use-trailing-return-type,cppcoreguidelines-avoid-non-const-global-variables)
     ASSERT_TRUE(IsColor(kGreen, 0.0f, 1.0f, 0.0f));
   }
 
-  TEST_F(ColorTest, Test_Blue) {
+  TEST_F(ColorTest, Test_Blue) { // NOLINT(modernize-use-trailing-return-type,cppcoreguidelines-avoid-non-const-global-variables)
     ASSERT_TRUE(IsColor(kBlue, 0.0f, 0.0f, 1.0f));
   }
 }

@@ -2,7 +2,7 @@
 #include "prette/thread_local.h"
 
 namespace prt {
-  static ThreadLocal<MockGlfw> mock_;
+  static ThreadLocal<MockGlfw> mock_; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 
   MockGlfw::MockGlfw() {
     mock_.Set(this);
@@ -14,8 +14,8 @@ namespace prt {
 }
 using prt::MockGlfw;
 
-static inline MockGlfw*
-GetMock() {
+static inline auto
+GetMock() -> MockGlfw* {
   const auto mock = prt::mock_.Get();
   assert(mock != nullptr);
   return mock;
@@ -27,7 +27,7 @@ void glfwSwapInterval(int interval) {
   __ glfwSwapInterval(interval);
 }
 
-GLFWwindow* glfwCreateWindow(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share) {
+auto glfwCreateWindow(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share) -> GLFWwindow* {
   __ glfwCreateWindow(width, height, title, monitor, share);
 }
 
@@ -39,7 +39,7 @@ void glfwGetFramebufferSize(GLFWwindow* window, int* width, int* height) {
   __ glfwGetFramebufferSize(window, width, height);
 }
 
-GLFWcursor* glfwCreateStandardCursor(const int shape) {
+auto glfwCreateStandardCursor(const int shape) -> GLFWcursor* {
   __ glfwCreateStandardCursor(shape);
 }
 
@@ -47,7 +47,7 @@ void glfwTerminate(void) {
   __ glfwTerminate();
 }
 
-int glfwGetKey(GLFWwindow* window, int key) {
+auto glfwGetKey(GLFWwindow* window, int key) -> int {
   __ glfwGetKey(window, key);
 }
 
@@ -63,11 +63,11 @@ void glfwSetWindowShouldClose(GLFWwindow* window, int value) {
   __ glfwSetWindowShouldClose(window, value);
 }
 
-int glfwGetMouseButton(GLFWwindow* window, int button) {
+auto glfwGetMouseButton(GLFWwindow* window, int button) -> int {
   __ glfwGetMouseButton(window, button);
 }
 
-GLFWwindowclosefun glfwSetWindowCloseCallback(GLFWwindow* window, GLFWwindowclosefun callback) {
+auto glfwSetWindowCloseCallback(GLFWwindow* window, GLFWwindowclosefun callback) -> GLFWwindowclosefun {
   __ glfwSetWindowCloseCallback(window, callback);
 }
 
@@ -83,11 +83,11 @@ void glfwSetInputMode(GLFWwindow* window, int mode, int value) {
   __ glfwSetInputMode(window, mode, value);
 }
 
-GLFWmonitor* glfwGetPrimaryMonitor() {
+auto glfwGetPrimaryMonitor() -> GLFWmonitor* {
   __ glfwGetPrimaryMonitor();
 }
 
-void* glfwGetWindowUserPointer(GLFWwindow* window) {
+auto glfwGetWindowUserPointer(GLFWwindow* window) -> void* {
   __ glfwGetWindowUserPointer(window);
 }
 
@@ -99,19 +99,19 @@ void glfwGetWindowPos(GLFWwindow* window, int* xPos, int* yPos) {
   __ glfwGetWindowPos(window, xPos, yPos);
 }
 
-GLFWwindowcontentscalefun glfwSetWindowContentScaleCallback(GLFWwindow* window, GLFWwindowcontentscalefun callback) {
+auto glfwSetWindowContentScaleCallback(GLFWwindow* window, GLFWwindowcontentscalefun callback) -> GLFWwindowcontentscalefun {
   __ glfwSetWindowContentScaleCallback(window, callback);
 }
 
-GLFWwindowfocusfun glfwSetWindowFocusCallback(GLFWwindow* window, GLFWwindowfocusfun callback) {
+auto glfwSetWindowFocusCallback(GLFWwindow* window, GLFWwindowfocusfun callback) -> GLFWwindowfocusfun {
   __ glfwSetWindowFocusCallback(window, callback);
 }
 
-GLFWwindowiconifyfun glfwSetWindowIconifyCallback(GLFWwindow* window, GLFWwindowiconifyfun callback) {
+auto glfwSetWindowIconifyCallback(GLFWwindow* window, GLFWwindowiconifyfun callback) -> GLFWwindowiconifyfun {
   __ glfwSetWindowIconifyCallback(window, callback);
 }
 
-GLFWwindowmaximizefun glfwSetWindowMaximizeCallback(GLFWwindow* window, GLFWwindowmaximizefun callback) {
+auto glfwSetWindowMaximizeCallback(GLFWwindow* window, GLFWwindowmaximizefun callback) -> GLFWwindowmaximizefun {
   __ glfwSetWindowMaximizeCallback(window, callback);
 }
 
@@ -127,27 +127,27 @@ void glfwSetWindowTitle(GLFWwindow* window, const char* title) {
   __ glfwSetWindowTitle(window, title);
 }
 
-GLFWwindowposfun glfwSetWindowPosCallback(GLFWwindow* window, GLFWwindowposfun callback) {
+auto glfwSetWindowPosCallback(GLFWwindow* window, GLFWwindowposfun callback) -> GLFWwindowposfun {
   __ glfwSetWindowPosCallback(window, callback);
 }
 
-GLFWwindowrefreshfun glfwSetWindowRefreshCallback(GLFWwindow* window, GLFWwindowrefreshfun callback) {
+auto glfwSetWindowRefreshCallback(GLFWwindow* window, GLFWwindowrefreshfun callback) -> GLFWwindowrefreshfun {
   __ glfwSetWindowRefreshCallback(window, callback);
 }
 
-GLFWwindowsizefun glfwSetWindowSizeCallback(GLFWwindow* window, GLFWwindowsizefun callback) {
+auto glfwSetWindowSizeCallback(GLFWwindow* window, GLFWwindowsizefun callback) -> GLFWwindowsizefun  {
   __ glfwSetWindowSizeCallback(window, callback);
 }
 
-const GLFWvidmode* glfwGetVideoMode(GLFWmonitor* monitor) {
+auto glfwGetVideoMode(GLFWmonitor* monitor) -> const GLFWvidmode* {
   __ glfwGetVideoMode(monitor);
 }
 
-const char* glfwGetKeyName(const int key, const int scancode) {
+auto glfwGetKeyName(const int key, const int scancode) -> const char* {
   __ glfwGetKeyName(key, scancode);
 }
 
-int glfwGetWindowAttrib(GLFWwindow* window, int attrib) {
+auto glfwGetWindowAttrib(GLFWwindow* window, int attrib) -> int {
   __ glfwGetWindowAttrib(window, attrib);
 }
 
@@ -171,7 +171,7 @@ void glfwWindowHintString(int hint, const char* value) {
   __ glfwWindowHintString(hint, value);
 }
 
-const char* glfwGetWindowTitle(GLFWwindow*	window) {
+auto glfwGetWindowTitle(GLFWwindow*	window) -> const char* {
   __ glfwGetWindowTitle(window);
 }
 

@@ -14,7 +14,7 @@ namespace prt {
     ~CacheTest() override = default;
   };
 
-  typedef ::testing::MockFunction<uint64_t(const std::string& key)> MockCacheLoader;
+  using MockCacheLoader = ::testing::MockFunction<uint64_t (const std::string &)>;
 }
 
 #endif //PRT_TEST_CACHE_H

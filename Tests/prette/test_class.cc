@@ -11,7 +11,7 @@ namespace prt {
     ~ClassTest() override = default;
   };
 
-  TEST_F(ClassTest, Test_GetAllocationSize) {
+  TEST_F(ClassTest, Test_GetAllocationSize) { // NOLINT(modernize-use-trailing-return-type,cppcoreguidelines-avoid-non-const-global-variables)
     // byte (8 bits)
     ASSERT_EQ(Class::kByte->GetAllocationSize(), sizeof(int8_t));
     ASSERT_EQ(Class::kUnsignedByte->GetAllocationSize(), sizeof(uint8_t));

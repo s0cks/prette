@@ -8,6 +8,7 @@ namespace prt::properties {
     ~BoolPropertyTest() override = default;
   };
 
+  // NOLINTBEGIN(cppcoreguidelines-avoid-non-const-global-variables,modernize-use-trailing-return-type)
   TEST_F(BoolPropertyTest, Test_True) {
     static constexpr const auto kPropertyName = "test";
     const auto property = BoolProperty::True(kPropertyName);
@@ -25,4 +26,5 @@ namespace prt::properties {
     ASSERT_TRUE(HasName(property, kPropertyName));
     ASSERT_TRUE(IsFalse(property));
   }
+  // NOLINTEND(cppcoreguidelines-avoid-non-const-global-variables,modernize-use-trailing-return-type)
 }

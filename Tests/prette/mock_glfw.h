@@ -9,6 +9,7 @@ namespace prt {
   public:
     MockGlfw();
     ~MockGlfw();
+    //NOLINTBEGIN(modernize-use-trailing-return-type)
     MOCK_METHOD1(glfwSwapInterval, void(int interval));
     MOCK_METHOD5(glfwCreateWindow, GLFWwindow*(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share));
     MOCK_METHOD3(glfwGetCursorPos, void(GLFWwindow* window, double* xpos, double* ypos));
@@ -49,6 +50,7 @@ namespace prt {
     MOCK_METHOD2(glfwWindowHintString, void(int hint, const char* value));
     MOCK_METHOD1(glfwGetWindowTitle, const char*(GLFWwindow* window));
     MOCK_METHOD5(glfwSetWindowSizeLimits, void(GLFWwindow* window, int minwidth, int minheight, int maxwidth, int maxheight));
+    //NOLINTEND(modernize-use-trailing-return-type)
   };
 }
 

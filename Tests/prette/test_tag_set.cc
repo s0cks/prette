@@ -11,8 +11,8 @@ namespace prt {
     ~TagSetTest() override = default;
   };
 
-  static inline AssertionResult
-  Insert(TagSet& tags, const RawTag& value) {
+  static inline auto
+  Insert(TagSet& tags, const RawTag& value) -> AssertionResult {
     const auto tag = Tag(value);
     const auto pos = tags.insert(tag);
     if(!pos.second)
@@ -20,8 +20,8 @@ namespace prt {
     return AssertionSuccess();
   }
 
-  static inline AssertionResult
-  Contains(const TagSet& tags, const RawTag& value) {
+  static inline auto
+  Contains(const TagSet& tags, const RawTag& value) -> AssertionResult {
     const auto tag = Tag(value);
     const auto pos = tags.find(tag);
     if(pos == tags.end())
@@ -29,8 +29,8 @@ namespace prt {
     return AssertionSuccess();
   }
 
-  static inline AssertionResult
-  Remove(TagSet& tags, const RawTag& value) {
+  static inline auto
+  Remove(TagSet& tags, const RawTag& value) -> AssertionResult {
     const auto tag = Tag(value);
     const auto removed = tags.erase(tag);
     if(removed != 1)
@@ -38,7 +38,7 @@ namespace prt {
     return AssertionSuccess();
   }
 
-  TEST_F(TagSetTest, Test) {
+  TEST_F(TagSetTest, Test) { // NOLINT(modernize-use-trailing-return-type,cppcoreguidelines-avoid-non-const-global-variables)
     TagSet tags;
     ASSERT_TRUE(Insert(tags, "test"));
     ASSERT_TRUE(Insert(tags, "debug"));

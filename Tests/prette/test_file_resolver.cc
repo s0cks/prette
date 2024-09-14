@@ -15,7 +15,7 @@ namespace prt {
     ~FileResolverTest() override = default;
   };
 
-  TEST_F(FileResolverTest, Test_ListAllInDirectory) {
+  TEST_F(FileResolverTest, Test_ListAllInDirectory) { // NOLINT(modernize-use-trailing-return-type,cppcoreguidelines-avoid-non-const-global-variables)
     rx::MockSubscription<std::string> sub;
     EXPECT_CALL(sub, OnNext(Eq(fmt::format("{0:s}/fonts", FLAGS_resources))));
     EXPECT_CALL(sub, OnNext(Eq(fmt::format("{0:s}/materials", FLAGS_resources))));
@@ -29,7 +29,7 @@ namespace prt {
     const auto subscription = sub.Subscribe(observable);
   }
 
-  TEST_F(FileResolverTest, Test_ListFilesInDirectory) {
+  TEST_F(FileResolverTest, Test_ListFilesInDirectory) { // NOLINT(modernize-use-trailing-return-type,cppcoreguidelines-avoid-non-const-global-variables)
     rx::MockSubscription<std::string> sub;
     EXPECT_CALL(sub, OnNext(Eq(fmt::format("{0:s}/.gitignore", FLAGS_resources))));
     EXPECT_CALL(sub, OnNext(Eq(fmt::format("{0:s}/.gitkeep", FLAGS_resources))));
@@ -38,7 +38,7 @@ namespace prt {
     const auto subscription = sub.Subscribe(observable);
   }
 
-  TEST_F(FileResolverTest, Test_ListDirsInDirectory) {
+  TEST_F(FileResolverTest, Test_ListDirsInDirectory) { // NOLINT(modernize-use-trailing-return-type,cppcoreguidelines-avoid-non-const-global-variables)
     rx::MockSubscription<std::string> sub;
     EXPECT_CALL(sub, OnNext(Eq(fmt::format("{0:s}/fonts", FLAGS_resources))));
     EXPECT_CALL(sub, OnNext(Eq(fmt::format("{0:s}/materials", FLAGS_resources))));

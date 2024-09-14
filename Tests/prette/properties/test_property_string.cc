@@ -8,7 +8,7 @@ namespace prt::properties {
     ~StringPropertyTest() override = default;
   };
 
-  TEST_F(StringPropertyTest, Test_New) {
+  TEST_F(StringPropertyTest, Test_New) { // NOLINT(modernize-use-trailing-return-type,cppcoreguidelines-avoid-non-const-global-variables)
     static constexpr const auto kPropertyName = "test";
     static const std::string kPropertyValue = "value";
     const auto property = StringProperty::New(kPropertyName, kPropertyValue);

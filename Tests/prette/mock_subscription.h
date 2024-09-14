@@ -27,11 +27,11 @@ namespace prt::rx {
     }
     ~MockSubscription() = default;
 
-    MOCK_METHOD1(OnNext, void(const T&));
-    MOCK_METHOD1(OnError, void(rx::error_ptr));
-    MOCK_METHOD0(OnCompleted, void());
+    MOCK_METHOD1(OnNext, void(const T&)); //NOLINT(modernize-use-trailing-return-type)
+    MOCK_METHOD1(OnError, void(rx::error_ptr)); //NOLINT(modernize-use-trailing-return-type)
+    MOCK_METHOD0(OnCompleted, void()); //NOLINT(modernize-use-trailing-return-type)
 
-    rx::composite_subscription Subscribe(rx::observable<T> observable) {
+    auto Subscribe(rx::observable<T> observable) -> rx::composite_subscription {
       const auto onnext = [this](const T& next) { return OnNext(next); };
       const auto onerror = [this](const rx::error_ptr& err) { return OnError(err); };
       const auto oncompleted = [this]() { return OnCompleted(); };

@@ -1,14 +1,15 @@
 #ifndef PRT_PROPERTY_ASSERTIONS_H
 #define PRT_PROPERTY_ASSERTIONS_H
 
+#include "gtest/gtest.h"
 #include <gtest/gtest.h>
 #include "prette/properties/property.h"
 
 namespace prt::properties {
   using namespace ::testing;
 
-  static inline AssertionResult
-  HasName(Property* p, const std::string& name) {
+  static inline auto
+  HasName(Property* p, const std::string& name) -> AssertionResult {
     if(!p)
       return AssertionFailure() << "expected value to not be null.";
     if(p->GetName() != name)
@@ -16,8 +17,8 @@ namespace prt::properties {
     return AssertionSuccess();
   }
 
-  static inline AssertionResult
-  HasValue(Property* p, const std::string& value) {
+  static inline auto
+  HasValue(Property* p, const std::string& value) -> AssertionResult {
     if(!p)
       return AssertionFailure() << "expected value to not be null.";
     if(!p->IsString())
@@ -27,8 +28,8 @@ namespace prt::properties {
     return AssertionSuccess();
   }
 
-  static inline AssertionResult
-  HasValue(Property* p, const uint64_t value) {
+  static inline auto
+  HasValue(Property* p, const uint64_t value) -> AssertionResult {
     if(!p)
       return AssertionFailure() << "expected value to not be null.";
     if(!p->IsLong())
@@ -38,8 +39,8 @@ namespace prt::properties {
     return AssertionSuccess();
   }
 
-  static inline AssertionResult
-  HasValue(Property* p, const double value) {
+  static inline auto
+  HasValue(Property* p, const double value) -> AssertionResult {
     if(!p)
       return AssertionFailure() << "expected value to not be null.";
     if(!p->IsDouble())
@@ -49,8 +50,8 @@ namespace prt::properties {
     return AssertionSuccess();
   }
 
-  static inline AssertionResult
-  HasValue(Property* p, const bool value) {
+  static inline auto
+  HasValue(Property* p, const bool value) -> AssertionResult {
     if(!p)
       return AssertionFailure() << "expected value to not be null.";
     if(!p->IsBool())
@@ -61,8 +62,8 @@ namespace prt::properties {
   }
 
 #define DEFINE_TYPE_CHECK(Name)                                                                           \
-  static inline AssertionResult                                                                           \
-  Is##Name##Property(Property* p) {                                                                       \
+  static inline auto                                                                           \
+  Is##Name##Property(Property* p) -> AssertionResult {                                                                       \
     if(!p)                                                                                                \
       return AssertionFailure() << "expected value to not be null.";                                      \
     return p->Is##Name()                                                                                  \
@@ -72,8 +73,8 @@ namespace prt::properties {
   FOR_EACH_PROPERTY_TYPE(DEFINE_TYPE_CHECK)
 #undef DEFINE_TYPE_CHECK
 
-  static inline AssertionResult
-  IsTrue(Property* p) {
+  static inline auto
+  IsTrue(Property* p) -> AssertionResult {
     if(!p)
       return AssertionFailure() << "expected value to not be null.";
     if(!p->IsBool())
@@ -83,8 +84,8 @@ namespace prt::properties {
     return AssertionSuccess();
   }
 
-  static inline AssertionResult
-  IsFalse(Property* p) {
+  static inline auto
+  IsFalse(Property* p) -> AssertionResult {
     if(!p)
       return AssertionFailure() << "expected value to not be null.";
     if(!p->IsBool())

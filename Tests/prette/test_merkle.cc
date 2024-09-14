@@ -11,13 +11,13 @@ namespace prt::merkle {
     ~MerkleTreeTest() override = default;
   };
 
-  TEST_F(MerkleTreeTest, Test_0Leaves) {
+  TEST_F(MerkleTreeTest, Test_0Leaves) { // NOLINT(modernize-use-trailing-return-type,cppcoreguidelines-avoid-non-const-global-variables)
     static const std::vector<uint256> kTestLeaves = {};
     Tree tree(kTestLeaves);
     ASSERT_TRUE(tree.IsEmpty());
   }
 
-  TEST_F(MerkleTreeTest, Test_1Leaves) {
+  TEST_F(MerkleTreeTest, Test_1Leaves) { // NOLINT(modernize-use-trailing-return-type,cppcoreguidelines-avoid-non-const-global-variables)
     static const uint256 kLeaf1 = sha256::Nonce();
     static const std::vector<uint256> kTestLeaves = {
       kLeaf1,
@@ -29,7 +29,7 @@ namespace prt::merkle {
     ASSERT_EQ(tree.GetRootHash(), kExpectedRoot);
   }
 
-  TEST_F(MerkleTreeTest, Test_2Leaves) {
+  TEST_F(MerkleTreeTest, Test_2Leaves) { // NOLINT(modernize-use-trailing-return-type,cppcoreguidelines-avoid-non-const-global-variables)
     static const uint256 kLeaf1 = sha256::Nonce();
     static const uint256 kLeaf2 = sha256::Nonce();
     static const std::vector<uint256> kTestLeaves = {
@@ -42,7 +42,7 @@ namespace prt::merkle {
     ASSERT_EQ(tree.GetRootHash(), kExpectedRoot);
   }
 
-  TEST_F(MerkleTreeTest, Test_3Leaves) {
+  TEST_F(MerkleTreeTest, Test_3Leaves) { // NOLINT(modernize-use-trailing-return-type,cppcoreguidelines-avoid-non-const-global-variables)
     static const uint256 kLeaf1 = sha256::Nonce();
     static const uint256 kLeaf2 = sha256::Nonce();
     static const uint256 kLeaf3 = sha256::Nonce();
@@ -56,7 +56,7 @@ namespace prt::merkle {
     ASSERT_EQ(tree.GetRootHash(), kExpectedRoot);
   }
 
-  TEST_F(MerkleTreeTest, Test_4Leaves) {
+  TEST_F(MerkleTreeTest, Test_4Leaves) { // NOLINT(modernize-use-trailing-return-type,cppcoreguidelines-avoid-non-const-global-variables)
     static const uint256 kLeaf1 = sha256::Nonce();
     static const uint256 kLeaf2 = sha256::Nonce();
     static const uint256 kLeaf3 = sha256::Nonce();

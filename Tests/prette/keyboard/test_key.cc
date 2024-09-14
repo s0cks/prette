@@ -13,7 +13,7 @@ namespace prt::keyboard {
     ~KeyTest() override = default;
   };
 
-  TEST_F(KeyTest, Test_Constructor) {
+  TEST_F(KeyTest, Test_Constructor) { // NOLINT(modernize-use-trailing-return-type,cppcoreguidelines-avoid-non-const-global-variables)
     Key k1;
     ASSERT_TRUE(k1.IsUnknown());
 
@@ -21,7 +21,7 @@ namespace prt::keyboard {
     ASSERT_TRUE(k2.IsCode(GLFW_KEY_A));
   }
 
-  TEST_F(KeyTest, Test_Equals) {
+  TEST_F(KeyTest, Test_Equals) { // NOLINT(modernize-use-trailing-return-type,cppcoreguidelines-avoid-non-const-global-variables)
     Key k1;
     Key k2;
     ASSERT_EQ(k1, k2);
@@ -41,10 +41,10 @@ namespace prt::keyboard {
     ~KeySetTest() override = default;
   };
 
-  TEST_F(KeySetTest, Test_Constructor) {
+  TEST_F(KeySetTest, Test_Constructor) { // NOLINT(modernize-use-trailing-return-type,cppcoreguidelines-avoid-non-const-global-variables)
     MockGlfw glfw;
     EXPECT_CALL(glfw, glfwGetKeyName(_, _))
-      .WillRepeatedly(Return((const char*) NULL));
+      .WillRepeatedly(Return((const char*) nullptr));
 
     KeySet keys;
     DLOG(INFO) << "Keys:";

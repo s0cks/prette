@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include "prette/image/image.h"
+#include "prette/image/image_format.h"
 
 namespace prt::img {
   using namespace ::testing;
@@ -11,17 +12,13 @@ namespace prt::img {
     ~ImageTest() override = default;
   };
 
-  TEST_F(ImageTest, Test_New) {
-    static constexpr const ImageSize kImageSize(128);
-    const auto img = Image::New(img::kRGB, kImageSize, kImageSize[0] * kImageSize[1] * 3);
+  TEST_F(ImageTest, Test_New) { // NOLINT(modernize-use-trailing-return-type,cppcoreguidelines-avoid-non-const-global-variables)
+    static const Resolution kImageResolution = Resolution(128, 128);
+    const auto img = Image::New(img::kRGBFormat, kImageResolution);
     ASSERT_TRUE(img);
-    ASSERT_EQ(img->format(), img::kRGB);
-    ASSERT_EQ(img->size(), kImageSize);
-    ASSERT_EQ(img->GetNumberOfBytes(), sizeof(uint8_t) * 3 * kImageSize[0] * kImageSize[1]);
-    const auto expected_total_size = sizeof(Image)
-      + sizeof(uword)                                     // format
-      + (sizeof(uword) * 2)                               // size
-      + sizeof(uint8_t) * img->GetNumberOfBytes();        // data
-    ASSERT_EQ(img->GetTotalNumberOfBytes(), expected_total_size);
+    ASSERT_EQ(img->GetFormat(), img::kRGBFormat);
+    ASSERT_EQ(img->GetResolution(), kImageResolution);
+    const auto total_size = img::kRGBAFormat * kImageResolution;
+    ASSERT_EQ(img->GetTotalSize(), total_size);
   }
 }
