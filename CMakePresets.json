@@ -31,9 +31,9 @@
         //"CPPCHECK_EXIT_CODE": "0",
         //"CPPCHECK_EXCLUDES": "${sourceDir}/lib"
       }
-    }, // base
+    },
     {
-      "name": "base-osx-arm64",
+      "name": "darwin-arm64",
       "hidden": true,
       "vendor": {
         "microsoft.com/VisualStudioSettings/CMake/1.0": {
@@ -46,10 +46,10 @@
         "lhs": "${hostSystemName}",
         "rhs": "Darwin"
       }
-    }, // base-osx-arm64
+    },
     {
-      "name": "dbg",
-      "hidden": true,
+      "name": "debug",
+      "displayName": "Debug",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": {
           "value": "Debug",
@@ -58,27 +58,22 @@
       },
       "environment": {
         "BUILD_ENVIRONMENT": "dev"
-      }
-    }, // dbg
-    {
-      "name": "debug-osx-arm64",
-      "displayName": "Debug (OSX/arm64)",
+      },
       "inherits": [
-        "base",
-        "dbg"
+        "base"
       ]
-    }, // debug-osx-arm64
+    },
     {
-      "name": "debug",
-      "displayName": "Debug",
+      "name": "debug-darwin-arm64",
+      "displayName": "Debug (Darwin/arm64)",
       "inherits": [
-        "base",
-        "dbg"
+        "debug",
+        "darwin-arm64"
       ]
-    }, // debug
+    },
     {
-      "name": "rel",
-      "hidden": true,
+      "name": "release",
+      "displayName": "Release",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": {
           "value": "Release",
@@ -87,32 +82,41 @@
       },
       "environment": {
         "BUILD_ENVIRONMENT": "release"
-      }
-    }, // rel
-    {
-      "name": "release",
-      "displayName": "Release",
+      },
       "inherits": [
-        "base",
-        "rel"
+        "base"
       ]
-    }, // release
+    },
+    {
+      "name": "release-darwin-arm64",
+      "displayName": "Release (Darwin/arm64)",
+      "inherits": [
+        "release",
+        "darwin-arm64"
+      ]
+    }
   ],
   "buildPresets": [
-    {
-      "name": "debug-osx-arm64",
-      "displayName": "Debug OSX/arm64",
-      "configurePreset": "debug-osx-arm64"
-    },
     {
       "name": "debug",
       "displayName": "Debug",
       "configurePreset": "debug"
     },
     {
+      "name": "debug-darwin-arm64",
+      "displayName": "Debug (Darwin/arm64)",
+      "configurePreset": "debug-darwin-arm64"
+    },
+    {
       "name": "release",
       "displayName": "Release",
       "configurePreset": "release",
+      "cleanFirst": true
+    },
+    {
+      "name": "release-darwin-arm64",
+      "displayName": "Release (Darwin/arm64)",
+      "configurePreset": "release-darwin-arm64",
       "cleanFirst": true
     }
   ]
