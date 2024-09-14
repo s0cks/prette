@@ -1,8 +1,8 @@
 #include <glog/logging.h>
+#include <gflags/gflags.h>
 #include <benchmark/benchmark.h>
-#include "mcc/flags.h"
 
-int main(int argc, char** argv) {
+auto main(int argc, char** argv) -> int {
   ::google::ParseCommandLineFlags(&argc, &argv, true);
   ::google::InitGoogleLogging(argv[0]);
   ::google::LogToStderr();

@@ -1,7 +1,7 @@
 #include <benchmark/benchmark.h>
-#include "mcc/uri_parser.h"
+#include "prette/uri_parser.h"
 
-namespace mcc {
+namespace prt {
   void BM_UriParser(benchmark::State& state) {
     static constexpr const char* kBenchmarkUri = "file://example.png";
     for(const auto& _ : state) {
@@ -10,5 +10,5 @@ namespace mcc {
     }
   }
 
-  BENCHMARK(BM_UriParser);
+  BENCHMARK(BM_UriParser); //NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 }

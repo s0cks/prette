@@ -44,12 +44,13 @@ add_library(${PROJECT_NAME}
   ${PROJECT_BINARY_DIR}/Sources/prette/prette.h prette/prette.cc
   ${PROJECT_BINARY_DIR}/Sources/prette/gfx.h
   ${PRT_SOURCES})
-target_include_directories(${PROJECT_NAME} PRIVATE ${TERMCOLOR_INCLUDE_DIRS})
+
 target_link_libraries(${PROJECT_NAME} ${PRT_LIBRARIES})
 target_compile_options(${PROJECT_NAME}
   PRIVATE ${PRT_COMPILE_OPTS})
 target_include_directories(${PROJECT_NAME}
-  PUBLIC ${PROJECT_SOURCE_DIR}/Sources ${PROJECT_BINARY_DIR})
+  PUBLIC ${PROJECT_SOURCE_DIR}/Sources ${PROJECT_BINARY_DIR}
+  PRIVATE ${TERMCOLOR_INCLUDE_DIRS})
 
 add_executable(${PROJECT_NAME}-client
   main.cc)

@@ -413,21 +413,28 @@
       "MIMode": "lldb"
     },
     {
-      "name": "minecraft-benchmarks",
+      "name": "Benchmarks (Debug)",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/build/Benchmarks/minecraft-benchmarks",
+      "program": "${workspaceFolder}/build/Benchmarks/prette-benchmarks",
       "args": [
-        "--undefok=benchmark_filter,resources",
-        "--resources",
-        "${workspaceFolder}/resources",
-        "--benchmark_filter=ObjParser*"
+        "--logtostdout",
+        "--colorlogtostdout"
       ],
-      "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
-      "environment": [],
-      "externalConsole": false,
-      "MIMode": "lldb"
+      "environment": [
+        {
+          "name": "UV_THREADPOOL_SIZE",
+          "value": "0"
+        }
+      ],
+      "MIMode": "lldb",
+      "setupCommands": [
+        {
+          "description": "Load .lldbinit",
+          "text": "command source ~/.lldbinit"
+        }
+      ]
     },
     {
       "name": "prette",
