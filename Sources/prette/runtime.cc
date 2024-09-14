@@ -1,5 +1,7 @@
 #include "prette/runtime.h"
 
+#include <vector>
+
 #include "prette/class.h"
 #include "prette/engine/engine.h"
 #include "prette/gfx.h"
@@ -11,11 +13,10 @@
 
 #include "prette/runtime_info_printer.h"
 #include "prette/signals.h"
-#include <GLFW/glfw3.h>
-#include <vulkan/vulkan_core.h>
 
 namespace prt {
 // NOLINTBEGIN(cppcoreguidelines-avoid-non-const-global-variables)
+static const auto kMaxFramesInFlight = 2;
 static VkInstance vk_instance_{};
 static rx::subscription on_terminating_{};
 static rx::subscription on_tick_{};
@@ -34,10 +35,11 @@ static VkPipeline vk_pipeline_;
 static VkPipelineLayout vk_pipeline_layout_;
 static VkRenderPass vk_render_pass_;
 static VkCommandPool vk_cmd_pool_;
-static VkCommandBuffer vk_cmd_buff_;
-static VkSemaphore img_avail_semaphore_;
-static VkSemaphore render_finished_semaphore_;
-static VkFence inflight_fence_;
+static std::array<VkCommandBuffer, kMaxFramesInFlight> vk_cmd_buffers_;
+static std::array<VkSemaphore, kMaxFramesInFlight> img_avail_semaphores_;
+static std::array<VkSemaphore, kMaxFramesInFlight> render_finished_semaphores_;
+static std::array<VkFence, kMaxFramesInFlight> inflight_fences_;
+static uint32_t current_frame_ = 0;
 // NOLINTEND(cppcoreguidelines-avoid-non-const-global-variables)
 static const std::vector<const char *> kDeviceExtensions = {
     VK_KHR_SWAPCHAIN_EXTENSION_NAME,
@@ -79,6 +81,40 @@ static inline auto operator<<(std::ostream &stream,
                 << "color_space=" << rhs.colorSpace << ")";
 }
 
+struct Vertex {
+  glm::vec2 pos;
+  glm::vec3 color;
+
+  static auto GetBindingDescription() -> VkVertexInputBindingDescription {
+    VkVertexInputBindingDescription binding;
+    binding.binding = 0;
+    binding.stride = sizeof(Vertex);
+    binding.inputRate = VK_VERTEX_INPUT_RATE_VERTEX;
+    return binding;
+  }
+
+  static auto GetAttributeDescription()
+      -> std::array<VkVertexInputAttributeDescription, 2> {
+    std::array<VkVertexInputAttributeDescription, 2> attributes{};
+    attributes[0].binding = 0;
+    attributes[0].location = 0;
+    attributes[0].format = VK_FORMAT_R32G32_SFLOAT;
+    attributes[0].offset = offsetof(Vertex, pos);
+
+    attributes[1].binding = 0;
+    attributes[1].location = 1;
+    attributes[1].format = VK_FORMAT_R32G32B32_SFLOAT;
+    attributes[1].offset = offsetof(Vertex, color);
+    return attributes;
+  }
+};
+
+static const std::vector<Vertex> kVertices = {
+    {{0.0f, -0.5f}, {1.0f, 0.0f, 0.0f}},
+    {{0.5f, 0.5f}, {0.0f, 1.0f, 0.0f}},
+    {{-0.5f, 0.5f}, {0.0f, 0.0f, 1.0f}},
+};
+
 struct QueueFamilyIndices {
   std::optional<uint32_t> graphics;
   std::optional<uint32_t> present;
@@ -110,26 +146,28 @@ static inline void InitSyncObjects() {
   VkFenceCreateInfo fence{};
   fence.sType = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;
   fence.flags = VK_FENCE_CREATE_SIGNALED_BIT;
+  for (auto idx = 0; idx < kMaxFramesInFlight; idx++) {
+    {
+      const auto result = vkCreateSemaphore(vk_device_, &semaphore, nullptr,
+                                            &img_avail_semaphores_.at(idx));
+      LOG_IF(FATAL, result != VK_SUCCESS)
+          << "failed to create img_avail semaphore: " << result;
+    }
 
-  {
-    const auto result = vkCreateSemaphore(vk_device_, &semaphore, nullptr,
-                                          &img_avail_semaphore_);
-    LOG_IF(FATAL, result != VK_SUCCESS)
-        << "failed to create img_avail semaphore: " << result;
-  }
+    {
+      const auto result =
+          vkCreateSemaphore(vk_device_, &semaphore, nullptr,
+                            &render_finished_semaphores_.at(idx));
+      LOG_IF(FATAL, result != VK_SUCCESS)
+          << "failed to create render_finished semaphore: " << result;
+    }
 
-  {
-    const auto result = vkCreateSemaphore(vk_device_, &semaphore, nullptr,
-                                          &render_finished_semaphore_);
-    LOG_IF(FATAL, result != VK_SUCCESS)
-        << "failed to create render_finished semaphore: " << result;
-  }
-
-  {
-    const auto result =
-        vkCreateFence(vk_device_, &fence, nullptr, &inflight_fence_);
-    LOG_IF(FATAL, result != VK_SUCCESS)
-        << "failed to create inflight fence: " << result;
+    {
+      const auto result =
+          vkCreateFence(vk_device_, &fence, nullptr, &inflight_fences_.at(idx));
+      LOG_IF(FATAL, result != VK_SUCCESS)
+          << "failed to create inflight fence: " << result;
+    }
   }
 }
 
@@ -516,9 +554,9 @@ static inline void InitCommandBuffer() {
   alloc.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
   alloc.commandPool = vk_cmd_pool_;
   alloc.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
-  alloc.commandBufferCount = 1;
+  alloc.commandBufferCount = kMaxFramesInFlight;
   const auto result =
-      vkAllocateCommandBuffers(vk_device_, &alloc, &vk_cmd_buff_);
+      vkAllocateCommandBuffers(vk_device_, &alloc, &vk_cmd_buffers_[0]);
   LOG_IF(FATAL, result != VK_SUCCESS)
       << "failed to allocate vkCommandBuffer: " << result;
 }
@@ -593,9 +631,11 @@ static inline void RecordCommandBuffer(VkCommandBuffer buf, uint32_t idx) {
 }
 
 static inline void DestroyInstance() {
-  vkDestroySemaphore(vk_device_, render_finished_semaphore_, nullptr);
-  vkDestroySemaphore(vk_device_, img_avail_semaphore_, nullptr);
-  vkDestroyFence(vk_device_, inflight_fence_, nullptr);
+  for (auto i = 0; i < kMaxFramesInFlight; i++) {
+    vkDestroySemaphore(vk_device_, render_finished_semaphores_[i], nullptr);
+    vkDestroySemaphore(vk_device_, img_avail_semaphores_[i], nullptr);
+    vkDestroyFence(vk_device_, inflight_fences_[i], nullptr);
+  }
   vkDestroyCommandPool(vk_device_, vk_cmd_pool_, nullptr);
   for (const auto &framebuffer : vk_swapchain_framebuffers_)
     vkDestroyFramebuffer(vk_device_, framebuffer, nullptr);
@@ -810,34 +850,40 @@ static inline void InitGraphicsPipeline() {
 }
 
 static inline void DrawFrame() {
-  vkWaitForFences(vk_device_, 1, &inflight_fence_, VK_TRUE, UINT64_MAX);
-  vkResetFences(vk_device_, 1, &inflight_fence_);
+  const auto &buffer = vk_cmd_buffers_.at(current_frame_);
+  const auto &fence = inflight_fences_.at(current_frame_);
+  const auto &finished_semaphore =
+      render_finished_semaphores_.at(current_frame_);
+  const auto &avail_semaphore = img_avail_semaphores_.at(current_frame_);
+  vkWaitForFences(vk_device_, 1, &fence, VK_TRUE, UINT64_MAX);
+  vkResetFences(vk_device_, 1, &fence);
 
   uint32_t index = 0;
   vkAcquireNextImageKHR(vk_device_, vk_swapchain_, UINT64_MAX,
-                        img_avail_semaphore_, VK_NULL_HANDLE, &index);
+                        img_avail_semaphores_.at(current_frame_),
+                        VK_NULL_HANDLE, &index);
 
-  vkResetCommandBuffer(vk_cmd_buff_, 0);
-  RecordCommandBuffer(vk_cmd_buff_, index);
+  vkResetCommandBuffer(buffer, 0);
+  RecordCommandBuffer(buffer, index);
 
   VkSubmitInfo submit{};
   submit.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
 
-  VkSemaphore wait_semaphores[] = {img_avail_semaphore_};
+  VkSemaphore wait_semaphores[] = {avail_semaphore};
   VkPipelineStageFlags wait_stages[] = {
       VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT};
   submit.waitSemaphoreCount = 1;
   submit.pWaitSemaphores = wait_semaphores;
   submit.pWaitDstStageMask = wait_stages;
   submit.commandBufferCount = 1;
-  submit.pCommandBuffers = &vk_cmd_buff_;
+  submit.pCommandBuffers = &buffer;
 
-  VkSemaphore signals[] = {render_finished_semaphore_};
+  VkSemaphore signals[] = {finished_semaphore};
   submit.signalSemaphoreCount = 1;
   submit.pSignalSemaphores = signals;
 
   {
-    const auto result = vkQueueSubmit(vk_queue_, 1, &submit, inflight_fence_);
+    const auto result = vkQueueSubmit(vk_queue_, 1, &submit, fence);
     LOG_IF(FATAL, result != VK_SUCCESS)
         << "failed to submit vkQueue: " << result;
   }
@@ -855,6 +901,7 @@ static inline void DrawFrame() {
   present_info.pImageIndices = &index;
 
   vkQueuePresentKHR(vk_present_queue_, &present_info);
+  current_frame_ = (current_frame_ + 1) % kMaxFramesInFlight;
 }
 
 void Runtime::Init(int argc, char **argv) {
