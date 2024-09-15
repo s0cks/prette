@@ -1,6 +1,7 @@
-configure_file(prette/prette.h.in ${PROJECT_BINARY_DIR}/Sources/prette/prette.h)
-configure_file(prette/gfx.h.in ${PROJECT_BINARY_DIR}/Sources/prette/gfx.h)
+configure_file(prette/prette.h.in ${CMAKE_CURRENT_BINARY_DIR}/prette/prette.h)
+configure_file(prette/gfx.h.in ${CMAKE_CURRENT_BINARY_DIR}/prette/gfx.h)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 file(
   GLOB_RECURSE
@@ -8,7 +9,8 @@ file(
   "${CMAKE_CURRENT_SOURCE_DIR}/prette/*.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/prette/*.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/prette/**/*.h"
-  "${CMAKE_CURRENT_SOURCE_DIR}/prette/**/*.cc")
+  "${CMAKE_CURRENT_SOURCE_DIR}/prette/**/*.cc"
+  "${CMAKE_CURRENT_BINARY_DIR}/prette/**/*.h")
 find_path(TERMCOLOR_INCLUDE_DIRS "termcolor/termcolor.hpp")
 
 list(
@@ -41,15 +43,12 @@ else()
   list(APPEND PRT_LIBRARIES OpenGL::GL GLEW::GLEW)
 endif()
 
-add_library(
-  ${PROJECT_NAME} STATIC
-  ${PROJECT_BINARY_DIR}/Sources/prette/prette.h prette/prette.cc
-  ${PROJECT_BINARY_DIR}/Sources/prette/gfx.h ${PRT_SOURCES})
+add_library(${PROJECT_NAME} STATIC ${PRT_SOURCES})
 target_compile_options(${PROJECT_NAME} PUBLIC ${PRT_COMPILE_OPTS})
 target_link_libraries(${PROJECT_NAME} PUBLIC ${PRT_LIBRARIES})
 target_include_directories(
   ${PROJECT_NAME}
-  PUBLIC ${PROJECT_SOURCE_DIR}/Sources ${PROJECT_BINARY_DIR}
+  PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}
   PRIVATE ${TERMCOLOR_INCLUDE_DIRS})
 
 add_executable(${PROJECT_NAME}-client main.cc)

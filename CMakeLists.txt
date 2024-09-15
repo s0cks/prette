@@ -1,21 +1,26 @@
 cmake_minimum_required(VERSION 3.5)
 project(prette CXX)
+set(PROJECT_VERSION_MAJOR 0)
+set(PROJECT_VERSION_MINOR 0)
+set(PROJECT_VERSION_PATCH 0)
 
 include(BuildInfo)
 
+option(ENABLE_CPPCHECK "Enable CppCheck" ON)
 option(ENABLE_CLANG_TIDY "Enable clang-tidy" ON)
-if(ENABLE_CLANG_TIDY AND ${CMAKE_BUILD_TYPE} MATCHES "^[rR]elease")
-  include(ClangTidy)
+if(${CMAKE_BUILD_TYPE} MATCHES "^[rR]elease")
+  if(ENABLE_CLANG_TIDY)
+    include(ClangTidy)
+  endif()
+
+  if(ENABLE_CPPCHECK)
+    include(CppCheck)
+  endif()
 endif()
 
 option(PRT_BUILD_DOCS "Build documentation" ON)
 if(PRT_BUILD_DOCS)
   include(Doxygen)
-endif()
-
-option(ENABLE_CPPCHECK "Enable CppCheck" ON)
-if(ENABLE_CPPCHECK AND ${CMAKE_BUILD_TYPE} MATCHES "^[rR]elease")
-  include(CppCheck)
 endif()
 
 set(PRT_ENABLE_VK 1)
@@ -60,18 +65,13 @@ find_path(SEMVER_INCLUDE_DIRS "semver/semver.hpp")
 find_package(utf8 REQUIRED)
 find_package(OpenAL REQUIRED)
 
-set(PROJECT_VERSION_MAJOR 0)
-set(PROJECT_VERSION_MINOR 0)
-set(PROJECT_VERSION_PATCH 0)
-
-include_directories(${PROJECT_BINARY_DIR}/Sources/)
-
 list(APPEND PRT_COMPILE_OPTS -frtti -fms-extensions -Wno-deprecated
      -Wno-sizeof-pointer-memaccess)
 
 option(ENABLE_COVERAGE "Enable code coverage reports using gcov/lcov" ON)
 if(ENABLE_COVERAGE)
   include(Coverage)
+  # TODO: cleanup this logic, get it into Coverage.cmake
   if(${CMAKE_CXX_COMPILER_ID} MATCHES "([aA]pple)?[cC]lang|GNU")
     list(
       APPEND
