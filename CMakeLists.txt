@@ -2,7 +2,11 @@ cmake_minimum_required(VERSION 3.5)
 project(prette CXX)
 
 include(BuildInfo)
-include(DoxygenConfig)
+option(PRT_BUILD_DOCS "Build documentation" ON)
+if(PRT_BUILD_DOCS)
+  include(DoxygenConfig)
+endif()
+
 include(CppCheckConfig)
 
 set(PRT_ENABLE_VK 1)
@@ -13,6 +17,8 @@ else()
   find_package(OpenGL REQUIRED COMPONENTS OpenGL)
   find_package(GLEW REQUIRED)
   add_compile_definitions(PRT_GL)
+  set(PROJECT_GLFW_CONTEXT_VERSION_MAJOR 4)
+  set(PROJECT_GLFW_CONTEXT_VERSION_MINOR 1)
 endif()
 
 # cppcheck
@@ -48,9 +54,6 @@ find_package(OpenAL REQUIRED)
 set(PROJECT_VERSION_MAJOR 0)
 set(PROJECT_VERSION_MINOR 0)
 set(PROJECT_VERSION_PATCH 0)
-
-set(PROJECT_GLFW_CONTEXT_VERSION_MAJOR 4)
-set(PROJECT_GLFW_CONTEXT_VERSION_MINOR 1)
 
 include_directories(${PROJECT_BINARY_DIR}/Sources/)
 
