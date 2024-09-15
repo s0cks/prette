@@ -22,7 +22,7 @@ namespace prt {
     uint64_t tail_{};
     bool full_ : 1{};
   public:
-    CircularBuffer() = default; 
+    CircularBuffer() = default;
     ~CircularBuffer() = default;
 
     auto begin() -> iterator {
@@ -49,7 +49,7 @@ namespace prt {
       full_ = head_ == tail_;
     }
 
-    auto get() const -> T {
+    auto get() -> T {
       if(empty())
         return (T)nullptr;
       auto val = data_[tail_];

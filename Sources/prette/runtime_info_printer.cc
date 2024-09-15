@@ -38,7 +38,7 @@ namespace prt {
 
   void RuntimeInfoPrinter::Print() {
     google::LogMessage(GetFile(), GetLine(), GetSeverity()).stream() << "Runtime Information:";
-    __ << "Version: " << prt::GetVersion() << " (" << PRT_GIT_BRANCH << "/" << PRT_GIT_COMMIT_HASH << ")";
+    __ << "Version: " << prt::GetVersion() << " (" << PRT_GIT_BRANCH << "/" << PRT_GIT_COMMIT << ")";
     __ << "Resources: " << FLAGS_resources;
     __ << "OpenGL:";
     Indent();

@@ -2,6 +2,12 @@ cmake_minimum_required(VERSION 3.5)
 project(prette CXX)
 
 include(BuildInfo)
+
+option(ENABLE_CLANG_TIDY "Enable clang-tidy" ON)
+if(ENABLE_CLANG_TIDY AND ${CMAKE_BUILD_TYPE} MATCHES "^[rR]elease")
+  include(ClangTidy)
+endif()
+
 option(PRT_BUILD_DOCS "Build documentation" ON)
 if(PRT_BUILD_DOCS)
   include(DoxygenConfig)
@@ -59,6 +65,7 @@ include_directories(${PROJECT_BINARY_DIR}/Sources/)
 
 list(APPEND PRT_COMPILE_OPTS
   -frtti
+  -fms-extensions
   -Wno-deprecated
   -Wno-sizeof-pointer-memaccess)
 

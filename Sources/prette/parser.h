@@ -266,7 +266,7 @@ namespace prt {
       }
     }
 
-    void set_data(const void* data) {
+    void set_data(void* data) {
       data_ = data;
     }
 

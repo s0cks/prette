@@ -5,6 +5,8 @@ vcpkg_installed/
 build/*
 !/build/.gitkeep
 
+*.profraw
+
 # ignore osx DS_Store
 .DS_Store
 ._.DS_Store

@@ -19,6 +19,8 @@ target_link_libraries(${PROJECT_NAME}-tests
     ${PROJECT_NAME}
     GTest::gtest
     GTest::gmock)
+target_include_directories(${PROJECT_NAME}-tests
+  PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 if(ENABLE_COVERAGE)
   create_coverage_target(${PROJECT_NAME}-tests)
