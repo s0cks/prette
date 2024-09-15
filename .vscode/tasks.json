@@ -28,6 +28,16 @@
     },
     {
       "type": "shell",
+      "label": "open docs",
+      "command": "open index.html",
+      "options": {
+        "cwd": "${workspaceFolder}/build/docs/html"
+      },
+      "problemMatcher": [],
+      "detail": "Open Doxygen docs in browser"
+    },
+    {
+      "type": "shell",
       "label": "open Sources/ coverage",
       "command": "open index.html",
       "options": {
