@@ -9,8 +9,10 @@ namespace prt {
 #define PRT_VERSION_MINOR @PROJECT_VERSION_MINOR@
 #define PRT_VERSION_PATCH @PROJECT_VERSION_PATCH@
 
-#define PRT_GIT_BRANCH "@PROJECT_GIT_BRANCH@"
-#define PRT_GIT_COMMIT_HASH "@PROJECT_GIT_COMMIT_HASH@"
+#define PRT_GIT_BRANCH    "@GIT_BRANCH@"
+#define PRT_GIT_HASH      "@GIT_COMMIT@"
+#define PRT_GIT_TAG       "@GIT_TAG@"
+#define PRT_GIT_DATE      "@GIT_DATE@"
 
   auto GetVersion() -> std::string;
   void OnGlfwError(int code, const char* description);

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 project(prette CXX)
 
-include(GitInfo)
+include(BuildInfo)
 include(DoxygenConfig)
 include(CppCheckConfig)
 
