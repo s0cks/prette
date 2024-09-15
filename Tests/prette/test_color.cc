@@ -16,7 +16,7 @@ namespace prt {
   template<const ColorComponent Component>
   static inline auto
   HasComponent(const Color& actual, const float expected) -> AssertionResult {
-    return actual[Component] == expected
+    return (actual[Component] / 255.0f) == expected
          ? AssertionSuccess()
          : AssertionFailure() << "expected " << glm::to_string(actual) << " to have a " << Component << " component of: " << expected << ", not: " << actual[Component];
   }

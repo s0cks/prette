@@ -11,7 +11,7 @@ namespace prt::img {
   }
 
   void Image::Flip() {
-    const auto channels = GetNumberOfChannels();
+    const auto channels = format_.GetNumberOfChannels();
     const auto width = GetWidth();
     const auto height = GetHeight();
     const auto total_size = GetTotalSize();

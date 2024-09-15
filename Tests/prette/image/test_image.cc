@@ -18,7 +18,7 @@ namespace prt::img {
     ASSERT_TRUE(img);
     ASSERT_EQ(img->GetFormat(), img::kRGBFormat);
     ASSERT_EQ(img->GetResolution(), kImageResolution);
-    const auto total_size = img::kRGBAFormat * kImageResolution;
+    const auto total_size = img::kRGBFormat * kImageResolution;
     ASSERT_EQ(img->GetTotalSize(), total_size);
   }
 }

@@ -1,4 +1,5 @@
 {
+  "version": "2.0.0",
   "tasks": [
     {
       "type": "cppbuild",
@@ -24,7 +25,26 @@
       },
       "problemMatcher": [],
       "detail": "Clean the build/ directory"
-    }
+    },
+    {
+      "type": "shell",
+      "label": "open Sources/ coverage",
+      "command": "open index.html",
+      "options": {
+        "cwd": "${workspaceFolder}/build/Sources/html"
+      },
+      "problemMatcher": [],
+      "detail": "open Sources/ coverage in browser"
+    },
+    {
+      "type": "shell",
+      "label": "open Tests/ coverage",
+      "command": "open index.html",
+      "options": {
+        "cwd": "${workspaceFolder}/build/Tests/html"
+      },
+      "problemMatcher": [],
+      "detail": "open Tests/ coverage in browser"
+    },
   ],
-  "version": "2.0.0"
 }

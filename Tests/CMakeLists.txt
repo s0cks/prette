@@ -13,8 +13,13 @@ add_executable(${PROJECT_NAME}-tests
   main.cc
   ${PRT_TEST_SOURCES})
 target_compile_options(${PROJECT_NAME}-tests
-  PRIVATE ${PRT_COMPILE_OPTS})
+  PUBLIC ${PRT_COMPILE_OPTS})
 target_link_libraries(${PROJECT_NAME}-tests
-  ${PROJECT_NAME}
-  GTest::gtest
-  GTest::gmock)
+  PUBLIC
+    ${PROJECT_NAME}
+    GTest::gtest
+    GTest::gmock)
+
+if(ENABLE_COVERAGE)
+  create_coverage_target(${PROJECT_NAME}-tests)
+endif()

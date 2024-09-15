@@ -37,16 +37,8 @@ namespace prt::img {
       return static_cast<uword>(GetResolution().height());
     }
 
-    inline auto GetArea() const -> uword {
-      return GetWidth() * GetHeight();
-    }
-
-    inline auto GetNumberOfChannels() const -> uword {
-      return GetFormat().GetNumberOfChannels();
-    }
-
     inline auto GetTotalSize() const -> uword {
-      return GetArea() * GetNumberOfChannels();
+      return GetFormat() * GetResolution();
     }
 
     auto data() const -> uint8_t* {

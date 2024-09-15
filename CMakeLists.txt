@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(prette)
+project(prette CXX)
 
 include(GitInfo)
 include(DoxygenConfig)
@@ -58,6 +58,28 @@ list(APPEND PRT_COMPILE_OPTS
   -frtti
   -Wno-deprecated
   -Wno-sizeof-pointer-memaccess)
+
+option(ENABLE_COVERAGE "Enable code coverage reports" ON)
+if(ENABLE_COVERAGE)
+  include(CoverageConfig)
+  if(${CMAKE_CXX_COMPILER_ID} MATCHES "([aA]pple)?[cC]lang|GNU")
+    list(APPEND PRT_COMPILE_OPTS
+        -O0
+        -g
+        -fprofile-instr-generate
+        -fcoverage-mapping
+        --coverage)
+    list(APPEND PRT_LIBRARIES
+      -fprofile-instr-generate
+      -fprofile-instr-generate
+      -fcoverage-mapping
+      --coverage)
+  elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+    #TODO: implement
+  else()
+    message(FATAL_ERROR "unsupported compiler: ${CMAKE_CXX_COMPILER_ID}")
+  endif()
+endif()
 
 add_compile_definitions(PRT_GLFW)
 if(CMAKE_BUILD_TYPE MATCHES "^[Dd]ebug")

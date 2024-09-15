@@ -40,14 +40,14 @@ else()
     GLEW::GLEW)
 endif()
 
-add_library(${PROJECT_NAME}
+add_library(${PROJECT_NAME} STATIC
   ${PROJECT_BINARY_DIR}/Sources/prette/prette.h prette/prette.cc
   ${PROJECT_BINARY_DIR}/Sources/prette/gfx.h
   ${PRT_SOURCES})
-
-target_link_libraries(${PROJECT_NAME} ${PRT_LIBRARIES})
 target_compile_options(${PROJECT_NAME}
-  PRIVATE ${PRT_COMPILE_OPTS})
+  PUBLIC ${PRT_COMPILE_OPTS})
+target_link_libraries(${PROJECT_NAME}
+  PUBLIC ${PRT_LIBRARIES})
 target_include_directories(${PROJECT_NAME}
   PUBLIC ${PROJECT_SOURCE_DIR}/Sources ${PROJECT_BINARY_DIR}
   PRIVATE ${TERMCOLOR_INCLUDE_DIRS})
@@ -55,4 +55,9 @@ target_include_directories(${PROJECT_NAME}
 add_executable(${PROJECT_NAME}-client
   main.cc)
 target_link_libraries(${PROJECT_NAME}-client
-  ${PROJECT_NAME})
+  PUBLIC
+    ${PROJECT_NAME})
+
+if(ENABLE_COVERAGE)
+  create_coverage_target(${PROJECT_NAME}-client)
+endif()
