@@ -1,11 +1,11 @@
+# TODO: move docs output to ${CMAKE_SOURCE_DIR}/docs/
 include(FetchContent)
 function(download_file url hash output_dir)
   fetchcontent_declare(
     download_${hash}
     URL ${url}
     URL_HASH SHA256=${hash}
-    SOURCE_DIR
-    ${output_dir}
+    SOURCE_DIR ${output_dir}
     DOWNLOAD_NO_EXTRACT true)
   if(NOT download_${hash}_POPULATED)
     fetchcontent_populate(download_${hash})
