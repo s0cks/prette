@@ -56,7 +56,7 @@ find_package(Vorbis CONFIG REQUIRED)
 
 find_path(SEMVER_INCLUDE_DIRS "semver/semver.hpp")
 
-#TODO: convert to vcpkg
+# TODO: convert to vcpkg
 find_package(utf8 REQUIRED)
 find_package(OpenAL REQUIRED)
 
@@ -66,29 +66,25 @@ set(PROJECT_VERSION_PATCH 0)
 
 include_directories(${PROJECT_BINARY_DIR}/Sources/)
 
-list(APPEND PRT_COMPILE_OPTS
-  -frtti
-  -fms-extensions
-  -Wno-deprecated
-  -Wno-sizeof-pointer-memaccess)
+list(APPEND PRT_COMPILE_OPTS -frtti -fms-extensions -Wno-deprecated
+     -Wno-sizeof-pointer-memaccess)
 
 option(ENABLE_COVERAGE "Enable code coverage reports using gcov/lcov" ON)
 if(ENABLE_COVERAGE)
   include(Coverage)
   if(${CMAKE_CXX_COMPILER_ID} MATCHES "([aA]pple)?[cC]lang|GNU")
-    list(APPEND PRT_COMPILE_OPTS
-        -O0
-        -g
-        -fprofile-instr-generate
-        -fcoverage-mapping
-        --coverage)
-    list(APPEND PRT_LIBRARIES
-      -fprofile-instr-generate
+    list(
+      APPEND
+      PRT_COMPILE_OPTS
+      -O0
+      -g
       -fprofile-instr-generate
       -fcoverage-mapping
       --coverage)
+    list(APPEND PRT_LIBRARIES -fprofile-instr-generate -fprofile-instr-generate
+         -fcoverage-mapping --coverage)
   elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    #TODO: implement
+    # TODO: implement
   else()
     message(FATAL_ERROR "unsupported compiler: ${CMAKE_CXX_COMPILER_ID}")
   endif()
@@ -101,9 +97,7 @@ if(CMAKE_BUILD_TYPE MATCHES "^[Dd]ebug")
   add_compile_definitions(PTR_VMEMPROF)
 endif()
 
-link_libraries(Threads::Threads
-               glog::glog
-               gflags::gflags)
+link_libraries(Threads::Threads glog::glog gflags::gflags)
 
 add_subdirectory(lib/semver)
 add_subdirectory(Sources)

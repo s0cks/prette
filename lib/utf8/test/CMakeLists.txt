@@ -1,37 +1,38 @@
 # This is free and unencumbered software released into the public domain.
 #
-# Anyone is free to copy, modify, publish, use, compile, sell, or
-# distribute this software, either in source code form or as a compiled
-# binary, for any purpose, commercial or non-commercial, and by any
-# means.
+# Anyone is free to copy, modify, publish, use, compile, sell, or distribute
+# this software, either in source code form or as a compiled binary, for any
+# purpose, commercial or non-commercial, and by any means.
 #
-# In jurisdictions that recognize copyright laws, the author or authors
-# of this software dedicate any and all copyright interest in the
-# software to the public domain. We make this dedication for the benefit
-# of the public at large and to the detriment of our heirs and
-# successors. We intend this dedication to be an overt act of
-# relinquishment in perpetuity of all present and future rights to this
-# software under copyright law.
+# In jurisdictions that recognize copyright laws, the author or authors of this
+# software dedicate any and all copyright interest in the software to the public
+# domain. We make this dedication for the benefit of the public at large and to
+# the detriment of our heirs and successors. We intend this dedication to be an
+# overt act of relinquishment in perpetuity of all present and future rights to
+# this software under copyright law.
 #
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-# IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
-# OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-# ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-# OTHER DEALINGS IN THE SOFTWARE.
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+# ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 # For more information, please refer to <http://unlicense.org/>
 
 project(utf8)
 cmake_minimum_required(VERSION 2.8.12)
 
-set(UTF8_USE_SANITIZER "" CACHE STRING "Set which Clang Sanitizer to use")
+set(UTF8_USE_SANITIZER
+    ""
+    CACHE STRING "Set which Clang Sanitizer to use")
 
 macro(add_sanitizer target)
   if(NOT "${UTF8_USE_SANITIZER}" STREQUAL "")
-    target_compile_options(${target} PUBLIC -fno-omit-frame-pointer -fsanitize=${UTF8_USE_SANITIZER})
-    target_link_options(${target} PUBLIC -fno-omit-frame-pointer -fsanitize=${UTF8_USE_SANITIZER})
+    target_compile_options(${target} PUBLIC -fno-omit-frame-pointer
+                                            -fsanitize=${UTF8_USE_SANITIZER})
+    target_link_options(${target} PUBLIC -fno-omit-frame-pointer
+                        -fsanitize=${UTF8_USE_SANITIZER})
   endif()
 endmacro()
 
@@ -50,6 +51,7 @@ if("${CMAKE_C_COMPILER_ID}" STREQUAL "GNU")
   target_compile_options(utf8_test_c90 PUBLIC "-std=c90")
 elseif("${CMAKE_C_COMPILER_ID}" STREQUAL "Clang")
   if("${CMAKE_CXX_COMPILER_FRONTEND_VARIANT}" STREQUAL "MSVC")
+
   else()
     target_compile_options(utf8_test_c90 PUBLIC "-std=c90")
   endif()
@@ -62,6 +64,7 @@ if("${CMAKE_C_COMPILER_ID}" STREQUAL "GNU")
   target_compile_options(utf8_test_c99 PUBLIC "-std=c99")
 elseif("${CMAKE_C_COMPILER_ID}" STREQUAL "Clang")
   if("${CMAKE_CXX_COMPILER_FRONTEND_VARIANT}" STREQUAL "MSVC")
+
   else()
     target_compile_options(utf8_test_c99 PUBLIC "-std=c99")
   endif()
@@ -74,6 +77,7 @@ if("${CMAKE_C_COMPILER_ID}" STREQUAL "GNU")
   target_compile_options(utf8_test_c11 PUBLIC "-std=c11")
 elseif("${CMAKE_C_COMPILER_ID}" STREQUAL "Clang")
   if("${CMAKE_CXX_COMPILER_FRONTEND_VARIANT}" STREQUAL "MSVC")
+
   else()
     target_compile_options(utf8_test_c11 PUBLIC "-std=c11")
   endif()
@@ -96,21 +100,19 @@ add_sanitizer(utf8_test_cpp20)
 set_target_properties(utf8_test_cpp20 PROPERTIES CXX_STANDARD 20)
 
 if("${CMAKE_C_COMPILER_ID}" STREQUAL "GNU")
-  set_source_files_properties(test.c test.cpp PROPERTIES
-    COMPILE_FLAGS "-Wall -Wextra -Werror"
-  )
+  set_source_files_properties(test.c test.cpp
+                              PROPERTIES COMPILE_FLAGS "-Wall -Wextra -Werror")
 elseif("${CMAKE_C_COMPILER_ID}" STREQUAL "Clang")
-  set_source_files_properties(test.c test.cpp PROPERTIES
-    COMPILE_FLAGS "-Wall -Wextra -Weverything -Werror -Wno-c++98-compat"
-  )
+  set_source_files_properties(
+    test.c test.cpp
+    PROPERTIES COMPILE_FLAGS
+               "-Wall -Wextra -Weverything -Werror -Wno-c++98-compat")
 elseif("${CMAKE_C_COMPILER_ID}" STREQUAL "MSVC")
-  set_source_files_properties(test.c test.cpp PROPERTIES
-    COMPILE_FLAGS "/Wall /WX /wd4514"
-  )
+  set_source_files_properties(test.c test.cpp PROPERTIES COMPILE_FLAGS
+                                                         "/Wall /WX /wd4514")
   if(${MSVC_VERSION} VERSION_GREATER "15.7")
-    set_source_files_properties(test.c test.cpp PROPERTIES
-        COMPILE_FLAGS "/Zc:__cplusplus"
-        )
+    set_source_files_properties(test.c test.cpp PROPERTIES COMPILE_FLAGS
+                                                           "/Zc:__cplusplus")
   endif()
 else()
   message(WARNING "Unknown compiler '${CMAKE_C_COMPILER_ID}'!")

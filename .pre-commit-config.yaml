@@ -13,6 +13,15 @@ repos:
   #   hooks:
   #     - id: clang-format
   #       types_or: [c++, c, cuda]
+  # - repo: https://github.com/cheshirekow/cmake-format-precommit
+  #   rev: v0.6.10
+  #   hooks:
+  #     - id: cmake-format
+  #       additional_dependencies:
+  #         - pyyaml
+  #     - id: cmake-lint
+  #       additional_dependencies:
+  #         - pyyaml
   - repo: https://github.com/rhysd/actionlint
     rev: v1.7.1
     hooks:
