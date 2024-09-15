@@ -10,10 +10,13 @@ endif()
 
 option(PRT_BUILD_DOCS "Build documentation" ON)
 if(PRT_BUILD_DOCS)
-  include(DoxygenConfig)
+  include(Doxygen)
 endif()
 
-include(CppCheckConfig)
+option(ENABLE_CPPCHECK "Enable CppCheck" ON)
+if(ENABLE_CPPCHECK AND ${CMAKE_BUILD_TYPE} MATCHES "^[rR]elease")
+  include(CppCheck)
+endif()
 
 set(PRT_ENABLE_VK 1)
 if(PRT_ENABLE_VK)
@@ -69,9 +72,9 @@ list(APPEND PRT_COMPILE_OPTS
   -Wno-deprecated
   -Wno-sizeof-pointer-memaccess)
 
-option(ENABLE_COVERAGE "Enable code coverage reports" ON)
+option(ENABLE_COVERAGE "Enable code coverage reports using gcov/lcov" ON)
 if(ENABLE_COVERAGE)
-  include(CoverageConfig)
+  include(Coverage)
   if(${CMAKE_CXX_COMPILER_ID} MATCHES "([aA]pple)?[cC]lang|GNU")
     list(APPEND PRT_COMPILE_OPTS
         -O0
