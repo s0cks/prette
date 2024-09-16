@@ -6,7 +6,14 @@
   "plugins": [
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
-    "@semantic-release/git",
+    [
+      "@semantic-release/git",
+      {
+        "assets": [
+          "build.json"
+        ]
+      }
+    ],
     "@semantic-release/github",
     "@s0cks/cmake-release"
   ]
