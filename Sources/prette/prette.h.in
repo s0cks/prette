@@ -10,7 +10,7 @@ namespace prt {
 #define PRT_VERSION_PATCH @PROJECT_VERSION_PATCH@
 
 #define PRT_GIT_BRANCH    "@GIT_BRANCH@"
-#define PRT_GIT_COMMIT      "@GIT_COMMIT@"
+#define PRT_GIT_COMMIT    "@GIT_COMMIT@"
 #define PRT_GIT_TAG       "@GIT_TAG@"
 #define PRT_GIT_DATE      "@GIT_DATE@"
 

@@ -14,7 +14,6 @@
     "harfbuzz",
     "leveldb",
     "libuv",
-    "libvorbis",
     "nuklear",
     "opengl",
     "openssl",
@@ -24,6 +23,7 @@
     "termcolor",
     "tweeny",
     "units",
-    "z4kn4fein-semver"
+    "z4kn4fein-semver",
+    "libogg-test"
   ]
 }

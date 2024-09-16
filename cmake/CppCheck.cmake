@@ -1,3 +1,4 @@
+# TODO: cleanup
 find_program(CPPCHECK_BIN NAMES cppcheck REQUIRED)
 if(CPPCHECK_BIN)
   execute_process(

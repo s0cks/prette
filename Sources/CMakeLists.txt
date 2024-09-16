@@ -35,7 +35,6 @@ list(
   OpenSSL::Crypto
   rapidjson
   glfw
-  Vorbis::vorbis
   libuv::uv_a)
 if(PRT_ENABLE_VK)
   list(APPEND PRT_LIBRARIES Vulkan::Vulkan)

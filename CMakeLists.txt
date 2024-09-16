@@ -1,10 +1,11 @@
 cmake_minimum_required(VERSION 3.5)
-project(prette CXX)
-set(PROJECT_VERSION_MAJOR 0)
-set(PROJECT_VERSION_MINOR 0)
-set(PROJECT_VERSION_PATCH 0)
 
 include(BuildInfo)
+project(
+  ${BUILD_JSON_NAME}
+  VERSION ${BUILD_JSON_VERSION}
+  HOMEPAGE_URL ${BUILD_JSON_HOMEPAGE}
+  LANGUAGES C CXX)
 
 option(ENABLE_CPPCHECK "Enable CppCheck" ON)
 option(ENABLE_CLANG_TIDY "Enable clang-tidy" ON)
@@ -57,7 +58,6 @@ find_package(gflags CONFIG REQUIRED)
 find_package(unofficial-nuklear CONFIG REQUIRED)
 find_package(RapidJSON CONFIG REQUIRED)
 find_package(stduuid CONFIG REQUIRED)
-find_package(Vorbis CONFIG REQUIRED)
 
 find_path(SEMVER_INCLUDE_DIRS "semver/semver.hpp")
 
