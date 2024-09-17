@@ -17,9 +17,9 @@ namespace prt::component {
 
   class Component;
   class ComponentEvent : public Event {
-  protected:
+  private:
     Component* component_;
-
+  protected:
     explicit ComponentEvent(Component* component):
       Event(),
       component_(component) {
@@ -27,11 +27,11 @@ namespace prt::component {
   public:
     ~ComponentEvent() override = default;
 
-    Component* component() const {
+    auto component() const -> Component* {
       return component_;
     }
 
-    virtual bool IsComponentStateEvent() const {
+    virtual auto IsComponentStateEvent() const -> bool {
       return false;
     }
 
@@ -58,7 +58,7 @@ namespace prt::component {
   public:
     ~ComponentStateEvent() override = default;
 
-    bool IsComponentStateEvent() const override {
+    auto IsComponentStateEvent() const -> bool override {
       return true;
     }
   };

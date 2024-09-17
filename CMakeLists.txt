@@ -7,15 +7,19 @@ project(
   HOMEPAGE_URL ${BUILD_JSON_HOMEPAGE}
   LANGUAGES C CXX)
 
-option(ENABLE_CPPCHECK "Enable CppCheck" ON)
-option(ENABLE_CLANG_TIDY "Enable clang-tidy" ON)
-if(${CMAKE_BUILD_TYPE} MATCHES "^[rR]elease")
-  if(ENABLE_CLANG_TIDY)
-    include(ClangTidy)
-  endif()
+option(ENABLE_CPPCHECK "Enable CppCheck" OFF)
+if(ENABLE_CPPCHECK)
+  include(CppCheck)
+endif()
 
+option(ENABLE_CLANG_TIDY "Enable clang-tidy" ON)
+if(ENABLE_CLANG_TIDY)
+  include(ClangTidy)
+endif()
+
+if(${CMAKE_BUILD_TYPE} MATCHES "^[rR]elease")
   if(ENABLE_CPPCHECK)
-    include(CppCheck)
+    enable_cppcheck()
   endif()
 endif()
 

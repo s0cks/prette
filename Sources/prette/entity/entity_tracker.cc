@@ -17,7 +17,7 @@ namespace prt::entity {
       });
   }
 
-  bool EntityTracker::VisitAll(std::function<bool(EntityId)> vis) const {
+  auto EntityTracker::VisitAll(std::function<bool(EntityId)> vis) const -> bool {
     for(const auto& e : entities_) {
       if(!vis(e))
         return false;
@@ -34,7 +34,7 @@ namespace prt::entity {
   void FilteredEntityTracker::SetSignature(const Signature& signature) {
     if(on_signature_changed_.is_subscribed())
       on_signature_changed_.unsubscribe();
-      
+
     signature_ = signature;
     on_signature_changed_ = entity::OnEntitySignatureChangedEvent()
       .subscribe([this](entity::EntitySignatureChangedEvent* event) {

@@ -8,9 +8,9 @@ namespace prt {
   class Rectangle : public Shape { // NOLINT(cppcoreguidelines-pro-type-member-init)
     DEFINE_DEFAULT_COPYABLE_TYPE(Rectangle);
   private:
-    Point pos_;
-    uword width_;
-    uword height_;
+    Point pos_{};
+    uword width_{};
+    uword height_{};
   public:
     Rectangle() = default;
     Rectangle(const Point& pos, const uword width, const uword height):
@@ -41,11 +41,11 @@ namespace prt {
     }
 
     auto GetTopRight() const -> Point {
-      return { pos_[0] + width_, pos_[1] };
+      return { pos_[0] + static_cast<float>(width_), pos_[1] };
     }
 
     auto GetBottomLeft() const -> Point {
-      return { pos_[0], pos_[1] + height_ };
+      return { pos_[0], pos_[1] + static_cast<float>(height_) };
     }
 
     auto GetWidth() const -> uword {

@@ -17,8 +17,8 @@ namespace prt::uv {
   }
 
   template<typename D, typename H>
-  static inline D*
-  GetHandleData(const H* handle) {
+  static inline auto
+  GetHandleData(const H* handle) -> D* {
     return (D*) uv_handle_get_data((uv_handle_t*) handle);
   }
 
@@ -32,11 +32,11 @@ namespace prt::uv {
   template<typename H>
   class HandleBaseTemplate : public HandleBase {
   protected:
-    H handle_;
+    H handle_; // NOLINT(cppcoreguidelines-non-private-member-variables-in-classes) TODO: remove NOLINT
 
     HandleBaseTemplate() = default;
 
-    inline H* handle() {
+    inline auto handle() -> H* {
       return &handle_;
     }
   public:

@@ -10,42 +10,42 @@
 #include "prette/uv/uv_status.h"
 
 namespace prt::uv {
-  typedef uv_prepare_t PrepareHandle;  
+  using PrepareHandle = uv_prepare_t;
 
-  static inline Status
-  InitPrepare(uv_loop_t* loop, PrepareHandle* handle) {
-    return Status(uv_prepare_init(loop, handle));
+  static inline auto
+  InitPrepare(uv_loop_t* loop, PrepareHandle* handle) -> Status {
+    return {uv_prepare_init(loop, handle)};
   }
 
-  static inline Status
-  InitPrepare(Loop* loop, PrepareHandle* handle) {
+  static inline auto
+  InitPrepare(Loop* loop, PrepareHandle* handle) -> Status {
     return InitPrepare(loop->GetLoop(), handle);
   }
 
-  static inline Status
-  StartPrepare(PrepareHandle* handle, uv_prepare_cb cb) {
-    return Status(uv_prepare_start(handle, cb));
+  static inline auto
+  StartPrepare(PrepareHandle* handle, uv_prepare_cb cb) -> Status {
+    return {uv_prepare_start(handle, cb)};
   }
 
-  static inline Status
-  StopPrepare(PrepareHandle* handle) {
-    return Status(uv_prepare_stop(handle));
+  static inline auto
+  StopPrepare(PrepareHandle* handle) -> Status {
+    return {uv_prepare_stop(handle)};
   }
 
   class Prepare : public HandleBaseTemplate<PrepareHandle> {
   public:
-    typedef std::function<void(Prepare*)> Callback;
+    using Callback = std::function<void (Prepare *)>;
   private:
     Callback callback_;
 
     static void OnPrepare(PrepareHandle* handle);
 
-    const Callback& GetCallback() const {
+    auto GetCallback() const -> const Callback& {
       return callback_;
     }
   public:
     explicit Prepare(Loop* loop,
-                     const Callback& callback,
+                     Callback callback,
                      const bool start = true);
     ~Prepare() override;
 

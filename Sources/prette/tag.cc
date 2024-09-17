@@ -4,11 +4,11 @@
 namespace prt {
   static TagTrie tags_;
 
-  Tag* Tag::Of(const std::string& value) {
+  auto Tag::Of(const std::string& value) -> Tag* {
     return tags_.Search(value);
   }
 
-  Tag* TagTrie::Search(Node* root, const std::string& value) {
+  auto TagTrie::Search(Node* root, const std::string& value) -> Tag* {
     auto node = root;
     auto iter = value.begin();
     do {

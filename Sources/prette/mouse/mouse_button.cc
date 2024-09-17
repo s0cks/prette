@@ -3,7 +3,7 @@
 #include "prette/window/window.h"
 
 namespace prt::mouse {
-  MouseButton::State MouseButton::GetState(GLFWwindow* handle) const {
+  auto MouseButton::GetState(GLFWwindow* handle) const -> MouseButton::State {
     PRT_ASSERT(handle);
     return static_cast<MouseButton::State>(glfwGetMouseButton(handle, GetCode()));
   }

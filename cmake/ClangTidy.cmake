@@ -21,4 +21,19 @@ if(CLANG_TIDY)
   message(STATUS "found clang-tidy v${CLANG_TIDY_VERSION}: ${CLANG_TIDY}")
   message(STATUS "clang-tidy options: ${CLANG_TIDY_OPTS}")
   set(CMAKE_CXX_CLANG_TIDY ${CLANG_TIDY} ${CLANG_TIDY_OPTS})
+
+  function(create_clang_tidy_target target)
+    get_target_property(TARGET_SOURCES ${target} SOURCES)
+    add_custom_target(
+      clang-tidy-${target}
+      COMMENT "Run clang-tidy"
+      COMMAND
+        echo ${CLANG_TIDY} ${CLANG_TIDY_OPTS} -p ${CMAKE_BINARY_DIR}
+        ${TARGET_SOURCES} -- "-I" ${CMAKE_CURRENT_SOURCE_DIR} "-I"
+        ${CMAKE_CURRENT_BINARY_DIR}
+      COMMAND
+        ${CLANG_TIDY} ${CLANG_TIDY_OPTS} -p ${CMAKE_BINARY_DIR}
+        ${TARGET_SOURCES} -- "-I" ${CMAKE_CURRENT_SOURCE_DIR} "-I"
+        ${CMAKE_CURRENT_BINARY_DIR})
+  endfunction()
 endif()

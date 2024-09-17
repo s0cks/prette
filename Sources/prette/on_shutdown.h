@@ -26,7 +26,7 @@ namespace prt {
   public:
     ShutdownListenerHandle(uv_loop_t* loop, const ShutdownListener* listener):
       uv::AsyncHandleBase(loop, &OnCall) {
-      uv::SetHandleData(&handle_, listener);
+      uv::SetHandleData(&handle(), listener);
     }
     ~ShutdownListenerHandle() override = default;
   };

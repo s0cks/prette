@@ -2,7 +2,7 @@
 #include "prette/pipeline_executor.h"
 
 namespace prt {
-  bool Pipeline::Execute() {
+  auto Pipeline::Execute() -> bool {
     return PipelineExecutor::ExecutePipeline(this);
   }
 }

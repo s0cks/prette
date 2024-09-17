@@ -11,37 +11,45 @@
 #include "prette/uv/uv_status.h"
 
 namespace prt::uv {
-  static inline Status
-  InitAsync(uv_loop_t* loop, uv_async_t* handle, uv_async_cb cb) {
+  static inline auto
+  InitAsync(uv_loop_t* loop, uv_async_t* handle, uv_async_cb cb) -> Status {
     PRT_ASSERT(loop);
     PRT_ASSERT(handle);
-    return Status(uv_async_init(loop, handle, cb));
+    return {uv_async_init(loop, handle, cb)};
   }
 
-  static inline Status
-  InitAsync(Loop* loop, uv_async_t* handle, uv_async_cb cb) {
+  static inline auto
+  InitAsync(Loop* loop, uv_async_t* handle, uv_async_cb cb) -> Status {
     PRT_ASSERT(loop);
     PRT_ASSERT(handle);
     return InitAsync(loop->GetLoop(), handle, cb);
   }
 
-  static inline Status
-  AsyncSend(uv_async_t* handle) {
+  static inline auto
+  AsyncSend(uv_async_t* handle) -> Status {
     PRT_ASSERT(handle);
-    return Status(uv_async_send(handle));
+    return {uv_async_send(handle)};
   }
 
   class AsyncHandleBase : public HandleBase {
-  protected:
+  private:
     uv_async_t handle_;
-
+  protected:
     AsyncHandleBase(uv_loop_t* loop, uv_async_cb callback):
       handle_() {
       const auto err = uv_async_init(loop, &handle_, callback);
       LOG_IF(ERROR, err != UV_OK) << "uv_async_init failed: " << uv_strerror(err);
     }
+
+    inline auto handle() -> uv_async_t& {
+      return handle_;
+    }
+
+    inline auto handle() const -> const uv_async_t& {
+      return handle_;
+    }
   public:
-    virtual ~AsyncHandleBase() = default;//TODO: remove async handle from loop?
+    ~AsyncHandleBase() override = default;//TODO: remove async handle from loop?
 
     virtual void Call() {
       const auto err = uv_async_send(&handle_);
@@ -52,14 +60,14 @@ namespace prt::uv {
   template<typename D>
   class AsyncHandle : public AsyncHandleBase {
   public:
-    typedef std::function<void(D*)> Callback;
+    using Callback = std::function<void (D *)>;
   private:
     static inline void
     OnCall(uv_async_t* handle) {
       const auto async = GetHandleData<AsyncHandle>(handle);
       async->callback_(async->GetData());
     }
-  protected:
+  private:
     Callback callback_;
     uword data_;
   public:
@@ -75,9 +83,9 @@ namespace prt::uv {
                 const D* data = 0):
       AsyncHandle(loop, callback, (uword) data) {
     }
-    ~AsyncHandle() = default; //TODO: remove async handle from loop?
+    ~AsyncHandle() override = default; //TODO: remove async handle from loop?
 
-    D* GetData() const {
+    auto GetData() const -> D* {
       return (D*) data_;
     }
 

@@ -9,7 +9,7 @@
 
 namespace prt::uv {
   class Ticker {
-  protected:
+  private:
     // state
     Tick first_;
     Tick current_;
@@ -24,7 +24,7 @@ namespace prt::uv {
     // stats
     TicksPerSecond count_;
     TickDurationSeries duration_;
-
+  protected:
     virtual void OnIdle() {
       // publish tick
       std::swap(previous_, current_);
@@ -74,39 +74,39 @@ namespace prt::uv {
       Stop();
     }
 
-    const Tick& GetFirstTick() const {
+    auto GetFirstTick() const -> const Tick& {
       return first_;
     }
 
-    const Tick& GetCurrentTick() const {
+    auto GetCurrentTick() const -> const Tick& {
       return current_;
     }
 
-    const Tick& GetPreviousTick() const {
+    auto GetPreviousTick() const -> const Tick& {
       return previous_;
     }
 
-    uint64_t GetTotalTicks() const {
+    auto GetTotalTicks() const -> uint64_t {
       return (uint64_t) count_;
     }
 
-    TickDelta GetTimeSinceCurrentTick(const uword ts = uv_hrtime()) const {
+    auto GetTimeSinceCurrentTick(const uword ts = uv_hrtime()) const -> TickDelta {
       return (ts - GetCurrentTick());
     }
 
-    TickDelta GetTimeSinceLastTick(const uword ts = uv_hrtime()) const {
+    auto GetTimeSinceLastTick(const uword ts = uv_hrtime()) const -> TickDelta {
       return (ts - GetPreviousTick());
     }
 
-    const TicksPerSecond& GetTicksPerSecond() const {
+    auto GetTicksPerSecond() const -> const TicksPerSecond& {
       return count_;
     }
 
-    const TickDurationSeries& GetTickDurationSeries() const {
+    auto GetTickDurationSeries() const -> const TickDurationSeries& {
       return duration_;
     }
-    
-    rx::observable<Tick> ToObservable() const {
+
+    auto ToObservable() const -> rx::observable<Tick> {
       return ticks_.get_observable();
     }
 
@@ -119,8 +119,9 @@ namespace prt::uv {
 
   template<const uword Rate>
   class RateLimitedTicker : public Ticker {
+  private:
+    bool skipped_{};
   protected:
-    bool skipped_;
 
     inline void
     SetSkipped(const bool skipped = true) {
@@ -132,8 +133,8 @@ namespace prt::uv {
       return SetSkipped(false);
     }
 
-    inline bool
-    IsSkipped() {
+    inline auto
+    IsSkipped() -> bool {
       return skipped_;
     }
 
@@ -158,12 +159,11 @@ namespace prt::uv {
     RateLimitedTicker(Loop* loop,
                       const uword start_ns = uv::Now(),
                       const bool start = true):
-      Ticker(loop, start_ns, start),
-      skipped_(false) {
+      Ticker(loop, start_ns, start) {
     }
     ~RateLimitedTicker() override = default;
 
-    uword GetRate() const {
+    auto GetRate() const -> uword {
       return Rate;
     }
   };

@@ -11,10 +11,10 @@
 #include "prette/timestamp.h"
 
 namespace prt::uv {
-  typedef uword TickId;
+  using TickId = uword;
 
   class TickDelta {
-  protected:
+  private:
     uword value_;
   public:
     constexpr TickDelta(const uword value):
@@ -23,63 +23,64 @@ namespace prt::uv {
     constexpr TickDelta(const TickDelta& rhs) = default;
     ~TickDelta() = default;
 
-    constexpr uword value() const {
+    constexpr auto value() const -> uword {
       return value_;
     }
 
-    void operator=(const uword& rhs) {
+    auto operator=(const uword& rhs) -> TickDelta& {
       value_ = rhs;
+      return *this;
     }
 
-    TickDelta& operator=(const TickDelta& rhs) = default;
+    auto operator=(const TickDelta& rhs) -> TickDelta& = default;
 
-    bool operator==(const TickDelta& rhs) const {
+    auto operator==(const TickDelta& rhs) const -> bool {
       return value() == rhs.value();
     }
 
-    bool operator==(const uword& rhs) const {
+    auto operator==(const uword& rhs) const -> bool {
       return value() == rhs;
     }
 
-    bool operator!=(const TickDelta& rhs) const {
+    auto operator!=(const TickDelta& rhs) const -> bool {
       return value() != rhs.value();
     }
 
-    bool operator!=(const uword& rhs) const {
+    auto operator!=(const uword& rhs) const -> bool {
       return value() != rhs;
     }
 
-    bool operator<(const TickDelta& rhs) const {
+    auto operator<(const TickDelta& rhs) const -> bool {
       return value() < rhs.value();
     }
 
-    bool operator<(const uword& rhs) const {
+    auto operator<(const uword& rhs) const -> bool {
       return value() < rhs;
     }
 
-    bool operator>(const TickDelta& rhs) const {
+    auto operator>(const TickDelta& rhs) const -> bool {
       return value() > rhs.value();
     }
 
-    bool operator>(const uword& rhs) const {
+    auto operator>(const uword& rhs) const -> bool {
       return value() > rhs;
     }
 
-    friend std::ostream& operator<<(std::ostream& stream, const TickDelta& rhs) {
-      return stream << units::time::nanosecond_t(rhs.value());
+    friend auto operator<<(std::ostream& stream, const TickDelta& rhs) -> std::ostream& {
+      return stream << units::time::nanosecond_t(rhs.value()); // NOLINT(cppcoreguidelines-narrowing-conversions)
     }
   };
 
   class Tick {
   public:
-    static inline int
-    Compare(const Tick& lhs, const Tick& rhs) {
+    static inline auto
+    Compare(const Tick& lhs, const Tick& rhs) -> int {
       if(lhs.GetId() < rhs.GetId()) {
         return -1;
       } else if(lhs.GetId() > rhs.GetId()) {
         return +1;
       }
-      
+
       if(lhs.GetTimestamp() < rhs.GetTimestamp()) {
         return -1;
       } else if(lhs.GetTimestamp() > rhs.GetTimestamp()) {
@@ -87,7 +88,7 @@ namespace prt::uv {
       }
       return 0;
     }
-  protected:
+  private:
     TickId id_;
     uword ts_;
   public:
@@ -102,11 +103,11 @@ namespace prt::uv {
     constexpr Tick(const Tick& rhs) = default;
     ~Tick() = default;
 
-    constexpr TickId GetId() const {
+    constexpr auto GetId() const -> TickId {
       return id_;
     }
 
-    constexpr uword GetTimestamp() const {
+    constexpr auto GetTimestamp() const -> uword {
       return ts_;
     }
 
@@ -114,33 +115,33 @@ namespace prt::uv {
       return ts_;
     }
 
-    Tick& operator=(const Tick& rhs) = default;
+    auto operator=(const Tick& rhs) -> Tick& = default;
 
-    constexpr bool operator==(const Tick& rhs) const {
+    constexpr auto operator==(const Tick& rhs) const -> bool {
       return Compare(*this, rhs) == 0;
     }
 
-    constexpr bool operator!=(const Tick& rhs) const {
+    constexpr auto operator!=(const Tick& rhs) const -> bool {
       return Compare(*this, rhs) != 0;
     }
 
-    constexpr bool operator<(const Tick& rhs) const {
+    constexpr auto operator<(const Tick& rhs) const -> bool {
       return Compare(*this, rhs) < 0;
     }
 
-    constexpr bool operator>(const Tick& rhs) const {
+    constexpr auto operator>(const Tick& rhs) const -> bool {
       return Compare(*this, rhs) > 0;
     }
 
-    friend constexpr TickDelta operator-(const Tick& lhs, const Tick& rhs) {
-      return TickDelta(lhs.GetTimestamp() - rhs.GetTimestamp());
+    friend constexpr auto operator-(const Tick& lhs, const Tick& rhs) -> TickDelta {
+      return {lhs.GetTimestamp() - rhs.GetTimestamp()};
     }
 
-    friend constexpr TickDelta operator-(const Tick& lhs, const uword& rhs) {
-      return TickDelta(lhs.GetTimestamp() - rhs);
+    friend constexpr auto operator-(const Tick& lhs, const uword& rhs) -> TickDelta {
+      return {lhs.GetTimestamp() - rhs};
     }
 
-    friend std::ostream& operator<<(std::ostream& stream, const Tick& rhs) {
+    friend auto operator<<(std::ostream& stream, const Tick& rhs) -> std::ostream& {
       stream << "Tick(";
       stream << "id=" << rhs.GetId() << ", ";
       stream << "timestamp=" << rhs.GetTimestamp();
@@ -149,15 +150,14 @@ namespace prt::uv {
     }
   };
 
-  static inline constexpr TickDelta
-  operator-(const uword& lhs, const Tick& rhs) {
-    return TickDelta(lhs - rhs.GetTimestamp());
+  static inline constexpr auto
+  operator-(const uword& lhs, const Tick& rhs) -> TickDelta {
+    return {lhs - rhs.GetTimestamp()};
   }
 
-  typedef rx::subject<Tick> TickSubject;
-
-  typedef TimeSeries<10> TickDurationSeries;
-  typedef PerSecondCounter<uint64_t> TicksPerSecond;
+  using TickSubject = rx::subject<Tick>;
+  using TickDurationSeries = TimeSeries<10>;
+  using TicksPerSecond = PerSecondCounter<uint64_t>;
 }
 
 #endif //PRT_UV_TICK_H

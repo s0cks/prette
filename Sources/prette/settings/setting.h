@@ -10,7 +10,7 @@ namespace prt::settings {
     SettingVisitor() = default;
   public:
     virtual ~SettingVisitor() = default;
-    virtual bool Visit(Setting* rhs) = 0;
+    virtual auto Visit(Setting* rhs) -> bool = 0;
   };
 
   class Setting : public SettingEventSource {
@@ -18,10 +18,10 @@ namespace prt::settings {
     Setting() = default;
   public:
     ~Setting() override = default;
-    virtual const char* GetName() const = 0;
-    virtual std::string ToString() const = 0;
+    virtual auto GetName() const -> const char* = 0;
+    virtual auto ToString() const -> std::string = 0;
 
-    virtual bool Accept(SettingVisitor* vis) {
+    virtual auto Accept(SettingVisitor* vis) -> bool {
       PRT_ASSERT(vis);
       return vis->Visit(this);
     }
@@ -52,7 +52,7 @@ namespace prt::settings {
   public:
     ~SettingTemplate() override = default;
 
-    const T& GetValue() const {
+    auto GetValue() const -> const T& {
       return value_;
     }
 

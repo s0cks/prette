@@ -10,7 +10,6 @@ namespace prt {
     state.SetBytesProcessed(state.iterations() * static_cast<int64_t>(strlen(kBenchmarkUri)));
   }
 
-  // NOLINTNEXTLINE(cppcoreguidelines-avoid-non-const-global-variables)
   BENCHMARK(BM_UriParser)
     ->Name("UriParser::Parse")
     ->Unit(benchmark::TimeUnit::kNanosecond)

@@ -51,7 +51,7 @@ namespace prt {
     template<class T, typename... Args>
     void Publish(Args... args) {
       T event(args...);
-      return PublishEvent((E*) &event);
+      return PublishEvent(&event);
     }
   public:
     virtual ~EventSource() = default;

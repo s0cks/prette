@@ -28,7 +28,8 @@
         "CMAKE_CXX_STANDARD_REQUIRED": "ON",
         "CMAKE_CXX_COMPILER": "clang++",
         "CMAKE_CXX_EXTENSIONS": "OFF",
-        "VCPKG_APPLOCAL_DEPS": "ON"
+        "VCPKG_APPLOCAL_DEPS": "ON",
+        "ENABLE_CPPCHECK": "OFF"
       }
     },
     {

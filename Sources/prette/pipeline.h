@@ -1,6 +1,7 @@
 #ifndef PRT_PIPELINE_H
 #define PRT_PIPELINE_H
 
+#include <utility>
 #include <vector>
 #include "prette/gfx.h"
 
@@ -11,15 +12,15 @@ namespace prt {
       friend class Pipeline;
     protected:
       PipelineVisitor() = default;
-      virtual bool Visit(Pipeline* pipeline) = 0;
+      virtual auto Visit(Pipeline* pipeline) -> bool = 0;
     public:
       virtual ~PipelineVisitor() = default;
     };
 
     class Pipeline {
-    protected:
+    private:
       Pipeline* parent_;
-
+    protected:
       explicit Pipeline(Pipeline* parent = nullptr):
         parent_(parent) {
       }
@@ -33,55 +34,55 @@ namespace prt {
       }
     public:
       virtual ~Pipeline() = default;
-      virtual const char* GetName() const = 0;
+      virtual auto GetName() const -> const char* = 0;
 
-      virtual Pipeline* GetParent() const {
+      virtual auto GetParent() const -> Pipeline* {
         return parent_;
       }
 
-      virtual Pipeline* GetChildAt(const uint64_t idx) const  {
+      virtual auto GetChildAt(const uint64_t idx) const -> Pipeline*  {
         return nullptr;
       }
 
-      virtual uint64_t GetNumberOfChildren() const {
+      virtual auto GetNumberOfChildren() const -> uint64_t {
         return 0;
       }
 
-      virtual bool HasChildren() const {
+      virtual auto HasChildren() const -> bool {
         return false;
       }
 
-      virtual bool Accept(PipelineVisitor* vis) {
+      virtual auto Accept(PipelineVisitor* vis) -> bool {
         PRT_ASSERT(vis);
         return vis->Visit(this);
       }
 
-      virtual bool HasParent() const {
+      virtual auto HasParent() const -> bool {
         return GetParent() != nullptr;
       }
 
-      virtual bool Apply() = 0;
+      virtual auto Apply() -> bool = 0;
 
-      bool Execute();
+      auto Execute() -> bool;
     };
 
     class ApplyPipeline : public Pipeline {
     public:
-      typedef std::function<bool()> ApplyFunc;
-    protected:
+      using ApplyFunc = std::function<bool ()>;
+    private:
       std::string name_;
       ApplyFunc apply_;
-
-      bool Apply() override {
+    protected:
+      auto Apply() -> bool override {
         return apply_();
       }
     public:
       ApplyPipeline(Pipeline* parent,
-                    const std::string& name,
-                    const ApplyFunc& func):
+                    std::string name,
+                    ApplyFunc func):
         Pipeline(parent),
-        name_(name),
-        apply_(func) {
+        name_(std::move(name)),
+        apply_(std::move(func)) {
       }
       ApplyPipeline(Pipeline* parent,
                     const ApplyFunc& func):
@@ -95,58 +96,70 @@ namespace prt {
       }
       ~ApplyPipeline() override = default;
 
-      const char* GetName() const override {
+      auto GetName() const -> const char* override {
         return name_.data();
       }
 
-      const ApplyFunc& GetApplyFunc() const {
+      auto GetApplyFunc() const -> const ApplyFunc& {
         return apply_;
       }
     };
 
     template<typename Sequence>
     class SequencePipelineTemplate : public Pipeline {
-    protected:
+    private:
       std::string name_;
       Sequence children_;
-
+    protected:
       SequencePipelineTemplate(Pipeline* parent,
-                               const std::string& name,
-                               const Sequence& children):
+                               std::string name,
+                               Sequence children):
         Pipeline(parent),
-        name_(name),
-        children_(children) {
+        name_(std::move(name)),
+        children_(std::move(children)) {
       }
 
-      bool Apply() override {
+      auto Apply() -> bool override {
         for(const auto& child : children_) {
           if(child && !child->Apply())
             return false;
         }
         return true;
       }
+
+      inline auto children() -> Sequence& {
+        return children_;
+      }
+
+      inline auto children() const -> const Sequence& {
+        return children_;
+      }
+
+      inline auto name() const -> const std::string& {
+        return name_;
+      }
     public:
       ~SequencePipelineTemplate() override = default;
 
-      uint64_t GetNumberOfChildren() const override {
+      auto GetNumberOfChildren() const -> uint64_t override {
         return children_.size();
       }
-      
-      bool HasChildren() const override {
+
+      auto HasChildren() const -> bool override {
         return !children_.empty();
       }
     };
 
-    typedef std::vector<Pipeline*> PipelineSequence;
+    using PipelineSequence = std::vector<Pipeline *>;
     class SequencePipeline : public SequencePipelineTemplate<PipelineSequence> {
     protected:
       void Append(Pipeline* child) override {
-        children_.push_back(child);
+        children().push_back(child);
       }
-      
+
       void SetChildAt(const uint64_t idx, Pipeline* child) override {
         PRT_ASSERT(idx >= 0 && idx <= GetNumberOfChildren());
-        children_[idx] = child;
+        children()[idx] = child;
       }
     public:
       SequencePipeline(Pipeline* parent,
@@ -156,7 +169,7 @@ namespace prt {
       }
       SequencePipeline(Pipeline* parent,
                       const PipelineSequence& children):
-        SequencePipeline(parent, "sequence", children) {  
+        SequencePipeline(parent, "sequence", children) {
       }
       SequencePipeline(const std::string& name,
                        const PipelineSequence& children = {}):
@@ -167,13 +180,13 @@ namespace prt {
       }
       ~SequencePipeline() override = default;
 
-      const char* GetName() const override {
-        return name_.data();
+      auto GetName() const -> const char* override {
+        return name().data();
       }
 
-      Pipeline* GetChildAt(const uint64_t idx) const override {
+      auto GetChildAt(const uint64_t idx) const -> Pipeline* override {
         PRT_ASSERT(idx >= 0 && idx <= GetNumberOfChildren());
-        return children_[idx];
+        return children()[idx];
       }
     };
   }

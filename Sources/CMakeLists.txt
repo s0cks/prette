@@ -50,9 +50,17 @@ target_include_directories(
   PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}
   PRIVATE ${TERMCOLOR_INCLUDE_DIRS})
 
+if(ENABLE_CPPCHECK)
+  create_cppcheck_target(${PROJECT_NAME} ${PRT_SOURCES})
+endif()
+
+if(ENABLE_CLANG_TIDY)
+  create_clang_tidy_target(${PROJECT_NAME} ${PRT_SOURCES})
+endif()
+
 add_executable(${PROJECT_NAME}-client main.cc)
 target_link_libraries(${PROJECT_NAME}-client PUBLIC ${PROJECT_NAME})
 
 if(ENABLE_COVERAGE)
-  create_coverage_target(${PROJECT_NAME}-client)
+  create_coverage_target(${PROJECT_NAME}-client ${PRT_SOU})
 endif()

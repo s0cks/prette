@@ -9,13 +9,13 @@ namespace prt::settings {
     enum Layout {
 
     };
-    
+
     uint8_t data_;
   public:
     SettingsKey() = default;
     SettingsKey(const SettingsKey& rhs) = default;
     ~SettingsKey() = default;
-    SettingsKey& operator=(const SettingsKey& rhs) = default;
+    auto operator=(const SettingsKey& rhs) -> SettingsKey& = default;
   };
 
   class SettingsStorage {

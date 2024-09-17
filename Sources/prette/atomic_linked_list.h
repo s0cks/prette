@@ -29,12 +29,12 @@ namespace prt {
     void Push(T* value) {
       const auto node = new Node(value);
       auto curHead = head_.load(std::memory_order_relaxed);
-      do {
+      do { // NOLINT(cppcoreguidelines-avoid-do-while)
         node->next = curHead;
       } while(!head_.compare_exchange_weak(curHead, node, std::memory_order_release, std::memory_order_relaxed));
     }
 
-    T Pop() {
+    auto Pop() -> T {
       auto curHead = head_.load(std::memory_order_relaxed);
       while(curHead != nullptr) {
         if(head_.compare_exchange_weak(curHead, curHead->next, std::memory_order_release, std::memory_order_acquire))
@@ -42,14 +42,14 @@ namespace prt {
       }
       const auto value = curHead->value;
       delete curHead;
-      return value; 
+      return value;
     }
 
-    T GetFirst() {
+    auto GetFirst() -> T {
       return head_.load(std::memory_order_relaxed)->value;
     }
 
-    bool IsEmpty() const {
+    auto IsEmpty() const -> bool {
       return head_.load(std::memory_order_relaxed) == nullptr;
     }
   };

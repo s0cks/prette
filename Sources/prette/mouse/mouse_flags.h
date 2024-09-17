@@ -9,9 +9,9 @@
 #include "prette/mouse/mouse_mode.h"
 
 namespace prt::mouse {
-DECLARE_string(mouse_mode); // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
+DECLARE_string(mouse_mode);
 static constexpr const auto kDefaultCursorsDir = "";
-DECLARE_string(cursors_dir); // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
+DECLARE_string(cursors_dir);
 
   static inline auto
   GetMouseMode() -> std::optional<Mode> {

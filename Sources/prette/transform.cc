@@ -17,7 +17,7 @@ namespace prt {
     Set(new TransformComponent());
   }
 
-  TransformComponent* TransformComponent::Get() {
+  auto TransformComponent::Get() -> TransformComponent* {
     return component_.Get();
   }
 }

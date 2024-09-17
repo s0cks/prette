@@ -2,28 +2,28 @@
 #include <sstream>
 
 namespace prt::settings {
-  std::string SettingsLoadingEvent::ToString() const {
+  auto SettingsLoadingEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "SettingsLoadingEvent(";
     ss << ")";
     return ss.str();
   }
 
-  std::string SettingsLoadedEvent::ToString() const {
+  auto SettingsLoadedEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "SettingsLoadedEvent(";
     ss << ")";
     return ss.str();
   }
 
-  std::string SettingsSavingEvent::ToString() const {
+  auto SettingsSavingEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "SettingsSavingEvent(";
     ss << ")";
     return ss.str();
   }
 
-  std::string SettingsSavedEvent::ToString() const {
+  auto SettingsSavedEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "SettingsSavedEvent(";
     ss << ")";

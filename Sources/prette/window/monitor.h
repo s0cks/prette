@@ -46,7 +46,7 @@ namespace prt::window {
 
     void PublishEvent(MonitorEvent* event) override;
   public:
-    ~Monitor() override;
+    ~Monitor() override = default;
     auto GetRedBits() const -> int;
     auto GetBlueBits() const -> int;
     auto GetGreenBits() const -> int;

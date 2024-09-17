@@ -3,7 +3,7 @@
 #include "prette/pipeline.h"
 
 namespace prt::pipeline {
-  std::string PipelineStartedEvent::ToString() const {
+  auto PipelineStartedEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "PipelineStartedEvent(";
     ss << "pipeline=" << GetPipeline()->GetName();
@@ -11,7 +11,7 @@ namespace prt::pipeline {
     return ss.str();
   }
 
-  std::string PipelineFinishedEvent::ToString() const {
+  auto PipelineFinishedEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "PipelineFinishedEvent(";
     ss << "pipeline=" << GetPipeline()->GetName();

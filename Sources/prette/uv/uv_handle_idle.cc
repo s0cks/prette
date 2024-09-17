@@ -8,10 +8,10 @@ namespace prt::uv {
   }
 
   Idle::Idle(Loop* loop,
-             const Callback& callback,
+             Callback callback,
              const bool start):
     HandleBaseTemplate<IdleHandle>(),
-    callback_(callback) {
+    callback_(std::move(callback)) {
     SetHandleData(handle_, this);
     const auto status = InitIdle(loop, &handle_);
     LOG_IF(ERROR, !status) << "failed to initialize uv::Idle: " << status;

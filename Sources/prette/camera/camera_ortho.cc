@@ -1,7 +1,7 @@
 #include "prette/camera/camera_ortho.h"
 
 namespace prt::camera {
-  static OrthoCameraSet all_; //NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
+  static OrthoCameraSet all_;
 
   static inline void
   Register(OrthoCamera* value) {

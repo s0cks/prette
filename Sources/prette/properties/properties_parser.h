@@ -17,6 +17,7 @@ namespace prt::properties {
     friend std::ostream& operator<<(std::ostream& stream, const TokenKind& rhs) {
       switch(rhs) {
         case kUnknown:
+        default:
           return stream << "Unknown TokenKind.";
       }
     }

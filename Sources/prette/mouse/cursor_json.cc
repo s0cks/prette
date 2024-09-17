@@ -1,7 +1,7 @@
 #include "prette/mouse/cursor_json.h"
 
 namespace prt::mouse {
-  bool CursorReaderHandler::String(const char* value, const rapidjson::SizeType length, const bool b) {
+  auto CursorReaderHandler::String(const char* value, const rapidjson::SizeType length, const bool b) -> bool {
     switch(GetState()) {
       case kImage: {
         const std::string raw_uri(value, length);
@@ -17,14 +17,14 @@ namespace prt::mouse {
     }
   }
 
-  bool CursorReaderHandler::OnParseDataField(const std::string& name) {
+  auto CursorReaderHandler::OnParseDataField(const std::string& name) -> bool {
     if(EqualsIgnoreCase(name, "image"))
       return TransitionTo(kImage);
     DLOG(ERROR) << "unexpected field: " << name;
     return TransitionTo(kError);
   }
 
-  bool CursorReaderHandler::OnParseImage(const uri::Uri& uri) {
+  auto CursorReaderHandler::OnParseImage(const uri::Uri& uri) -> bool {
     DLOG(INFO) << "parsed Cursor image: " << uri;
     return TransitionTo(kData);
   }

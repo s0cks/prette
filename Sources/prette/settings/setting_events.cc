@@ -2,7 +2,7 @@
 #include <sstream>
 
 namespace prt::settings {
-  std::string SettingChangedEvent::ToString() const {
+  auto SettingChangedEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "SettingChangedEvent(";
     ss << ")";

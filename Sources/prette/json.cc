@@ -2,16 +2,17 @@
 #include "prette/buffer.h"
 
 namespace prt::json {
-  static inline DocumentPtr
-  NewDocument() {
+  static inline auto
+  NewDocument() -> DocumentPtr {
     return std::make_shared<Document>();
   }
 
-  rx::observable<DocumentPtr> ParseDocument(FILE* file, const int buffer_size) {
+  auto ParseDocument(FILE* file, const int buffer_size) -> rx::observable<DocumentPtr> {
     return rx::observable<>::create<DocumentPtr>([&file,buffer_size](rx::subscriber<DocumentPtr> s) {
+      static constexpr const auto kDefaultJsonDocumentBufferSize = 4096;
       const auto buffer = Buffer::New(buffer_size);
       const auto doc = NewDocument();
-      FileReadStream frs(file, (char*) buffer->data(), 4096);
+      FileReadStream frs(file, (char*) buffer->data(), kDefaultJsonDocumentBufferSize); // NOLINT(cppcoreguidelines-pro-type-cstyle-cast)
       doc->ParseStream(frs);
       if(doc->HasParseError()) {
         fclose(file);
@@ -23,20 +24,21 @@ namespace prt::json {
     });
   }
 
-  bool ParseJson(FILE* file, Document& doc) {
-    auto buffer = Buffer::New(4096);
-    FileReadStream frs(file, (char*) buffer->data(), 4096);
+  auto ParseJson(FILE* file, Document& doc) -> bool {
+    static constexpr const auto kDefaultJsonBufferSize = 4096;
+    auto buffer = Buffer::New(kDefaultJsonBufferSize);
+    FileReadStream frs(file, (char*) buffer->data(), buffer->capacity()); // NOLINT(cppcoreguidelines-pro-type-cstyle-cast)
     doc.ParseStream(frs);
     if(doc.HasParseError()) {
       fclose(file);
       return false;
     }
-    
+
     fclose(file);
     return true;
   }
 
-  bool ParseJson(const uri::Uri& uri, Document& doc) {
+  auto ParseJson(const uri::Uri& uri, Document& doc) -> bool {
     DLOG(INFO) << "parsing json::Document from: " << uri;
     auto file = uri.OpenFileForReading();
     if(!file) {
@@ -46,7 +48,7 @@ namespace prt::json {
     return ParseJson(file, doc);
   }
 
-  bool ParseRawJson(const char* value, Document& doc) {
+  auto ParseRawJson(const char* value, Document& doc) -> bool {
     StringStream ss(value);
     doc.ParseStream(ss);
     return !doc.HasParseError();

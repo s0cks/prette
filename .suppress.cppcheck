@@ -1,6 +1,7 @@
 preprocessorErrorDirective
 missingIncludeSystem
-unmatchedSuppression
+missingInclude
+unmatchedSuppression:*
 checkersReport
 
-*:/lib/*
+*:/lib/:*

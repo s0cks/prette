@@ -97,10 +97,10 @@ namespace prt {
     class Node {
       DEFINE_DEFAULT_COPYABLE_TYPE(Node);
     private:
-      Node* parent_;
-      Node* children_[kAlphabetSize];
-      uint16_t num_children_;
-      Tag* value_;
+      Node* parent_{};
+      std::array<Node*, kAlphabetSize> children_{};
+      uint16_t num_children_{};
+      Tag* value_{};
     public:
       Node() = default;
       ~Node() = default;
@@ -171,7 +171,7 @@ namespace prt {
       }
     };
   protected:
-    Node* root_;
+    Node* root_{};
 
     inline void SetRoot(Node* node) {
       PRT_ASSERT(node);

@@ -9,11 +9,11 @@
 namespace prt::entity {
   class EntityVisitor;
   class EntityTracker {
-  protected:
+  private:
     rx::subscription on_created_;
     rx::subscription on_destroyed_;
     EntitySet entities_;
-
+  protected:
     virtual void OnCreated(const EntityId id) {
       entities_.Put(id);
     }
@@ -21,10 +21,18 @@ namespace prt::entity {
     virtual void OnDestroyed(const EntityId id) {
       entities_.Remove(id);
     }
+
+    inline auto entities() -> EntitySet& {
+      return entities_;
+    }
+
+    inline auto entities() const -> const EntitySet& {
+      return entities_;
+    }
   public:
     EntityTracker();
 
-    const EntitySet& GetEntities() const {
+    auto GetEntities() const -> const EntitySet& {
       return entities_;
     }
 
@@ -33,11 +41,11 @@ namespace prt::entity {
       on_destroyed_.unsubscribe();
     }
 
-    virtual bool Contains(const EntityId id) const {
+    virtual auto Contains(const EntityId id) const -> bool {
       return entities_.Contains(id);
     }
 
-    virtual bool VisitAll(std::function<bool(EntityId)> vis) const;
+    virtual auto VisitAll(std::function<bool(EntityId)> vis) const -> bool;
 
     explicit operator rx::observable<EntityId> () const {
       return (rx::observable<EntityId>) entities_;
@@ -45,23 +53,23 @@ namespace prt::entity {
   };
 
   class FilteredEntityTracker : public EntityTracker {
-  protected:
+  private:
     Signature signature_;
     rx::subscription on_signature_changed_;
-
+  protected:
     void OnCreated(const EntityId id) override { }
 
-    inline bool
-    HasSignature(const Signature& sig) {
+    inline auto
+    HasSignature(const Signature& sig) -> bool {
       return (sig & signature_) == signature_;
     }
 
     virtual void OnSignatureChanged(const EntityId id, const Signature& new_sig) {
       if(HasSignature(new_sig)) {
-        entities_.Put(id);
+        entities().Put(id);
         return;
       }
-      entities_.Remove(id);
+      entities().Remove(id);
       return;
     }
 
@@ -76,14 +84,14 @@ namespace prt::entity {
       on_signature_changed_.unsubscribe();
     }
 
-    const Signature& GetSignature() const {
+    auto GetSignature() const -> const Signature& {
       return signature_;
     }
 
     void SetSignature(const Signature& signature);
 
     explicit operator rx::observable<EntityId> () const {
-      return (rx::observable<EntityId>) entities_;
+      return (rx::observable<EntityId>) entities();
     }
   };
 }

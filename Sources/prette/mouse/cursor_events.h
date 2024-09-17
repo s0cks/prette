@@ -17,9 +17,9 @@ namespace prt::mouse {
 #undef FORWARD_DECLARE
 
   class CursorEvent : public Event {
-  protected:
+  private:
     const Cursor* cursor_;
-
+  protected:
     explicit CursorEvent(const Cursor* cursor):
       Event(),
       cursor_(cursor) {
@@ -28,7 +28,7 @@ namespace prt::mouse {
   public:
     ~CursorEvent() override = default;
 
-    const Cursor* GetCursor() const {
+    auto GetCursor() const -> const Cursor* {
       return cursor_;
     }
 
@@ -50,7 +50,7 @@ namespace prt::mouse {
   class CursorDeletedEvent : public CursorEvent {
   public:
     explicit CursorDeletedEvent(const Cursor* cursor):
-      CursorEvent(cursor) {  
+      CursorEvent(cursor) {
     }
     ~CursorDeletedEvent() override = default;
     DECLARE_CURSOR_EVENT(CursorDeleted);

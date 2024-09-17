@@ -12,19 +12,19 @@
 
 namespace prt {
   class Buffer;
-  typedef std::shared_ptr<Buffer> BufferPtr;
+  using BufferPtr = std::shared_ptr<Buffer>;
 
   class Buffer {
     friend class std::shared_ptr<Buffer>;
     DEFINE_NON_COPYABLE_TYPE(Buffer);
   public:
     static constexpr const uint64_t kDefaultBufferSize = 4096;
-  protected:
+  private:
     uint8_t* data_;
     uint64_t capacity_;
     uint64_t wpos_;
     uint64_t rpos_;
-
+  protected:
     Buffer(uint8_t* data, uint64_t capacity, uint64_t wpos, uint64_t rpos):
       data_(data),
       capacity_(capacity),
@@ -37,15 +37,15 @@ namespace prt {
     Buffer() = delete;
     virtual ~Buffer() = default;
 
-    uint8_t* data() const {
+    auto data() const -> uint8_t* {
       return data_;
     }
 
-    uint64_t capacity() const {
+    auto capacity() const -> uint64_t {
       return capacity_;
     }
-    
-    uint64_t write_pos() const {
+
+    auto write_pos() const -> uint64_t {
       return wpos_;
     }
 
@@ -53,7 +53,7 @@ namespace prt {
       wpos_ = pos;
     }
 
-    uint64_t read_pos() const {
+    auto read_pos() const -> uint64_t {
       return rpos_;
     }
 
@@ -61,12 +61,12 @@ namespace prt {
       rpos_ = pos;
     }
 
-    bool empty() const {
+    auto empty() const -> bool {
       return capacity() == 0 || write_pos() == 0;
     }
 
     template<typename T>
-    bool Insert(const T value, const uint64_t pos) {
+    auto Insert(const T value, const uint64_t pos) -> bool {
       const uint64_t tsize = sizeof(T);
       if((pos + tsize) > capacity())
         return false;
@@ -76,28 +76,28 @@ namespace prt {
     }
 
     template<typename T>
-    bool Append(const T value) {
+    auto Append(const T value) -> bool {
       return Insert<T>(value, wpos_);
     }
 
     template<typename T>
-    T Read(const uint64_t pos) {
+    auto Read(const uint64_t pos) -> T {
       const uint64_t tsize = sizeof(T);
       if((pos + tsize) > capacity()) {
         DLOG(ERROR) << "cannot insert " << tsize << " bytes into " << (*this) << " @" << pos;
         return false;
       }
-      const T data = *(reinterpret_cast<T*>(data() + pos));
+      const T data = *(T*)(data() + pos);
       rpos_ = pos + tsize;
       return data;
     }
 
     template<typename T>
-    T Read() {
+    auto Read() -> T {
       return Read<T>(rpos_);
     }
 
-    bool WriteTo(FILE* file) const {
+    auto WriteTo(FILE* file) const -> bool {
       if(!file)
         return false;
       if(fwrite(data(), sizeof(uint8_t), write_pos(), file) != 0) {
@@ -107,13 +107,13 @@ namespace prt {
       return true;
     }
 
-    bool WriteTo(std::fstream& stream) const {
+    auto WriteTo(std::fstream& stream) const -> bool {
       stream.write((char*)&data_[rpos_], wpos_);
       stream.flush();
       return true;
     }
 
-    bool ReadFrom(FILE* file, const uint64_t pos, const uint64_t nbytes) {
+    auto ReadFrom(FILE* file, const uint64_t pos, const uint64_t nbytes) -> bool {
       if((pos + nbytes) > capacity_) {
         DLOG(ERROR) << "cannot read " << nbytes << " from file, buffer is full.";
         return false;
@@ -127,15 +127,15 @@ namespace prt {
       return true;
     }
 
-    bool ReadFrom(FILE* file, const uint64_t nbytes) {
+    auto ReadFrom(FILE* file, const uint64_t nbytes) -> bool {
       return ReadFrom(file, wpos_, nbytes);
     }
 
-    bool ReadFrom(FILE* file) {
+    auto ReadFrom(FILE* file) -> bool {
       return ReadFrom(file, capacity_);
     }
 
-    bool ReadFrom(std::ifstream& stream, const uint64_t pos, const uint64_t nbytes) {
+    auto ReadFrom(std::ifstream& stream, const uint64_t pos, const uint64_t nbytes) -> bool {
       if((pos + nbytes) > capacity_) {
         DLOG(ERROR) << "cannot read " << nbytes << " from file, buffer is full.";
         return false;
@@ -145,11 +145,11 @@ namespace prt {
       return true;
     }
 
-    bool ReadFrom(std::ifstream& stream, const uint64_t nbytes) {
+    auto ReadFrom(std::ifstream& stream, const uint64_t nbytes) -> bool {
       return ReadFrom(stream, wpos_, nbytes);
     }
 
-    bool Put(const uint8_t* data, const uint64_t pos, const uint64_t nbytes) {
+    auto Put(const uint8_t* data, const uint64_t pos, const uint64_t nbytes) -> bool {
       if((pos + nbytes) > capacity_) {
         VLOG(3) << "cannot put " << nbytes << " in " << (*this) << " at " << pos;
         return false;
@@ -159,11 +159,11 @@ namespace prt {
       return true;
     }
 
-    bool Put(const uint8_t* data, const uint64_t nbytes) {
+    auto Put(const uint8_t* data, const uint64_t nbytes) -> bool {
       return Put(data, wpos_, nbytes);
     }
 
-    friend std::ostream& operator<<(std::ostream& stream, const Buffer& rhs) {
+    friend auto operator<<(std::ostream& stream, const Buffer& rhs) -> std::ostream& {
       stream << "Buffer(";
       stream << "data=" << std::hex << rhs.data() << ", ";
       stream << "capacity=" << rhs.capacity();
@@ -171,39 +171,39 @@ namespace prt {
       return stream;
     }
   public:
-    static BufferPtr New(const uint64_t init_capacity);
+    static auto New(const uint64_t init_capacity) -> BufferPtr;
 
-    static BufferPtr FromFile(const std::string& filename);
+    static auto FromFile(const std::string& filename) -> BufferPtr;
 
-    static inline BufferPtr
-    FromFile(const uri::Uri& uri) {
+    static inline auto
+    FromFile(const uri::Uri& uri) -> BufferPtr {
       PRT_ASSERT(uri.HasScheme("file"));
       PRT_ASSERT(uri.HasExtension());
       return FromFile(uri.path);
     }
 
-    static BufferPtr CopyFrom(const uint8_t* data, const uint64_t length, const uint64_t wpos, const uint64_t rpos = 0);
-    
-    static inline BufferPtr
-    CopyFrom(const uint8_t* data, const uint64_t length) {
+    static auto CopyFrom(const uint8_t* data, const uint64_t length, const uint64_t wpos, const uint64_t rpos = 0) -> BufferPtr;
+
+    static inline auto
+    CopyFrom(const uint8_t* data, const uint64_t length) -> BufferPtr {
       return CopyFrom(data, length, length);
     }
 
-    static inline BufferPtr
-    CopyFrom(const std::string& data) {
-      return CopyFrom((const uint8_t*) data.data(), data.length());
+    static inline auto
+    CopyFrom(const std::string& data) -> BufferPtr {
+      return CopyFrom((const uint8_t*) data.data(), data.length()); // NOLINT(cppcoreguidelines-pro-type-cstyle-cast)
     }
 
-    static BufferPtr Wrap(uint8_t* data, const uint64_t length, const uint64_t wpos, const uint64_t rpos = 0);
+    static auto Wrap(uint8_t* data, const uint64_t length, const uint64_t wpos, const uint64_t rpos = 0) -> BufferPtr;
 
-    static inline BufferPtr
-    Wrap(uint8_t* data, const uint64_t length) {
+    static inline auto
+    Wrap(uint8_t* data, const uint64_t length) -> BufferPtr {
       return Wrap(data, length, length);
     }
 
-    static inline BufferPtr
-    Wrap(const std::string& data) {
-      return Wrap((uint8_t*) data.data(), data.length());
+    static inline auto
+    Wrap(const std::string& data) -> BufferPtr {
+      return Wrap((uint8_t*) data.data(), data.length()); // NOLINT(cppcoreguidelines-pro-type-cstyle-cast)
     }
   };
 }

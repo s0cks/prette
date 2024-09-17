@@ -11,9 +11,9 @@ namespace prt {
   static const int kThreadNameMaxLength = 16;
   static const int kThreadMaxResultLength = 128;
 
-  typedef pthread_key_t ThreadLocalKey;
-  typedef pthread_t ThreadId;
-  typedef void (*ThreadHandler)(void* data);
+  using ThreadLocalKey = pthread_key_t;
+  using ThreadId = pthread_t;
+  using ThreadHandler = void (*)(void *);
 }
 
 #endif //PRT_OS_THREAD_LINUX_H

@@ -5,7 +5,7 @@
 #include "prette/keyboard/keyboard_mode.h"
 
 namespace prt::keyboard {
-DECLARE_string(keyboard_mode); // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
+DECLARE_string(keyboard_mode);
 
   static inline auto
   GetKeyboardMode() -> std::optional<Mode> {

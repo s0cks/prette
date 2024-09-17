@@ -80,7 +80,6 @@ namespace prt::img {
     // }
 
     const auto row_bytes = png_get_rowbytes(png, info);
-    const auto total_size = row_bytes * height;
     const auto resolution = Resolution(static_cast<int32_t>(width), static_cast<int32_t>(height));
     const auto image = Image::New(format, resolution);
     png_bytepp rows = png_get_rows(png, info);

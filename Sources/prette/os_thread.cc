@@ -10,7 +10,7 @@ namespace prt {
     kMainThreadId = id;
   }
 
-  ThreadId MainThread::GetThreadId() {
+  auto MainThread::GetThreadId() -> ThreadId {
     return (ThreadId) kMainThreadId;
   }
 

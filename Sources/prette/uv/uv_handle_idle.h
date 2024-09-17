@@ -11,45 +11,45 @@
 #include "prette/uv/uv_status.h"
 
 namespace prt::uv {
-  typedef uv_idle_t IdleHandle;
+  using IdleHandle = uv_idle_t;
 
-  static inline Status
-  InitIdle(uv_loop_t* loop, IdleHandle* handle) {
+  static inline auto
+  InitIdle(uv_loop_t* loop, IdleHandle* handle) -> Status {
     PRT_ASSERT(loop);
     PRT_ASSERT(handle);
-    return Status(uv_idle_init(loop, handle));
+    return {uv_idle_init(loop, handle)};
   }
 
-  static inline Status
-  InitIdle(Loop* loop, IdleHandle* handle) {
+  static inline auto
+  InitIdle(Loop* loop, IdleHandle* handle) -> Status {
     return InitIdle(loop->GetLoop(), handle);
   }
 
-  static inline Status
-  StartIdle(IdleHandle* handle, uv_idle_cb cb) {
+  static inline auto
+  StartIdle(IdleHandle* handle, uv_idle_cb cb) -> Status {
     PRT_ASSERT(handle);
-    return Status(uv_idle_start(handle, cb));
+    return {uv_idle_start(handle, cb)};
   }
 
-  static inline Status
-  StopIdle(IdleHandle* handle) {
+  static inline auto
+  StopIdle(IdleHandle* handle) -> Status {
     PRT_ASSERT(handle);
-    return Status(uv_idle_stop(handle));
+    return {uv_idle_stop(handle)};
   }
 
   class Idle : public HandleBaseTemplate<IdleHandle>  {
-    typedef std::function<void(Idle*)> Callback;
+    using Callback = std::function<void (Idle *)>;
   private:
     Callback callback_;
 
     static void OnIdle(IdleHandle* handle);
 
-    const Callback& GetCallback() const {
+    auto GetCallback() const -> const Callback& {
       return callback_;
     }
   public:
     Idle(Loop* loop,
-         const Callback& callback,
+         Callback callback,
          const bool start = true);
     ~Idle() override;
 

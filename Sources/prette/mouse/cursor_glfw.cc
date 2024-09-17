@@ -1,4 +1,5 @@
-#include "prette/mouse/cursor.h"
+#include "prette/mouse/cursor_glfw.h"
+#include "prette/image/image.h"
 
 #include <sstream>
 #include "prette/thread_local.h"
@@ -6,7 +7,7 @@
 #include "prette/mouse/mouse_flags.h"
 
 namespace prt::mouse {
-  std::string GlfwCursor::ToString() const {
+  auto GlfwCursor::ToString() const -> std::string {
     std::stringstream ss;
     ss << "GlfwCursor(";
     ss << "handle=" << GetHandle();
@@ -14,23 +15,23 @@ namespace prt::mouse {
     return ss.str();
   }
 
-  Cursor* GlfwCursor::New(const img::Image* img) {
+  auto GlfwCursor::New(const img::Image* img) -> Cursor* {
     PRT_ASSERT(img);
     GLFWimage image;
-    image.height = img->GetWidth();
-    image.width = img->GetHeight();
+    image.height = static_cast<int>(img->GetWidth());
+    image.width = static_cast<int>(img->GetHeight());
     image.pixels = (unsigned char*)img->data();
     const auto handle = glfwCreateCursor(&image, 0, 0);
     return handle ? New(handle) : nullptr;
   }
 
-  Cursor* GlfwCursor::NewStandard(const Shape shape) {
+  auto GlfwCursor::NewStandard(const Shape shape) -> Cursor* {
     const auto handle = glfwCreateStandardCursor(shape);
     PRT_ASSERT(handle);
     return New(handle);
   }
 
-  Cursor* GlfwCursor::New(const uri::Uri& uri) {
+  auto GlfwCursor::New(const uri::Uri& uri) -> Cursor* {
     if(uri.HasScheme("cursor")) {
       const auto root_dir = GetCursorsDir();
       auto path = uri.path;
@@ -70,7 +71,7 @@ namespace prt::mouse {
       SetDefaultCursor(cursor);
   }
 
-  Cursor* GetDefaultCursor() {
+  auto GetDefaultCursor() -> Cursor* {
     if(default_cursor_)
       return default_cursor_.Get();
     const auto cursor = GlfwCursor::NewStandard(GlfwCursor::kArrow);
@@ -88,7 +89,7 @@ namespace prt::mouse {
       default_cursor_.Set(cursor);
     const auto window = GetAppWindow();
     PRT_ASSERT(window);
-    glfwSetCursor(window->GetHandle(), ((GlfwCursor*)cursor)->GetHandle());
+    glfwSetCursor(window->GetHandle(), ((GlfwCursor*)cursor)->GetHandle()); // NOLINT(cppcoreguidelines-pro-type-cstyle-cast)
   }
 
   void SetCurrentCursor(const uri::Uri& uri) {
@@ -98,7 +99,7 @@ namespace prt::mouse {
       SetCurrentCursor(cursor);
   }
 
-  Cursor* GetCurrentCursor() {
+  auto GetCurrentCursor() -> Cursor* {
     return current_.Get();
   }
 }

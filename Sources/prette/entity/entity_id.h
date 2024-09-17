@@ -4,7 +4,7 @@
 #include <cstdint>
 
 namespace prt {
-  typedef uint64_t EntityId;
+  using EntityId = uint64_t;
   static constexpr const EntityId kInvalidEntityId = 0;
 }
 

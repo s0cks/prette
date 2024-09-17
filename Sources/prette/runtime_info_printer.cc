@@ -10,7 +10,7 @@
 
 namespace prt {
 #define __  google::LogMessage(GetFile(), GetLine(), GetSeverity()).stream() << std::string(indent_ * 2, ' ')
-  bool RuntimeInfoPrinter::PrintObject(Object* obj) {
+  auto RuntimeInfoPrinter::PrintObject(Object* obj) -> bool {
     PRT_ASSERT(obj);
     __ << "- " << obj->ToString();
     return true;

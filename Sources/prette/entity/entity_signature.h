@@ -4,7 +4,7 @@
 #include <bitset>
 
 namespace prt::entity {
-  typedef std::bitset<32> Signature;
+  using Signature = std::bitset<32>;
 }
 
 #endif //PRT_ENTITY_SIGNATURE_H

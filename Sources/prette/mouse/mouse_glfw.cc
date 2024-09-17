@@ -6,14 +6,14 @@
 #include "prette/window/window.h"
 
 namespace prt::mouse {
-  static inline window::Window::Handle*
-  GetAppWindowHandle() {
+  static inline auto
+  GetAppWindowHandle() -> window::Window::Handle* {
     const auto window = window::GetAppWindow();
     PRT_ASSERT(window);
     return window->GetHandle();
   }
 
-  MouseButton::State Mouse::GetButtonState(const MouseButton::Code code) const {
+  auto Mouse::GetButtonState(const MouseButton::Code code) const -> MouseButton::State {
     const auto window = GetAppWindowHandle();
     PRT_ASSERT(window);
     const auto state = glfwGetMouseButton(window, code);
@@ -50,7 +50,7 @@ namespace prt::mouse {
     }
   }
 
-  CursorMode Mouse::GetCursorMode() const {
+  auto Mouse::GetCursorMode() const -> CursorMode {
     const auto mode = glfwGetInputMode(GetAppWindowHandle(), GLFW_CURSOR);
     switch(mode) {
       case GLFW_CURSOR_HIDDEN:
@@ -73,7 +73,7 @@ namespace prt::mouse {
   }
 
   void Mouse::GetCursorPos(Point& pos) const {
-    double x, y;
+    double x{}, y{};
     glfwGetCursorPos(GetAppWindowHandle(), &x, &y);
     pos = Point(floor(x), floor(y));
   }

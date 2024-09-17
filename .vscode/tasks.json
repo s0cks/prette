@@ -28,6 +28,15 @@
     },
     {
       "type": "shell",
+      "label": "clean",
+      "command": "cmake --build . --target clean",
+      "options": {
+        "cwd": "${workspaceFolder}/build/"
+      },
+      "problemMatcher": []
+    },
+    {
+      "type": "shell",
       "label": "open docs",
       "command": "open index.html",
       "options": {

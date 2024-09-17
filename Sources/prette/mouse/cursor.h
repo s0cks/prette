@@ -9,13 +9,13 @@
 #include "prette/mouse/cursor_events.h"
 
 namespace prt::mouse {
-  rx::observable<CursorEvent*> OnCursorEvent();
-#define DEFINE_ON_CURSOR_EVENT(Name)            \
-  static inline rx::observable<Name##Event*>    \
-  On##Name##Event() {                           \
-    return OnCursorEvent()                      \
-      .filter(Name##Event::Filter)              \
-      .map(Name##Event::Cast);                  \
+  auto OnCursorEvent() -> rx::observable<CursorEvent*>;
+#define DEFINE_ON_CURSOR_EVENT(Name)                    \
+  static inline auto                                    \
+  On##Name##Event() -> rx::observable<Name##Event*> {   \
+    return OnCursorEvent()                              \
+      .filter(Name##Event::Filter)                      \
+      .map(Name##Event::Cast);                          \
   }
   FOR_EACH_CURSOR_EVENT(DEFINE_ON_CURSOR_EVENT)
 #undef DEFINE_ON_CURSOR_EVENT
@@ -26,7 +26,7 @@ namespace prt::mouse {
     CursorVisitor() = default;
   public:
     virtual ~CursorVisitor() = default;
-    virtual bool VisitCursor(Cursor* cursor) = 0;
+    virtual auto VisitCursor(Cursor* cursor) -> bool = 0;
   };
 
   class Cursor {
@@ -43,20 +43,20 @@ namespace prt::mouse {
     }
   public:
     virtual ~Cursor() = default;
-    
-    bool Accept(CursorVisitor* vis) {
+
+    auto Accept(CursorVisitor* vis) -> bool {
       PRT_ASSERT(vis);
       return vis->VisitCursor(this);
     }
 
-    virtual std::string ToString() const = 0;
+    virtual auto ToString() const -> std::string = 0;
   };
 
-  rx::observable<std::string> ListAvailableCursors();
+  auto ListAvailableCursors() -> rx::observable<std::string>;
 
   void SetDefaultCursor(Cursor* cursor);
   void SetDefaultCursor(const uri::Uri& uri);
-  Cursor* GetDefaultCursor();
+  auto GetDefaultCursor() -> Cursor*;
 
   static inline void
   SetDefaultCursor(const uri::basic_uri& uri) {
@@ -70,7 +70,7 @@ namespace prt::mouse {
 
   void SetCurrentCursor(Cursor* cursor);
   void SetCurrentCursor(const uri::Uri& uri);
-  Cursor* GetCurrentCursor();
+  auto GetCurrentCursor() -> Cursor*;
 
   static inline void
   SetCurrentCursor(const uri::basic_uri& uri) {
@@ -82,7 +82,5 @@ namespace prt::mouse {
     return SetCurrentCursor(uri::Uri(uri));
   }
 }
-
-#include "prette/mouse/cursor_glfw.h"
 
 #endif //PRT_CURSOR_H

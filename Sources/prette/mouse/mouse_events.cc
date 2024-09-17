@@ -3,7 +3,7 @@
 #include "prette/mouse/mouse.h"
 
 namespace prt::mouse {
-  std::string MouseCreatedEvent::ToString() const {
+  auto MouseCreatedEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "MouseCreatedEvent(";
     ss << "mouse=" << GetMouse()->ToString();
@@ -11,7 +11,7 @@ namespace prt::mouse {
     return ss.str();
   }
 
-  std::string MouseDestroyedEvent::ToString() const {
+  auto MouseDestroyedEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "MouseDestroyedEvent(";
     ss << "mouse=" << GetMouse()->ToString();
@@ -19,7 +19,7 @@ namespace prt::mouse {
     return ss.str();
   }
 
-  std::string MouseButtonPressedEvent::ToString() const {
+  auto MouseButtonPressedEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "MouseButtonPressedEvent(";
     ss << "mouse=" << GetMouse()->ToString() << ", ";
@@ -29,7 +29,7 @@ namespace prt::mouse {
     return ss.str();
   }
 
-  std::string MouseButtonReleasedEvent::ToString() const {
+  auto MouseButtonReleasedEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "MouseButtonReleasedEvent(";
     ss << "mouse=" << GetMouse()->ToString() << ", ";
@@ -39,7 +39,7 @@ namespace prt::mouse {
     return ss.str();
   }
 
-  std::string MouseMoveEvent::ToString() const {
+  auto MouseMoveEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "MouseMoveEvent(";
     ss << "pos=" << glm::to_string(pos()) << ", ";

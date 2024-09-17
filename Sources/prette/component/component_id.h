@@ -4,7 +4,7 @@
 #include <cstdint>
 
 namespace prt {
-  typedef uint32_t ComponentId;
+  using ComponentId = uint32_t;
 
   static constexpr const ComponentId kInvalidComponentId = 0;
 }

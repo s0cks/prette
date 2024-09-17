@@ -1,6 +1,7 @@
 #include "prette/runtime.h"
 
 #include <vector>
+#include <vulkan/vulkan_core.h>
 
 #include "prette/class.h"
 #include "prette/engine/engine.h"
@@ -15,7 +16,6 @@
 #include "prette/signals.h"
 
 namespace prt {
-// NOLINTBEGIN(cppcoreguidelines-avoid-non-const-global-variables)
 static const auto kMaxFramesInFlight = 2;
 static VkInstance vk_instance_{};
 static rx::subscription on_terminating_{};
@@ -40,7 +40,6 @@ static std::array<VkSemaphore, kMaxFramesInFlight> img_avail_semaphores_;
 static std::array<VkSemaphore, kMaxFramesInFlight> render_finished_semaphores_;
 static std::array<VkFence, kMaxFramesInFlight> inflight_fences_;
 static uint32_t current_frame_ = 0;
-// NOLINTEND(cppcoreguidelines-avoid-non-const-global-variables)
 static const std::vector<const char *> kDeviceExtensions = {
     VK_KHR_SWAPCHAIN_EXTENSION_NAME,
 };
@@ -49,9 +48,9 @@ static const std::vector<const char *> kValidationLayers = {
 };
 
 struct SwapChainSupportDetails {
-  VkSurfaceCapabilitiesKHR capabilities;
-  std::vector<VkSurfaceFormatKHR> formats;
-  std::vector<VkPresentModeKHR> modes;
+  VkSurfaceCapabilitiesKHR capabilities{};
+  std::vector<VkSurfaceFormatKHR> formats{};
+  std::vector<VkPresentModeKHR> modes{};
 };
 
 static inline auto operator<<(std::ostream &stream,
@@ -476,15 +475,15 @@ static inline void InitSwapChain() {
   create_info.imageUsage = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;
 
   const auto families = FindQueueFamilies(vk_physical_device_);
-  uint32_t indices[] = {
-      families.graphics.value(),
-      families.present.value(),
+  std::array<uint32_t, 2> indices = {
+    families.graphics.value(),
+    families.present.value(),
   };
 
   if (families.graphics != families.present) {
     create_info.imageSharingMode = VK_SHARING_MODE_CONCURRENT;
     create_info.queueFamilyIndexCount = 2;
-    create_info.pQueueFamilyIndices = indices;
+    create_info.pQueueFamilyIndices = indices.cbegin();
   } else {
     create_info.imageSharingMode = VK_SHARING_MODE_EXCLUSIVE;
   }
@@ -565,12 +564,12 @@ static inline void InitFramebuffers() {
   const auto total_framebuffers = vk_swapchain_views_.size();
   vk_swapchain_framebuffers_.resize(total_framebuffers);
   for (auto i = 0; i < total_framebuffers; i++) {
-    VkImageView attachments[] = {vk_swapchain_views_[i]};
+    std::array<VkImageView, 1> attachments = {vk_swapchain_views_[i]};
     VkFramebufferCreateInfo framebuffer{};
     framebuffer.sType = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
     framebuffer.renderPass = vk_render_pass_;
     framebuffer.attachmentCount = 1;
-    framebuffer.pAttachments = attachments;
+    framebuffer.pAttachments = attachments.cbegin();
     framebuffer.width = vk_swapchain_extent_.width;
     framebuffer.height = vk_swapchain_extent_.height;
     framebuffer.layers = 1;
@@ -632,9 +631,9 @@ static inline void RecordCommandBuffer(VkCommandBuffer buf, uint32_t idx) {
 
 static inline void DestroyInstance() {
   for (auto i = 0; i < kMaxFramesInFlight; i++) {
-    vkDestroySemaphore(vk_device_, render_finished_semaphores_[i], nullptr);
-    vkDestroySemaphore(vk_device_, img_avail_semaphores_[i], nullptr);
-    vkDestroyFence(vk_device_, inflight_fences_[i], nullptr);
+    vkDestroySemaphore(vk_device_, render_finished_semaphores_.at(i), nullptr);
+    vkDestroySemaphore(vk_device_, img_avail_semaphores_.at(i), nullptr);
+    vkDestroyFence(vk_device_, inflight_fences_.at(i), nullptr);
   }
   vkDestroyCommandPool(vk_device_, vk_cmd_pool_, nullptr);
   for (const auto &framebuffer : vk_swapchain_framebuffers_)
@@ -669,7 +668,7 @@ static inline void CreateShaderModule(VkShaderModule &shader_module,
   VkShaderModuleCreateInfo create_info{};
   create_info.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
   create_info.codeSize = code.size();
-  create_info.pCode = (const uint32_t *)&code[0];
+  create_info.pCode = (const uint32_t *)&code[0]; // NOLINT(cppcoreguidelines-pro-type-cstyle-cast)
   const auto result =
       vkCreateShaderModule(vk_device_, &create_info, nullptr, &shader_module);
   LOG_IF(FATAL, result != VK_SUCCESS)
@@ -746,9 +745,9 @@ static inline void InitGraphicsPipeline() {
   VkPipelineShaderStageCreateInfo frag_create_info{};
   InitFragmentShaderInfo(frag_create_info, frag_module);
 
-  VkPipelineShaderStageCreateInfo stages[] = {
-      vert_create_info,
-      frag_create_info,
+  std::array<VkPipelineShaderStageCreateInfo, 2> stages = {
+    vert_create_info,
+    frag_create_info,
   };
 
   VkPipelineVertexInputStateCreateInfo vertex_input_info{};
@@ -825,7 +824,7 @@ static inline void InitGraphicsPipeline() {
   VkGraphicsPipelineCreateInfo pipeline{};
   pipeline.sType = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
   pipeline.stageCount = 2;
-  pipeline.pStages = stages;
+  pipeline.pStages = stages.cbegin();
   pipeline.pVertexInputState = &vertex_input_info;
   pipeline.pInputAssemblyState = &input_assembly;
   pipeline.pViewportState = &view_state;
@@ -868,19 +867,20 @@ static inline void DrawFrame() {
 
   VkSubmitInfo submit{};
   submit.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
-
-  VkSemaphore wait_semaphores[] = {avail_semaphore};
-  VkPipelineStageFlags wait_stages[] = {
+  std::array<VkSemaphore, 1> wait_semaphores = {avail_semaphore};
+  std::array<VkPipelineStageFlags, 1> wait_stages = {
       VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT};
   submit.waitSemaphoreCount = 1;
-  submit.pWaitSemaphores = wait_semaphores;
-  submit.pWaitDstStageMask = wait_stages;
+  submit.pWaitSemaphores = wait_semaphores.data();
+  submit.pWaitDstStageMask = wait_stages.data();
   submit.commandBufferCount = 1;
   submit.pCommandBuffers = &buffer;
 
-  VkSemaphore signals[] = {finished_semaphore};
+  std::array<VkSemaphore, 1> signals = {
+    finished_semaphore,
+  };
   submit.signalSemaphoreCount = 1;
-  submit.pSignalSemaphores = signals;
+  submit.pSignalSemaphores = signals.data();
 
   {
     const auto result = vkQueueSubmit(vk_queue_, 1, &submit, fence);
@@ -891,13 +891,13 @@ static inline void DrawFrame() {
   VkPresentInfoKHR present_info{};
   present_info.sType = VK_STRUCTURE_TYPE_PRESENT_INFO_KHR;
   present_info.waitSemaphoreCount = 1;
-  present_info.pWaitSemaphores = signals;
+  present_info.pWaitSemaphores = signals.cbegin();
 
-  VkSwapchainKHR swapchains[] = {
-      vk_swapchain_,
+  std::array<VkSwapchainKHR, 1> swapchains = {
+    vk_swapchain_,
   };
   present_info.swapchainCount = 1;
-  present_info.pSwapchains = swapchains;
+  present_info.pSwapchains = swapchains.data();
   present_info.pImageIndices = &index;
 
   vkQueuePresentKHR(vk_present_queue_, &present_info);
@@ -937,13 +937,13 @@ void Runtime::Init(int argc, char **argv) {
   const auto engine = GetEngine();
   PRT_ASSERT(engine);
   on_terminating_ = engine
-                        ->OnTerminating() // NOLINT(cppcoreguidelines-slicing)
+                        ->OnTerminating()
                         .subscribe([](engine::TerminatingEvent *event) {
                           vkDeviceWaitIdle(vk_device_);
                           DestroyInstance();
                         });
   on_tick_ = engine
-                 ->OnTick() // NOLINT(cppcoreguidelines-slicing)
+                 ->OnTick()
                  .subscribe([](engine::TickEvent *event) { DrawFrame(); });
 }
 

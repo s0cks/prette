@@ -4,7 +4,7 @@
 #include "prette/component/component.h"
 
 namespace prt::component {
-  std::string ComponentRegisteredEvent::ToString() const {
+  auto ComponentRegisteredEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "ComponentRegisteredEvent(";
     ss << "component=" << component()->GetName();
@@ -12,7 +12,7 @@ namespace prt::component {
     return ss.str();
   }
 
-  std::string ComponentStateCreatedEvent::ToString() const {
+  auto ComponentStateCreatedEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "ComponentStateCreatedEvent(";
     ss << "component=" << component()->GetName();
@@ -20,7 +20,7 @@ namespace prt::component {
     return ss.str();
   }
 
-  std::string ComponentStateDestroyedEvent::ToString() const {
+  auto ComponentStateDestroyedEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "ComponentStateDestroyedEvent(";
     ss << "component=" << component()->GetName();

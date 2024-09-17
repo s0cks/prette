@@ -3,34 +3,38 @@
 
 #include <set>
 #include <functional>
+#include <glog/logging.h>
+
+#include "prette/rx.h"
+#include "prette/common.h"
 #include "prette/entity/entity_id.h"
 
 namespace prt::component {
   class ComponentStateBase {
   public:
     struct EntityIdComparator {
-      bool operator()(const ComponentStateBase* lhs, const ComponentStateBase* rhs) const {
+      auto operator()(const ComponentStateBase* lhs, const ComponentStateBase* rhs) const -> bool {
         return lhs->entity() == rhs->entity();
       }
     };
-  protected:
+  private:
     EntityId entity_;
-
+  protected:
     explicit ComponentStateBase(const EntityId entity):
       entity_(entity) {
     }
   public:
     virtual ~ComponentStateBase() = default;
-    virtual uword data() const = 0;
+    virtual auto data() const -> uword = 0;
 
-    EntityId entity() const {
+    auto entity() const -> EntityId {
       return entity_;
     }
   };
 
   template<class S>
   class ComponentState : public ComponentStateBase {
-  protected:
+  private:
     uword data_;
   public:
     ComponentState(const EntityId id, const uword data):
@@ -39,28 +43,28 @@ namespace prt::component {
     }
     ~ComponentState() override = default;
 
-    uword data() const override {
+    auto data() const -> uword override {
       return data_;
     }
 
-    S* Get() const {
+    auto Get() const -> S* {
       return (S*) data();
     }
 
-    S* operator->() const {
+    auto operator->() const -> S* {
       return Get();
     }
 
-    const S& operator*() const {
+    auto operator*() const -> const S& {
       return *Get();
     }
   };
 
   template<class S>
   class ComponentStateTable {
-    typedef ComponentState<S> State;
-    typedef std::set<State*, ComponentStateBase::EntityIdComparator> StateSet;
-    typedef std::function<State*> StateSupplier;
+    using State = ComponentState<S>;
+    using StateSet = std::set<State *, ComponentStateBase::EntityIdComparator>;
+    using StateSupplier = std::function<State *>;
   private:
     class ComponentStateKey : public ComponentStateBase {
     public:
@@ -69,14 +73,14 @@ namespace prt::component {
       }
       ~ComponentStateKey() override = default;
 
-      virtual uword data() const override {
+       auto data() const -> uword override {
         return 0;
       }
     };
-  protected:
+  private:
     StateSet states_;
-
-    ComponentStateBase* GetState(const EntityId id) const {
+  protected:
+    auto GetState(const EntityId id) const -> ComponentStateBase* {
       for(const auto state : states_) {
         if(state->entity() == id)
           return state;
@@ -84,20 +88,20 @@ namespace prt::component {
       return nullptr;
     }
 
-    inline ComponentStateBase* PutState(State* state) {
-      const auto status = states_.insert(state);
-      LOG_IF(ERROR, !status.second) << "failed to insert ComponentState into ComponentStateTable.";
+    inline auto PutState(State* state) -> ComponentStateBase* {
+      const auto [iter,success] = states_.insert(state);
+      LOG_IF(ERROR, !success) << "failed to insert ComponentState into ComponentStateTable.";
       return state;
     }
   public:
     ComponentStateTable() = default;
     virtual ~ComponentStateTable() = default;
 
-    typename StateSet::const_iterator begin() const {
+    auto begin() const -> typename StateSet::const_iterator {
       return states_.begin();
     }
 
-    typename StateSet::const_iterator end() const {
+    auto end() const -> typename StateSet::const_iterator {
       return states_.end();
     }
 
@@ -105,15 +109,15 @@ namespace prt::component {
       NOT_IMPLEMENTED(FATAL);//TODO: implement
     }
 
-    virtual bool Has(const EntityId id) const {
+    virtual auto Has(const EntityId id) const -> bool {
       return GetState(id) != nullptr;
     }
 
-    virtual State* Create(const EntityId id, const uword data = 0) {
+    virtual auto Create(const EntityId id, const uword data = 0) -> State* {
       return (State*) PutState(new State(id, data));
     }
 
-    virtual State* GetOrCreate(const EntityId id) {
+    virtual auto GetOrCreate(const EntityId id) -> State* {
       const auto state = (State*) GetState(id);
       return state ? state : Create(id);
     }

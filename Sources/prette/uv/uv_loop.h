@@ -7,9 +7,9 @@
 #include "prette/uv/uv_status.h"
 
 namespace prt::uv {
-  static inline Status
-  InitLoop(uv_loop_t* loop) {
-    return Status(uv_loop_init(loop));
+  static inline auto
+  InitLoop(uv_loop_t* loop) -> Status {
+    return {uv_loop_init(loop)};
   }
 
   enum RunMode {
@@ -18,8 +18,8 @@ namespace prt::uv {
     kRunOnce = UV_RUN_ONCE,
   };
 
-  static inline std::ostream&
-  operator<<(std::ostream& stream, const RunMode& rhs) {
+  static inline auto
+  operator<<(std::ostream& stream, const RunMode& rhs) -> std::ostream& {
     switch(rhs) {
       case kRunNoWait:
         return stream << "NoWait";
@@ -31,9 +31,9 @@ namespace prt::uv {
     }
   }
 
-  static inline Status
-  Run(uv_loop_t* loop, const RunMode mode = kRunDefault) {
-    return Status(uv_run(loop, static_cast<uv_run_mode>(mode)));
+  static inline auto
+  Run(uv_loop_t* loop, const RunMode mode = kRunDefault) -> Status {
+    return {uv_run(loop, static_cast<uv_run_mode>(mode))};
   }
 
   static inline void
@@ -42,7 +42,7 @@ namespace prt::uv {
   }
 
   class Loop {
-  protected:
+  private:
     uv_loop_t loop_;
   public:
     explicit Loop():
@@ -50,11 +50,9 @@ namespace prt::uv {
       const auto status = InitLoop(&loop_);
       LOG_IF(FATAL, !status) << "failed to initialize uv_loop_t: " << status;
     }
-    virtual ~Loop() {
-      //TODO: need to check if closed
-    }
+    virtual ~Loop() = default;
 
-    uv_loop_t* GetLoop() {
+    auto GetLoop() -> uv_loop_t* {
       return &loop_;
     }
 

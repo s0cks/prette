@@ -33,9 +33,9 @@ namespace prt {
       depth_(kDefaultDepth),
       offset_(kDefaultOffset) {
     }
-    CrashReportCause(const std::exception_ptr& cause,
-                     const int depth = kDefaultDepth,
-                     const int offset = kDefaultOffset):
+    explicit CrashReportCause(const std::exception_ptr& cause,
+                              const int depth = kDefaultDepth,
+                              const int offset = kDefaultOffset):
       cause_(cause),
       trace_(),
       depth_(depth),
@@ -80,8 +80,8 @@ namespace prt {
 
     void PrintStackTrace(std::ostream& stream);
   public:
-    CrashReport(const CrashReportCause& cause,
-                const ColorMode color_mode = kDefaultColorMode):
+    explicit CrashReport(const CrashReportCause& cause,
+                         const ColorMode color_mode = kDefaultColorMode):
       color_mode_(color_mode),
       cause_(cause) {
     }

@@ -24,14 +24,14 @@ namespace prt {
       ComponentVisitor() = default;
     public:
       virtual ~ComponentVisitor() = default;
-      virtual bool Visit(Component* component) = 0;
+      virtual auto Visit(Component* component) -> bool = 0;
     };
 
     class Component {
       friend class Components;
     public:
       struct ComponentIdComparator {
-        bool operator()(const Component* lhs, const Component* rhs) const {
+        auto operator()(const Component* lhs, const Component* rhs) const -> bool {
           return lhs->GetComponentId() == rhs->GetComponentId();
         }
       };
@@ -64,31 +64,31 @@ namespace prt {
       Component();
     public:
       virtual ~Component();
-      virtual const char* GetName() const = 0;
+      virtual auto GetName() const -> const char* = 0;
 
-      const entity::EntitySet& GetEntities() const {
+      auto GetEntities() const -> const entity::EntitySet& {
         return tracker_.GetEntities();
       }
 
-      const entity::Signature& GetSignature() const {
+      auto GetSignature() const -> const entity::Signature& {
         return tracker_.GetSignature();
       }
 
-      inline ComponentId GetComponentId() const {
+      inline auto GetComponentId() const -> ComponentId {
         return (ComponentId) id_;
       }
 
-      inline bool IsRegistered() const {
+      inline auto IsRegistered() const -> bool {
         return (bool) registered_;
       }
     };
 
     template<class S>
     class StatefulComponent : public Component {
-      typedef ComponentState<S> State;
-      typedef std::set<State*, ComponentStateBase::EntityIdComparator> StateSet;
-      typedef rx::observable<State*> StateObservable;
-      typedef std::function<S*()> StateSupplier;
+      using State = ComponentState<S>;
+      using StateSet = std::set<State *, ComponentStateBase::EntityIdComparator>;
+      using StateObservable = rx::observable<State *>;
+      using StateSupplier = std::function<S *()>;
     private:
       ComponentStateTable<S> states_;
     protected:
@@ -97,33 +97,33 @@ namespace prt {
         states_() {
       }
 
-      bool RemoveState(const EntityId id) {
+      auto RemoveState(const EntityId id) -> bool {
         return states_.Remove(id);
       }
     public:
       ~StatefulComponent() override = default;
 
-      const ComponentStateTable<S>& states() const {
+      auto states() const -> const ComponentStateTable<S>& {
         return states_;
       }
 
-      bool HasState(const EntityId id) const {
+      auto HasState(const EntityId id) const -> bool {
         return states_.Has(id);
       }
 
-      State* GetState(const EntityId id) const {
+      auto GetState(const EntityId id) const -> State* {
         return states_.Get(id);
       }
 
-      State* GetOrCreateState(const EntityId id) {
+      auto GetOrCreateState(const EntityId id) -> State* {
         return states_.GetOrCreate(id);
       }
 
-      State* CreateState(const EntityId id, const S* data = nullptr) {
+      auto CreateState(const EntityId id, const S* data = nullptr) -> State* {
         return states_.Create(id, (const uword) data);
       }
 
-      StateObservable GetStates() const {
+      auto GetStates() const -> StateObservable {
         return (StateObservable) states_;
       }
     };
@@ -133,13 +133,13 @@ namespace prt {
     public:
       static void Register(Component* component);
       static void ClearRegisteredComponents();
-      static bool Visit(ComponentVisitor* vis);
-      static rx::observable<Component*> Get();
-      static rx::observable<ComponentEvent*> OnEvent();
+      static auto Visit(ComponentVisitor* vis) -> bool;
+      static auto Get() -> rx::observable<Component*>;
+      static auto OnEvent() -> rx::observable<ComponentEvent*>;
 
 #define DEFINE_ON_EVENT(Name)                                                 \
-      static inline rx::observable<Name##Event*>                              \
-      On##Name##Event() {                                                     \
+      static inline auto                                                      \
+      On##Name##Event() -> rx::observable<Name##Event*> {                     \
         return OnEvent()                                                      \
           .filter(Name##Event::Filter)                                        \
           .map(Name##Event::Cast);                                            \
@@ -157,9 +157,9 @@ namespace prt {
   using component::Component;
   using component::StatefulComponent;
 
-#define DECLARE_COMPONENT(Name)                               \
-  public:                                                     \
-    const char* GetName() const override { return #Name; }
+#define DECLARE_COMPONENT(Name)                                       \
+  public:                                                             \
+    auto GetName() const -> const char*  override { return #Name; }
 }
 
 #endif //PRT_COMPONENT_H

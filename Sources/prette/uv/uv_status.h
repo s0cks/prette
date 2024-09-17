@@ -2,13 +2,14 @@
 #define PRT_UV_STATUS_H
 
 #include <uv.h>
+#include <ostream>
 
 namespace prt::uv {
 #ifndef UV_OK
 #define UV_OK 0
 #endif //UV_OK
 
-  typedef int StatusId;
+  using StatusId = int;
   class Status {
   private:
     StatusId id_;
@@ -19,18 +20,18 @@ namespace prt::uv {
     constexpr Status(const Status& rhs) = default;
     ~Status() = default;
 
-    inline constexpr StatusId id() const {
+    inline constexpr auto id() const -> StatusId {
       return id_;
     }
 
-    inline constexpr bool IsOk() const {
+    inline constexpr auto IsOk() const -> bool {
       return id() >= UV_OK; //TODO: this might be wrong
     }
 
-    const char* message() const {
+    auto message() const -> const char* {
       return IsOk() ? "Ok" : uv_strerror(id());
     }
-    
+
     constexpr operator StatusId () const {
       return id();
     }
@@ -39,9 +40,9 @@ namespace prt::uv {
       return IsOk();
     }
 
-    Status& operator=(const Status& rhs) = default;
+    auto operator=(const Status& rhs) -> Status& = default;
 
-    friend std::ostream& operator<<(std::ostream& stream, const Status& rhs) {
+    friend auto operator<<(std::ostream& stream, const Status& rhs) -> std::ostream& {
       stream << "uv::Status(";
       stream << "id=" << rhs.id() << ", ";
       stream << "is_ok=" << rhs.IsOk();
@@ -51,13 +52,13 @@ namespace prt::uv {
       return stream;
     }
   public:
-    static inline constexpr Status
-    New(const StatusId raw) {
-      return Status(raw);
+    static inline constexpr auto
+    New(const StatusId raw) -> Status {
+      return {raw};
     }
 
-    static inline constexpr Status
-    Ok() {
+    static inline constexpr auto
+    Ok() -> Status {
       return New(UV_OK);
     }
   };

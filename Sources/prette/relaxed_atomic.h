@@ -7,12 +7,12 @@ namespace prt {
   template<typename T>
   class RelaxedAtomic {
   protected:
-    std::atomic<T> value_;
+    std::atomic<T> value_{};
   public:
     RelaxedAtomic():
       value_() {
     }
-    constexpr RelaxedAtomic(const T& value):
+    constexpr explicit RelaxedAtomic(const T& value):
       value_(value) {
     }
     RelaxedAtomic(const RelaxedAtomic<T>& rhs):

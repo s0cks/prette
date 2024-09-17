@@ -4,11 +4,11 @@
 #include "prette/uv/utils.h"
 
 namespace prt::pipeline {
-  const char* PipelineExecutor::GetPipelineName() const {
+  auto PipelineExecutor::GetPipelineName() const -> const char* {
     return GetPipeline()->GetName();
   }
 
-  bool PipelineExecutor::Visit(Pipeline* pipeline) {
+  auto PipelineExecutor::Visit(Pipeline* pipeline) -> bool {
     PRT_ASSERT(pipeline);
     if(!pipeline->Apply())
       return false; // abort
@@ -23,7 +23,7 @@ namespace prt::pipeline {
     return true; // continue
   }
 
-  bool PipelineExecutor::Execute() {
+  auto PipelineExecutor::Execute() -> bool {
     using namespace units::time;
     LOG(INFO) << "executing " << GetPipelineName() << "....";
     const auto start_ns = uv::Now();

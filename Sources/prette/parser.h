@@ -11,8 +11,8 @@ namespace prt {
   struct Position {
     DEFINE_DEFAULT_COPYABLE_TYPE(Position);
   public:
-    uint64_t row;
-    uint64_t column;
+    uint64_t row{};
+    uint64_t column{};
 
     Position() = default;
     Position(const uint64_t r, const uint64_t c):
@@ -86,7 +86,7 @@ namespace prt {
       data(rhs.data),
       length(rhs.length) {
     }
-    ~TokenTemplate() {}
+    ~TokenTemplate() = default;
 
     auto valid() const -> bool {
       return kind != Kind::kUnknown;

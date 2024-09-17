@@ -5,7 +5,7 @@
 #include "prette/engine/engine.h"
 
 namespace prt::mouse {
-  static ThreadLocal<Mouse> mouse_; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
+  static ThreadLocal<Mouse> mouse_;
 
   Mouse::Mouse(engine::Engine* engine):
     Input(),

@@ -5,45 +5,45 @@
 #include <string>
 
 namespace prt {
-  typedef uint64_t RawTimestamp;
+  using RawTimestamp = uint64_t;
 
-  typedef std::chrono::system_clock SysClock;
-  typedef SysClock::time_point Timestamp;
-  typedef SysClock::duration Duration;
+  using SysClock = std::chrono::system_clock;
+  using Timestamp = SysClock::time_point;
+  using Duration = SysClock::duration;
 
-  static inline Timestamp
-  Now() {
+  static inline auto
+  Now() -> Timestamp {
     return SysClock::now();
   }
 
-  static inline uint64_t
+  static inline auto
   GetElapsedTimeMilliseconds(const Timestamp start,
-                             const Timestamp stop = Now()) {
+                             const Timestamp stop = Now()) -> uint64_t {
     using namespace std::chrono;
     return duration_cast<milliseconds>(stop - start).count();
   }
 
-  static inline RawTimestamp
-  ToUnixTimestamp(const Timestamp ts = Now()){
+  static inline auto
+  ToUnixTimestamp(const Timestamp ts = Now()) -> RawTimestamp{
     using namespace std::chrono;
     return duration_cast<milliseconds>(ts.time_since_epoch()).count();
   }
 
-  static inline Timestamp
-  FromUnixTimestamp(const RawTimestamp ms){
+  static inline auto
+  FromUnixTimestamp(const RawTimestamp ms) -> Timestamp{
     using namespace std::chrono;
     return Timestamp(milliseconds(ms));
   }
 
-  std::string FormatTimestamp(const Timestamp ts, const std::string& format);
+  auto FormatTimestamp(const Timestamp ts, const std::string& format) -> std::string;
 
-  static inline std::string
-  FormatTimestampReadable(const Timestamp ts) {
+  static inline auto
+  FormatTimestampReadable(const Timestamp ts) -> std::string {
     return FormatTimestamp(ts, "%m/%d/%Y %H:%M:%S");
   }
 
-  static inline std::string
-  FormatTimestampFileSafe(const Timestamp ts) {
+  static inline auto
+  FormatTimestampFileSafe(const Timestamp ts) -> std::string {
     return FormatTimestamp(ts, "%Y%m%d-%H%M%S");
   }
 }

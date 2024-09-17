@@ -48,7 +48,7 @@ namespace prt::component {
     DLOG(INFO) << "component #" << id << " registered to: " << name;
   }
 
-  bool Components::Visit(ComponentVisitor* vis) {
+  auto Components::Visit(ComponentVisitor* vis) -> bool {
     for(const auto& component : components_) {
       if(!vis->Visit(component))
         return false;
@@ -56,25 +56,25 @@ namespace prt::component {
     return true;
   }
 
-  rx::observable<Component*> Components::Get() {
+  auto Components::Get() -> rx::observable<Component*> {
     return rx::observable<>::iterate(components_);
   }
 
-  rx::observable<ComponentEvent*> Components::OnEvent() {
+  auto Components::OnEvent() -> rx::observable<ComponentEvent*> {
     return events_.get_observable();
   }
 
 #ifdef PRT_DEBUG
   class ComponentPrinter : public ComponentVisitor {
-  protected:
+  private:
     google::LogSeverity severity_;
 
-    inline google::LogSeverity
-    GetSeverity() const {
+    inline auto
+    GetSeverity() const -> google::LogSeverity {
       return severity_;
     }
 
-    bool Visit(Component* component) override {
+    auto Visit(Component* component) -> bool override {
       LOG_AT_LEVEL(GetSeverity()) << " - " << component->GetName();
       return true;
     }

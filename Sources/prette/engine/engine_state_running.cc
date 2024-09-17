@@ -9,8 +9,7 @@ namespace prt::engine {
     shutdown_(engine->GetLoop(), this),
     on_tick_() {
     auto& ticker = engine->ticker_;
-    //TODO: slicing
-    on_tick_ = ticker.ToObservable() // NOLINT(cppcoreguidelines-slicing)
+    on_tick_ = ticker.ToObservable()
       .subscribe([engine,this,&ticker](const uv::Tick& tick) {
         Publish<PreTickEvent>(engine);
         glfwPollEvents();

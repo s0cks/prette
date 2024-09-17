@@ -1,3 +1,4 @@
+#include <sstream>
 #include "prette/class.h"
 #include "prette/relaxed_atomic.h"
 
@@ -25,13 +26,13 @@ namespace prt {
   }
 
   Attribute::Attribute(Class* owner,
-                       const std::string& name,
+                       std::string name,
                        const uword index,
                        const uword size,
                        Class* type,
                        const bool normalized):
     owner_(owner),
-    name_(name),
+    name_(std::move(name)),
     index_(index),
     size_(size),
     type_(type),
@@ -40,15 +41,11 @@ namespace prt {
     PRT_ASSERT(type);
   }
 
-  Attribute::~Attribute() {
-    // do nothing 
-  }
-
   auto Attribute::GetAllocationSize() const -> uword {
     return GetSize() * GetType()->GetAllocationSize();
   }
 
-  auto Attribute::Compare(Attribute* rhs) const -> int {
+  auto Attribute::Compare(const Attribute* rhs) const -> int {
     if(GetIndex() < rhs->GetIndex()) {
       return -1;
     } else if(GetIndex() > rhs->GetIndex()) {
@@ -64,7 +61,7 @@ namespace prt {
     return 0;
   }
 
-  auto Attribute::Equals(Attribute* rhs) const -> bool {
+  auto Attribute::Equals(const Attribute* rhs) const -> bool {
     return GetIndex() == rhs->GetIndex()
         && GetSize() == rhs->GetSize()
         && GetType() == rhs->GetType()
@@ -74,13 +71,12 @@ namespace prt {
   }
 
   auto Attribute::ToString() const -> std::string {
-    using units::data::byte_t;
     std::stringstream ss;
     ss << "vertex::Attribute(";
     ss << "owner=" << GetOwner()->ToString() << ", ";
     ss << "name=" << GetName() << ", ";
     ss << "index=" << GetIndex() << ", ";
-    ss << "size=" << byte_t(GetSize()) << ", ";
+    ss << "size=" << units::data::byte_t(GetSize()) << ", "; // NOLINT(cppcoreguidelines-narrowing-conversions)
     ss << "type=" << GetType() << ", ";
     ss << "normalized=" << (IsNormalized() ? 'y' : 'n');
     ss << ")";
@@ -88,9 +84,10 @@ namespace prt {
   }
 
   Class::Class(const ClassId id,
-               const std::string& name):
+               std::string name):
     id_(id),
-    name_(name) {
+    name_(std::move(name)),
+    attrs_() {
     Register(this);
   }
 

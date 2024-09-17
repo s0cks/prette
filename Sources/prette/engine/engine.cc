@@ -58,7 +58,7 @@ namespace prt::engine {
     return events_.get_observable();
   }
 
-  static ThreadLocal<Engine> engine_; //NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
+  static ThreadLocal<Engine> engine_;
 
   static inline void
   SetEngine(Engine* engine) {

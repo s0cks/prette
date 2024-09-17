@@ -33,9 +33,9 @@ namespace prt {
     static constexpr const auto kSizeInBits = NumberOfBits;
     static constexpr const auto kSizeInBytes = kSizeInBits / kBitsPerByte;
     static constexpr const auto kSizeInWords = kSizeInBits / kBitsPerWord;
+  private:
+    std::array<uword, kSizeInWords> data_;
   protected:
-    uword data_[kSizeInWords];
-
     constexpr BigNumberTemplate():
       BigNumber(),
       data_() {
@@ -80,7 +80,7 @@ namespace prt {
           ss << data_[i];
       return ss.str();
     }
-    
+
     virtual auto ToBinaryString() const -> std::string {
       std::stringstream ss;
       std::bitset<kSizeInBits> bits;

@@ -5,7 +5,7 @@
 #include "prette/keyboard/keyboard_flags.h"
 
 namespace prt::keyboard {
-  static ThreadLocal<Keyboard> keyboard_; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
+  static ThreadLocal<Keyboard> keyboard_;
 
   Keyboard::Keyboard(engine::Engine* engine):
     Input(),
@@ -16,8 +16,7 @@ namespace prt::keyboard {
     state_.reset();
   }
 
-  void Keyboard::ProcessKey(const int idx, const Key& k) { 
-    const auto code = k.GetCode();
+  void Keyboard::ProcessKey(const int idx, const Key& k) {
     const auto old_state = KeyState(state_.test(idx));
     const auto new_state = GetKeyState(k);
     if(old_state == new_state)
@@ -82,7 +81,7 @@ namespace prt::keyboard {
     return keyboard_.Get();
   }
 
-  void InitKeyboard() { 
+  void InitKeyboard() {
     //TODO: only allow Keyboard initialization if an instance of Window exists
 #ifdef PRT_DEBUG
     const auto start_ns = uv::Now();

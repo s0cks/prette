@@ -13,19 +13,19 @@ DEFINE_string(settings_dir, "", "The absolute path to store settings. Empty is d
     subscriber.on_next(event);
   }
 
-  static inline bool
-  HasSettingsDir() {
+  static inline auto
+  HasSettingsDir() -> bool {
     return !FLAGS_settings_dir.empty();
   }
 
-  static inline std::string
-  GetSettingsDatabaseFilename() {
+  static inline auto
+  GetSettingsDatabaseFilename() -> std::string {
     if(HasSettingsDir())
       return FLAGS_settings_dir;
     return FLAGS_resources + "/settings";
   }
 
-  rx::observable<SettingsEvent*> Settings::OnEvent() {
+  auto Settings::OnEvent() -> rx::observable<SettingsEvent*> {
     return events_.get_observable();
   }
 
@@ -36,7 +36,7 @@ DEFINE_string(settings_dir, "", "The absolute path to store settings. Empty is d
     db::TryOpenWith<>(GetSettingsDatabaseFilename(), options, &settings_);
   }
 
-  bool Settings::VisitSettings(SettingVisitor* vis) {
+  auto Settings::VisitSettings(SettingVisitor* vis) -> bool {
     leveldb::ReadOptions options;
     leveldb::Iterator* iter = settings_->NewIterator(options);
     for(iter->SeekToFirst(); iter->Valid(); iter->Next()) {

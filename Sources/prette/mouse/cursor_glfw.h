@@ -1,7 +1,3 @@
-#ifndef PRT_CURSOR_H
-#error "Please #include <prette/mouse/cursor.h> instead."
-#endif //PRT_CURSOR_H
-
 #ifndef PRT_CURSOR_GLFW_H
 #define PRT_CURSOR_GLFW_H
 
@@ -10,7 +6,7 @@
 #include "prette/mouse/cursor.h"
 
 namespace prt::mouse {
-  typedef GLFWcursor CursorHandle;
+  using CursorHandle = GLFWcursor;
 
   class GlfwCursor : public Cursor {
     friend class Cursor;
@@ -25,9 +21,9 @@ namespace prt::mouse {
       kTotalNumberOfShapes,
       kDefaultShape = kArrow,
     };
-  protected:
+  private:
     CursorHandle* handle_;
-
+  protected:
     explicit GlfwCursor(CursorHandle* handle):
       Cursor(),
       handle_(handle) {
@@ -35,24 +31,24 @@ namespace prt::mouse {
     }
   public:
     ~GlfwCursor() override = default;
-    std::string ToString() const override;
+    auto ToString() const -> std::string override;
 
-    inline CursorHandle* GetHandle() const { //TODO: reduce visibility
+    inline auto GetHandle() const -> CursorHandle* { //TODO: reduce visibility
       return handle_;
     }
   private:
-    static inline GlfwCursor*
-    New(CursorHandle* handle) {
+    static inline auto
+    New(CursorHandle* handle) -> GlfwCursor* {
       PRT_ASSERT(handle);
       return new GlfwCursor(handle);
     }
   public:
-    static Cursor* NewStandard(const Shape shape = kDefaultShape);
-    static Cursor* New(const img::Image* image);
-    static Cursor* New(const uri::Uri& uri);
+    static auto NewStandard(const Shape shape = kDefaultShape) -> Cursor*;
+    static auto New(const img::Image* image) -> Cursor*;
+    static auto New(const uri::Uri& uri) -> Cursor*;
 
-    static inline Cursor*
-    New(const uri::basic_uri& uri) {
+    static inline auto
+    New(const uri::basic_uri& uri) -> Cursor* {
       if(!(StartsWith(uri, "file:") && EndsWith(uri, ".png"))
       && !StartsWith(uri, "cursor:")) {
         LOG(WARNING) << "invalid Cursor Uri: " << uri;

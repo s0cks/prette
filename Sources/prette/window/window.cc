@@ -35,11 +35,10 @@ namespace prt::window {
     id_() {
     Register(this);
     PRT_ASSERT(handle);
-    const auto size = GetSize();
     const auto engine = engine::GetEngine();
     PRT_ASSERT(engine);
     //TODO: on_post_init discard 16 bytes of data?
-    on_post_init_ = engine->OnPostInit() // NOLINT(cppcoreguidelines-slicing)
+    on_post_init_ = engine->OnPostInit()
       .subscribe([this](engine::PostInitEvent* event) {
         Show();
       });
@@ -148,7 +147,7 @@ namespace prt::window {
     SetAppWindow(CreateAppWindow());
     const auto engine = GetEngine();
     PRT_ASSERT(engine);
-    on_terminating_ = engine->OnTerminating() // NOLINT(cppcoreguidelines-slicing)
+    on_terminating_ = engine->OnTerminating()
       .subscribe([](engine::TerminatingEvent* event) {
         return CloseAllWindows();
       });

@@ -3,27 +3,27 @@
 #include "prette/mouse/cursor.h"
 
 namespace prt::mouse {
-  std::string CursorCreatedEvent::ToString() const {
+  auto CursorCreatedEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "CursorCreatedEvent(";
     ss << "cursor=" << GetCursor()->ToString();
     ss << ")";
-    return ss.str(); 
+    return ss.str();
   }
 
-  std::string CursorDeletedEvent::ToString() const {
+  auto CursorDeletedEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "CursorDeletedEvent(";
     ss << "cursor=" << GetCursor()->ToString();
     ss << ")";
-    return ss.str(); 
+    return ss.str();
   }
 
-  std::string CursorChangedEvent::ToString() const {
+  auto CursorChangedEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "CursorChangedEvent(";
     ss << "cursor=" << GetCursor()->ToString();
     ss << ")";
-    return ss.str(); 
+    return ss.str();
   }
 }

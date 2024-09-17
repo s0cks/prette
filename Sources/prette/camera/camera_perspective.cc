@@ -121,7 +121,7 @@ namespace prt::camera {
     return ss.str();
   }
 
-  static ThreadLocal<PerspectiveCamera> camera_; //NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
+  static ThreadLocal<PerspectiveCamera> camera_;
 
   static inline auto
   CreatePerspectiveCamera() -> PerspectiveCamera* {

@@ -32,10 +32,6 @@ namespace prt::window {
     SetUserPointer(handle, this);
   }
 
-  Monitor::~Monitor() {
-    // do nothing for now
-  }
-
   auto Monitor::GetVideoMode() const -> const GLFWvidmode* {
     return glfwGetVideoMode(GetHandle());
   }

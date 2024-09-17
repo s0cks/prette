@@ -36,12 +36,12 @@ namespace prt {
     bool normalized_;
   public:
     Attribute(Class* owner,
-              const std::string& name,
+              std::string name,
               const uword index,
               const uword size,
               Class* type,
               const bool normalized);
-    ~Attribute();
+    ~Attribute() = default;
 
     auto GetOwner() const -> Class* {
       return owner_;
@@ -74,8 +74,8 @@ namespace prt {
       return vis->VisitAttribute(this);
     }
 
-    auto Compare(Attribute* rhs) const -> int;
-    auto Equals(Attribute* rhs) const -> bool;
+    auto Compare(const Attribute* rhs) const -> int;
+    auto Equals(const Attribute* rhs) const -> bool;
     auto ToString() const -> std::string;
   };
 
@@ -151,7 +151,7 @@ namespace prt {
     AttributeSet attrs_;
 
     Class(const ClassId id,
-          const std::string& name);
+          std::string name);
 
     auto CalculateAllocationSize() const -> uword;
   public:

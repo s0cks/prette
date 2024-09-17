@@ -11,34 +11,32 @@
 
 namespace prt::entity {
   class Generation {
-    struct EntitySignature {
+    struct EntitySignature { //NOLINT(cppcoreguidelines-pro-type-member-init)
       EntityId id;
       Signature signature;
     };
   public:
     static constexpr const uint64_t kDefaultGenerationLimit = 65536;
-  protected:
+  private:
     uint64_t id_;
-    uint64_t size_;
-    uint64_t limit_;
-    EntitySignature* entities_;
+    uint64_t size_{};
+    uint64_t limit_{};
+    EntitySignature* entities_{};
   public:
     explicit Generation(const uint64_t id,
                         const uint64_t limit = kDefaultGenerationLimit):
-      id_(id),
-      size_(0),
-      limit_(0),
-      entities_(nullptr) {
+      id_(id) {
       if(limit <= 0) {
         DLOG(ERROR) << "allocated Generation with " << limit << " limit.";
         return;
       }
 
       const auto size = RoundUpPow2(limit);
-      const auto data = malloc(sizeof(EntitySignature) * size);
+      const auto total_size = sizeof(EntitySignature) * size;
+      const auto data = malloc(total_size);
       LOG_IF(FATAL, !data) << "failed to allocate Generation of size " << size;
-      memset(data, 0, sizeof(data));
-      entities_ = (EntitySignature*) data;
+      memset(data, 0, total_size);
+      entities_ = (EntitySignature*) data; //NOLINT(cppcoreguidelines-pro-type-cstyle-cast)
       limit_ = size;
     }
     virtual ~Generation() {
@@ -46,19 +44,19 @@ namespace prt::entity {
         free(entities_);
     }
 
-    uint64_t GetGenerationId() const {
+    auto GetGenerationId() const -> uint64_t {
       return id_;
     }
 
-    uint64_t GetLimit() const {
+    auto GetLimit() const -> uint64_t {
       return limit_;
     }
 
-    uint64_t GetSize() const {
+    auto GetSize() const -> uint64_t {
       return size_;
     }
 
-    virtual rx::observable<EntityId> GetAll() const;
+    virtual auto GetAll() const -> rx::observable<EntityId>;
   };
 }
 

@@ -7,5 +7,5 @@ namespace prt {
       murmur3_32::of(kExampleString);
   }
 
-  BENCHMARK(BM_Murmur); // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
+  BENCHMARK(BM_Murmur);
 }

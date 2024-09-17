@@ -27,7 +27,7 @@ namespace prt {
   namespace entity {
     class Entity {
       struct HashFunction {
-        size_t operator()(const Entity& k) const {
+        auto operator()(const Entity& k) const -> size_t {
           return k.id();
         }
       };
@@ -49,18 +49,16 @@ namespace prt {
       constexpr Entity(const EntityId id = kInvalidEntityId):
         id_(id) {
       }
-      constexpr Entity(const Entity& rhs):
-        id_(rhs.id_) {
-      }
+      constexpr Entity(const Entity& rhs) = default;
       ~Entity() = default;
 
-      EntityId id() const {
+      auto id() const -> EntityId {
         return id_;
       }
 
-      rx::observable<EntityEvent*> OnEvent() const;
+      auto OnEvent() const -> rx::observable<EntityEvent*>;
 #define DECLARE_ON_EVENT(Name) \
-      rx::observable<Name##Event*> On##Name() const;
+      auto On##Name() const -> rx::observable<Name##Event*>;
       FOR_EACH_ENTITY_EVENT(DECLARE_ON_EVENT)
 #undef DECLARE_ON_EVENT
 
@@ -68,23 +66,17 @@ namespace prt {
         return id_;
       }
 
-      void operator=(const Entity& rhs) {
-        id_ = rhs.id_;
-      }
+      auto operator=(const Entity& rhs) -> Entity& = default;
 
-      void operator=(const EntityId& rhs) {
-        id_ = rhs;
-      }
-
-      bool operator==(const Entity& rhs) {
+      auto operator==(const Entity& rhs) -> bool {
         return id_ == rhs.id_;
       }
 
-      bool operator!=(const Entity& rhs) {
+      auto operator!=(const Entity& rhs) -> bool {
         return id_ != rhs.id_;
       }
 
-      friend std::ostream& operator<<(std::ostream& stream, const Entity& rhs) {
+      friend auto operator<<(std::ostream& stream, const Entity& rhs) -> std::ostream& {
         stream << "Entity(";
         stream << "id=" << rhs.id_;
         stream << ")";
@@ -110,23 +102,23 @@ namespace prt {
       }
     };
 
-    rx::observable<EntityEvent*> OnEvent();
+    auto OnEvent() -> rx::observable<EntityEvent*>;
 
-    static inline rx::observable<EntityEvent*>
-    OnEvent(const EntityId id) {
+    static inline auto
+    OnEvent(const EntityId id) -> rx::observable<EntityEvent*> {
       return OnEvent()
         .filter(EntityEvent::FilterById(id));
     }
 
 #define DEFINE_ON_EVENT(Name)                                                  \
-    static inline rx::observable<Name##Event*>                                 \
-    On##Name##Event() {                                                        \
+    static inline auto                                                         \
+    On##Name##Event() -> rx::observable<Name##Event*> {                        \
       return OnEvent()                                                         \
         .filter(Name##Event::Filter)                                           \
         .map(Name##Event::Cast);                                               \
     }                                                                          \
-    static inline rx::observable<Name##Event*>                                 \
-    On##Name##Event(const EntityId id) {                                       \
+    static inline auto                                                         \
+    On##Name##Event(const EntityId id) -> rx::observable<Name##Event*> {       \
       return OnEvent()                                                         \
         .filter(Name##Event::FilterBy(id))                                     \
         .map(Name##Event::Cast);                                               \
@@ -136,8 +128,9 @@ namespace prt {
 
 #define DEFINE_EVENT_LISTENER_INTERFACE(Name)                                    \
     class Name##EventListener {                                                  \
-    protected:                                                                   \
+    private:                                                                     \
       rx::subscription sub_;                                                     \
+    protected:                                                                   \
       Name##EventListener():                                                     \
         sub_() {                                                                 \
         sub_ = On##Name##Event()                                                 \
@@ -151,7 +144,7 @@ namespace prt {
         sub_.unsubscribe();                                                      \
       }                                                                          \
     };
-    FOR_EACH_ENTITY_EVENT(DEFINE_EVENT_LISTENER_INTERFACE)
+    FOR_EACH_ENTITY_EVENT(DEFINE_EVENT_LISTENER_INTERFACE);
 #undef DEFINE_EVENT_LISTENER_INTERFACE
   }
 

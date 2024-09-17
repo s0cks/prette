@@ -15,8 +15,8 @@ namespace prt::mouse {
 #undef DEFINE_STATE
   };
 
-  static inline std::ostream&
-  operator<<(std::ostream& stream, const CursorReaderState& rhs) {
+  static inline auto
+  operator<<(std::ostream& stream, const CursorReaderState& rhs) -> std::ostream& {
     switch(rhs) {
 #define DEFINE_TO_STRING(Name)  \
       case k##Name: return stream << #Name;
@@ -29,15 +29,14 @@ namespace prt::mouse {
   class CursorReaderHandler : public json::ReaderHandlerTemplate<CursorReaderState, CursorReaderHandler> {
     static constexpr const auto kExpectedType = "Cursor";
   protected:
-    bool OnParseDataField(const std::string& name) override;
-    bool OnParseImage(const uri::Uri& uri);
+    auto OnParseDataField(const std::string& name) -> bool override;
+    auto OnParseImage(const uri::Uri& uri) -> bool;
   public:
     explicit CursorReaderHandler():
       json::ReaderHandlerTemplate<CursorReaderState, CursorReaderHandler>(kExpectedType) {
     }
     ~CursorReaderHandler() override = default;
-
-    bool String(const char* value, const rapidjson::SizeType length, const bool) override;
+    auto String(const char* value, const rapidjson::SizeType length, const bool) -> bool override;
   };
 }
 

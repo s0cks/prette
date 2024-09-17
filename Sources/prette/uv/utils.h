@@ -12,19 +12,19 @@ namespace prt::uv {
 #define CHECK_UV_RESULT(Severity, Result, Message) \
   LOG_IF(Severity, (Result) != UV_OK) << (Message) << ": " << uv_strerror((Result));
 
-  static inline uint64_t
-  Now() {
+  static inline auto
+  Now() -> uint64_t {
     return uv_hrtime();
   }
 
   static inline void
-  Close(uv_handle_t* handle, uv_close_cb cb = NULL) {
+  Close(uv_handle_t* handle, uv_close_cb cb = nullptr) {
     uv_close(handle, cb);
   }
 
   template<typename T>
   static inline void
-  Close(T* handle, uv_close_cb cb = NULL) {
+  Close(T* handle, uv_close_cb cb = nullptr) {
     return Close((uv_handle_t*)handle, cb);
   }
 }

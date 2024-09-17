@@ -25,27 +25,27 @@ namespace prt {
    }
    ~ThreadStartData() = default;
 
-   std::string GetName() const{
+   auto GetName() const -> std::string{
      return name_;
    }
 
-   ThreadHandler& GetFunction(){
+   auto GetFunction() -> ThreadHandler&{
      return handler_;
    }
 
-   ThreadHandler GetFunction() const{
+   auto GetFunction() const -> ThreadHandler {
      return handler_;
    }
 
-   void* GetParameter() const{
+   auto GetParameter() const -> void*{
      return parameter_;
    }
  };
 
- int GetCurrentThreadCount() {
+ auto GetCurrentThreadCount() -> int {
   const auto me = mach_task_self();
-  thread_array_t threads;
-  mach_msg_type_number_t num_threads;
+  thread_array_t threads = nullptr;
+  mach_msg_type_number_t num_threads = 0;
 
   {
     const auto res = task_threads(me, &threads, &num_threads);
@@ -60,11 +60,11 @@ namespace prt {
   return num_threads;
  }
 
-rx::observable<std::string> GetCurrentThreadNames() {
+auto GetCurrentThreadNames() -> rx::observable<std::string> {
   return rx::observable<>::create<std::string>([](rx::subscriber<std::string> s) {
     const auto me = mach_task_self();
-    thread_array_t threads;
-    mach_msg_type_number_t num_threads;
+    thread_array_t threads = nullptr;
+    mach_msg_type_number_t num_threads = 0;
     {
       const auto res = task_threads(me, &threads, &num_threads);
       if(res != KERN_SUCCESS)
@@ -93,10 +93,10 @@ rx::observable<std::string> GetCurrentThreadNames() {
  }
 
 
- bool SetThreadName(const ThreadId& thread, const char* name){
+ auto SetThreadName(const ThreadId& thread, const char* name) -> bool{
    char truncated_name[kThreadNameMaxLength];
    snprintf(truncated_name, kThreadNameMaxLength-1, "%s", name);
-   int result;
+   int result = 0;
    if((result = pthread_setname_np(truncated_name)) != 0){
      LOG(WARNING) << "couldn't set thread name: " << strerror(result);
      return false;
@@ -104,8 +104,8 @@ rx::observable<std::string> GetCurrentThreadNames() {
    return true;
  }
 
- static void*
- HandleThread(void* pdata){
+ static auto
+ HandleThread(void* pdata) -> void*{
    auto data = (ThreadStartData*)pdata;
    auto& func = data->GetFunction();
    void* parameter = data->GetParameter();
@@ -119,12 +119,12 @@ rx::observable<std::string> GetCurrentThreadNames() {
    pthread_exit(nullptr);
  }
 
- ThreadId GetCurrentThreadId(){
+ auto GetCurrentThreadId() -> ThreadId{
    return pthread_self();
  }
 
- bool Start(ThreadId* thread, const std::string& name, const ThreadHandler& func, void* parameter){
-   int result;
+ auto Start(ThreadId* thread, const std::string& name, const ThreadHandler& func, void* parameter) -> bool{
+   int result = 0;
    pthread_attr_t attrs;
    if((result = pthread_attr_init(&attrs)) != 0){
      LOG(ERROR) << "couldn't initialize the thread attributes: " << strerror(result);
@@ -145,12 +145,12 @@ rx::observable<std::string> GetCurrentThreadNames() {
    return true;
  }
 
- bool Join(const ThreadId& thread){
+ auto Join(const ThreadId& thread) -> bool{
    std::string thread_name = GetThreadName(thread);
 
    char return_data[kThreadMaxResultLength];
 
-   int result;
+   int result = 0;
    if((result = pthread_join(thread, (void**)&return_data)) != 0){
      LOG(ERROR) << "couldn't join thread: " << strerror(result);
      return false;
@@ -160,14 +160,14 @@ rx::observable<std::string> GetCurrentThreadNames() {
    return true;
  }
 
- int ThreadEquals(const ThreadId& lhs, const ThreadId& rhs){
+ auto ThreadEquals(const ThreadId& lhs, const ThreadId& rhs) -> int{
    return pthread_equal(lhs, rhs);
  }
 
- std::string GetThreadName(const ThreadId& thread){
+ auto GetThreadName(const ThreadId& thread) -> std::string{
    char name[kThreadNameMaxLength];
 
-   int err;
+   int err = 0;
    if((err = pthread_getname_np(thread, name, kThreadNameMaxLength)) != 0){
      LOG(ERROR) << "cannot get name for " << thread << " thread: " << strerror(err);
      return "unknown";
@@ -175,10 +175,10 @@ rx::observable<std::string> GetCurrentThreadNames() {
    return { name };
  }
 
- bool SetThreadName(const ThreadId& thread, const std::string& name){
+ auto SetThreadName(const ThreadId& thread, const std::string& name) -> bool{
    char truncated_name[kThreadNameMaxLength];
    snprintf(truncated_name, kThreadNameMaxLength-1, "%s", name.data());
-   int result;
+   int result = 0;
    if((result = pthread_setname_np(truncated_name)) != 0) {
      LOG(WARNING) << "couldn't set thread name: " << strerror(result);
      return false;
@@ -187,8 +187,8 @@ rx::observable<std::string> GetCurrentThreadNames() {
    return true;
  }
 
- bool InitializeThreadLocal(ThreadLocalKey& key){
-   int err;
+ auto InitializeThreadLocal(ThreadLocalKey& key) -> bool {
+   int err = 0;
    if((err = pthread_key_create(&key, nullptr)) != 0){//TODO: fix make second parameter visible to caller
      LOG(ERROR) << "failed to create ThreadLocal key: " << strerror(err);
      return false;
@@ -196,8 +196,8 @@ rx::observable<std::string> GetCurrentThreadNames() {
    return true;
  }
 
- bool SetCurrentThreadLocal(const ThreadLocalKey& key, const void* value){
-   int err;
+ auto SetCurrentThreadLocal(const ThreadLocalKey& key, const void* value) -> bool{
+   int err = 0;
    if((err = pthread_setspecific(key, value)) != 0){
      LOG(ERROR) << "couldn't set " << GetCurrentThreadName() << " ThreadLocal: " << strerror(err);
      return false;
@@ -205,8 +205,8 @@ rx::observable<std::string> GetCurrentThreadNames() {
    return true;
  }
 
- void* GetCurrentThreadLocal(const ThreadLocalKey& key){
-   void* ptr;
+ auto GetCurrentThreadLocal(const ThreadLocalKey& key) -> void*{
+   void* ptr = nullptr;
    if((ptr = pthread_getspecific(key)) != nullptr)
      return ptr;
    return nullptr;

@@ -2,21 +2,21 @@
 #include <sstream>
 
 namespace prt::keyboard {
-  std::string KeyboardCreatedEvent::ToString() const {
+  auto KeyboardCreatedEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "KeyboardCreatedEvent(";
     ss << ")";
     return ss.str();
   }
 
-  std::string KeyboardDestroyedEvent::ToString() const {
+  auto KeyboardDestroyedEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "KeyboardDestroyedEvent(";
     ss << ")";
     return ss.str();
   }
 
-  std::string KeyPressedEvent::ToString() const {
+  auto KeyPressedEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "KeyPressedEvent(";
     ss << "key=" << GetKey();
@@ -24,7 +24,7 @@ namespace prt::keyboard {
     return ss.str();
   }
 
-  std::string KeyReleasedEvent::ToString() const {
+  auto KeyReleasedEvent::ToString() const -> std::string {
     std::stringstream ss;
     ss << "KeyReleasedEvent(";
     ss << "key=" << GetKey();

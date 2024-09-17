@@ -96,13 +96,13 @@ namespace prt::window {
   }
 
   void Window::SetPos(const Point& pos) {
-    glfwSetWindowPos(GetHandle(), pos[0], pos[1]);
+    glfwSetWindowPos(GetHandle(), static_cast<int>(pos[0]), static_cast<int>(pos[1]));
   }
 
   auto Window::GetPos() const -> Point {
     glm::i32vec2 pos;
     glfwGetWindowPos(GetHandle(), &pos[0], &pos[1]);
-    return Point(pos);
+    return {pos};
   }
 
   void Window::Close() {

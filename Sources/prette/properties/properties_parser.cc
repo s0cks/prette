@@ -1,14 +1,14 @@
 #include "prette/properties/properties_parser.h"
 
 namespace prt::properties {
-  bool Parser::ParsePropertyName() {
+  auto Parser::ParsePropertyName() -> bool {
     token_len_ = 0;
     while(IsValidKeyCharacter(PeekChar(), token_len_ == 0))
       token_[token_len_++] = NextChar();
     return token_len_ > 0;
   }
 
-  bool Parser::ParseBoolValue(const std::string& name, Property** result) {
+  auto Parser::ParseBoolValue(const std::string& name, Property** result) -> bool {
     switch(PeekChar()) {
       case 't':
         if(!TryParseTrue()) {

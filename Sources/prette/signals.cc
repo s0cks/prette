@@ -23,7 +23,7 @@ namespace prt {
     LOG(FATAL) << "terminate.";
   }
 
-  typedef void* (*SignalHandler)(const int);
+  using SignalHandler = void *(*)(const int);
 
   template<const Signal S>
   static inline void

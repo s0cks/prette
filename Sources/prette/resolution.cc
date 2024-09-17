@@ -3,19 +3,19 @@
 #include <glog/logging.h>
 
 namespace prt {
-  static inline Resolution*
-  GetResolution(const ResolutionParser* parser) {
+  static inline auto
+  GetResolution(const ResolutionParser* parser) -> Resolution* {
     return (Resolution*) parser->data();
   }
 
-  static inline bool
-  OnParseWidth(const ResolutionParser* parser, const int32_t& width) {
+  static inline auto
+  OnParseWidth(const ResolutionParser* parser, const int32_t& width) -> bool {
     GetResolution(parser)->width() = width;
     return true;
   }
 
-  static inline bool
-  OnParseHeight(const ResolutionParser* parser, const int32_t& height) {
+  static inline auto
+  OnParseHeight(const ResolutionParser* parser, const int32_t& height) -> bool {
     GetResolution(parser)->height() = height;
     return true;
   }
@@ -30,7 +30,7 @@ namespace prt {
     LOG_IF(ERROR, !parser.ParseResolution()) << "failed to parse Resolution from: " << value;
   }
 
-  bool ResolutionParser::ParseInt32(int32_t* result) {
+  auto ResolutionParser::ParseInt32(int32_t* result) -> bool {
     token_len_ = 0;
     do {
       const auto next = PeekChar();
@@ -45,7 +45,7 @@ namespace prt {
       token_[token_len_++] = NextChar();
       continue;
     } while(true);
-    
+
     if(token_len_ <= 0)
       return false;
 
@@ -53,11 +53,11 @@ namespace prt {
     return true;
   }
 
-  bool ResolutionParser::ParseResolution() {
+  auto ResolutionParser::ParseResolution() -> bool {
     if(!OnParseStarted())
       return false;
 
-    int32_t width;
+    int32_t width = 0;
     if(!ParseInt32(&width))
       return false;
     if(!OnParseWidth(width))
@@ -71,8 +71,8 @@ namespace prt {
         DLOG(ERROR) << "unexpected token: " << NextChar();
         return false;
     }
-    
-    int32_t height;
+
+    int32_t height = 0;
     if(!ParseInt32(&height))
       return false;
     if(!OnParseHeight(height))

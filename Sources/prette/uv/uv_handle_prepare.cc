@@ -8,10 +8,10 @@ namespace prt::uv {
   }
 
   Prepare::Prepare(Loop* loop,
-                   const Callback& callback,
+                   Callback callback,
                    const bool start):
     HandleBaseTemplate<PrepareHandle>(),
-    callback_(callback) {
+    callback_(std::move(callback)) {
     SetHandleData(handle_, this);
     const auto status = InitPrepare(loop, &handle_);
     LOG_IF(ERROR, !status) << "failed to initialize uv::Prepare: " << status;

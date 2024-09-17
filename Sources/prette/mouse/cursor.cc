@@ -9,7 +9,7 @@
 namespace prt::mouse {
   static rx::subject<CursorEvent*> events_;
 
-  rx::observable<CursorEvent*> OnCursorEvent() {
+  auto OnCursorEvent() -> rx::observable<CursorEvent*> {
     return events_.get_observable();
   }
 
@@ -19,7 +19,7 @@ namespace prt::mouse {
     subscriber.on_next(event);
   }
 
-  rx::observable<std::string> ListAvailableCursors() {
+  auto ListAvailableCursors() -> rx::observable<std::string> {
     return rx::observable<>::create<std::string>([](rx::subscriber<std::string> s) {
       s.on_next("default");
       const auto dir = GetCursorsDir();

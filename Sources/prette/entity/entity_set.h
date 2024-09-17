@@ -8,39 +8,39 @@
 
 namespace prt::entity {
   class EntitySet {
-  protected:
-    std::unordered_set<EntityId> ids_;
+  private:
+    std::unordered_set<EntityId> ids_{};
   public:
     EntitySet() = default;
     virtual ~EntitySet() = default;
 
-    std::unordered_set<EntityId>::iterator begin() {
+    auto begin() -> std::unordered_set<EntityId>::iterator {
       return ids_.begin();
     }
 
-    std::unordered_set<EntityId>::const_iterator begin() const {
+    auto begin() const -> std::unordered_set<EntityId>::const_iterator {
       return ids_.begin();
     }
 
-    std::unordered_set<EntityId>::iterator end() {
+    auto end() -> std::unordered_set<EntityId>::iterator {
       return ids_.begin();
     }
 
-    std::unordered_set<EntityId>::const_iterator end() const {
+    auto end() const -> std::unordered_set<EntityId>::const_iterator {
       return ids_.end();
     }
 
-    virtual bool Put(const EntityId id) {
+    virtual auto Put(const EntityId id) -> bool {
       const auto result = ids_.insert(id);
       return result.second;
     }
 
-    virtual bool Contains(const EntityId id) const {
+    virtual auto Contains(const EntityId id) const -> bool {
       const auto pos = ids_.find(id);
       return pos != ids_.end();
     }
 
-    virtual bool Remove(const EntityId id) {
+    virtual auto Remove(const EntityId id) -> bool {
       const auto pos = ids_.find(id);
       if(pos == ids_.end())
         return false;

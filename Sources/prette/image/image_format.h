@@ -17,7 +17,7 @@ namespace prt::img {
 #undef DEFINE_TYPE
     };
   private:
-    Type value_;
+    Type value_{};
   public:
     constexpr ImageFormat() = default;
     constexpr ImageFormat(const Type value):

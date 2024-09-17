@@ -8,10 +8,10 @@ namespace prt::uv {
   }
 
   Check::Check(Loop* loop,
-               const Callback& callback,
+               Callback callback,
                const bool start):
     HandleBaseTemplate<CheckHandle>(),
-    callback_(callback) {
+    callback_(std::move(callback)) {
     SetHandleData(handle(), this);
     const auto status = InitCheck(loop, handle());
     LOG_IF(ERROR, !status) << "failed to initialize uv::Check: " << status;

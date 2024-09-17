@@ -14,16 +14,16 @@ namespace prt {
     uuid_copy(raw_, src);
   }
 
-  int UUID::Compare(const UUID& lhs, const UUID& rhs) {
+  auto UUID::Compare(const UUID& lhs, const UUID& rhs) -> int {
     return uuid_compare(lhs.raw(), rhs.raw());
   }
 
-  std::string UUID::ToString() const {
+  auto UUID::ToString() const -> std::string {
     static constexpr const auto kUUIDStringLength = 37;
 
     uuid_string_t ss;
     uuid_unparse(raw_, ss);
-    return std::string(ss, kUUIDStringLength);
+    return { ss, kUUIDStringLength };
   }
 #else
 #error "Unsupported Platform."

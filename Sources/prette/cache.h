@@ -79,8 +79,7 @@ namespace prt {
         head_ = tail_ = node;
       } else {
         node->next = head_;
-        if(head_)
-          head_->previous = node;
+        head_->previous = node;
         head_ = node;
       }
       size_ += 1;

@@ -20,8 +20,8 @@ namespace prt::mouse {
     kDefaultCursorMode = kNormal,
   };
 
-  static inline const char*
-  GetCursorModeName(const CursorMode& rhs) {
+  static inline auto
+  GetCursorModeName(const CursorMode& rhs) -> const char* {
     switch(rhs) {
 #define TO_STRING(Name) \
       case k##Name: return #Name;
@@ -31,13 +31,13 @@ namespace prt::mouse {
     }
   }
 
-  static inline std::ostream&
-  operator<<(std::ostream& stream, const CursorMode& rhs) {
+  static inline auto
+  operator<<(std::ostream& stream, const CursorMode& rhs) -> std::ostream& {
     return stream << GetCursorModeName(rhs);
   }
 
-  static inline std::optional<CursorMode>
-  ParseCursorMode(const std::string& value) {
+  static inline auto
+  ParseCursorMode(const std::string& value) -> std::optional<CursorMode> {
     if(EqualsIgnoreCase(value, "default"))
       return { kDefaultCursorMode };
 #define PARSE_CURSOR_MODE(Name)                 \
