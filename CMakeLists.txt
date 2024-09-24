@@ -7,20 +7,9 @@ project(
   HOMEPAGE_URL ${BUILD_JSON_HOMEPAGE}
   LANGUAGES C CXX)
 
-option(ENABLE_CPPCHECK "Enable CppCheck" OFF)
-if(ENABLE_CPPCHECK)
-  include(CppCheck)
-endif()
-
 option(ENABLE_CLANG_TIDY "Enable clang-tidy" ON)
 if(ENABLE_CLANG_TIDY)
   include(ClangTidy)
-endif()
-
-if(${CMAKE_BUILD_TYPE} MATCHES "^[rR]elease")
-  if(ENABLE_CPPCHECK)
-    enable_cppcheck()
-  endif()
 endif()
 
 option(PRT_BUILD_DOCS "Build documentation" ON)

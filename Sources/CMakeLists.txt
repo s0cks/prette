@@ -62,5 +62,5 @@ add_executable(${PROJECT_NAME}-client main.cc)
 target_link_libraries(${PROJECT_NAME}-client PUBLIC ${PROJECT_NAME})
 
 if(ENABLE_COVERAGE)
-  create_coverage_target(${PROJECT_NAME}-client ${PRT_SOU})
+  create_coverage_target(${PROJECT_NAME}-client)
 endif()
