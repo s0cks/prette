@@ -30,7 +30,6 @@ list(
   rapidjson
   nuklear
   glm::glm
-  OpenAL::OpenAL
   Backward::Backward
   OpenSSL::Crypto
   rapidjson

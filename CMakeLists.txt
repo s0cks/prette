@@ -54,10 +54,6 @@ find_package(stduuid CONFIG REQUIRED)
 
 find_path(SEMVER_INCLUDE_DIRS "semver/semver.hpp")
 
-# TODO: convert to vcpkg
-find_package(utf8 REQUIRED)
-find_package(OpenAL REQUIRED)
-
 list(APPEND PRT_COMPILE_OPTS -frtti -fms-extensions -Wno-deprecated
      -Wno-sizeof-pointer-memaccess)
 
