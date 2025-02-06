@@ -4,54 +4,54 @@
 #include "prette/common.h"
 
 namespace prt::tree {
-  template<class N>
-  class Node {
-  protected:
-    N* parent_;
+template <class N>
+class Node {
+ protected:
+  N* parent_;
 
-    explicit Node(N* parent = nullptr):
-      parent_(parent) {
-    }
-  public:
-    virtual ~Node() = default;
+  explicit Node(N* parent = nullptr) :
+    parent_(parent) {}
 
-    virtual N* GetParent() const {
-      return parent_;
-    }
+ public:
+  virtual ~Node() = default;
 
-    virtual void SetParent(N* node) {
-      PRT_ASSERT(node);
-      parent_ = node;
-    }
+  virtual N* GetParent() const {
+    return parent_;
+  }
 
-    virtual uword GetNumberOfChildren() const {
-      return 0;
-    }
+  virtual void SetParent(N* node) {
+    ASSERT(node);
+    parent_ = node;
+  }
 
-    virtual N* GetChildAt(const uword idx) const {
-      return nullptr;
-    }
+  virtual uword GetNumberOfChildren() const {
+    return 0;
+  }
 
-    virtual void SetChildAt(const uword idx, N* node) {
-      // do nothing
-    }
+  virtual N* GetChildAt(const uword idx) const {
+    return nullptr;
+  }
 
-    virtual void AddChild(N* node) {
-      // do nothing
-    }
+  virtual void SetChildAt(const uword idx, N* node) {
+    // do nothing
+  }
 
-    inline bool HasChildren() const {
-      return GetNumberOfChildren() > 0;
-    }
+  virtual void AddChild(N* node) {
+    // do nothing
+  }
 
-    inline bool IsLeaf() const {
-      return GetNumberOfChildren() == 0;
-    }
+  inline bool HasChildren() const {
+    return GetNumberOfChildren() > 0;
+  }
 
-    inline bool IsRoot() const {
-      return GetParent() == nullptr;
-    }
-  };
-}
+  inline bool IsLeaf() const {
+    return GetNumberOfChildren() == 0;
+  }
 
-#endif //PRT_TREE_H
+  inline bool IsRoot() const {
+    return GetParent() == nullptr;
+  }
+};
+}  // namespace prt::tree
+
+#endif  // PRT_TREE_H

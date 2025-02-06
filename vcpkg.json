@@ -15,15 +15,15 @@
     "leveldb",
     "libuv",
     "nuklear",
-    "opengl",
-    "openssl",
     "rapidjson",
     "rxcpp",
     "stduuid",
     "termcolor",
     "tweeny",
     "units",
+    "libpng",
     "z4kn4fein-semver",
-    "libogg-test"
+    "imgui",
+    "implot"
   ]
 }

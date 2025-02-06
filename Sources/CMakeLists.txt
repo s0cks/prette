@@ -32,16 +32,22 @@ list(
   glm::glm
   Backward::Backward
   OpenSSL::Crypto
+  imgui::imgui
+  implot::implot
   rapidjson
   glfw
-  libuv::uv_a)
+  libuv::uv)
 if(PRT_ENABLE_VK)
   list(APPEND PRT_LIBRARIES Vulkan::Vulkan)
 else()
   list(APPEND PRT_LIBRARIES OpenGL::GL GLEW::GLEW)
 endif()
 
-add_library(${PROJECT_NAME} STATIC ${PRT_SOURCES})
+if(OPENSSL_FOUND)
+  message(STATUS "found openssl: " ${OPENSSL_CRYPTO_LIBRARIES})
+endif()
+
+add_library(${PROJECT_NAME} SHARED ${PRT_SOURCES})
 target_compile_options(${PROJECT_NAME} PUBLIC ${PRT_COMPILE_OPTS})
 target_link_libraries(${PROJECT_NAME} PUBLIC ${PRT_LIBRARIES})
 target_include_directories(
@@ -49,17 +55,5 @@ target_include_directories(
   PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}
   PRIVATE ${TERMCOLOR_INCLUDE_DIRS})
 
-if(ENABLE_CPPCHECK)
-  create_cppcheck_target(${PROJECT_NAME} ${PRT_SOURCES})
-endif()
-
-if(ENABLE_CLANG_TIDY)
-  create_clang_tidy_target(${PROJECT_NAME} ${PRT_SOURCES})
-endif()
-
 add_executable(${PROJECT_NAME}-client main.cc)
 target_link_libraries(${PROJECT_NAME}-client PUBLIC ${PROJECT_NAME})
-
-if(ENABLE_COVERAGE)
-  create_coverage_target(${PROJECT_NAME}-client)
-endif()

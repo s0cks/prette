@@ -1,32 +1,35 @@
 #ifndef PRT_STATE_MACHINE_H
 #define PRT_STATE_MACHINE_H
 
-#include "prette/series.h"
 #include "prette/counter.h"
+#include "prette/series.h"
 
 namespace prt {
-  static constexpr const auto kDefaultStateSeriesCapacity = 10;
-  class State {
-    typedef TimeSeries<kDefaultStateSeriesCapacity> DurationSeries;
-  private:
-    DurationSeries duration_;
-  protected:
-    State() = default;
+static constexpr const auto kDefaultStateSeriesCapacity = 10;
+class State {
+  using DurationSeries = TimeSeries<kDefaultStateSeriesCapacity>;
 
-    virtual void Run() = 0;
-    virtual void Stop() = 0;
+ private:
+  DurationSeries duration_;
 
-    void AppendDuration(const uint64_t value) {
-      duration_.Append(value);
-    }
-  public:
-    virtual ~State() = default;
-    virtual const char* GetName() const = 0;
+ protected:
+  State() = default;
 
-    const DurationSeries& GetDurationSeries() const {
-      return duration_;
-    }
-  };
-}
+  virtual void Run() = 0;
+  virtual void Stop() = 0;
 
-#endif //PRT_STATE_MACHINE_H
+  void AppendDuration(const uint64_t value) {
+    duration_.Append(value);
+  }
+
+ public:
+  virtual ~State() = default;
+  virtual auto GetName() const -> const char* = 0;
+
+  auto GetDurationSeries() const -> const DurationSeries& {
+    return duration_;
+  }
+};
+}  // namespace prt
+
+#endif  // PRT_STATE_MACHINE_H

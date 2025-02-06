@@ -39,7 +39,15 @@ find_package(Freetype REQUIRED)
 find_package(PNG REQUIRED)
 find_package(JPEG REQUIRED)
 find_package(rxcpp CONFIG REQUIRED)
+
+set(OPENSSL_USE_STATIC_LIBS FALSE)
+
+if(APPLE)
+find_package(OpenSSL PATHS /opt/homebrew REQUIRED)
+else()
 find_package(OpenSSL REQUIRED)
+endif()
+
 find_package(leveldb CONFIG REQUIRED)
 find_package(fmt CONFIG REQUIRED)
 find_package(Backward CONFIG REQUIRED)
@@ -51,33 +59,35 @@ find_package(gflags CONFIG REQUIRED)
 find_package(unofficial-nuklear CONFIG REQUIRED)
 find_package(RapidJSON CONFIG REQUIRED)
 find_package(stduuid CONFIG REQUIRED)
+find_package(imgui CONFIG REQUIRED)
+find_package(implot CONFIG REQUIRED)
 
 find_path(SEMVER_INCLUDE_DIRS "semver/semver.hpp")
 
 list(APPEND PRT_COMPILE_OPTS -frtti -fms-extensions -Wno-deprecated
      -Wno-sizeof-pointer-memaccess)
 
-option(ENABLE_COVERAGE "Enable code coverage reports using gcov/lcov" ON)
-if(ENABLE_COVERAGE)
-  include(Coverage)
-  # TODO: cleanup this logic, get it into Coverage.cmake
-  if(${CMAKE_CXX_COMPILER_ID} MATCHES "([aA]pple)?[cC]lang|GNU")
-    list(
-      APPEND
-      PRT_COMPILE_OPTS
-      -O0
-      -g
-      -fprofile-instr-generate
-      -fcoverage-mapping
-      --coverage)
-    list(APPEND PRT_LIBRARIES -fprofile-instr-generate -fprofile-instr-generate
-         -fcoverage-mapping --coverage)
-  elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    # TODO: implement
-  else()
-    message(FATAL_ERROR "unsupported compiler: ${CMAKE_CXX_COMPILER_ID}")
-  endif()
-endif()
+# option(ENABLE_COVERAGE "Enable code coverage reports using gcov/lcov" OFF)
+# if(ENABLE_COVERAGE)
+#   include(Coverage)
+#   # TODO: cleanup this logic, get it into Coverage.cmake
+#   if(${CMAKE_CXX_COMPILER_ID} MATCHES "([aA]pple)?[cC]lang|GNU")
+#     list(
+#       APPEND
+#       PRT_COMPILE_OPTS
+#       -O0
+#       -g
+#       -fprofile-instr-generate
+#       -fcoverage-mapping
+#       --coverage)
+#     list(APPEND PRT_LIBRARIES -fprofile-instr-generate -fprofile-instr-generate
+#          -fcoverage-mapping --coverage)
+#   elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+#     # TODO: implement
+#   else()
+#     message(FATAL_ERROR "unsupported compiler: ${CMAKE_CXX_COMPILER_ID}")
+#   endif()
+# endif()
 
 add_compile_definitions(PRT_GLFW)
 if(CMAKE_BUILD_TYPE MATCHES "^[Dd]ebug")

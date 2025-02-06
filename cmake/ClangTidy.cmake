@@ -21,7 +21,8 @@ if(CLANG_TIDY)
   message(STATUS "found clang-tidy v${CLANG_TIDY_VERSION}: ${CLANG_TIDY}")
   message(STATUS "clang-tidy options: ${CLANG_TIDY_OPTS}")
   macro(enable_clang_tidy)
-    set(CMAKE_CXX_CLANG_TIDY ${CLANG_TIDY} ${CLANG_TIDY_OPTS})
+    set(CMAKE_CXX_CLANG_TIDY ${CLANG_TIDY} ${CLANG_TIDY_OPTS}
+                             --extra-arg-before=-std=c++20)
   endmacro()
 
   function(create_clang_tidy_target target)

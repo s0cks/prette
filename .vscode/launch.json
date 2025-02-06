@@ -52,7 +52,7 @@
     },
     {
       "name": "prette",
-      "type": "cppdbg",
+      "type": "lldb",
       "request": "launch",
       "program": "${workspaceFolder}/build/Sources/prette-client",
       "args": [
@@ -62,19 +62,13 @@
         "--colorlogtostdout"
       ],
       "cwd": "${workspaceFolder}",
-      "environment": [
-        {
-          "name": "UV_THREADPOOL_SIZE",
-          "value": "0"
-        }
+      "env": {
+        "UV_THREADPOOL_SIZE": "0",
+        "TERM": "xterm-256color",
+      },
+      "initCommands": [
+        "command source ${workspaceFolder}/.lldbinit"
       ],
-      "MIMode": "lldb",
-      "setupCommands": [
-        {
-          "description": "Load .lldbinit",
-          "text": "command source ~/.lldbinit"
-        }
-      ]
     },
     {
       "name": "prette (verbose)",

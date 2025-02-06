@@ -2,246 +2,250 @@
 #define PRT_TAG_H
 
 #include <string>
-#include <vector>
 #include <unordered_set>
+#include <vector>
+
 #include "prette/common.h"
 
 namespace prt {
-  typedef std::string RawTag;
-  class Tag {
-    DEFINE_DEFAULT_COPYABLE_TYPE(Tag);
-  protected:
-    RawTag raw_;
-  public:
-    Tag() = default;
-    explicit Tag(const RawTag& raw):
-      raw_(raw) {
-    }
-    ~Tag() = default;
+typedef std::string RawTag;
+class Tag {
+  DEFINE_DEFAULT_COPYABLE_TYPE(Tag);
 
-    int Compare(const Tag* rhs) const {
-      if(raw() < rhs->raw())
-        return -1;
-      else if(raw() > rhs->raw())
-        return +1;
-      return 0;
-    }
+ protected:
+  RawTag raw_;
 
-    inline bool Equals(const Tag* rhs) const {
-      return Compare(rhs) == 0;
-    }
+ public:
+  Tag() = default;
+  explicit Tag(const RawTag& raw) :
+    raw_(raw) {}
+  ~Tag() = default;
 
-    std::string ToString() const {
-      return raw_;
-    }
+  int Compare(const Tag* rhs) const {
+    if (raw() < rhs->raw())
+      return -1;
+    else if (raw() > rhs->raw())
+      return +1;
+    return 0;
+  }
 
-    const RawTag& raw() const {
-      return raw_;
-    }
+  inline bool Equals(const Tag* rhs) const {
+    return Compare(rhs) == 0;
+  }
 
-    operator std::string() const {
-      return raw();
-    }
+  std::string ToString() const {
+    return raw_;
+  }
 
-    Tag& operator=(const RawTag& raw) {
-      raw_ = raw;
-      return *this;
-    }
+  const RawTag& raw() const {
+    return raw_;
+  }
 
-    bool operator==(const Tag& rhs) const {
-      return raw() == rhs.raw();
-    }
+  operator std::string() const {
+    return raw();
+  }
 
-    bool operator==(const RawTag& rhs) const {
-      return raw() == rhs;
-    }
+  Tag& operator=(const RawTag& raw) {
+    raw_ = raw;
+    return *this;
+  }
 
-    bool operator!=(const Tag& rhs) const {
-      return raw() != rhs.raw();
-    }
+  bool operator==(const Tag& rhs) const {
+    return raw() == rhs.raw();
+  }
 
-    bool operator!=(const RawTag& rhs) const {
-      return raw() != rhs;
-    }
+  bool operator==(const RawTag& rhs) const {
+    return raw() == rhs;
+  }
 
-    bool operator<(const Tag& rhs) const {
-      return raw() < rhs.raw();
-    }
+  bool operator!=(const Tag& rhs) const {
+    return raw() != rhs.raw();
+  }
 
-    bool operator<(const RawTag& rhs) const {
-      return raw() < rhs;
-    }
+  bool operator!=(const RawTag& rhs) const {
+    return raw() != rhs;
+  }
 
-    bool operator>(const Tag& rhs) const {
-      return raw() > rhs.raw();
-    }
+  bool operator<(const Tag& rhs) const {
+    return raw() < rhs.raw();
+  }
 
-    bool operator>(const RawTag& rhs) const {
-      return raw() > rhs;
-    }
+  bool operator<(const RawTag& rhs) const {
+    return raw() < rhs;
+  }
 
-    friend std::ostream& operator<<(std::ostream& stream, const Tag& rhs) {
-      return stream << rhs.ToString();
-    }
-  public:
-    static inline Tag*
-    New(const std::string& value) {
-      return new Tag(value);
-    }
+  bool operator>(const Tag& rhs) const {
+    return raw() > rhs.raw();
+  }
 
-    static Tag* Of(const std::string& value);
-  };
+  bool operator>(const RawTag& rhs) const {
+    return raw() > rhs;
+  }
 
-  class TagTrie {
-    static constexpr const auto kAlphabetSize = 27;
-    class Node {
-      DEFINE_DEFAULT_COPYABLE_TYPE(Node);
-    private:
-      Node* parent_{};
-      std::array<Node*, kAlphabetSize> children_{};
-      uint16_t num_children_{};
-      Tag* value_{};
-    public:
-      Node() = default;
-      ~Node() = default;
+  friend std::ostream& operator<<(std::ostream& stream, const Tag& rhs) {
+    return stream << rhs.ToString();
+  }
 
-      Node* GetParent() const {
-        return parent_;
-      }
+ public:
+  static inline Tag* New(const std::string& value) {
+    return new Tag(value);
+  }
 
-      void SetParent(Node* node) {
-        PRT_ASSERT(node);
-        parent_ = node;
-      }
+  static Tag* Of(const std::string& value);
+};
 
-      bool HasParent() const {
-        return GetParent() != nullptr;
-      }
+class TagTrie {
+  static constexpr const auto kAlphabetSize = 27;
+  class Node {
+    DEFINE_DEFAULT_COPYABLE_TYPE(Node);
 
-      uint16_t GetNumberOfChildren() const {
-        return num_children_;
-      }
+   private:
+    Node* parent_{};
+    std::array<Node*, kAlphabetSize> children_{};
+    uint16_t num_children_{};
+    Tag* value_{};
 
-      bool IsLeaf() const {
-        return GetNumberOfChildren() == 0;
-      }
+   public:
+    Node() = default;
+    ~Node() = default;
 
-      bool HasChildren() const {
-        return GetNumberOfChildren() >= 1;
-      }
-
-      Node* GetChildAt(const uint16_t idx) const {
-        PRT_ASSERT(idx >= 0);
-        PRT_ASSERT(idx <= GetNumberOfChildren());
-        return children_[idx];
-      }
-
-      void SetChildAt(const uint16_t idx, Node* value) {
-        PRT_ASSERT(idx >= 0);
-        PRT_ASSERT(idx <= GetNumberOfChildren());
-        PRT_ASSERT(value);
-        children_[idx] = value;
-        value->SetParent(this);
-      }
-
-      bool HasChildAt(const uint16_t idx) const {
-        PRT_ASSERT(idx >= 0);
-        PRT_ASSERT(idx <= GetNumberOfChildren());
-        return children_[idx] != nullptr;
-      }
-
-      void SetValue(Tag* value) {
-        PRT_ASSERT(value);
-        value_ = value;
-      }
-
-      Tag* GetValue() const {
-        return value_;
-      }
-
-      bool HasValue() const {
-        return GetValue() != nullptr;
-      }
-
-      friend std::ostream& operator<<(std::ostream& stream, const Node& rhs) {
-        stream << "TagTrie::Node(";
-        stream << "value=" << (*rhs.GetValue());
-        stream << ")";
-        return stream;
-      }
-    };
-  protected:
-    Node* root_{};
-
-    inline void SetRoot(Node* node) {
-      PRT_ASSERT(node);
-      root_ = node;
+    Node* GetParent() const {
+      return parent_;
     }
 
-    inline Node* GetRoot() const {
-      return root_;
+    void SetParent(Node* node) {
+      ASSERT(node);
+      parent_ = node;
     }
 
-    static Tag* Search(Node* root, const std::string& value);
-  public:
-    TagTrie() = default;
-    ~TagTrie() = default;
+    bool HasParent() const {
+      return GetParent() != nullptr;
+    }
 
-    Tag* Search(const std::string& value) const {
-      return Search(GetRoot(), value);
+    uint16_t GetNumberOfChildren() const {
+      return num_children_;
+    }
+
+    bool IsLeaf() const {
+      return GetNumberOfChildren() == 0;
+    }
+
+    bool HasChildren() const {
+      return GetNumberOfChildren() >= 1;
+    }
+
+    Node* GetChildAt(const uint16_t idx) const {
+      ASSERT(idx >= 0);
+      ASSERT(idx <= GetNumberOfChildren());
+      return children_[idx];
+    }
+
+    void SetChildAt(const uint16_t idx, Node* value) {
+      ASSERT(idx >= 0);
+      ASSERT(idx <= GetNumberOfChildren());
+      ASSERT(value);
+      children_[idx] = value;
+      value->SetParent(this);
+    }
+
+    bool HasChildAt(const uint16_t idx) const {
+      ASSERT(idx >= 0);
+      ASSERT(idx <= GetNumberOfChildren());
+      return children_[idx] != nullptr;
+    }
+
+    void SetValue(Tag* value) {
+      ASSERT(value);
+      value_ = value;
+    }
+
+    Tag* GetValue() const {
+      return value_;
+    }
+
+    bool HasValue() const {
+      return GetValue() != nullptr;
+    }
+
+    friend std::ostream& operator<<(std::ostream& stream, const Node& rhs) {
+      stream << "TagTrie::Node(";
+      stream << "value=" << (*rhs.GetValue());
+      stream << ")";
+      return stream;
     }
   };
-}
+
+ protected:
+  Node* root_{};
+
+  inline void SetRoot(Node* node) {
+    ASSERT(node);
+    root_ = node;
+  }
+
+  inline Node* GetRoot() const {
+    return root_;
+  }
+
+  static Tag* Search(Node* root, const std::string& value);
+
+ public:
+  TagTrie() = default;
+  ~TagTrie() = default;
+
+  Tag* Search(const std::string& value) const {
+    return Search(GetRoot(), value);
+  }
+};
+}  // namespace prt
 
 namespace std {
-  using prt::Tag;
+using prt::Tag;
 
-  template<>
-  struct hash<Tag> {
-    size_t operator()(const Tag& value) const {
-      size_t h = 0;
-      combine<std::string>(h, value.raw());
-      return h;
-    }
-private:
-    template<typename T>
-    static inline void
-    combine(size_t& hash, const T& value) {
-      std::hash<T> hasher;
-      hash ^= hasher(value) + 0x9e3779b9 + (hash << 6) + (hash >> 2);
-    }
-  };
-}
+template <>
+struct hash<Tag> {
+  size_t operator()(const Tag& value) const {
+    size_t h = 0;
+    combine<std::string>(h, value.raw());
+    return h;
+  }
+
+ private:
+  template <typename T>
+  static inline void combine(size_t& hash, const T& value) {
+    std::hash<T> hasher;
+    hash ^= hasher(value) + 0x9e3779b9 + (hash << 6) + (hash >> 2);
+  }
+};
+}  // namespace std
 
 namespace prt {
-  typedef std::unordered_set<Tag> TagSet;
-  typedef std::vector<Tag> TagList;
+typedef std::unordered_set<Tag> TagSet;
+typedef std::vector<Tag> TagList;
 
-  static inline std::ostream&
-  operator<<(std::ostream& stream, const TagSet& rhs) {
-    stream << "[";
-    auto idx = 0;
-    for(const auto& tag : rhs) {
-      stream << tag;
-      if(idx++ < (rhs.size() - 1))
-        stream << ", ";
-    }
-    stream << "]";
-    return stream;
+static inline std::ostream& operator<<(std::ostream& stream, const TagSet& rhs) {
+  stream << "[";
+  auto idx = 0;
+  for (const auto& tag : rhs) {
+    stream << tag;
+    if (idx++ < (rhs.size() - 1))
+      stream << ", ";
   }
-
-  static inline std::ostream&
-  operator<<(std::ostream& stream, const TagList& rhs) {
-    stream << "[";
-    auto idx = 0;
-    for(const auto& tag : rhs) {
-      stream << tag;
-      if(idx++ < (rhs.size() - 1))
-        stream << ", ";
-    }
-    stream << "]";
-    return stream;
-  }
+  stream << "]";
+  return stream;
 }
 
-#endif //PRT_TAG_H
+static inline std::ostream& operator<<(std::ostream& stream, const TagList& rhs) {
+  stream << "[";
+  auto idx = 0;
+  for (const auto& tag : rhs) {
+    stream << tag;
+    if (idx++ < (rhs.size() - 1))
+      stream << ", ";
+  }
+  stream << "]";
+  return stream;
+}
+}  // namespace prt
+
+#endif  // PRT_TAG_H
