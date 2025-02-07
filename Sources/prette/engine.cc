@@ -1,7 +1,11 @@
 #include "prette/engine.h"
 
+#include <uv.h>
+
 #include "prette/common.h"
 #include "prette/gfx.h"
+#include "prette/renderer.h"
+#include "prette/runtime.h"
 #include "prette/thread_local.h"
 #include "prette/to_string.h"
 
@@ -59,17 +63,22 @@ ENGINE_STATE_F(Init) {
   __ PublishPostInitEvent();
 }
 
-ENGINE_STATE_F(Running) {
-  DLOG(INFO) << "running.";
-  Ticker ticker(&engine->GetLoop());
-  ticker.OnTick()
-      .map([engine, &ticker](Tick tick) {
-        return new TickEvent(engine, tick, ticker.GetPreviousTick());
+RunningState::RunningState(Engine* engine) :
+  EngineState(engine),
+  ticker_(&(engine->GetLoop())) {
+  ticker_.OnTick()
+      .map([engine, this](Tick tick) {
+        return new TickEvent(engine, tick, ticker_.GetPreviousTick());
       })
       .subscribe([engine](TickEvent* event) {
         __ PublishEvent(event);
       });
+}
+
+ENGINE_STATE_F(Running) {
+  DLOG(INFO) << "running.";
   engine->GetLoop().RunDefault();
+  ticker_.Close();
 }
 
 ENGINE_STATE_F(Paused) {
@@ -112,6 +121,7 @@ auto Engine::TransitionTo(EngineState* new_state) -> bool {
   const auto current_state = state_;
   if (HasState() && GetState()->Equals(new_state))
     return CancelTransitionTo(new_state);
+  GetState()->Stop();
   SetState(new_state);
   return true;
 }
@@ -135,7 +145,7 @@ void Engine::Run() {
 }
 
 void Engine::Shutdown(const std::exception_ptr& cause) {
-  return Stop();
+  return Terminate();
 }
 
 void Engine::PublishEvent(EngineEvent* event) const {
@@ -165,6 +175,7 @@ void InitEngine() {
 #ifdef PRT_GLFW
   engine->OnTick().subscribe([](TickEvent* event) {
     glfwPollEvents();
+    Renderer::DrawFrame(Runtime::GetVkLogicalDevice());
   });
 #endif  // PRT_GLFW
   SetEngine(engine);

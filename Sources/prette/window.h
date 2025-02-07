@@ -1,7 +1,10 @@
 #ifndef PRT_WINDOW_H
 #define PRT_WINDOW_H
 
+#include <vulkan/vulkan_core.h>
+
 #include "prette/builder.h"
+#include "prette/dimension.h"
 #include "prette/event.h"
 #include "prette/geometry/shape.h"
 #include "prette/monitor.h"
@@ -218,6 +221,7 @@ class WindowEventSource : public EventSource<WindowEvent> {
 };
 
 class Window : public WindowEventSource {
+  friend class Runtime;
   friend class WindowBuilder;
   DEFINE_NON_COPYABLE_TYPE(Window);
 
@@ -287,9 +291,17 @@ class Window : public WindowEventSource {
   Handle* handle_;
   UUID id_;
   rx::subscription on_post_init_{};
+#ifdef PRT_VK
+  VkSurfaceKHR surface_{};
+#endif  // PRT_VK
 
   explicit Window(Handle* handle);
   void PublishEvent(WindowEvent* event) const override;
+
+#ifdef PRT_VK
+  void InitSurface(VkInstance& instance, const VkAllocationCallbacks* allocator);
+  void DestroySurface(const VkInstance& instance, const VkAllocationCallbacks* allocator = nullptr);
+#endif  // PRT_VK
 
  public:
   ~Window() override;
@@ -377,6 +389,7 @@ class Window : public WindowEventSource {
   void SetMinSize(const glm::i32vec2& size);
   auto GetContentScale() const -> glm::vec2;
   auto ShouldClose() const -> bool;
+  auto GetFramebufferSize() const -> Dimension;
 
   auto GetBounds() const -> Rectangle {
     const auto size = GetSize();
@@ -386,6 +399,12 @@ class Window : public WindowEventSource {
   auto OnEvent() const -> WindowEventObservable override {
     return events_.get_observable();
   }
+
+#ifdef PRT_VK
+  auto GetSurface() const -> const VkSurfaceKHR& {
+    return surface_;
+  }
+#endif  // PRT_VK
 
   friend auto operator<<(std::ostream& stream, Window* rhs) -> std::ostream& {
     return stream << rhs->ToString();

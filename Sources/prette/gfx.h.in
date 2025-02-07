@@ -22,7 +22,12 @@
 
 #ifdef PRT_GLFW
 
+#ifdef PRT_VK
+#define GLFW_INCLUDE_VULKAN
+#else
 #define GLFW_INCLUDE_NONE
+#endif  // PRT_VK
+
 #include <GLFW/glfw3.h>
 // clang-format off
 #define PRT_GLFW_CTX_VERSION_MAJOR @PROJECT_GLFW_CONTEXT_VERSION_MAJOR@

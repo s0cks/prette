@@ -79,6 +79,18 @@ class Ticker {
   }
   virtual ~Ticker() = default;
 
+  void Stop() {
+    idle_.Stop();
+    prepare_.Stop();
+    check_.Stop();
+  }
+
+  void Close() {
+    idle_.Close();
+    prepare_.Close();
+    check_.Close();
+  }
+
   auto GetTickSubject() const -> const rx::subject<Tick>& {
     return ticks_;
   }

@@ -8,29 +8,19 @@
 namespace prt {
 class Renderer {
  private:
-  VkInstance instance_{};
-  VkDevice device_{};
-  VkPhysicalDevice physical_device_{};
-  VkQueue graphics_queue_{};
-  VkQueue present_queue_{};
-  VkExtent2D swap_extent_{};
-  VkExtent2D deferred_extent_{};
-  VkCommandPool command_pool_{};
-  VkSurfaceKHR surface_{};
+  static void InitSyncObjects(const VkDevice& device, const VkAllocationCallbacks* allocator);
+  static void DestroySyncObjects(const VkDevice& device, const VkAllocationCallbacks* allocator);
 
-  std::vector<VkDrawIndexedIndirectCommand> render_commands_{};
-  MemoryBuffer indirect_{};
-  uint32_t current_vtx_{};
-  uint32_t current_idx_{};
-  uint32_t num_meshes_{};
+ public:
+  static inline void Init(const VkDevice& device, const VkAllocationCallbacks* allocator = nullptr) {
+    InitSyncObjects(device, allocator);
+  }
 
-  VkPipelineCache pipeline_cache_{};
-  VkPipeline pipeline_{};
-  VkRenderPass render_pass_{};
-  VkRenderPass deferred_pass_{};
+  static inline void Shutdown(const VkDevice& device, const VkAllocationCallbacks* allocator = nullptr) {
+    DestroySyncObjects(device, allocator);
+  }
 
-  MemoryBuffer vertex_buffer_{};
-  MemoryBuffer index_buffer_{};
+  static void DrawFrame(const VkDevice& device);
 };
 }  // namespace prt
 

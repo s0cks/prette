@@ -1,6 +1,7 @@
 #include "prette/runtime.h"
 
 #include <units.h>
+#include <uv.h>
 #include <vulkan/vulkan_core.h>
 
 #include <algorithm>
@@ -10,32 +11,63 @@
 #include <subjects/rx-synchronize.hpp>
 #include <vector>
 
+#include "prette/command_pool.h"
 #include "prette/engine.h"
 #include "prette/flags.h"
 #include "prette/gfx.h"
 #include "prette/os_thread.h"
+#include "prette/pipeline.h"
+#include "prette/renderer.h"
 #include "prette/runtime_info_printer.h"
 #include "prette/signals.h"
+#include "prette/swap_chain.h"
 #include "prette/tick.h"
+#include "prette/uv/utils.h"
 #include "prette/window.h"
 
 namespace prt {
-static VkApplicationInfo app_info_{};
 static VkInstance instance_{};
 static VkPhysicalDevice physical_device_{};
 static VkDevice device_{};
 static VkQueue graphics_queue_{};
+static VkQueue present_queue_{};
+
+static uv_async_t on_shutdown_{};
 
 #ifdef PRT_DEBUG
 static VkDebugUtilsMessengerEXT messenger_{};
+
+auto Runtime::GetVkDebugUtilsMessengerEXT() -> const VkDebugUtilsMessengerEXT& {
+  return messenger_;
+}
 #endif  // PRT_DEBUG
 
 static const std::vector<const char*> kDeviceExtensions = {
     VK_KHR_SWAPCHAIN_EXTENSION_NAME,
+    "VK_KHR_portability_subset",
 };
-static const std::vector<const char*> validation_layers_ = {
-    "VK_LAYER_KHRONOS_validation",
-};
+// TODO: "VK_LAYER_LUNARG_api_dump"
+static const std::vector<const char*> validation_layers_ = {"VK_LAYER_KHRONOS_validation"};
+
+auto Runtime::GetVkInstance() -> const VkInstance& {
+  return instance_;
+}
+
+auto Runtime::GetVkPhysicalDevice() -> const VkPhysicalDevice& {
+  return physical_device_;
+}
+
+auto Runtime::GetVkLogicalDevice() -> const VkDevice& {
+  return device_;
+}
+
+auto Runtime::GetVkGraphicsQueue() -> const VkQueue& {
+  return graphics_queue_;
+}
+
+auto Runtime::GetVkPresentQueue() -> const VkQueue& {
+  return present_queue_;
+}
 
 #ifdef PRT_DEBUG
 void PrintRuntimeInfo(const google::LogSeverity s, const char* file, const int line, const int indent) {
@@ -64,15 +96,6 @@ static inline void GetRequiredExtensions(std::vector<const char*>& extensions) {
 #endif  // PRT_DEBUG
 }
 
-void Runtime::InitApplicationInfo(VkApplicationInfo& info) {
-  info.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
-  info.pApplicationName = "Hello World";
-  info.applicationVersion = VK_MAKE_VERSION(0, 0, 0);
-  info.pEngineName = "No Engine";
-  info.engineVersion = VK_MAKE_VERSION(0, 0, 0);
-  info.apiVersion = VK_API_VERSION_1_3;
-}
-
 #ifdef PRT_DEBUG
 static VKAPI_ATTR auto VKAPI_CALL OnDebugCreateInfo(VkDebugUtilsMessageSeverityFlagBitsEXT severity,
                                                     VkDebugUtilsMessageTypeFlagsEXT type,
@@ -98,9 +121,10 @@ static inline void InvokeVkIfExists(VkInstance& instance, const char* name, Args
 }
 
 static constexpr const auto kCreateDebugUtilsMessengerEXTName = "vkCreateDebugUtilsMessengerEXT";
-static inline auto CreateDebugUtilsMessengerEXT(VkInstance& instance, const VkDebugUtilsMessengerCreateInfoEXT* create_info,
-                                                const VkAllocationCallbacks* allocator, VkDebugUtilsMessengerEXT* messenger)
-    -> VkResult {
+VKAPI_ATTR auto VKAPI_CALL CreateDebugUtilsMessengerEXT(VkInstance& instance,
+                                                        const VkDebugUtilsMessengerCreateInfoEXT* create_info,
+                                                        const VkAllocationCallbacks* allocator,
+                                                        VkDebugUtilsMessengerEXT* messenger) -> VkResult {
   const auto result = CallVkIfExists<PFN_vkCreateDebugUtilsMessengerEXT>(instance, kCreateDebugUtilsMessengerEXTName, create_info,
                                                                          allocator, messenger);
   if (result == VK_ERROR_EXTENSION_NOT_PRESENT) {
@@ -111,8 +135,8 @@ static inline auto CreateDebugUtilsMessengerEXT(VkInstance& instance, const VkDe
 }
 
 static constexpr const auto kDestroyDebugUtilsMessengerEXTName = "vkDestroyDebugUtilsMessengerEXT";
-static inline void DestroyDebugUtilsMessengerEXT(VkInstance& instance, const VkDebugUtilsMessengerEXT messenger,
-                                                 const VkAllocationCallbacks* allocator) {
+VKAPI_ATTR void VKAPI_CALL DestroyDebugUtilsMessengerEXT(VkInstance& instance, const VkDebugUtilsMessengerEXT messenger,
+                                                         const VkAllocationCallbacks* allocator = nullptr) {
   return InvokeVkIfExists<PFN_vkDestroyDebugUtilsMessengerEXT>(instance, kDestroyDebugUtilsMessengerEXTName, messenger,
                                                                allocator);
 }
@@ -125,27 +149,18 @@ static inline void InitDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoE
   info.messageType = VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT |
                      VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT;
   info.pfnUserCallback = callback;
+  info.pNext = nullptr;
 }
 #endif  // PRT_DEBUG
 
-static inline void InitInstanceCreateInfo(VkInstanceCreateInfo& info, const std::vector<const char*>& extensions) {
-  info.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
-  info.pApplicationInfo = &app_info_;
-  info.flags |= VK_INSTANCE_CREATE_ENUMERATE_PORTABILITY_BIT_KHR;
-  info.enabledLayerCount = 0;
-  info.enabledExtensionCount = extensions.size();
-  info.ppEnabledExtensionNames = &extensions[0];
-
-#ifdef PRT_DEBUG
-  info.enabledLayerCount = validation_layers_.size();
-  info.ppEnabledLayerNames = &validation_layers_[0];
-  VkDebugUtilsMessengerCreateInfoEXT debug_info{};
-  InitDebugMessengerCreateInfo(debug_info, &OnDebugCreateInfo);
-  info.pNext = &debug_info;
-#else
-  info.enabledLayerCount = 0;
+static inline void InitAppInfo(VkApplicationInfo& info) {
+  info.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
+  info.pApplicationName = "Hello World";
+  info.applicationVersion = VK_MAKE_VERSION(0, 0, 0);
+  info.pEngineName = "No Engine";
+  info.engineVersion = VK_MAKE_VERSION(0, 0, 0);
   info.pNext = nullptr;
-#endif  // PRT_DEBUG
+  info.apiVersion = VK_API_VERSION_1_3;
 }
 
 static inline auto HasValidationLayerSupport() -> bool {
@@ -169,8 +184,6 @@ void Runtime::InitInstance(VkInstance& instance) {
 #ifdef PRT_DEBUG
   LOG_IF(FATAL, !HasValidationLayerSupport()) << "vk validation layers requested but not available!";
 #endif  // PRT_DEBUG
-  InitApplicationInfo(app_info_);
-
   std::vector<const char*> extensions;
   GetRequiredExtensions(extensions);
 #ifdef PRT_DEBUG
@@ -178,8 +191,27 @@ void Runtime::InitInstance(VkInstance& instance) {
   for (const auto& ext : extensions) LOG(INFO) << " - " << ext;
 #endif  // PRT_DEBUG
 
+  VkApplicationInfo app_info{};
+  InitAppInfo(app_info);
+
   VkInstanceCreateInfo create_info{};
-  InitInstanceCreateInfo(create_info, extensions);
+  create_info.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
+  create_info.pApplicationInfo = &app_info;
+  create_info.flags |= VK_INSTANCE_CREATE_ENUMERATE_PORTABILITY_BIT_KHR;
+  create_info.enabledLayerCount = 0;
+  create_info.enabledExtensionCount = extensions.size();
+  create_info.ppEnabledExtensionNames = &extensions[0];
+
+  VkDebugUtilsMessengerCreateInfoEXT debug_info{};
+#ifdef PRT_DEBUG
+  create_info.enabledLayerCount = validation_layers_.size();
+  create_info.ppEnabledLayerNames = &validation_layers_[0];
+  InitDebugMessengerCreateInfo(debug_info, &OnDebugCreateInfo);
+  create_info.pNext = (VkDebugUtilsMessengerCreateInfoEXT*)&debug_info;
+#else
+  info.enabledLayerCount = 0;
+  info.pNext = nullptr;
+#endif  // PRT_DEBUG
   CHECK_VK(FATAL, vkCreateInstance(&create_info, nullptr, &instance), "failed to create vkInstance");
 #ifdef PRT_DEBUG
   {
@@ -189,59 +221,128 @@ void Runtime::InitInstance(VkInstance& instance) {
              "failed to create vk debug messenger");
   }
 #endif  // PRT_DEBUG
-  InitPhysicalDevice(instance_, physical_device_);
-  InitLogicalDevice(device_);
+  InitWindowSurface(instance_, GetAppWindow());
+  const auto& surface = GetAppWindow()->GetSurface();
+  InitPhysicalDevice(instance_, surface, physical_device_);
+  InitLogicalDevice(physical_device_, surface, device_, graphics_queue_, present_queue_, 1.0f, validation_layers_);
+  SwapChain::Init(physical_device_, device_, surface);
+  Pipeline::Init(device_);
+  SwapChain::InitFramebuffers(device_);
+  CommandPool::Init(physical_device_, device_, surface);
+  Renderer::Init(device_);
 }
 
-void Runtime::InitPhysicalDevice(const VkInstance& instance, VkPhysicalDevice& device) {
-  LOG_IF(FATAL, !FindSuitablePhysicalDevice(instance, &device)) << "failed to find suitable GPU w/ vulkan support.";
+void Runtime::InitWindowSurface(VkInstance& instance, Window* window) {
+  ASSERT(window);
+  window->InitSurface(instance, nullptr);
+}
+
+static inline auto CheckDeviceExtensionSupport(const VkPhysicalDevice& device) -> bool {
+  uint32_t count = 0;
+  vkEnumerateDeviceExtensionProperties(device, nullptr, &count, nullptr);
+  std::vector<VkExtensionProperties> available(count);
+  vkEnumerateDeviceExtensionProperties(device, nullptr, &count, &available[0]);
+
+  std::set<std::string> required(std::begin(kDeviceExtensions), std::end(kDeviceExtensions));
+  for (const auto& ext : available) {
+    required.erase(ext.extensionName);
+  }
+  return required.empty();
+}
+
+static inline auto IsDeviceSuitable(const VkSurfaceKHR& surface) -> std::function<bool(const VkPhysicalDevice& device)> {
+  return [&surface](const VkPhysicalDevice& device) {
+    QueueFamilyIndices indices = FindQueueFamilies(device, surface);
+    const auto extensions_supported = CheckDeviceExtensionSupport(device);
+    bool swap_supported = false;
+    if (extensions_supported) {
+      const auto window = GetAppWindow();
+      ASSERT(window);
+      swap_supported = QuerySwapChainSupport(device, window->GetSurface());
+    }
+    return indices.IsComplete() && extensions_supported && swap_supported;
+  };
+}
+
+void Runtime::InitPhysicalDevice(const VkInstance& instance, const VkSurfaceKHR& surface, VkPhysicalDevice& device) {
+  LOG_IF(FATAL, !FindSuitablePhysicalDevice(instance, &device, IsDeviceSuitable(surface)))
+      << "failed to find suitable GPU w/ vulkan support.";
 #ifdef PRT_DEBUG
   LOG(INFO) << "found suitable GPU w/ vulkan support:";
   PrintProperties(device);
 #endif  // PRT_DEBUG
 }
 
-void Runtime::InitLogicalDevice(VkDevice& device, const float priority) {
-  const auto indices = FindQueueFamilies(physical_device_);
+void Runtime::InitLogicalDevice(const VkPhysicalDevice& physical_device, const VkSurfaceKHR& surface, VkDevice& device,
+                                VkQueue& graphics_queue, VkQueue& present_queue, const float priority,
+                                const std::vector<const char*>& validation_layers) {
+  const auto indices = FindQueueFamilies(physical_device, surface);
+  std::unordered_set<uint32_t> unique_families{};
+  indices.GetUniqueFamilies(unique_families);
+  std::vector<VkDeviceQueueCreateInfo> create_infos{};
 
-  VkDeviceQueueCreateInfo queue_create_info{};
-  queue_create_info.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
-  queue_create_info.queueFamilyIndex = indices.graphics.value();
-  queue_create_info.queueCount = 1;
-  queue_create_info.pQueuePriorities = &priority;
+  for (const auto& family : unique_families) {
+    VkDeviceQueueCreateInfo queue_create_info{};
+    queue_create_info.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
+    queue_create_info.queueFamilyIndex = family;
+    queue_create_info.queueCount = 1;
+    queue_create_info.pQueuePriorities = &priority;
+    create_infos.push_back(queue_create_info);
+  }
 
   VkPhysicalDeviceFeatures device_features{};
 
   VkDeviceCreateInfo create_info{};
   create_info.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
-  create_info.pQueueCreateInfos = &queue_create_info;
-  create_info.queueCreateInfoCount = 1;
+  create_info.pQueueCreateInfos = &create_infos[0];
+  create_info.queueCreateInfoCount = create_infos.size();
   create_info.pEnabledFeatures = &device_features;
-  create_info.enabledExtensionCount = 0;
+  create_info.enabledExtensionCount = kDeviceExtensions.size();
+  create_info.ppEnabledExtensionNames = &kDeviceExtensions[0];
 
 #ifdef PRT_DEBUG
-  create_info.enabledLayerCount = validation_layers_.size();
-  create_info.ppEnabledLayerNames = &validation_layers_[0];
+  create_info.enabledLayerCount = validation_layers.size();
+  create_info.ppEnabledLayerNames = &validation_layers[0];
 #else
   create_info.enabledLayerCount = 0;
 #endif  // PRT_DEBUG
-  CHECK_VK(FATAL, vkCreateDevice(physical_device_, &create_info, nullptr, &device), "failed to create vk device");
-  vkGetDeviceQueue(device, indices.graphics.value(), 0, &graphics_queue_);
+  CHECK_VK(FATAL, vkCreateDevice(physical_device, &create_info, nullptr, &device), "failed to create vk device");
+  indices.GetGraphicsQueue(device, graphics_queue);
+  indices.GetPresentQueue(device, present_queue);
 }
 
-void Runtime::Shutdown() {
+void Runtime::DestroyDevice(const VkAllocationCallbacks* allocator) {
+  vkDestroyDevice(device_, allocator);
+}
+
+void Runtime::DestroyInstance(const VkAllocationCallbacks* allocator) {
+  vkDestroyInstance(instance_, allocator);
+}
+
+void Runtime::OnShutdown(uv_async_t* handle) {
   DLOG(INFO) << "shutting down....";
-  const auto window = GetAppWindow();
-  window->Close();
   const auto engine = GetEngine();
   ASSERT(engine);
   engine->Shutdown();
+  const auto window = GetAppWindow();
+  window->Close();
 
-  vkDestroyDevice(device_, nullptr);
+  vkDeviceWaitIdle(device_);
+  Renderer::Shutdown(device_);
+  CommandPool::Shutdown(device_);
+  SwapChain::DestroyFramebuffers(device_);
+  Pipeline::Shutdown(device_);
+  SwapChain::Shutdown(device_);
+  DestroyDevice();
 #ifdef PRT_DEBUG
-  DestroyDebugUtilsMessengerEXT(instance_, messenger_, nullptr);
+  DestroyDebugUtilsMessengerEXT(instance_, messenger_);
 #endif  // PRT_DEBUG
-  vkDestroyInstance(instance_, nullptr);
+  window->DestroySurface(instance_);
+  DestroyInstance();
+}
+
+void Runtime::Shutdown() {
+  uv_async_send(&on_shutdown_);
   // TODO:
   //  - destroy window
   //  - terminate glfw
@@ -269,9 +370,11 @@ void Runtime::Init(int argc, char** argv) {
   LOG_IF(FATAL, !SetCurrentThreadName("main")) << "failed to set main thread name.";
   gfx::Init();
   engine::InitEngine();
-#ifdef PRT_DEBUG
+
   const auto engine = GetEngine();
   ASSERT(engine);
+  uv::Async::Init(engine->GetLoop(), &on_shutdown_, &OnShutdown);
+#ifdef PRT_DEBUG
   engine->OnTick()
       .map([](engine::TickEvent* event) {
         return (event->GetTimeSinceLast()).value();

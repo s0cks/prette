@@ -2,7 +2,9 @@
 #define PRT_ENGINE_H
 
 #include <units.h>
+#include <uv.h>
 
+#include "prette/common.h"
 #include "prette/crash_report.h"
 #include "prette/event.h"
 #include "prette/ticker.h"
@@ -184,7 +186,8 @@ FOR_EACH_ENGINE_STATE(FORWARD_DECLARE_STATE)
 #define DECLARE_ENGINE_STATE(Name)         \
   class Name##State : public EngineState { \
    public:                                 \
-    Name##State() = default;               \
+    explicit Name##State(Engine* engine) : \
+      EngineState(engine) {}               \
     ~Name##State() override = default;     \
     DECLARE_ENGINE_STATE_TYPE(Name);       \
   };
@@ -197,10 +200,18 @@ class EngineState {
   using DurationSeries = TimeSeries<>;
 
  private:
-  DurationSeries duration_;
+  Engine* engine_;
+  DurationSeries duration_{};
 
  protected:
-  EngineState() = default;
+  explicit EngineState(Engine* engine) :
+    engine_(engine) {
+    ASSERT(engine_);
+  }
+
+  virtual void Stop() {
+    // do nothing
+  }
 
   virtual void Execute(Engine* engine) = 0;
 
@@ -234,7 +245,9 @@ class RunningState : public EngineState {
   friend class Engine;
 
  private:
-  explicit RunningState() = default;
+  Ticker ticker_;
+
+  explicit RunningState(Engine* engine);
 
  public:
   ~RunningState() override = default;
@@ -242,8 +255,9 @@ class RunningState : public EngineState {
   DECLARE_ENGINE_STATE_TYPE(Running);
 
  public:
-  static inline auto New() -> RunningState* {
-    return new RunningState();
+  static inline auto New(Engine* engine) -> RunningState* {
+    ASSERT(engine);
+    return new RunningState(engine);
   }
 };
 
@@ -254,7 +268,8 @@ class ErrorState : public EngineState {
  private:
   std::exception_ptr cause_;
 
-  explicit ErrorState(const std::exception_ptr cause) :
+  explicit ErrorState(Engine* engine, const std::exception_ptr cause) :
+    EngineState(engine),
     cause_(cause) {}
 
  public:
@@ -267,8 +282,9 @@ class ErrorState : public EngineState {
   DECLARE_ENGINE_STATE_TYPE(Error);
 
  public:
-  static inline auto New(const std::exception_ptr& cause) -> ErrorState* {
-    return new ErrorState(cause);
+  static inline auto New(Engine* engine, const std::exception_ptr& cause) -> ErrorState* {
+    ASSERT(engine);
+    return new ErrorState(engine, cause);
   }
 };
 
@@ -303,12 +319,12 @@ class Engine : public EngineEventSource {
 
   template <class S, typename... Args>
   inline void RunState(Args... args) {
-    S state(args...);
+    S state(this, args...);
     return RunState(&state);
   }
 
-  void Stop() {
-    loop_.Stop();
+  void Terminate() {
+    GetLoop().Stop();
   }
 
   void PublishEvent(EngineEvent* event) const override;
@@ -316,7 +332,7 @@ class Engine : public EngineEventSource {
   auto CancelTransitionTo(EngineState* new_state) -> bool;
 
   auto Error(const std::exception_ptr& cause) -> bool {
-    return TransitionTo(ErrorState::New(cause));
+    return TransitionTo(ErrorState::New(this, cause));
   }
 
 #define DEFINE_PUBLISH_EVENT(Name)           \

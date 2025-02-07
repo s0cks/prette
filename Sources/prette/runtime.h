@@ -2,6 +2,7 @@
 #define PRT_RUNTIME_H
 
 #include <glog/logging.h>
+#include <vulkan/vulkan_core.h>
 
 #include "prette/common.h"
 #include "prette/gfx.h"
@@ -14,18 +15,35 @@ void PrintRuntimeInfo(const google::LogSeverity severity = google::INFO, const c
 
 #endif  // PRT_DEBUG
 
+class Window;
 class Runtime {
-  friend class RuntimeInfoPrinter;
   DEFINE_NON_INSTANTIABLE_TYPE(Runtime);
 
  private:
-  static void InitApplicationInfo(VkApplicationInfo& info);
+  static void OnShutdown(uv_async_t* handle);
   static void InitInstance(VkInstance& instance);
-  static void InitPhysicalDevice(const VkInstance& instance, VkPhysicalDevice& device);
-  static void InitLogicalDevice(VkDevice& device, const float priority = 1.0f);
+  static void InitWindowSurface(VkInstance& instance, Window* window);
+  static void InitPhysicalDevice(const VkInstance& instance, const VkSurfaceKHR& surface, VkPhysicalDevice& device);
+  static void InitLogicalDevice(const VkPhysicalDevice& physical_device, const VkSurfaceKHR& surface, VkDevice& device,
+                                VkQueue& graphics_queue, VkQueue& present_queue, const float priority,
+                                const std::vector<const char*>& validation_layers);
   static void OnUnhandledException();
 
+  static void DestroyInstance(const VkAllocationCallbacks* allocator = nullptr);
+  static void DestroyDevice(const VkAllocationCallbacks* allocator = nullptr);
+
  public:
+  static auto GetVkApplicationInfo() -> const VkApplicationInfo&;
+  static auto GetVkInstance() -> const VkInstance&;
+  static auto GetVkPhysicalDevice() -> const VkPhysicalDevice&;
+  static auto GetVkLogicalDevice() -> const VkDevice&;
+  static auto GetVkGraphicsQueue() -> const VkQueue&;
+  static auto GetVkPresentQueue() -> const VkQueue&;
+
+#ifdef PRT_DEBUG
+  static auto GetVkDebugUtilsMessengerEXT() -> const VkDebugUtilsMessengerEXT&;
+#endif  // PRT_DEBUG
+
   static void Init(int argc, char** argv);
   static auto Run() -> int;
   static void Shutdown();

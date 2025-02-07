@@ -1,5 +1,4 @@
-
-#include <GLFW/glfw3.h>
+#include <vulkan/vulkan_core.h>
 
 #include "prette/window.h"
 #ifdef PRT_GLFW
@@ -14,6 +13,16 @@ namespace prt {
 void Window::OnWindowClosed(Handle* handle) {
   Runtime::Shutdown();
 }
+
+#ifdef PRT_VK
+void Window::InitSurface(VkInstance& instance, const VkAllocationCallbacks* allocator) {
+  CHECK_VK(FATAL, glfwCreateWindowSurface(instance, GetHandle(), allocator, &surface_), "failed to create window vk surface");
+}
+
+void Window::DestroySurface(const VkInstance& instance, const VkAllocationCallbacks* allocator) {
+  vkDestroySurfaceKHR(instance, surface_, allocator);
+}
+#endif  // PRT_VK
 
 void Window::OnWindowPos(Handle* handle, const int xPos, const int yPos) {
   const auto window = GetWindow(handle);
@@ -107,6 +116,13 @@ auto Window::GetPos() const -> Point {
   glm::i32vec2 pos;
   glfwGetWindowPos(GetHandle(), &pos[0], &pos[1]);
   return {pos};
+}
+
+auto Window::GetFramebufferSize() const -> Dimension {
+  int width = 0;
+  int height = 0;
+  glfwGetFramebufferSize(GetHandle(), &width, &height);
+  return {width, height};
 }
 
 void Window::Close() {

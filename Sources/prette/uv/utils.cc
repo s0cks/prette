@@ -36,6 +36,12 @@ void Loop::Stop() {
     return Prefix##_stop(handle);             \
   }
 
+#define DEFINE_UV_HANDLE_CLOSE(Name, Prefix)   \
+  auto Name::Close(Handle* handle) -> Status { \
+    ASSERT(handle);                            \
+    return uv_close((uv_handle_t*)handle);     \
+  }
+
 #define DEFINE_UV_HANDLE_FUNCS(Name, Prefix) \
   DEFINE_UV_HANDLE_INIT(Name, Prefix);       \
   DEFINE_UV_HANDLE_START(Name, Prefix);      \
@@ -49,4 +55,8 @@ DEFINE_UV_HANDLE_FUNCS(Check, uv_check);
 #undef DEFINE_UV_HANDLE_STOP
 #undef DEFINE_UV_HANDLE_START
 #undef DEFINE_UV_HANDLE_INIT
+
+auto Async::Init(Loop& loop, Handle* handle, uv_async_cb on_send) -> Status {
+  return uv_async_init(loop, handle, on_send);
+}
 }  // namespace prt::uv

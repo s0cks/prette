@@ -76,6 +76,7 @@ struct is_uv_handle {
 DECLARE_IS_UV_HANDLE(uv_idle_t);
 DECLARE_IS_UV_HANDLE(uv_check_t);
 DECLARE_IS_UV_HANDLE(uv_prepare_t);
+DECLARE_IS_UV_HANDLE(uv_async_t);
 
 #define CHECK_UV_RESULT(Severity, Result, Message) \
   LOG_IF(Severity, (Result) != UV_OK) << (Message) << ": " << uv_strerror((Result));
@@ -247,14 +248,23 @@ class HandleTemplate : public HandleBase {
       if (data)                                                                 \
         SetHandleData<Type>(handle(), data);                                    \
     }                                                                           \
-    ~Name() override {                                                          \
+    ~Name() override {}                                                         \
+    void Stop() {                                                               \
       CHECK_UV(ERROR, Stop(handle()), "failed to stop uv::" #Name);             \
+    }                                                                           \
+    void Close(const uv_close_cb callback = nullptr) {                          \
+      return uv::Close<Type>(handle(), callback);                               \
     }                                                                           \
   };
 DECLARE_UV_HANDLE(Idle, uv_idle_t);
 DECLARE_UV_HANDLE(Prepare, uv_prepare_t);
 DECLARE_UV_HANDLE(Check, uv_check_t);
 #undef DECLARE_UV_HANDLE
+
+class Async : public HandleTemplate<uv_async_t> {
+ public:
+  static auto Init(Loop& loop, Handle* handle, uv_async_cb on_send) -> Status;
+};
 
 }  // namespace prt::uv
 
