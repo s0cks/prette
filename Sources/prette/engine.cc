@@ -66,19 +66,19 @@ ENGINE_STATE_F(Init) {
 RunningState::RunningState(Engine* engine) :
   EngineState(engine),
   ticker_(&(engine->GetLoop())) {
-  ticker_.OnTick()
-      .map([engine, this](Tick tick) {
-        return new TickEvent(engine, tick, ticker_.GetPreviousTick());
-      })
-      .subscribe([engine](TickEvent* event) {
-        __ PublishEvent(event);
-      });
+  on_tick_ = ticker_.OnTick().subscribe([engine, this](Tick tick) {
+    __ Publish<TickEvent>(engine, tick, ticker_.GetPreviousTick());
+  });
+}
+
+RunningState::~RunningState() {
+  on_tick_.unsubscribe();
+  ticker_.Close();
 }
 
 ENGINE_STATE_F(Running) {
   DLOG(INFO) << "running.";
   engine->GetLoop().RunDefault();
-  ticker_.Close();
 }
 
 ENGINE_STATE_F(Paused) {

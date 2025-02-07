@@ -131,7 +131,7 @@ static inline auto CreateAppWindow() -> Window* {
   WindowBuilder builder("App Demo");
   builder.SetFocusOnShow(true);
   builder.SetVisible(false);
-  builder.SetResizable(false);
+  builder.SetResizable(true);
 #ifdef OS_IS_OSX
   builder.SetRetinaFramebuffer(true);
   builder.SetGraphicsSwitching(true);
@@ -171,7 +171,6 @@ auto GetTotalNumberOfWindows() -> uword {
 }
 
 void InitWindows() {
-  DLOG(INFO) << "initializing Windows....";
   const auto window = CreateAppWindow();
   ASSERT(window);
   SetAppWindow(window);

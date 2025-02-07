@@ -11,6 +11,7 @@ class CommandPool {
   static void Init(const VkPhysicalDevice& physical_device, const VkDevice& device, const VkSurfaceKHR& surface,
                    const VkAllocationCallbacks* allocator = nullptr);
   static void Shutdown(const VkDevice& device, const VkAllocationCallbacks* allocator = nullptr);
+  static auto GetCommandPool() -> const VkCommandPool&;
   static auto GetCommandBuffer(const uint32_t buffer_index) -> const VkCommandBuffer&;
   static void RecordCommandBuffer(const uint32_t buffer_index, const uint32_t frame_index);
   static void ResetCommandBuffer(const uint32_t buffer_index,

@@ -1,5 +1,6 @@
 #include "prette/swap_chain.h"
 
+#include <GLFW/glfw3.h>
 #include <vulkan/vulkan_core.h>
 
 #include "prette/gfx.h"
@@ -146,7 +147,24 @@ void SwapChain::InitFramebuffers(const VkDevice& device, const VkAllocationCallb
   }
 }
 
-void SwapChain::Init(const VkPhysicalDevice& physical_device, const VkDevice& device, const VkSurfaceKHR& surface) {
+void SwapChain::Recreate(const VkPhysicalDevice& physical_device, const VkDevice& device, const VkSurfaceKHR& surface) {
+  const auto window = GetAppWindow();
+  ASSERT(window);
+  int width = 0;
+  int height = 0;
+  glfwGetFramebufferSize(window->GetHandle(), &width, &height);
+  while (width == 0 && height == 0) {
+    glfwGetFramebufferSize(window->GetHandle(), &width, &height);
+    glfwWaitEvents();
+  }
+
+  vkDeviceWaitIdle(device);
+  DestroySwapChain(device);
+  SwapChain::Init(physical_device, device, surface);
+}
+
+void SwapChain::Init(const VkPhysicalDevice& physical_device, const VkDevice& device, const VkSurfaceKHR& surface,
+                     const VkAllocationCallbacks* allocator) {
   const auto support = QuerySwapChainSupport(physical_device, surface);
   const auto surface_format = support.FindSurfaceFormat(&IsValidSwapChainSurfaceFormat);
   const auto present_mode = support.FindPresentMode(&IsValidSwapChainPresentMode);
@@ -193,9 +211,12 @@ void SwapChain::Init(const VkPhysicalDevice& physical_device, const VkDevice& de
   extent_ = extent;
   InitImageViews(device);
   InitRenderPass(device);
+  InitFramebuffers(device);
 }
 
 void SwapChain::DestroySwapChain(const VkDevice& device, const VkAllocationCallbacks* allocator) {
+  DestroyFramebuffers(device, allocator);
+  DestroyImageViews(device, allocator);
   vkDestroySwapchainKHR(device, chain_, allocator);
 }
 
@@ -216,8 +237,7 @@ void SwapChain::DestroyRenderPass(const VkDevice& device, const VkAllocationCall
 }
 
 void SwapChain::Shutdown(const VkDevice& device, const VkAllocationCallbacks* allocator) {
-  DestroyRenderPass(device, allocator);
-  DestroyImageViews(device, allocator);
   DestroySwapChain(device, allocator);
+  DestroyRenderPass(device, allocator);
 }
 }  // namespace prt

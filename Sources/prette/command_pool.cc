@@ -10,6 +10,10 @@ namespace prt {
 static VkCommandPool command_pool_{};
 static std::array<VkCommandBuffer, MAX_NUMBER_OF_FRAMES_IN_FLIGHT> command_buffers_{};
 
+auto CommandPool::GetCommandPool() -> const VkCommandPool& {
+  return command_pool_;
+}
+
 void CommandPool::InitCommandPool(const VkPhysicalDevice& physical_device, const VkDevice& device, const VkSurfaceKHR& surface,
                                   const VkAllocationCallbacks* allocator) {
   const auto indices = FindQueueFamilies(physical_device, surface);
@@ -77,7 +81,13 @@ void CommandPool::RecordCommandBuffer(const uint32_t buffer_index, const uint32_
       scissor.extent = SwapChain::GetExtent();
       vkCmdSetScissor(buffer, 0, 1, &scissor);
 
-      vkCmdDraw(buffer, 3, 1, 0, 0);
+      VkBuffer vertex_buffers[] = {Pipeline::GetVertexBuffer()};
+      VkDeviceSize offsets[] = {0};
+      vkCmdBindVertexBuffers(buffer, 0, 1, vertex_buffers, offsets);
+
+      vkCmdBindIndexBuffer(buffer, Pipeline::GetIndexBuffer(), 0, VK_INDEX_TYPE_UINT16);
+
+      vkCmdDrawIndexed(buffer, Pipeline::GetNumberOfIndices(), 1, 0, 0, 0);
     }
     vkCmdEndRenderPass(buffer);
   }

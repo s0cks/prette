@@ -246,11 +246,12 @@ class RunningState : public EngineState {
 
  private:
   Ticker ticker_;
+  rx::subscription on_tick_{};
 
   explicit RunningState(Engine* engine);
 
  public:
-  ~RunningState() override = default;
+  ~RunningState() override;
 
   DECLARE_ENGINE_STATE_TYPE(Running);
 

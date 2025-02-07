@@ -87,7 +87,9 @@ class SwapChain {
 
   static void InitImageViews(const VkDevice& device);
   static void InitFramebuffers(const VkDevice& device, const VkAllocationCallbacks* allocator = nullptr);
-  static void Init(const VkPhysicalDevice& physical_device, const VkDevice& device, const VkSurfaceKHR& surface);
+  static void Init(const VkPhysicalDevice& physical_device, const VkDevice& device, const VkSurfaceKHR& surface,
+                   const VkAllocationCallbacks* allocator = nullptr);
+  static void Recreate(const VkPhysicalDevice& physical_device, const VkDevice& device, const VkSurfaceKHR& surface);
   static void Shutdown(const VkDevice& device, const VkAllocationCallbacks* allocator = nullptr);
 };
 }  // namespace prt

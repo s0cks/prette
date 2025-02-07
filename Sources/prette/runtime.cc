@@ -227,8 +227,9 @@ void Runtime::InitInstance(VkInstance& instance) {
   InitLogicalDevice(physical_device_, surface, device_, graphics_queue_, present_queue_, 1.0f, validation_layers_);
   SwapChain::Init(physical_device_, device_, surface);
   Pipeline::Init(device_);
-  SwapChain::InitFramebuffers(device_);
   CommandPool::Init(physical_device_, device_, surface);
+  Pipeline::InitVertexBuffer(physical_device_, device_);
+  Pipeline::InitIndexBuffer(physical_device_, device_);
   Renderer::Init(device_);
 }
 
@@ -329,10 +330,11 @@ void Runtime::OnShutdown(uv_async_t* handle) {
 
   vkDeviceWaitIdle(device_);
   Renderer::Shutdown(device_);
-  CommandPool::Shutdown(device_);
-  SwapChain::DestroyFramebuffers(device_);
-  Pipeline::Shutdown(device_);
   SwapChain::Shutdown(device_);
+  CommandPool::Shutdown(device_);
+  Pipeline::Shutdown(device_);
+  Pipeline::DestroyIndexBuffer(device_);
+  Pipeline::DestroyVertexBuffer(device_);
   DestroyDevice();
 #ifdef PRT_DEBUG
   DestroyDebugUtilsMessengerEXT(instance_, messenger_);

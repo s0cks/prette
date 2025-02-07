@@ -5,13 +5,27 @@
 
 #include <vector>
 
+#include "prette/command_pool.h"
 #include "prette/flags.h"
+#include "prette/gfx.h"
+#include "prette/renderer.h"
+#include "prette/runtime.h"
 #include "prette/shader.h"
 #include "prette/swap_chain.h"
 
 namespace prt {
-static VkPipelineLayout pipeline_layout_;
-static VkPipeline pipeline_;
+static VkPipelineLayout pipeline_layout_{};
+static VkPipeline pipeline_{};
+
+static vk::Buffer* vertex_buffer_ = nullptr;
+static vk::Buffer* index_buffer_ = nullptr;
+
+static const std::vector<Vertex> vertices = {{.pos = {-0.5f, -0.5f}, .color = {1.0f, 0.0f, 0.0f}},
+                                             {.pos = {0.5f, -0.5f}, .color = {0.0f, 1.0f, 0.0f}},
+                                             {.pos = {0.5f, 0.5f}, .color = {0.0f, 0.0f, 1.0f}},
+                                             {.pos = {-0.5f, 0.5f}, .color = {1.0f, 1.0f, 1.0f}}};
+
+static const std::vector<uint16_t> indices = {0, 1, 2, 2, 3, 0};
 
 void Pipeline::Init(const VkDevice& device) {
   std::vector<char> vert_code{};
@@ -35,10 +49,16 @@ void Pipeline::Init(const VkDevice& device) {
       frag_stage,
   };
 
+  const auto bindings = Vertex::GetBindingDescription();
+  const auto attributes = Vertex::GetAttributeDescriptions();
+
   VkPipelineVertexInputStateCreateInfo vertex_input_info{};
   vertex_input_info.sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
-  vertex_input_info.vertexBindingDescriptionCount = 0;
-  vertex_input_info.vertexAttributeDescriptionCount = 0;
+  vertex_input_info.vertexBindingDescriptionCount = 1;
+  vertex_input_info.pVertexBindingDescriptions = &bindings;
+
+  vertex_input_info.vertexAttributeDescriptionCount = attributes.size();
+  vertex_input_info.pVertexAttributeDescriptions = attributes.data();
 
   VkPipelineInputAssemblyStateCreateInfo input_assembly{};
   input_assembly.sType = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;
@@ -121,6 +141,30 @@ void Pipeline::Init(const VkDevice& device) {
   vkDestroyShaderModule(device, vert_module, nullptr);
 }
 
+void Pipeline::InitIndexBuffer(const VkPhysicalDevice& physical_device, const VkDevice& device,
+                               const VkAllocationCallbacks* allocator) {
+  const VkDeviceSize buffer_size = (sizeof(uint16_t) * indices.size());
+  index_buffer_ = vk::Buffer::New(buffer_size, VK_BUFFER_USAGE_INDEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT);
+  ASSERT(index_buffer_);
+  index_buffer_->CopyFromBytes(&indices[0], buffer_size, true);
+}
+
+void Pipeline::InitVertexBuffer(const VkPhysicalDevice& physical_device, const VkDevice& device,
+                                const VkAllocationCallbacks* allocator) {
+  const VkDeviceSize buffer_size = (sizeof(Vertex) * vertices.size());
+  vertex_buffer_ = vk::Buffer::New(buffer_size, VK_BUFFER_USAGE_VERTEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT);
+  ASSERT(vertex_buffer_);
+  vertex_buffer_->CopyFromBytes(&vertices[0], buffer_size, true);
+}
+
+void Pipeline::DestroyVertexBuffer(const VkDevice& device, const VkAllocationCallbacks* allocator) {
+  return vertex_buffer_->Destroy();
+}
+
+void Pipeline::DestroyIndexBuffer(const VkDevice& device, const VkAllocationCallbacks* allocator) {
+  return index_buffer_->Destroy();
+}
+
 void Pipeline::DestroyPipeline(const VkDevice& device, const VkAllocationCallbacks* allocator) {
   vkDestroyPipeline(device, pipeline_, allocator);
 }
@@ -135,6 +179,20 @@ auto Pipeline::GetPipeline() -> const VkPipeline& {
 
 auto Pipeline::GetPipelineLayout() -> const VkPipelineLayout& {
   return pipeline_layout_;
+}
+
+auto Pipeline::GetVertexBuffer() -> const VkBuffer& {
+  ASSERT(vertex_buffer_);
+  return vertex_buffer_->GetBuffer();
+}
+
+auto Pipeline::GetIndexBuffer() -> const VkBuffer& {
+  ASSERT(index_buffer_);
+  return index_buffer_->GetBuffer();
+}
+
+auto Pipeline::GetNumberOfIndices() -> uint32_t {
+  return indices.size();
 }
 
 void Pipeline::Shutdown(const VkDevice& device, const VkAllocationCallbacks* allocator) {

@@ -1,18 +1,27 @@
 #include "prette/renderer.h"
 
-#include <vulkan/vulkan_core.h>
-
 #include "prette/command_pool.h"
 #include "prette/gfx.h"
 #include "prette/relaxed_atomic.h"
 #include "prette/runtime.h"
 #include "prette/swap_chain.h"
+#include "prette/window.h"
 
 namespace prt {
 static std::array<VkSemaphore, MAX_NUMBER_OF_FRAMES_IN_FLIGHT> available_semaphores_{};
 static std::array<VkSemaphore, MAX_NUMBER_OF_FRAMES_IN_FLIGHT> finished_semaphores_{};
 static std::array<VkFence, MAX_NUMBER_OF_FRAMES_IN_FLIGHT> fences_{};
 static RelaxedAtomic<uint32_t> current_frame_(0);
+static RelaxedAtomic<bool> resized_(false);
+
+void Renderer::InitResizeListener() {
+  const auto window = GetAppWindow();
+  ASSERT(window);
+  window->OnWindowSizeEvent().subscribe([](WindowSizeEvent* event) {
+    ASSERT(event);
+    resized_ = true;
+  });
+}
 
 void Renderer::InitSyncObjects(const VkDevice& device, const VkAllocationCallbacks* allocator) {
   VkSemaphoreCreateInfo semaphore_info{};
@@ -56,13 +65,22 @@ static inline auto GetCurrentFinishedSemaphore() -> const VkSemaphore& {
 }
 
 void Renderer::DrawFrame(const VkDevice& device) {
-  DLOG(INFO) << "drawing frame....";
   vkWaitForFences(device, 1, &GetCurrentFence(), VK_TRUE, UINT64_MAX);
+  uint32_t image_index = 0;
+  {
+    const auto result = vkAcquireNextImageKHR(device, SwapChain::GetVkSwapChain(), UINT64_MAX, GetCurrentAvailableSemaphore(),
+                                              VK_NULL_HANDLE, &image_index);
+    if (result == VK_ERROR_OUT_OF_DATE_KHR) {
+      const auto window = GetAppWindow();
+      ASSERT(window);
+      SwapChain::Recreate(Runtime::GetVkPhysicalDevice(), Runtime::GetVkLogicalDevice(), window->GetSurface());
+      return;
+    } else if (result != VK_SUCCESS && result != VK_SUBOPTIMAL_KHR) {
+      LOG(FATAL) << "failed to acquire swap chain image:" << string_VkResult(result);
+    }
+  }
   vkResetFences(device, 1, &GetCurrentFence());
 
-  uint32_t image_index = 0;
-  vkAcquireNextImageKHR(device, SwapChain::GetVkSwapChain(), UINT64_MAX, GetCurrentAvailableSemaphore(), VK_NULL_HANDLE,
-                        &image_index);
   CommandPool::ResetCommandBuffer(GetCurrentFrame());
   CommandPool::RecordCommandBuffer(GetCurrentFrame(), image_index);
 
@@ -95,7 +113,15 @@ void Renderer::DrawFrame(const VkDevice& device) {
   present_info.pImageIndices = &image_index;
 
   const auto& present_queue = Runtime::GetVkPresentQueue();
-  CHECK_VK(FATAL, vkQueuePresentKHR(present_queue, &present_info), "failed to submit to vk present queue");
+  {
+    const auto result = vkQueuePresentKHR(present_queue, &present_info);
+    if (result == VK_ERROR_OUT_OF_DATE_KHR || result == VK_SUBOPTIMAL_KHR || resized_) {
+      resized_ = false;
+      const auto window = GetAppWindow();
+      ASSERT(window);
+      SwapChain::Recreate(Runtime::GetVkPhysicalDevice(), Runtime::GetVkLogicalDevice(), window->GetSurface());
+    }
+  }
 
   current_frame_ = ((GetCurrentFrame() + 1) % MAX_NUMBER_OF_FRAMES_IN_FLIGHT);
 }
