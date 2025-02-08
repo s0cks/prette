@@ -48,6 +48,7 @@
 #endif  // PI
 
 namespace prt {
+auto InitDriver() -> Driver*;
 auto GetDriver() -> Driver*;
 
 #define FOR_EACH_DRIVER_EVENT(V) \

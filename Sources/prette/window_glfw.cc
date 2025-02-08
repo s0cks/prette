@@ -1,9 +1,12 @@
 #include <vulkan/vulkan_core.h>
 
+#include <exception>
+
 #include "prette/window.h"
 #ifdef PRT_GLFW
 
 #include "prette/engine.h"
+#include "prette/exception.h"
 #include "prette/gfx.h"
 #include "prette/monitor.h"
 #include "prette/thread_local.h"
@@ -12,7 +15,7 @@ namespace prt {
 void Window::OnWindowClosed(Handle* handle) {
   const auto engine = Engine::Get();
   ASSERT(engine);
-  engine->Shutdown();
+  engine->Shutdown(Exception::New("Hello World"), 4);
 }
 
 void Window::OnWindowPos(Handle* handle, const int xPos, const int yPos) {
@@ -216,8 +219,9 @@ auto WindowBuilder::Build() const -> Window* {
   const auto handle = glfwCreateWindow(static_cast<int>(size_.width()), static_cast<int>(size_.height()), title_.data(),
                                        GetMonitorHandle(), GetShareHandle());
   if (!handle) {
-    glfwTerminate();
-    LOG(FATAL) << "failed to create Window handle.";
+    const auto engine = Engine::Get();
+    ASSERT(engine);
+    engine->Shutdown(Exception::New("failed to create glfw window handle"));
     return nullptr;
   }
 

@@ -329,18 +329,17 @@ class VulkanDriver {
   vk::ValidationLayerList validation_layers_{"VK_LAYER_KHRONOS_validation"};
 #ifdef PRT_DEBUG
   VkDebugUtilsMessengerEXT debug_{};
-
-  void InitDebugMessenger();
 #endif  // PRT_DEBUG
 
+  VulkanDriver();
   void InitApplicationInfo();
   void InitInstance();
   void InitPhysicalDevice();
   void InitSurface();
   void InitLogicalDevice(const float priority);
-
- protected:
-  VulkanDriver();
+#ifdef PRT_DEBUG
+  void InitDebugMessenger();
+#endif  // PRT_DEBUG
 
  public:
   ~VulkanDriver();

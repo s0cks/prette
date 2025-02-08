@@ -104,6 +104,16 @@ Window::Window(Handle* handle) :
 #else
 #error "Unsupported Platform."
 #endif  // PRT_GLFW
+  const auto engine = Engine::Get();
+  ASSERT(engine);
+  engine->OnPostInitEvent().subscribe([this](engine::PostInitEvent* event) {
+    ASSERT(event);
+    Show();
+  });
+  engine->OnTerminatingEvent().subscribe([this](engine::TerminatingEvent* event) {
+    ASSERT(event);
+    Close();
+  });
 }
 
 Window::~Window() {
@@ -168,17 +178,6 @@ void InitWindows() {
   OnWindowEvent().subscribe(LogEvent<WindowEvent>(google::INFO, __FILE__, __LINE__));
 #endif  // PRT_DEBUG
   SetAppWindow(CreateAppWindow());
-  const auto engine = Engine::Get();
-  ASSERT(engine);
-  engine->OnPostInitEvent().subscribe([](engine::PostInitEvent* event) {
-    ASSERT(event);
-    LOG_IF(FATAL, !VisitAllWindows([](Window* window) {
-             ASSERT(window);
-             window->Show();
-             return true;
-           }))
-        << "failed to visit open all windows";
-  });
 }
 
 auto VisitAllWindows(const std::function<bool(Window*)>& vis) -> bool {

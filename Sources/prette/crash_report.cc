@@ -27,11 +27,11 @@ void CrashReport::PrintStackTrace(std::ostream& stream) {
   p.object = true;
   p.address = true;
   p.color_mode = GetColorMode();
-  p.print(cause_.GetTrace(), stream);
+  p.print(cause_->GetTrace(), stream);
 }
 
 void CrashReport::Print(std::ostream& stream) {
-  stream << "Cause: " << What(cause_.GetException()) << std::endl;
+  stream << "Cause: " << What(cause_->GetException()) << std::endl;
   PrintStackTrace(stream);
 }
 }  // namespace prt

@@ -21,7 +21,8 @@ namespace prt::engine {
   V(Tick)                        \
   V(PostTick)                    \
   V(Terminating)                 \
-  V(Terminated)
+  V(Terminated)                  \
+  V(Error)
 
 class Engine;
 class EngineEvent;
@@ -137,6 +138,14 @@ class TerminatedEvent : public EngineEvent {
     EngineEvent(engine) {}
   ~TerminatedEvent() override = default;
   DECLARE_ENGINE_EVENT(Terminated);
+};
+
+class ErrorEvent : public EngineEvent {
+ public:
+  explicit ErrorEvent(const Engine* engine) :
+    EngineEvent(engine) {}
+  ~ErrorEvent() override = default;
+  DECLARE_ENGINE_EVENT(Error);
 };
 
 DEFINE_EVENT_SUBJECT(Engine);
@@ -259,22 +268,22 @@ DECLARE_ENGINE_STATE(Terminated);
 
 class ErrorState : public EngineState {
  private:
-  std::exception_ptr cause_;
+  std::shared_ptr<CrashReportCause> cause_;
 
  public:
-  explicit ErrorState(const std::exception_ptr cause) :
+  explicit ErrorState(const std::shared_ptr<CrashReportCause>& cause) :
     EngineState(),
     cause_(cause) {}
   ~ErrorState() override = default;
 
-  auto GetCause() const -> std::exception_ptr {
+  auto GetCause() const -> const std::shared_ptr<CrashReportCause>& {
     return cause_;
   }
 
   DECLARE_ENGINE_STATE_TYPE(Error);
 
  public:
-  static inline auto New(const std::exception_ptr& cause) -> std::unique_ptr<ErrorState> {
+  static inline auto New(const std::shared_ptr<CrashReportCause>& cause) -> std::unique_ptr<ErrorState> {
     return std::make_unique<ErrorState>(cause);
   }
 };
@@ -302,7 +311,7 @@ class Engine : public EngineEventSource {
   RelaxedAtomic<bool> running_;
   std::unique_ptr<EngineState> state_{};
   EngineEventSubject events_;
-  std::exception_ptr cause_ = nullptr;
+  std::shared_ptr<CrashReportCause> cause_ = nullptr;
 
   virtual void SetRunning(const bool running = true) {
     running_ = running;
@@ -332,6 +341,7 @@ class Engine : public EngineEventSource {
   DEFINE_PUBLISH_EVENT(PostInit);
   DEFINE_PUBLISH_EVENT(Terminated);
   DEFINE_PUBLISH_EVENT(Terminating);
+  DEFINE_PUBLISH_EVENT(Error);
 #undef DEFINE_PUBLISH_EVENT
 
   void Stop() {
@@ -354,11 +364,11 @@ class Engine : public EngineEventSource {
   }
 
   auto Run() -> int;
-  void Shutdown(const std::exception_ptr& cause = nullptr);
+  void Shutdown(std::shared_ptr<CrashReportCause> cause = nullptr);
 
-  template <typename E, typename... Args>
-  inline void Shutdown(Args... args) {
-    return Shutdown((std::exception_ptr)std::make_exception_ptr<E>(E(args...)));
+  inline void Shutdown(const std::exception_ptr& cause = nullptr, const int depth = CrashReportCause::kDefaultDepth,
+                       const int offset = CrashReportCause::kDefaultOffset) {
+    return Shutdown(CrashReportCause::New(cause, depth, offset));
   }
 
   virtual auto IsRunning() const -> bool {

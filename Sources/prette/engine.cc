@@ -1,11 +1,14 @@
 #include "prette/engine.h"
 
+#include <GLFW/glfw3.h>
 #include <uv.h>
 
 #include <cstdlib>
+#include <exception>
 
 #include "prette/command_pool.h"
 #include "prette/common.h"
+#include "prette/crash_report.h"
 #include "prette/gfx.h"
 #include "prette/pipeline.h"
 #include "prette/renderer.h"
@@ -63,9 +66,14 @@ auto TerminatedEvent::ToString() const -> std::string {
   return helper;
 }
 
+auto ErrorEvent::ToString() const -> std::string {
+  ToStringHelper<ErrorEvent> helper;
+  helper.AddFieldPtr("engine", GetEngine());
+  return helper;
+}
+
 static inline void OnUnhandledException() {
-  CrashReportCause cause(std::current_exception());
-  CrashReport report(cause);
+  CrashReport report(CrashReportCause::New(std::current_exception()));
   report.Print();
   LOG(FATAL) << "unhandled exception occured.";
 }
@@ -82,11 +90,8 @@ ENGINE_STATE_ENTER_F(Init) {
   gfx::Init();
 
   InitWindows();
-  const auto driver = GetDriver();
+  const auto driver = InitDriver();
   ASSERT(driver);
-  driver->InitSurface();
-  driver->InitPhysicalDevice();
-  driver->InitLogicalDevice(1.0f);
   SwapChain::Init(driver);
   Pipeline::Init(driver);
   CommandPool::Init(driver);
@@ -139,15 +144,8 @@ ENGINE_STATE_EXIT_F(Paused) {
 }
 
 ENGINE_STATE_ENTER_F(Terminated) {
-  __ PublishTerminatingEvent();
   __ Stop();
-  const auto window = GetAppWindow();
-  ASSERT(window);
-  window->Close();
-
-  const auto driver = GetDriver();
-  ASSERT(driver);
-  driver->Destroy();
+  __ PublishTerminatingEvent();
 }
 
 ENGINE_STATE_TICK_F(Terminated) {
@@ -155,12 +153,12 @@ ENGINE_STATE_TICK_F(Terminated) {
 }
 
 ENGINE_STATE_EXIT_F(Terminated) {
-  // do nothing
+  glfwTerminate();
   __ PublishTerminatedEvent();
 }
 
 ENGINE_STATE_ENTER_F(Error) {
-  __ Stop();
+  __ SetState<TerminatedState>();
 }
 
 ENGINE_STATE_TICK_F(Error) {
@@ -168,11 +166,10 @@ ENGINE_STATE_TICK_F(Error) {
 }
 
 ENGINE_STATE_EXIT_F(Error) {
-  try {
-    std::rethrow_exception(GetCause());
-  } catch (const std::exception& exc) {
-    LOG(ERROR) << "error: " << exc.what();
-  }
+  LOG(ERROR) << "an exception has occurred.";
+  CrashReport report(GetCause());
+  report.Print();
+  __ PublishErrorEvent();
 }
 
 #undef __
@@ -206,10 +203,12 @@ Engine::~Engine() {
 auto Engine::Run() -> int {
   SetState<InitState>();
   GetLoop().RunDefault();
+  if (state_)
+    state_->ExitState(this);
   return EXIT_SUCCESS;
 }
 
-void Engine::Shutdown(const std::exception_ptr& cause) {
+void Engine::Shutdown(std::shared_ptr<CrashReportCause> cause) {
   cause_ = cause;
   on_shutdown_.Send();
 }

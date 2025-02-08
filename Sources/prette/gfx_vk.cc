@@ -2,6 +2,7 @@
 
 #include "prette/command_pool.h"
 #include "prette/common.h"
+#include "prette/engine.h"
 #include "prette/gfx.h"
 #include "prette/to_string.h"
 #ifdef PRT_VK
@@ -462,6 +463,15 @@ VulkanDriver::VulkanDriver() {
   GetRequiredExtensions(instance_extensions_);
   InitApplicationInfo();
   InitInstance();
+  InitSurface();
+  InitPhysicalDevice();
+  InitLogicalDevice(1.0f);
+  const auto engine = Engine::Get();
+  ASSERT(engine);
+  engine->OnTerminatingEvent().subscribe([this](engine::TerminatingEvent* event) {
+    ASSERT(event);
+    Destroy();
+  });
 }
 
 VulkanDriver::~VulkanDriver() {
@@ -492,10 +502,15 @@ void VulkanDriver::Destroy() {
   PublishDriverEvent<DriverDestroyedEvent>();
 }
 
+auto InitDriver() -> Driver* {
+  driver_ = VulkanDriver::New();
+  ASSERT(driver_);
+  return driver_;
+}
+
 auto GetDriver() -> Driver* {
-  if (driver_)
-    return driver_;
-  return driver_ = VulkanDriver::New();
+  ASSERT(driver_);
+  return driver_;
 }
 }  // namespace prt
 
