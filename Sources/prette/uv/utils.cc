@@ -67,7 +67,7 @@ Async::Async(Loop& loop, uv_async_cb on_send, void* data) {
 }
 
 void Async::Send() {
-  CHECK_UV(ERROR, uv_async_send(handle()), "uv_async_send failed");
+  CHECK_UV(ERROR, uv::Status(uv_async_send(handle())), "uv_async_send failed");
 }
 
 void Async::Close(uv_close_cb on_close) {

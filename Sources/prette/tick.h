@@ -165,6 +165,7 @@ static inline constexpr auto operator-(const uint64_t& lhs, const Tick& rhs) -> 
 }
 
 using TickSubject = rx::subject<Tick>;
+using TickObservable = rx::observable<Tick>;
 using TickDurationSeries = TimeSeries<>;
 using TicksPerSecond = PerSecondCounter<uint64_t>;
 }  // namespace prt

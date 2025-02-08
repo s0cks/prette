@@ -503,6 +503,10 @@ void VulkanDriver::Destroy() {
 }
 
 auto InitDriver() -> Driver* {
+  ASSERT(driver_ == nullptr);
+#ifdef PRT_DEBUG
+  OnDriverEvent().subscribe(LogEvent<DriverEvent>(google::INFO, __FILE__, __LINE__));
+#endif  // PRT_DEBUG
   driver_ = VulkanDriver::New();
   ASSERT(driver_);
   return driver_;

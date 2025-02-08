@@ -10,6 +10,7 @@
 #include "prette/crash_report.h"
 #include "prette/event.h"
 #include "prette/tick.h"
+#include "prette/tick_profiler.h"
 #include "prette/ticker.h"
 #include "prette/uv/utils.h"
 
@@ -306,11 +307,14 @@ class Engine : public EngineEventSource {
  private:
   uv::Loop loop_;
   uv::Async on_shutdown_;
+  EngineEventSubject events_;
   RateLimitedTicker<50000000> ticker_;
+#ifdef PRT_DEBUG
+  TickProfiler tick_profiler_;
+#endif  // PRT_DEBUG
   rx::subscription on_tick_;
   RelaxedAtomic<bool> running_;
   std::unique_ptr<EngineState> state_{};
-  EngineEventSubject events_;
   std::shared_ptr<CrashReportCause> cause_ = nullptr;
 
   virtual void SetRunning(const bool running = true) {
@@ -403,6 +407,10 @@ class Engine : public EngineEventSource {
 
   auto OnTick() const -> rx::observable<Tick> {
     return ticker_.OnTick();
+  }
+
+  auto OnTickProfilerStats() const -> rx::observable<TickStats> {
+    return tick_profiler_.OnStats();
   }
 
  public:

@@ -3,8 +3,11 @@
 #include <GLFW/glfw3.h>
 #include <uv.h>
 
+#include <algorithm>
 #include <cstdlib>
 #include <exception>
+#include <operators/rx-observe_on.hpp>
+#include <rx-observable.hpp>
 
 #include "prette/command_pool.h"
 #include "prette/common.h"
@@ -187,14 +190,30 @@ void Engine::Terminate() {
   return SetState<TerminatedState>();
 }
 
+static inline auto CreateTickDeltaObservable(const Engine* engine) -> rx::observable<uint64_t> {
+  return engine->OnTickEvent().map([](engine::TickEvent* event) {
+    return (event->GetTimeSinceLast()).value();
+  });
+}
+
 Engine::Engine() :
   EngineEventSource(),
   loop_(),
   on_shutdown_(loop_, &OnShutdown, this),
   ticker_(&loop_),
+#ifdef PRT_DEBUG
+  tick_profiler_(CreateTickDeltaObservable(this)),
+#endif  // PRT_DEBUG
   running_(false),
   state_(nullptr),
-  events_() {}
+  events_() {
+#ifdef PRT_DEBUG
+  OnEvent().subscribe(LogEvent<EngineEvent>(google::INFO, __FILE__, __LINE__));
+  OnTickProfilerStats().subscribe(([this](const TickStats stats) {
+    DLOG(INFO) << "tps: " << GetTicksPerSecond().per_sec() << "; rate=" << stats;
+  }));
+#endif  // PRT_DEBUG
+}
 
 Engine::~Engine() {
   on_tick_.unsubscribe();
@@ -235,35 +254,7 @@ auto Engine::Get() -> Engine* {
   return engine_.Get();
 }
 
-template <typename N>
-static inline auto Sum(const std::vector<N>& values) -> N {
-  return std::reduce(std::begin(values), std::end(values), 0);
-}
-
-template <typename N>
-static inline auto Average(const std::vector<N>& values) -> double {
-  const auto total = Sum(values);
-  return total / values.size();
-}
-
 void Engine::Init() {
-  const auto engine = SetEngine(new Engine());
-#ifdef PRT_DEBUG
-  OnDriverEvent().subscribe(LogEvent<DriverEvent>(google::INFO, __FILE__, __LINE__));
-  engine->OnEvent().subscribe(LogEvent<EngineEvent>(google::INFO, __FILE__, __LINE__));
-  engine->OnTickEvent()
-      .map([](engine::TickEvent* event) {
-        return (event->GetTimeSinceLast()).value();
-      })
-      .buffer(100)
-      .subscribe([engine](std::vector<uint64_t> deltas) {
-        const auto avg = Average(deltas);
-        const auto min = std::ranges::min_element(deltas);
-        const auto max = std::ranges::max_element(deltas);
-        using ns = units::time::nanosecond_t;
-        DLOG(INFO) << "tps: " << engine->GetTicksPerSecond();
-        DLOG(INFO) << "tick rate: avg=" << ns(avg) << ", min=" << ns((*min)) << ", max=" << ns((*max));
-      });
-#endif  // PRT_DEBUG
+  SetEngine(new Engine());
 }
 }  // namespace prt::engine
