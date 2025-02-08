@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <cstdint>
 #include <cstdio>
+#include <filesystem>
 #include <functional>
 #include <optional>
 #include <string>
@@ -41,6 +42,26 @@
 #define UNALLOCATED 0
 #endif  // UNALLOCATED
 
+#ifdef PRT_TRACING
+
+#include <tracy/Tracy.hpp>
+
+#define TRACE_MARK             FrameMark
+#define TRACE_ZONE             ZoneScoped
+#define TRACE_ZONE_NAMED(Name) ZoneScopedN((Name))
+#define TRACE_TAG(Value)       (ZoneText((Value), strlen((Value))))
+#define TRACE_TAG_STR(Value)   (ZoneText((Value).c_str(), (Value).length()))
+
+#else
+
+#define TRACE_MARK
+#define TRACE_ZONE
+#define TRACE_ZONE_NAMED(Name)
+#define TRACE_TAG(Value)
+#define TRACE_TAG_STR(Value)
+
+#endif  // PRT_TRACING
+
 #define DEFINE_NON_COPYABLE_TYPE(Name)        \
  public:                                      \
   Name(const Name& rhs) = delete;             \
@@ -64,6 +85,8 @@
 #define NOT_IMPLEMENTED(Level) LOG(Level) << __FUNCTION__ << " is not implemented!";
 
 namespace prt {
+namespace fs = std::filesystem;
+
 template <typename A, typename B>
 auto map(std::optional<A> a, std::function<std::optional<B>(const A&)> f) -> std::optional<B> {
   if (a.has_value())
@@ -183,6 +206,15 @@ static inline auto GetTypename() -> std::string {
 #endif  // PRT_DEBUG
 
 #define TIMED_EXECUTION(Code) _TIMED_EXECUTION_(__FUNCTION__, Code);
+
+template <typename E>
+static inline auto LogEvent(const google::LogSeverity severity, const char* file, const int line, const int indent = 0)
+    -> std::function<void(E*)> {
+  return [severity, file, line, indent](E* event) {
+    ASSERT(event);
+    google::LogMessage(file, line, severity).stream() << std::string((indent * 2), ' ') << "event: " << event->ToString();
+  };
+}
 }  // namespace prt
 
 #endif  // PRT_COMMON_H

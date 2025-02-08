@@ -9,7 +9,6 @@
 #include "prette/flags.h"
 #include "prette/gfx.h"
 #include "prette/renderer.h"
-#include "prette/runtime.h"
 #include "prette/shader.h"
 #include "prette/swap_chain.h"
 
@@ -27,16 +26,17 @@ static const std::vector<Vertex> vertices = {{.pos = {-0.5f, -0.5f}, .color = {1
 
 static const std::vector<uint16_t> indices = {0, 1, 2, 2, 3, 0};
 
-void Pipeline::Init(const VkDevice& device) {
+void Pipeline::Init(Driver* driver) {
+  ASSERT(driver);
   std::vector<char> vert_code{};
   ReadShaderCode(fmt::format("{}/shaders/vert.spv", FLAGS_resources), vert_code);
   VkShaderModule vert_module = VK_NULL_HANDLE;
-  CreateShaderModule(device, vert_code, vert_module);
+  CreateShaderModule(driver->GetDevice(), vert_code, vert_module);
 
   std::vector<char> frag_code{};
   ReadShaderCode(fmt::format("{}/shaders/frag.spv", FLAGS_resources), frag_code);
   VkShaderModule frag_module = VK_NULL_HANDLE;
-  CreateShaderModule(device, frag_code, frag_module);
+  CreateShaderModule(driver->GetDevice(), frag_code, frag_module);
 
   VkPipelineShaderStageCreateInfo vert_stage{};
   InitVertexShaderStageCreateInfo(vert_stage, vert_module);
@@ -115,7 +115,7 @@ void Pipeline::Init(const VkDevice& device) {
   pipeline_layout.setLayoutCount = 0;
   pipeline_layout.pushConstantRangeCount = 0;
 
-  CHECK_VK(FATAL, vkCreatePipelineLayout(device, &pipeline_layout, nullptr, &pipeline_layout_),
+  CHECK_VK(FATAL, vkCreatePipelineLayout(driver->GetDevice(), &pipeline_layout, nullptr, &pipeline_layout_),
            "failed to create vk pipeline layout");
 
   VkGraphicsPipelineCreateInfo pipeline{};
@@ -134,43 +134,39 @@ void Pipeline::Init(const VkDevice& device) {
   pipeline.subpass = 0;
   pipeline.basePipelineHandle = VK_NULL_HANDLE;
 
-  CHECK_VK(FATAL, vkCreateGraphicsPipelines(device, VK_NULL_HANDLE, 1, &pipeline, nullptr, &pipeline_),
+  CHECK_VK(FATAL, vkCreateGraphicsPipelines(driver->GetDevice(), VK_NULL_HANDLE, 1, &pipeline, nullptr, &pipeline_),
            "failed to create vk pipeline");
 
-  vkDestroyShaderModule(device, frag_module, nullptr);
-  vkDestroyShaderModule(device, vert_module, nullptr);
+  vkDestroyShaderModule(driver->GetDevice(), frag_module, nullptr);
+  vkDestroyShaderModule(driver->GetDevice(), vert_module, nullptr);
 }
 
-void Pipeline::InitIndexBuffer(const VkPhysicalDevice& physical_device, const VkDevice& device,
-                               const VkAllocationCallbacks* allocator) {
-  const VkDeviceSize buffer_size = (sizeof(uint16_t) * indices.size());
-  index_buffer_ = vk::Buffer::New(buffer_size, VK_BUFFER_USAGE_INDEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT);
-  ASSERT(index_buffer_);
-  index_buffer_->CopyFromBytes(&indices[0], buffer_size, true);
+void Pipeline::InitBuffers() {
+  {
+    // index buffer
+    const VkDeviceSize buffer_size = (sizeof(uint16_t) * indices.size());
+    index_buffer_ = vk::Buffer::New(buffer_size, VK_BUFFER_USAGE_INDEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT);
+    ASSERT(index_buffer_);
+    index_buffer_->CopyFromBytes(&indices[0], buffer_size, true);
+  }
+
+  {
+    // vertex buffer
+    const VkDeviceSize buffer_size = (sizeof(Vertex) * vertices.size());
+    vertex_buffer_ = vk::Buffer::New(buffer_size, VK_BUFFER_USAGE_VERTEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT);
+    ASSERT(vertex_buffer_);
+    vertex_buffer_->CopyFromBytes(&vertices[0], buffer_size, true);
+  }
 }
 
-void Pipeline::InitVertexBuffer(const VkPhysicalDevice& physical_device, const VkDevice& device,
-                                const VkAllocationCallbacks* allocator) {
-  const VkDeviceSize buffer_size = (sizeof(Vertex) * vertices.size());
-  vertex_buffer_ = vk::Buffer::New(buffer_size, VK_BUFFER_USAGE_VERTEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT);
-  ASSERT(vertex_buffer_);
-  vertex_buffer_->CopyFromBytes(&vertices[0], buffer_size, true);
+void Pipeline::DestroyPipeline(Driver* driver) {
+  ASSERT(driver);
+  vkDestroyPipeline(driver->GetDevice(), pipeline_, driver->GetAllocator());
 }
 
-void Pipeline::DestroyVertexBuffer(const VkDevice& device, const VkAllocationCallbacks* allocator) {
-  return vertex_buffer_->Destroy();
-}
-
-void Pipeline::DestroyIndexBuffer(const VkDevice& device, const VkAllocationCallbacks* allocator) {
-  return index_buffer_->Destroy();
-}
-
-void Pipeline::DestroyPipeline(const VkDevice& device, const VkAllocationCallbacks* allocator) {
-  vkDestroyPipeline(device, pipeline_, allocator);
-}
-
-void Pipeline::DestroyPipelineLayout(const VkDevice& device, const VkAllocationCallbacks* allocator) {
-  vkDestroyPipelineLayout(device, pipeline_layout_, allocator);
+void Pipeline::DestroyPipelineLayout(Driver* driver) {
+  ASSERT(driver);
+  vkDestroyPipelineLayout(driver->GetDevice(), pipeline_layout_, driver->GetAllocator());
 }
 
 auto Pipeline::GetPipeline() -> const VkPipeline& {
@@ -195,8 +191,13 @@ auto Pipeline::GetNumberOfIndices() -> uint32_t {
   return indices.size();
 }
 
-void Pipeline::Shutdown(const VkDevice& device, const VkAllocationCallbacks* allocator) {
-  DestroyPipeline(device, allocator);
-  DestroyPipelineLayout(device, allocator);
+void Pipeline::Shutdown(Driver* driver) {
+  ASSERT(driver);
+  DestroyPipeline(driver);
+  DestroyPipelineLayout(driver);
+  ASSERT(index_buffer_);
+  index_buffer_->Destroy();
+  ASSERT(vertex_buffer_);
+  vertex_buffer_->Destroy();
 }
 }  // namespace prt

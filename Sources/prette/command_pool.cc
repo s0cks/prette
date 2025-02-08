@@ -24,10 +24,10 @@ void CommandPool::InitCommandPool(const VkPhysicalDevice& physical_device, const
   CHECK_VK(FATAL, vkCreateCommandPool(device, &create_info, allocator, &command_pool_), "failed to create vk command pool");
 }
 
-void CommandPool::Init(const VkPhysicalDevice& physical_device, const VkDevice& device, const VkSurfaceKHR& surface,
-                       const VkAllocationCallbacks* allocator) {
-  InitCommandPool(physical_device, device, surface, allocator);
-  InitCommandBuffers(device);
+void CommandPool::Init(Driver* driver) {
+  ASSERT(driver);
+  InitCommandPool(driver->GetPhysicalDevice(), driver->GetDevice(), driver->GetSurface(), driver->GetAllocator());
+  InitCommandBuffers(driver->GetDevice());
 }
 
 void CommandPool::InitCommandBuffers(const VkDevice& device) {
@@ -94,7 +94,8 @@ void CommandPool::RecordCommandBuffer(const uint32_t buffer_index, const uint32_
   CHECK_VK(FATAL, vkEndCommandBuffer(buffer), "failed to end command buffer recording");
 }
 
-void CommandPool::Shutdown(const VkDevice& device, const VkAllocationCallbacks* allocator) {
-  vkDestroyCommandPool(device, command_pool_, allocator);
+void CommandPool::Shutdown(Driver* driver) {
+  ASSERT(driver);
+  vkDestroyCommandPool(driver->GetDevice(), command_pool_, driver->GetAllocator());
 }
 }  // namespace prt

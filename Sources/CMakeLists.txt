@@ -43,8 +43,8 @@ else()
   list(APPEND PRT_LIBRARIES OpenGL::GL GLEW::GLEW)
 endif()
 
-if(OPENSSL_FOUND)
-  message(STATUS "found openssl: " ${OPENSSL_CRYPTO_LIBRARIES})
+if(PRT_TRACING_ENABLED)
+  list(APPEND PRT_LIBRARIES Tracy::TracyClient)
 endif()
 
 add_library(${PROJECT_NAME} SHARED ${PRT_SOURCES})

@@ -5,6 +5,7 @@
 
 #include <array>
 
+#include "prette/engine.h"
 #include "prette/gfx.h"
 
 namespace prt {
@@ -39,25 +40,21 @@ struct Vertex {
 
 class Pipeline {
   friend class Runtime;
+  friend class engine::InitState;
 
  private:
-  static void InitVertexBuffer(const VkPhysicalDevice& physical_device, const VkDevice& device,
-                               const VkAllocationCallbacks* allocator = nullptr);
-  static void InitIndexBuffer(const VkPhysicalDevice& physical_device, const VkDevice& device,
-                              const VkAllocationCallbacks* allocator = nullptr);
-  static void DestroyVertexBuffer(const VkDevice& device, const VkAllocationCallbacks* allocator = nullptr);
-  static void DestroyIndexBuffer(const VkDevice& device, const VkAllocationCallbacks* allocator = nullptr);
-  static void DestroyPipeline(const VkDevice& device, const VkAllocationCallbacks* allocator = nullptr);
-  static void DestroyPipelineLayout(const VkDevice& device, const VkAllocationCallbacks* allocator = nullptr);
+  static void InitBuffers();
+  static void DestroyPipeline(Driver* driver);
+  static void DestroyPipelineLayout(Driver* driver);
 
  public:
-  static void Init(const VkDevice& device);
+  static void Init(Driver* driver);
   static auto GetPipeline() -> const VkPipeline&;
   static auto GetPipelineLayout() -> const VkPipelineLayout&;
   static auto GetVertexBuffer() -> const VkBuffer&;
   static auto GetIndexBuffer() -> const VkBuffer&;
   static auto GetNumberOfIndices() -> uint32_t;
-  static void Shutdown(const VkDevice& device, const VkAllocationCallbacks* allocator = nullptr);
+  static void Shutdown(Driver* driver);
 };
 }  // namespace prt
 

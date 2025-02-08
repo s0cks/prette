@@ -66,11 +66,27 @@
       ]
     },
     {
+      "name": "tracing",
+      "hidden": true,
+      "cacheVariables": {
+        "PRT_TRACING_ENABLED": "ON"
+      }
+    },
+    {
       "name": "debug-darwin-arm64",
       "displayName": "Debug (Darwin/arm64)",
       "inherits": [
         "debug",
         "darwin-arm64"
+      ]
+    },
+    {
+      "name": "debug-tracing-darwin-arm64",
+      "displayName": "Debug w/ Tracy (Darwin/arm64)",
+      "inherits": [
+        "debug",
+        "darwin-arm64",
+        "tracing"
       ]
     },
     {
@@ -96,28 +112,6 @@
         "release",
         "darwin-arm64"
       ]
-    }
-  ],
-  "buildPresets": [
-    {
-      "name": "debug",
-      "displayName": "Debug",
-      "configurePreset": "debug"
-    },
-    {
-      "name": "debug-darwin-arm64",
-      "displayName": "Debug (Darwin/arm64)",
-      "configurePreset": "debug-darwin-arm64"
-    },
-    {
-      "name": "release",
-      "displayName": "Release",
-      "configurePreset": "release"
-    },
-    {
-      "name": "release-darwin-arm64",
-      "displayName": "Release (Darwin/arm64)",
-      "configurePreset": "release-darwin-arm64"
     }
   ]
 }

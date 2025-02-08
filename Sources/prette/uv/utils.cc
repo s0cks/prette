@@ -59,4 +59,18 @@ DEFINE_UV_HANDLE_FUNCS(Check, uv_check);
 auto Async::Init(Loop& loop, Handle* handle, uv_async_cb on_send) -> Status {
   return uv_async_init(loop, handle, on_send);
 }
+
+Async::Async(Loop& loop, uv_async_cb on_send, void* data) {
+  CHECK_UV(FATAL, Init(loop, handle(), on_send), "failed to initialize uv_async_t");
+  if (data)
+    uv::SetHandleData(handle(), data);
+}
+
+void Async::Send() {
+  CHECK_UV(ERROR, uv_async_send(handle()), "uv_async_send failed");
+}
+
+void Async::Close(uv_close_cb on_close) {
+  uv::Close(handle(), on_close);
+}
 }  // namespace prt::uv

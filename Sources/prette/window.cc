@@ -2,12 +2,29 @@
 
 #include <unordered_map>
 
+#include "prette/common.h"
 #include "prette/engine.h"
 #include "prette/thread_local.h"
 #include "prette/to_string.h"
 
 namespace prt {
+static WindowSet all_{};
+static WindowEventSubject all_events_{};
+static ThreadLocal<Window> app_{};
+
+static inline void PublishWindowEvent(const WindowEventSubject& subject, WindowEvent* event) {
+  ASSERT(event);
+  const auto& subscriber = subject.get_subscriber();
+  return subscriber.on_next(event);
+}
+
 DEFINE_string(window_size, kDefaultWindowSize, "The size of the window.");
+
+auto WindowCreatedEvent::ToString() const -> std::string {
+  ToStringHelper<WindowCreatedEvent> helper;
+  helper.AddFieldPtr("window", GetWindow());
+  return helper;
+}
 
 auto WindowOpenedEvent::ToString() const -> std::string {
   ToStringHelper<WindowOpenedEvent> helper;
@@ -63,12 +80,6 @@ auto WindowContentScaleEvent::ToString() const -> std::string {
   return helper;
 }
 
-// NOLINTBEGIN(cppcoreguidelines-avoid-non-const-global-variables)
-static WindowSet all_;
-static ThreadLocal<Window> app_;
-static rx::subscription on_terminating_;
-// NOLINTEND(cppcoreguidelines-avoid-non-const-global-variables))
-
 static inline void Register(Window* window) {
   ASSERT(window);
   const auto& [iter, success] = all_.insert(window);
@@ -86,14 +97,8 @@ Window::Window(Handle* handle) :
   handle_(handle),
   events_(),
   id_() {
-  Register(this);
   ASSERT(handle);
-  const auto engine = engine::GetEngine();
-  ASSERT(engine);
-  // TODO: on_post_init discard 16 bytes of data?
-  on_post_init_ = engine->OnPostInit().subscribe([this](engine::PostInitEvent* event) {
-    Show();
-  });
+  Register(this);
 #ifdef PRT_GLFW
   glfwSetWindowUserPointer(handle, this);
 #else
@@ -103,19 +108,16 @@ Window::Window(Handle* handle) :
 
 Window::~Window() {
   Deregister(this);
-  on_post_init_.unsubscribe();
 }
 
 auto OnWindowEvent() -> WindowEventObservable {
-  const auto window = GetAppWindow();
-  ASSERT(window);
-  return window->OnEvent();
+  return all_events_.get_observable();
 }
 
 void Window::PublishEvent(WindowEvent* event) const {
   ASSERT(event);
-  const auto& subscriber = events_.get_subscriber();
-  return subscriber.on_next(event);
+  PublishWindowEvent(events_, event);
+  PublishWindowEvent(all_events_, event);
 }
 
 auto Window::ToString() const -> std::string {
@@ -136,20 +138,15 @@ static inline auto CreateAppWindow() -> Window* {
   builder.SetRetinaFramebuffer(true);
   builder.SetGraphicsSwitching(true);
 #endif  // OSX
-  const auto size = GetWindowSize();
-  builder.SetWidth(size.width());
-  builder.SetHeight(size.height());
-  const auto window = builder.Build();
+  builder.SetSize(GetWindowSize());
+  return builder.Build();
+}
+
+auto Window::New(Handle* handle) -> Window* {
+  ASSERT(handle);
+  const auto window = new Window(handle);
   ASSERT(window);
-  if (!window->IsMaximized()) {
-    // TODO: set Window min-size
-    //  window->SetMinSize(glm::i32vec2(resolution.width(), resolution.height()));
-  }
-#ifdef PRT_DEBUG
-  window->OnEvent().subscribe([](WindowEvent* event) {
-    DLOG(INFO) << "event: " << event->ToString();
-  });
-#endif  // PRT_DEBUG
+  window->PublishWindowCreatedEvent();
   return window;
 }
 
@@ -162,20 +159,34 @@ auto GetAppWindow() -> Window* {
   return app_.Get();
 }
 
-auto GetAllWindows() -> const WindowSet& {
-  return all_;
-}
-
 auto GetTotalNumberOfWindows() -> uword {
   return all_.size();
 }
 
 void InitWindows() {
-  const auto window = CreateAppWindow();
-  ASSERT(window);
-  SetAppWindow(window);
-  const auto engine = GetEngine();
+#ifdef PRT_DEBUG
+  OnWindowEvent().subscribe(LogEvent<WindowEvent>(google::INFO, __FILE__, __LINE__));
+#endif  // PRT_DEBUG
+  SetAppWindow(CreateAppWindow());
+  const auto engine = Engine::Get();
   ASSERT(engine);
-  // TODO: create close all windows
+  engine->OnPostInitEvent().subscribe([](engine::PostInitEvent* event) {
+    ASSERT(event);
+    LOG_IF(FATAL, !VisitAllWindows([](Window* window) {
+             ASSERT(window);
+             window->Show();
+             return true;
+           }))
+        << "failed to visit open all windows";
+  });
+}
+
+auto VisitAllWindows(const std::function<bool(Window*)>& vis) -> bool {
+  for (const auto& window : all_) {
+    ASSERT(window);
+    if (!vis(window))
+      return false;
+  }
+  return true;
 }
 }  // namespace prt

@@ -8,7 +8,7 @@
 #include <stdexcept>
 #include <termcolor/termcolor.hpp>
 
-#include "prette/runtime.h"
+#include "prette/engine.h"
 
 using namespace prt;
 
@@ -20,6 +20,11 @@ static inline auto LogEvent() -> std::function<void(Event*)> {
 }
 
 auto main(int argc, char** argv) -> int {
-  Runtime::Init(argc, argv);
-  return Runtime::Run();
+  // ::google::InstallPrefixFormatter(&MyPrefixFormatter);
+  ::google::InitGoogleLogging(argv[0]);
+  ::google::ParseCommandLineFlags(&argc, &argv, true);
+  Engine::Init();
+  const auto engine = Engine::Get();
+  ASSERT(engine);
+  return engine->Run();
 }

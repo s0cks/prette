@@ -8,21 +8,23 @@
 namespace prt {
 class Renderer {
  private:
-  static void InitSyncObjects(const VkDevice& device, const VkAllocationCallbacks* allocator);
+  static void InitSyncObjects(Driver* driver);
   static void InitResizeListener();
-  static void DestroySyncObjects(const VkDevice& device, const VkAllocationCallbacks* allocator);
+  static void DestroySyncObjects(Driver* driver);
 
  public:
-  static inline void Init(const VkDevice& device, const VkAllocationCallbacks* allocator = nullptr) {
-    InitSyncObjects(device, allocator);
+  static inline void Init(Driver* driver) {
+    ASSERT(driver);
+    InitSyncObjects(driver);
     InitResizeListener();
   }
 
-  static inline void Shutdown(const VkDevice& device, const VkAllocationCallbacks* allocator = nullptr) {
-    DestroySyncObjects(device, allocator);
+  static inline void Shutdown(Driver* driver) {
+    ASSERT(driver);
+    DestroySyncObjects(driver);
   }
 
-  static void DrawFrame(const VkDevice& device);
+  static void DrawFrame(Driver* driver);
 };
 }  // namespace prt
 

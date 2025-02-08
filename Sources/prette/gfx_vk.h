@@ -1,4 +1,3 @@
-#include <vulkan/vulkan_core.h>
 #ifndef PRT_GFX_H
 #error "Please #include <prt/gfx.h> instead."
 #endif  // PRT_GFX_H
@@ -9,6 +8,7 @@
 #include <glog/logging.h>
 #include <vulkan/vk_enum_string_helper.h>
 #include <vulkan/vulkan.h>
+#include <vulkan/vulkan_core.h>
 
 #include <unordered_set>
 #include <vector>
@@ -293,9 +293,117 @@ class MappedBufferScope {
     return IsMapped();
   }
 };
+
+using ValidationLayerList = std::vector<const char*>;
+using ExtensionList = std::vector<const char*>;
 }  // namespace vk
 
 #endif  // PRT_DEBUG
+
+namespace engine {
+class InitState;
+class TerminatedState;
+}  // namespace engine
+
+class Window;
+class VulkanDriver {
+  friend class Runtime;
+  friend class engine::InitState;
+  friend class engine::TerminatedState;
+  DEFINE_NON_COPYABLE_TYPE(VulkanDriver);
+
+ private:
+  VkApplicationInfo app_info_{};
+  VkInstance instance_{};
+  VkPhysicalDevice physical_device_{};
+  VkDevice device_{};
+  VkQueue graphics_queue_{};
+  VkQueue present_queue_{};
+  VkSurfaceKHR surface_{};
+  VkAllocationCallbacks* allocator_ = nullptr;
+  vk::ExtensionList instance_extensions_{};
+  vk::ExtensionList device_extensions_{
+      "VK_KHR_portability_subset",
+      VK_KHR_SWAPCHAIN_EXTENSION_NAME,
+  };
+  vk::ValidationLayerList validation_layers_{"VK_LAYER_KHRONOS_validation"};
+#ifdef PRT_DEBUG
+  VkDebugUtilsMessengerEXT debug_{};
+
+  void InitDebugMessenger();
+#endif  // PRT_DEBUG
+
+  void InitApplicationInfo();
+  void InitInstance();
+  void InitPhysicalDevice();
+  void InitSurface();
+  void InitLogicalDevice(const float priority);
+
+ protected:
+  VulkanDriver();
+
+ public:
+  ~VulkanDriver();
+
+  auto GetApplicationInfo() const -> VkApplicationInfo {
+    return app_info_;
+  }
+
+  auto GetInstance() const -> VkInstance {
+    return instance_;
+  }
+
+  auto GetPhysicalDevice() const -> VkPhysicalDevice {
+    return physical_device_;
+  }
+
+  auto GetDevice() const -> VkDevice {
+    return device_;
+  }
+
+  auto GetGraphicsQueue() const -> VkQueue {
+    return graphics_queue_;
+  }
+
+  auto GetPresentQueue() const -> VkQueue {
+    return present_queue_;
+  }
+
+  auto GetValidationLayers() const -> const vk::ValidationLayerList& {
+    return validation_layers_;
+  }
+
+  auto GetInstanceExtensions() const -> const vk::ExtensionList& {
+    return instance_extensions_;
+  }
+
+  auto GetDeviceExtensions() const -> const vk::ExtensionList& {
+    return device_extensions_;
+  }
+
+  auto GetAllocator() const -> VkAllocationCallbacks* {
+    return allocator_;
+  }
+
+  auto GetSurface() const -> const VkSurfaceKHR& {
+    return surface_;
+  }
+
+#ifdef PRT_DEBUG
+  auto GetDebugMessenger() const -> VkDebugUtilsMessengerEXT {
+    return debug_;
+  }
+#endif  // PRT_DEBUG
+
+  void WaitDeviceIdle();
+
+ private:
+  static void Destroy();
+
+ public:
+  static auto New() -> VulkanDriver*;
+};
+using Driver = VulkanDriver;
 }  // namespace prt
 
 #endif  // PRT_GFX_VK_H

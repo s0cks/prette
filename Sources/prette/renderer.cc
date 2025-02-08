@@ -3,7 +3,6 @@
 #include "prette/command_pool.h"
 #include "prette/gfx.h"
 #include "prette/relaxed_atomic.h"
-#include "prette/runtime.h"
 #include "prette/swap_chain.h"
 #include "prette/window.h"
 
@@ -23,7 +22,8 @@ void Renderer::InitResizeListener() {
   });
 }
 
-void Renderer::InitSyncObjects(const VkDevice& device, const VkAllocationCallbacks* allocator) {
+void Renderer::InitSyncObjects(Driver* driver) {
+  ASSERT(driver);
   VkSemaphoreCreateInfo semaphore_info{};
   semaphore_info.sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
 
@@ -32,19 +32,23 @@ void Renderer::InitSyncObjects(const VkDevice& device, const VkAllocationCallbac
   fence_info.flags = VK_FENCE_CREATE_SIGNALED_BIT;
 
   for (auto idx = 0; idx < MAX_NUMBER_OF_FRAMES_IN_FLIGHT; idx++) {
-    CHECK_VK(FATAL, vkCreateSemaphore(device, &semaphore_info, allocator, &available_semaphores_.at(idx)),
+    CHECK_VK(FATAL,
+             vkCreateSemaphore(driver->GetDevice(), &semaphore_info, driver->GetAllocator(), &available_semaphores_.at(idx)),
              "failed to create available semaphore");
-    CHECK_VK(FATAL, vkCreateSemaphore(device, &semaphore_info, allocator, &finished_semaphores_.at(idx)),
+    CHECK_VK(FATAL,
+             vkCreateSemaphore(driver->GetDevice(), &semaphore_info, driver->GetAllocator(), &finished_semaphores_.at(idx)),
              "failed to create finished semaphore");
-    CHECK_VK(FATAL, vkCreateFence(device, &fence_info, allocator, &fences_.at(idx)), "failed to create fence");
+    CHECK_VK(FATAL, vkCreateFence(driver->GetDevice(), &fence_info, driver->GetAllocator(), &fences_.at(idx)),
+             "failed to create fence");
   }
 }
 
-void Renderer::DestroySyncObjects(const VkDevice& device, const VkAllocationCallbacks* allocator) {
+void Renderer::DestroySyncObjects(Driver* driver) {
+  ASSERT(driver);
   for (auto idx = 0; idx < MAX_NUMBER_OF_FRAMES_IN_FLIGHT; idx++) {
-    vkDestroySemaphore(device, finished_semaphores_.at(idx), allocator);
-    vkDestroySemaphore(device, available_semaphores_.at(idx), allocator);
-    vkDestroyFence(device, fences_.at(idx), allocator);
+    vkDestroySemaphore(driver->GetDevice(), finished_semaphores_.at(idx), driver->GetAllocator());
+    vkDestroySemaphore(driver->GetDevice(), available_semaphores_.at(idx), driver->GetAllocator());
+    vkDestroyFence(driver->GetDevice(), fences_.at(idx), driver->GetAllocator());
   }
 }
 
@@ -64,22 +68,21 @@ static inline auto GetCurrentFinishedSemaphore() -> const VkSemaphore& {
   return finished_semaphores_.at(GetCurrentFrame());
 }
 
-void Renderer::DrawFrame(const VkDevice& device) {
-  vkWaitForFences(device, 1, &GetCurrentFence(), VK_TRUE, UINT64_MAX);
+void Renderer::DrawFrame(Driver* driver) {
+  ASSERT(driver);
+  vkWaitForFences(driver->GetDevice(), 1, &GetCurrentFence(), VK_TRUE, UINT64_MAX);
   uint32_t image_index = 0;
   {
-    const auto result = vkAcquireNextImageKHR(device, SwapChain::GetVkSwapChain(), UINT64_MAX, GetCurrentAvailableSemaphore(),
-                                              VK_NULL_HANDLE, &image_index);
+    const auto result = vkAcquireNextImageKHR(driver->GetDevice(), SwapChain::GetVkSwapChain(), UINT64_MAX,
+                                              GetCurrentAvailableSemaphore(), VK_NULL_HANDLE, &image_index);
     if (result == VK_ERROR_OUT_OF_DATE_KHR) {
-      const auto window = GetAppWindow();
-      ASSERT(window);
-      SwapChain::Recreate(Runtime::GetVkPhysicalDevice(), Runtime::GetVkLogicalDevice(), window->GetSurface());
+      SwapChain::ReInit(driver);
       return;
     } else if (result != VK_SUCCESS && result != VK_SUBOPTIMAL_KHR) {
       LOG(FATAL) << "failed to acquire swap chain image:" << string_VkResult(result);
     }
   }
-  vkResetFences(device, 1, &GetCurrentFence());
+  vkResetFences(driver->GetDevice(), 1, &GetCurrentFence());
 
   CommandPool::ResetCommandBuffer(GetCurrentFrame());
   CommandPool::RecordCommandBuffer(GetCurrentFrame(), image_index);
@@ -99,7 +102,7 @@ void Renderer::DrawFrame(const VkDevice& device) {
   submit_info.signalSemaphoreCount = 1;
   submit_info.pSignalSemaphores = signal_semaphores;
 
-  const auto& graphics_queue = Runtime::GetVkGraphicsQueue();
+  const auto& graphics_queue = driver->GetGraphicsQueue();
   CHECK_VK(FATAL, vkQueueSubmit(graphics_queue, 1, &submit_info, GetCurrentFence()), "failed to submit to vk graphics queue");
 
   VkPresentInfoKHR present_info{};
@@ -112,14 +115,12 @@ void Renderer::DrawFrame(const VkDevice& device) {
   present_info.swapchainCount = 1;
   present_info.pImageIndices = &image_index;
 
-  const auto& present_queue = Runtime::GetVkPresentQueue();
+  const auto& present_queue = driver->GetPresentQueue();
   {
     const auto result = vkQueuePresentKHR(present_queue, &present_info);
     if (result == VK_ERROR_OUT_OF_DATE_KHR || result == VK_SUBOPTIMAL_KHR || resized_) {
       resized_ = false;
-      const auto window = GetAppWindow();
-      ASSERT(window);
-      SwapChain::Recreate(Runtime::GetVkPhysicalDevice(), Runtime::GetVkLogicalDevice(), window->GetSurface());
+      SwapChain::ReInit(driver);
     }
   }
 

@@ -147,24 +147,8 @@ void SwapChain::InitFramebuffers(const VkDevice& device, const VkAllocationCallb
   }
 }
 
-void SwapChain::Recreate(const VkPhysicalDevice& physical_device, const VkDevice& device, const VkSurfaceKHR& surface) {
-  const auto window = GetAppWindow();
-  ASSERT(window);
-  int width = 0;
-  int height = 0;
-  glfwGetFramebufferSize(window->GetHandle(), &width, &height);
-  while (width == 0 && height == 0) {
-    glfwGetFramebufferSize(window->GetHandle(), &width, &height);
-    glfwWaitEvents();
-  }
-
-  vkDeviceWaitIdle(device);
-  DestroySwapChain(device);
-  SwapChain::Init(physical_device, device, surface);
-}
-
-void SwapChain::Init(const VkPhysicalDevice& physical_device, const VkDevice& device, const VkSurfaceKHR& surface,
-                     const VkAllocationCallbacks* allocator) {
+void SwapChain::InitSwapChain(const VkPhysicalDevice& physical_device, const VkDevice& device, const VkSurfaceKHR& surface,
+                              const VkAllocationCallbacks* allocator) {
   const auto support = QuerySwapChainSupport(physical_device, surface);
   const auto surface_format = support.FindSurfaceFormat(&IsValidSwapChainSurfaceFormat);
   const auto present_mode = support.FindPresentMode(&IsValidSwapChainPresentMode);
@@ -209,9 +193,33 @@ void SwapChain::Init(const VkPhysicalDevice& physical_device, const VkDevice& de
 
   format_ = surface_format.format;
   extent_ = extent;
-  InitImageViews(device);
-  InitRenderPass(device);
-  InitFramebuffers(device);
+}
+
+void SwapChain::ReInit(Driver* driver) {
+  ASSERT(driver);
+  const auto window = GetAppWindow();
+  ASSERT(window);
+  int width = 0;
+  int height = 0;
+  glfwGetFramebufferSize(window->GetHandle(), &width, &height);
+  while (width == 0 && height == 0) {
+    glfwGetFramebufferSize(window->GetHandle(), &width, &height);
+    glfwWaitEvents();
+  }
+
+  vkDeviceWaitIdle(driver->GetDevice());
+  DestroySwapChain(driver->GetDevice());
+  InitSwapChain(driver->GetPhysicalDevice(), driver->GetDevice(), driver->GetSurface(), driver->GetAllocator());
+  InitImageViews(driver->GetDevice());
+  InitFramebuffers(driver->GetDevice());
+}
+
+void SwapChain::Init(Driver* driver) {
+  ASSERT(driver);
+  InitSwapChain(driver->GetPhysicalDevice(), driver->GetDevice(), driver->GetSurface(), driver->GetAllocator());
+  InitImageViews(driver->GetDevice());
+  InitRenderPass(driver->GetDevice());
+  InitFramebuffers(driver->GetDevice());
 }
 
 void SwapChain::DestroySwapChain(const VkDevice& device, const VkAllocationCallbacks* allocator) {
@@ -232,12 +240,14 @@ void SwapChain::DestroyImageViews(const VkDevice& device, const VkAllocationCall
   }
 }
 
-void SwapChain::DestroyRenderPass(const VkDevice& device, const VkAllocationCallbacks* allocator) {
-  vkDestroyRenderPass(device, render_pass_, allocator);
+void SwapChain::DestroyRenderPass(Driver* driver) {
+  ASSERT(driver);
+  vkDestroyRenderPass(driver->GetDevice(), render_pass_, driver->GetAllocator());
 }
 
-void SwapChain::Shutdown(const VkDevice& device, const VkAllocationCallbacks* allocator) {
-  DestroySwapChain(device, allocator);
-  DestroyRenderPass(device, allocator);
+void SwapChain::Shutdown(Driver* driver) {
+  ASSERT(driver);
+  DestroySwapChain(driver->GetDevice(), driver->GetAllocator());
+  DestroyRenderPass(driver);
 }
 }  // namespace prt

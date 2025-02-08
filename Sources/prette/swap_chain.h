@@ -66,14 +66,20 @@ static inline auto HasSwapChainSupport(const VkPhysicalDevice& device, const VkS
 
 class SwapChain {
   friend class Runtime;
+  friend class Renderer;
   DEFINE_NON_COPYABLE_TYPE(SwapChain);
 
  private:
+  static void InitImageViews(const VkDevice& device);
+  static void InitFramebuffers(const VkDevice& device, const VkAllocationCallbacks* allocator = nullptr);
   static void InitRenderPass(const VkDevice& device);
 
+  static void InitSwapChain(const VkPhysicalDevice& physical_device, const VkDevice& device, const VkSurfaceKHR& surface,
+                            const VkAllocationCallbacks* allocator);
+  static void ReInit(Driver* driver);
   static void DestroyFramebuffers(const VkDevice& device, const VkAllocationCallbacks* allocator = nullptr);
   static void DestroyImageViews(const VkDevice& device, const VkAllocationCallbacks* allocator = nullptr);
-  static void DestroyRenderPass(const VkDevice& device, const VkAllocationCallbacks* allocator = nullptr);
+  static void DestroyRenderPass(Driver* driver);
   static void DestroySwapChain(const VkDevice& device, const VkAllocationCallbacks* allocator = nullptr);
 
  public:
@@ -84,13 +90,8 @@ class SwapChain {
   static auto GetExtent() -> const VkExtent2D&;
   static auto GetRenderPass() -> const VkRenderPass&;
   static auto GetFramebuffer(const uint32_t index) -> const VkFramebuffer&;
-
-  static void InitImageViews(const VkDevice& device);
-  static void InitFramebuffers(const VkDevice& device, const VkAllocationCallbacks* allocator = nullptr);
-  static void Init(const VkPhysicalDevice& physical_device, const VkDevice& device, const VkSurfaceKHR& surface,
-                   const VkAllocationCallbacks* allocator = nullptr);
-  static void Recreate(const VkPhysicalDevice& physical_device, const VkDevice& device, const VkSurfaceKHR& surface);
-  static void Shutdown(const VkDevice& device, const VkAllocationCallbacks* allocator = nullptr);
+  static void Init(Driver* driver);
+  static void Shutdown(Driver* driver);
 };
 }  // namespace prt
 

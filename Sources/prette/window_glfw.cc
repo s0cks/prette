@@ -6,23 +6,14 @@
 #include "prette/engine.h"
 #include "prette/gfx.h"
 #include "prette/monitor.h"
-#include "prette/runtime.h"
 #include "prette/thread_local.h"
 
 namespace prt {
 void Window::OnWindowClosed(Handle* handle) {
-  Runtime::Shutdown();
+  const auto engine = Engine::Get();
+  ASSERT(engine);
+  engine->Shutdown();
 }
-
-#ifdef PRT_VK
-void Window::InitSurface(VkInstance& instance, const VkAllocationCallbacks* allocator) {
-  CHECK_VK(FATAL, glfwCreateWindowSurface(instance, GetHandle(), allocator, &surface_), "failed to create window vk surface");
-}
-
-void Window::DestroySurface(const VkInstance& instance, const VkAllocationCallbacks* allocator) {
-  vkDestroySurfaceKHR(instance, surface_, allocator);
-}
-#endif  // PRT_VK
 
 void Window::OnWindowPos(Handle* handle, const int xPos, const int yPos) {
   const auto window = GetWindow(handle);
@@ -222,7 +213,8 @@ auto WindowBuilder::Build() const -> Window* {
 #ifdef __APPLE__
   glfwWindowHintString(GLFW_COCOA_FRAME_NAME, title_.data());
 #endif
-  const auto handle = glfwCreateWindow(size_[0], size_[1], title_.data(), GetMonitorHandle(), GetShareHandle());
+  const auto handle = glfwCreateWindow(static_cast<int>(size_.width()), static_cast<int>(size_.height()), title_.data(),
+                                       GetMonitorHandle(), GetShareHandle());
   if (!handle) {
     glfwTerminate();
     LOG(FATAL) << "failed to create Window handle.";
@@ -242,7 +234,7 @@ auto WindowBuilder::Build() const -> Window* {
   glfwMakeContextCurrent(handle);
   glfwSwapInterval(0);
 #endif  // PRT_GL
-  return new Window(handle);
+  return Window::New(handle);
 }
 }  // namespace prt
 

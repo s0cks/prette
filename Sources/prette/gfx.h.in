@@ -36,6 +36,7 @@
 
 #endif  // PRT_GLFW
 
+#include "prette/event.h"
 #include "prette/glm.h"
 
 #ifndef PI
@@ -46,7 +47,67 @@
 #endif
 #endif  // PI
 
-namespace prt::gfx {
+namespace prt {
+auto GetDriver() -> Driver*;
+
+#define FOR_EACH_DRIVER_EVENT(V) \
+  V(DriverCreated)               \
+  V(DriverDestroyed)
+
+class DriverEvent;
+#define FORWARD_DECLARE_EVENT(Name) class Name##Event;
+FOR_EACH_DRIVER_EVENT(FORWARD_DECLARE_EVENT)
+#undef FORWARD_DECLARE_EVENT
+
+class DriverEvent : public Event {
+ protected:
+  explicit DriverEvent() = default;
+
+ public:
+  ~DriverEvent() override = default;
+  DEFINE_EVENT_PROTOTYPE(FOR_EACH_DRIVER_EVENT);
+};
+
+class DriverCreatedEvent : public DriverEvent {
+ private:
+  const Driver* driver_;
+
+ public:
+  explicit DriverCreatedEvent(const Driver* driver) :
+    DriverEvent(),
+    driver_(driver) {
+    ASSERT(driver_);
+  }
+  ~DriverCreatedEvent() override = default;
+
+  auto GetDriver() const -> const Driver* {
+    return driver_;
+  }
+
+  DECLARE_EVENT_TYPE(DriverEvent, DriverCreated);
+};
+
+class DriverDestroyedEvent : public DriverEvent {
+ public:
+  DriverDestroyedEvent() = default;
+  ~DriverDestroyedEvent() override = default;
+  DECLARE_EVENT_TYPE(DriverEvent, DriverDestroyed);
+};
+
+DEFINE_EVENT_OBSERVABLE(Driver);
+DEFINE_EVENT_SUBJECT(Driver);
+FOR_EACH_DRIVER_EVENT(DEFINE_EVENT_OBSERVABLE);
+
+auto OnDriverEvent() -> DriverEventObservable;
+
+#define DEFINE_ON_DRIVER_EVENT(Name)                                           \
+  static inline auto On##Name##Event()->Name##EventObservable {                \
+    return OnDriverEvent().filter(Name##Event::Filter).map(Name##Event::Cast); \
+  }
+FOR_EACH_DRIVER_EVENT(DEFINE_ON_DRIVER_EVENT);
+#undef DEFINE_ON_DRIVER_EVENT
+
+namespace gfx {
 using semver::version;
 
 void Init();
@@ -54,6 +115,7 @@ void Init();
 static inline auto GetGlfwVersion() -> version {
   return version(GLFW_VERSION_MAJOR, GLFW_VERSION_MINOR, GLFW_VERSION_REVISION);
 }
-}  // namespace prt::gfx
+}  // namespace gfx
+}  // namespace prt
 
 #endif  // PRT_GFX_H

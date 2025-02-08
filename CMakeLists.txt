@@ -29,7 +29,6 @@ else()
   set(PROJECT_GLFW_CONTEXT_VERSION_MINOR 1)
 endif()
 
-# cppcheck
 find_package(Threads REQUIRED)
 find_package(glfw3 CONFIG REQUIRED)
 find_package(glog CONFIG REQUIRED)
@@ -94,6 +93,12 @@ if(CMAKE_BUILD_TYPE MATCHES "^[Dd]ebug")
   list(APPEND PRT_COMPILE_OPTS "-Wno-exceptions")
   add_compile_definitions(PRT_DEBUG)
   add_compile_definitions(PTR_VMEMPROF)
+endif()
+
+option(PRT_TRACING_ENABLED "" OFF)
+if(PRT_TRACING_ENABLED)
+  find_package(Tracy CONFIG REQUIRED)
+  add_compile_definitions(PRT_TRACING)
 endif()
 
 link_libraries(Threads::Threads glog::glog gflags::gflags)

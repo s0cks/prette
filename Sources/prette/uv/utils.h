@@ -228,33 +228,39 @@ class HandleTemplate : public HandleBase {
   ~HandleTemplate() override = default;
 };
 
-#define DECLARE_UV_HANDLE(Name, Type)                                           \
-  class Name : public HandleTemplate<Type> {                                    \
-    DEFINE_NON_COPYABLE_TYPE(Name);                                             \
-    using Callback = void (*)(Type*);                                           \
-                                                                                \
-   public:                                                                      \
-    static auto Init(Loop* loop, Handle* handle) -> Status;                     \
-    static auto Start(Handle* handle, Callback callback) -> Status;             \
-    static auto Stop(Handle* handle) -> Status;                                 \
-                                                                                \
-   public:                                                                      \
-    Name(Loop* loop, Callback callback, void* data = nullptr) :                 \
-      HandleTemplate<Type>() {                                                  \
-      ASSERT(loop);                                                             \
-      ASSERT(callback);                                                         \
-      CHECK_UV(ERROR, Init(loop, handle()), "failed to initialize uv::" #Name); \
-      CHECK_UV(ERROR, Start(handle(), callback), "failed to start uv::" #Name); \
-      if (data)                                                                 \
-        SetHandleData<Type>(handle(), data);                                    \
-    }                                                                           \
-    ~Name() override {}                                                         \
-    void Stop() {                                                               \
-      CHECK_UV(ERROR, Stop(handle()), "failed to stop uv::" #Name);             \
-    }                                                                           \
-    void Close(const uv_close_cb callback = nullptr) {                          \
-      return uv::Close<Type>(handle(), callback);                               \
-    }                                                                           \
+#define DECLARE_UV_HANDLE(Name, Type)                                            \
+  class Name : public HandleTemplate<Type> {                                     \
+    DEFINE_NON_COPYABLE_TYPE(Name);                                              \
+    using Callback = void (*)(Type*);                                            \
+                                                                                 \
+   public:                                                                       \
+    static auto Init(Loop* loop, Handle* handle) -> Status;                      \
+    static auto Start(Handle* handle, Callback callback) -> Status;              \
+    static auto Stop(Handle* handle) -> Status;                                  \
+                                                                                 \
+   private:                                                                      \
+    Callback callback_;                                                          \
+                                                                                 \
+   public:                                                                       \
+    Name(Loop* loop, Callback callback, void* data = nullptr) :                  \
+      HandleTemplate<Type>(),                                                    \
+      callback_(callback) {                                                      \
+      ASSERT(loop);                                                              \
+      ASSERT(callback);                                                          \
+      CHECK_UV(ERROR, Init(loop, handle()), "failed to initialize uv::" #Name);  \
+      if (data)                                                                  \
+        SetHandleData<Type>(handle(), data);                                     \
+    }                                                                            \
+    ~Name() override = default;                                                  \
+    void Start() {                                                               \
+      CHECK_UV(ERROR, Start(handle(), callback_), "failed to start uv::" #Name); \
+    }                                                                            \
+    void Stop() {                                                                \
+      CHECK_UV(ERROR, Stop(handle()), "failed to stop uv::" #Name);              \
+    }                                                                            \
+    void Close(const uv_close_cb callback = nullptr) {                           \
+      return uv::Close<Type>(handle(), callback);                                \
+    }                                                                            \
   };
 DECLARE_UV_HANDLE(Idle, uv_idle_t);
 DECLARE_UV_HANDLE(Prepare, uv_prepare_t);
@@ -264,6 +270,12 @@ DECLARE_UV_HANDLE(Check, uv_check_t);
 class Async : public HandleTemplate<uv_async_t> {
  public:
   static auto Init(Loop& loop, Handle* handle, uv_async_cb on_send) -> Status;
+
+ public:
+  Async(Loop& loop, uv_async_cb on_send, void* data = nullptr);
+  ~Async() = default;
+  void Send();
+  void Close(uv_close_cb on_close = nullptr);
 };
 
 }  // namespace prt::uv

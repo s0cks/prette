@@ -79,6 +79,12 @@ class Ticker {
   }
   virtual ~Ticker() = default;
 
+  void Start() {
+    idle_.Start();
+    prepare_.Start();
+    check_.Start();
+  }
+
   void Stop() {
     idle_.Stop();
     prepare_.Stop();

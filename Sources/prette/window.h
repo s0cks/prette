@@ -1,12 +1,11 @@
 #ifndef PRT_WINDOW_H
 #define PRT_WINDOW_H
 
-#include <vulkan/vulkan_core.h>
-
 #include "prette/builder.h"
 #include "prette/dimension.h"
 #include "prette/event.h"
 #include "prette/geometry/shape.h"
+#include "prette/gfx.h"
 #include "prette/monitor.h"
 #include "prette/uuid.h"
 
@@ -25,6 +24,7 @@ static inline auto GetWindowSize() -> Dimension {
 class Window;
 
 #define FOR_EACH_WINDOW_EVENT(V) \
+  V(WindowCreated)               \
   V(WindowOpened)                \
   V(WindowClosed)                \
   V(WindowPos)                   \
@@ -46,15 +46,17 @@ class WindowEvent : public Event {
   DEFINE_NON_COPYABLE_TYPE(WindowEvent);
 
  private:
-  Window* window_;
+  const Window* window_;
 
  public:
   WindowEvent() = delete;
-  explicit WindowEvent(Window* window) :
-    window_(window) {}
+  explicit WindowEvent(const Window* window) :
+    window_(window) {
+    ASSERT(window_);
+  }
   ~WindowEvent() override = default;
 
-  auto GetWindow() const -> Window* {
+  auto GetWindow() const -> const Window* {
     return window_;
   }
 
@@ -63,9 +65,17 @@ class WindowEvent : public Event {
 
 #define DECLARE_WINDOW_EVENT(Name) DECLARE_EVENT_TYPE(WindowEvent, Name)
 
+class WindowCreatedEvent : public WindowEvent {
+ public:
+  explicit WindowCreatedEvent(const Window* window) :
+    WindowEvent(window) {}
+  ~WindowCreatedEvent() override = default;
+  DECLARE_WINDOW_EVENT(WindowCreated);
+};
+
 class WindowOpenedEvent : public WindowEvent {
  public:
-  explicit WindowOpenedEvent(Window* window) :
+  explicit WindowOpenedEvent(const Window* window) :
     WindowEvent(window) {}
   ~WindowOpenedEvent() override = default;
   DECLARE_WINDOW_EVENT(WindowOpened);
@@ -73,7 +83,7 @@ class WindowOpenedEvent : public WindowEvent {
 
 class WindowClosedEvent : public WindowEvent {
  public:
-  explicit WindowClosedEvent(Window* window) :
+  explicit WindowClosedEvent(const Window* window) :
     WindowEvent(window) {}
   ~WindowClosedEvent() override = default;
   DECLARE_WINDOW_EVENT(WindowClosed);
@@ -84,10 +94,10 @@ class WindowPosEvent : public WindowEvent {
   Point pos_;
 
  public:
-  WindowPosEvent(Window* window, const Point& pos) :
+  WindowPosEvent(const Window* window, const Point& pos) :
     WindowEvent(window),
     pos_(pos) {}
-  explicit WindowPosEvent(Window* window, const int32_t x, const int32_t y) :
+  WindowPosEvent(const Window* window, const int32_t x, const int32_t y) :
     WindowPosEvent(window, {x, y}) {}
   ~WindowPosEvent() override = default;
 
@@ -103,12 +113,12 @@ class WindowSizeEvent : public WindowEvent {
   Dimension size_;
 
  public:
-  WindowSizeEvent(Window* window, const Dimension& size) :
+  WindowSizeEvent(const Window* window, const Dimension& size) :
     WindowEvent(window),
     size_(size) {}
-  WindowSizeEvent(Window* window, const int32_t width, const int32_t height) :
+  WindowSizeEvent(const Window* window, const int32_t width, const int32_t height) :
     WindowSizeEvent(window, {width, height}) {}
-  explicit WindowSizeEvent(Window* window) :
+  explicit WindowSizeEvent(const Window* window) :
     WindowSizeEvent(window, 0, 0) {}
   ~WindowSizeEvent() override = default;
 
@@ -124,7 +134,7 @@ class WindowFocusEvent : public WindowEvent {
   bool focused_;
 
  public:
-  WindowFocusEvent(Window* window, const bool focused) :
+  WindowFocusEvent(const Window* window, const bool focused) :
     WindowEvent(window),
     focused_(focused) {}
   ~WindowFocusEvent() override = default;
@@ -141,7 +151,7 @@ class WindowIconifyEvent : public WindowEvent {
   bool iconified_;
 
  public:
-  WindowIconifyEvent(Window* window, bool iconified) :
+  WindowIconifyEvent(const Window* window, const bool iconified) :
     WindowEvent(window),
     iconified_(iconified) {}
   ~WindowIconifyEvent() override = default;
@@ -155,7 +165,7 @@ class WindowIconifyEvent : public WindowEvent {
 
 class WindowRefreshEvent : public WindowEvent {
  public:
-  WindowRefreshEvent(Window* window) :
+  explicit WindowRefreshEvent(const Window* window) :
     WindowEvent(window) {}
   ~WindowRefreshEvent() override = default;
   DECLARE_WINDOW_EVENT(WindowRefresh);
@@ -166,7 +176,7 @@ class WindowMaximizeEvent : public WindowEvent {
   bool maximized_;
 
  public:
-  WindowMaximizeEvent(Window* window, const bool maximized) :
+  WindowMaximizeEvent(const Window* window, const bool maximized) :
     WindowEvent(window),
     maximized_(maximized) {}
   ~WindowMaximizeEvent() override = default;
@@ -185,10 +195,10 @@ class WindowContentScaleEvent : public WindowEvent {
   Scale scale_;
 
  public:
-  WindowContentScaleEvent(Window* window, const Scale& scale) :
+  WindowContentScaleEvent(const Window* window, const Scale& scale) :
     WindowEvent(window),
     scale_(scale) {}
-  WindowContentScaleEvent(Window* window, const float xScale, const float yScale) :
+  WindowContentScaleEvent(const Window* window, const float xScale, const float yScale) :
     WindowContentScaleEvent(window, {xScale, yScale}) {}
   ~WindowContentScaleEvent() override = default;
 
@@ -287,21 +297,20 @@ class Window : public WindowEventSource {
 #error "Unsupported Platform."
 #endif  // PRT_WINDOW_H
  private:
+  UUID id_;
   WindowEventSubject events_;
   Handle* handle_;
-  UUID id_;
-  rx::subscription on_post_init_{};
-#ifdef PRT_VK
-  VkSurfaceKHR surface_{};
-#endif  // PRT_VK
 
   explicit Window(Handle* handle);
   void PublishEvent(WindowEvent* event) const override;
 
-#ifdef PRT_VK
-  void InitSurface(VkInstance& instance, const VkAllocationCallbacks* allocator);
-  void DestroySurface(const VkInstance& instance, const VkAllocationCallbacks* allocator = nullptr);
-#endif  // PRT_VK
+#define DEFINE_PUBLISH_EVENT(Name)                       \
+  template <typename... Args>                            \
+  inline void Publish##Name##Event(Args... args) const { \
+    return Publish<Name##Event>(this, args...);          \
+  }
+  FOR_EACH_WINDOW_EVENT(DEFINE_PUBLISH_EVENT)
+#undef DEFINE_PUBLISH_EVENT
 
  public:
   ~Window() override;
@@ -400,15 +409,12 @@ class Window : public WindowEventSource {
     return events_.get_observable();
   }
 
-#ifdef PRT_VK
-  auto GetSurface() const -> const VkSurfaceKHR& {
-    return surface_;
-  }
-#endif  // PRT_VK
-
   friend auto operator<<(std::ostream& stream, Window* rhs) -> std::ostream& {
     return stream << rhs->ToString();
   }
+
+ private:
+  static auto New(Handle* handle) -> Window*;
 };
 
 class Window;
@@ -417,7 +423,7 @@ class WindowBuilder : public BuilderTemplate<Window> {
 
  private:
   std::string title_;
-  glm::i32vec2 size_;
+  Dimension size_{};
   Monitor* monitor_{};
   Window* share_{};
 
@@ -440,19 +446,11 @@ class WindowBuilder : public BuilderTemplate<Window> {
     return monitor_;
   }
 
-  void SetSize(const glm::i32vec2& size) {
+  void SetSize(const Dimension& size) {
     size_ = size;
   }
 
-  void SetWidth(const int32_t width) {
-    size_[0] = width;
-  }
-
-  void SetHeight(const int32_t height) {
-    size_[1] = height;
-  }
-
-  auto GetSize() const -> const glm::i32vec2 {
+  auto GetSize() const -> const Dimension& {
     return size_;
   }
 
@@ -491,8 +489,16 @@ using WindowSet = std::set<Window*, Window::Comparator>;
 
 void InitWindows();
 auto GetAppWindow() -> Window*;
-auto GetAllWindows() -> const WindowSet&;
-auto GetTotalNumberOfWindows() -> uword;
+auto VisitAllWindows(const std::function<bool(Window*)>& vis) -> bool;
+auto OnWindowEvent() -> WindowEventObservable;
+
+#define DEFINE_ON_EVENT(Name)                                                  \
+  static inline auto On##Name##Event()->Name##EventObservable {                \
+    return OnWindowEvent().filter(Name##Event::Filter).map(Name##Event::Cast); \
+  }
+FOR_EACH_WINDOW_EVENT(DEFINE_ON_EVENT)
+#undef DEFINE_ON_EVENT
+
 }  // namespace prt
 
 #endif  // PRT_WINDOW_H

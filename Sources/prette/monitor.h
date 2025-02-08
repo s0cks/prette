@@ -8,7 +8,6 @@
 #include "prette/event.h"
 #include "prette/geometry/rectangle.h"
 #include "prette/gfx.h"
-#include "prette/object.h"
 #include "prette/resolution.h"
 #include "prette/rx.h"
 
@@ -76,7 +75,7 @@ DECLARE_EVENT_OBSERVABLE(Monitor);
 FOR_EACH_MONITOR_EVENT(DECLARE_EVENT_OBSERVABLE);
 #undef DECLARE_EVENT_OBSERVABLE
 
-class Monitor : public Object, public EventSource<MonitorEvent> {
+class Monitor : public EventSource<MonitorEvent> {
   friend class WindowBuilder;
   DEFINE_NON_COPYABLE_TYPE(Monitor);
 #ifdef PRT_GLFW
@@ -120,7 +119,7 @@ class Monitor : public Object, public EventSource<MonitorEvent> {
   auto GetPhysicalSize() const -> Dimension;
   auto GetPos() const -> Point;
   auto GetWorkArea() const -> Rectangle;
-  auto ToString() const -> std::string override;
+  auto ToString() const -> std::string;
   auto OnEvent() const -> MonitorEventObservable override;
 
   auto GetSubject() const -> const MonitorEventSubject& {
