@@ -199,16 +199,17 @@ class Renderer {
   static void InitSwapChain(const VkPhysicalDevice& physical_device, const VkDevice& device, const VkSurfaceKHR& surface,
                             const VkAllocationCallbacks* allocator);
   static void ReInitSwapChain(Driver* driver);
-  static void DestroyFramebuffers(const VkDevice& device, const VkAllocationCallbacks* allocator = nullptr);
-  static void DestroyImageViews(const VkDevice& device, const VkAllocationCallbacks* allocator = nullptr);
-  static void DestroyRenderPass(Driver* driver);
-  static void DestroySwapChain(const VkDevice& device, const VkAllocationCallbacks* allocator = nullptr);
 
   static void Destroy();
-  static void DestroySyncObjects(const Driver* driver);
-  static void DestroyPipelineCache(const Driver* driver);
-  static void DestroyPipeline(const Driver* driver);
-  static void DestroyPipelineLayout(const Driver* driver);
+  static void DestroyBuffers();
+  static void DestroyFramebuffers(Driver* driver);
+  static void DestroyImageViews(Driver* driver);
+  static void DestroyRenderPass(Driver* driver);
+  static void DestroySwapChain(Driver* driver);
+  static void DestroySyncObjects(Driver* driver);
+  static void DestroyPipelineCache(Driver* driver);
+  static void DestroyPipeline(Driver* driver);
+  static void DestroyPipelineLayout(Driver* driver);
 
  private:
   static void InitLua(lua_State* L);
@@ -223,9 +224,6 @@ class Renderer {
   static auto GetNumberOfIndices() -> uint32_t;
   static auto GetCommandPool() -> VkCommandPool const&;
   static auto GetCommandBuffer(const uint32_t buffer_index) -> VkCommandBuffer const&;
-  static void RecordCommandBuffer(const uint32_t buffer_index, const uint32_t frame_index);
-  static void ResetCommandBuffer(const uint32_t buffer_index,
-                                 const VkCommandBufferResetFlagBits flags = static_cast<VkCommandBufferResetFlagBits>(0));
   static auto GetSwapChain() -> VkSwapchainKHR const&;
   static auto GetImages() -> std::vector<VkImage> const&;
   static auto GetImageViews() -> std::vector<VkImageView> const&;
@@ -234,6 +232,9 @@ class Renderer {
   static auto GetRenderPass() -> VkRenderPass const&;
   static auto GetFramebuffer(const uint32_t index) -> VkFramebuffer const&;
 
+  static void RecordCommandBuffer(const uint32_t buffer_index, const uint32_t frame_index);
+  static void ResetCommandBuffer(const uint32_t buffer_index,
+                                 const VkCommandBufferResetFlagBits flags = static_cast<VkCommandBufferResetFlagBits>(0));
   static void DrawFrame(Driver* driver, const Tick& current, const Tick& previous);
 };
 }  // namespace prt

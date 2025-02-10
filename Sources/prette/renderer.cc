@@ -231,7 +231,7 @@ void Renderer::InitSyncObjects(const Driver* driver) {
   }
 }
 
-void Renderer::DestroySyncObjects(const Driver* driver) {
+void Renderer::DestroySyncObjects(Driver* driver) {
   ASSERT(driver);
   for (auto idx = 0; idx < MAX_NUMBER_OF_FRAMES_IN_FLIGHT; idx++) {
     vkDestroySemaphore(driver->GetDevice(), finished_semaphores_.at(idx), driver->GetAllocator());
@@ -274,17 +274,17 @@ void Renderer::InitBuffers() {
   }
 }
 
-void Renderer::DestroyPipeline(const Driver* driver) {
+void Renderer::DestroyPipeline(Driver* driver) {
   ASSERT(driver);
   vkDestroyPipeline(driver->GetDevice(), pipeline_, driver->GetAllocator());
 }
 
-void Renderer::DestroyPipelineLayout(const Driver* driver) {
+void Renderer::DestroyPipelineLayout(Driver* driver) {
   ASSERT(driver);
   vkDestroyPipelineLayout(driver->GetDevice(), pipeline_layout_, driver->GetAllocator());
 }
 
-void Renderer::DestroyPipelineCache(const Driver* driver) {
+void Renderer::DestroyPipelineCache(Driver* driver) {
   ASSERT(driver);
   vkDestroyPipelineCache(driver->GetDevice(), pipeline_cache_, driver->GetAllocator());
 }
@@ -573,20 +573,21 @@ void Renderer::InitSwapChain(const VkPhysicalDevice& physical_device, const VkDe
   extent_ = extent;
 }
 
-void Renderer::DestroySwapChain(const VkDevice& device, const VkAllocationCallbacks* allocator) {
-  DestroyImageViews(device, allocator);
-  vkDestroySwapchainKHR(device, chain_, allocator);
+void Renderer::DestroySwapChain(Driver* driver) {
+  ASSERT(driver);
+  DestroyImageViews(driver);
+  vkDestroySwapchainKHR(driver->GetDevice(), chain_, driver->GetAllocator());
 }
 
-void Renderer::DestroyFramebuffers(const VkDevice& device, const VkAllocationCallbacks* allocator) {
+void Renderer::DestroyFramebuffers(Driver* driver) {
   for (const auto& framebuffer : framebuffers_) {
-    vkDestroyFramebuffer(device, framebuffer, allocator);
+    vkDestroyFramebuffer(driver->GetDevice(), framebuffer, driver->GetAllocator());
   }
 }
 
-void Renderer::DestroyImageViews(const VkDevice& device, const VkAllocationCallbacks* allocator) {
+void Renderer::DestroyImageViews(Driver* driver) {
   for (const auto& view : views_) {
-    vkDestroyImageView(device, view, allocator);
+    vkDestroyImageView(driver->GetDevice(), view, driver->GetAllocator());
   }
 }
 
@@ -608,9 +609,9 @@ void Renderer::ReInitSwapChain(Driver* driver) {
   }
 
   driver->WaitDeviceIdle();
-  DestroySwapChain(driver->GetDevice());
-  DestroyImageViews(driver->GetDevice(), driver->GetAllocator());
-  DestroyFramebuffers(driver->GetDevice());
+  DestroySwapChain(driver);
+  DestroyImageViews(driver);
+  DestroyFramebuffers(driver);
 
   InitSwapChain(driver->GetPhysicalDevice(), driver->GetDevice(), driver->GetSurface(), driver->GetAllocator());
   InitImageViews(driver->GetDevice());
@@ -742,20 +743,24 @@ void Renderer::Init() {
   });
 }
 
+void Renderer::DestroyBuffers() {
+  ASSERT(index_buffer_);
+  index_buffer_->Destroy();
+  ASSERT(vertex_buffer_);
+  vertex_buffer_->Destroy();
+}
+
 void Renderer::Destroy() {
   DLOG(INFO) << "destroying vk renderer....";
   const auto driver = Driver::Get();
   ASSERT(driver);
   vkDestroyCommandPool(driver->GetDevice(), command_pool_, driver->GetAllocator());
-  DestroySwapChain(driver->GetDevice(), driver->GetAllocator());
+  DestroySwapChain(driver);
   DestroyPipeline(driver);
   DestroyPipelineLayout(driver);
   DestroyPipelineCache(driver);
-  ASSERT(index_buffer_);
-  index_buffer_->Destroy();
-  ASSERT(vertex_buffer_);
-  vertex_buffer_->Destroy();
-  DestroyFramebuffers(driver->GetDevice(), driver->GetAllocator());
+  DestroyBuffers();
+  DestroyFramebuffers(driver);
   DestroyRenderPass(driver);
   DestroySyncObjects(driver);
   Publish<RendererDestroyedEvent>();
