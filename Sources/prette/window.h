@@ -450,6 +450,9 @@ class Window : public WindowEventSource {
 
   static void InitLua(lua_State* L);
   static auto New(Handle* handle) -> Window*;
+
+ public:
+  static void Init();
 };
 
 class Window;
@@ -522,7 +525,6 @@ class WindowBuilder : public BuilderTemplate<Window> {
 
 using WindowSet = std::set<Window*, Window::Comparator>;
 
-void InitWindows();
 auto GetAppWindow() -> Window*;
 auto VisitAllWindows(const std::function<bool(Window*)>& vis) -> bool;
 auto OnWindowEvent() -> WindowEventObservable;

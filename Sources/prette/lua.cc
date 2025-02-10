@@ -5,17 +5,43 @@
 
 #include <array>
 #include <filesystem>
+#include <rx-coordination.hpp>
+#include <subjects/rx-replaysubject.hpp>
 
 #include "prette/common.h"
 #include "prette/engine.h"
 #include "prette/flags.h"
 #include "prette/keyboard.h"
+#include "prette/mouse.h"
 #include "prette/prette.h"
 #include "prette/renderer.h"
+#include "prette/rx.h"
 #include "prette/to_string.h"
 #include "prette/window.h"
 
 namespace prt {
+static rx::subject<LuaStateEvent*> events_{};
+
+static void PublishEvent(LuaStateEvent* event) {
+  ASSERT(event);
+  const auto& subscriber = events_.get_subscriber();
+  return subscriber.on_next(event);
+}
+
+template <class E, typename... Args>
+static inline void Publish(Args... args) {
+  E event(args...);
+  return PublishEvent(&event);
+}
+
+auto OnLuaStateEvent() -> LuaStateEventObservable {
+  return events_.get_observable();
+}
+
+auto LuaStateInitEvent::ToString() const -> std::string {
+  return ToStringHelper<LuaStateInitEvent>{};
+}
+
 LUA_F(getVersion) {
   const auto version = prt::GetVersion();
   lua_pushstring(L, version.c_str());
@@ -48,11 +74,25 @@ static const struct luaL_Reg kPretteLib[] = {
 };
 // clang-format on
 
+LUA_F(prette_tostring) {
+  ASSERT(L);
+  const auto message = fmt::format("Prette v{}", prt::GetVersion());
+  lua_pushstring(L, message.c_str());
+  return 1;
+}
+
 void LuaState::InitLua(lua_State* L) {
   ASSERT(L);
+  DLOG(INFO) << "initializing lua bindings....";
   luaL_openlibs(L);
 
   lua_newtable(L);
+
+  luaL_newmetatable(L, "Prette");
+  lua_pushcfunction(L, &lua_prette_tostring);
+  lua_setfield(L, -2, "__tostring");
+  lua_setmetatable(L, -2);
+
   luaL_setfuncs(L, kPretteLib, 0);
   lua_setglobal(L, "Prette");
   lua_pushinteger(L, google::INFO);
@@ -62,11 +102,13 @@ void LuaState::InitLua(lua_State* L) {
   lua_pushinteger(L, google::WARNING);
   lua_setglobal(L, "WARNING");
 
-  Driver::InitLua(L);
   Engine::InitLua(L);
   Window::InitLua(L);
+  Driver::InitLua(L);
   Keyboard::InitLua(L);
+  Mouse::InitLua(L);
   Renderer::InitLua(L);
+  Publish<LuaStateInitEvent>(L);
 }
 
 #define L state_
@@ -75,7 +117,6 @@ LuaState::LuaState(const std::filesystem::path& root) :
   state_(luaL_newstate()),
   root_(root) {
   ASSERT(std::filesystem::is_directory(root_));
-  InitLua(L);
 }
 
 LuaState::~LuaState() {
@@ -115,6 +156,7 @@ void LuaState::Init() {
   ASSERT(state == nullptr);
   state = LuaState::New(std::filesystem::path(FLAGS_resources) / "scripts");
   ASSERT(state);
+  InitLua(state->GetState());
 }
 
 auto LuaState::Get() -> LuaState* {

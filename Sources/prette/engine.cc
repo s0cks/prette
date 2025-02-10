@@ -1,6 +1,7 @@
 #include "prette/engine.h"
 
 #include <GLFW/glfw3.h>
+#include <lua.h>
 #include <uv.h>
 
 #include <algorithm>
@@ -13,6 +14,7 @@
 #include "prette/command_pool.h"
 #include "prette/common.h"
 #include "prette/crash_report.h"
+#include "prette/exception.h"
 #include "prette/gfx.h"
 #include "prette/lua.h"
 #include "prette/pipeline.h"
@@ -78,12 +80,6 @@ auto ErrorEvent::ToString() const -> std::string {
   return helper;
 }
 
-static inline void OnUnhandledException() {
-  CrashReport report(CrashReportCause::New(std::current_exception()));
-  report.Print();
-  LOG(FATAL) << "unhandled exception occured.";
-}
-
 static inline auto GetLowercaseStateName(const std::unique_ptr<EngineState>& state) -> std::string {
   std::string name(state->GetStateName());
   std::ranges::transform(name, std::begin(name), [](const char c) {
@@ -125,13 +121,7 @@ void Engine::ExitState(const std::unique_ptr<EngineState>& state) {
 ENGINE_STATE_ENTER_F(Init) {
   __ PublishPreInitEvent();
 
-  srand(time(nullptr));
-  InitSignalHandlers();
-  std::set_terminate(OnUnhandledException);
-  LOG_IF(FATAL, !SetCurrentThreadName("main")) << "failed to set main thread name.";
-  gfx::Init();
-
-  InitWindows();
+  Window::Init();
   const auto driver = Driver::Init();
   ASSERT(driver);
   SwapChain::Init(driver);
@@ -301,6 +291,18 @@ LUA_ENGINE_F(getStateName) {
   return 1;
 }
 
+LUA_ENGINE_F(shutdown) {
+  const auto engine = Engine::Get();
+  ASSERT(engine);
+  std::exception_ptr cause = nullptr;
+  if (lua_gettop(L) > 0) {
+    luaL_checktype(L, 1, LUA_TSTRING);
+    cause = Exception::New(lua_tostring(L, 1));
+  }
+  engine->Shutdown(cause);
+  return 0;
+}
+
 LUA_ENGINE_F(onEvent) {
   const auto engine = Engine::Get();
   ASSERT(engine);
@@ -336,6 +338,7 @@ static const struct luaL_Reg kEngineLib[] = {
 
 void Engine::InitLua(lua_State* L) {
   ASSERT(L);
+  DLOG(INFO) << "initializing lua bindings....";
   lua_newtable(L);
   luaL_setfuncs(L, kEngineLib, 0);
   lua_setglobal(L, "Engine");

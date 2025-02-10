@@ -9,6 +9,7 @@
 #include "prette/engine.h"
 #include "prette/keyboard.h"
 #include "prette/lua.h"
+#include "prette/mouse.h"
 #include "prette/thread_local.h"
 #include "prette/to_string.h"
 
@@ -198,10 +199,11 @@ void Window::SetTable(lua_State* L, const int index) const {
   lua_setfield(L, index + -1, "size");
 }
 
-static inline void InitAppWindow() {
+void Window::Init() {
   const auto window = CreateAppWindow();
   ASSERT(window);
   Keyboard::Init(window);
+  Mouse::Init(window);
   OnKeyPressed(GLFW_KEY_ESCAPE).subscribe([](KeyStateEvent* event) {
     ASSERT(event);
     const auto engine = Engine::Get();
@@ -209,10 +211,6 @@ static inline void InitAppWindow() {
     engine->Shutdown();
   });
   SetAppWindow(window);
-}
-
-void InitWindows() {
-  InitAppWindow();
 }
 
 auto VisitAllWindows(const std::function<bool(Window*)>& vis) -> bool {
@@ -258,6 +256,7 @@ FOR_EACH_WINDOW_EVENT(DEFINE_ON_EVENT)
 
 void Window::InitLua(lua_State* L) {
   ASSERT(L);
+  DLOG(INFO) << "initializing lua bindings....";
   lua_newtable(L);
   luaL_setfuncs(L, kWindowLib, 0);
   lua_setglobal(L, "Window");

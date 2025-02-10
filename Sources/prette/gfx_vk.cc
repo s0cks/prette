@@ -4,6 +4,7 @@
 #include "prette/common.h"
 #include "prette/engine.h"
 #include "prette/gfx.h"
+#include "prette/lua.h"
 #include "prette/to_string.h"
 #ifdef PRT_VK
 
@@ -518,6 +519,9 @@ void VulkanDriver::Destroy() {
 }
 
 auto VulkanDriver::Init() -> VulkanDriver* {
+  OnLuaStateInitEvent().subscribe([](LuaStateInitEvent* event) {
+    InitLua(event->GetState());
+  });
   ASSERT(driver_ == nullptr);
   driver_ = VulkanDriver::New();
   ASSERT(driver_);
@@ -563,6 +567,7 @@ FOR_EACH_DRIVER_EVENT(DEFINE_ON_EVENT)
 
 void VulkanDriver::InitLua(lua_State* L) {
   ASSERT(L);
+  DLOG(INFO) << "initializing lua bindings....";
   lua_newtable(L);
   luaL_setfuncs(L, kDriverLib, 0);
   lua_setglobal(L, "Driver");

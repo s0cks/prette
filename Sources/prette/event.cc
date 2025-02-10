@@ -1,8 +1,5 @@
 #include "prette/event.h"
 
-#include <lauxlib.h>
-#include <lua.h>
-
 #include "prette/lua.h"
 
 namespace prt {

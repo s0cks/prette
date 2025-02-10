@@ -4,7 +4,6 @@
 #include <string>
 
 #include "prette/common.h"
-#include "prette/lua.h"
 #include "prette/rx.h"
 
 namespace prt {

@@ -90,6 +90,7 @@ class SwapChain {
   static auto GetExtent() -> const VkExtent2D&;
   static auto GetRenderPass() -> const VkRenderPass&;
   static auto GetFramebuffer(const uint32_t index) -> const VkFramebuffer&;
+
   static void Init(Driver* driver);
   static void Shutdown(Driver* driver);
 };

@@ -3,6 +3,8 @@
 
 #include <glfw/glfw3.h>
 
+#include <string>
+
 #include "prette/common.h"
 #include "prette/event.h"
 #include "prette/lua.h"
@@ -269,12 +271,14 @@ class Keyboard : public EventSourceTemplate<KeyboardEvent> {
   }
 
   auto GetKey(const int code) const -> KeyState;
+  auto ToString() const -> std::string;
 
  private:
   static auto New(Window* owner) -> Keyboard*;
   static void InitLua(lua_State* L);
 
  public:
+  static auto IsInitialized() -> bool;
   static auto Init(Window* window) -> Keyboard*;
   static auto Get() -> Keyboard*;
 };

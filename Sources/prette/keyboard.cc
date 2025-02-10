@@ -1,6 +1,8 @@
 #include "prette/keyboard.h"
 
 #include <GLFW/glfw3.h>
+#include <lauxlib.h>
+#include <lua.h>
 
 #include "prette/common.h"
 #include "prette/lua.h"
@@ -80,6 +82,10 @@ Keyboard::~Keyboard() {
   glfwSetKeyCallback(owner_->GetHandle(), nullptr);
 }
 
+auto Keyboard::ToString() const -> std::string {
+  return ToStringHelper<Keyboard>{};
+}
+
 void Keyboard::PublishEvent(KeyboardEvent* event) const {
   ASSERT(event);
   prt::PublishEvent(event);
@@ -94,6 +100,10 @@ static inline auto SetKeyboard(Keyboard* rhs) -> Keyboard* {
   ASSERT(rhs);
   keyboard_ = rhs;
   return rhs;
+}
+
+auto Keyboard::IsInitialized() -> bool {
+  return keyboard_ != nullptr;
 }
 
 auto Keyboard::New(Window* owner) -> Keyboard* {
@@ -117,7 +127,19 @@ auto Keyboard::Init(Window* window) -> Keyboard* {
   return keyboard;
 }
 
-LUA_F(keyboard_onEvent) {
+#define LUA_KEYBOARD_F(Name) LUA_F(keyboard_##Name)
+
+LUA_KEYBOARD_F(tostring) {
+  if (!Keyboard::IsInitialized()) {
+    lua_pushstring(L, "keyboard is not initialized!");
+    return 1;
+  }
+  const auto value = Keyboard::Get()->ToString();
+  lua_pushstring(L, value.c_str());
+  return 1;
+}
+
+LUA_KEYBOARD_F(onEvent) {
   OnKeyboardEvent().subscribe(CreateSubscriber<KeyboardEvent>(L));
   return 0;
 }
@@ -134,8 +156,6 @@ static inline auto CheckKeyCode(lua_State* L, const int index) -> int {
   luaL_checktype(L, index, LUA_TNUMBER);
   return lua_tonumber(L, index);
 }
-
-#define LUA_KEYBOARD_F(Name) LUA_F(keyboard_##Name)
 
 LUA_KEYBOARD_F(onPressed) {
   OnKeyPressed(CheckKeyCode(L, 1)).subscribe(CreateSubscriber<KeyStateEvent>(L, 2));
@@ -169,7 +189,14 @@ LUA_KEYBOARD_F(onReleased),
 
 void Keyboard::InitLua(lua_State* L) {
   ASSERT(L);
+  DLOG(INFO) << "initializing lua bindings...";
   lua_newtable(L);
+
+  luaL_newmetatable(L, "Keyboard");
+  lua_pushcfunction(L, &lua_keyboard_tostring);
+  lua_setfield(L, -2, "__tostring");
+  lua_setmetatable(L, -2);
+
   luaL_setfuncs(L, kKeyboardLib, 0);
   lua_setglobal(L, "Keyboard");
 }

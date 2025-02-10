@@ -7,20 +7,44 @@ print = function(value)
   end
 end
 
-local isTickEvent = function(event)
-  local event_name = getmetatable(event).__name
-  return event_name == "PreTick" or event_name == "Tick" or event_name == "PostTick"
-end
-
+print(Prette)
 if Prette.isDebug() then
-  print("prette v" .. Prette.getVersion() .. " booting....")
+  print("booting....")
+
+  -- init Driver
   Driver.onEvent(print)
+
+
+  -- init Engine
+  local isTickEvent = function(event)
+    local event_name = getmetatable(event).__name
+    return event_name == "PreTick" or event_name == "Tick" or event_name == "PostTick"
+  end
+
   Engine.onEvent(function (event)
     if not isTickEvent(event) then
       print(event)
     end
   end)
+
+  -- init Window
   Window.onEvent(print)
+
+  -- init Keyboard
   Keyboard.onEvent(print)
-  Renderer.onEvent(print)
+
+  -- init Mouse
+  Mouse.onEvent(print)
+
+  -- init Renderer
+  local isFrameEvent = function(event)
+    local event_name = getmetatable(event).__name
+    return event_name == "PreFrame" or event_name == "PostFrame"
+  end
+
+  Renderer.onEvent(function(event)
+    if not isFrameEvent(event) then
+      print(event)
+    end
+  end)
 end

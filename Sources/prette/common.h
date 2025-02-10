@@ -90,6 +90,7 @@
 #define NOT_IMPLEMENTED(Level) LOG(Level) << __FUNCTION__ << " is not implemented!";
 #endif
 
+struct lua_State;
 namespace prt {
 namespace fs = std::filesystem;
 

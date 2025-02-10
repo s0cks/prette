@@ -2,6 +2,7 @@
 
 #include "prette/command_pool.h"
 #include "prette/gfx.h"
+#include "prette/lua.h"
 #include "prette/relaxed_atomic.h"
 #include "prette/swap_chain.h"
 #include "prette/to_string.h"
@@ -29,6 +30,16 @@ static inline void Publish(Args... args) {
 
 auto OnRendererEvent() -> RendererEventObservable {
   return events_.get_observable();
+}
+
+auto PreFrameEvent::ToString() const -> std::string {
+  ToStringHelper<PreFrameEvent> helper{};
+  return helper;
+}
+
+auto PostFrameEvent::ToString() const -> std::string {
+  ToStringHelper<PostFrameEvent> helper{};
+  return helper;
 }
 
 auto RendererCreatedEvent::ToString() const -> std::string {
@@ -191,6 +202,7 @@ FOR_EACH_RENDERER_EVENT(DEFINE_ON_EVENT)
 
 void Renderer::InitLua(lua_State* L) {
   ASSERT(L);
+  DLOG(INFO) << "initializing lua bindings....";
   lua_newtable(L);
   luaL_setfuncs(L, kRendererLib, 0);
   lua_setglobal(L, "Renderer");

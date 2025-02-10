@@ -5,7 +5,7 @@
 #include <string>
 
 #include "prette/common.h"
-#include "prette/rx.h"
+#include "prette/event.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -20,6 +20,52 @@ extern "C" {
 #endif
 
 namespace prt {
+#define FOR_EACH_LUA_STATE_EVENT(V) V(LuaStateInit)
+
+class LuaState;
+class LuaStateEvent;
+#define FORWARD_DECLARE(Name) class Name##Event;
+FOR_EACH_LUA_STATE_EVENT(FORWARD_DECLARE);
+#undef FORWARD_DECLARE
+
+class LuaStateEvent : public Event {
+ protected:
+  LuaStateEvent() = default;
+
+ public:
+  ~LuaStateEvent() override = default;
+  DEFINE_EVENT_PROTOTYPE(LuaState, FOR_EACH_LUA_STATE_EVENT);
+};
+
+class LuaStateInitEvent : public LuaStateEvent {
+ private:
+  lua_State* state_;
+
+ public:
+  explicit LuaStateInitEvent(lua_State* state) :
+    LuaStateEvent(),
+    state_(state) {}
+  ~LuaStateInitEvent() override = default;
+
+  auto GetState() const -> lua_State* {
+    return state_;
+  }
+
+  DECLARE_EVENT_TYPE(LuaStateEvent, LuaStateInit);
+};
+
+DEFINE_EVENT_SUBJECT(LuaState);
+DEFINE_EVENT_OBSERVABLE(LuaState);
+FOR_EACH_LUA_STATE_EVENT(DEFINE_EVENT_OBSERVABLE);
+
+auto OnLuaStateEvent() -> LuaStateEventObservable;
+#define DEFINE_ON_EVENT(Name)                                                    \
+  static inline auto On##Name##Event()->Name##EventObservable {                  \
+    return OnLuaStateEvent().filter(Name##Event::Filter).map(Name##Event::Cast); \
+  }
+FOR_EACH_LUA_STATE_EVENT(DEFINE_ON_EVENT);
+#undef DEFINE_ON_EVENT
+
 class LuaState {
  private:
   lua_State* state_;
@@ -30,6 +76,10 @@ class LuaState {
 
  public:
   ~LuaState();
+
+  auto GetState() const -> lua_State* {
+    return state_;
+  }
 
   auto GetRoot() const -> const std::filesystem::path& {
     return root_;
