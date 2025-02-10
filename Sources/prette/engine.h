@@ -298,7 +298,15 @@ class ErrorState : public EngineState {
 #define ENGINE_STATE_TICK_F(Name)  void Name##State::OnTick(Engine* engine, const Tick& current, const Tick& previous)
 #define ENGINE_STATE_EXIT_F(Name)  void Name##State::ExitState(Engine* engine)
 
-class Engine : public EngineEventSource {
+auto OnEngineEvent() -> EngineEventObservable;
+#define DEFINE_ON_EVENT(Name)                                                  \
+  static inline auto On##Name##Event()->Name##EventObservable {                \
+    return OnEngineEvent().filter(Name##Event::Filter).map(Name##Event::Cast); \
+  }
+FOR_EACH_ENGINE_EVENT(DEFINE_ON_EVENT);
+#undef DEFINE_ON_EVENT
+
+class Engine {
   friend class prt::LuaState;
   friend class EngineState;
   friend class InitState;
@@ -313,7 +321,6 @@ class Engine : public EngineEventSource {
  private:
   uv::Loop loop_;
   uv::Async on_shutdown_;
-  EngineEventSubject events_;
   RateLimitedTicker<50000000> ticker_;
 #ifdef PRT_DEBUG
   TickProfiler tick_profiler_;
@@ -339,19 +346,7 @@ class Engine : public EngineEventSource {
     });
   }
 
-  void PublishEvent(EngineEvent* event) const override;
   void Terminate();
-
-#define DEFINE_PUBLISH_EVENT(Name)           \
-  inline void Publish##Name##Event() const { \
-    return Publish<Name##Event>(this);       \
-  }
-  DEFINE_PUBLISH_EVENT(PreInit);
-  DEFINE_PUBLISH_EVENT(PostInit);
-  DEFINE_PUBLISH_EVENT(Terminated);
-  DEFINE_PUBLISH_EVENT(Terminating);
-  DEFINE_PUBLISH_EVENT(Error);
-#undef DEFINE_PUBLISH_EVENT
 
   void Stop() {
     ticker_.Stop();
@@ -362,7 +357,7 @@ class Engine : public EngineEventSource {
 
  public:
   Engine();
-  ~Engine() override;
+  ~Engine();
 
   auto GetLoop() const -> const uv::Loop& {
     return loop_;
@@ -405,8 +400,6 @@ class Engine : public EngineEventSource {
   auto GetTicksPerSecond() const -> const TicksPerSecond& {
     return ticker_.GetTicksPerSecond();
   }
-
-  auto OnEvent() const -> EngineEventObservable override;
 
   auto OnTick() const -> rx::observable<Tick> {
     return ticker_.OnTick();

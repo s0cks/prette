@@ -118,13 +118,11 @@ Window::Window(Handle* handle) :
 #else
 #error "Unsupported Platform."
 #endif  // PRT_GLFW
-  const auto engine = Engine::Get();
-  ASSERT(engine);
-  engine->OnPostInitEvent().subscribe([this](engine::PostInitEvent* event) {
+  engine::OnPostInitEvent().subscribe([this](engine::PostInitEvent* event) {
     ASSERT(event);
     Show();
   });
-  engine->OnTerminatingEvent().subscribe([this](engine::TerminatingEvent* event) {
+  engine::OnTerminatingEvent().subscribe([this](engine::TerminatingEvent* event) {
     ASSERT(event);
     Close();
   });

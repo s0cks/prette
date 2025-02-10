@@ -14,7 +14,8 @@ namespace prt {
 auto ReadShaderCode(const std::string& filename, std::vector<char>& code) -> bool;
 
 #ifdef PRT_VK
-void CreateShaderModule(const VkDevice& device, const std::vector<char>& code, VkShaderModule& shader_module);
+auto CreateShaderModule(const VkDevice& device, const std::vector<char>& code, VkShaderModule& shader_module) -> bool;
+auto CreateShaderModule(const VkDevice& device, const std::string& filename, VkShaderModule& shader_module) -> bool;
 
 static inline void InitShaderStageCreateInfo(VkPipelineShaderStageCreateInfo& create_info, VkShaderModule m,
                                              const VkShaderStageFlagBits stage, const char* name = "main") {

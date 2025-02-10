@@ -19,7 +19,6 @@ list(
   PNG::PNG
   JPEG::JPEG
   leveldb::leveldb
-  flatbuffers::flatbuffers
   Freetype::Freetype
   units::units
   semver
@@ -36,6 +35,8 @@ list(
   implot::implot
   rapidjson
   stduuid
+  absl::any absl::log absl::base absl::bits
+  tinyobjloader::tinyobjloader
   ${LUA_LIBRARIES}
   glfw
   libuv::uv)
@@ -51,11 +52,12 @@ endif()
 
 add_library(${PROJECT_NAME} SHARED ${PRT_SOURCES})
 target_compile_options(${PROJECT_NAME} PUBLIC ${PRT_COMPILE_OPTS})
-target_link_libraries(${PROJECT_NAME} PUBLIC ${PRT_LIBRARIES})
+target_link_libraries(${PROJECT_NAME}
+  PUBLIC ${PRT_LIBRARIES} prt-flatbuffers)
 target_include_directories(
   ${PROJECT_NAME}
   PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}
-  PRIVATE ${TERMCOLOR_INCLUDE_DIRS} ${LUA_INCLUDE_DIR})
+  PRIVATE ${TERMCOLOR_INCLUDE_DIRS} ${LUA_INCLUDE_DIR} ${Stb_INCLUDE_DIR})
 
 add_executable(${PROJECT_NAME}-client main.cc)
 target_link_libraries(${PROJECT_NAME}-client PUBLIC ${PROJECT_NAME})

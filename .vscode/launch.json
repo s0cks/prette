@@ -65,38 +65,12 @@
       "env": {
         "UV_THREADPOOL_SIZE": "0",
         "TERM": "xterm-256color",
-        "METAL_DEVICE_WRAPPER_TYPE": "1"
+        "METAL_DEVICE_WRAPPER_TYPE": "1",
+        "PRT_PATH": "${workspaceFolder}/resources;${workspaceFolder}/build/resources",
       },
       "initCommands": [
         "command source ${workspaceFolder}/.lldbinit"
       ],
-    },
-    {
-      "name": "prette (verbose)",
-      "type": "cppdbg",
-      "request": "launch",
-      "program": "${workspaceFolder}/build/Sources/prette-client",
-      "args": [
-        "--resources",
-        "${workspaceFolder}/resources",
-        "--logtostdout",
-        "--colorlogtostdout",
-        "--v=10"
-      ],
-      "cwd": "${workspaceFolder}",
-      "environment": [
-        {
-          "name": "UV_THREADPOOL_SIZE",
-          "value": "0"
-        }
-      ],
-      "MIMode": "lldb",
-      "setupCommands": [
-        {
-          "description": "Load .lldbinit",
-          "text": "command source ~/.lldbinit"
-        }
-      ]
     }
   ]
 }

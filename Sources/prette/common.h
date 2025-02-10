@@ -222,6 +222,40 @@ static inline auto LogEvent(const google::LogSeverity severity, const char* file
     google::LogMessage(file, line, severity).stream() << std::string((indent * 2), ' ') << "event: " << event->ToString();
   };
 }
+
+static inline void Split(const std::string& str, const char delim, std::vector<std::string>& results) {
+  std::stringstream ss(str);
+  std::string token;
+  while (std::getline(ss, token, delim)) {
+    results.push_back(token);
+  }
+}
+
+class EnvironmentVariable {
+ private:
+  std::string name_;
+
+ public:
+  explicit EnvironmentVariable(const char* name) :
+    name_(name) {}
+  ~EnvironmentVariable() = default;
+
+  auto GetName() const -> const char* {
+    return name_.c_str();
+  }
+
+  auto Get() const -> std::optional<std::string> {
+    const auto value = getenv(GetName());
+    return value ? std::optional<std::string>{std::string(value)} : std::nullopt;
+  }
+
+  void GetList(std::vector<std::string>& results) const {
+    const auto value = getenv(GetName());
+    if (!value)
+      return;
+    Split(value, ';', results);
+  }
+};
 }  // namespace prt
 
 #endif  // PRT_COMMON_H

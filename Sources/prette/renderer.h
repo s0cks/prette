@@ -94,20 +94,146 @@ auto OnRendererEvent() -> RendererEventObservable;
 FOR_EACH_RENDERER_EVENT(DEFINE_ON_EVENT)
 #undef DEFINE_ON_EVENT
 
+struct Vertex {
+  glm::vec2 pos;
+  glm::vec3 color;
+
+  static auto GetBindingDescription() -> VkVertexInputBindingDescription {
+    VkVertexInputBindingDescription binding{};
+    binding.binding = 0;
+    binding.stride = sizeof(Vertex);
+    binding.inputRate = VK_VERTEX_INPUT_RATE_VERTEX;
+    return binding;
+  }
+
+  static auto GetAttributeDescriptions() -> const std::array<VkVertexInputAttributeDescription, 2>& {
+    static std::array<VkVertexInputAttributeDescription, 2> attributes{};
+    if (attributes.at(0).format != VK_FORMAT_R32G32_SFLOAT) {
+      attributes.at(0).binding = 0;
+      attributes.at(0).location = 0;
+      attributes.at(0).format = VK_FORMAT_R32G32_SFLOAT;
+      attributes.at(0).offset = offsetof(Vertex, pos);
+
+      attributes.at(1).binding = 0;
+      attributes.at(1).location = 1;
+      attributes.at(1).format = VK_FORMAT_R32G32B32_SFLOAT;
+      attributes.at(1).offset = offsetof(Vertex, color);
+    }
+    return attributes;
+  }
+};
+
+struct SwapChainSupportDetails {
+  VkSurfaceCapabilitiesKHR surface_capabilities{};
+  std::vector<VkSurfaceFormatKHR> surface_formats{};
+  std::vector<VkPresentModeKHR> present_modes{};
+
+  inline auto HasSurfaceFormats() const -> bool {
+    return !surface_formats.empty();
+  }
+
+  inline auto HasPresentModes() const -> bool {
+    return !present_modes.empty();
+  }
+
+  auto FindSurfaceFormat(const std::function<bool(const VkSurfaceFormatKHR&)>& filter) const -> const VkSurfaceFormatKHR& {
+    const auto pos = std::ranges::find_if(surface_formats, filter);
+    if (pos != std::end(surface_formats))
+      return (*pos);
+    DLOG(WARNING) << "failed to find valid surface format for swap chain.";
+    return surface_formats[0];
+  }
+
+  auto FindPresentMode(const std::function<bool(const VkPresentModeKHR&)>& filter) const -> VkPresentModeKHR {
+    const auto pos = std::ranges::find_if(present_modes, filter);
+    if (pos != std::end(present_modes))
+      return (*pos);
+    DLOG(WARNING) << "failed to find valid present mode for swap chain.";
+    return VK_PRESENT_MODE_FIFO_KHR;
+  }
+
+  auto GetMaxImageCount() const -> uint32_t {
+    return surface_capabilities.maxImageCount;
+  }
+
+  inline auto HasMaxImage() const -> bool {
+    return GetMaxImageCount() > 0;
+  }
+
+  void ClampImageCount(uint32_t& image_count) const {
+    if (HasMaxImage() && image_count > GetMaxImageCount())
+      image_count = GetMaxImageCount();
+  }
+
+  auto GetExtent() const -> VkExtent2D;
+
+  operator bool() const {
+    return HasSurfaceFormats() && HasPresentModes();
+  }
+};
+
+auto QuerySwapChainSupport(const VkPhysicalDevice& device, const VkSurfaceKHR& surface) -> SwapChainSupportDetails;
+
+static inline auto HasSwapChainSupport(const VkPhysicalDevice& device, const VkSurfaceKHR& surface) -> bool {
+  return QuerySwapChainSupport(device, surface);
+}
+
 class Renderer {
   friend class LuaState;
 
  private:
-  static void InitSyncObjects(Driver* driver);
+  static void InitSyncObjects(const Driver* driver);
   static void InitResizeListener();
-  static void DestroySyncObjects(Driver* driver);
+  static void InitBuffers();
+  static void InitPipeline(const Driver* driver);
+  static void InitPipelineCache(const Driver* driver);
+
+  static void InitCommandPool(const VkPhysicalDevice& physical_device, const VkDevice& device, const VkSurfaceKHR& surface,
+                              const VkAllocationCallbacks* allocator);
+  static void InitCommandBuffers(const VkDevice& device);
+
+  static void InitImageViews(const VkDevice& device);
+  static void InitFramebuffers(const VkDevice& device, const VkAllocationCallbacks* allocator = nullptr);
+  static void InitRenderPass(const VkDevice& device);
+
+  static void InitSwapChain(const VkPhysicalDevice& physical_device, const VkDevice& device, const VkSurfaceKHR& surface,
+                            const VkAllocationCallbacks* allocator);
+  static void ReInitSwapChain(Driver* driver);
+  static void DestroyFramebuffers(const VkDevice& device, const VkAllocationCallbacks* allocator = nullptr);
+  static void DestroyImageViews(const VkDevice& device, const VkAllocationCallbacks* allocator = nullptr);
+  static void DestroyRenderPass(Driver* driver);
+  static void DestroySwapChain(const VkDevice& device, const VkAllocationCallbacks* allocator = nullptr);
+
+  static void Destroy();
+  static void DestroySyncObjects(const Driver* driver);
+  static void DestroyPipelineCache(const Driver* driver);
+  static void DestroyPipeline(const Driver* driver);
+  static void DestroyPipelineLayout(const Driver* driver);
 
  private:
   static void InitLua(lua_State* L);
 
  public:
-  static void Init(Driver* driver);
-  static void Shutdown(Driver* driver);
+  static void Init();
+  static auto GetPipeline() -> VkPipeline const&;
+  static auto GetPipelineLayout() -> VkPipelineLayout const&;
+  static auto GetVertexBuffer() -> VkBuffer const&;
+  static auto GetIndexBuffer() -> VkBuffer const&;
+  static auto GetPipelineCache() -> VkPipelineCache const&;
+  static auto GetNumberOfIndices() -> uint32_t;
+  static auto GetCommandPool() -> VkCommandPool const&;
+  static auto GetCommandBuffer(const uint32_t buffer_index) -> VkCommandBuffer const&;
+  static void RecordCommandBuffer(const uint32_t buffer_index, const uint32_t frame_index);
+  static void ResetCommandBuffer(const uint32_t buffer_index,
+                                 const VkCommandBufferResetFlagBits flags = static_cast<VkCommandBufferResetFlagBits>(0));
+  static auto GetSwapChain() -> VkSwapchainKHR const&;
+  static auto GetImages() -> std::vector<VkImage> const&;
+  static auto GetImageViews() -> std::vector<VkImageView> const&;
+  static auto GetFormat() -> VkFormat const&;
+  static auto GetExtent() -> VkExtent2D const&;
+  static auto GetRenderPass() -> VkRenderPass const&;
+  static auto GetFramebuffer(const uint32_t index) -> VkFramebuffer const&;
+
   static void DrawFrame(Driver* driver, const Tick& current, const Tick& previous);
 };
 }  // namespace prt

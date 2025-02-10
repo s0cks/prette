@@ -1,7 +1,6 @@
-#include <gtest/gtest.h>
 #include <glog/logging.h>
+#include <gtest/gtest.h>
 
-#include "prette/class.h"
 #include "prette/prette.h"
 
 using namespace google;
@@ -13,7 +12,5 @@ auto main(int argc, char** argv) -> int {
   InitGoogleTest(&argc, argv);
   ParseCommandLineFlags(&argc, &argv, false);
   LOG(INFO) << "Running unit tests for prette v" << GetVersion() << "....";
-
-  Class::Init();
   return RUN_ALL_TESTS();
 }

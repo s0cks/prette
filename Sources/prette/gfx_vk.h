@@ -310,9 +310,10 @@ class TerminatedState;
 }  // namespace engine
 
 class Window;
-class VulkanDriver {
+class VulkanDriver : public DriverBase {
   friend class Runtime;
   friend class LuaState;
+  friend class DriverBase;
   friend class engine::InitState;
   friend class engine::TerminatedState;
   DEFINE_NON_COPYABLE_TYPE(VulkanDriver);
@@ -402,15 +403,14 @@ class VulkanDriver {
   void WaitDeviceIdle();
 
  private:
-  static void Destroy();
-  static void InitLua(lua_State* L);
+  static inline auto New() -> VulkanDriver* {
+    ASSERT(!DriverBase::IsInitialized());
+    return new VulkanDriver();
+  }
 
  public:
-  static auto New() -> VulkanDriver*;
-  static auto Init() -> VulkanDriver*;
-  static auto Get() -> VulkanDriver*;
+  static void Init();
 };
-using Driver = VulkanDriver;
 }  // namespace prt
 
 #endif  // PRT_GFX_VK_H

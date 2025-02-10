@@ -1,21 +1,15 @@
-#include <vulkan/vulkan_core.h>
-
-#include "prette/command_pool.h"
 #include "prette/common.h"
 #include "prette/engine.h"
 #include "prette/gfx.h"
 #include "prette/lua.h"
+#include "prette/renderer.h"
 #include "prette/to_string.h"
 #ifdef PRT_VK
 
-#include "prette/command_pool.h"
-#include "prette/pipeline.h"
 #include "prette/renderer.h"
-#include "prette/swap_chain.h"
 #include "prette/window.h"
 
 namespace prt {
-
 namespace vk {
 void Buffer::AllocateMemory(const VkDevice& device, const VkDeviceSize alloc_size, const uint32_t memory_type,
                             VkDeviceMemory& memory, const VkAllocationCallbacks* allocator) {
@@ -147,14 +141,14 @@ class SingleUseCommandBuffer {
   SingleUseCommandBuffer() {
     const auto driver = Driver::Get();
     ASSERT(driver);
-    InitCommandBuffer(driver->GetDevice(), CommandPool::GetCommandPool(), buffer_);
+    InitCommandBuffer(driver->GetDevice(), Renderer::GetCommandPool(), buffer_);
     StartCommandBuffer(buffer_);
   }
   ~SingleUseCommandBuffer() {
     const auto driver = Driver::Get();
     ASSERT(driver);
     SubmitCommandBuffer(driver->GetGraphicsQueue(), buffer_);
-    DestroyCommandBuffer(driver->GetDevice(), CommandPool::GetCommandPool(), buffer_);
+    DestroyCommandBuffer(driver->GetDevice(), Renderer::GetCommandPool(), buffer_);
   }
 
   operator VkCommandBuffer() const {
@@ -213,35 +207,6 @@ void MappedBufferScope::CopyFrom(const void* src, const VkDeviceSize num_bytes) 
   memcpy(mapped_memory_, src, num_bytes == VK_WHOLE_SIZE ? GetBuffer()->GetSize() : num_bytes);
 }
 }  // namespace vk
-
-static DriverEventSubject driver_events_;
-static VulkanDriver* driver_ = nullptr;
-
-static inline void PublishDriverEvent(DriverEvent* event) {
-  ASSERT(event);
-  const auto& subscriber = driver_events_.get_subscriber();
-  subscriber.on_next(event);
-}
-
-template <class E, typename... Args>
-static inline void PublishDriverEvent(Args... args) {
-  E event(args...);
-  return PublishDriverEvent((DriverEvent*)&event);
-}
-
-auto OnDriverEvent() -> DriverEventObservable {
-  return driver_events_.get_observable();
-}
-
-auto DriverCreatedEvent::ToString() const -> std::string {
-  ToStringHelper<DriverCreatedEvent> helper;
-  helper.AddFieldPtr("driver", GetDriver());
-  return helper;
-}
-
-auto DriverDestroyedEvent::ToString() const -> std::string {
-  return ToStringHelper<DriverDestroyedEvent>{};
-}
 
 static inline void GetRequiredExtensions(std::vector<const char*>& extensions) {
   uint32_t ext_count = 0;
@@ -409,6 +374,7 @@ void VulkanDriver::InitApplicationInfo() {
 }
 
 void VulkanDriver::WaitDeviceIdle() {
+  DLOG(INFO) << "waiting for idle...";
   vkDeviceWaitIdle(device_);
 }
 
@@ -482,12 +448,6 @@ VulkanDriver::VulkanDriver() {
   InitSurface();
   InitPhysicalDevice();
   InitLogicalDevice(1.0f);
-  const auto engine = Engine::Get();
-  ASSERT(engine);
-  engine->OnTerminatingEvent().subscribe([this](engine::TerminatingEvent* event) {
-    ASSERT(event);
-    Destroy();
-  });
 }
 
 VulkanDriver::~VulkanDriver() {
@@ -499,78 +459,16 @@ VulkanDriver::~VulkanDriver() {
   vkDestroyInstance(instance_, allocator_);
 }
 
-auto VulkanDriver::New() -> VulkanDriver* {
-  const auto driver = new VulkanDriver();
-  ASSERT(driver);
-  PublishDriverEvent<DriverCreatedEvent>(driver);
-  return driver;
-}
-
-void VulkanDriver::Destroy() {
-  ASSERT(driver_);
-  driver_->WaitDeviceIdle();
-  Renderer::Shutdown(driver_);
-  SwapChain::Shutdown(driver_);
-  CommandPool::Shutdown(driver_);
-  Pipeline::Shutdown(driver_);
-  delete driver_;
-  driver_ = nullptr;
-  PublishDriverEvent<DriverDestroyedEvent>();
-}
-
-auto VulkanDriver::Init() -> VulkanDriver* {
-  OnLuaStateInitEvent().subscribe([](LuaStateInitEvent* event) {
-    InitLua(event->GetState());
+void VulkanDriver::Init() {
+  DriverBase::Init();
+  const auto engine = Engine::Get();
+  ASSERT(engine);
+  engine::OnTerminatingEvent().subscribe([](engine::TerminatingEvent* event) {
+    ASSERT(event);
+    const auto driver = Driver::Get();
+    ASSERT(driver);
+    driver->WaitDeviceIdle();
   });
-  ASSERT(driver_ == nullptr);
-  driver_ = VulkanDriver::New();
-  ASSERT(driver_);
-  return driver_;
-}
-
-auto VulkanDriver::Get() -> VulkanDriver* {
-  ASSERT(driver_);
-  return driver_;
-}
-
-#define LUA_DRIVER_F(Name) LUA_F(driver_##Name)
-
-LUA_DRIVER_F(onEvent) {
-  OnDriverEvent().subscribe(CreateSubscriber<DriverEvent>(L));
-  return 0;
-}
-
-#define DEFINE_ON_EVENT_FUNC(Name)                                 \
-  LUA_DRIVER_F(on##Name##Event) {                                  \
-    On##Name##Event().subscribe(CreateSubscriber<Name##Event>(L)); \
-    return 0;                                                      \
-  }
-FOR_EACH_DRIVER_EVENT(DEFINE_ON_EVENT_FUNC);
-#undef DEFINE_ON_EVENT_FUNC
-
-#undef LUA_DRIVER_F
-
-// clang-format off
-// NOLINTNEXTLINE
-static const struct luaL_Reg kDriverLib[] = {
-#define LUA_DRIVER_F(Name) \
-  { .name = #Name, .func = &lua_driver_##Name }
-
-  LUA_DRIVER_F(onEvent),
-#define DEFINE_ON_EVENT(Name) \
-  LUA_DRIVER_F(on##Name##Event),
-FOR_EACH_DRIVER_EVENT(DEFINE_ON_EVENT)
-#undef DEFINE_ON_EVENT
-#undef LUA_DRIVER_F
-};
-// clang-format on
-
-void VulkanDriver::InitLua(lua_State* L) {
-  ASSERT(L);
-  DLOG(INFO) << "initializing lua bindings....";
-  lua_newtable(L);
-  luaL_setfuncs(L, kDriverLib, 0);
-  lua_setglobal(L, "Driver");
 }
 }  // namespace prt
 

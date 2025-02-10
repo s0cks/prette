@@ -19,6 +19,7 @@ endif()
 
 set(PRT_ENABLE_VK 1)
 if(PRT_ENABLE_VK)
+  include(Vulkan)
   find_package(Vulkan REQUIRED)
   add_compile_definitions(PRT_VK)
 else()
@@ -61,6 +62,9 @@ find_package(Lua REQUIRED)
 find_package(stduuid CONFIG REQUIRED)
 find_package(imgui CONFIG REQUIRED)
 find_package(implot CONFIG REQUIRED)
+find_package(absl CONFIG REQUIRED)
+find_package(tinyobjloader CONFIG REQUIRED)
+find_package(Stb REQUIRED)
 
 find_path(SEMVER_INCLUDE_DIRS "semver/semver.hpp")
 
@@ -104,6 +108,7 @@ endif()
 
 link_libraries(Threads::Threads glog::glog gflags::gflags)
 
+add_subdirectory(resources)
 add_subdirectory(lib/semver)
 add_subdirectory(Sources)
 

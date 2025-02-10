@@ -18,6 +18,9 @@
     "rapidjson",
     "rxcpp",
     "lua",
+    "stb",
+    "tinyobjloader",
+    "abseil",
     {
       "name": "stduuid",
       "features": ["system-gen"]

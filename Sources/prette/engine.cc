@@ -11,23 +11,38 @@
 #include <operators/rx-observe_on.hpp>
 #include <rx-observable.hpp>
 
-#include "prette/command_pool.h"
 #include "prette/common.h"
 #include "prette/crash_report.h"
 #include "prette/exception.h"
 #include "prette/gfx.h"
 #include "prette/lua.h"
-#include "prette/pipeline.h"
 #include "prette/prette.h"
 #include "prette/renderer.h"
 #include "prette/signals.h"
-#include "prette/swap_chain.h"
 #include "prette/thread_local.h"
 #include "prette/to_string.h"
 #include "prette/uv/utils.h"
 #include "prette/window.h"
 
 namespace prt::engine {
+static EngineEventSubject events_{};
+
+auto OnEngineEvent() -> EngineEventObservable {
+  return events_.get_observable();
+}
+
+static inline void PublishEvent(EngineEvent* event) {
+  ASSERT(event);
+  const auto& subscriber = events_.get_subscriber();
+  return subscriber.on_next(event);
+}
+
+template <class E, typename... Args>
+static inline void Publish(Args... args) {
+  E event(args...);
+  return PublishEvent(&event);
+}
+
 auto PreInitEvent::ToString() const -> std::string {
   ToStringHelper<PreInitEvent> helper;
   helper.AddFieldPtr("engine", GetEngine());
@@ -119,23 +134,14 @@ void Engine::ExitState(const std::unique_ptr<EngineState>& state) {
 #define __ engine->
 
 ENGINE_STATE_ENTER_F(Init) {
-  __ PublishPreInitEvent();
-
-  Window::Init();
-  const auto driver = Driver::Init();
-  ASSERT(driver);
-  SwapChain::Init(driver);
-  Pipeline::Init(driver);
-  CommandPool::Init(driver);
-  Pipeline::InitBuffers();
-  Renderer::Init(driver);
+  Publish<PreInitEvent>(engine);
   __ SetState<RunningState>();
 }
 
 ENGINE_STATE_TICK_F(Init) {}
 
 ENGINE_STATE_EXIT_F(Init) {
-  __ PublishPostInitEvent();
+  Publish<PostInitEvent>(engine);
 }
 
 ENGINE_STATE_ENTER_F(Running) {
@@ -144,15 +150,15 @@ ENGINE_STATE_ENTER_F(Running) {
 
 ENGINE_STATE_TICK_F(Running) {
   // pre-tick
-  __ Publish<PreTickEvent>(engine);
+  Publish<PreTickEvent>(engine);
   glfwPollEvents();
 
   // tick-logic
-  __ Publish<TickEvent>(engine, current, previous);
+  Publish<TickEvent>(engine, current, previous);
+  Renderer::DrawFrame(Driver::Get(), current, previous);
 
   // post-tick
-  Renderer::DrawFrame(Driver::Get(), current, previous);
-  __ Publish<PostTickEvent>(engine, current);
+  Publish<PostTickEvent>(engine, current);
 }
 
 ENGINE_STATE_EXIT_F(Running) {
@@ -172,8 +178,8 @@ ENGINE_STATE_EXIT_F(Paused) {
 }
 
 ENGINE_STATE_ENTER_F(Terminated) {
+  Publish<TerminatingEvent>(engine);
   __ Stop();
-  __ PublishTerminatingEvent();
 }
 
 ENGINE_STATE_TICK_F(Terminated) {
@@ -182,7 +188,7 @@ ENGINE_STATE_TICK_F(Terminated) {
 
 ENGINE_STATE_EXIT_F(Terminated) {
   glfwTerminate();
-  __ PublishTerminatedEvent();
+  Publish<TerminatedEvent>(engine);
 }
 
 ENGINE_STATE_ENTER_F(Error) {
@@ -197,7 +203,7 @@ ENGINE_STATE_EXIT_F(Error) {
   LOG(ERROR) << "an exception has occurred.";
   CrashReport report(GetCause());
   report.Print();
-  __ PublishErrorEvent();
+  Publish<ErrorEvent>(engine);
 }
 
 #undef __
@@ -216,21 +222,19 @@ void Engine::Terminate() {
 }
 
 static inline auto CreateTickDeltaObservable(const Engine* engine) -> rx::observable<uint64_t> {
-  return engine->OnTickEvent().map([](engine::TickEvent* event) {
+  return OnTickEvent().map([](engine::TickEvent* event) {
     return (event->GetTimeSinceLast()).value();
   });
 }
 
 Engine::Engine() :
-  EngineEventSource(),
   loop_(),
   on_shutdown_(loop_, &OnShutdown, this),
   ticker_(&loop_),
 #ifdef PRT_DEBUG
   tick_profiler_(CreateTickDeltaObservable(this)),
 #endif  // PRT_DEBUG
-  state_(nullptr),
-  events_() {
+  state_(nullptr) {
 #ifdef PRT_DEBUG
   OnTickProfilerStats().subscribe(([this](const TickStats stats) {
     DLOG(INFO) << "tps: " << GetTicksPerSecond().per_sec() << "; rate=" << stats;
@@ -253,16 +257,6 @@ auto Engine::Run() -> int {
 void Engine::Shutdown(std::shared_ptr<CrashReportCause> cause) {
   cause_ = cause;
   on_shutdown_.Send();
-}
-
-void Engine::PublishEvent(EngineEvent* event) const {
-  ASSERT(event);
-  const auto& subscriber = events_.get_subscriber();
-  return subscriber.on_next(event);
-}
-
-auto Engine::OnEvent() const -> EngineEventObservable {
-  return events_.get_observable();
 }
 
 static ThreadLocal<Engine> engine_;
@@ -306,16 +300,16 @@ LUA_ENGINE_F(shutdown) {
 LUA_ENGINE_F(onEvent) {
   const auto engine = Engine::Get();
   ASSERT(engine);
-  engine->OnEvent().subscribe(CreateSubscriber<EngineEvent>(L));
+  OnEngineEvent().subscribe(CreateSubscriber<EngineEvent>(L));
   return 0;
 }
 
-#define DEFINE_ON_EVENT_FUNC(Name)                                         \
-  LUA_ENGINE_F(on##Name##Event) {                                          \
-    const auto engine = Engine::Get();                                     \
-    ASSERT(engine);                                                        \
-    engine->On##Name##Event().subscribe(CreateSubscriber<Name##Event>(L)); \
-    return 0;                                                              \
+#define DEFINE_ON_EVENT_FUNC(Name)                                 \
+  LUA_ENGINE_F(on##Name##Event) {                                  \
+    const auto engine = Engine::Get();                             \
+    ASSERT(engine);                                                \
+    On##Name##Event().subscribe(CreateSubscriber<Name##Event>(L)); \
+    return 0;                                                      \
   }
 FOR_EACH_ENGINE_EVENT(DEFINE_ON_EVENT_FUNC);
 #undef DEFINE_ON_EVENT_FUNC

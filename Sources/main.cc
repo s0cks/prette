@@ -12,6 +12,7 @@
 #include "prette/os_thread.h"
 #include "prette/renderer.h"
 #include "prette/signals.h"
+#include "prette/test_generated.h"
 #include "prette/window.h"
 
 using namespace prt;
@@ -33,7 +34,10 @@ auto main(int argc, char** argv) -> int {
   LOG_IF(FATAL, !SetCurrentThreadName("main")) << "failed to set main thread name.";
   gfx::Init();
   LuaState::Init();
+  Window::Init();
   Engine::Init();
+  Driver::Init();
+  Renderer::Init();
   const auto engine = Engine::Get();
   ASSERT(engine);
   return engine->Run();

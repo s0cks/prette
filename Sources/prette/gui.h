@@ -1,9 +1,10 @@
 #ifndef PRT_GUI_H
 #define PRT_GUI_H
 
-#include <vulkan/vulkan.h>
+#include <imgui.h>
 
 #include "prette/dimension.h"
+#include "prette/gfx.h"
 
 namespace prt::gui {
 void Init(const Dimension& size);
