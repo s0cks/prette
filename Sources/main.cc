@@ -23,6 +23,7 @@ auto main(int argc, char** argv) -> int {
   // ::google::InstallPrefixFormatter(&MyPrefixFormatter);
   ::google::InitGoogleLogging(argv[0]);
   ::google::ParseCommandLineFlags(&argc, &argv, true);
+  LuaState::Init();
   Engine::Init();
   const auto engine = Engine::Get();
   ASSERT(engine);

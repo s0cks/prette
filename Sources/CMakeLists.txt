@@ -35,6 +35,8 @@ list(
   imgui::imgui
   implot::implot
   rapidjson
+  stduuid
+  ${LUA_LIBRARIES}
   glfw
   libuv::uv)
 if(PRT_ENABLE_VK)
@@ -53,7 +55,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC ${PRT_LIBRARIES})
 target_include_directories(
   ${PROJECT_NAME}
   PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}
-  PRIVATE ${TERMCOLOR_INCLUDE_DIRS})
+  PRIVATE ${TERMCOLOR_INCLUDE_DIRS} ${LUA_INCLUDE_DIR})
 
 add_executable(${PROJECT_NAME}-client main.cc)
 target_link_libraries(${PROJECT_NAME}-client PUBLIC ${PROJECT_NAME})

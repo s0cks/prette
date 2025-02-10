@@ -48,9 +48,6 @@
 #endif  // PI
 
 namespace prt {
-auto InitDriver() -> Driver*;
-auto GetDriver() -> Driver*;
-
 #define FOR_EACH_DRIVER_EVENT(V) \
   V(DriverCreated)               \
   V(DriverDestroyed)
@@ -66,7 +63,7 @@ class DriverEvent : public Event {
 
  public:
   ~DriverEvent() override = default;
-  DEFINE_EVENT_PROTOTYPE(FOR_EACH_DRIVER_EVENT);
+  DEFINE_EVENT_PROTOTYPE(Driver, FOR_EACH_DRIVER_EVENT);
 };
 
 class DriverCreatedEvent : public DriverEvent {

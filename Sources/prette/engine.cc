@@ -4,6 +4,7 @@
 #include <uv.h>
 
 #include <algorithm>
+#include <cctype>
 #include <cstdlib>
 #include <exception>
 #include <operators/rx-observe_on.hpp>
@@ -13,7 +14,9 @@
 #include "prette/common.h"
 #include "prette/crash_report.h"
 #include "prette/gfx.h"
+#include "prette/lua.h"
 #include "prette/pipeline.h"
+#include "prette/prette.h"
 #include "prette/renderer.h"
 #include "prette/signals.h"
 #include "prette/swap_chain.h"
@@ -81,6 +84,42 @@ static inline void OnUnhandledException() {
   LOG(FATAL) << "unhandled exception occured.";
 }
 
+static inline auto GetLowercaseStateName(const std::unique_ptr<EngineState>& state) -> std::string {
+  std::string name(state->GetStateName());
+  std::ranges::transform(name, std::begin(name), [](const char c) {
+    return tolower(c);
+  });
+  return name;
+}
+
+static inline auto GetPreScriptName(const std::unique_ptr<EngineState>& state) -> std::string {
+  return fmt::format("pre-{}.lua", GetLowercaseStateName(state));
+}
+
+static inline void ExecutePreScript(const std::unique_ptr<EngineState>& state) {
+  return LuaState::Get()->ExecuteScript(GetPreScriptName(state));
+}
+
+static inline auto GetPostScriptName(const std::unique_ptr<EngineState>& state) -> std::string {
+  return fmt::format("post-{}.lua", GetLowercaseStateName(state));
+}
+
+static inline void ExecutePostScript(const std::unique_ptr<EngineState>& state) {
+  return LuaState::Get()->ExecuteScript(GetPostScriptName(state));
+}
+
+void Engine::EnterState(const std::unique_ptr<EngineState>& state) {
+  ASSERT(state);
+  ExecutePreScript(state);
+  state->EnterState(this);
+}
+
+void Engine::ExitState(const std::unique_ptr<EngineState>& state) {
+  ASSERT(state);
+  state->ExitState(this);
+  ExecutePostScript(state);
+}
+
 #define __ engine->
 
 ENGINE_STATE_ENTER_F(Init) {
@@ -93,14 +132,13 @@ ENGINE_STATE_ENTER_F(Init) {
   gfx::Init();
 
   InitWindows();
-  const auto driver = InitDriver();
+  const auto driver = Driver::Init();
   ASSERT(driver);
   SwapChain::Init(driver);
   Pipeline::Init(driver);
   CommandPool::Init(driver);
   Pipeline::InitBuffers();
   Renderer::Init(driver);
-
   __ SetState<RunningState>();
 }
 
@@ -123,9 +161,7 @@ ENGINE_STATE_TICK_F(Running) {
   __ Publish<TickEvent>(engine, current, previous);
 
   // post-tick
-  const auto driver = GetDriver();
-  ASSERT(driver);
-  Renderer::DrawFrame(driver);
+  Renderer::DrawFrame(Driver::Get(), current, previous);
   __ Publish<PostTickEvent>(engine, current);
 }
 
@@ -134,7 +170,6 @@ ENGINE_STATE_EXIT_F(Running) {
 }
 
 ENGINE_STATE_ENTER_F(Paused) {
-  DLOG(INFO) << "paused.";
   __ Stop();
 }
 
@@ -204,11 +239,9 @@ Engine::Engine() :
 #ifdef PRT_DEBUG
   tick_profiler_(CreateTickDeltaObservable(this)),
 #endif  // PRT_DEBUG
-  running_(false),
   state_(nullptr),
   events_() {
 #ifdef PRT_DEBUG
-  OnEvent().subscribe(LogEvent<EngineEvent>(google::INFO, __FILE__, __LINE__));
   OnTickProfilerStats().subscribe(([this](const TickStats stats) {
     DLOG(INFO) << "tps: " << GetTicksPerSecond().per_sec() << "; rate=" << stats;
   }));
@@ -223,7 +256,7 @@ auto Engine::Run() -> int {
   SetState<InitState>();
   GetLoop().RunDefault();
   if (state_)
-    state_->ExitState(this);
+    ExitState(state_);
   return EXIT_SUCCESS;
 }
 
@@ -256,5 +289,55 @@ auto Engine::Get() -> Engine* {
 
 void Engine::Init() {
   SetEngine(new Engine());
+  LuaState::Get()->ExecuteScript("boot.lua");
+}
+
+#define LUA_ENGINE_F(Name) LUA_F(engine_##Name)
+
+LUA_ENGINE_F(getStateName) {
+  const auto engine = Engine::Get();
+  ASSERT(engine);
+  lua_pushstring(L, engine->GetState()->GetStateName());
+  return 1;
+}
+
+LUA_ENGINE_F(onEvent) {
+  const auto engine = Engine::Get();
+  ASSERT(engine);
+  engine->OnEvent().subscribe(CreateSubscriber<EngineEvent>(L));
+  return 0;
+}
+
+#define DEFINE_ON_EVENT_FUNC(Name)                                         \
+  LUA_ENGINE_F(on##Name##Event) {                                          \
+    const auto engine = Engine::Get();                                     \
+    ASSERT(engine);                                                        \
+    engine->On##Name##Event().subscribe(CreateSubscriber<Name##Event>(L)); \
+    return 0;                                                              \
+  }
+FOR_EACH_ENGINE_EVENT(DEFINE_ON_EVENT_FUNC);
+#undef DEFINE_ON_EVENT_FUNC
+#undef LUA_ENGINE_F
+
+// clang-format off
+// NOLINTNEXTLINE
+static const struct luaL_Reg kEngineLib[] = {
+#define LUA_ENGINE_F(Name) \
+  {.name = #Name, .func = &lua_engine_##Name }
+
+  LUA_ENGINE_F(onEvent),
+#define DEFINE_ON_EVENT(Name) \
+  LUA_ENGINE_F(on##Name##Event),
+  FOR_EACH_ENGINE_EVENT(DEFINE_ON_EVENT)
+#undef DEFINE_ON_EVENT
+#undef LUA_ENGINE_F
+};
+// clang-format on
+
+void Engine::InitLua(lua_State* L) {
+  ASSERT(L);
+  lua_newtable(L);
+  luaL_setfuncs(L, kEngineLib, 0);
+  lua_setglobal(L, "Engine");
 }
 }  // namespace prt::engine

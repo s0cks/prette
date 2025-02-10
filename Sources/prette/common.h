@@ -3,6 +3,7 @@
 
 #include <glog/logging.h>
 #include <units.h>
+#include <uuid.h>
 #include <uv.h>
 
 #include <algorithm>
@@ -10,6 +11,7 @@
 #include <cstdio>
 #include <filesystem>
 #include <functional>
+#include <iostream>
 #include <optional>
 #include <string>
 #include <vector>
@@ -82,7 +84,11 @@
   auto operator=(Name&& rhs)->Name& = default; \
   auto operator=(const Name& rhs)->Name& = default;
 
+#if defined(__clang__) || defined(__GNUC__)
+#define NOT_IMPLEMENTED(Level) LOG(Level) << __PRETTY_FUNCTION__ << " is not implemented!";
+#else
 #define NOT_IMPLEMENTED(Level) LOG(Level) << __FUNCTION__ << " is not implemented!";
+#endif
 
 namespace prt {
 namespace fs = std::filesystem;

@@ -15,7 +15,7 @@ namespace prt {
 void Window::OnWindowClosed(Handle* handle) {
   const auto engine = Engine::Get();
   ASSERT(engine);
-  engine->Shutdown(Exception::New("Hello World"), 4);
+  engine->Shutdown();
 }
 
 void Window::OnWindowPos(Handle* handle, const int xPos, const int yPos) {
@@ -92,10 +92,10 @@ auto Window::ShouldClose() const -> bool {
   return glfwWindowShouldClose(GetHandle()) == GLFW_TRUE;
 }
 
-auto Window::GetSize() const -> glm::i32vec2 {
-  glm::i32vec2 size;
-  glfwGetWindowSize(GetHandle(), &size[0], &size[1]);
-  return size;
+auto Window::GetSize() const -> Dimension {
+  int width = 0, height = 0;
+  glfwGetWindowSize(GetHandle(), &width, &height);
+  return {static_cast<uint32_t>(width), static_cast<uint32_t>(height)};
 }
 
 void Window::SetSize(const glm::i32vec2& size) {

@@ -124,6 +124,10 @@ class ToStringHelper : public ToStringHelperBase {
     return *this;
   }
 
+  inline auto AddField(std::string name, const std::stringstream& ss) -> ToStringHelper<T>& {
+    return AddField(std::move(name), ss.str());
+  }
+
   auto AddFieldPtr(std::string name, const void* value) -> ToStringHelper<T>& {
     ASSERT(!name.empty());
     EmplaceBackField(Identity(name), [value]() -> std::string {

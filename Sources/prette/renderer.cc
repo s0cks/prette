@@ -4,14 +4,42 @@
 #include "prette/gfx.h"
 #include "prette/relaxed_atomic.h"
 #include "prette/swap_chain.h"
+#include "prette/to_string.h"
 #include "prette/window.h"
 
 namespace prt {
+static RendererEventSubject events_{};
 static std::array<VkSemaphore, MAX_NUMBER_OF_FRAMES_IN_FLIGHT> available_semaphores_{};
 static std::array<VkSemaphore, MAX_NUMBER_OF_FRAMES_IN_FLIGHT> finished_semaphores_{};
 static std::array<VkFence, MAX_NUMBER_OF_FRAMES_IN_FLIGHT> fences_{};
 static RelaxedAtomic<uint32_t> current_frame_(0);
 static RelaxedAtomic<bool> resized_(false);
+
+static inline void PublishRendererEvent(RendererEvent* event) {
+  ASSERT(event);
+  const auto& subscriber = events_.get_subscriber();
+  return subscriber.on_next(event);
+}
+
+template <class E, typename... Args>
+static inline void Publish(Args... args) {
+  E event(args...);
+  return PublishRendererEvent(&event);
+}
+
+auto OnRendererEvent() -> RendererEventObservable {
+  return events_.get_observable();
+}
+
+auto RendererCreatedEvent::ToString() const -> std::string {
+  ToStringHelper<RendererCreatedEvent> helper{};
+  return helper;
+}
+
+auto RendererDestroyedEvent::ToString() const -> std::string {
+  ToStringHelper<RendererDestroyedEvent> helper{};
+  return helper;
+}
 
 void Renderer::InitResizeListener() {
   const auto window = GetAppWindow();
@@ -68,8 +96,9 @@ static inline auto GetCurrentFinishedSemaphore() -> const VkSemaphore& {
   return finished_semaphores_.at(GetCurrentFrame());
 }
 
-void Renderer::DrawFrame(Driver* driver) {
+void Renderer::DrawFrame(Driver* driver, const Tick& current, const Tick& previous) {
   ASSERT(driver);
+  Publish<PreFrameEvent>();
   vkWaitForFences(driver->GetDevice(), 1, &GetCurrentFence(), VK_TRUE, UINT64_MAX);
   uint32_t image_index = 0;
   {
@@ -125,5 +154,58 @@ void Renderer::DrawFrame(Driver* driver) {
   }
 
   current_frame_ = ((GetCurrentFrame() + 1) % MAX_NUMBER_OF_FRAMES_IN_FLIGHT);
+  Publish<PostFrameEvent>();
+}
+
+#define LUA_RENDERER_F(Name) LUA_F(renderer_##Name)
+
+LUA_RENDERER_F(onEvent) {
+  OnRendererEvent().subscribe(CreateSubscriber<RendererEvent>(L));
+  return 0;
+}
+
+#define DEFINE_ON_EVENT_FUNC(Name)                                 \
+  LUA_RENDERER_F(on##Name##Event) {                                \
+    On##Name##Event().subscribe(CreateSubscriber<Name##Event>(L)); \
+    return 0;                                                      \
+  }
+FOR_EACH_RENDERER_EVENT(DEFINE_ON_EVENT_FUNC);
+#undef DEFINE_ON_EVENT_FUNC
+
+#undef LUA_RENDERER_F
+
+// clang-format off
+// NOLINTNEXTLINE
+static const struct luaL_Reg kRendererLib[] = {
+#define LUA_RENDERER_F(Name) \
+  { .name = #Name, .func = &lua_renderer_##Name }
+
+  LUA_RENDERER_F(onEvent),
+#define DEFINE_ON_EVENT(Name) \
+  LUA_RENDERER_F(on##Name##Event),
+FOR_EACH_RENDERER_EVENT(DEFINE_ON_EVENT)
+#undef DEFINE_ON_EVENT
+#undef LUA_RENDERER_F
+};
+// clang-format on
+
+void Renderer::InitLua(lua_State* L) {
+  ASSERT(L);
+  lua_newtable(L);
+  luaL_setfuncs(L, kRendererLib, 0);
+  lua_setglobal(L, "Renderer");
+}
+
+void Renderer::Init(Driver* driver) {
+  ASSERT(driver);
+  InitSyncObjects(driver);
+  InitResizeListener();
+  Publish<RendererCreatedEvent>();
+}
+
+void Renderer::Shutdown(Driver* driver) {
+  ASSERT(driver);
+  DestroySyncObjects(driver);
+  Publish<RendererDestroyedEvent>();
 }
 }  // namespace prt

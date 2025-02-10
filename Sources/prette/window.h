@@ -6,8 +6,8 @@
 #include "prette/event.h"
 #include "prette/geometry/shape.h"
 #include "prette/gfx.h"
+#include "prette/lua.h"
 #include "prette/monitor.h"
-#include "prette/uuid.h"
 
 namespace prt {
 static constexpr const auto kDefaultWindowSize = "512x512";
@@ -60,7 +60,8 @@ class WindowEvent : public Event {
     return window_;
   }
 
-  DEFINE_EVENT_PROTOTYPE(FOR_EACH_WINDOW_EVENT);
+  void ToTable(lua_State* L) const override;
+  DEFINE_EVENT_PROTOTYPE(Window, FOR_EACH_WINDOW_EVENT);
 };
 
 #define DECLARE_WINDOW_EVENT(Name) DECLARE_EVENT_TYPE(WindowEvent, Name)
@@ -230,8 +231,11 @@ class WindowEventSource : public EventSource<WindowEvent> {
 #undef DEFINE_ON_WINDOW_EVENT
 };
 
+class Keyboard;
 class Window : public WindowEventSource {
   friend class Runtime;
+  friend class Keyboard;
+  friend class LuaState;
   friend class WindowBuilder;
   DEFINE_NON_COPYABLE_TYPE(Window);
 
@@ -297,12 +301,18 @@ class Window : public WindowEventSource {
 #error "Unsupported Platform."
 #endif  // PRT_WINDOW_H
  private:
-  UUID id_;
+  uuids::uuid uuid_ = uuids::uuid_system_generator{}();
   WindowEventSubject events_;
   Handle* handle_;
+  Keyboard* keyboard_ = nullptr;
 
   explicit Window(Handle* handle);
   void PublishEvent(WindowEvent* event) const override;
+
+  void SetKeyboard(Keyboard* rhs) {
+    ASSERT(rhs);
+    keyboard_ = rhs;
+  }
 
 #define DEFINE_PUBLISH_EVENT(Name)                       \
   template <typename... Args>                            \
@@ -315,6 +325,10 @@ class Window : public WindowEventSource {
  public:
   ~Window() override;
 
+  auto GetId() const -> const uuids::uuid& {
+    return uuid_;
+  }
+
   inline auto GetHandle() const -> Handle* {
     return handle_;
   }
@@ -323,7 +337,7 @@ class Window : public WindowEventSource {
   void SetTitle(const std::string& value);
   auto GetPos() const -> Point;
   void SetPos(const Point& value);
-  auto GetSize() const -> glm::i32vec2;
+  auto GetSize() const -> Dimension;
   void SetSize(const glm::i32vec2& value);
   void Show();
   void Hide();
@@ -402,11 +416,26 @@ class Window : public WindowEventSource {
 
   auto GetBounds() const -> Rectangle {
     const auto size = GetSize();
-    return Rectangle(Point(), size[0], size[1]);
+    return Rectangle(Point(), size.width(), size.height());
   }
 
   auto OnEvent() const -> WindowEventObservable override {
     return events_.get_observable();
+  }
+
+  auto GetKeyboard() const -> Keyboard* {
+    return keyboard_;
+  }
+
+  inline auto HasKeyboard() const -> bool {
+    return GetKeyboard() != nullptr;
+  }
+
+  void SetTable(lua_State* L, const int index) const;
+
+  inline void ToTable(lua_State* L) const {
+    lua_newtable(L);
+    return SetTable(L, -1);
   }
 
   friend auto operator<<(std::ostream& stream, Window* rhs) -> std::ostream& {
@@ -414,6 +443,12 @@ class Window : public WindowEventSource {
   }
 
  private:
+  static inline auto Get(Handle* handle) -> Window* {
+    ASSERT(handle);
+    return ((Window*)glfwGetWindowUserPointer(handle));  // NOLINT(cppcoreguidelines-pro-type-cstyle-cast)
+  }
+
+  static void InitLua(lua_State* L);
   static auto New(Handle* handle) -> Window*;
 };
 
@@ -498,7 +533,6 @@ auto OnWindowEvent() -> WindowEventObservable;
   }
 FOR_EACH_WINDOW_EVENT(DEFINE_ON_EVENT)
 #undef DEFINE_ON_EVENT
-
 }  // namespace prt
 
 #endif  // PRT_WINDOW_H

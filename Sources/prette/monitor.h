@@ -40,7 +40,7 @@ class MonitorEvent : public Event {
     return monitor_;
   }
 
-  DEFINE_EVENT_PROTOTYPE(FOR_EACH_MONITOR_EVENT);
+  DEFINE_EVENT_PROTOTYPE(Monitor, FOR_EACH_MONITOR_EVENT);
 };
 
 #define DEFINE_MONITOR_EVENT(Name)        \

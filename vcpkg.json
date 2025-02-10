@@ -17,7 +17,11 @@
     "nuklear",
     "rapidjson",
     "rxcpp",
-    "stduuid",
+    "lua",
+    {
+      "name": "stduuid",
+      "features": ["system-gen"]
+    },
     "tracy",
     "termcolor",
     "tweeny",

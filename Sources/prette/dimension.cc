@@ -1,8 +1,23 @@
 #include "prette/dimension.h"
 
 #include <glog/logging.h>
+#include <lauxlib.h>
+#include <lua.h>
 
 namespace prt {
+void Dimension::SetTable(lua_State* L, const int index) const {
+  ASSERT(L);
+  luaL_checktype(L, index, LUA_TTABLE);
+  luaL_newmetatable(L, "Dimension");
+  lua_setmetatable(L, index);
+
+  lua_pushnumber(L, width());
+  lua_setfield(L, index + -1, "width");
+
+  lua_pushnumber(L, height());
+  lua_setfield(L, index + -1, "height");
+}
+
 static inline auto GetDimension(const DimensionParser* parser) -> Dimension* {
   return (Dimension*)parser->data();
 }

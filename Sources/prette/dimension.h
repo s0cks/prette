@@ -5,6 +5,7 @@
 #include <vulkan/vulkan_core.h>
 
 #include "prette/glm.h"
+#include "prette/lua.h"
 #include "prette/parser.h"
 
 namespace prt {
@@ -110,6 +111,8 @@ class Dimension {
   auto operator>(const Dimension& rhs) const -> bool {
     return Compare(*this, rhs) > 0;
   }
+
+  void SetTable(lua_State* L, const int index) const;
 
   friend auto operator<<(std::ostream& stream, const Dimension& rhs) -> std::ostream& {
     return stream << rhs.width() << "x" << rhs.height();

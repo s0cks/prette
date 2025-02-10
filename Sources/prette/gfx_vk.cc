@@ -33,7 +33,7 @@ Buffer::Buffer(const VkDeviceSize size, const VkBufferUsageFlags usage, const Vk
   create_info.size = size;
   create_info.usage = usage;
   create_info.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
-  const auto driver = GetDriver();
+  const auto driver = Driver::Get();
   ASSERT(driver);
 
   const auto& device = driver->GetDevice();
@@ -144,13 +144,13 @@ class SingleUseCommandBuffer {
 
  public:
   SingleUseCommandBuffer() {
-    const auto driver = GetDriver();
+    const auto driver = Driver::Get();
     ASSERT(driver);
     InitCommandBuffer(driver->GetDevice(), CommandPool::GetCommandPool(), buffer_);
     StartCommandBuffer(buffer_);
   }
   ~SingleUseCommandBuffer() {
-    const auto driver = GetDriver();
+    const auto driver = Driver::Get();
     ASSERT(driver);
     SubmitCommandBuffer(driver->GetGraphicsQueue(), buffer_);
     DestroyCommandBuffer(driver->GetDevice(), CommandPool::GetCommandPool(), buffer_);
@@ -169,7 +169,7 @@ void Buffer::CopyFromBuffer(const VkBuffer& src, const VkDeviceSize num_bytes) {
 }
 
 void Buffer::Destroy() {
-  const auto driver = GetDriver();
+  const auto driver = Driver::Get();
   ASSERT(driver);
   if (buffer_)
     vkDestroyBuffer(driver->GetDevice(), buffer_, nullptr);
@@ -183,7 +183,7 @@ void Buffer::Flush(const VkDeviceSize size, const VkDeviceSize offset) {
   range.memory = memory_;
   range.offset = offset;
   range.size = size;
-  const auto driver = GetDriver();
+  const auto driver = Driver::Get();
   ASSERT(driver);
   CHECK_VK(FATAL, vkFlushMappedMemoryRanges(driver->GetDevice(), 1, &range), "failed to flush vk buffer");
 }
@@ -192,7 +192,7 @@ MappedBufferScope::MappedBufferScope(const Buffer* buffer, const VkDeviceSize si
                                      const VkMemoryMapFlags flags) :
   buffer_(buffer) {
   ASSERT(buffer_);
-  const auto driver = GetDriver();
+  const auto driver = Driver::Get();
   ASSERT(driver);
   CHECK_VK(FATAL, vkMapMemory(driver->GetDevice(), GetBuffer()->GetMemory(), offset, size, flags, &mapped_memory_),
            "failed to map vk buffer memory");
@@ -202,7 +202,7 @@ MappedBufferScope::~MappedBufferScope() {
   if (!IsMapped())
     return;
   ASSERT(GetBuffer()->GetMemory() != VK_NULL_HANDLE);
-  const auto driver = GetDriver();
+  const auto driver = Driver::Get();
   ASSERT(driver);
   vkUnmapMemory(driver->GetDevice(), GetBuffer()->GetMemory());
   mapped_memory_ = nullptr;
@@ -260,7 +260,22 @@ static VKAPI_ATTR auto VKAPI_CALL OnDebugCreateInfo(VkDebugUtilsMessageSeverityF
                                                     VkDebugUtilsMessageTypeFlagsEXT type,
                                                     const VkDebugUtilsMessengerCallbackDataEXT* callbackData, void* userData)
     -> VkBool32 {
-  LOG(ERROR) << "Validation Layer: " << callbackData->pMessage;
+  switch (severity) {
+    case VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT:
+      LOG(ERROR) << "vk validation layer: " << callbackData->pMessage;
+      break;
+    case VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT:
+      LOG(WARNING) << "vk validation layer: " << callbackData->pMessage;
+      break;
+    case VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT:
+      LOG(INFO) << "vk validation layer: " << callbackData->pMessage;
+      break;
+    case VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT:
+      VLOG(1) << "vk validation layer: " << callbackData->pMessage;
+      break;
+    default:
+      LOG(WARNING) << "vk validation layer: " << callbackData->pMessage;
+  }
   return VK_FALSE;
 }
 
@@ -384,10 +399,10 @@ void VulkanDriver::InitDebugMessenger() {
 
 void VulkanDriver::InitApplicationInfo() {
   app_info_.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
-  app_info_.pApplicationName = "Hello World";
-  app_info_.applicationVersion = VK_MAKE_VERSION(0, 0, 0);
-  app_info_.pEngineName = "No Engine";
-  app_info_.engineVersion = VK_MAKE_VERSION(0, 0, 0);
+  app_info_.pApplicationName = "Prette";
+  app_info_.applicationVersion = VK_MAKE_PRT_VERSION;
+  app_info_.pEngineName = "Prette";
+  app_info_.engineVersion = VK_MAKE_PRT_VERSION;
   app_info_.pNext = nullptr;
   app_info_.apiVersion = VK_API_VERSION_1_3;
 }
@@ -502,19 +517,55 @@ void VulkanDriver::Destroy() {
   PublishDriverEvent<DriverDestroyedEvent>();
 }
 
-auto InitDriver() -> Driver* {
+auto VulkanDriver::Init() -> VulkanDriver* {
   ASSERT(driver_ == nullptr);
-#ifdef PRT_DEBUG
-  OnDriverEvent().subscribe(LogEvent<DriverEvent>(google::INFO, __FILE__, __LINE__));
-#endif  // PRT_DEBUG
   driver_ = VulkanDriver::New();
   ASSERT(driver_);
   return driver_;
 }
 
-auto GetDriver() -> Driver* {
+auto VulkanDriver::Get() -> VulkanDriver* {
   ASSERT(driver_);
   return driver_;
+}
+
+#define LUA_DRIVER_F(Name) LUA_F(driver_##Name)
+
+LUA_DRIVER_F(onEvent) {
+  OnDriverEvent().subscribe(CreateSubscriber<DriverEvent>(L));
+  return 0;
+}
+
+#define DEFINE_ON_EVENT_FUNC(Name)                                 \
+  LUA_DRIVER_F(on##Name##Event) {                                  \
+    On##Name##Event().subscribe(CreateSubscriber<Name##Event>(L)); \
+    return 0;                                                      \
+  }
+FOR_EACH_DRIVER_EVENT(DEFINE_ON_EVENT_FUNC);
+#undef DEFINE_ON_EVENT_FUNC
+
+#undef LUA_DRIVER_F
+
+// clang-format off
+// NOLINTNEXTLINE
+static const struct luaL_Reg kDriverLib[] = {
+#define LUA_DRIVER_F(Name) \
+  { .name = #Name, .func = &lua_driver_##Name }
+
+  LUA_DRIVER_F(onEvent),
+#define DEFINE_ON_EVENT(Name) \
+  LUA_DRIVER_F(on##Name##Event),
+FOR_EACH_DRIVER_EVENT(DEFINE_ON_EVENT)
+#undef DEFINE_ON_EVENT
+#undef LUA_DRIVER_F
+};
+// clang-format on
+
+void VulkanDriver::InitLua(lua_State* L) {
+  ASSERT(L);
+  lua_newtable(L);
+  luaL_setfuncs(L, kDriverLib, 0);
+  lua_setglobal(L, "Driver");
 }
 }  // namespace prt
 

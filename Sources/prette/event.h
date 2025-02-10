@@ -4,6 +4,7 @@
 #include <string>
 
 #include "prette/common.h"
+#include "prette/lua.h"
 #include "prette/rx.h"
 
 namespace prt {
@@ -17,6 +18,7 @@ class Event {
   virtual ~Event() = default;
   virtual auto GetName() const -> const char* = 0;
   virtual auto ToString() const -> std::string = 0;
+  virtual void ToTable(lua_State* L) const;
 };
 
 #define DEFINE_EVENT_PROTOTYPE_TYPE_CHECK(Name)  \
@@ -27,7 +29,12 @@ class Event {
     return As##Name##Event() != nullptr;         \
   }
 
-#define DEFINE_EVENT_PROTOTYPE(Types) Types(DEFINE_EVENT_PROTOTYPE_TYPE_CHECK)
+#define DEFINE_EVENT_PROTOTYPE(Name, Types)            \
+ public:                                               \
+  using Predicate = std::function<bool(Name##Event*)>; \
+                                                       \
+ public:                                               \
+  Types(DEFINE_EVENT_PROTOTYPE_TYPE_CHECK)
 
 #define DECLARE_EVENT_TYPE(Proto, Name)                   \
   DEFINE_NON_COPYABLE_TYPE(Name##Event);                  \
@@ -66,6 +73,27 @@ class EventSource {
  public:
   virtual ~EventSource() = default;
   virtual auto OnEvent() const -> rx::observable<E*> = 0;
+};
+
+template <class E>
+class EventSourceTemplate : public EventSource<E> {
+ protected:
+  rx::subject<E*> events_{};  // NOLINT(cppcoreguidelines-non-private-member-variables-in-classes)
+
+  EventSourceTemplate() = default;
+
+  void PublishEvent(E* event) const override {
+    ASSERT(event);
+    const auto& subscriber = events_.get_subscriber();
+    return subscriber.on_next(event);
+  }
+
+ public:
+  ~EventSourceTemplate() override = default;
+
+  auto OnEvent() const -> rx::observable<E*> override {
+    return events_.get_observable();
+  }
 };
 
 #define DEFINE_EVENT_SUBJECT(Name)    using Name##EventSubject = rx::subject<Name##Event*>;

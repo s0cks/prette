@@ -1,9 +1,14 @@
 #include "prette/window.h"
 
+#include <lua.h>
+
+#include <cstdlib>
 #include <unordered_map>
 
 #include "prette/common.h"
 #include "prette/engine.h"
+#include "prette/keyboard.h"
+#include "prette/lua.h"
 #include "prette/thread_local.h"
 #include "prette/to_string.h"
 
@@ -19,6 +24,15 @@ static inline void PublishWindowEvent(const WindowEventSubject& subject, WindowE
 }
 
 DEFINE_string(window_size, kDefaultWindowSize, "The size of the window.");
+
+void WindowEvent::ToTable(lua_State* L) const {
+  ASSERT(L);
+  Event::ToTable(L);
+  const auto window = GetWindow();
+  ASSERT(window);
+  window->ToTable(L);
+  lua_setfield(L, -2, "window");
+}
 
 auto WindowCreatedEvent::ToString() const -> std::string {
   ToStringHelper<WindowCreatedEvent> helper;
@@ -95,8 +109,7 @@ static inline void Deregister(Window* window) {
 Window::Window(Handle* handle) :
   WindowEventSource(),
   handle_(handle),
-  events_(),
-  id_() {
+  events_() {
   ASSERT(handle);
   Register(this);
 #ifdef PRT_GLFW
@@ -133,6 +146,7 @@ void Window::PublishEvent(WindowEvent* event) const {
 auto Window::ToString() const -> std::string {
   std::stringstream ss;
   ss << "Window(";
+  ss << "id=" << GetId() << ", ";
   ss << "title=" << GetTitle() << ", ";
   ss << "size=" << GetSize();
   ss << ")";
@@ -173,11 +187,32 @@ auto GetTotalNumberOfWindows() -> uword {
   return all_.size();
 }
 
+void Window::SetTable(lua_State* L, const int index) const {
+  ASSERT(L);
+  lua_pushstring(L, GetTitle().c_str());
+  lua_setfield(L, index + -1, "title");
+
+  lua_newtable(L);
+  const auto size = GetSize();
+  size.SetTable(L, -1);
+  lua_setfield(L, index + -1, "size");
+}
+
+static inline void InitAppWindow() {
+  const auto window = CreateAppWindow();
+  ASSERT(window);
+  Keyboard::Init(window);
+  OnKeyPressed(GLFW_KEY_ESCAPE).subscribe([](KeyStateEvent* event) {
+    ASSERT(event);
+    const auto engine = Engine::Get();
+    ASSERT(engine);
+    engine->Shutdown();
+  });
+  SetAppWindow(window);
+}
+
 void InitWindows() {
-#ifdef PRT_DEBUG
-  OnWindowEvent().subscribe(LogEvent<WindowEvent>(google::INFO, __FILE__, __LINE__));
-#endif  // PRT_DEBUG
-  SetAppWindow(CreateAppWindow());
+  InitAppWindow();
 }
 
 auto VisitAllWindows(const std::function<bool(Window*)>& vis) -> bool {
@@ -187,5 +222,44 @@ auto VisitAllWindows(const std::function<bool(Window*)>& vis) -> bool {
       return false;
   }
   return true;
+}
+
+#define LUA_WINDOW_F(Name) LUA_F(window_##Name)
+
+LUA_WINDOW_F(onEvent) {
+  OnWindowEvent().subscribe(CreateSubscriber<WindowEvent>(L));
+  return 0;
+}
+
+#define DEFINE_ON_EVENT_FUNC(Name)                                 \
+  LUA_WINDOW_F(on##Name##Event) {                                  \
+    On##Name##Event().subscribe(CreateSubscriber<Name##Event>(L)); \
+    return 0;                                                      \
+  }
+FOR_EACH_WINDOW_EVENT(DEFINE_ON_EVENT_FUNC);
+#undef DEFINE_ON_EVENT_FUNC
+
+#undef LUA_WINDOW_F
+
+// clang-format off
+// NOLINTNEXTLINE
+static const struct luaL_Reg kWindowLib[] = {
+#define LUA_WINDOW_F(Name) \
+  { .name = #Name, .func = &lua_window_##Name }
+
+  LUA_WINDOW_F(onEvent),
+#define DEFINE_ON_EVENT(Name) \
+  LUA_WINDOW_F(on##Name##Event),
+FOR_EACH_WINDOW_EVENT(DEFINE_ON_EVENT)
+#undef DEFINE_ON_EVENT
+#undef LUA_WINDOW_F
+};
+// clang-format on
+
+void Window::InitLua(lua_State* L) {
+  ASSERT(L);
+  lua_newtable(L);
+  luaL_setfuncs(L, kWindowLib, 0);
+  lua_setglobal(L, "Window");
 }
 }  // namespace prt

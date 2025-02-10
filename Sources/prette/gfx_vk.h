@@ -14,6 +14,8 @@
 #include <vector>
 
 #include "prette/common.h"
+#include "prette/lua.h"
+#include "prette/prette.h"
 
 namespace prt {
 struct MemoryBuffer {
@@ -64,6 +66,8 @@ struct QueueFamilyIndices {
 };
 
 #define MAX_NUMBER_OF_FRAMES_IN_FLIGHT 2
+
+#define VK_MAKE_PRT_VERSION            VK_MAKE_VERSION(PRT_VERSION_MAJOR, PRT_VERSION_MINOR, PRT_VERSION_PATCH)
 
 static inline auto ClampExtent(VkExtent2D& v, const VkExtent2D& min, const VkExtent2D& max) -> VkExtent2D& {
   v.width = std::clamp(v.width, min.width, max.width);
@@ -308,6 +312,7 @@ class TerminatedState;
 class Window;
 class VulkanDriver {
   friend class Runtime;
+  friend class LuaState;
   friend class engine::InitState;
   friend class engine::TerminatedState;
   DEFINE_NON_COPYABLE_TYPE(VulkanDriver);
@@ -398,9 +403,12 @@ class VulkanDriver {
 
  private:
   static void Destroy();
+  static void InitLua(lua_State* L);
 
  public:
   static auto New() -> VulkanDriver*;
+  static auto Init() -> VulkanDriver*;
+  static auto Get() -> VulkanDriver*;
 };
 using Driver = VulkanDriver;
 }  // namespace prt

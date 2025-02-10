@@ -9,10 +9,15 @@
 #include "prette/common.h"
 #include "prette/crash_report.h"
 #include "prette/event.h"
+#include "prette/lua.h"
 #include "prette/tick.h"
 #include "prette/tick_profiler.h"
 #include "prette/ticker.h"
 #include "prette/uv/utils.h"
+
+namespace prt {
+class LuaState;
+}
 
 namespace prt::engine {
 #define FOR_EACH_ENGINE_EVENT(V) \
@@ -50,7 +55,7 @@ class EngineEvent : public Event {
     return engine_;
   }
 
-  DEFINE_EVENT_PROTOTYPE(FOR_EACH_ENGINE_EVENT);
+  DEFINE_EVENT_PROTOTYPE(Engine, FOR_EACH_ENGINE_EVENT);
 };
 
 #define DECLARE_ENGINE_EVENT(Name) DECLARE_EVENT_TYPE(EngineEvent, Name)
@@ -294,6 +299,7 @@ class ErrorState : public EngineState {
 #define ENGINE_STATE_EXIT_F(Name)  void Name##State::ExitState(Engine* engine)
 
 class Engine : public EngineEventSource {
+  friend class prt::LuaState;
   friend class EngineState;
   friend class InitState;
   friend class ErrorState;
@@ -313,21 +319,20 @@ class Engine : public EngineEventSource {
   TickProfiler tick_profiler_;
 #endif  // PRT_DEBUG
   rx::subscription on_tick_;
-  RelaxedAtomic<bool> running_;
   std::unique_ptr<EngineState> state_{};
   std::shared_ptr<CrashReportCause> cause_ = nullptr;
 
-  virtual void SetRunning(const bool running = true) {
-    running_ = running;
-  }
+  void EnterState(const std::unique_ptr<EngineState>& state);
+  void ExitState(const std::unique_ptr<EngineState>& state);
 
   template <class S, typename... Args>
   inline void SetState(Args... args) {
     on_tick_.unsubscribe();
     if (state_)
-      state_->ExitState(this);
+      ExitState(state_);
     state_ = S::New(args...);
-    state_->EnterState(this);
+    ASSERT(state_);
+    EnterState(state_);
     on_tick_ = OnTick().subscribe([this](const Tick& tick) {
       ASSERT(state_);
       state_->OnTick(this, tick, GetPreviousTick());
@@ -368,15 +373,13 @@ class Engine : public EngineEventSource {
   }
 
   auto Run() -> int;
-  void Shutdown(std::shared_ptr<CrashReportCause> cause = nullptr);
+  void Shutdown(std::shared_ptr<CrashReportCause> cause);
 
   inline void Shutdown(const std::exception_ptr& cause = nullptr, const int depth = CrashReportCause::kDefaultDepth,
                        const int offset = CrashReportCause::kDefaultOffset) {
-    return Shutdown(CrashReportCause::New(cause, depth, offset));
-  }
-
-  virtual auto IsRunning() const -> bool {
-    return (bool)running_;
+    if (cause)
+      return Shutdown(CrashReportCause::New(cause, depth, offset));
+    return Shutdown((std::shared_ptr<CrashReportCause>)nullptr);
   }
 
   inline auto HasState() const -> bool {
@@ -412,6 +415,9 @@ class Engine : public EngineEventSource {
   auto OnTickProfilerStats() const -> rx::observable<TickStats> {
     return tick_profiler_.OnStats();
   }
+
+ private:
+  static void InitLua(lua_State* L);
 
  public:
   static void Init();
