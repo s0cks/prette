@@ -107,7 +107,7 @@ void Buffer::CopyDataToImageWithStaging(const VkImage& image, const uint8_t* dat
   StagingBufferScope staging(num_bytes);
   staging.CopyFrom(data, num_bytes);
 
-  SingleUseCommandBuffer cmds;
+  SingleUseCommandBuffer cmds(Renderer::GetCommandPool());
   vkCmdCopyBufferToImage(cmds, staging, image, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, static_cast<uint32_t>(regions.size()),
                          regions.data());
 }
@@ -129,7 +129,7 @@ void Buffer::CopyFromBytes(const void* data, const uint64_t num_bytes, const boo
 }
 
 void Buffer::CopyFromBuffer(const VkBuffer& src, const VkDeviceSize num_bytes) {
-  SingleUseCommandBuffer buffer;
+  SingleUseCommandBuffer buffer(Renderer::GetCommandPool());
   VkBufferCopy copy{};
   copy.size = num_bytes;
   vkCmdCopyBuffer(buffer, src, buffer_, 1, &copy);
@@ -455,27 +455,67 @@ void VulkanDriver::Init() {
   });
 }
 
-SingleUseCommandBuffer::SingleUseCommandBuffer(const bool submit) :
-  submit_(submit) {
+void SingleUseCommandBuffer::Allocate(const VkDevice& device, const VkCommandPool& command_pool, VkCommandBuffer& buffer) {
+  VkCommandBufferAllocateInfo alloc_info{};
+  alloc_info.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
+  alloc_info.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
+  alloc_info.commandPool = command_pool;
+  alloc_info.commandBufferCount = 1;
+  CHECK_VK(FATAL, vkAllocateCommandBuffers(device, &alloc_info, &buffer), "failed to allocate single use vk command buffer");
+}
+
+void SingleUseCommandBuffer::Start(const VkCommandBuffer& buffer) {
+  VkCommandBufferBeginInfo begin_info{};
+  begin_info.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
+  begin_info.flags |= VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
+  CHECK_VK(FATAL, vkBeginCommandBuffer(buffer, &begin_info), "failed to begin vk command buffer");
+}
+
+void SingleUseCommandBuffer::Finish(const VkCommandBuffer& buffer) {
+  CHECK_VK(FATAL, vkEndCommandBuffer(buffer), "failed to end single use vk command buffer");
+}
+
+void SingleUseCommandBuffer::Destroy(const VkDevice& device, const VkCommandPool& pool, const VkCommandBuffer& buffer) {
+  vkFreeCommandBuffers(device, pool, 1, &buffer);
+}
+
+void SingleUseCommandBuffer::Submit(const VkDevice& device, const VkQueue& queue, const VkCommandBuffer& buffer,
+                                    const VkAllocationCallbacks* allocator) {
+  VkSubmitInfo submit_info{};
+  submit_info.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
+  submit_info.commandBufferCount = 1;
+  submit_info.pCommandBuffers = &buffer;
+
+  VkFenceCreateInfo create_info{};
+  create_info.sType = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;
+  create_info.flags = VK_FLAGS_NONE;
+
+  VkFence fence{};
+  CHECK_VK(FATAL, vkCreateFence(device, &create_info, allocator, &fence), "failed to create vk fence");
+  vkQueueSubmit(queue, 1, &submit_info, fence);
+  CHECK_VK(FATAL, vkWaitForFences(device, 1, &fence, VK_TRUE, VK_DEFAULT_FENCE_TIMEOUT), "failed to wait for vk fence");
+  vkDestroyFence(device, fence, allocator);
+}
+
+static inline void DestroyCommandBuffer(const VkDevice& device, const VkCommandPool& command_pool,
+                                        const VkCommandBuffer& buffer) {
+  vkFreeCommandBuffers(device, command_pool, 1, &buffer);
+}
+
+SingleUseCommandBuffer::SingleUseCommandBuffer(const VkCommandPool& pool) :
+  pool_(pool) {
   const auto driver = Driver::Get();
   ASSERT(driver);
-  InitCommandBuffer(driver->GetDevice(), Renderer::GetCommandPool(), buffer_);
-  StartCommandBuffer(buffer_);
+  Allocate(driver->GetDevice(), pool_, buffer_);
+  Start(buffer_);
 }
 
 SingleUseCommandBuffer::~SingleUseCommandBuffer() {
-  if (!finished_)
-    CHECK_VK(FATAL, vkEndCommandBuffer(buffer_), "failed to end vk command buffer");
   const auto driver = Driver::Get();
   ASSERT(driver);
-  if (submit_)
-    SubmitCommandBuffer(driver->GetGraphicsQueue(), buffer_);
-  DestroyCommandBuffer(driver->GetDevice(), Renderer::GetCommandPool(), buffer_);
-}
-
-void SingleUseCommandBuffer::Finish() {
   CHECK_VK(FATAL, vkEndCommandBuffer(buffer_), "failed to end vk command buffer");
-  finished_ = true;
+  Submit(driver->GetDevice(), driver->GetGraphicsQueue(), buffer_, driver->GetAllocator());
+  Destroy(driver->GetDevice(), pool_, buffer_);
 }
 }  // namespace prt
 

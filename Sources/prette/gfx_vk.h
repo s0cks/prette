@@ -17,6 +17,14 @@
 #include "prette/lua.h"
 #include "prette/prette.h"
 
+#ifndef VK_DEFAULT_FENCE_TIMEOUT
+#define VK_DEFAULT_FENCE_TIMEOUT 100000000000
+#endif  // VK_DEFAULT_FENCE_TIMEOUT
+
+#ifndef VK_FLAGS_NONE
+#define VK_FLAGS_NONE 0
+#endif  // VK_FLAGS_NONE
+
 namespace prt {
 struct MemoryBuffer {
   VkBuffer buffer{};
@@ -435,42 +443,18 @@ class VulkanDriver : public DriverBase {
 
 class SingleUseCommandBuffer {
  private:
-  bool submit_;
-  bool finished_ = false;
+  const VkCommandPool& pool_;
   VkCommandBuffer buffer_{};
 
-  static inline void InitCommandBuffer(const VkDevice& device, const VkCommandPool& command_pool, VkCommandBuffer& buffer) {
-    VkCommandBufferAllocateInfo alloc_info{};
-    alloc_info.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
-    alloc_info.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
-    alloc_info.commandPool = command_pool;
-    alloc_info.commandBufferCount = 1;
-    CHECK_VK(FATAL, vkAllocateCommandBuffers(device, &alloc_info, &buffer), "failed to allocate single use vk command buffer");
-  }
-
-  static inline void StartCommandBuffer(const VkCommandBuffer& buffer) {
-    VkCommandBufferBeginInfo begin_info{};
-    begin_info.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
-    begin_info.flags |= VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
-    CHECK_VK(FATAL, vkBeginCommandBuffer(buffer, &begin_info), "failed to begin vk command buffer");
-  }
-
-  static inline void SubmitCommandBuffer(const VkQueue& queue, const VkCommandBuffer& buffer) {
-    VkSubmitInfo submit_info{};
-    submit_info.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
-    submit_info.commandBufferCount = 1;
-    submit_info.pCommandBuffers = &buffer;
-    vkQueueSubmit(queue, 1, &submit_info, VK_NULL_HANDLE);
-    vkQueueWaitIdle(queue);
-  }
-
-  static inline void DestroyCommandBuffer(const VkDevice& device, const VkCommandPool& command_pool,
-                                          const VkCommandBuffer& buffer) {
-    vkFreeCommandBuffers(device, command_pool, 1, &buffer);
-  }
+  static void Allocate(const VkDevice& device, const VkCommandPool& pool, VkCommandBuffer& buffer);
+  static void Start(const VkCommandBuffer& buffer);
+  static void Finish(const VkCommandBuffer& buffer);
+  static void Submit(const VkDevice& device, const VkQueue& queue, const VkCommandBuffer& buffer,
+                     const VkAllocationCallbacks* allocator);
+  static void Destroy(const VkDevice& device, const VkCommandPool& pool, const VkCommandBuffer& buffer);
 
  public:
-  SingleUseCommandBuffer(const bool submit = true);
+  SingleUseCommandBuffer(const VkCommandPool& pool);
   ~SingleUseCommandBuffer();
 
   void Finish();
@@ -479,6 +463,27 @@ class SingleUseCommandBuffer {
     return buffer_;
   }
 };
+
+namespace vk {
+static inline auto NewImageView(const Driver* driver, const VkImage& image, const VkFormat& format,
+                                const VkImageAspectFlags flags) -> VkImageView {
+  VkImageViewCreateInfo create_info{};
+  create_info.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
+  create_info.image = image;
+  create_info.viewType = VK_IMAGE_VIEW_TYPE_2D;
+  create_info.format = format;
+  create_info.subresourceRange.aspectMask = flags;
+  create_info.subresourceRange.baseMipLevel = 0;
+  create_info.subresourceRange.levelCount = 1;
+  create_info.subresourceRange.baseArrayLayer = 0;
+  create_info.subresourceRange.layerCount = 1;
+
+  VkImageView view{};
+  CHECK_VK(FATAL, vkCreateImageView(driver->GetDevice(), &create_info, driver->GetAllocator(), &view),
+           "failed to create vk image view");
+  return view;
+}
+}  // namespace vk
 }  // namespace prt
 
 #endif  // PRT_GFX_VK_H
