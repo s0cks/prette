@@ -8,6 +8,18 @@
 #include <semver/semver.hpp>
 
 #include "prette/common.h"
+
+#ifdef PRT_VK
+
+namespace prt {
+class VulkanDriver;
+using Driver = VulkanDriver;
+}  // namespace prt
+
+#else
+#error "Unsupported Graphics Library"
+#endif
+
 #include "prette/gfx_driver.h"
 #ifdef PRT_VK
 

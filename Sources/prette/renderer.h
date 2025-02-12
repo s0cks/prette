@@ -190,11 +190,16 @@ class Renderer {
 
   static void InitCommandPool(const VkPhysicalDevice& physical_device, const VkDevice& device, const VkSurfaceKHR& surface,
                               const VkAllocationCallbacks* allocator);
+  static void InitGuiCommandPool(const VkPhysicalDevice& physical_device, const VkDevice& device, const VkSurfaceKHR& surface,
+                                 const VkAllocationCallbacks* allocator);
   static void InitCommandBuffers(const VkDevice& device);
+  static void InitGuiCommandBuffers(const VkDevice& device);
 
   static void InitImageViews(const VkDevice& device);
-  static void InitFramebuffers(const VkDevice& device, const VkAllocationCallbacks* allocator = nullptr);
+
+  static void InitFramebuffers(const Driver* driver, std::vector<VkFramebuffer>& framebuffers);
   static void InitRenderPass(const VkDevice& device);
+  static void InitGuiRenderPass(const VkDevice& device);
 
   static void InitSwapChain(const VkPhysicalDevice& physical_device, const VkDevice& device, const VkSurfaceKHR& surface,
                             const VkAllocationCallbacks* allocator);
@@ -232,7 +237,7 @@ class Renderer {
   static auto GetRenderPass() -> VkRenderPass const&;
   static auto GetFramebuffer(const uint32_t index) -> VkFramebuffer const&;
 
-  static void RecordCommandBuffer(const uint32_t buffer_index, const uint32_t frame_index);
+  static void RecordCommandBuffers(const int image_index);
   static void ResetCommandBuffer(const uint32_t buffer_index,
                                  const VkCommandBufferResetFlagBits flags = static_cast<VkCommandBufferResetFlagBits>(0));
   static void DrawFrame(Driver* driver, const Tick& current, const Tick& previous);

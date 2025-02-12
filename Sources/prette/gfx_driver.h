@@ -8,15 +8,6 @@
 #include "prette/event.h"
 
 namespace prt {
-#ifdef PRT_VK
-
-class VulkanDriver;
-using Driver = VulkanDriver;
-
-#else
-#error "Unsupported graphics backend"
-#endif
-
 #define FOR_EACH_DRIVER_EVENT(V) \
   V(DriverCreated)               \
   V(DriverInitialized)           \

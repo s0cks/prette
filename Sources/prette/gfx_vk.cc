@@ -1,3 +1,5 @@
+#include <vulkan/vulkan_core.h>
+
 #include "prette/common.h"
 #include "prette/engine.h"
 #include "prette/gfx.h"
@@ -11,14 +13,26 @@
 
 namespace prt {
 namespace vk {
-void Buffer::AllocateMemory(const VkDevice& device, const VkDeviceSize alloc_size, const uint32_t memory_type,
-                            VkDeviceMemory& memory, const VkAllocationCallbacks* allocator) {
+void Buffer::AllocateMemory(Driver* driver, const VkDeviceSize alloc_size, const uint32_t memory_type, VkDeviceMemory& memory) {
   VkMemoryAllocateInfo alloc_info{};
   alloc_info.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
   alloc_info.allocationSize = alloc_size;
   alloc_info.memoryTypeIndex = memory_type;
-  CHECK_VK(FATAL, vkAllocateMemory(device, &alloc_info, nullptr, &memory), "failed to allocate vk memory");
+  CHECK_VK(FATAL, vkAllocateMemory(driver->GetDevice(), &alloc_info, driver->GetAllocator(), &memory),
+           "failed to allocate vk memory");
   ASSERT(memory != VK_NULL_HANDLE);
+}
+
+void Buffer::AllocateMemory(Driver* driver, const VkMemoryRequirements& mem_requirements, VkDeviceMemory& memory,
+                            VkMemoryPropertyFlags properties) {
+  const auto memory_type_index = FindMemoryType(driver->GetPhysicalDevice(), mem_requirements.memoryTypeBits, properties);
+  return AllocateMemory(driver, mem_requirements.size, memory_type_index, memory);
+}
+
+void Buffer::AllocateImageMemory(Driver* driver, const VkImage& image, VkDeviceMemory& memory, VkMemoryPropertyFlags properties) {
+  VkMemoryRequirements mem_requirements{};
+  vkGetImageMemoryRequirements(driver->GetDevice(), image, &mem_requirements);
+  AllocateMemory(driver, mem_requirements, memory, properties);
 }
 
 Buffer::Buffer(const VkDeviceSize size, const VkBufferUsageFlags usage, const VkMemoryPropertyFlags properties) :
@@ -32,12 +46,10 @@ Buffer::Buffer(const VkDeviceSize size, const VkBufferUsageFlags usage, const Vk
   ASSERT(driver);
 
   const auto& device = driver->GetDevice();
-  CHECK_VK(FATAL, vkCreateBuffer(device, &create_info, nullptr, &buffer_), "failed to create vk buffer");
-
+  CHECK_VK(FATAL, vkCreateBuffer(device, &create_info, driver->GetAllocator(), &buffer_), "failed to create vk buffer");
   VkMemoryRequirements mem_requirements{};
   vkGetBufferMemoryRequirements(device, buffer_, &mem_requirements);
-  const auto memory_type = FindMemoryType(driver->GetPhysicalDevice(), mem_requirements.memoryTypeBits, properties);
-  AllocateMemory(device, size, memory_type, memory_, nullptr);
+  AllocateMemory(driver, mem_requirements, memory_, properties);
   CHECK_VK(FATAL, vkBindBufferMemory(device, buffer_, memory_, 0), "failed to bind vk buffer memory");
   InitDescriptor(descriptor_, buffer_);
 }
@@ -83,7 +95,22 @@ class StagingBufferScope {
   operator bool() const {
     return HasBuffer() && IsMapped();
   }
+
+  operator VkBuffer const&() const {
+    ASSERT(buffer_);
+    return buffer_->GetBuffer();
+  }
 };
+
+void Buffer::CopyDataToImageWithStaging(const VkImage& image, const uint8_t* data, const uint64_t num_bytes,
+                                        const std::vector<VkBufferImageCopy>& regions) {
+  StagingBufferScope staging(num_bytes);
+  staging.CopyFrom(data, num_bytes);
+
+  SingleUseCommandBuffer cmds;
+  vkCmdCopyBufferToImage(cmds, staging, image, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, static_cast<uint32_t>(regions.size()),
+                         regions.data());
+}
 
 void Buffer::CopyFromBytes(const void* data, const uint64_t num_bytes, const bool staging) {
   ASSERT(data);
@@ -100,61 +127,6 @@ void Buffer::CopyFromBytes(const void* data, const uint64_t num_bytes, const boo
     mapped.CopyFrom(data, num_bytes);
   }
 }
-
-class SingleUseCommandBuffer {
- private:
-  VkCommandBuffer buffer_{};
-
-  static inline void InitCommandBuffer(const VkDevice& device, const VkCommandPool& command_pool, VkCommandBuffer& buffer) {
-    VkCommandBufferAllocateInfo alloc_info{};
-    alloc_info.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
-    alloc_info.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
-    alloc_info.commandPool = command_pool;
-    alloc_info.commandBufferCount = 1;
-    CHECK_VK(FATAL, vkAllocateCommandBuffers(device, &alloc_info, &buffer), "failed to allocate single use vk command buffer");
-  }
-
-  static inline void StartCommandBuffer(const VkCommandBuffer& buffer) {
-    VkCommandBufferBeginInfo begin_info{};
-    begin_info.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
-    begin_info.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
-    CHECK_VK(FATAL, vkBeginCommandBuffer(buffer, &begin_info), "failed to begin vk command buffer");
-  }
-
-  static inline void SubmitCommandBuffer(const VkQueue& queue, const VkCommandBuffer& buffer) {
-    CHECK_VK(FATAL, vkEndCommandBuffer(buffer), "failed to end vk command buffer");
-
-    VkSubmitInfo submit_info{};
-    submit_info.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
-    submit_info.commandBufferCount = 1;
-    submit_info.pCommandBuffers = &buffer;
-    vkQueueSubmit(queue, 1, &submit_info, VK_NULL_HANDLE);
-    vkQueueWaitIdle(queue);
-  }
-
-  static inline void DestroyCommandBuffer(const VkDevice& device, const VkCommandPool& command_pool,
-                                          const VkCommandBuffer& buffer) {
-    vkFreeCommandBuffers(device, command_pool, 1, &buffer);
-  }
-
- public:
-  SingleUseCommandBuffer() {
-    const auto driver = Driver::Get();
-    ASSERT(driver);
-    InitCommandBuffer(driver->GetDevice(), Renderer::GetCommandPool(), buffer_);
-    StartCommandBuffer(buffer_);
-  }
-  ~SingleUseCommandBuffer() {
-    const auto driver = Driver::Get();
-    ASSERT(driver);
-    SubmitCommandBuffer(driver->GetGraphicsQueue(), buffer_);
-    DestroyCommandBuffer(driver->GetDevice(), Renderer::GetCommandPool(), buffer_);
-  }
-
-  operator VkCommandBuffer() const {
-    return buffer_;
-  }
-};
 
 void Buffer::CopyFromBuffer(const VkBuffer& src, const VkDeviceSize num_bytes) {
   SingleUseCommandBuffer buffer;
@@ -205,6 +177,17 @@ MappedBufferScope::~MappedBufferScope() {
 
 void MappedBufferScope::CopyFrom(const void* src, const VkDeviceSize num_bytes) {
   memcpy(mapped_memory_, src, num_bytes == VK_WHOLE_SIZE ? GetBuffer()->GetSize() : num_bytes);
+}
+
+void MappedBufferScope::Flush(const VkDeviceSize num_bytes, const VkDeviceSize offset) {
+  const auto driver = Driver::Get();
+  ASSERT(driver);
+  VkMappedMemoryRange range{};
+  range.sType = VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE;
+  range.memory = buffer_->GetMemory();
+  range.offset = offset;
+  range.size = num_bytes;
+  CHECK_VK(FATAL, vkFlushMappedMemoryRanges(driver->GetDevice(), 1, &range), "failed to flush mapped vk memory range");
 }
 }  // namespace vk
 
@@ -418,6 +401,7 @@ void VulkanDriver::InitLogicalDevice(const float priority) {
   }
 
   VkPhysicalDeviceFeatures device_features{};
+  device_features.samplerAnisotropy = VK_TRUE;
 
   VkDeviceCreateInfo create_info{};
   create_info.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
@@ -469,6 +453,29 @@ void VulkanDriver::Init() {
     ASSERT(driver);
     driver->WaitDeviceIdle();
   });
+}
+
+SingleUseCommandBuffer::SingleUseCommandBuffer(const bool submit) :
+  submit_(submit) {
+  const auto driver = Driver::Get();
+  ASSERT(driver);
+  InitCommandBuffer(driver->GetDevice(), Renderer::GetCommandPool(), buffer_);
+  StartCommandBuffer(buffer_);
+}
+
+SingleUseCommandBuffer::~SingleUseCommandBuffer() {
+  if (!finished_)
+    CHECK_VK(FATAL, vkEndCommandBuffer(buffer_), "failed to end vk command buffer");
+  const auto driver = Driver::Get();
+  ASSERT(driver);
+  if (submit_)
+    SubmitCommandBuffer(driver->GetGraphicsQueue(), buffer_);
+  DestroyCommandBuffer(driver->GetDevice(), Renderer::GetCommandPool(), buffer_);
+}
+
+void SingleUseCommandBuffer::Finish() {
+  CHECK_VK(FATAL, vkEndCommandBuffer(buffer_), "failed to end vk command buffer");
+  finished_ = true;
 }
 }  // namespace prt
 

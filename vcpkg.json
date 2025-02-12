@@ -31,7 +31,14 @@
     "units",
     "libpng",
     "z4kn4fein-semver",
-    "imgui",
+    {
+      "name": "imgui",
+      "features": [
+        "freetype",
+        "glfw-binding",
+        "vulkan-binding"
+      ]
+    },
     "implot"
   ]
 }

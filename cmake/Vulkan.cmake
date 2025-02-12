@@ -32,4 +32,14 @@ if(PRT_ENABLE_VK)
       COMMAND
         ${GLSLC} ${GLSLC_OPTS} ${source} -o ${shader_out})
   endfunction()
+
+  function(add_shader_target shader_name vertex_shader_source fragment_shader_source)
+    add_glslc_target(${shader_name}-vert ${vertex_shader_source})
+    add_glslc_target(${shader_name}-frag ${fragment_shader_source})
+    add_custom_target(${shader_name} ALL
+      DEPENDS
+        ${shader_name}-vert
+        ${shader_name}-frag
+      WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+  endfunction()
 endif()

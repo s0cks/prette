@@ -229,6 +229,9 @@ class Mouse {
     return owner_;
   }
 
+  auto GetPos() const -> glm::dvec2;
+  auto IsPressed(const int btn) const -> bool;
+
  private:
   static auto New(Window* owner) -> Mouse*;
   static void InitLua(lua_State* L);

@@ -9,6 +9,7 @@
 #include <termcolor/termcolor.hpp>
 
 #include "prette/engine.h"
+#include "prette/gui.h"
 #include "prette/os_thread.h"
 #include "prette/renderer.h"
 #include "prette/signals.h"
@@ -38,6 +39,7 @@ auto main(int argc, char** argv) -> int {
   Engine::Init();
   Driver::Init();
   Renderer::Init();
+  gui::Init();
   const auto engine = Engine::Get();
   ASSERT(engine);
   return engine->Run();

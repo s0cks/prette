@@ -59,6 +59,16 @@ static inline auto SetMouse(Mouse* rhs) -> Mouse* {
   return rhs;
 }
 
+auto Mouse::GetPos() const -> glm::dvec2 {
+  glm::dvec2 pos;
+  glfwGetCursorPos(GetOwner()->GetHandle(), &pos.x, &pos.y);
+  return pos;
+}
+
+auto Mouse::IsPressed(const int button) const -> bool {
+  return glfwGetMouseButton(GetOwner()->GetHandle(), button);
+}
+
 auto Mouse::New(Window* window) -> Mouse* {
   const auto mouse = new Mouse(window);
   ASSERT(mouse);

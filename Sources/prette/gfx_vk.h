@@ -1,5 +1,5 @@
 #ifndef PRT_GFX_H
-#error "Please #include <prt/gfx.h> instead."
+#error "Please #include <prette/gfx.h> instead."
 #endif  // PRT_GFX_H
 
 #ifndef PRT_GFX_VK_H
@@ -208,10 +208,15 @@ class Buffer {
  public:
   static constexpr const VkMemoryPropertyFlags kDefaultBufferMemoryProperties =
       VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT;
+  static void AllocateImageMemory(Driver* driver, const VkImage& image, VkDeviceMemory& bufferMemory,
+                                  VkMemoryPropertyFlags properties);
+  static void CopyDataToImageWithStaging(const VkImage& image, const uint8_t* data, const uint64_t num_bytes,
+                                         const std::vector<VkBufferImageCopy>& regions);
 
  private:
-  static void AllocateMemory(const VkDevice& device, const VkDeviceSize alloc_size, const uint32_t memory_type,
-                             VkDeviceMemory& memory, const VkAllocationCallbacks* allocator = nullptr);
+  static void AllocateMemory(Driver* driver, const VkDeviceSize alloc_size, const uint32_t memory_type, VkDeviceMemory& memory);
+  static void AllocateMemory(Driver* driver, const VkMemoryRequirements& mem_requirements, VkDeviceMemory& memory,
+                             VkMemoryPropertyFlags properties);
 
   static inline void InitDescriptor(VkDescriptorBufferInfo& descriptor, const VkBuffer& buffer,
                                     const VkDeviceSize size = VK_WHOLE_SIZE, const VkDeviceSize offset = 0) {
@@ -267,6 +272,21 @@ class Buffer {
                                        const VkMemoryPropertyFlags properties = kDefaultBufferMemoryProperties) -> Buffer* {
     return new Buffer(size, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, properties);
   }
+
+  static inline auto NewStaging(const VkDeviceSize size, const VkMemoryPropertyFlags properties = kDefaultBufferMemoryProperties)
+      -> Buffer* {
+    return New(size, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, properties);
+  }
+
+  static inline auto NewVertex(const VkDeviceSize size, const VkMemoryPropertyFlags properties = kDefaultBufferMemoryProperties)
+      -> Buffer* {
+    return New(size, VK_BUFFER_USAGE_VERTEX_BUFFER_BIT, properties);
+  }
+
+  static inline auto NewIndex(const VkDeviceSize size, const VkMemoryPropertyFlags properties = kDefaultBufferMemoryProperties)
+      -> Buffer* {
+    return New(size, VK_BUFFER_USAGE_INDEX_BUFFER_BIT, properties);
+  }
 };
 
 class MappedBufferScope {
@@ -291,6 +311,7 @@ class MappedBufferScope {
     return GetMappedMemory() != nullptr;
   }
 
+  void Flush(const VkDeviceSize num_bytes = VK_WHOLE_SIZE, const VkDeviceSize offset = 0);
   void CopyFrom(const void* data, const VkDeviceSize num_bytes = VK_WHOLE_SIZE);
 
   operator bool() const {
@@ -410,6 +431,53 @@ class VulkanDriver : public DriverBase {
 
  public:
   static void Init();
+};
+
+class SingleUseCommandBuffer {
+ private:
+  bool submit_;
+  bool finished_ = false;
+  VkCommandBuffer buffer_{};
+
+  static inline void InitCommandBuffer(const VkDevice& device, const VkCommandPool& command_pool, VkCommandBuffer& buffer) {
+    VkCommandBufferAllocateInfo alloc_info{};
+    alloc_info.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
+    alloc_info.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
+    alloc_info.commandPool = command_pool;
+    alloc_info.commandBufferCount = 1;
+    CHECK_VK(FATAL, vkAllocateCommandBuffers(device, &alloc_info, &buffer), "failed to allocate single use vk command buffer");
+  }
+
+  static inline void StartCommandBuffer(const VkCommandBuffer& buffer) {
+    VkCommandBufferBeginInfo begin_info{};
+    begin_info.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
+    begin_info.flags |= VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
+    CHECK_VK(FATAL, vkBeginCommandBuffer(buffer, &begin_info), "failed to begin vk command buffer");
+  }
+
+  static inline void SubmitCommandBuffer(const VkQueue& queue, const VkCommandBuffer& buffer) {
+    VkSubmitInfo submit_info{};
+    submit_info.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
+    submit_info.commandBufferCount = 1;
+    submit_info.pCommandBuffers = &buffer;
+    vkQueueSubmit(queue, 1, &submit_info, VK_NULL_HANDLE);
+    vkQueueWaitIdle(queue);
+  }
+
+  static inline void DestroyCommandBuffer(const VkDevice& device, const VkCommandPool& command_pool,
+                                          const VkCommandBuffer& buffer) {
+    vkFreeCommandBuffers(device, command_pool, 1, &buffer);
+  }
+
+ public:
+  SingleUseCommandBuffer(const bool submit = true);
+  ~SingleUseCommandBuffer();
+
+  void Finish();
+
+  operator VkCommandBuffer&() {
+    return buffer_;
+  }
 };
 }  // namespace prt
 

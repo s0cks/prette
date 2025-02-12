@@ -51,7 +51,7 @@ if(PRT_TRACING_ENABLED)
 endif()
 
 add_library(${PROJECT_NAME} SHARED ${PRT_SOURCES})
-target_compile_options(${PROJECT_NAME} PUBLIC ${PRT_COMPILE_OPTS})
+target_compile_options(${PROJECT_NAME} PUBLIC ${PRT_COMPILE_OPTS} )
 target_link_libraries(${PROJECT_NAME}
   PUBLIC ${PRT_LIBRARIES} prt-flatbuffers)
 target_include_directories(
