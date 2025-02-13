@@ -1,7 +1,3 @@
-#ifndef PRT_GFX_H
-#error "Please #include <prette/gfx.h> instead."
-#endif  // PRT_GFX_H
-
 #ifndef PRT_GFX_DRIVER_H
 #define PRT_GFX_DRIVER_H
 
@@ -10,9 +6,14 @@
 namespace prt {
 #define FOR_EACH_DRIVER_EVENT(V) \
   V(DriverCreated)               \
-  V(DriverInitialized)           \
+  V(InstanceInit)                \
+  V(PhysicalDeviceInit)          \
+  V(DeviceInit)                  \
+  V(SurfaceInit)                 \
+  V(DriverInit)                  \
   V(DriverDestroyed)
 
+class Driver;
 class DriverEvent;
 #define FORWARD_DECLARE_EVENT(Name) class Name##Event;
 FOR_EACH_DRIVER_EVENT(FORWARD_DECLARE_EVENT)
@@ -52,12 +53,44 @@ class DriverCreatedEvent : public DriverEventBase {
   DECLARE_EVENT_TYPE(DriverEvent, DriverCreated);
 };
 
-class DriverInitializedEvent : public DriverEventBase {
+class InstanceInitEvent : public DriverEventBase {
  public:
-  explicit DriverInitializedEvent(const Driver* driver) :
+  explicit InstanceInitEvent(const Driver* driver) :
     DriverEventBase(driver) {}
-  ~DriverInitializedEvent() override = default;
-  DECLARE_EVENT_TYPE(DriverEvent, DriverInitialized);
+  ~InstanceInitEvent() override = default;
+  DECLARE_EVENT_TYPE(DriverEvent, InstanceInit);
+};
+
+class PhysicalDeviceInitEvent : public DriverEventBase {
+ public:
+  explicit PhysicalDeviceInitEvent(const Driver* driver) :
+    DriverEventBase(driver) {}
+  ~PhysicalDeviceInitEvent() override = default;
+  DECLARE_EVENT_TYPE(DriverEvent, PhysicalDeviceInit);
+};
+
+class SurfaceInitEvent : public DriverEventBase {
+ public:
+  explicit SurfaceInitEvent(const Driver* driver) :
+    DriverEventBase(driver) {}
+  ~SurfaceInitEvent() override = default;
+  DECLARE_EVENT_TYPE(DriverEvent, SurfaceInit);
+};
+
+class DeviceInitEvent : public DriverEventBase {
+ public:
+  explicit DeviceInitEvent(const Driver* driver) :
+    DriverEventBase(driver) {}
+  ~DeviceInitEvent() override = default;
+  DECLARE_EVENT_TYPE(DriverEvent, DeviceInit);
+};
+
+class DriverInitEvent : public DriverEventBase {
+ public:
+  explicit DriverInitEvent(const Driver* driver) :
+    DriverEventBase(driver) {}
+  ~DriverInitEvent() override = default;
+  DECLARE_EVENT_TYPE(DriverEvent, DriverInit);
 };
 
 class DriverDestroyedEvent : public DriverEvent {

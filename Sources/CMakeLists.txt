@@ -20,6 +20,7 @@ list(
   JPEG::JPEG
   leveldb::leveldb
   Freetype::Freetype
+  libconfig::config
   units::units
   semver
   fmt::fmt
@@ -27,11 +28,11 @@ list(
   rxcpp
   stduuid
   rapidjson
-  nuklear
   glm::glm
   Backward::Backward
   OpenSSL::Crypto
   imgui::imgui
+  Vulkan::Vulkan
   implot::implot
   rapidjson
   stduuid
@@ -40,11 +41,6 @@ list(
   ${LUA_LIBRARIES}
   glfw
   libuv::uv)
-if(PRT_ENABLE_VK)
-  list(APPEND PRT_LIBRARIES Vulkan::Vulkan)
-else()
-  list(APPEND PRT_LIBRARIES OpenGL::GL GLEW::GLEW)
-endif()
 
 if(PRT_TRACING_ENABLED)
   list(APPEND PRT_LIBRARIES Tracy::TracyClient)

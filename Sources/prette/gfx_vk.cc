@@ -3,12 +3,11 @@
 #include "prette/common.h"
 #include "prette/engine.h"
 #include "prette/gfx.h"
+#include "prette/gfx_driver.h"
 #include "prette/lua.h"
 #include "prette/renderer.h"
+#include "prette/scene_renderer.h"
 #include "prette/to_string.h"
-#ifdef PRT_VK
-
-#include "prette/renderer.h"
 #include "prette/window.h"
 
 namespace prt {
@@ -129,7 +128,7 @@ void Buffer::CopyFromBytes(const void* data, const uint64_t num_bytes, const boo
 }
 
 void Buffer::CopyFromBuffer(const VkBuffer& src, const VkDeviceSize num_bytes) {
-  SingleUseCommandBuffer buffer(Renderer::GetCommandPool());
+  SingleUseCommandBuffer buffer(SceneRenderer::GetCommandPool());
   VkBufferCopy copy{};
   copy.size = num_bytes;
   vkCmdCopyBuffer(buffer, src, buffer_, 1, &copy);
@@ -188,6 +187,24 @@ void MappedBufferScope::Flush(const VkDeviceSize num_bytes, const VkDeviceSize o
   range.offset = offset;
   range.size = num_bytes;
   CHECK_VK(FATAL, vkFlushMappedMemoryRanges(driver->GetDevice(), 1, &range), "failed to flush mapped vk memory range");
+}
+
+void InitFramebuffers(const Driver* driver, const VkRenderPass& pass, const std::vector<VkImageView>& views,
+                      const VkExtent2D& extent, std::vector<VkFramebuffer>& framebuffers) {
+  ASSERT(driver);
+  framebuffers.resize(views.size());
+  for (auto idx = 0; idx < views.size(); idx++) {
+    VkFramebufferCreateInfo create_info{};
+    create_info.sType = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
+    create_info.renderPass = pass;
+    create_info.attachmentCount = 1;
+    create_info.pAttachments = &views[idx];
+    create_info.width = extent.width;
+    create_info.height = extent.height;
+    create_info.layers = 1;
+    CHECK_VK(FATAL, vkCreateFramebuffer(driver->GetDevice(), &create_info, driver->GetAllocator(), &framebuffers[idx]),
+             "failed to create vk framebuffers");
+  }
 }
 }  // namespace vk
 
@@ -320,25 +337,27 @@ static inline auto IsDeviceSuitable(const VkSurfaceKHR& surface, const std::vect
   };
 }
 
-void VulkanDriver::InitPhysicalDevice() {
+void Driver::InitPhysicalDevice() {
   LOG_IF(FATAL, !FindSuitablePhysicalDevice(instance_, &physical_device_, IsDeviceSuitable(surface_, device_extensions_)))
       << "failed to find suitable GPU w/ vulkan support.";
 #ifdef PRT_DEBUG
   LOG(INFO) << "found suitable GPU w/ vulkan support:";
   PrintProperties(physical_device_);
 #endif  // PRT_DEBUG
+  Publish<PhysicalDeviceInitEvent>(this);
 }
 
 #ifdef PRT_DEBUG
 
-void VulkanDriver::InitSurface() {
+void Driver::InitSurface() {
   const auto window = GetAppWindow();
   ASSERT(window);
   CHECK_VK(FATAL, glfwCreateWindowSurface(instance_, window->GetHandle(), allocator_, &surface_),
            "failed to create window vk surface");
+  Publish<SurfaceInitEvent>(this);
 }
 
-void VulkanDriver::InitDebugMessenger() {
+void Driver::InitDebugMessenger() {
   VkDebugUtilsMessengerCreateInfoEXT debug_info{};
   InitDebugMessengerCreateInfo(debug_info, &OnDebugCreateInfo);
   CHECK_VK(FATAL, CreateDebugUtilsMessengerEXT(instance_, &debug_info, nullptr, &debug_), "failed to create vk debug messenger");
@@ -346,7 +365,7 @@ void VulkanDriver::InitDebugMessenger() {
 
 #endif  // PRT_DEBUG
 
-void VulkanDriver::InitApplicationInfo() {
+void Driver::InitApplicationInfo() {
   app_info_.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
   app_info_.pApplicationName = "Prette";
   app_info_.applicationVersion = VK_MAKE_PRT_VERSION;
@@ -356,12 +375,12 @@ void VulkanDriver::InitApplicationInfo() {
   app_info_.apiVersion = VK_API_VERSION_1_3;
 }
 
-void VulkanDriver::WaitDeviceIdle() {
+void Driver::WaitDeviceIdle() {
   DLOG(INFO) << "waiting for idle...";
   vkDeviceWaitIdle(device_);
 }
 
-void VulkanDriver::InitInstance() {
+void Driver::InitInstance() {
   VkInstanceCreateInfo create_info{};
   create_info.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
   create_info.pApplicationInfo = &app_info_;
@@ -381,11 +400,11 @@ void VulkanDriver::InitInstance() {
   info.enabledLayerCount = 0;
   info.pNext = nullptr;
 #endif  // PRT_DEBUG
-
   CHECK_VK(FATAL, vkCreateInstance(&create_info, nullptr, &instance_), "failed to create vkInstance");
+  Publish<InstanceInitEvent>(this);
 }
 
-void VulkanDriver::InitLogicalDevice(const float priority) {
+void Driver::InitLogicalDevice(const float priority) {
   const auto indices = FindQueueFamilies(physical_device_, surface_);
   std::unordered_set<uint32_t> unique_families{};
   indices.GetUniqueFamilies(unique_families);
@@ -420,9 +439,10 @@ void VulkanDriver::InitLogicalDevice(const float priority) {
   CHECK_VK(FATAL, vkCreateDevice(physical_device_, &create_info, nullptr, &device_), "failed to create vk device");
   indices.GetGraphicsQueue(device_, graphics_queue_);
   indices.GetPresentQueue(device_, present_queue_);
+  Publish<DeviceInitEvent>(this);
 }
 
-VulkanDriver::VulkanDriver() {
+Driver::Driver() {
 #ifdef PRT_DEBUG
   LOG_IF(FATAL, !HasValidationLayerSupport(validation_layers_)) << "vk validation layers requested but not available!";
 #endif  // PRT_DEBUG
@@ -434,7 +454,7 @@ VulkanDriver::VulkanDriver() {
   InitLogicalDevice(1.0f);
 }
 
-VulkanDriver::~VulkanDriver() {
+Driver::~Driver() {
   vkDestroySurfaceKHR(instance_, surface_, allocator_);
   vkDestroyDevice(device_, allocator_);
 #ifdef PRT_DEBUG
@@ -443,7 +463,7 @@ VulkanDriver::~VulkanDriver() {
   vkDestroyInstance(instance_, allocator_);
 }
 
-void VulkanDriver::Init() {
+void Driver::Init() {
   DriverBase::Init();
   const auto engine = Engine::Get();
   ASSERT(engine);
@@ -518,5 +538,3 @@ SingleUseCommandBuffer::~SingleUseCommandBuffer() {
   Destroy(driver->GetDevice(), pool_, buffer_);
 }
 }  // namespace prt
-
-#endif  // PRT_VK

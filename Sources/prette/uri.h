@@ -2,6 +2,7 @@
 #define PRT_URI_H
 
 #include <fmt/format.h>
+#include <leveldb/slice.h>
 
 #include <cstdio>
 #include <optional>

@@ -15,9 +15,10 @@ message(STATUS "found flatc v${FLATC_VERSION}: ${FLATC}")
 
 set(FLATC_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
 set(FLATC_BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}")
+set(FLATC_OUTPUT_DIR "${FLATC_BINARY_DIR}/Sources/prette")
 
 set(FLATC_TARGET "--cpp")
-set(FLATC_OPTS ${FLATC_TARGET} -o ${FLATC_BINARY_DIR} -I ${FLATC_SOURCE_DIR})
+set(FLATC_OPTS ${FLATC_TARGET} -o ${FLATC_OUTPUT_DIR} -I ${FLATC_SOURCE_DIR})
 
 message(STATUS "flatc options: ${FLATC_OPTS}")
 function(add_flatc_target target_name target_sources)

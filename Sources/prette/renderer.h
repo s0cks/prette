@@ -1,6 +1,8 @@
 #ifndef PRT_RENDERER_H
 #define PRT_RENDERER_H
 
+#include <vulkan/vulkan_core.h>
+
 #include <vector>
 
 #include "prette/event.h"
@@ -9,9 +11,11 @@
 
 namespace prt {
 #define FOR_EACH_RENDERER_EVENT(V) \
-  V(RendererCreated)               \
+  V(SwapChainInit)                 \
+  V(RendererInit)                  \
   V(PreFrame)                      \
   V(PostFrame)                     \
+  V(SwapChainDestroyed)            \
   V(RendererDestroyed)
 
 class Renderer;
@@ -39,43 +43,75 @@ class TemplateRendererEvent : public RendererEvent {
   }
 };
 
-class PreFrameEvent : public TemplateRendererEvent<true> {
+class RendererEventBase : public TemplateRendererEvent<false> {
+ protected:
+  RendererEventBase() = default;
+
+ public:
+  ~RendererEventBase() override = default;
+};
+
+class FrameEvent : public TemplateRendererEvent<true> {
+ protected:
+  FrameEvent() = default;
+
+ public:
+  ~FrameEvent() override = default;
+};
+
+class SwapChainEvent : public RendererEventBase {
+ private:
+  bool reinit_;
+
+ public:
+  explicit SwapChainEvent(const bool reinit) :
+    RendererEventBase(),
+    reinit_(reinit) {}
+  ~SwapChainEvent() override = default;
+
+  auto IsReinit() const -> bool {
+    return reinit_;
+  }
+};
+
+class SwapChainInitEvent : public SwapChainEvent {
+ public:
+  explicit SwapChainInitEvent(const bool reinit) :
+    SwapChainEvent(reinit) {}
+  ~SwapChainInitEvent() override = default;
+  DECLARE_EVENT_TYPE(RendererEvent, SwapChainInit);
+};
+
+class RendererInitEvent : public RendererEventBase {
+ public:
+  RendererInitEvent() = default;
+  ~RendererInitEvent() override = default;
+  DECLARE_EVENT_TYPE(RendererEvent, RendererInit);
+};
+
+class PreFrameEvent : public FrameEvent {
  public:
   PreFrameEvent() = default;
   ~PreFrameEvent() override = default;
   DECLARE_EVENT_TYPE(RendererEvent, PreFrame);
 };
 
-class PostFrameEvent : public TemplateRendererEvent<true> {
+class PostFrameEvent : public FrameEvent {
  public:
   PostFrameEvent() = default;
   ~PostFrameEvent() override = default;
   DECLARE_EVENT_TYPE(RendererEvent, PostFrame);
 };
 
-class RendererEventBase : public TemplateRendererEvent<false> {
- private:
-  const Renderer* renderer_;
-
- protected:
-  explicit RendererEventBase(const Renderer* renderer) :
-    TemplateRendererEvent<false>(),
-    renderer_(renderer) {
-    ASSERT(renderer_);
-  }
-
+class SwapChainDestroyedEvent : public SwapChainEvent {
  public:
-  ~RendererEventBase() override = default;
+  explicit SwapChainDestroyedEvent(const bool reinit) :
+    SwapChainEvent(reinit) {}
+  ~SwapChainDestroyedEvent() override = default;
+  DECLARE_EVENT_TYPE(RendererEvent, SwapChainDestroyed);
 };
 
-class RendererCreatedEvent : public TemplateRendererEvent<false> {
- public:
-  RendererCreatedEvent() = default;
-  ~RendererCreatedEvent() override = default;
-  DECLARE_EVENT_TYPE(RendererEvent, RendererCreated);
-};
-
-class RendererDestroyedEvent : public TemplateRendererEvent<false> {
+class RendererDestroyedEvent : public RendererEventBase {
  public:
   RendererDestroyedEvent() = default;
   ~RendererDestroyedEvent() override = default;
@@ -182,64 +218,29 @@ class Renderer {
   friend class LuaState;
 
  private:
-  static void InitSyncObjects(const Driver* driver);
   static void InitResizeListener();
-  static void InitBuffers();
-  static void InitPipeline(const Driver* driver);
-  static void InitPipelineCache(const Driver* driver);
-
-  static void InitCommandPool(const VkPhysicalDevice& physical_device, const VkDevice& device, const VkSurfaceKHR& surface,
-                              const VkAllocationCallbacks* allocator);
-  static void InitGuiCommandPool(const VkPhysicalDevice& physical_device, const VkDevice& device, const VkSurfaceKHR& surface,
-                                 const VkAllocationCallbacks* allocator);
-  static void InitCommandBuffers(const VkDevice& device);
-  static void InitGuiCommandBuffers(const VkDevice& device);
-
-  static void InitImageViews(const VkDevice& device);
-
-  static void InitFramebuffers(const Driver* driver, std::vector<VkFramebuffer>& framebuffers);
-  static void InitRenderPass(const VkDevice& device);
-  static void InitGuiRenderPass(const VkDevice& device);
-
-  static void InitSwapChain(const VkPhysicalDevice& physical_device, const VkDevice& device, const VkSurfaceKHR& surface,
-                            const VkAllocationCallbacks* allocator);
+  static void InitCommandPool(const Driver* driver);
+  static void InitSwapChain(const Driver* driver, const bool reinit);
   static void ReInitSwapChain(Driver* driver);
-
   static void Destroy();
-  static void DestroyBuffers();
-  static void DestroyFramebuffers(Driver* driver);
-  static void DestroyImageViews(Driver* driver);
-  static void DestroyRenderPass(Driver* driver);
-  static void DestroySwapChain(Driver* driver);
-  static void DestroySyncObjects(Driver* driver);
-  static void DestroyPipelineCache(Driver* driver);
-  static void DestroyPipeline(Driver* driver);
-  static void DestroyPipelineLayout(Driver* driver);
+  static void DestroySwapChain(Driver* driver, const bool reinit);
+  static auto AcquireNextImage(Driver* driver, uint32_t* result) -> bool;
+  static void Submit(Driver* driver, const VkSemaphore& signal, const std::vector<VkCommandBuffer>& cmd_buffers);
+  static void Present(Driver* driver, const VkSemaphore& signal, const uint32_t image_index);
 
  private:
   static void InitLua(lua_State* L);
 
  public:
   static void Init();
-  static auto GetPipeline() -> VkPipeline const&;
-  static auto GetPipelineLayout() -> VkPipelineLayout const&;
-  static auto GetVertexBuffer() -> VkBuffer const&;
-  static auto GetIndexBuffer() -> VkBuffer const&;
-  static auto GetPipelineCache() -> VkPipelineCache const&;
-  static auto GetNumberOfIndices() -> uint32_t;
+  static auto GetCurrentFrame() -> uint32_t;
   static auto GetCommandPool() -> VkCommandPool const&;
-  static auto GetCommandBuffer(const uint32_t buffer_index) -> VkCommandBuffer const&;
   static auto GetSwapChain() -> VkSwapchainKHR const&;
   static auto GetImages() -> std::vector<VkImage> const&;
   static auto GetImageViews() -> std::vector<VkImageView> const&;
+  static auto GetImageView(const uint32_t idx) -> VkImageView const&;
   static auto GetFormat() -> VkFormat const&;
   static auto GetExtent() -> VkExtent2D const&;
-  static auto GetRenderPass() -> VkRenderPass const&;
-  static auto GetFramebuffer(const uint32_t index) -> VkFramebuffer const&;
-
-  static void RecordCommandBuffers(const int image_index);
-  static void ResetCommandBuffer(const uint32_t buffer_index,
-                                 const VkCommandBufferResetFlagBits flags = static_cast<VkCommandBufferResetFlagBits>(0));
   static void DrawFrame(Driver* driver, const Tick& current, const Tick& previous);
 };
 }  // namespace prt

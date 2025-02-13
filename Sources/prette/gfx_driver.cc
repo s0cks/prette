@@ -1,3 +1,5 @@
+#include "prette/gfx_driver.h"
+
 #include "prette/engine.h"
 #include "prette/gfx.h"
 #include "prette/to_string.h"
@@ -16,8 +18,32 @@ auto DriverCreatedEvent::ToString() const -> std::string {
   return helper;
 }
 
-auto DriverInitializedEvent::ToString() const -> std::string {
-  ToStringHelper<DriverInitializedEvent> helper;
+auto InstanceInitEvent::ToString() const -> std::string {
+  ToStringHelper<InstanceInitEvent> helper;
+  helper.AddFieldPtr("driver", GetDriver());
+  return helper;
+}
+
+auto PhysicalDeviceInitEvent::ToString() const -> std::string {
+  ToStringHelper<PhysicalDeviceInitEvent> helper;
+  helper.AddFieldPtr("driver", GetDriver());
+  return helper;
+}
+
+auto SurfaceInitEvent::ToString() const -> std::string {
+  ToStringHelper<SurfaceInitEvent> helper;
+  helper.AddFieldPtr("driver", GetDriver());
+  return helper;
+}
+
+auto DeviceInitEvent::ToString() const -> std::string {
+  ToStringHelper<DeviceInitEvent> helper;
+  helper.AddFieldPtr("driver", GetDriver());
+  return helper;
+}
+
+auto DriverInitEvent::ToString() const -> std::string {
+  ToStringHelper<DriverInitEvent> helper;
   helper.AddFieldPtr("driver", GetDriver());
   return helper;
 }
@@ -59,7 +85,7 @@ void DriverBase::InitDriver() {
   const auto driver = Driver::New();
   ASSERT(driver);
   SetDriver(driver);
-  Publish<DriverInitializedEvent>(driver);
+  Publish<DriverInitEvent>(driver);
 }
 
 void DriverBase::Init() {

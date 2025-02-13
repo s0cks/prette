@@ -1,11 +1,12 @@
 #include "prette/viewport.h"
 
-#include <vulkan/vulkan_core.h>
-
 #include <vector>
 
 #include "prette/common.h"
 #include "prette/gfx.h"
+#include "prette/gfx_vk.h"
+#include "prette/renderer.h"
+#include "prette/shader.h"
 
 namespace prt {
 static std::vector<VkImage> images_{};
@@ -13,120 +14,204 @@ static std::vector<VkDeviceMemory> memory_{};
 static std::vector<VkImageView> views_{};
 static VkRenderPass pass_{};
 static VkPipeline pipeline_{};
+static VkPipelineLayout pipeline_layout_{};
+static VkPipelineCache pipeline_cache_{};
 static VkCommandPool pool_{};
 static std::vector<VkFramebuffer> framebuffers_{};
 static std::vector<VkCommandBuffer> command_buffers_{};
 
-// static inline void InitRenderPass(const Driver* driver) {
-//   VkAttachmentDescription color_att{};
-//   color_att.format = color_format;
-//   color_att.samples = VK_SAMPLE_COUNT_1_BIT;
-//   color_att.loadOp = VK_ATTACHMENT_LOAD_OP_CLEAR;
-//   color_att.storeOp = VK_ATTACHMENT_STORE_OP_STORE;
-//   color_att.stencilLoadOp = VK_ATTACHMENT_LOAD_OP_DONT_CARE;
-//   color_att.stencilStoreOp = VK_ATTACHMENT_STORE_OP_DONT_CARE;
-//   color_att.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
-//   color_att.finalLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+void Viewport::InitRenderPass(const Driver* driver) {
+  std::array<VkAttachmentDescription, 1> attachments = {};
+  // Color attachment
+  attachments[0].format = Renderer::GetFormat();
+  attachments[0].samples = VK_SAMPLE_COUNT_1_BIT;
+  attachments[0].loadOp = VK_ATTACHMENT_LOAD_OP_CLEAR;
+  attachments[0].storeOp = VK_ATTACHMENT_STORE_OP_STORE;
+  attachments[0].stencilLoadOp = VK_ATTACHMENT_LOAD_OP_DONT_CARE;
+  attachments[0].stencilStoreOp = VK_ATTACHMENT_STORE_OP_DONT_CARE;
+  attachments[0].initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
+  attachments[0].finalLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+  VkAttachmentReference colorReference = {};
+  colorReference.attachment = 0;
+  colorReference.layout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
 
-//   VkAttachmentDescription depth_att{};
-//   depth_att.format = depth_format;
-//   depth_att.samples = VK_SAMPLE_COUNT_1_BIT;
-//   depth_att.loadOp = VK_ATTACHMENT_LOAD_OP_CLEAR;
-//   depth_att.storeOp = VK_ATTACHMENT_STORE_OP_STORE;
-//   depth_att.stencilLoadOp = VK_ATTACHMENT_LOAD_OP_CLEAR;
-//   depth_att.stencilStoreOp = VK_ATTACHMENT_STORE_OP_DONT_CARE;
-//   depth_att.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
-//   depth_att.finalLayout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
+  VkAttachmentReference depthReference = {};
+  depthReference.attachment = 1;
+  depthReference.layout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
 
-//   std::array<VkAttachmentDescription, 2> attachments = {};
-// }
+  VkSubpassDescription subpassDescription = {};
+  subpassDescription.pipelineBindPoint = VK_PIPELINE_BIND_POINT_GRAPHICS;
+  subpassDescription.colorAttachmentCount = 1;
+  subpassDescription.pColorAttachments = &colorReference;
+  subpassDescription.pDepthStencilAttachment = &depthReference;
+  subpassDescription.inputAttachmentCount = 0;
+  subpassDescription.pInputAttachments = nullptr;
+  subpassDescription.preserveAttachmentCount = 0;
+  subpassDescription.pPreserveAttachments = nullptr;
+  subpassDescription.pResolveAttachments = nullptr;
 
-static inline void InitImages(const Driver* driver, const int num_images, const VkExtent3D& extent) {
-  images_.resize(num_images);
-  for (auto idx = 0; idx < num_images; idx++) {
-    VkImageCreateInfo create_info{};
-    create_info.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
-    create_info.imageType = VK_IMAGE_TYPE_2D;
-    create_info.format = VK_FORMAT_B8G8R8A8_SRGB;
-    create_info.extent.width = extent.width;
-    create_info.extent.height = extent.height;
-    create_info.extent.depth = extent.depth;
-    create_info.arrayLayers = 1;
-    create_info.mipLevels = 1;
-    create_info.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
-    create_info.samples = VK_SAMPLE_COUNT_1_BIT;
-    create_info.tiling = VK_IMAGE_TILING_LINEAR;
-    create_info.usage = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | VK_IMAGE_USAGE_SAMPLED_BIT;
-    CHECK_VK(FATAL, vkCreateImage(driver->GetDevice(), &create_info, driver->GetAllocator(), &images_[idx]),
-             "failed to create vk image");
+  // Subpass dependencies for layout transitions
+  std::array<VkSubpassDependency, 2> dependencies{};
+  dependencies[0].srcSubpass = VK_SUBPASS_EXTERNAL;
+  dependencies[0].dstSubpass = 0;
+  dependencies[0].srcStageMask = VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT;
+  dependencies[0].dstStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
+  dependencies[0].srcAccessMask = VK_ACCESS_MEMORY_READ_BIT;
+  dependencies[0].dstAccessMask = VK_ACCESS_COLOR_ATTACHMENT_READ_BIT | VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
+  dependencies[0].dependencyFlags = VK_DEPENDENCY_BY_REGION_BIT;
 
-    VkMemoryRequirements mem_requirements{};
-    VkMemoryAllocateInfo alloc_info{};
-    alloc_info.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
-    vkGetImageMemoryRequirements(driver->GetDevice(), images_[idx], &mem_requirements);
+  dependencies[1].srcSubpass = 0;
+  dependencies[1].dstSubpass = VK_SUBPASS_EXTERNAL;
+  dependencies[1].srcStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
+  dependencies[1].dstStageMask = VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT;
+  dependencies[1].srcAccessMask = VK_ACCESS_COLOR_ATTACHMENT_READ_BIT | VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
+  dependencies[1].dstAccessMask = VK_ACCESS_MEMORY_READ_BIT;
+  dependencies[1].dependencyFlags = VK_DEPENDENCY_BY_REGION_BIT;
 
-    alloc_info.memoryTypeIndex = FindMemoryType(driver->GetPhysicalDevice(), mem_requirements.memoryTypeBits,
-                                                VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);
-    CHECK_VK(FATAL, vkAllocateMemory(driver->GetDevice(), &alloc_info, driver->GetAllocator(), &memory_[idx]),
-             "failed to create vk image memory");
-    CHECK_VK(FATAL, vkBindImageMemory(driver->GetDevice(), images_[idx], memory_[idx], 0), "failed to bind vk image memory");
-
-    SingleUseCommandBuffer buffer(pool_);
-    VkImageMemoryBarrier barrier{};
-    barrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
-    barrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
-    barrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
-    barrier.srcAccessMask = VK_ACCESS_TRANSFER_READ_BIT;
-    barrier.dstAccessMask = VK_ACCESS_MEMORY_READ_BIT;
-    barrier.oldLayout = VK_IMAGE_LAYOUT_UNDEFINED;
-    barrier.newLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
-    barrier.image = images_[idx];
-    barrier.subresourceRange = VkImageSubresourceRange{VK_IMAGE_ASPECT_COLOR_BIT, 0, 1, 0, 1};
-
-    vkCmdPipelineBarrier(buffer, VK_PIPELINE_STAGE_TRANSFER_BIT, VK_PIPELINE_STAGE_TRANSFER_BIT, 0, 0, nullptr, 0, nullptr, 1,
-                         &barrier);
-  }
+  VkRenderPassCreateInfo renderPassInfo = {};
+  renderPassInfo.sType = VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO;
+  renderPassInfo.attachmentCount = static_cast<uint32_t>(attachments.size());
+  renderPassInfo.pAttachments = attachments.data();
+  renderPassInfo.subpassCount = 1;
+  renderPassInfo.pSubpasses = &subpassDescription;
+  renderPassInfo.dependencyCount = static_cast<uint32_t>(dependencies.size());
+  renderPassInfo.pDependencies = dependencies.data();
+  CHECK_VK(FATAL, vkCreateRenderPass(driver->GetDevice(), &renderPassInfo, nullptr, &pass_), "failed to create vk render pass");
 }
 
-static inline void InitImageViews(const Driver* driver, const int num_views) {
+void Viewport::InitPipeline(const Driver* driver) {
   ASSERT(driver);
-  ASSERT(num_views >= 1);
-  views_.resize(num_views);
-  for (auto idx = 0; idx < num_views; idx++) {
-    views_[idx] = vk::NewImageView(driver, images_[idx], VK_FORMAT_B8G8R8A8_SRGB, VK_IMAGE_ASPECT_COLOR_BIT);
-  }
-}
+  static constexpr const auto kVertexShaderFilename = "test.vert.spv";
+  VkShaderModule vert_module = VK_NULL_HANDLE;
+  LOG_IF(FATAL, !CreateShaderModule(driver->GetDevice(), kVertexShaderFilename, vert_module))
+      << "failed to create vertex shader module for: " << kVertexShaderFilename;
 
-// static inline void InitFramebuffers(const Driver* driver, const int num_framebuffers) {
-//   ASSERT(driver);
-//   ASSERT(num_framebuffers >= 1);
-//   framebuffers_.resize(num_framebuffers);
-//   for (auto idx = 0; idx < num_framebuffers; idx++) {
-//     std::array<VkImageView, 2> attachments = {views_[idx], depth_};
+  static constexpr const auto kFragmentShaderFilename = "test.frag.spv";
+  VkShaderModule frag_module = VK_NULL_HANDLE;
+  LOG_IF(FATAL, !CreateShaderModule(driver->GetDevice(), kFragmentShaderFilename, frag_module))
+      << "failed to create fragment shader module for: " << kFragmentShaderFilename;
 
-//     VkFramebufferCreateInfo create_info{};
-//     create_info.sType = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
-//     create_info.renderPass = pass_;
-//     create_info.attachmentCount = attachments.size();
-//     create_info.pAttachments = &attachments[0];
-//     create_info.width = width;
-//     create_info.height = height;
-//     create_info.layers = 1;
-//     CHECK_VK(FATAL, vkCreateFramebuffer(driver->GetDevice(), &create_info, driver->GetAllocator(), &framebuffers_[idx]),
-//              "failed to create viewport vk framebuffer");
-//   }
-// }
+  VkPipelineShaderStageCreateInfo vert_stage{};
+  InitVertexShaderStageCreateInfo(vert_stage, vert_module);
 
-static inline void InitCommandBuffers(const Driver* driver, const int num_buffers) {
+  VkPipelineShaderStageCreateInfo frag_stage{};
+  InitFragmentShaderStageCreateInfo(frag_stage, frag_module);
+
+  std::vector<VkPipelineShaderStageCreateInfo> stages = {
+      vert_stage,
+      frag_stage,
+  };
+
+  const auto bindings = Vertex::GetBindingDescription();
+  const auto attributes = Vertex::GetAttributeDescriptions();
+
+  VkPipelineVertexInputStateCreateInfo vertex_input_info{};
+  vertex_input_info.sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
+  vertex_input_info.vertexBindingDescriptionCount = 1;
+  vertex_input_info.pVertexBindingDescriptions = &bindings;
+
+  vertex_input_info.vertexAttributeDescriptionCount = attributes.size();
+  vertex_input_info.pVertexAttributeDescriptions = attributes.data();
+
+  VkPipelineInputAssemblyStateCreateInfo input_assembly{};
+  input_assembly.sType = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;
+  input_assembly.topology = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST;
+  input_assembly.primitiveRestartEnable = VK_FALSE;
+
+  VkPipelineViewportStateCreateInfo viewport_state{};
+  viewport_state.sType = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO;
+  viewport_state.viewportCount = 1;
+  viewport_state.scissorCount = 1;
+
+  VkPipelineRasterizationStateCreateInfo rasterizer{};
+  rasterizer.sType = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO;
+  rasterizer.depthClampEnable = VK_FALSE;
+  rasterizer.rasterizerDiscardEnable = VK_FALSE;
+  rasterizer.polygonMode = VK_POLYGON_MODE_FILL;
+  rasterizer.lineWidth = 1.0f;
+  rasterizer.cullMode = VK_CULL_MODE_BACK_BIT;
+  rasterizer.frontFace = VK_FRONT_FACE_CLOCKWISE;
+  rasterizer.depthBiasEnable = VK_FALSE;
+
+  VkPipelineMultisampleStateCreateInfo multisampling{};
+  multisampling.sType = VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO;
+  multisampling.sampleShadingEnable = VK_FALSE;
+  multisampling.rasterizationSamples = VK_SAMPLE_COUNT_1_BIT;
+
+  VkPipelineColorBlendAttachmentState color_blend_attachment{};
+  color_blend_attachment.colorWriteMask =
+      VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT | VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
+  color_blend_attachment.blendEnable = VK_FALSE;
+
+  VkPipelineColorBlendStateCreateInfo color_blend{};
+  color_blend.sType = VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO;
+  color_blend.logicOpEnable = VK_FALSE;
+  color_blend.logicOp = VK_LOGIC_OP_COPY;
+  color_blend.attachmentCount = 1;
+  color_blend.pAttachments = &color_blend_attachment;
+  color_blend.blendConstants[0] = 0.0f;
+  color_blend.blendConstants[1] = 0.0f;
+  color_blend.blendConstants[2] = 0.0f;
+  color_blend.blendConstants[3] = 0.0f;
+
+  std::vector<VkDynamicState> dynamic_states = {
+      VK_DYNAMIC_STATE_VIEWPORT,
+      VK_DYNAMIC_STATE_SCISSOR,
+  };
+  VkPipelineDynamicStateCreateInfo dynamic_state{};
+  dynamic_state.sType = VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO;
+  dynamic_state.dynamicStateCount = dynamic_states.size();
+  dynamic_state.pDynamicStates = &dynamic_states[0];
+
+  VkPipelineLayoutCreateInfo pipeline_layout{};
+  pipeline_layout.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
+  pipeline_layout.setLayoutCount = 0;
+  pipeline_layout.pushConstantRangeCount = 0;
+
+  CHECK_VK(FATAL, vkCreatePipelineLayout(driver->GetDevice(), &pipeline_layout, nullptr, &pipeline_layout_),
+           "failed to create vk pipeline layout");
+
+  VkGraphicsPipelineCreateInfo pipeline{};
+  pipeline.sType = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
+  pipeline.stageCount = 2;
+  pipeline.pStages = &stages[0];
+  pipeline.pVertexInputState = &vertex_input_info;
+  pipeline.pInputAssemblyState = &input_assembly;
+  pipeline.pViewportState = &viewport_state;
+  pipeline.pRasterizationState = &rasterizer;
+  pipeline.pMultisampleState = &multisampling;
+  pipeline.pColorBlendState = &color_blend;
+  pipeline.pDynamicState = &dynamic_state;
+  pipeline.layout = pipeline_layout_;
+  pipeline.renderPass = pass_;
+  pipeline.subpass = 0;
+  pipeline.basePipelineHandle = VK_NULL_HANDLE;
+
+  CHECK_VK(FATAL, vkCreateGraphicsPipelines(driver->GetDevice(), VK_NULL_HANDLE, 1, &pipeline, nullptr, &pipeline_),
+           "failed to create vk pipeline");
+
+  vkDestroyShaderModule(driver->GetDevice(), frag_module, nullptr);
+  vkDestroyShaderModule(driver->GetDevice(), vert_module, nullptr);
+
   ASSERT(driver);
-  ASSERT(num_buffers >= 1);
-  command_buffers_.resize(num_buffers);
-  VkCommandBufferAllocateInfo alloc_info{};
-  alloc_info.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
-  alloc_info.commandPool = pool_;
-  alloc_info.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
-  alloc_info.commandBufferCount = num_buffers;
-  CHECK_VK(FATAL, vkAllocateCommandBuffers(driver->GetDevice(), &alloc_info, command_buffers_.data()),
-           "failed to allocate vk command buffers");
+  VkPipelineCacheCreateInfo create_info{};
+  create_info.sType = VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO;
+  CHECK_VK(FATAL, vkCreatePipelineCache(driver->GetDevice(), &create_info, driver->GetAllocator(), &pipeline_cache_),
+           "failed to create vk pipeline cache");
 }
+
+void Viewport::InitImage(const Driver* driver) {
+  ASSERT(driver);
+}
+
+void Viewport::InitImageViews(const Driver* driver) {
+  ASSERT(driver);
+}
+
+void Viewport::InitFramebuffers(const Driver* driver) {
+  ASSERT(driver);
+  vk::InitFramebuffers(driver, pass_, views_, Renderer::GetExtent(), framebuffers_);
+}
+
+void Viewport::Init() {}
 }  // namespace prt

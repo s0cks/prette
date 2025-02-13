@@ -9,6 +9,8 @@
 #include "prette/engine.h"
 #include "prette/flags.h"
 #include "prette/gfx.h"
+#include "prette/gfx_driver.h"
+#include "prette/gui_renderer.h"
 #include "prette/mouse.h"
 #include "prette/renderer.h"
 #include "prette/shader.h"
@@ -20,8 +22,6 @@ struct VkFont {
   VkDeviceMemory memory{};
   VkImageView view{};
 };
-
-static VkDescriptorPool descriptor_pool_{};
 
 // NOLINTBEGIN(cppcoreguidelines-avoid-magic-numbers)
 static inline void InitStyle() {
@@ -368,77 +368,43 @@ auto Update(const glm::u32vec2& size) -> bool {
 
   ImGui_ImplVulkan_NewFrame();
   ImGui::NewFrame();
-  ImGui::Begin("Window");
-  const auto target_items = std::array<const char*, 2>{
-      "Full Scene",
-      "Test",
-  };
-  if (ImGui::BeginCombo("Target", target_items.at(kRenderTarget), ImGuiComboFlags_HeightSmall)) {
-    for (auto idx = 0; idx < target_items.size(); idx++) {
-      const auto is_selected = (kRenderTarget == idx);
-      if (ImGui::Selectable(target_items.at(idx), is_selected)) {
-        kRenderTarget = idx;
-      }
-      if (is_selected) {
-        ImGui::SetItemDefaultFocus();
-      }
-    }
-    ImGui::EndCombo();
-  }
+  ImGui::Begin("Viewport");
+  ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
+  ImGui::Image(GuiRenderer::GetSceneDescriptor(Renderer::GetCurrentFrame()), ImVec2{viewportPanelSize.x, viewportPanelSize.y});
+
+  // const auto target_items = std::array<const char*, 2>{
+  //     "Full Scene",
+  //     "Test",
+  // };
+  // if (ImGui::BeginCombo("Target", target_items.at(kRenderTarget), ImGuiComboFlags_HeightSmall)) {
+  //   for (auto idx = 0; idx < target_items.size(); idx++) {
+  //     const auto is_selected = (kRenderTarget == idx);
+  //     if (ImGui::Selectable(target_items.at(idx), is_selected)) {
+  //       kRenderTarget = idx;
+  //     }
+  //     if (is_selected) {
+  //       ImGui::SetItemDefaultFocus();
+  //     }
+  //   }
+  //   ImGui::EndCombo();
+  // }
   ImGui::End();
   ImGui::Render();
   return true;
 }
 
-static inline void InitGui(const Driver* driver) {
+static void Destroy(const Driver* driver) {
   ASSERT(driver);
-  VkDescriptorPoolSize descriptor_pool_sizes_[] = {{VK_DESCRIPTOR_TYPE_SAMPLER, 1000},
-                                                   {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1000},
-                                                   {VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE, 1000},
-                                                   {VK_DESCRIPTOR_TYPE_STORAGE_IMAGE, 1000},
-                                                   {VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER, 1000},
-                                                   {VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER, 1000},
-                                                   {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, 1000},
-                                                   {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1000},
-                                                   {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC, 1000},
-                                                   {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC, 1000},
-                                                   {VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT, 1000}};
-
-  VkDescriptorPoolCreateInfo create_info{};
-  create_info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
-  create_info.flags = VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT;
-  create_info.maxSets = 1000;
-  create_info.poolSizeCount = std::size(descriptor_pool_sizes_);
-  create_info.pPoolSizes = descriptor_pool_sizes_;
-
-  CHECK_VK(FATAL, vkCreateDescriptorPool(driver->GetDevice(), &create_info, driver->GetAllocator(), &descriptor_pool_),
-           "failed to create vk descriptor pool");
-
-  IMGUI_CHECKVERSION();
-  ImGui::CreateContext();
-  const auto window = GetAppWindow();
-  ASSERT(window);
-  ImGui_ImplGlfw_InitForVulkan(window->GetHandle(), true);
-
-  ImGui_ImplVulkan_InitInfo info{};
-  info.Instance = driver->GetInstance();
-  info.PhysicalDevice = driver->GetPhysicalDevice();
-  info.Device = driver->GetDevice();
-  info.Queue = driver->GetGraphicsQueue();
-  info.DescriptorPool = descriptor_pool_;
-  info.ImageCount = 2;
-  info.MinImageCount = 2;
-  info.RenderPass = Renderer::GetRenderPass();
-  info.MSAASamples = VK_SAMPLE_COUNT_1_BIT;
-  ImGui_ImplVulkan_Init(&info);
-
-  ImGui_ImplVulkan_CreateFontsTexture();
 }
 
 void Init() {
-  OnDriverInitializedEvent().subscribe([](DriverInitializedEvent* event) {
+  OnDriverInitEvent().subscribe([](DriverInitEvent* event) {
     ASSERT(event);
-    InitGui(event->GetDriver());
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    const auto window = GetAppWindow();
+    ASSERT(window);
+    ImGui_ImplGlfw_InitForVulkan(window->GetHandle(), true);
   });
   engine::OnTickEvent().subscribe([](engine::TickEvent* event) {
     ASSERT(event);
@@ -448,6 +414,14 @@ void Init() {
     if (!Update(size.data())) {
       // update more?
     }
+  });
+  engine::OnTerminatingEvent().subscribe([](engine::TerminatingEvent* event) {
+    ASSERT(event);
+    const auto driver = Driver::Get();
+    ASSERT(driver);
+    ImGui_ImplVulkan_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
   });
 }
 }  // namespace prt::gui

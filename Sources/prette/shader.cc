@@ -21,7 +21,6 @@ auto ReadShaderCode(const std::string& filename, std::vector<char>& code) -> boo
   return true;
 }
 
-#ifdef PRT_VK
 auto CreateShaderModule(const VkDevice& device, const std::vector<char>& code, VkShaderModule& shader_module) -> bool {
   VkShaderModuleCreateInfo create_info{};
   create_info.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
@@ -55,5 +54,4 @@ auto CreateShaderModule(const VkDevice& device, const std::string& filename, VkS
 
   return CreateShaderModule(device, code, shader_module);
 }
-#endif  // PRT_VK
 }  // namespace prt

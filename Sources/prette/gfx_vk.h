@@ -1,7 +1,3 @@
-#ifndef PRT_GFX_H
-#error "Please #include <prette/gfx.h> instead."
-#endif  // PRT_GFX_H
-
 #ifndef PRT_GFX_VK_H
 #define PRT_GFX_VK_H
 
@@ -14,6 +10,7 @@
 #include <vector>
 
 #include "prette/common.h"
+#include "prette/gfx_driver.h"
 #include "prette/lua.h"
 #include "prette/prette.h"
 
@@ -26,6 +23,8 @@
 #endif  // VK_FLAGS_NONE
 
 namespace prt {
+class Driver;
+
 struct MemoryBuffer {
   VkBuffer buffer{};
   VkDeviceMemory memory{};
@@ -339,13 +338,13 @@ class TerminatedState;
 }  // namespace engine
 
 class Window;
-class VulkanDriver : public DriverBase {
+class Driver : public DriverBase {
   friend class Runtime;
   friend class LuaState;
   friend class DriverBase;
   friend class engine::InitState;
   friend class engine::TerminatedState;
-  DEFINE_NON_COPYABLE_TYPE(VulkanDriver);
+  DEFINE_NON_COPYABLE_TYPE(Driver);
 
  private:
   VkApplicationInfo app_info_{};
@@ -366,7 +365,7 @@ class VulkanDriver : public DriverBase {
   VkDebugUtilsMessengerEXT debug_{};
 #endif  // PRT_DEBUG
 
-  VulkanDriver();
+  Driver();
   void InitApplicationInfo();
   void InitInstance();
   void InitPhysicalDevice();
@@ -377,7 +376,7 @@ class VulkanDriver : public DriverBase {
 #endif  // PRT_DEBUG
 
  public:
-  ~VulkanDriver();
+  ~Driver();
 
   auto GetApplicationInfo() const -> VkApplicationInfo {
     return app_info_;
@@ -432,9 +431,9 @@ class VulkanDriver : public DriverBase {
   void WaitDeviceIdle();
 
  private:
-  static inline auto New() -> VulkanDriver* {
+  static inline auto New() -> Driver* {
     ASSERT(!DriverBase::IsInitialized());
-    return new VulkanDriver();
+    return new Driver();
   }
 
  public:
@@ -483,6 +482,9 @@ static inline auto NewImageView(const Driver* driver, const VkImage& image, cons
            "failed to create vk image view");
   return view;
 }
+
+void InitFramebuffers(const Driver* driver, const VkRenderPass& pass, const std::vector<VkImageView>& views,
+                      const VkExtent2D& extent, std::vector<VkFramebuffer>& framebuffers);
 }  // namespace vk
 }  // namespace prt
 

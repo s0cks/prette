@@ -14,7 +14,6 @@
     "harfbuzz",
     "leveldb",
     "libuv",
-    "nuklear",
     "rapidjson",
     "rxcpp",
     "lua",
@@ -39,6 +38,7 @@
         "vulkan-binding"
       ]
     },
-    "implot"
+    "implot",
+    "libconfig"
   ]
 }

@@ -8,10 +8,13 @@
 #include <stdexcept>
 #include <termcolor/termcolor.hpp>
 
+#include "prette/config.h"
 #include "prette/engine.h"
 #include "prette/gui.h"
 #include "prette/os_thread.h"
+#include "prette/registry.h"
 #include "prette/renderer.h"
+#include "prette/scene_renderer.h"
 #include "prette/signals.h"
 #include "prette/test_generated.h"
 #include "prette/window.h"
@@ -28,18 +31,20 @@ auto main(int argc, char** argv) -> int {
   // ::google::InstallPrefixFormatter(&MyPrefixFormatter);
   ::google::InitGoogleLogging(argv[0]);
   ::google::ParseCommandLineFlags(&argc, &argv, true);
-
   srand(time(nullptr));
   InitSignalHandlers();
   std::set_terminate(OnUnhandledException);
   LOG_IF(FATAL, !SetCurrentThreadName("main")) << "failed to set main thread name.";
+  Config::Load();
   gfx::Init();
   LuaState::Init();
   Window::Init();
   Engine::Init();
   Driver::Init();
-  Renderer::Init();
+  GuiRenderer::Init();
+  SceneRenderer::Init();
   gui::Init();
+  Renderer::Init();
   const auto engine = Engine::Get();
   ASSERT(engine);
   return engine->Run();

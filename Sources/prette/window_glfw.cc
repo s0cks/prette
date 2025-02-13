@@ -207,12 +207,7 @@ void WindowBuilder::SetGraphicsSwitching(const bool value) {
 #endif
 
 auto WindowBuilder::Build() const -> Window* {
-#ifdef PRT_VK
   glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-#else
-#error "Unsupported Graphics Library"
-#endif
-
 #ifdef __APPLE__
   glfwWindowHintString(GLFW_COCOA_FRAME_NAME, title_.data());
 #endif

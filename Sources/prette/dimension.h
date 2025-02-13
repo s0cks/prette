@@ -118,14 +118,12 @@ class Dimension {
     return stream << rhs.width() << "x" << rhs.height();
   }
 
-#ifdef PRT_VK
   operator VkExtent2D() const {
     return VkExtent2D{
         .width = width(),
         .height = height(),
     };
   }
-#endif  // PRT_VK
 };
 
 static constexpr const uint64_t kDefaultDimensionParserBufferSize = 4096;

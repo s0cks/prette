@@ -21,4 +21,6 @@ void Shutdown();
 auto Update(const glm::u32vec2& size) -> bool;
 }  // namespace prt::gui
 
+#include "prette/gui_renderer.h"
+
 #endif  // PRT_GUI_H
