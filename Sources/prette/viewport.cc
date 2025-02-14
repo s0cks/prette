@@ -7,6 +7,7 @@
 #include "prette/gfx_vk.h"
 #include "prette/renderer.h"
 #include "prette/shader.h"
+#include "prette/swapchain.h"
 
 namespace prt {
 static std::vector<VkImage> images_{};
@@ -23,7 +24,7 @@ static std::vector<VkCommandBuffer> command_buffers_{};
 void Viewport::InitRenderPass(const Driver* driver) {
   std::array<VkAttachmentDescription, 1> attachments = {};
   // Color attachment
-  attachments[0].format = Renderer::GetFormat();
+  attachments[0].format = SwapChain::GetFormat();
   attachments[0].samples = VK_SAMPLE_COUNT_1_BIT;
   attachments[0].loadOp = VK_ATTACHMENT_LOAD_OP_CLEAR;
   attachments[0].storeOp = VK_ATTACHMENT_STORE_OP_STORE;
@@ -210,7 +211,7 @@ void Viewport::InitImageViews(const Driver* driver) {
 
 void Viewport::InitFramebuffers(const Driver* driver) {
   ASSERT(driver);
-  vk::InitFramebuffers(driver, pass_, views_, Renderer::GetExtent(), framebuffers_);
+  vk::InitFramebuffers(driver, pass_, views_, SwapChain::GetExtent(), framebuffers_);
 }
 
 void Viewport::Init() {}

@@ -428,16 +428,13 @@ class Driver : public DriverBase {
   }
 #endif  // PRT_DEBUG
 
-  void WaitDeviceIdle();
+  void WaitDeviceIdle() const;
 
  private:
   static inline auto New() -> Driver* {
     ASSERT(!DriverBase::IsInitialized());
     return new Driver();
   }
-
- public:
-  static void Init();
 };
 
 class SingleUseCommandBuffer {

@@ -16,6 +16,7 @@
 #include "prette/renderer.h"
 #include "prette/scene_renderer.h"
 #include "prette/signals.h"
+#include "prette/swapchain.h"
 #include "prette/test_generated.h"
 #include "prette/window.h"
 
@@ -41,10 +42,11 @@ auto main(int argc, char** argv) -> int {
   Window::Init();
   Engine::Init();
   Driver::Init();
-  GuiRenderer::Init();
-  SceneRenderer::Init();
   gui::Init();
   Renderer::Init();
+  SwapChain::Init();
+  SceneRenderer::Init();
+  GuiRenderer::Init();
   const auto engine = Engine::Get();
   ASSERT(engine);
   return engine->Run();

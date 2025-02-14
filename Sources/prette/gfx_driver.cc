@@ -48,6 +48,12 @@ auto DriverInitEvent::ToString() const -> std::string {
   return helper;
 }
 
+auto DestroyingDriverEvent::ToString() const -> std::string {
+  ToStringHelper<DestroyingDriverEvent> helper{};
+  helper.AddFieldRef("driver", GetDriver());
+  return helper;
+}
+
 auto DriverDestroyedEvent::ToString() const -> std::string {
   return ToStringHelper<DriverDestroyedEvent>{};
 }
@@ -75,7 +81,8 @@ static inline auto SetDriver(Driver* driver) -> Driver* {
 
 void DriverBase::DestroyDriver() {
   ASSERT(driver_);
-  DLOG(INFO) << "destroying driver....";
+  driver_->WaitDeviceIdle();
+  Publish<DestroyingDriverEvent>(driver_);
   delete driver_;
   Publish<DriverDestroyedEvent>();
 }

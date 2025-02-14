@@ -7,6 +7,7 @@
 #include "prette/lua.h"
 #include "prette/renderer.h"
 #include "prette/scene_renderer.h"
+#include "prette/swapchain.h"
 #include "prette/to_string.h"
 #include "prette/window.h"
 
@@ -375,8 +376,7 @@ void Driver::InitApplicationInfo() {
   app_info_.apiVersion = VK_API_VERSION_1_3;
 }
 
-void Driver::WaitDeviceIdle() {
-  DLOG(INFO) << "waiting for idle...";
+void Driver::WaitDeviceIdle() const {
   vkDeviceWaitIdle(device_);
 }
 
@@ -461,18 +461,6 @@ Driver::~Driver() {
   DestroyDebugUtilsMessengerEXT(instance_, debug_);
 #endif  // PRT_DEBUG
   vkDestroyInstance(instance_, allocator_);
-}
-
-void Driver::Init() {
-  DriverBase::Init();
-  const auto engine = Engine::Get();
-  ASSERT(engine);
-  engine::OnTerminatingEvent().subscribe([](engine::TerminatingEvent* event) {
-    ASSERT(event);
-    const auto driver = Driver::Get();
-    ASSERT(driver);
-    driver->WaitDeviceIdle();
-  });
 }
 
 void SingleUseCommandBuffer::Allocate(const VkDevice& device, const VkCommandPool& command_pool, VkCommandBuffer& buffer) {

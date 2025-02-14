@@ -187,7 +187,6 @@ ENGINE_STATE_TICK_F(Terminated) {
 }
 
 ENGINE_STATE_EXIT_F(Terminated) {
-  glfwTerminate();
   Publish<TerminatedEvent>(engine);
 }
 

@@ -47,14 +47,12 @@ FOR_EACH_GUI_RENDERER_EVENT(DEFINE_ON_EVENT)
 class Driver;
 class GuiRenderer {
  private:
-  static void InitPipeline(const Driver* driver);
   static void InitFramebuffers(const Driver* driver);
   static void InitRenderPass(const Driver* driver);
   static void InitCommandPool(const Driver* driver);
   static void InitCommandBuffers(const Driver* driver);
   static void InitDescriptorPool(const Driver* driver);
-  static void InitSceneDescriptors(const Driver* driver);
-  static void InitTextureSampler(const Driver* driver);
+  static void InitSampler(const Driver* driver);
 
   static void Destroy(const Driver* driver, const bool is_reinit);
 

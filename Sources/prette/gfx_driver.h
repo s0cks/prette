@@ -11,6 +11,7 @@ namespace prt {
   V(DeviceInit)                  \
   V(SurfaceInit)                 \
   V(DriverInit)                  \
+  V(DestroyingDriver)            \
   V(DriverDestroyed)
 
 class Driver;
@@ -91,6 +92,14 @@ class DriverInitEvent : public DriverEventBase {
     DriverEventBase(driver) {}
   ~DriverInitEvent() override = default;
   DECLARE_EVENT_TYPE(DriverEvent, DriverInit);
+};
+
+class DestroyingDriverEvent : public DriverEventBase {  // TODO: rename
+ public:
+  explicit DestroyingDriverEvent(const Driver* driver) :
+    DriverEventBase(driver) {}
+  ~DestroyingDriverEvent() override = default;
+  DECLARE_EVENT_TYPE(DriverEvent, DestroyingDriver);
 };
 
 class DriverDestroyedEvent : public DriverEvent {
