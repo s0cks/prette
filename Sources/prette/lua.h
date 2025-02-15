@@ -85,8 +85,13 @@ class LuaState {
     return root_;
   }
 
+  auto GetScriptPath(const std::string& filename) const -> std::filesystem::path {
+    return GetRoot() / filename;
+  }
+
   void ExecuteCode(const std::string& code);
   void ExecuteScript(const std::string& path);
+  void ExecuteGlobalFunction(const std::string& global, const std::string& func);
 
  private:
   static auto New(const std::filesystem::path& root) -> LuaState*;

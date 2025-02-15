@@ -18,7 +18,7 @@ struct TickStats {
 
 class TickProfiler {
  public:
-  static constexpr const auto kTickProfilerMaxCount = 1000;
+  static constexpr const auto kTickProfilerMaxCount = 10;
   static constexpr const auto kTickProfilerRate = std::chrono::seconds(1);
   DEFINE_NON_COPYABLE_TYPE(TickProfiler);
 
@@ -51,14 +51,13 @@ class TickProfiler {
   static inline auto min_or(const Container& container, const T default_value) -> T {
     if (container.empty())
       return default_value;
-    const auto max_pos = std::ranges::max_element(container);
+    const auto max_pos = std::ranges::min_element(container);
     return max_pos != std::end(container) ? (*max_pos) : default_value;
   }
 
  public:
   explicit TickProfiler(rx::observable<uint64_t> deltas) {
-    on_delta_ = deltas.buffer_with_time_or_count(kTickProfilerRate, kTickProfilerMaxCount, rx::observe_on_new_thread())
-                    .skip(3)
+    on_delta_ = deltas.buffer(kTickProfilerMaxCount)
                     .map([this](std::vector<uint64_t> deltas) {
                       const auto avg = Average(deltas);
                       const auto min = static_cast<double>(min_or(deltas, 0));

@@ -8,21 +8,30 @@
 #include <vulkan/vulkan_core.h>
 
 #include <cstdint>
+#include <rx-coordination.hpp>
 #include <vector>
 
 #include "prette/engine.h"
 #include "prette/flags.h"
 #include "prette/gfx.h"
 #include "prette/gfx_driver.h"
+#include "prette/gui_debug.h"
 #include "prette/gui_renderer.h"
+#include "prette/gui_viewport.h"
+#include "prette/lua.h"
 #include "prette/mouse.h"
 #include "prette/renderer.h"
 #include "prette/series.h"
 #include "prette/shader.h"
-#include "prette/swapchain.h"
 #include "prette/window.h"
 
-namespace prt::gui {
+namespace prt {
+Gui::Gui(std::string name) :
+  name_(std::move(name)) {}
+
+Gui::~Gui() {}
+
+namespace gui {
 struct VkFont {
   VkImage image{};
   VkDeviceMemory memory{};
@@ -358,15 +367,7 @@ class Texture {
   std::string m_name = "default_texture_name";
 };
 
-static size_t kRenderTarget = 0;
-static std::array<uint64_t, 10> tickseries_ = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-static TimeSeries<> tpsseries_{};
-static TimeSeries<> deltaseries_{};
-
-static inline auto TimeFormatter(double value, char* buff, int size, void*) -> int {
-  const auto str = units::time::to_string(units::time::millisecond_t(value));
-  return snprintf(buff, size, "%s", str.c_str());
-}
+static std::vector<Gui*> guis_{};
 
 auto Update(const glm::u32vec2& size) -> bool {
   auto& io = ImGui::GetIO();
@@ -374,46 +375,11 @@ auto Update(const glm::u32vec2& size) -> bool {
   ImGui_ImplGlfw_NewFrame();
   ImGui::NewFrame();
 
-  ImGui::SetNextWindowPos({0, 0}, ImGuiCond_FirstUseEver);
-  ImGui::SetNextWindowSize(ImVec2(size.x, size.y), ImGuiCond_FirstUseEver);
-  ImGui::Begin("Viewport");
-  ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
-  ImGui::Image(GuiRenderer::GetSceneDescriptor(SwapChain::GetCurrentFrame().frame),
-               ImVec2{viewportPanelSize.x, viewportPanelSize.y});
-  ImGui::End();
-
-  ImGui::SetNextWindowPos(ImVec2{0, 0});
-  ImGui::SetNextWindowSize(ImVec2{size.x / 4, size.y});
-  ImGui::Begin("Tools");
-  const auto target_items = std::array<const char*, 2>{
-      "Full Scene",
-      "Test",
-  };
-  if (ImGui::BeginCombo("Target", target_items.at(kRenderTarget), ImGuiComboFlags_HeightSmall)) {
-    for (auto idx = 0; idx < target_items.size(); idx++) {
-      const auto is_selected = (kRenderTarget == idx);
-      if (ImGui::Selectable(target_items.at(idx), is_selected)) {
-        kRenderTarget = idx;
-      }
-      if (is_selected) {
-        ImGui::SetItemDefaultFocus();
-      }
-    }
-    ImGui::EndCombo();
+  for (const auto& gui : guis_) {
+    gui->Update();
+    gui->Render();
   }
 
-  if (ImPlot::BeginPlot("Profiler")) {
-    ImPlot::SetupAxis(ImAxis_Y1, "Ticks", ImPlotAxisFlags_Opposite);
-    ImPlot::SetupAxisLimits(ImAxis_Y1, 0, 50);
-    ImPlot::SetupAxis(ImAxis_Y2, "Time (ms)");
-    ImPlot::SetupAxisFormat(ImAxis_Y2, TimeFormatter);
-    ImPlot::SetupAxisLimits(ImAxis_Y2, 0, 50);
-
-    ImPlot::PlotLine("Ticks Per Second", tickseries_.begin(), tpsseries_.begin(), 10);
-    ImPlot::PlotLine("Time Since Last Tick", tickseries_.begin(), deltaseries_.begin(), 10);
-    ImPlot::EndPlot();
-  }
-  ImGui::End();
   ImGui::Render();
   return true;
 }
@@ -423,11 +389,6 @@ static void Destroy(const Driver* driver) {
 }
 
 void Init() {
-  engine::OnTickEvent().subscribe([](engine::TickEvent* event) {
-    ASSERT(event);
-    tpsseries_.Append(Engine::Get()->GetTicksPerSecond().per_sec());
-    deltaseries_.Append(event->GetTimeSinceLast().value() / 1000000);
-  });
   OnDriverInitEvent().subscribe([](DriverInitEvent* event) {
     ASSERT(event);
     IMGUI_CHECKVERSION();
@@ -436,6 +397,11 @@ void Init() {
     const auto window = GetAppWindow();
     ASSERT(window);
     ImGui_ImplGlfw_InitForVulkan(window->GetHandle(), true);
+  });
+  engine::OnPostInitEvent().subscribe([](engine::PostInitEvent* event) {
+    ASSERT(event);
+    guis_.push_back(new GuiViewport());
+    guis_.push_back(new GuiDebug());
   });
   engine::OnTickEvent().subscribe([](engine::TickEvent* event) {
     ASSERT(event);
@@ -455,5 +421,8 @@ void Init() {
     ImPlot::DestroyContext();
     ImGui::DestroyContext();
   });
+  GuiViewport::Init();
+  GuiDebug::Init();
 }
-}  // namespace prt::gui
+}  // namespace gui
+}  // namespace prt

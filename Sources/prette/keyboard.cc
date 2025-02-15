@@ -4,7 +4,10 @@
 #include <lauxlib.h>
 #include <lua.h>
 
+#include <filesystem>
+
 #include "prette/common.h"
+#include "prette/engine.h"
 #include "prette/lua.h"
 #include "prette/to_string.h"
 #include "prette/window.h"
@@ -23,8 +26,8 @@ auto OnKeyboardEvent() -> KeyboardEventObservable {
   return all_events.get_observable();
 }
 
-auto KeyboardCreatedEvent::ToString() const -> std::string {
-  ToStringHelper<KeyboardCreatedEvent> helper{};
+auto KeyboardInitEvent::ToString() const -> std::string {
+  ToStringHelper<KeyboardInitEvent> helper{};
   helper.AddFieldPtr("keyboard", GetKeyboard());
   return helper;
 }
@@ -42,6 +45,9 @@ void KeyStateEvent::ToTable(lua_State* L) const {
 
   lua_pushstring(L, GetKey());
   lua_setfield(L, -2, "key");
+
+  lua_pushnumber(L, GetMods());
+  lua_setfield(L, -2, "mods");
 }
 
 auto KeyStateEvent::ToString() const -> std::string {
@@ -110,7 +116,7 @@ auto Keyboard::New(Window* owner) -> Keyboard* {
   ASSERT(owner);
   const auto keyboard = new Keyboard(owner);
   ASSERT(keyboard);
-  keyboard->PublishKeyboardCreatedEvent();
+  keyboard->Publish<KeyboardInitEvent>(keyboard);
   return keyboard;
 }
 
@@ -119,12 +125,11 @@ auto Keyboard::Get() -> Keyboard* {
   return keyboard_;
 }
 
-auto Keyboard::Init(Window* window) -> Keyboard* {
+void Keyboard::Init(Window* window) {
   ASSERT(window);
   const auto keyboard = SetKeyboard(Keyboard::New(window));
   ASSERT(keyboard);
   window->SetKeyboard(keyboard);
-  return keyboard;
 }
 
 #define LUA_KEYBOARD_F(Name) LUA_F(keyboard_##Name)
@@ -157,6 +162,33 @@ static inline auto CheckKeyCode(lua_State* L, const int index) -> int {
   return lua_tonumber(L, index);
 }
 
+LUA_KEYBOARD_F(isPressed) {
+  const auto code = CheckKeyCode(L, 1);
+  const auto keyboard = Keyboard::Get();
+  ASSERT(keyboard);
+  const auto state = keyboard->GetKey(code);
+  lua_pushboolean(L, state.IsPressed());
+  return 1;
+}
+
+LUA_KEYBOARD_F(isReleased) {
+  const auto code = CheckKeyCode(L, 1);
+  const auto keyboard = Keyboard::Get();
+  ASSERT(keyboard);
+  const auto state = keyboard->GetKey(code);
+  lua_pushboolean(L, state.IsReleased());
+  return 1;
+}
+
+LUA_KEYBOARD_F(isRepeat) {
+  const auto code = CheckKeyCode(L, 1);
+  const auto keyboard = Keyboard::Get();
+  ASSERT(keyboard);
+  const auto state = keyboard->GetKey(code);
+  lua_pushboolean(L, state.IsRepeat());
+  return 1;
+}
+
 LUA_KEYBOARD_F(onPressed) {
   OnKeyPressed(CheckKeyCode(L, 1)).subscribe(CreateSubscriber<KeyStateEvent>(L, 2));
   return 0;
@@ -178,6 +210,9 @@ static const struct luaL_Reg kKeyboardLib[] = {
 LUA_KEYBOARD_F(onEvent),
 LUA_KEYBOARD_F(onPressed),
 LUA_KEYBOARD_F(onReleased),
+LUA_KEYBOARD_F(isPressed),
+LUA_KEYBOARD_F(isReleased),
+LUA_KEYBOARD_F(isRepeat),
 #define DEFINE_ON_EVENT(Name) \
   LUA_KEYBOARD_F(on##Name##Event),
   FOR_EACH_KEYBOARD_EVENT(DEFINE_ON_EVENT)

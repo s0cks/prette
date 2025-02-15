@@ -234,11 +234,6 @@ Engine::Engine() :
   tick_profiler_(CreateTickDeltaObservable(this)),
 #endif  // PRT_DEBUG
   state_(nullptr) {
-#ifdef PRT_DEBUG
-  OnTickProfilerStats().subscribe(([this](const TickStats stats) {
-    DLOG(INFO) << "tps: " << GetTicksPerSecond().per_sec() << "; rate=" << stats;
-  }));
-#endif  // PRT_DEBUG
 }
 
 Engine::~Engine() {

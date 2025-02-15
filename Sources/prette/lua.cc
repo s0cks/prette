@@ -142,6 +142,17 @@ void LuaState::ExecuteScript(const std::string& path) {
   lua_pop(L, lua_gettop(L));
 }
 
+void LuaState::ExecuteGlobalFunction(const std::string& global, const std::string& func) {
+  ASSERT(!global.empty());
+  ASSERT(!func.empty());
+  lua_getglobal(L, global.c_str());
+  lua_getfield(L, -1, func.c_str());
+  if (lua_type(L, -1) == LUA_TFUNCTION) {
+    lua_call(L, 0, 0);
+  }
+  lua_pop(L, lua_gettop(L));
+}
+
 #undef L
 
 static LuaState* state = nullptr;

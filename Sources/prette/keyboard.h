@@ -83,7 +83,7 @@ class KeyState {
 };
 
 #define FOR_EACH_KEYBOARD_EVENT(V) \
-  V(KeyboardCreated)               \
+  V(KeyboardInit)                  \
   V(KeyState)                      \
   V(KeyboardDestroyed)
 
@@ -121,12 +121,12 @@ class KeyboardEventBase : public KeyboardEvent {
   }
 };
 
-class KeyboardCreatedEvent : public KeyboardEventBase {
+class KeyboardInitEvent : public KeyboardEventBase {
  public:
-  explicit KeyboardCreatedEvent(const Keyboard* keyboard) :
+  explicit KeyboardInitEvent(const Keyboard* keyboard) :
     KeyboardEventBase(keyboard) {}
-  ~KeyboardCreatedEvent() override = default;
-  DECLARE_EVENT_TYPE(KeyboardEvent, KeyboardCreated);
+  ~KeyboardInitEvent() override = default;
+  DECLARE_EVENT_TYPE(KeyboardEvent, KeyboardInit);
 };
 
 class KeyboardDestroyedEvent : public KeyboardEvent {
@@ -254,10 +254,6 @@ class Keyboard : public EventSourceTemplate<KeyboardEvent> {
     return PublishEvent(&event);
   }
 
-  inline void PublishKeyboardCreatedEvent() const {
-    return Publish<KeyboardCreatedEvent>(this);
-  }
-
  public:
   Keyboard(Window* owner);
   ~Keyboard() override;
@@ -278,8 +274,8 @@ class Keyboard : public EventSourceTemplate<KeyboardEvent> {
   static void InitLua(lua_State* L);
 
  public:
+  static void Init(Window* window);
   static auto IsInitialized() -> bool;
-  static auto Init(Window* window) -> Keyboard*;
   static auto Get() -> Keyboard*;
 };
 }  // namespace prt

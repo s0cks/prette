@@ -1,3 +1,4 @@
+#include <GLFW/glfw3.h>
 #include <glog/logging.h>
 #include <units.h>
 #include <uv.h>
@@ -11,6 +12,7 @@
 #include "prette/config.h"
 #include "prette/engine.h"
 #include "prette/gui.h"
+#include "prette/keyboard.h"
 #include "prette/os_thread.h"
 #include "prette/registry.h"
 #include "prette/renderer.h"
