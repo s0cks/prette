@@ -128,7 +128,7 @@ class Renderer {
 
  private:
   static void InitResizeListener();
-  static void InitCommandPool(const Driver* driver);
+  static void InitCommandBuffers(const Driver* driver);
   static void Destroy();
 
  private:
@@ -136,7 +136,6 @@ class Renderer {
 
  public:
   static void Init();
-  static auto GetCommandPool() -> VkCommandPool const&;
   static void DrawFrame(Driver* driver, const Tick& current, const Tick& previous);
 };
 }  // namespace prt

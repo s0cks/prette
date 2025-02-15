@@ -1,6 +1,8 @@
 #ifndef PRT_PIPELINE_H
 #define PRT_PIPELINE_H
 
+#include <vulkan/vulkan_core.h>
+
 #include "prette/common.h"
 #include "prette/gfx.h"
 
@@ -15,12 +17,14 @@ class GraphicsPipeline {
   VkPipelineLayout layout_ = VK_NULL_HANDLE;
   VkPipelineCache cache_ = VK_NULL_HANDLE;
 
-  void Init(const Driver* driver, const std::vector<VkDynamicState>& dynamic_states);
+  void Init(const Driver* driver, const std::string& shader, const std::vector<VkDynamicState>& dynamic_states,
+            const std::vector<VkDescriptorSetLayout>& descriptor_set_layouts);
 
  public:
   GraphicsPipeline() = default;
-  explicit GraphicsPipeline(const Driver* driver, const VkRenderPass pass, const std::vector<VkDynamicState>& dynamic_states,
-                            const VkExtent2D& extent);
+  explicit GraphicsPipeline(const Driver* driver, const std::string& shader, const VkRenderPass pass,
+                            const std::vector<VkDynamicState>& dynamic_states, const VkExtent2D& extent,
+                            const std::vector<VkDescriptorSetLayout>& descriptor_set_layouts);
   ~GraphicsPipeline() = default;
 
   auto Get() const -> VkPipeline const& {

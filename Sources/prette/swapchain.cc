@@ -137,7 +137,7 @@ void SwapChain::InitPipeline(const Driver* driver) {
       VK_DYNAMIC_STATE_VIEWPORT,
       VK_DYNAMIC_STATE_SCISSOR,
   };
-  pipeline_ = GraphicsPipeline(driver, pass_, dynamic_states, SwapChain::GetExtent());
+  pipeline_ = GraphicsPipeline(driver, "swapchain", pass_, dynamic_states, SwapChain::GetExtent(), {});
 }
 
 void SwapChain::InitDescriptorSets(const Driver* driver, const uint64_t num_sets) {

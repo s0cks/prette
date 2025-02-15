@@ -3,6 +3,9 @@
 #include <imgui_impl_vulkan.h>
 #include <vulkan/vulkan_core.h>
 
+#include <glm/ext/matrix_clip_space.hpp>
+
+#include "prette/camera.h"
 #include "prette/engine.h"
 #include "prette/gfx.h"
 #include "prette/gfx_driver.h"
@@ -20,7 +23,6 @@
 namespace prt {
 static RendererEventSubject events_{};
 static RelaxedAtomic<bool> resized_(false);
-static VkCommandPool command_pool_{};
 static std::vector<VkCommandBuffer> command_buffers_{};
 
 static inline void PublishRendererEvent(RendererEvent* event) {
@@ -59,6 +61,18 @@ auto RendererDestroyedEvent::ToString() const -> std::string {
   return helper;
 }
 
+void Renderer::InitCommandBuffers(const Driver* driver) {
+  ASSERT(driver);
+  command_buffers_.resize(SwapChain::GetNumberOfImages());
+  VkCommandBufferAllocateInfo alloc_info{};
+  alloc_info.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
+  alloc_info.commandPool = driver->GetCommandPool();
+  alloc_info.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
+  alloc_info.commandBufferCount = command_buffers_.size();
+  CHECK_VK(FATAL, vkAllocateCommandBuffers(driver->GetDevice(), &alloc_info, command_buffers_.data()),
+           "failed to allocate vk command buffers");
+}
+
 void Renderer::InitResizeListener() {
   const auto window = GetAppWindow();
   ASSERT(window);
@@ -66,10 +80,6 @@ void Renderer::InitResizeListener() {
     ASSERT(event);
     resized_ = true;
   });
-}
-
-auto Renderer::GetCommandPool() -> VkCommandPool const& {
-  return command_pool_;
 }
 
 void Renderer::DrawFrame(Driver* driver, const Tick& current, const Tick& previous) {
@@ -125,6 +135,20 @@ void Renderer::DrawFrame(Driver* driver, const Tick& current, const Tick& previo
   SceneRenderer::Draw(frame.frame, frame.image, cmd_buffers);
   GuiRenderer::Draw(frame.frame, frame.image, cmd_buffers);
 
+  {
+    // update camera
+    CameraData data{};
+    data.model = glm::mat4(1.0f);
+    data.model = glm::rotate(data.model, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+    data.view = glm::lookAt(glm::vec3(2.0f, 2.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+    const auto& extent = SwapChain::GetExtent();
+    data.projection = glm::perspective(glm::radians(45.0f), static_cast<float>(extent.width / extent.height), 0.1f, 10.0f);
+    data.projection[1][1] *= -1;
+    const auto buffer = SceneRenderer::GetCameraBuffer(frame.frame);
+    ASSERT(buffer);
+    buffer->CopyFromBytes(&data, sizeof(CameraData));
+  }
+
   // post frame
   SwapChain::Submit(driver, cmd_buffers);
   SwapChain::Present(driver);
@@ -171,38 +195,11 @@ void Renderer::InitLua(lua_State* L) {
   lua_setglobal(L, "Renderer");
 }
 
-void Renderer::InitCommandPool(const Driver* driver) {
-  const auto indices = FindQueueFamilies(driver->GetPhysicalDevice(), driver->GetSurface());
-  VkCommandPoolCreateInfo create_info{};
-  create_info.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
-  create_info.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
-  create_info.queueFamilyIndex = indices.GetGraphicsFamily();
-  CHECK_VK(FATAL, vkCreateCommandPool(driver->GetDevice(), &create_info, driver->GetAllocator(), &command_pool_),
-           "failed to create vk command pool");
-
-  command_buffers_.resize(SwapChain::GetNumberOfImages());
-  VkCommandBufferAllocateInfo alloc_info{};
-  alloc_info.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
-  alloc_info.commandPool = command_pool_;
-  alloc_info.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
-  alloc_info.commandBufferCount = command_buffers_.size();
-  CHECK_VK(FATAL, vkAllocateCommandBuffers(driver->GetDevice(), &alloc_info, command_buffers_.data()),
-           "failed to allocate vk command buffers");
-}
-
 void Renderer::Init() {
   OnSwapChainInitEvent().subscribe([](SwapChainInitEvent* event) {
     const auto driver = Driver::Get();
     ASSERT(driver);
-    // renderer
-    try {
-      InitCommandPool(driver);
-    } catch (const std::exception& exc) {
-      LOG(ERROR) << "an exception has occured:";
-      CrashReport report(CrashReportCause::New(std::current_exception()));
-      report.Print(std::cerr);
-      LOG(FATAL) << "";
-    }
+    InitCommandBuffers(driver);
     InitResizeListener();
     Publish<RendererInitEvent>();
   });
@@ -214,8 +211,7 @@ void Renderer::Init() {
 void Renderer::Destroy() {
   const auto driver = Driver::Get();
   ASSERT(driver);
-  vkFreeCommandBuffers(driver->GetDevice(), command_pool_, command_buffers_.size(), command_buffers_.data());
-  vkDestroyCommandPool(driver->GetDevice(), command_pool_, driver->GetAllocator());
+  vkFreeCommandBuffers(driver->GetDevice(), driver->GetCommandPool(), command_buffers_.size(), command_buffers_.data());
   Publish<RendererDestroyedEvent>();
 }
 }  // namespace prt

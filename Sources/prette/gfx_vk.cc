@@ -106,9 +106,8 @@ void Buffer::CopyDataToImageWithStaging(const VkImage& image, const uint8_t* dat
                                         const std::vector<VkBufferImageCopy>& regions) {
   StagingBufferScope staging(num_bytes);
   staging.CopyFrom(data, num_bytes);
-
-  SingleUseCommandBuffer cmds(Renderer::GetCommandPool());
-  vkCmdCopyBufferToImage(cmds, staging, image, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, static_cast<uint32_t>(regions.size()),
+  SingleUseCommandBuffer buffer;
+  vkCmdCopyBufferToImage(buffer, staging, image, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, static_cast<uint32_t>(regions.size()),
                          regions.data());
 }
 
@@ -129,7 +128,7 @@ void Buffer::CopyFromBytes(const void* data, const uint64_t num_bytes, const boo
 }
 
 void Buffer::CopyFromBuffer(const VkBuffer& src, const VkDeviceSize num_bytes) {
-  SingleUseCommandBuffer buffer(SceneRenderer::GetCommandPool());
+  SingleUseCommandBuffer buffer;
   VkBufferCopy copy{};
   copy.size = num_bytes;
   vkCmdCopyBuffer(buffer, src, buffer_, 1, &copy);
@@ -404,6 +403,16 @@ void Driver::InitInstance() {
   Publish<InstanceInitEvent>(this);
 }
 
+void Driver::InitCommandPool() {
+  const auto indices = FindQueueFamilies(GetPhysicalDevice(), GetSurface());
+  VkCommandPoolCreateInfo create_info{};
+  create_info.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
+  create_info.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
+  create_info.queueFamilyIndex = indices.GetGraphicsFamily();
+  CHECK_VK(FATAL, vkCreateCommandPool(GetDevice(), &create_info, GetAllocator(), &command_pool_),
+           "failed to create vk command pool");
+}
+
 void Driver::InitLogicalDevice(const float priority) {
   const auto indices = FindQueueFamilies(physical_device_, surface_);
   std::unordered_set<uint32_t> unique_families{};
@@ -452,9 +461,11 @@ Driver::Driver() {
   InitSurface();
   InitPhysicalDevice();
   InitLogicalDevice(1.0f);
+  InitCommandPool();
 }
 
 Driver::~Driver() {
+  vkDestroyCommandPool(device_, command_pool_, allocator_);
   vkDestroySurfaceKHR(instance_, surface_, allocator_);
   vkDestroyDevice(device_, allocator_);
 #ifdef PRT_DEBUG
@@ -510,11 +521,10 @@ static inline void DestroyCommandBuffer(const VkDevice& device, const VkCommandP
   vkFreeCommandBuffers(device, command_pool, 1, &buffer);
 }
 
-SingleUseCommandBuffer::SingleUseCommandBuffer(const VkCommandPool& pool) :
-  pool_(pool) {
+SingleUseCommandBuffer::SingleUseCommandBuffer() {
   const auto driver = Driver::Get();
   ASSERT(driver);
-  Allocate(driver->GetDevice(), pool_, buffer_);
+  Allocate(driver->GetDevice(), driver->GetCommandPool(), buffer_);
   Start(buffer_);
 }
 
@@ -523,6 +533,6 @@ SingleUseCommandBuffer::~SingleUseCommandBuffer() {
   ASSERT(driver);
   CHECK_VK(FATAL, vkEndCommandBuffer(buffer_), "failed to end vk command buffer");
   Submit(driver->GetDevice(), driver->GetGraphicsQueue(), buffer_, driver->GetAllocator());
-  Destroy(driver->GetDevice(), pool_, buffer_);
+  Destroy(driver->GetDevice(), driver->GetCommandPool(), buffer_);
 }
 }  // namespace prt

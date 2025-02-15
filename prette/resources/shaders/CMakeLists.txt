@@ -1,9 +1,11 @@
 include(Vulkan)
-add_shader_target(test-shader ${CMAKE_CURRENT_SOURCE_DIR}/test.vert ${CMAKE_CURRENT_SOURCE_DIR}/test.frag)
+add_shader_target(swapchain-shader ${CMAKE_CURRENT_SOURCE_DIR}/swapchain.vert ${CMAKE_CURRENT_SOURCE_DIR}/swapchain.frag)
+add_shader_target(scene-shader ${CMAKE_CURRENT_SOURCE_DIR}/scene.vert ${CMAKE_CURRENT_SOURCE_DIR}/scene.frag)
 add_shader_target(gui-shader ${CMAKE_CURRENT_SOURCE_DIR}/gui.vert ${CMAKE_CURRENT_SOURCE_DIR}/gui.frag)
 
 add_custom_target(shaders ALL
   DEPENDS
-    test-shader
+    scene-shader
+    swapchain-shader
     gui-shader
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})

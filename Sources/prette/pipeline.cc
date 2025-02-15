@@ -118,13 +118,13 @@ static inline void InitColorBlendAttachment(VkPipelineColorBlendAttachmentState&
   color_blend_attachment.alphaBlendOp = VK_BLEND_OP_ADD;
 }
 
-void GraphicsPipeline::Init(const Driver* driver, const std::vector<VkDynamicState>& dynamic_states) {
+void GraphicsPipeline::Init(const Driver* driver, const std::string& shader, const std::vector<VkDynamicState>& dynamic_states,
+                            const std::vector<VkDescriptorSetLayout>& descriptor_set_layouts) {
   ASSERT(driver);
   VkPipelineLayoutCreateInfo pipeline_layout{};
   pipeline_layout.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
-  // TODO: implement descriptor sets?
-  pipeline_layout.setLayoutCount = 0;
-  pipeline_layout.pSetLayouts = nullptr;
+  pipeline_layout.setLayoutCount = descriptor_set_layouts.size();
+  pipeline_layout.pSetLayouts = descriptor_set_layouts.data();
   pipeline_layout.pushConstantRangeCount = 0;
   pipeline_layout.pPushConstantRanges = nullptr;
   CHECK_VK(FATAL, vkCreatePipelineLayout(driver->GetDevice(), &pipeline_layout, driver->GetAllocator(), &layout_),
@@ -135,7 +135,7 @@ void GraphicsPipeline::Init(const Driver* driver, const std::vector<VkDynamicSta
 
   VkShaderModule frag_shader{};
   VkPipelineShaderStageCreateInfo frag_stage{};
-  InitShaderStages(driver, "test", vert_shader, vert_stage, frag_shader, frag_stage);
+  InitShaderStages(driver, shader, vert_shader, vert_stage, frag_shader, frag_stage);
   std::array<VkPipelineShaderStageCreateInfo, 2> stages = {
       vert_stage,
       frag_stage,
@@ -160,6 +160,10 @@ void GraphicsPipeline::Init(const Driver* driver, const std::vector<VkDynamicSta
 
   VkPipelineRasterizationStateCreateInfo rasterizer{};
   InitRasterizer(rasterizer);
+  if (shader == "scene") {
+    rasterizer.cullMode = VK_CULL_MODE_BACK_BIT;
+    rasterizer.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE;
+  }
 
   VkPipelineMultisampleStateCreateInfo multisampling{};
   InitMultisampling(multisampling);
@@ -208,10 +212,11 @@ void GraphicsPipeline::Destroy(const Driver* driver) {
   vkDestroyPipeline(driver->GetDevice(), pipeline_, driver->GetAllocator());
 }
 
-GraphicsPipeline::GraphicsPipeline(const Driver* driver, const VkRenderPass pass,
-                                   const std::vector<VkDynamicState>& dynamic_states, const VkExtent2D& extent) :
+GraphicsPipeline::GraphicsPipeline(const Driver* driver, const std::string& shader, const VkRenderPass pass,
+                                   const std::vector<VkDynamicState>& dynamic_states, const VkExtent2D& extent,
+                                   const std::vector<VkDescriptorSetLayout>& descriptor_set_layouts) :
   pass_(pass),
   extent_(extent) {
-  Init(driver, dynamic_states);
+  Init(driver, shader, dynamic_states, descriptor_set_layouts);
 }
 }  // namespace prt

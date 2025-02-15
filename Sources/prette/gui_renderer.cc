@@ -15,10 +15,7 @@
 namespace prt {
 static VkRenderPass pass_{};
 static std::vector<VkFramebuffer> framebuffers_{};
-
-static VkCommandPool command_pool_{};
 static std::array<VkCommandBuffer, MAX_NUMBER_OF_FRAMES_IN_FLIGHT> command_buffers_{};
-
 static VkDescriptorPool descriptor_pool_{};
 static std::vector<VkDescriptorSet> descriptors_{};
 
@@ -39,16 +36,6 @@ template <class E, typename... Args>
 static inline void Publish(Args... args) {
   E event(args...);
   return PublishEvent(&event);
-}
-
-void GuiRenderer::InitCommandPool(const Driver* driver) {
-  const auto indices = FindQueueFamilies(driver->GetPhysicalDevice(), driver->GetSurface());
-  VkCommandPoolCreateInfo create_info{};
-  create_info.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
-  create_info.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
-  create_info.queueFamilyIndex = indices.GetGraphicsFamily();
-  CHECK_VK(FATAL, vkCreateCommandPool(driver->GetDevice(), &create_info, driver->GetAllocator(), &command_pool_),
-           "failed to create vk command pool");
 }
 
 void GuiRenderer::InitSampler(const Driver* driver) {
@@ -76,7 +63,7 @@ void GuiRenderer::InitSampler(const Driver* driver) {
 void GuiRenderer::InitCommandBuffers(const Driver* driver) {
   VkCommandBufferAllocateInfo alloc_info{};
   alloc_info.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
-  alloc_info.commandPool = command_pool_;
+  alloc_info.commandPool = driver->GetCommandPool();
   alloc_info.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
   alloc_info.commandBufferCount = command_buffers_.size();
   CHECK_VK(FATAL, vkAllocateCommandBuffers(driver->GetDevice(), &alloc_info, command_buffers_.data()),
@@ -140,8 +127,7 @@ void GuiRenderer::Destroy(const Driver* driver, const bool is_reinit) {
   if (!is_reinit) {
     vkDestroySampler(driver->GetDevice(), sampler_, driver->GetAllocator());
     vkDestroyDescriptorPool(driver->GetDevice(), descriptor_pool_, driver->GetAllocator());
-    vkFreeCommandBuffers(driver->GetDevice(), command_pool_, command_buffers_.size(), command_buffers_.data());
-    vkDestroyCommandPool(driver->GetDevice(), command_pool_, driver->GetAllocator());
+    vkFreeCommandBuffers(driver->GetDevice(), driver->GetCommandPool(), command_buffers_.size(), command_buffers_.data());
   }
 }
 
@@ -197,7 +183,6 @@ void GuiRenderer::Init() {
       }
       InitFramebuffers(driver);
       if (!event->IsReinit()) {
-        InitCommandPool(driver);
         InitCommandBuffers(driver);
         InitDescriptorPool(driver);
         ImGui_ImplVulkan_InitInfo info{};

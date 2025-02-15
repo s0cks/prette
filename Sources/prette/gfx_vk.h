@@ -275,6 +275,16 @@ class Buffer {
     return new Buffer(size, usage, properties);
   }
 
+  static inline auto NewUniformBuffer(const VkDeviceSize size,
+                                      const VkMemoryPropertyFlags properties = kDefaultBufferMemoryProperties) -> Buffer* {
+    return New(size, VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT, properties);
+  }
+
+  template <typename T>
+  static inline auto NewUniformBuffer(const VkMemoryPropertyFlags properties = kDefaultBufferMemoryProperties) -> Buffer* {
+    return NewUniformBuffer(sizeof(T), properties);
+  }
+
   static inline auto NewTransferSource(const VkDeviceSize size,
                                        const VkMemoryPropertyFlags properties = kDefaultBufferMemoryProperties) -> Buffer* {
     return new Buffer(size, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, properties);
@@ -354,6 +364,7 @@ class Driver : public DriverBase {
   VkQueue graphics_queue_{};
   VkQueue present_queue_{};
   VkSurfaceKHR surface_{};
+  VkCommandPool command_pool_{};
   VkAllocationCallbacks* allocator_ = nullptr;
   vk::ExtensionList instance_extensions_{};
   vk::ExtensionList device_extensions_{
@@ -371,6 +382,7 @@ class Driver : public DriverBase {
   void InitPhysicalDevice();
   void InitSurface();
   void InitLogicalDevice(const float priority);
+  void InitCommandPool();
 #ifdef PRT_DEBUG
   void InitDebugMessenger();
 #endif  // PRT_DEBUG
@@ -422,6 +434,10 @@ class Driver : public DriverBase {
     return surface_;
   }
 
+  auto GetCommandPool() const -> VkCommandPool const& {
+    return command_pool_;
+  }
+
 #ifdef PRT_DEBUG
   auto GetDebugMessenger() const -> VkDebugUtilsMessengerEXT {
     return debug_;
@@ -439,7 +455,6 @@ class Driver : public DriverBase {
 
 class SingleUseCommandBuffer {
  private:
-  const VkCommandPool& pool_;
   VkCommandBuffer buffer_{};
 
   static void Allocate(const VkDevice& device, const VkCommandPool& pool, VkCommandBuffer& buffer);
@@ -450,7 +465,7 @@ class SingleUseCommandBuffer {
   static void Destroy(const VkDevice& device, const VkCommandPool& pool, const VkCommandBuffer& buffer);
 
  public:
-  SingleUseCommandBuffer(const VkCommandPool& pool);
+  SingleUseCommandBuffer();
   ~SingleUseCommandBuffer();
 
   void Finish();
