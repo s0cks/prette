@@ -453,6 +453,47 @@ class Driver : public DriverBase {
   }
 };
 
+class CommandBufferScope {
+ private:
+  VkCommandBufferBeginInfo begin_info_{};
+  VkCommandBuffer& buffer_;
+
+ public:
+  explicit CommandBufferScope(VkCommandBuffer& buffer, const bool reset = false);
+  ~CommandBufferScope();
+
+  auto GetBeginInfo() const -> VkCommandBufferBeginInfo const& {
+    return begin_info_;
+  }
+
+  operator VkCommandBuffer&() const {
+    return buffer_;
+  }
+};
+
+class GraphicsPipeline;
+class RenderPassScope {
+ private:
+  const VkCommandBuffer& buffer_;
+  VkRenderPassBeginInfo begin_info_{};
+  const VkRenderPass& pass_;
+
+ public:
+  explicit RenderPassScope(const VkCommandBuffer& buffer, const VkRenderPass& pass, const VkFramebuffer& framebuffer,
+                           const std::vector<VkClearValue>& clear_values);
+  ~RenderPassScope();
+
+  auto GetBeginInfo() const -> VkRenderPassBeginInfo const& {
+    return begin_info_;
+  }
+
+  void Bind(GraphicsPipeline* pipeline);
+
+  operator const VkRenderPass&() const {
+    return pass_;
+  }
+};
+
 class SingleUseCommandBuffer {
  private:
   VkCommandBuffer buffer_{};

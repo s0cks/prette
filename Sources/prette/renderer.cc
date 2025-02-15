@@ -22,7 +22,6 @@
 
 namespace prt {
 static RendererEventSubject events_{};
-static RelaxedAtomic<bool> resized_(false);
 static std::vector<VkCommandBuffer> command_buffers_{};
 
 static inline void PublishRendererEvent(RendererEvent* event) {
@@ -73,17 +72,13 @@ void Renderer::InitCommandBuffers(const Driver* driver) {
            "failed to allocate vk command buffers");
 }
 
-void Renderer::InitResizeListener() {
-  const auto window = GetAppWindow();
-  ASSERT(window);
-  window->OnWindowSizeEvent().subscribe([](WindowSizeEvent* event) {
-    ASSERT(event);
-    resized_ = true;
-  });
-}
-
 void Renderer::DrawFrame(Driver* driver, const Tick& current, const Tick& previous) {
   ASSERT(driver);
+  // clang-format off
+  static const std::vector<VkClearValue> kClearValues = {
+    VkClearValue{.color = {0.0f, 0.0f, 0.0f, 1.0f }}
+  };
+  // clang-format on
   // pre frame
   SwapChain::AcquireNextImage(driver);
   Publish<PreFrameEvent>();
@@ -92,24 +87,9 @@ void Renderer::DrawFrame(Driver* driver, const Tick& current, const Tick& previo
   const auto& frame = SwapChain::GetCurrentFrame();
   std::vector<VkCommandBuffer> cmd_buffers{};
   {
-    auto& buffer = command_buffers_.at(frame.frame);
-    VkCommandBufferBeginInfo begin_info{};
-    begin_info.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
-    CHECK_VK(FATAL, vkBeginCommandBuffer(buffer, &begin_info), "failed to begin vk command buffer");
+    CommandBufferScope buffer(command_buffers_.at(frame.frame));
     {
-      VkRenderPassBeginInfo render_pass{};
-      render_pass.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
-      render_pass.renderPass = SwapChain::GetRenderPass();
-      render_pass.framebuffer = SwapChain::GetFramebuffer(frame.image);
-      render_pass.renderArea.offset = {0, 0};
-      render_pass.renderArea.extent = SwapChain::GetExtent();
-      std::array<VkClearValue, 2> clear_values = {
-          {1.0f, 0.0f, 0.0f, 1.0f},
-      };
-      render_pass.clearValueCount = clear_values.size();
-      render_pass.pClearValues = clear_values.data();
-
-      vkCmdBeginRenderPass(buffer, &render_pass, VK_SUBPASS_CONTENTS_INLINE);
+      RenderPassScope render_pass(buffer, SwapChain::GetRenderPass(), SwapChain::GetFramebuffer(frame.image), kClearValues);
       vkCmdBindPipeline(buffer, VK_PIPELINE_BIND_POINT_GRAPHICS, SwapChain::GetGraphicsPipeline().Get());
 
       VkViewport viewport{};
@@ -125,10 +105,7 @@ void Renderer::DrawFrame(Driver* driver, const Tick& current, const Tick& previo
       scissor.offset = {0, 0};
       scissor.extent = SwapChain::GetExtent();
       vkCmdSetScissor(buffer, 0, 1, &scissor);
-
-      vkCmdEndRenderPass(buffer);
     }
-    CHECK_VK(FATAL, vkEndCommandBuffer(buffer), "failed to end vk command buffer");
     cmd_buffers.push_back(buffer);
   }
 
@@ -200,7 +177,6 @@ void Renderer::Init() {
     const auto driver = Driver::Get();
     ASSERT(driver);
     InitCommandBuffers(driver);
-    InitResizeListener();
     Publish<RendererInitEvent>();
   });
   OnDestroyingDriverEvent().subscribe([](DestroyingDriverEvent* event) {

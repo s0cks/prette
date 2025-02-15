@@ -127,7 +127,6 @@ class Renderer {
   friend class LuaState;
 
  private:
-  static void InitResizeListener();
   static void InitCommandBuffers(const Driver* driver);
   static void Destroy();
 

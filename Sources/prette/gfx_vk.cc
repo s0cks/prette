@@ -1,3 +1,5 @@
+#include "prette/gfx_vk.h"
+
 #include <vulkan/vulkan_core.h>
 
 #include "prette/common.h"
@@ -207,6 +209,41 @@ void InitFramebuffers(const Driver* driver, const VkRenderPass& pass, const std:
   }
 }
 }  // namespace vk
+
+CommandBufferScope::CommandBufferScope(VkCommandBuffer& buffer, const bool reset) :
+  buffer_(buffer) {
+  begin_info_.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
+  if (reset)
+    CHECK_VK(FATAL, vkResetCommandBuffer(buffer, 0), "failed to reset vk command buffer");
+  CHECK_VK(FATAL, vkBeginCommandBuffer(buffer, &begin_info_), "failed to begin vk command buffer");
+}
+
+CommandBufferScope::~CommandBufferScope() {
+  CHECK_VK(FATAL, vkEndCommandBuffer(buffer_), "failed to end vk command buffer");
+}
+
+void RenderPassScope::Bind(GraphicsPipeline* p) {
+  ASSERT(p);
+  vkCmdBindPipeline(buffer_, VK_PIPELINE_BIND_POINT_GRAPHICS, p->Get());
+}
+
+RenderPassScope::RenderPassScope(const VkCommandBuffer& buffer, const VkRenderPass& pass, const VkFramebuffer& framebuffer,
+                                 const std::vector<VkClearValue>& clear_values) :
+  buffer_(buffer),
+  pass_(pass) {
+  begin_info_.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
+  begin_info_.renderPass = pass_;
+  begin_info_.framebuffer = framebuffer;
+  begin_info_.renderArea.offset = {0, 0};
+  begin_info_.renderArea.extent = SwapChain::GetExtent();
+  begin_info_.clearValueCount = clear_values.size();
+  begin_info_.pClearValues = clear_values.data();
+  vkCmdBeginRenderPass(buffer_, &begin_info_, VK_SUBPASS_CONTENTS_INLINE);
+}
+
+RenderPassScope::~RenderPassScope() {
+  vkCmdEndRenderPass(buffer_);
+}
 
 static inline void GetRequiredExtensions(std::vector<const char*>& extensions) {
   uint32_t ext_count = 0;

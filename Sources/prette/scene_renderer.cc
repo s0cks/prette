@@ -172,38 +172,23 @@ void SceneRenderer::InitImages(const Driver* driver, const uint64_t num_images, 
 }
 
 void SceneRenderer::Draw(const uint32_t buffer_index, const uint32_t image_index, std::vector<VkCommandBuffer>& cmd_buffers) {
-  auto& buffer = command_buffers_.at(buffer_index);
-  CHECK_VK(FATAL, vkResetCommandBuffer(buffer, 0), "failed to reset vk command buffer");
-
-  VkCommandBufferBeginInfo begin_info{};
-  begin_info.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
-  CHECK_VK(FATAL, vkBeginCommandBuffer(buffer, &begin_info), "failed to begin command buffer recording");
+  // clang-format off
+  static const std::vector<VkClearValue> kClearValues = {
+    VkClearValue { .color = { 0.0f, 0.0f, 0.0f, 1.0f }}
+  };
+  // clang-format on
+  CommandBufferScope buffer(command_buffers_.at(buffer_index), true);
   {
-    VkRenderPassBeginInfo render_pass_info{};
-    render_pass_info.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
-    render_pass_info.renderPass = pass_;
-    render_pass_info.framebuffer = framebuffers_[image_index];
-    render_pass_info.renderArea.offset = {.x = 0, .y = 0};
-    render_pass_info.renderArea.extent = SwapChain::GetExtent();
-
-    VkClearValue clear_color{{0.0f, 0.0f, 0.0f, 1.0f}};
-    render_pass_info.clearValueCount = 1;
-    render_pass_info.pClearValues = &clear_color;
-
-    vkCmdBeginRenderPass(buffer, &render_pass_info, VK_SUBPASS_CONTENTS_INLINE);
-    {
-      vkCmdBindPipeline(buffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipeline_);
-      vkCmdBindDescriptorSets(buffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipeline_.GetLayout(), 0, 1,
-                              &descriptor_sets_[buffer_index], 0, nullptr);
-      VkBuffer vertex_buffers[] = {vertex_buffer_->GetBuffer()};
-      VkDeviceSize offsets[] = {0};
-      vkCmdBindVertexBuffers(buffer, 0, 1, vertex_buffers, offsets);
-      vkCmdBindIndexBuffer(buffer, index_buffer_->GetBuffer(), 0, VK_INDEX_TYPE_UINT16);
-      vkCmdDrawIndexed(buffer, indices.size(), 1, 0, 0, 0);
-    }
-    vkCmdEndRenderPass(buffer);
+    RenderPassScope render_pass(buffer, pass_, framebuffers_[image_index], kClearValues);
+    render_pass.Bind(&pipeline_);
+    vkCmdBindDescriptorSets(buffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipeline_.GetLayout(), 0, 1, &descriptor_sets_[buffer_index],
+                            0, nullptr);
+    VkBuffer vertex_buffers[] = {vertex_buffer_->GetBuffer()};
+    VkDeviceSize offsets[] = {0};
+    vkCmdBindVertexBuffers(buffer, 0, 1, vertex_buffers, offsets);
+    vkCmdBindIndexBuffer(buffer, index_buffer_->GetBuffer(), 0, VK_INDEX_TYPE_UINT16);
+    vkCmdDrawIndexed(buffer, indices.size(), 1, 0, 0, 0);
   }
-  CHECK_VK(FATAL, vkEndCommandBuffer(buffer), "failed to end command buffer recording");
   cmd_buffers.push_back(buffer);
 }
 

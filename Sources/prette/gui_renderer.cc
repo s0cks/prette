@@ -221,29 +221,17 @@ void GuiRenderer::Init() {
 }
 
 void GuiRenderer::Draw(const uint32_t bidx, const uint32_t image_index, std::vector<VkCommandBuffer>& cmd_buffers) {
-  auto& buffer = command_buffers_.at(bidx);
-  // do nothing
-  VkCommandBufferBeginInfo begin_info{};
-  begin_info.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
-  begin_info.flags |= VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
-  vkBeginCommandBuffer(buffer, &begin_info);
+  // clang-format off
+  static const std::vector<VkClearValue> kClearValues = {
+    VkClearValue{.color = {0.0f, 0.0f, 0.0f, 1.0f }}
+  };
+  // clang-format on
+  CommandBufferScope buffer(command_buffers_.at(bidx));
+  // TODO: flags |= VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT?
   {
-    VkRenderPassBeginInfo render_pass{};
-    render_pass.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
-    render_pass.renderPass = pass_;
-    render_pass.framebuffer = framebuffers_.at(image_index);
-    render_pass.renderArea.offset = {0, 0};
-    render_pass.renderArea.extent = SwapChain::GetExtent();
-
-    std::array<VkClearValue, 1> clear_values{};
-    clear_values.at(0).color = {{0.0f, 1.0f, 0.0f, 1.0f}};
-    render_pass.clearValueCount = clear_values.size();
-    render_pass.pClearValues = clear_values.data();
-    vkCmdBeginRenderPass(buffer, &render_pass, VK_SUBPASS_CONTENTS_INLINE);
+    RenderPassScope render_pass(buffer, pass_, framebuffers_[image_index], kClearValues);
     ImGui_ImplVulkan_RenderDrawData(ImGui::GetDrawData(), buffer);
-    vkCmdEndRenderPass(buffer);
   }
-  vkEndCommandBuffer(buffer);
   cmd_buffers.push_back(buffer);
 }
 }  // namespace prt
