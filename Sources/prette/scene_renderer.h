@@ -14,7 +14,6 @@ class SceneRenderer {
   static void InitDescriptorSetLayout(const Driver* driver);
   static void InitPipeline(const Driver* driver);
   static void InitPipelineLayout(const Driver* driver);
-  static void InitFramebuffers(const Driver* driver);
   static void InitRenderPass(const Driver* driver);
   static void InitCommandBuffers(const Driver* driver);
   static void InitBuffers();

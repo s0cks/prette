@@ -9,20 +9,17 @@
 #include "prette/gfx_vk.h"
 #include "prette/gui.h"
 #include "prette/pipeline.h"
+#include "prette/render_target.h"
 #include "prette/renderer.h"
 #include "prette/shader.h"
 #include "prette/swapchain.h"
 
 namespace prt {
 static VkRenderPass pass_;
-static std::vector<VkFramebuffer> framebuffers_{};
+static std::array<RenderTarget, MAX_NUMBER_OF_FRAMES_IN_FLIGHT + 1> render_targets_{};
 static std::array<VkCommandBuffer, MAX_NUMBER_OF_FRAMES_IN_FLIGHT> command_buffers_{};
 
 static GraphicsPipeline pipeline_;
-
-static std::vector<VkImage> images_{};
-static std::vector<VkDeviceMemory> memory_{};
-static std::vector<VkImageView> views_{};
 
 static VkDescriptorSetLayout descriptor_set_layout_{};
 static VkDescriptorPool descriptor_pool_{};
@@ -85,11 +82,6 @@ void SceneRenderer::InitRenderPass(const Driver* driver) {
   CHECK_VK(FATAL, vkCreateRenderPass(driver->GetDevice(), &create_info, nullptr, &pass_), "failed to create vk render pass");
 }
 
-void SceneRenderer::InitFramebuffers(const Driver* driver) {
-  ASSERT(driver);
-  vk::InitFramebuffers(driver, pass_, views_, SwapChain::GetExtent(), framebuffers_);
-}
-
 void SceneRenderer::InitCommandBuffers(const Driver* driver) {
   VkCommandBufferAllocateInfo alloc_info{};
   alloc_info.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
@@ -110,64 +102,8 @@ void SceneRenderer::InitPipeline(const Driver* driver) {
 }
 
 void SceneRenderer::InitImages(const Driver* driver, const uint64_t num_images, const VkExtent2D& extent) {
-  images_.resize(num_images);
-  memory_.resize(num_images);
-  views_.resize(num_images);
   for (auto idx = 0; idx < num_images; idx++) {
-    VkImageCreateInfo create_info{};
-    create_info.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
-    create_info.imageType = VK_IMAGE_TYPE_2D;
-    create_info.format = VK_FORMAT_B8G8R8A8_SRGB;
-    create_info.extent.width = extent.width;
-    create_info.extent.height = extent.height;
-    create_info.extent.depth = 1.0f;
-    create_info.arrayLayers = 1;
-    create_info.mipLevels = 1;
-    create_info.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
-    create_info.samples = VK_SAMPLE_COUNT_1_BIT;
-    create_info.tiling = VK_IMAGE_TILING_LINEAR;
-    create_info.usage = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | VK_IMAGE_USAGE_SAMPLED_BIT;
-    CHECK_VK(FATAL, vkCreateImage(driver->GetDevice(), &create_info, driver->GetAllocator(), &images_[idx]),
-             "failed to create vk image");
-
-    VkMemoryRequirements mem_requirements{};
-    VkMemoryAllocateInfo alloc_info{};
-    alloc_info.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
-    vkGetImageMemoryRequirements(driver->GetDevice(), images_[idx], &mem_requirements);
-    alloc_info.allocationSize = mem_requirements.size;
-    alloc_info.memoryTypeIndex = FindMemoryType(driver->GetPhysicalDevice(), mem_requirements.memoryTypeBits,
-                                                VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);
-    vkAllocateMemory(driver->GetDevice(), &alloc_info, driver->GetAllocator(), &memory_[idx]);
-    vkBindImageMemory(driver->GetDevice(), images_[idx], memory_[idx], 0);
-
-    {
-      SingleUseCommandBuffer copy;
-      VkImageMemoryBarrier mem_barrier{};
-      mem_barrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
-      mem_barrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
-      mem_barrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
-      mem_barrier.srcAccessMask = VK_ACCESS_TRANSFER_READ_BIT;
-      mem_barrier.dstAccessMask = VK_ACCESS_MEMORY_READ_BIT;
-      mem_barrier.oldLayout = VK_IMAGE_LAYOUT_UNDEFINED;
-      mem_barrier.newLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
-      mem_barrier.image = images_[idx];
-      mem_barrier.subresourceRange = VkImageSubresourceRange{VK_IMAGE_ASPECT_COLOR_BIT, 0, 1, 0, 1};
-      vkCmdPipelineBarrier(copy, VK_PIPELINE_STAGE_TRANSFER_BIT, VK_PIPELINE_STAGE_TRANSFER_BIT, 0, 0, nullptr, 0, nullptr, 1,
-                           &mem_barrier);
-    }
-
-    VkImageViewCreateInfo view_info{};
-    view_info.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
-    view_info.image = images_[idx];
-    view_info.viewType = VK_IMAGE_VIEW_TYPE_2D;
-    view_info.format = VK_FORMAT_B8G8R8A8_SRGB;
-    view_info.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
-    view_info.subresourceRange.baseMipLevel = 0;
-    view_info.subresourceRange.levelCount = 1;
-    view_info.subresourceRange.baseArrayLayer = 0;
-    view_info.subresourceRange.layerCount = 1;
-    CHECK_VK(FATAL, vkCreateImageView(driver->GetDevice(), &view_info, driver->GetAllocator(), &views_[idx]),
-             "failed to create vk image view");
+    render_targets_[idx] = RenderTarget(pass_, extent);
   }
 }
 
@@ -179,7 +115,7 @@ void SceneRenderer::Draw(const SwapChainFrame& frame, std::vector<VkCommandBuffe
   // clang-format on
   CommandBufferScope buffer(command_buffers_.at(frame), true);
   {
-    RenderPassScope render_pass(buffer, pass_, framebuffers_[frame.image], kClearValues);
+    RenderPassScope render_pass(buffer, pass_, render_targets_[frame.image].GetFramebuffer(), kClearValues);
     render_pass.Bind(&pipeline_);
     vkCmdBindDescriptorSets(buffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipeline_.GetLayout(), 0, 1, &descriptor_sets_[frame], 0,
                             nullptr);
@@ -229,23 +165,14 @@ void SceneRenderer::Destroy(const Driver* driver, const bool is_reinit) {
     pipeline_.Destroy(driver);
     vkDestroyRenderPass(driver->GetDevice(), pass_, driver->GetAllocator());
   }
-  for (const auto& framebuffer : framebuffers_) {
-    vkDestroyFramebuffer(driver->GetDevice(), framebuffer, driver->GetAllocator());
-  }
   if (!is_reinit) {
     ASSERT(vertex_buffer_);
     vertex_buffer_->Destroy();
     ASSERT(index_buffer_);
     index_buffer_->Destroy();
-    vkFreeCommandBuffers(driver->GetDevice(), driver->GetCommandPool(), command_buffers_.size(), command_buffers_.data());
-    for (const auto& view : views_) {
-      vkDestroyImageView(driver->GetDevice(), view, driver->GetAllocator());
-    }
-    for (const auto& image : images_) {
-      vkDestroyImage(driver->GetDevice(), image, driver->GetAllocator());
-    }
-    for (const auto& memory : memory_) {
-      vkFreeMemory(driver->GetDevice(), memory, driver->GetAllocator());
+    driver->ReleaseCommandBuffers(command_buffers_);
+    for (const auto& target : render_targets_) {
+      target.Destroy();
     }
   }
 }
@@ -259,7 +186,7 @@ auto SceneRenderer::GetRenderPass() -> VkRenderPass const& {
 }
 
 auto SceneRenderer::GetImageView(const uint64_t idx) -> VkImageView const& {
-  return views_[idx];
+  return render_targets_[idx].GetView();
 }
 
 void SceneRenderer::InitDescriptorSetLayout(const Driver* driver) {
@@ -344,7 +271,6 @@ void SceneRenderer::Init() {
         InitCommandBuffers(driver);
       }
       InitImages(driver, SwapChain::GetNumberOfImages(), SwapChain::GetExtent());
-      InitFramebuffers(driver);
       if (!event->IsReinit()) {
         InitBuffers();
         InitDescriptorPool(driver);

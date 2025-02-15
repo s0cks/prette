@@ -446,6 +446,17 @@ class Driver : public DriverBase {
 
   void WaitDeviceIdle() const;
 
+  void ReleaseCommandBuffers(const VkCommandBuffer* buffers, const uint64_t num_buffers) const;
+
+  template <typename Container>
+  inline void ReleaseCommandBuffers(const Container& buffers) const {
+    if (buffers.empty()) {
+      DLOG(WARNING) << "attempting to release 0 VkCommandBuffers.";
+      return;
+    }
+    return ReleaseCommandBuffers(buffers.data(), buffers.size());
+  }
+
  private:
   static inline auto New() -> Driver* {
     ASSERT(!DriverBase::IsInitialized());

@@ -227,7 +227,6 @@ void GuiRenderer::Draw(const SwapChainFrame& frame, std::vector<VkCommandBuffer>
   };
   // clang-format on
   CommandBufferScope buffer(command_buffers_.at(frame));
-  // TODO: flags |= VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT?
   {
     RenderPassScope render_pass(buffer, pass_, framebuffers_[frame.image], kClearValues);
     ImGui_ImplVulkan_RenderDrawData(ImGui::GetDrawData(), buffer);

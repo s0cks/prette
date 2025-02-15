@@ -416,6 +416,10 @@ void Driver::WaitDeviceIdle() const {
   vkDeviceWaitIdle(device_);
 }
 
+void Driver::ReleaseCommandBuffers(const VkCommandBuffer* buffers, const uint64_t num_buffers) const {
+  vkFreeCommandBuffers(GetDevice(), GetCommandPool(), num_buffers, buffers);
+}
+
 void Driver::InitInstance() {
   VkInstanceCreateInfo create_info{};
   create_info.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;

@@ -22,7 +22,7 @@
 
 namespace prt {
 static RendererEventSubject events_{};
-static std::vector<VkCommandBuffer> command_buffers_{};
+static std::array<VkCommandBuffer, MAX_NUMBER_OF_FRAMES_IN_FLIGHT> command_buffers_{};
 
 static inline void PublishRendererEvent(RendererEvent* event) {
   ASSERT(event);
@@ -62,7 +62,6 @@ auto RendererDestroyedEvent::ToString() const -> std::string {
 
 void Renderer::InitCommandBuffers(const Driver* driver) {
   ASSERT(driver);
-  command_buffers_.resize(SwapChain::GetNumberOfImages());
   VkCommandBufferAllocateInfo alloc_info{};
   alloc_info.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
   alloc_info.commandPool = driver->GetCommandPool();
@@ -187,7 +186,7 @@ void Renderer::Init() {
 void Renderer::Destroy() {
   const auto driver = Driver::Get();
   ASSERT(driver);
-  vkFreeCommandBuffers(driver->GetDevice(), driver->GetCommandPool(), command_buffers_.size(), command_buffers_.data());
+  driver->ReleaseCommandBuffers(command_buffers_);
   Publish<RendererDestroyedEvent>();
 }
 }  // namespace prt
