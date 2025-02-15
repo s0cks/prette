@@ -21,15 +21,17 @@ class Ticker {
   uv::Check check_;
   // stats
   TicksPerSecond count_{};
-  TickDurationSeries duration_{};
+  uint64_t duration_ = 0;
+  TickDurationSeries durations_{};
 
  protected:
+  auto GetDuration() const -> uint64_t {
+    return duration_;
+  }
+
   virtual void Idle() {
-    // publish tick
-    std::swap(previous_, current_);
     current_ = Tick(((uint64_t)count_));
     count_.Increment(1, current_.GetTimestamp());
-    duration_.Append((current_ - previous_).value());
   }
 
   virtual void Prepare() {
@@ -38,8 +40,9 @@ class Ticker {
   }
 
   virtual void Check() {
-    // TODO:
-    //  - check for stop
+    duration_ = GetTimeSinceCurrentTick().value();
+    durations_.Append(duration_);
+    std::swap(previous_, current_);
   }
 
  private:
@@ -134,13 +137,14 @@ class Ticker {
   }
 
   auto GetTickDurationSeries() const -> const TickDurationSeries& {
-    return duration_;
+    return durations_;
   }
 };
 
 template <const uword Rate>
 class RateLimitedTicker : public Ticker {
  private:
+  uint64_t remaining_ = 0;
   bool skipped_{};
 
  protected:
@@ -157,9 +161,11 @@ class RateLimitedTicker : public Ticker {
   }
 
   void Idle() override {
-    if (GetTimeSinceLastTick() < Rate)
-      return SetSkipped();
-    return Ticker::Idle();
+    remaining_ += GetTimeSinceLastTick();
+    while (remaining_ >= Rate) {
+      Ticker::Idle();
+      remaining_ -= Rate;
+    }
   }
 
   void Prepare() override {
@@ -169,9 +175,8 @@ class RateLimitedTicker : public Ticker {
   }
 
   void Check() override {
-    if (IsSkipped())
-      return ClearSkipped();
-    return Ticker::Check();
+    ClearSkipped();
+    Ticker::Check();
   }
 
  public:

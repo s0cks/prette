@@ -62,9 +62,15 @@ void GuiDebug::Render() {
     ImGui::EndCombo();
   }
 
+  const auto engine = Engine::Get();
+  ASSERT(engine);
+  ImGui::Text("tps");
+  ImGui::SameLine();
+  ImGui::Text("%llu", engine->GetTicksPerSecond().per_sec());
+
   if (ImPlot::BeginPlot("Profiler")) {
     ImPlot::SetupAxis(ImAxis_Y1, "Tick(s) per Second", ImPlotAxisFlags_Opposite);
-    ImPlot::SetupAxisLimits(ImAxis_Y1, 0, 50);
+    ImPlot::SetupAxisLimits(ImAxis_Y1, 0, 150);
 
     ImPlot::SetupAxis(ImAxis_Y2, "Duration (ms)");
     ImPlot::SetupAxisFormat(ImAxis_Y2, TimeFormatter);

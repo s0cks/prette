@@ -1,6 +1,8 @@
 #ifndef COUNTER_H
 #define COUNTER_H
 
+#include <glog/logging.h>
+#include <units.h>
 #include <uv.h>
 
 #include "prette/relaxed_atomic.h"

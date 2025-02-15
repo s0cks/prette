@@ -1,5 +1,5 @@
-#ifndef TICK_H
-#define TICK_H
+#ifndef PRT_TICK_H
+#define PRT_TICK_H
 
 #include <units.h>
 
@@ -139,12 +139,20 @@ class Tick {
     return {lhs.GetTimestamp() + rhs};
   }
 
+  void operator+=(const uint64_t& rhs) {
+    ts_ += rhs;
+  }
+
   friend constexpr auto operator-(const Tick& lhs, const Tick& rhs) -> TickDelta {
     return {lhs.GetTimestamp() - rhs.GetTimestamp()};
   }
 
   friend constexpr auto operator-(const Tick& lhs, const uint64_t& rhs) -> TickDelta {
     return {lhs.GetTimestamp() - rhs};
+  }
+
+  void operator-=(const uint64_t& rhs) {
+    ts_ -= rhs;
   }
 
   friend auto operator<<(std::ostream& stream, const Tick& rhs) -> std::ostream& {
@@ -160,8 +168,18 @@ static inline constexpr auto operator+(const uint64_t& lhs, const Tick& rhs) -> 
   return lhs + rhs.GetTimestamp();
 }
 
+static inline auto operator+=(uint64_t& lhs, const TickDelta& rhs) -> uint64_t& {
+  lhs += rhs.value();
+  return lhs;
+}
+
 static inline constexpr auto operator-(const uint64_t& lhs, const Tick& rhs) -> TickDelta {
   return lhs - rhs.GetTimestamp();
+}
+
+static inline auto operator-=(uint64_t& lhs, const TickDelta& rhs) -> uint64_t& {
+  lhs -= rhs.value();
+  return lhs;
 }
 
 using TickSubject = rx::subject<Tick>;
@@ -170,4 +188,4 @@ using TickDurationSeries = TimeSeries<>;
 using TicksPerSecond = PerSecondCounter<uint64_t>;
 }  // namespace prt
 
-#endif  // TICK_H
+#endif  // PRT_TICK_H
