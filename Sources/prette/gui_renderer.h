@@ -5,6 +5,7 @@
 
 #include "prette/event.h"
 #include "prette/gfx.h"
+#include "prette/swapchain.h"
 
 namespace prt {
 #define FOR_EACH_GUI_RENDERER_EVENT(V) V(GuiRendererInit)
@@ -60,7 +61,7 @@ class GuiRenderer {
   static auto GetPass() -> VkRenderPass const&;
   static auto GetSceneDescriptor(const uint32_t frame) -> VkDescriptorSet const&;
   static auto GetDescriptorPool() -> VkDescriptorPool const&;
-  static void Draw(const uint32_t bidx, const uint32_t image_index, std::vector<VkCommandBuffer>& cmd_buffers);
+  static void Draw(const SwapChainFrame& frame, std::vector<VkCommandBuffer>& cmd_buffers);
 };
 }  // namespace prt
 

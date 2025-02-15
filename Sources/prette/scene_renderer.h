@@ -4,6 +4,7 @@
 #include <vulkan/vulkan_core.h>
 
 #include "prette/gfx.h"
+#include "prette/swapchain.h"
 
 namespace prt {
 class Driver;
@@ -27,7 +28,7 @@ class SceneRenderer {
   static auto GetCameraBuffer(const uint64_t idx) -> vk::Buffer*;
   static auto GetRenderPass() -> VkRenderPass const&;
   static auto GetImageView(const uint64_t idx) -> VkImageView const&;
-  static void Draw(const uint32_t buffer_index, const uint32_t image_index, std::vector<VkCommandBuffer>& cmd_buffers);
+  static void Draw(const SwapChainFrame& frame, std::vector<VkCommandBuffer>& buffers);
 };
 }  // namespace prt
 

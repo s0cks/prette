@@ -220,16 +220,16 @@ void GuiRenderer::Init() {
   });
 }
 
-void GuiRenderer::Draw(const uint32_t bidx, const uint32_t image_index, std::vector<VkCommandBuffer>& cmd_buffers) {
+void GuiRenderer::Draw(const SwapChainFrame& frame, std::vector<VkCommandBuffer>& cmd_buffers) {
   // clang-format off
   static const std::vector<VkClearValue> kClearValues = {
     VkClearValue{.color = {0.0f, 0.0f, 0.0f, 1.0f }}
   };
   // clang-format on
-  CommandBufferScope buffer(command_buffers_.at(bidx));
+  CommandBufferScope buffer(command_buffers_.at(frame));
   // TODO: flags |= VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT?
   {
-    RenderPassScope render_pass(buffer, pass_, framebuffers_[image_index], kClearValues);
+    RenderPassScope render_pass(buffer, pass_, framebuffers_[frame.image], kClearValues);
     ImGui_ImplVulkan_RenderDrawData(ImGui::GetDrawData(), buffer);
   }
   cmd_buffers.push_back(buffer);

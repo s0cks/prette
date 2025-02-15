@@ -1,5 +1,6 @@
 #include "prette/swapchain.h"
 
+#include <sys/param.h>
 #include <vulkan/vulkan_core.h>
 
 #include "prette/common.h"
@@ -440,6 +441,9 @@ auto SwapChain::GetSwapChain() -> VkSwapchainKHR const& {
 }
 
 void SwapChain::Init() {
+  for (auto idx = 0; idx < MAX_NUMBER_OF_FRAMES_IN_FLIGHT; idx++) {
+    frames_.at(idx).frame = idx;
+  }
   OnDriverInitEvent().subscribe([](DriverInitEvent* event) {
     ASSERT(event);
     const auto driver = event->GetDriver();

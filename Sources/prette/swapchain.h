@@ -7,6 +7,7 @@
 #include "prette/event.h"
 #include "prette/gfx.h"
 #include "prette/pipeline.h"
+#include "prette/to_string.h"
 
 namespace prt {
 struct SwapChainFrame {
@@ -21,6 +22,17 @@ struct SwapChainFrame {
   SwapChainFrame() = default;
   SwapChainFrame(const uint32_t frame, const Driver* driver);
   ~SwapChainFrame() = default;
+
+  operator uint32_t() const {
+    return frame;
+  }
+
+  friend auto operator<<(std::ostream& stream, const SwapChainFrame& rhs) -> std::ostream& {
+    ToStringHelper<SwapChainFrame> helper{};
+    helper.AddFieldRef("frame", rhs.frame);
+    helper.AddFieldRef("image", rhs.image);
+    return stream << helper.ToString();
+  }
 
   DEFINE_DEFAULT_COPYABLE_TYPE(SwapChainFrame);
 

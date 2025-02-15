@@ -171,18 +171,18 @@ void SceneRenderer::InitImages(const Driver* driver, const uint64_t num_images, 
   }
 }
 
-void SceneRenderer::Draw(const uint32_t buffer_index, const uint32_t image_index, std::vector<VkCommandBuffer>& cmd_buffers) {
+void SceneRenderer::Draw(const SwapChainFrame& frame, std::vector<VkCommandBuffer>& cmd_buffers) {
   // clang-format off
   static const std::vector<VkClearValue> kClearValues = {
     VkClearValue { .color = { 0.0f, 0.0f, 0.0f, 1.0f }}
   };
   // clang-format on
-  CommandBufferScope buffer(command_buffers_.at(buffer_index), true);
+  CommandBufferScope buffer(command_buffers_.at(frame), true);
   {
-    RenderPassScope render_pass(buffer, pass_, framebuffers_[image_index], kClearValues);
+    RenderPassScope render_pass(buffer, pass_, framebuffers_[frame.image], kClearValues);
     render_pass.Bind(&pipeline_);
-    vkCmdBindDescriptorSets(buffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipeline_.GetLayout(), 0, 1, &descriptor_sets_[buffer_index],
-                            0, nullptr);
+    vkCmdBindDescriptorSets(buffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipeline_.GetLayout(), 0, 1, &descriptor_sets_[frame], 0,
+                            nullptr);
     VkBuffer vertex_buffers[] = {vertex_buffer_->GetBuffer()};
     VkDeviceSize offsets[] = {0};
     vkCmdBindVertexBuffers(buffer, 0, 1, vertex_buffers, offsets);

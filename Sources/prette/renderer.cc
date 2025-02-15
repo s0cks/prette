@@ -109,8 +109,8 @@ void Renderer::DrawFrame(Driver* driver, const Tick& current, const Tick& previo
     cmd_buffers.push_back(buffer);
   }
 
-  SceneRenderer::Draw(frame.frame, frame.image, cmd_buffers);
-  GuiRenderer::Draw(frame.frame, frame.image, cmd_buffers);
+  SceneRenderer::Draw(frame, cmd_buffers);
+  GuiRenderer::Draw(frame, cmd_buffers);
 
   {
     // update camera
