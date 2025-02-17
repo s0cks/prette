@@ -9,6 +9,7 @@
 #include <stdexcept>
 #include <termcolor/termcolor.hpp>
 
+#include "prette/camera.h"
 #include "prette/config.h"
 #include "prette/engine.h"
 #include "prette/gui.h"
@@ -42,6 +43,7 @@ auto main(int argc, char** argv) -> int {
   gfx::Init();
   LuaState::Init();
   Window::Init();
+  Camera::Init();
   Engine::Init();
   Driver::Init();
   gui::Init();

@@ -42,9 +42,9 @@ void GuiDebug::Render() {
   const auto window = GetAppWindow();
   ASSERT(window);
   const auto size = window->GetSize();
-  ImGui::SetNextWindowPos(ImVec2{0, 0}, ImGuiCond_FirstUseEver);
+  ImGui::SetNextWindowPos(ImVec2{0, 0});
   ImGui::SetNextWindowSize(ImVec2{size.width() / 4, size.height()});
-  ImGui::Begin(GetGuiName());
+  ImGui::Begin(GetGuiName(), nullptr, ImGuiWindowFlags_NoCollapse);
   const auto target_items = std::array<const char*, 2>{
       "Full Scene",
       "Test",

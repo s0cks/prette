@@ -454,6 +454,32 @@ void Driver::InitCommandPool() {
            "failed to create vk command pool");
 }
 
+void Driver::InitDescriptorPool() {
+  // clang-format off
+  static const std::vector<VkDescriptorPoolSize> kDescriptorPoolSizes = {
+    {.type = VK_DESCRIPTOR_TYPE_SAMPLER, .descriptorCount = 1000},
+    {.type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, .descriptorCount = 1000},
+    {.type = VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE, .descriptorCount = 1000},
+    {.type = VK_DESCRIPTOR_TYPE_STORAGE_IMAGE, .descriptorCount = 1000},
+    {.type = VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER, .descriptorCount = 1000},
+    {.type = VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER, .descriptorCount = 1000},
+    {.type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, .descriptorCount = 1000},
+    {.type = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, .descriptorCount = 1000},
+    {.type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC, .descriptorCount = 1000},
+    {.type = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC, .descriptorCount = 1000},
+    {.type = VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT, .descriptorCount = 1000}
+  };
+  // clang-format on
+  VkDescriptorPoolCreateInfo create_info{};
+  create_info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
+  create_info.flags |= VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT;
+  create_info.poolSizeCount = kDescriptorPoolSizes.size();
+  create_info.pPoolSizes = kDescriptorPoolSizes.data();
+  create_info.maxSets = 1000;
+  CHECK_VK(FATAL, vkCreateDescriptorPool(GetDevice(), &create_info, GetAllocator(), &descriptor_pool_),
+           "failed to create vk descriptor pool");
+}
+
 void Driver::InitLogicalDevice(const float priority) {
   const auto indices = FindQueueFamilies(physical_device_, surface_);
   std::unordered_set<uint32_t> unique_families{};
@@ -503,9 +529,11 @@ Driver::Driver() {
   InitPhysicalDevice();
   InitLogicalDevice(1.0f);
   InitCommandPool();
+  InitDescriptorPool();
 }
 
 Driver::~Driver() {
+  vkDestroyDescriptorPool(GetDevice(), descriptor_pool_, GetAllocator());
   vkDestroyCommandPool(device_, command_pool_, allocator_);
   vkDestroySurfaceKHR(instance_, surface_, allocator_);
   vkDestroyDevice(device_, allocator_);

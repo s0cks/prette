@@ -22,18 +22,16 @@ static std::array<VkCommandBuffer, MAX_NUMBER_OF_FRAMES_IN_FLIGHT> command_buffe
 static GraphicsPipeline pipeline_;
 
 static VkDescriptorSetLayout descriptor_set_layout_{};
-static VkDescriptorPool descriptor_pool_{};
 static std::vector<VkDescriptorSet> descriptor_sets_{};
 
 static std::vector<vk::Buffer*> camera_buffers_{};
 static vk::Buffer* vertex_buffer_ = nullptr;
 static vk::Buffer* index_buffer_ = nullptr;
 
-static const std::vector<Vertex> vertices = {{.pos = {-0.5f, -0.5f}, .color = {1.0f, 0.0f, 0.0f}},
-                                             {.pos = {0.5f, -0.5f}, .color = {0.0f, 1.0f, 0.0f}},
-                                             {.pos = {0.5f, 0.5f}, .color = {0.0f, 0.0f, 1.0f}},
-                                             {.pos = {-0.5f, 0.5f}, .color = {1.0f, 1.0f, 1.0f}}};
-
+static const std::vector<Vertex> vertices = {{.pos = {-0.5f, -0.5f, 0.0f}, .color = {1.0f, 0.0f, 0.0f}},
+                                             {.pos = {0.5f, -0.5f, 0.0f}, .color = {0.0f, 1.0f, 0.0f}},
+                                             {.pos = {0.5f, 0.5f, 0.0f}, .color = {0.0f, 0.0f, 1.0f}},
+                                             {.pos = {-0.5f, 0.5f, 0.0f}, .color = {1.0f, 1.0f, 1.0f}}};
 static const std::vector<uint16_t> indices = {0, 1, 2, 2, 3, 0};
 
 void SceneRenderer::InitRenderPass(const Driver* driver) {
@@ -103,7 +101,7 @@ void SceneRenderer::InitPipeline(const Driver* driver) {
 
 void SceneRenderer::InitImages(const Driver* driver, const uint64_t num_images, const VkExtent2D& extent) {
   for (auto idx = 0; idx < num_images; idx++) {
-    render_targets_[idx] = RenderTarget(pass_, extent);
+    render_targets_.at(idx) = RenderTarget(pass_, extent);
   }
 }
 
@@ -115,13 +113,13 @@ void SceneRenderer::Draw(const SwapChainFrame& frame, std::vector<VkCommandBuffe
   // clang-format on
   CommandBufferScope buffer(command_buffers_.at(frame), true);
   {
-    RenderPassScope render_pass(buffer, pass_, render_targets_[frame.image].GetFramebuffer(), kClearValues);
+    RenderPassScope render_pass(buffer, pass_, render_targets_.at(frame.image).GetFramebuffer(), kClearValues);
     render_pass.Bind(&pipeline_);
     vkCmdBindDescriptorSets(buffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipeline_.GetLayout(), 0, 1, &descriptor_sets_[frame], 0,
                             nullptr);
-    VkBuffer vertex_buffers[] = {vertex_buffer_->GetBuffer()};
-    VkDeviceSize offsets[] = {0};
-    vkCmdBindVertexBuffers(buffer, 0, 1, vertex_buffers, offsets);
+    std::array<VkBuffer, 1> vertex_buffers = {vertex_buffer_->GetBuffer()};
+    std::array<VkDeviceSize, 1> offsets = {0};
+    vkCmdBindVertexBuffers(buffer, 0, 1, vertex_buffers.data(), offsets.data());
     vkCmdBindIndexBuffer(buffer, index_buffer_->GetBuffer(), 0, VK_INDEX_TYPE_UINT16);
     vkCmdDrawIndexed(buffer, indices.size(), 1, 0, 0, 0);
   }
@@ -136,7 +134,6 @@ void SceneRenderer::InitBuffers() {
     ASSERT(index_buffer_);
     index_buffer_->CopyFromBytes(&indices[0], buffer_size, true);
   }
-
   {
     // vertex buffer
     const VkDeviceSize buffer_size = (sizeof(Vertex) * vertices.size());
@@ -161,7 +158,6 @@ void SceneRenderer::Destroy(const Driver* driver, const bool is_reinit) {
       delete buffer;
     }
     vkDestroyDescriptorSetLayout(driver->GetDevice(), descriptor_set_layout_, driver->GetAllocator());
-    vkDestroyDescriptorPool(driver->GetDevice(), descriptor_pool_, driver->GetAllocator());
     pipeline_.Destroy(driver);
     vkDestroyRenderPass(driver->GetDevice(), pass_, driver->GetAllocator());
   }
@@ -186,7 +182,7 @@ auto SceneRenderer::GetRenderPass() -> VkRenderPass const& {
 }
 
 auto SceneRenderer::GetImageView(const uint64_t idx) -> VkImageView const& {
-  return render_targets_[idx].GetView();
+  return render_targets_.at(idx).GetView();
 }
 
 void SceneRenderer::InitDescriptorSetLayout(const Driver* driver) {
@@ -211,26 +207,12 @@ void SceneRenderer::InitDescriptorSetLayout(const Driver* driver) {
            "failed to create vk descriptor set layout");
 }
 
-void SceneRenderer::InitDescriptorPool(const Driver* driver) {
-  ASSERT(driver);
-  std::vector<VkDescriptorPoolSize> pool_sizes{
-      {.type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, .descriptorCount = MAX_NUMBER_OF_FRAMES_IN_FLIGHT},
-  };
-  VkDescriptorPoolCreateInfo create_info{};
-  create_info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
-  create_info.poolSizeCount = pool_sizes.size();
-  create_info.pPoolSizes = pool_sizes.data();
-  create_info.maxSets = MAX_NUMBER_OF_FRAMES_IN_FLIGHT;
-  CHECK_VK(FATAL, vkCreateDescriptorPool(driver->GetDevice(), &create_info, driver->GetAllocator(), &descriptor_pool_),
-           "failed to create vk descriptor pool");
-}
-
 void SceneRenderer::InitDescriptorSets(const Driver* driver) {
   ASSERT(driver);
   std::vector<VkDescriptorSetLayout> layouts(MAX_NUMBER_OF_FRAMES_IN_FLIGHT, descriptor_set_layout_);
   VkDescriptorSetAllocateInfo alloc_info{};
   alloc_info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
-  alloc_info.descriptorPool = descriptor_pool_;
+  alloc_info.descriptorPool = driver->GetDescriptorPool();
   alloc_info.descriptorSetCount = layouts.size();
   alloc_info.pSetLayouts = layouts.data();
   descriptor_sets_.resize(layouts.size());
@@ -260,24 +242,19 @@ void SceneRenderer::InitDescriptorSets(const Driver* driver) {
 
 void SceneRenderer::Init() {
   OnSwapChainInitEvent().subscribe([](SwapChainInitEvent* event) {
-    try {
-      ASSERT(event);
-      const auto driver = Driver::Get();
-      ASSERT(driver);
-      if (!event->IsReinit()) {
-        InitRenderPass(driver);
-        InitDescriptorSetLayout(driver);
-        InitPipeline(driver);
-        InitCommandBuffers(driver);
-      }
-      InitImages(driver, SwapChain::GetNumberOfImages(), SwapChain::GetExtent());
-      if (!event->IsReinit()) {
-        InitBuffers();
-        InitDescriptorPool(driver);
-        InitDescriptorSets(driver);
-      }
-    } catch (const std::exception& exc) {
-      LOG(FATAL) << "exception: " << exc.what();
+    ASSERT(event);
+    const auto driver = Driver::Get();
+    ASSERT(driver);
+    if (!event->IsReinit()) {
+      InitRenderPass(driver);
+      InitDescriptorSetLayout(driver);
+      InitPipeline(driver);
+      InitCommandBuffers(driver);
+    }
+    InitImages(driver, SwapChain::GetNumberOfImages(), SwapChain::GetExtent());
+    if (!event->IsReinit()) {
+      InitBuffers();
+      InitDescriptorSets(driver);
     }
   });
   OnSwapChainDestroyedEvent().subscribe([](SwapChainDestroyedEvent* event) {

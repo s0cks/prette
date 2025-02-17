@@ -17,7 +17,6 @@ class SceneRenderer {
   static void InitRenderPass(const Driver* driver);
   static void InitCommandBuffers(const Driver* driver);
   static void InitBuffers();
-  static void InitDescriptorPool(const Driver* driver);
   static void InitDescriptorSets(const Driver* driver);
 
   static void Destroy(const Driver* driver, const bool is_reinit);

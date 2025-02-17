@@ -5,6 +5,7 @@
 #include <imgui_impl_vulkan.h>
 #include <implot.h>
 
+#include "prette/common.h"
 #include "prette/gfx_driver.h"
 #include "prette/gui_renderer.h"
 #include "prette/lua.h"
@@ -23,9 +24,12 @@ void GuiViewport::Update() {
 }
 
 void GuiViewport::Render() {
-  ImGui::SetNextWindowPos({0, 0}, ImGuiCond_FirstUseEver);
-  ImGui::SetNextWindowSize(ImGui::GetContentRegionAvail(), ImGuiCond_FirstUseEver);
-  ImGui::Begin(GetGuiName());
+  const auto window = GetAppWindow();
+  ASSERT(window);
+  const auto size = window->GetSize();
+  ImGui::SetNextWindowPos(ImVec2{(size.width() / 4), 0});
+  ImGui::SetNextWindowSize(ImVec2{size.width() - (size.width() / 4), size.height()});
+  ImGui::Begin(GetGuiName(), nullptr, ImGuiWindowFlags_NoCollapse);
   ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
   ImGui::Image(GuiRenderer::GetSceneDescriptor(SwapChain::GetCurrentFrame().frame),
                ImVec2{viewportPanelSize.x, viewportPanelSize.y});

@@ -51,7 +51,6 @@ class GuiRenderer {
   static void InitFramebuffers(const Driver* driver);
   static void InitRenderPass(const Driver* driver);
   static void InitCommandBuffers(const Driver* driver);
-  static void InitDescriptorPool(const Driver* driver);
   static void InitSampler(const Driver* driver);
 
   static void Destroy(const Driver* driver, const bool is_reinit);
@@ -60,7 +59,6 @@ class GuiRenderer {
   static void Init();
   static auto GetPass() -> VkRenderPass const&;
   static auto GetSceneDescriptor(const uint32_t frame) -> VkDescriptorSet const&;
-  static auto GetDescriptorPool() -> VkDescriptorPool const&;
   static void Draw(const SwapChainFrame& frame, std::vector<VkCommandBuffer>& cmd_buffers);
 };
 }  // namespace prt

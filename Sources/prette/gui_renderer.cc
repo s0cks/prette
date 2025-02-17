@@ -16,7 +16,6 @@ namespace prt {
 static VkRenderPass pass_{};
 static std::vector<VkFramebuffer> framebuffers_{};
 static std::array<VkCommandBuffer, MAX_NUMBER_OF_FRAMES_IN_FLIGHT> command_buffers_{};
-static VkDescriptorPool descriptor_pool_{};
 static std::vector<VkDescriptorSet> descriptors_{};
 
 static VkSampler sampler_{};
@@ -126,7 +125,6 @@ void GuiRenderer::Destroy(const Driver* driver, const bool is_reinit) {
   }
   if (!is_reinit) {
     vkDestroySampler(driver->GetDevice(), sampler_, driver->GetAllocator());
-    vkDestroyDescriptorPool(driver->GetDevice(), descriptor_pool_, driver->GetAllocator());
     vkFreeCommandBuffers(driver->GetDevice(), driver->GetCommandPool(), command_buffers_.size(), command_buffers_.data());
   }
 }
@@ -137,38 +135,6 @@ auto GuiRenderer::GetPass() -> VkRenderPass const& {
 
 auto GuiRenderer::GetSceneDescriptor(const uint32_t frame) -> VkDescriptorSet const& {
   return descriptors_[frame];
-}
-
-static auto GetDescriptorPool() -> VkDescriptorPool const& {
-  return descriptor_pool_;
-}
-
-void GuiRenderer::InitDescriptorPool(const Driver* driver) {
-  VkDescriptorPoolSize descriptor_pool_sizes_[] = {{VK_DESCRIPTOR_TYPE_SAMPLER, 1000},
-                                                   {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1000},
-                                                   {VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE, 1000},
-                                                   {VK_DESCRIPTOR_TYPE_STORAGE_IMAGE, 1000},
-                                                   {VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER, 1000},
-                                                   {VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER, 1000},
-                                                   {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, 1000},
-                                                   {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1000},
-                                                   {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC, 1000},
-                                                   {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC, 1000},
-                                                   {VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT, 1000}};
-
-  VkDescriptorPoolCreateInfo create_info{};
-  create_info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
-  create_info.flags = VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT;
-  create_info.maxSets = 1000;
-  create_info.poolSizeCount = std::size(descriptor_pool_sizes_);
-  create_info.pPoolSizes = descriptor_pool_sizes_;
-
-  CHECK_VK(FATAL, vkCreateDescriptorPool(driver->GetDevice(), &create_info, driver->GetAllocator(), &descriptor_pool_),
-           "failed to create vk descriptor pool");
-}
-
-auto GuiRenderer::GetDescriptorPool() -> VkDescriptorPool const& {
-  return descriptor_pool_;
 }
 
 void GuiRenderer::Init() {
@@ -184,14 +150,13 @@ void GuiRenderer::Init() {
       InitFramebuffers(driver);
       if (!event->IsReinit()) {
         InitCommandBuffers(driver);
-        InitDescriptorPool(driver);
         ImGui_ImplVulkan_InitInfo info{};
         info.Instance = driver->GetInstance();
         info.PhysicalDevice = driver->GetPhysicalDevice();
         info.Allocator = driver->GetAllocator();
         info.Device = driver->GetDevice();
         info.Queue = driver->GetGraphicsQueue();
-        info.DescriptorPool = GetDescriptorPool();
+        info.DescriptorPool = driver->GetDescriptorPool();
         info.ImageCount = 2;
         info.MinImageCount = 2;
         info.RenderPass = GetPass();

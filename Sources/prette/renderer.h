@@ -98,7 +98,7 @@ FOR_EACH_RENDERER_EVENT(DEFINE_ON_EVENT)
 #undef DEFINE_ON_EVENT
 
 struct Vertex {
-  glm::vec2 pos;
+  glm::vec3 pos;
   glm::vec3 color;
 
   static auto GetBindingDescription() -> VkVertexInputBindingDescription {
@@ -113,7 +113,7 @@ struct Vertex {
     std::array<VkVertexInputAttributeDescription, 2> attributes{};
     attributes.at(0).binding = 0;
     attributes.at(0).location = 0;
-    attributes.at(0).format = VK_FORMAT_R32G32_SFLOAT;
+    attributes.at(0).format = VK_FORMAT_R32G32B32_SFLOAT;
     attributes.at(0).offset = offsetof(Vertex, pos);
 
     attributes.at(1).binding = 0;

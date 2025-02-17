@@ -365,6 +365,7 @@ class Driver : public DriverBase {
   VkQueue present_queue_{};
   VkSurfaceKHR surface_{};
   VkCommandPool command_pool_{};
+  VkDescriptorPool descriptor_pool_{};
   VkAllocationCallbacks* allocator_ = nullptr;
   vk::ExtensionList instance_extensions_{};
   vk::ExtensionList device_extensions_{
@@ -383,6 +384,7 @@ class Driver : public DriverBase {
   void InitSurface();
   void InitLogicalDevice(const float priority);
   void InitCommandPool();
+  void InitDescriptorPool();
 #ifdef PRT_DEBUG
   void InitDebugMessenger();
 #endif  // PRT_DEBUG
@@ -436,6 +438,10 @@ class Driver : public DriverBase {
 
   auto GetCommandPool() const -> VkCommandPool const& {
     return command_pool_;
+  }
+
+  auto GetDescriptorPool() const -> VkDescriptorPool const& {
+    return descriptor_pool_;
   }
 
 #ifdef PRT_DEBUG

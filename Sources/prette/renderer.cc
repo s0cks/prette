@@ -1,6 +1,9 @@
 #include "prette/renderer.h"
 
+#include <easing.h>
 #include <imgui_impl_vulkan.h>
+#include <mach/clock_types.h>
+#include <tweeny.h>
 #include <vulkan/vulkan_core.h>
 
 #include <glm/ext/matrix_clip_space.hpp>
@@ -23,6 +26,8 @@
 namespace prt {
 static RendererEventSubject events_{};
 static std::array<VkCommandBuffer, MAX_NUMBER_OF_FRAMES_IN_FLIGHT> command_buffers_{};
+
+static auto kTween = tweeny::from(0.0f).to(360.0f).during(engine::kTargetTicksPerSecond * 100).via(tweeny::easing::circularInOut);
 
 static inline void PublishRendererEvent(RendererEvent* event) {
   ASSERT(event);
@@ -113,12 +118,14 @@ void Renderer::DrawFrame(Driver* driver, const Tick& current, const Tick& previo
 
   {
     // update camera
-    CameraData data{};
+    const auto camera = Camera::Get();
+    ASSERT(camera);
+    auto data = camera->data();
     data.model = glm::mat4(1.0f);
-    data.model = glm::rotate(data.model, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-    data.view = glm::lookAt(glm::vec3(2.0f, 2.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-    const auto& extent = SwapChain::GetExtent();
-    data.projection = glm::perspective(glm::radians(45.0f), static_cast<float>(extent.width / extent.height), 0.1f, 10.0f);
+    data.model = glm::translate(data.model, glm::vec3(0.0f, 0.0f, -1.0f));
+    camera->Update();
+    // const auto rot = kTween.step(1);
+    // data.model = glm::rotate(data.model, rot, glm::vec3(0.0f, 1.0f, 0.0f));
     data.projection[1][1] *= -1;
     const auto buffer = SceneRenderer::GetCameraBuffer(frame.frame);
     ASSERT(buffer);
