@@ -12,16 +12,10 @@ namespace prt {
 static MouseEventSubject events_{};
 static Mouse* mouse_ = nullptr;
 
-static inline void PublishEvent(MouseEvent* event) {
+void Mouse::PublishEvent(MouseEvent* event) {
   ASSERT(event);
   const auto& subscriber = events_.get_subscriber();
   return subscriber.on_next(event);
-}
-
-template <class E, typename... Args>
-static inline void Publish(Args... args) {
-  E event(args...);
-  return PublishEvent(&event);
 }
 
 auto OnMouseEvent() -> MouseEventObservable {
@@ -30,6 +24,13 @@ auto OnMouseEvent() -> MouseEventObservable {
 
 auto MouseCreatedEvent::ToString() const -> std::string {
   ToStringHelper<MouseCreatedEvent> helper{};
+  return helper;
+}
+
+auto MouseMotionEvent::ToString() const -> std::string {
+  ToStringHelper<MouseMotionEvent> helper{};
+  helper.AddFieldPtr("mouse", GetMouse());
+  helper.AddField("direction", glm::to_string(GetDirection()));
   return helper;
 }
 
@@ -42,11 +43,13 @@ Mouse::Mouse(Window* owner) :
   owner_(owner) {
   ASSERT(owner_);
   glfwSetMouseButtonCallback(owner_->GetHandle(), &OnMouseButton);
+  glfwSetCursorPosCallback(owner_->GetHandle(), &OnMouseMotion);
 }
 
 Mouse::~Mouse() {
   ASSERT(owner_);
   glfwSetMouseButtonCallback(owner_->GetHandle(), nullptr);
+  glfwSetCursorPosCallback(owner_->GetHandle(), nullptr);
 }
 
 auto Mouse::IsInitialized() -> bool {
@@ -79,7 +82,10 @@ auto Mouse::New(Window* window) -> Mouse* {
 auto Mouse::Init(Window* window) -> Mouse* {
   ASSERT(window);
   ASSERT(!IsInitialized());
-  return SetMouse(Mouse::New(window));
+  const auto mouse = SetMouse(Mouse::New(window));
+  ASSERT(mouse);
+  window->SetMouse(mouse);
+  return mouse;
 }
 
 #define LUA_MOUSE_F(Name) LUA_F(mouse_##Name)

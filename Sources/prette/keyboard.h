@@ -158,6 +158,10 @@ class KeyStateEvent : public KeyboardEventBase {
     return state_.GetCode();
   }
 
+  inline auto IsCode(const int code) const -> bool {
+    return GetCode() == code;
+  }
+
   auto GetMods() const -> int {
     return mods_;
   }
@@ -206,12 +210,24 @@ class KeyStateEvent : public KeyboardEventBase {
     };
   }
 
+  static inline auto FilterByPressed() -> KeyboardEvent::Predicate {
+    return [](KeyboardEvent* event) {
+      return event && event->IsKeyStateEvent() && event->AsKeyStateEvent()->IsPressed();
+    };
+  }
+
   static inline auto FilterByPressed(const int code) -> std::function<bool(KeyboardEvent*)> {
     return FilterBy(KeyState(code, GLFW_PRESS));
   }
 
   static inline auto FilterByReleased(const int code) -> KeyboardEvent::Predicate {
     return FilterBy(KeyState(code, GLFW_RELEASE));
+  }
+
+  static inline auto FilterByReleased() -> KeyboardEvent::Predicate {
+    return [](KeyboardEvent* event) {
+      return event && event->IsKeyStateEvent() && event->AsKeyStateEvent()->IsReleased();
+    };
   }
 };
 
@@ -227,8 +243,16 @@ auto OnKeyboardEvent() -> KeyboardEventObservable;
 FOR_EACH_KEYBOARD_EVENT(DEFINE_ON_EVENT);
 #undef DEFINE_ON_EVENT
 
+static inline auto OnKeyPressed() -> KeyStateEventObservable {
+  return OnKeyboardEvent().filter(KeyStateEvent::FilterByPressed()).map(KeyStateEvent::Cast);
+}
+
 static inline auto OnKeyPressed(const int code) -> KeyStateEventObservable {
   return OnKeyboardEvent().filter(KeyStateEvent::FilterByPressed(code)).map(KeyStateEvent::Cast);
+}
+
+static inline auto OnKeyReleased() -> KeyStateEventObservable {
+  return OnKeyboardEvent().filter(KeyStateEvent::FilterByReleased()).map(KeyStateEvent::Cast);
 }
 
 static inline auto OnKeyReleased(const int code) -> KeyStateEventObservable {

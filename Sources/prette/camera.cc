@@ -1,6 +1,10 @@
 #include "prette/camera.h"
 
 #include "prette/common.h"
+#include "prette/config.h"
+#include "prette/engine.h"
+#include "prette/glm.h"
+#include "prette/keyboard.h"
 #include "prette/mouse.h"
 #include "prette/swapchain.h"
 #include "prette/window.h"
@@ -8,10 +12,46 @@
 namespace prt {
 PerspectiveCamera::PerspectiveCamera(const float fov, const float aspectRatio, const float nearClip, const float farClip,
                                      const glm::vec3& pos) :
-  Camera(glm::perspective(fov, aspectRatio, nearClip, farClip), pos) {}
+  Camera(glm::perspective(fov, aspectRatio, nearClip, farClip), pos) {
+  on_key_ = OnKeyStateEvent().subscribe([this](KeyStateEvent* event) {
+    if (event->IsRepeat() || event->IsPressed()) {
+      ASSERT(event);
+      const auto engine = Engine::Get();
+      ASSERT(engine);
+      const auto dts = (engine->GetCurrentTick() - engine->GetPreviousTick());
+      const auto velocity = speed_ * (dts.value() / NSEC_PER_MSEC);
+      if (event->IsCode(GLFW_KEY_A)) {
+        return MoveLeft(velocity);
+      } else if (event->IsCode(GLFW_KEY_S)) {
+        return MoveBack(velocity);
+      } else if (event->IsCode(GLFW_KEY_W)) {
+        return MoveForward(velocity);
+      } else if (event->IsCode(GLFW_KEY_D)) {
+        return MoveRight(velocity);
+      }
+    }
+  });
+  on_mouse_moved_ = OnMouseMotionEvent().skip(1).subscribe([this](MouseMotionEvent* event) {
+    ASSERT(event);
+    const auto keyboard = Keyboard::Get();
+    ASSERT(keyboard);
+    if (keyboard->GetKey(GLFW_KEY_SPACE).IsReleased()) {
+      const auto& direction = event->GetDirection();
+      yaw_ += (direction.x * sensitivity_);
+      pitch_ -= (direction.y * sensitivity_);
+      Clamp(pitch_, -89.0f, 89.0f);
+      glm::vec3 dir{};
+      dir.x = cos(glm::radians(yaw_)) * cos(glm::radians(pitch_));
+      dir.y = sin(glm::radians(pitch_));
+      dir.z = sin(glm::radians(yaw_)) * cos(glm::radians(pitch_));
+      data_.direction = glm::normalize(dir);
+    }
+  });
+}
 
 PerspectiveCamera::~PerspectiveCamera() {
   on_mouse_moved_.unsubscribe();
+  on_key_.unsubscribe();
 }
 
 void PerspectiveCamera::Update() {

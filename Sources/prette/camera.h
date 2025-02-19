@@ -85,8 +85,26 @@ class PerspectiveCamera : public Camera {
  private:
   float yaw_ = -90.0f;
   float pitch_ = 0.0f;
-  float speed_ = 0.5f;
+  float speed_ = 0.05f;
+  float sensitivity_ = 0.1f;
   rx::subscription on_mouse_moved_{};
+  rx::subscription on_key_{};
+
+  inline void MoveLeft(const float velocity) {
+    data_.pos -= (data_.right * velocity);
+  }
+
+  inline void MoveBack(const float velocity) {
+    data_.pos -= (data_.direction * velocity);
+  }
+
+  inline void MoveForward(const float velocity) {
+    data_.pos += (data_.direction * velocity);
+  }
+
+  inline void MoveRight(const float velocity) {
+    data_.pos += (data_.right * velocity);
+  }
 
  public:
   PerspectiveCamera(const float fov, const float aspectRatio, const float nearClip, const float farClip, const glm::vec3& pos);
@@ -102,6 +120,20 @@ class PerspectiveCamera : public Camera {
 
   auto GetSpeed() const -> float {
     return speed_;
+  }
+
+  void SetSpeed(const float rhs) {
+    ASSERT(rhs >= 0.0f);
+    speed_ = rhs;
+  }
+
+  auto GetSensitivity() const -> float {
+    return sensitivity_;
+  }
+
+  void SetSensitivity(const float rhs) {
+    ASSERT(rhs >= 0.0f);
+    sensitivity_ = rhs;
   }
 
   void Update() override;

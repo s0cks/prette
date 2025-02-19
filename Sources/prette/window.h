@@ -231,9 +231,10 @@ class WindowEventSource : public EventSource<WindowEvent> {
 #undef DEFINE_ON_WINDOW_EVENT
 };
 
+class Mouse;
 class Keyboard;
 class Window : public WindowEventSource {
-  friend class Runtime;
+  friend class Mouse;
   friend class Keyboard;
   friend class LuaState;
   friend class WindowBuilder;
@@ -305,6 +306,7 @@ class Window : public WindowEventSource {
   WindowEventSubject events_;
   Handle* handle_;
   Keyboard* keyboard_ = nullptr;
+  Mouse* mouse_ = nullptr;
 
   explicit Window(Handle* handle);
   void PublishEvent(WindowEvent* event) const override;
@@ -312,6 +314,11 @@ class Window : public WindowEventSource {
   void SetKeyboard(Keyboard* rhs) {
     ASSERT(rhs);
     keyboard_ = rhs;
+  }
+
+  void SetMouse(Mouse* rhs) {
+    ASSERT(rhs);
+    mouse_ = rhs;
   }
 
 #define DEFINE_PUBLISH_EVENT(Name)                       \
@@ -421,6 +428,14 @@ class Window : public WindowEventSource {
 
   auto OnEvent() const -> WindowEventObservable override {
     return events_.get_observable();
+  }
+
+  auto GetMouse() const -> Mouse* {
+    return mouse_;
+  }
+
+  inline auto HasMouse() const -> bool {
+    return GetMouse() != nullptr;
   }
 
   auto GetKeyboard() const -> Keyboard* {

@@ -109,6 +109,14 @@ static inline auto GetFilesize(FILE* file) -> uint64_t {
   return sz;
 }
 
+static inline void Clamp(float& value, const float min, const float max) {
+  if (value > max) {
+    value = max;
+  } else if (value < min) {
+    value = min;
+  }
+}
+
 static inline auto RoundUpPow2(uword x) -> uword {
   x = x - 1;
   x = x | (x >> 1);

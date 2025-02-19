@@ -5,6 +5,7 @@
 #include <imgui_impl_vulkan.h>
 #include <implot.h>
 
+#include "prette/camera.h"
 #include "prette/engine.h"
 #include "prette/gui_renderer.h"
 #include "prette/series.h"
@@ -19,6 +20,10 @@ static TimeSeries<> avg_{};
 static TimeSeries<> min_{};
 static TimeSeries<> max_{};
 
+static float camera_speed_ = 0.0f;
+static float camera_fov_ = 0.0f;
+static float camera_sensitivity_ = 0.0f;
+
 static inline auto TimeFormatter(double value, char* buff, int size, void*) -> int {
   const auto str = units::time::to_string(units::time::millisecond_t(value));
   return snprintf(buff, size, "%s", str.c_str());
@@ -26,6 +31,10 @@ static inline auto TimeFormatter(double value, char* buff, int size, void*) -> i
 
 GuiDebug::GuiDebug() :
   Gui("Debug") {
+  const auto camera = Camera::Get();
+  ASSERT(camera);
+  camera_sensitivity_ = ((PerspectiveCamera*)camera)->GetSensitivity();
+  camera_speed_ = ((PerspectiveCamera*)camera)->GetSpeed();
   Engine::Get()->OnTickProfilerStats().subscribe(([](const TickStats stats) {
     tpsseries_.Append(Engine::Get()->GetTicksPerSecond().per_sec());
     avg_.Append(stats.avg / NSEC_PER_MSEC);
@@ -81,6 +90,14 @@ void GuiDebug::Render() {
     ImPlot::PlotLine("Min", tickseries_.begin(), min_.begin(), 10);
     ImPlot::PlotLine("Max", tickseries_.begin(), max_.begin(), 10);
     ImPlot::EndPlot();
+  }
+
+  const auto camera = ((PerspectiveCamera*)Camera::Get());
+  if (ImGui::InputFloat("Speed", &camera_speed_)) {
+    camera->SetSpeed(camera_speed_);
+  }
+  if (ImGui::InputFloat("Sensitivity", &camera_sensitivity_)) {
+    camera->SetSensitivity(camera_sensitivity_);
   }
   ImGui::End();
 }

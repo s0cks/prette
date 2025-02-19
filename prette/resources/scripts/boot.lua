@@ -33,8 +33,17 @@ if Prette.isDebug() then
   -- init Keyboard
   Keyboard.onEvent(print)
 
+  local isMotionEvent = function(event)
+    local event_name = getmetatable(event).__name
+    return event_name == "MouseMotion"
+  end
+
   -- init Mouse
-  Mouse.onEvent(print)
+  Mouse.onEvent(function(event)
+    if not isMotionEvent(event) then
+      print(event)
+    end
+  end)
 
   -- init Renderer
   local isFrameEvent = function(event)

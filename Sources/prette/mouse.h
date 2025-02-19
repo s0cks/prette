@@ -9,6 +9,7 @@ namespace prt {
 #define FOR_EACH_MOUSE_EVENT(V) \
   V(MouseCreated)               \
   V(MouseButtonState)           \
+  V(MouseMotion)                \
   V(MouseDestroyed)
 
 class Mouse;
@@ -170,6 +171,25 @@ class MouseButtonStateEvent : public MouseEventBase {
   }
 };
 
+class MouseMotionEvent : public MouseEventBase {
+ private:
+  glm::vec2 direction_;
+
+ public:
+  MouseMotionEvent(const Mouse* mouse, const glm::vec2& dir) :
+    MouseEventBase(mouse),
+    direction_(dir) {}
+  MouseMotionEvent(const Mouse* mouse, const double xPos, const double yPos) :
+    MouseMotionEvent(mouse, glm::vec2(xPos, yPos)) {}
+  ~MouseMotionEvent() = default;
+
+  auto GetDirection() const -> glm::vec2 const& {
+    return direction_;
+  }
+
+  DECLARE_EVENT_TYPE(MouseEvent, MouseMotion);
+};
+
 class MouseDestroyedEvent : public MouseEvent {
  public:
   MouseDestroyedEvent() = default;
@@ -215,9 +235,19 @@ class Mouse {
   friend class LuaState;
 #ifdef PRT_GLFW
   static void OnMouseButton(GLFWwindow* window, int button, int action, int mods);
+  static void OnMouseMotion(GLFWwindow* window, double xPos, double yPos);
 #endif  // PRT_GLFW
  private:
   Window* owner_;
+  glm::vec2 previous_pos_{};
+
+  static void PublishEvent(MouseEvent* event);
+
+  template <class E, typename... Args>
+  static inline void Publish(Args... args) {
+    E event(args...);
+    return PublishEvent(&event);
+  }
 
  protected:
   explicit Mouse(Window* owner);
@@ -230,6 +260,11 @@ class Mouse {
   }
 
   auto GetPos() const -> glm::dvec2;
+
+  auto GetPreviousPos() const -> glm::vec2 const& {
+    return previous_pos_;
+  }
+
   auto IsPressed(const int btn) const -> bool;
 
  private:

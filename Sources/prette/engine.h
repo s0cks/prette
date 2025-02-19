@@ -306,7 +306,7 @@ auto OnEngineEvent() -> EngineEventObservable;
 FOR_EACH_ENGINE_EVENT(DEFINE_ON_EVENT);
 #undef DEFINE_ON_EVENT
 
-static constexpr const auto kTargetTicksPerSecond = 30;
+static constexpr const auto kTargetTicksPerSecond = 120;
 static constexpr const auto kTargetTickRate = NSEC_PER_SEC / kTargetTicksPerSecond;
 class Engine {
   friend class prt::LuaState;
