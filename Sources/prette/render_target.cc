@@ -3,7 +3,8 @@
 #include <vulkan/vulkan_core.h>
 
 namespace prt {
-RenderTarget::RenderTarget(const VkRenderPass& pass, const VkExtent2D& extent, const VkFormat format) {
+RenderTarget::RenderTarget(const VkRenderPass& pass, const VkExtent2D& extent, const VkImageView depth_view,
+                           const VkFormat format) {
   const auto driver = Driver::Get();
   ASSERT(driver);
 
@@ -61,11 +62,17 @@ RenderTarget::RenderTarget(const VkRenderPass& pass, const VkExtent2D& extent, c
   CHECK_VK(FATAL, vkCreateImageView(driver->GetDevice(), &view_info, driver->GetAllocator(), &view_),
            "failed to create vk image view");
 
+  std::vector<VkImageView> attachments = {
+      view_,
+  };
+  if (depth_view != VK_NULL_HANDLE)
+    attachments.push_back(depth_view);
+
   VkFramebufferCreateInfo fb_info{};
   fb_info.sType = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
   fb_info.renderPass = pass;
-  fb_info.attachmentCount = 1;
-  fb_info.pAttachments = &view_;
+  fb_info.attachmentCount = attachments.size();
+  fb_info.pAttachments = attachments.data();
   fb_info.width = extent.width;
   fb_info.height = extent.height;
   fb_info.layers = 1;

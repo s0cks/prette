@@ -12,14 +12,17 @@
 namespace prt {
 PerspectiveCamera::PerspectiveCamera(const float fov, const float aspectRatio, const float nearClip, const float farClip,
                                      const glm::vec3& pos) :
+  fov_(fov),
+  aspect_(aspectRatio),
+  near_(nearClip),
+  far_(farClip),
   Camera(glm::perspective(fov, aspectRatio, nearClip, farClip), pos) {
   on_key_ = OnKeyStateEvent().subscribe([this](KeyStateEvent* event) {
     if (event->IsRepeat() || event->IsPressed()) {
       ASSERT(event);
       const auto engine = Engine::Get();
       ASSERT(engine);
-      const auto dts = (engine->GetCurrentTick() - engine->GetPreviousTick());
-      const auto velocity = speed_ * (dts.value() / NSEC_PER_MSEC);
+      const auto velocity = CalculateVelocity(engine->GetCurrentTick() - engine->GetPreviousTick());
       if (event->IsCode(GLFW_KEY_A)) {
         return MoveLeft(velocity);
       } else if (event->IsCode(GLFW_KEY_S)) {
@@ -72,9 +75,9 @@ void Camera::Init() {
     ASSERT(event);
     const auto window = GetAppWindow();
     ASSERT(window);
-    const auto fbsize = window->GetFramebufferSize();
-    const auto aspectRatio = (fbsize.width() / fbsize.height());
-    camera_ = new PerspectiveCamera(70.0f, aspectRatio, 0.0f, 100.0f, glm::vec3(0.0f, 0.0f, 3.0f));
+    const auto fb_size = window->GetFramebufferSize();
+    const auto aspect_ratio = fb_size.GetAspectRatio();
+    camera_ = new PerspectiveCamera(kDefaultFov, aspect_ratio, kDefaultNearClip, kDefaultFarClip, kDefaultPos);
     ASSERT(camera_);
   });
 }

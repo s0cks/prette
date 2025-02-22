@@ -17,7 +17,8 @@ class RenderTarget {
 
  public:
   RenderTarget() = default;
-  RenderTarget(const VkRenderPass& pass, const VkExtent2D& extent, const VkFormat format = VK_FORMAT_B8G8R8A8_SRGB);
+  RenderTarget(const VkRenderPass& pass, const VkExtent2D& extent, const VkImageView depth_view = VK_NULL_HANDLE,
+               const VkFormat format = VK_FORMAT_B8G8R8A8_SRGB);
   ~RenderTarget() = default;
 
   auto GetImage() const -> VkImage const& {

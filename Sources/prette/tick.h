@@ -66,6 +66,10 @@ class TickDelta {
     return value() > rhs;
   }
 
+  auto operator/(const uint64_t& rhs) const -> float {
+    return static_cast<float>(value()) / static_cast<float>(rhs);
+  }
+
   friend auto operator<<(std::ostream& stream, const TickDelta& rhs) -> std::ostream& {
     return stream << units::time::nanosecond_t(rhs.value());  // NOLINT(cppcoreguidelines-narrowing-conversions)
   }

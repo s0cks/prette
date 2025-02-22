@@ -94,7 +94,7 @@ static inline void InitBlending(VkPipelineColorBlendStateCreateInfo& create_info
 static inline void InitInput(VkPipelineVertexInputStateCreateInfo& vertex_input,
                              VkPipelineInputAssemblyStateCreateInfo& input_assembly,
                              const std::array<VkVertexInputBindingDescription, 1>& bindings,
-                             const std::array<VkVertexInputAttributeDescription, 2>& attributes) {
+                             const std::array<VkVertexInputAttributeDescription, 3>& attributes) {
   vertex_input.sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
   vertex_input.vertexBindingDescriptionCount = bindings.size();
   vertex_input.pVertexBindingDescriptions = bindings.data();
@@ -118,8 +118,21 @@ static inline void InitColorBlendAttachment(VkPipelineColorBlendAttachmentState&
   color_blend_attachment.alphaBlendOp = VK_BLEND_OP_ADD;
 }
 
+static inline void InitDepthStencil(VkPipelineDepthStencilStateCreateInfo& depth_stencil) {
+  depth_stencil.sType = VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO;
+  depth_stencil.depthTestEnable = VK_TRUE;
+  depth_stencil.depthWriteEnable = VK_TRUE;
+  depth_stencil.depthCompareOp = VK_COMPARE_OP_LESS;
+  depth_stencil.depthBoundsTestEnable = VK_FALSE;
+  depth_stencil.minDepthBounds = 0.0f;
+  depth_stencil.maxDepthBounds = 1.0f;
+  depth_stencil.stencilTestEnable = VK_FALSE;
+  depth_stencil.front = {};
+  depth_stencil.back = {};
+}
+
 void GraphicsPipeline::Init(const Driver* driver, const std::string& shader, const std::vector<VkDynamicState>& dynamic_states,
-                            const std::vector<VkDescriptorSetLayout>& descriptor_set_layouts) {
+                            const std::vector<VkDescriptorSetLayout>& descriptor_set_layouts, const bool depth) {
   ASSERT(driver);
   VkPipelineLayoutCreateInfo pipeline_layout{};
   pipeline_layout.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
@@ -141,6 +154,9 @@ void GraphicsPipeline::Init(const Driver* driver, const std::string& shader, con
       frag_stage,
   };
 
+  VkPipelineDepthStencilStateCreateInfo depth_stencil{};
+  InitDepthStencil(depth_stencil);
+
   VkViewport viewport{};
   VkRect2D scissor{};
   InitViewportAndScissor(viewport, scissor, extent_);
@@ -152,7 +168,7 @@ void GraphicsPipeline::Init(const Driver* driver, const std::string& shader, con
   std::array<VkVertexInputBindingDescription, 1> bindings = {
       Vertex::GetBindingDescription(),
   };
-  std::array<VkVertexInputAttributeDescription, 2> attributes = Vertex::GetAttributeDescriptions();
+  std::array<VkVertexInputAttributeDescription, 3> attributes = Vertex::GetAttributeDescriptions();
   InitInput(vertex_input_info, input_assembly, bindings, attributes);
 
   VkPipelineDynamicStateCreateInfo dynamic_state{};
@@ -188,6 +204,7 @@ void GraphicsPipeline::Init(const Driver* driver, const std::string& shader, con
   pipeline.pMultisampleState = &multisampling;
   pipeline.pColorBlendState = &blending;
   pipeline.pDynamicState = &dynamic_state;
+  pipeline.pDepthStencilState = &depth_stencil;
   pipeline.layout = layout_;
   pipeline.renderPass = pass_;
   pipeline.subpass = 0;
@@ -214,9 +231,9 @@ void GraphicsPipeline::Destroy(const Driver* driver) {
 
 GraphicsPipeline::GraphicsPipeline(const Driver* driver, const std::string& shader, const VkRenderPass pass,
                                    const std::vector<VkDynamicState>& dynamic_states, const VkExtent2D& extent,
-                                   const std::vector<VkDescriptorSetLayout>& descriptor_set_layouts) :
+                                   const std::vector<VkDescriptorSetLayout>& descriptor_set_layouts, const bool depth) :
   pass_(pass),
   extent_(extent) {
-  Init(driver, shader, dynamic_states, descriptor_set_layouts);
+  Init(driver, shader, dynamic_states, descriptor_set_layouts, depth);
 }
 }  // namespace prt

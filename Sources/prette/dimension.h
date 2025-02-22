@@ -89,6 +89,10 @@ class Dimension {
     return data_[kHeightComponent];
   }
 
+  auto GetAspectRatio() const -> float {
+    return static_cast<float>(width()) / static_cast<float>(height());
+  }
+
   auto operator=(Dimension&& rhs) -> Dimension& = default;
   auto operator=(const Dimension& rhs) -> Dimension& = default;
 

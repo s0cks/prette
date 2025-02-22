@@ -1,6 +1,6 @@
 ---
 # yamllint disable-line rule:line-length
-Checks: clang-diagnostic-*,clang-analyzer-*,cppcoreguidelines-*,modernize-*,-modernize-use-nodiscard,-cppcoreguidelines-pro-bounds-array-to-pointer-decay,-cppcoreguidelines-pro-type-union-access,-cppcoreguidelines-macro-usage,-cppcoreguidelines-no-malloc,-cppcoreguidelines-owning-memory,-cppcoreguidelines-pro-bounds-pointer-arithmetic,-cppcoreguidelines-special-member-functions,-cppcoreguidelines-slicing,-cppcoreguidelines-avoid-non-const-global-variables
+Checks: clang-diagnostic-*,clang-analyzer-*,cppcoreguidelines-*,modernize-*,-modernize-use-nodiscard,-cppcoreguidelines-pro-bounds-array-to-pointer-decay,-cppcoreguidelines-pro-type-union-access,-cppcoreguidelines-macro-usage,-cppcoreguidelines-no-malloc,-cppcoreguidelines-owning-memory,-cppcoreguidelines-pro-bounds-pointer-arithmetic,-cppcoreguidelines-special-member-functions,-cppcoreguidelines-slicing,-cppcoreguidelines-avoid-non-const-global-variables,-cppcoreguidelines-avoid-magic-numbers
 WarningsAsErrors: true
 HeaderFilterRegex: ".*"
 FormatStyle: google

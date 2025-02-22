@@ -4,7 +4,6 @@
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_vulkan.h>
 #include <implot.h>
-#include <stb_image.h>
 #include <vulkan/vulkan_core.h>
 
 #include <cstdint>
@@ -15,6 +14,7 @@
 #include "prette/flags.h"
 #include "prette/gfx.h"
 #include "prette/gfx_driver.h"
+#include "prette/gui_camera.h"
 #include "prette/gui_debug.h"
 #include "prette/gui_renderer.h"
 #include "prette/gui_viewport.h"
@@ -79,6 +79,7 @@ void Init() {
     ASSERT(event);
     guis_.push_back(new GuiViewport());
     guis_.push_back(new GuiDebug());
+    guis_.push_back(new GuiCamera());
   });
   engine::OnTickEvent().subscribe([](engine::TickEvent* event) {
     ASSERT(event);

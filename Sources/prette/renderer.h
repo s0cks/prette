@@ -100,6 +100,7 @@ FOR_EACH_RENDERER_EVENT(DEFINE_ON_EVENT)
 struct Vertex {
   glm::vec3 pos;
   glm::vec3 color;
+  glm::vec2 uv;
 
   static auto GetBindingDescription() -> VkVertexInputBindingDescription {
     VkVertexInputBindingDescription binding{};
@@ -109,8 +110,8 @@ struct Vertex {
     return binding;
   }
 
-  static auto GetAttributeDescriptions() -> std::array<VkVertexInputAttributeDescription, 2> {
-    std::array<VkVertexInputAttributeDescription, 2> attributes{};
+  static auto GetAttributeDescriptions() -> std::array<VkVertexInputAttributeDescription, 3> {
+    std::array<VkVertexInputAttributeDescription, 3> attributes{};
     attributes.at(0).binding = 0;
     attributes.at(0).location = 0;
     attributes.at(0).format = VK_FORMAT_R32G32B32_SFLOAT;
@@ -120,7 +121,16 @@ struct Vertex {
     attributes.at(1).location = 1;
     attributes.at(1).format = VK_FORMAT_R32G32B32_SFLOAT;
     attributes.at(1).offset = offsetof(Vertex, color);
+
+    attributes.at(2).binding = 0;
+    attributes.at(2).location = 2;
+    attributes.at(2).format = VK_FORMAT_R32G32_SFLOAT;
+    attributes.at(2).offset = offsetof(Vertex, uv);
     return attributes;
+  }
+
+  auto operator==(const Vertex& rhs) const -> bool {
+    return pos == rhs.pos && color == rhs.color && uv == rhs.uv;
   }
 };
 class Renderer {
@@ -138,5 +148,25 @@ class Renderer {
   static void DrawFrame(Driver* driver, const Tick& current, const Tick& previous);
 };
 }  // namespace prt
+
+namespace std {
+template <>
+struct hash<prt::Vertex> {
+  auto operator()(const prt::Vertex& rhs) const -> size_t {
+    size_t hash = 0;
+    Combine(hash, rhs.pos);
+    Combine(hash, rhs.color);
+    Combine(hash, rhs.uv);
+    return hash;
+  }
+
+ private:
+  template <class T>
+  static inline void Combine(std::size_t& seed, const T& v) {
+    std::hash<T> hasher;
+    seed ^= hasher(v) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+  }
+};
+}  // namespace std
 
 #endif  // PRT_RENDERER_H

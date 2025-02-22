@@ -20,10 +20,6 @@ static TimeSeries<> avg_{};
 static TimeSeries<> min_{};
 static TimeSeries<> max_{};
 
-static float camera_speed_ = 0.0f;
-static float camera_fov_ = 0.0f;
-static float camera_sensitivity_ = 0.0f;
-
 static inline auto TimeFormatter(double value, char* buff, int size, void*) -> int {
   const auto str = units::time::to_string(units::time::millisecond_t(value));
   return snprintf(buff, size, "%s", str.c_str());
@@ -33,8 +29,6 @@ GuiDebug::GuiDebug() :
   Gui("Debug") {
   const auto camera = Camera::Get();
   ASSERT(camera);
-  camera_sensitivity_ = ((PerspectiveCamera*)camera)->GetSensitivity();
-  camera_speed_ = ((PerspectiveCamera*)camera)->GetSpeed();
   Engine::Get()->OnTickProfilerStats().subscribe(([](const TickStats stats) {
     tpsseries_.Append(Engine::Get()->GetTicksPerSecond().per_sec());
     avg_.Append(stats.avg / NSEC_PER_MSEC);
@@ -52,7 +46,7 @@ void GuiDebug::Render() {
   ASSERT(window);
   const auto size = window->GetSize();
   ImGui::SetNextWindowPos(ImVec2{0, 0});
-  ImGui::SetNextWindowSize(ImVec2{size.width() / 4, size.height()});
+  ImGui::SetNextWindowSize(ImVec2{size.width() / 4, size.height() / 2});
   ImGui::Begin(GetGuiName(), nullptr, ImGuiWindowFlags_NoCollapse);
   const auto target_items = std::array<const char*, 2>{
       "Full Scene",
@@ -90,14 +84,6 @@ void GuiDebug::Render() {
     ImPlot::PlotLine("Min", tickseries_.begin(), min_.begin(), 10);
     ImPlot::PlotLine("Max", tickseries_.begin(), max_.begin(), 10);
     ImPlot::EndPlot();
-  }
-
-  const auto camera = ((PerspectiveCamera*)Camera::Get());
-  if (ImGui::InputFloat("Speed", &camera_speed_)) {
-    camera->SetSpeed(camera_speed_);
-  }
-  if (ImGui::InputFloat("Sensitivity", &camera_sensitivity_)) {
-    camera->SetSensitivity(camera_sensitivity_);
   }
   ImGui::End();
 }

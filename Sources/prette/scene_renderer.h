@@ -18,6 +18,9 @@ class SceneRenderer {
   static void InitCommandBuffers(const Driver* driver);
   static void InitBuffers();
   static void InitDescriptorSets(const Driver* driver);
+  static void InitModel();
+  static void InitModelTexture();
+  static void InitDepthTexture(const Driver* driver);
 
   static void Destroy(const Driver* driver, const bool is_reinit);
 

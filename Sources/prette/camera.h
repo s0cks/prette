@@ -9,13 +9,13 @@ static constexpr const auto kWorldUp = glm::vec3(0.0f, 1.0f, 0.0f);
 static constexpr const auto kWorldRight = glm::vec3(0.0f, 0.0f, 1.0f);
 
 struct CameraData {
-  alignas(16) glm::mat4 model;
-  alignas(16) glm::mat4 view;
+  alignas(16) glm::mat4 model{};
+  alignas(16) glm::mat4 view{};
   alignas(16) glm::mat4 projection = glm::mat4(1.0f);
-  alignas(16) glm::vec3 pos;
-  alignas(16) glm::vec3 up;
-  alignas(16) glm::vec3 right;
-  alignas(16) glm::vec3 direction;
+  alignas(16) glm::vec3 pos{};
+  alignas(16) glm::vec3 up{};
+  alignas(16) glm::vec3 right{};
+  alignas(16) glm::vec3 direction{};
 };
 
 class Camera {
@@ -81,12 +81,23 @@ class Camera {
   static void Init();
 };
 
+static constexpr const auto kDefaultYaw = -90.0f;
+static constexpr const auto kDefaultSpeed = 0.05f;
+static constexpr const auto kDefaultNearClip = 0.1f;
+static constexpr const auto kDefaultFarClip = 100.0f;
+static constexpr const auto kDefaultPos = glm::vec3(0.0f, 0.0f, 3.0f);
+static constexpr const auto kDefaultFov = 70.0f;
+static constexpr const auto kDefaultSensitivity = 0.1f;
 class PerspectiveCamera : public Camera {
  private:
-  float yaw_ = -90.0f;
-  float pitch_ = 0.0f;
-  float speed_ = 0.05f;
-  float sensitivity_ = 0.1f;
+  float yaw_ = kDefaultYaw;
+  float pitch_{};
+  float speed_ = kDefaultSpeed;
+  float sensitivity_ = kDefaultSensitivity;
+  float fov_;
+  float aspect_;
+  float near_;
+  float far_;
   rx::subscription on_mouse_moved_{};
   rx::subscription on_key_{};
 
@@ -106,16 +117,60 @@ class PerspectiveCamera : public Camera {
     data_.pos += (data_.right * velocity);
   }
 
+  inline auto CalculateVelocity(const TickDelta& dts) -> float {
+    return speed_ * (dts / NSEC_PER_MSEC);
+  }
+
  public:
   PerspectiveCamera(const float fov, const float aspectRatio, const float nearClip, const float farClip, const glm::vec3& pos);
   ~PerspectiveCamera() override;
+
+  auto GetFov() const -> float {
+    return fov_;
+  }
+
+  void SetFov(const float rhs) {
+    fov_ = rhs;
+  }
+
+  auto GetAspectRatio() const -> float {
+    return aspect_;
+  }
+
+  void SetAspectRatio(const float rhs) {
+    aspect_ = rhs;
+  }
+
+  auto GetNearClip() const -> float {
+    return near_;
+  }
+
+  void SetNearClip(const float rhs) {
+    near_ = rhs;
+  }
+
+  auto GetFarClip() const -> float {
+    return far_;
+  }
+
+  void SetFarClip(const float rhs) {
+    far_ = rhs;
+  }
 
   auto GetYaw() const -> float {
     return yaw_;
   }
 
+  void SetYaw(const float rhs) {
+    yaw_ = rhs;
+  }
+
   auto GetPitch() const -> float {
     return pitch_;
+  }
+
+  void SetPitch(const float rhs) {
+    pitch_ = rhs;
   }
 
   auto GetSpeed() const -> float {

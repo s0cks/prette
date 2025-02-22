@@ -18,13 +18,13 @@ class GraphicsPipeline {
   VkPipelineCache cache_ = VK_NULL_HANDLE;
 
   void Init(const Driver* driver, const std::string& shader, const std::vector<VkDynamicState>& dynamic_states,
-            const std::vector<VkDescriptorSetLayout>& descriptor_set_layouts);
+            const std::vector<VkDescriptorSetLayout>& descriptor_set_layouts, const bool depth);
 
  public:
   GraphicsPipeline() = default;
   explicit GraphicsPipeline(const Driver* driver, const std::string& shader, const VkRenderPass pass,
                             const std::vector<VkDynamicState>& dynamic_states, const VkExtent2D& extent,
-                            const std::vector<VkDescriptorSetLayout>& descriptor_set_layouts);
+                            const std::vector<VkDescriptorSetLayout>& descriptor_set_layouts, const bool depth = false);
   ~GraphicsPipeline() = default;
 
   auto Get() const -> VkPipeline const& {

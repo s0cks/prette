@@ -1,6 +1,7 @@
 #include "prette/scene_renderer.h"
 
 #include <fmt/format.h>
+#include <tiny_obj_loader.h>
 #include <vulkan/vulkan_core.h>
 
 #include "prette/camera.h"
@@ -13,6 +14,10 @@
 #include "prette/renderer.h"
 #include "prette/shader.h"
 #include "prette/swapchain.h"
+#include "prette/texture.h"
+
+#define MODEL_PATH   "/Users/tazz/Projects/prette/prette/resources/meshes/cube/cube.obj"
+#define TEXTURE_PATH "wood.png"
 
 namespace prt {
 static VkRenderPass pass_;
@@ -28,11 +33,53 @@ static std::vector<vk::Buffer*> camera_buffers_{};
 static vk::Buffer* vertex_buffer_ = nullptr;
 static vk::Buffer* index_buffer_ = nullptr;
 
-static const std::vector<Vertex> vertices = {{.pos = {-0.5f, -0.5f, 0.0f}, .color = {1.0f, 0.0f, 0.0f}},
-                                             {.pos = {0.5f, -0.5f, 0.0f}, .color = {0.0f, 1.0f, 0.0f}},
-                                             {.pos = {0.5f, 0.5f, 0.0f}, .color = {0.0f, 0.0f, 1.0f}},
-                                             {.pos = {-0.5f, 0.5f, 0.0f}, .color = {1.0f, 1.0f, 1.0f}}};
-static const std::vector<uint16_t> indices = {0, 1, 2, 2, 3, 0};
+static Texture* texture_ = nullptr;
+
+static VkImage depth_image_{};
+static VkDeviceMemory depth_image_memory_{};
+static VkImageView depth_image_view_{};
+
+static std::vector<Vertex> vertices{};
+static std::vector<uint16_t> indices{};
+
+void SceneRenderer::InitModelTexture() {
+  texture_ = new Texture(Texture::kDiffuseMap, TEXTURE_PATH, true);
+  ASSERT(texture_);
+}
+
+void SceneRenderer::InitModel() {
+  tinyobj::attrib_t attrib{};
+  std::vector<tinyobj::shape_t> shapes{};
+  std::vector<tinyobj::material_t> materials{};
+  std::string warning{};
+  std::string error{};
+
+  if (!tinyobj::LoadObj(&attrib, &shapes, &materials, &warning, &error, MODEL_PATH)) {
+    LOG(ERROR) << "failed to load model: ";
+    LOG(WARNING) << warning;
+    LOG(ERROR) << error;
+    LOG(FATAL) << "";
+  }
+
+  std::unordered_map<Vertex, uint32_t> unique_vertices{};
+  for (const auto& shape : shapes) {
+    for (const auto& index : shape.mesh.indices) {
+      Vertex vertex{};
+      vertex.pos = {
+          attrib.vertices[3 * index.vertex_index + 0],
+          attrib.vertices[3 * index.vertex_index + 1],
+          attrib.vertices[3 * index.vertex_index + 2],
+      };
+      vertex.uv = {attrib.texcoords[2 * index.texcoord_index + 0], 1.0f - attrib.texcoords[2 * index.texcoord_index + 1]};
+      vertex.color = {1.0f, 1.0f, 1.0f};
+      if (unique_vertices.count(vertex) == 0) {
+        unique_vertices[vertex] = vertices.size();
+        vertices.push_back(vertex);
+      }
+      indices.push_back(unique_vertices[vertex]);
+    }
+  }
+}
 
 void SceneRenderer::InitRenderPass(const Driver* driver) {
   ASSERT(driver);
@@ -46,38 +93,72 @@ void SceneRenderer::InitRenderPass(const Driver* driver) {
   color_attachment.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
   color_attachment.finalLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
 
+  VkAttachmentDescription depth_attachment{};
+  depth_attachment.format = FindDepthFormat(driver->GetPhysicalDevice());
+  depth_attachment.samples = VK_SAMPLE_COUNT_1_BIT;
+  depth_attachment.loadOp = VK_ATTACHMENT_LOAD_OP_CLEAR;
+  depth_attachment.storeOp = VK_ATTACHMENT_STORE_OP_DONT_CARE;
+  depth_attachment.stencilLoadOp = VK_ATTACHMENT_LOAD_OP_DONT_CARE;
+  depth_attachment.stencilStoreOp = VK_ATTACHMENT_STORE_OP_DONT_CARE;
+  depth_attachment.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
+  depth_attachment.finalLayout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
+
   VkAttachmentReference color_attachment_ref{};
   color_attachment_ref.attachment = 0;
   color_attachment_ref.layout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
+
+  VkAttachmentReference depth_attachment_ref{};
+  depth_attachment_ref.attachment = 1;
+  depth_attachment_ref.layout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
 
   VkSubpassDescription subpass{};
   subpass.pipelineBindPoint = VK_PIPELINE_BIND_POINT_GRAPHICS;
   subpass.colorAttachmentCount = 1;
   subpass.pColorAttachments = &color_attachment_ref;
+  subpass.pDepthStencilAttachment = &depth_attachment_ref;
 
   VkSubpassDependency dependency1{};
   dependency1.srcSubpass = VK_SUBPASS_EXTERNAL;
   dependency1.dstSubpass = 0;
-  dependency1.srcStageMask = VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT;
+  dependency1.srcStageMask = VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT | VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT;
   dependency1.srcAccessMask = VK_ACCESS_MEMORY_READ_BIT;
-  dependency1.dstStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
-  dependency1.dstAccessMask = VK_ACCESS_COLOR_ATTACHMENT_READ_BIT | VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
+  dependency1.dstStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT | VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT;
+  dependency1.dstAccessMask =
+      VK_ACCESS_COLOR_ATTACHMENT_READ_BIT | VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT | VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT;
   dependency1.dependencyFlags = VK_DEPENDENCY_BY_REGION_BIT;
 
   std::array<VkSubpassDependency, 1> dependencies = {
       dependency1,
   };
 
+  std::array<VkAttachmentDescription, 2> attachments = {
+      color_attachment,
+      depth_attachment,
+  };
+
   VkRenderPassCreateInfo create_info{};
   create_info.sType = VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO;
-  create_info.attachmentCount = 1;
-  create_info.pAttachments = &color_attachment;
+  create_info.attachmentCount = attachments.size();
+  create_info.pAttachments = attachments.data();
   create_info.subpassCount = 1;
   create_info.pSubpasses = &subpass;
   create_info.dependencyCount = dependencies.size();
   create_info.pDependencies = dependencies.data();
 
-  CHECK_VK(FATAL, vkCreateRenderPass(driver->GetDevice(), &create_info, nullptr, &pass_), "failed to create vk render pass");
+  CHECK_VK(FATAL, vkCreateRenderPass(driver->GetDevice(), &create_info, driver->GetAllocator(), &pass_),
+           "failed to create vk render pass");
+}
+
+void SceneRenderer::InitDepthTexture(const Driver* driver) {
+  ASSERT(driver);
+  const auto format = FindDepthFormat(driver->GetPhysicalDevice());
+  const auto& extent = SwapChain::GetExtent();
+  const auto [image, memory] =
+      Texture::CreateImage(extent.width, extent.height, 1, VK_SAMPLE_COUNT_1_BIT, format, VK_IMAGE_TILING_OPTIMAL,
+                           VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, false);
+  depth_image_ = image;
+  depth_image_memory_ = memory;
+  depth_image_view_ = Texture::CreateImageView(depth_image_, format, VK_IMAGE_ASPECT_DEPTH_BIT, 1, false);
 }
 
 void SceneRenderer::InitCommandBuffers(const Driver* driver) {
@@ -101,14 +182,15 @@ void SceneRenderer::InitPipeline(const Driver* driver) {
 
 void SceneRenderer::InitImages(const Driver* driver, const uint64_t num_images, const VkExtent2D& extent) {
   for (auto idx = 0; idx < num_images; idx++) {
-    render_targets_.at(idx) = RenderTarget(pass_, extent);
+    render_targets_.at(idx) = RenderTarget(pass_, extent, depth_image_view_);
   }
 }
 
 void SceneRenderer::Draw(const SwapChainFrame& frame, std::vector<VkCommandBuffer>& cmd_buffers) {
   // clang-format off
   static const std::vector<VkClearValue> kClearValues = {
-    VkClearValue { .color = { 0.0f, 0.0f, 0.0f, 1.0f }}
+    VkClearValue { .color = { 0.0f, 0.0f, 0.0f, 1.0f }},
+    VkClearValue { .depthStencil = { 1.0f, 0.0f } },
   };
   // clang-format on
   CommandBufferScope buffer(command_buffers_.at(frame), true);
@@ -153,6 +235,9 @@ void SceneRenderer::InitBuffers() {
 
 void SceneRenderer::Destroy(const Driver* driver, const bool is_reinit) {
   ASSERT(driver);
+  vkDestroyImage(driver->GetDevice(), depth_image_, driver->GetAllocator());
+  vkDestroyImageView(driver->GetDevice(), depth_image_view_, driver->GetAllocator());
+  vkFreeMemory(driver->GetDevice(), depth_image_memory_, driver->GetAllocator());
   if (!is_reinit) {
     for (const auto& buffer : camera_buffers_) {
       delete buffer;
@@ -170,6 +255,7 @@ void SceneRenderer::Destroy(const Driver* driver, const bool is_reinit) {
     for (const auto& target : render_targets_) {
       target.Destroy();
     }
+    texture_->Destroy();
   }
 }
 
@@ -194,9 +280,19 @@ void SceneRenderer::InitDescriptorSetLayout(const Driver* driver) {
   camera_binding.stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
   camera_binding.pImmutableSamplers = nullptr;
 
-  std::array<VkDescriptorSetLayoutBinding, 1> bindings = {
-      camera_binding,
+  VkDescriptorSetLayoutBinding texture_binding{};
+  texture_binding.binding = 1;
+  texture_binding.descriptorCount = 1;
+  texture_binding.descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+  texture_binding.pImmutableSamplers = nullptr;
+  texture_binding.stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;
+
+  // clang-format off
+  std::array<VkDescriptorSetLayoutBinding, 2> bindings = {
+  camera_binding,
+  texture_binding
   };
+  // clang-format on
 
   VkDescriptorSetLayoutCreateInfo create_info{};
   create_info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;
@@ -225,18 +321,33 @@ void SceneRenderer::InitDescriptorSets(const Driver* driver) {
     buffer_info.offset = 0;
     buffer_info.range = sizeof(CameraData);
 
-    VkWriteDescriptorSet write{};
-    write.sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
-    write.dstSet = descriptor_sets_[idx];
-    write.dstBinding = 0;
-    write.dstArrayElement = 0;
-    write.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-    write.descriptorCount = 1;
-    write.pBufferInfo = &buffer_info;
-    write.pImageInfo = nullptr;
-    write.pTexelBufferView = nullptr;
+    VkDescriptorImageInfo image_info{};
+    image_info.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+    image_info.imageView = texture_->GetImageView();
+    image_info.sampler = texture_->GetSampler();
 
-    vkUpdateDescriptorSets(driver->GetDevice(), 1, &write, 0, nullptr);
+    VkWriteDescriptorSet write{};
+
+    std::array<VkWriteDescriptorSet, 2> writes{};
+    writes.at(0).sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
+    writes.at(0).dstSet = descriptor_sets_[idx];
+    writes.at(0).dstBinding = 0;
+    writes.at(0).dstArrayElement = 0;
+    writes.at(0).descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+    writes.at(0).descriptorCount = 1;
+    writes.at(0).pBufferInfo = &buffer_info;
+    writes.at(0).pImageInfo = nullptr;
+    writes.at(0).pTexelBufferView = nullptr;
+
+    writes.at(1).sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
+    writes.at(1).dstSet = descriptor_sets_[idx];
+    writes.at(1).dstBinding = 1;
+    writes.at(1).dstArrayElement = 0;
+    writes.at(1).descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+    writes.at(1).descriptorCount = 1;
+    writes.at(1).pImageInfo = &image_info;
+
+    vkUpdateDescriptorSets(driver->GetDevice(), writes.size(), writes.data(), 0, nullptr);
   }
 }
 
@@ -246,11 +357,14 @@ void SceneRenderer::Init() {
     const auto driver = Driver::Get();
     ASSERT(driver);
     if (!event->IsReinit()) {
+      InitModel();
+      InitModelTexture();
       InitRenderPass(driver);
       InitDescriptorSetLayout(driver);
       InitPipeline(driver);
       InitCommandBuffers(driver);
     }
+    InitDepthTexture(driver);
     InitImages(driver, SwapChain::GetNumberOfImages(), SwapChain::GetExtent());
     if (!event->IsReinit()) {
       InitBuffers();

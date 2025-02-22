@@ -1,6 +1,8 @@
 #include "prette/texture.h"
 
+#define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
+#include <stb_include.h>
 
 #include "prette/flags.h"
 
@@ -15,31 +17,24 @@ auto ReadTexture(const std::string& filename, const bool flip) -> TextureData {
   return {.data = std::move(bytes), .width = width, .height = height, .num_channels = num_channels};
 }
 
-void Texture::CreateTextureImage(Texture::Type type, std::string textureName) {
-  type_ = type;
-  auto textureData = ReadTexture(textureName);
-  m_width = textureData.width;
-  m_height = textureData.height;
-
-  m_format = type == Type::kDiffuseMap ? VK_FORMAT_R8G8B8A8_SRGB : VK_FORMAT_R8G8B8A8_UNORM;
-  m_mips = static_cast<uint32_t>(std::floor(std::log2(std::max(m_width, m_height)))) + 1;
-
-  std::tie(m_textureImage, m_textureImageMemory) =
-      CreateImage(m_width, m_height, m_mips, VK_SAMPLE_COUNT_1_BIT, m_format, VK_IMAGE_TILING_OPTIMAL,
+Texture::Texture(const Type type, std::string filename, const bool flip) :
+  type_(type),
+  format_(type == Type::kDiffuseMap ? VK_FORMAT_R8G8B8A8_SRGB : VK_FORMAT_R8G8B8A8_UNORM),
+  mips_(1) {  // TODO: static_cast<uint32_t>(std::floor(std::log2(std::max(width_, height_)))) +
+  auto textureData = ReadTexture(filename, flip);
+  width_ = textureData.width;
+  height_ = textureData.height;
+  std::tie(image_, memory_) =
+      CreateImage(width_, height_, mips_, VK_SAMPLE_COUNT_1_BIT, format_, VK_IMAGE_TILING_OPTIMAL,
                   VK_IMAGE_USAGE_TRANSFER_SRC_BIT | VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT,
                   VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, type == Type::kCubeMap);
 
-  m_textureImageView =
-      CreateImageView(m_textureImage, m_format, VK_IMAGE_ASPECT_COLOR_BIT, m_mips, type == TextureType::CUBE_MAP);
+  view_ = CreateImageView(image_, format_, VK_IMAGE_ASPECT_COLOR_BIT, mips_, type == Texture::kCubeMap);
+  InitSampler(sampler_, mips_);
 
-  CreateTextureSampler();
-
-  TransitionImageLayout(VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, m_mips);
-
+  TransitionImageLayout(VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, mips_);
   CopyBufferToImage(textureData.data.get());
-
-  // transitioned to VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL while generating mipmaps
-  GenerateMipmaps(m_textureImage, VK_FORMAT_R8G8B8A8_SRGB, static_cast<int32_t>(m_width), static_cast<int32_t>(m_height), m_mips);
+  GenerateMipmaps(image_, VK_FORMAT_R8G8B8A8_SRGB, static_cast<int32_t>(width_), static_cast<int32_t>(height_), mips_);
 }
 
 void Texture::CopyBufferToImage(VkImage image, uint32_t texWidth, uint32_t texHeight, uint8_t* data) {
@@ -56,15 +51,6 @@ void Texture::CopyBufferToImage(VkImage image, uint32_t texWidth, uint32_t texHe
 
   const auto size = static_cast<size_t>(texWidth) * static_cast<size_t>(texHeight) * size_t{4};
   vk::Buffer::CopyDataToImageWithStaging(image, data, size, {region});
-}
-
-void Texture::Destroy() {
-  const auto driver = Driver::Get();
-  ASSERT(driver);
-  vkDestroySampler(driver->GetDevice(), m_textureSampler, nullptr);
-  vkDestroyImageView(driver->GetDevice(), m_textureImageView, nullptr);
-  vkDestroyImage(driver->GetDevice(), m_textureImage, nullptr);
-  vkFreeMemory(driver->GetDevice(), m_textureImageMemory, nullptr);
 }
 
 auto Texture::CreateImage(uint32_t width, uint32_t height, uint32_t mipLevels, VkSampleCountFlagBits numSamples, VkFormat format,
@@ -115,7 +101,7 @@ void Texture::GenerateMipmaps(VkImage image, VkFormat imageFormat, int32_t texWi
     LOG(FATAL) << "Texture image format does not support linear blitting!";
   }
 
-  SingleUseCommandBuffer buffer(Renderer::GetCommandPool());
+  SingleUseCommandBuffer buffer{};
   VkImageMemoryBarrier barrier{};
   barrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
   barrier.image = image;
@@ -125,6 +111,7 @@ void Texture::GenerateMipmaps(VkImage image, VkFormat imageFormat, int32_t texWi
   barrier.subresourceRange.baseArrayLayer = 0;
   barrier.subresourceRange.layerCount = 1;
   barrier.subresourceRange.levelCount = 1;
+  barrier.subresourceRange.baseMipLevel = 0;
 
   int32_t mipWidth = texWidth;
   int32_t mipHeight = texHeight;
@@ -190,13 +177,14 @@ auto Texture::CreateImageView(VkImage image, VkFormat format, VkImageAspectFlags
   VkImageViewCreateInfo viewInfo{};
   viewInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
   viewInfo.image = image;
-  viewInfo.viewType = not cubemap ? VK_IMAGE_VIEW_TYPE_2D : VK_IMAGE_VIEW_TYPE_CUBE;
+  viewInfo.viewType = !cubemap ? VK_IMAGE_VIEW_TYPE_2D : VK_IMAGE_VIEW_TYPE_CUBE;
   viewInfo.format = format;
   viewInfo.subresourceRange.baseMipLevel = 0;
   viewInfo.subresourceRange.levelCount = mipLevels;
   viewInfo.subresourceRange.aspectMask = aspectFlags;
   viewInfo.subresourceRange.baseArrayLayer = 0;
-  viewInfo.subresourceRange.layerCount = not cubemap ? 1 : 6;
+  viewInfo.subresourceRange.layerCount = !cubemap ? 1 : 6;
+  viewInfo.subresourceRange.baseMipLevel = 0;
 
   VkImageView imageView{};
   CHECK_VK(FATAL, vkCreateImageView(driver->GetDevice(), &viewInfo, driver->GetAllocator(), &imageView),
@@ -205,11 +193,9 @@ auto Texture::CreateImageView(VkImage image, VkFormat format, VkImageAspectFlags
   return imageView;
 }
 
-auto Texture::CreateSampler(uint32_t mipLevels) -> VkSampler {
+void Texture::InitSampler(VkSampler& sampler, const uint32_t mips) {
   const auto driver = Driver::Get();
   ASSERT(driver);
-  VkSampler sampler{};
-
   VkPhysicalDeviceProperties properties{};
   vkGetPhysicalDeviceProperties(driver->GetPhysicalDevice(), &properties);
 
@@ -228,16 +214,15 @@ auto Texture::CreateSampler(uint32_t mipLevels) -> VkSampler {
   samplerInfo.compareOp = VK_COMPARE_OP_ALWAYS;
   samplerInfo.mipmapMode = VK_SAMPLER_MIPMAP_MODE_LINEAR;
   samplerInfo.minLod = 0.0f;
-  samplerInfo.maxLod = static_cast<float>(mipLevels);
+  samplerInfo.maxLod = static_cast<float>(mips);
   samplerInfo.mipLodBias = 0.0f;
-  CHECK_VK(FATAL, vkCreateSampler(driver->GetDevice(), &samplerInfo, nullptr, &sampler), "Failed to create texture sampler!");
-  return sampler;
+  CHECK_VK(FATAL, vkCreateSampler(driver->GetDevice(), &samplerInfo, driver->GetAllocator(), &sampler),
+           "Failed to create texture sampler!");
 }
 
 void Texture::TransitionImageLayout(VkImage image, VkImageLayout oldLayout, VkImageLayout newLayout, uint32_t mipLevels,
                                     bool cubemap) {
-  SingleUseCommandBuffer buffer(Renderer::GetCommandPool());
-
+  SingleUseCommandBuffer buffer{};
   VkImageMemoryBarrier barrier{};
   barrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
   barrier.oldLayout = oldLayout;
@@ -249,7 +234,7 @@ void Texture::TransitionImageLayout(VkImage image, VkImageLayout oldLayout, VkIm
   barrier.subresourceRange.baseMipLevel = 0;
   barrier.subresourceRange.levelCount = mipLevels;
   barrier.subresourceRange.baseArrayLayer = 0;
-  barrier.subresourceRange.layerCount = not cubemap ? 1 : 6;
+  barrier.subresourceRange.layerCount = !cubemap ? 1 : 6;
 
   VkPipelineStageFlags sourceStage = {};
   VkPipelineStageFlags destinationStage = {};
@@ -271,5 +256,14 @@ void Texture::TransitionImageLayout(VkImage image, VkImageLayout oldLayout, VkIm
   }
 
   vkCmdPipelineBarrier(buffer, sourceStage, destinationStage, 0, 0, nullptr, 0, nullptr, 1, &barrier);
+}
+
+void Texture::Destroy() {
+  const auto driver = Driver::Get();
+  ASSERT(driver);
+  vkDestroySampler(driver->GetDevice(), sampler_, driver->GetAllocator());
+  vkDestroyImageView(driver->GetDevice(), view_, driver->GetAllocator());
+  vkDestroyImage(driver->GetDevice(), image_, driver->GetAllocator());
+  vkFreeMemory(driver->GetDevice(), memory_, driver->GetAllocator());
 }
 }  // namespace prt

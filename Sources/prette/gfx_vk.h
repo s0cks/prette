@@ -130,6 +130,29 @@ static inline auto FindSuitablePhysicalDevice(const VkInstance& instance, VkPhys
   return true;
 }
 
+static inline auto FindSupportedFormat(const VkPhysicalDevice physical_device, const std::vector<VkFormat>& formats,
+                                       VkImageTiling tiling, VkFormatFeatureFlags features) -> VkFormat {
+  for (const auto& format : formats) {
+    VkFormatProperties properties{};
+    vkGetPhysicalDeviceFormatProperties(physical_device, format, &properties);
+    if (tiling == VK_IMAGE_TILING_LINEAR && (properties.linearTilingFeatures & features) == features) {
+      return format;
+    } else if (tiling == VK_IMAGE_TILING_OPTIMAL && (properties.optimalTilingFeatures & features) == features) {
+      return format;
+    }
+  }
+  LOG(FATAL) << "failed to find supported depth format";
+}
+
+static inline auto FindDepthFormat(const VkPhysicalDevice physical_device) -> VkFormat {
+  return FindSupportedFormat(physical_device, {VK_FORMAT_D32_SFLOAT, VK_FORMAT_D32_SFLOAT_S8_UINT, VK_FORMAT_D24_UNORM_S8_UINT},
+                             VK_IMAGE_TILING_OPTIMAL, VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT);
+}
+
+static inline auto HasStencilComponent(const VkFormat format) -> bool {
+  return format == VK_FORMAT_D32_SFLOAT_S8_UINT || format == VK_FORMAT_D24_UNORM_S8_UINT;
+}
+
 #ifdef PRT_DEBUG
 
 static inline void PrintProperties(const VkPhysicalDevice& device) {
