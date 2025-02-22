@@ -474,7 +474,7 @@ class Driver : public DriverBase {
 #endif  // PRT_DEBUG
 
   void WaitDeviceIdle() const;
-
+  auto GetDepthFormat() const -> VkFormat;
   void ReleaseCommandBuffers(const VkCommandBuffer* buffers, const uint64_t num_buffers) const;
 
   template <typename Container>

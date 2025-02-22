@@ -21,6 +21,7 @@ class SceneRenderer {
   static void InitModel();
   static void InitModelTexture();
   static void InitDepthTexture(const Driver* driver);
+  static void InitPickingTexture(const Driver* driver);
 
   static void Destroy(const Driver* driver, const bool is_reinit);
 

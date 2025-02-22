@@ -16,8 +16,8 @@
 #include "prette/swapchain.h"
 #include "prette/texture.h"
 
-#define MODEL_PATH   "/Users/tazz/Projects/prette/prette/resources/meshes/cube/cube.obj"
-#define TEXTURE_PATH "wood.png"
+#define MODEL_PATH   "/Users/tazz/Projects/prette/prette/resources/meshes/sphere/sphere.obj"
+#define TEXTURE_PATH "concrete.png"
 
 namespace prt {
 static VkRenderPass pass_;
@@ -147,6 +147,10 @@ void SceneRenderer::InitRenderPass(const Driver* driver) {
 
   CHECK_VK(FATAL, vkCreateRenderPass(driver->GetDevice(), &create_info, driver->GetAllocator(), &pass_),
            "failed to create vk render pass");
+}
+
+void SceneRenderer::InitPickingTexture(const Driver* driver) {
+  ASSERT(driver);
 }
 
 void SceneRenderer::InitDepthTexture(const Driver* driver) {

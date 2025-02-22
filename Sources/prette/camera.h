@@ -18,18 +18,26 @@ struct CameraData {
   alignas(16) glm::vec3 direction{};
 };
 
+enum CameraType {
+  kOrthoCamera,
+  kIsoCamera,
+  kPerspectiveCamera,
+};
+
 class Camera {
  protected:
-  CameraData data_{};  // NOLINT(cppcoreguidelines-non-private-member-variables-in-classes)
+  CameraType type_;
+  CameraData data_{};
 
-  Camera(const glm::mat4& projection, const glm::vec3& pos, const glm::vec3& direction = glm::vec3(0.0f, 0.0f, -1.0f)) :
+  Camera(const CameraType type, const glm::mat4& projection, const glm::vec3& pos,
+         const glm::vec3& direction = glm::vec3(0.0f, 0.0f, -1.0f)) :
+    type_(type),
     data_() {
     data_.direction = direction;
     data_.right = glm::normalize(glm::cross(kWorldUp, data_.direction));
     data_.up = glm::cross(data_.direction, data_.right);
     data_.projection = projection;
     data_.pos = pos;
-    UpdateViewMatrix();
   }
 
   virtual void UpdateViewMatrix() {
@@ -38,6 +46,22 @@ class Camera {
 
  public:
   virtual ~Camera() = default;
+
+  auto GetType() const -> CameraType {
+    return type_;
+  }
+
+  inline auto IsOrtho() const -> bool {
+    return GetType() == kOrthoCamera;
+  }
+
+  inline auto IsIso() const -> bool {
+    return GetType() == kIsoCamera;
+  }
+
+  inline auto IsPerspective() const -> bool {
+    return GetType() == kPerspectiveCamera;
+  }
 
   auto data() const -> const CameraData& {
     return data_;
@@ -79,6 +103,20 @@ class Camera {
  public:
   static auto Get() -> Camera*;
   static void Init();
+};
+
+class OrthoCamera : public Camera {
+ private:
+  rx::subscription on_key_{};
+
+ protected:
+  void UpdateViewMatrix() override;
+
+ public:
+  OrthoCamera(const float top, const float left, const float bottom, const float right, const glm::vec3& pos);
+  ~OrthoCamera() override;
+
+  void Update() override;
 };
 
 static constexpr const auto kDefaultYaw = -90.0f;
@@ -189,6 +227,11 @@ class PerspectiveCamera : public Camera {
   void SetSensitivity(const float rhs) {
     ASSERT(rhs >= 0.0f);
     sensitivity_ = rhs;
+  }
+
+  void SetDirection(const glm::vec3& rhs) {
+    data_.direction = rhs;
+    UpdateViewMatrix();
   }
 
   void Update() override;

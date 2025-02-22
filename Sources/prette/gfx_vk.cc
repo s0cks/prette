@@ -416,6 +416,10 @@ void Driver::WaitDeviceIdle() const {
   vkDeviceWaitIdle(device_);
 }
 
+auto Driver::GetDepthFormat() const -> VkFormat {
+  return FindDepthFormat(GetPhysicalDevice());
+}
+
 void Driver::ReleaseCommandBuffers(const VkCommandBuffer* buffers, const uint64_t num_buffers) const {
   vkFreeCommandBuffers(GetDevice(), GetCommandPool(), num_buffers, buffers);
 }

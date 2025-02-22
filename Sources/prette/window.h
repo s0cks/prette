@@ -1,7 +1,6 @@
 #ifndef PRT_WINDOW_H
 #define PRT_WINDOW_H
 
-#include "prette/builder.h"
 #include "prette/dimension.h"
 #include "prette/event.h"
 #include "prette/geometry/shape.h"
@@ -471,7 +470,7 @@ class Window : public WindowEventSource {
 };
 
 class Window;
-class WindowBuilder : public BuilderTemplate<Window> {
+class WindowBuilder {
   DEFINE_NON_COPYABLE_TYPE(WindowBuilder);
 
  private:
@@ -485,11 +484,10 @@ class WindowBuilder : public BuilderTemplate<Window> {
   auto GetMonitorHandle() const -> GLFWmonitor*;
 
  public:
-  WindowBuilder(const char* title = "") :
-    BuilderTemplate<Window>(),
+  explicit WindowBuilder(const char* title = "") :
     title_(title),
     size_() {}
-  ~WindowBuilder() override = default;
+  ~WindowBuilder() = default;
 
   auto HasMonitor() const -> bool {
     return monitor_ != nullptr;
@@ -535,7 +533,7 @@ class WindowBuilder : public BuilderTemplate<Window> {
   void SetGraphicsSwitching(const bool value);
 #endif
 
-  auto Build() const -> Window* override;
+  auto Build() const -> Window*;
 };
 
 using WindowSet = std::set<Window*, Window::Comparator>;

@@ -7,6 +7,15 @@
 #include "prette/gfx.h"
 
 namespace prt {
+static inline void InitPipelineViewportState(VkPipelineViewportStateCreateInfo& create_info,
+                                             const std::vector<VkViewport>& viewports, const std::vector<VkRect2D>& scissors) {
+  create_info.sType = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO;
+  create_info.viewportCount = viewports.size();
+  create_info.pViewports = viewports.data();
+  create_info.scissorCount = scissors.size();
+  create_info.pScissors = scissors.data();
+}
+
 class GraphicsPipeline {
   DEFINE_DEFAULT_COPYABLE_TYPE(GraphicsPipeline);
 

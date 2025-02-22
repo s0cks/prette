@@ -10,13 +10,35 @@
 #include "prette/window.h"
 
 namespace prt {
+OrthoCamera::OrthoCamera(const float top, const float left, const float bottom, const float right, const glm::vec3& pos) :
+  Camera(kOrthoCamera, glm::ortho(left, right, bottom, top, kDefaultNearClip, kDefaultFarClip), pos) {
+  on_key_ = OnKeyStateEvent().subscribe([this](KeyStateEvent* event) {
+    ASSERT(event);
+  });
+  UpdateViewMatrix();
+}
+
+OrthoCamera::~OrthoCamera() {
+  on_key_.unsubscribe();
+}
+
+void OrthoCamera::UpdateViewMatrix() {
+  Camera::UpdateViewMatrix();
+  // data_.view = glm::rotate(data_.view, glm::radians(35.264f), glm::vec3(1.0f, 0.0f, 0.0f));
+  // data_.view = glm::rotate(data_.view, glm::radians(-45.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+}
+
+void OrthoCamera::Update() {
+  UpdateViewMatrix();
+}
+
 PerspectiveCamera::PerspectiveCamera(const float fov, const float aspectRatio, const float nearClip, const float farClip,
                                      const glm::vec3& pos) :
   fov_(fov),
   aspect_(aspectRatio),
   near_(nearClip),
   far_(farClip),
-  Camera(glm::perspective(fov, aspectRatio, nearClip, farClip), pos) {
+  Camera(kPerspectiveCamera, glm::perspective(fov, aspectRatio, nearClip, farClip), pos) {
   on_key_ = OnKeyStateEvent().subscribe([this](KeyStateEvent* event) {
     if (event->IsRepeat() || event->IsPressed()) {
       ASSERT(event);
