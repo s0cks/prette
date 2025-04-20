@@ -1,0 +1,108 @@
+\doxysection{prt\+::Shader Class Reference}
+\hypertarget{classprt_1_1_shader}{}\label{classprt_1_1_shader}\index{prt::Shader@{prt::Shader}}
+
+
+{\ttfamily \#include $<$shader.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_shader_a151ca6afb192df6457af88087996ea95}{Shader}} (std\+::string name, const \mbox{\hyperlink{classprt_1_1_shader_code}{Shader\+Code}} \&code)
+\item 
+\mbox{\hyperlink{classprt_1_1_shader_a95af3b32810c7fb642a28993651f4149}{\texorpdfstring{$\sim$}{\string~}\+Shader}} ()
+\item 
+auto \mbox{\hyperlink{classprt_1_1_shader_a148372135b837cb721cc847a9309d00b}{Get\+Name}} () const -\/$>$ const std\+::string \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_shader_ae22b72e860fba88c2b6188fe24894190}{Get\+Handle}} () const -\/$>$ const \mbox{\hyperlink{classprt_1_1_shader_af1d98b5e49e0eea65bd8996068520f0e}{Handle}} \&
+\item 
+\mbox{\hyperlink{classprt_1_1_shader_a21ee018f3323b521d1bf0b506c046a99}{operator Handle}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classprt_1_1_shader_af1d98b5e49e0eea65bd8996068520f0e}{Handle}} = Vk\+Shader\+Module
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_shader_a3ba3996bcc399f0d5f17f0b2740556f7}{DEFINE\+\_\+\+NON\+\_\+\+COPYABLE\+\_\+\+TYPE}} (\mbox{\hyperlink{classprt_1_1_shader}{Shader}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classprt_1_1_shader_a75f81ae6e204a201893a7c3f5bacfd44}{name\+\_\+}}
+\item 
+\mbox{\hyperlink{classprt_1_1_shader_af1d98b5e49e0eea65bd8996068520f0e}{Handle}} \mbox{\hyperlink{classprt_1_1_shader_a4cfc53e1ccd7df664d8560a8b42c2268}{handle\+\_\+}} \{\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classprt_1_1_shader_af1d98b5e49e0eea65bd8996068520f0e}\index{prt::Shader@{prt::Shader}!Handle@{Handle}}
+\index{Handle@{Handle}!prt::Shader@{prt::Shader}}
+\doxysubsubsection{\texorpdfstring{Handle}{Handle}}
+{\footnotesize\ttfamily \label{classprt_1_1_shader_af1d98b5e49e0eea65bd8996068520f0e} 
+using \mbox{\hyperlink{classprt_1_1_shader_af1d98b5e49e0eea65bd8996068520f0e}{prt\+::\+Shader\+::\+Handle}} = Vk\+Shader\+Module\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_shader_a151ca6afb192df6457af88087996ea95}\index{prt::Shader@{prt::Shader}!Shader@{Shader}}
+\index{Shader@{Shader}!prt::Shader@{prt::Shader}}
+\doxysubsubsection{\texorpdfstring{Shader()}{Shader()}}
+{\footnotesize\ttfamily \label{classprt_1_1_shader_a151ca6afb192df6457af88087996ea95} 
+prt\+::\+Shader\+::\+Shader (\begin{DoxyParamCaption}\item[{std\+::string}]{name}{, }\item[{const \mbox{\hyperlink{classprt_1_1_shader_code}{Shader\+Code}} \&}]{code}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_shader_a95af3b32810c7fb642a28993651f4149}\index{prt::Shader@{prt::Shader}!````~Shader@{\texorpdfstring{$\sim$}{\string~}Shader}}
+\index{````~Shader@{\texorpdfstring{$\sim$}{\string~}Shader}!prt::Shader@{prt::Shader}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Shader()}{\string~Shader()}}
+{\footnotesize\ttfamily \label{classprt_1_1_shader_a95af3b32810c7fb642a28993651f4149} 
+prt\+::\+Shader\+::\texorpdfstring{$\sim$}{\string~}\+Shader (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_shader_a3ba3996bcc399f0d5f17f0b2740556f7}\index{prt::Shader@{prt::Shader}!DEFINE\_NON\_COPYABLE\_TYPE@{DEFINE\_NON\_COPYABLE\_TYPE}}
+\index{DEFINE\_NON\_COPYABLE\_TYPE@{DEFINE\_NON\_COPYABLE\_TYPE}!prt::Shader@{prt::Shader}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_NON\_COPYABLE\_TYPE()}{DEFINE\_NON\_COPYABLE\_TYPE()}}
+{\footnotesize\ttfamily \label{classprt_1_1_shader_a3ba3996bcc399f0d5f17f0b2740556f7} 
+prt\+::\+Shader\+::\+DEFINE\+\_\+\+NON\+\_\+\+COPYABLE\+\_\+\+TYPE (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_shader}{Shader}}}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_shader_ae22b72e860fba88c2b6188fe24894190}\index{prt::Shader@{prt::Shader}!GetHandle@{GetHandle}}
+\index{GetHandle@{GetHandle}!prt::Shader@{prt::Shader}}
+\doxysubsubsection{\texorpdfstring{GetHandle()}{GetHandle()}}
+{\footnotesize\ttfamily \label{classprt_1_1_shader_ae22b72e860fba88c2b6188fe24894190} 
+auto prt\+::\+Shader\+::\+Get\+Handle (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const \mbox{\hyperlink{classprt_1_1_shader_af1d98b5e49e0eea65bd8996068520f0e}{Handle}}\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_shader_a148372135b837cb721cc847a9309d00b}\index{prt::Shader@{prt::Shader}!GetName@{GetName}}
+\index{GetName@{GetName}!prt::Shader@{prt::Shader}}
+\doxysubsubsection{\texorpdfstring{GetName()}{GetName()}}
+{\footnotesize\ttfamily \label{classprt_1_1_shader_a148372135b837cb721cc847a9309d00b} 
+auto prt\+::\+Shader\+::\+Get\+Name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const std\+::string\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_shader_a21ee018f3323b521d1bf0b506c046a99}\index{prt::Shader@{prt::Shader}!operator Handle@{operator Handle}}
+\index{operator Handle@{operator Handle}!prt::Shader@{prt::Shader}}
+\doxysubsubsection{\texorpdfstring{operator Handle()}{operator Handle()}}
+{\footnotesize\ttfamily \label{classprt_1_1_shader_a21ee018f3323b521d1bf0b506c046a99} 
+prt\+::\+Shader\+::operator \mbox{\hyperlink{classprt_1_1_shader_af1d98b5e49e0eea65bd8996068520f0e}{Handle}} (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_shader_a4cfc53e1ccd7df664d8560a8b42c2268}\index{prt::Shader@{prt::Shader}!handle\_@{handle\_}}
+\index{handle\_@{handle\_}!prt::Shader@{prt::Shader}}
+\doxysubsubsection{\texorpdfstring{handle\_}{handle\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_shader_a4cfc53e1ccd7df664d8560a8b42c2268} 
+\mbox{\hyperlink{classprt_1_1_shader_af1d98b5e49e0eea65bd8996068520f0e}{Handle}} prt\+::\+Shader\+::handle\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_shader_a75f81ae6e204a201893a7c3f5bacfd44}\index{prt::Shader@{prt::Shader}!name\_@{name\_}}
+\index{name\_@{name\_}!prt::Shader@{prt::Shader}}
+\doxysubsubsection{\texorpdfstring{name\_}{name\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_shader_a75f81ae6e204a201893a7c3f5bacfd44} 
+std\+::string prt\+::\+Shader\+::name\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{shader_8h}{shader.\+h}}\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{shader_8cc}{shader.\+cc}}\end{DoxyCompactItemize}

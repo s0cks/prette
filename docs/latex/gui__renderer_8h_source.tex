@@ -1,0 +1,65 @@
+\doxysection{gui\+\_\+renderer.\+h}
+\hypertarget{gui__renderer_8h_source}{}\label{gui__renderer_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/gui\_renderer.h@{/Users/tazz/Projects/prette/Sources/prette/gui\_renderer.h}}
+\mbox{\hyperlink{gui__renderer_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_GUI\_RENDERER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_GUI\_RENDERER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vulkan/vulkan\_core.h>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{event_8h}{prette/event.h}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}prette/gfx.h"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{swapchain_8h}{prette/swapchain.h}}"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#define\ FOR\_EACH\_GUI\_RENDERER\_EVENT(V)\ V(GuiRendererInit)}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }GuiRenderer;}
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }GuiRendererEvent;}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#define\ FORWARD\_DECLARE(Name)\ class\ Name\#\#Event;}}
+\DoxyCodeLine{00017\ \mbox{\hyperlink{gui__renderer_8h_a5c871b8209408fb4d61b8c30db8980cb}{FOR\_EACH\_GUI\_RENDERER\_EVENT}}(\mbox{\hyperlink{gui_8h_a83d2d158052fc2dc9bdf9bece3fd251e}{FORWARD\_DECLARE}})}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#undef\ FORWARD\_DECLARE}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \mbox{\hyperlink{event_8h_a1ee8f5215b2cce8affd6de0762ca1d7e}{DEFINE\_EVENT\_PROTOTYPE}}(\mbox{\hyperlink{classprt_1_1_gui_renderer}{GuiRenderer}},\ \mbox{\hyperlink{gui__renderer_8h_a5c871b8209408fb4d61b8c30db8980cb}{FOR\_EACH\_GUI\_RENDERER\_EVENT}});}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_gui_renderer_init_event}{GuiRendererInitEvent}}\ :\ \textcolor{keyword}{public}\ GuiRendererEvent\ \{}
+\DoxyCodeLine{00023\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \mbox{\hyperlink{classprt_1_1_gui_renderer_init_event_a635d9c2bc5e08250287259675f9f1d1b}{GuiRendererInitEvent}}();}
+\DoxyCodeLine{00025\ \ \ \mbox{\hyperlink{classprt_1_1_gui_renderer_init_event_a2245730562c5139e13cf4cb08e7adfc2}{\string~GuiRendererInitEvent}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00026\ \ \ \mbox{\hyperlink{classprt_1_1_gui_renderer_init_event_a92b0407b14d42a8cc032fd6bf8bb7500}{DECLARE\_EVENT\_TYPE}}(GuiRendererEvent,\ GuiRendererInit);}
+\DoxyCodeLine{00027\ \};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \mbox{\hyperlink{event_8h_a75f747c7c3ad9804780471c5ce370793}{DEFINE\_EVENT\_SUBJECT}}(\mbox{\hyperlink{classprt_1_1_gui_renderer}{GuiRenderer}});}
+\DoxyCodeLine{00030\ \mbox{\hyperlink{event_8h_a77dcd0ad69e8fd51c473d76aca5bba76}{DEFINE\_EVENT\_OBSERVABLE}}(\mbox{\hyperlink{classprt_1_1_gui_renderer}{GuiRenderer}});}
+\DoxyCodeLine{00031\ \mbox{\hyperlink{gui__renderer_8h_a5c871b8209408fb4d61b8c30db8980cb}{FOR\_EACH\_GUI\_RENDERER\_EVENT}}(\mbox{\hyperlink{event_8h_a77dcd0ad69e8fd51c473d76aca5bba76}{DEFINE\_EVENT\_OBSERVABLE}});}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{namespaceprt_ac603f0b28a9fa1fb73a363f596fc3f68}{OnGuiRendererEvent}}()\ -\/>\ GuiRendererEventObservable;}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#define\ DEFINE\_ON\_EVENT(Name)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\ \ static\ inline\ auto\ On\#\#Name\#\#Event()-\/>Name\#\#EventObservable\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\ \ \ \ return\ OnGuiRendererEvent().filter(Name\#\#Event::Filter).map(Name\#\#Event::Cast);\ \(\backslash\)}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\ \ \}}}
+\DoxyCodeLine{00038\ \mbox{\hyperlink{gui__renderer_8h_a5c871b8209408fb4d61b8c30db8980cb}{FOR\_EACH\_GUI\_RENDERER\_EVENT}}(\mbox{\hyperlink{engine_8cc_a2672365a233e0c9f3c1ccb0d78388308}{DEFINE\_ON\_EVENT}})}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#undef\ DEFINE\_ON\_EVENT}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{keyword}{class\ }Driver;}
+\DoxyCodeLine{00042\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_gui_renderer}{GuiRenderer}}\ \{}
+\DoxyCodeLine{00043\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00044\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_gui_renderer_a7a9fa95bb159f63610f50fb519316b3f}{InitFramebuffers}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_driver}{Driver}}*\ driver);}
+\DoxyCodeLine{00045\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_gui_renderer_ae891ea5e01af4a6279d2218fbc74311d}{InitRenderPass}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_driver}{Driver}}*\ driver);}
+\DoxyCodeLine{00046\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_gui_renderer_a9d8ab13d19efc66684ebee8bc82c64c2}{InitCommandBuffers}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_driver}{Driver}}*\ driver);}
+\DoxyCodeLine{00047\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_gui_renderer_a132874a2776233b676c5654f74fa71fe}{InitSampler}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_driver}{Driver}}*\ driver);}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_gui_renderer_a0873f7f0b6661b11caaf72f0c7d3dafb}{Destroy}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_driver}{Driver}}*\ driver,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ is\_reinit);}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00052\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_gui_renderer_a9d2b3ab239ac717c4f79aac7e157102c}{Init}}();}
+\DoxyCodeLine{00053\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_gui_renderer_af69fce6721d636decabf0056f5f67d20}{GetPass}}()\ -\/>\ VkRenderPass\ \textcolor{keyword}{const}\&;}
+\DoxyCodeLine{00054\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_gui_renderer_a46171f8afbfd94b63a50a6492b6c21ba}{GetSceneDescriptor}}(\textcolor{keyword}{const}\ uint32\_t\ frame)\ -\/>\ VkDescriptorSet\ \textcolor{keyword}{const}\&;}
+\DoxyCodeLine{00055\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_gui_renderer_adca26bd527476a374e7e7cad3b4ee7f6}{Draw}}(\mbox{\hyperlink{classprt_1_1_swap_chain_frame}{SwapChainFrame}}*\ frame,\ std::vector<VkCommandBuffer>\&\ cmd\_buffers);}
+\DoxyCodeLine{00056\ \};}
+\DoxyCodeLine{00057\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_GUI\_RENDERER\_H}}
+
+\end{DoxyCode}

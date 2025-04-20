@@ -1,0 +1,73 @@
+\doxysection{prt\+::Pipeline\+Layout\+Builder Class Reference}
+\hypertarget{classprt_1_1_pipeline_layout_builder}{}\label{classprt_1_1_pipeline_layout_builder}\index{prt::PipelineLayoutBuilder@{prt::PipelineLayoutBuilder}}
+
+
+{\ttfamily \#include $<$pipeline\+\_\+builder.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_pipeline_layout_builder_a2c890f21dc3a3dc49da832dae41a6c5a}{Pipeline\+Layout\+Builder}} (const \mbox{\hyperlink{classprt_1_1_pipeline_layout_builder_ac84941bb10e4d1f9f79b09da6f26da17}{Vk\+Descriptor\+Set\+Layout\+List}} \&descriptor\+\_\+set\+\_\+layouts)
+\item 
+\mbox{\hyperlink{classprt_1_1_pipeline_layout_builder_a8bce18dedfc8b38c969e26c3cba21455}{\texorpdfstring{$\sim$}{\string~}\+Pipeline\+Layout\+Builder}} ()=default
+\item 
+void \mbox{\hyperlink{classprt_1_1_pipeline_layout_builder_aa797053135838d6612c04484da351fa7}{Build}} (Vk\+Pipeline\+Layout \&layout)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classprt_1_1_pipeline_layout_builder_ac84941bb10e4d1f9f79b09da6f26da17}{Vk\+Descriptor\+Set\+Layout\+List}} = std\+::vector$<$Vk\+Descriptor\+Set\+Layout$>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_pipeline_layout_builder_ac84941bb10e4d1f9f79b09da6f26da17}{Vk\+Descriptor\+Set\+Layout\+List}} \mbox{\hyperlink{classprt_1_1_pipeline_layout_builder_aecb00be2bd10614e4e6044f9991d76d6}{descriptor\+\_\+set\+\_\+layouts\+\_\+}} \{\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classprt_1_1_pipeline_layout_builder_ac84941bb10e4d1f9f79b09da6f26da17}\index{prt::PipelineLayoutBuilder@{prt::PipelineLayoutBuilder}!VkDescriptorSetLayoutList@{VkDescriptorSetLayoutList}}
+\index{VkDescriptorSetLayoutList@{VkDescriptorSetLayoutList}!prt::PipelineLayoutBuilder@{prt::PipelineLayoutBuilder}}
+\doxysubsubsection{\texorpdfstring{VkDescriptorSetLayoutList}{VkDescriptorSetLayoutList}}
+{\footnotesize\ttfamily \label{classprt_1_1_pipeline_layout_builder_ac84941bb10e4d1f9f79b09da6f26da17} 
+using \mbox{\hyperlink{classprt_1_1_pipeline_layout_builder_ac84941bb10e4d1f9f79b09da6f26da17}{prt\+::\+Pipeline\+Layout\+Builder\+::\+Vk\+Descriptor\+Set\+Layout\+List}} = std\+::vector$<$Vk\+Descriptor\+Set\+Layout$>$\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_pipeline_layout_builder_a2c890f21dc3a3dc49da832dae41a6c5a}\index{prt::PipelineLayoutBuilder@{prt::PipelineLayoutBuilder}!PipelineLayoutBuilder@{PipelineLayoutBuilder}}
+\index{PipelineLayoutBuilder@{PipelineLayoutBuilder}!prt::PipelineLayoutBuilder@{prt::PipelineLayoutBuilder}}
+\doxysubsubsection{\texorpdfstring{PipelineLayoutBuilder()}{PipelineLayoutBuilder()}}
+{\footnotesize\ttfamily \label{classprt_1_1_pipeline_layout_builder_a2c890f21dc3a3dc49da832dae41a6c5a} 
+prt\+::\+Pipeline\+Layout\+Builder\+::\+Pipeline\+Layout\+Builder (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_pipeline_layout_builder_ac84941bb10e4d1f9f79b09da6f26da17}{Vk\+Descriptor\+Set\+Layout\+List}} \&}]{descriptor\+\_\+set\+\_\+layouts}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+\Hypertarget{classprt_1_1_pipeline_layout_builder_a8bce18dedfc8b38c969e26c3cba21455}\index{prt::PipelineLayoutBuilder@{prt::PipelineLayoutBuilder}!````~PipelineLayoutBuilder@{\texorpdfstring{$\sim$}{\string~}PipelineLayoutBuilder}}
+\index{````~PipelineLayoutBuilder@{\texorpdfstring{$\sim$}{\string~}PipelineLayoutBuilder}!prt::PipelineLayoutBuilder@{prt::PipelineLayoutBuilder}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}PipelineLayoutBuilder()}{\string~PipelineLayoutBuilder()}}
+{\footnotesize\ttfamily \label{classprt_1_1_pipeline_layout_builder_a8bce18dedfc8b38c969e26c3cba21455} 
+prt\+::\+Pipeline\+Layout\+Builder\+::\texorpdfstring{$\sim$}{\string~}\+Pipeline\+Layout\+Builder (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_pipeline_layout_builder_aa797053135838d6612c04484da351fa7}\index{prt::PipelineLayoutBuilder@{prt::PipelineLayoutBuilder}!Build@{Build}}
+\index{Build@{Build}!prt::PipelineLayoutBuilder@{prt::PipelineLayoutBuilder}}
+\doxysubsubsection{\texorpdfstring{Build()}{Build()}}
+{\footnotesize\ttfamily \label{classprt_1_1_pipeline_layout_builder_aa797053135838d6612c04484da351fa7} 
+void prt\+::\+Pipeline\+Layout\+Builder\+::\+Build (\begin{DoxyParamCaption}\item[{Vk\+Pipeline\+Layout \&}]{layout}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_pipeline_layout_builder_aecb00be2bd10614e4e6044f9991d76d6}\index{prt::PipelineLayoutBuilder@{prt::PipelineLayoutBuilder}!descriptor\_set\_layouts\_@{descriptor\_set\_layouts\_}}
+\index{descriptor\_set\_layouts\_@{descriptor\_set\_layouts\_}!prt::PipelineLayoutBuilder@{prt::PipelineLayoutBuilder}}
+\doxysubsubsection{\texorpdfstring{descriptor\_set\_layouts\_}{descriptor\_set\_layouts\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_pipeline_layout_builder_aecb00be2bd10614e4e6044f9991d76d6} 
+\mbox{\hyperlink{classprt_1_1_pipeline_layout_builder_ac84941bb10e4d1f9f79b09da6f26da17}{Vk\+Descriptor\+Set\+Layout\+List}} prt\+::\+Pipeline\+Layout\+Builder\+::descriptor\+\_\+set\+\_\+layouts\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{pipeline__builder_8h}{pipeline\+\_\+builder.\+h}}\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{pipeline__builder_8cc}{pipeline\+\_\+builder.\+cc}}\end{DoxyCompactItemize}

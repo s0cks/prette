@@ -1,0 +1,114 @@
+\doxysection{prt\+::Monitor\+Event Class Reference}
+\hypertarget{classprt_1_1_monitor_event}{}\label{classprt_1_1_monitor_event}\index{prt::MonitorEvent@{prt::MonitorEvent}}
+
+
+{\ttfamily \#include $<$monitor.\+h$>$}
+
+
+
+Inheritance diagram for prt\+::Monitor\+Event\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classprt_1_1_monitor_event__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for prt\+::Monitor\+Event\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=255pt]{classprt_1_1_monitor_event__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classprt_1_1_monitor_event_aafbaf85f4e598b8abe9094c61785af3d}{\texorpdfstring{$\sim$}{\string~}\+Monitor\+Event}} ()=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1_monitor_event_a2314f31a344df9d6b69712a6c683a865}{Get\+Monitor}} () const -\/$>$ const \mbox{\hyperlink{classprt_1_1_monitor}{Monitor}} \texorpdfstring{$\ast$}{*}
+\item 
+\mbox{\hyperlink{classprt_1_1_monitor_event_ad22a7e397cef78d9b30f278873a40ca4}{DEFINE\+\_\+\+EVENT\+\_\+\+PROTOTYPE\+\_\+\+TYPE}} (\mbox{\hyperlink{classprt_1_1_monitor}{Monitor}}, \mbox{\hyperlink{namespaceprt_afc40a413eb25a9c1a226ad5df9a64b82}{FOR\+\_\+\+EACH\+\_\+\+MONITOR\+\_\+\+EVENT}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classprt_1_1_event}{prt\+::\+Event}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classprt_1_1_event_a4852e85c48ebb80d6c96fe0d13d5ae6a}{\texorpdfstring{$\sim$}{\string~}\+Event}} ()=default
+\item 
+virtual auto \mbox{\hyperlink{classprt_1_1_event_a674cd356a472771aad69534b2959500e}{Get\+Name}} () const -\/$>$ const char \texorpdfstring{$\ast$}{*}=0
+\item 
+virtual auto \mbox{\hyperlink{classprt_1_1_event_a90911d9644cf7ec9b4f05053a3b632af}{To\+String}} () const -\/$>$ std\+::string=0
+\item 
+virtual void \mbox{\hyperlink{classprt_1_1_event_a9f54e07e32d052203fe0e08a185746bc}{To\+Table}} (lua\+\_\+\+State \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{engine_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}}) const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_monitor_event_acb7443f077382d78dc38774688fa4865}{Monitor\+Event}} (const \mbox{\hyperlink{classprt_1_1_monitor}{Monitor}} \texorpdfstring{$\ast$}{*}monitor)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classprt_1_1_event}{prt\+::\+Event}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_event_a68ae1e6264631e55933648b66d5dd11b}{Event}} ()=default
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_monitor_event_a1d7c9866a96184222f99fa9ab0f81db4}{DEFINE\+\_\+\+NON\+\_\+\+COPYABLE\+\_\+\+TYPE}} (\mbox{\hyperlink{classprt_1_1_monitor_event}{Monitor\+Event}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const \mbox{\hyperlink{classprt_1_1_monitor}{Monitor}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1_monitor_event_a9432368398b68accc37fed1673b90a43}{monitor\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_monitor_event_acb7443f077382d78dc38774688fa4865}\index{prt::MonitorEvent@{prt::MonitorEvent}!MonitorEvent@{MonitorEvent}}
+\index{MonitorEvent@{MonitorEvent}!prt::MonitorEvent@{prt::MonitorEvent}}
+\doxysubsubsection{\texorpdfstring{MonitorEvent()}{MonitorEvent()}}
+{\footnotesize\ttfamily \label{classprt_1_1_monitor_event_acb7443f077382d78dc38774688fa4865} 
+prt\+::\+Monitor\+Event\+::\+Monitor\+Event (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_monitor}{Monitor}} \texorpdfstring{$\ast$}{*}}]{monitor}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}, {\ttfamily [protected]}}
+
+\Hypertarget{classprt_1_1_monitor_event_aafbaf85f4e598b8abe9094c61785af3d}\index{prt::MonitorEvent@{prt::MonitorEvent}!````~MonitorEvent@{\texorpdfstring{$\sim$}{\string~}MonitorEvent}}
+\index{````~MonitorEvent@{\texorpdfstring{$\sim$}{\string~}MonitorEvent}!prt::MonitorEvent@{prt::MonitorEvent}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}MonitorEvent()}{\string~MonitorEvent()}}
+{\footnotesize\ttfamily \label{classprt_1_1_monitor_event_aafbaf85f4e598b8abe9094c61785af3d} 
+virtual prt\+::\+Monitor\+Event\+::\texorpdfstring{$\sim$}{\string~}\+Monitor\+Event (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_monitor_event_ad22a7e397cef78d9b30f278873a40ca4}\index{prt::MonitorEvent@{prt::MonitorEvent}!DEFINE\_EVENT\_PROTOTYPE\_TYPE@{DEFINE\_EVENT\_PROTOTYPE\_TYPE}}
+\index{DEFINE\_EVENT\_PROTOTYPE\_TYPE@{DEFINE\_EVENT\_PROTOTYPE\_TYPE}!prt::MonitorEvent@{prt::MonitorEvent}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_EVENT\_PROTOTYPE\_TYPE()}{DEFINE\_EVENT\_PROTOTYPE\_TYPE()}}
+{\footnotesize\ttfamily \label{classprt_1_1_monitor_event_ad22a7e397cef78d9b30f278873a40ca4} 
+prt\+::\+Monitor\+Event\+::\+DEFINE\+\_\+\+EVENT\+\_\+\+PROTOTYPE\+\_\+\+TYPE (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_monitor}{Monitor}}}]{}{, }\item[{\mbox{\hyperlink{namespaceprt_afc40a413eb25a9c1a226ad5df9a64b82}{FOR\+\_\+\+EACH\+\_\+\+MONITOR\+\_\+\+EVENT}}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_monitor_event_a1d7c9866a96184222f99fa9ab0f81db4}\index{prt::MonitorEvent@{prt::MonitorEvent}!DEFINE\_NON\_COPYABLE\_TYPE@{DEFINE\_NON\_COPYABLE\_TYPE}}
+\index{DEFINE\_NON\_COPYABLE\_TYPE@{DEFINE\_NON\_COPYABLE\_TYPE}!prt::MonitorEvent@{prt::MonitorEvent}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_NON\_COPYABLE\_TYPE()}{DEFINE\_NON\_COPYABLE\_TYPE()}}
+{\footnotesize\ttfamily \label{classprt_1_1_monitor_event_a1d7c9866a96184222f99fa9ab0f81db4} 
+prt\+::\+Monitor\+Event\+::\+DEFINE\+\_\+\+NON\+\_\+\+COPYABLE\+\_\+\+TYPE (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_monitor_event}{Monitor\+Event}}}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_monitor_event_a2314f31a344df9d6b69712a6c683a865}\index{prt::MonitorEvent@{prt::MonitorEvent}!GetMonitor@{GetMonitor}}
+\index{GetMonitor@{GetMonitor}!prt::MonitorEvent@{prt::MonitorEvent}}
+\doxysubsubsection{\texorpdfstring{GetMonitor()}{GetMonitor()}}
+{\footnotesize\ttfamily \label{classprt_1_1_monitor_event_a2314f31a344df9d6b69712a6c683a865} 
+auto prt\+::\+Monitor\+Event\+::\+Get\+Monitor (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const \mbox{\hyperlink{classprt_1_1_monitor}{Monitor}}\texorpdfstring{$\ast$}{*} \hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_monitor_event_a9432368398b68accc37fed1673b90a43}\index{prt::MonitorEvent@{prt::MonitorEvent}!monitor\_@{monitor\_}}
+\index{monitor\_@{monitor\_}!prt::MonitorEvent@{prt::MonitorEvent}}
+\doxysubsubsection{\texorpdfstring{monitor\_}{monitor\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_monitor_event_a9432368398b68accc37fed1673b90a43} 
+const \mbox{\hyperlink{classprt_1_1_monitor}{Monitor}}\texorpdfstring{$\ast$}{*} prt\+::\+Monitor\+Event\+::monitor\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{monitor_8h}{monitor.\+h}}\end{DoxyCompactItemize}

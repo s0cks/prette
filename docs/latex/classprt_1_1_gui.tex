@@ -1,0 +1,124 @@
+\doxysection{prt\+::Gui Class Reference}
+\hypertarget{classprt_1_1_gui}{}\label{classprt_1_1_gui}\index{prt::Gui@{prt::Gui}}
+
+
+{\ttfamily \#include $<$gui.\+h$>$}
+
+
+
+Inheritance diagram for prt\+::Gui\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classprt_1_1_gui__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classprt_1_1_gui_aeabb2c2cc065007b3f4e0e23f320a0ab}{\texorpdfstring{$\sim$}{\string~}\+Gui}} ()
+\item 
+virtual auto \mbox{\hyperlink{classprt_1_1_gui_a637f852342d2279b73fd5a4d8e071807}{Get\+Gui\+Name}} () const -\/$>$ const char \texorpdfstring{$\ast$}{*}=0
+\item 
+virtual void \mbox{\hyperlink{classprt_1_1_gui_a1babbaab76bfeeee0f44f6cf48b43209}{Update}} ()=0
+\item 
+virtual void \mbox{\hyperlink{classprt_1_1_gui_a9ec0dbab4550e416cabbd0b6b09a98f8}{Render}} ()=0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_gui_aa8b454b38bd9082c22b75991636d2aa8}{Gui}} (std\+::string name)
+\item 
+void \mbox{\hyperlink{classprt_1_1_gui_a827e83fc3f1653755a716f55415d2b3c}{Load\+Lua\+Script}} (const std\+::string \&name)
+\item 
+{\footnotesize template$<$typename... Args$>$ }\\void \mbox{\hyperlink{classprt_1_1_gui_aed52360396df7011ddc7742e6e852495}{Invoke\+Lua\+Callback}} (const std\+::string \&name, Args... args)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classprt_1_1_gui_aedf738e4d63d926b285466e2fbcb52e3}{name\+\_\+}}
+\item 
+rx\+::subscription \mbox{\hyperlink{classprt_1_1_gui_a97d6292f6035e6de6cf3269d6a87e9be}{on\+\_\+tick\+\_\+}} \{\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_gui_aa8b454b38bd9082c22b75991636d2aa8}\index{prt::Gui@{prt::Gui}!Gui@{Gui}}
+\index{Gui@{Gui}!prt::Gui@{prt::Gui}}
+\doxysubsubsection{\texorpdfstring{Gui()}{Gui()}}
+{\footnotesize\ttfamily \label{classprt_1_1_gui_aa8b454b38bd9082c22b75991636d2aa8} 
+prt\+::\+Gui\+::\+Gui (\begin{DoxyParamCaption}\item[{std\+::string}]{name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}, {\ttfamily [protected]}}
+
+\Hypertarget{classprt_1_1_gui_aeabb2c2cc065007b3f4e0e23f320a0ab}\index{prt::Gui@{prt::Gui}!````~Gui@{\texorpdfstring{$\sim$}{\string~}Gui}}
+\index{````~Gui@{\texorpdfstring{$\sim$}{\string~}Gui}!prt::Gui@{prt::Gui}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Gui()}{\string~Gui()}}
+{\footnotesize\ttfamily \label{classprt_1_1_gui_aeabb2c2cc065007b3f4e0e23f320a0ab} 
+prt\+::\+Gui\+::\texorpdfstring{$\sim$}{\string~}\+Gui (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_gui_a637f852342d2279b73fd5a4d8e071807}\index{prt::Gui@{prt::Gui}!GetGuiName@{GetGuiName}}
+\index{GetGuiName@{GetGuiName}!prt::Gui@{prt::Gui}}
+\doxysubsubsection{\texorpdfstring{GetGuiName()}{GetGuiName()}}
+{\footnotesize\ttfamily \label{classprt_1_1_gui_a637f852342d2279b73fd5a4d8e071807} 
+virtual auto prt\+::\+Gui\+::\+Get\+Gui\+Name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$  const char \texorpdfstring{$\ast$}{*}\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{classprt_1_1_gui_camera_a53ddd55dc978403f451662af3e968d8c}{prt\+::\+Gui\+Camera}}, \mbox{\hyperlink{classprt_1_1_gui_debug_a2b7bf9d060f9c9f71756a41c9603863b}{prt\+::\+Gui\+Debug}}, and \mbox{\hyperlink{classprt_1_1_gui_viewport_afe04b1e2239217e33140e8e87de7f8bc}{prt\+::\+Gui\+Viewport}}.
+
+\Hypertarget{classprt_1_1_gui_aed52360396df7011ddc7742e6e852495}\index{prt::Gui@{prt::Gui}!InvokeLuaCallback@{InvokeLuaCallback}}
+\index{InvokeLuaCallback@{InvokeLuaCallback}!prt::Gui@{prt::Gui}}
+\doxysubsubsection{\texorpdfstring{InvokeLuaCallback()}{InvokeLuaCallback()}}
+{\footnotesize\ttfamily \label{classprt_1_1_gui_aed52360396df7011ddc7742e6e852495} 
+template$<$typename... Args$>$ \\
+void prt\+::\+Gui\+::\+Invoke\+Lua\+Callback (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{, }\item[{Args...}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+\Hypertarget{classprt_1_1_gui_a827e83fc3f1653755a716f55415d2b3c}\index{prt::Gui@{prt::Gui}!LoadLuaScript@{LoadLuaScript}}
+\index{LoadLuaScript@{LoadLuaScript}!prt::Gui@{prt::Gui}}
+\doxysubsubsection{\texorpdfstring{LoadLuaScript()}{LoadLuaScript()}}
+{\footnotesize\ttfamily \label{classprt_1_1_gui_a827e83fc3f1653755a716f55415d2b3c} 
+void prt\+::\+Gui\+::\+Load\+Lua\+Script (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+\Hypertarget{classprt_1_1_gui_a9ec0dbab4550e416cabbd0b6b09a98f8}\index{prt::Gui@{prt::Gui}!Render@{Render}}
+\index{Render@{Render}!prt::Gui@{prt::Gui}}
+\doxysubsubsection{\texorpdfstring{Render()}{Render()}}
+{\footnotesize\ttfamily \label{classprt_1_1_gui_a9ec0dbab4550e416cabbd0b6b09a98f8} 
+virtual void prt\+::\+Gui\+::\+Render (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{classprt_1_1_gui_camera_a1724ccea27328947b54983698df0cad7}{prt\+::\+Gui\+Camera}}, \mbox{\hyperlink{classprt_1_1_gui_debug_a61db91fe245d0911c3ed59802e32d928}{prt\+::\+Gui\+Debug}}, and \mbox{\hyperlink{classprt_1_1_gui_viewport_a6e080637d78eabe04857fbf66749b33f}{prt\+::\+Gui\+Viewport}}.
+
+\Hypertarget{classprt_1_1_gui_a1babbaab76bfeeee0f44f6cf48b43209}\index{prt::Gui@{prt::Gui}!Update@{Update}}
+\index{Update@{Update}!prt::Gui@{prt::Gui}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily \label{classprt_1_1_gui_a1babbaab76bfeeee0f44f6cf48b43209} 
+virtual void prt\+::\+Gui\+::\+Update (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{classprt_1_1_gui_camera_aabe13f02a10605674581e3ab8899e2ce}{prt\+::\+Gui\+Camera}}, \mbox{\hyperlink{classprt_1_1_gui_debug_a4eae9fc977bffed6d82ab475dcec2c4c}{prt\+::\+Gui\+Debug}}, and \mbox{\hyperlink{classprt_1_1_gui_viewport_a9cfc1ece9e575aabd4c1bb242722ee90}{prt\+::\+Gui\+Viewport}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_gui_aedf738e4d63d926b285466e2fbcb52e3}\index{prt::Gui@{prt::Gui}!name\_@{name\_}}
+\index{name\_@{name\_}!prt::Gui@{prt::Gui}}
+\doxysubsubsection{\texorpdfstring{name\_}{name\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_gui_aedf738e4d63d926b285466e2fbcb52e3} 
+std\+::string prt\+::\+Gui\+::name\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_gui_a97d6292f6035e6de6cf3269d6a87e9be}\index{prt::Gui@{prt::Gui}!on\_tick\_@{on\_tick\_}}
+\index{on\_tick\_@{on\_tick\_}!prt::Gui@{prt::Gui}}
+\doxysubsubsection{\texorpdfstring{on\_tick\_}{on\_tick\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_gui_a97d6292f6035e6de6cf3269d6a87e9be} 
+rx\+::subscription prt\+::\+Gui\+::on\+\_\+tick\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{gui_8h}{gui.\+h}}\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{gui_8cc}{gui.\+cc}}\end{DoxyCompactItemize}

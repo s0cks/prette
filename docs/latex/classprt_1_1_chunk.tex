@@ -1,0 +1,196 @@
+\doxysection{prt\+::Chunk Class Reference}
+\hypertarget{classprt_1_1_chunk}{}\label{classprt_1_1_chunk}\index{prt::Chunk@{prt::Chunk}}
+
+
+{\ttfamily \#include $<$chunk.\+h$>$}
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1_chunk_1_1_chunk_tile_iterator}{Chunk\+Tile\+Iterator}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_chunk_a6269dd7e7510ac8e772f839a107e9fc2}{Chunk}} ()=default
+\item 
+\mbox{\hyperlink{classprt_1_1_chunk_a52fb733ad276cac81736ece9e2b2b031}{Chunk}} (const \mbox{\hyperlink{namespaceprt_a417886d23aeea354e544f47ad952fd84}{Chunk\+Pos}} pos)
+\item 
+\mbox{\hyperlink{classprt_1_1_chunk_a0be8a4bd7439dbe12c2439de0b6e13e8}{Chunk}} (const uint32\+\_\+t x, const uint32\+\_\+t y)
+\item 
+\mbox{\hyperlink{classprt_1_1_chunk_a7f0258e56d3c58b21123a4665424c808}{\texorpdfstring{$\sim$}{\string~}\+Chunk}} ()
+\item 
+auto \mbox{\hyperlink{classprt_1_1_chunk_a9b4662aa811f2898dfc7713d604394c6}{Get\+Pos}} () const -\/$>$ const \mbox{\hyperlink{namespaceprt_a417886d23aeea354e544f47ad952fd84}{Chunk\+Pos}} \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_chunk_af61eba0a02d062fa185ce44e1e3dc7fd}{Get\+Tile\+At}} (const \mbox{\hyperlink{namespaceprt_a2b26a6eb256a6eefff5896d1df8e78c3}{Tile\+Pos}} pos) -\/$>$ \mbox{\hyperlink{classprt_1_1_tile}{Tile}} const \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_chunk_a80bfd2a6ad2c6a7ee3887ad74d141e65}{Accept}} (\mbox{\hyperlink{classprt_1_1_chunk_visitor}{Chunk\+Visitor}} \texorpdfstring{$\ast$}{*}vis) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_chunk_ad4d6798b226391a85dd9c62bc567553f}{Visit\+Tiles}} (\mbox{\hyperlink{classprt_1_1_tile_visitor}{Tile\+Visitor}} \texorpdfstring{$\ast$}{*}vis) -\/$>$ bool
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_chunk_a3103682416203ce0b04d42fa7d5404e0}{DEFINE\+\_\+\+DEFAULT\+\_\+\+COPYABLE\+\_\+\+TYPE}} (\mbox{\hyperlink{classprt_1_1_chunk}{Chunk}})
+\item 
+auto \mbox{\hyperlink{classprt_1_1_chunk_aef8c7d11abf3511fe4896ead2e7394a1}{data}} () -\/$>$ \mbox{\hyperlink{namespaceprt_a48c350434af7dd830a8e46eaec4121cb}{Chunk\+Data}} \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_chunk_aabc612bcb3ac096594a018e18db24a94}{tile}} (const uint32\+\_\+t idx) -\/$>$ \mbox{\hyperlink{classprt_1_1_tile}{Tile}} \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_chunk_a2b2266645c836b9bc46142743bd88af7}{tile}} (const \mbox{\hyperlink{namespaceprt_a2b26a6eb256a6eefff5896d1df8e78c3}{Tile\+Pos}} pos) -\/$>$ \mbox{\hyperlink{classprt_1_1_tile}{Tile}} \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_chunk_a0a495bd5ed0a4ee75b67f3ecbc4e1c51}{tile}} (const uint32\+\_\+t idx) const -\/$>$ \mbox{\hyperlink{classprt_1_1_tile}{Tile}} const \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_chunk_acdc5d71c0422b49271a595c1f5a2d876}{tile}} (const \mbox{\hyperlink{namespaceprt_a2b26a6eb256a6eefff5896d1df8e78c3}{Tile\+Pos}} pos) const -\/$>$ \mbox{\hyperlink{classprt_1_1_tile}{Tile}} const \&
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_chunk_a5c604ad3dbe06013204bbdd651d82fd7}{Get\+Tile\+Index}} (const \mbox{\hyperlink{namespaceprt_a2b26a6eb256a6eefff5896d1df8e78c3}{Tile\+Pos}} \&pos) -\/$>$ uint32\+\_\+t
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceprt_a417886d23aeea354e544f47ad952fd84}{Chunk\+Pos}} \mbox{\hyperlink{classprt_1_1_chunk_a5cc432dcec5d9c617e4fc31eee042b3a}{pos\+\_\+}} \{\}
+\item 
+\mbox{\hyperlink{namespaceprt_a48c350434af7dd830a8e46eaec4121cb}{Chunk\+Data}} \mbox{\hyperlink{classprt_1_1_chunk_a01b1138d7dfddcc11c7612872ff58856}{tiles\+\_\+}} \{\}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1_chunk_ac2f1cae8a4ade90b4921738dd683137f}{Chunk\+Tile\+Iterator}}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_chunk_a04f86597c4c4f467c0361b33718d9045}{operator$<$$<$}} (std\+::ostream \&stream, const \mbox{\hyperlink{classprt_1_1_chunk}{Chunk}} \&rhs) -\/$>$ std\+::ostream \&
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_chunk_a6269dd7e7510ac8e772f839a107e9fc2}\index{prt::Chunk@{prt::Chunk}!Chunk@{Chunk}}
+\index{Chunk@{Chunk}!prt::Chunk@{prt::Chunk}}
+\doxysubsubsection{\texorpdfstring{Chunk()}{Chunk()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classprt_1_1_chunk_a6269dd7e7510ac8e772f839a107e9fc2} 
+prt\+::\+Chunk\+::\+Chunk (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{classprt_1_1_chunk_a52fb733ad276cac81736ece9e2b2b031}\index{prt::Chunk@{prt::Chunk}!Chunk@{Chunk}}
+\index{Chunk@{Chunk}!prt::Chunk@{prt::Chunk}}
+\doxysubsubsection{\texorpdfstring{Chunk()}{Chunk()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classprt_1_1_chunk_a52fb733ad276cac81736ece9e2b2b031} 
+prt\+::\+Chunk\+::\+Chunk (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceprt_a417886d23aeea354e544f47ad952fd84}{Chunk\+Pos}}}]{pos}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+\Hypertarget{classprt_1_1_chunk_a0be8a4bd7439dbe12c2439de0b6e13e8}\index{prt::Chunk@{prt::Chunk}!Chunk@{Chunk}}
+\index{Chunk@{Chunk}!prt::Chunk@{prt::Chunk}}
+\doxysubsubsection{\texorpdfstring{Chunk()}{Chunk()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classprt_1_1_chunk_a0be8a4bd7439dbe12c2439de0b6e13e8} 
+prt\+::\+Chunk\+::\+Chunk (\begin{DoxyParamCaption}\item[{const uint32\+\_\+t}]{x}{, }\item[{const uint32\+\_\+t}]{y}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_chunk_a7f0258e56d3c58b21123a4665424c808}\index{prt::Chunk@{prt::Chunk}!````~Chunk@{\texorpdfstring{$\sim$}{\string~}Chunk}}
+\index{````~Chunk@{\texorpdfstring{$\sim$}{\string~}Chunk}!prt::Chunk@{prt::Chunk}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Chunk()}{\string~Chunk()}}
+{\footnotesize\ttfamily \label{classprt_1_1_chunk_a7f0258e56d3c58b21123a4665424c808} 
+prt\+::\+Chunk\+::\texorpdfstring{$\sim$}{\string~}\+Chunk (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_chunk_a80bfd2a6ad2c6a7ee3887ad74d141e65}\index{prt::Chunk@{prt::Chunk}!Accept@{Accept}}
+\index{Accept@{Accept}!prt::Chunk@{prt::Chunk}}
+\doxysubsubsection{\texorpdfstring{Accept()}{Accept()}}
+{\footnotesize\ttfamily \label{classprt_1_1_chunk_a80bfd2a6ad2c6a7ee3887ad74d141e65} 
+auto prt\+::\+Chunk\+::\+Accept (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_chunk_visitor}{Chunk\+Visitor}} \texorpdfstring{$\ast$}{*}}]{vis}{}\end{DoxyParamCaption}) -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_chunk_aef8c7d11abf3511fe4896ead2e7394a1}\index{prt::Chunk@{prt::Chunk}!data@{data}}
+\index{data@{data}!prt::Chunk@{prt::Chunk}}
+\doxysubsubsection{\texorpdfstring{data()}{data()}}
+{\footnotesize\ttfamily \label{classprt_1_1_chunk_aef8c7d11abf3511fe4896ead2e7394a1} 
+auto prt\+::\+Chunk\+::data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{namespaceprt_a48c350434af7dd830a8e46eaec4121cb}{Chunk\+Data}}\& \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_chunk_a3103682416203ce0b04d42fa7d5404e0}\index{prt::Chunk@{prt::Chunk}!DEFINE\_DEFAULT\_COPYABLE\_TYPE@{DEFINE\_DEFAULT\_COPYABLE\_TYPE}}
+\index{DEFINE\_DEFAULT\_COPYABLE\_TYPE@{DEFINE\_DEFAULT\_COPYABLE\_TYPE}!prt::Chunk@{prt::Chunk}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_DEFAULT\_COPYABLE\_TYPE()}{DEFINE\_DEFAULT\_COPYABLE\_TYPE()}}
+{\footnotesize\ttfamily \label{classprt_1_1_chunk_a3103682416203ce0b04d42fa7d5404e0} 
+prt\+::\+Chunk\+::\+DEFINE\+\_\+\+DEFAULT\+\_\+\+COPYABLE\+\_\+\+TYPE (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_chunk}{Chunk}}}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_chunk_a9b4662aa811f2898dfc7713d604394c6}\index{prt::Chunk@{prt::Chunk}!GetPos@{GetPos}}
+\index{GetPos@{GetPos}!prt::Chunk@{prt::Chunk}}
+\doxysubsubsection{\texorpdfstring{GetPos()}{GetPos()}}
+{\footnotesize\ttfamily \label{classprt_1_1_chunk_a9b4662aa811f2898dfc7713d604394c6} 
+auto prt\+::\+Chunk\+::\+Get\+Pos (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const \mbox{\hyperlink{namespaceprt_a417886d23aeea354e544f47ad952fd84}{Chunk\+Pos}}\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_chunk_af61eba0a02d062fa185ce44e1e3dc7fd}\index{prt::Chunk@{prt::Chunk}!GetTileAt@{GetTileAt}}
+\index{GetTileAt@{GetTileAt}!prt::Chunk@{prt::Chunk}}
+\doxysubsubsection{\texorpdfstring{GetTileAt()}{GetTileAt()}}
+{\footnotesize\ttfamily \label{classprt_1_1_chunk_af61eba0a02d062fa185ce44e1e3dc7fd} 
+auto prt\+::\+Chunk\+::\+Get\+Tile\+At (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceprt_a2b26a6eb256a6eefff5896d1df8e78c3}{Tile\+Pos}}}]{pos}{}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{classprt_1_1_tile}{Tile}} const\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_chunk_a5c604ad3dbe06013204bbdd651d82fd7}\index{prt::Chunk@{prt::Chunk}!GetTileIndex@{GetTileIndex}}
+\index{GetTileIndex@{GetTileIndex}!prt::Chunk@{prt::Chunk}}
+\doxysubsubsection{\texorpdfstring{GetTileIndex()}{GetTileIndex()}}
+{\footnotesize\ttfamily \label{classprt_1_1_chunk_a5c604ad3dbe06013204bbdd651d82fd7} 
+static auto prt\+::\+Chunk\+::\+Get\+Tile\+Index (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceprt_a2b26a6eb256a6eefff5896d1df8e78c3}{Tile\+Pos}} \&}]{pos}{}\end{DoxyParamCaption}) -\/$>$ uint32\+\_\+t \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_chunk_a2b2266645c836b9bc46142743bd88af7}\index{prt::Chunk@{prt::Chunk}!tile@{tile}}
+\index{tile@{tile}!prt::Chunk@{prt::Chunk}}
+\doxysubsubsection{\texorpdfstring{tile()}{tile()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{classprt_1_1_chunk_a2b2266645c836b9bc46142743bd88af7} 
+auto prt\+::\+Chunk\+::tile (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceprt_a2b26a6eb256a6eefff5896d1df8e78c3}{Tile\+Pos}}}]{pos}{}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{classprt_1_1_tile}{Tile}}\& \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_chunk_acdc5d71c0422b49271a595c1f5a2d876}\index{prt::Chunk@{prt::Chunk}!tile@{tile}}
+\index{tile@{tile}!prt::Chunk@{prt::Chunk}}
+\doxysubsubsection{\texorpdfstring{tile()}{tile()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{classprt_1_1_chunk_acdc5d71c0422b49271a595c1f5a2d876} 
+auto prt\+::\+Chunk\+::tile (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceprt_a2b26a6eb256a6eefff5896d1df8e78c3}{Tile\+Pos}}}]{pos}{}\end{DoxyParamCaption}) const -\/$>$ \mbox{\hyperlink{classprt_1_1_tile}{Tile}} const\& \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_chunk_aabc612bcb3ac096594a018e18db24a94}\index{prt::Chunk@{prt::Chunk}!tile@{tile}}
+\index{tile@{tile}!prt::Chunk@{prt::Chunk}}
+\doxysubsubsection{\texorpdfstring{tile()}{tile()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{classprt_1_1_chunk_aabc612bcb3ac096594a018e18db24a94} 
+auto prt\+::\+Chunk\+::tile (\begin{DoxyParamCaption}\item[{const uint32\+\_\+t}]{idx}{}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{classprt_1_1_tile}{Tile}}\& \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_chunk_a0a495bd5ed0a4ee75b67f3ecbc4e1c51}\index{prt::Chunk@{prt::Chunk}!tile@{tile}}
+\index{tile@{tile}!prt::Chunk@{prt::Chunk}}
+\doxysubsubsection{\texorpdfstring{tile()}{tile()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{classprt_1_1_chunk_a0a495bd5ed0a4ee75b67f3ecbc4e1c51} 
+auto prt\+::\+Chunk\+::tile (\begin{DoxyParamCaption}\item[{const uint32\+\_\+t}]{idx}{}\end{DoxyParamCaption}) const -\/$>$ \mbox{\hyperlink{classprt_1_1_tile}{Tile}} const\& \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_chunk_ad4d6798b226391a85dd9c62bc567553f}\index{prt::Chunk@{prt::Chunk}!VisitTiles@{VisitTiles}}
+\index{VisitTiles@{VisitTiles}!prt::Chunk@{prt::Chunk}}
+\doxysubsubsection{\texorpdfstring{VisitTiles()}{VisitTiles()}}
+{\footnotesize\ttfamily \label{classprt_1_1_chunk_ad4d6798b226391a85dd9c62bc567553f} 
+auto prt\+::\+Chunk\+::\+Visit\+Tiles (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_tile_visitor}{Tile\+Visitor}} \texorpdfstring{$\ast$}{*}}]{vis}{}\end{DoxyParamCaption}) -\/$>$ bool}
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classprt_1_1_chunk_ac2f1cae8a4ade90b4921738dd683137f}\index{prt::Chunk@{prt::Chunk}!ChunkTileIterator@{ChunkTileIterator}}
+\index{ChunkTileIterator@{ChunkTileIterator}!prt::Chunk@{prt::Chunk}}
+\doxysubsubsection{\texorpdfstring{ChunkTileIterator}{ChunkTileIterator}}
+{\footnotesize\ttfamily \label{classprt_1_1_chunk_ac2f1cae8a4ade90b4921738dd683137f} 
+friend class Chunk\+Tile\+Iterator\hspace{0.3cm}{\ttfamily [friend]}}
+
+\Hypertarget{classprt_1_1_chunk_a04f86597c4c4f467c0361b33718d9045}\index{prt::Chunk@{prt::Chunk}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!prt::Chunk@{prt::Chunk}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily \label{classprt_1_1_chunk_a04f86597c4c4f467c0361b33718d9045} 
+auto operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{stream}{, }\item[{const \mbox{\hyperlink{classprt_1_1_chunk}{Chunk}} \&}]{rhs}{}\end{DoxyParamCaption}) -\/$>$ std\+::ostream\& \hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_chunk_a5cc432dcec5d9c617e4fc31eee042b3a}\index{prt::Chunk@{prt::Chunk}!pos\_@{pos\_}}
+\index{pos\_@{pos\_}!prt::Chunk@{prt::Chunk}}
+\doxysubsubsection{\texorpdfstring{pos\_}{pos\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_chunk_a5cc432dcec5d9c617e4fc31eee042b3a} 
+\mbox{\hyperlink{namespaceprt_a417886d23aeea354e544f47ad952fd84}{Chunk\+Pos}} prt\+::\+Chunk\+::pos\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_chunk_a01b1138d7dfddcc11c7612872ff58856}\index{prt::Chunk@{prt::Chunk}!tiles\_@{tiles\_}}
+\index{tiles\_@{tiles\_}!prt::Chunk@{prt::Chunk}}
+\doxysubsubsection{\texorpdfstring{tiles\_}{tiles\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_chunk_a01b1138d7dfddcc11c7612872ff58856} 
+\mbox{\hyperlink{namespaceprt_a48c350434af7dd830a8e46eaec4121cb}{Chunk\+Data}} prt\+::\+Chunk\+::tiles\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{chunk_8h}{chunk.\+h}}\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{chunk_8cc}{chunk.\+cc}}\end{DoxyCompactItemize}

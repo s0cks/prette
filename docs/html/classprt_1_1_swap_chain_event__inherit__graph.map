@@ -1,0 +1,9 @@
+<map id="prt::SwapChainEvent" name="prt::SwapChainEvent">
+<area shape="rect" id="Node000001" title=" " alt="" coords="139,79,285,105"/>
+<area shape="rect" id="Node000003" href="$classprt_1_1_swap_chain_destroyed_event.html" title=" " alt="" coords="5,153,211,178"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="184,116,127,154,124,150,181,111"/>
+<area shape="rect" id="Node000004" href="$classprt_1_1_swap_chain_init_event.html" title=" " alt="" coords="234,153,398,178"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="243,111,300,150,297,154,240,116"/>
+<area shape="rect" id="Node000002" href="$classprt_1_1_event.html" title=" " alt="" coords="173,5,251,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="215,46,215,79,209,79,209,46"/>
+</map>

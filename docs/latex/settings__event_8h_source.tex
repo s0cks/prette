@@ -1,0 +1,42 @@
+\doxysection{settings\+\_\+event.\+h}
+\hypertarget{settings__event_8h_source}{}\label{settings__event_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/settings\_event.h@{/Users/tazz/Projects/prette/Sources/prette/settings\_event.h}}
+\mbox{\hyperlink{settings__event_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_SETTINGS\_EVENT\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_SETTINGS\_EVENT\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{event_8h}{prette/event.h}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ FOR\_EACH\_SETTINGS\_EVENT(V)\ \(\backslash\)}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\ \ V(SettingsLoaded)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\ \ V(SettingsSaved)}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }SettingsEvent;}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ FORWARD\_DECLARE(Name)\ class\ Name\#\#Event;}}
+\DoxyCodeLine{00013\ \mbox{\hyperlink{settings__event_8h_a4e60ec9db1a2510152dd5dfa63ee2b87}{FOR\_EACH\_SETTINGS\_EVENT}}(\mbox{\hyperlink{gui_8h_a83d2d158052fc2dc9bdf9bece3fd251e}{FORWARD\_DECLARE}})}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#undef\ FORWARD\_DECLARE}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \mbox{\hyperlink{event_8h_a1ee8f5215b2cce8affd6de0762ca1d7e}{DEFINE\_EVENT\_PROTOTYPE}}(\mbox{\hyperlink{classprt_1_1_settings}{Settings}},\ \mbox{\hyperlink{settings__event_8h_a4e60ec9db1a2510152dd5dfa63ee2b87}{FOR\_EACH\_SETTINGS\_EVENT}});}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#define\ DEFINE\_SETTINGS\_EVENT\_TYPE(Name)\ DECLARE\_EVENT\_TYPE(SettingsEvent,\ Name)}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ DEFINE\_SETTINGS\_EVENT(Name)\ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\ \ class\ Name\#\#Event\ :\ public\ SettingsEvent\ \{\ \(\backslash\)}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\ \ \ public:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\ \ \ \ Name\#\#Event()\ =\ default;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\ \ \ \ \string~Name\#\#Event()\ override\ =\ default;\ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\ \ \ \ DEFINE\_SETTINGS\_EVENT\_TYPE(Name);\ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\ \ \};}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \mbox{\hyperlink{settings__event_8h_a2613603d4bb1cf5aaee432d538984eb1}{DEFINE\_SETTINGS\_EVENT}}(SettingsLoaded);}
+\DoxyCodeLine{00029\ \mbox{\hyperlink{settings__event_8h_a2613603d4bb1cf5aaee432d538984eb1}{DEFINE\_SETTINGS\_EVENT}}(SettingsSaved);}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \mbox{\hyperlink{event_8h_a75f747c7c3ad9804780471c5ce370793}{DEFINE\_EVENT\_SUBJECT}}(\mbox{\hyperlink{classprt_1_1_settings}{Settings}});}
+\DoxyCodeLine{00032\ \mbox{\hyperlink{event_8h_a77dcd0ad69e8fd51c473d76aca5bba76}{DEFINE\_EVENT\_OBSERVABLE}}(\mbox{\hyperlink{classprt_1_1_settings}{Settings}});}
+\DoxyCodeLine{00033\ \mbox{\hyperlink{settings__event_8h_a4e60ec9db1a2510152dd5dfa63ee2b87}{FOR\_EACH\_SETTINGS\_EVENT}}(\mbox{\hyperlink{event_8h_a77dcd0ad69e8fd51c473d76aca5bba76}{DEFINE\_EVENT\_OBSERVABLE}});}
+\DoxyCodeLine{00034\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_SETTINGS\_EVENT\_H}}
+
+\end{DoxyCode}

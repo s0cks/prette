@@ -1,0 +1,150 @@
+\doxysection{/\+Users/tazz/\+Projects/prette/\+Sources/prette/event.h File Reference}
+\hypertarget{event_8h}{}\label{event_8h}\index{/Users/tazz/Projects/prette/Sources/prette/event.h@{/Users/tazz/Projects/prette/Sources/prette/event.h}}
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include "{}prette/common.\+h"{}}\newline
+{\ttfamily \#include "{}prette/rx.\+h"{}}\newline
+Include dependency graph for event.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{event_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{event_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1_event}{prt\+::\+Event}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_event_source}{prt\+::\+Event\+Source$<$ E $>$}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_event_source_template}{prt\+::\+Event\+Source\+Template$<$ E $>$}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceprt}{prt}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{event_8h_a95f03e73d7d2ecab55e56cd849149ab1}{DEFINE\+\_\+\+EVENT\+\_\+\+PROTOTYPE\+\_\+\+TYPE\+\_\+\+CHECK}}(Name)
+\item 
+\#define \mbox{\hyperlink{event_8h_abdcaadf856ca76712e066a46ac2f1c40}{DEFINE\+\_\+\+EVENT\+\_\+\+PROTOTYPE\+\_\+\+TYPE}}(Name,  Types)
+\item 
+\#define \mbox{\hyperlink{event_8h_a1ee8f5215b2cce8affd6de0762ca1d7e}{DEFINE\+\_\+\+EVENT\+\_\+\+PROTOTYPE}}(Name,  Types)
+\item 
+\#define \mbox{\hyperlink{event_8h_aa8d2371509853602194dfe7289ca052e}{DECLARE\+\_\+\+EVENT\+\_\+\+TYPE}}(Proto,  Name)
+\item 
+\#define \mbox{\hyperlink{event_8h_a75f747c7c3ad9804780471c5ce370793}{DEFINE\+\_\+\+EVENT\+\_\+\+SUBJECT}}(Name)
+\item 
+\#define \mbox{\hyperlink{event_8h_a77dcd0ad69e8fd51c473d76aca5bba76}{DEFINE\+\_\+\+EVENT\+\_\+\+OBSERVABLE}}(Name)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{event_8h_aa8d2371509853602194dfe7289ca052e}\index{event.h@{event.h}!DECLARE\_EVENT\_TYPE@{DECLARE\_EVENT\_TYPE}}
+\index{DECLARE\_EVENT\_TYPE@{DECLARE\_EVENT\_TYPE}!event.h@{event.h}}
+\doxysubsubsection{\texorpdfstring{DECLARE\_EVENT\_TYPE}{DECLARE\_EVENT\_TYPE}}
+{\footnotesize\ttfamily \label{event_8h_aa8d2371509853602194dfe7289ca052e} 
+\#define DECLARE\+\_\+\+EVENT\+\_\+\+TYPE(\begin{DoxyParamCaption}\item[{}]{Proto}{, }\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{common_8h_aff92626c05b258f87ce06435c4c40e58}{DEFINE\_NON\_COPYABLE\_TYPE}}(Name\#\#Event);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \textcolor{keyword}{public}:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \textcolor{keyword}{auto}\ ToString()\ const\ -\/>\ \mbox{\hyperlink{namespacestd}{std}}::\textcolor{keywordtype}{string}\ override;\ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ auto\ GetName()\ const\ -\/>\ const\ \textcolor{keywordtype}{char}*\textcolor{keyword}{\ override\ }\{\ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ \#Name;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \textcolor{keyword}{auto}\ As\#\#Name\#\#Event()-\/>Name\#\#Event*\ \textcolor{keyword}{override}\ \{\ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{this};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ Filter(Proto*\ event)\ -\/>\ \textcolor{keywordtype}{bool}\ \{\ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{event}\ \&\&\ \textcolor{keyword}{event}-\/>Is\#\#Name\#\#Event();\ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ Cast(Proto*\ event)\ -\/>\ Name\#\#Event*\ \{\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ ASSERT(event);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ ASSERT(event-\/>Is\#\#Name\#\#Event());\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{event}-\/>As\#\#Name\#\#Event();\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{event_8h_a77dcd0ad69e8fd51c473d76aca5bba76}\index{event.h@{event.h}!DEFINE\_EVENT\_OBSERVABLE@{DEFINE\_EVENT\_OBSERVABLE}}
+\index{DEFINE\_EVENT\_OBSERVABLE@{DEFINE\_EVENT\_OBSERVABLE}!event.h@{event.h}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_EVENT\_OBSERVABLE}{DEFINE\_EVENT\_OBSERVABLE}}
+{\footnotesize\ttfamily \label{event_8h_a77dcd0ad69e8fd51c473d76aca5bba76} 
+\#define DEFINE\+\_\+\+EVENT\+\_\+\+OBSERVABLE(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{using\ }Name\#\#EventObservable\ =\ rx::observable<Name\#\#Event*>;}
+
+\end{DoxyCode}
+\Hypertarget{event_8h_a1ee8f5215b2cce8affd6de0762ca1d7e}\index{event.h@{event.h}!DEFINE\_EVENT\_PROTOTYPE@{DEFINE\_EVENT\_PROTOTYPE}}
+\index{DEFINE\_EVENT\_PROTOTYPE@{DEFINE\_EVENT\_PROTOTYPE}!event.h@{event.h}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_EVENT\_PROTOTYPE}{DEFINE\_EVENT\_PROTOTYPE}}
+{\footnotesize\ttfamily \label{event_8h_a1ee8f5215b2cce8affd6de0762ca1d7e} 
+\#define DEFINE\+\_\+\+EVENT\+\_\+\+PROTOTYPE(\begin{DoxyParamCaption}\item[{}]{Name}{, }\item[{}]{Types}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \textcolor{keyword}{class\ }Name\#\#Event\ :\ \textcolor{keyword}{public}\ Event\ \{\ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{protected}:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ Name\#\#Event()\ =\ \textcolor{keywordflow}{default};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{public}:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \string~Name\#\#Event()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};\ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ DEFINE\_EVENT\_PROTOTYPE\_TYPE(Name,\ Types);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \};}
+
+\end{DoxyCode}
+\Hypertarget{event_8h_abdcaadf856ca76712e066a46ac2f1c40}\index{event.h@{event.h}!DEFINE\_EVENT\_PROTOTYPE\_TYPE@{DEFINE\_EVENT\_PROTOTYPE\_TYPE}}
+\index{DEFINE\_EVENT\_PROTOTYPE\_TYPE@{DEFINE\_EVENT\_PROTOTYPE\_TYPE}!event.h@{event.h}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_EVENT\_PROTOTYPE\_TYPE}{DEFINE\_EVENT\_PROTOTYPE\_TYPE}}
+{\footnotesize\ttfamily \label{event_8h_abdcaadf856ca76712e066a46ac2f1c40} 
+\#define DEFINE\+\_\+\+EVENT\+\_\+\+PROTOTYPE\+\_\+\+TYPE(\begin{DoxyParamCaption}\item[{}]{Name}{, }\item[{}]{Types}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \textcolor{keyword}{public}:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \textcolor{keyword}{using\ }Predicate\ =\ std::function<bool(Name\#\#Event*)>;\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \textcolor{keyword}{public}:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ Types(\mbox{\hyperlink{event_8h_a95f03e73d7d2ecab55e56cd849149ab1}{DEFINE\_EVENT\_PROTOTYPE\_TYPE\_CHECK}})}
+
+\end{DoxyCode}
+\Hypertarget{event_8h_a95f03e73d7d2ecab55e56cd849149ab1}\index{event.h@{event.h}!DEFINE\_EVENT\_PROTOTYPE\_TYPE\_CHECK@{DEFINE\_EVENT\_PROTOTYPE\_TYPE\_CHECK}}
+\index{DEFINE\_EVENT\_PROTOTYPE\_TYPE\_CHECK@{DEFINE\_EVENT\_PROTOTYPE\_TYPE\_CHECK}!event.h@{event.h}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_EVENT\_PROTOTYPE\_TYPE\_CHECK}{DEFINE\_EVENT\_PROTOTYPE\_TYPE\_CHECK}}
+{\footnotesize\ttfamily \label{event_8h_a95f03e73d7d2ecab55e56cd849149ab1} 
+\#define DEFINE\+\_\+\+EVENT\+\_\+\+PROTOTYPE\+\_\+\+TYPE\+\_\+\+CHECK(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \textcolor{keyword}{virtual}\ \textcolor{keyword}{auto}\ As\#\#Name\#\#Event()-\/>Name\#\#Event*\ \{\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{nullptr};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \textcolor{keyword}{auto}\ Is\#\#Name\#\#Event()-\/>bool\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ As\#\#Name\#\#Event()\ !=\ \textcolor{keyword}{nullptr};\ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{event_8h_a75f747c7c3ad9804780471c5ce370793}\index{event.h@{event.h}!DEFINE\_EVENT\_SUBJECT@{DEFINE\_EVENT\_SUBJECT}}
+\index{DEFINE\_EVENT\_SUBJECT@{DEFINE\_EVENT\_SUBJECT}!event.h@{event.h}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_EVENT\_SUBJECT}{DEFINE\_EVENT\_SUBJECT}}
+{\footnotesize\ttfamily \label{event_8h_a75f747c7c3ad9804780471c5ce370793} 
+\#define DEFINE\+\_\+\+EVENT\+\_\+\+SUBJECT(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{using\ }Name\#\#EventSubject\ =\ rx::subject<Name\#\#Event*>;}
+
+\end{DoxyCode}

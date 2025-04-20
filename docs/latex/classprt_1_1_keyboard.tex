@@ -1,0 +1,207 @@
+\doxysection{prt\+::Keyboard Class Reference}
+\hypertarget{classprt_1_1_keyboard}{}\label{classprt_1_1_keyboard}\index{prt::Keyboard@{prt::Keyboard}}
+
+
+{\ttfamily \#include $<$keyboard.\+h$>$}
+
+
+
+Inheritance diagram for prt\+::Keyboard\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=220pt]{classprt_1_1_keyboard__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for prt\+::Keyboard\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classprt_1_1_keyboard__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_keyboard_a1b31069696e875cecbd501fc052e3f66}{Keyboard}} (\mbox{\hyperlink{classprt_1_1_window}{Window}} \texorpdfstring{$\ast$}{*}owner)
+\item 
+\mbox{\hyperlink{classprt_1_1_keyboard_adc64a7bb17f6ce0144bd8a2ebc8cac81}{\texorpdfstring{$\sim$}{\string~}\+Keyboard}} () override
+\item 
+auto \mbox{\hyperlink{classprt_1_1_keyboard_a7618ef2e46b23281f85a8e3919d83740}{Get\+Owner}} () const -\/$>$ \mbox{\hyperlink{classprt_1_1_window}{Window}} \texorpdfstring{$\ast$}{*}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_keyboard_ac06e04bc1a8109497c2da42b670dd30d}{Has\+Owner}} () const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_keyboard_a8069771e28ffe873730922e75534dd92}{Get\+Key}} (const int code) const -\/$>$ \mbox{\hyperlink{classprt_1_1_key_state}{Key\+State}}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_keyboard_ad887e0a5f5396ce196910f3cade121f6}{To\+String}} () const -\/$>$ std\+::string
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classprt_1_1_event_source_template}{prt\+::\+Event\+Source\+Template$<$ Keyboard\+Event $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_event_source_template_a7a70bfd9f515f0dbeba9493399d6fd96}{\texorpdfstring{$\sim$}{\string~}\+Event\+Source\+Template}} () override=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1_event_source_template_a2296fe373d44cc30cf7fc7c5c22edf3d}{On\+Event}} () const -\/$>$ rx\+::observable$<$ Keyboard\+Event \texorpdfstring{$\ast$}{*} $>$ override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classprt_1_1_event_source}{prt\+::\+Event\+Source$<$ Keyboard\+Event $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classprt_1_1_event_source_ac9bb1fe6345521cad4f1dd2722b83d80}{\texorpdfstring{$\sim$}{\string~}\+Event\+Source}} ()=default
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classprt_1_1_keyboard_a392d28e83a00773b213bbb4ed5e34727}{Init}} (\mbox{\hyperlink{classprt_1_1_window}{Window}} \texorpdfstring{$\ast$}{*}window)
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_keyboard_af5a8ac8d813e3e6a66d889f4ec1e2de5}{Is\+Initialized}} () -\/$>$ bool
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_keyboard_a7c27854e0e4f030516980d4848dec9dc}{Get}} () -\/$>$ \mbox{\hyperlink{classprt_1_1_keyboard}{Keyboard}} \texorpdfstring{$\ast$}{*}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classprt_1_1_keyboard_aa645187d3c00e15188980824283650d4}{Publish\+Event}} (Keyboard\+Event \texorpdfstring{$\ast$}{*}event) const override
+\item 
+{\footnotesize template$<$class E , typename... Args$>$ }\\void \mbox{\hyperlink{classprt_1_1_keyboard_aa6c22eaffaf4634a7f4afcd2d6248be6}{Publish}} (Args... args) const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_keyboard_a75c34d450288f5ec10d6503c0feb771c}{New}} (\mbox{\hyperlink{classprt_1_1_window}{Window}} \texorpdfstring{$\ast$}{*}owner) -\/$>$ \mbox{\hyperlink{classprt_1_1_keyboard}{Keyboard}} \texorpdfstring{$\ast$}{*}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_window}{Window}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1_keyboard_afa75d8483c44e4c96ca4a4c44af3d936}{owner\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1_keyboard_a9aa251d710bba4f257a519ebc5d01d51}{Lua\+State}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classprt_1_1_event_source_template}{prt\+::\+Event\+Source\+Template$<$ Keyboard\+Event $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_event_source_template_a9b14ed5af2f49da98d56d90ccfffb4d9}{Event\+Source\+Template}} ()=default
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classprt_1_1_event_source}{prt\+::\+Event\+Source$<$ Keyboard\+Event $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_event_source_aae9ebe9e39115964f91291367fbb2bc1}{Event\+Source}} ()=default
+\item 
+void \mbox{\hyperlink{classprt_1_1_event_source_a21e88ee76cebc7dce0759f7142865bce}{Publish}} (Args... args) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classprt_1_1_event_source_template}{prt\+::\+Event\+Source\+Template$<$ Keyboard\+Event $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+rx\+::subject$<$ Keyboard\+Event \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classprt_1_1_event_source_template_ad7a4bdd535b3f972af72fec3d862760a}{events\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_keyboard_a1b31069696e875cecbd501fc052e3f66}\index{prt::Keyboard@{prt::Keyboard}!Keyboard@{Keyboard}}
+\index{Keyboard@{Keyboard}!prt::Keyboard@{prt::Keyboard}}
+\doxysubsubsection{\texorpdfstring{Keyboard()}{Keyboard()}}
+{\footnotesize\ttfamily \label{classprt_1_1_keyboard_a1b31069696e875cecbd501fc052e3f66} 
+prt\+::\+Keyboard\+::\+Keyboard (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_window}{Window}} \texorpdfstring{$\ast$}{*}}]{owner}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_keyboard_adc64a7bb17f6ce0144bd8a2ebc8cac81}\index{prt::Keyboard@{prt::Keyboard}!````~Keyboard@{\texorpdfstring{$\sim$}{\string~}Keyboard}}
+\index{````~Keyboard@{\texorpdfstring{$\sim$}{\string~}Keyboard}!prt::Keyboard@{prt::Keyboard}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Keyboard()}{\string~Keyboard()}}
+{\footnotesize\ttfamily \label{classprt_1_1_keyboard_adc64a7bb17f6ce0144bd8a2ebc8cac81} 
+prt\+::\+Keyboard\+::\texorpdfstring{$\sim$}{\string~}\+Keyboard (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_keyboard_a7c27854e0e4f030516980d4848dec9dc}\index{prt::Keyboard@{prt::Keyboard}!Get@{Get}}
+\index{Get@{Get}!prt::Keyboard@{prt::Keyboard}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}}
+{\footnotesize\ttfamily \label{classprt_1_1_keyboard_a7c27854e0e4f030516980d4848dec9dc} 
+auto prt\+::\+Keyboard\+::\+Get (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{classprt_1_1_keyboard}{Keyboard}}\texorpdfstring{$\ast$}{*}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_keyboard_a8069771e28ffe873730922e75534dd92}\index{prt::Keyboard@{prt::Keyboard}!GetKey@{GetKey}}
+\index{GetKey@{GetKey}!prt::Keyboard@{prt::Keyboard}}
+\doxysubsubsection{\texorpdfstring{GetKey()}{GetKey()}}
+{\footnotesize\ttfamily \label{classprt_1_1_keyboard_a8069771e28ffe873730922e75534dd92} 
+auto prt\+::\+Keyboard\+::\+Get\+Key (\begin{DoxyParamCaption}\item[{const int}]{code}{}\end{DoxyParamCaption}) const -\/$>$ \mbox{\hyperlink{classprt_1_1_key_state}{Key\+State}}}
+
+\Hypertarget{classprt_1_1_keyboard_a7618ef2e46b23281f85a8e3919d83740}\index{prt::Keyboard@{prt::Keyboard}!GetOwner@{GetOwner}}
+\index{GetOwner@{GetOwner}!prt::Keyboard@{prt::Keyboard}}
+\doxysubsubsection{\texorpdfstring{GetOwner()}{GetOwner()}}
+{\footnotesize\ttfamily \label{classprt_1_1_keyboard_a7618ef2e46b23281f85a8e3919d83740} 
+auto prt\+::\+Keyboard\+::\+Get\+Owner (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ \mbox{\hyperlink{classprt_1_1_window}{Window}}\texorpdfstring{$\ast$}{*} \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_keyboard_ac06e04bc1a8109497c2da42b670dd30d}\index{prt::Keyboard@{prt::Keyboard}!HasOwner@{HasOwner}}
+\index{HasOwner@{HasOwner}!prt::Keyboard@{prt::Keyboard}}
+\doxysubsubsection{\texorpdfstring{HasOwner()}{HasOwner()}}
+{\footnotesize\ttfamily \label{classprt_1_1_keyboard_ac06e04bc1a8109497c2da42b670dd30d} 
+auto prt\+::\+Keyboard\+::\+Has\+Owner (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_keyboard_a392d28e83a00773b213bbb4ed5e34727}\index{prt::Keyboard@{prt::Keyboard}!Init@{Init}}
+\index{Init@{Init}!prt::Keyboard@{prt::Keyboard}}
+\doxysubsubsection{\texorpdfstring{Init()}{Init()}}
+{\footnotesize\ttfamily \label{classprt_1_1_keyboard_a392d28e83a00773b213bbb4ed5e34727} 
+void prt\+::\+Keyboard\+::\+Init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_window}{Window}} \texorpdfstring{$\ast$}{*}}]{window}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_keyboard_af5a8ac8d813e3e6a66d889f4ec1e2de5}\index{prt::Keyboard@{prt::Keyboard}!IsInitialized@{IsInitialized}}
+\index{IsInitialized@{IsInitialized}!prt::Keyboard@{prt::Keyboard}}
+\doxysubsubsection{\texorpdfstring{IsInitialized()}{IsInitialized()}}
+{\footnotesize\ttfamily \label{classprt_1_1_keyboard_af5a8ac8d813e3e6a66d889f4ec1e2de5} 
+auto prt\+::\+Keyboard\+::\+Is\+Initialized (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ bool\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_keyboard_a75c34d450288f5ec10d6503c0feb771c}\index{prt::Keyboard@{prt::Keyboard}!New@{New}}
+\index{New@{New}!prt::Keyboard@{prt::Keyboard}}
+\doxysubsubsection{\texorpdfstring{New()}{New()}}
+{\footnotesize\ttfamily \label{classprt_1_1_keyboard_a75c34d450288f5ec10d6503c0feb771c} 
+auto prt\+::\+Keyboard\+::\+New (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_window}{Window}} \texorpdfstring{$\ast$}{*}}]{owner}{}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{classprt_1_1_keyboard}{Keyboard}}\texorpdfstring{$\ast$}{*}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_keyboard_aa6c22eaffaf4634a7f4afcd2d6248be6}\index{prt::Keyboard@{prt::Keyboard}!Publish@{Publish}}
+\index{Publish@{Publish}!prt::Keyboard@{prt::Keyboard}}
+\doxysubsubsection{\texorpdfstring{Publish()}{Publish()}}
+{\footnotesize\ttfamily \label{classprt_1_1_keyboard_aa6c22eaffaf4634a7f4afcd2d6248be6} 
+template$<$class E , typename... Args$>$ \\
+void prt\+::\+Keyboard\+::\+Publish (\begin{DoxyParamCaption}\item[{Args...}]{args}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_keyboard_aa645187d3c00e15188980824283650d4}\index{prt::Keyboard@{prt::Keyboard}!PublishEvent@{PublishEvent}}
+\index{PublishEvent@{PublishEvent}!prt::Keyboard@{prt::Keyboard}}
+\doxysubsubsection{\texorpdfstring{PublishEvent()}{PublishEvent()}}
+{\footnotesize\ttfamily \label{classprt_1_1_keyboard_aa645187d3c00e15188980824283650d4} 
+void prt\+::\+Keyboard\+::\+Publish\+Event (\begin{DoxyParamCaption}\item[{Keyboard\+Event \texorpdfstring{$\ast$}{*}}]{event}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{classprt_1_1_event_source_template_a4e6af3cd350d7c6bfd8614ca7333cee4}{prt\+::\+Event\+Source\+Template$<$ Keyboard\+Event $>$}}.
+
+\Hypertarget{classprt_1_1_keyboard_ad887e0a5f5396ce196910f3cade121f6}\index{prt::Keyboard@{prt::Keyboard}!ToString@{ToString}}
+\index{ToString@{ToString}!prt::Keyboard@{prt::Keyboard}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily \label{classprt_1_1_keyboard_ad887e0a5f5396ce196910f3cade121f6} 
+auto prt\+::\+Keyboard\+::\+To\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ std\+::string}
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classprt_1_1_keyboard_a9aa251d710bba4f257a519ebc5d01d51}\index{prt::Keyboard@{prt::Keyboard}!LuaState@{LuaState}}
+\index{LuaState@{LuaState}!prt::Keyboard@{prt::Keyboard}}
+\doxysubsubsection{\texorpdfstring{LuaState}{LuaState}}
+{\footnotesize\ttfamily \label{classprt_1_1_keyboard_a9aa251d710bba4f257a519ebc5d01d51} 
+friend class \mbox{\hyperlink{classprt_1_1_lua_state}{Lua\+State}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_keyboard_afa75d8483c44e4c96ca4a4c44af3d936}\index{prt::Keyboard@{prt::Keyboard}!owner\_@{owner\_}}
+\index{owner\_@{owner\_}!prt::Keyboard@{prt::Keyboard}}
+\doxysubsubsection{\texorpdfstring{owner\_}{owner\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_keyboard_afa75d8483c44e4c96ca4a4c44af3d936} 
+\mbox{\hyperlink{classprt_1_1_window}{Window}}\texorpdfstring{$\ast$}{*} prt\+::\+Keyboard\+::owner\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{keyboard_8h}{keyboard.\+h}}\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{keyboard_8cc}{keyboard.\+cc}}\end{DoxyCompactItemize}

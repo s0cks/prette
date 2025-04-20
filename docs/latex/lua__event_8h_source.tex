@@ -1,0 +1,43 @@
+\doxysection{lua\+\_\+event.\+h}
+\hypertarget{lua__event_8h_source}{}\label{lua__event_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/lua\_event.h@{/Users/tazz/Projects/prette/Sources/prette/lua\_event.h}}
+\mbox{\hyperlink{lua__event_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_LUA\_EVENT\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_LUA\_EVENT\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{event_8h}{prette/event.h}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ FOR\_EACH\_LUA\_STATE\_EVENT(V)\ \(\backslash\)}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\ \ V(LuaStateInit)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\ \ V(LuaStateDestroyed)}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }LuaState;}
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }LuaStateEvent;}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ FORWARD\_DECLARE(Name)\ class\ Name\#\#Event;}}
+\DoxyCodeLine{00014\ \mbox{\hyperlink{lua__event_8h_a8aa4600c08c05f6339712a02b1e97910}{FOR\_EACH\_LUA\_STATE\_EVENT}}(\mbox{\hyperlink{gui_8h_a83d2d158052fc2dc9bdf9bece3fd251e}{FORWARD\_DECLARE}});}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#undef\ FORWARD\_DECLARE}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#define\ DEFINE\_LUA\_STATE\_EVENT\_TYPE(Name)\ DECLARE\_EVENT\_TYPE(LuaStateEvent,\ LuaState\#\#Name)}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \mbox{\hyperlink{event_8h_a1ee8f5215b2cce8affd6de0762ca1d7e}{DEFINE\_EVENT\_PROTOTYPE}}(\mbox{\hyperlink{classprt_1_1_lua_state}{LuaState}},\ \mbox{\hyperlink{lua__event_8h_a8aa4600c08c05f6339712a02b1e97910}{FOR\_EACH\_LUA\_STATE\_EVENT}});}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#define\ DEFINE\_LUA\_STATE\_EVENT(Name)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\ \ class\ LuaState\#\#Name\#\#Event\ :\ public\ LuaStateEvent\ \{\ \(\backslash\)}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\ \ \ public:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\ \ \ \ LuaState\#\#Name\#\#Event()\ =\ default;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\ \ \ \ \string~LuaState\#\#Name\#\#Event()\ override\ =\ default;\ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\ \ \ \ DEFINE\_LUA\_STATE\_EVENT\_TYPE(Name);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\ \ \};}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \mbox{\hyperlink{lua__event_8h_a7d01b244a885fb755de54cc9349976c8}{DEFINE\_LUA\_STATE\_EVENT}}(Init);}
+\DoxyCodeLine{00030\ \mbox{\hyperlink{lua__event_8h_a7d01b244a885fb755de54cc9349976c8}{DEFINE\_LUA\_STATE\_EVENT}}(Destroyed);}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \mbox{\hyperlink{event_8h_a75f747c7c3ad9804780471c5ce370793}{DEFINE\_EVENT\_SUBJECT}}(\mbox{\hyperlink{classprt_1_1_lua_state}{LuaState}});}
+\DoxyCodeLine{00033\ \mbox{\hyperlink{event_8h_a77dcd0ad69e8fd51c473d76aca5bba76}{DEFINE\_EVENT\_OBSERVABLE}}(\mbox{\hyperlink{classprt_1_1_lua_state}{LuaState}});}
+\DoxyCodeLine{00034\ \mbox{\hyperlink{lua__event_8h_a8aa4600c08c05f6339712a02b1e97910}{FOR\_EACH\_LUA\_STATE\_EVENT}}(\mbox{\hyperlink{event_8h_a77dcd0ad69e8fd51c473d76aca5bba76}{DEFINE\_EVENT\_OBSERVABLE}});}
+\DoxyCodeLine{00035\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_LUA\_EVENT\_H}}
+
+\end{DoxyCode}

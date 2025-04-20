@@ -1,0 +1,280 @@
+\doxysection{common.\+h}
+\hypertarget{common_8h_source}{}\label{common_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/common.h@{/Users/tazz/Projects/prette/Sources/prette/common.h}}
+\mbox{\hyperlink{common_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_COMMON\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_COMMON\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <glog/logging.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <units.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <uuid.h>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <uv.h>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <cstdio>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <filesystem>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <optional>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{platform_8h}{prette/platform.h}}"{}}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#if\ defined(\_\_clang\_\_)}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <cxxabi.h>}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#if\ defined(OS\_IS\_LINUX)\ ||\ defined(OS\_IS\_OSX)}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#include\ <sys/stat.h>}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#include\ <unistd.h>}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#error\ "{}unsupported\ operating\ system"{}}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#ifdef\ PRT\_DEBUG}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#include\ <cassert>}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#define\ ASSERT(x)\ assert((x));}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#define\ ASSERT(x)}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_DEBUG}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#ifndef\ UNALLOCATED}}
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\#define\ UNALLOCATED\ 0}}
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ UNALLOCATED}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#ifdef\ PRT\_TRACING}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#include\ <tracy/Tracy.hpp>}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#define\ TRACE\_MARK\ \ \ \ \ \ \ \ \ \ \ \ \ FrameMark}}
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#define\ TRACE\_ZONE\ \ \ \ \ \ \ \ \ \ \ \ \ ZoneScoped}}
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#define\ TRACE\_ZONE\_NAMED(Name)\ ZoneScopedN((Name))}}
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#define\ TRACE\_TAG(Value)\ \ \ \ \ \ \ (ZoneText((Value),\ strlen((Value))))}}
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#define\ TRACE\_TAG\_STR(Value)\ \ \ (ZoneText((Value).c\_str(),\ (Value).length()))}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\#define\ TRACE\_MARK}}
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\#define\ TRACE\_ZONE}}
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\#define\ TRACE\_ZONE\_NAMED(Name)}}
+\DoxyCodeLine{00062\ \textcolor{preprocessor}{\#define\ TRACE\_TAG(Value)}}
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\#define\ TRACE\_TAG\_STR(Value)}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_TRACING}}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \textcolor{preprocessor}{\#define\ DEFINE\_NON\_COPYABLE\_TYPE(Name)\ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00068\ \textcolor{preprocessor}{\ public:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00069\ \textcolor{preprocessor}{\ \ Name(const\ Name\&\ rhs)\ =\ delete;\ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00070\ \textcolor{preprocessor}{\ \ Name(Name\&\&\ rhs)\ =\ delete;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00071\ \textcolor{preprocessor}{\ \ auto\ operator=(Name\&\&\ rhs)-\/>Name\&\ =\ delete;\ \(\backslash\)}}
+\DoxyCodeLine{00072\ \textcolor{preprocessor}{\ \ auto\ operator=(const\ Name\&\ rhs)-\/>Name\&\ =\ delete;}}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \textcolor{preprocessor}{\#define\ DEFINE\_NON\_INSTANTIABLE\_TYPE(Name)\ \(\backslash\)}}
+\DoxyCodeLine{00075\ \textcolor{preprocessor}{\ public:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00076\ \textcolor{preprocessor}{\ \ Name()\ =\ delete;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00077\ \textcolor{preprocessor}{\ \ \string~Name()\ =\ delete;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00078\ \textcolor{preprocessor}{\ \ DEFINE\_NON\_COPYABLE\_TYPE(Name);}}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \textcolor{preprocessor}{\#define\ DEFINE\_DEFAULT\_COPYABLE\_TYPE(Name)\ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\ public:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00082\ \textcolor{preprocessor}{\ \ Name(Name\&\&\ rhs)\ =\ default;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00083\ \textcolor{preprocessor}{\ \ Name(const\ Name\&\ rhs)\ =\ default;\ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00084\ \textcolor{preprocessor}{\ \ auto\ operator=(Name\&\&\ rhs)-\/>Name\&\ =\ default;\ \(\backslash\)}}
+\DoxyCodeLine{00085\ \textcolor{preprocessor}{\ \ auto\ operator=(const\ Name\&\ rhs)-\/>Name\&\ =\ default;}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \textcolor{preprocessor}{\#if\ defined(\_\_clang\_\_)\ ||\ defined(\_\_GNUC\_\_)}}
+\DoxyCodeLine{00088\ \textcolor{preprocessor}{\#define\ NOT\_IMPLEMENTED(Level)\ LOG(Level)\ <<\ \_\_PRETTY\_FUNCTION\_\_\ <<\ "{}\ is\ not\ implemented!"{};}}
+\DoxyCodeLine{00089\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00090\ \textcolor{preprocessor}{\#define\ NOT\_IMPLEMENTED(Level)\ LOG(Level)\ <<\ \_\_FUNCTION\_\_\ <<\ "{}\ is\ not\ implemented!"{};}}
+\DoxyCodeLine{00091\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \textcolor{keyword}{struct\ }lua\_State;}
+\DoxyCodeLine{00094\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00095\ \textcolor{keyword}{namespace\ }fs\ =\ std::filesystem;}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ A,\ \textcolor{keyword}{typename}\ B>}
+\DoxyCodeLine{00098\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{namespaceprt_a1685b01aab7430a05854e61acd6113d5}{map}}(std::optional<A>\ a,\ std::function<std::optional<B>(\textcolor{keyword}{const}\ A\&)>\ f)\ -\/>\ std::optional<B>\ \{}
+\DoxyCodeLine{00099\ \ \ \textcolor{keywordflow}{if}\ (a.has\_value())}
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordflow}{return}\ f(a.value());}
+\DoxyCodeLine{00101\ \ \ \textcolor{keywordflow}{return}\ std::optional<B>\{\};}
+\DoxyCodeLine{00102\ \}}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ GetFilesize(FILE*\ file)\ -\/>\ uint64\_t\ \{}
+\DoxyCodeLine{00105\ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ pos\ =\ ftell(file);}
+\DoxyCodeLine{00106\ \ \ fseek(file,\ 0,\ SEEK\_END);}
+\DoxyCodeLine{00107\ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ sz\ =\ ftell(file);}
+\DoxyCodeLine{00108\ \ \ fseek(file,\ pos,\ SEEK\_SET);}
+\DoxyCodeLine{00109\ \ \ \textcolor{keywordflow}{return}\ sz;}
+\DoxyCodeLine{00110\ \}}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ Clamp(\textcolor{keywordtype}{float}\&\ value,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ min,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ max)\ \{}
+\DoxyCodeLine{00113\ \ \ \textcolor{keywordflow}{if}\ (value\ >\ max)\ \{}
+\DoxyCodeLine{00114\ \ \ \ \ value\ =\ max;}
+\DoxyCodeLine{00115\ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (value\ <\ min)\ \{}
+\DoxyCodeLine{00116\ \ \ \ \ value\ =\ min;}
+\DoxyCodeLine{00117\ \ \ \}}
+\DoxyCodeLine{00118\ \}}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ RoundUpPow2(\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ x)\ -\/>\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ \{}
+\DoxyCodeLine{00121\ \ \ x\ =\ x\ -\/\ 1;}
+\DoxyCodeLine{00122\ \ \ x\ =\ x\ |\ (x\ >>\ 1);}
+\DoxyCodeLine{00123\ \ \ x\ =\ x\ |\ (x\ >>\ 2);}
+\DoxyCodeLine{00124\ \ \ x\ =\ x\ |\ (x\ >>\ 4);}
+\DoxyCodeLine{00125\ \ \ x\ =\ x\ |\ (x\ >>\ 8);}
+\DoxyCodeLine{00126\ \ \ x\ =\ x\ |\ (x\ >>\ 16);}
+\DoxyCodeLine{00127\ \textcolor{preprocessor}{\#if\ defined(ARCHITECTURE\_IS\_X64)\ ||\ defined(ARCHITECTURE\_IS\_ARM64)}}
+\DoxyCodeLine{00128\ \ \ x\ =\ x\ |\ (x\ >>\ 32);}
+\DoxyCodeLine{00129\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00130\ \ \ \textcolor{keywordflow}{return}\ x\ +\ 1;}
+\DoxyCodeLine{00131\ \}}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ FileExists(\textcolor{keyword}{const}\ std::string\&\ name)\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00134\ \textcolor{preprocessor}{\#if\ defined(OS\_IS\_OSX)\ ||\ defined(OS\_IS\_LINUX)}}
+\DoxyCodeLine{00135\ \ \ \textcolor{keywordflow}{return}\ access(name.data(),\ F\_OK)\ ==\ 0;}
+\DoxyCodeLine{00136\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00137\ \textcolor{preprocessor}{\#error\ "{}unsupported\ operating\ system"{}}}
+\DoxyCodeLine{00138\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00139\ \}}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00141\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ IsDirectory(\textcolor{keyword}{const}\ std::string\&\ filename)\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00142\ \textcolor{preprocessor}{\#if\ defined(OS\_IS\_OSX)\ ||\ defined(OS\_IS\_LINUX)}}
+\DoxyCodeLine{00143\ \ \ \textcolor{keyword}{struct\ }stat\ s\{\};}
+\DoxyCodeLine{00144\ \ \ \textcolor{keywordflow}{if}\ (stat(filename.c\_str(),\ \&s)\ !=\ 0)}
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00146\ \ \ \textcolor{keywordflow}{return}\ S\_ISDIR(s.st\_mode);}
+\DoxyCodeLine{00147\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00148\ \textcolor{preprocessor}{\#error\ "{}unsupported\ operating\ system"{}}}
+\DoxyCodeLine{00149\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00150\ \}}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00152\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ DeleteDirectory(\textcolor{keyword}{const}\ std::string\&\ name)\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00153\ \textcolor{preprocessor}{\#if\ defined(OS\_IS\_OSX)\ ||\ defined(OS\_IS\_LINUX)}}
+\DoxyCodeLine{00154\ \ \ \textcolor{keywordflow}{return}\ access(name.data(),\ F\_OK)\ ==\ 0;}
+\DoxyCodeLine{00155\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00156\ \textcolor{preprocessor}{\#error\ "{}unsupported\ operating\ system"{}}}
+\DoxyCodeLine{00157\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00158\ \}}
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00160\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ StartsWith(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ str,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ str\_len,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ prefix,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ prefix\_len)\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00161\ \ \ \textcolor{keywordflow}{return}\ str\_len\ >=\ prefix\_len\ \&\&\ strncmp(\&str[0],\ \&prefix[0],\ prefix\_len)\ ==\ 0;}
+\DoxyCodeLine{00162\ \}}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ StartsWith(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ str,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ str\_len,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ prefix)\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00165\ \ \ \textcolor{keywordflow}{return}\ StartsWith(str,\ str\_len,\ prefix,\ strlen(prefix));}
+\DoxyCodeLine{00166\ \}}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00168\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ StartsWith(\textcolor{keyword}{const}\ std::string\&\ str,\ \textcolor{keyword}{const}\ std::string\&\ prefix)\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00169\ \ \ \textcolor{keywordflow}{return}\ str.size()\ >=\ prefix.size()\ \&\&\ str.compare(0,\ prefix.size(),\ prefix)\ ==\ 0;}
+\DoxyCodeLine{00170\ \}}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00172\ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ EndsWith(\textcolor{keyword}{const}\ std::string\&\ str,\ \textcolor{keyword}{const}\ std::string\&\ suffix)\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00173\ \ \ \textcolor{keywordflow}{return}\ str.size()\ >=\ suffix.size()\ \&\&\ str.compare(str.size()\ -\/\ suffix.size(),\ suffix.size(),\ suffix)\ ==\ 0;}
+\DoxyCodeLine{00174\ \}}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00176\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ CharEqualsIgnoreCase(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\&\ lhs,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\&\ rhs)\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00177\ \ \ \textcolor{keywordflow}{return}\ std::tolower(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\textcolor{keyword}{>}(lhs))\ ==\ std::tolower(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\textcolor{keyword}{>}(rhs));}
+\DoxyCodeLine{00178\ \}}
+\DoxyCodeLine{00179\ }
+\DoxyCodeLine{00180\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ EqualsIgnoreCase(\textcolor{keyword}{const}\ std::string\&\ lhs,\ \textcolor{keyword}{const}\ std::string\&\ rhs)\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00181\ \ \ \textcolor{keywordflow}{return}\ lhs.size()\ ==\ rhs.size()\ \&\&\ std::equal(rhs.begin(),\ rhs.end(),\ lhs.begin(),\ lhs.end(),\ CharEqualsIgnoreCase);}
+\DoxyCodeLine{00182\ \}}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00184\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ ToLowercase(std::string\&\ value)\ \{}
+\DoxyCodeLine{00185\ \ \ std::transform(std::begin(value),\ std::end(value),\ std::begin(value),\ [](\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ c)\ \{}
+\DoxyCodeLine{00186\ \ \ \ \ \textcolor{keywordflow}{return}\ std::tolower(c);}
+\DoxyCodeLine{00187\ \ \ \});}
+\DoxyCodeLine{00188\ \}}
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00190\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00191\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ GetTypename()\ -\/>\ std::string\ \{}
+\DoxyCodeLine{00192\ \ \ std::string\ name\ =\ \textcolor{keyword}{typeid}(T).name();}
+\DoxyCodeLine{00193\ \textcolor{preprocessor}{\#if\ defined(\_\_clang\_\_)}}
+\DoxyCodeLine{00194\ \ \ \textcolor{keywordtype}{int}\ status\ =\ -\/1;}
+\DoxyCodeLine{00195\ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ demangled\ =\ abi::\_\_cxa\_demangle(name.c\_str(),\ \textcolor{keyword}{nullptr},\ \textcolor{keyword}{nullptr},\ \&status);}
+\DoxyCodeLine{00196\ \ \ \textcolor{keywordflow}{if}\ (status\ ==\ 0)}
+\DoxyCodeLine{00197\ \ \ \ \ name\ =\ std::string(demangled);}
+\DoxyCodeLine{00198\ \ \ free(demangled);\ \ \textcolor{comment}{//\ NOLINT(cppcoreguidelines-\/no-\/malloc)}}
+\DoxyCodeLine{00199\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00200\ \ \ \textcolor{keywordflow}{return}\ name;}
+\DoxyCodeLine{00201\ \}}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00203\ \textcolor{preprocessor}{\#ifdef\ PRT\_DEBUG}}
+\DoxyCodeLine{00204\ }
+\DoxyCodeLine{00205\ \textcolor{preprocessor}{\#define\ \_TIMED\_EXECUTION\_(Name,\ Function,\ Args...)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00206\ \textcolor{preprocessor}{\ \ do\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00207\ \textcolor{preprocessor}{\ \ \ \ const\ auto\ start\_ns\ =\ uv\_hrtime();\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00208\ \textcolor{preprocessor}{\ \ \ \ \{Function\};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00209\ \textcolor{preprocessor}{\ \ \ \ const\ auto\ stop\_ns\ =\ uv\_hrtime();\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00210\ \textcolor{preprocessor}{\ \ \ \ const\ auto\ total\_ns\ =\ (stop\_ns\ -\/\ start\_ns);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00211\ \textcolor{preprocessor}{\ \ \ \ LOG(INFO)\ <<\ \#Name\ <<\ "{}\ finished\ in\ "{}\ <<\ units::time::nanosecond\_t(total\_ns)\ <<\ "{}."{};\ \(\backslash\)}}
+\DoxyCodeLine{00212\ \textcolor{preprocessor}{\ \ \}\ while\ (0);}}
+\DoxyCodeLine{00213\ }
+\DoxyCodeLine{00214\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00215\ }
+\DoxyCodeLine{00216\ \textcolor{preprocessor}{\#define\ \_TIMED\_EXECUTION\_(Name,\ Function,\ Args...)\ \(\backslash\)}}
+\DoxyCodeLine{00217\ \textcolor{preprocessor}{\ \ do\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00218\ \textcolor{preprocessor}{\ \ \ \ \{Function\};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00219\ \textcolor{preprocessor}{\ \ \}\ while\ (0);}}
+\DoxyCodeLine{00220\ }
+\DoxyCodeLine{00221\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_DEBUG}}
+\DoxyCodeLine{00222\ }
+\DoxyCodeLine{00223\ \textcolor{preprocessor}{\#define\ TIMED\_EXECUTION(Code)\ \_TIMED\_EXECUTION\_(\_\_FUNCTION\_\_,\ Code);}}
+\DoxyCodeLine{00224\ }
+\DoxyCodeLine{00225\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ E>}
+\DoxyCodeLine{00226\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ LogEvent(\textcolor{keyword}{const}\ google::LogSeverity\ severity,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ file,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ line,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ indent\ =\ 0)}
+\DoxyCodeLine{00227\ \ \ \ \ -\/>\ std::function<void(E*)>\ \{}
+\DoxyCodeLine{00228\ \ \ \textcolor{keywordflow}{return}\ [severity,\ file,\ line,\ indent](E*\ event)\ \{}
+\DoxyCodeLine{00229\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(event);}
+\DoxyCodeLine{00230\ \ \ \ \ google::LogMessage(file,\ line,\ severity).stream()\ <<\ std::string((indent\ *\ 2),\ \textcolor{charliteral}{'\ '})\ <<\ \textcolor{stringliteral}{"{}event:\ "{}}\ <<\ \textcolor{keyword}{event}-\/>ToString();}
+\DoxyCodeLine{00231\ \ \ \};}
+\DoxyCodeLine{00232\ \}}
+\DoxyCodeLine{00233\ }
+\DoxyCodeLine{00234\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ Split(\textcolor{keyword}{const}\ std::string\&\ str,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ delim,\ std::vector<std::string>\&\ results)\ \{}
+\DoxyCodeLine{00235\ \ \ std::stringstream\ ss(str);}
+\DoxyCodeLine{00236\ \ \ std::string\ token;}
+\DoxyCodeLine{00237\ \ \ \textcolor{keywordflow}{while}\ (std::getline(ss,\ token,\ delim))\ \{}
+\DoxyCodeLine{00238\ \ \ \ \ results.push\_back(token);}
+\DoxyCodeLine{00239\ \ \ \}}
+\DoxyCodeLine{00240\ \}}
+\DoxyCodeLine{00241\ }
+\DoxyCodeLine{00242\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_environment_variable}{EnvironmentVariable}}\ \{}
+\DoxyCodeLine{00243\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00244\ \ \ std::string\ \mbox{\hyperlink{classprt_1_1_environment_variable_a163f56c0bd577c2298084dd2dbbffe43}{name\_}};}
+\DoxyCodeLine{00245\ }
+\DoxyCodeLine{00246\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00247\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_environment_variable_a6f7f8c818869b85ff39d874cacbbe654}{EnvironmentVariable}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ name)\ :}
+\DoxyCodeLine{00248\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_environment_variable_a163f56c0bd577c2298084dd2dbbffe43}{name\_}}(name)\ \{\}}
+\DoxyCodeLine{00249\ \ \ \mbox{\hyperlink{classprt_1_1_environment_variable_aebdbe4319d778ac945f1c4343645923d}{\string~EnvironmentVariable}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00250\ }
+\DoxyCodeLine{00251\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_environment_variable_a3f2218aec6d331df2b0f44b5e81cbf4a}{GetName}}()\ const\ -\/>\ const\ \textcolor{keywordtype}{char}*\ \{}
+\DoxyCodeLine{00252\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_environment_variable_a163f56c0bd577c2298084dd2dbbffe43}{name\_}}.c\_str();}
+\DoxyCodeLine{00253\ \ \ \}}
+\DoxyCodeLine{00254\ }
+\DoxyCodeLine{00255\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_environment_variable_ac80647f4b616295ef7f557e5921f14bf}{Get}}()\ const\ -\/>\ \mbox{\hyperlink{namespacestd}{std}}::optional<\mbox{\hyperlink{namespacestd}{std}}::\textcolor{keywordtype}{string}>\ \{}
+\DoxyCodeLine{00256\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ value\ =\ getenv(\mbox{\hyperlink{classprt_1_1_environment_variable_a3f2218aec6d331df2b0f44b5e81cbf4a}{GetName}}());}
+\DoxyCodeLine{00257\ \ \ \ \ \textcolor{keywordflow}{return}\ value\ ?\ std::optional<std::string>\{std::string(value)\}\ :\ std::nullopt;}
+\DoxyCodeLine{00258\ \ \ \}}
+\DoxyCodeLine{00259\ }
+\DoxyCodeLine{00260\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_environment_variable_a707488380b7cb81be2917f241fc9d2da}{GetList}}(std::vector<std::string>\&\ results)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00261\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ value\ =\ getenv(\mbox{\hyperlink{classprt_1_1_environment_variable_a3f2218aec6d331df2b0f44b5e81cbf4a}{GetName}}());}
+\DoxyCodeLine{00262\ \ \ \ \ \textcolor{keywordflow}{if}\ (!value)}
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00264\ \ \ \ \ Split(value,\ \textcolor{charliteral}{';'},\ results);}
+\DoxyCodeLine{00265\ \ \ \}}
+\DoxyCodeLine{00266\ }
+\DoxyCodeLine{00267\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_environment_variable_a46f6440f53f691d142470056ec1cb6f8}{operator>>}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_environment_variable}{EnvironmentVariable}}\&\ ev,\ std::vector<std::string>\&\ results)\ -\/>\ std::vector<std::string>\&\ \{}
+\DoxyCodeLine{00268\ \ \ \ \ ev.GetList(results);}
+\DoxyCodeLine{00269\ \ \ \ \ \textcolor{keywordflow}{return}\ results;}
+\DoxyCodeLine{00270\ \ \ \}}
+\DoxyCodeLine{00271\ \};}
+\DoxyCodeLine{00272\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00273\ }
+\DoxyCodeLine{00274\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_COMMON\_H}}
+
+\end{DoxyCode}

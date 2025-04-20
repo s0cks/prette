@@ -1,0 +1,354 @@
+\doxysection{prt\+::json\+::Pipeline\+Handler Class Reference}
+\hypertarget{classprt_1_1json_1_1_pipeline_handler}{}\label{classprt_1_1json_1_1_pipeline_handler}\index{prt::json::PipelineHandler@{prt::json::PipelineHandler}}
+
+
+{\ttfamily \#include $<$pipeline\+\_\+json.\+h$>$}
+
+
+
+Inheritance diagram for prt\+::json\+::Pipeline\+Handler\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=219pt]{classprt_1_1json_1_1_pipeline_handler__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for prt\+::json\+::Pipeline\+Handler\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classprt_1_1json_1_1_pipeline_handler__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structprt_1_1json_1_1_pipeline_handler_1_1_key_state}{Key\+State}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a86c06e5cb25385c2a474ca884754e976}{Pipeline\+Handler}} ()=default
+\item 
+\mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a6d23c3db3f84ad3ee08d61f8fcbdcab8}{\texorpdfstring{$\sim$}{\string~}\+Pipeline\+Handler}} ()=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a9a87529732783c2bebe00a5f094d201e}{Has\+Error}} () const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a49737a493c2f4d7080d21fd73ba1ab1e}{Get\+Error}} () const -\/$>$ const std\+::string \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_affc674e37bbfe59a590409e3b487e928}{Null}} () -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a58a383f6a52fe0328a5d20c01d870f4b}{Bool}} (bool b) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_af195b66f5146667f2e17d5a8d3bb5b5f}{Int}} (int i) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_aaa285b077cd95f74eda72232a73fb71f}{Uint}} (unsigned u) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_aed8de752c2c38270c8455dec5a1bb7c3}{Int64}} (int64\+\_\+t i) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a593537c1163c0d00f39b8530cdc492fd}{Uint64}} (uint64\+\_\+t u) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a3801553af1263b77beac6defc6484a74}{Double}} (double d) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_ae655e2e269ec3bfd7e3fcabc779532a4}{String}} (const char \texorpdfstring{$\ast$}{*}str, Size\+Type length, bool copy) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a533fa8c69781e7417529a8ebe4f20177}{Start\+Object}} () -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_ae6d27521181ce7f5e128ca01cdb45087}{Key}} (const char \texorpdfstring{$\ast$}{*}str, Size\+Type length, bool copy) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a5f910aff9d1a1316ed69a43bda82a9ba}{End\+Object}} (Size\+Type member\+Count) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_ab9527ab2b214bbe183784d194d5d30c7}{Start\+Array}} () -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_aec5bc4bd56d695c4721849eebeb93b42}{End\+Array}} (Size\+Type element\+Count) -\/$>$ bool
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a7a3dba96a8f60e8807a73d893648d561}{State}} 
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+auto \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a53649cf657995ceb9e43ff90fa534858}{Continue}} () -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a9c8308e2bfa6ea741163309777fb3124}{Get\+State}} () const -\/$>$ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a7a3dba96a8f60e8807a73d893648d561}{State}}
+\item 
+void \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_ae5edff9bf6ce49a0a93d212c8cd03be2}{Set\+State}} (const \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a7a3dba96a8f60e8807a73d893648d561}{State}} rhs)
+\item 
+void \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a5154a679ccfbf4c0366988099915e32c}{Set\+Error}} (const std\+::string \&rhs)
+\item 
+auto \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_ac9047c4832ba06a8989d9a1b064e09d6}{Error}} (const std\+::string \&rhs) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_ae1b10a6fe3dd33fb1f76b6f4d35a7724}{Invalid\+State}} () -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a19bc3ae9c0d5a5a5304ab929910ae445}{Transition\+To}} (const \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a7a3dba96a8f60e8807a73d893648d561}{State}} rhs) -\/$>$ bool
+\item 
+{\footnotesize template$<$typename Container $>$ }\\auto \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_ac1c61ef3296c4893db0fbe93ea2db214}{Check\+Key\+Table}} (const std\+::string \&key, const Container \&key\+\_\+table) -\/$>$ bool
+\item 
+void \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a92af85d72d645be2ecb9e173953deb4d}{On\+Parse\+Rasterizer\+Cull\+Mode}} (const std\+::string \&value)
+\item 
+void \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_ace54dc574c598296554b768c827fd427}{On\+Parse\+Rasterizer\+Front\+Face}} (const std\+::string \&value)
+\item 
+void \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_aa388af387334ff8effdc7d0fe8b977d0}{On\+Parse\+Vertex\+Shader}} (const std\+::string \&value)
+\item 
+void \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a87e3f93d00268fc38e9d689de39ac5fd}{On\+Parse\+Fragment\+Shader}} (const std\+::string \&value)
+\item 
+void \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_af0a0bccc772f3d42c7e7edfeee865857}{On\+Parse\+Dynamic\+State}} (const std\+::string \&value)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a7a3dba96a8f60e8807a73d893648d561}{State}} \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_ab27f241fb8863a05daf36ce135fd9e67}{state\+\_\+}} = k\+Closed\+Doc
+\item 
+std\+::string \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a26e236005bcbdc5f301cdd07bef81e5f}{error\+\_\+}} \{\}
+\item 
+\mbox{\hyperlink{structprt_1_1_graphics_pipeline_builder}{Graphics\+Pipeline\+Builder}} \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a1af04c5ad1492bb3355e0b94baf643bd}{builder\+\_\+}} \{\}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_afb94dc0f044b8de3c26fccf0e62ab209}{prt\+::\+Graphics\+Pipeline}}
+\item 
+auto \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a56bd914f87645dc84792fec1d29ac1f9}{operator$<$$<$}} (std\+::ostream \&stream, const \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a7a3dba96a8f60e8807a73d893648d561}{State}} \&rhs) -\/$>$ std\+::ostream \&
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classprt_1_1json_1_1_pipeline_handler_a7a3dba96a8f60e8807a73d893648d561}\index{prt::json::PipelineHandler@{prt::json::PipelineHandler}!State@{State}}
+\index{State@{State}!prt::json::PipelineHandler@{prt::json::PipelineHandler}}
+\doxysubsubsection{\texorpdfstring{State}{State}}
+{\footnotesize\ttfamily \label{classprt_1_1json_1_1_pipeline_handler_a7a3dba96a8f60e8807a73d893648d561} 
+enum \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a7a3dba96a8f60e8807a73d893648d561}{prt\+::json\+::\+Pipeline\+Handler\+::\+State}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1json_1_1_pipeline_handler_a86c06e5cb25385c2a474ca884754e976}\index{prt::json::PipelineHandler@{prt::json::PipelineHandler}!PipelineHandler@{PipelineHandler}}
+\index{PipelineHandler@{PipelineHandler}!prt::json::PipelineHandler@{prt::json::PipelineHandler}}
+\doxysubsubsection{\texorpdfstring{PipelineHandler()}{PipelineHandler()}}
+{\footnotesize\ttfamily \label{classprt_1_1json_1_1_pipeline_handler_a86c06e5cb25385c2a474ca884754e976} 
+prt\+::json\+::\+Pipeline\+Handler\+::\+Pipeline\+Handler (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{classprt_1_1json_1_1_pipeline_handler_a6d23c3db3f84ad3ee08d61f8fcbdcab8}\index{prt::json::PipelineHandler@{prt::json::PipelineHandler}!````~PipelineHandler@{\texorpdfstring{$\sim$}{\string~}PipelineHandler}}
+\index{````~PipelineHandler@{\texorpdfstring{$\sim$}{\string~}PipelineHandler}!prt::json::PipelineHandler@{prt::json::PipelineHandler}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}PipelineHandler()}{\string~PipelineHandler()}}
+{\footnotesize\ttfamily \label{classprt_1_1json_1_1_pipeline_handler_a6d23c3db3f84ad3ee08d61f8fcbdcab8} 
+prt\+::json\+::\+Pipeline\+Handler\+::\texorpdfstring{$\sim$}{\string~}\+Pipeline\+Handler (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1json_1_1_pipeline_handler_a58a383f6a52fe0328a5d20c01d870f4b}\index{prt::json::PipelineHandler@{prt::json::PipelineHandler}!Bool@{Bool}}
+\index{Bool@{Bool}!prt::json::PipelineHandler@{prt::json::PipelineHandler}}
+\doxysubsubsection{\texorpdfstring{Bool()}{Bool()}}
+{\footnotesize\ttfamily \label{classprt_1_1json_1_1_pipeline_handler_a58a383f6a52fe0328a5d20c01d870f4b} 
+auto prt\+::json\+::\+Pipeline\+Handler\+::\+Bool (\begin{DoxyParamCaption}\item[{bool}]{b}{}\end{DoxyParamCaption}) -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1json_1_1_pipeline_handler_ac1c61ef3296c4893db0fbe93ea2db214}\index{prt::json::PipelineHandler@{prt::json::PipelineHandler}!CheckKeyTable@{CheckKeyTable}}
+\index{CheckKeyTable@{CheckKeyTable}!prt::json::PipelineHandler@{prt::json::PipelineHandler}}
+\doxysubsubsection{\texorpdfstring{CheckKeyTable()}{CheckKeyTable()}}
+{\footnotesize\ttfamily \label{classprt_1_1json_1_1_pipeline_handler_ac1c61ef3296c4893db0fbe93ea2db214} 
+template$<$typename Container $>$ \\
+auto prt\+::json\+::\+Pipeline\+Handler\+::\+Check\+Key\+Table (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{const Container \&}]{key\+\_\+table}{}\end{DoxyParamCaption}) -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1json_1_1_pipeline_handler_a53649cf657995ceb9e43ff90fa534858}\index{prt::json::PipelineHandler@{prt::json::PipelineHandler}!Continue@{Continue}}
+\index{Continue@{Continue}!prt::json::PipelineHandler@{prt::json::PipelineHandler}}
+\doxysubsubsection{\texorpdfstring{Continue()}{Continue()}}
+{\footnotesize\ttfamily \label{classprt_1_1json_1_1_pipeline_handler_a53649cf657995ceb9e43ff90fa534858} 
+auto prt\+::json\+::\+Pipeline\+Handler\+::\+Continue (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1json_1_1_pipeline_handler_a3801553af1263b77beac6defc6484a74}\index{prt::json::PipelineHandler@{prt::json::PipelineHandler}!Double@{Double}}
+\index{Double@{Double}!prt::json::PipelineHandler@{prt::json::PipelineHandler}}
+\doxysubsubsection{\texorpdfstring{Double()}{Double()}}
+{\footnotesize\ttfamily \label{classprt_1_1json_1_1_pipeline_handler_a3801553af1263b77beac6defc6484a74} 
+auto prt\+::json\+::\+Pipeline\+Handler\+::\+Double (\begin{DoxyParamCaption}\item[{double}]{d}{}\end{DoxyParamCaption}) -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1json_1_1_pipeline_handler_aec5bc4bd56d695c4721849eebeb93b42}\index{prt::json::PipelineHandler@{prt::json::PipelineHandler}!EndArray@{EndArray}}
+\index{EndArray@{EndArray}!prt::json::PipelineHandler@{prt::json::PipelineHandler}}
+\doxysubsubsection{\texorpdfstring{EndArray()}{EndArray()}}
+{\footnotesize\ttfamily \label{classprt_1_1json_1_1_pipeline_handler_aec5bc4bd56d695c4721849eebeb93b42} 
+auto prt\+::json\+::\+Pipeline\+Handler\+::\+End\+Array (\begin{DoxyParamCaption}\item[{Size\+Type}]{element\+Count}{}\end{DoxyParamCaption}) -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1json_1_1_pipeline_handler_a5f910aff9d1a1316ed69a43bda82a9ba}\index{prt::json::PipelineHandler@{prt::json::PipelineHandler}!EndObject@{EndObject}}
+\index{EndObject@{EndObject}!prt::json::PipelineHandler@{prt::json::PipelineHandler}}
+\doxysubsubsection{\texorpdfstring{EndObject()}{EndObject()}}
+{\footnotesize\ttfamily \label{classprt_1_1json_1_1_pipeline_handler_a5f910aff9d1a1316ed69a43bda82a9ba} 
+auto prt\+::json\+::\+Pipeline\+Handler\+::\+End\+Object (\begin{DoxyParamCaption}\item[{Size\+Type}]{member\+Count}{}\end{DoxyParamCaption}) -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1json_1_1_pipeline_handler_ac9047c4832ba06a8989d9a1b064e09d6}\index{prt::json::PipelineHandler@{prt::json::PipelineHandler}!Error@{Error}}
+\index{Error@{Error}!prt::json::PipelineHandler@{prt::json::PipelineHandler}}
+\doxysubsubsection{\texorpdfstring{Error()}{Error()}}
+{\footnotesize\ttfamily \label{classprt_1_1json_1_1_pipeline_handler_ac9047c4832ba06a8989d9a1b064e09d6} 
+auto prt\+::json\+::\+Pipeline\+Handler\+::\+Error (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{rhs}{}\end{DoxyParamCaption}) -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1json_1_1_pipeline_handler_a49737a493c2f4d7080d21fd73ba1ab1e}\index{prt::json::PipelineHandler@{prt::json::PipelineHandler}!GetError@{GetError}}
+\index{GetError@{GetError}!prt::json::PipelineHandler@{prt::json::PipelineHandler}}
+\doxysubsubsection{\texorpdfstring{GetError()}{GetError()}}
+{\footnotesize\ttfamily \label{classprt_1_1json_1_1_pipeline_handler_a49737a493c2f4d7080d21fd73ba1ab1e} 
+auto prt\+::json\+::\+Pipeline\+Handler\+::\+Get\+Error (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const std\+::string\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1json_1_1_pipeline_handler_a9c8308e2bfa6ea741163309777fb3124}\index{prt::json::PipelineHandler@{prt::json::PipelineHandler}!GetState@{GetState}}
+\index{GetState@{GetState}!prt::json::PipelineHandler@{prt::json::PipelineHandler}}
+\doxysubsubsection{\texorpdfstring{GetState()}{GetState()}}
+{\footnotesize\ttfamily \label{classprt_1_1json_1_1_pipeline_handler_a9c8308e2bfa6ea741163309777fb3124} 
+auto prt\+::json\+::\+Pipeline\+Handler\+::\+Get\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a7a3dba96a8f60e8807a73d893648d561}{State}} \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1json_1_1_pipeline_handler_a9a87529732783c2bebe00a5f094d201e}\index{prt::json::PipelineHandler@{prt::json::PipelineHandler}!HasError@{HasError}}
+\index{HasError@{HasError}!prt::json::PipelineHandler@{prt::json::PipelineHandler}}
+\doxysubsubsection{\texorpdfstring{HasError()}{HasError()}}
+{\footnotesize\ttfamily \label{classprt_1_1json_1_1_pipeline_handler_a9a87529732783c2bebe00a5f094d201e} 
+auto prt\+::json\+::\+Pipeline\+Handler\+::\+Has\+Error (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1json_1_1_pipeline_handler_af195b66f5146667f2e17d5a8d3bb5b5f}\index{prt::json::PipelineHandler@{prt::json::PipelineHandler}!Int@{Int}}
+\index{Int@{Int}!prt::json::PipelineHandler@{prt::json::PipelineHandler}}
+\doxysubsubsection{\texorpdfstring{Int()}{Int()}}
+{\footnotesize\ttfamily \label{classprt_1_1json_1_1_pipeline_handler_af195b66f5146667f2e17d5a8d3bb5b5f} 
+auto prt\+::json\+::\+Pipeline\+Handler\+::\+Int (\begin{DoxyParamCaption}\item[{int}]{i}{}\end{DoxyParamCaption}) -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1json_1_1_pipeline_handler_aed8de752c2c38270c8455dec5a1bb7c3}\index{prt::json::PipelineHandler@{prt::json::PipelineHandler}!Int64@{Int64}}
+\index{Int64@{Int64}!prt::json::PipelineHandler@{prt::json::PipelineHandler}}
+\doxysubsubsection{\texorpdfstring{Int64()}{Int64()}}
+{\footnotesize\ttfamily \label{classprt_1_1json_1_1_pipeline_handler_aed8de752c2c38270c8455dec5a1bb7c3} 
+auto prt\+::json\+::\+Pipeline\+Handler\+::\+Int64 (\begin{DoxyParamCaption}\item[{int64\+\_\+t}]{i}{}\end{DoxyParamCaption}) -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1json_1_1_pipeline_handler_ae1b10a6fe3dd33fb1f76b6f4d35a7724}\index{prt::json::PipelineHandler@{prt::json::PipelineHandler}!InvalidState@{InvalidState}}
+\index{InvalidState@{InvalidState}!prt::json::PipelineHandler@{prt::json::PipelineHandler}}
+\doxysubsubsection{\texorpdfstring{InvalidState()}{InvalidState()}}
+{\footnotesize\ttfamily \label{classprt_1_1json_1_1_pipeline_handler_ae1b10a6fe3dd33fb1f76b6f4d35a7724} 
+auto prt\+::json\+::\+Pipeline\+Handler\+::\+Invalid\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1json_1_1_pipeline_handler_ae6d27521181ce7f5e128ca01cdb45087}\index{prt::json::PipelineHandler@{prt::json::PipelineHandler}!Key@{Key}}
+\index{Key@{Key}!prt::json::PipelineHandler@{prt::json::PipelineHandler}}
+\doxysubsubsection{\texorpdfstring{Key()}{Key()}}
+{\footnotesize\ttfamily \label{classprt_1_1json_1_1_pipeline_handler_ae6d27521181ce7f5e128ca01cdb45087} 
+auto prt\+::json\+::\+Pipeline\+Handler\+::\+Key (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{str}{, }\item[{Size\+Type}]{length}{, }\item[{bool}]{copy}{}\end{DoxyParamCaption}) -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1json_1_1_pipeline_handler_affc674e37bbfe59a590409e3b487e928}\index{prt::json::PipelineHandler@{prt::json::PipelineHandler}!Null@{Null}}
+\index{Null@{Null}!prt::json::PipelineHandler@{prt::json::PipelineHandler}}
+\doxysubsubsection{\texorpdfstring{Null()}{Null()}}
+{\footnotesize\ttfamily \label{classprt_1_1json_1_1_pipeline_handler_affc674e37bbfe59a590409e3b487e928} 
+auto prt\+::json\+::\+Pipeline\+Handler\+::\+Null (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1json_1_1_pipeline_handler_af0a0bccc772f3d42c7e7edfeee865857}\index{prt::json::PipelineHandler@{prt::json::PipelineHandler}!OnParseDynamicState@{OnParseDynamicState}}
+\index{OnParseDynamicState@{OnParseDynamicState}!prt::json::PipelineHandler@{prt::json::PipelineHandler}}
+\doxysubsubsection{\texorpdfstring{OnParseDynamicState()}{OnParseDynamicState()}}
+{\footnotesize\ttfamily \label{classprt_1_1json_1_1_pipeline_handler_af0a0bccc772f3d42c7e7edfeee865857} 
+void prt\+::json\+::\+Pipeline\+Handler\+::\+On\+Parse\+Dynamic\+State (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1json_1_1_pipeline_handler_a87e3f93d00268fc38e9d689de39ac5fd}\index{prt::json::PipelineHandler@{prt::json::PipelineHandler}!OnParseFragmentShader@{OnParseFragmentShader}}
+\index{OnParseFragmentShader@{OnParseFragmentShader}!prt::json::PipelineHandler@{prt::json::PipelineHandler}}
+\doxysubsubsection{\texorpdfstring{OnParseFragmentShader()}{OnParseFragmentShader()}}
+{\footnotesize\ttfamily \label{classprt_1_1json_1_1_pipeline_handler_a87e3f93d00268fc38e9d689de39ac5fd} 
+void prt\+::json\+::\+Pipeline\+Handler\+::\+On\+Parse\+Fragment\+Shader (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1json_1_1_pipeline_handler_a92af85d72d645be2ecb9e173953deb4d}\index{prt::json::PipelineHandler@{prt::json::PipelineHandler}!OnParseRasterizerCullMode@{OnParseRasterizerCullMode}}
+\index{OnParseRasterizerCullMode@{OnParseRasterizerCullMode}!prt::json::PipelineHandler@{prt::json::PipelineHandler}}
+\doxysubsubsection{\texorpdfstring{OnParseRasterizerCullMode()}{OnParseRasterizerCullMode()}}
+{\footnotesize\ttfamily \label{classprt_1_1json_1_1_pipeline_handler_a92af85d72d645be2ecb9e173953deb4d} 
+void prt\+::json\+::\+Pipeline\+Handler\+::\+On\+Parse\+Rasterizer\+Cull\+Mode (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1json_1_1_pipeline_handler_ace54dc574c598296554b768c827fd427}\index{prt::json::PipelineHandler@{prt::json::PipelineHandler}!OnParseRasterizerFrontFace@{OnParseRasterizerFrontFace}}
+\index{OnParseRasterizerFrontFace@{OnParseRasterizerFrontFace}!prt::json::PipelineHandler@{prt::json::PipelineHandler}}
+\doxysubsubsection{\texorpdfstring{OnParseRasterizerFrontFace()}{OnParseRasterizerFrontFace()}}
+{\footnotesize\ttfamily \label{classprt_1_1json_1_1_pipeline_handler_ace54dc574c598296554b768c827fd427} 
+void prt\+::json\+::\+Pipeline\+Handler\+::\+On\+Parse\+Rasterizer\+Front\+Face (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1json_1_1_pipeline_handler_aa388af387334ff8effdc7d0fe8b977d0}\index{prt::json::PipelineHandler@{prt::json::PipelineHandler}!OnParseVertexShader@{OnParseVertexShader}}
+\index{OnParseVertexShader@{OnParseVertexShader}!prt::json::PipelineHandler@{prt::json::PipelineHandler}}
+\doxysubsubsection{\texorpdfstring{OnParseVertexShader()}{OnParseVertexShader()}}
+{\footnotesize\ttfamily \label{classprt_1_1json_1_1_pipeline_handler_aa388af387334ff8effdc7d0fe8b977d0} 
+void prt\+::json\+::\+Pipeline\+Handler\+::\+On\+Parse\+Vertex\+Shader (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1json_1_1_pipeline_handler_a5154a679ccfbf4c0366988099915e32c}\index{prt::json::PipelineHandler@{prt::json::PipelineHandler}!SetError@{SetError}}
+\index{SetError@{SetError}!prt::json::PipelineHandler@{prt::json::PipelineHandler}}
+\doxysubsubsection{\texorpdfstring{SetError()}{SetError()}}
+{\footnotesize\ttfamily \label{classprt_1_1json_1_1_pipeline_handler_a5154a679ccfbf4c0366988099915e32c} 
+void prt\+::json\+::\+Pipeline\+Handler\+::\+Set\+Error (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{rhs}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1json_1_1_pipeline_handler_ae5edff9bf6ce49a0a93d212c8cd03be2}\index{prt::json::PipelineHandler@{prt::json::PipelineHandler}!SetState@{SetState}}
+\index{SetState@{SetState}!prt::json::PipelineHandler@{prt::json::PipelineHandler}}
+\doxysubsubsection{\texorpdfstring{SetState()}{SetState()}}
+{\footnotesize\ttfamily \label{classprt_1_1json_1_1_pipeline_handler_ae5edff9bf6ce49a0a93d212c8cd03be2} 
+void prt\+::json\+::\+Pipeline\+Handler\+::\+Set\+State (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a7a3dba96a8f60e8807a73d893648d561}{State}}}]{rhs}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1json_1_1_pipeline_handler_ab9527ab2b214bbe183784d194d5d30c7}\index{prt::json::PipelineHandler@{prt::json::PipelineHandler}!StartArray@{StartArray}}
+\index{StartArray@{StartArray}!prt::json::PipelineHandler@{prt::json::PipelineHandler}}
+\doxysubsubsection{\texorpdfstring{StartArray()}{StartArray()}}
+{\footnotesize\ttfamily \label{classprt_1_1json_1_1_pipeline_handler_ab9527ab2b214bbe183784d194d5d30c7} 
+auto prt\+::json\+::\+Pipeline\+Handler\+::\+Start\+Array (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1json_1_1_pipeline_handler_a533fa8c69781e7417529a8ebe4f20177}\index{prt::json::PipelineHandler@{prt::json::PipelineHandler}!StartObject@{StartObject}}
+\index{StartObject@{StartObject}!prt::json::PipelineHandler@{prt::json::PipelineHandler}}
+\doxysubsubsection{\texorpdfstring{StartObject()}{StartObject()}}
+{\footnotesize\ttfamily \label{classprt_1_1json_1_1_pipeline_handler_a533fa8c69781e7417529a8ebe4f20177} 
+auto prt\+::json\+::\+Pipeline\+Handler\+::\+Start\+Object (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1json_1_1_pipeline_handler_ae655e2e269ec3bfd7e3fcabc779532a4}\index{prt::json::PipelineHandler@{prt::json::PipelineHandler}!String@{String}}
+\index{String@{String}!prt::json::PipelineHandler@{prt::json::PipelineHandler}}
+\doxysubsubsection{\texorpdfstring{String()}{String()}}
+{\footnotesize\ttfamily \label{classprt_1_1json_1_1_pipeline_handler_ae655e2e269ec3bfd7e3fcabc779532a4} 
+auto prt\+::json\+::\+Pipeline\+Handler\+::\+String (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{str}{, }\item[{Size\+Type}]{length}{, }\item[{bool}]{copy}{}\end{DoxyParamCaption}) -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1json_1_1_pipeline_handler_a19bc3ae9c0d5a5a5304ab929910ae445}\index{prt::json::PipelineHandler@{prt::json::PipelineHandler}!TransitionTo@{TransitionTo}}
+\index{TransitionTo@{TransitionTo}!prt::json::PipelineHandler@{prt::json::PipelineHandler}}
+\doxysubsubsection{\texorpdfstring{TransitionTo()}{TransitionTo()}}
+{\footnotesize\ttfamily \label{classprt_1_1json_1_1_pipeline_handler_a19bc3ae9c0d5a5a5304ab929910ae445} 
+auto prt\+::json\+::\+Pipeline\+Handler\+::\+Transition\+To (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a7a3dba96a8f60e8807a73d893648d561}{State}}}]{rhs}{}\end{DoxyParamCaption}) -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1json_1_1_pipeline_handler_aaa285b077cd95f74eda72232a73fb71f}\index{prt::json::PipelineHandler@{prt::json::PipelineHandler}!Uint@{Uint}}
+\index{Uint@{Uint}!prt::json::PipelineHandler@{prt::json::PipelineHandler}}
+\doxysubsubsection{\texorpdfstring{Uint()}{Uint()}}
+{\footnotesize\ttfamily \label{classprt_1_1json_1_1_pipeline_handler_aaa285b077cd95f74eda72232a73fb71f} 
+auto prt\+::json\+::\+Pipeline\+Handler\+::\+Uint (\begin{DoxyParamCaption}\item[{unsigned}]{u}{}\end{DoxyParamCaption}) -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1json_1_1_pipeline_handler_a593537c1163c0d00f39b8530cdc492fd}\index{prt::json::PipelineHandler@{prt::json::PipelineHandler}!Uint64@{Uint64}}
+\index{Uint64@{Uint64}!prt::json::PipelineHandler@{prt::json::PipelineHandler}}
+\doxysubsubsection{\texorpdfstring{Uint64()}{Uint64()}}
+{\footnotesize\ttfamily \label{classprt_1_1json_1_1_pipeline_handler_a593537c1163c0d00f39b8530cdc492fd} 
+auto prt\+::json\+::\+Pipeline\+Handler\+::\+Uint64 (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{u}{}\end{DoxyParamCaption}) -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classprt_1_1json_1_1_pipeline_handler_a56bd914f87645dc84792fec1d29ac1f9}\index{prt::json::PipelineHandler@{prt::json::PipelineHandler}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!prt::json::PipelineHandler@{prt::json::PipelineHandler}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily \label{classprt_1_1json_1_1_pipeline_handler_a56bd914f87645dc84792fec1d29ac1f9} 
+auto operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{stream}{, }\item[{const \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a7a3dba96a8f60e8807a73d893648d561}{State}} \&}]{rhs}{}\end{DoxyParamCaption}) -\/$>$ std\+::ostream\& \hspace{0.3cm}{\ttfamily [friend]}}
+
+\Hypertarget{classprt_1_1json_1_1_pipeline_handler_afb94dc0f044b8de3c26fccf0e62ab209}\index{prt::json::PipelineHandler@{prt::json::PipelineHandler}!prt::GraphicsPipeline@{prt::GraphicsPipeline}}
+\index{prt::GraphicsPipeline@{prt::GraphicsPipeline}!prt::json::PipelineHandler@{prt::json::PipelineHandler}}
+\doxysubsubsection{\texorpdfstring{prt::GraphicsPipeline}{prt::GraphicsPipeline}}
+{\footnotesize\ttfamily \label{classprt_1_1json_1_1_pipeline_handler_afb94dc0f044b8de3c26fccf0e62ab209} 
+friend class \mbox{\hyperlink{classprt_1_1_graphics_pipeline}{prt\+::\+Graphics\+Pipeline}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1json_1_1_pipeline_handler_a1af04c5ad1492bb3355e0b94baf643bd}\index{prt::json::PipelineHandler@{prt::json::PipelineHandler}!builder\_@{builder\_}}
+\index{builder\_@{builder\_}!prt::json::PipelineHandler@{prt::json::PipelineHandler}}
+\doxysubsubsection{\texorpdfstring{builder\_}{builder\_}}
+{\footnotesize\ttfamily \label{classprt_1_1json_1_1_pipeline_handler_a1af04c5ad1492bb3355e0b94baf643bd} 
+\mbox{\hyperlink{structprt_1_1_graphics_pipeline_builder}{Graphics\+Pipeline\+Builder}} prt\+::json\+::\+Pipeline\+Handler\+::builder\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1json_1_1_pipeline_handler_a26e236005bcbdc5f301cdd07bef81e5f}\index{prt::json::PipelineHandler@{prt::json::PipelineHandler}!error\_@{error\_}}
+\index{error\_@{error\_}!prt::json::PipelineHandler@{prt::json::PipelineHandler}}
+\doxysubsubsection{\texorpdfstring{error\_}{error\_}}
+{\footnotesize\ttfamily \label{classprt_1_1json_1_1_pipeline_handler_a26e236005bcbdc5f301cdd07bef81e5f} 
+std\+::string prt\+::json\+::\+Pipeline\+Handler\+::error\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1json_1_1_pipeline_handler_ab27f241fb8863a05daf36ce135fd9e67}\index{prt::json::PipelineHandler@{prt::json::PipelineHandler}!state\_@{state\_}}
+\index{state\_@{state\_}!prt::json::PipelineHandler@{prt::json::PipelineHandler}}
+\doxysubsubsection{\texorpdfstring{state\_}{state\_}}
+{\footnotesize\ttfamily \label{classprt_1_1json_1_1_pipeline_handler_ab27f241fb8863a05daf36ce135fd9e67} 
+\mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a7a3dba96a8f60e8807a73d893648d561}{State}} prt\+::json\+::\+Pipeline\+Handler\+::state\+\_\+ = k\+Closed\+Doc\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{pipeline__json_8h}{pipeline\+\_\+json.\+h}}\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{pipeline__json_8cc}{pipeline\+\_\+json.\+cc}}\end{DoxyCompactItemize}

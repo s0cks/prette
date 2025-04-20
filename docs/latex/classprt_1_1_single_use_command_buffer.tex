@@ -1,0 +1,110 @@
+\doxysection{prt\+::Single\+Use\+Command\+Buffer Class Reference}
+\hypertarget{classprt_1_1_single_use_command_buffer}{}\label{classprt_1_1_single_use_command_buffer}\index{prt::SingleUseCommandBuffer@{prt::SingleUseCommandBuffer}}
+
+
+{\ttfamily \#include $<$gfx\+\_\+vk.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_single_use_command_buffer_a8d04c90adbb5e6f3decf44202dc1fae7}{Single\+Use\+Command\+Buffer}} ()
+\item 
+\mbox{\hyperlink{classprt_1_1_single_use_command_buffer_a4ae848fdf80e219a9305950e5fc69f14}{\texorpdfstring{$\sim$}{\string~}\+Single\+Use\+Command\+Buffer}} ()
+\item 
+void \mbox{\hyperlink{classprt_1_1_single_use_command_buffer_a20ae73f968b31788dddd2e74ff0b75f4}{Finish}} ()
+\item 
+\mbox{\hyperlink{classprt_1_1_single_use_command_buffer_a59ae8dd3225e3c865ea73d6f034ec9df}{operator Vk\+Command\+Buffer \&}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classprt_1_1_single_use_command_buffer_a67ece089cc30e2088e44736e5377645f}{Allocate}} (const Vk\+Device \&device, const Vk\+Command\+Pool \&pool, Vk\+Command\+Buffer \&buffer)
+\item 
+static void \mbox{\hyperlink{classprt_1_1_single_use_command_buffer_a34bdbfbe7f69efc8ce2858cf8efc7ad5}{Start}} (const Vk\+Command\+Buffer \&buffer)
+\item 
+static void \mbox{\hyperlink{classprt_1_1_single_use_command_buffer_a99798f7b39992c6eabb5b4a4c53c1178}{Finish}} (const Vk\+Command\+Buffer \&buffer)
+\item 
+static void \mbox{\hyperlink{classprt_1_1_single_use_command_buffer_a1d166029c9a36ff5549372f5ed9b1fee}{Submit}} (const Vk\+Device \&device, const Vk\+Queue \&queue, const Vk\+Command\+Buffer \&buffer, const Vk\+Allocation\+Callbacks \texorpdfstring{$\ast$}{*}allocator)
+\item 
+static void \mbox{\hyperlink{classprt_1_1_single_use_command_buffer_a2bbb2d0358a630b763953eb1c84fccfc}{Destroy}} (const Vk\+Device \&device, const Vk\+Command\+Pool \&pool, const Vk\+Command\+Buffer \&buffer)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Vk\+Command\+Buffer \mbox{\hyperlink{classprt_1_1_single_use_command_buffer_a4fbe9d9ae77b4482d3168d70a3563108}{buffer\+\_\+}} \{\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_single_use_command_buffer_a8d04c90adbb5e6f3decf44202dc1fae7}\index{prt::SingleUseCommandBuffer@{prt::SingleUseCommandBuffer}!SingleUseCommandBuffer@{SingleUseCommandBuffer}}
+\index{SingleUseCommandBuffer@{SingleUseCommandBuffer}!prt::SingleUseCommandBuffer@{prt::SingleUseCommandBuffer}}
+\doxysubsubsection{\texorpdfstring{SingleUseCommandBuffer()}{SingleUseCommandBuffer()}}
+{\footnotesize\ttfamily \label{classprt_1_1_single_use_command_buffer_a8d04c90adbb5e6f3decf44202dc1fae7} 
+prt\+::\+Single\+Use\+Command\+Buffer\+::\+Single\+Use\+Command\+Buffer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_single_use_command_buffer_a4ae848fdf80e219a9305950e5fc69f14}\index{prt::SingleUseCommandBuffer@{prt::SingleUseCommandBuffer}!````~SingleUseCommandBuffer@{\texorpdfstring{$\sim$}{\string~}SingleUseCommandBuffer}}
+\index{````~SingleUseCommandBuffer@{\texorpdfstring{$\sim$}{\string~}SingleUseCommandBuffer}!prt::SingleUseCommandBuffer@{prt::SingleUseCommandBuffer}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}SingleUseCommandBuffer()}{\string~SingleUseCommandBuffer()}}
+{\footnotesize\ttfamily \label{classprt_1_1_single_use_command_buffer_a4ae848fdf80e219a9305950e5fc69f14} 
+prt\+::\+Single\+Use\+Command\+Buffer\+::\texorpdfstring{$\sim$}{\string~}\+Single\+Use\+Command\+Buffer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_single_use_command_buffer_a67ece089cc30e2088e44736e5377645f}\index{prt::SingleUseCommandBuffer@{prt::SingleUseCommandBuffer}!Allocate@{Allocate}}
+\index{Allocate@{Allocate}!prt::SingleUseCommandBuffer@{prt::SingleUseCommandBuffer}}
+\doxysubsubsection{\texorpdfstring{Allocate()}{Allocate()}}
+{\footnotesize\ttfamily \label{classprt_1_1_single_use_command_buffer_a67ece089cc30e2088e44736e5377645f} 
+void prt\+::\+Single\+Use\+Command\+Buffer\+::\+Allocate (\begin{DoxyParamCaption}\item[{const Vk\+Device \&}]{device}{, }\item[{const Vk\+Command\+Pool \&}]{pool}{, }\item[{Vk\+Command\+Buffer \&}]{buffer}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_single_use_command_buffer_a2bbb2d0358a630b763953eb1c84fccfc}\index{prt::SingleUseCommandBuffer@{prt::SingleUseCommandBuffer}!Destroy@{Destroy}}
+\index{Destroy@{Destroy}!prt::SingleUseCommandBuffer@{prt::SingleUseCommandBuffer}}
+\doxysubsubsection{\texorpdfstring{Destroy()}{Destroy()}}
+{\footnotesize\ttfamily \label{classprt_1_1_single_use_command_buffer_a2bbb2d0358a630b763953eb1c84fccfc} 
+void prt\+::\+Single\+Use\+Command\+Buffer\+::\+Destroy (\begin{DoxyParamCaption}\item[{const Vk\+Device \&}]{device}{, }\item[{const Vk\+Command\+Pool \&}]{pool}{, }\item[{const Vk\+Command\+Buffer \&}]{buffer}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_single_use_command_buffer_a20ae73f968b31788dddd2e74ff0b75f4}\index{prt::SingleUseCommandBuffer@{prt::SingleUseCommandBuffer}!Finish@{Finish}}
+\index{Finish@{Finish}!prt::SingleUseCommandBuffer@{prt::SingleUseCommandBuffer}}
+\doxysubsubsection{\texorpdfstring{Finish()}{Finish()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_single_use_command_buffer_a20ae73f968b31788dddd2e74ff0b75f4} 
+void prt\+::\+Single\+Use\+Command\+Buffer\+::\+Finish (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_single_use_command_buffer_a99798f7b39992c6eabb5b4a4c53c1178}\index{prt::SingleUseCommandBuffer@{prt::SingleUseCommandBuffer}!Finish@{Finish}}
+\index{Finish@{Finish}!prt::SingleUseCommandBuffer@{prt::SingleUseCommandBuffer}}
+\doxysubsubsection{\texorpdfstring{Finish()}{Finish()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_single_use_command_buffer_a99798f7b39992c6eabb5b4a4c53c1178} 
+void prt\+::\+Single\+Use\+Command\+Buffer\+::\+Finish (\begin{DoxyParamCaption}\item[{const Vk\+Command\+Buffer \&}]{buffer}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_single_use_command_buffer_a59ae8dd3225e3c865ea73d6f034ec9df}\index{prt::SingleUseCommandBuffer@{prt::SingleUseCommandBuffer}!operator VkCommandBuffer \&@{operator VkCommandBuffer \&}}
+\index{operator VkCommandBuffer \&@{operator VkCommandBuffer \&}!prt::SingleUseCommandBuffer@{prt::SingleUseCommandBuffer}}
+\doxysubsubsection{\texorpdfstring{operator VkCommandBuffer \&()}{operator VkCommandBuffer \&()}}
+{\footnotesize\ttfamily \label{classprt_1_1_single_use_command_buffer_a59ae8dd3225e3c865ea73d6f034ec9df} 
+prt\+::\+Single\+Use\+Command\+Buffer\+::operator Vk\+Command\+Buffer \& (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_single_use_command_buffer_a34bdbfbe7f69efc8ce2858cf8efc7ad5}\index{prt::SingleUseCommandBuffer@{prt::SingleUseCommandBuffer}!Start@{Start}}
+\index{Start@{Start}!prt::SingleUseCommandBuffer@{prt::SingleUseCommandBuffer}}
+\doxysubsubsection{\texorpdfstring{Start()}{Start()}}
+{\footnotesize\ttfamily \label{classprt_1_1_single_use_command_buffer_a34bdbfbe7f69efc8ce2858cf8efc7ad5} 
+void prt\+::\+Single\+Use\+Command\+Buffer\+::\+Start (\begin{DoxyParamCaption}\item[{const Vk\+Command\+Buffer \&}]{buffer}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_single_use_command_buffer_a1d166029c9a36ff5549372f5ed9b1fee}\index{prt::SingleUseCommandBuffer@{prt::SingleUseCommandBuffer}!Submit@{Submit}}
+\index{Submit@{Submit}!prt::SingleUseCommandBuffer@{prt::SingleUseCommandBuffer}}
+\doxysubsubsection{\texorpdfstring{Submit()}{Submit()}}
+{\footnotesize\ttfamily \label{classprt_1_1_single_use_command_buffer_a1d166029c9a36ff5549372f5ed9b1fee} 
+void prt\+::\+Single\+Use\+Command\+Buffer\+::\+Submit (\begin{DoxyParamCaption}\item[{const Vk\+Device \&}]{device}{, }\item[{const Vk\+Queue \&}]{queue}{, }\item[{const Vk\+Command\+Buffer \&}]{buffer}{, }\item[{const Vk\+Allocation\+Callbacks \texorpdfstring{$\ast$}{*}}]{allocator}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_single_use_command_buffer_a4fbe9d9ae77b4482d3168d70a3563108}\index{prt::SingleUseCommandBuffer@{prt::SingleUseCommandBuffer}!buffer\_@{buffer\_}}
+\index{buffer\_@{buffer\_}!prt::SingleUseCommandBuffer@{prt::SingleUseCommandBuffer}}
+\doxysubsubsection{\texorpdfstring{buffer\_}{buffer\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_single_use_command_buffer_a4fbe9d9ae77b4482d3168d70a3563108} 
+Vk\+Command\+Buffer prt\+::\+Single\+Use\+Command\+Buffer\+::buffer\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{gfx__vk_8h}{gfx\+\_\+vk.\+h}}\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{gfx__vk_8cc}{gfx\+\_\+vk.\+cc}}\end{DoxyCompactItemize}

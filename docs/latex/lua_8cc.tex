@@ -1,0 +1,79 @@
+\doxysection{/\+Users/tazz/\+Projects/prette/\+Sources/prette/lua.cc File Reference}
+\hypertarget{lua_8cc}{}\label{lua_8cc}\index{/Users/tazz/Projects/prette/Sources/prette/lua.cc@{/Users/tazz/Projects/prette/Sources/prette/lua.cc}}
+{\ttfamily \#include "{}prette/lua.\+h"{}}\newline
+{\ttfamily \#include $<$lauxlib.\+h$>$}\newline
+{\ttfamily \#include $<$array$>$}\newline
+{\ttfamily \#include $<$filesystem$>$}\newline
+{\ttfamily \#include $<$rx-\/coordination.\+hpp$>$}\newline
+{\ttfamily \#include $<$subjects/rx-\/replaysubject.\+hpp$>$}\newline
+{\ttfamily \#include "{}prette/common.\+h"{}}\newline
+{\ttfamily \#include "{}prette/engine.\+h"{}}\newline
+{\ttfamily \#include "{}prette/flags.\+h"{}}\newline
+{\ttfamily \#include "{}prette/keyboard.\+h"{}}\newline
+{\ttfamily \#include "{}prette/lua\+\_\+event.\+h"{}}\newline
+{\ttfamily \#include "{}prette/mouse.\+h"{}}\newline
+{\ttfamily \#include "{}prette/prette.\+h"{}}\newline
+{\ttfamily \#include "{}prette/renderer.\+h"{}}\newline
+{\ttfamily \#include "{}prette/rx.\+h"{}}\newline
+{\ttfamily \#include "{}prette/settings.\+h"{}}\newline
+{\ttfamily \#include "{}prette/thread\+\_\+local.\+h"{}}\newline
+{\ttfamily \#include "{}prette/to\+\_\+string.\+h"{}}\newline
+{\ttfamily \#include "{}prette/window.\+h"{}}\newline
+Include dependency graph for lua.\+cc\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{lua_8cc__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1_runtime_module}{prt\+::\+Runtime\+Module}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_log_module}{prt\+::\+Log\+Module}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceprt}{prt}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{lua_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}}~state\+\_\+
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+auto \mbox{\hyperlink{namespaceprt_af2819a73ad14128b8fdfcab55c3d8b08}{prt\+::\+On\+Lua\+State\+Event}} () -\/$>$ Lua\+State\+Event\+Observable
+\item 
+\mbox{\hyperlink{namespaceprt_a77bff7d98df729777a30e10d34f75b8c}{prt\+::\+LUA\+\_\+F}} (get\+Version)
+\item 
+\mbox{\hyperlink{namespaceprt_a9eefcb9c861c78201521df675432a112}{prt\+::\+LUA\+\_\+F}} (is\+Debug)
+\item 
+\mbox{\hyperlink{namespaceprt_afc9453b2376717a70dc3133189f63111}{prt\+::\+LUA\+\_\+F}} (prette\+\_\+tostring)
+\item 
+\mbox{\hyperlink{namespaceprt_a4b6c512558fcff4c332f52faef7222af}{prt\+::\+LUA\+\_\+F}} (log\+\_\+log)
+\item 
+\mbox{\hyperlink{namespaceprt_a01e9b07c83d1fbf02d7e47019fbd0a3d}{prt\+::\+LUA\+\_\+F}} (log\+\_\+info)
+\item 
+\mbox{\hyperlink{namespaceprt_a4492148f0797ec4b703ed1d51b125676}{prt\+::\+LUA\+\_\+F}} (log\+\_\+debug)
+\item 
+\mbox{\hyperlink{namespaceprt_aeefe69480d167f1314d2d3e5f9c2e621}{prt\+::\+LUA\+\_\+F}} (log\+\_\+warning)
+\item 
+\mbox{\hyperlink{namespaceprt_a555b12ed424d8a7701844589da38c62e}{prt\+::\+LUA\+\_\+F}} (log\+\_\+error)
+\item 
+\mbox{\hyperlink{namespaceprt_a0c6e5a13e5a71f76db092754d56e1743}{prt\+::\+LUA\+\_\+F}} (prette\+\_\+print)
+\item 
+\mbox{\hyperlink{namespaceprt_a2b8700a62a823574a2b1511f9b4734a9}{prt\+::\+LUA\+\_\+F}} (module\+\_\+default\+\_\+tostring)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{lua_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}\index{lua.cc@{lua.cc}!L@{L}}
+\index{L@{L}!lua.cc@{lua.cc}}
+\doxysubsubsection{\texorpdfstring{L}{L}}
+{\footnotesize\ttfamily \label{lua_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53} 
+\#define L~state\+\_\+}
+

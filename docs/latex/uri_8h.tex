@@ -1,0 +1,73 @@
+\doxysection{/\+Users/tazz/\+Projects/prette/\+Sources/prette/uri.h File Reference}
+\hypertarget{uri_8h}{}\label{uri_8h}\index{/Users/tazz/Projects/prette/Sources/prette/uri.h@{/Users/tazz/Projects/prette/Sources/prette/uri.h}}
+{\ttfamily \#include $<$fmt/format.\+h$>$}\newline
+{\ttfamily \#include $<$leveldb/slice.\+h$>$}\newline
+{\ttfamily \#include $<$cstdio$>$}\newline
+{\ttfamily \#include $<$optional$>$}\newline
+{\ttfamily \#include $<$set$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$unordered\+\_\+set$>$}\newline
+{\ttfamily \#include $<$utility$>$}\newline
+{\ttfamily \#include "{}prette/common.\+h"{}}\newline
+Include dependency graph for uri.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{uri_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{uri_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structprt_1_1uri_1_1_uri}{prt\+::uri\+::\+Uri}}
+\item 
+struct \mbox{\hyperlink{structfmt_1_1formatter_3_01_uri_01_4}{fmt\+::formatter$<$ Uri $>$}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceprt}{prt}}
+\item 
+namespace \mbox{\hyperlink{namespaceprt_1_1uri}{prt\+::uri}}
+\item 
+namespace \mbox{\hyperlink{namespacefmt}{fmt}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{namespaceprt_1_1uri_ac7268ce718e3b3615fe3dd565040c4e3}{prt\+::uri\+::\+Extension\+Set}} = std\+::unordered\+\_\+set$<$std\+::string$>$
+\item 
+using \mbox{\hyperlink{namespaceprt_1_1uri_abd78a90444cc631e16c4484d1c03743f}{prt\+::uri\+::basic\+\_\+uri}} = std\+::string
+\item 
+using \mbox{\hyperlink{namespaceprt_1_1uri_a8d16d88011a7f47eca76c281d6fee57d}{prt\+::uri\+::\+Path}} = std\+::string
+\item 
+using \mbox{\hyperlink{namespaceprt_1_1uri_a678076225dd533b5e37a65e04ff7ecf2}{prt\+::uri\+::\+Scheme}} = std\+::string
+\item 
+using \mbox{\hyperlink{namespaceprt_1_1uri_aa0248aa8682ab71b8292c1b1bd6eeaff}{prt\+::uri\+::\+Fragment}} = std\+::string
+\item 
+using \mbox{\hyperlink{namespaceprt_1_1uri_a487da430806070600da37428f7a239ac}{prt\+::uri\+::\+Extension}} = std\+::string
+\item 
+using \mbox{\hyperlink{namespaceprt_1_1uri_a6ebfc51cc655f3bc80af827c79f1c0d8}{prt\+::uri\+::\+Query\+Map}} = std\+::unordered\+\_\+map$<$std\+::string, std\+::string$>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespaceprt_1_1uri_aefb10cb435038a60f3dd371e34a1f6d4}{prt\+::uri\+::\+Sanitize\+Path}} (\mbox{\hyperlink{namespaceprt_1_1uri_a8d16d88011a7f47eca76c281d6fee57d}{Path}} \&path, const bool root)
+\item 
+void \mbox{\hyperlink{namespaceprt_1_1uri_a5a78eca16a680e41e2e0751320d37af8}{prt\+::uri\+::\+Sanitize\+Extension}} (\mbox{\hyperlink{namespaceprt_1_1uri_a487da430806070600da37428f7a239ac}{Extension}} \&extension)
+\item 
+auto \mbox{\hyperlink{namespaceprt_1_1uri_a5a99791459568f773bfa3cfaa69d8b0a}{prt\+::uri\+::\+Is\+Valid\+Uri}} (const \mbox{\hyperlink{namespaceprt_1_1uri_abd78a90444cc631e16c4484d1c03743f}{basic\+\_\+uri}} \&value) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{namespaceprt_1_1uri_aee08b6daf031c958ef61a3c8ba236588}{prt\+::uri\+::\+Is\+Valid\+Uri}} (const \mbox{\hyperlink{namespaceprt_1_1uri_abd78a90444cc631e16c4484d1c03743f}{basic\+\_\+uri}} \&value, const std\+::string \&scheme) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{namespaceprt_1_1uri_a037a833277d691ae0323351db8d8a6dc}{prt\+::uri\+::\+Is\+Valid\+Uri}} (const \mbox{\hyperlink{namespaceprt_1_1uri_abd78a90444cc631e16c4484d1c03743f}{basic\+\_\+uri}} \&value, const std\+::set$<$ \mbox{\hyperlink{namespaceprt_1_1uri_a678076225dd533b5e37a65e04ff7ecf2}{Scheme}} $>$ \&schemes) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{namespaceprt_1_1uri_a83eab53679c31fc60834b3598f1d75af}{prt\+::uri\+::\+Is\+Valid\+Uri}} (const \mbox{\hyperlink{namespaceprt_1_1uri_abd78a90444cc631e16c4484d1c03743f}{basic\+\_\+uri}} \&value, const std\+::unordered\+\_\+set$<$ \mbox{\hyperlink{namespaceprt_1_1uri_a678076225dd533b5e37a65e04ff7ecf2}{Scheme}} $>$ \&schemes) -\/$>$ bool
+\end{DoxyCompactItemize}

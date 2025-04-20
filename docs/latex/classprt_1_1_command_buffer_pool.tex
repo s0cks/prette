@@ -1,0 +1,94 @@
+\doxysection{prt\+::Command\+Buffer\+Pool Class Reference}
+\hypertarget{classprt_1_1_command_buffer_pool}{}\label{classprt_1_1_command_buffer_pool}\index{prt::CommandBufferPool@{prt::CommandBufferPool}}
+
+
+{\ttfamily \#include $<$gfx\+\_\+vk.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_command_buffer_pool_a77dad5e28ea7b83f7bcda6d024d2de3b}{Command\+Buffer\+Pool}} ()=default
+\item 
+\mbox{\hyperlink{classprt_1_1_command_buffer_pool_a5d3cd4ea6e7f7ad3eb4bf32a651abb15}{Command\+Buffer\+Pool}} (const Vk\+Command\+Pool \&pool, const uint64\+\_\+t num\+\_\+buffers)
+\item 
+\mbox{\hyperlink{classprt_1_1_command_buffer_pool_a8f270c215c79318db1c13f14b319cc1a}{\texorpdfstring{$\sim$}{\string~}\+Command\+Buffer\+Pool}} ()
+\item 
+auto \mbox{\hyperlink{classprt_1_1_command_buffer_pool_a5b011cc8baf8e371d3be1942e9e7cd56}{Is\+Empty}} () const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_command_buffer_pool_ae95de04f853c63868ae13594ac76a99f}{Get\+Number\+Of\+Buffers}} () const -\/$>$ uint64\+\_\+t
+\item 
+auto \mbox{\hyperlink{classprt_1_1_command_buffer_pool_afd3863f48f2043d922aa973a4624c8f3}{Get\+Buffer\+At}} (const uint64\+\_\+t idx) -\/$>$ Vk\+Command\+Buffer \&
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_command_buffer_pool_a5b14da55c33944d0f713c3b3b20b2f62}{New}} (const Vk\+Command\+Pool \&pool, const uint64\+\_\+t num\+\_\+buffers) -\/$>$ \mbox{\hyperlink{classprt_1_1_command_buffer_pool}{Command\+Buffer\+Pool}} \texorpdfstring{$\ast$}{*}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ Vk\+Command\+Buffer $>$ \mbox{\hyperlink{classprt_1_1_command_buffer_pool_a2d3fdb0d87b3e6baec4b81b35dc58697}{buffers\+\_\+}} \{\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_command_buffer_pool_a77dad5e28ea7b83f7bcda6d024d2de3b}\index{prt::CommandBufferPool@{prt::CommandBufferPool}!CommandBufferPool@{CommandBufferPool}}
+\index{CommandBufferPool@{CommandBufferPool}!prt::CommandBufferPool@{prt::CommandBufferPool}}
+\doxysubsubsection{\texorpdfstring{CommandBufferPool()}{CommandBufferPool()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_command_buffer_pool_a77dad5e28ea7b83f7bcda6d024d2de3b} 
+prt\+::\+Command\+Buffer\+Pool\+::\+Command\+Buffer\+Pool (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{classprt_1_1_command_buffer_pool_a5d3cd4ea6e7f7ad3eb4bf32a651abb15}\index{prt::CommandBufferPool@{prt::CommandBufferPool}!CommandBufferPool@{CommandBufferPool}}
+\index{CommandBufferPool@{CommandBufferPool}!prt::CommandBufferPool@{prt::CommandBufferPool}}
+\doxysubsubsection{\texorpdfstring{CommandBufferPool()}{CommandBufferPool()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_command_buffer_pool_a5d3cd4ea6e7f7ad3eb4bf32a651abb15} 
+prt\+::\+Command\+Buffer\+Pool\+::\+Command\+Buffer\+Pool (\begin{DoxyParamCaption}\item[{const Vk\+Command\+Pool \&}]{pool}{, }\item[{const uint64\+\_\+t}]{num\+\_\+buffers}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+\Hypertarget{classprt_1_1_command_buffer_pool_a8f270c215c79318db1c13f14b319cc1a}\index{prt::CommandBufferPool@{prt::CommandBufferPool}!````~CommandBufferPool@{\texorpdfstring{$\sim$}{\string~}CommandBufferPool}}
+\index{````~CommandBufferPool@{\texorpdfstring{$\sim$}{\string~}CommandBufferPool}!prt::CommandBufferPool@{prt::CommandBufferPool}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}CommandBufferPool()}{\string~CommandBufferPool()}}
+{\footnotesize\ttfamily \label{classprt_1_1_command_buffer_pool_a8f270c215c79318db1c13f14b319cc1a} 
+prt\+::\+Command\+Buffer\+Pool\+::\texorpdfstring{$\sim$}{\string~}\+Command\+Buffer\+Pool (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_command_buffer_pool_afd3863f48f2043d922aa973a4624c8f3}\index{prt::CommandBufferPool@{prt::CommandBufferPool}!GetBufferAt@{GetBufferAt}}
+\index{GetBufferAt@{GetBufferAt}!prt::CommandBufferPool@{prt::CommandBufferPool}}
+\doxysubsubsection{\texorpdfstring{GetBufferAt()}{GetBufferAt()}}
+{\footnotesize\ttfamily \label{classprt_1_1_command_buffer_pool_afd3863f48f2043d922aa973a4624c8f3} 
+auto prt\+::\+Command\+Buffer\+Pool\+::\+Get\+Buffer\+At (\begin{DoxyParamCaption}\item[{const uint64\+\_\+t}]{idx}{}\end{DoxyParamCaption}) -\/$>$ Vk\+Command\+Buffer\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_command_buffer_pool_ae95de04f853c63868ae13594ac76a99f}\index{prt::CommandBufferPool@{prt::CommandBufferPool}!GetNumberOfBuffers@{GetNumberOfBuffers}}
+\index{GetNumberOfBuffers@{GetNumberOfBuffers}!prt::CommandBufferPool@{prt::CommandBufferPool}}
+\doxysubsubsection{\texorpdfstring{GetNumberOfBuffers()}{GetNumberOfBuffers()}}
+{\footnotesize\ttfamily \label{classprt_1_1_command_buffer_pool_ae95de04f853c63868ae13594ac76a99f} 
+auto prt\+::\+Command\+Buffer\+Pool\+::\+Get\+Number\+Of\+Buffers (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ uint64\+\_\+t \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_command_buffer_pool_a5b011cc8baf8e371d3be1942e9e7cd56}\index{prt::CommandBufferPool@{prt::CommandBufferPool}!IsEmpty@{IsEmpty}}
+\index{IsEmpty@{IsEmpty}!prt::CommandBufferPool@{prt::CommandBufferPool}}
+\doxysubsubsection{\texorpdfstring{IsEmpty()}{IsEmpty()}}
+{\footnotesize\ttfamily \label{classprt_1_1_command_buffer_pool_a5b011cc8baf8e371d3be1942e9e7cd56} 
+auto prt\+::\+Command\+Buffer\+Pool\+::\+Is\+Empty (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_command_buffer_pool_a5b14da55c33944d0f713c3b3b20b2f62}\index{prt::CommandBufferPool@{prt::CommandBufferPool}!New@{New}}
+\index{New@{New}!prt::CommandBufferPool@{prt::CommandBufferPool}}
+\doxysubsubsection{\texorpdfstring{New()}{New()}}
+{\footnotesize\ttfamily \label{classprt_1_1_command_buffer_pool_a5b14da55c33944d0f713c3b3b20b2f62} 
+static auto prt\+::\+Command\+Buffer\+Pool\+::\+New (\begin{DoxyParamCaption}\item[{const Vk\+Command\+Pool \&}]{pool}{, }\item[{const uint64\+\_\+t}]{num\+\_\+buffers}{}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{classprt_1_1_command_buffer_pool}{Command\+Buffer\+Pool}}\texorpdfstring{$\ast$}{*} \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_command_buffer_pool_a2d3fdb0d87b3e6baec4b81b35dc58697}\index{prt::CommandBufferPool@{prt::CommandBufferPool}!buffers\_@{buffers\_}}
+\index{buffers\_@{buffers\_}!prt::CommandBufferPool@{prt::CommandBufferPool}}
+\doxysubsubsection{\texorpdfstring{buffers\_}{buffers\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_command_buffer_pool_a2d3fdb0d87b3e6baec4b81b35dc58697} 
+std\+::vector$<$Vk\+Command\+Buffer$>$ prt\+::\+Command\+Buffer\+Pool\+::buffers\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{gfx__vk_8h}{gfx\+\_\+vk.\+h}}\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{gfx__vk_8cc}{gfx\+\_\+vk.\+cc}}\end{DoxyCompactItemize}

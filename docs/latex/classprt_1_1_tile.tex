@@ -1,0 +1,107 @@
+\doxysection{prt\+::Tile Class Reference}
+\hypertarget{classprt_1_1_tile}{}\label{classprt_1_1_tile}\index{prt::Tile@{prt::Tile}}
+
+
+{\ttfamily \#include $<$tile.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_tile_a72ea69e7123439c82de03e354605d70e}{Tile}} ()=default
+\item 
+\mbox{\hyperlink{classprt_1_1_tile_a96a70e1cc70dd767faf4d0456c6c1608}{Tile}} (const \mbox{\hyperlink{namespaceprt_a2b26a6eb256a6eefff5896d1df8e78c3}{Tile\+Pos}} pos)
+\item 
+\mbox{\hyperlink{classprt_1_1_tile_a3882ff1063eafa05e2d7f065acb19b55}{Tile}} (const uint32\+\_\+t x, const uint32\+\_\+t y)
+\item 
+\mbox{\hyperlink{classprt_1_1_tile_afc4bd07e32a7b88901fae669f7de9548}{\texorpdfstring{$\sim$}{\string~}\+Tile}} ()=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1_tile_a33d1e16ffd488c7840ce66db0cd04e67}{Get\+Pos}} () const -\/$>$ const \mbox{\hyperlink{namespaceprt_a2b26a6eb256a6eefff5896d1df8e78c3}{Tile\+Pos}} \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_tile_a7332b882a9d9815888ee0dba51a77137}{Accept}} (\mbox{\hyperlink{classprt_1_1_tile_visitor}{Tile\+Visitor}} \texorpdfstring{$\ast$}{*}vis) -\/$>$ bool
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_tile_a6d2cb88680195dfefb6699ae0fe3c364}{DEFINE\+\_\+\+DEFAULT\+\_\+\+COPYABLE\+\_\+\+TYPE}} (\mbox{\hyperlink{classprt_1_1_tile}{Tile}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceprt_a2b26a6eb256a6eefff5896d1df8e78c3}{Tile\+Pos}} \mbox{\hyperlink{classprt_1_1_tile_a0cc3822a4c48ffcd2bda19a61e4829f6}{pos\+\_\+}} \{\}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_tile_adb330c2d5d37dde9d35e624a69f96c49}{operator$<$$<$}} (std\+::ostream \&stream, const \mbox{\hyperlink{classprt_1_1_tile}{Tile}} \&rhs) -\/$>$ std\+::ostream \&
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_tile_a72ea69e7123439c82de03e354605d70e}\index{prt::Tile@{prt::Tile}!Tile@{Tile}}
+\index{Tile@{Tile}!prt::Tile@{prt::Tile}}
+\doxysubsubsection{\texorpdfstring{Tile()}{Tile()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classprt_1_1_tile_a72ea69e7123439c82de03e354605d70e} 
+prt\+::\+Tile\+::\+Tile (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{classprt_1_1_tile_a96a70e1cc70dd767faf4d0456c6c1608}\index{prt::Tile@{prt::Tile}!Tile@{Tile}}
+\index{Tile@{Tile}!prt::Tile@{prt::Tile}}
+\doxysubsubsection{\texorpdfstring{Tile()}{Tile()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classprt_1_1_tile_a96a70e1cc70dd767faf4d0456c6c1608} 
+prt\+::\+Tile\+::\+Tile (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceprt_a2b26a6eb256a6eefff5896d1df8e78c3}{Tile\+Pos}}}]{pos}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+\Hypertarget{classprt_1_1_tile_a3882ff1063eafa05e2d7f065acb19b55}\index{prt::Tile@{prt::Tile}!Tile@{Tile}}
+\index{Tile@{Tile}!prt::Tile@{prt::Tile}}
+\doxysubsubsection{\texorpdfstring{Tile()}{Tile()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classprt_1_1_tile_a3882ff1063eafa05e2d7f065acb19b55} 
+prt\+::\+Tile\+::\+Tile (\begin{DoxyParamCaption}\item[{const uint32\+\_\+t}]{x}{, }\item[{const uint32\+\_\+t}]{y}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_tile_afc4bd07e32a7b88901fae669f7de9548}\index{prt::Tile@{prt::Tile}!````~Tile@{\texorpdfstring{$\sim$}{\string~}Tile}}
+\index{````~Tile@{\texorpdfstring{$\sim$}{\string~}Tile}!prt::Tile@{prt::Tile}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Tile()}{\string~Tile()}}
+{\footnotesize\ttfamily \label{classprt_1_1_tile_afc4bd07e32a7b88901fae669f7de9548} 
+prt\+::\+Tile\+::\texorpdfstring{$\sim$}{\string~}\+Tile (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_tile_a7332b882a9d9815888ee0dba51a77137}\index{prt::Tile@{prt::Tile}!Accept@{Accept}}
+\index{Accept@{Accept}!prt::Tile@{prt::Tile}}
+\doxysubsubsection{\texorpdfstring{Accept()}{Accept()}}
+{\footnotesize\ttfamily \label{classprt_1_1_tile_a7332b882a9d9815888ee0dba51a77137} 
+auto prt\+::\+Tile\+::\+Accept (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_tile_visitor}{Tile\+Visitor}} \texorpdfstring{$\ast$}{*}}]{vis}{}\end{DoxyParamCaption}) -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_tile_a6d2cb88680195dfefb6699ae0fe3c364}\index{prt::Tile@{prt::Tile}!DEFINE\_DEFAULT\_COPYABLE\_TYPE@{DEFINE\_DEFAULT\_COPYABLE\_TYPE}}
+\index{DEFINE\_DEFAULT\_COPYABLE\_TYPE@{DEFINE\_DEFAULT\_COPYABLE\_TYPE}!prt::Tile@{prt::Tile}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_DEFAULT\_COPYABLE\_TYPE()}{DEFINE\_DEFAULT\_COPYABLE\_TYPE()}}
+{\footnotesize\ttfamily \label{classprt_1_1_tile_a6d2cb88680195dfefb6699ae0fe3c364} 
+prt\+::\+Tile\+::\+DEFINE\+\_\+\+DEFAULT\+\_\+\+COPYABLE\+\_\+\+TYPE (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_tile}{Tile}}}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_tile_a33d1e16ffd488c7840ce66db0cd04e67}\index{prt::Tile@{prt::Tile}!GetPos@{GetPos}}
+\index{GetPos@{GetPos}!prt::Tile@{prt::Tile}}
+\doxysubsubsection{\texorpdfstring{GetPos()}{GetPos()}}
+{\footnotesize\ttfamily \label{classprt_1_1_tile_a33d1e16ffd488c7840ce66db0cd04e67} 
+auto prt\+::\+Tile\+::\+Get\+Pos (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const \mbox{\hyperlink{namespaceprt_a2b26a6eb256a6eefff5896d1df8e78c3}{Tile\+Pos}}\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classprt_1_1_tile_adb330c2d5d37dde9d35e624a69f96c49}\index{prt::Tile@{prt::Tile}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!prt::Tile@{prt::Tile}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily \label{classprt_1_1_tile_adb330c2d5d37dde9d35e624a69f96c49} 
+auto operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{stream}{, }\item[{const \mbox{\hyperlink{classprt_1_1_tile}{Tile}} \&}]{rhs}{}\end{DoxyParamCaption}) -\/$>$ std\+::ostream\& \hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_tile_a0cc3822a4c48ffcd2bda19a61e4829f6}\index{prt::Tile@{prt::Tile}!pos\_@{pos\_}}
+\index{pos\_@{pos\_}!prt::Tile@{prt::Tile}}
+\doxysubsubsection{\texorpdfstring{pos\_}{pos\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_tile_a0cc3822a4c48ffcd2bda19a61e4829f6} 
+\mbox{\hyperlink{namespaceprt_a2b26a6eb256a6eefff5896d1df8e78c3}{Tile\+Pos}} prt\+::\+Tile\+::pos\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{tile_8h}{tile.\+h}}\end{DoxyCompactItemize}

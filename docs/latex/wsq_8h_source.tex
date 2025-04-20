@@ -1,0 +1,154 @@
+\doxysection{wsq.\+h}
+\hypertarget{wsq_8h_source}{}\label{wsq_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/wsq.h@{/Users/tazz/Projects/prette/Sources/prette/wsq.h}}
+\mbox{\hyperlink{wsq_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_WSQ\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_WSQ\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <atomic>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <optional>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{common_8h}{prette/common.h}}"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{platform_8h}{prette/platform.h}}"{}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00012\ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00013\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_work_stealing_queue}{WorkStealingQueue}}\{}
+\DoxyCodeLine{00014\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structprt_1_1_work_stealing_queue_1_1_item}{Item}}\{}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ int64\_t\ \mbox{\hyperlink{structprt_1_1_work_stealing_queue_1_1_item_ab78ff3a1db345d948999d2c6fac38dc4}{C}};}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ int64\_t\ \mbox{\hyperlink{structprt_1_1_work_stealing_queue_1_1_item_a903c785c32df5f34de05fcb1b5ff47ba}{M}};}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ std::atomic<T>*\ \mbox{\hyperlink{structprt_1_1_work_stealing_queue_1_1_item_a6ae0bee944622436c440372a063ad554}{S}};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{structprt_1_1_work_stealing_queue_1_1_item_af5c6e383073cadadfac21e646de705b8}{Item}}(int64\_t\ c):}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structprt_1_1_work_stealing_queue_1_1_item_ab78ff3a1db345d948999d2c6fac38dc4}{C}}(c),}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structprt_1_1_work_stealing_queue_1_1_item_a903c785c32df5f34de05fcb1b5ff47ba}{M}}(c\ -\/\ 1),}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structprt_1_1_work_stealing_queue_1_1_item_a6ae0bee944622436c440372a063ad554}{S}}(new\ \mbox{\hyperlink{namespacestd}{std}}::atomic<T>[static\_cast<size\_t>(\mbox{\hyperlink{structprt_1_1_work_stealing_queue_1_1_item_ab78ff3a1db345d948999d2c6fac38dc4}{C}})])\{}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \mbox{\hyperlink{structprt_1_1_work_stealing_queue_1_1_item_a2ea1925967f79ea7b2750b7e0a96a956}{\string~Item}}()\{}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}[]\ \mbox{\hyperlink{structprt_1_1_work_stealing_queue_1_1_item_a6ae0bee944622436c440372a063ad554}{S}};}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \ \ int64\_t\ \mbox{\hyperlink{structprt_1_1_work_stealing_queue_1_1_item_a6130c3206864c5276b8d77a307d9d560}{capacity}}()\textcolor{keyword}{\ const}\{}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structprt_1_1_work_stealing_queue_1_1_item_ab78ff3a1db345d948999d2c6fac38dc4}{C}};}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{structprt_1_1_work_stealing_queue_1_1_item_a33629a281bbe70aae3675f20d677d97b}{Push}}(int64\_t\ i,\ T\ val)\{}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structprt_1_1_work_stealing_queue_1_1_item_a6ae0bee944622436c440372a063ad554}{S}}[i\ \&\ \mbox{\hyperlink{structprt_1_1_work_stealing_queue_1_1_item_a903c785c32df5f34de05fcb1b5ff47ba}{M}}].store(val,\ std::memory\_order\_relaxed);}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ \ \ T\ \mbox{\hyperlink{structprt_1_1_work_stealing_queue_1_1_item_a40268975fb67bad45aa6759e9e5ca849}{Pop}}(int64\_t\ i)\{}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structprt_1_1_work_stealing_queue_1_1_item_a6ae0bee944622436c440372a063ad554}{S}}[i\ \&\ \mbox{\hyperlink{structprt_1_1_work_stealing_queue_1_1_item_a903c785c32df5f34de05fcb1b5ff47ba}{M}}].load(std::memory\_order\_relaxed);}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \mbox{\hyperlink{structprt_1_1_work_stealing_queue_1_1_item}{Item}}*\ \mbox{\hyperlink{structprt_1_1_work_stealing_queue_1_1_item_aba20ed539a2755232363b92e880558aa}{Resize}}(int64\_t\ bottom,\ int64\_t\ top)\{}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ ptr\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{structprt_1_1_work_stealing_queue_1_1_item}{Item}}\{2\ *\ \mbox{\hyperlink{structprt_1_1_work_stealing_queue_1_1_item_ab78ff3a1db345d948999d2c6fac38dc4}{C}}\};}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ i\ =\ top;\ i\ !=\ bottom;\ i++)}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ ptr-\/>\mbox{\hyperlink{structprt_1_1_work_stealing_queue_1_1_item_a33629a281bbe70aae3675f20d677d97b}{Push}}(i,\ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_ac1b8a47577330c648e1aa8559e2c78fe}{Pop}}(i));}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ptr;}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00047\ \ \ \ \ \};}
+\DoxyCodeLine{00048\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00049\ \ \ \ \ std::atomic<int64\_t>\ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_ac97ee0b346e698edb3a5babe63f68986}{top\_}};}
+\DoxyCodeLine{00050\ \ \ \ \ std::atomic<int64\_t>\ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_ab2c38414cdd003eb7273401cb85e55e2}{bottom\_}};}
+\DoxyCodeLine{00051\ \ \ \ \ std::atomic<Item*>\ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_a47a33d05819fe87a6be898e24f3d6cf4}{items\_}};}
+\DoxyCodeLine{00052\ \ \ \ \ std::vector<Item*>\ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_ae299a8544618685c52683826ffd4fc0c}{garbage\_}};}
+\DoxyCodeLine{00053\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_aca5cff534ae4b418955d0293041169d7}{WorkStealingQueue}}(int64\_t\ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_a09904fd0aad40198c9130c882039562c}{capacity}}\ =\ 1024):}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_ac97ee0b346e698edb3a5babe63f68986}{top\_}}(),}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_ab2c38414cdd003eb7273401cb85e55e2}{bottom\_}}(),}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_a47a33d05819fe87a6be898e24f3d6cf4}{items\_}}(),}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_ae299a8544618685c52683826ffd4fc0c}{garbage\_}}()\ \{}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keyword}{auto}\ cap\ =\ RoundUpPow2(\mbox{\hyperlink{classprt_1_1_work_stealing_queue_a09904fd0aad40198c9130c882039562c}{capacity}});}
+\DoxyCodeLine{00060\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_ac97ee0b346e698edb3a5babe63f68986}{top\_}}.store(0,\ std::memory\_order\_relaxed);}
+\DoxyCodeLine{00061\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_ab2c38414cdd003eb7273401cb85e55e2}{bottom\_}}.store(0,\ std::memory\_order\_relaxed);}
+\DoxyCodeLine{00062\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_a47a33d05819fe87a6be898e24f3d6cf4}{items\_}}.store(\textcolor{keyword}{new}\ \mbox{\hyperlink{structprt_1_1_work_stealing_queue_1_1_item}{Item}}\{\textcolor{keyword}{static\_cast<}int64\_t\textcolor{keyword}{>}(cap)\},\ std::memory\_order\_relaxed);}
+\DoxyCodeLine{00063\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_ae299a8544618685c52683826ffd4fc0c}{garbage\_}}.reserve(32);}
+\DoxyCodeLine{00064\ \ \ \ \ \}}
+\DoxyCodeLine{00065\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_a8724d61ce9d50b5ba18d14c548ad01cc}{\string~WorkStealingQueue}}()\{}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\&\ a\ :\ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_ae299a8544618685c52683826ffd4fc0c}{garbage\_}})}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ a;}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \textcolor{keyword}{delete}\ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_a47a33d05819fe87a6be898e24f3d6cf4}{items\_}}.load();}
+\DoxyCodeLine{00069\ \ \ \ \ \}}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_a65224bcb5b15a9fcf03663ca82ede6a7}{empty}}()\textcolor{keyword}{\ const}\{}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ int64\_t\ bottom\ =\ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_ab2c38414cdd003eb7273401cb85e55e2}{bottom\_}}.load(std::memory\_order\_relaxed);}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ int64\_t\ top\ =\ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_ac97ee0b346e698edb3a5babe63f68986}{top\_}}.load(std::memory\_order\_relaxed);}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ bottom\ <=\ top;}
+\DoxyCodeLine{00075\ \ \ \ \ \}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ int64\_t\ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_a2db1cb0105aee57af07db3c83b077270}{size}}()\textcolor{keyword}{\ const}\{}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ int64\_t\ bottom\ =\ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_ab2c38414cdd003eb7273401cb85e55e2}{bottom\_}}.load(std::memory\_order\_relaxed);}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ int64\_t\ top\ =\ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_ac97ee0b346e698edb3a5babe63f68986}{top\_}}.load(std::memory\_order\_relaxed);}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}int64\_t\textcolor{keyword}{>}(bottom\ >=\ top\ ?\ bottom\ -\/\ top\ :\ 0);}
+\DoxyCodeLine{00081\ \ \ \ \ \}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \ int64\_t\ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_a09904fd0aad40198c9130c882039562c}{capacity}}()\textcolor{keyword}{\ const}\{}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_a47a33d05819fe87a6be898e24f3d6cf4}{items\_}}.load(std::memory\_order\_relaxed)-\/>capacity();}
+\DoxyCodeLine{00085\ \ \ \ \ \}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_a94e98ec8673a4cc772a29926425175a4}{Push}}(T\ item)\{}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ int64\_t\ bottom\ =\ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_ab2c38414cdd003eb7273401cb85e55e2}{bottom\_}}.load(std::memory\_order\_relaxed);}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ int64\_t\ top\ =\ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_ac97ee0b346e698edb3a5babe63f68986}{top\_}}.load(std::memory\_order\_acquire);}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \textcolor{keyword}{auto}\ items\ =\ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_a47a33d05819fe87a6be898e24f3d6cf4}{items\_}}.load(std::memory\_order\_relaxed);}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \textcolor{keywordflow}{if}((items-\/>capacity()\ -\/\ 1)\ <\ (bottom\ -\/\ top))\{}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ tmp\ =\ items-\/>Resize(bottom,\ top);}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_ae299a8544618685c52683826ffd4fc0c}{garbage\_}}.push\_back(items);}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ std::swap(items,\ tmp);}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_a47a33d05819fe87a6be898e24f3d6cf4}{items\_}}.store(items,\ std::memory\_order\_relaxed);}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \ \ \ \ items-\/>Push(bottom,\ item);}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ std::atomic\_thread\_fence(std::memory\_order\_release);}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_ab2c38414cdd003eb7273401cb85e55e2}{bottom\_}}.store(bottom\ +\ 1,\ std::memory\_order\_relaxed);}
+\DoxyCodeLine{00102\ \ \ \ \ \}}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \ \ \ \ T\ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_ac1b8a47577330c648e1aa8559e2c78fe}{Pop}}()\{}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ int64\_t\ bottom\ =\ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_ab2c38414cdd003eb7273401cb85e55e2}{bottom\_}}.load(std::memory\_order\_relaxed)\ -\/\ 1;}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \textcolor{keyword}{auto}\ items\ =\ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_a47a33d05819fe87a6be898e24f3d6cf4}{items\_}}.load(std::memory\_order\_relaxed);}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_ab2c38414cdd003eb7273401cb85e55e2}{bottom\_}}.store(bottom,\ std::memory\_order\_relaxed);}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ std::atomic\_thread\_fence(std::memory\_order\_seq\_cst);}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ int64\_t\ top\ =\ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_ac97ee0b346e698edb3a5babe63f68986}{top\_}}.load(std::memory\_order\_relaxed);}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ \ \ \ \ \ \ T\ value\ =\ (T)0;}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(top\ <=\ bottom)\{}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ value\ =\ items-\/>Pop(bottom);}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(top\ ==\ bottom)\{}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(!\mbox{\hyperlink{classprt_1_1_work_stealing_queue_ac97ee0b346e698edb3a5babe63f68986}{top\_}}.compare\_exchange\_strong(top,\ top\ +\ 1,}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::memory\_order\_seq\_cst,}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::memory\_order\_relaxed))\{}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ value\ =\ (T)0;}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_ab2c38414cdd003eb7273401cb85e55e2}{bottom\_}}.store(bottom\ +\ 1,\ std::memory\_order\_relaxed);}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_ab2c38414cdd003eb7273401cb85e55e2}{bottom\_}}.store(bottom\ +\ 1,\ std::memory\_order\_relaxed);}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ value;}
+\DoxyCodeLine{00126\ \ \ \ \ \}}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \ \ \ \ T\ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_ad0754ff3a52269019411be735e6c28d7}{Steal}}()\{}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ int64\_t\ top\ =\ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_ac97ee0b346e698edb3a5babe63f68986}{top\_}}.load(std::memory\_order\_acquire);}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ std::atomic\_thread\_fence(std::memory\_order\_seq\_cst);}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ int64\_t\ bottom\ =\ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_ab2c38414cdd003eb7273401cb85e55e2}{bottom\_}}.load(std::memory\_order\_acquire);}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \ \ \ \ \ \ T\ value\ =\ (T)0;}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(top\ <\ bottom)\{}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ items\ =\ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_a47a33d05819fe87a6be898e24f3d6cf4}{items\_}}.load(std::memory\_order\_consume);}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ value\ =\ items-\/>Pop(top);}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(!\mbox{\hyperlink{classprt_1_1_work_stealing_queue_ac97ee0b346e698edb3a5babe63f68986}{top\_}}.compare\_exchange\_strong(top,\ top\ +\ 1,}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::memory\_order\_seq\_cst,}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::memory\_order\_relaxed))\{}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (T)0;}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ value;}
+\DoxyCodeLine{00144\ \ \ \ \ \}}
+\DoxyCodeLine{00145\ \ \ \};}
+\DoxyCodeLine{00146\ \}}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00148\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//PRT\_WSQ\_H}}
+
+\end{DoxyCode}

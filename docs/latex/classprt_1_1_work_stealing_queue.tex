@@ -1,0 +1,139 @@
+\doxysection{prt\+::Work\+Stealing\+Queue\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classprt_1_1_work_stealing_queue}{}\label{classprt_1_1_work_stealing_queue}\index{prt::WorkStealingQueue$<$ T $>$@{prt::WorkStealingQueue$<$ T $>$}}
+
+
+{\ttfamily \#include $<$wsq.\+h$>$}
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structprt_1_1_work_stealing_queue_1_1_item}{Item}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_work_stealing_queue_aca5cff534ae4b418955d0293041169d7}{Work\+Stealing\+Queue}} (int64\+\_\+t \mbox{\hyperlink{classprt_1_1_work_stealing_queue_a09904fd0aad40198c9130c882039562c}{capacity}}=1024)
+\item 
+\mbox{\hyperlink{classprt_1_1_work_stealing_queue_a8724d61ce9d50b5ba18d14c548ad01cc}{\texorpdfstring{$\sim$}{\string~}\+Work\+Stealing\+Queue}} ()
+\item 
+bool \mbox{\hyperlink{classprt_1_1_work_stealing_queue_a65224bcb5b15a9fcf03663ca82ede6a7}{empty}} () const
+\item 
+int64\+\_\+t \mbox{\hyperlink{classprt_1_1_work_stealing_queue_a2db1cb0105aee57af07db3c83b077270}{size}} () const
+\item 
+int64\+\_\+t \mbox{\hyperlink{classprt_1_1_work_stealing_queue_a09904fd0aad40198c9130c882039562c}{capacity}} () const
+\item 
+void \mbox{\hyperlink{classprt_1_1_work_stealing_queue_a94e98ec8673a4cc772a29926425175a4}{Push}} (T item)
+\item 
+T \mbox{\hyperlink{classprt_1_1_work_stealing_queue_ac1b8a47577330c648e1aa8559e2c78fe}{Pop}} ()
+\item 
+T \mbox{\hyperlink{classprt_1_1_work_stealing_queue_ad0754ff3a52269019411be735e6c28d7}{Steal}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::atomic$<$ int64\+\_\+t $>$ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_ac97ee0b346e698edb3a5babe63f68986}{top\+\_\+}}
+\item 
+std\+::atomic$<$ int64\+\_\+t $>$ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_ab2c38414cdd003eb7273401cb85e55e2}{bottom\+\_\+}}
+\item 
+std\+::atomic$<$ \mbox{\hyperlink{structprt_1_1_work_stealing_queue_1_1_item}{Item}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_a47a33d05819fe87a6be898e24f3d6cf4}{items\+\_\+}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{structprt_1_1_work_stealing_queue_1_1_item}{Item}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classprt_1_1_work_stealing_queue_ae299a8544618685c52683826ffd4fc0c}{garbage\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_work_stealing_queue_aca5cff534ae4b418955d0293041169d7}\index{prt::WorkStealingQueue$<$ T $>$@{prt::WorkStealingQueue$<$ T $>$}!WorkStealingQueue@{WorkStealingQueue}}
+\index{WorkStealingQueue@{WorkStealingQueue}!prt::WorkStealingQueue$<$ T $>$@{prt::WorkStealingQueue$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{WorkStealingQueue()}{WorkStealingQueue()}}
+{\footnotesize\ttfamily \label{classprt_1_1_work_stealing_queue_aca5cff534ae4b418955d0293041169d7} 
+template$<$class T $>$ \\
+\mbox{\hyperlink{classprt_1_1_work_stealing_queue}{prt\+::\+Work\+Stealing\+Queue}}$<$ T $>$\+::\+Work\+Stealing\+Queue (\begin{DoxyParamCaption}\item[{int64\+\_\+t}]{capacity}{ = {\ttfamily 1024}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+\Hypertarget{classprt_1_1_work_stealing_queue_a8724d61ce9d50b5ba18d14c548ad01cc}\index{prt::WorkStealingQueue$<$ T $>$@{prt::WorkStealingQueue$<$ T $>$}!````~WorkStealingQueue@{\texorpdfstring{$\sim$}{\string~}WorkStealingQueue}}
+\index{````~WorkStealingQueue@{\texorpdfstring{$\sim$}{\string~}WorkStealingQueue}!prt::WorkStealingQueue$<$ T $>$@{prt::WorkStealingQueue$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}WorkStealingQueue()}{\string~WorkStealingQueue()}}
+{\footnotesize\ttfamily \label{classprt_1_1_work_stealing_queue_a8724d61ce9d50b5ba18d14c548ad01cc} 
+template$<$class T $>$ \\
+\mbox{\hyperlink{classprt_1_1_work_stealing_queue}{prt\+::\+Work\+Stealing\+Queue}}$<$ T $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classprt_1_1_work_stealing_queue}{Work\+Stealing\+Queue}} (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_work_stealing_queue_a09904fd0aad40198c9130c882039562c}\index{prt::WorkStealingQueue$<$ T $>$@{prt::WorkStealingQueue$<$ T $>$}!capacity@{capacity}}
+\index{capacity@{capacity}!prt::WorkStealingQueue$<$ T $>$@{prt::WorkStealingQueue$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{capacity()}{capacity()}}
+{\footnotesize\ttfamily \label{classprt_1_1_work_stealing_queue_a09904fd0aad40198c9130c882039562c} 
+template$<$class T $>$ \\
+int64\+\_\+t \mbox{\hyperlink{classprt_1_1_work_stealing_queue}{prt\+::\+Work\+Stealing\+Queue}}$<$ T $>$\+::capacity (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_work_stealing_queue_a65224bcb5b15a9fcf03663ca82ede6a7}\index{prt::WorkStealingQueue$<$ T $>$@{prt::WorkStealingQueue$<$ T $>$}!empty@{empty}}
+\index{empty@{empty}!prt::WorkStealingQueue$<$ T $>$@{prt::WorkStealingQueue$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{empty()}{empty()}}
+{\footnotesize\ttfamily \label{classprt_1_1_work_stealing_queue_a65224bcb5b15a9fcf03663ca82ede6a7} 
+template$<$class T $>$ \\
+bool \mbox{\hyperlink{classprt_1_1_work_stealing_queue}{prt\+::\+Work\+Stealing\+Queue}}$<$ T $>$\+::empty (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_work_stealing_queue_ac1b8a47577330c648e1aa8559e2c78fe}\index{prt::WorkStealingQueue$<$ T $>$@{prt::WorkStealingQueue$<$ T $>$}!Pop@{Pop}}
+\index{Pop@{Pop}!prt::WorkStealingQueue$<$ T $>$@{prt::WorkStealingQueue$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Pop()}{Pop()}}
+{\footnotesize\ttfamily \label{classprt_1_1_work_stealing_queue_ac1b8a47577330c648e1aa8559e2c78fe} 
+template$<$class T $>$ \\
+T \mbox{\hyperlink{classprt_1_1_work_stealing_queue}{prt\+::\+Work\+Stealing\+Queue}}$<$ T $>$\+::\+Pop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_work_stealing_queue_a94e98ec8673a4cc772a29926425175a4}\index{prt::WorkStealingQueue$<$ T $>$@{prt::WorkStealingQueue$<$ T $>$}!Push@{Push}}
+\index{Push@{Push}!prt::WorkStealingQueue$<$ T $>$@{prt::WorkStealingQueue$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Push()}{Push()}}
+{\footnotesize\ttfamily \label{classprt_1_1_work_stealing_queue_a94e98ec8673a4cc772a29926425175a4} 
+template$<$class T $>$ \\
+void \mbox{\hyperlink{classprt_1_1_work_stealing_queue}{prt\+::\+Work\+Stealing\+Queue}}$<$ T $>$\+::\+Push (\begin{DoxyParamCaption}\item[{T}]{item}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_work_stealing_queue_a2db1cb0105aee57af07db3c83b077270}\index{prt::WorkStealingQueue$<$ T $>$@{prt::WorkStealingQueue$<$ T $>$}!size@{size}}
+\index{size@{size}!prt::WorkStealingQueue$<$ T $>$@{prt::WorkStealingQueue$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily \label{classprt_1_1_work_stealing_queue_a2db1cb0105aee57af07db3c83b077270} 
+template$<$class T $>$ \\
+int64\+\_\+t \mbox{\hyperlink{classprt_1_1_work_stealing_queue}{prt\+::\+Work\+Stealing\+Queue}}$<$ T $>$\+::size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_work_stealing_queue_ad0754ff3a52269019411be735e6c28d7}\index{prt::WorkStealingQueue$<$ T $>$@{prt::WorkStealingQueue$<$ T $>$}!Steal@{Steal}}
+\index{Steal@{Steal}!prt::WorkStealingQueue$<$ T $>$@{prt::WorkStealingQueue$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Steal()}{Steal()}}
+{\footnotesize\ttfamily \label{classprt_1_1_work_stealing_queue_ad0754ff3a52269019411be735e6c28d7} 
+template$<$class T $>$ \\
+T \mbox{\hyperlink{classprt_1_1_work_stealing_queue}{prt\+::\+Work\+Stealing\+Queue}}$<$ T $>$\+::\+Steal (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_work_stealing_queue_ab2c38414cdd003eb7273401cb85e55e2}\index{prt::WorkStealingQueue$<$ T $>$@{prt::WorkStealingQueue$<$ T $>$}!bottom\_@{bottom\_}}
+\index{bottom\_@{bottom\_}!prt::WorkStealingQueue$<$ T $>$@{prt::WorkStealingQueue$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{bottom\_}{bottom\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_work_stealing_queue_ab2c38414cdd003eb7273401cb85e55e2} 
+template$<$class T $>$ \\
+std\+::atomic$<$int64\+\_\+t$>$ \mbox{\hyperlink{classprt_1_1_work_stealing_queue}{prt\+::\+Work\+Stealing\+Queue}}$<$ T $>$\+::bottom\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_work_stealing_queue_ae299a8544618685c52683826ffd4fc0c}\index{prt::WorkStealingQueue$<$ T $>$@{prt::WorkStealingQueue$<$ T $>$}!garbage\_@{garbage\_}}
+\index{garbage\_@{garbage\_}!prt::WorkStealingQueue$<$ T $>$@{prt::WorkStealingQueue$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{garbage\_}{garbage\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_work_stealing_queue_ae299a8544618685c52683826ffd4fc0c} 
+template$<$class T $>$ \\
+std\+::vector$<$\mbox{\hyperlink{structprt_1_1_work_stealing_queue_1_1_item}{Item}}\texorpdfstring{$\ast$}{*}$>$ \mbox{\hyperlink{classprt_1_1_work_stealing_queue}{prt\+::\+Work\+Stealing\+Queue}}$<$ T $>$\+::garbage\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_work_stealing_queue_a47a33d05819fe87a6be898e24f3d6cf4}\index{prt::WorkStealingQueue$<$ T $>$@{prt::WorkStealingQueue$<$ T $>$}!items\_@{items\_}}
+\index{items\_@{items\_}!prt::WorkStealingQueue$<$ T $>$@{prt::WorkStealingQueue$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{items\_}{items\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_work_stealing_queue_a47a33d05819fe87a6be898e24f3d6cf4} 
+template$<$class T $>$ \\
+std\+::atomic$<$\mbox{\hyperlink{structprt_1_1_work_stealing_queue_1_1_item}{Item}}\texorpdfstring{$\ast$}{*}$>$ \mbox{\hyperlink{classprt_1_1_work_stealing_queue}{prt\+::\+Work\+Stealing\+Queue}}$<$ T $>$\+::items\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_work_stealing_queue_ac97ee0b346e698edb3a5babe63f68986}\index{prt::WorkStealingQueue$<$ T $>$@{prt::WorkStealingQueue$<$ T $>$}!top\_@{top\_}}
+\index{top\_@{top\_}!prt::WorkStealingQueue$<$ T $>$@{prt::WorkStealingQueue$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{top\_}{top\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_work_stealing_queue_ac97ee0b346e698edb3a5babe63f68986} 
+template$<$class T $>$ \\
+std\+::atomic$<$int64\+\_\+t$>$ \mbox{\hyperlink{classprt_1_1_work_stealing_queue}{prt\+::\+Work\+Stealing\+Queue}}$<$ T $>$\+::top\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{wsq_8h}{wsq.\+h}}\end{DoxyCompactItemize}

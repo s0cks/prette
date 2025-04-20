@@ -1,0 +1,31 @@
+\doxysection{shape.\+h}
+\hypertarget{shape_8h_source}{}\label{shape_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/geometry/shape.h@{/Users/tazz/Projects/prette/Sources/prette/geometry/shape.h}}
+\mbox{\hyperlink{shape_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_SHAPE\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_SHAPE\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{glm_8h}{prette/glm.h}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{common_8h}{prette/common.h}}"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00008\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}}\ =\ glm::vec2;}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00011\ \ \ operator<<(std::ostream\&\ stream,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}}\&\ rhs)\ -\/>\ std::ostream\&\ \{}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordflow}{return}\ stream\ <<\ glm::to\_string(rhs);}
+\DoxyCodeLine{00013\ \ \ \}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_shape}{Shape}}\ \{}
+\DoxyCodeLine{00016\ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_shape_a6a50d94269593680ec3d37c0a45b85c3}{Shape}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00018\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classprt_1_1_shape_a83c63d764eb1bf672bde44b600d798ed}{\string~Shape}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_shape_a121212d34b5085488b14753ac9b2720c}{Contains}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}}\&\ p)\ \textcolor{keyword}{const}\ -\/>\ \textcolor{keywordtype}{bool}\ =\ 0;}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_shape_a8df176610d2a5282ae16496545fa3a6c}{ToString}}()\ const\ -\/>\ \mbox{\hyperlink{namespacestd}{std}}::\textcolor{keywordtype}{string}\ =\ 0;}
+\DoxyCodeLine{00022\ \ \ \};}
+\DoxyCodeLine{00023\ \}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//PRT\_SHAPE\_H}}
+
+\end{DoxyCode}

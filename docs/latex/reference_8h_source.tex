@@ -1,0 +1,85 @@
+\doxysection{reference.\+h}
+\hypertarget{reference_8h_source}{}\label{reference_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/reference.h@{/Users/tazz/Projects/prette/Sources/prette/reference.h}}
+\mbox{\hyperlink{reference_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_REFERENCE\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_REFERENCE\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{flags_8h}{prette/flags.h}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}prette/resource/resource\_ptr.h"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00008\ \ \ \textcolor{keyword}{namespace\ }res=resource;\textcolor{comment}{//TODO:\ remove}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00011\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_reference}{Reference}}\ \{}
+\DoxyCodeLine{00012\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_relaxed_atomic}{RelaxedAtomic<uword>}}\ \mbox{\hyperlink{classprt_1_1_reference_a3caeba5f9b3e5733359f97d8632eb832}{ptr\_}};}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_reference_a38c75612d3078cafa342f1e2b800534b}{IncrementReferenceCounter}}()\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(!\mbox{\hyperlink{classprt_1_1_reference_a22bb6541518a875d5c6be476a9987897}{valid}}())}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_reference_ade0c9ab195e128ea13e449173579be98}{ptr}}()-\/>IncrementReferenceCounter();}
+\DoxyCodeLine{00019\ \ \ \ \ \}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_reference_a29ef0e9d0283514b000b46a198dc8680}{DecrementReferenceCounter}}()\ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(!\mbox{\hyperlink{classprt_1_1_reference_a22bb6541518a875d5c6be476a9987897}{valid}}())}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_reference_ade0c9ab195e128ea13e449173579be98}{ptr}}()-\/>DecrementReferenceCounter();}
+\DoxyCodeLine{00025\ \ \ \ \ \}}
+\DoxyCodeLine{00026\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_reference_a2f3eaa507b3fa027377e7856ade07d11}{Reference}}():}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_reference_a3caeba5f9b3e5733359f97d8632eb832}{ptr\_}}(0)\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \}}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_reference_a4f2cf9be0acc7af4e449e830efeeec95}{Reference}}(T*\ value):}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_reference_a3caeba5f9b3e5733359f97d8632eb832}{ptr\_}}(res::Pointer::New<T>(value))\ \{}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_reference_ade0c9ab195e128ea13e449173579be98}{ptr}}()-\/>IncrementReferenceCounter();}
+\DoxyCodeLine{00033\ \ \ \ \ \}}
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_reference_a49b6d58954c9afd70e34f7fa9ce2e50d}{Reference}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_reference}{Reference<T>}}\&\ rhs):}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_reference_a3caeba5f9b3e5733359f97d8632eb832}{ptr\_}}(rhs.\mbox{\hyperlink{classprt_1_1_reference_a3caeba5f9b3e5733359f97d8632eb832}{ptr\_}})\ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{classprt_1_1_reference_a22bb6541518a875d5c6be476a9987897}{valid}}())}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_reference_ade0c9ab195e128ea13e449173579be98}{ptr}}()-\/>\mbox{\hyperlink{classprt_1_1_reference_a38c75612d3078cafa342f1e2b800534b}{IncrementReferenceCounter}}();}
+\DoxyCodeLine{00038\ \ \ \ \ \}}
+\DoxyCodeLine{00039\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_reference_a37ef62e47bef7853267a2c1a49d446e6}{\string~Reference}}()\ \{}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(!\mbox{\hyperlink{classprt_1_1_reference_a22bb6541518a875d5c6be476a9987897}{valid}}())}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_reference_ade0c9ab195e128ea13e449173579be98}{ptr}}()-\/>DecrementReferenceCounter();}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{classprt_1_1_reference_ade0c9ab195e128ea13e449173579be98}{ptr}}()-\/>GetNumberOfReferences()\ ==\ 0)\ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ data\ =\ (T*)\ \mbox{\hyperlink{classprt_1_1_reference_ade0c9ab195e128ea13e449173579be98}{ptr}}()-\/>GetAddressPointer();}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ data;}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ \mbox{\hyperlink{classprt_1_1_reference_ade0c9ab195e128ea13e449173579be98}{ptr}}();}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00048\ \ \ \ \ \}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classprt_1_1_reference_a22bb6541518a875d5c6be476a9987897}{valid}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_reference_a3caeba5f9b3e5733359f97d8632eb832}{ptr\_}}\ !=\ 0;}
+\DoxyCodeLine{00052\ \ \ \ \ \}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keyword}{inline}\ res::Pointer*\ \mbox{\hyperlink{classprt_1_1_reference_ade0c9ab195e128ea13e449173579be98}{ptr}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (res::Pointer*)\ ((\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}})\mbox{\hyperlink{classprt_1_1_reference_a3caeba5f9b3e5733359f97d8632eb832}{ptr\_}});}
+\DoxyCodeLine{00056\ \ \ \ \ \}}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ T*\ \mbox{\hyperlink{classprt_1_1_reference_a31856738e19bbc824843dc2ce7c12277}{operator-\/>}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{reinterpret\_cast<}T*\textcolor{keyword}{>}(\mbox{\hyperlink{classprt_1_1_reference_ade0c9ab195e128ea13e449173579be98}{ptr}}()-\/>GetAddress());}
+\DoxyCodeLine{00060\ \ \ \ \ \}}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_reference_a566fd44a7c25f1047390e4ff89b2d513}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_reference}{Reference<T>}}\&\ rhs)\ \{}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{classprt_1_1_reference_a22bb6541518a875d5c6be476a9987897}{valid}}())}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_reference_ade0c9ab195e128ea13e449173579be98}{ptr}}()-\/>DecrementReferenceCounter();}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_reference_a3caeba5f9b3e5733359f97d8632eb832}{ptr\_}}\ =\ rhs.\mbox{\hyperlink{classprt_1_1_reference_a3caeba5f9b3e5733359f97d8632eb832}{ptr\_}};}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{classprt_1_1_reference_a22bb6541518a875d5c6be476a9987897}{valid}}())}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_reference_ade0c9ab195e128ea13e449173579be98}{ptr}}()-\/>IncrementReferenceCounter();}
+\DoxyCodeLine{00068\ \ \ \ \ \}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keyword}{friend}\ std::ostream\&\ \mbox{\hyperlink{classprt_1_1_reference_adf314cc3974086fa7a7262d6b9fccda1}{operator<<}}(std::ostream\&\ stream,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_reference}{Reference}}\&\ rhs)\ \{}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{}resource::Reference("{}};}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{}ptr="{}}\ <<\ rhs.\mbox{\hyperlink{classprt_1_1_reference_a3caeba5f9b3e5733359f97d8632eb832}{ptr\_}};}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{})"{}};}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ stream;}
+\DoxyCodeLine{00075\ \ \ \ \ \}}
+\DoxyCodeLine{00076\ \ \ \};}
+\DoxyCodeLine{00077\ \}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//PRT\_RESOURCE\_REFERENCE\_H}}
+
+\end{DoxyCode}

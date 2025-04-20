@@ -1,0 +1,116 @@
+\doxysection{prt\+::Event\+Source\+Template\texorpdfstring{$<$}{<} E \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classprt_1_1_event_source_template}{}\label{classprt_1_1_event_source_template}\index{prt::EventSourceTemplate$<$ E $>$@{prt::EventSourceTemplate$<$ E $>$}}
+
+
+{\ttfamily \#include $<$event.\+h$>$}
+
+
+
+Inheritance diagram for prt\+::Event\+Source\+Template\texorpdfstring{$<$}{<} E \texorpdfstring{$>$}{>}\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=234pt]{classprt_1_1_event_source_template__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for prt\+::Event\+Source\+Template\texorpdfstring{$<$}{<} E \texorpdfstring{$>$}{>}\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=234pt]{classprt_1_1_event_source_template__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_event_source_template_a7a70bfd9f515f0dbeba9493399d6fd96}{\texorpdfstring{$\sim$}{\string~}\+Event\+Source\+Template}} () override=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1_event_source_template_a2296fe373d44cc30cf7fc7c5c22edf3d}{On\+Event}} () const -\/$>$ rx\+::observable$<$ E \texorpdfstring{$\ast$}{*} $>$ override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classprt_1_1_event_source}{prt\+::\+Event\+Source$<$ E $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classprt_1_1_event_source_ac9bb1fe6345521cad4f1dd2722b83d80}{\texorpdfstring{$\sim$}{\string~}\+Event\+Source}} ()=default
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_event_source_template_a9b14ed5af2f49da98d56d90ccfffb4d9}{Event\+Source\+Template}} ()=default
+\item 
+void \mbox{\hyperlink{classprt_1_1_event_source_template_a4e6af3cd350d7c6bfd8614ca7333cee4}{Publish\+Event}} (E \texorpdfstring{$\ast$}{*}event) const override
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classprt_1_1_event_source}{prt\+::\+Event\+Source$<$ E $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_event_source_aae9ebe9e39115964f91291367fbb2bc1}{Event\+Source}} ()=default
+\item 
+{\footnotesize template$<$class T , typename... Args$>$ }\\void \mbox{\hyperlink{classprt_1_1_event_source_a21e88ee76cebc7dce0759f7142865bce}{Publish}} (Args... args) const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+rx\+::subject$<$ E \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classprt_1_1_event_source_template_ad7a4bdd535b3f972af72fec3d862760a}{events\+\_\+}} \{\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_event_source_template_a9b14ed5af2f49da98d56d90ccfffb4d9}\index{prt::EventSourceTemplate$<$ E $>$@{prt::EventSourceTemplate$<$ E $>$}!EventSourceTemplate@{EventSourceTemplate}}
+\index{EventSourceTemplate@{EventSourceTemplate}!prt::EventSourceTemplate$<$ E $>$@{prt::EventSourceTemplate$<$ E $>$}}
+\doxysubsubsection{\texorpdfstring{EventSourceTemplate()}{EventSourceTemplate()}}
+{\footnotesize\ttfamily \label{classprt_1_1_event_source_template_a9b14ed5af2f49da98d56d90ccfffb4d9} 
+template$<$class E $>$ \\
+\mbox{\hyperlink{classprt_1_1_event_source_template}{prt\+::\+Event\+Source\+Template}}$<$ E $>$\+::\+Event\+Source\+Template (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [default]}}
+
+\Hypertarget{classprt_1_1_event_source_template_a7a70bfd9f515f0dbeba9493399d6fd96}\index{prt::EventSourceTemplate$<$ E $>$@{prt::EventSourceTemplate$<$ E $>$}!````~EventSourceTemplate@{\texorpdfstring{$\sim$}{\string~}EventSourceTemplate}}
+\index{````~EventSourceTemplate@{\texorpdfstring{$\sim$}{\string~}EventSourceTemplate}!prt::EventSourceTemplate$<$ E $>$@{prt::EventSourceTemplate$<$ E $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}EventSourceTemplate()}{\string~EventSourceTemplate()}}
+{\footnotesize\ttfamily \label{classprt_1_1_event_source_template_a7a70bfd9f515f0dbeba9493399d6fd96} 
+template$<$class E $>$ \\
+\mbox{\hyperlink{classprt_1_1_event_source_template}{prt\+::\+Event\+Source\+Template}}$<$ E $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classprt_1_1_event_source_template}{Event\+Source\+Template}} (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_event_source_template_a2296fe373d44cc30cf7fc7c5c22edf3d}\index{prt::EventSourceTemplate$<$ E $>$@{prt::EventSourceTemplate$<$ E $>$}!OnEvent@{OnEvent}}
+\index{OnEvent@{OnEvent}!prt::EventSourceTemplate$<$ E $>$@{prt::EventSourceTemplate$<$ E $>$}}
+\doxysubsubsection{\texorpdfstring{OnEvent()}{OnEvent()}}
+{\footnotesize\ttfamily \label{classprt_1_1_event_source_template_a2296fe373d44cc30cf7fc7c5c22edf3d} 
+template$<$class E $>$ \\
+auto \mbox{\hyperlink{classprt_1_1_event_source_template}{prt\+::\+Event\+Source\+Template}}$<$ E $>$\+::\+On\+Event (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ rx\+::observable$<$E\texorpdfstring{$\ast$}{*}$>$\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classprt_1_1_event_source_ac9882f8a6317c309a9f82d543b6fb0a0}{prt\+::\+Event\+Source$<$ E $>$}}.
+
+\Hypertarget{classprt_1_1_event_source_template_a4e6af3cd350d7c6bfd8614ca7333cee4}\index{prt::EventSourceTemplate$<$ E $>$@{prt::EventSourceTemplate$<$ E $>$}!PublishEvent@{PublishEvent}}
+\index{PublishEvent@{PublishEvent}!prt::EventSourceTemplate$<$ E $>$@{prt::EventSourceTemplate$<$ E $>$}}
+\doxysubsubsection{\texorpdfstring{PublishEvent()}{PublishEvent()}}
+{\footnotesize\ttfamily \label{classprt_1_1_event_source_template_a4e6af3cd350d7c6bfd8614ca7333cee4} 
+template$<$class E $>$ \\
+void \mbox{\hyperlink{classprt_1_1_event_source_template}{prt\+::\+Event\+Source\+Template}}$<$ E $>$\+::\+Publish\+Event (\begin{DoxyParamCaption}\item[{E \texorpdfstring{$\ast$}{*}}]{event}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classprt_1_1_event_source_aab767454f57a64014e76b6981ce62a56}{prt\+::\+Event\+Source$<$ E $>$}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{classprt_1_1_keyboard_aa645187d3c00e15188980824283650d4}{prt\+::\+Keyboard}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_event_source_template_ad7a4bdd535b3f972af72fec3d862760a}\index{prt::EventSourceTemplate$<$ E $>$@{prt::EventSourceTemplate$<$ E $>$}!events\_@{events\_}}
+\index{events\_@{events\_}!prt::EventSourceTemplate$<$ E $>$@{prt::EventSourceTemplate$<$ E $>$}}
+\doxysubsubsection{\texorpdfstring{events\_}{events\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_event_source_template_ad7a4bdd535b3f972af72fec3d862760a} 
+template$<$class E $>$ \\
+rx\+::subject$<$E\texorpdfstring{$\ast$}{*}$>$ \mbox{\hyperlink{classprt_1_1_event_source_template}{prt\+::\+Event\+Source\+Template}}$<$ E $>$\+::events\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{event_8h}{event.\+h}}\end{DoxyCompactItemize}

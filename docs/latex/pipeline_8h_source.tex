@@ -1,0 +1,78 @@
+\doxysection{pipeline.\+h}
+\hypertarget{pipeline_8h_source}{}\label{pipeline_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/pipeline.h@{/Users/tazz/Projects/prette/Sources/prette/pipeline.h}}
+\mbox{\hyperlink{pipeline_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_PIPELINE\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_PIPELINE\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vulkan/vulkan\_core.h>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{common_8h}{prette/common.h}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}prette/gfx.h"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{pipeline__builder_8h}{prette/pipeline\_builder.h}}"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{shader_8h}{prette/shader.h}}"{}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00012\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ InitPipelineViewportState(VkPipelineViewportStateCreateInfo\&\ create\_info,}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<VkViewport>\&\ viewports,\ \textcolor{keyword}{const}\ std::vector<VkRect2D>\&\ scissors)\ \{}
+\DoxyCodeLine{00014\ \ \ create\_info.sType\ =\ VK\_STRUCTURE\_TYPE\_PIPELINE\_VIEWPORT\_STATE\_CREATE\_INFO;}
+\DoxyCodeLine{00015\ \ \ create\_info.viewportCount\ =\ viewports.size();}
+\DoxyCodeLine{00016\ \ \ create\_info.pViewports\ =\ viewports.data();}
+\DoxyCodeLine{00017\ \ \ create\_info.scissorCount\ =\ scissors.size();}
+\DoxyCodeLine{00018\ \ \ create\_info.pScissors\ =\ scissors.data();}
+\DoxyCodeLine{00019\ \}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{namespace\ }json\ \{}
+\DoxyCodeLine{00022\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler}{PipelineHandler}};}
+\DoxyCodeLine{00023\ \}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_graphics_pipeline}{GraphicsPipeline}};}
+\DoxyCodeLine{00026\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceprt_a0459879771eaf79c0144dbe37c40726d}{GraphicsPipelinePtr}}\ =\ std::shared\_ptr<GraphicsPipeline>;}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_graphics_pipeline}{GraphicsPipeline}}\ \{}
+\DoxyCodeLine{00029\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler}{json::PipelineHandler}};}
+\DoxyCodeLine{00030\ \ \ \mbox{\hyperlink{classprt_1_1_graphics_pipeline_afbf1a4eb987b1d868480a724d67774b9}{DEFINE\_DEFAULT\_COPYABLE\_TYPE}}(\mbox{\hyperlink{classprt_1_1_graphics_pipeline}{GraphicsPipeline}});}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00033\ \ \ VkRenderPass\ \mbox{\hyperlink{classprt_1_1_graphics_pipeline_a6e7d948b763bbaad4421650d111d76cf}{pass\_}}\ =\ VK\_NULL\_HANDLE;}
+\DoxyCodeLine{00034\ \ \ VkExtent2D\ \mbox{\hyperlink{classprt_1_1_graphics_pipeline_a5fa7720cc5f600a01b19671cef6d82f4}{extent\_}}\{\};}
+\DoxyCodeLine{00035\ \ \ VkPipeline\ \mbox{\hyperlink{classprt_1_1_graphics_pipeline_a7c08adba6f7ce1cd016932317fb91683}{pipeline\_}}\ =\ VK\_NULL\_HANDLE;}
+\DoxyCodeLine{00036\ \ \ VkPipelineLayout\ \mbox{\hyperlink{classprt_1_1_graphics_pipeline_a476be6944082ae2ac96212edf75aef33}{layout\_}}\ =\ VK\_NULL\_HANDLE;}
+\DoxyCodeLine{00037\ \ \ VkPipelineCache\ \mbox{\hyperlink{classprt_1_1_graphics_pipeline_a7de325ccd761a3c4969dd7fa72c9762b}{cache\_}}\ =\ VK\_NULL\_HANDLE;}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00040\ \ \ \mbox{\hyperlink{classprt_1_1_graphics_pipeline_ac3572642a4cb344748815b318f37b37e}{GraphicsPipeline}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00041\ \ \ \mbox{\hyperlink{classprt_1_1_graphics_pipeline_a3eb2fe7e911629939117204bf5fa9591}{GraphicsPipeline}}(VkRenderPass\ pass,\ VkExtent2D\ extent,\ VkPipeline\ pipeline,\ VkPipelineLayout\ layout,\ VkPipelineCache\ cache)\ :}
+\DoxyCodeLine{00042\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_graphics_pipeline_a6e7d948b763bbaad4421650d111d76cf}{pass\_}}(pass),}
+\DoxyCodeLine{00043\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_graphics_pipeline_a5fa7720cc5f600a01b19671cef6d82f4}{extent\_}}(extent),}
+\DoxyCodeLine{00044\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_graphics_pipeline_a7c08adba6f7ce1cd016932317fb91683}{pipeline\_}}(pipeline),}
+\DoxyCodeLine{00045\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_graphics_pipeline_a476be6944082ae2ac96212edf75aef33}{layout\_}}(layout),}
+\DoxyCodeLine{00046\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_graphics_pipeline_a7de325ccd761a3c4969dd7fa72c9762b}{cache\_}}(cache)\ \{\}}
+\DoxyCodeLine{00047\ \ \ \mbox{\hyperlink{classprt_1_1_graphics_pipeline_a7b239a8e2561c0ac82774855e76de325}{\string~GraphicsPipeline}}();}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_graphics_pipeline_ac75f0f77e634ac83d48656e789c6c333}{Get}}()\ const\ -\/>\ VkPipeline\ const\&\ \{}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_graphics_pipeline_a7c08adba6f7ce1cd016932317fb91683}{pipeline\_}};}
+\DoxyCodeLine{00051\ \ \ \}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_graphics_pipeline_a6aef8cf82b040918385a4cb98fb46665}{GetLayout}}()\ const\ -\/>\ VkPipelineLayout\ const\&\ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_graphics_pipeline_a476be6944082ae2ac96212edf75aef33}{layout\_}};}
+\DoxyCodeLine{00055\ \ \ \}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_graphics_pipeline_ab01110c61f7148e5fedd1ad5df642256}{GetCache}}()\ const\ -\/>\ VkPipelineCache\ const\&\ \{}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_graphics_pipeline_a7de325ccd761a3c4969dd7fa72c9762b}{cache\_}};}
+\DoxyCodeLine{00059\ \ \ \}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \textcolor{keyword}{operator}\ VkPipeline()\ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_graphics_pipeline_a7c08adba6f7ce1cd016932317fb91683}{pipeline\_}};}
+\DoxyCodeLine{00063\ \ \ \}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00066\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_graphics_pipeline_aadb567e7895f8bc60d45a784876da885}{New}}(\textcolor{keyword}{const}\ std::vector<VkDescriptorSetLayout>\&\ descriptor\_set\_layouts\ =\ \{\})\ -\/>\ \mbox{\hyperlink{classprt_1_1_graphics_pipeline}{GraphicsPipeline}}*;}
+\DoxyCodeLine{00067\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_graphics_pipeline_a87cb9b6f7b7d1309945508c762e54ca6}{FromJson}}(fs::path\ path,\ VkRenderPass\ pass,\ VkExtent2D\ extent,}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<VkDescriptorSetLayout>\&\ descriptor\_set\_layouts\ =\ \{\})\ -\/>\ \mbox{\hyperlink{classprt_1_1_graphics_pipeline_ac3572642a4cb344748815b318f37b37e}{GraphicsPipeline}}*;}
+\DoxyCodeLine{00069\ \};}
+\DoxyCodeLine{00070\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_PIPELINE\_H}}
+
+\end{DoxyCode}

@@ -1,0 +1,103 @@
+\doxysection{/\+Users/tazz/\+Projects/prette/\+Sources/prette/gfx\+\_\+driver.cc File Reference}
+\hypertarget{gfx__driver_8cc}{}\label{gfx__driver_8cc}\index{/Users/tazz/Projects/prette/Sources/prette/gfx\_driver.cc@{/Users/tazz/Projects/prette/Sources/prette/gfx\_driver.cc}}
+{\ttfamily \#include "{}prette/gfx\+\_\+driver.\+h"{}}\newline
+{\ttfamily \#include "{}prette/engine.\+h"{}}\newline
+{\ttfamily \#include "{}prette/gfx.\+h"{}}\newline
+{\ttfamily \#include "{}prette/lua.\+h"{}}\newline
+{\ttfamily \#include "{}prette/lua\+\_\+event.\+h"{}}\newline
+{\ttfamily \#include "{}prette/to\+\_\+string.\+h"{}}\newline
+Include dependency graph for gfx\+\_\+driver.\+cc\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{gfx__driver_8cc__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1_driver_module}{prt\+::\+Driver\+Module}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceprt}{prt}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{gfx__driver_8cc_ac133a9c427d3a8bdcb020fa3c7843972}{LUA\+\_\+\+DRIVER\+\_\+F}}(Name)
+\item 
+\#define \mbox{\hyperlink{gfx__driver_8cc_a883bc9ae9206c92ed074a39a9a30192a}{DEFINE\+\_\+\+ON\+\_\+\+EVENT\+\_\+\+FUNC}}(Name)
+\item 
+\#define \mbox{\hyperlink{gfx__driver_8cc_ac133a9c427d3a8bdcb020fa3c7843972}{LUA\+\_\+\+DRIVER\+\_\+F}}(Name)
+\item 
+\#define \mbox{\hyperlink{gfx__driver_8cc_a2672365a233e0c9f3c1ccb0d78388308}{DEFINE\+\_\+\+ON\+\_\+\+EVENT}}(Name)
+\item 
+\#define \mbox{\hyperlink{gfx__driver_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}}~lstate-\/$>$Get\+State()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+auto \mbox{\hyperlink{namespaceprt_a36d337888521b9ff8f3dea3e3dc5ac4c}{prt\+::\+On\+Driver\+Event}} () -\/$>$ Driver\+Event\+Observable
+\item 
+\mbox{\hyperlink{namespaceprt_aac0445dd332bec5b67cf3d581efc4088}{prt\+::\+LUA\+\_\+\+DRIVER\+\_\+F}} (on\+Event)
+\item 
+\mbox{\hyperlink{namespaceprt_a335c766ceeb5841a5543f06a2ceced56}{prt\+::\+FOR\+\_\+\+EACH\+\_\+\+DRIVER\+\_\+\+EVENT}} (\mbox{\hyperlink{engine_8cc_a883bc9ae9206c92ed074a39a9a30192a}{DEFINE\+\_\+\+ON\+\_\+\+EVENT\+\_\+\+FUNC}})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{gfx__driver_8cc_a2672365a233e0c9f3c1ccb0d78388308}\index{gfx\_driver.cc@{gfx\_driver.cc}!DEFINE\_ON\_EVENT@{DEFINE\_ON\_EVENT}}
+\index{DEFINE\_ON\_EVENT@{DEFINE\_ON\_EVENT}!gfx\_driver.cc@{gfx\_driver.cc}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_ON\_EVENT}{DEFINE\_ON\_EVENT}}
+{\footnotesize\ttfamily \label{gfx__driver_8cc_a2672365a233e0c9f3c1ccb0d78388308} 
+\#define DEFINE\+\_\+\+ON\+\_\+\+EVENT(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{gfx__driver_8cc_ac133a9c427d3a8bdcb020fa3c7843972}{LUA\_DRIVER\_F}}(on\#\#Name\#\#Event),}
+
+\end{DoxyCode}
+\Hypertarget{gfx__driver_8cc_a883bc9ae9206c92ed074a39a9a30192a}\index{gfx\_driver.cc@{gfx\_driver.cc}!DEFINE\_ON\_EVENT\_FUNC@{DEFINE\_ON\_EVENT\_FUNC}}
+\index{DEFINE\_ON\_EVENT\_FUNC@{DEFINE\_ON\_EVENT\_FUNC}!gfx\_driver.cc@{gfx\_driver.cc}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_ON\_EVENT\_FUNC}{DEFINE\_ON\_EVENT\_FUNC}}
+{\footnotesize\ttfamily \label{gfx__driver_8cc_a883bc9ae9206c92ed074a39a9a30192a} 
+\#define DEFINE\+\_\+\+ON\+\_\+\+EVENT\+\_\+\+FUNC(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{gfx__driver_8cc_ac133a9c427d3a8bdcb020fa3c7843972}{LUA\_DRIVER\_F}}(on\#\#Name\#\#Event)\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ On\#\#Name\#\#Event().subscribe(CreateSubscriber<Name\#\#Event>(\mbox{\hyperlink{gfx__driver_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}}));\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{gfx__driver_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}\index{gfx\_driver.cc@{gfx\_driver.cc}!L@{L}}
+\index{L@{L}!gfx\_driver.cc@{gfx\_driver.cc}}
+\doxysubsubsection{\texorpdfstring{L}{L}}
+{\footnotesize\ttfamily \label{gfx__driver_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53} 
+\#define L~lstate-\/$>$Get\+State()}
+
+\Hypertarget{gfx__driver_8cc_ac133a9c427d3a8bdcb020fa3c7843972}\index{gfx\_driver.cc@{gfx\_driver.cc}!LUA\_DRIVER\_F@{LUA\_DRIVER\_F}}
+\index{LUA\_DRIVER\_F@{LUA\_DRIVER\_F}!gfx\_driver.cc@{gfx\_driver.cc}}
+\doxysubsubsection{\texorpdfstring{LUA\_DRIVER\_F}{LUA\_DRIVER\_F}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{gfx__driver_8cc_ac133a9c427d3a8bdcb020fa3c7843972} 
+\#define LUA\+\_\+\+DRIVER\+\_\+F(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{lua_8h_a4c3a947c2f5c2f6244ffac8dfa005527}{LUA\_F}}(driver\_\#\#Name)}
+
+\end{DoxyCode}
+\Hypertarget{gfx__driver_8cc_ac133a9c427d3a8bdcb020fa3c7843972}\index{gfx\_driver.cc@{gfx\_driver.cc}!LUA\_DRIVER\_F@{LUA\_DRIVER\_F}}
+\index{LUA\_DRIVER\_F@{LUA\_DRIVER\_F}!gfx\_driver.cc@{gfx\_driver.cc}}
+\doxysubsubsection{\texorpdfstring{LUA\_DRIVER\_F}{LUA\_DRIVER\_F}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{gfx__driver_8cc_ac133a9c427d3a8bdcb020fa3c7843972} 
+\#define LUA\+\_\+\+DRIVER\+\_\+F(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \{\ .name\ =\ \#Name,\ .func\ =\ \&lua\_driver\_\#\#Name\ \}}
+
+\end{DoxyCode}

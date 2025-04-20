@@ -2,7 +2,7 @@
 #include "prette/thread_local.h"
 
 namespace prt {
-  static ThreadLocal<MockGlfw> mock_; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
+  static ThreadLocal<MockGlfw> mock_;
 
   MockGlfw::MockGlfw() {
     mock_.Set(this);

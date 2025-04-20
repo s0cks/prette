@@ -1,0 +1,71 @@
+\doxysection{swapchain.\+h}
+\hypertarget{swapchain_8h_source}{}\label{swapchain_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/swapchain.h@{/Users/tazz/Projects/prette/Sources/prette/swapchain.h}}
+\mbox{\hyperlink{swapchain_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_SWAPCHAIN\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_SWAPCHAIN\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vulkan/vulkan\_core.h>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{common_8h}{prette/common.h}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{event_8h}{prette/event.h}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}prette/gfx.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{pipeline_8h}{prette/pipeline.h}}"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{swapchain__event_8h}{prette/swapchain\_event.h}}"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{swapchain__frame_8h}{prette/swapchain\_frame.h}}"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{swapchain__render__pass_8h}{prette/swapchain\_render\_pass.h}}"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{to__string_8h}{prette/to\_string.h}}"{}}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{namespaceprt_a8b0096bdf6cfc40a315d7e3202164ee3}{OnSwapChainEvent}}()\ -\/>\ SwapChainEventObservable;}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#define\ DEFINE\_ON\_EVENT(Name)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\ \ static\ inline\ auto\ On\#\#Name\#\#Event()-\/>Name\#\#EventObservable\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\ \ \ \ return\ OnSwapChainEvent().filter(Name\#\#Event::Filter).map(Name\#\#Event::Cast);\ \(\backslash\)}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\ \ \}}}
+\DoxyCodeLine{00021\ \mbox{\hyperlink{swapchain__event_8h_a86d634f247395fa962e84b5cadf99b98}{FOR\_EACH\_SWAPCHAIN\_EVENT}}(\mbox{\hyperlink{engine_8cc_a2672365a233e0c9f3c1ccb0d78388308}{DEFINE\_ON\_EVENT}});}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#undef\ DEFINE\_ON\_EVENT}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_driver}{Driver}};}
+\DoxyCodeLine{00025\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_swap_chain}{SwapChain}}\ \{}
+\DoxyCodeLine{00026\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_renderer}{Renderer}};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00029\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_swap_chain_ac9798c9e75c1574fa1ced6709acae702}{InitSwap}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_driver}{Driver}}*\ driver,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ is\_reinit);}
+\DoxyCodeLine{00030\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_swap_chain_a2474db515fd32138a38b97cb6b6684a1}{DestroySwap}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_driver}{Driver}}*\ driver,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ is\_reinit);}
+\DoxyCodeLine{00031\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_swap_chain_a759c8d2ec190555f90618efc39eb4779}{ReInitSwap}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_driver}{Driver}}*\ driver);}
+\DoxyCodeLine{00032\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_swap_chain_a393aded0bbbad8858affead5c2b72bee}{InitWindowResizeListener}}();}
+\DoxyCodeLine{00033\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_swap_chain_a4e4177e776834e1a79c28f85cd1c4b4d}{InitRenderPass}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_driver}{Driver}}*\ driver);}
+\DoxyCodeLine{00034\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_swap_chain_a88c7e37d06a38251c963e8fc31123c70}{InitPipeline}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_driver}{Driver}}*\ driver);}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_swap_chain_a17068c87bf06430eba246036a3496406}{AcquireNextImage}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_driver}{Driver}}*\ driver)\ -\/>\ bool;}
+\DoxyCodeLine{00037\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_swap_chain_a4e5c84faa6faf5b72d21cb79ae1b0930}{Present}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_driver}{Driver}}*\ driver);}
+\DoxyCodeLine{00038\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_swap_chain_a1bd8c5c30edc93f256b1cd72dbcecda0}{Submit}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_driver}{Driver}}*\ driver,\ \textcolor{keyword}{const}\ std::vector<VkCommandBuffer>\&\ cmd\_buffers);}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_swap_chain_aee8c6a065eb5e06b64610b46de61bff3}{InitImages}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_driver}{Driver}}*\ driver);}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00043\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_swap_chain_a3ae3351a4b17de0508d4976cf5e1890f}{Init}}();}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_swap_chain_af01da41cdba2e6d3d8b1b40470a2558b}{GetSwapChain}}()\ -\/>\ VkSwapchainKHR\ \textcolor{keyword}{const}\&;}
+\DoxyCodeLine{00046\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_swap_chain_a10b91e5518b170ece6e270f57550dda1}{GetImages}}()\ -\/>\ std::vector<VkImage>\ \textcolor{keyword}{const}\&;}
+\DoxyCodeLine{00047\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_swap_chain_a75d623958e155b06b66877ec21291dc0}{GetImageView}}(\textcolor{keyword}{const}\ uint32\_t\ idx)\ -\/>\ VkImageView\ \textcolor{keyword}{const}\&;}
+\DoxyCodeLine{00048\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_swap_chain_a3ae2bc400533bfa1745a82bb360c5087}{GetFormat}}()\ -\/>\ VkFormat\ \textcolor{keyword}{const}\&;}
+\DoxyCodeLine{00049\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_swap_chain_afa49c6454e286e09b5ae769d48e53597}{GetExtent}}()\ -\/>\ VkExtent2D\ \textcolor{keyword}{const}\&;}
+\DoxyCodeLine{00050\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_swap_chain_a33468312f70a0796034f7d41f84743b5}{GetRenderPass}}()\ -\/>\ \mbox{\hyperlink{classprt_1_1_swap_chain_render_pass}{SwapChainRenderPass}}*;}
+\DoxyCodeLine{00051\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_swap_chain_a709ad581fbdc2b06d11cabc0120c4acf}{GetGraphicsPipeline}}()\ -\/>\ \mbox{\hyperlink{classprt_1_1_graphics_pipeline}{GraphicsPipeline}}*\ \textcolor{keyword}{const}\&;}
+\DoxyCodeLine{00052\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_swap_chain_aeb82c19f0cffc83ce0e9dd988cfd73b8}{GetCurrentFrame}}()\ -\/>\ \mbox{\hyperlink{classprt_1_1_swap_chain_frame}{SwapChainFrame}}*;}
+\DoxyCodeLine{00053\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_swap_chain_abab409b7e20ce0e045896b1c627f4031}{GetFramebuffer}}(\textcolor{keyword}{const}\ uint32\_t\ idx)\ -\/>\ VkFramebuffer\ \textcolor{keyword}{const}\&;}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_swap_chain_a79c5b22c1cb67e2ef65654c9195ae4e7}{GetNumberOfImages}}()\ -\/>\ uint64\_t\ \{}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_swap_chain_a10b91e5518b170ece6e270f57550dda1}{GetImages}}().size();}
+\DoxyCodeLine{00057\ \ \ \}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_swap_chain_ac7c03e10bc8c0bfa23e870abd48ccd8d}{GetCurrentImage}}()\ -\/>\ uint32\_t\ \{}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_swap_chain_aeb82c19f0cffc83ce0e9dd988cfd73b8}{GetCurrentFrame}}()-\/>GetImage();}
+\DoxyCodeLine{00061\ \ \ \}}
+\DoxyCodeLine{00062\ \};}
+\DoxyCodeLine{00063\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_SWAPCHAIN\_H}}
+
+\end{DoxyCode}

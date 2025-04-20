@@ -1,0 +1,15 @@
+<map id="/Users/tazz/Projects/prette/Sources/prette/counter.h" name="/Users/tazz/Projects/prette/Sources/prette/counter.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="125,5,272,61"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,109,107,135"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="155,64,90,103,88,98,153,59"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="131,109,192,135"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="190,62,175,96,170,93,185,60"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="215,109,260,135"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="213,60,228,93,223,96,208,62"/>
+<area shape="rect" id="Node000005" href="$relaxed__atomic_8h.html" title=" " alt="" coords="284,109,441,135"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="251,59,328,99,325,104,249,64"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="287,183,348,208"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="357,136,335,171,331,168,353,133"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="371,183,442,208"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="372,133,393,168,389,171,368,136"/>
+</map>

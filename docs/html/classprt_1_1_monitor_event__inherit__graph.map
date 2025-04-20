@@ -1,0 +1,9 @@
+<map id="prt::MonitorEvent" name="prt::MonitorEvent">
+<area shape="rect" id="Node000001" title=" " alt="" coords="137,79,258,105"/>
+<area shape="rect" id="Node000003" href="$classprt_1_1_monitor_connected_event.html" title=" " alt="" coords="5,160,190,186"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="172,116,114,162,111,158,169,112"/>
+<area shape="rect" id="Node000004" href="$classprt_1_1_monitor_disconnected_event.html" title=" " alt="" coords="214,153,381,193"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="226,112,274,150,271,154,223,116"/>
+<area shape="rect" id="Node000002" href="$classprt_1_1_event.html" title=" " alt="" coords="158,5,237,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="200,46,200,79,195,79,195,46"/>
+</map>

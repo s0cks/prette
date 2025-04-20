@@ -1,0 +1,165 @@
+\doxysection{prt\+::uv\+::Loop Class Reference}
+\hypertarget{classprt_1_1uv_1_1_loop}{}\label{classprt_1_1uv_1_1_loop}\index{prt::uv::Loop@{prt::uv::Loop}}
+
+
+{\ttfamily \#include $<$utils.\+h$>$}
+
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classprt_1_1uv_1_1_loop_a7dc860eaf13d69ce1948dbdacea5e648}{Handle}} = uv\+\_\+loop\+\_\+t
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1uv_1_1_loop_a97c936a498fff2ed8d9f215dc1d452dc}{Loop}} ()
+\item 
+virtual \mbox{\hyperlink{classprt_1_1uv_1_1_loop_a16d30683f4a79831db2ac53e011d2e1e}{\texorpdfstring{$\sim$}{\string~}\+Loop}} ()=default
+\item 
+void \mbox{\hyperlink{classprt_1_1uv_1_1_loop_aaf471392aa03eb964bff1ad3eb68168f}{Run}} (const \mbox{\hyperlink{namespaceprt_1_1uv_af8a610099472f39fe8ee81a55f0d4025}{Run\+Mode}} mode)
+\item 
+void \mbox{\hyperlink{classprt_1_1uv_1_1_loop_ab25833ad410f4f191ca915cb605a1ad6}{Stop}} ()
+\item 
+\mbox{\hyperlink{classprt_1_1uv_1_1_loop_ab5cb9537ca5e3424edd6ea314fb46b23}{FOR\+\_\+\+EACH\+\_\+\+UV\+\_\+\+RUN\+\_\+\+MODE}} (\mbox{\hyperlink{utils_8h_ab7c3f2d7c9af97aa7a192c93c4c53dec}{DEFINE\+\_\+\+RUN\+\_\+\+WITH\+\_\+\+MODE}})
+\item 
+\mbox{\hyperlink{classprt_1_1uv_1_1_loop_ac546c2d13865a2d5b8b1d78632d19959}{operator Handle \texorpdfstring{$\ast$}{*}}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1uv_1_1_loop_a6e78fcda7702fcfbbaa7b18bdbcd509c}{Init\+Loop}} (\mbox{\hyperlink{classprt_1_1uv_1_1_loop_a7dc860eaf13d69ce1948dbdacea5e648}{Handle}} \texorpdfstring{$\ast$}{*}handle) -\/$>$ \mbox{\hyperlink{classprt_1_1uv_1_1_status}{Status}}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1uv_1_1_loop_a5eee91d3010b74d22d7b99037c825531}{Run\+Loop}} (\mbox{\hyperlink{classprt_1_1uv_1_1_loop_a7dc860eaf13d69ce1948dbdacea5e648}{Handle}} \texorpdfstring{$\ast$}{*}handle, const \mbox{\hyperlink{namespaceprt_1_1uv_af8a610099472f39fe8ee81a55f0d4025}{Run\+Mode}} mode=\mbox{\hyperlink{namespaceprt_1_1uv_af8a610099472f39fe8ee81a55f0d4025ae04b8230cf6cc5bc77d4befe64ba4fac}{k\+Run\+Default}}) -\/$>$ \mbox{\hyperlink{classprt_1_1uv_1_1_status}{Status}}
+\item 
+static void \mbox{\hyperlink{classprt_1_1uv_1_1_loop_a04d3e982bd52d36d481b88f927270486}{Stop\+Loop}} (\mbox{\hyperlink{classprt_1_1uv_1_1_loop_a7dc860eaf13d69ce1948dbdacea5e648}{Handle}} \texorpdfstring{$\ast$}{*}handle)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+auto \mbox{\hyperlink{classprt_1_1uv_1_1_loop_ad65960eab5713dbc0eda4887c7eba98a}{Get\+Handle}} () -\/$>$ \mbox{\hyperlink{classprt_1_1uv_1_1_loop_a7dc860eaf13d69ce1948dbdacea5e648}{Handle}} \texorpdfstring{$\ast$}{*}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1uv_1_1_loop_a7dc860eaf13d69ce1948dbdacea5e648}{Handle}} \mbox{\hyperlink{classprt_1_1uv_1_1_loop_ad154258db91585789140fa48c3dd379e}{handle\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1uv_1_1_loop_ac031c432825fc9836eec35a38346788b}{Idle}}
+\item 
+class \mbox{\hyperlink{classprt_1_1uv_1_1_loop_a340d2e0eea68faab58a9001ff666a432}{Check}}
+\item 
+class \mbox{\hyperlink{classprt_1_1uv_1_1_loop_a1b73dd3c3ac1219541d6b5d436521509}{Prepare}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classprt_1_1uv_1_1_loop_a7dc860eaf13d69ce1948dbdacea5e648}\index{prt::uv::Loop@{prt::uv::Loop}!Handle@{Handle}}
+\index{Handle@{Handle}!prt::uv::Loop@{prt::uv::Loop}}
+\doxysubsubsection{\texorpdfstring{Handle}{Handle}}
+{\footnotesize\ttfamily \label{classprt_1_1uv_1_1_loop_a7dc860eaf13d69ce1948dbdacea5e648} 
+using \mbox{\hyperlink{classprt_1_1uv_1_1_loop_a7dc860eaf13d69ce1948dbdacea5e648}{prt\+::uv\+::\+Loop\+::\+Handle}} = uv\+\_\+loop\+\_\+t}
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1uv_1_1_loop_a97c936a498fff2ed8d9f215dc1d452dc}\index{prt::uv::Loop@{prt::uv::Loop}!Loop@{Loop}}
+\index{Loop@{Loop}!prt::uv::Loop@{prt::uv::Loop}}
+\doxysubsubsection{\texorpdfstring{Loop()}{Loop()}}
+{\footnotesize\ttfamily \label{classprt_1_1uv_1_1_loop_a97c936a498fff2ed8d9f215dc1d452dc} 
+prt\+::uv\+::\+Loop\+::\+Loop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+\Hypertarget{classprt_1_1uv_1_1_loop_a16d30683f4a79831db2ac53e011d2e1e}\index{prt::uv::Loop@{prt::uv::Loop}!````~Loop@{\texorpdfstring{$\sim$}{\string~}Loop}}
+\index{````~Loop@{\texorpdfstring{$\sim$}{\string~}Loop}!prt::uv::Loop@{prt::uv::Loop}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Loop()}{\string~Loop()}}
+{\footnotesize\ttfamily \label{classprt_1_1uv_1_1_loop_a16d30683f4a79831db2ac53e011d2e1e} 
+virtual prt\+::uv\+::\+Loop\+::\texorpdfstring{$\sim$}{\string~}\+Loop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1uv_1_1_loop_ab5cb9537ca5e3424edd6ea314fb46b23}\index{prt::uv::Loop@{prt::uv::Loop}!FOR\_EACH\_UV\_RUN\_MODE@{FOR\_EACH\_UV\_RUN\_MODE}}
+\index{FOR\_EACH\_UV\_RUN\_MODE@{FOR\_EACH\_UV\_RUN\_MODE}!prt::uv::Loop@{prt::uv::Loop}}
+\doxysubsubsection{\texorpdfstring{FOR\_EACH\_UV\_RUN\_MODE()}{FOR\_EACH\_UV\_RUN\_MODE()}}
+{\footnotesize\ttfamily \label{classprt_1_1uv_1_1_loop_ab5cb9537ca5e3424edd6ea314fb46b23} 
+prt\+::uv\+::\+Loop\+::\+FOR\+\_\+\+EACH\+\_\+\+UV\+\_\+\+RUN\+\_\+\+MODE (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{utils_8h_ab7c3f2d7c9af97aa7a192c93c4c53dec}{DEFINE\+\_\+\+RUN\+\_\+\+WITH\+\_\+\+MODE}}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1uv_1_1_loop_ad65960eab5713dbc0eda4887c7eba98a}\index{prt::uv::Loop@{prt::uv::Loop}!GetHandle@{GetHandle}}
+\index{GetHandle@{GetHandle}!prt::uv::Loop@{prt::uv::Loop}}
+\doxysubsubsection{\texorpdfstring{GetHandle()}{GetHandle()}}
+{\footnotesize\ttfamily \label{classprt_1_1uv_1_1_loop_ad65960eab5713dbc0eda4887c7eba98a} 
+auto prt\+::uv\+::\+Loop\+::\+Get\+Handle (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{classprt_1_1uv_1_1_loop_a7dc860eaf13d69ce1948dbdacea5e648}{Handle}}\texorpdfstring{$\ast$}{*} \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1uv_1_1_loop_a6e78fcda7702fcfbbaa7b18bdbcd509c}\index{prt::uv::Loop@{prt::uv::Loop}!InitLoop@{InitLoop}}
+\index{InitLoop@{InitLoop}!prt::uv::Loop@{prt::uv::Loop}}
+\doxysubsubsection{\texorpdfstring{InitLoop()}{InitLoop()}}
+{\footnotesize\ttfamily \label{classprt_1_1uv_1_1_loop_a6e78fcda7702fcfbbaa7b18bdbcd509c} 
+static auto prt\+::uv\+::\+Loop\+::\+Init\+Loop (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1uv_1_1_loop_a7dc860eaf13d69ce1948dbdacea5e648}{Handle}} \texorpdfstring{$\ast$}{*}}]{handle}{}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{classprt_1_1uv_1_1_status}{Status}} \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1uv_1_1_loop_ac546c2d13865a2d5b8b1d78632d19959}\index{prt::uv::Loop@{prt::uv::Loop}!operator Handle \texorpdfstring{$\ast$}{*}@{operator Handle \texorpdfstring{$\ast$}{*}}}
+\index{operator Handle \texorpdfstring{$\ast$}{*}@{operator Handle \texorpdfstring{$\ast$}{*}}!prt::uv::Loop@{prt::uv::Loop}}
+\doxysubsubsection{\texorpdfstring{operator Handle \texorpdfstring{$\ast$}{*}()}{operator Handle *()}}
+{\footnotesize\ttfamily \label{classprt_1_1uv_1_1_loop_ac546c2d13865a2d5b8b1d78632d19959} 
+prt\+::uv\+::\+Loop\+::operator \mbox{\hyperlink{classprt_1_1uv_1_1_loop_a7dc860eaf13d69ce1948dbdacea5e648}{Handle}} \texorpdfstring{$\ast$}{*} (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1uv_1_1_loop_aaf471392aa03eb964bff1ad3eb68168f}\index{prt::uv::Loop@{prt::uv::Loop}!Run@{Run}}
+\index{Run@{Run}!prt::uv::Loop@{prt::uv::Loop}}
+\doxysubsubsection{\texorpdfstring{Run()}{Run()}}
+{\footnotesize\ttfamily \label{classprt_1_1uv_1_1_loop_aaf471392aa03eb964bff1ad3eb68168f} 
+void prt\+::uv\+::\+Loop\+::\+Run (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceprt_1_1uv_af8a610099472f39fe8ee81a55f0d4025}{Run\+Mode}}}]{mode}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1uv_1_1_loop_a5eee91d3010b74d22d7b99037c825531}\index{prt::uv::Loop@{prt::uv::Loop}!RunLoop@{RunLoop}}
+\index{RunLoop@{RunLoop}!prt::uv::Loop@{prt::uv::Loop}}
+\doxysubsubsection{\texorpdfstring{RunLoop()}{RunLoop()}}
+{\footnotesize\ttfamily \label{classprt_1_1uv_1_1_loop_a5eee91d3010b74d22d7b99037c825531} 
+static auto prt\+::uv\+::\+Loop\+::\+Run\+Loop (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1uv_1_1_loop_a7dc860eaf13d69ce1948dbdacea5e648}{Handle}} \texorpdfstring{$\ast$}{*}}]{handle}{, }\item[{const \mbox{\hyperlink{namespaceprt_1_1uv_af8a610099472f39fe8ee81a55f0d4025}{Run\+Mode}}}]{mode}{ = {\ttfamily \mbox{\hyperlink{namespaceprt_1_1uv_af8a610099472f39fe8ee81a55f0d4025ae04b8230cf6cc5bc77d4befe64ba4fac}{k\+Run\+Default}}}}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{classprt_1_1uv_1_1_status}{Status}} \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1uv_1_1_loop_ab25833ad410f4f191ca915cb605a1ad6}\index{prt::uv::Loop@{prt::uv::Loop}!Stop@{Stop}}
+\index{Stop@{Stop}!prt::uv::Loop@{prt::uv::Loop}}
+\doxysubsubsection{\texorpdfstring{Stop()}{Stop()}}
+{\footnotesize\ttfamily \label{classprt_1_1uv_1_1_loop_ab25833ad410f4f191ca915cb605a1ad6} 
+void prt\+::uv\+::\+Loop\+::\+Stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1uv_1_1_loop_a04d3e982bd52d36d481b88f927270486}\index{prt::uv::Loop@{prt::uv::Loop}!StopLoop@{StopLoop}}
+\index{StopLoop@{StopLoop}!prt::uv::Loop@{prt::uv::Loop}}
+\doxysubsubsection{\texorpdfstring{StopLoop()}{StopLoop()}}
+{\footnotesize\ttfamily \label{classprt_1_1uv_1_1_loop_a04d3e982bd52d36d481b88f927270486} 
+static void prt\+::uv\+::\+Loop\+::\+Stop\+Loop (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1uv_1_1_loop_a7dc860eaf13d69ce1948dbdacea5e648}{Handle}} \texorpdfstring{$\ast$}{*}}]{handle}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classprt_1_1uv_1_1_loop_a340d2e0eea68faab58a9001ff666a432}\index{prt::uv::Loop@{prt::uv::Loop}!Check@{Check}}
+\index{Check@{Check}!prt::uv::Loop@{prt::uv::Loop}}
+\doxysubsubsection{\texorpdfstring{Check}{Check}}
+{\footnotesize\ttfamily \label{classprt_1_1uv_1_1_loop_a340d2e0eea68faab58a9001ff666a432} 
+friend class Check\hspace{0.3cm}{\ttfamily [friend]}}
+
+\Hypertarget{classprt_1_1uv_1_1_loop_ac031c432825fc9836eec35a38346788b}\index{prt::uv::Loop@{prt::uv::Loop}!Idle@{Idle}}
+\index{Idle@{Idle}!prt::uv::Loop@{prt::uv::Loop}}
+\doxysubsubsection{\texorpdfstring{Idle}{Idle}}
+{\footnotesize\ttfamily \label{classprt_1_1uv_1_1_loop_ac031c432825fc9836eec35a38346788b} 
+friend class Idle\hspace{0.3cm}{\ttfamily [friend]}}
+
+\Hypertarget{classprt_1_1uv_1_1_loop_a1b73dd3c3ac1219541d6b5d436521509}\index{prt::uv::Loop@{prt::uv::Loop}!Prepare@{Prepare}}
+\index{Prepare@{Prepare}!prt::uv::Loop@{prt::uv::Loop}}
+\doxysubsubsection{\texorpdfstring{Prepare}{Prepare}}
+{\footnotesize\ttfamily \label{classprt_1_1uv_1_1_loop_a1b73dd3c3ac1219541d6b5d436521509} 
+friend class Prepare\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1uv_1_1_loop_ad154258db91585789140fa48c3dd379e}\index{prt::uv::Loop@{prt::uv::Loop}!handle\_@{handle\_}}
+\index{handle\_@{handle\_}!prt::uv::Loop@{prt::uv::Loop}}
+\doxysubsubsection{\texorpdfstring{handle\_}{handle\_}}
+{\footnotesize\ttfamily \label{classprt_1_1uv_1_1_loop_ad154258db91585789140fa48c3dd379e} 
+\mbox{\hyperlink{classprt_1_1uv_1_1_loop_a7dc860eaf13d69ce1948dbdacea5e648}{Handle}} prt\+::uv\+::\+Loop\+::handle\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/uv/\mbox{\hyperlink{utils_8h}{utils.\+h}}\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/uv/\mbox{\hyperlink{utils_8cc}{utils.\+cc}}\end{DoxyCompactItemize}

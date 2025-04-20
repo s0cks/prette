@@ -1,0 +1,128 @@
+\doxysection{prt\+::Shader\+Indexer Class Reference}
+\hypertarget{classprt_1_1_shader_indexer}{}\label{classprt_1_1_shader_indexer}\index{prt::ShaderIndexer@{prt::ShaderIndexer}}
+
+
+{\ttfamily \#include $<$registry.\+h$>$}
+
+
+
+Inheritance diagram for prt\+::Shader\+Indexer\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=182pt]{classprt_1_1_shader_indexer__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for prt\+::Shader\+Indexer\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=182pt]{classprt_1_1_shader_indexer__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structprt_1_1_shader_indexer_1_1_shader_info}{Shader\+Info}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_shader_indexer_ab2bd1076351247d932b82f3e5ef83d6b}{\texorpdfstring{$\sim$}{\string~}\+Shader\+Indexer}} () override=default
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classprt_1_1_registry_indexer}{prt\+::\+Registry\+Indexer}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classprt_1_1_registry_indexer_abb06b7435716a0cde9cc17fd1ab9b073}{\texorpdfstring{$\sim$}{\string~}\+Registry\+Indexer}} ()=default
+\item 
+virtual void \mbox{\hyperlink{classprt_1_1_registry_indexer_a2aedec8148a9e024b6d3a7c3caa239c4}{Index}} (\mbox{\hyperlink{classprt_1_1_registry}{Registry}} \texorpdfstring{$\ast$}{*}registry)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classprt_1_1_shader_indexer_add82302d43d466ec442c6427ebb71080}{Index\+Path}} (leveldb\+::\+Write\+Batch \&batch, const fs\+::path \&path) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classprt_1_1_registry_indexer}{prt\+::\+Registry\+Indexer}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_registry_indexer_a0a86ec311d594c1c4697dd96f53e9f6e}{Registry\+Indexer}} (fs\+::path root)
+\item 
+auto \mbox{\hyperlink{classprt_1_1_registry_indexer_a737e950315edf72903442221820a2bce}{Get\+Root}} () const -\/$>$ const fs\+::path \&
+\item 
+virtual auto \mbox{\hyperlink{classprt_1_1_registry_indexer_a1f6f34bf581f70fabccdac6eaef0f834}{Create\+Stream}} () const -\/$>$ \mbox{\hyperlink{namespaceprt_a189cd3af64e89458ea1ee7ab9e0de979}{Path\+Stream}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_shader_indexer_a40a750d5a906b568940287fa8e64ba36}{Shader\+Indexer}} (fs\+::path root)
+\item 
+auto \mbox{\hyperlink{classprt_1_1_shader_indexer_a62c0d412dc0f2e483bfa60b22daded28}{Create\+Filter}} () const -\/$>$ \mbox{\hyperlink{namespaceprt_a9f32127cc126e363bab6995173fc63d7}{Path\+Predicate}} override
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1_shader_indexer_ac7b716e6d41ff508ad2d8e5dad655d72}{Registry}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Protected Member Functions inherited from \mbox{\hyperlink{classprt_1_1_registry_indexer}{prt\+::\+Registry\+Indexer}}}
+\begin{DoxyCompactItemize}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_registry_indexer_ab37841133856bf992c8b0e52e44e5f1a}{Create\+Stream\+For\+Directory}} (const fs\+::path \&root, const bool is\+\_\+recursive=false) -\/$>$ \mbox{\hyperlink{namespaceprt_a189cd3af64e89458ea1ee7ab9e0de979}{Path\+Stream}}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_registry_indexer_a59e4ad350a02306867da08a184ec21c0}{Has\+File\+Extension}} (const std\+::unordered\+\_\+set$<$ std\+::string $>$ \&extensions) -\/$>$ \mbox{\hyperlink{namespaceprt_a9f32127cc126e363bab6995173fc63d7}{Path\+Predicate}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_shader_indexer_a40a750d5a906b568940287fa8e64ba36}\index{prt::ShaderIndexer@{prt::ShaderIndexer}!ShaderIndexer@{ShaderIndexer}}
+\index{ShaderIndexer@{ShaderIndexer}!prt::ShaderIndexer@{prt::ShaderIndexer}}
+\doxysubsubsection{\texorpdfstring{ShaderIndexer()}{ShaderIndexer()}}
+{\footnotesize\ttfamily \label{classprt_1_1_shader_indexer_a40a750d5a906b568940287fa8e64ba36} 
+prt\+::\+Shader\+Indexer\+::\+Shader\+Indexer (\begin{DoxyParamCaption}\item[{fs\+::path}]{root}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_shader_indexer_ab2bd1076351247d932b82f3e5ef83d6b}\index{prt::ShaderIndexer@{prt::ShaderIndexer}!````~ShaderIndexer@{\texorpdfstring{$\sim$}{\string~}ShaderIndexer}}
+\index{````~ShaderIndexer@{\texorpdfstring{$\sim$}{\string~}ShaderIndexer}!prt::ShaderIndexer@{prt::ShaderIndexer}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ShaderIndexer()}{\string~ShaderIndexer()}}
+{\footnotesize\ttfamily \label{classprt_1_1_shader_indexer_ab2bd1076351247d932b82f3e5ef83d6b} 
+prt\+::\+Shader\+Indexer\+::\texorpdfstring{$\sim$}{\string~}\+Shader\+Indexer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_shader_indexer_a62c0d412dc0f2e483bfa60b22daded28}\index{prt::ShaderIndexer@{prt::ShaderIndexer}!CreateFilter@{CreateFilter}}
+\index{CreateFilter@{CreateFilter}!prt::ShaderIndexer@{prt::ShaderIndexer}}
+\doxysubsubsection{\texorpdfstring{CreateFilter()}{CreateFilter()}}
+{\footnotesize\ttfamily \label{classprt_1_1_shader_indexer_a62c0d412dc0f2e483bfa60b22daded28} 
+auto prt\+::\+Shader\+Indexer\+::\+Create\+Filter (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ \mbox{\hyperlink{namespaceprt_a9f32127cc126e363bab6995173fc63d7}{Path\+Predicate}}\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classprt_1_1_registry_indexer_a3851adbaf5a20ae38d79719a7ec808b4}{prt\+::\+Registry\+Indexer}}.
+
+\Hypertarget{classprt_1_1_shader_indexer_add82302d43d466ec442c6427ebb71080}\index{prt::ShaderIndexer@{prt::ShaderIndexer}!IndexPath@{IndexPath}}
+\index{IndexPath@{IndexPath}!prt::ShaderIndexer@{prt::ShaderIndexer}}
+\doxysubsubsection{\texorpdfstring{IndexPath()}{IndexPath()}}
+{\footnotesize\ttfamily \label{classprt_1_1_shader_indexer_add82302d43d466ec442c6427ebb71080} 
+void prt\+::\+Shader\+Indexer\+::\+Index\+Path (\begin{DoxyParamCaption}\item[{leveldb\+::\+Write\+Batch \&}]{batch}{, }\item[{const fs\+::path \&}]{path}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classprt_1_1_registry_indexer_aa5324d25b562122ddc99f19e5614326f}{prt\+::\+Registry\+Indexer}}.
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classprt_1_1_shader_indexer_ac7b716e6d41ff508ad2d8e5dad655d72}\index{prt::ShaderIndexer@{prt::ShaderIndexer}!Registry@{Registry}}
+\index{Registry@{Registry}!prt::ShaderIndexer@{prt::ShaderIndexer}}
+\doxysubsubsection{\texorpdfstring{Registry}{Registry}}
+{\footnotesize\ttfamily \label{classprt_1_1_shader_indexer_ac7b716e6d41ff508ad2d8e5dad655d72} 
+friend class \mbox{\hyperlink{classprt_1_1_registry}{Registry}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{registry_8h}{registry.\+h}}\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{registry_8cc}{registry.\+cc}}\end{DoxyCompactItemize}

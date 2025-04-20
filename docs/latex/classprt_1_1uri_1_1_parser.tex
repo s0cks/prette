@@ -1,0 +1,421 @@
+\doxysection{prt\+::uri\+::Parser Class Reference}
+\hypertarget{classprt_1_1uri_1_1_parser}{}\label{classprt_1_1uri_1_1_parser}\index{prt::uri::Parser@{prt::uri::Parser}}
+
+
+{\ttfamily \#include $<$uri\+\_\+parser.\+h$>$}
+
+
+
+Inheritance diagram for prt\+::uri\+::Parser\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=219pt]{classprt_1_1uri_1_1_parser__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for prt\+::uri\+::Parser\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classprt_1_1uri_1_1_parser__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config}{Config}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1uri_1_1_parser_adb3438508a0673266d3570641d187cb5}{Parser}} (\mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config}{Config}} config, void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classprt_1_1_parser_template_a0f16d45dd01c07b4d3261520f640a62e}{data}}=nullptr)
+\item 
+\mbox{\hyperlink{classprt_1_1uri_1_1_parser_a248aa4cb0c3b7c118237ff9754d4cf09}{Parser}} (const \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a49f2d46e250bd18ccb5e2481c51e6599}{Config\+::\+Flags}} flags, void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classprt_1_1_parser_template_a0f16d45dd01c07b4d3261520f640a62e}{data}}=nullptr)
+\item 
+\mbox{\hyperlink{classprt_1_1uri_1_1_parser_a8d43e3324033c2c583c523cad0464bb4}{Parser}} (void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classprt_1_1_parser_template_a0f16d45dd01c07b4d3261520f640a62e}{data}}=nullptr)
+\item 
+\mbox{\hyperlink{classprt_1_1uri_1_1_parser_a784d8df9b4e5c0a06d07efc09b76b2ba}{\texorpdfstring{$\sim$}{\string~}\+Parser}} () override=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a975ad043fd05046ef7d4cf1b33d1823b}{Parse}} (const \mbox{\hyperlink{namespaceprt_1_1uri_abd78a90444cc631e16c4484d1c03743f}{basic\+\_\+uri}} \&raw) -\/$>$ \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result}{Parse\+Result}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classprt_1_1_parser_template}{prt\+::\+Parser\+Template$<$ k\+Default\+Parser\+Buffer\+Size, k\+Default\+Token\+Buffer\+Size $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classprt_1_1_parser_template_a0a14c207713cdb20c90fdfce338044a9}{\texorpdfstring{$\sim$}{\string~}\+Parser\+Template}} ()=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1_parser_template_a0f16d45dd01c07b4d3261520f640a62e}{data}} () const -\/$>$ void \texorpdfstring{$\ast$}{*}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_parser_template_ae7e8b25e6757f4a1e1c926f541f697d9}{Get\+Data}} () const -\/$>$ D \texorpdfstring{$\ast$}{*}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr auto \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a89ffd507ee376c2811e0e5fe3686a6ab}{No\+Flags}} () -\/$>$ \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a49f2d46e250bd18ccb5e2481c51e6599}{Config\+::\+Flags}}
+\item 
+static constexpr auto \mbox{\hyperlink{classprt_1_1uri_1_1_parser_ac2019d22ab92ccbde53076be2cb6f52b}{Strict}} (const bool value=true) -\/$>$ \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a49f2d46e250bd18ccb5e2481c51e6599}{Config\+::\+Flags}}
+\item 
+static constexpr auto \mbox{\hyperlink{classprt_1_1uri_1_1_parser_aab4267c5bb398506a50d9ee59d405625}{Parse\+Fragments}} (const bool value=true) -\/$>$ \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a49f2d46e250bd18ccb5e2481c51e6599}{Config\+::\+Flags}}
+\item 
+static constexpr auto \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a79b059578997c92170dac469c9b27bb8}{Parse\+Queries}} (const bool value=true) -\/$>$ \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a49f2d46e250bd18ccb5e2481c51e6599}{Config\+::\+Flags}}
+\item 
+static constexpr auto \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a193bee0522c0b1a405edb627a0c63acc}{Default\+Flags}} () -\/$>$ \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a49f2d46e250bd18ccb5e2481c51e6599}{Config\+::\+Flags}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1uri_1_1_parser_a312e0843e0cad5956032c65253b9f693}{DEFINE\+\_\+\+NON\+\_\+\+COPYABLE\+\_\+\+TYPE}} (\mbox{\hyperlink{classprt_1_1uri_1_1_parser}{Parser}})
+\item 
+auto \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a9dc1e43166741e620dd5dc4155144e91}{Parse\+Scheme}} () -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a59b958eedf1d93858a16fd2a2c8d91f0}{Parse\+Path}} () -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a9060addc999e3bae33549d782b15d2bc}{Parse\+Query\+Parameter\+Key}} () -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a52d5156bdeee0c4e0ee307443789bd4b}{Parse\+Query\+Parameter\+Value}} () -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a41dd7c468b8f86c82f784ff61ee3c0ed}{Parse\+Query\+Parameter}} () -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a422520c2af7df02a75970a85ea58f3b8}{Parse\+Query\+Parameter\+List}} () -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a2fe3eb2594e542633d096ef4afaa5304}{Parse\+Fragment}} () -\/$>$ bool
+\item 
+{\footnotesize template$<$typename Func , typename... Args$>$ }\\auto \mbox{\hyperlink{classprt_1_1uri_1_1_parser_ae748e2f505acd9f1e0dc03f595d6f2f3}{Call\+If\+Exists}} (Func \texorpdfstring{$\ast$}{*}func, Args... args) const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a659e4e6f6310fc829ea0d3c7c1a2f300}{On\+Parse\+Scheme}} (const char \texorpdfstring{$\ast$}{*}scheme, const uint64\+\_\+t length) const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1uri_1_1_parser_ab8f8cdc4a6a42686b51d4fd2262c90ad}{On\+Parse\+Path}} (const char \texorpdfstring{$\ast$}{*}path, const uint64\+\_\+t length) const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1uri_1_1_parser_aa63d90f02db03070599404ffc6683b0a}{On\+Parse\+Query0}} (const uint64\+\_\+t idx, const char \texorpdfstring{$\ast$}{*}key, const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} key\+\_\+length) const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1uri_1_1_parser_af48e5d6ff108395a7854f3b83399f4b9}{On\+Parse\+Query1}} (const uint64\+\_\+t idx, const char \texorpdfstring{$\ast$}{*}key, const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} key\+\_\+len, const char \texorpdfstring{$\ast$}{*}value, const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} value\+\_\+len) const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a4cc9490bbb3d7b8a1767f5d18ee70c81}{On\+Parse\+Fragment}} (const char \texorpdfstring{$\ast$}{*}fragment, const uint64\+\_\+t length) const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1uri_1_1_parser_adfbef1550084963f3e63e73333a9e601}{On\+Parse\+Error}} () const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1uri_1_1_parser_ae4a247314bc6c79e2d29446776a13a80}{Try\+Parse\+Scheme}} () -\/$>$ bool
+\item 
+void \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a924795f01aaf6901faa8c6a11dacd23b}{Reset}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a14d3681cb3d558facba2b40ee953cd90}{Is\+Query\+Delimiter}} (const char c) -\/$>$ bool
+\item 
+static auto \mbox{\hyperlink{classprt_1_1uri_1_1_parser_ae64633f7a484f8e44551e46aca580718}{Is\+Valid\+Query\+Key\+Char}} (const char c) -\/$>$ bool
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config}{Config}} \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a6a6582960d98679ae2e6b6bb097e4df6}{config\+\_\+}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a7bc7173c806f104046c72bcdf5fad48d}{num\+\_\+query\+\_\+params\+\_\+}}
+\item 
+std\+::array$<$ char, k\+Default\+Token\+Buffer\+Size $>$ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a9b582a27f58a1d2e9d58cfc8598b8c23}{key\+\_\+}}
+\item 
+\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a8d9aae82a1be6e89eb00a1a197069903}{key\+\_\+length\+\_\+}}
+\item 
+std\+::array$<$ char, k\+Default\+Token\+Buffer\+Size $>$ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a2840f1260298522f97dc659947f7581c}{value\+\_\+}}
+\item 
+\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a8ddb161187aac5db1ac6c13ca1582c2c}{value\+\_\+length\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classprt_1_1_parser_template}{prt\+::\+Parser\+Template$<$ k\+Default\+Parser\+Buffer\+Size, k\+Default\+Token\+Buffer\+Size $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_parser_template_aeae68da4c4f22985362ee41deeb0d3e6}{Parser\+Template}} (void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classprt_1_1_parser_template_a0f16d45dd01c07b4d3261520f640a62e}{data}})
+\item 
+\mbox{\hyperlink{classprt_1_1_parser_template_a1c64ef28e2b19f4852e94db15b23d25b}{Parser\+Template}} (void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classprt_1_1_parser_template_a0f16d45dd01c07b4d3261520f640a62e}{data}}, const uint8\+\_\+t \texorpdfstring{$\ast$}{*}bytes, const uint64\+\_\+t nbytes)
+\item 
+\mbox{\hyperlink{classprt_1_1_parser_template_a8d5e68233d995c64404fe61142a69e28}{Parser\+Template}} (void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classprt_1_1_parser_template_a0f16d45dd01c07b4d3261520f640a62e}{data}}, const std\+::string \&buffer)
+\item 
+void \mbox{\hyperlink{classprt_1_1_parser_template_af2afa36dbb7b260d7c15a48f55ec2433}{Copy\+Buffer\+From}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classprt_1_1_parser_template_a0f16d45dd01c07b4d3261520f640a62e}{data}}, const uint64\+\_\+t nbytes)
+\item 
+auto \mbox{\hyperlink{classprt_1_1_parser_template_a42311af48537dea0ba4b67c2fca81602}{row}} () const -\/$>$ uint64\+\_\+t
+\item 
+auto \mbox{\hyperlink{classprt_1_1_parser_template_a107740d36dad34ae6dbaea788ba0cf07}{column}} () const -\/$>$ uint64\+\_\+t
+\item 
+auto \mbox{\hyperlink{classprt_1_1_parser_template_abf65e2bbe1f12ddf9a3384d3081db08a}{token\+\_\+start}} () const -\/$>$ \mbox{\hyperlink{structprt_1_1_position}{Position}}
+\item 
+virtual auto \mbox{\hyperlink{classprt_1_1_parser_template_ad3826dd83a7c72ab9bc39fdfefeb77ac}{Read\+Next\+Chunk}} () -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_parser_template_af01fd292e95241c7cceeaa7cc33d62af}{Peek\+Char}} (const uint64\+\_\+t offset=0) -\/$>$ char
+\item 
+auto \mbox{\hyperlink{classprt_1_1_parser_template_aa25ffb76c955016cdbe420ea7f0e8f0e}{Next\+Char}} () -\/$>$ char
+\item 
+auto \mbox{\hyperlink{classprt_1_1_parser_template_a8f24646a85260f420afd77b4e04a1154}{Next\+Real\+Char}} () -\/$>$ char
+\item 
+void \mbox{\hyperlink{classprt_1_1_parser_template_a6dfbc82cb04c950dbedec05497d38c4d}{Skip\+Whitespace}} ()
+\item 
+void \mbox{\hyperlink{classprt_1_1_parser_template_af6c9f0fc525c279aae2165c38eababa4}{Advance}} (const uint64\+\_\+t num)
+\item 
+auto \mbox{\hyperlink{classprt_1_1_parser_template_a8b89dfcaf753e958195cdaae92466429}{Parse\+Until}} (const char expected) -\/$>$ int
+\item 
+void \mbox{\hyperlink{classprt_1_1_parser_template_a1501adbf5d6719a8ac8a61f2820e002a}{set\+\_\+data}} (void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classprt_1_1_parser_template_a0f16d45dd01c07b4d3261520f640a62e}{data}})
+\item 
+auto \mbox{\hyperlink{classprt_1_1_parser_template_affc05f96cc3144acc68f8a0b36ef5d8f}{Expect\+Next\+Real\+Char}} (const char \mbox{\hyperlink{classprt_1_1_parser_template_a9cb27fae80513339a6bd53cce5898c2f}{token}}) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_parser_template_aa8f22e437c9489acecbd15bbb10b65b6}{Parse\+Number}} (T \texorpdfstring{$\ast$}{*}result) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_parser_template_a6fa1b88c8b8aa70741cf06c71dd04a4a}{Parse\+Int}} (int32\+\_\+t \texorpdfstring{$\ast$}{*}result) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_parser_template_ae2b5e526c010b6ac455fc7e7efbbbe80}{Parse\+Long}} (int64\+\_\+t \texorpdfstring{$\ast$}{*}result) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_parser_template_a8e21aeca9dcf242f994de2eb65713ee6}{Parse\+Double}} (double \texorpdfstring{$\ast$}{*}result) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_parser_template_a895f2103cd028a2c379faa5c2abd6a4c}{Parse\+Float}} (float \texorpdfstring{$\ast$}{*}result) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_parser_template_a9cb27fae80513339a6bd53cce5898c2f}{token}} () const -\/$>$ std\+::string
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Member Functions inherited from \mbox{\hyperlink{classprt_1_1_parser_template}{prt\+::\+Parser\+Template$<$ k\+Default\+Parser\+Buffer\+Size, k\+Default\+Token\+Buffer\+Size $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_parser_template_aa953ccf3f24dead609892b95726ca508}{Is\+Whitespace}} (const char c) -\/$>$ bool
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_parser_template_a823ef7a3fe195ba804765dbf72642462}{Is\+Digit}} (const char c) -\/$>$ bool
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classprt_1_1_parser_template}{prt\+::\+Parser\+Template$<$ k\+Default\+Parser\+Buffer\+Size, k\+Default\+Token\+Buffer\+Size $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1_parser_template_a00939ff783555e84a7de6c02606a2732}{data\+\_\+}}
+\item 
+\mbox{\hyperlink{structprt_1_1_position}{Position}} \mbox{\hyperlink{classprt_1_1_parser_template_a86a3609bfbdd5c75c8e5d17e7c3af174}{pos\+\_\+}}
+\item 
+\mbox{\hyperlink{classprt_1_1_parser_template_a25440eec7674ca2455ae3f0b3ae8391e}{Parser\+Buffer}} \mbox{\hyperlink{classprt_1_1_parser_template_aee92f987a83cfe6bcbf5f7378f4f9f45}{buffer\+\_\+}}
+\item 
+\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} \mbox{\hyperlink{classprt_1_1_parser_template_a1c4d59a33b1f8fe651145ae5bda10575}{wpos\+\_\+}}
+\item 
+\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} \mbox{\hyperlink{classprt_1_1_parser_template_ac7776676f5baf940a786b3fac872c907}{rpos\+\_\+}}
+\item 
+\mbox{\hyperlink{classprt_1_1_parser_template_a5c7e1c886c1118cd2aab765469dde858}{Token\+Buffer}} \mbox{\hyperlink{classprt_1_1_parser_template_adff02420577fb25765d8e81580a9cd37}{token\+\_\+}}
+\item 
+\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} \mbox{\hyperlink{classprt_1_1_parser_template_aa5805d43880d1548b774863f8c668ad8}{token\+\_\+len\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1uri_1_1_parser_adb3438508a0673266d3570641d187cb5}\index{prt::uri::Parser@{prt::uri::Parser}!Parser@{Parser}}
+\index{Parser@{Parser}!prt::uri::Parser@{prt::uri::Parser}}
+\doxysubsubsection{\texorpdfstring{Parser()}{Parser()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parser_adb3438508a0673266d3570641d187cb5} 
+prt\+::uri\+::\+Parser\+::\+Parser (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config}{Config}}}]{config}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{data}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+\Hypertarget{classprt_1_1uri_1_1_parser_a248aa4cb0c3b7c118237ff9754d4cf09}\index{prt::uri::Parser@{prt::uri::Parser}!Parser@{Parser}}
+\index{Parser@{Parser}!prt::uri::Parser@{prt::uri::Parser}}
+\doxysubsubsection{\texorpdfstring{Parser()}{Parser()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parser_a248aa4cb0c3b7c118237ff9754d4cf09} 
+prt\+::uri\+::\+Parser\+::\+Parser (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a49f2d46e250bd18ccb5e2481c51e6599}{Config\+::\+Flags}}}]{flags}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{data}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1uri_1_1_parser_a8d43e3324033c2c583c523cad0464bb4}\index{prt::uri::Parser@{prt::uri::Parser}!Parser@{Parser}}
+\index{Parser@{Parser}!prt::uri::Parser@{prt::uri::Parser}}
+\doxysubsubsection{\texorpdfstring{Parser()}{Parser()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parser_a8d43e3324033c2c583c523cad0464bb4} 
+prt\+::uri\+::\+Parser\+::\+Parser (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{data}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1uri_1_1_parser_a784d8df9b4e5c0a06d07efc09b76b2ba}\index{prt::uri::Parser@{prt::uri::Parser}!````~Parser@{\texorpdfstring{$\sim$}{\string~}Parser}}
+\index{````~Parser@{\texorpdfstring{$\sim$}{\string~}Parser}!prt::uri::Parser@{prt::uri::Parser}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Parser()}{\string~Parser()}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parser_a784d8df9b4e5c0a06d07efc09b76b2ba} 
+prt\+::uri\+::\+Parser\+::\texorpdfstring{$\sim$}{\string~}\+Parser (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1uri_1_1_parser_ae748e2f505acd9f1e0dc03f595d6f2f3}\index{prt::uri::Parser@{prt::uri::Parser}!CallIfExists@{CallIfExists}}
+\index{CallIfExists@{CallIfExists}!prt::uri::Parser@{prt::uri::Parser}}
+\doxysubsubsection{\texorpdfstring{CallIfExists()}{CallIfExists()}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parser_ae748e2f505acd9f1e0dc03f595d6f2f3} 
+template$<$typename Func , typename... Args$>$ \\
+auto prt\+::uri\+::\+Parser\+::\+Call\+If\+Exists (\begin{DoxyParamCaption}\item[{Func \texorpdfstring{$\ast$}{*}}]{func}{, }\item[{Args...}]{args}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1uri_1_1_parser_a193bee0522c0b1a405edb627a0c63acc}\index{prt::uri::Parser@{prt::uri::Parser}!DefaultFlags@{DefaultFlags}}
+\index{DefaultFlags@{DefaultFlags}!prt::uri::Parser@{prt::uri::Parser}}
+\doxysubsubsection{\texorpdfstring{DefaultFlags()}{DefaultFlags()}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parser_a193bee0522c0b1a405edb627a0c63acc} 
+static constexpr auto prt\+::uri\+::\+Parser\+::\+Default\+Flags (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a49f2d46e250bd18ccb5e2481c51e6599}{Config\+::\+Flags}} \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classprt_1_1uri_1_1_parser_a312e0843e0cad5956032c65253b9f693}\index{prt::uri::Parser@{prt::uri::Parser}!DEFINE\_NON\_COPYABLE\_TYPE@{DEFINE\_NON\_COPYABLE\_TYPE}}
+\index{DEFINE\_NON\_COPYABLE\_TYPE@{DEFINE\_NON\_COPYABLE\_TYPE}!prt::uri::Parser@{prt::uri::Parser}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_NON\_COPYABLE\_TYPE()}{DEFINE\_NON\_COPYABLE\_TYPE()}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parser_a312e0843e0cad5956032c65253b9f693} 
+prt\+::uri\+::\+Parser\+::\+DEFINE\+\_\+\+NON\+\_\+\+COPYABLE\+\_\+\+TYPE (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1uri_1_1_parser}{Parser}}}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1uri_1_1_parser_a14d3681cb3d558facba2b40ee953cd90}\index{prt::uri::Parser@{prt::uri::Parser}!IsQueryDelimiter@{IsQueryDelimiter}}
+\index{IsQueryDelimiter@{IsQueryDelimiter}!prt::uri::Parser@{prt::uri::Parser}}
+\doxysubsubsection{\texorpdfstring{IsQueryDelimiter()}{IsQueryDelimiter()}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parser_a14d3681cb3d558facba2b40ee953cd90} 
+static auto prt\+::uri\+::\+Parser\+::\+Is\+Query\+Delimiter (\begin{DoxyParamCaption}\item[{const char}]{c}{}\end{DoxyParamCaption}) -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1uri_1_1_parser_ae64633f7a484f8e44551e46aca580718}\index{prt::uri::Parser@{prt::uri::Parser}!IsValidQueryKeyChar@{IsValidQueryKeyChar}}
+\index{IsValidQueryKeyChar@{IsValidQueryKeyChar}!prt::uri::Parser@{prt::uri::Parser}}
+\doxysubsubsection{\texorpdfstring{IsValidQueryKeyChar()}{IsValidQueryKeyChar()}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parser_ae64633f7a484f8e44551e46aca580718} 
+static auto prt\+::uri\+::\+Parser\+::\+Is\+Valid\+Query\+Key\+Char (\begin{DoxyParamCaption}\item[{const char}]{c}{}\end{DoxyParamCaption}) -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1uri_1_1_parser_a89ffd507ee376c2811e0e5fe3686a6ab}\index{prt::uri::Parser@{prt::uri::Parser}!NoFlags@{NoFlags}}
+\index{NoFlags@{NoFlags}!prt::uri::Parser@{prt::uri::Parser}}
+\doxysubsubsection{\texorpdfstring{NoFlags()}{NoFlags()}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parser_a89ffd507ee376c2811e0e5fe3686a6ab} 
+static constexpr auto prt\+::uri\+::\+Parser\+::\+No\+Flags (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a49f2d46e250bd18ccb5e2481c51e6599}{Config\+::\+Flags}} \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classprt_1_1uri_1_1_parser_adfbef1550084963f3e63e73333a9e601}\index{prt::uri::Parser@{prt::uri::Parser}!OnParseError@{OnParseError}}
+\index{OnParseError@{OnParseError}!prt::uri::Parser@{prt::uri::Parser}}
+\doxysubsubsection{\texorpdfstring{OnParseError()}{OnParseError()}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parser_adfbef1550084963f3e63e73333a9e601} 
+auto prt\+::uri\+::\+Parser\+::\+On\+Parse\+Error (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1uri_1_1_parser_a4cc9490bbb3d7b8a1767f5d18ee70c81}\index{prt::uri::Parser@{prt::uri::Parser}!OnParseFragment@{OnParseFragment}}
+\index{OnParseFragment@{OnParseFragment}!prt::uri::Parser@{prt::uri::Parser}}
+\doxysubsubsection{\texorpdfstring{OnParseFragment()}{OnParseFragment()}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parser_a4cc9490bbb3d7b8a1767f5d18ee70c81} 
+auto prt\+::uri\+::\+Parser\+::\+On\+Parse\+Fragment (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{fragment}{, }\item[{const uint64\+\_\+t}]{length}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1uri_1_1_parser_ab8f8cdc4a6a42686b51d4fd2262c90ad}\index{prt::uri::Parser@{prt::uri::Parser}!OnParsePath@{OnParsePath}}
+\index{OnParsePath@{OnParsePath}!prt::uri::Parser@{prt::uri::Parser}}
+\doxysubsubsection{\texorpdfstring{OnParsePath()}{OnParsePath()}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parser_ab8f8cdc4a6a42686b51d4fd2262c90ad} 
+auto prt\+::uri\+::\+Parser\+::\+On\+Parse\+Path (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{path}{, }\item[{const uint64\+\_\+t}]{length}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1uri_1_1_parser_aa63d90f02db03070599404ffc6683b0a}\index{prt::uri::Parser@{prt::uri::Parser}!OnParseQuery0@{OnParseQuery0}}
+\index{OnParseQuery0@{OnParseQuery0}!prt::uri::Parser@{prt::uri::Parser}}
+\doxysubsubsection{\texorpdfstring{OnParseQuery0()}{OnParseQuery0()}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parser_aa63d90f02db03070599404ffc6683b0a} 
+auto prt\+::uri\+::\+Parser\+::\+On\+Parse\+Query0 (\begin{DoxyParamCaption}\item[{const uint64\+\_\+t}]{idx}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{key}{, }\item[{const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}}]{key\+\_\+length}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1uri_1_1_parser_af48e5d6ff108395a7854f3b83399f4b9}\index{prt::uri::Parser@{prt::uri::Parser}!OnParseQuery1@{OnParseQuery1}}
+\index{OnParseQuery1@{OnParseQuery1}!prt::uri::Parser@{prt::uri::Parser}}
+\doxysubsubsection{\texorpdfstring{OnParseQuery1()}{OnParseQuery1()}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parser_af48e5d6ff108395a7854f3b83399f4b9} 
+auto prt\+::uri\+::\+Parser\+::\+On\+Parse\+Query1 (\begin{DoxyParamCaption}\item[{const uint64\+\_\+t}]{idx}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{key}{, }\item[{const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}}]{key\+\_\+len}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{value}{, }\item[{const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}}]{value\+\_\+len}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1uri_1_1_parser_a659e4e6f6310fc829ea0d3c7c1a2f300}\index{prt::uri::Parser@{prt::uri::Parser}!OnParseScheme@{OnParseScheme}}
+\index{OnParseScheme@{OnParseScheme}!prt::uri::Parser@{prt::uri::Parser}}
+\doxysubsubsection{\texorpdfstring{OnParseScheme()}{OnParseScheme()}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parser_a659e4e6f6310fc829ea0d3c7c1a2f300} 
+auto prt\+::uri\+::\+Parser\+::\+On\+Parse\+Scheme (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{scheme}{, }\item[{const uint64\+\_\+t}]{length}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1uri_1_1_parser_a975ad043fd05046ef7d4cf1b33d1823b}\index{prt::uri::Parser@{prt::uri::Parser}!Parse@{Parse}}
+\index{Parse@{Parse}!prt::uri::Parser@{prt::uri::Parser}}
+\doxysubsubsection{\texorpdfstring{Parse()}{Parse()}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parser_a975ad043fd05046ef7d4cf1b33d1823b} 
+auto prt\+::uri\+::\+Parser\+::\+Parse (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceprt_1_1uri_abd78a90444cc631e16c4484d1c03743f}{basic\+\_\+uri}} \&}]{raw}{}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result}{Parse\+Result}}}
+
+\Hypertarget{classprt_1_1uri_1_1_parser_a2fe3eb2594e542633d096ef4afaa5304}\index{prt::uri::Parser@{prt::uri::Parser}!ParseFragment@{ParseFragment}}
+\index{ParseFragment@{ParseFragment}!prt::uri::Parser@{prt::uri::Parser}}
+\doxysubsubsection{\texorpdfstring{ParseFragment()}{ParseFragment()}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parser_a2fe3eb2594e542633d096ef4afaa5304} 
+auto prt\+::uri\+::\+Parser\+::\+Parse\+Fragment (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ bool\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1uri_1_1_parser_aab4267c5bb398506a50d9ee59d405625}\index{prt::uri::Parser@{prt::uri::Parser}!ParseFragments@{ParseFragments}}
+\index{ParseFragments@{ParseFragments}!prt::uri::Parser@{prt::uri::Parser}}
+\doxysubsubsection{\texorpdfstring{ParseFragments()}{ParseFragments()}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parser_aab4267c5bb398506a50d9ee59d405625} 
+static constexpr auto prt\+::uri\+::\+Parser\+::\+Parse\+Fragments (\begin{DoxyParamCaption}\item[{const bool}]{value}{ = {\ttfamily true}}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a49f2d46e250bd18ccb5e2481c51e6599}{Config\+::\+Flags}} \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classprt_1_1uri_1_1_parser_a59b958eedf1d93858a16fd2a2c8d91f0}\index{prt::uri::Parser@{prt::uri::Parser}!ParsePath@{ParsePath}}
+\index{ParsePath@{ParsePath}!prt::uri::Parser@{prt::uri::Parser}}
+\doxysubsubsection{\texorpdfstring{ParsePath()}{ParsePath()}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parser_a59b958eedf1d93858a16fd2a2c8d91f0} 
+auto prt\+::uri\+::\+Parser\+::\+Parse\+Path (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ bool\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1uri_1_1_parser_a79b059578997c92170dac469c9b27bb8}\index{prt::uri::Parser@{prt::uri::Parser}!ParseQueries@{ParseQueries}}
+\index{ParseQueries@{ParseQueries}!prt::uri::Parser@{prt::uri::Parser}}
+\doxysubsubsection{\texorpdfstring{ParseQueries()}{ParseQueries()}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parser_a79b059578997c92170dac469c9b27bb8} 
+static constexpr auto prt\+::uri\+::\+Parser\+::\+Parse\+Queries (\begin{DoxyParamCaption}\item[{const bool}]{value}{ = {\ttfamily true}}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a49f2d46e250bd18ccb5e2481c51e6599}{Config\+::\+Flags}} \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classprt_1_1uri_1_1_parser_a41dd7c468b8f86c82f784ff61ee3c0ed}\index{prt::uri::Parser@{prt::uri::Parser}!ParseQueryParameter@{ParseQueryParameter}}
+\index{ParseQueryParameter@{ParseQueryParameter}!prt::uri::Parser@{prt::uri::Parser}}
+\doxysubsubsection{\texorpdfstring{ParseQueryParameter()}{ParseQueryParameter()}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parser_a41dd7c468b8f86c82f784ff61ee3c0ed} 
+auto prt\+::uri\+::\+Parser\+::\+Parse\+Query\+Parameter (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ bool\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1uri_1_1_parser_a9060addc999e3bae33549d782b15d2bc}\index{prt::uri::Parser@{prt::uri::Parser}!ParseQueryParameterKey@{ParseQueryParameterKey}}
+\index{ParseQueryParameterKey@{ParseQueryParameterKey}!prt::uri::Parser@{prt::uri::Parser}}
+\doxysubsubsection{\texorpdfstring{ParseQueryParameterKey()}{ParseQueryParameterKey()}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parser_a9060addc999e3bae33549d782b15d2bc} 
+auto prt\+::uri\+::\+Parser\+::\+Parse\+Query\+Parameter\+Key (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ bool\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1uri_1_1_parser_a422520c2af7df02a75970a85ea58f3b8}\index{prt::uri::Parser@{prt::uri::Parser}!ParseQueryParameterList@{ParseQueryParameterList}}
+\index{ParseQueryParameterList@{ParseQueryParameterList}!prt::uri::Parser@{prt::uri::Parser}}
+\doxysubsubsection{\texorpdfstring{ParseQueryParameterList()}{ParseQueryParameterList()}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parser_a422520c2af7df02a75970a85ea58f3b8} 
+auto prt\+::uri\+::\+Parser\+::\+Parse\+Query\+Parameter\+List (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ bool\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1uri_1_1_parser_a52d5156bdeee0c4e0ee307443789bd4b}\index{prt::uri::Parser@{prt::uri::Parser}!ParseQueryParameterValue@{ParseQueryParameterValue}}
+\index{ParseQueryParameterValue@{ParseQueryParameterValue}!prt::uri::Parser@{prt::uri::Parser}}
+\doxysubsubsection{\texorpdfstring{ParseQueryParameterValue()}{ParseQueryParameterValue()}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parser_a52d5156bdeee0c4e0ee307443789bd4b} 
+auto prt\+::uri\+::\+Parser\+::\+Parse\+Query\+Parameter\+Value (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ bool\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1uri_1_1_parser_a9dc1e43166741e620dd5dc4155144e91}\index{prt::uri::Parser@{prt::uri::Parser}!ParseScheme@{ParseScheme}}
+\index{ParseScheme@{ParseScheme}!prt::uri::Parser@{prt::uri::Parser}}
+\doxysubsubsection{\texorpdfstring{ParseScheme()}{ParseScheme()}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parser_a9dc1e43166741e620dd5dc4155144e91} 
+auto prt\+::uri\+::\+Parser\+::\+Parse\+Scheme (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ bool\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1uri_1_1_parser_a924795f01aaf6901faa8c6a11dacd23b}\index{prt::uri::Parser@{prt::uri::Parser}!Reset@{Reset}}
+\index{Reset@{Reset}!prt::uri::Parser@{prt::uri::Parser}}
+\doxysubsubsection{\texorpdfstring{Reset()}{Reset()}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parser_a924795f01aaf6901faa8c6a11dacd23b} 
+void prt\+::uri\+::\+Parser\+::\+Reset (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1uri_1_1_parser_ac2019d22ab92ccbde53076be2cb6f52b}\index{prt::uri::Parser@{prt::uri::Parser}!Strict@{Strict}}
+\index{Strict@{Strict}!prt::uri::Parser@{prt::uri::Parser}}
+\doxysubsubsection{\texorpdfstring{Strict()}{Strict()}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parser_ac2019d22ab92ccbde53076be2cb6f52b} 
+static constexpr auto prt\+::uri\+::\+Parser\+::\+Strict (\begin{DoxyParamCaption}\item[{const bool}]{value}{ = {\ttfamily true}}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a49f2d46e250bd18ccb5e2481c51e6599}{Config\+::\+Flags}} \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classprt_1_1uri_1_1_parser_ae4a247314bc6c79e2d29446776a13a80}\index{prt::uri::Parser@{prt::uri::Parser}!TryParseScheme@{TryParseScheme}}
+\index{TryParseScheme@{TryParseScheme}!prt::uri::Parser@{prt::uri::Parser}}
+\doxysubsubsection{\texorpdfstring{TryParseScheme()}{TryParseScheme()}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parser_ae4a247314bc6c79e2d29446776a13a80} 
+auto prt\+::uri\+::\+Parser\+::\+Try\+Parse\+Scheme (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ bool\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1uri_1_1_parser_a6a6582960d98679ae2e6b6bb097e4df6}\index{prt::uri::Parser@{prt::uri::Parser}!config\_@{config\_}}
+\index{config\_@{config\_}!prt::uri::Parser@{prt::uri::Parser}}
+\doxysubsubsection{\texorpdfstring{config\_}{config\_}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parser_a6a6582960d98679ae2e6b6bb097e4df6} 
+\mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config}{Config}} prt\+::uri\+::\+Parser\+::config\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1uri_1_1_parser_a9b582a27f58a1d2e9d58cfc8598b8c23}\index{prt::uri::Parser@{prt::uri::Parser}!key\_@{key\_}}
+\index{key\_@{key\_}!prt::uri::Parser@{prt::uri::Parser}}
+\doxysubsubsection{\texorpdfstring{key\_}{key\_}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parser_a9b582a27f58a1d2e9d58cfc8598b8c23} 
+std\+::array$<$char, k\+Default\+Token\+Buffer\+Size$>$ prt\+::uri\+::\+Parser\+::key\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1uri_1_1_parser_a8d9aae82a1be6e89eb00a1a197069903}\index{prt::uri::Parser@{prt::uri::Parser}!key\_length\_@{key\_length\_}}
+\index{key\_length\_@{key\_length\_}!prt::uri::Parser@{prt::uri::Parser}}
+\doxysubsubsection{\texorpdfstring{key\_length\_}{key\_length\_}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parser_a8d9aae82a1be6e89eb00a1a197069903} 
+\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} prt\+::uri\+::\+Parser\+::key\+\_\+length\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1uri_1_1_parser_a7bc7173c806f104046c72bcdf5fad48d}\index{prt::uri::Parser@{prt::uri::Parser}!num\_query\_params\_@{num\_query\_params\_}}
+\index{num\_query\_params\_@{num\_query\_params\_}!prt::uri::Parser@{prt::uri::Parser}}
+\doxysubsubsection{\texorpdfstring{num\_query\_params\_}{num\_query\_params\_}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parser_a7bc7173c806f104046c72bcdf5fad48d} 
+uint64\+\_\+t prt\+::uri\+::\+Parser\+::num\+\_\+query\+\_\+params\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1uri_1_1_parser_a2840f1260298522f97dc659947f7581c}\index{prt::uri::Parser@{prt::uri::Parser}!value\_@{value\_}}
+\index{value\_@{value\_}!prt::uri::Parser@{prt::uri::Parser}}
+\doxysubsubsection{\texorpdfstring{value\_}{value\_}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parser_a2840f1260298522f97dc659947f7581c} 
+std\+::array$<$char, k\+Default\+Token\+Buffer\+Size$>$ prt\+::uri\+::\+Parser\+::value\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1uri_1_1_parser_a8ddb161187aac5db1ac6c13ca1582c2c}\index{prt::uri::Parser@{prt::uri::Parser}!value\_length\_@{value\_length\_}}
+\index{value\_length\_@{value\_length\_}!prt::uri::Parser@{prt::uri::Parser}}
+\doxysubsubsection{\texorpdfstring{value\_length\_}{value\_length\_}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parser_a8ddb161187aac5db1ac6c13ca1582c2c} 
+\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} prt\+::uri\+::\+Parser\+::value\+\_\+length\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{uri__parser_8h}{uri\+\_\+parser.\+h}}\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{uri__parser_8cc}{uri\+\_\+parser.\+cc}}\end{DoxyCompactItemize}

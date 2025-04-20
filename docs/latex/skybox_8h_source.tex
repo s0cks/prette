@@ -1,0 +1,136 @@
+\doxysection{skybox.\+h}
+\hypertarget{skybox_8h_source}{}\label{skybox_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/skybox.h@{/Users/tazz/Projects/prette/Sources/prette/skybox.h}}
+\mbox{\hyperlink{skybox_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_SKYBOX\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_SKYBOX\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vulkan/vulkan\_core.h>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{event_8h}{prette/event.h}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}prette/gfx.h"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{texture_8h}{prette/texture.h}}"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#define\ FOR\_EACH\_SKYBOX\_EVENT(V)\ \(\backslash\)}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\ \ V(SkyboxInit)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\ \ V(SkyboxRendered)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\ \ V(SkyboxDestroyed)}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{class\ }SkyboxEvent;}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#define\ FORWARD\_DECLARE(Name)\ class\ Name\#\#Event;}}
+\DoxyCodeLine{00018\ \mbox{\hyperlink{skybox_8h_a1661f9334544b9802eeac8a95e6d86e2}{FOR\_EACH\_SKYBOX\_EVENT}}(\mbox{\hyperlink{gui_8h_a83d2d158052fc2dc9bdf9bece3fd251e}{FORWARD\_DECLARE}})}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#undef\ FORWARD\_DECLARE}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \mbox{\hyperlink{event_8h_a1ee8f5215b2cce8affd6de0762ca1d7e}{DEFINE\_EVENT\_PROTOTYPE}}(\mbox{\hyperlink{classprt_1_1_skybox}{Skybox}},\ \mbox{\hyperlink{skybox_8h_a1661f9334544b9802eeac8a95e6d86e2}{FOR\_EACH\_SKYBOX\_EVENT}});}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_skybox_init_event}{SkyboxInitEvent}}\ :\ \textcolor{keyword}{public}\ SkyboxEvent\ \{}
+\DoxyCodeLine{00024\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00025\ \ \ \mbox{\hyperlink{classprt_1_1_skybox_init_event_ab112c9e043fb80d60dcf8e17f456d006}{SkyboxInitEvent}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00026\ \ \ \mbox{\hyperlink{classprt_1_1_skybox_init_event_a9230f12843f242207b03bb0b5ca6d501}{\string~SkyboxInitEvent}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00027\ \ \ \mbox{\hyperlink{classprt_1_1_skybox_init_event_ad3fb9fde433432e8954f2f62cc824466}{DECLARE\_EVENT\_TYPE}}(SkyboxEvent,\ SkyboxInit);}
+\DoxyCodeLine{00028\ \};}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_skybox_rendered_event}{SkyboxRenderedEvent}}\ :\ \textcolor{keyword}{public}\ SkyboxEvent\ \{}
+\DoxyCodeLine{00031\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00032\ \ \ \mbox{\hyperlink{classprt_1_1_skybox_rendered_event_a648d65c4688b2f37a55d7a5130dcb2a2}{SkyboxRenderedEvent}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00033\ \ \ \mbox{\hyperlink{classprt_1_1_skybox_rendered_event_a15b989e69431c99d5d657a6b8ade16dc}{\string~SkyboxRenderedEvent}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00034\ \ \ \mbox{\hyperlink{classprt_1_1_skybox_rendered_event_ae86d934bde7afce01d3d1bebca97c614}{DECLARE\_EVENT\_TYPE}}(SkyboxEvent,\ SkyboxRendered);}
+\DoxyCodeLine{00035\ \};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_skybox_destroyed_event}{SkyboxDestroyedEvent}}\ :\ \textcolor{keyword}{public}\ SkyboxEvent\ \{}
+\DoxyCodeLine{00038\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00039\ \ \ \mbox{\hyperlink{classprt_1_1_skybox_destroyed_event_abfd4baf5ed04986aedbe2ce32e03795b}{SkyboxDestroyedEvent}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00040\ \ \ \mbox{\hyperlink{classprt_1_1_skybox_destroyed_event_a0245819edb5bf5800351be71201b3ae9}{\string~SkyboxDestroyedEvent}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00041\ \ \ \mbox{\hyperlink{classprt_1_1_skybox_destroyed_event_a13d48b68f9d7738f69356123c6f51006}{DECLARE\_EVENT\_TYPE}}(SkyboxEvent,\ SkyboxDestroyed);}
+\DoxyCodeLine{00042\ \};}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \mbox{\hyperlink{event_8h_a75f747c7c3ad9804780471c5ce370793}{DEFINE\_EVENT\_SUBJECT}}(\mbox{\hyperlink{classprt_1_1_skybox}{Skybox}});}
+\DoxyCodeLine{00045\ \mbox{\hyperlink{event_8h_a77dcd0ad69e8fd51c473d76aca5bba76}{DEFINE\_EVENT\_OBSERVABLE}}(\mbox{\hyperlink{classprt_1_1_skybox}{Skybox}});}
+\DoxyCodeLine{00046\ \mbox{\hyperlink{skybox_8h_a1661f9334544b9802eeac8a95e6d86e2}{FOR\_EACH\_SKYBOX\_EVENT}}(\mbox{\hyperlink{event_8h_a77dcd0ad69e8fd51c473d76aca5bba76}{DEFINE\_EVENT\_OBSERVABLE}});}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{namespaceprt_aba17f68a6a22f469f820eed76882a3e8}{OnSkyboxEvent}}()\ -\/>\ SkyboxEventObservable;}
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#define\ DEFINE\_ON\_EVENT(Name)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\ \ static\ inline\ auto\ On\#\#Name\#\#Event()-\/>Name\#\#EventObservable\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\ \ \ \ return\ OnSkyboxEvent().filter(Name\#\#Event::Filter).map(Name\#\#Event::Cast);\ \(\backslash\)}}
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\ \ \}}}
+\DoxyCodeLine{00053\ \mbox{\hyperlink{skybox_8h_a1661f9334544b9802eeac8a95e6d86e2}{FOR\_EACH\_SKYBOX\_EVENT}}(\mbox{\hyperlink{engine_8cc_a2672365a233e0c9f3c1ccb0d78388308}{DEFINE\_ON\_EVENT}});}
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#undef\ DEFINE\_ON\_EVENT}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structprt_1_1_skybox_data}{SkyboxData}}\ \{}
+\DoxyCodeLine{00057\ \ \ \textcolor{keyword}{alignas}(16)\ glm::mat4\ \mbox{\hyperlink{structprt_1_1_skybox_data_a5c2b96842649647d7316fc812c19d302}{view}}\{\};}
+\DoxyCodeLine{00058\ \};}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_skybox_mesh}{SkyboxMesh}}\ \{}
+\DoxyCodeLine{00061\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00062\ \ \ vk::Buffer*\ \mbox{\hyperlink{classprt_1_1_skybox_mesh_a123f662d61478e5e7b9b3535fd5ae2ea}{vertices\_}};}
+\DoxyCodeLine{00063\ \ \ uint64\_t\ \mbox{\hyperlink{classprt_1_1_skybox_mesh_ae0be1265c4fa146f1971fc43dbc28505}{num\_vertices\_}};}
+\DoxyCodeLine{00064\ \ \ vk::Buffer*\ \mbox{\hyperlink{classprt_1_1_skybox_mesh_a33988acb3c7920388028d9c4b99a24c3}{indices\_}};}
+\DoxyCodeLine{00065\ \ \ uint64\_t\ \mbox{\hyperlink{classprt_1_1_skybox_mesh_ae0fe057ba1d39e39c16b50391a75cb3e}{num\_indices\_}};}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00068\ \ \ \mbox{\hyperlink{classprt_1_1_skybox_mesh_a78baa39fe39ac7f2f5e9c96ab90e71c2}{SkyboxMesh}}();}
+\DoxyCodeLine{00069\ \ \ \mbox{\hyperlink{classprt_1_1_skybox_mesh_ab6c39c95507d525fd56e56dca2c45744}{\string~SkyboxMesh}}();}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_skybox_mesh_a503b93e140f486d408029cbf64136b61}{GetVertexBuffer}}()\ const\ -\/>\ vk::\mbox{\hyperlink{classprt_1_1_buffer}{Buffer}}*\ \{}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_skybox_mesh_a123f662d61478e5e7b9b3535fd5ae2ea}{vertices\_}};}
+\DoxyCodeLine{00073\ \ \ \}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_skybox_mesh_a0621b402846869db0f1786b080bcc748}{GetNumberOfVertices}}()\ const\ -\/>\ uint64\_t\ \{}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_skybox_mesh_ae0be1265c4fa146f1971fc43dbc28505}{num\_vertices\_}};}
+\DoxyCodeLine{00077\ \ \ \}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_skybox_mesh_a511bae4e1e4413f084980727c221faee}{GetIndexBuffer}}()\ const\ -\/>\ vk::\mbox{\hyperlink{classprt_1_1_buffer}{Buffer}}*\ \{}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_skybox_mesh_a33988acb3c7920388028d9c4b99a24c3}{indices\_}};}
+\DoxyCodeLine{00081\ \ \ \}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_skybox_mesh_a0822bbd362ac1dd06c316d91bb6e5c7e}{GetNumberOfIndices}}()\ const\ -\/>\ uint64\_t\ \{}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_skybox_mesh_ae0fe057ba1d39e39c16b50391a75cb3e}{num\_indices\_}};}
+\DoxyCodeLine{00085\ \ \ \}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_skybox_mesh_a651aea16ee1be1fe15445a14cedb2e34}{Draw}}(VkCommandBuffer\&\ buffer);}
+\DoxyCodeLine{00088\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_skybox_mesh_ae5e09f01d79ab67f5d563f0195c60aa5}{Destroy}}();}
+\DoxyCodeLine{00089\ \};}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \textcolor{keyword}{class\ }Driver;}
+\DoxyCodeLine{00092\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_skybox_pipeline}{SkyboxPipeline}}\ \{}
+\DoxyCodeLine{00093\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00094\ \ \ VkPipeline\ \mbox{\hyperlink{classprt_1_1_skybox_pipeline_a5d295bd2e6cf71019746c17f1c21ef6d}{pipeline\_}}\{\};}
+\DoxyCodeLine{00095\ \ \ VkPipelineLayout\ \mbox{\hyperlink{classprt_1_1_skybox_pipeline_ae51b43d4a2d2a4629ae823aeb25dcc0e}{layout\_}}\{\};}
+\DoxyCodeLine{00096\ \ \ VkPipelineCache\ \mbox{\hyperlink{classprt_1_1_skybox_pipeline_a8f8510a20bbb1a8fcbde01b3e82ac157}{cache\_}}\{\};}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \ \ VkDescriptorSetLayout\ \mbox{\hyperlink{classprt_1_1_skybox_pipeline_a346aee6179580b75aba6b31f23997a0f}{dset\_layout\_}}\{\};}
+\DoxyCodeLine{00099\ \ \ VkDescriptorSet\ \mbox{\hyperlink{classprt_1_1_skybox_pipeline_a79cbc0e7e65cd9906ffc873137669996}{dset\_}}\{\};}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_skybox_pipeline_ab138bffdf571eca9a693ce60afa152b9}{InitDescriptorSet}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_driver}{Driver}}*\ driver,\ VkDescriptorSetLayout\&\ dset\_layout,\ VkDescriptorSet\&\ dset);}
+\DoxyCodeLine{00102\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_skybox_pipeline_ac833a23a92accde959eb8291691f5f7b}{InitLayout}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_driver}{Driver}}*\ driver,\ VkPipelineLayout\&\ layout,\ \textcolor{keyword}{const}\ std::vector<VkDescriptorSetLayout>\&\ dset\_layouts);}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00105\ \ \ \mbox{\hyperlink{classprt_1_1_skybox_pipeline_aeb8da8ec68370c3212565b07de9a4e92}{SkyboxPipeline}}();}
+\DoxyCodeLine{00106\ \ \ \mbox{\hyperlink{classprt_1_1_skybox_pipeline_ab3028719eab8b2c5169a0cb1f0833e9c}{\string~SkyboxPipeline}}();}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_skybox_pipeline_ae822ff3843e77a6c850652480243d0e6}{Get}}()\ const\ -\/>\ VkPipeline\ const\&\ \{}
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_skybox_pipeline_a5d295bd2e6cf71019746c17f1c21ef6d}{pipeline\_}};}
+\DoxyCodeLine{00110\ \ \ \}}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_skybox_pipeline_ac2da547b59da46f7deb7e385fe89c831}{GetLayout}}()\ const\ -\/>\ VkPipelineLayout\ const\&\ \{}
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_skybox_pipeline_ae51b43d4a2d2a4629ae823aeb25dcc0e}{layout\_}};}
+\DoxyCodeLine{00114\ \ \ \}}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_skybox_pipeline_abb51e70e9548c58dc1c387e18111b644}{GetCache}}()\ const\ -\/>\ VkPipelineCache\ const\&\ \{}
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_skybox_pipeline_a8f8510a20bbb1a8fcbde01b3e82ac157}{cache\_}};}
+\DoxyCodeLine{00118\ \ \ \}}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_skybox_pipeline_af3825bcd09e9679873750201007d472e}{Draw}}(\textcolor{keyword}{const}\ VkCommandBuffer\&\ buffer);}
+\DoxyCodeLine{00121\ \};}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_skybox}{Skybox}}\ \{}
+\DoxyCodeLine{00124\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00125\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_skybox_ae8bf5ea5d8ce7ed422b8b429df542b98}{Init}}();}
+\DoxyCodeLine{00126\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_skybox_a08609f076757c2843c20973c1dad0cc3}{Update}}();}
+\DoxyCodeLine{00127\ \};}
+\DoxyCodeLine{00128\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00130\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_SKYBOX\_H}}
+
+\end{DoxyCode}

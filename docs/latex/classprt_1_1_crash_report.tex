@@ -1,0 +1,89 @@
+\doxysection{prt\+::Crash\+Report Class Reference}
+\hypertarget{classprt_1_1_crash_report}{}\label{classprt_1_1_crash_report}\index{prt::CrashReport@{prt::CrashReport}}
+
+
+{\ttfamily \#include $<$crash\+\_\+report.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_crash_report_a413c0b364b7053560890dff2d98c5030}{Crash\+Report}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classprt_1_1_crash_report_cause}{Crash\+Report\+Cause}} $>$ cause, const \mbox{\hyperlink{namespaceprt_acc736f72f064aa43e9e2eb941c309196}{Color\+Mode}} color\+\_\+mode=\mbox{\hyperlink{classprt_1_1_crash_report_a9760f34a0a306452fb4b6558c6f6e21e}{k\+Default\+Color\+Mode}})
+\item 
+auto \mbox{\hyperlink{classprt_1_1_crash_report_a206232e21d9452ace9e1db6539994797}{Get\+Color\+Mode}} () const -\/$>$ \mbox{\hyperlink{namespaceprt_acc736f72f064aa43e9e2eb941c309196}{Color\+Mode}}
+\item 
+void \mbox{\hyperlink{classprt_1_1_crash_report_a4ae98abdc690b0abe36dde77e7a2377d}{Print}} (std\+::ostream \&stream=std\+::cerr)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr const auto \mbox{\hyperlink{classprt_1_1_crash_report_a9760f34a0a306452fb4b6558c6f6e21e}{k\+Default\+Color\+Mode}} = Color\+Mode\+::always
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classprt_1_1_crash_report_ab17d5bc4dff50ef4c263afad3d5e0a6d}{Print\+Stack\+Trace}} (std\+::ostream \&stream)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classprt_1_1_crash_report_cause}{Crash\+Report\+Cause}} $>$ \mbox{\hyperlink{classprt_1_1_crash_report_ad9b5f9c2327465398143e45b1f08f228}{cause\+\_\+}}
+\item 
+\mbox{\hyperlink{namespaceprt_acc736f72f064aa43e9e2eb941c309196}{Color\+Mode}} \mbox{\hyperlink{classprt_1_1_crash_report_aecd96760300abb6403a29c9ff9df8b5f}{color\+\_\+mode\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_crash_report_a413c0b364b7053560890dff2d98c5030}\index{prt::CrashReport@{prt::CrashReport}!CrashReport@{CrashReport}}
+\index{CrashReport@{CrashReport}!prt::CrashReport@{prt::CrashReport}}
+\doxysubsubsection{\texorpdfstring{CrashReport()}{CrashReport()}}
+{\footnotesize\ttfamily \label{classprt_1_1_crash_report_a413c0b364b7053560890dff2d98c5030} 
+prt\+::\+Crash\+Report\+::\+Crash\+Report (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classprt_1_1_crash_report_cause}{Crash\+Report\+Cause}} $>$}]{cause}{, }\item[{const \mbox{\hyperlink{namespaceprt_acc736f72f064aa43e9e2eb941c309196}{Color\+Mode}}}]{color\+\_\+mode}{ = {\ttfamily \mbox{\hyperlink{classprt_1_1_crash_report_a9760f34a0a306452fb4b6558c6f6e21e}{k\+Default\+Color\+Mode}}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_crash_report_a206232e21d9452ace9e1db6539994797}\index{prt::CrashReport@{prt::CrashReport}!GetColorMode@{GetColorMode}}
+\index{GetColorMode@{GetColorMode}!prt::CrashReport@{prt::CrashReport}}
+\doxysubsubsection{\texorpdfstring{GetColorMode()}{GetColorMode()}}
+{\footnotesize\ttfamily \label{classprt_1_1_crash_report_a206232e21d9452ace9e1db6539994797} 
+auto prt\+::\+Crash\+Report\+::\+Get\+Color\+Mode (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ \mbox{\hyperlink{namespaceprt_acc736f72f064aa43e9e2eb941c309196}{Color\+Mode}} \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_crash_report_a4ae98abdc690b0abe36dde77e7a2377d}\index{prt::CrashReport@{prt::CrashReport}!Print@{Print}}
+\index{Print@{Print}!prt::CrashReport@{prt::CrashReport}}
+\doxysubsubsection{\texorpdfstring{Print()}{Print()}}
+{\footnotesize\ttfamily \label{classprt_1_1_crash_report_a4ae98abdc690b0abe36dde77e7a2377d} 
+void prt\+::\+Crash\+Report\+::\+Print (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{stream}{ = {\ttfamily std\+:\+:cerr}}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_crash_report_ab17d5bc4dff50ef4c263afad3d5e0a6d}\index{prt::CrashReport@{prt::CrashReport}!PrintStackTrace@{PrintStackTrace}}
+\index{PrintStackTrace@{PrintStackTrace}!prt::CrashReport@{prt::CrashReport}}
+\doxysubsubsection{\texorpdfstring{PrintStackTrace()}{PrintStackTrace()}}
+{\footnotesize\ttfamily \label{classprt_1_1_crash_report_ab17d5bc4dff50ef4c263afad3d5e0a6d} 
+void prt\+::\+Crash\+Report\+::\+Print\+Stack\+Trace (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{stream}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_crash_report_ad9b5f9c2327465398143e45b1f08f228}\index{prt::CrashReport@{prt::CrashReport}!cause\_@{cause\_}}
+\index{cause\_@{cause\_}!prt::CrashReport@{prt::CrashReport}}
+\doxysubsubsection{\texorpdfstring{cause\_}{cause\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_crash_report_ad9b5f9c2327465398143e45b1f08f228} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classprt_1_1_crash_report_cause}{Crash\+Report\+Cause}}$>$ prt\+::\+Crash\+Report\+::cause\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_crash_report_aecd96760300abb6403a29c9ff9df8b5f}\index{prt::CrashReport@{prt::CrashReport}!color\_mode\_@{color\_mode\_}}
+\index{color\_mode\_@{color\_mode\_}!prt::CrashReport@{prt::CrashReport}}
+\doxysubsubsection{\texorpdfstring{color\_mode\_}{color\_mode\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_crash_report_aecd96760300abb6403a29c9ff9df8b5f} 
+\mbox{\hyperlink{namespaceprt_acc736f72f064aa43e9e2eb941c309196}{Color\+Mode}} prt\+::\+Crash\+Report\+::color\+\_\+mode\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_crash_report_a9760f34a0a306452fb4b6558c6f6e21e}\index{prt::CrashReport@{prt::CrashReport}!kDefaultColorMode@{kDefaultColorMode}}
+\index{kDefaultColorMode@{kDefaultColorMode}!prt::CrashReport@{prt::CrashReport}}
+\doxysubsubsection{\texorpdfstring{kDefaultColorMode}{kDefaultColorMode}}
+{\footnotesize\ttfamily \label{classprt_1_1_crash_report_a9760f34a0a306452fb4b6558c6f6e21e} 
+const auto prt\+::\+Crash\+Report\+::k\+Default\+Color\+Mode = Color\+Mode\+::always\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{crash__report_8h}{crash\+\_\+report.\+h}}\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{crash__report_8cc}{crash\+\_\+report.\+cc}}\end{DoxyCompactItemize}

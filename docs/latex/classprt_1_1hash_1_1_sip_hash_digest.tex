@@ -1,0 +1,245 @@
+\doxysection{prt\+::hash\+::Sip\+Hash\+Digest\texorpdfstring{$<$}{<} Key\+Size \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classprt_1_1hash_1_1_sip_hash_digest}{}\label{classprt_1_1hash_1_1_sip_hash_digest}\index{prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}}
+
+
+{\ttfamily \#include $<$siphash\+\_\+digest.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest_a21a09686cf2ef432fd241ecae62e7d3e}{Sip\+Hash\+Digest}} (const \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest_a78b95abb059342a9b6c7d6cd0c27a052}{Key}} \&key, const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} c, const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} d)
+\item 
+virtual \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest_a50102cc2bfa83b01bda2271b4b39c0a9}{\texorpdfstring{$\sim$}{\string~}\+Sip\+Hash\+Digest}} ()=default
+\item 
+void \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest_a6d173f67e51eeb6fb69bf7592e6c3002}{Update}} (const uint8\+\_\+t \mbox{\hyperlink{namespaceprt_a5b83ac41dda5a6f6a66917de0a70cdf1}{byte}})
+\item 
+void \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest_abf4f975bf4860b16004a6ce0ccb463d6}{Update}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}bytes, const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} num\+\_\+bytes)
+\item 
+void \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest_a6ffa17f975242ec71168841bd032532c}{Update}} (const char \texorpdfstring{$\ast$}{*}data, const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} length)
+\item 
+void \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest_abc3f12d007f5e46d4fe04268a34a7096}{Update}} (const char \texorpdfstring{$\ast$}{*}data)
+\item 
+void \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest_a9db7312f30c53801bd386925a220cdd8}{Update}} (const std\+::string \&data)
+\item 
+auto \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest_af7265b6ddd091f37e4fce0d6c675a1a9}{Digest}} () -\/$>$ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest_a78b95abb059342a9b6c7d6cd0c27a052}{Key}} = std\+::array$<$uint8\+\_\+t, Key\+Size$>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest_af6b1e1eb4a75b3b02994793835c110c7}{DEFINE\+\_\+\+DEFAULT\+\_\+\+COPYABLE\+\_\+\+TYPE}} (\mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest}{Sip\+Hash\+Digest}}$<$ Key\+Size $>$)
+\item 
+void \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest_acff1d0b26966b1e6494d310595dc446b}{Compress}} ()
+\item 
+void \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest_aead841bbbdd1a674e4e95f3dcd3302d9}{Digest\+Block}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest_aa7caa8867ba2ed7560078c6c052388ec}{Rotate\+Left}} (const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} val, const int32\+\_\+t cnt) -\/$>$ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest_a241c802d60265608ff320d5f05beaf77}{Read8}} (const \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest_a78b95abb059342a9b6c7d6cd0c27a052}{Key}} \&key, const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} o=0) -\/$>$ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest_a6b5aea90ae5315dd2e7326b3385475e9}{c\+\_\+}}
+\item 
+\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest_aa99139b4afb0f4c4b3746e6278e5c026}{d\+\_\+}}
+\item 
+\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest_a3f69dedf9899285e6818a53cc530162e}{index\+\_\+}} \{\}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest_a9bb98f6464ab91ab5d4bb58aaf37a603}{length\+\_\+}} \{\}
+\item 
+\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest_aea0f05adaa9f3cd354804d4a1f086eee}{v0\+\_\+}} \{\}
+\item 
+\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest_a5a4e784d4250671fff6cf4e031799209}{v1\+\_\+}} \{\}
+\item 
+\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest_af9998a9efc3175c1d3f683734e2459eb}{v2\+\_\+}} \{\}
+\item 
+\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest_ad70368fa06d973c1c8e518be13006167}{v3\+\_\+}} \{\}
+\item 
+\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest_a6e16387c23e7e7eaeca8434f0ccb6016}{m\+\_\+}} \{\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classprt_1_1hash_1_1_sip_hash_digest_a78b95abb059342a9b6c7d6cd0c27a052}\index{prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}!Key@{Key}}
+\index{Key@{Key}!prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}}
+\doxysubsubsection{\texorpdfstring{Key}{Key}}
+{\footnotesize\ttfamily \label{classprt_1_1hash_1_1_sip_hash_digest_a78b95abb059342a9b6c7d6cd0c27a052} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Key\+Size$>$ \\
+using \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest}{prt\+::hash\+::\+Sip\+Hash\+Digest}}$<$ Key\+Size $>$\+::\+Key = std\+::array$<$uint8\+\_\+t, Key\+Size$>$\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1hash_1_1_sip_hash_digest_a21a09686cf2ef432fd241ecae62e7d3e}\index{prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}!SipHashDigest@{SipHashDigest}}
+\index{SipHashDigest@{SipHashDigest}!prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}}
+\doxysubsubsection{\texorpdfstring{SipHashDigest()}{SipHashDigest()}}
+{\footnotesize\ttfamily \label{classprt_1_1hash_1_1_sip_hash_digest_a21a09686cf2ef432fd241ecae62e7d3e} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Key\+Size$>$ \\
+\mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest}{prt\+::hash\+::\+Sip\+Hash\+Digest}}$<$ Key\+Size $>$\+::\+Sip\+Hash\+Digest (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest_a78b95abb059342a9b6c7d6cd0c27a052}{Key}} \&}]{key}{, }\item[{const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}}]{c}{, }\item[{const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}}]{d}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1hash_1_1_sip_hash_digest_a50102cc2bfa83b01bda2271b4b39c0a9}\index{prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}!````~SipHashDigest@{\texorpdfstring{$\sim$}{\string~}SipHashDigest}}
+\index{````~SipHashDigest@{\texorpdfstring{$\sim$}{\string~}SipHashDigest}!prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}SipHashDigest()}{\string~SipHashDigest()}}
+{\footnotesize\ttfamily \label{classprt_1_1hash_1_1_sip_hash_digest_a50102cc2bfa83b01bda2271b4b39c0a9} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Key\+Size$>$ \\
+virtual \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest}{prt\+::hash\+::\+Sip\+Hash\+Digest}}$<$ Key\+Size $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest}{Sip\+Hash\+Digest}} (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1hash_1_1_sip_hash_digest_acff1d0b26966b1e6494d310595dc446b}\index{prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}!Compress@{Compress}}
+\index{Compress@{Compress}!prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}}
+\doxysubsubsection{\texorpdfstring{Compress()}{Compress()}}
+{\footnotesize\ttfamily \label{classprt_1_1hash_1_1_sip_hash_digest_acff1d0b26966b1e6494d310595dc446b} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Key\+Size$>$ \\
+void \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest}{prt\+::hash\+::\+Sip\+Hash\+Digest}}$<$ Key\+Size $>$\+::\+Compress (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1hash_1_1_sip_hash_digest_af6b1e1eb4a75b3b02994793835c110c7}\index{prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}!DEFINE\_DEFAULT\_COPYABLE\_TYPE@{DEFINE\_DEFAULT\_COPYABLE\_TYPE}}
+\index{DEFINE\_DEFAULT\_COPYABLE\_TYPE@{DEFINE\_DEFAULT\_COPYABLE\_TYPE}!prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_DEFAULT\_COPYABLE\_TYPE()}{DEFINE\_DEFAULT\_COPYABLE\_TYPE()}}
+{\footnotesize\ttfamily \label{classprt_1_1hash_1_1_sip_hash_digest_af6b1e1eb4a75b3b02994793835c110c7} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Key\+Size$>$ \\
+\mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest}{prt\+::hash\+::\+Sip\+Hash\+Digest}}$<$ Key\+Size $>$\+::\+DEFINE\+\_\+\+DEFAULT\+\_\+\+COPYABLE\+\_\+\+TYPE (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest}{Sip\+Hash\+Digest}}$<$ Key\+Size $>$}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1hash_1_1_sip_hash_digest_af7265b6ddd091f37e4fce0d6c675a1a9}\index{prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}!Digest@{Digest}}
+\index{Digest@{Digest}!prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}}
+\doxysubsubsection{\texorpdfstring{Digest()}{Digest()}}
+{\footnotesize\ttfamily \label{classprt_1_1hash_1_1_sip_hash_digest_af7265b6ddd091f37e4fce0d6c675a1a9} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Key\+Size$>$ \\
+auto \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest}{prt\+::hash\+::\+Sip\+Hash\+Digest}}$<$ Key\+Size $>$\+::\+Digest (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1hash_1_1_sip_hash_digest_aead841bbbdd1a674e4e95f3dcd3302d9}\index{prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}!DigestBlock@{DigestBlock}}
+\index{DigestBlock@{DigestBlock}!prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}}
+\doxysubsubsection{\texorpdfstring{DigestBlock()}{DigestBlock()}}
+{\footnotesize\ttfamily \label{classprt_1_1hash_1_1_sip_hash_digest_aead841bbbdd1a674e4e95f3dcd3302d9} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Key\+Size$>$ \\
+void \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest}{prt\+::hash\+::\+Sip\+Hash\+Digest}}$<$ Key\+Size $>$\+::\+Digest\+Block (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1hash_1_1_sip_hash_digest_a241c802d60265608ff320d5f05beaf77}\index{prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}!Read8@{Read8}}
+\index{Read8@{Read8}!prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}}
+\doxysubsubsection{\texorpdfstring{Read8()}{Read8()}}
+{\footnotesize\ttfamily \label{classprt_1_1hash_1_1_sip_hash_digest_a241c802d60265608ff320d5f05beaf77} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Key\+Size$>$ \\
+static auto \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest}{prt\+::hash\+::\+Sip\+Hash\+Digest}}$<$ Key\+Size $>$\+::\+Read8 (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest_a78b95abb059342a9b6c7d6cd0c27a052}{Key}} \&}]{key}{, }\item[{const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}}]{o}{ = {\ttfamily 0}}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1hash_1_1_sip_hash_digest_aa7caa8867ba2ed7560078c6c052388ec}\index{prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}!RotateLeft@{RotateLeft}}
+\index{RotateLeft@{RotateLeft}!prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}}
+\doxysubsubsection{\texorpdfstring{RotateLeft()}{RotateLeft()}}
+{\footnotesize\ttfamily \label{classprt_1_1hash_1_1_sip_hash_digest_aa7caa8867ba2ed7560078c6c052388ec} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Key\+Size$>$ \\
+static auto \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest}{prt\+::hash\+::\+Sip\+Hash\+Digest}}$<$ Key\+Size $>$\+::\+Rotate\+Left (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}}]{val}{, }\item[{const int32\+\_\+t}]{cnt}{}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1hash_1_1_sip_hash_digest_abc3f12d007f5e46d4fe04268a34a7096}\index{prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}!Update@{Update}}
+\index{Update@{Update}!prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily \label{classprt_1_1hash_1_1_sip_hash_digest_abc3f12d007f5e46d4fe04268a34a7096} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Key\+Size$>$ \\
+void \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest}{prt\+::hash\+::\+Sip\+Hash\+Digest}}$<$ Key\+Size $>$\+::\+Update (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1hash_1_1_sip_hash_digest_a6ffa17f975242ec71168841bd032532c}\index{prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}!Update@{Update}}
+\index{Update@{Update}!prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily \label{classprt_1_1hash_1_1_sip_hash_digest_a6ffa17f975242ec71168841bd032532c} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Key\+Size$>$ \\
+void \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest}{prt\+::hash\+::\+Sip\+Hash\+Digest}}$<$ Key\+Size $>$\+::\+Update (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}}]{length}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1hash_1_1_sip_hash_digest_a9db7312f30c53801bd386925a220cdd8}\index{prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}!Update@{Update}}
+\index{Update@{Update}!prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily \label{classprt_1_1hash_1_1_sip_hash_digest_a9db7312f30c53801bd386925a220cdd8} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Key\+Size$>$ \\
+void \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest}{prt\+::hash\+::\+Sip\+Hash\+Digest}}$<$ Key\+Size $>$\+::\+Update (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1hash_1_1_sip_hash_digest_abf4f975bf4860b16004a6ce0ccb463d6}\index{prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}!Update@{Update}}
+\index{Update@{Update}!prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily \label{classprt_1_1hash_1_1_sip_hash_digest_abf4f975bf4860b16004a6ce0ccb463d6} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Key\+Size$>$ \\
+void \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest}{prt\+::hash\+::\+Sip\+Hash\+Digest}}$<$ Key\+Size $>$\+::\+Update (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{bytes}{, }\item[{const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}}]{num\+\_\+bytes}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1hash_1_1_sip_hash_digest_a6d173f67e51eeb6fb69bf7592e6c3002}\index{prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}!Update@{Update}}
+\index{Update@{Update}!prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily \label{classprt_1_1hash_1_1_sip_hash_digest_a6d173f67e51eeb6fb69bf7592e6c3002} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Key\+Size$>$ \\
+void \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest}{prt\+::hash\+::\+Sip\+Hash\+Digest}}$<$ Key\+Size $>$\+::\+Update (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t}]{byte}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1hash_1_1_sip_hash_digest_a6b5aea90ae5315dd2e7326b3385475e9}\index{prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}!c\_@{c\_}}
+\index{c\_@{c\_}!prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}}
+\doxysubsubsection{\texorpdfstring{c\_}{c\_}}
+{\footnotesize\ttfamily \label{classprt_1_1hash_1_1_sip_hash_digest_a6b5aea90ae5315dd2e7326b3385475e9} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Key\+Size$>$ \\
+\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest}{prt\+::hash\+::\+Sip\+Hash\+Digest}}$<$ Key\+Size $>$\+::c\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1hash_1_1_sip_hash_digest_aa99139b4afb0f4c4b3746e6278e5c026}\index{prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}!d\_@{d\_}}
+\index{d\_@{d\_}!prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}}
+\doxysubsubsection{\texorpdfstring{d\_}{d\_}}
+{\footnotesize\ttfamily \label{classprt_1_1hash_1_1_sip_hash_digest_aa99139b4afb0f4c4b3746e6278e5c026} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Key\+Size$>$ \\
+\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest}{prt\+::hash\+::\+Sip\+Hash\+Digest}}$<$ Key\+Size $>$\+::d\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1hash_1_1_sip_hash_digest_a3f69dedf9899285e6818a53cc530162e}\index{prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}!index\_@{index\_}}
+\index{index\_@{index\_}!prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}}
+\doxysubsubsection{\texorpdfstring{index\_}{index\_}}
+{\footnotesize\ttfamily \label{classprt_1_1hash_1_1_sip_hash_digest_a3f69dedf9899285e6818a53cc530162e} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Key\+Size$>$ \\
+\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest}{prt\+::hash\+::\+Sip\+Hash\+Digest}}$<$ Key\+Size $>$\+::index\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1hash_1_1_sip_hash_digest_a9bb98f6464ab91ab5d4bb58aaf37a603}\index{prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}!length\_@{length\_}}
+\index{length\_@{length\_}!prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}}
+\doxysubsubsection{\texorpdfstring{length\_}{length\_}}
+{\footnotesize\ttfamily \label{classprt_1_1hash_1_1_sip_hash_digest_a9bb98f6464ab91ab5d4bb58aaf37a603} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Key\+Size$>$ \\
+uint8\+\_\+t \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest}{prt\+::hash\+::\+Sip\+Hash\+Digest}}$<$ Key\+Size $>$\+::length\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1hash_1_1_sip_hash_digest_a6e16387c23e7e7eaeca8434f0ccb6016}\index{prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}!m\_@{m\_}}
+\index{m\_@{m\_}!prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}}
+\doxysubsubsection{\texorpdfstring{m\_}{m\_}}
+{\footnotesize\ttfamily \label{classprt_1_1hash_1_1_sip_hash_digest_a6e16387c23e7e7eaeca8434f0ccb6016} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Key\+Size$>$ \\
+\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest}{prt\+::hash\+::\+Sip\+Hash\+Digest}}$<$ Key\+Size $>$\+::m\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1hash_1_1_sip_hash_digest_aea0f05adaa9f3cd354804d4a1f086eee}\index{prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}!v0\_@{v0\_}}
+\index{v0\_@{v0\_}!prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}}
+\doxysubsubsection{\texorpdfstring{v0\_}{v0\_}}
+{\footnotesize\ttfamily \label{classprt_1_1hash_1_1_sip_hash_digest_aea0f05adaa9f3cd354804d4a1f086eee} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Key\+Size$>$ \\
+\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest}{prt\+::hash\+::\+Sip\+Hash\+Digest}}$<$ Key\+Size $>$\+::v0\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1hash_1_1_sip_hash_digest_a5a4e784d4250671fff6cf4e031799209}\index{prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}!v1\_@{v1\_}}
+\index{v1\_@{v1\_}!prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}}
+\doxysubsubsection{\texorpdfstring{v1\_}{v1\_}}
+{\footnotesize\ttfamily \label{classprt_1_1hash_1_1_sip_hash_digest_a5a4e784d4250671fff6cf4e031799209} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Key\+Size$>$ \\
+\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest}{prt\+::hash\+::\+Sip\+Hash\+Digest}}$<$ Key\+Size $>$\+::v1\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1hash_1_1_sip_hash_digest_af9998a9efc3175c1d3f683734e2459eb}\index{prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}!v2\_@{v2\_}}
+\index{v2\_@{v2\_}!prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}}
+\doxysubsubsection{\texorpdfstring{v2\_}{v2\_}}
+{\footnotesize\ttfamily \label{classprt_1_1hash_1_1_sip_hash_digest_af9998a9efc3175c1d3f683734e2459eb} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Key\+Size$>$ \\
+\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest}{prt\+::hash\+::\+Sip\+Hash\+Digest}}$<$ Key\+Size $>$\+::v2\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1hash_1_1_sip_hash_digest_ad70368fa06d973c1c8e518be13006167}\index{prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}!v3\_@{v3\_}}
+\index{v3\_@{v3\_}!prt::hash::SipHashDigest$<$ KeySize $>$@{prt::hash::SipHashDigest$<$ KeySize $>$}}
+\doxysubsubsection{\texorpdfstring{v3\_}{v3\_}}
+{\footnotesize\ttfamily \label{classprt_1_1hash_1_1_sip_hash_digest_ad70368fa06d973c1c8e518be13006167} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Key\+Size$>$ \\
+\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} \mbox{\hyperlink{classprt_1_1hash_1_1_sip_hash_digest}{prt\+::hash\+::\+Sip\+Hash\+Digest}}$<$ Key\+Size $>$\+::v3\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/hash/\mbox{\hyperlink{siphash__digest_8h}{siphash\+\_\+digest.\+h}}\end{DoxyCompactItemize}

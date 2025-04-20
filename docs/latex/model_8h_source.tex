@@ -1,0 +1,53 @@
+\doxysection{model.\+h}
+\hypertarget{model_8h_source}{}\label{model_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/model.h@{/Users/tazz/Projects/prette/Sources/prette/model.h}}
+\mbox{\hyperlink{model_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_MODEL\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_MODEL\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{mesh_8h}{prette/mesh.h}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_model}{Model}}\ \{}
+\DoxyCodeLine{00008\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00009\ \ \ std::vector<Mesh>\ \mbox{\hyperlink{classprt_1_1_model_a8ce82254822106957118c64b95c47585}{meshes\_}}\{\};}
+\DoxyCodeLine{00010\ \ \ uint64\_t\ \mbox{\hyperlink{classprt_1_1_model_a2225ba276b6f6f6fe0b0ffdf47b9b840}{num\_vertices\_}}\{\};}
+\DoxyCodeLine{00011\ \ \ uint64\_t\ \mbox{\hyperlink{classprt_1_1_model_ad0731e4c5576c39e376224e53c97240f}{num\_indices\_}}\{\};}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00014\ \ \ \mbox{\hyperlink{classprt_1_1_model_a373d8ece2d468037a25a13bc26b99ec5}{Model}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00015\ \ \ \mbox{\hyperlink{classprt_1_1_model_ada518c4de2144c3bda4075d42d347f1b}{\string~Model}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_model_a570becd276d29fa49e96a21978037892}{GetMeshes}}()\ const\ -\/>\ const\ \mbox{\hyperlink{namespacestd}{std}}::vector<\mbox{\hyperlink{classprt_1_1_mesh}{Mesh}}>\&\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_model_a8ce82254822106957118c64b95c47585}{meshes\_}};}
+\DoxyCodeLine{00019\ \ \ \}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_model_ab3522ea4418a44da25cf3a6af9ff68e4}{GetNumberOfMeshes}}()\ const\ -\/>\ uint64\_t\ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_model_a8ce82254822106957118c64b95c47585}{meshes\_}}.size();}
+\DoxyCodeLine{00023\ \ \ \}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_model_ac3408d8fc6988b9b4b0cc96af8daf9cc}{GetNumberOfVertices}}()\ const\ -\/>\ uint64\_t\ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_model_a2225ba276b6f6f6fe0b0ffdf47b9b840}{num\_vertices\_}};}
+\DoxyCodeLine{00027\ \ \ \}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_model_a4640f19215252fe435500bef7e3ba3f0}{GetNumberOfIndices}}()\ const\ -\/>\ uint64\_t\ \{}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_model_ad0731e4c5576c39e376224e53c97240f}{num\_indices\_}};}
+\DoxyCodeLine{00031\ \ \ \}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_model_aad78d22dee901fc67e515d8fba654aa0}{Scale}}(\textcolor{keyword}{const}\ glm::vec3\&\ scale);}
+\DoxyCodeLine{00034\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_model_ac66f05c2f38bf7c85569df3ae56d71f8}{Rotate}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ angle,\ \textcolor{keyword}{const}\ glm::vec3\&\ axis);}
+\DoxyCodeLine{00035\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_model_aaf8ff103dd6396926617639f3b9fc61f}{Translate}}(\textcolor{keyword}{const}\ glm::vec3\&\ translation);}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_model_a6a78e7e31b8a7632dffc4e1581ea27c0}{RotateUp}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ angle)\ \{}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_model_ac66f05c2f38bf7c85569df3ae56d71f8}{Rotate}}(angle,\ glm::vec3(0.0f,\ 1.0f,\ 0.0f));}
+\DoxyCodeLine{00039\ \ \ \}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_model_a3db20fd9618b5ee1914fec146834d3dd}{RotateDown}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ angle)\ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_model_ac66f05c2f38bf7c85569df3ae56d71f8}{Rotate}}(angle,\ glm::vec3(0.0f,\ -\/1.0f,\ 0.0f));}
+\DoxyCodeLine{00043\ \ \ \}}
+\DoxyCodeLine{00044\ \};}
+\DoxyCodeLine{00045\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_MODEL\_H}}
+
+\end{DoxyCode}

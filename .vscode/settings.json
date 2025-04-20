@@ -97,8 +97,13 @@
     "csignal": "cpp",
     "utility": "cpp"
   },
+  "filewatcher.autoClearConsole": true,
+  "C/C++ Include Guard.Prefix": "PRT_",
+  "cmakeFormat.args": [
+    "--config-file ${workspaceFolder}/.cmake-format.yaml"
+  ],
   "cmake.useCMakePresets": "always",
-  "cmake.options.statusBarVisibility": "visible",
+  "cmake.options.statusBarVisibility": "compact",
   "workbench.colorCustomizations": {
     "debugConsole.errorForeground": "#ff0000"
   },
@@ -120,5 +125,14 @@
       "query": "state:closed repo:${owner}/${repository} sort:updated-desc"
     }
   ],
-  "C_Cpp.errorSquiggles": "disabled"
+  "cmake.allowUnsupportedPresetsVersions": true,
+  "cmake.allowCommentsInPresetsFile": true,
+  "cmake.buildTask": true,
+  "cmake.generator": "Ninja",
+  "cmake.ignoreCMakeListsMissing": true,
+  "cmake.launchBehavior": "breakAndReuseTerminal",
+  "clang-format.fallbackStyle": "Google",
+  "bookmarks.saveBookmarksInProject": true,
+  "cmake.clearOutputBeforeBuild": false,
+  "makefile.clearOutputBeforeBuild": false
 }

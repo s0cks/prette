@@ -1,0 +1,73 @@
+\doxysection{/\+Users/tazz/\+Projects/prette/\+Sources/prette/swapchain\+\_\+event.h File Reference}
+\hypertarget{swapchain__event_8h}{}\label{swapchain__event_8h}\index{/Users/tazz/Projects/prette/Sources/prette/swapchain\_event.h@{/Users/tazz/Projects/prette/Sources/prette/swapchain\_event.h}}
+{\ttfamily \#include "{}prette/event.\+h"{}}\newline
+Include dependency graph for swapchain\+\_\+event.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{swapchain__event_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{swapchain__event_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1_swap_chain_event}{prt\+::\+Swap\+Chain\+Event}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_swap_chain_init_event}{prt\+::\+Swap\+Chain\+Init\+Event}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_swap_chain_destroyed_event}{prt\+::\+Swap\+Chain\+Destroyed\+Event}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceprt}{prt}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{swapchain__event_8h_a86d634f247395fa962e84b5cadf99b98}{FOR\+\_\+\+EACH\+\_\+\+SWAPCHAIN\+\_\+\+EVENT}}(V)
+\item 
+\#define \mbox{\hyperlink{swapchain__event_8h_a83d2d158052fc2dc9bdf9bece3fd251e}{FORWARD\+\_\+\+DECLARE}}(Name)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceprt_aaf2eea615db9821c39f78e13a8214835}{prt\+::\+DEFINE\+\_\+\+EVENT\+\_\+\+SUBJECT}} (\mbox{\hyperlink{classprt_1_1_swap_chain}{Swap\+Chain}})
+\item 
+\mbox{\hyperlink{namespaceprt_ae95d413efc59d7688cf67a10f1897726}{prt\+::\+DEFINE\+\_\+\+EVENT\+\_\+\+OBSERVABLE}} (\mbox{\hyperlink{classprt_1_1_swap_chain}{Swap\+Chain}})
+\item 
+\mbox{\hyperlink{namespaceprt_a81e5f998ef26e699eb015f92d982c297}{prt\+::\+FOR\+\_\+\+EACH\+\_\+\+SWAPCHAIN\+\_\+\+EVENT}} (\mbox{\hyperlink{namespaceprt_a1a037a7c66a8e0c9eafb4608fef52cca}{DEFINE\+\_\+\+EVENT\+\_\+\+OBSERVABLE}})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{swapchain__event_8h_a86d634f247395fa962e84b5cadf99b98}\index{swapchain\_event.h@{swapchain\_event.h}!FOR\_EACH\_SWAPCHAIN\_EVENT@{FOR\_EACH\_SWAPCHAIN\_EVENT}}
+\index{FOR\_EACH\_SWAPCHAIN\_EVENT@{FOR\_EACH\_SWAPCHAIN\_EVENT}!swapchain\_event.h@{swapchain\_event.h}}
+\doxysubsubsection{\texorpdfstring{FOR\_EACH\_SWAPCHAIN\_EVENT}{FOR\_EACH\_SWAPCHAIN\_EVENT}}
+{\footnotesize\ttfamily \label{swapchain__event_8h_a86d634f247395fa962e84b5cadf99b98} 
+\#define FOR\+\_\+\+EACH\+\_\+\+SWAPCHAIN\+\_\+\+EVENT(\begin{DoxyParamCaption}\item[{}]{V}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ V(SwapChainInit)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(SwapChainDestroyed)}
+
+\end{DoxyCode}
+\Hypertarget{swapchain__event_8h_a83d2d158052fc2dc9bdf9bece3fd251e}\index{swapchain\_event.h@{swapchain\_event.h}!FORWARD\_DECLARE@{FORWARD\_DECLARE}}
+\index{FORWARD\_DECLARE@{FORWARD\_DECLARE}!swapchain\_event.h@{swapchain\_event.h}}
+\doxysubsubsection{\texorpdfstring{FORWARD\_DECLARE}{FORWARD\_DECLARE}}
+{\footnotesize\ttfamily \label{swapchain__event_8h_a83d2d158052fc2dc9bdf9bece3fd251e} 
+\#define FORWARD\+\_\+\+DECLARE(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{class\ }Name\#\#Event;}
+
+\end{DoxyCode}

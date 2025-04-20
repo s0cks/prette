@@ -18,41 +18,44 @@ list(
   PRT_LIBRARIES
   PNG::PNG
   JPEG::JPEG
-  leveldb::leveldb
-  flatbuffers::flatbuffers
   Freetype::Freetype
+  libconfig::config
   units::units
   semver
   fmt::fmt
+  jsonnet::jsonnet++
   tweeny
   rxcpp
   stduuid
   rapidjson
-  nuklear
+  RocksDB::rocksdb RocksDB::rocksdb-shared
   glm::glm
-  OpenAL::OpenAL
   Backward::Backward
   OpenSSL::Crypto
+  imgui::imgui
+  Vulkan::Vulkan
+  implot::implot
   rapidjson
+  yoga::yogacore
+  stduuid
+  absl::any absl::log absl::base absl::bits
+  tinyobjloader::tinyobjloader
+  ${LUA_LIBRARIES}
   glfw
-  libuv::uv_a)
-if(PRT_ENABLE_VK)
-  list(APPEND PRT_LIBRARIES Vulkan::Vulkan)
-else()
-  list(APPEND PRT_LIBRARIES OpenGL::GL GLEW::GLEW)
+  libuv::uv)
+
+if(PRT_TRACING_ENABLED)
+  list(APPEND PRT_LIBRARIES Tracy::TracyClient)
 endif()
 
-add_library(${PROJECT_NAME} STATIC ${PRT_SOURCES})
-target_compile_options(${PROJECT_NAME} PUBLIC ${PRT_COMPILE_OPTS})
-target_link_libraries(${PROJECT_NAME} PUBLIC ${PRT_LIBRARIES})
+add_library(${PROJECT_NAME} SHARED ${PRT_SOURCES})
+target_compile_options(${PROJECT_NAME} PUBLIC ${PRT_COMPILE_OPTS} )
+target_link_libraries(${PROJECT_NAME}
+  PUBLIC ${PRT_LIBRARIES} prt-flatbuffers)
 target_include_directories(
   ${PROJECT_NAME}
   PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}
-  PRIVATE ${TERMCOLOR_INCLUDE_DIRS})
+  PRIVATE ${TERMCOLOR_INCLUDE_DIRS} ${LUA_INCLUDE_DIR} ${Stb_INCLUDE_DIR})
 
 add_executable(${PROJECT_NAME}-client main.cc)
 target_link_libraries(${PROJECT_NAME}-client PUBLIC ${PROJECT_NAME})
-
-if(ENABLE_COVERAGE)
-  create_coverage_target(${PROJECT_NAME}-client)
-endif()

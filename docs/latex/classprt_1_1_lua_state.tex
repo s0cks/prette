@@ -1,0 +1,156 @@
+\doxysection{prt\+::Lua\+State Class Reference}
+\hypertarget{classprt_1_1_lua_state}{}\label{classprt_1_1_lua_state}\index{prt::LuaState@{prt::LuaState}}
+
+
+{\ttfamily \#include $<$lua.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_lua_state_a73593a1f88ad44d0689cf8bd066fb0a7}{\texorpdfstring{$\sim$}{\string~}\+Lua\+State}} ()
+\item 
+auto \mbox{\hyperlink{classprt_1_1_lua_state_ab51d94b01ef5f1c67fe3ff1b3b3d61d3}{Get\+State}} () const -\/$>$ lua\+\_\+\+State \texorpdfstring{$\ast$}{*}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_lua_state_a0a3db88f71f678a65ca4a39535f12e58}{Get\+Root}} () const -\/$>$ const std\+::filesystem\+::path \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_lua_state_a54edbdbec67b46ae72c5fc14c964fca6}{Get\+Script\+Path}} (const std\+::string \&filename) const -\/$>$ std\+::filesystem\+::path
+\item 
+void \mbox{\hyperlink{classprt_1_1_lua_state_a052c16d7379c083962cb0097cf489994}{Execute\+Code}} (const std\+::string \&code)
+\item 
+void \mbox{\hyperlink{classprt_1_1_lua_state_a2c394892ae709b4efbc8b073de24bb07}{Execute\+Script}} (const std\+::string \&path)
+\item 
+void \mbox{\hyperlink{classprt_1_1_lua_state_ad1f8a0631487c507b32e5ace87fdecca}{Execute\+Global\+Function}} (const std\+::string \&global, const std\+::string \&func)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classprt_1_1_lua_state_a9cbf1c884f056b8fa56015364b579825}{Init}} ()
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_lua_state_aac9c8191bb320fe6bc6f83a3286f28b2}{Is\+Initialized}} () -\/$>$ bool
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_lua_state_a0612d94b8671de21e31b3dbf3621e13e}{Get}} () -\/$>$ \mbox{\hyperlink{classprt_1_1_lua_state}{Lua\+State}} \texorpdfstring{$\ast$}{*}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_lua_state_a3e0666ada006bbe372e8dfbd6b640881}{Lua\+State}} (fs\+::path root)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_lua_state_a0587fa6a8079c69430fa8efe46d524c4}{New}} (const std\+::filesystem\+::path \&root) -\/$>$ \mbox{\hyperlink{classprt_1_1_lua_state}{Lua\+State}} \texorpdfstring{$\ast$}{*}
+\item 
+static void \mbox{\hyperlink{classprt_1_1_lua_state_a1243f824fb770c98481b0463a7695831}{Init\+Lua}} (lua\+\_\+\+State \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{engine_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+lua\+\_\+\+State \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1_lua_state_acb294d1eeb446a7a1d8d5773f63d1266}{state\+\_\+}}
+\item 
+std\+::filesystem\+::path \mbox{\hyperlink{classprt_1_1_lua_state_a5aedff1dcae1591bdf296a380265565d}{root\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_lua_state_a3e0666ada006bbe372e8dfbd6b640881}\index{prt::LuaState@{prt::LuaState}!LuaState@{LuaState}}
+\index{LuaState@{LuaState}!prt::LuaState@{prt::LuaState}}
+\doxysubsubsection{\texorpdfstring{LuaState()}{LuaState()}}
+{\footnotesize\ttfamily \label{classprt_1_1_lua_state_a3e0666ada006bbe372e8dfbd6b640881} 
+prt\+::\+Lua\+State\+::\+Lua\+State (\begin{DoxyParamCaption}\item[{fs\+::path}]{root}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}, {\ttfamily [protected]}}
+
+\Hypertarget{classprt_1_1_lua_state_a73593a1f88ad44d0689cf8bd066fb0a7}\index{prt::LuaState@{prt::LuaState}!````~LuaState@{\texorpdfstring{$\sim$}{\string~}LuaState}}
+\index{````~LuaState@{\texorpdfstring{$\sim$}{\string~}LuaState}!prt::LuaState@{prt::LuaState}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}LuaState()}{\string~LuaState()}}
+{\footnotesize\ttfamily \label{classprt_1_1_lua_state_a73593a1f88ad44d0689cf8bd066fb0a7} 
+prt\+::\+Lua\+State\+::\texorpdfstring{$\sim$}{\string~}\+Lua\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_lua_state_a052c16d7379c083962cb0097cf489994}\index{prt::LuaState@{prt::LuaState}!ExecuteCode@{ExecuteCode}}
+\index{ExecuteCode@{ExecuteCode}!prt::LuaState@{prt::LuaState}}
+\doxysubsubsection{\texorpdfstring{ExecuteCode()}{ExecuteCode()}}
+{\footnotesize\ttfamily \label{classprt_1_1_lua_state_a052c16d7379c083962cb0097cf489994} 
+void prt\+::\+Lua\+State\+::\+Execute\+Code (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{code}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_lua_state_ad1f8a0631487c507b32e5ace87fdecca}\index{prt::LuaState@{prt::LuaState}!ExecuteGlobalFunction@{ExecuteGlobalFunction}}
+\index{ExecuteGlobalFunction@{ExecuteGlobalFunction}!prt::LuaState@{prt::LuaState}}
+\doxysubsubsection{\texorpdfstring{ExecuteGlobalFunction()}{ExecuteGlobalFunction()}}
+{\footnotesize\ttfamily \label{classprt_1_1_lua_state_ad1f8a0631487c507b32e5ace87fdecca} 
+void prt\+::\+Lua\+State\+::\+Execute\+Global\+Function (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{global}{, }\item[{const std\+::string \&}]{func}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_lua_state_a2c394892ae709b4efbc8b073de24bb07}\index{prt::LuaState@{prt::LuaState}!ExecuteScript@{ExecuteScript}}
+\index{ExecuteScript@{ExecuteScript}!prt::LuaState@{prt::LuaState}}
+\doxysubsubsection{\texorpdfstring{ExecuteScript()}{ExecuteScript()}}
+{\footnotesize\ttfamily \label{classprt_1_1_lua_state_a2c394892ae709b4efbc8b073de24bb07} 
+void prt\+::\+Lua\+State\+::\+Execute\+Script (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_lua_state_a0612d94b8671de21e31b3dbf3621e13e}\index{prt::LuaState@{prt::LuaState}!Get@{Get}}
+\index{Get@{Get}!prt::LuaState@{prt::LuaState}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}}
+{\footnotesize\ttfamily \label{classprt_1_1_lua_state_a0612d94b8671de21e31b3dbf3621e13e} 
+auto prt\+::\+Lua\+State\+::\+Get (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{classprt_1_1_lua_state}{Lua\+State}}\texorpdfstring{$\ast$}{*}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_lua_state_a0a3db88f71f678a65ca4a39535f12e58}\index{prt::LuaState@{prt::LuaState}!GetRoot@{GetRoot}}
+\index{GetRoot@{GetRoot}!prt::LuaState@{prt::LuaState}}
+\doxysubsubsection{\texorpdfstring{GetRoot()}{GetRoot()}}
+{\footnotesize\ttfamily \label{classprt_1_1_lua_state_a0a3db88f71f678a65ca4a39535f12e58} 
+auto prt\+::\+Lua\+State\+::\+Get\+Root (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const std\+::filesystem\+::path\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_lua_state_a54edbdbec67b46ae72c5fc14c964fca6}\index{prt::LuaState@{prt::LuaState}!GetScriptPath@{GetScriptPath}}
+\index{GetScriptPath@{GetScriptPath}!prt::LuaState@{prt::LuaState}}
+\doxysubsubsection{\texorpdfstring{GetScriptPath()}{GetScriptPath()}}
+{\footnotesize\ttfamily \label{classprt_1_1_lua_state_a54edbdbec67b46ae72c5fc14c964fca6} 
+auto prt\+::\+Lua\+State\+::\+Get\+Script\+Path (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename}{}\end{DoxyParamCaption}) const -\/$>$ std\+::filesystem\+::path \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_lua_state_ab51d94b01ef5f1c67fe3ff1b3b3d61d3}\index{prt::LuaState@{prt::LuaState}!GetState@{GetState}}
+\index{GetState@{GetState}!prt::LuaState@{prt::LuaState}}
+\doxysubsubsection{\texorpdfstring{GetState()}{GetState()}}
+{\footnotesize\ttfamily \label{classprt_1_1_lua_state_ab51d94b01ef5f1c67fe3ff1b3b3d61d3} 
+auto prt\+::\+Lua\+State\+::\+Get\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ lua\+\_\+\+State\texorpdfstring{$\ast$}{*} \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_lua_state_a9cbf1c884f056b8fa56015364b579825}\index{prt::LuaState@{prt::LuaState}!Init@{Init}}
+\index{Init@{Init}!prt::LuaState@{prt::LuaState}}
+\doxysubsubsection{\texorpdfstring{Init()}{Init()}}
+{\footnotesize\ttfamily \label{classprt_1_1_lua_state_a9cbf1c884f056b8fa56015364b579825} 
+void prt\+::\+Lua\+State\+::\+Init (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_lua_state_a1243f824fb770c98481b0463a7695831}\index{prt::LuaState@{prt::LuaState}!InitLua@{InitLua}}
+\index{InitLua@{InitLua}!prt::LuaState@{prt::LuaState}}
+\doxysubsubsection{\texorpdfstring{InitLua()}{InitLua()}}
+{\footnotesize\ttfamily \label{classprt_1_1_lua_state_a1243f824fb770c98481b0463a7695831} 
+void prt\+::\+Lua\+State\+::\+Init\+Lua (\begin{DoxyParamCaption}\item[{lua\+\_\+\+State \texorpdfstring{$\ast$}{*}}]{L}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_lua_state_aac9c8191bb320fe6bc6f83a3286f28b2}\index{prt::LuaState@{prt::LuaState}!IsInitialized@{IsInitialized}}
+\index{IsInitialized@{IsInitialized}!prt::LuaState@{prt::LuaState}}
+\doxysubsubsection{\texorpdfstring{IsInitialized()}{IsInitialized()}}
+{\footnotesize\ttfamily \label{classprt_1_1_lua_state_aac9c8191bb320fe6bc6f83a3286f28b2} 
+auto prt\+::\+Lua\+State\+::\+Is\+Initialized (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ bool\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_lua_state_a0587fa6a8079c69430fa8efe46d524c4}\index{prt::LuaState@{prt::LuaState}!New@{New}}
+\index{New@{New}!prt::LuaState@{prt::LuaState}}
+\doxysubsubsection{\texorpdfstring{New()}{New()}}
+{\footnotesize\ttfamily \label{classprt_1_1_lua_state_a0587fa6a8079c69430fa8efe46d524c4} 
+auto prt\+::\+Lua\+State\+::\+New (\begin{DoxyParamCaption}\item[{const std\+::filesystem\+::path \&}]{root}{}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{classprt_1_1_lua_state}{Lua\+State}}\texorpdfstring{$\ast$}{*}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_lua_state_a5aedff1dcae1591bdf296a380265565d}\index{prt::LuaState@{prt::LuaState}!root\_@{root\_}}
+\index{root\_@{root\_}!prt::LuaState@{prt::LuaState}}
+\doxysubsubsection{\texorpdfstring{root\_}{root\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_lua_state_a5aedff1dcae1591bdf296a380265565d} 
+std\+::filesystem\+::path prt\+::\+Lua\+State\+::root\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_lua_state_acb294d1eeb446a7a1d8d5773f63d1266}\index{prt::LuaState@{prt::LuaState}!state\_@{state\_}}
+\index{state\_@{state\_}!prt::LuaState@{prt::LuaState}}
+\doxysubsubsection{\texorpdfstring{state\_}{state\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_lua_state_acb294d1eeb446a7a1d8d5773f63d1266} 
+lua\+\_\+\+State\texorpdfstring{$\ast$}{*} prt\+::\+Lua\+State\+::state\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{lua_8h}{lua.\+h}}\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{lua_8cc}{lua.\+cc}}\end{DoxyCompactItemize}

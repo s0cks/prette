@@ -1,0 +1,518 @@
+\doxysection{prt\+::Driver Class Reference}
+\hypertarget{classprt_1_1_driver}{}\label{classprt_1_1_driver}\index{prt::Driver@{prt::Driver}}
+
+
+{\ttfamily \#include $<$gfx\+\_\+vk.\+h$>$}
+
+
+
+Inheritance diagram for prt\+::Driver\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=162pt]{classprt_1_1_driver__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for prt\+::Driver\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=162pt]{classprt_1_1_driver__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_driver_ab2f103fafb0f3970091a7e3944798ffa}{\texorpdfstring{$\sim$}{\string~}\+Driver}} ()
+\item 
+auto \mbox{\hyperlink{classprt_1_1_driver_a4bc3e78fee942ba9495a42a84549dd9b}{Get\+Application\+Info}} () const -\/$>$ Vk\+Application\+Info
+\item 
+auto \mbox{\hyperlink{classprt_1_1_driver_ab668d50223bc184f85dfcb21c89b4110}{Get\+Instance}} () const -\/$>$ Vk\+Instance
+\item 
+auto \mbox{\hyperlink{classprt_1_1_driver_a00344f2beacba0c43dd724e02d283be1}{Get\+Physical\+Device}} () const -\/$>$ Vk\+Physical\+Device
+\item 
+auto \mbox{\hyperlink{classprt_1_1_driver_a128c6679c2beba6f22040a2c142f77ec}{Get\+Device}} () const -\/$>$ Vk\+Device
+\item 
+auto \mbox{\hyperlink{classprt_1_1_driver_a700c2521bcec49414cfc0c1fb972f592}{Get\+Graphics\+Queue}} () const -\/$>$ Vk\+Queue
+\item 
+auto \mbox{\hyperlink{classprt_1_1_driver_a476ebbbfbede864fe82b89bbfdfd0d67}{Get\+Present\+Queue}} () const -\/$>$ Vk\+Queue
+\item 
+auto \mbox{\hyperlink{classprt_1_1_driver_aeb474957a441994ecf8c7ce04435e18e}{Get\+Validation\+Layers}} () const -\/$>$ const vk\+::\+Validation\+Layer\+List \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_driver_a9244e5bd31a332ec31c709294686c68c}{Get\+Instance\+Extensions}} () const -\/$>$ const vk\+::\+Extension\+List \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_driver_a0b00db0e1aaf63059865b78c8dde0f1f}{Get\+Device\+Extensions}} () const -\/$>$ const vk\+::\+Extension\+List \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_driver_a10a0c892ff7f73f7819461295dc5cf6a}{Get\+Allocator}} () const -\/$>$ Vk\+Allocation\+Callbacks \texorpdfstring{$\ast$}{*}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_driver_ae27002ae22401fed449356329a225792}{Get\+Surface}} () const -\/$>$ const Vk\+Surface\+KHR \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_driver_a8028fcc88a9959f50044b7c783701dd8}{Get\+Command\+Pool}} () const -\/$>$ Vk\+Command\+Pool const \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_driver_ae191e56571dba3b26868c39e8a9fd467}{Get\+Descriptor\+Pool}} () const -\/$>$ Vk\+Descriptor\+Pool const \&
+\item 
+void \mbox{\hyperlink{classprt_1_1_driver_a3289261b45f1601ec122541e9f87b68c}{Wait\+Device\+Idle}} () const
+\item 
+auto \mbox{\hyperlink{classprt_1_1_driver_a2db2b3119ce0ac9a7567d658f85a92dc}{Get\+Depth\+Format}} () const -\/$>$ Vk\+Format
+\item 
+void \mbox{\hyperlink{classprt_1_1_driver_a804ccedcc7d91eaf7d49ddcde3999d9c}{Release\+Command\+Buffers}} (const Vk\+Command\+Buffer \texorpdfstring{$\ast$}{*}buffers, const uint64\+\_\+t num\+\_\+buffers) const
+\item 
+{\footnotesize template$<$typename Container $>$ }\\void \mbox{\hyperlink{classprt_1_1_driver_a2b28915d63c651429b4d129922c81b58}{Release\+Command\+Buffers}} (const Container \&buffers) const
+\item 
+void \mbox{\hyperlink{classprt_1_1_driver_aa81ce44aaa6a5ca6393978786adb5e5e}{Create\+Render\+Pass}} (const Vk\+Render\+Pass\+Create\+Info \&create\+\_\+info, Vk\+Render\+Pass \&pass)
+\item 
+void \mbox{\hyperlink{classprt_1_1_driver_a3e89658ddb6a84ad8431014bac3ec49d}{Create\+Pipeline\+Layout}} (const Vk\+Pipeline\+Layout\+Create\+Info \&create\+\_\+info, Vk\+Pipeline\+Layout \&layout)
+\item 
+void \mbox{\hyperlink{classprt_1_1_driver_a7eced8b199776b307b52bc7c246185f9}{Create\+Pipeline\+Cache}} (const Vk\+Pipeline\+Cache\+Create\+Info \&create\+\_\+info, Vk\+Pipeline\+Cache \&cache)
+\item 
+void \mbox{\hyperlink{classprt_1_1_driver_a80a7477ca2fe4ccd1a1823f5874df46b}{Create\+Graphics\+Pipeline}} (const Vk\+Graphics\+Pipeline\+Create\+Info \&create\+\_\+info, const Vk\+Pipeline\+Cache \&cache, Vk\+Pipeline \&pipeline)
+\item 
+void \mbox{\hyperlink{classprt_1_1_driver_a7b3c00f605721bd072d5c9698785fa3b}{Allocate\+Command\+Buffers}} (const Vk\+Command\+Buffer\+Allocate\+Info \&alloc\+\_\+info, Vk\+Command\+Buffer \texorpdfstring{$\ast$}{*}buffers)
+\item 
+{\footnotesize template$<$typename H $>$ }\\void \mbox{\hyperlink{classprt_1_1_driver_a12eac05feda8696d1bdb9292c9196309}{Destroy}} (const H \&handle, void(\texorpdfstring{$\ast$}{*}destroyer)(Vk\+Device, H, const Vk\+Allocation\+Callbacks \texorpdfstring{$\ast$}{*}))
+\item 
+void \mbox{\hyperlink{classprt_1_1_driver_ae44f75430efea08459c91b34d6c16f68}{Destroy}} (const Vk\+Device\+Memory \&memory)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classprt_1_1_driver_base}{prt\+::\+Driver\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classprt_1_1_driver_base_a888e963ce7ae681e427959c16fd573f1}{\texorpdfstring{$\sim$}{\string~}\+Driver\+Base}} ()=default
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_driver_a6dfcf8e1e54146b5b9a9c2de36ed3768}{DEFINE\+\_\+\+NON\+\_\+\+COPYABLE\+\_\+\+TYPE}} (\mbox{\hyperlink{classprt_1_1_driver}{Driver}})
+\item 
+\mbox{\hyperlink{classprt_1_1_driver_a3cfdf510b3d4004ca6d662949b5dc29b}{Driver}} ()
+\item 
+void \mbox{\hyperlink{classprt_1_1_driver_a504cfe1293d5c7bcd2a59a96e4ddd2e0}{Init\+Application\+Info}} ()
+\item 
+void \mbox{\hyperlink{classprt_1_1_driver_a813737f118b197b18b2cc1e55b396704}{Init\+Instance}} ()
+\item 
+void \mbox{\hyperlink{classprt_1_1_driver_ac9556a206684d94f16a872e765777216}{Init\+Physical\+Device}} ()
+\item 
+void \mbox{\hyperlink{classprt_1_1_driver_abf0417525f37bcb76235f41f30e46742}{Init\+Surface}} ()
+\item 
+void \mbox{\hyperlink{classprt_1_1_driver_ae92b5dd68dc98fb40e8a70381624ca27}{Init\+Logical\+Device}} (const float priority)
+\item 
+void \mbox{\hyperlink{classprt_1_1_driver_a1b8252f55392c6128d206795c8460e79}{Init\+Command\+Pool}} ()
+\item 
+void \mbox{\hyperlink{classprt_1_1_driver_a475761b5f3a189fadab12ae3ded1b39e}{Init\+Descriptor\+Pool}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_driver_a5139b6722670d6e86d11f039f1c7e250}{New}} () -\/$>$ \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Vk\+Application\+Info \mbox{\hyperlink{classprt_1_1_driver_aa84987098309067b133a681fea5e867c}{app\+\_\+info\+\_\+}} \{\}
+\item 
+Vk\+Instance \mbox{\hyperlink{classprt_1_1_driver_aa6d0dc78cac202e0e4386b9602fc1a21}{instance\+\_\+}} \{\}
+\item 
+Vk\+Physical\+Device \mbox{\hyperlink{classprt_1_1_driver_aef22a0b75e18d1ac4c0765c49a498679}{physical\+\_\+device\+\_\+}} \{\}
+\item 
+Vk\+Device \mbox{\hyperlink{classprt_1_1_driver_ae9f7b66c9fb61d5f20f17d8c0853ca71}{device\+\_\+}} \{\}
+\item 
+Vk\+Queue \mbox{\hyperlink{classprt_1_1_driver_a7a563f3ed172d408af2401ef7fd5eef2}{graphics\+\_\+queue\+\_\+}} \{\}
+\item 
+Vk\+Queue \mbox{\hyperlink{classprt_1_1_driver_a0dcef29393919dfbc9d2ef8ac77fd86e}{present\+\_\+queue\+\_\+}} \{\}
+\item 
+Vk\+Surface\+KHR \mbox{\hyperlink{classprt_1_1_driver_a840d165fa7766f07b8e4359bab2b6868}{surface\+\_\+}} \{\}
+\item 
+Vk\+Command\+Pool \mbox{\hyperlink{classprt_1_1_driver_a48bd59ea337e299c63afd619c2bc9467}{command\+\_\+pool\+\_\+}} \{\}
+\item 
+Vk\+Descriptor\+Pool \mbox{\hyperlink{classprt_1_1_driver_a050fa206a41d403588d99ee4a6b7ee60}{descriptor\+\_\+pool\+\_\+}} \{\}
+\item 
+Vk\+Allocation\+Callbacks \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1_driver_a70a9cc54d358214023a3abe2e12598eb}{allocator\+\_\+}} = nullptr
+\item 
+vk\+::\+Extension\+List \mbox{\hyperlink{classprt_1_1_driver_aeeede03c5c5e99056357ddcc09284387}{instance\+\_\+extensions\+\_\+}} \{\}
+\item 
+vk\+::\+Extension\+List \mbox{\hyperlink{classprt_1_1_driver_a3bbf9791ce0e62b75d44d63bd3e4bd3e}{device\+\_\+extensions\+\_\+}}
+\item 
+vk\+::\+Validation\+Layer\+List \mbox{\hyperlink{classprt_1_1_driver_a89d03bc7394ef7aae5d8653bc478450b}{validation\+\_\+layers\+\_\+}} \{"{}VK\+\_\+\+LAYER\+\_\+\+KHRONOS\+\_\+validation"{}\}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1_driver_af3d14e26ba8af9e6cc5a32aad8446de7}{Runtime}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_driver_a9aa251d710bba4f257a519ebc5d01d51}{Lua\+State}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_driver_aec64db508f7e38f3c27d18e61ddb8a15}{Driver\+Base}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_driver_a73d514fb9a4d35225a7c1449a14a666e}{Init\+State}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_driver_a29c748ef4d814963f9821a5c470b5fef}{Terminated\+State}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classprt_1_1_driver_base}{prt\+::\+Driver\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_driver_base_a5b3657be0a8a6df6fd68c84aebd98e6f}{Is\+Initialized}} () -\/$>$ bool
+\item 
+static void \mbox{\hyperlink{classprt_1_1_driver_base_a91e0251d6ec0b82e3908fa15e021780f}{Init}} ()
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_driver_base_a3e9721ab1d3911692ddbed01267f4b02}{Get}} () -\/$>$ \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classprt_1_1_driver_base}{prt\+::\+Driver\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_driver_base_ad064939c42260daba8ac182a3775c017}{Driver\+Base}} ()=default
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Member Functions inherited from \mbox{\hyperlink{classprt_1_1_driver_base}{prt\+::\+Driver\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classprt_1_1_driver_base_a0d6eed44c4b11f90da1041f1e2fec397}{Publish\+Event}} (Driver\+Event \texorpdfstring{$\ast$}{*}event)
+\item 
+{\footnotesize template$<$class E , typename... Args$>$ }\\static void \mbox{\hyperlink{classprt_1_1_driver_base_acf8a8ad5fe457ddb7a056197225d8ffa}{Publish}} (Args... args)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_driver_a3cfdf510b3d4004ca6d662949b5dc29b}\index{prt::Driver@{prt::Driver}!Driver@{Driver}}
+\index{Driver@{Driver}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{Driver()}{Driver()}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_a3cfdf510b3d4004ca6d662949b5dc29b} 
+prt\+::\+Driver\+::\+Driver (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_driver_ab2f103fafb0f3970091a7e3944798ffa}\index{prt::Driver@{prt::Driver}!````~Driver@{\texorpdfstring{$\sim$}{\string~}Driver}}
+\index{````~Driver@{\texorpdfstring{$\sim$}{\string~}Driver}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Driver()}{\string~Driver()}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_ab2f103fafb0f3970091a7e3944798ffa} 
+prt\+::\+Driver\+::\texorpdfstring{$\sim$}{\string~}\+Driver (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_driver_a7b3c00f605721bd072d5c9698785fa3b}\index{prt::Driver@{prt::Driver}!AllocateCommandBuffers@{AllocateCommandBuffers}}
+\index{AllocateCommandBuffers@{AllocateCommandBuffers}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{AllocateCommandBuffers()}{AllocateCommandBuffers()}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_a7b3c00f605721bd072d5c9698785fa3b} 
+void prt\+::\+Driver\+::\+Allocate\+Command\+Buffers (\begin{DoxyParamCaption}\item[{const Vk\+Command\+Buffer\+Allocate\+Info \&}]{alloc\+\_\+info}{, }\item[{Vk\+Command\+Buffer \texorpdfstring{$\ast$}{*}}]{buffers}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_driver_a80a7477ca2fe4ccd1a1823f5874df46b}\index{prt::Driver@{prt::Driver}!CreateGraphicsPipeline@{CreateGraphicsPipeline}}
+\index{CreateGraphicsPipeline@{CreateGraphicsPipeline}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{CreateGraphicsPipeline()}{CreateGraphicsPipeline()}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_a80a7477ca2fe4ccd1a1823f5874df46b} 
+void prt\+::\+Driver\+::\+Create\+Graphics\+Pipeline (\begin{DoxyParamCaption}\item[{const Vk\+Graphics\+Pipeline\+Create\+Info \&}]{create\+\_\+info}{, }\item[{const Vk\+Pipeline\+Cache \&}]{cache}{, }\item[{Vk\+Pipeline \&}]{pipeline}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_driver_a7eced8b199776b307b52bc7c246185f9}\index{prt::Driver@{prt::Driver}!CreatePipelineCache@{CreatePipelineCache}}
+\index{CreatePipelineCache@{CreatePipelineCache}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{CreatePipelineCache()}{CreatePipelineCache()}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_a7eced8b199776b307b52bc7c246185f9} 
+void prt\+::\+Driver\+::\+Create\+Pipeline\+Cache (\begin{DoxyParamCaption}\item[{const Vk\+Pipeline\+Cache\+Create\+Info \&}]{create\+\_\+info}{, }\item[{Vk\+Pipeline\+Cache \&}]{cache}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_driver_a3e89658ddb6a84ad8431014bac3ec49d}\index{prt::Driver@{prt::Driver}!CreatePipelineLayout@{CreatePipelineLayout}}
+\index{CreatePipelineLayout@{CreatePipelineLayout}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{CreatePipelineLayout()}{CreatePipelineLayout()}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_a3e89658ddb6a84ad8431014bac3ec49d} 
+void prt\+::\+Driver\+::\+Create\+Pipeline\+Layout (\begin{DoxyParamCaption}\item[{const Vk\+Pipeline\+Layout\+Create\+Info \&}]{create\+\_\+info}{, }\item[{Vk\+Pipeline\+Layout \&}]{layout}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_driver_aa81ce44aaa6a5ca6393978786adb5e5e}\index{prt::Driver@{prt::Driver}!CreateRenderPass@{CreateRenderPass}}
+\index{CreateRenderPass@{CreateRenderPass}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{CreateRenderPass()}{CreateRenderPass()}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_aa81ce44aaa6a5ca6393978786adb5e5e} 
+void prt\+::\+Driver\+::\+Create\+Render\+Pass (\begin{DoxyParamCaption}\item[{const Vk\+Render\+Pass\+Create\+Info \&}]{create\+\_\+info}{, }\item[{Vk\+Render\+Pass \&}]{pass}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_driver_a6dfcf8e1e54146b5b9a9c2de36ed3768}\index{prt::Driver@{prt::Driver}!DEFINE\_NON\_COPYABLE\_TYPE@{DEFINE\_NON\_COPYABLE\_TYPE}}
+\index{DEFINE\_NON\_COPYABLE\_TYPE@{DEFINE\_NON\_COPYABLE\_TYPE}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_NON\_COPYABLE\_TYPE()}{DEFINE\_NON\_COPYABLE\_TYPE()}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_a6dfcf8e1e54146b5b9a9c2de36ed3768} 
+prt\+::\+Driver\+::\+DEFINE\+\_\+\+NON\+\_\+\+COPYABLE\+\_\+\+TYPE (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_driver}{Driver}}}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_driver_a12eac05feda8696d1bdb9292c9196309}\index{prt::Driver@{prt::Driver}!Destroy@{Destroy}}
+\index{Destroy@{Destroy}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{Destroy()}{Destroy()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_a12eac05feda8696d1bdb9292c9196309} 
+template$<$typename H $>$ \\
+void prt\+::\+Driver\+::\+Destroy (\begin{DoxyParamCaption}\item[{const H \&}]{handle}{, }\item[{void(\texorpdfstring{$\ast$}{*}}]{destroyer~}{)(Vk\+Device, H, const Vk\+Allocation\+Callbacks \texorpdfstring{$\ast$}{*})}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_driver_ae44f75430efea08459c91b34d6c16f68}\index{prt::Driver@{prt::Driver}!Destroy@{Destroy}}
+\index{Destroy@{Destroy}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{Destroy()}{Destroy()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_ae44f75430efea08459c91b34d6c16f68} 
+void prt\+::\+Driver\+::\+Destroy (\begin{DoxyParamCaption}\item[{const Vk\+Device\+Memory \&}]{memory}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_driver_a10a0c892ff7f73f7819461295dc5cf6a}\index{prt::Driver@{prt::Driver}!GetAllocator@{GetAllocator}}
+\index{GetAllocator@{GetAllocator}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{GetAllocator()}{GetAllocator()}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_a10a0c892ff7f73f7819461295dc5cf6a} 
+auto prt\+::\+Driver\+::\+Get\+Allocator (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ Vk\+Allocation\+Callbacks\texorpdfstring{$\ast$}{*} \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_driver_a4bc3e78fee942ba9495a42a84549dd9b}\index{prt::Driver@{prt::Driver}!GetApplicationInfo@{GetApplicationInfo}}
+\index{GetApplicationInfo@{GetApplicationInfo}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{GetApplicationInfo()}{GetApplicationInfo()}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_a4bc3e78fee942ba9495a42a84549dd9b} 
+auto prt\+::\+Driver\+::\+Get\+Application\+Info (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ Vk\+Application\+Info \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_driver_a8028fcc88a9959f50044b7c783701dd8}\index{prt::Driver@{prt::Driver}!GetCommandPool@{GetCommandPool}}
+\index{GetCommandPool@{GetCommandPool}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{GetCommandPool()}{GetCommandPool()}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_a8028fcc88a9959f50044b7c783701dd8} 
+auto prt\+::\+Driver\+::\+Get\+Command\+Pool (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ Vk\+Command\+Pool const\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_driver_a2db2b3119ce0ac9a7567d658f85a92dc}\index{prt::Driver@{prt::Driver}!GetDepthFormat@{GetDepthFormat}}
+\index{GetDepthFormat@{GetDepthFormat}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{GetDepthFormat()}{GetDepthFormat()}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_a2db2b3119ce0ac9a7567d658f85a92dc} 
+auto prt\+::\+Driver\+::\+Get\+Depth\+Format (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ Vk\+Format}
+
+\Hypertarget{classprt_1_1_driver_ae191e56571dba3b26868c39e8a9fd467}\index{prt::Driver@{prt::Driver}!GetDescriptorPool@{GetDescriptorPool}}
+\index{GetDescriptorPool@{GetDescriptorPool}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{GetDescriptorPool()}{GetDescriptorPool()}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_ae191e56571dba3b26868c39e8a9fd467} 
+auto prt\+::\+Driver\+::\+Get\+Descriptor\+Pool (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ Vk\+Descriptor\+Pool const\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_driver_a128c6679c2beba6f22040a2c142f77ec}\index{prt::Driver@{prt::Driver}!GetDevice@{GetDevice}}
+\index{GetDevice@{GetDevice}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{GetDevice()}{GetDevice()}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_a128c6679c2beba6f22040a2c142f77ec} 
+auto prt\+::\+Driver\+::\+Get\+Device (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ Vk\+Device \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_driver_a0b00db0e1aaf63059865b78c8dde0f1f}\index{prt::Driver@{prt::Driver}!GetDeviceExtensions@{GetDeviceExtensions}}
+\index{GetDeviceExtensions@{GetDeviceExtensions}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{GetDeviceExtensions()}{GetDeviceExtensions()}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_a0b00db0e1aaf63059865b78c8dde0f1f} 
+auto prt\+::\+Driver\+::\+Get\+Device\+Extensions (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const vk\+::\+Extension\+List\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_driver_a700c2521bcec49414cfc0c1fb972f592}\index{prt::Driver@{prt::Driver}!GetGraphicsQueue@{GetGraphicsQueue}}
+\index{GetGraphicsQueue@{GetGraphicsQueue}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{GetGraphicsQueue()}{GetGraphicsQueue()}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_a700c2521bcec49414cfc0c1fb972f592} 
+auto prt\+::\+Driver\+::\+Get\+Graphics\+Queue (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ Vk\+Queue \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_driver_ab668d50223bc184f85dfcb21c89b4110}\index{prt::Driver@{prt::Driver}!GetInstance@{GetInstance}}
+\index{GetInstance@{GetInstance}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{GetInstance()}{GetInstance()}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_ab668d50223bc184f85dfcb21c89b4110} 
+auto prt\+::\+Driver\+::\+Get\+Instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ Vk\+Instance \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_driver_a9244e5bd31a332ec31c709294686c68c}\index{prt::Driver@{prt::Driver}!GetInstanceExtensions@{GetInstanceExtensions}}
+\index{GetInstanceExtensions@{GetInstanceExtensions}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{GetInstanceExtensions()}{GetInstanceExtensions()}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_a9244e5bd31a332ec31c709294686c68c} 
+auto prt\+::\+Driver\+::\+Get\+Instance\+Extensions (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const vk\+::\+Extension\+List\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_driver_a00344f2beacba0c43dd724e02d283be1}\index{prt::Driver@{prt::Driver}!GetPhysicalDevice@{GetPhysicalDevice}}
+\index{GetPhysicalDevice@{GetPhysicalDevice}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{GetPhysicalDevice()}{GetPhysicalDevice()}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_a00344f2beacba0c43dd724e02d283be1} 
+auto prt\+::\+Driver\+::\+Get\+Physical\+Device (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ Vk\+Physical\+Device \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_driver_a476ebbbfbede864fe82b89bbfdfd0d67}\index{prt::Driver@{prt::Driver}!GetPresentQueue@{GetPresentQueue}}
+\index{GetPresentQueue@{GetPresentQueue}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{GetPresentQueue()}{GetPresentQueue()}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_a476ebbbfbede864fe82b89bbfdfd0d67} 
+auto prt\+::\+Driver\+::\+Get\+Present\+Queue (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ Vk\+Queue \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_driver_ae27002ae22401fed449356329a225792}\index{prt::Driver@{prt::Driver}!GetSurface@{GetSurface}}
+\index{GetSurface@{GetSurface}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{GetSurface()}{GetSurface()}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_ae27002ae22401fed449356329a225792} 
+auto prt\+::\+Driver\+::\+Get\+Surface (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const Vk\+Surface\+KHR\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_driver_aeb474957a441994ecf8c7ce04435e18e}\index{prt::Driver@{prt::Driver}!GetValidationLayers@{GetValidationLayers}}
+\index{GetValidationLayers@{GetValidationLayers}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{GetValidationLayers()}{GetValidationLayers()}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_aeb474957a441994ecf8c7ce04435e18e} 
+auto prt\+::\+Driver\+::\+Get\+Validation\+Layers (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const vk\+::\+Validation\+Layer\+List\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_driver_a504cfe1293d5c7bcd2a59a96e4ddd2e0}\index{prt::Driver@{prt::Driver}!InitApplicationInfo@{InitApplicationInfo}}
+\index{InitApplicationInfo@{InitApplicationInfo}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{InitApplicationInfo()}{InitApplicationInfo()}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_a504cfe1293d5c7bcd2a59a96e4ddd2e0} 
+void prt\+::\+Driver\+::\+Init\+Application\+Info (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_driver_a1b8252f55392c6128d206795c8460e79}\index{prt::Driver@{prt::Driver}!InitCommandPool@{InitCommandPool}}
+\index{InitCommandPool@{InitCommandPool}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{InitCommandPool()}{InitCommandPool()}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_a1b8252f55392c6128d206795c8460e79} 
+void prt\+::\+Driver\+::\+Init\+Command\+Pool (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_driver_a475761b5f3a189fadab12ae3ded1b39e}\index{prt::Driver@{prt::Driver}!InitDescriptorPool@{InitDescriptorPool}}
+\index{InitDescriptorPool@{InitDescriptorPool}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{InitDescriptorPool()}{InitDescriptorPool()}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_a475761b5f3a189fadab12ae3ded1b39e} 
+void prt\+::\+Driver\+::\+Init\+Descriptor\+Pool (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_driver_a813737f118b197b18b2cc1e55b396704}\index{prt::Driver@{prt::Driver}!InitInstance@{InitInstance}}
+\index{InitInstance@{InitInstance}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{InitInstance()}{InitInstance()}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_a813737f118b197b18b2cc1e55b396704} 
+void prt\+::\+Driver\+::\+Init\+Instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_driver_ae92b5dd68dc98fb40e8a70381624ca27}\index{prt::Driver@{prt::Driver}!InitLogicalDevice@{InitLogicalDevice}}
+\index{InitLogicalDevice@{InitLogicalDevice}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{InitLogicalDevice()}{InitLogicalDevice()}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_ae92b5dd68dc98fb40e8a70381624ca27} 
+void prt\+::\+Driver\+::\+Init\+Logical\+Device (\begin{DoxyParamCaption}\item[{const float}]{priority}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_driver_ac9556a206684d94f16a872e765777216}\index{prt::Driver@{prt::Driver}!InitPhysicalDevice@{InitPhysicalDevice}}
+\index{InitPhysicalDevice@{InitPhysicalDevice}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{InitPhysicalDevice()}{InitPhysicalDevice()}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_ac9556a206684d94f16a872e765777216} 
+void prt\+::\+Driver\+::\+Init\+Physical\+Device (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_driver_abf0417525f37bcb76235f41f30e46742}\index{prt::Driver@{prt::Driver}!InitSurface@{InitSurface}}
+\index{InitSurface@{InitSurface}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{InitSurface()}{InitSurface()}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_abf0417525f37bcb76235f41f30e46742} 
+void prt\+::\+Driver\+::\+Init\+Surface (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_driver_a5139b6722670d6e86d11f039f1c7e250}\index{prt::Driver@{prt::Driver}!New@{New}}
+\index{New@{New}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{New()}{New()}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_a5139b6722670d6e86d11f039f1c7e250} 
+static auto prt\+::\+Driver\+::\+New (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{classprt_1_1_driver}{Driver}}\texorpdfstring{$\ast$}{*} \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_driver_a2b28915d63c651429b4d129922c81b58}\index{prt::Driver@{prt::Driver}!ReleaseCommandBuffers@{ReleaseCommandBuffers}}
+\index{ReleaseCommandBuffers@{ReleaseCommandBuffers}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{ReleaseCommandBuffers()}{ReleaseCommandBuffers()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_a2b28915d63c651429b4d129922c81b58} 
+template$<$typename Container $>$ \\
+void prt\+::\+Driver\+::\+Release\+Command\+Buffers (\begin{DoxyParamCaption}\item[{const Container \&}]{buffers}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_driver_a804ccedcc7d91eaf7d49ddcde3999d9c}\index{prt::Driver@{prt::Driver}!ReleaseCommandBuffers@{ReleaseCommandBuffers}}
+\index{ReleaseCommandBuffers@{ReleaseCommandBuffers}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{ReleaseCommandBuffers()}{ReleaseCommandBuffers()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_a804ccedcc7d91eaf7d49ddcde3999d9c} 
+void prt\+::\+Driver\+::\+Release\+Command\+Buffers (\begin{DoxyParamCaption}\item[{const Vk\+Command\+Buffer \texorpdfstring{$\ast$}{*}}]{buffers}{, }\item[{const uint64\+\_\+t}]{num\+\_\+buffers}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{classprt_1_1_driver_a3289261b45f1601ec122541e9f87b68c}\index{prt::Driver@{prt::Driver}!WaitDeviceIdle@{WaitDeviceIdle}}
+\index{WaitDeviceIdle@{WaitDeviceIdle}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{WaitDeviceIdle()}{WaitDeviceIdle()}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_a3289261b45f1601ec122541e9f87b68c} 
+void prt\+::\+Driver\+::\+Wait\+Device\+Idle (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classprt_1_1_driver_aec64db508f7e38f3c27d18e61ddb8a15}\index{prt::Driver@{prt::Driver}!DriverBase@{DriverBase}}
+\index{DriverBase@{DriverBase}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{DriverBase}{DriverBase}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_aec64db508f7e38f3c27d18e61ddb8a15} 
+friend class \mbox{\hyperlink{classprt_1_1_driver_base}{Driver\+Base}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+\Hypertarget{classprt_1_1_driver_a73d514fb9a4d35225a7c1449a14a666e}\index{prt::Driver@{prt::Driver}!InitState@{InitState}}
+\index{InitState@{InitState}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{InitState}{InitState}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_a73d514fb9a4d35225a7c1449a14a666e} 
+friend class Init\+State\hspace{0.3cm}{\ttfamily [friend]}}
+
+\Hypertarget{classprt_1_1_driver_a9aa251d710bba4f257a519ebc5d01d51}\index{prt::Driver@{prt::Driver}!LuaState@{LuaState}}
+\index{LuaState@{LuaState}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{LuaState}{LuaState}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_a9aa251d710bba4f257a519ebc5d01d51} 
+friend class \mbox{\hyperlink{classprt_1_1_lua_state}{Lua\+State}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+\Hypertarget{classprt_1_1_driver_af3d14e26ba8af9e6cc5a32aad8446de7}\index{prt::Driver@{prt::Driver}!Runtime@{Runtime}}
+\index{Runtime@{Runtime}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{Runtime}{Runtime}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_af3d14e26ba8af9e6cc5a32aad8446de7} 
+friend class Runtime\hspace{0.3cm}{\ttfamily [friend]}}
+
+\Hypertarget{classprt_1_1_driver_a29c748ef4d814963f9821a5c470b5fef}\index{prt::Driver@{prt::Driver}!TerminatedState@{TerminatedState}}
+\index{TerminatedState@{TerminatedState}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{TerminatedState}{TerminatedState}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_a29c748ef4d814963f9821a5c470b5fef} 
+friend class Terminated\+State\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_driver_a70a9cc54d358214023a3abe2e12598eb}\index{prt::Driver@{prt::Driver}!allocator\_@{allocator\_}}
+\index{allocator\_@{allocator\_}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{allocator\_}{allocator\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_a70a9cc54d358214023a3abe2e12598eb} 
+Vk\+Allocation\+Callbacks\texorpdfstring{$\ast$}{*} prt\+::\+Driver\+::allocator\+\_\+ = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_driver_aa84987098309067b133a681fea5e867c}\index{prt::Driver@{prt::Driver}!app\_info\_@{app\_info\_}}
+\index{app\_info\_@{app\_info\_}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{app\_info\_}{app\_info\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_aa84987098309067b133a681fea5e867c} 
+Vk\+Application\+Info prt\+::\+Driver\+::app\+\_\+info\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_driver_a48bd59ea337e299c63afd619c2bc9467}\index{prt::Driver@{prt::Driver}!command\_pool\_@{command\_pool\_}}
+\index{command\_pool\_@{command\_pool\_}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{command\_pool\_}{command\_pool\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_a48bd59ea337e299c63afd619c2bc9467} 
+Vk\+Command\+Pool prt\+::\+Driver\+::command\+\_\+pool\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_driver_a050fa206a41d403588d99ee4a6b7ee60}\index{prt::Driver@{prt::Driver}!descriptor\_pool\_@{descriptor\_pool\_}}
+\index{descriptor\_pool\_@{descriptor\_pool\_}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{descriptor\_pool\_}{descriptor\_pool\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_a050fa206a41d403588d99ee4a6b7ee60} 
+Vk\+Descriptor\+Pool prt\+::\+Driver\+::descriptor\+\_\+pool\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_driver_ae9f7b66c9fb61d5f20f17d8c0853ca71}\index{prt::Driver@{prt::Driver}!device\_@{device\_}}
+\index{device\_@{device\_}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{device\_}{device\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_ae9f7b66c9fb61d5f20f17d8c0853ca71} 
+Vk\+Device prt\+::\+Driver\+::device\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_driver_a3bbf9791ce0e62b75d44d63bd3e4bd3e}\index{prt::Driver@{prt::Driver}!device\_extensions\_@{device\_extensions\_}}
+\index{device\_extensions\_@{device\_extensions\_}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{device\_extensions\_}{device\_extensions\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_a3bbf9791ce0e62b75d44d63bd3e4bd3e} 
+vk\+::\+Extension\+List prt\+::\+Driver\+::device\+\_\+extensions\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{stringliteral}{"{}VK\_KHR\_portability\_subset"{}},}
+\DoxyCodeLine{\ \ \ \ \ \ VK\_KHR\_SWAPCHAIN\_EXTENSION\_NAME,}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{classprt_1_1_driver_a7a563f3ed172d408af2401ef7fd5eef2}\index{prt::Driver@{prt::Driver}!graphics\_queue\_@{graphics\_queue\_}}
+\index{graphics\_queue\_@{graphics\_queue\_}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{graphics\_queue\_}{graphics\_queue\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_a7a563f3ed172d408af2401ef7fd5eef2} 
+Vk\+Queue prt\+::\+Driver\+::graphics\+\_\+queue\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_driver_aa6d0dc78cac202e0e4386b9602fc1a21}\index{prt::Driver@{prt::Driver}!instance\_@{instance\_}}
+\index{instance\_@{instance\_}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{instance\_}{instance\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_aa6d0dc78cac202e0e4386b9602fc1a21} 
+Vk\+Instance prt\+::\+Driver\+::instance\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_driver_aeeede03c5c5e99056357ddcc09284387}\index{prt::Driver@{prt::Driver}!instance\_extensions\_@{instance\_extensions\_}}
+\index{instance\_extensions\_@{instance\_extensions\_}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{instance\_extensions\_}{instance\_extensions\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_aeeede03c5c5e99056357ddcc09284387} 
+vk\+::\+Extension\+List prt\+::\+Driver\+::instance\+\_\+extensions\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_driver_aef22a0b75e18d1ac4c0765c49a498679}\index{prt::Driver@{prt::Driver}!physical\_device\_@{physical\_device\_}}
+\index{physical\_device\_@{physical\_device\_}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{physical\_device\_}{physical\_device\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_aef22a0b75e18d1ac4c0765c49a498679} 
+Vk\+Physical\+Device prt\+::\+Driver\+::physical\+\_\+device\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_driver_a0dcef29393919dfbc9d2ef8ac77fd86e}\index{prt::Driver@{prt::Driver}!present\_queue\_@{present\_queue\_}}
+\index{present\_queue\_@{present\_queue\_}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{present\_queue\_}{present\_queue\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_a0dcef29393919dfbc9d2ef8ac77fd86e} 
+Vk\+Queue prt\+::\+Driver\+::present\+\_\+queue\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_driver_a840d165fa7766f07b8e4359bab2b6868}\index{prt::Driver@{prt::Driver}!surface\_@{surface\_}}
+\index{surface\_@{surface\_}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{surface\_}{surface\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_a840d165fa7766f07b8e4359bab2b6868} 
+Vk\+Surface\+KHR prt\+::\+Driver\+::surface\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_driver_a89d03bc7394ef7aae5d8653bc478450b}\index{prt::Driver@{prt::Driver}!validation\_layers\_@{validation\_layers\_}}
+\index{validation\_layers\_@{validation\_layers\_}!prt::Driver@{prt::Driver}}
+\doxysubsubsection{\texorpdfstring{validation\_layers\_}{validation\_layers\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_a89d03bc7394ef7aae5d8653bc478450b} 
+vk\+::\+Validation\+Layer\+List prt\+::\+Driver\+::validation\+\_\+layers\+\_\+ \{"{}VK\+\_\+\+LAYER\+\_\+\+KHRONOS\+\_\+validation"{}\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{gfx__vk_8h}{gfx\+\_\+vk.\+h}}\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{gfx__vk_8cc}{gfx\+\_\+vk.\+cc}}\end{DoxyCompactItemize}

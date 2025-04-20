@@ -1,0 +1,41 @@
+\doxysection{bitfield.\+h}
+\hypertarget{bitfield_8h_source}{}\label{bitfield_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/bitfield.h@{/Users/tazz/Projects/prette/Sources/prette/bitfield.h}}
+\mbox{\hyperlink{bitfield_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_BITFIELD\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_BITFIELD\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <type\_traits>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{platform_8h}{prette/platform.h}}"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00008\ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ S,\ \textcolor{keyword}{typename}\ T,\ \textcolor{keywordtype}{int}\ Position,\ \textcolor{keywordtype}{int}\ Size=(\textcolor{keyword}{sizeof}(S)*kBitsPerByte)\ -\/\ Position>}
+\DoxyCodeLine{00009\ \ \ \textcolor{keyword}{class}\ \mbox{\hyperlink{classprt_1_1_bit_field}{BitField}}\ \{}
+\DoxyCodeLine{00010\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_bit_field_ac222787963821c64eafebd8963834189}{Mask}}()\ -\/>\ S\{}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (kUWordOne\ <<\ Size)\ -\/\ 1;}
+\DoxyCodeLine{00013\ \ \ \ \ \}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_bit_field_a26cf9d1b5a8c9b2a87ddc000d353c2f8}{MaskInPlace}}()\ -\/>\ S\{}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Mask()\ <<\ \mbox{\hyperlink{structprt_1_1_position}{Position}};}
+\DoxyCodeLine{00017\ \ \ \ \ \}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_bit_field_a8e529500723215d2c9cca9349173adb2}{Decode}}(S\ val)\ -\/>\ T\{}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ u\ =\ \textcolor{keyword}{static\_cast<}typename\ std::make\_unsigned<S>::type\textcolor{keyword}{>}(val);}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}((u\ >>\ \mbox{\hyperlink{structprt_1_1_position}{Position}})\ \&\ Mask());}
+\DoxyCodeLine{00022\ \ \ \ \ \}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_bit_field_adace18b6edf5a92ce2fb2275b6f10ac2}{Encode}}(T\ val)\ -\/>\ S\{}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ u\ =\ \textcolor{keyword}{static\_cast<}typename\ std::make\_unsigned<S>::type\textcolor{keyword}{>}(val);}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (u\ \&\ Mask())\ <<\ \mbox{\hyperlink{structprt_1_1_position}{Position}};}
+\DoxyCodeLine{00027\ \ \ \ \ \}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_bit_field_ac2d8ac7ffdbd9c624d3e408822e41279}{Update}}(T\ val,\ S\ original)\ -\/>\ S\{}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Encode(val)\ |\ (\string~MaskInPlace()\ \&\ original);}
+\DoxyCodeLine{00031\ \ \ \ \ \}}
+\DoxyCodeLine{00032\ \ \ \};}
+\DoxyCodeLine{00033\ \}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//PRT\_BITFIELD\_H}}
+
+\end{DoxyCode}

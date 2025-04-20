@@ -1,0 +1,156 @@
+\doxysection{prt\+::Mouse\+Button\+State\+Event Class Reference}
+\hypertarget{classprt_1_1_mouse_button_state_event}{}\label{classprt_1_1_mouse_button_state_event}\index{prt::MouseButtonStateEvent@{prt::MouseButtonStateEvent}}
+
+
+{\ttfamily \#include $<$mouse.\+h$>$}
+
+
+
+Inheritance diagram for prt\+::Mouse\+Button\+State\+Event\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=220pt]{classprt_1_1_mouse_button_state_event__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for prt\+::Mouse\+Button\+State\+Event\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classprt_1_1_mouse_button_state_event__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_mouse_button_state_event_a5b518f6c8ebc3ddcda85223d0bc23bd3}{Mouse\+Button\+State\+Event}} (const \mbox{\hyperlink{classprt_1_1_mouse}{Mouse}} \texorpdfstring{$\ast$}{*}mouse, const \mbox{\hyperlink{classprt_1_1_mouse_button_state}{Mouse\+Button\+State}} \&state)
+\item 
+\mbox{\hyperlink{classprt_1_1_mouse_button_state_event_a90dd359a56f084c25805fac676f45074}{\texorpdfstring{$\sim$}{\string~}\+Mouse\+Button\+State\+Event}} () override=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1_mouse_button_state_event_a123c17542a34d72c34cf555aecf302f6}{Get\+State}} () const -\/$>$ const \mbox{\hyperlink{classprt_1_1_mouse_button_state}{Mouse\+Button\+State}} \&
+\item 
+\mbox{\hyperlink{classprt_1_1_mouse_button_state_event_a3728a5ee5c5835faee9dab274c54e255}{DECLARE\+\_\+\+EVENT\+\_\+\+TYPE}} (Mouse\+Event, \mbox{\hyperlink{classprt_1_1_mouse_button_state}{Mouse\+Button\+State}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classprt_1_1_mouse_event_base}{prt\+::\+Mouse\+Event\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_mouse_event_base_a48fe31a906e67c07134e5d181e35a5d0}{\texorpdfstring{$\sim$}{\string~}\+Mouse\+Event\+Base}} () override=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1_mouse_event_base_af2e262f625226f0805e5b6010de9be9f}{Get\+Mouse}} () const -\/$>$ const \mbox{\hyperlink{classprt_1_1_mouse}{Mouse}} \texorpdfstring{$\ast$}{*}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_mouse_button_state_event_afa605405405836fbb9eb1e9b1b72b9b9}{Filter\+By\+State}} (const std\+::function$<$ bool(const \mbox{\hyperlink{classprt_1_1_mouse_button_state}{Mouse\+Button\+State}} \&)$>$ \&filter) -\/$>$ Mouse\+Event\+::\+Predicate
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_mouse_button_state_event_ad77ce1b5e5c2b650d9d63a56edfb7c9a}{Filter\+By\+Button}} (const int button) -\/$>$ Mouse\+Event\+::\+Predicate
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_mouse_button_state_event_aa369d51ed3a39c95f3fd7dee0fc6b5a6}{Filter\+By\+State}} (const \mbox{\hyperlink{classprt_1_1_mouse_button_state}{Mouse\+Button\+State}} \&rhs) -\/$>$ Mouse\+Event\+::\+Predicate
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_mouse_button_state_event_a7672847e803236217836e8ec43ca118b}{Filter\+By\+Pressed}} () -\/$>$ Mouse\+Event\+::\+Predicate
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_mouse_button_state_event_ab732df644df485c88200b0ab56ea78fd}{Filter\+By\+Pressed}} (const int button, const int mods=0) -\/$>$ Mouse\+Event\+::\+Predicate
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_mouse_button_state_event_a94a48b2db67ed56f49455badd988f21e}{Filter\+By\+Released}} () -\/$>$ Mouse\+Event\+::\+Predicate
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_mouse_button_state_event_a3575f2988bbeb8b23fcb6df96ff7b804}{Filter\+By\+Released}} (const int button) -\/$>$ Mouse\+Event\+::\+Predicate
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_mouse_button_state}{Mouse\+Button\+State}} \mbox{\hyperlink{classprt_1_1_mouse_button_state_event_add9a8fdb61d871ca887778b743b97ca2}{state\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classprt_1_1_mouse_event_base}{prt\+::\+Mouse\+Event\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_mouse_event_base_a719e5a72de8df69042426df381b0c07a}{Mouse\+Event\+Base}} (const \mbox{\hyperlink{classprt_1_1_mouse}{Mouse}} \texorpdfstring{$\ast$}{*}mouse)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_mouse_button_state_event_a5b518f6c8ebc3ddcda85223d0bc23bd3}\index{prt::MouseButtonStateEvent@{prt::MouseButtonStateEvent}!MouseButtonStateEvent@{MouseButtonStateEvent}}
+\index{MouseButtonStateEvent@{MouseButtonStateEvent}!prt::MouseButtonStateEvent@{prt::MouseButtonStateEvent}}
+\doxysubsubsection{\texorpdfstring{MouseButtonStateEvent()}{MouseButtonStateEvent()}}
+{\footnotesize\ttfamily \label{classprt_1_1_mouse_button_state_event_a5b518f6c8ebc3ddcda85223d0bc23bd3} 
+prt\+::\+Mouse\+Button\+State\+Event\+::\+Mouse\+Button\+State\+Event (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_mouse}{Mouse}} \texorpdfstring{$\ast$}{*}}]{mouse}{, }\item[{const \mbox{\hyperlink{classprt_1_1_mouse_button_state}{Mouse\+Button\+State}} \&}]{state}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_mouse_button_state_event_a90dd359a56f084c25805fac676f45074}\index{prt::MouseButtonStateEvent@{prt::MouseButtonStateEvent}!````~MouseButtonStateEvent@{\texorpdfstring{$\sim$}{\string~}MouseButtonStateEvent}}
+\index{````~MouseButtonStateEvent@{\texorpdfstring{$\sim$}{\string~}MouseButtonStateEvent}!prt::MouseButtonStateEvent@{prt::MouseButtonStateEvent}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}MouseButtonStateEvent()}{\string~MouseButtonStateEvent()}}
+{\footnotesize\ttfamily \label{classprt_1_1_mouse_button_state_event_a90dd359a56f084c25805fac676f45074} 
+prt\+::\+Mouse\+Button\+State\+Event\+::\texorpdfstring{$\sim$}{\string~}\+Mouse\+Button\+State\+Event (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_mouse_button_state_event_a3728a5ee5c5835faee9dab274c54e255}\index{prt::MouseButtonStateEvent@{prt::MouseButtonStateEvent}!DECLARE\_EVENT\_TYPE@{DECLARE\_EVENT\_TYPE}}
+\index{DECLARE\_EVENT\_TYPE@{DECLARE\_EVENT\_TYPE}!prt::MouseButtonStateEvent@{prt::MouseButtonStateEvent}}
+\doxysubsubsection{\texorpdfstring{DECLARE\_EVENT\_TYPE()}{DECLARE\_EVENT\_TYPE()}}
+{\footnotesize\ttfamily \label{classprt_1_1_mouse_button_state_event_a3728a5ee5c5835faee9dab274c54e255} 
+prt\+::\+Mouse\+Button\+State\+Event\+::\+DECLARE\+\_\+\+EVENT\+\_\+\+TYPE (\begin{DoxyParamCaption}\item[{Mouse\+Event}]{}{, }\item[{\mbox{\hyperlink{classprt_1_1_mouse_button_state}{Mouse\+Button\+State}}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_mouse_button_state_event_ad77ce1b5e5c2b650d9d63a56edfb7c9a}\index{prt::MouseButtonStateEvent@{prt::MouseButtonStateEvent}!FilterByButton@{FilterByButton}}
+\index{FilterByButton@{FilterByButton}!prt::MouseButtonStateEvent@{prt::MouseButtonStateEvent}}
+\doxysubsubsection{\texorpdfstring{FilterByButton()}{FilterByButton()}}
+{\footnotesize\ttfamily \label{classprt_1_1_mouse_button_state_event_ad77ce1b5e5c2b650d9d63a56edfb7c9a} 
+static auto prt\+::\+Mouse\+Button\+State\+Event\+::\+Filter\+By\+Button (\begin{DoxyParamCaption}\item[{const int}]{button}{}\end{DoxyParamCaption}) -\/$>$ Mouse\+Event\+::\+Predicate \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_mouse_button_state_event_a7672847e803236217836e8ec43ca118b}\index{prt::MouseButtonStateEvent@{prt::MouseButtonStateEvent}!FilterByPressed@{FilterByPressed}}
+\index{FilterByPressed@{FilterByPressed}!prt::MouseButtonStateEvent@{prt::MouseButtonStateEvent}}
+\doxysubsubsection{\texorpdfstring{FilterByPressed()}{FilterByPressed()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_mouse_button_state_event_a7672847e803236217836e8ec43ca118b} 
+static auto prt\+::\+Mouse\+Button\+State\+Event\+::\+Filter\+By\+Pressed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ Mouse\+Event\+::\+Predicate \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_mouse_button_state_event_ab732df644df485c88200b0ab56ea78fd}\index{prt::MouseButtonStateEvent@{prt::MouseButtonStateEvent}!FilterByPressed@{FilterByPressed}}
+\index{FilterByPressed@{FilterByPressed}!prt::MouseButtonStateEvent@{prt::MouseButtonStateEvent}}
+\doxysubsubsection{\texorpdfstring{FilterByPressed()}{FilterByPressed()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_mouse_button_state_event_ab732df644df485c88200b0ab56ea78fd} 
+static auto prt\+::\+Mouse\+Button\+State\+Event\+::\+Filter\+By\+Pressed (\begin{DoxyParamCaption}\item[{const int}]{button}{, }\item[{const int}]{mods}{ = {\ttfamily 0}}\end{DoxyParamCaption}) -\/$>$ Mouse\+Event\+::\+Predicate \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_mouse_button_state_event_a94a48b2db67ed56f49455badd988f21e}\index{prt::MouseButtonStateEvent@{prt::MouseButtonStateEvent}!FilterByReleased@{FilterByReleased}}
+\index{FilterByReleased@{FilterByReleased}!prt::MouseButtonStateEvent@{prt::MouseButtonStateEvent}}
+\doxysubsubsection{\texorpdfstring{FilterByReleased()}{FilterByReleased()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_mouse_button_state_event_a94a48b2db67ed56f49455badd988f21e} 
+static auto prt\+::\+Mouse\+Button\+State\+Event\+::\+Filter\+By\+Released (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ Mouse\+Event\+::\+Predicate \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_mouse_button_state_event_a3575f2988bbeb8b23fcb6df96ff7b804}\index{prt::MouseButtonStateEvent@{prt::MouseButtonStateEvent}!FilterByReleased@{FilterByReleased}}
+\index{FilterByReleased@{FilterByReleased}!prt::MouseButtonStateEvent@{prt::MouseButtonStateEvent}}
+\doxysubsubsection{\texorpdfstring{FilterByReleased()}{FilterByReleased()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_mouse_button_state_event_a3575f2988bbeb8b23fcb6df96ff7b804} 
+static auto prt\+::\+Mouse\+Button\+State\+Event\+::\+Filter\+By\+Released (\begin{DoxyParamCaption}\item[{const int}]{button}{}\end{DoxyParamCaption}) -\/$>$ Mouse\+Event\+::\+Predicate \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_mouse_button_state_event_aa369d51ed3a39c95f3fd7dee0fc6b5a6}\index{prt::MouseButtonStateEvent@{prt::MouseButtonStateEvent}!FilterByState@{FilterByState}}
+\index{FilterByState@{FilterByState}!prt::MouseButtonStateEvent@{prt::MouseButtonStateEvent}}
+\doxysubsubsection{\texorpdfstring{FilterByState()}{FilterByState()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_mouse_button_state_event_aa369d51ed3a39c95f3fd7dee0fc6b5a6} 
+static auto prt\+::\+Mouse\+Button\+State\+Event\+::\+Filter\+By\+State (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_mouse_button_state}{Mouse\+Button\+State}} \&}]{rhs}{}\end{DoxyParamCaption}) -\/$>$ Mouse\+Event\+::\+Predicate \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_mouse_button_state_event_afa605405405836fbb9eb1e9b1b72b9b9}\index{prt::MouseButtonStateEvent@{prt::MouseButtonStateEvent}!FilterByState@{FilterByState}}
+\index{FilterByState@{FilterByState}!prt::MouseButtonStateEvent@{prt::MouseButtonStateEvent}}
+\doxysubsubsection{\texorpdfstring{FilterByState()}{FilterByState()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_mouse_button_state_event_afa605405405836fbb9eb1e9b1b72b9b9} 
+static auto prt\+::\+Mouse\+Button\+State\+Event\+::\+Filter\+By\+State (\begin{DoxyParamCaption}\item[{const std\+::function$<$ bool(const \mbox{\hyperlink{classprt_1_1_mouse_button_state}{Mouse\+Button\+State}} \&)$>$ \&}]{filter}{}\end{DoxyParamCaption}) -\/$>$ Mouse\+Event\+::\+Predicate \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_mouse_button_state_event_a123c17542a34d72c34cf555aecf302f6}\index{prt::MouseButtonStateEvent@{prt::MouseButtonStateEvent}!GetState@{GetState}}
+\index{GetState@{GetState}!prt::MouseButtonStateEvent@{prt::MouseButtonStateEvent}}
+\doxysubsubsection{\texorpdfstring{GetState()}{GetState()}}
+{\footnotesize\ttfamily \label{classprt_1_1_mouse_button_state_event_a123c17542a34d72c34cf555aecf302f6} 
+auto prt\+::\+Mouse\+Button\+State\+Event\+::\+Get\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const \mbox{\hyperlink{classprt_1_1_mouse_button_state}{Mouse\+Button\+State}}\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_mouse_button_state_event_add9a8fdb61d871ca887778b743b97ca2}\index{prt::MouseButtonStateEvent@{prt::MouseButtonStateEvent}!state\_@{state\_}}
+\index{state\_@{state\_}!prt::MouseButtonStateEvent@{prt::MouseButtonStateEvent}}
+\doxysubsubsection{\texorpdfstring{state\_}{state\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_mouse_button_state_event_add9a8fdb61d871ca887778b743b97ca2} 
+\mbox{\hyperlink{classprt_1_1_mouse_button_state}{Mouse\+Button\+State}} prt\+::\+Mouse\+Button\+State\+Event\+::state\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{mouse_8h}{mouse.\+h}}\end{DoxyCompactItemize}

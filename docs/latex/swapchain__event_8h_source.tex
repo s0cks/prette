@@ -1,0 +1,60 @@
+\doxysection{swapchain\+\_\+event.\+h}
+\hypertarget{swapchain__event_8h_source}{}\label{swapchain__event_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/swapchain\_event.h@{/Users/tazz/Projects/prette/Sources/prette/swapchain\_event.h}}
+\mbox{\hyperlink{swapchain__event_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_SWAPCHAIN\_EVENT\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_SWAPCHAIN\_EVENT\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{event_8h}{prette/event.h}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ FOR\_EACH\_SWAPCHAIN\_EVENT(V)\ \(\backslash\)}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\ \ V(SwapChainInit)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\ \ V(SwapChainDestroyed)}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }SwapChainEvent;}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ FORWARD\_DECLARE(Name)\ class\ Name\#\#Event;}}
+\DoxyCodeLine{00013\ \mbox{\hyperlink{swapchain__event_8h_a86d634f247395fa962e84b5cadf99b98}{FOR\_EACH\_SWAPCHAIN\_EVENT}}(\mbox{\hyperlink{gui_8h_a83d2d158052fc2dc9bdf9bece3fd251e}{FORWARD\_DECLARE}})}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#undef\ FORWARD\_DECLARE}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_swap_chain_event}{SwapChainEvent}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1_event}{Event}}\ \{}
+\DoxyCodeLine{00017\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00018\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classprt_1_1_swap_chain_event_ae0cc386a347a9239e190d76e33fe9c9f}{reinit\_}};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_swap_chain_event_a14d2f0b59107fd092a1e9aa0ee7f0fc9}{SwapChainEvent}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ reinit)\ :}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_event}{Event}}(),}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_swap_chain_event_ae0cc386a347a9239e190d76e33fe9c9f}{reinit\_}}(reinit)\ \{\}}
+\DoxyCodeLine{00024\ \ \ \mbox{\hyperlink{classprt_1_1_swap_chain_event_ab95e0702377c7b46494ec59899231093}{\string~SwapChainEvent}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_swap_chain_event_a87fa988d191f3d38ffc1642f8f62e49e}{IsReinit}}()\ const\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_swap_chain_event_ae0cc386a347a9239e190d76e33fe9c9f}{reinit\_}};}
+\DoxyCodeLine{00028\ \ \ \}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \mbox{\hyperlink{classprt_1_1_swap_chain_event_a467170ad5dd01c169bc385310a0da8d1}{DEFINE\_EVENT\_PROTOTYPE\_TYPE}}(\mbox{\hyperlink{classprt_1_1_swap_chain}{SwapChain}},\ \mbox{\hyperlink{swapchain__event_8h_a86d634f247395fa962e84b5cadf99b98}{FOR\_EACH\_SWAPCHAIN\_EVENT}});}
+\DoxyCodeLine{00031\ \};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_swap_chain_init_event}{SwapChainInitEvent}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1_swap_chain_event}{SwapChainEvent}}\ \{}
+\DoxyCodeLine{00034\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00035\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_swap_chain_init_event_a440bf9697ab28e56becf36ccbdaa65ed}{SwapChainInitEvent}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ reinit)\ :}
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_swap_chain_event}{SwapChainEvent}}(reinit)\ \{\}}
+\DoxyCodeLine{00037\ \ \ \mbox{\hyperlink{classprt_1_1_swap_chain_init_event_a5d888f38488821d2e57d18aa27ce0da6}{\string~SwapChainInitEvent}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00038\ \ \ \mbox{\hyperlink{classprt_1_1_swap_chain_init_event_a1db80a60b8bea167edbd1043aaf7bde4}{DECLARE\_EVENT\_TYPE}}(\mbox{\hyperlink{classprt_1_1_swap_chain_event}{SwapChainEvent}},\ SwapChainInit);}
+\DoxyCodeLine{00039\ \};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_swap_chain_destroyed_event}{SwapChainDestroyedEvent}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1_swap_chain_event}{SwapChainEvent}}\ \{}
+\DoxyCodeLine{00042\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00043\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_swap_chain_destroyed_event_a80283f77e5394f545a893da464d7b815}{SwapChainDestroyedEvent}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ reinit)\ :}
+\DoxyCodeLine{00044\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_swap_chain_event}{SwapChainEvent}}(reinit)\ \{\}}
+\DoxyCodeLine{00045\ \ \ \mbox{\hyperlink{classprt_1_1_swap_chain_destroyed_event_a76a348d19ace65df5da1a16d16ea13f5}{\string~SwapChainDestroyedEvent}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00046\ \ \ \mbox{\hyperlink{classprt_1_1_swap_chain_destroyed_event_af6a7afd43ebef832d2fc2da9d50917ff}{DECLARE\_EVENT\_TYPE}}(\mbox{\hyperlink{classprt_1_1_swap_chain_event}{SwapChainEvent}},\ SwapChainDestroyed);}
+\DoxyCodeLine{00047\ \};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \mbox{\hyperlink{event_8h_a75f747c7c3ad9804780471c5ce370793}{DEFINE\_EVENT\_SUBJECT}}(\mbox{\hyperlink{classprt_1_1_swap_chain}{SwapChain}});}
+\DoxyCodeLine{00050\ \mbox{\hyperlink{event_8h_a77dcd0ad69e8fd51c473d76aca5bba76}{DEFINE\_EVENT\_OBSERVABLE}}(\mbox{\hyperlink{classprt_1_1_swap_chain}{SwapChain}});}
+\DoxyCodeLine{00051\ \mbox{\hyperlink{swapchain__event_8h_a86d634f247395fa962e84b5cadf99b98}{FOR\_EACH\_SWAPCHAIN\_EVENT}}(\mbox{\hyperlink{event_8h_a77dcd0ad69e8fd51c473d76aca5bba76}{DEFINE\_EVENT\_OBSERVABLE}});}
+\DoxyCodeLine{00052\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_SWAPCHAIN\_EVENT\_H}}
+
+\end{DoxyCode}

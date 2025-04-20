@@ -1,0 +1,25 @@
+\doxysection{os\+\_\+thread\+\_\+linux.\+h}
+\hypertarget{os__thread__linux_8h_source}{}\label{os__thread__linux_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/os\_thread\_linux.h@{/Users/tazz/Projects/prette/Sources/prette/os\_thread\_linux.h}}
+\mbox{\hyperlink{os__thread__linux_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_OS\_THREAD\_LINUX\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_OS\_THREAD\_LINUX\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#ifndef\ PRT\_OS\_THREAD\_H}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#error\ "{}Please\ \#include\ <prette/os\_thread.h>\ instead\ of\ <prette/os\_thread\_linux.h>"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//PRT\_OS\_THREAD\_H}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <pthread.h>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00011\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ kThreadNameMaxLength\ =\ 16;}
+\DoxyCodeLine{00012\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ kThreadMaxResultLength\ =\ 128;}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceprt_a366a741d866403a24a0c5ea6ebdb9746}{ThreadLocalKey}}\ =\ pthread\_key\_t;}
+\DoxyCodeLine{00015\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceprt_ae470469d22e60556e76251a50af0654e}{ThreadId}}\ =\ pthread\_t;}
+\DoxyCodeLine{00016\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceprt_a6f640847802d0ad35f8e5b2580187ab7}{ThreadHandler}}\ =\ void\ (*)(\textcolor{keywordtype}{void}\ *);}
+\DoxyCodeLine{00017\ \}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//PRT\_OS\_THREAD\_LINUX\_H}}
+
+\end{DoxyCode}

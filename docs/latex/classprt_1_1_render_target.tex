@@ -1,0 +1,150 @@
+\doxysection{prt\+::Render\+Target Class Reference}
+\hypertarget{classprt_1_1_render_target}{}\label{classprt_1_1_render_target}\index{prt::RenderTarget@{prt::RenderTarget}}
+
+
+{\ttfamily \#include $<$render\+\_\+target.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_render_target_ac095972af85ab0e50e8524ed75e91739}{Render\+Target}} ()=default
+\item 
+\mbox{\hyperlink{classprt_1_1_render_target_a2cce7e938d0a0e8e9fa71b05adceb453}{Render\+Target}} (const Vk\+Render\+Pass \&pass, const Vk\+Extent2D \&extent, const Vk\+Image\+View depth\+\_\+view=VK\+\_\+\+NULL\+\_\+\+HANDLE, const Vk\+Format format=VK\+\_\+\+FORMAT\+\_\+\+B8\+G8\+R8\+A8\+\_\+\+SRGB)
+\item 
+\mbox{\hyperlink{classprt_1_1_render_target_a041a23abab898ccb380b36fd59b0f0b1}{\texorpdfstring{$\sim$}{\string~}\+Render\+Target}} ()=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1_render_target_a7ceccdaf9a7fba873e0e3de012fd453a}{Get\+Image}} () const -\/$>$ Vk\+Image const \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_render_target_a6054993a7a425725f04f38a9fe484523}{Get\+View}} () const -\/$>$ Vk\+Image\+View const \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_render_target_ae6cfa8b54e4a6c638aaacd760a927a8a}{Get\+Memory}} () const -\/$>$ Vk\+Device\+Memory const \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_render_target_af3afa55992f1cbfaecb8bfdf5417fe2c}{Get\+Framebuffer}} () const -\/$>$ Vk\+Framebuffer const \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_render_target_a9b5716510d9ede32e0753394add8277d}{Get\+Extent}} () const -\/$>$ Vk\+Extent2D const \&
+\item 
+void \mbox{\hyperlink{classprt_1_1_render_target_a29377d7629964ab3bddc6a33eb5b98bc}{Destroy}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_render_target_a35750e3a8698783e24143dd21c6f410d}{DEFINE\+\_\+\+DEFAULT\+\_\+\+COPYABLE\+\_\+\+TYPE}} (\mbox{\hyperlink{classprt_1_1_render_target}{Render\+Target}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Vk\+Image \mbox{\hyperlink{classprt_1_1_render_target_a10c07b43625d08376cf9221efd543e64}{image\+\_\+}} \{\}
+\item 
+Vk\+Image\+View \mbox{\hyperlink{classprt_1_1_render_target_a5a0d442d4591e184e00936da244832aa}{view\+\_\+}} \{\}
+\item 
+Vk\+Device\+Memory \mbox{\hyperlink{classprt_1_1_render_target_ac3936e86fae1dcf9ef3db3557f891b5b}{memory\+\_\+}} \{\}
+\item 
+Vk\+Framebuffer \mbox{\hyperlink{classprt_1_1_render_target_a1b2714855a23cdcff0b58b773ebf7482}{framebuffer\+\_\+}} \{\}
+\item 
+Vk\+Extent2D \mbox{\hyperlink{classprt_1_1_render_target_ab2c6b33dc5910a23e3ad9c495d7fa183}{extent\+\_\+}} \{\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_render_target_ac095972af85ab0e50e8524ed75e91739}\index{prt::RenderTarget@{prt::RenderTarget}!RenderTarget@{RenderTarget}}
+\index{RenderTarget@{RenderTarget}!prt::RenderTarget@{prt::RenderTarget}}
+\doxysubsubsection{\texorpdfstring{RenderTarget()}{RenderTarget()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_render_target_ac095972af85ab0e50e8524ed75e91739} 
+prt\+::\+Render\+Target\+::\+Render\+Target (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{classprt_1_1_render_target_a2cce7e938d0a0e8e9fa71b05adceb453}\index{prt::RenderTarget@{prt::RenderTarget}!RenderTarget@{RenderTarget}}
+\index{RenderTarget@{RenderTarget}!prt::RenderTarget@{prt::RenderTarget}}
+\doxysubsubsection{\texorpdfstring{RenderTarget()}{RenderTarget()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_render_target_a2cce7e938d0a0e8e9fa71b05adceb453} 
+prt\+::\+Render\+Target\+::\+Render\+Target (\begin{DoxyParamCaption}\item[{const Vk\+Render\+Pass \&}]{pass}{, }\item[{const Vk\+Extent2D \&}]{extent}{, }\item[{const Vk\+Image\+View}]{depth\+\_\+view}{ = {\ttfamily VK\+\_\+NULL\+\_\+HANDLE}, }\item[{const Vk\+Format}]{format}{ = {\ttfamily VK\+\_\+FORMAT\+\_\+B8G8R8A8\+\_\+SRGB}}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_render_target_a041a23abab898ccb380b36fd59b0f0b1}\index{prt::RenderTarget@{prt::RenderTarget}!````~RenderTarget@{\texorpdfstring{$\sim$}{\string~}RenderTarget}}
+\index{````~RenderTarget@{\texorpdfstring{$\sim$}{\string~}RenderTarget}!prt::RenderTarget@{prt::RenderTarget}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}RenderTarget()}{\string~RenderTarget()}}
+{\footnotesize\ttfamily \label{classprt_1_1_render_target_a041a23abab898ccb380b36fd59b0f0b1} 
+prt\+::\+Render\+Target\+::\texorpdfstring{$\sim$}{\string~}\+Render\+Target (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_render_target_a35750e3a8698783e24143dd21c6f410d}\index{prt::RenderTarget@{prt::RenderTarget}!DEFINE\_DEFAULT\_COPYABLE\_TYPE@{DEFINE\_DEFAULT\_COPYABLE\_TYPE}}
+\index{DEFINE\_DEFAULT\_COPYABLE\_TYPE@{DEFINE\_DEFAULT\_COPYABLE\_TYPE}!prt::RenderTarget@{prt::RenderTarget}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_DEFAULT\_COPYABLE\_TYPE()}{DEFINE\_DEFAULT\_COPYABLE\_TYPE()}}
+{\footnotesize\ttfamily \label{classprt_1_1_render_target_a35750e3a8698783e24143dd21c6f410d} 
+prt\+::\+Render\+Target\+::\+DEFINE\+\_\+\+DEFAULT\+\_\+\+COPYABLE\+\_\+\+TYPE (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_render_target}{Render\+Target}}}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_render_target_a29377d7629964ab3bddc6a33eb5b98bc}\index{prt::RenderTarget@{prt::RenderTarget}!Destroy@{Destroy}}
+\index{Destroy@{Destroy}!prt::RenderTarget@{prt::RenderTarget}}
+\doxysubsubsection{\texorpdfstring{Destroy()}{Destroy()}}
+{\footnotesize\ttfamily \label{classprt_1_1_render_target_a29377d7629964ab3bddc6a33eb5b98bc} 
+void prt\+::\+Render\+Target\+::\+Destroy (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{classprt_1_1_render_target_a9b5716510d9ede32e0753394add8277d}\index{prt::RenderTarget@{prt::RenderTarget}!GetExtent@{GetExtent}}
+\index{GetExtent@{GetExtent}!prt::RenderTarget@{prt::RenderTarget}}
+\doxysubsubsection{\texorpdfstring{GetExtent()}{GetExtent()}}
+{\footnotesize\ttfamily \label{classprt_1_1_render_target_a9b5716510d9ede32e0753394add8277d} 
+auto prt\+::\+Render\+Target\+::\+Get\+Extent (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ Vk\+Extent2D const\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_render_target_af3afa55992f1cbfaecb8bfdf5417fe2c}\index{prt::RenderTarget@{prt::RenderTarget}!GetFramebuffer@{GetFramebuffer}}
+\index{GetFramebuffer@{GetFramebuffer}!prt::RenderTarget@{prt::RenderTarget}}
+\doxysubsubsection{\texorpdfstring{GetFramebuffer()}{GetFramebuffer()}}
+{\footnotesize\ttfamily \label{classprt_1_1_render_target_af3afa55992f1cbfaecb8bfdf5417fe2c} 
+auto prt\+::\+Render\+Target\+::\+Get\+Framebuffer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ Vk\+Framebuffer const\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_render_target_a7ceccdaf9a7fba873e0e3de012fd453a}\index{prt::RenderTarget@{prt::RenderTarget}!GetImage@{GetImage}}
+\index{GetImage@{GetImage}!prt::RenderTarget@{prt::RenderTarget}}
+\doxysubsubsection{\texorpdfstring{GetImage()}{GetImage()}}
+{\footnotesize\ttfamily \label{classprt_1_1_render_target_a7ceccdaf9a7fba873e0e3de012fd453a} 
+auto prt\+::\+Render\+Target\+::\+Get\+Image (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ Vk\+Image const\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_render_target_ae6cfa8b54e4a6c638aaacd760a927a8a}\index{prt::RenderTarget@{prt::RenderTarget}!GetMemory@{GetMemory}}
+\index{GetMemory@{GetMemory}!prt::RenderTarget@{prt::RenderTarget}}
+\doxysubsubsection{\texorpdfstring{GetMemory()}{GetMemory()}}
+{\footnotesize\ttfamily \label{classprt_1_1_render_target_ae6cfa8b54e4a6c638aaacd760a927a8a} 
+auto prt\+::\+Render\+Target\+::\+Get\+Memory (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ Vk\+Device\+Memory const\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_render_target_a6054993a7a425725f04f38a9fe484523}\index{prt::RenderTarget@{prt::RenderTarget}!GetView@{GetView}}
+\index{GetView@{GetView}!prt::RenderTarget@{prt::RenderTarget}}
+\doxysubsubsection{\texorpdfstring{GetView()}{GetView()}}
+{\footnotesize\ttfamily \label{classprt_1_1_render_target_a6054993a7a425725f04f38a9fe484523} 
+auto prt\+::\+Render\+Target\+::\+Get\+View (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ Vk\+Image\+View const\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_render_target_ab2c6b33dc5910a23e3ad9c495d7fa183}\index{prt::RenderTarget@{prt::RenderTarget}!extent\_@{extent\_}}
+\index{extent\_@{extent\_}!prt::RenderTarget@{prt::RenderTarget}}
+\doxysubsubsection{\texorpdfstring{extent\_}{extent\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_render_target_ab2c6b33dc5910a23e3ad9c495d7fa183} 
+Vk\+Extent2D prt\+::\+Render\+Target\+::extent\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_render_target_a1b2714855a23cdcff0b58b773ebf7482}\index{prt::RenderTarget@{prt::RenderTarget}!framebuffer\_@{framebuffer\_}}
+\index{framebuffer\_@{framebuffer\_}!prt::RenderTarget@{prt::RenderTarget}}
+\doxysubsubsection{\texorpdfstring{framebuffer\_}{framebuffer\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_render_target_a1b2714855a23cdcff0b58b773ebf7482} 
+Vk\+Framebuffer prt\+::\+Render\+Target\+::framebuffer\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_render_target_a10c07b43625d08376cf9221efd543e64}\index{prt::RenderTarget@{prt::RenderTarget}!image\_@{image\_}}
+\index{image\_@{image\_}!prt::RenderTarget@{prt::RenderTarget}}
+\doxysubsubsection{\texorpdfstring{image\_}{image\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_render_target_a10c07b43625d08376cf9221efd543e64} 
+Vk\+Image prt\+::\+Render\+Target\+::image\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_render_target_ac3936e86fae1dcf9ef3db3557f891b5b}\index{prt::RenderTarget@{prt::RenderTarget}!memory\_@{memory\_}}
+\index{memory\_@{memory\_}!prt::RenderTarget@{prt::RenderTarget}}
+\doxysubsubsection{\texorpdfstring{memory\_}{memory\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_render_target_ac3936e86fae1dcf9ef3db3557f891b5b} 
+Vk\+Device\+Memory prt\+::\+Render\+Target\+::memory\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_render_target_a5a0d442d4591e184e00936da244832aa}\index{prt::RenderTarget@{prt::RenderTarget}!view\_@{view\_}}
+\index{view\_@{view\_}!prt::RenderTarget@{prt::RenderTarget}}
+\doxysubsubsection{\texorpdfstring{view\_}{view\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_render_target_a5a0d442d4591e184e00936da244832aa} 
+Vk\+Image\+View prt\+::\+Render\+Target\+::view\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{render__target_8h}{render\+\_\+target.\+h}}\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{render__target_8cc}{render\+\_\+target.\+cc}}\end{DoxyCompactItemize}

@@ -1,0 +1,279 @@
+\doxysection{prt\+::Dimension Class Reference}
+\hypertarget{classprt_1_1_dimension}{}\label{classprt_1_1_dimension}\index{prt::Dimension@{prt::Dimension}}
+
+
+{\ttfamily \#include $<$dimension.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_dimension_ab6e363a3be30d48fe57298797602a4a1}{Dimension}} ()=default
+\item 
+\mbox{\hyperlink{classprt_1_1_dimension_a95e5f27f1fead145622fecbfe7c0c058}{Dimension}} (const \mbox{\hyperlink{namespaceprt_a536ee3323b453cc5365cf5773ffb6f94}{Raw\+Dimension}} \&value)
+\item 
+\mbox{\hyperlink{classprt_1_1_dimension_a0e54f25abdfa3080fc728dd2437acbb0}{Dimension}} (const uint32\+\_\+t \mbox{\hyperlink{classprt_1_1_dimension_ade4cb2e9045d9e38bf487cbd525b8338}{width}}, const uint32\+\_\+t \mbox{\hyperlink{classprt_1_1_dimension_af9fe37e4105bb20d55901b0c13261689}{height}})
+\item 
+\mbox{\hyperlink{classprt_1_1_dimension_a7ea41feaf93a0010a5a0dccf8ee3c100}{Dimension}} (const std\+::string \&value)
+\item 
+\mbox{\hyperlink{classprt_1_1_dimension_ac608c8820c5a2f39930fc8ab12d40f12}{Dimension}} (const \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} \&rhs)=default
+\item 
+\mbox{\hyperlink{classprt_1_1_dimension_ab935dc3897eb614cdec3f78f1a9cfbad}{Dimension}} (const \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} \&\&rhs)=delete
+\item 
+\mbox{\hyperlink{classprt_1_1_dimension_a2dc636f2eafa3d9a8ffb6fcd78377bfe}{\texorpdfstring{$\sim$}{\string~}\+Dimension}} ()=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1_dimension_a39d5b14e7ff8dd59ebfea23d137abe79}{data}} () const -\/$>$ const \mbox{\hyperlink{namespaceprt_a536ee3323b453cc5365cf5773ffb6f94}{Raw\+Dimension}} \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_dimension_ade4cb2e9045d9e38bf487cbd525b8338}{width}} () -\/$>$ uint32\+\_\+t \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_dimension_abff612fa3db2167a3c2628b0ea37dd4d}{width}} () const -\/$>$ const uint32\+\_\+t \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_dimension_af9fe37e4105bb20d55901b0c13261689}{height}} () -\/$>$ uint32\+\_\+t \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_dimension_a0a5ebd611a793814d739c97577cda7a3}{height}} () const -\/$>$ const uint32\+\_\+t \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_dimension_ac0f0c7f3906cc4577dd59ad498826215}{Get\+Aspect\+Ratio}} () const -\/$>$ float
+\item 
+auto \mbox{\hyperlink{classprt_1_1_dimension_aa0b275b791bc0576b2fd6f3dde7dcf2a}{operator=}} (\mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} \&\&rhs) -\/$>$ \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} \&=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1_dimension_a23ba305b935c8bee281178b801fa4d07}{operator=}} (const \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} \&rhs) -\/$>$ \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} \&=default
+\item 
+\mbox{\hyperlink{classprt_1_1_dimension_a45f42835906507fee877b0ffe5d5b7d7}{operator std\+::string}} () const
+\item 
+auto \mbox{\hyperlink{classprt_1_1_dimension_a365579ace17d1a4e5123fd20b045ab22}{operator==}} (const \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} \&rhs) const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_dimension_a1d76359502e5ce9de0ad18af67da9bb5}{operator!=}} (const \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} \&rhs) const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_dimension_abfaffe20c6f22f2d63b6a05f102cdfd1}{operator$<$}} (const \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} \&rhs) const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_dimension_a329e78698eba4be60d04972460b3143c}{operator$>$}} (const \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} \&rhs) const -\/$>$ bool
+\item 
+void \mbox{\hyperlink{classprt_1_1_dimension_a2a82264706d9fc1e8d5dc55b9c7ed30f}{Set\+Table}} (lua\+\_\+\+State \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{engine_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}}, const int index) const
+\item 
+\mbox{\hyperlink{classprt_1_1_dimension_a7f64ed9ed493df773f8a91531fcd0802}{operator Vk\+Extent2D}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_dimension_aa77f779cea71d9a562d8259cbad42463}{Compare\+Area}} (const \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} \&lhs, const \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} \&rhs) -\/$>$ int
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_dimension_ac3825747267583016ae081137f15f6f5}{Compare\+Width}} (const \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} \&lhs, const \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} \&rhs) -\/$>$ int
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_dimension_a15f170930f05cca6368fbe1b7a8d287b}{Compare\+Height}} (const \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} \&lhs, const \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} \&rhs) -\/$>$ int
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_dimension_a9ba241f6da10f73d1dca999409672503}{Compare}} (const \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} \&lhs, const \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} \&rhs) -\/$>$ int
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceprt_a536ee3323b453cc5365cf5773ffb6f94}{Raw\+Dimension}} \mbox{\hyperlink{classprt_1_1_dimension_a2b41ecb367dacb999aa05c88128d6271}{data\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr const auto \mbox{\hyperlink{classprt_1_1_dimension_a8bfb4ca487c91adc173a7ab985de4f40}{k\+Width\+Component}} = 0
+\item 
+static constexpr const auto \mbox{\hyperlink{classprt_1_1_dimension_a705ef3040441fe9e392d63f4e5322753}{k\+Height\+Component}} = 1
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_dimension_a2ed91ee57b29ac1a271f7e727073b142}{operator$<$$<$}} (std\+::ostream \&stream, const \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} \&rhs) -\/$>$ std\+::ostream \&
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_dimension_ab6e363a3be30d48fe57298797602a4a1}\index{prt::Dimension@{prt::Dimension}!Dimension@{Dimension}}
+\index{Dimension@{Dimension}!prt::Dimension@{prt::Dimension}}
+\doxysubsubsection{\texorpdfstring{Dimension()}{Dimension()}\hspace{0.1cm}{\footnotesize\ttfamily [1/6]}}
+{\footnotesize\ttfamily \label{classprt_1_1_dimension_ab6e363a3be30d48fe57298797602a4a1} 
+prt\+::\+Dimension\+::\+Dimension (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{classprt_1_1_dimension_a95e5f27f1fead145622fecbfe7c0c058}\index{prt::Dimension@{prt::Dimension}!Dimension@{Dimension}}
+\index{Dimension@{Dimension}!prt::Dimension@{prt::Dimension}}
+\doxysubsubsection{\texorpdfstring{Dimension()}{Dimension()}\hspace{0.1cm}{\footnotesize\ttfamily [2/6]}}
+{\footnotesize\ttfamily \label{classprt_1_1_dimension_a95e5f27f1fead145622fecbfe7c0c058} 
+prt\+::\+Dimension\+::\+Dimension (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceprt_a536ee3323b453cc5365cf5773ffb6f94}{Raw\+Dimension}} \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+\Hypertarget{classprt_1_1_dimension_a0e54f25abdfa3080fc728dd2437acbb0}\index{prt::Dimension@{prt::Dimension}!Dimension@{Dimension}}
+\index{Dimension@{Dimension}!prt::Dimension@{prt::Dimension}}
+\doxysubsubsection{\texorpdfstring{Dimension()}{Dimension()}\hspace{0.1cm}{\footnotesize\ttfamily [3/6]}}
+{\footnotesize\ttfamily \label{classprt_1_1_dimension_a0e54f25abdfa3080fc728dd2437acbb0} 
+prt\+::\+Dimension\+::\+Dimension (\begin{DoxyParamCaption}\item[{const uint32\+\_\+t}]{width}{, }\item[{const uint32\+\_\+t}]{height}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_dimension_a7ea41feaf93a0010a5a0dccf8ee3c100}\index{prt::Dimension@{prt::Dimension}!Dimension@{Dimension}}
+\index{Dimension@{Dimension}!prt::Dimension@{prt::Dimension}}
+\doxysubsubsection{\texorpdfstring{Dimension()}{Dimension()}\hspace{0.1cm}{\footnotesize\ttfamily [4/6]}}
+{\footnotesize\ttfamily \label{classprt_1_1_dimension_a7ea41feaf93a0010a5a0dccf8ee3c100} 
+prt\+::\+Dimension\+::\+Dimension (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+\Hypertarget{classprt_1_1_dimension_ac608c8820c5a2f39930fc8ab12d40f12}\index{prt::Dimension@{prt::Dimension}!Dimension@{Dimension}}
+\index{Dimension@{Dimension}!prt::Dimension@{prt::Dimension}}
+\doxysubsubsection{\texorpdfstring{Dimension()}{Dimension()}\hspace{0.1cm}{\footnotesize\ttfamily [5/6]}}
+{\footnotesize\ttfamily \label{classprt_1_1_dimension_ac608c8820c5a2f39930fc8ab12d40f12} 
+prt\+::\+Dimension\+::\+Dimension (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} \&}]{rhs}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{classprt_1_1_dimension_ab935dc3897eb614cdec3f78f1a9cfbad}\index{prt::Dimension@{prt::Dimension}!Dimension@{Dimension}}
+\index{Dimension@{Dimension}!prt::Dimension@{prt::Dimension}}
+\doxysubsubsection{\texorpdfstring{Dimension()}{Dimension()}\hspace{0.1cm}{\footnotesize\ttfamily [6/6]}}
+{\footnotesize\ttfamily \label{classprt_1_1_dimension_ab935dc3897eb614cdec3f78f1a9cfbad} 
+prt\+::\+Dimension\+::\+Dimension (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} \&\&}]{rhs}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\Hypertarget{classprt_1_1_dimension_a2dc636f2eafa3d9a8ffb6fcd78377bfe}\index{prt::Dimension@{prt::Dimension}!````~Dimension@{\texorpdfstring{$\sim$}{\string~}Dimension}}
+\index{````~Dimension@{\texorpdfstring{$\sim$}{\string~}Dimension}!prt::Dimension@{prt::Dimension}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Dimension()}{\string~Dimension()}}
+{\footnotesize\ttfamily \label{classprt_1_1_dimension_a2dc636f2eafa3d9a8ffb6fcd78377bfe} 
+prt\+::\+Dimension\+::\texorpdfstring{$\sim$}{\string~}\+Dimension (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_dimension_a9ba241f6da10f73d1dca999409672503}\index{prt::Dimension@{prt::Dimension}!Compare@{Compare}}
+\index{Compare@{Compare}!prt::Dimension@{prt::Dimension}}
+\doxysubsubsection{\texorpdfstring{Compare()}{Compare()}}
+{\footnotesize\ttfamily \label{classprt_1_1_dimension_a9ba241f6da10f73d1dca999409672503} 
+static auto prt\+::\+Dimension\+::\+Compare (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} \&}]{lhs}{, }\item[{const \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} \&}]{rhs}{}\end{DoxyParamCaption}) -\/$>$ int \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_dimension_aa77f779cea71d9a562d8259cbad42463}\index{prt::Dimension@{prt::Dimension}!CompareArea@{CompareArea}}
+\index{CompareArea@{CompareArea}!prt::Dimension@{prt::Dimension}}
+\doxysubsubsection{\texorpdfstring{CompareArea()}{CompareArea()}}
+{\footnotesize\ttfamily \label{classprt_1_1_dimension_aa77f779cea71d9a562d8259cbad42463} 
+static auto prt\+::\+Dimension\+::\+Compare\+Area (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} \&}]{lhs}{, }\item[{const \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} \&}]{rhs}{}\end{DoxyParamCaption}) -\/$>$ int \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_dimension_a15f170930f05cca6368fbe1b7a8d287b}\index{prt::Dimension@{prt::Dimension}!CompareHeight@{CompareHeight}}
+\index{CompareHeight@{CompareHeight}!prt::Dimension@{prt::Dimension}}
+\doxysubsubsection{\texorpdfstring{CompareHeight()}{CompareHeight()}}
+{\footnotesize\ttfamily \label{classprt_1_1_dimension_a15f170930f05cca6368fbe1b7a8d287b} 
+static auto prt\+::\+Dimension\+::\+Compare\+Height (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} \&}]{lhs}{, }\item[{const \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} \&}]{rhs}{}\end{DoxyParamCaption}) -\/$>$ int \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_dimension_ac3825747267583016ae081137f15f6f5}\index{prt::Dimension@{prt::Dimension}!CompareWidth@{CompareWidth}}
+\index{CompareWidth@{CompareWidth}!prt::Dimension@{prt::Dimension}}
+\doxysubsubsection{\texorpdfstring{CompareWidth()}{CompareWidth()}}
+{\footnotesize\ttfamily \label{classprt_1_1_dimension_ac3825747267583016ae081137f15f6f5} 
+static auto prt\+::\+Dimension\+::\+Compare\+Width (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} \&}]{lhs}{, }\item[{const \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} \&}]{rhs}{}\end{DoxyParamCaption}) -\/$>$ int \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_dimension_a39d5b14e7ff8dd59ebfea23d137abe79}\index{prt::Dimension@{prt::Dimension}!data@{data}}
+\index{data@{data}!prt::Dimension@{prt::Dimension}}
+\doxysubsubsection{\texorpdfstring{data()}{data()}}
+{\footnotesize\ttfamily \label{classprt_1_1_dimension_a39d5b14e7ff8dd59ebfea23d137abe79} 
+auto prt\+::\+Dimension\+::data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const \mbox{\hyperlink{namespaceprt_a536ee3323b453cc5365cf5773ffb6f94}{Raw\+Dimension}}\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_dimension_ac0f0c7f3906cc4577dd59ad498826215}\index{prt::Dimension@{prt::Dimension}!GetAspectRatio@{GetAspectRatio}}
+\index{GetAspectRatio@{GetAspectRatio}!prt::Dimension@{prt::Dimension}}
+\doxysubsubsection{\texorpdfstring{GetAspectRatio()}{GetAspectRatio()}}
+{\footnotesize\ttfamily \label{classprt_1_1_dimension_ac0f0c7f3906cc4577dd59ad498826215} 
+auto prt\+::\+Dimension\+::\+Get\+Aspect\+Ratio (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ float \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_dimension_af9fe37e4105bb20d55901b0c13261689}\index{prt::Dimension@{prt::Dimension}!height@{height}}
+\index{height@{height}!prt::Dimension@{prt::Dimension}}
+\doxysubsubsection{\texorpdfstring{height()}{height()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_dimension_af9fe37e4105bb20d55901b0c13261689} 
+auto prt\+::\+Dimension\+::height (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ uint32\+\_\+t\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_dimension_a0a5ebd611a793814d739c97577cda7a3}\index{prt::Dimension@{prt::Dimension}!height@{height}}
+\index{height@{height}!prt::Dimension@{prt::Dimension}}
+\doxysubsubsection{\texorpdfstring{height()}{height()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_dimension_a0a5ebd611a793814d739c97577cda7a3} 
+auto prt\+::\+Dimension\+::height (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const uint32\+\_\+t\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_dimension_a45f42835906507fee877b0ffe5d5b7d7}\index{prt::Dimension@{prt::Dimension}!operator std::string@{operator std::string}}
+\index{operator std::string@{operator std::string}!prt::Dimension@{prt::Dimension}}
+\doxysubsubsection{\texorpdfstring{operator std::string()}{operator std::string()}}
+{\footnotesize\ttfamily \label{classprt_1_1_dimension_a45f42835906507fee877b0ffe5d5b7d7} 
+prt\+::\+Dimension\+::operator std\+::string (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_dimension_a7f64ed9ed493df773f8a91531fcd0802}\index{prt::Dimension@{prt::Dimension}!operator VkExtent2D@{operator VkExtent2D}}
+\index{operator VkExtent2D@{operator VkExtent2D}!prt::Dimension@{prt::Dimension}}
+\doxysubsubsection{\texorpdfstring{operator VkExtent2D()}{operator VkExtent2D()}}
+{\footnotesize\ttfamily \label{classprt_1_1_dimension_a7f64ed9ed493df773f8a91531fcd0802} 
+prt\+::\+Dimension\+::operator Vk\+Extent2D (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_dimension_a1d76359502e5ce9de0ad18af67da9bb5}\index{prt::Dimension@{prt::Dimension}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!prt::Dimension@{prt::Dimension}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily \label{classprt_1_1_dimension_a1d76359502e5ce9de0ad18af67da9bb5} 
+auto prt\+::\+Dimension\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} \&}]{rhs}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_dimension_abfaffe20c6f22f2d63b6a05f102cdfd1}\index{prt::Dimension@{prt::Dimension}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!prt::Dimension@{prt::Dimension}}
+\doxysubsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily \label{classprt_1_1_dimension_abfaffe20c6f22f2d63b6a05f102cdfd1} 
+auto prt\+::\+Dimension\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} \&}]{rhs}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_dimension_a23ba305b935c8bee281178b801fa4d07}\index{prt::Dimension@{prt::Dimension}!operator=@{operator=}}
+\index{operator=@{operator=}!prt::Dimension@{prt::Dimension}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_dimension_a23ba305b935c8bee281178b801fa4d07} 
+auto prt\+::\+Dimension\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} \&}]{rhs}{}\end{DoxyParamCaption}) -\/$>$  \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} \&=default\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{classprt_1_1_dimension_aa0b275b791bc0576b2fd6f3dde7dcf2a}\index{prt::Dimension@{prt::Dimension}!operator=@{operator=}}
+\index{operator=@{operator=}!prt::Dimension@{prt::Dimension}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_dimension_aa0b275b791bc0576b2fd6f3dde7dcf2a} 
+auto prt\+::\+Dimension\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} \&\&}]{rhs}{}\end{DoxyParamCaption}) -\/$>$  \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} \&=default\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{classprt_1_1_dimension_a365579ace17d1a4e5123fd20b045ab22}\index{prt::Dimension@{prt::Dimension}!operator==@{operator==}}
+\index{operator==@{operator==}!prt::Dimension@{prt::Dimension}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{classprt_1_1_dimension_a365579ace17d1a4e5123fd20b045ab22} 
+auto prt\+::\+Dimension\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} \&}]{rhs}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_dimension_a329e78698eba4be60d04972460b3143c}\index{prt::Dimension@{prt::Dimension}!operator$>$@{operator$>$}}
+\index{operator$>$@{operator$>$}!prt::Dimension@{prt::Dimension}}
+\doxysubsubsection{\texorpdfstring{operator$>$()}{operator>()}}
+{\footnotesize\ttfamily \label{classprt_1_1_dimension_a329e78698eba4be60d04972460b3143c} 
+auto prt\+::\+Dimension\+::operator$>$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} \&}]{rhs}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_dimension_a2a82264706d9fc1e8d5dc55b9c7ed30f}\index{prt::Dimension@{prt::Dimension}!SetTable@{SetTable}}
+\index{SetTable@{SetTable}!prt::Dimension@{prt::Dimension}}
+\doxysubsubsection{\texorpdfstring{SetTable()}{SetTable()}}
+{\footnotesize\ttfamily \label{classprt_1_1_dimension_a2a82264706d9fc1e8d5dc55b9c7ed30f} 
+void prt\+::\+Dimension\+::\+Set\+Table (\begin{DoxyParamCaption}\item[{lua\+\_\+\+State \texorpdfstring{$\ast$}{*}}]{L}{, }\item[{const int}]{index}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{classprt_1_1_dimension_ade4cb2e9045d9e38bf487cbd525b8338}\index{prt::Dimension@{prt::Dimension}!width@{width}}
+\index{width@{width}!prt::Dimension@{prt::Dimension}}
+\doxysubsubsection{\texorpdfstring{width()}{width()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_dimension_ade4cb2e9045d9e38bf487cbd525b8338} 
+auto prt\+::\+Dimension\+::width (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ uint32\+\_\+t\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_dimension_abff612fa3db2167a3c2628b0ea37dd4d}\index{prt::Dimension@{prt::Dimension}!width@{width}}
+\index{width@{width}!prt::Dimension@{prt::Dimension}}
+\doxysubsubsection{\texorpdfstring{width()}{width()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_dimension_abff612fa3db2167a3c2628b0ea37dd4d} 
+auto prt\+::\+Dimension\+::width (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const uint32\+\_\+t\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classprt_1_1_dimension_a2ed91ee57b29ac1a271f7e727073b142}\index{prt::Dimension@{prt::Dimension}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!prt::Dimension@{prt::Dimension}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily \label{classprt_1_1_dimension_a2ed91ee57b29ac1a271f7e727073b142} 
+auto operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{stream}{, }\item[{const \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} \&}]{rhs}{}\end{DoxyParamCaption}) -\/$>$ std\+::ostream\& \hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_dimension_a2b41ecb367dacb999aa05c88128d6271}\index{prt::Dimension@{prt::Dimension}!data\_@{data\_}}
+\index{data\_@{data\_}!prt::Dimension@{prt::Dimension}}
+\doxysubsubsection{\texorpdfstring{data\_}{data\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_dimension_a2b41ecb367dacb999aa05c88128d6271} 
+\mbox{\hyperlink{namespaceprt_a536ee3323b453cc5365cf5773ffb6f94}{Raw\+Dimension}} prt\+::\+Dimension\+::data\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_dimension_a705ef3040441fe9e392d63f4e5322753}\index{prt::Dimension@{prt::Dimension}!kHeightComponent@{kHeightComponent}}
+\index{kHeightComponent@{kHeightComponent}!prt::Dimension@{prt::Dimension}}
+\doxysubsubsection{\texorpdfstring{kHeightComponent}{kHeightComponent}}
+{\footnotesize\ttfamily \label{classprt_1_1_dimension_a705ef3040441fe9e392d63f4e5322753} 
+const auto prt\+::\+Dimension\+::k\+Height\+Component = 1\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_dimension_a8bfb4ca487c91adc173a7ab985de4f40}\index{prt::Dimension@{prt::Dimension}!kWidthComponent@{kWidthComponent}}
+\index{kWidthComponent@{kWidthComponent}!prt::Dimension@{prt::Dimension}}
+\doxysubsubsection{\texorpdfstring{kWidthComponent}{kWidthComponent}}
+{\footnotesize\ttfamily \label{classprt_1_1_dimension_a8bfb4ca487c91adc173a7ab985de4f40} 
+const auto prt\+::\+Dimension\+::k\+Width\+Component = 0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{dimension_8h}{dimension.\+h}}\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{dimension_8cc}{dimension.\+cc}}\end{DoxyCompactItemize}

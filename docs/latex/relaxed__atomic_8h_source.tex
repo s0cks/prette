@@ -1,0 +1,97 @@
+\doxysection{relaxed\+\_\+atomic.\+h}
+\hypertarget{relaxed__atomic_8h_source}{}\label{relaxed__atomic_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/relaxed\_atomic.h@{/Users/tazz/Projects/prette/Sources/prette/relaxed\_atomic.h}}
+\mbox{\hyperlink{relaxed__atomic_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_RELAXED\_ATOMIC\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_RELAXED\_ATOMIC\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <atomic>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00008\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_relaxed_atomic}{RelaxedAtomic}}\ \{}
+\DoxyCodeLine{00010\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00011\ \ \ std::atomic<T>\ \mbox{\hyperlink{classprt_1_1_relaxed_atomic_ae6ac7a36071178a811d95e25207739ac}{value\_}}\{\};}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00014\ \ \ \mbox{\hyperlink{classprt_1_1_relaxed_atomic_ad93c373e4d9b414219ad18f4a689ba1e}{RelaxedAtomic}}()\ :}
+\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_relaxed_atomic_ae6ac7a36071178a811d95e25207739ac}{value\_}}()\ \{\}}
+\DoxyCodeLine{00016\ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_relaxed_atomic_a75b4b15dea7d0d0180c7c042cb601e28}{RelaxedAtomic}}(\textcolor{keyword}{const}\ T\&\ value)\ :}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_relaxed_atomic_ae6ac7a36071178a811d95e25207739ac}{value\_}}(value)\ \{\}}
+\DoxyCodeLine{00018\ \ \ \mbox{\hyperlink{classprt_1_1_relaxed_atomic_ae5479c99ab4d82d7bc2fa8ee068f93e5}{RelaxedAtomic}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_relaxed_atomic}{RelaxedAtomic<T>}}\&\ rhs)\ :}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_relaxed_atomic_ae6ac7a36071178a811d95e25207739ac}{value\_}}((T)rhs)\ \{\}}
+\DoxyCodeLine{00020\ \ \ \mbox{\hyperlink{classprt_1_1_relaxed_atomic_a5ef34a9f80a78b3eb099761d0e4c92c0}{\string~RelaxedAtomic}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ T\ \mbox{\hyperlink{classprt_1_1_relaxed_atomic_afd0cf74dbdc2c62a53f3bd84e33b4102}{fetch\_add}}(T\ arg,\ std::memory\_order\ order\ =\ std::memory\_order\_relaxed)\ \{}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_relaxed_atomic_ae6ac7a36071178a811d95e25207739ac}{value\_}}.fetch\_add(arg,\ order);}
+\DoxyCodeLine{00024\ \ \ \}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ T\ \mbox{\hyperlink{classprt_1_1_relaxed_atomic_a4b2cbc9dc73d4a3902c0ec3b9db0bd53}{fetch\_sub}}(T\ arg,\ std::memory\_order\ order\ =\ std::memory\_order\_relaxed)\ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_relaxed_atomic_ae6ac7a36071178a811d95e25207739ac}{value\_}}.fetch\_sub(arg,\ order);}
+\DoxyCodeLine{00028\ \ \ \}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ T\ \mbox{\hyperlink{classprt_1_1_relaxed_atomic_ab67bc1abe3f64478dcfda4b59bd3b6b7}{load}}(std::memory\_order\ order\ =\ std::memory\_order\_relaxed)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_relaxed_atomic_ae6ac7a36071178a811d95e25207739ac}{value\_}}.load(order);}
+\DoxyCodeLine{00032\ \ \ \}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_relaxed_atomic_a504def09eb5c0d03c816ee7f09ed8be1}{store}}(T\ arg,\ std::memory\_order\ order\ =\ std::memory\_order\_relaxed)\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_relaxed_atomic_ae6ac7a36071178a811d95e25207739ac}{value\_}}.store(arg,\ order);}
+\DoxyCodeLine{00036\ \ \ \}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classprt_1_1_relaxed_atomic_a0b39336298db3e06ce3e55fde2d260a4}{compare\_exchange\_weak}}(T\&\ expected,\ T\ desired,\ std::memory\_order\ order\ =\ std::memory\_order\_relaxed)\ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_relaxed_atomic_ae6ac7a36071178a811d95e25207739ac}{value\_}}.compare\_exchange\_weak(expected,\ desired,\ order,\ order);}
+\DoxyCodeLine{00040\ \ \ \}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classprt_1_1_relaxed_atomic_aed39df5de1c51de2be4117b9ed8bfc66}{compare\_exchange\_strong}}(T\&\ expected,\ T\ desired,\ std::memory\_order\ order\ =\ std::memory\_order\_relaxed)\ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_relaxed_atomic_ae6ac7a36071178a811d95e25207739ac}{value\_}}.compare\_exchange\_strong(expected,\ desired,\ order,\ order);}
+\DoxyCodeLine{00044\ \ \ \}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \textcolor{keyword}{explicit}\ \textcolor{keyword}{operator}\ T()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_relaxed_atomic_ab67bc1abe3f64478dcfda4b59bd3b6b7}{load}}();}
+\DoxyCodeLine{00048\ \ \ \}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ T\ \mbox{\hyperlink{classprt_1_1_relaxed_atomic_aca6e36d82657fa73cb3c7ecef8e78c2f}{operator=}}(T\ arg)\ \{\ \ \textcolor{comment}{//\ NOLINT(misc-\/unconventional-\/assign-\/operator)}}
+\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_relaxed_atomic_a504def09eb5c0d03c816ee7f09ed8be1}{store}}(arg);}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordflow}{return}\ arg;}
+\DoxyCodeLine{00053\ \ \ \}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ T\ \mbox{\hyperlink{classprt_1_1_relaxed_atomic_a14b4e475d1ad4464d7cf66902854df04}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_relaxed_atomic}{RelaxedAtomic}}\&\ arg)\ \{\ \ \textcolor{comment}{//\ NOLINT(misc-\/unconventional-\/assign-\/operator)}}
+\DoxyCodeLine{00056\ \ \ \ \ T\ loaded\ =\ (T)arg;}
+\DoxyCodeLine{00057\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_relaxed_atomic_a504def09eb5c0d03c816ee7f09ed8be1}{store}}(loaded);}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordflow}{return}\ loaded;}
+\DoxyCodeLine{00059\ \ \ \}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ T\ \mbox{\hyperlink{classprt_1_1_relaxed_atomic_afc964ca0e01b1fd1c8736502e898f90c}{operator+=}}(T\ arg)\ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_relaxed_atomic_afd0cf74dbdc2c62a53f3bd84e33b4102}{fetch\_add}}(arg)\ +\ arg;}
+\DoxyCodeLine{00063\ \ \ \}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ T\ \mbox{\hyperlink{classprt_1_1_relaxed_atomic_a723fb5fb96f9d9dd04c168d8f437bea5}{operator-\/=}}(T\ arg)\ \{}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_relaxed_atomic_a4b2cbc9dc73d4a3902c0ec3b9db0bd53}{fetch\_sub}}(arg)\ -\/\ arg;}
+\DoxyCodeLine{00067\ \ \ \}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \textcolor{keyword}{friend}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classprt_1_1_relaxed_atomic_a985012d1f05749206ca47235e56ef38c}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_relaxed_atomic}{RelaxedAtomic<T>}}\&\ lhs,\ \textcolor{keyword}{const}\ T\&\ rhs)\ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordflow}{return}\ ((T)lhs)\ ==\ rhs;}
+\DoxyCodeLine{00071\ \ \ \}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \textcolor{keyword}{friend}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classprt_1_1_relaxed_atomic_a653628dc8fc75dda5fded46eb9e515cd}{operator!=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_relaxed_atomic}{RelaxedAtomic<T>}}\&\ lhs,\ \textcolor{keyword}{const}\ T\&\ rhs)\ \{}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordflow}{return}\ ((T)lhs)\ !=\ rhs;}
+\DoxyCodeLine{00075\ \ \ \}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \textcolor{keyword}{friend}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classprt_1_1_relaxed_atomic_aff9ff8b146dedbc4163150cbaa03efa7}{operator<}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_relaxed_atomic}{RelaxedAtomic<T>}}\&\ lhs,\ \textcolor{keyword}{const}\ T\&\ rhs)\ \{}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordflow}{return}\ ((T)lhs)\ <\ rhs;}
+\DoxyCodeLine{00079\ \ \ \}}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \textcolor{keyword}{friend}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classprt_1_1_relaxed_atomic_a615211afe2a2eaf18785bd3b9028f181}{operator>}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_relaxed_atomic}{RelaxedAtomic<T>}}\&\ lhs,\ \textcolor{keyword}{const}\ T\&\ rhs)\ \{}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordflow}{return}\ ((T)lhs)\ >\ rhs;}
+\DoxyCodeLine{00083\ \ \ \}}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \ \ \textcolor{keyword}{friend}\ std::ostream\&\ \mbox{\hyperlink{classprt_1_1_relaxed_atomic_a419ed0b8f272b713972148e143005413}{operator<<}}(std::ostream\&\ stream,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_relaxed_atomic}{RelaxedAtomic<T>}}\&\ val)\ \{}
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordflow}{return}\ stream\ <<\ ((T)val);}
+\DoxyCodeLine{00087\ \ \ \}}
+\DoxyCodeLine{00088\ \};}
+\DoxyCodeLine{00089\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_RELAXED\_ATOMIC\_H}}
+
+\end{DoxyCode}

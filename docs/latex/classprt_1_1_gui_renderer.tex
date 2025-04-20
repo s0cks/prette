@@ -1,0 +1,93 @@
+\doxysection{prt\+::Gui\+Renderer Class Reference}
+\hypertarget{classprt_1_1_gui_renderer}{}\label{classprt_1_1_gui_renderer}\index{prt::GuiRenderer@{prt::GuiRenderer}}
+
+
+{\ttfamily \#include $<$gui\+\_\+renderer.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classprt_1_1_gui_renderer_a9d2b3ab239ac717c4f79aac7e157102c}{Init}} ()
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_gui_renderer_af69fce6721d636decabf0056f5f67d20}{Get\+Pass}} () -\/$>$ Vk\+Render\+Pass const \&
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_gui_renderer_a46171f8afbfd94b63a50a6492b6c21ba}{Get\+Scene\+Descriptor}} (const uint32\+\_\+t frame) -\/$>$ Vk\+Descriptor\+Set const \&
+\item 
+static void \mbox{\hyperlink{classprt_1_1_gui_renderer_adca26bd527476a374e7e7cad3b4ee7f6}{Draw}} (\mbox{\hyperlink{classprt_1_1_swap_chain_frame}{Swap\+Chain\+Frame}} \texorpdfstring{$\ast$}{*}frame, std\+::vector$<$ Vk\+Command\+Buffer $>$ \&cmd\+\_\+buffers)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classprt_1_1_gui_renderer_a7a9fa95bb159f63610f50fb519316b3f}{Init\+Framebuffers}} (const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}driver)
+\item 
+static void \mbox{\hyperlink{classprt_1_1_gui_renderer_ae891ea5e01af4a6279d2218fbc74311d}{Init\+Render\+Pass}} (const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}driver)
+\item 
+static void \mbox{\hyperlink{classprt_1_1_gui_renderer_a9d8ab13d19efc66684ebee8bc82c64c2}{Init\+Command\+Buffers}} (const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}driver)
+\item 
+static void \mbox{\hyperlink{classprt_1_1_gui_renderer_a132874a2776233b676c5654f74fa71fe}{Init\+Sampler}} (const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}driver)
+\item 
+static void \mbox{\hyperlink{classprt_1_1_gui_renderer_a0873f7f0b6661b11caaf72f0c7d3dafb}{Destroy}} (const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}driver, const bool is\+\_\+reinit)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_gui_renderer_a0873f7f0b6661b11caaf72f0c7d3dafb}\index{prt::GuiRenderer@{prt::GuiRenderer}!Destroy@{Destroy}}
+\index{Destroy@{Destroy}!prt::GuiRenderer@{prt::GuiRenderer}}
+\doxysubsubsection{\texorpdfstring{Destroy()}{Destroy()}}
+{\footnotesize\ttfamily \label{classprt_1_1_gui_renderer_a0873f7f0b6661b11caaf72f0c7d3dafb} 
+void prt\+::\+Gui\+Renderer\+::\+Destroy (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}}]{driver}{, }\item[{const bool}]{is\+\_\+reinit}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_gui_renderer_adca26bd527476a374e7e7cad3b4ee7f6}\index{prt::GuiRenderer@{prt::GuiRenderer}!Draw@{Draw}}
+\index{Draw@{Draw}!prt::GuiRenderer@{prt::GuiRenderer}}
+\doxysubsubsection{\texorpdfstring{Draw()}{Draw()}}
+{\footnotesize\ttfamily \label{classprt_1_1_gui_renderer_adca26bd527476a374e7e7cad3b4ee7f6} 
+void prt\+::\+Gui\+Renderer\+::\+Draw (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_swap_chain_frame}{Swap\+Chain\+Frame}} \texorpdfstring{$\ast$}{*}}]{frame}{, }\item[{std\+::vector$<$ Vk\+Command\+Buffer $>$ \&}]{cmd\+\_\+buffers}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_gui_renderer_af69fce6721d636decabf0056f5f67d20}\index{prt::GuiRenderer@{prt::GuiRenderer}!GetPass@{GetPass}}
+\index{GetPass@{GetPass}!prt::GuiRenderer@{prt::GuiRenderer}}
+\doxysubsubsection{\texorpdfstring{GetPass()}{GetPass()}}
+{\footnotesize\ttfamily \label{classprt_1_1_gui_renderer_af69fce6721d636decabf0056f5f67d20} 
+auto prt\+::\+Gui\+Renderer\+::\+Get\+Pass (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ Vk\+Render\+Pass const\&\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_gui_renderer_a46171f8afbfd94b63a50a6492b6c21ba}\index{prt::GuiRenderer@{prt::GuiRenderer}!GetSceneDescriptor@{GetSceneDescriptor}}
+\index{GetSceneDescriptor@{GetSceneDescriptor}!prt::GuiRenderer@{prt::GuiRenderer}}
+\doxysubsubsection{\texorpdfstring{GetSceneDescriptor()}{GetSceneDescriptor()}}
+{\footnotesize\ttfamily \label{classprt_1_1_gui_renderer_a46171f8afbfd94b63a50a6492b6c21ba} 
+auto prt\+::\+Gui\+Renderer\+::\+Get\+Scene\+Descriptor (\begin{DoxyParamCaption}\item[{const uint32\+\_\+t}]{frame}{}\end{DoxyParamCaption}) -\/$>$ Vk\+Descriptor\+Set const\&\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_gui_renderer_a9d2b3ab239ac717c4f79aac7e157102c}\index{prt::GuiRenderer@{prt::GuiRenderer}!Init@{Init}}
+\index{Init@{Init}!prt::GuiRenderer@{prt::GuiRenderer}}
+\doxysubsubsection{\texorpdfstring{Init()}{Init()}}
+{\footnotesize\ttfamily \label{classprt_1_1_gui_renderer_a9d2b3ab239ac717c4f79aac7e157102c} 
+void prt\+::\+Gui\+Renderer\+::\+Init (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_gui_renderer_a9d8ab13d19efc66684ebee8bc82c64c2}\index{prt::GuiRenderer@{prt::GuiRenderer}!InitCommandBuffers@{InitCommandBuffers}}
+\index{InitCommandBuffers@{InitCommandBuffers}!prt::GuiRenderer@{prt::GuiRenderer}}
+\doxysubsubsection{\texorpdfstring{InitCommandBuffers()}{InitCommandBuffers()}}
+{\footnotesize\ttfamily \label{classprt_1_1_gui_renderer_a9d8ab13d19efc66684ebee8bc82c64c2} 
+void prt\+::\+Gui\+Renderer\+::\+Init\+Command\+Buffers (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}}]{driver}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_gui_renderer_a7a9fa95bb159f63610f50fb519316b3f}\index{prt::GuiRenderer@{prt::GuiRenderer}!InitFramebuffers@{InitFramebuffers}}
+\index{InitFramebuffers@{InitFramebuffers}!prt::GuiRenderer@{prt::GuiRenderer}}
+\doxysubsubsection{\texorpdfstring{InitFramebuffers()}{InitFramebuffers()}}
+{\footnotesize\ttfamily \label{classprt_1_1_gui_renderer_a7a9fa95bb159f63610f50fb519316b3f} 
+void prt\+::\+Gui\+Renderer\+::\+Init\+Framebuffers (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}}]{driver}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_gui_renderer_ae891ea5e01af4a6279d2218fbc74311d}\index{prt::GuiRenderer@{prt::GuiRenderer}!InitRenderPass@{InitRenderPass}}
+\index{InitRenderPass@{InitRenderPass}!prt::GuiRenderer@{prt::GuiRenderer}}
+\doxysubsubsection{\texorpdfstring{InitRenderPass()}{InitRenderPass()}}
+{\footnotesize\ttfamily \label{classprt_1_1_gui_renderer_ae891ea5e01af4a6279d2218fbc74311d} 
+void prt\+::\+Gui\+Renderer\+::\+Init\+Render\+Pass (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}}]{driver}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_gui_renderer_a132874a2776233b676c5654f74fa71fe}\index{prt::GuiRenderer@{prt::GuiRenderer}!InitSampler@{InitSampler}}
+\index{InitSampler@{InitSampler}!prt::GuiRenderer@{prt::GuiRenderer}}
+\doxysubsubsection{\texorpdfstring{InitSampler()}{InitSampler()}}
+{\footnotesize\ttfamily \label{classprt_1_1_gui_renderer_a132874a2776233b676c5654f74fa71fe} 
+void prt\+::\+Gui\+Renderer\+::\+Init\+Sampler (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}}]{driver}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{gui__renderer_8h}{gui\+\_\+renderer.\+h}}\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{gui__renderer_8cc}{gui\+\_\+renderer.\+cc}}\end{DoxyCompactItemize}

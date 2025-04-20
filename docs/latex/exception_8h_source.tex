@@ -1,0 +1,40 @@
+\doxysection{exception.\+h}
+\hypertarget{exception_8h_source}{}\label{exception_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/exception.h@{/Users/tazz/Projects/prette/Sources/prette/exception.h}}
+\mbox{\hyperlink{exception_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_EXCEPTION\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_EXCEPTION\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <exception>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <utility>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_exception}{Exception}}\ :\ \textcolor{keyword}{public}\ std::exception\ \{}
+\DoxyCodeLine{00010\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00011\ \ \ std::string\ \mbox{\hyperlink{classprt_1_1_exception_a004dd6852e1e12364bf2ab5a2a872fe4}{message\_}};}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00014\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_exception_ac5243171e908ca5d39dae9541ae08a60}{Exception}}(std::string\ \mbox{\hyperlink{classprt_1_1_exception_a9bff0d10caa9d58169552b7ce553cc1f}{message}})\ :}
+\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{namespacestd}{std}}::exception(),}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_exception_a004dd6852e1e12364bf2ab5a2a872fe4}{message\_}}(\mbox{\hyperlink{namespacestd}{std}}::move(\mbox{\hyperlink{classprt_1_1_exception_a9bff0d10caa9d58169552b7ce553cc1f}{message}}))\ \{\}}
+\DoxyCodeLine{00017\ \ \ \mbox{\hyperlink{classprt_1_1_exception_a00ca3171d262e23679c62edc279733a5}{\string~Exception}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_exception_a9bff0d10caa9d58169552b7ce553cc1f}{message}}()\ const\ -\/>\ const\ \mbox{\hyperlink{namespacestd}{std}}::\textcolor{keywordtype}{string}\&\ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_exception_a004dd6852e1e12364bf2ab5a2a872fe4}{message\_}};}
+\DoxyCodeLine{00021\ \ \ \}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_exception_a0315b2a413e9910022b93b55de4d4611}{what}}()\ const\ noexcept\ -\/>\ const\ \textcolor{keywordtype}{char}*\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_exception_a004dd6852e1e12364bf2ab5a2a872fe4}{message\_}}.c\_str();}
+\DoxyCodeLine{00025\ \ \ \}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00028\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_exception_a8faee27565a28c4c734513bf6ff7cebd}{New}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classprt_1_1_exception_a9bff0d10caa9d58169552b7ce553cc1f}{message}})\ -\/>\ std::exception\_ptr\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordflow}{return}\ std::make\_exception\_ptr(\mbox{\hyperlink{classprt_1_1_exception_ac5243171e908ca5d39dae9541ae08a60}{Exception}}(\mbox{\hyperlink{classprt_1_1_exception_a9bff0d10caa9d58169552b7ce553cc1f}{message}}));}
+\DoxyCodeLine{00030\ \ \ \}}
+\DoxyCodeLine{00031\ \};}
+\DoxyCodeLine{00032\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_EXCEPTION\_H}}
+
+\end{DoxyCode}

@@ -1,0 +1,101 @@
+\doxysection{/\+Users/tazz/\+Projects/prette/\+Sources/prette/settings\+\_\+event.h File Reference}
+\hypertarget{settings__event_8h}{}\label{settings__event_8h}\index{/Users/tazz/Projects/prette/Sources/prette/settings\_event.h@{/Users/tazz/Projects/prette/Sources/prette/settings\_event.h}}
+{\ttfamily \#include "{}prette/event.\+h"{}}\newline
+Include dependency graph for settings\+\_\+event.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{settings__event_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{settings__event_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceprt}{prt}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{settings__event_8h_a4e60ec9db1a2510152dd5dfa63ee2b87}{FOR\+\_\+\+EACH\+\_\+\+SETTINGS\+\_\+\+EVENT}}(V)
+\item 
+\#define \mbox{\hyperlink{settings__event_8h_a83d2d158052fc2dc9bdf9bece3fd251e}{FORWARD\+\_\+\+DECLARE}}(Name)
+\item 
+\#define \mbox{\hyperlink{settings__event_8h_ae2f70545ed5c0173d9255caf87738271}{DEFINE\+\_\+\+SETTINGS\+\_\+\+EVENT\+\_\+\+TYPE}}(Name)
+\item 
+\#define \mbox{\hyperlink{settings__event_8h_a2613603d4bb1cf5aaee432d538984eb1}{DEFINE\+\_\+\+SETTINGS\+\_\+\+EVENT}}(Name)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceprt_a005dfd643ca361268234028cd4b9a511}{prt\+::\+DEFINE\+\_\+\+EVENT\+\_\+\+PROTOTYPE}} (\mbox{\hyperlink{classprt_1_1_settings}{Settings}}, \mbox{\hyperlink{namespaceprt_aa41ed1533684c4d4141b9cd990a56b1d}{FOR\+\_\+\+EACH\+\_\+\+SETTINGS\+\_\+\+EVENT}})
+\item 
+\mbox{\hyperlink{namespaceprt_aee90d914447e1cfcfd32b9cc4e0b6f6f}{prt\+::\+DEFINE\+\_\+\+SETTINGS\+\_\+\+EVENT}} (Settings\+Loaded)
+\item 
+\mbox{\hyperlink{namespaceprt_a350f0d6a8ff86726d15fb9caeb2c7e86}{prt\+::\+DEFINE\+\_\+\+SETTINGS\+\_\+\+EVENT}} (Settings\+Saved)
+\item 
+\mbox{\hyperlink{namespaceprt_abdecd1829a37dccccd545cf90e1a3088}{prt\+::\+DEFINE\+\_\+\+EVENT\+\_\+\+SUBJECT}} (\mbox{\hyperlink{classprt_1_1_settings}{Settings}})
+\item 
+\mbox{\hyperlink{namespaceprt_a840a3669d863f8d578a16393e14255c4}{prt\+::\+DEFINE\+\_\+\+EVENT\+\_\+\+OBSERVABLE}} (\mbox{\hyperlink{classprt_1_1_settings}{Settings}})
+\item 
+\mbox{\hyperlink{namespaceprt_ae33927a458c415c171280745e4424840}{prt\+::\+FOR\+\_\+\+EACH\+\_\+\+SETTINGS\+\_\+\+EVENT}} (\mbox{\hyperlink{namespaceprt_a1a037a7c66a8e0c9eafb4608fef52cca}{DEFINE\+\_\+\+EVENT\+\_\+\+OBSERVABLE}})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{settings__event_8h_a2613603d4bb1cf5aaee432d538984eb1}\index{settings\_event.h@{settings\_event.h}!DEFINE\_SETTINGS\_EVENT@{DEFINE\_SETTINGS\_EVENT}}
+\index{DEFINE\_SETTINGS\_EVENT@{DEFINE\_SETTINGS\_EVENT}!settings\_event.h@{settings\_event.h}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_SETTINGS\_EVENT}{DEFINE\_SETTINGS\_EVENT}}
+{\footnotesize\ttfamily \label{settings__event_8h_a2613603d4bb1cf5aaee432d538984eb1} 
+\#define DEFINE\+\_\+\+SETTINGS\+\_\+\+EVENT(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \textcolor{keyword}{class\ }Name\#\#Event\ :\ \textcolor{keyword}{public}\ SettingsEvent\ \{\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{public}:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ Name\#\#Event()\ =\ \textcolor{keywordflow}{default};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \string~Name\#\#Event()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};\ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ DEFINE\_SETTINGS\_EVENT\_TYPE(Name);\ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \};}
+
+\end{DoxyCode}
+\Hypertarget{settings__event_8h_ae2f70545ed5c0173d9255caf87738271}\index{settings\_event.h@{settings\_event.h}!DEFINE\_SETTINGS\_EVENT\_TYPE@{DEFINE\_SETTINGS\_EVENT\_TYPE}}
+\index{DEFINE\_SETTINGS\_EVENT\_TYPE@{DEFINE\_SETTINGS\_EVENT\_TYPE}!settings\_event.h@{settings\_event.h}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_SETTINGS\_EVENT\_TYPE}{DEFINE\_SETTINGS\_EVENT\_TYPE}}
+{\footnotesize\ttfamily \label{settings__event_8h_ae2f70545ed5c0173d9255caf87738271} 
+\#define DEFINE\+\_\+\+SETTINGS\+\_\+\+EVENT\+\_\+\+TYPE(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{event_8h_aa8d2371509853602194dfe7289ca052e}{DECLARE\_EVENT\_TYPE}}(SettingsEvent,\ Name)}
+
+\end{DoxyCode}
+\Hypertarget{settings__event_8h_a4e60ec9db1a2510152dd5dfa63ee2b87}\index{settings\_event.h@{settings\_event.h}!FOR\_EACH\_SETTINGS\_EVENT@{FOR\_EACH\_SETTINGS\_EVENT}}
+\index{FOR\_EACH\_SETTINGS\_EVENT@{FOR\_EACH\_SETTINGS\_EVENT}!settings\_event.h@{settings\_event.h}}
+\doxysubsubsection{\texorpdfstring{FOR\_EACH\_SETTINGS\_EVENT}{FOR\_EACH\_SETTINGS\_EVENT}}
+{\footnotesize\ttfamily \label{settings__event_8h_a4e60ec9db1a2510152dd5dfa63ee2b87} 
+\#define FOR\+\_\+\+EACH\+\_\+\+SETTINGS\+\_\+\+EVENT(\begin{DoxyParamCaption}\item[{}]{V}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ V(SettingsLoaded)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(SettingsSaved)}
+
+\end{DoxyCode}
+\Hypertarget{settings__event_8h_a83d2d158052fc2dc9bdf9bece3fd251e}\index{settings\_event.h@{settings\_event.h}!FORWARD\_DECLARE@{FORWARD\_DECLARE}}
+\index{FORWARD\_DECLARE@{FORWARD\_DECLARE}!settings\_event.h@{settings\_event.h}}
+\doxysubsubsection{\texorpdfstring{FORWARD\_DECLARE}{FORWARD\_DECLARE}}
+{\footnotesize\ttfamily \label{settings__event_8h_a83d2d158052fc2dc9bdf9bece3fd251e} 
+\#define FORWARD\+\_\+\+DECLARE(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{class\ }Name\#\#Event;}
+
+\end{DoxyCode}

@@ -1,0 +1,114 @@
+\doxysection{/\+Users/tazz/\+Projects/prette/\+Sources/prette/renderer.h File Reference}
+\hypertarget{renderer_8h}{}\label{renderer_8h}\index{/Users/tazz/Projects/prette/Sources/prette/renderer.h@{/Users/tazz/Projects/prette/Sources/prette/renderer.h}}
+{\ttfamily \#include $<$vulkan/vulkan\+\_\+core.\+h$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include "{}prette/event.\+h"{}}\newline
+{\ttfamily \#include "{}prette/gfx.\+h"{}}\newline
+{\ttfamily \#include "{}prette/tick.\+h"{}}\newline
+Include dependency graph for renderer.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{renderer_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{renderer_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1_renderer_event}{prt\+::\+Renderer\+Event}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_template_renderer_event}{prt\+::\+Template\+Renderer\+Event$<$ Frame\+Event $>$}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_renderer_event_base}{prt\+::\+Renderer\+Event\+Base}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_frame_event}{prt\+::\+Frame\+Event}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_renderer_init_event}{prt\+::\+Renderer\+Init\+Event}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_pre_frame_event}{prt\+::\+Pre\+Frame\+Event}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_post_frame_event}{prt\+::\+Post\+Frame\+Event}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_renderer_destroyed_event}{prt\+::\+Renderer\+Destroyed\+Event}}
+\item 
+struct \mbox{\hyperlink{structprt_1_1_vertex}{prt\+::\+Vertex}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_renderer}{prt\+::\+Renderer}}
+\item 
+struct \mbox{\hyperlink{structstd_1_1hash_3_01prt_1_1_vertex_01_4}{std\+::hash$<$ prt\+::\+Vertex $>$}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceprt}{prt}}
+\item 
+namespace \mbox{\hyperlink{namespacestd}{std}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{renderer_8h_ae9988c73a80f5b53389f3f54a6dc4039}{FOR\+\_\+\+EACH\+\_\+\+RENDERER\+\_\+\+EVENT}}(V)
+\item 
+\#define \mbox{\hyperlink{renderer_8h_a83d2d158052fc2dc9bdf9bece3fd251e}{FORWARD\+\_\+\+DECLARE}}(Name)
+\item 
+\#define \mbox{\hyperlink{renderer_8h_a2672365a233e0c9f3c1ccb0d78388308}{DEFINE\+\_\+\+ON\+\_\+\+EVENT}}(Name)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceprt_a01dbfdf81f2b917f3f4d6c7582dbdab3}{prt\+::\+DEFINE\+\_\+\+EVENT\+\_\+\+SUBJECT}} (\mbox{\hyperlink{classprt_1_1_renderer}{Renderer}})
+\item 
+\mbox{\hyperlink{namespaceprt_ae3e552be890f853a9ce7c2e643aa0e21}{prt\+::\+DEFINE\+\_\+\+EVENT\+\_\+\+OBSERVABLE}} (\mbox{\hyperlink{classprt_1_1_renderer}{Renderer}})
+\item 
+\mbox{\hyperlink{namespaceprt_afcbe0f3c11c5ff8ea0077d5d430e513e}{prt\+::\+FOR\+\_\+\+EACH\+\_\+\+RENDERER\+\_\+\+EVENT}} (\mbox{\hyperlink{namespaceprt_a1a037a7c66a8e0c9eafb4608fef52cca}{DEFINE\+\_\+\+EVENT\+\_\+\+OBSERVABLE}})
+\item 
+auto \mbox{\hyperlink{namespaceprt_a59fc17725eff26f75ccc5fc0964c7846}{prt\+::\+On\+Renderer\+Event}} () -\/$>$ Renderer\+Event\+Observable
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{renderer_8h_a2672365a233e0c9f3c1ccb0d78388308}\index{renderer.h@{renderer.h}!DEFINE\_ON\_EVENT@{DEFINE\_ON\_EVENT}}
+\index{DEFINE\_ON\_EVENT@{DEFINE\_ON\_EVENT}!renderer.h@{renderer.h}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_ON\_EVENT}{DEFINE\_ON\_EVENT}}
+{\footnotesize\ttfamily \label{renderer_8h_a2672365a233e0c9f3c1ccb0d78388308} 
+\#define DEFINE\+\_\+\+ON\+\_\+\+EVENT(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ On\#\#Name\#\#Event()-\/>Name\#\#EventObservable\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ OnRendererEvent().filter(Name\#\#Event::Filter).map(Name\#\#Event::Cast);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{renderer_8h_ae9988c73a80f5b53389f3f54a6dc4039}\index{renderer.h@{renderer.h}!FOR\_EACH\_RENDERER\_EVENT@{FOR\_EACH\_RENDERER\_EVENT}}
+\index{FOR\_EACH\_RENDERER\_EVENT@{FOR\_EACH\_RENDERER\_EVENT}!renderer.h@{renderer.h}}
+\doxysubsubsection{\texorpdfstring{FOR\_EACH\_RENDERER\_EVENT}{FOR\_EACH\_RENDERER\_EVENT}}
+{\footnotesize\ttfamily \label{renderer_8h_ae9988c73a80f5b53389f3f54a6dc4039} 
+\#define FOR\+\_\+\+EACH\+\_\+\+RENDERER\+\_\+\+EVENT(\begin{DoxyParamCaption}\item[{}]{V}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ V(RendererInit)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(PreFrame)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(PostFrame)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(RendererDestroyed)}
+
+\end{DoxyCode}
+\Hypertarget{renderer_8h_a83d2d158052fc2dc9bdf9bece3fd251e}\index{renderer.h@{renderer.h}!FORWARD\_DECLARE@{FORWARD\_DECLARE}}
+\index{FORWARD\_DECLARE@{FORWARD\_DECLARE}!renderer.h@{renderer.h}}
+\doxysubsubsection{\texorpdfstring{FORWARD\_DECLARE}{FORWARD\_DECLARE}}
+{\footnotesize\ttfamily \label{renderer_8h_a83d2d158052fc2dc9bdf9bece3fd251e} 
+\#define FORWARD\+\_\+\+DECLARE(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{class\ }Name\#\#Event;}
+
+\end{DoxyCode}

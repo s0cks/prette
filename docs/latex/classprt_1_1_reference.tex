@@ -1,0 +1,152 @@
+\doxysection{prt\+::Reference\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classprt_1_1_reference}{}\label{classprt_1_1_reference}\index{prt::Reference$<$ T $>$@{prt::Reference$<$ T $>$}}
+
+
+{\ttfamily \#include $<$reference.\+h$>$}
+
+
+
+Collaboration diagram for prt\+::Reference\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=182pt]{classprt_1_1_reference__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_reference_a2f3eaa507b3fa027377e7856ade07d11}{Reference}} ()
+\item 
+\mbox{\hyperlink{classprt_1_1_reference_a4f2cf9be0acc7af4e449e830efeeec95}{Reference}} (T \texorpdfstring{$\ast$}{*}value)
+\item 
+\mbox{\hyperlink{classprt_1_1_reference_a49b6d58954c9afd70e34f7fa9ce2e50d}{Reference}} (const \mbox{\hyperlink{classprt_1_1_reference}{Reference}}$<$ T $>$ \&rhs)
+\item 
+\mbox{\hyperlink{classprt_1_1_reference_a37ef62e47bef7853267a2c1a49d446e6}{\texorpdfstring{$\sim$}{\string~}\+Reference}} ()
+\item 
+bool \mbox{\hyperlink{classprt_1_1_reference_a22bb6541518a875d5c6be476a9987897}{valid}} () const
+\item 
+res\+::\+Pointer \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1_reference_ade0c9ab195e128ea13e449173579be98}{ptr}} () const
+\item 
+T \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1_reference_a31856738e19bbc824843dc2ce7c12277}{operator-\/$>$}} () const
+\item 
+void \mbox{\hyperlink{classprt_1_1_reference_a566fd44a7c25f1047390e4ff89b2d513}{operator=}} (const \mbox{\hyperlink{classprt_1_1_reference}{Reference}}$<$ T $>$ \&rhs)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classprt_1_1_reference_a38c75612d3078cafa342f1e2b800534b}{Increment\+Reference\+Counter}} ()
+\item 
+void \mbox{\hyperlink{classprt_1_1_reference_a29ef0e9d0283514b000b46a198dc8680}{Decrement\+Reference\+Counter}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_relaxed_atomic}{Relaxed\+Atomic}}$<$ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} $>$ \mbox{\hyperlink{classprt_1_1_reference_a3caeba5f9b3e5733359f97d8632eb832}{ptr\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+std\+::ostream \& \mbox{\hyperlink{classprt_1_1_reference_adf314cc3974086fa7a7262d6b9fccda1}{operator$<$$<$}} (std\+::ostream \&stream, const \mbox{\hyperlink{classprt_1_1_reference}{Reference}} \&rhs)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_reference_a2f3eaa507b3fa027377e7856ade07d11}\index{prt::Reference$<$ T $>$@{prt::Reference$<$ T $>$}!Reference@{Reference}}
+\index{Reference@{Reference}!prt::Reference$<$ T $>$@{prt::Reference$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Reference()}{Reference()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classprt_1_1_reference_a2f3eaa507b3fa027377e7856ade07d11} 
+template$<$typename T $>$ \\
+\mbox{\hyperlink{classprt_1_1_reference}{prt\+::\+Reference}}$<$ T $>$\+::\+Reference (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_reference_a4f2cf9be0acc7af4e449e830efeeec95}\index{prt::Reference$<$ T $>$@{prt::Reference$<$ T $>$}!Reference@{Reference}}
+\index{Reference@{Reference}!prt::Reference$<$ T $>$@{prt::Reference$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Reference()}{Reference()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classprt_1_1_reference_a4f2cf9be0acc7af4e449e830efeeec95} 
+template$<$typename T $>$ \\
+\mbox{\hyperlink{classprt_1_1_reference}{prt\+::\+Reference}}$<$ T $>$\+::\+Reference (\begin{DoxyParamCaption}\item[{T \texorpdfstring{$\ast$}{*}}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+\Hypertarget{classprt_1_1_reference_a49b6d58954c9afd70e34f7fa9ce2e50d}\index{prt::Reference$<$ T $>$@{prt::Reference$<$ T $>$}!Reference@{Reference}}
+\index{Reference@{Reference}!prt::Reference$<$ T $>$@{prt::Reference$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Reference()}{Reference()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classprt_1_1_reference_a49b6d58954c9afd70e34f7fa9ce2e50d} 
+template$<$typename T $>$ \\
+\mbox{\hyperlink{classprt_1_1_reference}{prt\+::\+Reference}}$<$ T $>$\+::\+Reference (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_reference}{Reference}}$<$ T $>$ \&}]{rhs}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_reference_a37ef62e47bef7853267a2c1a49d446e6}\index{prt::Reference$<$ T $>$@{prt::Reference$<$ T $>$}!````~Reference@{\texorpdfstring{$\sim$}{\string~}Reference}}
+\index{````~Reference@{\texorpdfstring{$\sim$}{\string~}Reference}!prt::Reference$<$ T $>$@{prt::Reference$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Reference()}{\string~Reference()}}
+{\footnotesize\ttfamily \label{classprt_1_1_reference_a37ef62e47bef7853267a2c1a49d446e6} 
+template$<$typename T $>$ \\
+\mbox{\hyperlink{classprt_1_1_reference}{prt\+::\+Reference}}$<$ T $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classprt_1_1_reference}{Reference}} (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_reference_a29ef0e9d0283514b000b46a198dc8680}\index{prt::Reference$<$ T $>$@{prt::Reference$<$ T $>$}!DecrementReferenceCounter@{DecrementReferenceCounter}}
+\index{DecrementReferenceCounter@{DecrementReferenceCounter}!prt::Reference$<$ T $>$@{prt::Reference$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{DecrementReferenceCounter()}{DecrementReferenceCounter()}}
+{\footnotesize\ttfamily \label{classprt_1_1_reference_a29ef0e9d0283514b000b46a198dc8680} 
+template$<$typename T $>$ \\
+void \mbox{\hyperlink{classprt_1_1_reference}{prt\+::\+Reference}}$<$ T $>$\+::\+Decrement\+Reference\+Counter (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_reference_a38c75612d3078cafa342f1e2b800534b}\index{prt::Reference$<$ T $>$@{prt::Reference$<$ T $>$}!IncrementReferenceCounter@{IncrementReferenceCounter}}
+\index{IncrementReferenceCounter@{IncrementReferenceCounter}!prt::Reference$<$ T $>$@{prt::Reference$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{IncrementReferenceCounter()}{IncrementReferenceCounter()}}
+{\footnotesize\ttfamily \label{classprt_1_1_reference_a38c75612d3078cafa342f1e2b800534b} 
+template$<$typename T $>$ \\
+void \mbox{\hyperlink{classprt_1_1_reference}{prt\+::\+Reference}}$<$ T $>$\+::\+Increment\+Reference\+Counter (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_reference_a31856738e19bbc824843dc2ce7c12277}\index{prt::Reference$<$ T $>$@{prt::Reference$<$ T $>$}!operator-\/$>$@{operator-\/$>$}}
+\index{operator-\/$>$@{operator-\/$>$}!prt::Reference$<$ T $>$@{prt::Reference$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator-\/$>$()}{operator->()}}
+{\footnotesize\ttfamily \label{classprt_1_1_reference_a31856738e19bbc824843dc2ce7c12277} 
+template$<$typename T $>$ \\
+T \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1_reference}{prt\+::\+Reference}}$<$ T $>$\+::operator-\/$>$ (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_reference_a566fd44a7c25f1047390e4ff89b2d513}\index{prt::Reference$<$ T $>$@{prt::Reference$<$ T $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!prt::Reference$<$ T $>$@{prt::Reference$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \label{classprt_1_1_reference_a566fd44a7c25f1047390e4ff89b2d513} 
+template$<$typename T $>$ \\
+void \mbox{\hyperlink{classprt_1_1_reference}{prt\+::\+Reference}}$<$ T $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_reference}{Reference}}$<$ T $>$ \&}]{rhs}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_reference_ade0c9ab195e128ea13e449173579be98}\index{prt::Reference$<$ T $>$@{prt::Reference$<$ T $>$}!ptr@{ptr}}
+\index{ptr@{ptr}!prt::Reference$<$ T $>$@{prt::Reference$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{ptr()}{ptr()}}
+{\footnotesize\ttfamily \label{classprt_1_1_reference_ade0c9ab195e128ea13e449173579be98} 
+template$<$typename T $>$ \\
+res\+::\+Pointer \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1_reference}{prt\+::\+Reference}}$<$ T $>$\+::ptr (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_reference_a22bb6541518a875d5c6be476a9987897}\index{prt::Reference$<$ T $>$@{prt::Reference$<$ T $>$}!valid@{valid}}
+\index{valid@{valid}!prt::Reference$<$ T $>$@{prt::Reference$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{valid()}{valid()}}
+{\footnotesize\ttfamily \label{classprt_1_1_reference_a22bb6541518a875d5c6be476a9987897} 
+template$<$typename T $>$ \\
+bool \mbox{\hyperlink{classprt_1_1_reference}{prt\+::\+Reference}}$<$ T $>$\+::valid (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classprt_1_1_reference_adf314cc3974086fa7a7262d6b9fccda1}\index{prt::Reference$<$ T $>$@{prt::Reference$<$ T $>$}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!prt::Reference$<$ T $>$@{prt::Reference$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily \label{classprt_1_1_reference_adf314cc3974086fa7a7262d6b9fccda1} 
+template$<$typename T $>$ \\
+std\+::ostream \& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{stream}{, }\item[{const \mbox{\hyperlink{classprt_1_1_reference}{Reference}}$<$ T $>$ \&}]{rhs}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_reference_a3caeba5f9b3e5733359f97d8632eb832}\index{prt::Reference$<$ T $>$@{prt::Reference$<$ T $>$}!ptr\_@{ptr\_}}
+\index{ptr\_@{ptr\_}!prt::Reference$<$ T $>$@{prt::Reference$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{ptr\_}{ptr\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_reference_a3caeba5f9b3e5733359f97d8632eb832} 
+template$<$typename T $>$ \\
+\mbox{\hyperlink{classprt_1_1_relaxed_atomic}{Relaxed\+Atomic}}$<$\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}$>$ \mbox{\hyperlink{classprt_1_1_reference}{prt\+::\+Reference}}$<$ T $>$\+::ptr\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{reference_8h}{reference.\+h}}\end{DoxyCompactItemize}

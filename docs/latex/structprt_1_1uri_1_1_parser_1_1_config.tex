@@ -1,0 +1,186 @@
+\doxysection{prt\+::uri\+::Parser\+::Config Struct Reference}
+\hypertarget{structprt_1_1uri_1_1_parser_1_1_config}{}\label{structprt_1_1uri_1_1_parser_1_1_config}\index{prt::uri::Parser::Config@{prt::uri::Parser::Config}}
+
+
+{\ttfamily \#include $<$uri\+\_\+parser.\+h$>$}
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1uri_1_1_parser_1_1_config_1_1_flags_field}{Flags\+Field}}
+\item 
+class \mbox{\hyperlink{classprt_1_1uri_1_1_parser_1_1_config_1_1_parse_fragments_field}{Parse\+Fragments\+Field}}
+\item 
+class \mbox{\hyperlink{classprt_1_1uri_1_1_parser_1_1_config_1_1_parse_queries_field}{Parse\+Queries\+Field}}
+\item 
+class \mbox{\hyperlink{classprt_1_1uri_1_1_parser_1_1_config_1_1_strict_field}{Strict\+Field}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a49f2d46e250bd18ccb5e2481c51e6599}{Flags}} = uint8\+\_\+t
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+auto \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a8359aba785eb8a43af6e07149bca3f37}{Is\+Strict}} () const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a4a506a7adf86d44b8007a8fa2f0f7dc7}{Should\+Parse\+Queries}} () const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a1af11a410599b1f36d3ab5b53d4fe271}{Should\+Parse\+Fragments}} () const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a0eef3061d299fb2848f02991997f2f0d}{Has\+Default\+Scheme}} () const -\/$>$ bool
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceprt_1_1uri_a678076225dd533b5e37a65e04ff7ecf2}{Scheme}} \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a426ac58f10e8ddcf9aa7bc46056dc9db}{default\+\_\+scheme}}
+\item 
+\mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a49f2d46e250bd18ccb5e2481c51e6599}{Flags}} \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a96634705271d6a3155ce927681455f3d}{flags}}
+\item 
+bool(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_ab47c51f94669e2cb5429dbb46b8945a8}{On\+Parse\+Scheme}} )(const \mbox{\hyperlink{classprt_1_1uri_1_1_parser}{Parser}} \texorpdfstring{$\ast$}{*}parser, const char \texorpdfstring{$\ast$}{*}scheme, const uint64\+\_\+t length)
+\item 
+bool(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_aae7ff5e3b2d5b3d37446e48b3d9d2233}{On\+Parse\+Path}} )(const \mbox{\hyperlink{classprt_1_1uri_1_1_parser}{Parser}} \texorpdfstring{$\ast$}{*}parser, const char \texorpdfstring{$\ast$}{*}path, const uint64\+\_\+t length)
+\item 
+bool(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a42216da785a157744e1c33b349c4abb1}{On\+Parse\+Query0}} )(const \mbox{\hyperlink{classprt_1_1uri_1_1_parser}{Parser}} \texorpdfstring{$\ast$}{*}parser, const uint64\+\_\+t idx, const char \texorpdfstring{$\ast$}{*}key, const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} key\+\_\+length)
+\item 
+bool(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a0ebcd7b4afde77d3649ea10c8f0902e6}{On\+Parse\+Query1}} )(const \mbox{\hyperlink{classprt_1_1uri_1_1_parser}{Parser}} \texorpdfstring{$\ast$}{*}parser, const uint64\+\_\+t idx, const char \texorpdfstring{$\ast$}{*}key, const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} key\+\_\+len, const char \texorpdfstring{$\ast$}{*}value, const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} value\+\_\+len)
+\item 
+bool(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a9f3cae545d68d10b92afd3cbf1e398b9}{On\+Parse\+Fragment}} )(const \mbox{\hyperlink{classprt_1_1uri_1_1_parser}{Parser}} \texorpdfstring{$\ast$}{*}parser, const char \texorpdfstring{$\ast$}{*}fragment, const uint64\+\_\+t length)
+\item 
+bool(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a41b22b9c1535c87d7c8dceabbe66931b}{On\+Parse\+Error}} )(const \mbox{\hyperlink{classprt_1_1uri_1_1_parser}{Parser}} \texorpdfstring{$\ast$}{*}parser)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr const \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a49f2d46e250bd18ccb5e2481c51e6599}{Flags}} \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a34b59ff36e87bec02142e9833f697b65}{k\+No\+Flags}} = 0x0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_ac90f1b9b93eb11402ce88538669308a8}{Flags\+Layout}} \{ \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_ac90f1b9b93eb11402ce88538669308a8a44996c7bbf12180dac98692b0b80ff8b}{k\+Strict\+Offset}} = 0
+, \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_ac90f1b9b93eb11402ce88538669308a8aec68365c64f81279af68c5d38fd4c9d0}{k\+Parse\+Queries\+Offset}} = k\+Strict\+Offset + 1
+, \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_ac90f1b9b93eb11402ce88538669308a8a4ac531e73b73773e4bad8fb420fe3288}{k\+Parse\+Fragments\+Offset}} = k\+Parse\+Queries\+Offset + 1
+ \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{structprt_1_1uri_1_1_parser_1_1_config_a49f2d46e250bd18ccb5e2481c51e6599}\index{prt::uri::Parser::Config@{prt::uri::Parser::Config}!Flags@{Flags}}
+\index{Flags@{Flags}!prt::uri::Parser::Config@{prt::uri::Parser::Config}}
+\doxysubsubsection{\texorpdfstring{Flags}{Flags}}
+{\footnotesize\ttfamily \label{structprt_1_1uri_1_1_parser_1_1_config_a49f2d46e250bd18ccb5e2481c51e6599} 
+using \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a49f2d46e250bd18ccb5e2481c51e6599}{prt\+::uri\+::\+Parser\+::\+Config\+::\+Flags}} = uint8\+\_\+t}
+
+
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{structprt_1_1uri_1_1_parser_1_1_config_ac90f1b9b93eb11402ce88538669308a8}\index{prt::uri::Parser::Config@{prt::uri::Parser::Config}!FlagsLayout@{FlagsLayout}}
+\index{FlagsLayout@{FlagsLayout}!prt::uri::Parser::Config@{prt::uri::Parser::Config}}
+\doxysubsubsection{\texorpdfstring{FlagsLayout}{FlagsLayout}}
+{\footnotesize\ttfamily \label{structprt_1_1uri_1_1_parser_1_1_config_ac90f1b9b93eb11402ce88538669308a8} 
+enum \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_ac90f1b9b93eb11402ce88538669308a8}{prt\+::uri\+::\+Parser\+::\+Config\+::\+Flags\+Layout}}\hspace{0.3cm}{\ttfamily [private]}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kStrictOffset@{kStrictOffset}!prt::uri::Parser::Config@{prt::uri::Parser::Config}}\index{prt::uri::Parser::Config@{prt::uri::Parser::Config}!kStrictOffset@{kStrictOffset}}}\Hypertarget{structprt_1_1uri_1_1_parser_1_1_config_ac90f1b9b93eb11402ce88538669308a8a44996c7bbf12180dac98692b0b80ff8b}\label{structprt_1_1uri_1_1_parser_1_1_config_ac90f1b9b93eb11402ce88538669308a8} 
+k\+Strict\+Offset&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kParseQueriesOffset@{kParseQueriesOffset}!prt::uri::Parser::Config@{prt::uri::Parser::Config}}\index{prt::uri::Parser::Config@{prt::uri::Parser::Config}!kParseQueriesOffset@{kParseQueriesOffset}}}\Hypertarget{structprt_1_1uri_1_1_parser_1_1_config_ac90f1b9b93eb11402ce88538669308a8aec68365c64f81279af68c5d38fd4c9d0}\label{structprt_1_1uri_1_1_parser_1_1_config_ac90f1b9b93eb11402ce88538669308a8} 
+k\+Parse\+Queries\+Offset&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kParseFragmentsOffset@{kParseFragmentsOffset}!prt::uri::Parser::Config@{prt::uri::Parser::Config}}\index{prt::uri::Parser::Config@{prt::uri::Parser::Config}!kParseFragmentsOffset@{kParseFragmentsOffset}}}\Hypertarget{structprt_1_1uri_1_1_parser_1_1_config_ac90f1b9b93eb11402ce88538669308a8a4ac531e73b73773e4bad8fb420fe3288}\label{structprt_1_1uri_1_1_parser_1_1_config_ac90f1b9b93eb11402ce88538669308a8} 
+k\+Parse\+Fragments\+Offset&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{structprt_1_1uri_1_1_parser_1_1_config_a0eef3061d299fb2848f02991997f2f0d}\index{prt::uri::Parser::Config@{prt::uri::Parser::Config}!HasDefaultScheme@{HasDefaultScheme}}
+\index{HasDefaultScheme@{HasDefaultScheme}!prt::uri::Parser::Config@{prt::uri::Parser::Config}}
+\doxysubsubsection{\texorpdfstring{HasDefaultScheme()}{HasDefaultScheme()}}
+{\footnotesize\ttfamily \label{structprt_1_1uri_1_1_parser_1_1_config_a0eef3061d299fb2848f02991997f2f0d} 
+auto prt\+::uri\+::\+Parser\+::\+Config\+::\+Has\+Default\+Scheme (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{structprt_1_1uri_1_1_parser_1_1_config_a8359aba785eb8a43af6e07149bca3f37}\index{prt::uri::Parser::Config@{prt::uri::Parser::Config}!IsStrict@{IsStrict}}
+\index{IsStrict@{IsStrict}!prt::uri::Parser::Config@{prt::uri::Parser::Config}}
+\doxysubsubsection{\texorpdfstring{IsStrict()}{IsStrict()}}
+{\footnotesize\ttfamily \label{structprt_1_1uri_1_1_parser_1_1_config_a8359aba785eb8a43af6e07149bca3f37} 
+auto prt\+::uri\+::\+Parser\+::\+Config\+::\+Is\+Strict (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{structprt_1_1uri_1_1_parser_1_1_config_a1af11a410599b1f36d3ab5b53d4fe271}\index{prt::uri::Parser::Config@{prt::uri::Parser::Config}!ShouldParseFragments@{ShouldParseFragments}}
+\index{ShouldParseFragments@{ShouldParseFragments}!prt::uri::Parser::Config@{prt::uri::Parser::Config}}
+\doxysubsubsection{\texorpdfstring{ShouldParseFragments()}{ShouldParseFragments()}}
+{\footnotesize\ttfamily \label{structprt_1_1uri_1_1_parser_1_1_config_a1af11a410599b1f36d3ab5b53d4fe271} 
+auto prt\+::uri\+::\+Parser\+::\+Config\+::\+Should\+Parse\+Fragments (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{structprt_1_1uri_1_1_parser_1_1_config_a4a506a7adf86d44b8007a8fa2f0f7dc7}\index{prt::uri::Parser::Config@{prt::uri::Parser::Config}!ShouldParseQueries@{ShouldParseQueries}}
+\index{ShouldParseQueries@{ShouldParseQueries}!prt::uri::Parser::Config@{prt::uri::Parser::Config}}
+\doxysubsubsection{\texorpdfstring{ShouldParseQueries()}{ShouldParseQueries()}}
+{\footnotesize\ttfamily \label{structprt_1_1uri_1_1_parser_1_1_config_a4a506a7adf86d44b8007a8fa2f0f7dc7} 
+auto prt\+::uri\+::\+Parser\+::\+Config\+::\+Should\+Parse\+Queries (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structprt_1_1uri_1_1_parser_1_1_config_a426ac58f10e8ddcf9aa7bc46056dc9db}\index{prt::uri::Parser::Config@{prt::uri::Parser::Config}!default\_scheme@{default\_scheme}}
+\index{default\_scheme@{default\_scheme}!prt::uri::Parser::Config@{prt::uri::Parser::Config}}
+\doxysubsubsection{\texorpdfstring{default\_scheme}{default\_scheme}}
+{\footnotesize\ttfamily \label{structprt_1_1uri_1_1_parser_1_1_config_a426ac58f10e8ddcf9aa7bc46056dc9db} 
+\mbox{\hyperlink{namespaceprt_1_1uri_a678076225dd533b5e37a65e04ff7ecf2}{Scheme}} prt\+::uri\+::\+Parser\+::\+Config\+::default\+\_\+scheme}
+
+\Hypertarget{structprt_1_1uri_1_1_parser_1_1_config_a96634705271d6a3155ce927681455f3d}\index{prt::uri::Parser::Config@{prt::uri::Parser::Config}!flags@{flags}}
+\index{flags@{flags}!prt::uri::Parser::Config@{prt::uri::Parser::Config}}
+\doxysubsubsection{\texorpdfstring{flags}{flags}}
+{\footnotesize\ttfamily \label{structprt_1_1uri_1_1_parser_1_1_config_a96634705271d6a3155ce927681455f3d} 
+\mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a49f2d46e250bd18ccb5e2481c51e6599}{Flags}} prt\+::uri\+::\+Parser\+::\+Config\+::flags}
+
+\Hypertarget{structprt_1_1uri_1_1_parser_1_1_config_a34b59ff36e87bec02142e9833f697b65}\index{prt::uri::Parser::Config@{prt::uri::Parser::Config}!kNoFlags@{kNoFlags}}
+\index{kNoFlags@{kNoFlags}!prt::uri::Parser::Config@{prt::uri::Parser::Config}}
+\doxysubsubsection{\texorpdfstring{kNoFlags}{kNoFlags}}
+{\footnotesize\ttfamily \label{structprt_1_1uri_1_1_parser_1_1_config_a34b59ff36e87bec02142e9833f697b65} 
+const \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a49f2d46e250bd18ccb5e2481c51e6599}{Flags}} prt\+::uri\+::\+Parser\+::\+Config\+::k\+No\+Flags = 0x0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{structprt_1_1uri_1_1_parser_1_1_config_a41b22b9c1535c87d7c8dceabbe66931b}\index{prt::uri::Parser::Config@{prt::uri::Parser::Config}!OnParseError@{OnParseError}}
+\index{OnParseError@{OnParseError}!prt::uri::Parser::Config@{prt::uri::Parser::Config}}
+\doxysubsubsection{\texorpdfstring{OnParseError}{OnParseError}}
+{\footnotesize\ttfamily \label{structprt_1_1uri_1_1_parser_1_1_config_a41b22b9c1535c87d7c8dceabbe66931b} 
+bool(\texorpdfstring{$\ast$}{*} prt\+::uri\+::\+Parser\+::\+Config\+::\+On\+Parse\+Error) (const \mbox{\hyperlink{classprt_1_1uri_1_1_parser}{Parser}} \texorpdfstring{$\ast$}{*}parser)}
+
+\Hypertarget{structprt_1_1uri_1_1_parser_1_1_config_a9f3cae545d68d10b92afd3cbf1e398b9}\index{prt::uri::Parser::Config@{prt::uri::Parser::Config}!OnParseFragment@{OnParseFragment}}
+\index{OnParseFragment@{OnParseFragment}!prt::uri::Parser::Config@{prt::uri::Parser::Config}}
+\doxysubsubsection{\texorpdfstring{OnParseFragment}{OnParseFragment}}
+{\footnotesize\ttfamily \label{structprt_1_1uri_1_1_parser_1_1_config_a9f3cae545d68d10b92afd3cbf1e398b9} 
+bool(\texorpdfstring{$\ast$}{*} prt\+::uri\+::\+Parser\+::\+Config\+::\+On\+Parse\+Fragment) (const \mbox{\hyperlink{classprt_1_1uri_1_1_parser}{Parser}} \texorpdfstring{$\ast$}{*}parser, const char \texorpdfstring{$\ast$}{*}fragment, const uint64\+\_\+t length)}
+
+\Hypertarget{structprt_1_1uri_1_1_parser_1_1_config_aae7ff5e3b2d5b3d37446e48b3d9d2233}\index{prt::uri::Parser::Config@{prt::uri::Parser::Config}!OnParsePath@{OnParsePath}}
+\index{OnParsePath@{OnParsePath}!prt::uri::Parser::Config@{prt::uri::Parser::Config}}
+\doxysubsubsection{\texorpdfstring{OnParsePath}{OnParsePath}}
+{\footnotesize\ttfamily \label{structprt_1_1uri_1_1_parser_1_1_config_aae7ff5e3b2d5b3d37446e48b3d9d2233} 
+bool(\texorpdfstring{$\ast$}{*} prt\+::uri\+::\+Parser\+::\+Config\+::\+On\+Parse\+Path) (const \mbox{\hyperlink{classprt_1_1uri_1_1_parser}{Parser}} \texorpdfstring{$\ast$}{*}parser, const char \texorpdfstring{$\ast$}{*}path, const uint64\+\_\+t length)}
+
+\Hypertarget{structprt_1_1uri_1_1_parser_1_1_config_a42216da785a157744e1c33b349c4abb1}\index{prt::uri::Parser::Config@{prt::uri::Parser::Config}!OnParseQuery0@{OnParseQuery0}}
+\index{OnParseQuery0@{OnParseQuery0}!prt::uri::Parser::Config@{prt::uri::Parser::Config}}
+\doxysubsubsection{\texorpdfstring{OnParseQuery0}{OnParseQuery0}}
+{\footnotesize\ttfamily \label{structprt_1_1uri_1_1_parser_1_1_config_a42216da785a157744e1c33b349c4abb1} 
+bool(\texorpdfstring{$\ast$}{*} prt\+::uri\+::\+Parser\+::\+Config\+::\+On\+Parse\+Query0) (const \mbox{\hyperlink{classprt_1_1uri_1_1_parser}{Parser}} \texorpdfstring{$\ast$}{*}parser, const uint64\+\_\+t idx, const char \texorpdfstring{$\ast$}{*}key, const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} key\+\_\+length)}
+
+\Hypertarget{structprt_1_1uri_1_1_parser_1_1_config_a0ebcd7b4afde77d3649ea10c8f0902e6}\index{prt::uri::Parser::Config@{prt::uri::Parser::Config}!OnParseQuery1@{OnParseQuery1}}
+\index{OnParseQuery1@{OnParseQuery1}!prt::uri::Parser::Config@{prt::uri::Parser::Config}}
+\doxysubsubsection{\texorpdfstring{OnParseQuery1}{OnParseQuery1}}
+{\footnotesize\ttfamily \label{structprt_1_1uri_1_1_parser_1_1_config_a0ebcd7b4afde77d3649ea10c8f0902e6} 
+bool(\texorpdfstring{$\ast$}{*} prt\+::uri\+::\+Parser\+::\+Config\+::\+On\+Parse\+Query1) (const \mbox{\hyperlink{classprt_1_1uri_1_1_parser}{Parser}} \texorpdfstring{$\ast$}{*}parser, const uint64\+\_\+t idx, const char \texorpdfstring{$\ast$}{*}key, const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} key\+\_\+len, const char \texorpdfstring{$\ast$}{*}value, const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} value\+\_\+len)}
+
+\Hypertarget{structprt_1_1uri_1_1_parser_1_1_config_ab47c51f94669e2cb5429dbb46b8945a8}\index{prt::uri::Parser::Config@{prt::uri::Parser::Config}!OnParseScheme@{OnParseScheme}}
+\index{OnParseScheme@{OnParseScheme}!prt::uri::Parser::Config@{prt::uri::Parser::Config}}
+\doxysubsubsection{\texorpdfstring{OnParseScheme}{OnParseScheme}}
+{\footnotesize\ttfamily \label{structprt_1_1uri_1_1_parser_1_1_config_ab47c51f94669e2cb5429dbb46b8945a8} 
+bool(\texorpdfstring{$\ast$}{*} prt\+::uri\+::\+Parser\+::\+Config\+::\+On\+Parse\+Scheme) (const \mbox{\hyperlink{classprt_1_1uri_1_1_parser}{Parser}} \texorpdfstring{$\ast$}{*}parser, const char \texorpdfstring{$\ast$}{*}scheme, const uint64\+\_\+t length)}
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{uri__parser_8h}{uri\+\_\+parser.\+h}}\end{DoxyCompactItemize}

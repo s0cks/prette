@@ -1,0 +1,23 @@
+<map id="prt::RendererEvent" name="prt::RendererEvent">
+<area shape="rect" id="Node000001" title=" " alt="" coords="132,116,263,142"/>
+<area shape="rect" id="Node000003" href="$classprt_1_1_template_renderer_event.html" title=" " alt="" coords="311,43,495,84"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="254,108,336,82,337,87,255,113"/>
+<area shape="rect" id="Node000007" href="$classprt_1_1_template_renderer_event.html" title=" " alt="" coords="311,108,495,149"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="279,126,311,126,311,132,279,132"/>
+<area shape="rect" id="Node000011" href="$classprt_1_1_template_renderer_event.html" title=" " alt="" coords="311,174,495,214"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="255,144,337,171,336,176,254,149"/>
+<area shape="rect" id="Node000002" href="$classprt_1_1_event.html" title=" " alt="" coords="5,116,84,142"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="99,126,132,126,132,132,99,132"/>
+<area shape="rect" id="Node000004" href="$classprt_1_1_frame_event.html" title=" " alt="" coords="566,51,682,76"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="511,61,566,61,566,66,511,66"/>
+<area shape="rect" id="Node000005" href="$classprt_1_1_post_frame_event.html" title=" " alt="" coords="777,5,920,31"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="696,46,781,29,782,34,697,52"/>
+<area shape="rect" id="Node000006" href="$classprt_1_1_pre_frame_event.html" title=" " alt="" coords="781,55,916,80"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="697,62,780,64,780,69,697,67"/>
+<area shape="rect" id="Node000008" href="$classprt_1_1_renderer_event_base.html" title=" " alt="" coords="543,116,705,142"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="511,126,543,126,543,132,511,132"/>
+<area shape="rect" id="Node000009" href="$classprt_1_1_renderer_destroyed_event.html" title=" " alt="" coords="753,112,944,138"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="720,124,752,124,752,129,720,130"/>
+<area shape="rect" id="Node000010" href="$classprt_1_1_renderer_init_event.html" title=" " alt="" coords="774,161,923,187"/>
+<area shape="poly" id="edge9_Node000008_Node000010" title=" " alt="" coords="706,143,782,158,781,163,705,148"/>
+</map>

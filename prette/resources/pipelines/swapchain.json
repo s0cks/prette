@@ -1,0 +1,14 @@
+{
+  "type": "Pipeline",
+  "meta": {
+    "name": "SwapchainPipeline"
+  },
+  "data": {
+    "dynamicStates": [
+      "viewport",
+      "scissor"
+    ],
+    "vertexShader": "swapchain",
+    "fragmentShader": "swapchain"
+  }
+}

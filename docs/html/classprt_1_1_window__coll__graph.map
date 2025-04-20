@@ -1,0 +1,17 @@
+<map id="prt::Window" name="prt::Window">
+<area shape="rect" id="Node000001" title=" " alt="" coords="261,193,352,218"/>
+<area shape="rect" id="Node000004" href="$classprt_1_1_keyboard.html" title=" " alt="" coords="93,289,192,315"/>
+<area shape="poly" id="edge6_Node000004_Node000001" title=" " alt="" coords="246,220,192,234,170,243,156,252,147,270,145,289,139,288,142,268,152,248,167,238,190,229,245,215"/>
+<area shape="rect" id="Node000007" href="$classprt_1_1_mouse.html" title=" " alt="" coords="312,289,395,315"/>
+<area shape="poly" id="edge8_Node000007_Node000001" title=" " alt="" coords="307,234,309,249,314,264,323,276,335,286,331,290,319,280,309,266,303,250,302,234"/>
+<area shape="rect" id="Node000002" href="$classprt_1_1_window_event_source.html" title=" " alt="" coords="223,103,390,128"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="309,144,309,192,304,192,304,144"/>
+<area shape="rect" id="Node000003" href="$classprt_1_1_event_source.html" title=" " alt="" coords="217,5,396,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="309,62,309,102,304,102,304,62"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="175,279,284,217,287,221,178,283"/>
+<area shape="rect" id="Node000005" href="$classprt_1_1_event_source_template.html" title=" " alt="" coords="12,185,185,226"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="110,240,120,264,135,287,130,290,115,266,105,242"/>
+<area shape="rect" id="Node000006" href="$classprt_1_1_event_source.html" title=" " alt="" coords="5,95,192,136"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="101,152,101,185,96,185,96,152"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="361,274,363,262,360,251,347,234,329,221,333,217,351,230,365,249,368,262,367,275"/>
+</map>

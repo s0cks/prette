@@ -1,0 +1,131 @@
+\doxysection{prt\+::Registry Class Reference}
+\hypertarget{classprt_1_1_registry}{}\label{classprt_1_1_registry}\index{prt::Registry@{prt::Registry}}
+
+
+{\ttfamily \#include $<$registry.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_registry_a72586b2cb17a578636658a5671e445c5}{\texorpdfstring{$\sim$}{\string~}\+Registry}} ()
+\item 
+auto \mbox{\hyperlink{classprt_1_1_registry_ab93e3e528e2af1d299cde73f0eed2353}{Get\+Root}} () const -\/$>$ const fs\+::path \&
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classprt_1_1_registry_a29faaf9cd43e4e84387d16cc4beb9455}{Init}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_registry_aa6a0f98495fd5d06e1476f33b5b162ad}{Registry}} (std\+::string root)
+\item 
+{\footnotesize template$<$class Indexer $>$ }\\void \mbox{\hyperlink{classprt_1_1_registry_a26a7cda7da25f64e59c6da92257ed949}{Index}} (fs\+::path root)
+\item 
+void \mbox{\hyperlink{classprt_1_1_registry_a2f9e875769b6c22c4d360ed73a30622d}{Write}} (const leveldb\+::\+Write\+Options \&options, leveldb\+::\+Write\+Batch \&batch)
+\item 
+void \mbox{\hyperlink{classprt_1_1_registry_a0a61c0873c605c65f1955609f6904922}{Write}} (leveldb\+::\+Write\+Batch \&batch, const bool sync=true)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_registry_afb329ad0bfc07d81e4b34aa74013cad2}{New}} (const std\+::string \&path) -\/$>$ \mbox{\hyperlink{classprt_1_1_registry}{Registry}} \texorpdfstring{$\ast$}{*}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+fs\+::path \mbox{\hyperlink{classprt_1_1_registry_a4098172f5b6f6745af6302aa48c21320}{root\+\_\+}}
+\item 
+leveldb\+::\+DB \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1_registry_aaa271ba9180dba96132f10758fe09990}{db\+\_\+}} = nullptr
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1_registry_a01d5002acabf3ca137a290c67c6e88b5}{Registry\+Indexer}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_registry_aa6a0f98495fd5d06e1476f33b5b162ad}\index{prt::Registry@{prt::Registry}!Registry@{Registry}}
+\index{Registry@{Registry}!prt::Registry@{prt::Registry}}
+\doxysubsubsection{\texorpdfstring{Registry()}{Registry()}}
+{\footnotesize\ttfamily \label{classprt_1_1_registry_aa6a0f98495fd5d06e1476f33b5b162ad} 
+prt\+::\+Registry\+::\+Registry (\begin{DoxyParamCaption}\item[{std\+::string}]{root}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_registry_a72586b2cb17a578636658a5671e445c5}\index{prt::Registry@{prt::Registry}!````~Registry@{\texorpdfstring{$\sim$}{\string~}Registry}}
+\index{````~Registry@{\texorpdfstring{$\sim$}{\string~}Registry}!prt::Registry@{prt::Registry}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Registry()}{\string~Registry()}}
+{\footnotesize\ttfamily \label{classprt_1_1_registry_a72586b2cb17a578636658a5671e445c5} 
+prt\+::\+Registry\+::\texorpdfstring{$\sim$}{\string~}\+Registry (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_registry_ab93e3e528e2af1d299cde73f0eed2353}\index{prt::Registry@{prt::Registry}!GetRoot@{GetRoot}}
+\index{GetRoot@{GetRoot}!prt::Registry@{prt::Registry}}
+\doxysubsubsection{\texorpdfstring{GetRoot()}{GetRoot()}}
+{\footnotesize\ttfamily \label{classprt_1_1_registry_ab93e3e528e2af1d299cde73f0eed2353} 
+auto prt\+::\+Registry\+::\+Get\+Root (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const fs\+::path\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_registry_a26a7cda7da25f64e59c6da92257ed949}\index{prt::Registry@{prt::Registry}!Index@{Index}}
+\index{Index@{Index}!prt::Registry@{prt::Registry}}
+\doxysubsubsection{\texorpdfstring{Index()}{Index()}}
+{\footnotesize\ttfamily \label{classprt_1_1_registry_a26a7cda7da25f64e59c6da92257ed949} 
+template$<$class Indexer $>$ \\
+void prt\+::\+Registry\+::\+Index (\begin{DoxyParamCaption}\item[{fs\+::path}]{root}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_registry_a29faaf9cd43e4e84387d16cc4beb9455}\index{prt::Registry@{prt::Registry}!Init@{Init}}
+\index{Init@{Init}!prt::Registry@{prt::Registry}}
+\doxysubsubsection{\texorpdfstring{Init()}{Init()}}
+{\footnotesize\ttfamily \label{classprt_1_1_registry_a29faaf9cd43e4e84387d16cc4beb9455} 
+void prt\+::\+Registry\+::\+Init (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_registry_afb329ad0bfc07d81e4b34aa74013cad2}\index{prt::Registry@{prt::Registry}!New@{New}}
+\index{New@{New}!prt::Registry@{prt::Registry}}
+\doxysubsubsection{\texorpdfstring{New()}{New()}}
+{\footnotesize\ttfamily \label{classprt_1_1_registry_afb329ad0bfc07d81e4b34aa74013cad2} 
+auto prt\+::\+Registry\+::\+New (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path}{}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{classprt_1_1_registry}{Registry}}\texorpdfstring{$\ast$}{*}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_registry_a2f9e875769b6c22c4d360ed73a30622d}\index{prt::Registry@{prt::Registry}!Write@{Write}}
+\index{Write@{Write}!prt::Registry@{prt::Registry}}
+\doxysubsubsection{\texorpdfstring{Write()}{Write()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_registry_a2f9e875769b6c22c4d360ed73a30622d} 
+void prt\+::\+Registry\+::\+Write (\begin{DoxyParamCaption}\item[{const leveldb\+::\+Write\+Options \&}]{options}{, }\item[{leveldb\+::\+Write\+Batch \&}]{batch}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_registry_a0a61c0873c605c65f1955609f6904922}\index{prt::Registry@{prt::Registry}!Write@{Write}}
+\index{Write@{Write}!prt::Registry@{prt::Registry}}
+\doxysubsubsection{\texorpdfstring{Write()}{Write()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_registry_a0a61c0873c605c65f1955609f6904922} 
+void prt\+::\+Registry\+::\+Write (\begin{DoxyParamCaption}\item[{leveldb\+::\+Write\+Batch \&}]{batch}{, }\item[{const bool}]{sync}{ = {\ttfamily true}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classprt_1_1_registry_a01d5002acabf3ca137a290c67c6e88b5}\index{prt::Registry@{prt::Registry}!RegistryIndexer@{RegistryIndexer}}
+\index{RegistryIndexer@{RegistryIndexer}!prt::Registry@{prt::Registry}}
+\doxysubsubsection{\texorpdfstring{RegistryIndexer}{RegistryIndexer}}
+{\footnotesize\ttfamily \label{classprt_1_1_registry_a01d5002acabf3ca137a290c67c6e88b5} 
+friend class \mbox{\hyperlink{classprt_1_1_registry_indexer}{Registry\+Indexer}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_registry_aaa271ba9180dba96132f10758fe09990}\index{prt::Registry@{prt::Registry}!db\_@{db\_}}
+\index{db\_@{db\_}!prt::Registry@{prt::Registry}}
+\doxysubsubsection{\texorpdfstring{db\_}{db\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_registry_aaa271ba9180dba96132f10758fe09990} 
+leveldb\+::\+DB\texorpdfstring{$\ast$}{*} prt\+::\+Registry\+::db\+\_\+ = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_registry_a4098172f5b6f6745af6302aa48c21320}\index{prt::Registry@{prt::Registry}!root\_@{root\_}}
+\index{root\_@{root\_}!prt::Registry@{prt::Registry}}
+\doxysubsubsection{\texorpdfstring{root\_}{root\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_registry_a4098172f5b6f6745af6302aa48c21320} 
+fs\+::path prt\+::\+Registry\+::root\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{registry_8h}{registry.\+h}}\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{registry_8cc}{registry.\+cc}}\end{DoxyCompactItemize}

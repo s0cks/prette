@@ -1,0 +1,84 @@
+\doxysection{/\+Users/tazz/\+Projects/prette/\+Sources/prette/lua.h File Reference}
+\hypertarget{lua_8h}{}\label{lua_8h}\index{/Users/tazz/Projects/prette/Sources/prette/lua.h@{/Users/tazz/Projects/prette/Sources/prette/lua.h}}
+{\ttfamily \#include $<$filesystem$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include "{}prette/common.\+h"{}}\newline
+{\ttfamily \#include "{}prette/lua\+\_\+event.\+h"{}}\newline
+{\ttfamily \#include $<$lauxlib.\+h$>$}\newline
+{\ttfamily \#include $<$lua.\+h$>$}\newline
+{\ttfamily \#include $<$lualib.\+h$>$}\newline
+Include dependency graph for lua.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{lua_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{lua_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1_lua_state}{prt\+::\+Lua\+State}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_lua_module}{prt\+::\+Lua\+Module}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceprt}{prt}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{lua_8h_a2672365a233e0c9f3c1ccb0d78388308}{DEFINE\+\_\+\+ON\+\_\+\+EVENT}}(Name)
+\item 
+\#define \mbox{\hyperlink{lua_8h_a4787e5baf49f9b7e41544e063600cbe8}{EXTERN\+\_\+\+LUA}}~extern "{}C"{} inline
+\item 
+\#define \mbox{\hyperlink{lua_8h_a4c3a947c2f5c2f6244ffac8dfa005527}{LUA\+\_\+F}}(Name)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+auto \mbox{\hyperlink{namespaceprt_af2819a73ad14128b8fdfcab55c3d8b08}{prt\+::\+On\+Lua\+State\+Event}} () -\/$>$ Lua\+State\+Event\+Observable
+\item 
+\mbox{\hyperlink{namespaceprt_a335910623c86e2b56b55c660d56fb2fd}{prt\+::\+FOR\+\_\+\+EACH\+\_\+\+LUA\+\_\+\+STATE\+\_\+\+EVENT}} (\mbox{\hyperlink{engine_8cc_a2672365a233e0c9f3c1ccb0d78388308}{DEFINE\+\_\+\+ON\+\_\+\+EVENT}})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{lua_8h_a2672365a233e0c9f3c1ccb0d78388308}\index{lua.h@{lua.h}!DEFINE\_ON\_EVENT@{DEFINE\_ON\_EVENT}}
+\index{DEFINE\_ON\_EVENT@{DEFINE\_ON\_EVENT}!lua.h@{lua.h}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_ON\_EVENT}{DEFINE\_ON\_EVENT}}
+{\footnotesize\ttfamily \label{lua_8h_a2672365a233e0c9f3c1ccb0d78388308} 
+\#define DEFINE\+\_\+\+ON\+\_\+\+EVENT(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ On\#\#Name\#\#Event()-\/>Name\#\#EventObservable\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ OnLuaStateEvent().filter(Name\#\#Event::Filter).map(Name\#\#Event::Cast);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{lua_8h_a4787e5baf49f9b7e41544e063600cbe8}\index{lua.h@{lua.h}!EXTERN\_LUA@{EXTERN\_LUA}}
+\index{EXTERN\_LUA@{EXTERN\_LUA}!lua.h@{lua.h}}
+\doxysubsubsection{\texorpdfstring{EXTERN\_LUA}{EXTERN\_LUA}}
+{\footnotesize\ttfamily \label{lua_8h_a4787e5baf49f9b7e41544e063600cbe8} 
+\#define EXTERN\+\_\+\+LUA~extern "{}C"{} inline}
+
+\Hypertarget{lua_8h_a4c3a947c2f5c2f6244ffac8dfa005527}\index{lua.h@{lua.h}!LUA\_F@{LUA\_F}}
+\index{LUA\_F@{LUA\_F}!lua.h@{lua.h}}
+\doxysubsubsection{\texorpdfstring{LUA\_F}{LUA\_F}}
+{\footnotesize\ttfamily \label{lua_8h_a4c3a947c2f5c2f6244ffac8dfa005527} 
+\#define LUA\+\_\+F(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{lua_8h_a4787e5baf49f9b7e41544e063600cbe8}{EXTERN\_LUA}}\ \textcolor{keyword}{auto}\ lua\_\#\#Name(lua\_State*\ \mbox{\hyperlink{engine_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}})-\/>int}
+
+\end{DoxyCode}

@@ -1,0 +1,91 @@
+\doxysection{big\+\_\+number.\+h}
+\hypertarget{big__number_8h_source}{}\label{big__number_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/big\_number.h@{/Users/tazz/Projects/prette/Sources/prette/big\_number.h}}
+\mbox{\hyperlink{big__number_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_BIG\_NUMBER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_BIG\_NUMBER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <iomanip>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{platform_8h}{prette/platform.h}}"{}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_big_number}{BigNumber}}\ \{}
+\DoxyCodeLine{00013\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00014\ \ \ \mbox{\hyperlink{classprt_1_1_big_number_af65892939123a14a53a906cc502e140d}{BigNumber}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classprt_1_1_big_number_ae5fc2c2c86187920db45875b09f80349}{\string~BigNumber}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00018\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_big_number_ace9cbd88189d02c09678fdf22ec8df80}{data}}()\ const\ -\/>\ const\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ *\ =\ 0;}
+\DoxyCodeLine{00019\ \ \ virtual\ auto\ \mbox{\hyperlink{classprt_1_1_big_number_a3271231088342316626a7a63e372abeb}{size}}()\ const\ -\/>\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ =\ 0;}
+\DoxyCodeLine{00020\ \ \ virtual\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_big_number_a4a7a92a2b068197257ebdbeaabc50c59}{clear}}()\ =\ 0;}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ auto\ \mbox{\hyperlink{classprt_1_1_big_number_af7b0c4815fbc57c625b2ffab5e6b7a1f}{const\_begin}}()\ const\ -\/>\ const\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ *\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_big_number_ace9cbd88189d02c09678fdf22ec8df80}{data}}();\ \}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_big_number_a76d3e53685187f92017ad5141638ac91}{const\_end}}()\ const\ -\/>\ const\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ *\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_big_number_ace9cbd88189d02c09678fdf22ec8df80}{data}}()\ +\ \mbox{\hyperlink{classprt_1_1_big_number_a3271231088342316626a7a63e372abeb}{size}}();\ \}}
+\DoxyCodeLine{00025\ \};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{template}\ <const\ uword\ NumberOfBits>\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_big_number_template}{BigNumberTemplate}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1_big_number}{BigNumber}}\ \{}
+\DoxyCodeLine{00028\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00029\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_big_number_template_a6ca3b74ebfbde64f3736f57b5323c6e8}{kSizeInBits}}\ =\ NumberOfBits;}
+\DoxyCodeLine{00030\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_big_number_template_aaec701adaec9858ddf019f619c4da0ea}{kSizeInBytes}}\ =\ \mbox{\hyperlink{classprt_1_1_big_number_template_a6ca3b74ebfbde64f3736f57b5323c6e8}{kSizeInBits}}\ /\ kBitsPerByte;}
+\DoxyCodeLine{00031\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_big_number_template_ab231f7aa5b063343cb1e6cbda7629a54}{kSizeInWords}}\ =\ \mbox{\hyperlink{classprt_1_1_big_number_template_a6ca3b74ebfbde64f3736f57b5323c6e8}{kSizeInBits}}\ /\ kBitsPerWord;}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00034\ \ \ \textcolor{comment}{//\ NOLINTNEXTLINE(cppcoreguidelines-\/non-\/private-\/member-\/variables-\/in-\/classes)}}
+\DoxyCodeLine{00035\ \ \ std::array<uword,\ kSizeInWords>\ \mbox{\hyperlink{classprt_1_1_big_number_template_a541301fbc305e5d0a2d59230bda27190}{data\_}};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \textcolor{keyword}{constexpr}\ \mbox{\hyperlink{classprt_1_1_big_number_template_a58e52616f6773a765f004752ce20f314}{BigNumberTemplate}}()\ :\ \mbox{\hyperlink{classprt_1_1_big_number}{BigNumber}}(),\ \mbox{\hyperlink{classprt_1_1_big_number_template_a541301fbc305e5d0a2d59230bda27190}{data\_}}()\ \{}
+\DoxyCodeLine{00038\ \ \ \ \ memset(\&\mbox{\hyperlink{classprt_1_1_big_number_template_a541301fbc305e5d0a2d59230bda27190}{data\_}}[0],\ 0,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{classprt_1_1_big_number_template_a541301fbc305e5d0a2d59230bda27190}{data\_}}));}
+\DoxyCodeLine{00039\ \ \ \}}
+\DoxyCodeLine{00040\ \ \ \textcolor{keyword}{constexpr}\ \mbox{\hyperlink{classprt_1_1_big_number_template_a6ada7ed9db834295dc0f29541a1d1d1f}{BigNumberTemplate}}(\textcolor{keyword}{const}\ uint8\_t\ *bytes,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ num\_bytes)}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ :\ \mbox{\hyperlink{classprt_1_1_big_number}{BigNumber}}(),\ \mbox{\hyperlink{classprt_1_1_big_number_template_a541301fbc305e5d0a2d59230bda27190}{data\_}}()\ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_big_number_template_a10750af0c82a9495a698560fc2c611cf}{CopyFrom}}(bytes,\ num\_bytes);}
+\DoxyCodeLine{00043\ \ \ \}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_big_number_template_a10750af0c82a9495a698560fc2c611cf}{CopyFrom}}(\textcolor{keyword}{const}\ uint8\_t\ *bytes,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ num\_bytes)\ \{}
+\DoxyCodeLine{00046\ \ \ \ \ memset(\&\mbox{\hyperlink{classprt_1_1_big_number_template_a541301fbc305e5d0a2d59230bda27190}{data\_}}[0],\ 0,\ \mbox{\hyperlink{classprt_1_1_big_number_template_aaec701adaec9858ddf019f619c4da0ea}{kSizeInBytes}});}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ total\_bytes\ =\ std::min(num\_bytes,\ \mbox{\hyperlink{classprt_1_1_big_number_template_aaec701adaec9858ddf019f619c4da0ea}{kSizeInBytes}});}
+\DoxyCodeLine{00048\ \ \ \ \ memcpy(\&\mbox{\hyperlink{classprt_1_1_big_number_template_a541301fbc305e5d0a2d59230bda27190}{data\_}}[0],\ \&bytes[0],\ total\_bytes);}
+\DoxyCodeLine{00049\ \ \ \}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_big_number_template_aaf4ec59b486efa9a3a36c72ecce4cade}{CopyFrom}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_big_number_template}{BigNumberTemplate<NumberOfBits>}}\ \&rhs)\ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_big_number_template_a10750af0c82a9495a698560fc2c611cf}{CopyFrom}}((\textcolor{keyword}{const}\ uint8\_t\ *)rhs.\mbox{\hyperlink{classprt_1_1_big_number_template_a4dec58403d03babe7f7c1e051aab93f3}{data}}(),\ rhs.\mbox{\hyperlink{classprt_1_1_big_number_template_ada0c8349e9f0b6fe017c0675045ed3d7}{size}}());}
+\DoxyCodeLine{00053\ \ \ \}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00056\ \ \ \mbox{\hyperlink{classprt_1_1_big_number_template_abd86847075d6bf2e9f6cfd71c44053e0}{\string~BigNumberTemplate}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_big_number_template_a4dec58403d03babe7f7c1e051aab93f3}{data}}()\ const\ -\/>\ const\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ *\textcolor{keyword}{\ override\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_big_number_template_a541301fbc305e5d0a2d59230bda27190}{data\_}}.data();\ \}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_big_number_template_ada0c8349e9f0b6fe017c0675045ed3d7}{size}}()\ const\ -\/>\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\textcolor{keyword}{\ override\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_big_number_template_ab231f7aa5b063343cb1e6cbda7629a54}{kSizeInWords}};\ \}}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_big_number_template_a35fd8880de9f3bfda677c66474917ecc}{clear}}()\textcolor{keyword}{\ override\ }\{\ memset(\&\mbox{\hyperlink{classprt_1_1_big_number_template_a541301fbc305e5d0a2d59230bda27190}{data\_}}[0],\ 0,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{classprt_1_1_big_number_template_a541301fbc305e5d0a2d59230bda27190}{data\_}}));\ \}}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_big_number_template_af4417815a3c504db709c3194deacb058}{ToHexString}}()\ const\ -\/>\ \mbox{\hyperlink{namespacestd}{std}}::\textcolor{keywordtype}{string}\ \{}
+\DoxyCodeLine{00065\ \ \ \ \ std::stringstream\ ss;}
+\DoxyCodeLine{00066\ \ \ \ \ ss\ <<\ std::hex;}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{classprt_1_1_big_number_template_ada0c8349e9f0b6fe017c0675045ed3d7}{size}}();\ ++i)}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ ss\ <<\ \mbox{\hyperlink{classprt_1_1_big_number_template_a541301fbc305e5d0a2d59230bda27190}{data\_}}[i];}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordflow}{return}\ ss.str();}
+\DoxyCodeLine{00070\ \ \ \}}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_big_number_template_af865045add6ee194566f401603fe4af9}{ToBinaryString}}()\ const\ -\/>\ \mbox{\hyperlink{namespacestd}{std}}::\textcolor{keywordtype}{string}\ \{}
+\DoxyCodeLine{00073\ \ \ \ \ std::stringstream\ ss;}
+\DoxyCodeLine{00074\ \ \ \ \ std::bitset<kSizeInBits>\ bits;}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ idx\ =\ 0;\ idx\ <\ \mbox{\hyperlink{classprt_1_1_big_number_template_ada0c8349e9f0b6fe017c0675045ed3d7}{size}}();\ idx++)\ \{}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ bits\ <<=\ kBitsPerWord;}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ bits\ |=\ std::bitset<kSizeInBits>(\mbox{\hyperlink{classprt_1_1_big_number_template_a541301fbc305e5d0a2d59230bda27190}{data\_}}[idx]);}
+\DoxyCodeLine{00078\ \ \ \ \ \}}
+\DoxyCodeLine{00079\ \ \ \ \ ss\ <<\ bits;}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordflow}{return}\ ss.str();}
+\DoxyCodeLine{00081\ \ \ \}}
+\DoxyCodeLine{00082\ \};}
+\DoxyCodeLine{00083\ \}\ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ PRT\_BIG\_NUMBER\_H}}
+
+\end{DoxyCode}

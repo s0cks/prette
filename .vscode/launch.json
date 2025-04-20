@@ -52,56 +52,71 @@
     },
     {
       "name": "prette",
-      "type": "cppdbg",
+      "type": "lldb",
       "request": "launch",
       "program": "${workspaceFolder}/build/Sources/prette-client",
       "args": [
         "--resources",
-        "${workspaceFolder}/resources",
+        "${workspaceFolder}/prette/resources",
         "--logtostdout",
         "--colorlogtostdout"
       ],
-      "cwd": "${workspaceFolder}",
-      "environment": [
-        {
-          "name": "UV_THREADPOOL_SIZE",
-          "value": "0"
-        }
+      "cwd": "${workspaceFolder}/prette",
+      "env": {
+        "UV_THREADPOOL_SIZE": "0",
+        "TERM": "xterm-256color",
+        "METAL_DEVICE_WRAPPER_TYPE": "1",
+        "PRT_PATH": "${workspaceFolder}/prette/resources;${workspaceFolder}/build/prette/resources",
+        "LUA_PATH": "${env:LUA_PATH};${workspaceFolder}/lib/?/?.lua;${workspaceFolder}/prette/resources/scripts/?/?.lua;${workspaceFolder}/prette/resources/scripts/?.lua"
+      },
+      "initCommands": [
+        "command source ${workspaceFolder}/.lldbinit"
       ],
-      "MIMode": "lldb",
-      "setupCommands": [
-        {
-          "description": "Load .lldbinit",
-          "text": "command source ~/.lldbinit"
-        }
-      ]
     },
     {
-      "name": "prette (verbose)",
-      "type": "cppdbg",
+      "name": "prette help",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/Sources/prette-client",
+      "args": [
+        "--help"
+      ],
+      "cwd": "${workspaceFolder}/prette",
+      "env": {
+        "UV_THREADPOOL_SIZE": "0",
+        "TERM": "xterm-256color",
+        "METAL_DEVICE_WRAPPER_TYPE": "1",
+        "PRT_PATH": "${workspaceFolder}/prette/resources;${workspaceFolder}/build/prette/resources",
+        "LUA_PATH": "${env:LUA_PATH};${workspaceFolder}/lib/?/?.lua"
+      },
+      "initCommands": [
+        "command source ${workspaceFolder}/.lldbinit"
+      ],
+    },
+    {
+      "name": "prette (gfx disabled)",
+      "type": "lldb",
       "request": "launch",
       "program": "${workspaceFolder}/build/Sources/prette-client",
       "args": [
         "--resources",
-        "${workspaceFolder}/resources",
+        "${workspaceFolder}/prette/resources",
         "--logtostdout",
         "--colorlogtostdout",
-        "--v=10"
+        "--nogfx",
+        "--lua-event-logging"
       ],
-      "cwd": "${workspaceFolder}",
-      "environment": [
-        {
-          "name": "UV_THREADPOOL_SIZE",
-          "value": "0"
-        }
+      "cwd": "${workspaceFolder}/prette",
+      "env": {
+        "UV_THREADPOOL_SIZE": "0",
+        "TERM": "xterm-256color",
+        "METAL_DEVICE_WRAPPER_TYPE": "1",
+        "PRT_PATH": "${workspaceFolder}/prette/resources;${workspaceFolder}/build/prette/resources",
+        "LUA_PATH": "${env:LUA_PATH};${workspaceFolder}/lib/?/?.lua;${workspaceFolder}/prette/resources/scripts/?/?.lua;${workspaceFolder}/prette/resources/scripts/?.lua"
+      },
+      "initCommands": [
+        "command source ${workspaceFolder}/.lldbinit"
       ],
-      "MIMode": "lldb",
-      "setupCommands": [
-        {
-          "description": "Load .lldbinit",
-          "text": "command source ~/.lldbinit"
-        }
-      ]
-    }
+    },
   ]
 }

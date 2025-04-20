@@ -1,0 +1,578 @@
+\doxysection{prt\+::Window Class Reference}
+\hypertarget{classprt_1_1_window}{}\label{classprt_1_1_window}\index{prt::Window@{prt::Window}}
+
+
+{\ttfamily \#include $<$window.\+h$>$}
+
+
+
+Inheritance diagram for prt\+::Window\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=214pt]{classprt_1_1_window__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for prt\+::Window\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classprt_1_1_window__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structprt_1_1_window_1_1_comparator}{Comparator}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_window_a687f47966e56b15c8a694548af0d973a}{\texorpdfstring{$\sim$}{\string~}\+Window}} () override
+\item 
+auto \mbox{\hyperlink{classprt_1_1_window_af0e027beb144fceb46c3d9619e55833b}{Get\+Id}} () const -\/$>$ const uuids\+::uuid \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_window_a9c2c1af37ce648915285cdfb18d3f76a}{Get\+Handle}} () const -\/$>$ Handle \texorpdfstring{$\ast$}{*}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_window_a4f53a257f42b0c40d860ac5d68568055}{Get\+Title}} () const -\/$>$ std\+::string
+\item 
+void \mbox{\hyperlink{classprt_1_1_window_a1c75d3bbc0e35054bbccb6e53e3265c3}{Set\+Title}} (const std\+::string \&value)
+\item 
+auto \mbox{\hyperlink{classprt_1_1_window_accb3f32eea2eca61b19a4ba15b7d8bf3}{Get\+Pos}} () const -\/$>$ \mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}}
+\item 
+void \mbox{\hyperlink{classprt_1_1_window_a8c6614c5419fb3a851d1003275301ae4}{Set\+Pos}} (const \mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}} \&value)
+\item 
+auto \mbox{\hyperlink{classprt_1_1_window_a809113c55127846258523b1e079da134}{Get\+Size}} () const -\/$>$ \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}}
+\item 
+void \mbox{\hyperlink{classprt_1_1_window_a70f5d25b979f0c4642fb2d8d78a8ab61}{Set\+Size}} (const glm\+::i32vec2 \&value)
+\item 
+void \mbox{\hyperlink{classprt_1_1_window_a9b2e25033f49d86e5777cd073b227324}{Show}} ()
+\item 
+void \mbox{\hyperlink{classprt_1_1_window_a317b91560d4558e934641b6b57f99752}{Hide}} ()
+\item 
+void \mbox{\hyperlink{classprt_1_1_window_a8d62bbff1e185fd9e9ebe746d7bd928e}{Close}} ()
+\item 
+void \mbox{\hyperlink{classprt_1_1_window_a90f1f8c8e4d77e185d3867d1ac9ac172}{Set\+Decorated}} (const bool value)
+\item 
+void \mbox{\hyperlink{classprt_1_1_window_a70506152eb4a85b3e005eea86a1c8b7c}{Set\+Resizable}} (const bool value)
+\item 
+void \mbox{\hyperlink{classprt_1_1_window_a44425bb8a0b97d9507c019decb266489}{Set\+Floating}} (const bool value)
+\item 
+void \mbox{\hyperlink{classprt_1_1_window_a40e9dfcf16134fafed51392f569370c4}{Set\+Auto\+Iconify}} (const bool value)
+\item 
+void \mbox{\hyperlink{classprt_1_1_window_a84cdfa544f35634da3dd236853b12f02}{Set\+Focus\+On\+Show}} (const bool value)
+\item 
+auto \mbox{\hyperlink{classprt_1_1_window_a95700444dc3f046e68a401bc464d0615}{Is\+Focused}} () const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_window_a625e5ee688b35b2a0f5a47fc3427ad15}{Is\+Iconified}} () const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_window_ad91f47c83055cca605bb972bd87ceeb1}{Is\+Maximized}} () const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_window_a7137ee145cd55aa75c3fa7720f993f56}{Is\+Hovered}} () const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_window_a06719a8649bbbd7d6925ff535c8e01ce}{Is\+Visible}} () const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_window_a676379d7cc8bf09103e2cb2b0f069780}{Is\+Resizable}} () const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_window_a96bd55dc286f0191e573530542f497e6}{Is\+Decorated}} () const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_window_a92733ccea6008d7cefe9bf0fcc1eeff8}{Is\+Auto\+Iconify}} () const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_window_ab88912d0186f1a4e08ff6cc80233487f}{Is\+Floating}} () const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_window_a4a3fffbff1ef20fbe57f1919033e4df5}{Is\+Transparent\+Framebuffer}} () const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_window_a755f372d92fdf25fe11f20a274cdb4c1}{Is\+Focus\+On\+Show}} () const -\/$>$ bool
+\item 
+void \mbox{\hyperlink{classprt_1_1_window_a22fb729a08c3986d6cab58aa04323a23}{Swap\+Buffers}} ()
+\item 
+auto \mbox{\hyperlink{classprt_1_1_window_a931d90e28e56d0cb6e993b4c9a687936}{To\+String}} () const -\/$>$ std\+::string
+\item 
+void \mbox{\hyperlink{classprt_1_1_window_afa5a0d40a0185d3c38ebcb2f94e80a9e}{Set\+Min\+Size}} (const glm\+::i32vec2 \&size)
+\item 
+auto \mbox{\hyperlink{classprt_1_1_window_aea43d174c1b469cd31616bb49ff75d78}{Get\+Content\+Scale}} () const -\/$>$ glm\+::vec2
+\item 
+auto \mbox{\hyperlink{classprt_1_1_window_ac0aa538339a39ac1ce5ebc20d8714043}{Should\+Close}} () const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_window_afe8539ae95bd2526ecf47f9b771b9de6}{Get\+Framebuffer\+Size}} () const -\/$>$ \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_window_ace5f7856e6553d3398ef42ea239a23c5}{Get\+Bounds}} () const -\/$>$ \mbox{\hyperlink{classprt_1_1_rectangle}{Rectangle}}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_window_a3b5990587435be614cc5dbca15a87fe0}{On\+Event}} () const -\/$>$ Window\+Event\+Observable override
+\item 
+auto \mbox{\hyperlink{classprt_1_1_window_a557d27a0a6612e8879998f2ed59aa5b7}{Get\+Mouse}} () const -\/$>$ \mbox{\hyperlink{classprt_1_1_mouse}{Mouse}} \texorpdfstring{$\ast$}{*}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_window_ac16a3f461b5cf4f2aa697954ec1aa25b}{Has\+Mouse}} () const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_window_a65fe1028645c9d0116d103521992cfa3}{Get\+Keyboard}} () const -\/$>$ \mbox{\hyperlink{classprt_1_1_keyboard}{Keyboard}} \texorpdfstring{$\ast$}{*}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_window_a0157bb6d56959318c795e94bc8107b57}{Has\+Keyboard}} () const -\/$>$ bool
+\item 
+void \mbox{\hyperlink{classprt_1_1_window_ae5708be984e4ad9933b38b5195c053d2}{Set\+Table}} (lua\+\_\+\+State \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{engine_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}}, const int index) const
+\item 
+void \mbox{\hyperlink{classprt_1_1_window_aadae18fe585cdc181d7b06f81abc80b5}{To\+Table}} (lua\+\_\+\+State \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{engine_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}}) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classprt_1_1_window_event_source}{prt\+::\+Window\+Event\+Source}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_window_event_source_a9ab0e4bfe1355270fb0dac8e1a9bc457}{\texorpdfstring{$\sim$}{\string~}\+Window\+Event\+Source}} () override=default
+\item 
+\mbox{\hyperlink{classprt_1_1_window_event_source_a3fb8af3abcc82172ce6407962a3d4c8d}{FOR\+\_\+\+EACH\+\_\+\+WINDOW\+\_\+\+EVENT}} (\mbox{\hyperlink{window_8h_ae28240040173cc818c48b6b0e0516138}{DEFINE\+\_\+\+ON\+\_\+\+WINDOW\+\_\+\+EVENT}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classprt_1_1_event_source}{prt\+::\+Event\+Source$<$ Window\+Event $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classprt_1_1_event_source_ac9bb1fe6345521cad4f1dd2722b83d80}{\texorpdfstring{$\sim$}{\string~}\+Event\+Source}} ()=default
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classprt_1_1_window_ad44c6a4b308e88aba5eb4720e4dc22c6}{Init}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_window_a9c21e740c429d37ff28e379e13bb4cbc}{DEFINE\+\_\+\+NON\+\_\+\+COPYABLE\+\_\+\+TYPE}} (\mbox{\hyperlink{classprt_1_1_window}{Window}})
+\item 
+\mbox{\hyperlink{classprt_1_1_window_a1f66b5557052a0e8a0bc9db43c394152}{Window}} (Handle \texorpdfstring{$\ast$}{*}handle)
+\item 
+void \mbox{\hyperlink{classprt_1_1_window_a13e10eb8d29d46b143d50ec2276e0b02}{Publish\+Event}} (\mbox{\hyperlink{classprt_1_1_window_event}{Window\+Event}} \texorpdfstring{$\ast$}{*}event) const override
+\item 
+void \mbox{\hyperlink{classprt_1_1_window_ad8b1a335f20a91f2cd29ec9d4d83ce8e}{Set\+Keyboard}} (\mbox{\hyperlink{classprt_1_1_keyboard}{Keyboard}} \texorpdfstring{$\ast$}{*}rhs)
+\item 
+void \mbox{\hyperlink{classprt_1_1_window_afb8037749cdcdf5d35b65224a5e045d4}{Set\+Mouse}} (\mbox{\hyperlink{classprt_1_1_mouse}{Mouse}} \texorpdfstring{$\ast$}{*}rhs)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_window_a1c6fb3314d8fd51e1f2e9c56d283f674}{Get}} (Handle \texorpdfstring{$\ast$}{*}handle) -\/$>$ \mbox{\hyperlink{classprt_1_1_window}{Window}} \texorpdfstring{$\ast$}{*}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_window_abec3a61548e8e41bbee3cb7e50f922a1}{New}} (Handle \texorpdfstring{$\ast$}{*}handle) -\/$>$ \mbox{\hyperlink{classprt_1_1_window}{Window}} \texorpdfstring{$\ast$}{*}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uuids\+::uuid \mbox{\hyperlink{classprt_1_1_window_a3901d5a4e4f393bae7817153c68f016e}{uuid\+\_\+}} = uuids\+::uuid\+\_\+system\+\_\+generator\{\}()
+\item 
+Window\+Event\+Subject \mbox{\hyperlink{classprt_1_1_window_ac12d0b81e334bf02acd4ea2da34d8c63}{events\+\_\+}}
+\item 
+Handle \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1_window_a9ea4936996ac091cc14bc2a74d7c199d}{handle\+\_\+}}
+\item 
+\mbox{\hyperlink{classprt_1_1_keyboard}{Keyboard}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1_window_a371222d5e8b05c3d76228443b88a714d}{keyboard\+\_\+}} = nullptr
+\item 
+\mbox{\hyperlink{classprt_1_1_mouse}{Mouse}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1_window_a831f9764f90cf679557b60a9330faea1}{mouse\+\_\+}} = nullptr
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1_window_a07eafe2eb7248be18a8531cb12734113}{Mouse}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_window_ac9dc0b81cf70532f036f05fc25a3c7a9}{Keyboard}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_window_a9aa251d710bba4f257a519ebc5d01d51}{Lua\+State}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_window_a0d4d3f443518aa9f5c616c435bde1a74}{Window\+Builder}}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_window_aeeb0c87843e83ecd230f9acddce85af4}{operator$<$$<$}} (std\+::ostream \&stream, \mbox{\hyperlink{classprt_1_1_window}{Window}} \texorpdfstring{$\ast$}{*}rhs) -\/$>$ std\+::ostream \&
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classprt_1_1_window_event_source}{prt\+::\+Window\+Event\+Source}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_window_event_source_ade735b676afaadbd50769d0ff1c143ce}{Window\+Event\+Source}} ()=default
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classprt_1_1_event_source}{prt\+::\+Event\+Source$<$ Window\+Event $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_event_source_aae9ebe9e39115964f91291367fbb2bc1}{Event\+Source}} ()=default
+\item 
+void \mbox{\hyperlink{classprt_1_1_event_source_a21e88ee76cebc7dce0759f7142865bce}{Publish}} (Args... args) const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_window_a1f66b5557052a0e8a0bc9db43c394152}\index{prt::Window@{prt::Window}!Window@{Window}}
+\index{Window@{Window}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{Window()}{Window()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_a1f66b5557052a0e8a0bc9db43c394152} 
+prt\+::\+Window\+::\+Window (\begin{DoxyParamCaption}\item[{Handle \texorpdfstring{$\ast$}{*}}]{handle}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_window_a687f47966e56b15c8a694548af0d973a}\index{prt::Window@{prt::Window}!````~Window@{\texorpdfstring{$\sim$}{\string~}Window}}
+\index{````~Window@{\texorpdfstring{$\sim$}{\string~}Window}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Window()}{\string~Window()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_a687f47966e56b15c8a694548af0d973a} 
+prt\+::\+Window\+::\texorpdfstring{$\sim$}{\string~}\+Window (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_window_a8d62bbff1e185fd9e9ebe746d7bd928e}\index{prt::Window@{prt::Window}!Close@{Close}}
+\index{Close@{Close}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{Close()}{Close()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_a8d62bbff1e185fd9e9ebe746d7bd928e} 
+void prt\+::\+Window\+::\+Close (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_window_a9c21e740c429d37ff28e379e13bb4cbc}\index{prt::Window@{prt::Window}!DEFINE\_NON\_COPYABLE\_TYPE@{DEFINE\_NON\_COPYABLE\_TYPE}}
+\index{DEFINE\_NON\_COPYABLE\_TYPE@{DEFINE\_NON\_COPYABLE\_TYPE}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_NON\_COPYABLE\_TYPE()}{DEFINE\_NON\_COPYABLE\_TYPE()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_a9c21e740c429d37ff28e379e13bb4cbc} 
+prt\+::\+Window\+::\+DEFINE\+\_\+\+NON\+\_\+\+COPYABLE\+\_\+\+TYPE (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_window}{Window}}}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_window_a1c6fb3314d8fd51e1f2e9c56d283f674}\index{prt::Window@{prt::Window}!Get@{Get}}
+\index{Get@{Get}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_a1c6fb3314d8fd51e1f2e9c56d283f674} 
+static auto prt\+::\+Window\+::\+Get (\begin{DoxyParamCaption}\item[{Handle \texorpdfstring{$\ast$}{*}}]{handle}{}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{classprt_1_1_window}{Window}}\texorpdfstring{$\ast$}{*} \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_window_ace5f7856e6553d3398ef42ea239a23c5}\index{prt::Window@{prt::Window}!GetBounds@{GetBounds}}
+\index{GetBounds@{GetBounds}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{GetBounds()}{GetBounds()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_ace5f7856e6553d3398ef42ea239a23c5} 
+auto prt\+::\+Window\+::\+Get\+Bounds (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ \mbox{\hyperlink{classprt_1_1_rectangle}{Rectangle}} \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_window_aea43d174c1b469cd31616bb49ff75d78}\index{prt::Window@{prt::Window}!GetContentScale@{GetContentScale}}
+\index{GetContentScale@{GetContentScale}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{GetContentScale()}{GetContentScale()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_aea43d174c1b469cd31616bb49ff75d78} 
+auto prt\+::\+Window\+::\+Get\+Content\+Scale (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$  glm\+::vec2}
+
+\Hypertarget{classprt_1_1_window_afe8539ae95bd2526ecf47f9b771b9de6}\index{prt::Window@{prt::Window}!GetFramebufferSize@{GetFramebufferSize}}
+\index{GetFramebufferSize@{GetFramebufferSize}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{GetFramebufferSize()}{GetFramebufferSize()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_afe8539ae95bd2526ecf47f9b771b9de6} 
+auto prt\+::\+Window\+::\+Get\+Framebuffer\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$  \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}}}
+
+\Hypertarget{classprt_1_1_window_a9c2c1af37ce648915285cdfb18d3f76a}\index{prt::Window@{prt::Window}!GetHandle@{GetHandle}}
+\index{GetHandle@{GetHandle}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{GetHandle()}{GetHandle()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_a9c2c1af37ce648915285cdfb18d3f76a} 
+auto prt\+::\+Window\+::\+Get\+Handle (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ Handle\texorpdfstring{$\ast$}{*} \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_window_af0e027beb144fceb46c3d9619e55833b}\index{prt::Window@{prt::Window}!GetId@{GetId}}
+\index{GetId@{GetId}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{GetId()}{GetId()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_af0e027beb144fceb46c3d9619e55833b} 
+auto prt\+::\+Window\+::\+Get\+Id (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const uuids\+::uuid\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_window_a65fe1028645c9d0116d103521992cfa3}\index{prt::Window@{prt::Window}!GetKeyboard@{GetKeyboard}}
+\index{GetKeyboard@{GetKeyboard}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{GetKeyboard()}{GetKeyboard()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_a65fe1028645c9d0116d103521992cfa3} 
+auto prt\+::\+Window\+::\+Get\+Keyboard (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ \mbox{\hyperlink{classprt_1_1_keyboard}{Keyboard}}\texorpdfstring{$\ast$}{*} \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_window_a557d27a0a6612e8879998f2ed59aa5b7}\index{prt::Window@{prt::Window}!GetMouse@{GetMouse}}
+\index{GetMouse@{GetMouse}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{GetMouse()}{GetMouse()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_a557d27a0a6612e8879998f2ed59aa5b7} 
+auto prt\+::\+Window\+::\+Get\+Mouse (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ \mbox{\hyperlink{classprt_1_1_mouse}{Mouse}}\texorpdfstring{$\ast$}{*} \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_window_accb3f32eea2eca61b19a4ba15b7d8bf3}\index{prt::Window@{prt::Window}!GetPos@{GetPos}}
+\index{GetPos@{GetPos}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{GetPos()}{GetPos()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_accb3f32eea2eca61b19a4ba15b7d8bf3} 
+auto prt\+::\+Window\+::\+Get\+Pos (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$  \mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}}}
+
+\Hypertarget{classprt_1_1_window_a809113c55127846258523b1e079da134}\index{prt::Window@{prt::Window}!GetSize@{GetSize}}
+\index{GetSize@{GetSize}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{GetSize()}{GetSize()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_a809113c55127846258523b1e079da134} 
+auto prt\+::\+Window\+::\+Get\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$  \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}}}
+
+\Hypertarget{classprt_1_1_window_a4f53a257f42b0c40d860ac5d68568055}\index{prt::Window@{prt::Window}!GetTitle@{GetTitle}}
+\index{GetTitle@{GetTitle}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{GetTitle()}{GetTitle()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_a4f53a257f42b0c40d860ac5d68568055} 
+auto prt\+::\+Window\+::\+Get\+Title (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$  std\+::string}
+
+\Hypertarget{classprt_1_1_window_a0157bb6d56959318c795e94bc8107b57}\index{prt::Window@{prt::Window}!HasKeyboard@{HasKeyboard}}
+\index{HasKeyboard@{HasKeyboard}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{HasKeyboard()}{HasKeyboard()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_a0157bb6d56959318c795e94bc8107b57} 
+auto prt\+::\+Window\+::\+Has\+Keyboard (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_window_ac16a3f461b5cf4f2aa697954ec1aa25b}\index{prt::Window@{prt::Window}!HasMouse@{HasMouse}}
+\index{HasMouse@{HasMouse}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{HasMouse()}{HasMouse()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_ac16a3f461b5cf4f2aa697954ec1aa25b} 
+auto prt\+::\+Window\+::\+Has\+Mouse (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_window_a317b91560d4558e934641b6b57f99752}\index{prt::Window@{prt::Window}!Hide@{Hide}}
+\index{Hide@{Hide}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{Hide()}{Hide()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_a317b91560d4558e934641b6b57f99752} 
+void prt\+::\+Window\+::\+Hide (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_window_ad44c6a4b308e88aba5eb4720e4dc22c6}\index{prt::Window@{prt::Window}!Init@{Init}}
+\index{Init@{Init}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{Init()}{Init()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_ad44c6a4b308e88aba5eb4720e4dc22c6} 
+void prt\+::\+Window\+::\+Init (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_window_a92733ccea6008d7cefe9bf0fcc1eeff8}\index{prt::Window@{prt::Window}!IsAutoIconify@{IsAutoIconify}}
+\index{IsAutoIconify@{IsAutoIconify}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{IsAutoIconify()}{IsAutoIconify()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_a92733ccea6008d7cefe9bf0fcc1eeff8} 
+auto prt\+::\+Window\+::\+Is\+Auto\+Iconify (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_window_a96bd55dc286f0191e573530542f497e6}\index{prt::Window@{prt::Window}!IsDecorated@{IsDecorated}}
+\index{IsDecorated@{IsDecorated}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{IsDecorated()}{IsDecorated()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_a96bd55dc286f0191e573530542f497e6} 
+auto prt\+::\+Window\+::\+Is\+Decorated (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_window_ab88912d0186f1a4e08ff6cc80233487f}\index{prt::Window@{prt::Window}!IsFloating@{IsFloating}}
+\index{IsFloating@{IsFloating}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{IsFloating()}{IsFloating()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_ab88912d0186f1a4e08ff6cc80233487f} 
+auto prt\+::\+Window\+::\+Is\+Floating (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_window_a95700444dc3f046e68a401bc464d0615}\index{prt::Window@{prt::Window}!IsFocused@{IsFocused}}
+\index{IsFocused@{IsFocused}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{IsFocused()}{IsFocused()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_a95700444dc3f046e68a401bc464d0615} 
+auto prt\+::\+Window\+::\+Is\+Focused (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_window_a755f372d92fdf25fe11f20a274cdb4c1}\index{prt::Window@{prt::Window}!IsFocusOnShow@{IsFocusOnShow}}
+\index{IsFocusOnShow@{IsFocusOnShow}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{IsFocusOnShow()}{IsFocusOnShow()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_a755f372d92fdf25fe11f20a274cdb4c1} 
+auto prt\+::\+Window\+::\+Is\+Focus\+On\+Show (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_window_a7137ee145cd55aa75c3fa7720f993f56}\index{prt::Window@{prt::Window}!IsHovered@{IsHovered}}
+\index{IsHovered@{IsHovered}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{IsHovered()}{IsHovered()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_a7137ee145cd55aa75c3fa7720f993f56} 
+auto prt\+::\+Window\+::\+Is\+Hovered (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_window_a625e5ee688b35b2a0f5a47fc3427ad15}\index{prt::Window@{prt::Window}!IsIconified@{IsIconified}}
+\index{IsIconified@{IsIconified}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{IsIconified()}{IsIconified()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_a625e5ee688b35b2a0f5a47fc3427ad15} 
+auto prt\+::\+Window\+::\+Is\+Iconified (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_window_ad91f47c83055cca605bb972bd87ceeb1}\index{prt::Window@{prt::Window}!IsMaximized@{IsMaximized}}
+\index{IsMaximized@{IsMaximized}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{IsMaximized()}{IsMaximized()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_ad91f47c83055cca605bb972bd87ceeb1} 
+auto prt\+::\+Window\+::\+Is\+Maximized (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_window_a676379d7cc8bf09103e2cb2b0f069780}\index{prt::Window@{prt::Window}!IsResizable@{IsResizable}}
+\index{IsResizable@{IsResizable}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{IsResizable()}{IsResizable()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_a676379d7cc8bf09103e2cb2b0f069780} 
+auto prt\+::\+Window\+::\+Is\+Resizable (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_window_a4a3fffbff1ef20fbe57f1919033e4df5}\index{prt::Window@{prt::Window}!IsTransparentFramebuffer@{IsTransparentFramebuffer}}
+\index{IsTransparentFramebuffer@{IsTransparentFramebuffer}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{IsTransparentFramebuffer()}{IsTransparentFramebuffer()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_a4a3fffbff1ef20fbe57f1919033e4df5} 
+auto prt\+::\+Window\+::\+Is\+Transparent\+Framebuffer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_window_a06719a8649bbbd7d6925ff535c8e01ce}\index{prt::Window@{prt::Window}!IsVisible@{IsVisible}}
+\index{IsVisible@{IsVisible}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{IsVisible()}{IsVisible()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_a06719a8649bbbd7d6925ff535c8e01ce} 
+auto prt\+::\+Window\+::\+Is\+Visible (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_window_abec3a61548e8e41bbee3cb7e50f922a1}\index{prt::Window@{prt::Window}!New@{New}}
+\index{New@{New}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{New()}{New()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_abec3a61548e8e41bbee3cb7e50f922a1} 
+auto prt\+::\+Window\+::\+New (\begin{DoxyParamCaption}\item[{Handle \texorpdfstring{$\ast$}{*}}]{handle}{}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{classprt_1_1_window}{Window}}\texorpdfstring{$\ast$}{*}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_window_a3b5990587435be614cc5dbca15a87fe0}\index{prt::Window@{prt::Window}!OnEvent@{OnEvent}}
+\index{OnEvent@{OnEvent}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{OnEvent()}{OnEvent()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_a3b5990587435be614cc5dbca15a87fe0} 
+auto prt\+::\+Window\+::\+On\+Event (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ Window\+Event\+Observable\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classprt_1_1_event_source_ac9882f8a6317c309a9f82d543b6fb0a0}{prt\+::\+Event\+Source$<$ Window\+Event $>$}}.
+
+\Hypertarget{classprt_1_1_window_a13e10eb8d29d46b143d50ec2276e0b02}\index{prt::Window@{prt::Window}!PublishEvent@{PublishEvent}}
+\index{PublishEvent@{PublishEvent}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{PublishEvent()}{PublishEvent()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_a13e10eb8d29d46b143d50ec2276e0b02} 
+void prt\+::\+Window\+::\+Publish\+Event (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_window_event}{Window\+Event}} \texorpdfstring{$\ast$}{*}}]{event}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classprt_1_1_event_source_aab767454f57a64014e76b6981ce62a56}{prt\+::\+Event\+Source$<$ Window\+Event $>$}}.
+
+\Hypertarget{classprt_1_1_window_a40e9dfcf16134fafed51392f569370c4}\index{prt::Window@{prt::Window}!SetAutoIconify@{SetAutoIconify}}
+\index{SetAutoIconify@{SetAutoIconify}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{SetAutoIconify()}{SetAutoIconify()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_a40e9dfcf16134fafed51392f569370c4} 
+void prt\+::\+Window\+::\+Set\+Auto\+Iconify (\begin{DoxyParamCaption}\item[{const bool}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_window_a90f1f8c8e4d77e185d3867d1ac9ac172}\index{prt::Window@{prt::Window}!SetDecorated@{SetDecorated}}
+\index{SetDecorated@{SetDecorated}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{SetDecorated()}{SetDecorated()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_a90f1f8c8e4d77e185d3867d1ac9ac172} 
+void prt\+::\+Window\+::\+Set\+Decorated (\begin{DoxyParamCaption}\item[{const bool}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_window_a44425bb8a0b97d9507c019decb266489}\index{prt::Window@{prt::Window}!SetFloating@{SetFloating}}
+\index{SetFloating@{SetFloating}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{SetFloating()}{SetFloating()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_a44425bb8a0b97d9507c019decb266489} 
+void prt\+::\+Window\+::\+Set\+Floating (\begin{DoxyParamCaption}\item[{const bool}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_window_a84cdfa544f35634da3dd236853b12f02}\index{prt::Window@{prt::Window}!SetFocusOnShow@{SetFocusOnShow}}
+\index{SetFocusOnShow@{SetFocusOnShow}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{SetFocusOnShow()}{SetFocusOnShow()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_a84cdfa544f35634da3dd236853b12f02} 
+void prt\+::\+Window\+::\+Set\+Focus\+On\+Show (\begin{DoxyParamCaption}\item[{const bool}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_window_ad8b1a335f20a91f2cd29ec9d4d83ce8e}\index{prt::Window@{prt::Window}!SetKeyboard@{SetKeyboard}}
+\index{SetKeyboard@{SetKeyboard}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{SetKeyboard()}{SetKeyboard()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_ad8b1a335f20a91f2cd29ec9d4d83ce8e} 
+void prt\+::\+Window\+::\+Set\+Keyboard (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_keyboard}{Keyboard}} \texorpdfstring{$\ast$}{*}}]{rhs}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_window_afa5a0d40a0185d3c38ebcb2f94e80a9e}\index{prt::Window@{prt::Window}!SetMinSize@{SetMinSize}}
+\index{SetMinSize@{SetMinSize}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{SetMinSize()}{SetMinSize()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_afa5a0d40a0185d3c38ebcb2f94e80a9e} 
+void prt\+::\+Window\+::\+Set\+Min\+Size (\begin{DoxyParamCaption}\item[{const glm\+::i32vec2 \&}]{size}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_window_afb8037749cdcdf5d35b65224a5e045d4}\index{prt::Window@{prt::Window}!SetMouse@{SetMouse}}
+\index{SetMouse@{SetMouse}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{SetMouse()}{SetMouse()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_afb8037749cdcdf5d35b65224a5e045d4} 
+void prt\+::\+Window\+::\+Set\+Mouse (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_mouse}{Mouse}} \texorpdfstring{$\ast$}{*}}]{rhs}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_window_a8c6614c5419fb3a851d1003275301ae4}\index{prt::Window@{prt::Window}!SetPos@{SetPos}}
+\index{SetPos@{SetPos}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{SetPos()}{SetPos()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_a8c6614c5419fb3a851d1003275301ae4} 
+void prt\+::\+Window\+::\+Set\+Pos (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}} \&}]{value}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_window_a70506152eb4a85b3e005eea86a1c8b7c}\index{prt::Window@{prt::Window}!SetResizable@{SetResizable}}
+\index{SetResizable@{SetResizable}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{SetResizable()}{SetResizable()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_a70506152eb4a85b3e005eea86a1c8b7c} 
+void prt\+::\+Window\+::\+Set\+Resizable (\begin{DoxyParamCaption}\item[{const bool}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_window_a70f5d25b979f0c4642fb2d8d78a8ab61}\index{prt::Window@{prt::Window}!SetSize@{SetSize}}
+\index{SetSize@{SetSize}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{SetSize()}{SetSize()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_a70f5d25b979f0c4642fb2d8d78a8ab61} 
+void prt\+::\+Window\+::\+Set\+Size (\begin{DoxyParamCaption}\item[{const glm\+::i32vec2 \&}]{value}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_window_ae5708be984e4ad9933b38b5195c053d2}\index{prt::Window@{prt::Window}!SetTable@{SetTable}}
+\index{SetTable@{SetTable}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{SetTable()}{SetTable()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_ae5708be984e4ad9933b38b5195c053d2} 
+void prt\+::\+Window\+::\+Set\+Table (\begin{DoxyParamCaption}\item[{lua\+\_\+\+State \texorpdfstring{$\ast$}{*}}]{L}{, }\item[{const int}]{index}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{classprt_1_1_window_a1c75d3bbc0e35054bbccb6e53e3265c3}\index{prt::Window@{prt::Window}!SetTitle@{SetTitle}}
+\index{SetTitle@{SetTitle}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{SetTitle()}{SetTitle()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_a1c75d3bbc0e35054bbccb6e53e3265c3} 
+void prt\+::\+Window\+::\+Set\+Title (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{value}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_window_ac0aa538339a39ac1ce5ebc20d8714043}\index{prt::Window@{prt::Window}!ShouldClose@{ShouldClose}}
+\index{ShouldClose@{ShouldClose}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{ShouldClose()}{ShouldClose()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_ac0aa538339a39ac1ce5ebc20d8714043} 
+auto prt\+::\+Window\+::\+Should\+Close (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$  bool}
+
+\Hypertarget{classprt_1_1_window_a9b2e25033f49d86e5777cd073b227324}\index{prt::Window@{prt::Window}!Show@{Show}}
+\index{Show@{Show}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{Show()}{Show()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_a9b2e25033f49d86e5777cd073b227324} 
+void prt\+::\+Window\+::\+Show (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_window_a22fb729a08c3986d6cab58aa04323a23}\index{prt::Window@{prt::Window}!SwapBuffers@{SwapBuffers}}
+\index{SwapBuffers@{SwapBuffers}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{SwapBuffers()}{SwapBuffers()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_a22fb729a08c3986d6cab58aa04323a23} 
+void prt\+::\+Window\+::\+Swap\+Buffers (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_window_a931d90e28e56d0cb6e993b4c9a687936}\index{prt::Window@{prt::Window}!ToString@{ToString}}
+\index{ToString@{ToString}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_a931d90e28e56d0cb6e993b4c9a687936} 
+auto prt\+::\+Window\+::\+To\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ std\+::string}
+
+\Hypertarget{classprt_1_1_window_aadae18fe585cdc181d7b06f81abc80b5}\index{prt::Window@{prt::Window}!ToTable@{ToTable}}
+\index{ToTable@{ToTable}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{ToTable()}{ToTable()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_aadae18fe585cdc181d7b06f81abc80b5} 
+void prt\+::\+Window\+::\+To\+Table (\begin{DoxyParamCaption}\item[{lua\+\_\+\+State \texorpdfstring{$\ast$}{*}}]{L}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classprt_1_1_window_ac9dc0b81cf70532f036f05fc25a3c7a9}\index{prt::Window@{prt::Window}!Keyboard@{Keyboard}}
+\index{Keyboard@{Keyboard}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{Keyboard}{Keyboard}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_ac9dc0b81cf70532f036f05fc25a3c7a9} 
+friend class \mbox{\hyperlink{classprt_1_1_keyboard}{Keyboard}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+\Hypertarget{classprt_1_1_window_a9aa251d710bba4f257a519ebc5d01d51}\index{prt::Window@{prt::Window}!LuaState@{LuaState}}
+\index{LuaState@{LuaState}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{LuaState}{LuaState}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_a9aa251d710bba4f257a519ebc5d01d51} 
+friend class \mbox{\hyperlink{classprt_1_1_lua_state}{Lua\+State}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+\Hypertarget{classprt_1_1_window_a07eafe2eb7248be18a8531cb12734113}\index{prt::Window@{prt::Window}!Mouse@{Mouse}}
+\index{Mouse@{Mouse}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{Mouse}{Mouse}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_a07eafe2eb7248be18a8531cb12734113} 
+friend class \mbox{\hyperlink{classprt_1_1_mouse}{Mouse}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+\Hypertarget{classprt_1_1_window_aeeb0c87843e83ecd230f9acddce85af4}\index{prt::Window@{prt::Window}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_aeeb0c87843e83ecd230f9acddce85af4} 
+auto operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{stream}{, }\item[{\mbox{\hyperlink{classprt_1_1_window}{Window}} \texorpdfstring{$\ast$}{*}}]{rhs}{}\end{DoxyParamCaption}) -\/$>$ std\+::ostream\& \hspace{0.3cm}{\ttfamily [friend]}}
+
+\Hypertarget{classprt_1_1_window_a0d4d3f443518aa9f5c616c435bde1a74}\index{prt::Window@{prt::Window}!WindowBuilder@{WindowBuilder}}
+\index{WindowBuilder@{WindowBuilder}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{WindowBuilder}{WindowBuilder}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_a0d4d3f443518aa9f5c616c435bde1a74} 
+friend class \mbox{\hyperlink{classprt_1_1_window_builder}{Window\+Builder}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_window_ac12d0b81e334bf02acd4ea2da34d8c63}\index{prt::Window@{prt::Window}!events\_@{events\_}}
+\index{events\_@{events\_}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{events\_}{events\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_ac12d0b81e334bf02acd4ea2da34d8c63} 
+Window\+Event\+Subject prt\+::\+Window\+::events\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_window_a9ea4936996ac091cc14bc2a74d7c199d}\index{prt::Window@{prt::Window}!handle\_@{handle\_}}
+\index{handle\_@{handle\_}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{handle\_}{handle\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_a9ea4936996ac091cc14bc2a74d7c199d} 
+Handle\texorpdfstring{$\ast$}{*} prt\+::\+Window\+::handle\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_window_a371222d5e8b05c3d76228443b88a714d}\index{prt::Window@{prt::Window}!keyboard\_@{keyboard\_}}
+\index{keyboard\_@{keyboard\_}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{keyboard\_}{keyboard\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_a371222d5e8b05c3d76228443b88a714d} 
+\mbox{\hyperlink{classprt_1_1_keyboard}{Keyboard}}\texorpdfstring{$\ast$}{*} prt\+::\+Window\+::keyboard\+\_\+ = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_window_a831f9764f90cf679557b60a9330faea1}\index{prt::Window@{prt::Window}!mouse\_@{mouse\_}}
+\index{mouse\_@{mouse\_}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{mouse\_}{mouse\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_a831f9764f90cf679557b60a9330faea1} 
+\mbox{\hyperlink{classprt_1_1_mouse}{Mouse}}\texorpdfstring{$\ast$}{*} prt\+::\+Window\+::mouse\+\_\+ = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_window_a3901d5a4e4f393bae7817153c68f016e}\index{prt::Window@{prt::Window}!uuid\_@{uuid\_}}
+\index{uuid\_@{uuid\_}!prt::Window@{prt::Window}}
+\doxysubsubsection{\texorpdfstring{uuid\_}{uuid\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_a3901d5a4e4f393bae7817153c68f016e} 
+uuids\+::uuid prt\+::\+Window\+::uuid\+\_\+ = uuids\+::uuid\+\_\+system\+\_\+generator\{\}()\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{window_8h}{window.\+h}}\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{window_8cc}{window.\+cc}}\end{DoxyCompactItemize}

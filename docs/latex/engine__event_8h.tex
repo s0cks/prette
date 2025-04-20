@@ -1,0 +1,123 @@
+\doxysection{/\+Users/tazz/\+Projects/prette/\+Sources/prette/engine\+\_\+event.h File Reference}
+\hypertarget{engine__event_8h}{}\label{engine__event_8h}\index{/Users/tazz/Projects/prette/Sources/prette/engine\_event.h@{/Users/tazz/Projects/prette/Sources/prette/engine\_event.h}}
+{\ttfamily \#include "{}prette/event.\+h"{}}\newline
+{\ttfamily \#include "{}prette/tick.\+h"{}}\newline
+Include dependency graph for engine\+\_\+event.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{engine__event_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{engine__event_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1_tick_event}{prt\+::\+Tick\+Event}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_post_tick_event}{prt\+::\+Post\+Tick\+Event}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_error_event}{prt\+::\+Error\+Event}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceprt}{prt}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{engine__event_8h_aa553f12be86634d0b342890713cdb085}{FOR\+\_\+\+EACH\+\_\+\+ENGINE\+\_\+\+EVENT}}(V)
+\item 
+\#define \mbox{\hyperlink{engine__event_8h_a05172607c43d176ec5c76bad45f5a145}{FORWARD\+\_\+\+DECLARE\+\_\+\+ENGINE\+\_\+\+EVENT}}(Name)
+\item 
+\#define \mbox{\hyperlink{engine__event_8h_a02b535868a670e599b6e42bec9389e2b}{DECLARE\+\_\+\+ENGINE\+\_\+\+EVENT\+\_\+\+TYPE}}(Name)
+\item 
+\#define \mbox{\hyperlink{engine__event_8h_a22b173d9600a9784e930c7f842e1531f}{DECLARE\+\_\+\+ENGINE\+\_\+\+EVENT}}(Name)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceprt_aea6c6e1ca95407097c9dc6a966608a3f}{prt\+::\+DEFINE\+\_\+\+EVENT\+\_\+\+PROTOTYPE}} (\mbox{\hyperlink{classprt_1_1_engine}{Engine}}, \mbox{\hyperlink{namespaceprt_a1997ace4caa1eebeb17a2065a6c62bcb}{FOR\+\_\+\+EACH\+\_\+\+ENGINE\+\_\+\+EVENT}})
+\item 
+\mbox{\hyperlink{namespaceprt_a51f017931968b0196c6b03615411e18c}{prt\+::\+DECLARE\+\_\+\+ENGINE\+\_\+\+EVENT}} (Pre\+Init)
+\item 
+\mbox{\hyperlink{namespaceprt_a500eb1497d3681e44330aaaf9cae040b}{prt\+::\+DECLARE\+\_\+\+ENGINE\+\_\+\+EVENT}} (Post\+Init)
+\item 
+\mbox{\hyperlink{namespaceprt_a993cd3f12f464f782c5865fd91bbefa6}{prt\+::\+DECLARE\+\_\+\+ENGINE\+\_\+\+EVENT}} (Pre\+Tick)
+\item 
+\mbox{\hyperlink{namespaceprt_ac68ba2b1298e81bc60d641040aa396c7}{prt\+::\+DECLARE\+\_\+\+ENGINE\+\_\+\+EVENT}} (Terminating)
+\item 
+\mbox{\hyperlink{namespaceprt_a5fa455d6006f165c386a39dc030ac1f6}{prt\+::\+DECLARE\+\_\+\+ENGINE\+\_\+\+EVENT}} (Terminated)
+\item 
+\mbox{\hyperlink{namespaceprt_abe60c6ed98af88f1e3542f0f70b2eeec}{prt\+::\+DEFINE\+\_\+\+EVENT\+\_\+\+SUBJECT}} (\mbox{\hyperlink{classprt_1_1_engine}{Engine}})
+\item 
+\mbox{\hyperlink{namespaceprt_a1a037a7c66a8e0c9eafb4608fef52cca}{prt\+::\+DEFINE\+\_\+\+EVENT\+\_\+\+OBSERVABLE}} (\mbox{\hyperlink{classprt_1_1_engine}{Engine}})
+\item 
+\mbox{\hyperlink{namespaceprt_a58bf38aadcf62159e981074e1fcb426b}{prt\+::\+FOR\+\_\+\+EACH\+\_\+\+ENGINE\+\_\+\+EVENT}} (\mbox{\hyperlink{namespaceprt_a1a037a7c66a8e0c9eafb4608fef52cca}{DEFINE\+\_\+\+EVENT\+\_\+\+OBSERVABLE}})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{engine__event_8h_a22b173d9600a9784e930c7f842e1531f}\index{engine\_event.h@{engine\_event.h}!DECLARE\_ENGINE\_EVENT@{DECLARE\_ENGINE\_EVENT}}
+\index{DECLARE\_ENGINE\_EVENT@{DECLARE\_ENGINE\_EVENT}!engine\_event.h@{engine\_event.h}}
+\doxysubsubsection{\texorpdfstring{DECLARE\_ENGINE\_EVENT}{DECLARE\_ENGINE\_EVENT}}
+{\footnotesize\ttfamily \label{engine__event_8h_a22b173d9600a9784e930c7f842e1531f} 
+\#define DECLARE\+\_\+\+ENGINE\+\_\+\+EVENT(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \textcolor{keyword}{class\ }Name\#\#Event\ :\ \textcolor{keyword}{public}\ EngineEvent\ \{\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{public}:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ Name\#\#Event()\ =\ \textcolor{keywordflow}{default};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \string~Name\#\#Event()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};\ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ DECLARE\_ENGINE\_EVENT\_TYPE(Name);\ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \};}
+
+\end{DoxyCode}
+\Hypertarget{engine__event_8h_a02b535868a670e599b6e42bec9389e2b}\index{engine\_event.h@{engine\_event.h}!DECLARE\_ENGINE\_EVENT\_TYPE@{DECLARE\_ENGINE\_EVENT\_TYPE}}
+\index{DECLARE\_ENGINE\_EVENT\_TYPE@{DECLARE\_ENGINE\_EVENT\_TYPE}!engine\_event.h@{engine\_event.h}}
+\doxysubsubsection{\texorpdfstring{DECLARE\_ENGINE\_EVENT\_TYPE}{DECLARE\_ENGINE\_EVENT\_TYPE}}
+{\footnotesize\ttfamily \label{engine__event_8h_a02b535868a670e599b6e42bec9389e2b} 
+\#define DECLARE\+\_\+\+ENGINE\+\_\+\+EVENT\+\_\+\+TYPE(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{event_8h_aa8d2371509853602194dfe7289ca052e}{DECLARE\_EVENT\_TYPE}}(EngineEvent,\ Name)}
+
+\end{DoxyCode}
+\Hypertarget{engine__event_8h_aa553f12be86634d0b342890713cdb085}\index{engine\_event.h@{engine\_event.h}!FOR\_EACH\_ENGINE\_EVENT@{FOR\_EACH\_ENGINE\_EVENT}}
+\index{FOR\_EACH\_ENGINE\_EVENT@{FOR\_EACH\_ENGINE\_EVENT}!engine\_event.h@{engine\_event.h}}
+\doxysubsubsection{\texorpdfstring{FOR\_EACH\_ENGINE\_EVENT}{FOR\_EACH\_ENGINE\_EVENT}}
+{\footnotesize\ttfamily \label{engine__event_8h_aa553f12be86634d0b342890713cdb085} 
+\#define FOR\+\_\+\+EACH\+\_\+\+ENGINE\+\_\+\+EVENT(\begin{DoxyParamCaption}\item[{}]{V}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ V(PreInit)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(PostInit)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(PreTick)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(Tick)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(PostTick)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(Terminating)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(Terminated)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(Error)}
+
+\end{DoxyCode}
+\Hypertarget{engine__event_8h_a05172607c43d176ec5c76bad45f5a145}\index{engine\_event.h@{engine\_event.h}!FORWARD\_DECLARE\_ENGINE\_EVENT@{FORWARD\_DECLARE\_ENGINE\_EVENT}}
+\index{FORWARD\_DECLARE\_ENGINE\_EVENT@{FORWARD\_DECLARE\_ENGINE\_EVENT}!engine\_event.h@{engine\_event.h}}
+\doxysubsubsection{\texorpdfstring{FORWARD\_DECLARE\_ENGINE\_EVENT}{FORWARD\_DECLARE\_ENGINE\_EVENT}}
+{\footnotesize\ttfamily \label{engine__event_8h_a05172607c43d176ec5c76bad45f5a145} 
+\#define FORWARD\+\_\+\+DECLARE\+\_\+\+ENGINE\+\_\+\+EVENT(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{class\ }Name\#\#Event;}
+
+\end{DoxyCode}

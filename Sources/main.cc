@@ -1,76 +1,99 @@
-#include <cstdlib>
+#include <stb_include.h>
+
+// clang-format on
+#define TINYOBJLOADER_IMPLEMENTATION
+#include <tiny_obj_loader.h>
+// clang-format on
+
+#include <GLFW/glfw3.h>
 #include <glog/logging.h>
-
-#include <uv.h>
-#include <cstdlib>
-#include <stdexcept>
-#include <exception>
-
 #include <units.h>
+#include <uv.h>
+
 #include <backward.hpp>
+#include <cstdlib>
+#include <exception>
+#include <stdexcept>
 #include <termcolor/termcolor.hpp>
 
-#define NK_GLFW_GL3_IMPLEMENTATION
-
-#include "prette/runtime.h"
-#include "prette/keyboard/keyboard.h"
+#include "prette/camera.h"
+#include "prette/chunk.h"
+#include "prette/config.h"
+#include "prette/engine.h"
+#include "prette/glm.h"
+#include "prette/gui.h"
+#include "prette/keyboard.h"
+#include "prette/os_thread.h"
+#include "prette/renderer.h"
+#include "prette/scene_renderer.h"
+#include "prette/settings.h"
+#include "prette/signals.h"
+#include "prette/swapchain.h"
+#include "prette/window.h"
+#include "prette/world.h"
 
 using namespace prt;
 
-template<class Event, const google::LogSeverity Severity = google::INFO>
-static inline auto
-LogEvent() -> std::function<void(Event*)> {
-  return [](Event* event) {
-    LOG_AT_LEVEL(Severity) << event->ToString();
-  };
+static inline void OnUnhandledException() {
+  CrashReport report(CrashReportCause::New(std::current_exception()));
+  report.Print();
+  LOG(FATAL) << "unhandled exception occured.";
 }
 
-// static inline std::ostream& 
-// operator<<(std::ostream& s, const google::LogSeverity& severity) {
-//   switch(severity) {
-//     case google::INFO:
-//       return s << termcolor::white << "I";
-//     case google::WARNING:
-//       return s << termcolor::yellow << "W";
-//     case google::ERROR:
-//       return s << termcolor::red << "E";
-//     case google::FATAL:
-//       return s << termcolor::bright_red << "F";
-//   }
-// }
+class TilePrinter : public TileVisitor {
+ public:
+  TilePrinter() = default;
+  ~TilePrinter() override = default;
 
-// void MyPrefixFormatter(std::ostream& s, const google::LogMessage& m, void* /*data*/) {
-//   using namespace std;
-//   s << m.severity()
-//     << setw(4) << 1900 + m.time().year()
-//     << setw(2) << 1 + m.time().month()
-//     << setw(2) << m.time().day()
-//     << ' '
-//     << setw(2) << m.time().hour() << ':'
-//     << setw(2) << m.time().min()  << ':'
-//     << setw(2) << m.time().sec() << "."
-//     << setw(6) << m.time().usec()
-//     << ' '
-//     << setfill(' ') << setw(5)
-//     << m.thread_id() << setfill('0')
-//     << ' '
-//     << m.basename() << ':' << m.line() << "]";
-// }
+  auto Visit(Tile* tile) -> bool override {
+    ASSERT(tile);
+    LOG(INFO) << (*tile);
+    return true;
+  }
+};
+
+#ifdef PRT_DEBUG
+
+#define BEGIN_GRAPHICS_SECTION if (FLAGS_gfx) {
+#define END_GRAPHICS_SECTION   }
+
+#else
+
+#define BEGIN_GRAPHICS_SECTION
+#define END_GRAPHICS_SECTION
+
+#endif  // PRT_DEBUG
 
 auto main(int argc, char** argv) -> int {
-  Runtime::Init(argc, argv);
+  // ::google::InstallPrefixFormatter(&MyPrefixFormatter);
+  ::google::InitGoogleLogging(argv[0]);
+  ::google::ParseCommandLineFlags(&argc, &argv, true);
+  srand(time(nullptr));
+  InitSignalHandlers();
+  std::set_terminate(OnUnhandledException);
+  LOG_IF(FATAL, !SetCurrentThreadName("main")) << "failed to set main thread name.";
+  Config::Init();  // TODO: de-init Config
+  Settings::Init();
+  LuaState::Init();
+  BEGIN_GRAPHICS_SECTION {
+    gfx::Init();
+    Window::Init();
+    Camera::Init();
+  }
+  END_GRAPHICS_SECTION
+  Engine::Init();
+  World::Init();
+  BEGIN_GRAPHICS_SECTION {
+    Driver::Init();
+    gui::Init();
+    Renderer::Init();
+    SwapChain::Init();
+    SceneRenderer::Init();
+    GuiRenderer::Init();
+  }
+  END_GRAPHICS_SECTION
 
-  uword counter = 0;
-  const auto kb = keyboard::GetKeyboard();
-  PRT_ASSERT(kb);
-  kb->OnKeyPressed()
-    .subscribe(LogEvent<keyboard::KeyPressedEvent>());
-#ifdef PRT_DEBUG
-  kb->OnKeyPressed()
-    .filter(keyboard::KeyPressedEvent::FilterBy(GLFW_KEY_GRAVE_ACCENT))
-    .subscribe([](keyboard::KeyPressedEvent* e) {
-      PrintRuntimeInfo();
-    });
-#endif //PRT_DEBUG
-  return Runtime::Run();
+  const auto engine = Engine::Get();
+  ASSERT(engine);
+  return engine->Run();
 }

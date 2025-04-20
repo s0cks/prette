@@ -2,126 +2,115 @@
 #define PRT_SERIES_H
 
 #include <units.h>
-#include <functional>
-#include <algorithm>
 
-#include "prette/rx.h"
+#include <algorithm>
+#include <functional>
+
 #include "prette/circular_buffer.h"
+#include "prette/rx.h"
 
 namespace prt {
-  template<typename T, const uint64_t Capacity>
-  class Series {
-  protected:
-    CircularBuffer<T, Capacity> data_;
+template <typename T, const uint64_t Capacity>
+class Series {
+ protected:
+  CircularBuffer<T, Capacity> data_;
 
-    Series():
-      data_() {
-    }
-  public:
-    virtual ~Series() = default;
+  Series() :
+    data_() {}
 
-    void Append(const T value) {
-      data_.put(value);
-    }
+ public:
+  virtual ~Series() = default;
 
-    T* begin() {
-      return data_.begin();
-    }
+  void Append(const T value) {
+    data_.put(value);
+  }
 
-    T* begin() const {
-      return data_.begin();
-    }
+  T* begin() {
+    return data_.begin();
+  }
 
-    T* end() {
-      return data_.end();
-    }
+  T* begin() const {
+    return data_.begin();
+  }
 
-    T* end() const {
-      return data_.end();
-    }
+  T* end() {
+    return data_.end();
+  }
 
-    uint64_t count() const {
-      return ToObservable()
-        .as_blocking()
-        .count();
-    }
+  T* end() const {
+    return data_.end();
+  }
 
-    rx::observable<T> ToObservable() const {
-      return rx::observable<>::create<T>([this](rx::subscriber<T> s) {
-        for(const auto& value : data_) {
-          s.on_next(value);
-        }
-        s.on_completed();
-      });
-    }
+  uint64_t count() const {
+    return ToObservable().as_blocking().count();
+  }
 
-    explicit operator rx::observable<T> () const {
-      return ToObservable();
-    }
-  };
+  rx::observable<T> ToObservable() const {
+    return rx::observable<>::create<T>([this](rx::subscriber<T> s) {
+      for (const auto& value : data_) {
+        s.on_next(value);
+      }
+      s.on_completed();
+    });
+  }
 
-  template<typename T, const uint64_t Capacity = 10>
-  class NumericSeries : public Series<uint64_t, Capacity> {
-  public:
-    NumericSeries() = default;
-    ~NumericSeries() override = default;
+  explicit operator rx::observable<T>() const {
+    return ToObservable();
+  }
+};
 
-    inline uint64_t first() const {
-      return Series<uint64_t, Capacity>::ToObservable()
-        .as_blocking()
-        .first();
-    }
+template <typename T, const uint64_t Capacity = 10>
+class NumericSeries : public Series<uint64_t, Capacity> {
+ public:
+  NumericSeries() = default;
+  ~NumericSeries() override = default;
 
-    inline uint64_t last() const {
-      return Series<uint64_t, Capacity>::ToObservable()
-        .as_blocking()
-        .last();
-    }
+  inline uint64_t first() const {
+    return Series<uint64_t, Capacity>::ToObservable().as_blocking().first();
+  }
 
-    inline uint64_t average() const {
-      return Series<uint64_t, Capacity>::ToObservable()
-        .as_blocking()
-        .average();
-    }
+  inline uint64_t last() const {
+    return Series<uint64_t, Capacity>::ToObservable().as_blocking().last();
+  }
 
-    inline uint64_t max() const {
-      return Series<uint64_t, Capacity>::ToObservable()
-        .as_blocking()
-        .max();
-    }
+  inline uint64_t average() const {
+    return Series<uint64_t, Capacity>::ToObservable().as_blocking().average();
+  }
 
-    inline uint64_t min() const {
-      return Series<uint64_t, Capacity>::ToObservable()
-        .as_blocking()
-        .min();
-    }
+  inline uint64_t max() const {
+    return Series<uint64_t, Capacity>::ToObservable().as_blocking().max();
+  }
 
-    explicit operator rx::observable<uint64_t> () const {
-      return Series<uint64_t, Capacity>::ToObservable();
-    }
-  };
+  inline uint64_t min() const {
+    return Series<uint64_t, Capacity>::ToObservable().as_blocking().min();
+  }
 
-  template<const uint64_t Capacity = 10>
-  class TimeSeries : public NumericSeries<uint64_t, Capacity> {
-  public:
-    TimeSeries() = default;
-    ~TimeSeries() override = default;
+  explicit operator rx::observable<uint64_t>() const {
+    return Series<uint64_t, Capacity>::ToObservable();
+  }
+};
 
-    explicit operator rx::observable<uint64_t> () const {
-      return Series<uint64_t, Capacity>::ToObservable();
-    }
+template <const uint64_t Capacity = 10>
+class TimeSeries : public NumericSeries<uint64_t, Capacity> {
+ public:
+  TimeSeries() = default;
+  ~TimeSeries() override = default;
 
-    friend std::ostream& operator<<(std::ostream& stream, const TimeSeries<Capacity>& rhs) {
-      using namespace units::time;
-      stream << "TimeSeries(";
-      stream << "size=" << (Capacity) << ", ";
-      stream << "avg=" << nanosecond_t(rhs.average()) << ", ";
-      stream << "min=" << nanosecond_t(rhs.min()) << ", ";
-      stream << "max=" << nanosecond_t(rhs.max());
-      stream << ")";
-      return stream;
-    }
-  };
-}
+  explicit operator rx::observable<uint64_t>() const {
+    return Series<uint64_t, Capacity>::ToObservable();
+  }
 
-#endif //PRT_SERIES_H
+  friend std::ostream& operator<<(std::ostream& stream, const TimeSeries<Capacity>& rhs) {
+    using namespace units::time;
+    stream << "TimeSeries(";
+    stream << "size=" << (Capacity) << ", ";
+    stream << "avg=" << nanosecond_t(rhs.average()) << ", ";
+    stream << "min=" << nanosecond_t(rhs.min()) << ", ";
+    stream << "max=" << nanosecond_t(rhs.max());
+    stream << ")";
+    return stream;
+  }
+};
+}  // namespace prt
+
+#endif  // PRT_SERIES_H

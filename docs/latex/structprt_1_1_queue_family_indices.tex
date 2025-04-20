@@ -1,0 +1,87 @@
+\doxysection{prt\+::Queue\+Family\+Indices Struct Reference}
+\hypertarget{structprt_1_1_queue_family_indices}{}\label{structprt_1_1_queue_family_indices}\index{prt::QueueFamilyIndices@{prt::QueueFamilyIndices}}
+
+
+{\ttfamily \#include $<$gfx\+\_\+vk.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+auto \mbox{\hyperlink{structprt_1_1_queue_family_indices_aae551fd89e56683018e2c4cc7bf5c632}{Get\+Graphics\+Family}} () const -\/$>$ uint32\+\_\+t
+\item 
+auto \mbox{\hyperlink{structprt_1_1_queue_family_indices_a0d4269ce76496c84edd41df47550a142}{Get\+Present\+Family}} () const -\/$>$ uint32\+\_\+t
+\item 
+auto \mbox{\hyperlink{structprt_1_1_queue_family_indices_a15fc8e15fb62259caa096ce7be75f806}{Is\+Complete}} () const -\/$>$ bool
+\item 
+void \mbox{\hyperlink{structprt_1_1_queue_family_indices_a4501b1b8ceeba3f07609ab86df9e7013}{Get\+Unique\+Families}} (std\+::unordered\+\_\+set$<$ uint32\+\_\+t $>$ \&families) const
+\item 
+void \mbox{\hyperlink{structprt_1_1_queue_family_indices_a752d5597aec17c1f8c7ebae7b78e7adb}{Get\+Graphics\+Queue}} (const Vk\+Device \&device, Vk\+Queue \&queue, const int index=0) const
+\item 
+void \mbox{\hyperlink{structprt_1_1_queue_family_indices_a95aa096af873d0ac7b46d365f5a22902}{Get\+Present\+Queue}} (const Vk\+Device \&device, Vk\+Queue \&queue, const int index=0) const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::optional$<$ uint32\+\_\+t $>$ \mbox{\hyperlink{structprt_1_1_queue_family_indices_a4450c0ad58283557939893d87f713b2c}{graphics}} \{\}
+\item 
+std\+::optional$<$ uint32\+\_\+t $>$ \mbox{\hyperlink{structprt_1_1_queue_family_indices_afbd556e04609377bf1e28a5789cd8046}{present}} \{\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{structprt_1_1_queue_family_indices_aae551fd89e56683018e2c4cc7bf5c632}\index{prt::QueueFamilyIndices@{prt::QueueFamilyIndices}!GetGraphicsFamily@{GetGraphicsFamily}}
+\index{GetGraphicsFamily@{GetGraphicsFamily}!prt::QueueFamilyIndices@{prt::QueueFamilyIndices}}
+\doxysubsubsection{\texorpdfstring{GetGraphicsFamily()}{GetGraphicsFamily()}}
+{\footnotesize\ttfamily \label{structprt_1_1_queue_family_indices_aae551fd89e56683018e2c4cc7bf5c632} 
+auto prt\+::\+Queue\+Family\+Indices\+::\+Get\+Graphics\+Family (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ uint32\+\_\+t \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{structprt_1_1_queue_family_indices_a752d5597aec17c1f8c7ebae7b78e7adb}\index{prt::QueueFamilyIndices@{prt::QueueFamilyIndices}!GetGraphicsQueue@{GetGraphicsQueue}}
+\index{GetGraphicsQueue@{GetGraphicsQueue}!prt::QueueFamilyIndices@{prt::QueueFamilyIndices}}
+\doxysubsubsection{\texorpdfstring{GetGraphicsQueue()}{GetGraphicsQueue()}}
+{\footnotesize\ttfamily \label{structprt_1_1_queue_family_indices_a752d5597aec17c1f8c7ebae7b78e7adb} 
+void prt\+::\+Queue\+Family\+Indices\+::\+Get\+Graphics\+Queue (\begin{DoxyParamCaption}\item[{const Vk\+Device \&}]{device}{, }\item[{Vk\+Queue \&}]{queue}{, }\item[{const int}]{index}{ = {\ttfamily 0}}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{structprt_1_1_queue_family_indices_a0d4269ce76496c84edd41df47550a142}\index{prt::QueueFamilyIndices@{prt::QueueFamilyIndices}!GetPresentFamily@{GetPresentFamily}}
+\index{GetPresentFamily@{GetPresentFamily}!prt::QueueFamilyIndices@{prt::QueueFamilyIndices}}
+\doxysubsubsection{\texorpdfstring{GetPresentFamily()}{GetPresentFamily()}}
+{\footnotesize\ttfamily \label{structprt_1_1_queue_family_indices_a0d4269ce76496c84edd41df47550a142} 
+auto prt\+::\+Queue\+Family\+Indices\+::\+Get\+Present\+Family (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ uint32\+\_\+t \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{structprt_1_1_queue_family_indices_a95aa096af873d0ac7b46d365f5a22902}\index{prt::QueueFamilyIndices@{prt::QueueFamilyIndices}!GetPresentQueue@{GetPresentQueue}}
+\index{GetPresentQueue@{GetPresentQueue}!prt::QueueFamilyIndices@{prt::QueueFamilyIndices}}
+\doxysubsubsection{\texorpdfstring{GetPresentQueue()}{GetPresentQueue()}}
+{\footnotesize\ttfamily \label{structprt_1_1_queue_family_indices_a95aa096af873d0ac7b46d365f5a22902} 
+void prt\+::\+Queue\+Family\+Indices\+::\+Get\+Present\+Queue (\begin{DoxyParamCaption}\item[{const Vk\+Device \&}]{device}{, }\item[{Vk\+Queue \&}]{queue}{, }\item[{const int}]{index}{ = {\ttfamily 0}}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{structprt_1_1_queue_family_indices_a4501b1b8ceeba3f07609ab86df9e7013}\index{prt::QueueFamilyIndices@{prt::QueueFamilyIndices}!GetUniqueFamilies@{GetUniqueFamilies}}
+\index{GetUniqueFamilies@{GetUniqueFamilies}!prt::QueueFamilyIndices@{prt::QueueFamilyIndices}}
+\doxysubsubsection{\texorpdfstring{GetUniqueFamilies()}{GetUniqueFamilies()}}
+{\footnotesize\ttfamily \label{structprt_1_1_queue_family_indices_a4501b1b8ceeba3f07609ab86df9e7013} 
+void prt\+::\+Queue\+Family\+Indices\+::\+Get\+Unique\+Families (\begin{DoxyParamCaption}\item[{std\+::unordered\+\_\+set$<$ uint32\+\_\+t $>$ \&}]{families}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{structprt_1_1_queue_family_indices_a15fc8e15fb62259caa096ce7be75f806}\index{prt::QueueFamilyIndices@{prt::QueueFamilyIndices}!IsComplete@{IsComplete}}
+\index{IsComplete@{IsComplete}!prt::QueueFamilyIndices@{prt::QueueFamilyIndices}}
+\doxysubsubsection{\texorpdfstring{IsComplete()}{IsComplete()}}
+{\footnotesize\ttfamily \label{structprt_1_1_queue_family_indices_a15fc8e15fb62259caa096ce7be75f806} 
+auto prt\+::\+Queue\+Family\+Indices\+::\+Is\+Complete (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structprt_1_1_queue_family_indices_a4450c0ad58283557939893d87f713b2c}\index{prt::QueueFamilyIndices@{prt::QueueFamilyIndices}!graphics@{graphics}}
+\index{graphics@{graphics}!prt::QueueFamilyIndices@{prt::QueueFamilyIndices}}
+\doxysubsubsection{\texorpdfstring{graphics}{graphics}}
+{\footnotesize\ttfamily \label{structprt_1_1_queue_family_indices_a4450c0ad58283557939893d87f713b2c} 
+std\+::optional$<$uint32\+\_\+t$>$ prt\+::\+Queue\+Family\+Indices\+::graphics \{\}}
+
+\Hypertarget{structprt_1_1_queue_family_indices_afbd556e04609377bf1e28a5789cd8046}\index{prt::QueueFamilyIndices@{prt::QueueFamilyIndices}!present@{present}}
+\index{present@{present}!prt::QueueFamilyIndices@{prt::QueueFamilyIndices}}
+\doxysubsubsection{\texorpdfstring{present}{present}}
+{\footnotesize\ttfamily \label{structprt_1_1_queue_family_indices_afbd556e04609377bf1e28a5789cd8046} 
+std\+::optional$<$uint32\+\_\+t$>$ prt\+::\+Queue\+Family\+Indices\+::present \{\}}
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{gfx__vk_8h}{gfx\+\_\+vk.\+h}}\end{DoxyCompactItemize}

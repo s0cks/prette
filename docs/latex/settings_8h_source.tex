@@ -1,0 +1,33 @@
+\doxysection{settings.\+h}
+\hypertarget{settings_8h_source}{}\label{settings_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/settings.h@{/Users/tazz/Projects/prette/Sources/prette/settings.h}}
+\mbox{\hyperlink{settings_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_SETTINGS\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_SETTINGS\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{settings__event_8h}{prette/settings\_event.h}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00007\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{namespaceprt_a000e1db281cd74ac72ea70587ff0ff60}{OnSettingsEvent}}()\ -\/>\ SettingsEventObservable;}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ DEFINE\_ON\_EVENT(Name)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\ \ static\ inline\ auto\ On\#\#Name\#\#Event()-\/>Name\#\#EventObservable\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\ \ \ \ return\ OnSettingsEvent().filter(Name\#\#Event::Filter).map(Name\#\#Event::Cast);\ \(\backslash\)}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\ \ \}}}
+\DoxyCodeLine{00013\ \mbox{\hyperlink{settings__event_8h_a4e60ec9db1a2510152dd5dfa63ee2b87}{FOR\_EACH\_SETTINGS\_EVENT}}(\mbox{\hyperlink{engine_8cc_a2672365a233e0c9f3c1ccb0d78388308}{DEFINE\_ON\_EVENT}});}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#undef\ DEFINE\_ON\_EVENT}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_lua_state}{LuaState}};}
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_settings}{Settings}}\ \{}
+\DoxyCodeLine{00018\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_lua_state}{LuaState}};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_settings_a31331ae0ca351d27e4c104184ba8dc76}{Load}}();}
+\DoxyCodeLine{00022\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_settings_a19cc1a2355623e6ee0db21e5829ac19e}{Save}}();}
+\DoxyCodeLine{00023\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_settings_a3932df8bb744d7040c3c95dd3eabd1de}{Init}}();}
+\DoxyCodeLine{00024\ \};}
+\DoxyCodeLine{00025\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_SETTINGS\_H}}
+
+\end{DoxyCode}

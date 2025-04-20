@@ -1,0 +1,145 @@
+\doxysection{prt\+::Driver\+Base Class Reference}
+\hypertarget{classprt_1_1_driver_base}{}\label{classprt_1_1_driver_base}\index{prt::DriverBase@{prt::DriverBase}}
+
+
+{\ttfamily \#include $<$gfx\+\_\+driver.\+h$>$}
+
+
+
+Inheritance diagram for prt\+::Driver\+Base\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=162pt]{classprt_1_1_driver_base__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classprt_1_1_driver_base_a888e963ce7ae681e427959c16fd573f1}{\texorpdfstring{$\sim$}{\string~}\+Driver\+Base}} ()=default
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_driver_base_a5b3657be0a8a6df6fd68c84aebd98e6f}{Is\+Initialized}} () -\/$>$ bool
+\item 
+static void \mbox{\hyperlink{classprt_1_1_driver_base_a91e0251d6ec0b82e3908fa15e021780f}{Init}} ()
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_driver_base_a3e9721ab1d3911692ddbed01267f4b02}{Get}} () -\/$>$ \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_driver_base_ad064939c42260daba8ac182a3775c017}{Driver\+Base}} ()=default
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classprt_1_1_driver_base_a0d6eed44c4b11f90da1041f1e2fec397}{Publish\+Event}} (Driver\+Event \texorpdfstring{$\ast$}{*}event)
+\item 
+{\footnotesize template$<$class E , typename... Args$>$ }\\static void \mbox{\hyperlink{classprt_1_1_driver_base_acf8a8ad5fe457ddb7a056197225d8ffa}{Publish}} (Args... args)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classprt_1_1_driver_base_acd22a9eb0ad3e8396214c9285de823ae}{Destroy\+Driver}} ()
+\item 
+static void \mbox{\hyperlink{classprt_1_1_driver_base_add2e2c88ce329409d0adab4fc4338c50}{Init\+Driver}} ()
+\item 
+static void \mbox{\hyperlink{classprt_1_1_driver_base_accb7fc038992b07e4a7c5f5ca51b582a}{Init}} (\mbox{\hyperlink{classprt_1_1_lua_state}{Lua\+State}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{engine_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1_driver_base_a9aa251d710bba4f257a519ebc5d01d51}{Lua\+State}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_driver_base_afda0dca6355150b79ae46df82bc74bdd}{engine\+::\+Init\+State}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_driver_base_ad064939c42260daba8ac182a3775c017}\index{prt::DriverBase@{prt::DriverBase}!DriverBase@{DriverBase}}
+\index{DriverBase@{DriverBase}!prt::DriverBase@{prt::DriverBase}}
+\doxysubsubsection{\texorpdfstring{DriverBase()}{DriverBase()}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_base_ad064939c42260daba8ac182a3775c017} 
+prt\+::\+Driver\+Base\+::\+Driver\+Base (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [default]}}
+
+\Hypertarget{classprt_1_1_driver_base_a888e963ce7ae681e427959c16fd573f1}\index{prt::DriverBase@{prt::DriverBase}!````~DriverBase@{\texorpdfstring{$\sim$}{\string~}DriverBase}}
+\index{````~DriverBase@{\texorpdfstring{$\sim$}{\string~}DriverBase}!prt::DriverBase@{prt::DriverBase}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}DriverBase()}{\string~DriverBase()}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_base_a888e963ce7ae681e427959c16fd573f1} 
+virtual prt\+::\+Driver\+Base\+::\texorpdfstring{$\sim$}{\string~}\+Driver\+Base (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_driver_base_acd22a9eb0ad3e8396214c9285de823ae}\index{prt::DriverBase@{prt::DriverBase}!DestroyDriver@{DestroyDriver}}
+\index{DestroyDriver@{DestroyDriver}!prt::DriverBase@{prt::DriverBase}}
+\doxysubsubsection{\texorpdfstring{DestroyDriver()}{DestroyDriver()}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_base_acd22a9eb0ad3e8396214c9285de823ae} 
+void prt\+::\+Driver\+Base\+::\+Destroy\+Driver (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_driver_base_a3e9721ab1d3911692ddbed01267f4b02}\index{prt::DriverBase@{prt::DriverBase}!Get@{Get}}
+\index{Get@{Get}!prt::DriverBase@{prt::DriverBase}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_base_a3e9721ab1d3911692ddbed01267f4b02} 
+auto prt\+::\+Driver\+Base\+::\+Get (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{classprt_1_1_driver}{Driver}}\texorpdfstring{$\ast$}{*}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_driver_base_a91e0251d6ec0b82e3908fa15e021780f}\index{prt::DriverBase@{prt::DriverBase}!Init@{Init}}
+\index{Init@{Init}!prt::DriverBase@{prt::DriverBase}}
+\doxysubsubsection{\texorpdfstring{Init()}{Init()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_base_a91e0251d6ec0b82e3908fa15e021780f} 
+void prt\+::\+Driver\+Base\+::\+Init (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_driver_base_accb7fc038992b07e4a7c5f5ca51b582a}\index{prt::DriverBase@{prt::DriverBase}!Init@{Init}}
+\index{Init@{Init}!prt::DriverBase@{prt::DriverBase}}
+\doxysubsubsection{\texorpdfstring{Init()}{Init()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_base_accb7fc038992b07e4a7c5f5ca51b582a} 
+static void prt\+::\+Driver\+Base\+::\+Init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_lua_state}{Lua\+State}} \texorpdfstring{$\ast$}{*}}]{L}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_driver_base_add2e2c88ce329409d0adab4fc4338c50}\index{prt::DriverBase@{prt::DriverBase}!InitDriver@{InitDriver}}
+\index{InitDriver@{InitDriver}!prt::DriverBase@{prt::DriverBase}}
+\doxysubsubsection{\texorpdfstring{InitDriver()}{InitDriver()}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_base_add2e2c88ce329409d0adab4fc4338c50} 
+void prt\+::\+Driver\+Base\+::\+Init\+Driver (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_driver_base_a5b3657be0a8a6df6fd68c84aebd98e6f}\index{prt::DriverBase@{prt::DriverBase}!IsInitialized@{IsInitialized}}
+\index{IsInitialized@{IsInitialized}!prt::DriverBase@{prt::DriverBase}}
+\doxysubsubsection{\texorpdfstring{IsInitialized()}{IsInitialized()}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_base_a5b3657be0a8a6df6fd68c84aebd98e6f} 
+auto prt\+::\+Driver\+Base\+::\+Is\+Initialized (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ bool\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_driver_base_acf8a8ad5fe457ddb7a056197225d8ffa}\index{prt::DriverBase@{prt::DriverBase}!Publish@{Publish}}
+\index{Publish@{Publish}!prt::DriverBase@{prt::DriverBase}}
+\doxysubsubsection{\texorpdfstring{Publish()}{Publish()}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_base_acf8a8ad5fe457ddb7a056197225d8ffa} 
+template$<$class E , typename... Args$>$ \\
+static void prt\+::\+Driver\+Base\+::\+Publish (\begin{DoxyParamCaption}\item[{Args...}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [protected]}}
+
+\Hypertarget{classprt_1_1_driver_base_a0d6eed44c4b11f90da1041f1e2fec397}\index{prt::DriverBase@{prt::DriverBase}!PublishEvent@{PublishEvent}}
+\index{PublishEvent@{PublishEvent}!prt::DriverBase@{prt::DriverBase}}
+\doxysubsubsection{\texorpdfstring{PublishEvent()}{PublishEvent()}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_base_a0d6eed44c4b11f90da1041f1e2fec397} 
+void prt\+::\+Driver\+Base\+::\+Publish\+Event (\begin{DoxyParamCaption}\item[{Driver\+Event \texorpdfstring{$\ast$}{*}}]{event}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classprt_1_1_driver_base_afda0dca6355150b79ae46df82bc74bdd}\index{prt::DriverBase@{prt::DriverBase}!engine::InitState@{engine::InitState}}
+\index{engine::InitState@{engine::InitState}!prt::DriverBase@{prt::DriverBase}}
+\doxysubsubsection{\texorpdfstring{engine::InitState}{engine::InitState}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_base_afda0dca6355150b79ae46df82bc74bdd} 
+friend class engine\+::\+Init\+State\hspace{0.3cm}{\ttfamily [friend]}}
+
+\Hypertarget{classprt_1_1_driver_base_a9aa251d710bba4f257a519ebc5d01d51}\index{prt::DriverBase@{prt::DriverBase}!LuaState@{LuaState}}
+\index{LuaState@{LuaState}!prt::DriverBase@{prt::DriverBase}}
+\doxysubsubsection{\texorpdfstring{LuaState}{LuaState}}
+{\footnotesize\ttfamily \label{classprt_1_1_driver_base_a9aa251d710bba4f257a519ebc5d01d51} 
+friend class \mbox{\hyperlink{classprt_1_1_lua_state}{Lua\+State}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{gfx__driver_8h}{gfx\+\_\+driver.\+h}}\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{gfx__driver_8cc}{gfx\+\_\+driver.\+cc}}\end{DoxyCompactItemize}

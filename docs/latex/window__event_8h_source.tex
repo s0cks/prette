@@ -1,0 +1,179 @@
+\doxysection{window\+\_\+event.\+h}
+\hypertarget{window__event_8h_source}{}\label{window__event_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/window\_event.h@{/Users/tazz/Projects/prette/Sources/prette/window\_event.h}}
+\mbox{\hyperlink{window__event_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_WINDOW\_EVENT\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_WINDOW\_EVENT\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{dimension_8h}{prette/dimension.h}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{event_8h}{prette/event.h}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{shape_8h}{prette/geometry/shape.h}}"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ FOR\_EACH\_WINDOW\_EVENT(V)\ \(\backslash\)}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\ \ V(WindowCreated)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\ \ V(WindowOpened)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\ \ V(WindowClosed)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\ \ V(WindowPos)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\ \ V(WindowSize)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\ \ V(WindowFocus)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\ \ V(WindowIconify)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\ \ V(WindowRefresh)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\ \ V(WindowMaximize)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\ \ V(WindowContentScale)}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{class\ }Window;}
+\DoxyCodeLine{00022\ \textcolor{keyword}{class\ }WindowEvent;}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#define\ FORWARD\_DECLARE(Name)\ class\ Name\#\#Event;}}
+\DoxyCodeLine{00024\ \mbox{\hyperlink{window__event_8h_a8a75169cb2d9f0c82bb53fd315b4baf7}{FOR\_EACH\_WINDOW\_EVENT}}(\mbox{\hyperlink{gui_8h_a83d2d158052fc2dc9bdf9bece3fd251e}{FORWARD\_DECLARE}})}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#undef\ FORWARD\_DECLARE}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_window_event}{WindowEvent}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1_event}{Event}}\ \{}
+\DoxyCodeLine{00028\ \ \ \mbox{\hyperlink{classprt_1_1_window_event_a5df13dfa745f94336667a9c266eb10eb}{DEFINE\_NON\_COPYABLE\_TYPE}}(\mbox{\hyperlink{classprt_1_1_window_event}{WindowEvent}});}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00031\ \ \ \mbox{\hyperlink{classprt_1_1_window_event_a73dc5c806af4d3af62804362b1dfe6ef}{WindowEvent}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00032\ \ \ \mbox{\hyperlink{classprt_1_1_window_event_a8a5719e27f083bae94ef7c9d89fddb90}{\string~WindowEvent}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_window_event_a1241f05b5d887227878650ec78b3d75c}{ToTable}}(lua\_State*\ \mbox{\hyperlink{engine_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}})\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00035\ \ \ \mbox{\hyperlink{classprt_1_1_window_event_a95125bb1675dd6f3aaec40b75bf69cb8}{DEFINE\_EVENT\_PROTOTYPE\_TYPE}}(\mbox{\hyperlink{classprt_1_1_window}{Window}},\ \mbox{\hyperlink{window__event_8h_a8a75169cb2d9f0c82bb53fd315b4baf7}{FOR\_EACH\_WINDOW\_EVENT}});}
+\DoxyCodeLine{00036\ \};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#define\ DECLARE\_WINDOW\_EVENT\_TYPE(Name)\ DECLARE\_EVENT\_TYPE(WindowEvent,\ Name)}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#define\ DEFINE\_WINDOW\_EVENT(Name)\ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\ \ class\ Name\#\#Event\ :\ public\ WindowEvent\ \{\ \(\backslash\)}}
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\ \ \ public:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\ \ \ \ Name\#\#Event()\ =\ default;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\ \ \ \ \string~Name\#\#Event()\ override\ =\ default;\ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\ \ \ \ DECLARE\_WINDOW\_EVENT\_TYPE(Name);\ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\ \ \};}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \mbox{\hyperlink{window__event_8h_aefcfc0bd059232b20e3c7c528d08dd37}{DEFINE\_WINDOW\_EVENT}}(WindowCreated);}
+\DoxyCodeLine{00049\ \mbox{\hyperlink{window__event_8h_aefcfc0bd059232b20e3c7c528d08dd37}{DEFINE\_WINDOW\_EVENT}}(WindowOpened);}
+\DoxyCodeLine{00050\ \mbox{\hyperlink{window__event_8h_aefcfc0bd059232b20e3c7c528d08dd37}{DEFINE\_WINDOW\_EVENT}}(WindowClosed);}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_window_pos_event}{WindowPosEvent}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1_window_event}{WindowEvent}}\ \{}
+\DoxyCodeLine{00053\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00054\ \ \ \mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}}\ \mbox{\hyperlink{classprt_1_1_window_pos_event_a12c236e35252edc323476deec3d2cc92}{pos\_}};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00057\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_window_pos_event_a76692d23cc77ddd00a05e7e2a2ac499d}{WindowPosEvent}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}}\&\ pos)\ :}
+\DoxyCodeLine{00058\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_window_event}{WindowEvent}}(),}
+\DoxyCodeLine{00059\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_window_pos_event_a12c236e35252edc323476deec3d2cc92}{pos\_}}(pos)\ \{\}}
+\DoxyCodeLine{00060\ \ \ \mbox{\hyperlink{classprt_1_1_window_pos_event_ab8a162c42ebd16acaacb6a4ac29993f1}{WindowPosEvent}}(\textcolor{keyword}{const}\ int32\_t\ x,\ \textcolor{keyword}{const}\ int32\_t\ y)\ :}
+\DoxyCodeLine{00061\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_window_event}{WindowEvent}}(),}
+\DoxyCodeLine{00062\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_window_pos_event_a12c236e35252edc323476deec3d2cc92}{pos\_}}(x,\ y)\ \{\}}
+\DoxyCodeLine{00063\ \ \ \mbox{\hyperlink{classprt_1_1_window_pos_event_ad95f497707b00be527f1ed48f62f2d13}{\string~WindowPosEvent}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_window_pos_event_a1cadf0ae8602359bcde791c4054311be}{GetPos}}()\ const\ -\/>\ const\ \mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}}\&\ \{}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_window_pos_event_a12c236e35252edc323476deec3d2cc92}{pos\_}};}
+\DoxyCodeLine{00067\ \ \ \}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \mbox{\hyperlink{classprt_1_1_window_pos_event_aa845cecaa046ae0565a0f1627575419a}{DECLARE\_WINDOW\_EVENT\_TYPE}}(WindowPos);}
+\DoxyCodeLine{00070\ \};}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_window_size_event}{WindowSizeEvent}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1_window_event}{WindowEvent}}\ \{}
+\DoxyCodeLine{00073\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00074\ \ \ \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}}\ \mbox{\hyperlink{classprt_1_1_window_size_event_a61e26421a2ff5cc4bd6b3b4c52fdfbde}{size\_}};}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00077\ \ \ \mbox{\hyperlink{classprt_1_1_window_size_event_a5387a1c3f5e7f0b28e421b874589b33f}{WindowSizeEvent}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}}\&\ size)\ :}
+\DoxyCodeLine{00078\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_window_event}{WindowEvent}}(),}
+\DoxyCodeLine{00079\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_window_size_event_a61e26421a2ff5cc4bd6b3b4c52fdfbde}{size\_}}(size)\ \{\}}
+\DoxyCodeLine{00080\ \ \ \mbox{\hyperlink{classprt_1_1_window_size_event_af8d74914d7c83ef2b1fd44b14d9a25f0}{WindowSizeEvent}}(\textcolor{keyword}{const}\ int32\_t\ width,\ \textcolor{keyword}{const}\ int32\_t\ height)\ :}
+\DoxyCodeLine{00081\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_window_event}{WindowEvent}}(),}
+\DoxyCodeLine{00082\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_window_size_event_a61e26421a2ff5cc4bd6b3b4c52fdfbde}{size\_}}(width,\ height)\ \{\}}
+\DoxyCodeLine{00083\ \ \ \mbox{\hyperlink{classprt_1_1_window_size_event_a71f5d96270129383fb9b8003a3e80223}{\string~WindowSizeEvent}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_window_size_event_a572b345f01f09594d1b19825c271e13a}{GetSize}}()\ const\ -\/>\ const\ \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}}\&\ \{}
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_window_size_event_a61e26421a2ff5cc4bd6b3b4c52fdfbde}{size\_}};}
+\DoxyCodeLine{00087\ \ \ \}}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \ \ \mbox{\hyperlink{classprt_1_1_window_size_event_a5ef16fe1a330cb9806fc53883668e92c}{DECLARE\_WINDOW\_EVENT\_TYPE}}(WindowSize);}
+\DoxyCodeLine{00090\ \};}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_window_focus_event}{WindowFocusEvent}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1_window_event}{WindowEvent}}\ \{}
+\DoxyCodeLine{00093\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00094\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classprt_1_1_window_focus_event_a307a2cefe8f19f0709731b9dcbcfb79f}{focused\_}};}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00097\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_window_focus_event_af2a7e8bd2c52bfafff772d4f9dfaa83d}{WindowFocusEvent}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ focused)\ :}
+\DoxyCodeLine{00098\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_window_event}{WindowEvent}}(),}
+\DoxyCodeLine{00099\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_window_focus_event_a307a2cefe8f19f0709731b9dcbcfb79f}{focused\_}}(focused)\ \{\}}
+\DoxyCodeLine{00100\ \ \ \mbox{\hyperlink{classprt_1_1_window_focus_event_aee8e2184a4c584ad896f6383cf1d7c07}{\string~WindowFocusEvent}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_window_focus_event_a2d8066bad991a1ad589629d217ac6f4d}{IsFocused}}()\ const\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_window_focus_event_a307a2cefe8f19f0709731b9dcbcfb79f}{focused\_}};}
+\DoxyCodeLine{00104\ \ \ \}}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_window_focus_event_a7515cc28a864b52ddc14ff318f137ebf}{ToTable}}(lua\_State*\ \mbox{\hyperlink{engine_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}})\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00107\ \ \ \mbox{\hyperlink{classprt_1_1_window_focus_event_a66d164df932618fe4d81d5d512276672}{DECLARE\_WINDOW\_EVENT\_TYPE}}(WindowFocus);}
+\DoxyCodeLine{00108\ \};}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_window_iconify_event}{WindowIconifyEvent}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1_window_event}{WindowEvent}}\ \{}
+\DoxyCodeLine{00111\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00112\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classprt_1_1_window_iconify_event_a5d9f54cefda54f74278ce9db1e2bbb74}{iconified\_}};}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00115\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_window_iconify_event_ab90b6fafe211bae6ec8da4dbe99cf945}{WindowIconifyEvent}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ iconified)\ :}
+\DoxyCodeLine{00116\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_window_event}{WindowEvent}}(),}
+\DoxyCodeLine{00117\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_window_iconify_event_a5d9f54cefda54f74278ce9db1e2bbb74}{iconified\_}}(iconified)\ \{\}}
+\DoxyCodeLine{00118\ \ \ \mbox{\hyperlink{classprt_1_1_window_iconify_event_aaf23898a88376697db2389c60e1c7a8b}{\string~WindowIconifyEvent}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_window_iconify_event_a1fcf143733f472ae6d105166ec428eca}{IsIconified}}()\ const\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_window_iconify_event_a5d9f54cefda54f74278ce9db1e2bbb74}{iconified\_}};}
+\DoxyCodeLine{00122\ \ \ \}}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \ \ \mbox{\hyperlink{classprt_1_1_window_iconify_event_ac53ff307198efb0f95bf93cd1faa6d12}{DECLARE\_WINDOW\_EVENT\_TYPE}}(WindowIconify);}
+\DoxyCodeLine{00125\ \};}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ \mbox{\hyperlink{window__event_8h_aefcfc0bd059232b20e3c7c528d08dd37}{DEFINE\_WINDOW\_EVENT}}(WindowRefresh);}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00129\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_window_maximize_event}{WindowMaximizeEvent}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1_window_event}{WindowEvent}}\ \{}
+\DoxyCodeLine{00130\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00131\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classprt_1_1_window_maximize_event_a4bf99167ad3b4d28fd5bb23e4e685a96}{maximized\_}};}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00134\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_window_maximize_event_a39d8467ec0c96f0f8d7ed31011c9a9b2}{WindowMaximizeEvent}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ maximized)\ :}
+\DoxyCodeLine{00135\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_window_event}{WindowEvent}}(),}
+\DoxyCodeLine{00136\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_window_maximize_event_a4bf99167ad3b4d28fd5bb23e4e685a96}{maximized\_}}(maximized)\ \{\}}
+\DoxyCodeLine{00137\ \ \ \mbox{\hyperlink{classprt_1_1_window_maximize_event_a26730ff1346998aed152560029b1a563}{\string~WindowMaximizeEvent}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00139\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_window_maximize_event_a70e0186bea753c4416ed60c21751d73e}{IsMaximized}}()\ const\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_window_maximize_event_a4bf99167ad3b4d28fd5bb23e4e685a96}{maximized\_}};}
+\DoxyCodeLine{00141\ \ \ \}}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ \ \ \mbox{\hyperlink{classprt_1_1_window_maximize_event_aec12548849befed4e39a6d48d98d0644}{DECLARE\_WINDOW\_EVENT\_TYPE}}(WindowMaximize);}
+\DoxyCodeLine{00144\ \};}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_window_content_scale_event}{WindowContentScaleEvent}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1_window_event}{WindowEvent}}\ \{}
+\DoxyCodeLine{00147\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classprt_1_1_window_content_scale_event_a37fca9aa3cbf1dfd38dc502a7595295d}{Scale}}\ =\ glm::vec2;}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00149\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00150\ \ \ \mbox{\hyperlink{classprt_1_1_window_content_scale_event_a37fca9aa3cbf1dfd38dc502a7595295d}{Scale}}\ \mbox{\hyperlink{classprt_1_1_window_content_scale_event_acae3eb72564b1bf238346604eacb117e}{scale\_}};}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00152\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00153\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_window_content_scale_event_ae25ca95677e14d11420f8d895df4729d}{WindowContentScaleEvent}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_window_content_scale_event_a37fca9aa3cbf1dfd38dc502a7595295d}{Scale}}\&\ scale)\ :}
+\DoxyCodeLine{00154\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_window_event}{WindowEvent}}(),}
+\DoxyCodeLine{00155\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_window_content_scale_event_acae3eb72564b1bf238346604eacb117e}{scale\_}}(scale)\ \{\}}
+\DoxyCodeLine{00156\ \ \ \mbox{\hyperlink{classprt_1_1_window_content_scale_event_aa95d76a31d221a22b7ce7c20571ca49b}{WindowContentScaleEvent}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ xScale,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ yScale)\ :}
+\DoxyCodeLine{00157\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_window_event}{WindowEvent}}(),}
+\DoxyCodeLine{00158\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_window_content_scale_event_acae3eb72564b1bf238346604eacb117e}{scale\_}}(xScale,\ yScale)\ \{\}}
+\DoxyCodeLine{00159\ \ \ \mbox{\hyperlink{classprt_1_1_window_content_scale_event_a03c6010b909f9c3ece4f9e596057097d}{\string~WindowContentScaleEvent}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00161\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_window_content_scale_event_aca8c50e7a3cfb3a722b4a305d1af9513}{GetScale}}()\ const\ -\/>\ const\ \mbox{\hyperlink{classprt_1_1_window_content_scale_event_a37fca9aa3cbf1dfd38dc502a7595295d}{Scale}}\&\ \{}
+\DoxyCodeLine{00162\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_window_content_scale_event_acae3eb72564b1bf238346604eacb117e}{scale\_}};}
+\DoxyCodeLine{00163\ \ \ \}}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \ \ \mbox{\hyperlink{classprt_1_1_window_content_scale_event_a3c7d2dfaac37f0ad3ea49cfd4953b905}{DECLARE\_WINDOW\_EVENT\_TYPE}}(WindowContentScale);}
+\DoxyCodeLine{00166\ \};}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00168\ \mbox{\hyperlink{event_8h_a75f747c7c3ad9804780471c5ce370793}{DEFINE\_EVENT\_SUBJECT}}(\mbox{\hyperlink{classprt_1_1_window}{Window}});}
+\DoxyCodeLine{00169\ \mbox{\hyperlink{event_8h_a77dcd0ad69e8fd51c473d76aca5bba76}{DEFINE\_EVENT\_OBSERVABLE}}(\mbox{\hyperlink{classprt_1_1_window}{Window}});}
+\DoxyCodeLine{00170\ \mbox{\hyperlink{window__event_8h_a8a75169cb2d9f0c82bb53fd315b4baf7}{FOR\_EACH\_WINDOW\_EVENT}}(\mbox{\hyperlink{event_8h_a77dcd0ad69e8fd51c473d76aca5bba76}{DEFINE\_EVENT\_OBSERVABLE}})}
+\DoxyCodeLine{00171\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_WINDOW\_EVENT\_H}}
+
+\end{DoxyCode}

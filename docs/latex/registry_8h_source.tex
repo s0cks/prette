@@ -1,0 +1,112 @@
+\doxysection{registry.\+h}
+\hypertarget{registry_8h_source}{}\label{registry_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/registry.h@{/Users/tazz/Projects/prette/Sources/prette/registry.h}}
+\mbox{\hyperlink{registry_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_REGISTRY\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_REGISTRY\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <leveldb/db.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <leveldb/options.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <leveldb/write\_batch.h>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <filesystem>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <unordered\_set>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <utility>}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{common_8h}{prette/common.h}}"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{rx_8h}{prette/rx.h}}"{}}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceprt_a189cd3af64e89458ea1ee7ab9e0de979}{PathStream}}\ =\ rx::observable<fs::path>;}
+\DoxyCodeLine{00017\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceprt_a9f32127cc126e363bab6995173fc63d7}{PathPredicate}}\ =\ std::function<bool(\textcolor{keyword}{const}\ fs::path\&)>;}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_registry}{Registry}};}
+\DoxyCodeLine{00020\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_registry_indexer}{RegistryIndexer}}\ \{}
+\DoxyCodeLine{00021\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00022\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_registry_indexer_ab37841133856bf992c8b0e52e44e5f1a}{CreateStreamForDirectory}}(\textcolor{keyword}{const}\ fs::path\&\ root,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ is\_recursive\ =\ \textcolor{keyword}{false})\ -\/>\ \mbox{\hyperlink{namespaceprt_a189cd3af64e89458ea1ee7ab9e0de979}{PathStream}};}
+\DoxyCodeLine{00023\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_registry_indexer_a59e4ad350a02306867da08a184ec21c0}{HasFileExtension}}(\textcolor{keyword}{const}\ std::unordered\_set<std::string>\&\ extensions)\ -\/>\ \mbox{\hyperlink{namespaceprt_a9f32127cc126e363bab6995173fc63d7}{PathPredicate}};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00026\ \ \ fs::path\ \mbox{\hyperlink{classprt_1_1_registry_indexer_a2481243bbe397087032b83970476d60d}{root\_}};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00029\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_registry_indexer_a0a86ec311d594c1c4697dd96f53e9f6e}{RegistryIndexer}}(fs::path\ root)\ :}
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_registry_indexer_a2481243bbe397087032b83970476d60d}{root\_}}(\mbox{\hyperlink{namespacestd}{std}}::move(root))\ \{\}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_registry_indexer_a737e950315edf72903442221820a2bce}{GetRoot}}()\ const\ -\/>\ const\ fs::path\&\ \{}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_registry_indexer_a2481243bbe397087032b83970476d60d}{root\_}};}
+\DoxyCodeLine{00034\ \ \ \}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_registry_indexer_aa5324d25b562122ddc99f19e5614326f}{IndexPath}}(leveldb::WriteBatch\&\ batch,\ \textcolor{keyword}{const}\ fs::path\&\ path)\ =\ 0;}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_registry_indexer_a1f6f34bf581f70fabccdac6eaef0f834}{CreateStream}}()\ const\ -\/>\ \mbox{\hyperlink{namespaceprt_a189cd3af64e89458ea1ee7ab9e0de979}{PathStream}}\ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_registry_indexer_ab37841133856bf992c8b0e52e44e5f1a}{CreateStreamForDirectory}}(\mbox{\hyperlink{classprt_1_1_registry_indexer_a737e950315edf72903442221820a2bce}{GetRoot}}());}
+\DoxyCodeLine{00040\ \ \ \}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_registry_indexer_a3851adbaf5a20ae38d79719a7ec808b4}{CreateFilter}}()\ const\ -\/>\ \mbox{\hyperlink{namespaceprt_a9f32127cc126e363bab6995173fc63d7}{PathPredicate}}\ =\ 0;}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ public:}
+\DoxyCodeLine{00045\ \ \ virtual\ \string~\mbox{\hyperlink{classprt_1_1_registry_indexer}{RegistryIndexer}}()\ =\ default;}
+\DoxyCodeLine{00046\ \ \ virtual\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_registry_indexer_a2aedec8148a9e024b6d3a7c3caa239c4}{Index}}(\mbox{\hyperlink{classprt_1_1_registry}{Registry}}*\ registry);}
+\DoxyCodeLine{00047\ \};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ class\ \mbox{\hyperlink{classprt_1_1_registry}{Registry}}\ \{}
+\DoxyCodeLine{00050\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_registry_indexer}{RegistryIndexer}};}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00053\ \ \ fs::path\ \mbox{\hyperlink{classprt_1_1_registry_a4098172f5b6f6745af6302aa48c21320}{root\_}};}
+\DoxyCodeLine{00054\ \ \ leveldb::DB*\ db\_\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_registry}{Registry}}(std::string\ root);}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ Indexer>}
+\DoxyCodeLine{00059\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_registry_a26a7cda7da25f64e59c6da92257ed949}{Index}}(fs::path\ root)\ \{}
+\DoxyCodeLine{00060\ \ \ \ \ Indexer\ indexer(root);}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordflow}{return}\ indexer.Index(\textcolor{keyword}{this});}
+\DoxyCodeLine{00062\ \ \ \}}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \textcolor{keywordtype}{void}\ Write(\textcolor{keyword}{const}\ leveldb::WriteOptions\&\ options,\ leveldb::WriteBatch\&\ batch);}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_registry_a0a61c0873c605c65f1955609f6904922}{Write}}(leveldb::WriteBatch\&\ batch,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ sync\ =\ \textcolor{keyword}{true})\ \{}
+\DoxyCodeLine{00067\ \ \ \ \ leveldb::WriteOptions\ options\{\};}
+\DoxyCodeLine{00068\ \ \ \ \ options.sync\ =\ sync;}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordflow}{return}\ Write(options,\ batch);}
+\DoxyCodeLine{00070\ \ \ \}}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00073\ \ \ \mbox{\hyperlink{classprt_1_1_registry}{\string~Registry}}();}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_registry_ab93e3e528e2af1d299cde73f0eed2353}{GetRoot}}()\ const\ -\/>\ const\ fs::path\&\ \{}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_registry_indexer_a2481243bbe397087032b83970476d60d}{root\_}};}
+\DoxyCodeLine{00077\ \ \ \}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00080\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ New(\textcolor{keyword}{const}\ std::string\&\ path)\ -\/>\ \mbox{\hyperlink{classprt_1_1_registry}{Registry}}*;}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00083\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ Init();}
+\DoxyCodeLine{00084\ \};}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_shader_indexer}{ShaderIndexer}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1_registry_indexer}{RegistryIndexer}}\ \{}
+\DoxyCodeLine{00087\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_registry}{Registry}};}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00090\ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structprt_1_1_shader_indexer_1_1_shader_info}{ShaderInfo}}\ \{\};}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00093\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_shader_indexer_a40a750d5a906b568940287fa8e64ba36}{ShaderIndexer}}(fs::path\ root)\ :}
+\DoxyCodeLine{00094\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_registry_indexer}{RegistryIndexer}}(\mbox{\hyperlink{namespacestd}{std}}::move(root))\ \{\}}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ \textcolor{keyword}{auto}\ CreateFilter()\ const\ -\/>\ \mbox{\hyperlink{namespaceprt_a9f32127cc126e363bab6995173fc63d7}{PathPredicate}}\ override;}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \ protected:}
+\DoxyCodeLine{00099\ \ \ \textcolor{keywordtype}{void}\ IndexPath(leveldb::WriteBatch\&\ batch,\ const\ fs::path\&\ path)\ override;}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ public:}
+\DoxyCodeLine{00102\ \ \ \string~\mbox{\hyperlink{classprt_1_1_shader_indexer}{ShaderIndexer}}()\ override\ =\ default;}
+\DoxyCodeLine{00103\ \};}
+\DoxyCodeLine{00104\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_REGISTRY\_H}}
+
+\end{DoxyCode}

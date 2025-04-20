@@ -1,0 +1,58 @@
+\doxysection{swapchain\+\_\+frame.\+h}
+\hypertarget{swapchain__frame_8h_source}{}\label{swapchain__frame_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/swapchain\_frame.h@{/Users/tazz/Projects/prette/Sources/prette/swapchain\_frame.h}}
+\mbox{\hyperlink{swapchain__frame_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_SWAPCHAIN\_FRAME\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_SWAPCHAIN\_FRAME\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{common_8h}{prette/common.h}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}prette/gfx.h"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00008\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_swap_chain_frame}{SwapChainFrame}}\ \{}
+\DoxyCodeLine{00009\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_swap_chain}{SwapChain}};}
+\DoxyCodeLine{00010\ \ \ \mbox{\hyperlink{classprt_1_1_swap_chain_frame_ada11ea249806dcf618c7384ed07ec98d}{DEFINE\_DEFAULT\_COPYABLE\_TYPE}}(\mbox{\hyperlink{classprt_1_1_swap_chain_frame}{SwapChainFrame}});}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00013\ \ \ uint32\_t\ \mbox{\hyperlink{classprt_1_1_swap_chain_frame_a24ef25bfda8f33515be0649ecd5713bd}{frame\_}}\ =\ 0;}
+\DoxyCodeLine{00014\ \ \ uint32\_t\ \mbox{\hyperlink{classprt_1_1_swap_chain_frame_a5064b94dfe0401fe33b370f10033eab9}{image\_}}\ =\ 0;}
+\DoxyCodeLine{00015\ \ \ VkSemaphore\ \mbox{\hyperlink{classprt_1_1_swap_chain_frame_a4c34acc4ba43a770fe753b2b1394d3cf}{available\_}}\ =\ VK\_NULL\_HANDLE;}
+\DoxyCodeLine{00016\ \ \ VkSemaphore\ \mbox{\hyperlink{classprt_1_1_swap_chain_frame_a47639fafb204f8c608e14f2f1362d46d}{finished\_}}\ =\ VK\_NULL\_HANDLE;}
+\DoxyCodeLine{00017\ \ \ VkFence\ \mbox{\hyperlink{classprt_1_1_swap_chain_frame_ab8765abcd7355beda4cf477b8990e72e}{fence\_}}\ =\ VK\_NULL\_HANDLE;}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_swap_chain_frame_ac9262f3939eee5327437ea6892cb3d17}{SetFrame}}(\textcolor{keyword}{const}\ uint32\_t\ idx)\ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_swap_chain_frame_a24ef25bfda8f33515be0649ecd5713bd}{frame\_}}\ =\ idx;}
+\DoxyCodeLine{00021\ \ \ \}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \mbox{\hyperlink{classprt_1_1_swap_chain_frame_a2a4db65f6d934fcf431588815ee85a76}{SwapChainFrame}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00025\ \ \ \mbox{\hyperlink{classprt_1_1_swap_chain_frame_a2a4db65f6d934fcf431588815ee85a76}{SwapChainFrame}}(\textcolor{keyword}{const}\ uint32\_t\ frame);}
+\DoxyCodeLine{00026\ \ \ \mbox{\hyperlink{classprt_1_1_swap_chain_frame_a660bf9ba81a274c20e254972dbe82c3b}{\string~SwapChainFrame}}();}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_swap_chain_frame_a6cdb3725136f98ea06b6e36c45a08d3e}{GetFrame}}()\ const\ -\/>\ uint32\_t\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_swap_chain_frame_a24ef25bfda8f33515be0649ecd5713bd}{frame\_}};}
+\DoxyCodeLine{00030\ \ \ \}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_swap_chain_frame_a8372f3b10121402b23ebab8d20e00c36}{GetImage}}()\ const\ -\/>\ uint32\_t\ \{}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_swap_chain_frame_a5064b94dfe0401fe33b370f10033eab9}{image\_}};}
+\DoxyCodeLine{00034\ \ \ \}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_swap_chain_frame_a3bcb97af5d3abf9ae520f174d271c8bc}{GetAvailableSemaphore}}()\ const\ -\/>\ const\ VkSemaphore\&\ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_swap_chain_frame_a4c34acc4ba43a770fe753b2b1394d3cf}{available\_}};}
+\DoxyCodeLine{00038\ \ \ \}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_swap_chain_frame_ad1da26d16ea6285c4e87b07ec6ab8fc7}{GetFinishedSemaphore}}()\ const\ -\/>\ const\ VkSemaphore\&\ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_swap_chain_frame_a47639fafb204f8c608e14f2f1362d46d}{finished\_}};}
+\DoxyCodeLine{00042\ \ \ \}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_swap_chain_frame_a31c0c48230d014b8769d6bf5b9ac0433}{GetFence}}()\ const\ -\/>\ const\ VkFence\&\ \{}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_swap_chain_frame_ab8765abcd7355beda4cf477b8990e72e}{fence\_}};}
+\DoxyCodeLine{00046\ \ \ \}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_swap_chain_frame_a4e17912990ed9bc228739c82d37f3923}{ToString}}()\ const\ -\/>\ \mbox{\hyperlink{namespacestd}{std}}::\textcolor{keywordtype}{string};}
+\DoxyCodeLine{00049\ \};}
+\DoxyCodeLine{00050\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_SWAPCHAIN\_FRAME\_H}}
+
+\end{DoxyCode}

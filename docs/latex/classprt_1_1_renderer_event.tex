@@ -1,0 +1,91 @@
+\doxysection{prt\+::Renderer\+Event Class Reference}
+\hypertarget{classprt_1_1_renderer_event}{}\label{classprt_1_1_renderer_event}\index{prt::RendererEvent@{prt::RendererEvent}}
+
+
+{\ttfamily \#include $<$renderer.\+h$>$}
+
+
+
+Inheritance diagram for prt\+::Renderer\+Event\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classprt_1_1_renderer_event__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for prt\+::Renderer\+Event\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=179pt]{classprt_1_1_renderer_event__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_renderer_event_a31e5df7a8c3b03e10c60ce56a0a0081a}{Renderer\+Event}} ()=default
+\item 
+\mbox{\hyperlink{classprt_1_1_renderer_event_ae3438bb018a29f07eba18e79cc02820f}{\texorpdfstring{$\sim$}{\string~}\+Renderer\+Event}} () override=default
+\item 
+virtual auto \mbox{\hyperlink{classprt_1_1_renderer_event_af9f1b4078fb042d85f297b7be05bebc9}{Is\+Frame\+Event}} () const -\/$>$ bool=0
+\item 
+\mbox{\hyperlink{classprt_1_1_renderer_event_a5f30e5177f375f5e409d8abb4478d788}{DEFINE\+\_\+\+EVENT\+\_\+\+PROTOTYPE\+\_\+\+TYPE}} (\mbox{\hyperlink{classprt_1_1_renderer}{Renderer}}, \mbox{\hyperlink{namespaceprt_a50fd62542de32dd3e6a6d37abcff1911}{FOR\+\_\+\+EACH\+\_\+\+RENDERER\+\_\+\+EVENT}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classprt_1_1_event}{prt\+::\+Event}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classprt_1_1_event_a4852e85c48ebb80d6c96fe0d13d5ae6a}{\texorpdfstring{$\sim$}{\string~}\+Event}} ()=default
+\item 
+virtual auto \mbox{\hyperlink{classprt_1_1_event_a674cd356a472771aad69534b2959500e}{Get\+Name}} () const -\/$>$ const char \texorpdfstring{$\ast$}{*}=0
+\item 
+virtual auto \mbox{\hyperlink{classprt_1_1_event_a90911d9644cf7ec9b4f05053a3b632af}{To\+String}} () const -\/$>$ std\+::string=0
+\item 
+virtual void \mbox{\hyperlink{classprt_1_1_event_a9f54e07e32d052203fe0e08a185746bc}{To\+Table}} (lua\+\_\+\+State \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{engine_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}}) const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classprt_1_1_event}{prt\+::\+Event}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_event_a68ae1e6264631e55933648b66d5dd11b}{Event}} ()=default
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_renderer_event_a31e5df7a8c3b03e10c60ce56a0a0081a}\index{prt::RendererEvent@{prt::RendererEvent}!RendererEvent@{RendererEvent}}
+\index{RendererEvent@{RendererEvent}!prt::RendererEvent@{prt::RendererEvent}}
+\doxysubsubsection{\texorpdfstring{RendererEvent()}{RendererEvent()}}
+{\footnotesize\ttfamily \label{classprt_1_1_renderer_event_a31e5df7a8c3b03e10c60ce56a0a0081a} 
+prt\+::\+Renderer\+Event\+::\+Renderer\+Event (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{classprt_1_1_renderer_event_ae3438bb018a29f07eba18e79cc02820f}\index{prt::RendererEvent@{prt::RendererEvent}!````~RendererEvent@{\texorpdfstring{$\sim$}{\string~}RendererEvent}}
+\index{````~RendererEvent@{\texorpdfstring{$\sim$}{\string~}RendererEvent}!prt::RendererEvent@{prt::RendererEvent}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}RendererEvent()}{\string~RendererEvent()}}
+{\footnotesize\ttfamily \label{classprt_1_1_renderer_event_ae3438bb018a29f07eba18e79cc02820f} 
+prt\+::\+Renderer\+Event\+::\texorpdfstring{$\sim$}{\string~}\+Renderer\+Event (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_renderer_event_a5f30e5177f375f5e409d8abb4478d788}\index{prt::RendererEvent@{prt::RendererEvent}!DEFINE\_EVENT\_PROTOTYPE\_TYPE@{DEFINE\_EVENT\_PROTOTYPE\_TYPE}}
+\index{DEFINE\_EVENT\_PROTOTYPE\_TYPE@{DEFINE\_EVENT\_PROTOTYPE\_TYPE}!prt::RendererEvent@{prt::RendererEvent}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_EVENT\_PROTOTYPE\_TYPE()}{DEFINE\_EVENT\_PROTOTYPE\_TYPE()}}
+{\footnotesize\ttfamily \label{classprt_1_1_renderer_event_a5f30e5177f375f5e409d8abb4478d788} 
+prt\+::\+Renderer\+Event\+::\+DEFINE\+\_\+\+EVENT\+\_\+\+PROTOTYPE\+\_\+\+TYPE (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_renderer}{Renderer}}}]{}{, }\item[{\mbox{\hyperlink{namespaceprt_a50fd62542de32dd3e6a6d37abcff1911}{FOR\+\_\+\+EACH\+\_\+\+RENDERER\+\_\+\+EVENT}}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_renderer_event_af9f1b4078fb042d85f297b7be05bebc9}\index{prt::RendererEvent@{prt::RendererEvent}!IsFrameEvent@{IsFrameEvent}}
+\index{IsFrameEvent@{IsFrameEvent}!prt::RendererEvent@{prt::RendererEvent}}
+\doxysubsubsection{\texorpdfstring{IsFrameEvent()}{IsFrameEvent()}}
+{\footnotesize\ttfamily \label{classprt_1_1_renderer_event_af9f1b4078fb042d85f297b7be05bebc9} 
+virtual auto prt\+::\+Renderer\+Event\+::\+Is\+Frame\+Event (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$  bool\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{classprt_1_1_template_renderer_event_ac2b6e92542b27633d5db45d55a3b7648}{prt\+::\+Template\+Renderer\+Event$<$ Frame\+Event $>$}}, \mbox{\hyperlink{classprt_1_1_template_renderer_event_ac2b6e92542b27633d5db45d55a3b7648}{prt\+::\+Template\+Renderer\+Event$<$ false $>$}}, and \mbox{\hyperlink{classprt_1_1_template_renderer_event_ac2b6e92542b27633d5db45d55a3b7648}{prt\+::\+Template\+Renderer\+Event$<$ true $>$}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{renderer_8h}{renderer.\+h}}\end{DoxyCompactItemize}

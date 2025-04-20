@@ -1,0 +1,10 @@
+<map id="/Users/tazz/Projects/prette/Sources/prette/scene_renderer.h" name="/Users/tazz/Projects/prette/Sources/prette/scene_renderer.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="113,5,260,61"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,116,150,142"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="157,64,104,109,101,104,153,60"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="195,198,282,223"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="194,61,215,149,228,183,224,185,210,150,189,62"/>
+<area shape="rect" id="Node000004" href="$scene__render__pass_8h.html" title=" " alt="" coords="224,109,360,150"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="219,60,261,97,258,101,216,64"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="281,152,258,186,253,183,277,149"/>
+</map>

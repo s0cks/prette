@@ -1,0 +1,68 @@
+\doxysection{/\+Users/tazz/\+Projects/prette/\+Sources/prette/to\+\_\+string.h File Reference}
+\hypertarget{to__string_8h}{}\label{to__string_8h}\index{/Users/tazz/Projects/prette/Sources/prette/to\_string.h@{/Users/tazz/Projects/prette/Sources/prette/to\_string.h}}
+{\ttfamily \#include $<$glog/logging.\+h$>$}\newline
+{\ttfamily \#include $<$functional$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$type\+\_\+traits$>$}\newline
+{\ttfamily \#include $<$utility$>$}\newline
+{\ttfamily \#include "{}prette/common.\+h"{}}\newline
+Include dependency graph for to\+\_\+string.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{to__string_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{to__string_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structprt_1_1tostring_1_1has__to__string}{prt\+::tostring\+::has\+\_\+to\+\_\+string$<$ T $>$}}
+\item 
+class \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base}{prt\+::tostring\+::\+To\+String\+Helper\+Base}}
+\item 
+class \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_1_1_field}{prt\+::tostring\+::\+To\+String\+Helper\+Base\+::\+Field}}
+\item 
+class \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper}{prt\+::tostring\+::\+To\+String\+Helper$<$ T $>$}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceprt}{prt}}
+\item 
+namespace \mbox{\hyperlink{namespaceprt_1_1tostring}{prt\+::tostring}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{to__string_8h_a4b9d56a6c4763c186a58deb57bf4ce44}{DECLARE\+\_\+\+HAS\+\_\+\+TO\+\_\+\+STRING}}(Name)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceprt_1_1tostring_a1c8c38961a495708f81275a19ed99f02}{prt\+::tostring\+::\+DECLARE\+\_\+\+HAS\+\_\+\+TO\+\_\+\+STRING}} (\mbox{\hyperlink{classprt_1_1_window}{prt\+::\+Window}})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{to__string_8h_a4b9d56a6c4763c186a58deb57bf4ce44}\index{to\_string.h@{to\_string.h}!DECLARE\_HAS\_TO\_STRING@{DECLARE\_HAS\_TO\_STRING}}
+\index{DECLARE\_HAS\_TO\_STRING@{DECLARE\_HAS\_TO\_STRING}!to\_string.h@{to\_string.h}}
+\doxysubsubsection{\texorpdfstring{DECLARE\_HAS\_TO\_STRING}{DECLARE\_HAS\_TO\_STRING}}
+{\footnotesize\ttfamily \label{to__string_8h_a4b9d56a6c4763c186a58deb57bf4ce44} 
+\#define DECLARE\+\_\+\+HAS\+\_\+\+TO\+\_\+\+STRING(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \textcolor{keyword}{template}\ <>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \textcolor{keyword}{struct\ }has\_to\_string<Name>\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ value\ =\ \textcolor{keyword}{true};\ \(\backslash\)}
+\DoxyCodeLine{\ \ \};}
+
+\end{DoxyCode}

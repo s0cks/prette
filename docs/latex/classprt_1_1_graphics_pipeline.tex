@@ -1,0 +1,167 @@
+\doxysection{prt\+::Graphics\+Pipeline Class Reference}
+\hypertarget{classprt_1_1_graphics_pipeline}{}\label{classprt_1_1_graphics_pipeline}\index{prt::GraphicsPipeline@{prt::GraphicsPipeline}}
+
+
+{\ttfamily \#include $<$pipeline.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_graphics_pipeline_ac3572642a4cb344748815b318f37b37e}{Graphics\+Pipeline}} ()=default
+\item 
+\mbox{\hyperlink{classprt_1_1_graphics_pipeline_a3eb2fe7e911629939117204bf5fa9591}{Graphics\+Pipeline}} (Vk\+Render\+Pass pass, Vk\+Extent2D extent, Vk\+Pipeline pipeline, Vk\+Pipeline\+Layout layout, Vk\+Pipeline\+Cache cache)
+\item 
+\mbox{\hyperlink{classprt_1_1_graphics_pipeline_a7b239a8e2561c0ac82774855e76de325}{\texorpdfstring{$\sim$}{\string~}\+Graphics\+Pipeline}} ()
+\item 
+auto \mbox{\hyperlink{classprt_1_1_graphics_pipeline_ac75f0f77e634ac83d48656e789c6c333}{Get}} () const -\/$>$ Vk\+Pipeline const \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_graphics_pipeline_a6aef8cf82b040918385a4cb98fb46665}{Get\+Layout}} () const -\/$>$ Vk\+Pipeline\+Layout const \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_graphics_pipeline_ab01110c61f7148e5fedd1ad5df642256}{Get\+Cache}} () const -\/$>$ Vk\+Pipeline\+Cache const \&
+\item 
+\mbox{\hyperlink{classprt_1_1_graphics_pipeline_a8e168f3910cf4e9d40fba7dd26177120}{operator Vk\+Pipeline}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_graphics_pipeline_aadb567e7895f8bc60d45a784876da885}{New}} (const std\+::vector$<$ Vk\+Descriptor\+Set\+Layout $>$ \&descriptor\+\_\+set\+\_\+layouts=\{\}) -\/$>$ \mbox{\hyperlink{classprt_1_1_graphics_pipeline}{Graphics\+Pipeline}} \texorpdfstring{$\ast$}{*}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_graphics_pipeline_a87cb9b6f7b7d1309945508c762e54ca6}{From\+Json}} (fs\+::path path, Vk\+Render\+Pass pass, Vk\+Extent2D extent, const std\+::vector$<$ Vk\+Descriptor\+Set\+Layout $>$ \&descriptor\+\_\+set\+\_\+layouts=\{\}) -\/$>$ \mbox{\hyperlink{classprt_1_1_graphics_pipeline}{Graphics\+Pipeline}} \texorpdfstring{$\ast$}{*}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_graphics_pipeline_afbf1a4eb987b1d868480a724d67774b9}{DEFINE\+\_\+\+DEFAULT\+\_\+\+COPYABLE\+\_\+\+TYPE}} (\mbox{\hyperlink{classprt_1_1_graphics_pipeline}{Graphics\+Pipeline}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Vk\+Render\+Pass \mbox{\hyperlink{classprt_1_1_graphics_pipeline_a6e7d948b763bbaad4421650d111d76cf}{pass\+\_\+}} = VK\+\_\+\+NULL\+\_\+\+HANDLE
+\item 
+Vk\+Extent2D \mbox{\hyperlink{classprt_1_1_graphics_pipeline_a5fa7720cc5f600a01b19671cef6d82f4}{extent\+\_\+}} \{\}
+\item 
+Vk\+Pipeline \mbox{\hyperlink{classprt_1_1_graphics_pipeline_a7c08adba6f7ce1cd016932317fb91683}{pipeline\+\_\+}} = VK\+\_\+\+NULL\+\_\+\+HANDLE
+\item 
+Vk\+Pipeline\+Layout \mbox{\hyperlink{classprt_1_1_graphics_pipeline_a476be6944082ae2ac96212edf75aef33}{layout\+\_\+}} = VK\+\_\+\+NULL\+\_\+\+HANDLE
+\item 
+Vk\+Pipeline\+Cache \mbox{\hyperlink{classprt_1_1_graphics_pipeline_a7de325ccd761a3c4969dd7fa72c9762b}{cache\+\_\+}} = VK\+\_\+\+NULL\+\_\+\+HANDLE
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1_graphics_pipeline_a7eedced7c77911af0edc13b547f1445d}{json\+::\+Pipeline\+Handler}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_graphics_pipeline_ac3572642a4cb344748815b318f37b37e}\index{prt::GraphicsPipeline@{prt::GraphicsPipeline}!GraphicsPipeline@{GraphicsPipeline}}
+\index{GraphicsPipeline@{GraphicsPipeline}!prt::GraphicsPipeline@{prt::GraphicsPipeline}}
+\doxysubsubsection{\texorpdfstring{GraphicsPipeline()}{GraphicsPipeline()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_graphics_pipeline_ac3572642a4cb344748815b318f37b37e} 
+prt\+::\+Graphics\+Pipeline\+::\+Graphics\+Pipeline (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{classprt_1_1_graphics_pipeline_a3eb2fe7e911629939117204bf5fa9591}\index{prt::GraphicsPipeline@{prt::GraphicsPipeline}!GraphicsPipeline@{GraphicsPipeline}}
+\index{GraphicsPipeline@{GraphicsPipeline}!prt::GraphicsPipeline@{prt::GraphicsPipeline}}
+\doxysubsubsection{\texorpdfstring{GraphicsPipeline()}{GraphicsPipeline()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_graphics_pipeline_a3eb2fe7e911629939117204bf5fa9591} 
+prt\+::\+Graphics\+Pipeline\+::\+Graphics\+Pipeline (\begin{DoxyParamCaption}\item[{Vk\+Render\+Pass}]{pass}{, }\item[{Vk\+Extent2D}]{extent}{, }\item[{Vk\+Pipeline}]{pipeline}{, }\item[{Vk\+Pipeline\+Layout}]{layout}{, }\item[{Vk\+Pipeline\+Cache}]{cache}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_graphics_pipeline_a7b239a8e2561c0ac82774855e76de325}\index{prt::GraphicsPipeline@{prt::GraphicsPipeline}!````~GraphicsPipeline@{\texorpdfstring{$\sim$}{\string~}GraphicsPipeline}}
+\index{````~GraphicsPipeline@{\texorpdfstring{$\sim$}{\string~}GraphicsPipeline}!prt::GraphicsPipeline@{prt::GraphicsPipeline}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}GraphicsPipeline()}{\string~GraphicsPipeline()}}
+{\footnotesize\ttfamily \label{classprt_1_1_graphics_pipeline_a7b239a8e2561c0ac82774855e76de325} 
+prt\+::\+Graphics\+Pipeline\+::\texorpdfstring{$\sim$}{\string~}\+Graphics\+Pipeline (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_graphics_pipeline_afbf1a4eb987b1d868480a724d67774b9}\index{prt::GraphicsPipeline@{prt::GraphicsPipeline}!DEFINE\_DEFAULT\_COPYABLE\_TYPE@{DEFINE\_DEFAULT\_COPYABLE\_TYPE}}
+\index{DEFINE\_DEFAULT\_COPYABLE\_TYPE@{DEFINE\_DEFAULT\_COPYABLE\_TYPE}!prt::GraphicsPipeline@{prt::GraphicsPipeline}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_DEFAULT\_COPYABLE\_TYPE()}{DEFINE\_DEFAULT\_COPYABLE\_TYPE()}}
+{\footnotesize\ttfamily \label{classprt_1_1_graphics_pipeline_afbf1a4eb987b1d868480a724d67774b9} 
+prt\+::\+Graphics\+Pipeline\+::\+DEFINE\+\_\+\+DEFAULT\+\_\+\+COPYABLE\+\_\+\+TYPE (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_graphics_pipeline}{Graphics\+Pipeline}}}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_graphics_pipeline_a87cb9b6f7b7d1309945508c762e54ca6}\index{prt::GraphicsPipeline@{prt::GraphicsPipeline}!FromJson@{FromJson}}
+\index{FromJson@{FromJson}!prt::GraphicsPipeline@{prt::GraphicsPipeline}}
+\doxysubsubsection{\texorpdfstring{FromJson()}{FromJson()}}
+{\footnotesize\ttfamily \label{classprt_1_1_graphics_pipeline_a87cb9b6f7b7d1309945508c762e54ca6} 
+auto prt\+::\+Graphics\+Pipeline\+::\+From\+Json (\begin{DoxyParamCaption}\item[{fs\+::path}]{path}{, }\item[{Vk\+Render\+Pass}]{pass}{, }\item[{Vk\+Extent2D}]{extent}{, }\item[{const std\+::vector$<$ Vk\+Descriptor\+Set\+Layout $>$ \&}]{descriptor\+\_\+set\+\_\+layouts}{ = {\ttfamily \{\}}}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{classprt_1_1_graphics_pipeline}{Graphics\+Pipeline}}\texorpdfstring{$\ast$}{*}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_graphics_pipeline_ac75f0f77e634ac83d48656e789c6c333}\index{prt::GraphicsPipeline@{prt::GraphicsPipeline}!Get@{Get}}
+\index{Get@{Get}!prt::GraphicsPipeline@{prt::GraphicsPipeline}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}}
+{\footnotesize\ttfamily \label{classprt_1_1_graphics_pipeline_ac75f0f77e634ac83d48656e789c6c333} 
+auto prt\+::\+Graphics\+Pipeline\+::\+Get (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ Vk\+Pipeline const\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_graphics_pipeline_ab01110c61f7148e5fedd1ad5df642256}\index{prt::GraphicsPipeline@{prt::GraphicsPipeline}!GetCache@{GetCache}}
+\index{GetCache@{GetCache}!prt::GraphicsPipeline@{prt::GraphicsPipeline}}
+\doxysubsubsection{\texorpdfstring{GetCache()}{GetCache()}}
+{\footnotesize\ttfamily \label{classprt_1_1_graphics_pipeline_ab01110c61f7148e5fedd1ad5df642256} 
+auto prt\+::\+Graphics\+Pipeline\+::\+Get\+Cache (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ Vk\+Pipeline\+Cache const\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_graphics_pipeline_a6aef8cf82b040918385a4cb98fb46665}\index{prt::GraphicsPipeline@{prt::GraphicsPipeline}!GetLayout@{GetLayout}}
+\index{GetLayout@{GetLayout}!prt::GraphicsPipeline@{prt::GraphicsPipeline}}
+\doxysubsubsection{\texorpdfstring{GetLayout()}{GetLayout()}}
+{\footnotesize\ttfamily \label{classprt_1_1_graphics_pipeline_a6aef8cf82b040918385a4cb98fb46665} 
+auto prt\+::\+Graphics\+Pipeline\+::\+Get\+Layout (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ Vk\+Pipeline\+Layout const\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_graphics_pipeline_aadb567e7895f8bc60d45a784876da885}\index{prt::GraphicsPipeline@{prt::GraphicsPipeline}!New@{New}}
+\index{New@{New}!prt::GraphicsPipeline@{prt::GraphicsPipeline}}
+\doxysubsubsection{\texorpdfstring{New()}{New()}}
+{\footnotesize\ttfamily \label{classprt_1_1_graphics_pipeline_aadb567e7895f8bc60d45a784876da885} 
+static auto prt\+::\+Graphics\+Pipeline\+::\+New (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ Vk\+Descriptor\+Set\+Layout $>$ \&}]{descriptor\+\_\+set\+\_\+layouts}{ = {\ttfamily \{\}}}\end{DoxyParamCaption}) -\/$>$  \mbox{\hyperlink{classprt_1_1_graphics_pipeline}{Graphics\+Pipeline}} \texorpdfstring{$\ast$}{*}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_graphics_pipeline_a8e168f3910cf4e9d40fba7dd26177120}\index{prt::GraphicsPipeline@{prt::GraphicsPipeline}!operator VkPipeline@{operator VkPipeline}}
+\index{operator VkPipeline@{operator VkPipeline}!prt::GraphicsPipeline@{prt::GraphicsPipeline}}
+\doxysubsubsection{\texorpdfstring{operator VkPipeline()}{operator VkPipeline()}}
+{\footnotesize\ttfamily \label{classprt_1_1_graphics_pipeline_a8e168f3910cf4e9d40fba7dd26177120} 
+prt\+::\+Graphics\+Pipeline\+::operator Vk\+Pipeline (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classprt_1_1_graphics_pipeline_a7eedced7c77911af0edc13b547f1445d}\index{prt::GraphicsPipeline@{prt::GraphicsPipeline}!json::PipelineHandler@{json::PipelineHandler}}
+\index{json::PipelineHandler@{json::PipelineHandler}!prt::GraphicsPipeline@{prt::GraphicsPipeline}}
+\doxysubsubsection{\texorpdfstring{json::PipelineHandler}{json::PipelineHandler}}
+{\footnotesize\ttfamily \label{classprt_1_1_graphics_pipeline_a7eedced7c77911af0edc13b547f1445d} 
+friend class \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler}{json\+::\+Pipeline\+Handler}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_graphics_pipeline_a7de325ccd761a3c4969dd7fa72c9762b}\index{prt::GraphicsPipeline@{prt::GraphicsPipeline}!cache\_@{cache\_}}
+\index{cache\_@{cache\_}!prt::GraphicsPipeline@{prt::GraphicsPipeline}}
+\doxysubsubsection{\texorpdfstring{cache\_}{cache\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_graphics_pipeline_a7de325ccd761a3c4969dd7fa72c9762b} 
+Vk\+Pipeline\+Cache prt\+::\+Graphics\+Pipeline\+::cache\+\_\+ = VK\+\_\+\+NULL\+\_\+\+HANDLE\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_graphics_pipeline_a5fa7720cc5f600a01b19671cef6d82f4}\index{prt::GraphicsPipeline@{prt::GraphicsPipeline}!extent\_@{extent\_}}
+\index{extent\_@{extent\_}!prt::GraphicsPipeline@{prt::GraphicsPipeline}}
+\doxysubsubsection{\texorpdfstring{extent\_}{extent\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_graphics_pipeline_a5fa7720cc5f600a01b19671cef6d82f4} 
+Vk\+Extent2D prt\+::\+Graphics\+Pipeline\+::extent\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_graphics_pipeline_a476be6944082ae2ac96212edf75aef33}\index{prt::GraphicsPipeline@{prt::GraphicsPipeline}!layout\_@{layout\_}}
+\index{layout\_@{layout\_}!prt::GraphicsPipeline@{prt::GraphicsPipeline}}
+\doxysubsubsection{\texorpdfstring{layout\_}{layout\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_graphics_pipeline_a476be6944082ae2ac96212edf75aef33} 
+Vk\+Pipeline\+Layout prt\+::\+Graphics\+Pipeline\+::layout\+\_\+ = VK\+\_\+\+NULL\+\_\+\+HANDLE\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_graphics_pipeline_a6e7d948b763bbaad4421650d111d76cf}\index{prt::GraphicsPipeline@{prt::GraphicsPipeline}!pass\_@{pass\_}}
+\index{pass\_@{pass\_}!prt::GraphicsPipeline@{prt::GraphicsPipeline}}
+\doxysubsubsection{\texorpdfstring{pass\_}{pass\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_graphics_pipeline_a6e7d948b763bbaad4421650d111d76cf} 
+Vk\+Render\+Pass prt\+::\+Graphics\+Pipeline\+::pass\+\_\+ = VK\+\_\+\+NULL\+\_\+\+HANDLE\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_graphics_pipeline_a7c08adba6f7ce1cd016932317fb91683}\index{prt::GraphicsPipeline@{prt::GraphicsPipeline}!pipeline\_@{pipeline\_}}
+\index{pipeline\_@{pipeline\_}!prt::GraphicsPipeline@{prt::GraphicsPipeline}}
+\doxysubsubsection{\texorpdfstring{pipeline\_}{pipeline\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_graphics_pipeline_a7c08adba6f7ce1cd016932317fb91683} 
+Vk\+Pipeline prt\+::\+Graphics\+Pipeline\+::pipeline\+\_\+ = VK\+\_\+\+NULL\+\_\+\+HANDLE\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{pipeline_8h}{pipeline.\+h}}\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{pipeline_8cc}{pipeline.\+cc}}\end{DoxyCompactItemize}

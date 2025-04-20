@@ -1,0 +1,210 @@
+\doxysection{/\+Users/tazz/\+Projects/prette/\+Sources/prette/engine.h File Reference}
+\hypertarget{engine_8h}{}\label{engine_8h}\index{/Users/tazz/Projects/prette/Sources/prette/engine.h@{/Users/tazz/Projects/prette/Sources/prette/engine.h}}
+{\ttfamily \#include $<$units.\+h$>$}\newline
+{\ttfamily \#include $<$uv.\+h$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include "{}prette/common.\+h"{}}\newline
+{\ttfamily \#include "{}prette/crash\+\_\+report.\+h"{}}\newline
+{\ttfamily \#include "{}prette/engine\+\_\+event.\+h"{}}\newline
+{\ttfamily \#include "{}prette/lua.\+h"{}}\newline
+{\ttfamily \#include "{}prette/tick\+\_\+profiler.\+h"{}}\newline
+{\ttfamily \#include "{}prette/ticker.\+h"{}}\newline
+{\ttfamily \#include "{}prette/uv/utils.\+h"{}}\newline
+Include dependency graph for engine.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{engine_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{engine_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1_engine_state}{prt\+::\+Engine\+State}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_running_state}{prt\+::\+Running\+State}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_error_state}{prt\+::\+Error\+State}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_engine}{prt\+::\+Engine}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceprt}{prt}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{engine_8h_a559db3ee6c9a96fa5511207455a2ae3c}{FOR\+\_\+\+EACH\+\_\+\+ENGINE\+\_\+\+STATE}}(V)
+\item 
+\#define \mbox{\hyperlink{engine_8h_a30012f0deb75f21fc8e3087ceb5935bd}{FORWARD\+\_\+\+DECLARE\+\_\+\+STATE}}(Name)
+\item 
+\#define \mbox{\hyperlink{engine_8h_a49629f55d32818ef86dc66775c4ff132}{DECLARE\+\_\+\+ENGINE\+\_\+\+STATE\+\_\+\+TYPE}}(Name)
+\item 
+\#define \mbox{\hyperlink{engine_8h_a8f32a23d3888c2c7b449e36e19804d77}{DECLARE\+\_\+\+ENGINE\+\_\+\+STATE}}(Name)
+\item 
+\#define \mbox{\hyperlink{engine_8h_a3d1b15ee6cd792249ef8fe18a376bde5}{DEFINE\+\_\+\+TYPE\+\_\+\+CHECK}}(Name)
+\item 
+\#define \mbox{\hyperlink{engine_8h_aca54b1ee88af93447803369925374b11}{ENGINE\+\_\+\+STATE\+\_\+\+ENTER\+\_\+F}}(Name)
+\item 
+\#define \mbox{\hyperlink{engine_8h_a4d11fb2b49bd1b21d707191a0a2014d2}{ENGINE\+\_\+\+STATE\+\_\+\+TICK\+\_\+F}}(Name)
+\item 
+\#define \mbox{\hyperlink{engine_8h_a783b9bd5fa423503c8fa46b2337d0769}{ENGINE\+\_\+\+STATE\+\_\+\+EXIT\+\_\+F}}(Name)
+\item 
+\#define \mbox{\hyperlink{engine_8h_a2672365a233e0c9f3c1ccb0d78388308}{DEFINE\+\_\+\+ON\+\_\+\+EVENT}}(Name)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceprt_abfab8b0ccada197e8c5460a42162753d}{prt\+::\+DECLARE\+\_\+\+ENGINE\+\_\+\+STATE}} (Init)
+\item 
+\mbox{\hyperlink{namespaceprt_a942d776b1a1cc6300320755ce116daa5}{prt\+::\+DECLARE\+\_\+\+ENGINE\+\_\+\+STATE}} (Paused)
+\item 
+\mbox{\hyperlink{namespaceprt_a20ab565e86e6f2bb6134dc731e24e56a}{prt\+::\+DECLARE\+\_\+\+ENGINE\+\_\+\+STATE}} (Terminated)
+\item 
+auto \mbox{\hyperlink{namespaceprt_a5b5f1395e909dafeffefb5506c1b9387}{prt\+::\+On\+Engine\+Event}} () -\/$>$ Engine\+Event\+Observable
+\item 
+\mbox{\hyperlink{namespaceprt_aa15b2d4a5d463feb02eed2e1af917800}{prt\+::\+FOR\+\_\+\+EACH\+\_\+\+ENGINE\+\_\+\+EVENT}} (\mbox{\hyperlink{engine_8cc_a2672365a233e0c9f3c1ccb0d78388308}{DEFINE\+\_\+\+ON\+\_\+\+EVENT}})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{engine_8h_a8f32a23d3888c2c7b449e36e19804d77}\index{engine.h@{engine.h}!DECLARE\_ENGINE\_STATE@{DECLARE\_ENGINE\_STATE}}
+\index{DECLARE\_ENGINE\_STATE@{DECLARE\_ENGINE\_STATE}!engine.h@{engine.h}}
+\doxysubsubsection{\texorpdfstring{DECLARE\_ENGINE\_STATE}{DECLARE\_ENGINE\_STATE}}
+{\footnotesize\ttfamily \label{engine_8h_a8f32a23d3888c2c7b449e36e19804d77} 
+\#define DECLARE\+\_\+\+ENGINE\+\_\+\+STATE(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \textcolor{keyword}{class\ }Name\#\#State\ :\ \textcolor{keyword}{public}\ EngineState\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{public}:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ Name\#\#State()\ =\ \textcolor{keywordflow}{default};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \string~Name\#\#State()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ DECLARE\_ENGINE\_STATE\_TYPE(Name);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{public}:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ New()\ -\/>\ std::unique\_ptr<Name\#\#State>\ \{\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::make\_unique<Name\#\#State>();\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \};}
+
+\end{DoxyCode}
+\Hypertarget{engine_8h_a49629f55d32818ef86dc66775c4ff132}\index{engine.h@{engine.h}!DECLARE\_ENGINE\_STATE\_TYPE@{DECLARE\_ENGINE\_STATE\_TYPE}}
+\index{DECLARE\_ENGINE\_STATE\_TYPE@{DECLARE\_ENGINE\_STATE\_TYPE}!engine.h@{engine.h}}
+\doxysubsubsection{\texorpdfstring{DECLARE\_ENGINE\_STATE\_TYPE}{DECLARE\_ENGINE\_STATE\_TYPE}}
+{\footnotesize\ttfamily \label{engine_8h_a49629f55d32818ef86dc66775c4ff132} 
+\#define DECLARE\+\_\+\+ENGINE\+\_\+\+STATE\+\_\+\+TYPE(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \textcolor{keyword}{protected}:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ EnterState(Engine*\ engine)\ \textcolor{keyword}{override};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ OnTick(Engine*\ engine,\ \textcolor{keyword}{const}\ Tick\&\ current,\ \textcolor{keyword}{const}\ Tick\&\ previous)\ \textcolor{keyword}{override};\ \(\backslash\)}
+\DoxyCodeLine{\ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ ExitState(Engine*\ engine)\ \textcolor{keyword}{override};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \textcolor{keyword}{public}:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \textcolor{keyword}{auto}\ GetStateName()\ const\ -\/>\ const\ \textcolor{keywordtype}{char}*\textcolor{keyword}{\ override\ }\{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ \#Name;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \textcolor{keyword}{auto}\ As\#\#Name\#\#State()-\/>Name\#\#State*\ \textcolor{keyword}{override}\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{this};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{engine_8h_a2672365a233e0c9f3c1ccb0d78388308}\index{engine.h@{engine.h}!DEFINE\_ON\_EVENT@{DEFINE\_ON\_EVENT}}
+\index{DEFINE\_ON\_EVENT@{DEFINE\_ON\_EVENT}!engine.h@{engine.h}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_ON\_EVENT}{DEFINE\_ON\_EVENT}}
+{\footnotesize\ttfamily \label{engine_8h_a2672365a233e0c9f3c1ccb0d78388308} 
+\#define DEFINE\+\_\+\+ON\+\_\+\+EVENT(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ On\#\#Name\#\#Event()-\/>Name\#\#EventObservable\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ OnEngineEvent().filter(Name\#\#Event::Filter).map(Name\#\#Event::Cast);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{engine_8h_a3d1b15ee6cd792249ef8fe18a376bde5}\index{engine.h@{engine.h}!DEFINE\_TYPE\_CHECK@{DEFINE\_TYPE\_CHECK}}
+\index{DEFINE\_TYPE\_CHECK@{DEFINE\_TYPE\_CHECK}!engine.h@{engine.h}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_TYPE\_CHECK}{DEFINE\_TYPE\_CHECK}}
+{\footnotesize\ttfamily \label{engine_8h_a3d1b15ee6cd792249ef8fe18a376bde5} 
+\#define DEFINE\+\_\+\+TYPE\+\_\+\+CHECK(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \textcolor{keyword}{virtual}\ \textcolor{keyword}{auto}\ As\#\#Name\#\#State()-\/>Name\#\#State*\ \{\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{nullptr};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \textcolor{keyword}{auto}\ Is\#\#Name\#\#State()-\/>bool\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ As\#\#Name\#\#State()\ !=\ \textcolor{keyword}{nullptr};\ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{engine_8h_aca54b1ee88af93447803369925374b11}\index{engine.h@{engine.h}!ENGINE\_STATE\_ENTER\_F@{ENGINE\_STATE\_ENTER\_F}}
+\index{ENGINE\_STATE\_ENTER\_F@{ENGINE\_STATE\_ENTER\_F}!engine.h@{engine.h}}
+\doxysubsubsection{\texorpdfstring{ENGINE\_STATE\_ENTER\_F}{ENGINE\_STATE\_ENTER\_F}}
+{\footnotesize\ttfamily \label{engine_8h_aca54b1ee88af93447803369925374b11} 
+\#define ENGINE\+\_\+\+STATE\+\_\+\+ENTER\+\_\+F(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ Name\#\#State::EnterState(Engine*\ engine)}
+
+\end{DoxyCode}
+\Hypertarget{engine_8h_a783b9bd5fa423503c8fa46b2337d0769}\index{engine.h@{engine.h}!ENGINE\_STATE\_EXIT\_F@{ENGINE\_STATE\_EXIT\_F}}
+\index{ENGINE\_STATE\_EXIT\_F@{ENGINE\_STATE\_EXIT\_F}!engine.h@{engine.h}}
+\doxysubsubsection{\texorpdfstring{ENGINE\_STATE\_EXIT\_F}{ENGINE\_STATE\_EXIT\_F}}
+{\footnotesize\ttfamily \label{engine_8h_a783b9bd5fa423503c8fa46b2337d0769} 
+\#define ENGINE\+\_\+\+STATE\+\_\+\+EXIT\+\_\+F(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ Name\#\#State::ExitState(Engine*\ engine)}
+
+\end{DoxyCode}
+\Hypertarget{engine_8h_a4d11fb2b49bd1b21d707191a0a2014d2}\index{engine.h@{engine.h}!ENGINE\_STATE\_TICK\_F@{ENGINE\_STATE\_TICK\_F}}
+\index{ENGINE\_STATE\_TICK\_F@{ENGINE\_STATE\_TICK\_F}!engine.h@{engine.h}}
+\doxysubsubsection{\texorpdfstring{ENGINE\_STATE\_TICK\_F}{ENGINE\_STATE\_TICK\_F}}
+{\footnotesize\ttfamily \label{engine_8h_a4d11fb2b49bd1b21d707191a0a2014d2} 
+\#define ENGINE\+\_\+\+STATE\+\_\+\+TICK\+\_\+F(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ Name\#\#State::OnTick(Engine*\ engine,\ \textcolor{keyword}{const}\ Tick\&\ current,\ \textcolor{keyword}{const}\ Tick\&\ previous)}
+
+\end{DoxyCode}
+\Hypertarget{engine_8h_a559db3ee6c9a96fa5511207455a2ae3c}\index{engine.h@{engine.h}!FOR\_EACH\_ENGINE\_STATE@{FOR\_EACH\_ENGINE\_STATE}}
+\index{FOR\_EACH\_ENGINE\_STATE@{FOR\_EACH\_ENGINE\_STATE}!engine.h@{engine.h}}
+\doxysubsubsection{\texorpdfstring{FOR\_EACH\_ENGINE\_STATE}{FOR\_EACH\_ENGINE\_STATE}}
+{\footnotesize\ttfamily \label{engine_8h_a559db3ee6c9a96fa5511207455a2ae3c} 
+\#define FOR\+\_\+\+EACH\+\_\+\+ENGINE\+\_\+\+STATE(\begin{DoxyParamCaption}\item[{}]{V}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ V(Init)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(Running)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(Paused)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(Terminated)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(Error)}
+
+\end{DoxyCode}
+\Hypertarget{engine_8h_a30012f0deb75f21fc8e3087ceb5935bd}\index{engine.h@{engine.h}!FORWARD\_DECLARE\_STATE@{FORWARD\_DECLARE\_STATE}}
+\index{FORWARD\_DECLARE\_STATE@{FORWARD\_DECLARE\_STATE}!engine.h@{engine.h}}
+\doxysubsubsection{\texorpdfstring{FORWARD\_DECLARE\_STATE}{FORWARD\_DECLARE\_STATE}}
+{\footnotesize\ttfamily \label{engine_8h_a30012f0deb75f21fc8e3087ceb5935bd} 
+\#define FORWARD\+\_\+\+DECLARE\+\_\+\+STATE(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{class\ }Name\#\#State;}
+
+\end{DoxyCode}

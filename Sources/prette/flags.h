@@ -4,7 +4,11 @@
 #include <gflags/gflags.h>
 
 namespace prt {
-  DECLARE_string(resources);
-}
+DECLARE_bool(gfx);
 
-#endif //PRT_FLAGS_H
+#ifdef PRT_DEBUG
+DECLARE_string(resources);
+#endif  // PRT_DEBUG
+}  // namespace prt
+
+#endif  // PRT_FLAGS_H

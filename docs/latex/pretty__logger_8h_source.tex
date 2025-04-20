@@ -1,0 +1,81 @@
+\doxysection{pretty\+\_\+logger.\+h}
+\hypertarget{pretty__logger_8h_source}{}\label{pretty__logger_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/pretty\_logger.h@{/Users/tazz/Projects/prette/Sources/prette/pretty\_logger.h}}
+\mbox{\hyperlink{pretty__logger_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_PRETTY\_LOGGER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_PRETTY\_LOGGER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <glog/logging.h>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{common_8h}{prette/common.h}}"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_pretty_logger}{PrettyLogger}}\ \{}
+\DoxyCodeLine{00010\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classprt_1_1_pretty_logger_a614d01e4de5935800b5858484cf3bd31}{Severity}}\ =\ google::LogSeverity;}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00013\ \ \ \mbox{\hyperlink{classprt_1_1_pretty_logger_a614d01e4de5935800b5858484cf3bd31}{Severity}}\ \mbox{\hyperlink{classprt_1_1_pretty_logger_a25874d8bfd5b63e437e81e81b1392cad}{severity\_}};}
+\DoxyCodeLine{00014\ \ \ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{classprt_1_1_pretty_logger_a937d1f9c40751b127b9649f949575bea}{file\_}};}
+\DoxyCodeLine{00015\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classprt_1_1_pretty_logger_ae73ff96ea7d42c76bcd76adc5ab1e4cc}{line\_}};}
+\DoxyCodeLine{00016\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classprt_1_1_pretty_logger_a779fd217c99e693747a916eed72cdeba}{indent\_}};}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \ \mbox{\hyperlink{classprt_1_1_pretty_logger_a9e5a78183918afb28955155d9e36f166}{PrettyLogger}}(\textcolor{keyword}{const}\ google::LogSeverity\ severity,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ file,\ \textcolor{keywordtype}{int}\ line,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ indent)\ :}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_pretty_logger_a25874d8bfd5b63e437e81e81b1392cad}{severity\_}}(severity),}
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_pretty_logger_a779fd217c99e693747a916eed72cdeba}{indent\_}}(indent),}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_pretty_logger_ae73ff96ea7d42c76bcd76adc5ab1e4cc}{line\_}}(line),}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_pretty_logger_a937d1f9c40751b127b9649f949575bea}{file\_}}(nullptr)\ \{}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(file);}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_pretty_logger_a937d1f9c40751b127b9649f949575bea}{file\_}}\ =\ strdup(file);}
+\DoxyCodeLine{00025\ \ \ \}}
+\DoxyCodeLine{00026\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_pretty_logger_a3332f0b25769268b11da38d006e1e98d}{PrettyLogger}}(\mbox{\hyperlink{classprt_1_1_pretty_logger}{PrettyLogger}}*\ parent)\ :}
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_pretty_logger_a25874d8bfd5b63e437e81e81b1392cad}{severity\_}}(google::INFO),}
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_pretty_logger_a779fd217c99e693747a916eed72cdeba}{indent\_}}(0),}
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_pretty_logger_ae73ff96ea7d42c76bcd76adc5ab1e4cc}{line\_}}(0),}
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_pretty_logger_a937d1f9c40751b127b9649f949575bea}{file\_}}(nullptr)\ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(parent);}
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_pretty_logger_a25874d8bfd5b63e437e81e81b1392cad}{severity\_}}\ =\ parent-\/>\mbox{\hyperlink{classprt_1_1_pretty_logger_a8fa2ab4a4fdec50f36af746af830afe7}{GetSeverity}}();}
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_pretty_logger_a779fd217c99e693747a916eed72cdeba}{indent\_}}\ =\ parent-\/>\mbox{\hyperlink{classprt_1_1_pretty_logger_ac26679b1e9dd26c2fc9cb90c973101c8}{GetIndent}}();}
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_pretty_logger_ae73ff96ea7d42c76bcd76adc5ab1e4cc}{line\_}}\ =\ parent-\/>\mbox{\hyperlink{classprt_1_1_pretty_logger_a50ecc48e2a9bcdb158d3fad61b85e7d1}{GetLine}}();}
+\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(parent-\/>\mbox{\hyperlink{classprt_1_1_pretty_logger_a2d2b333caf97ee172cabf310a786ea5a}{GetFile}}());}
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_pretty_logger_a937d1f9c40751b127b9649f949575bea}{file\_}}\ =\ strdup(parent-\/>\mbox{\hyperlink{classprt_1_1_pretty_logger_a2d2b333caf97ee172cabf310a786ea5a}{GetFile}}());}
+\DoxyCodeLine{00037\ \ \ \}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{classprt_1_1_pretty_logger_a2d2b333caf97ee172cabf310a786ea5a}{GetFile}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_pretty_logger_a937d1f9c40751b127b9649f949575bea}{file\_}};}
+\DoxyCodeLine{00041\ \ \ \}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classprt_1_1_pretty_logger_a50ecc48e2a9bcdb158d3fad61b85e7d1}{GetLine}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_pretty_logger_ae73ff96ea7d42c76bcd76adc5ab1e4cc}{line\_}};}
+\DoxyCodeLine{00045\ \ \ \}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \textcolor{keyword}{inline}\ \mbox{\hyperlink{classprt_1_1_pretty_logger_a614d01e4de5935800b5858484cf3bd31}{Severity}}\ \mbox{\hyperlink{classprt_1_1_pretty_logger_a8fa2ab4a4fdec50f36af746af830afe7}{GetSeverity}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_pretty_logger_a25874d8bfd5b63e437e81e81b1392cad}{severity\_}};}
+\DoxyCodeLine{00049\ \ \ \}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classprt_1_1_pretty_logger_ac26679b1e9dd26c2fc9cb90c973101c8}{GetIndent}}()\ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_pretty_logger_a779fd217c99e693747a916eed72cdeba}{indent\_}};}
+\DoxyCodeLine{00053\ \ \ \}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_pretty_logger_a8aa482a6a725788941784866056c5d2f}{Indent}}()\ \{}
+\DoxyCodeLine{00056\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_pretty_logger_a779fd217c99e693747a916eed72cdeba}{indent\_}}++;}
+\DoxyCodeLine{00057\ \ \ \}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_pretty_logger_a3048d70717d89771f6bde31cb49989aa}{Deindent}}()\ \{}
+\DoxyCodeLine{00060\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_pretty_logger_a779fd217c99e693747a916eed72cdeba}{indent\_}}-\/-\/;}
+\DoxyCodeLine{00061\ \ \ \}}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ std::string\ \mbox{\hyperlink{classprt_1_1_pretty_logger_a40a8b29bb6e31cc47976ce1072bca98a}{GetIndentString}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordflow}{return}\ std::string(\mbox{\hyperlink{classprt_1_1_pretty_logger_a779fd217c99e693747a916eed72cdeba}{indent\_}}\ *\ 2,\ \textcolor{charliteral}{'\ '});}
+\DoxyCodeLine{00065\ \ \ \}}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00068\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classprt_1_1_pretty_logger_a27549062c9c8c71823a90bc6fe29cee2}{\string~PrettyLogger}}()\ \{}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classprt_1_1_pretty_logger_a937d1f9c40751b127b9649f949575bea}{file\_}})}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ free(\mbox{\hyperlink{classprt_1_1_pretty_logger_a937d1f9c40751b127b9649f949575bea}{file\_}});}
+\DoxyCodeLine{00071\ \ \ \}}
+\DoxyCodeLine{00072\ \};}
+\DoxyCodeLine{00073\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_PRETTY\_LOGGER\_H}}
+
+\end{DoxyCode}

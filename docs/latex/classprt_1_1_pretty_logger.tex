@@ -1,0 +1,155 @@
+\doxysection{prt\+::Pretty\+Logger Class Reference}
+\hypertarget{classprt_1_1_pretty_logger}{}\label{classprt_1_1_pretty_logger}\index{prt::PrettyLogger@{prt::PrettyLogger}}
+
+
+{\ttfamily \#include $<$pretty\+\_\+logger.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classprt_1_1_pretty_logger_a27549062c9c8c71823a90bc6fe29cee2}{\texorpdfstring{$\sim$}{\string~}\+Pretty\+Logger}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_pretty_logger_a9e5a78183918afb28955155d9e36f166}{Pretty\+Logger}} (const google\+::\+Log\+Severity severity, const char \texorpdfstring{$\ast$}{*}file, int line, const int indent)
+\item 
+\mbox{\hyperlink{classprt_1_1_pretty_logger_a3332f0b25769268b11da38d006e1e98d}{Pretty\+Logger}} (\mbox{\hyperlink{classprt_1_1_pretty_logger}{Pretty\+Logger}} \texorpdfstring{$\ast$}{*}parent)
+\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1_pretty_logger_a2d2b333caf97ee172cabf310a786ea5a}{Get\+File}} () const
+\item 
+int \mbox{\hyperlink{classprt_1_1_pretty_logger_a50ecc48e2a9bcdb158d3fad61b85e7d1}{Get\+Line}} () const
+\item 
+\mbox{\hyperlink{classprt_1_1_pretty_logger_a614d01e4de5935800b5858484cf3bd31}{Severity}} \mbox{\hyperlink{classprt_1_1_pretty_logger_a8fa2ab4a4fdec50f36af746af830afe7}{Get\+Severity}} () const
+\item 
+int \mbox{\hyperlink{classprt_1_1_pretty_logger_ac26679b1e9dd26c2fc9cb90c973101c8}{Get\+Indent}} ()
+\item 
+void \mbox{\hyperlink{classprt_1_1_pretty_logger_a8aa482a6a725788941784866056c5d2f}{Indent}} ()
+\item 
+void \mbox{\hyperlink{classprt_1_1_pretty_logger_a3048d70717d89771f6bde31cb49989aa}{Deindent}} ()
+\item 
+std\+::string \mbox{\hyperlink{classprt_1_1_pretty_logger_a40a8b29bb6e31cc47976ce1072bca98a}{Get\+Indent\+String}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_pretty_logger_a614d01e4de5935800b5858484cf3bd31}{Severity}} \mbox{\hyperlink{classprt_1_1_pretty_logger_a25874d8bfd5b63e437e81e81b1392cad}{severity\+\_\+}}
+\item 
+char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1_pretty_logger_a937d1f9c40751b127b9649f949575bea}{file\+\_\+}}
+\item 
+int \mbox{\hyperlink{classprt_1_1_pretty_logger_ae73ff96ea7d42c76bcd76adc5ab1e4cc}{line\+\_\+}}
+\item 
+int \mbox{\hyperlink{classprt_1_1_pretty_logger_a779fd217c99e693747a916eed72cdeba}{indent\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classprt_1_1_pretty_logger_a614d01e4de5935800b5858484cf3bd31}{Severity}} = google\+::\+Log\+Severity
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classprt_1_1_pretty_logger_a614d01e4de5935800b5858484cf3bd31}\index{prt::PrettyLogger@{prt::PrettyLogger}!Severity@{Severity}}
+\index{Severity@{Severity}!prt::PrettyLogger@{prt::PrettyLogger}}
+\doxysubsubsection{\texorpdfstring{Severity}{Severity}}
+{\footnotesize\ttfamily \label{classprt_1_1_pretty_logger_a614d01e4de5935800b5858484cf3bd31} 
+using \mbox{\hyperlink{classprt_1_1_pretty_logger_a614d01e4de5935800b5858484cf3bd31}{prt\+::\+Pretty\+Logger\+::\+Severity}} = google\+::\+Log\+Severity\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_pretty_logger_a9e5a78183918afb28955155d9e36f166}\index{prt::PrettyLogger@{prt::PrettyLogger}!PrettyLogger@{PrettyLogger}}
+\index{PrettyLogger@{PrettyLogger}!prt::PrettyLogger@{prt::PrettyLogger}}
+\doxysubsubsection{\texorpdfstring{PrettyLogger()}{PrettyLogger()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_pretty_logger_a9e5a78183918afb28955155d9e36f166} 
+prt\+::\+Pretty\+Logger\+::\+Pretty\+Logger (\begin{DoxyParamCaption}\item[{const google\+::\+Log\+Severity}]{severity}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{file}{, }\item[{int}]{line}{, }\item[{const int}]{indent}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+\Hypertarget{classprt_1_1_pretty_logger_a3332f0b25769268b11da38d006e1e98d}\index{prt::PrettyLogger@{prt::PrettyLogger}!PrettyLogger@{PrettyLogger}}
+\index{PrettyLogger@{PrettyLogger}!prt::PrettyLogger@{prt::PrettyLogger}}
+\doxysubsubsection{\texorpdfstring{PrettyLogger()}{PrettyLogger()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_pretty_logger_a3332f0b25769268b11da38d006e1e98d} 
+prt\+::\+Pretty\+Logger\+::\+Pretty\+Logger (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_pretty_logger}{Pretty\+Logger}} \texorpdfstring{$\ast$}{*}}]{parent}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}, {\ttfamily [protected]}}
+
+\Hypertarget{classprt_1_1_pretty_logger_a27549062c9c8c71823a90bc6fe29cee2}\index{prt::PrettyLogger@{prt::PrettyLogger}!````~PrettyLogger@{\texorpdfstring{$\sim$}{\string~}PrettyLogger}}
+\index{````~PrettyLogger@{\texorpdfstring{$\sim$}{\string~}PrettyLogger}!prt::PrettyLogger@{prt::PrettyLogger}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}PrettyLogger()}{\string~PrettyLogger()}}
+{\footnotesize\ttfamily \label{classprt_1_1_pretty_logger_a27549062c9c8c71823a90bc6fe29cee2} 
+virtual prt\+::\+Pretty\+Logger\+::\texorpdfstring{$\sim$}{\string~}\+Pretty\+Logger (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_pretty_logger_a3048d70717d89771f6bde31cb49989aa}\index{prt::PrettyLogger@{prt::PrettyLogger}!Deindent@{Deindent}}
+\index{Deindent@{Deindent}!prt::PrettyLogger@{prt::PrettyLogger}}
+\doxysubsubsection{\texorpdfstring{Deindent()}{Deindent()}}
+{\footnotesize\ttfamily \label{classprt_1_1_pretty_logger_a3048d70717d89771f6bde31cb49989aa} 
+void prt\+::\+Pretty\+Logger\+::\+Deindent (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+\Hypertarget{classprt_1_1_pretty_logger_a2d2b333caf97ee172cabf310a786ea5a}\index{prt::PrettyLogger@{prt::PrettyLogger}!GetFile@{GetFile}}
+\index{GetFile@{GetFile}!prt::PrettyLogger@{prt::PrettyLogger}}
+\doxysubsubsection{\texorpdfstring{GetFile()}{GetFile()}}
+{\footnotesize\ttfamily \label{classprt_1_1_pretty_logger_a2d2b333caf97ee172cabf310a786ea5a} 
+const char \texorpdfstring{$\ast$}{*} prt\+::\+Pretty\+Logger\+::\+Get\+File (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+\Hypertarget{classprt_1_1_pretty_logger_ac26679b1e9dd26c2fc9cb90c973101c8}\index{prt::PrettyLogger@{prt::PrettyLogger}!GetIndent@{GetIndent}}
+\index{GetIndent@{GetIndent}!prt::PrettyLogger@{prt::PrettyLogger}}
+\doxysubsubsection{\texorpdfstring{GetIndent()}{GetIndent()}}
+{\footnotesize\ttfamily \label{classprt_1_1_pretty_logger_ac26679b1e9dd26c2fc9cb90c973101c8} 
+int prt\+::\+Pretty\+Logger\+::\+Get\+Indent (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+\Hypertarget{classprt_1_1_pretty_logger_a40a8b29bb6e31cc47976ce1072bca98a}\index{prt::PrettyLogger@{prt::PrettyLogger}!GetIndentString@{GetIndentString}}
+\index{GetIndentString@{GetIndentString}!prt::PrettyLogger@{prt::PrettyLogger}}
+\doxysubsubsection{\texorpdfstring{GetIndentString()}{GetIndentString()}}
+{\footnotesize\ttfamily \label{classprt_1_1_pretty_logger_a40a8b29bb6e31cc47976ce1072bca98a} 
+std\+::string prt\+::\+Pretty\+Logger\+::\+Get\+Indent\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+\Hypertarget{classprt_1_1_pretty_logger_a50ecc48e2a9bcdb158d3fad61b85e7d1}\index{prt::PrettyLogger@{prt::PrettyLogger}!GetLine@{GetLine}}
+\index{GetLine@{GetLine}!prt::PrettyLogger@{prt::PrettyLogger}}
+\doxysubsubsection{\texorpdfstring{GetLine()}{GetLine()}}
+{\footnotesize\ttfamily \label{classprt_1_1_pretty_logger_a50ecc48e2a9bcdb158d3fad61b85e7d1} 
+int prt\+::\+Pretty\+Logger\+::\+Get\+Line (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+\Hypertarget{classprt_1_1_pretty_logger_a8fa2ab4a4fdec50f36af746af830afe7}\index{prt::PrettyLogger@{prt::PrettyLogger}!GetSeverity@{GetSeverity}}
+\index{GetSeverity@{GetSeverity}!prt::PrettyLogger@{prt::PrettyLogger}}
+\doxysubsubsection{\texorpdfstring{GetSeverity()}{GetSeverity()}}
+{\footnotesize\ttfamily \label{classprt_1_1_pretty_logger_a8fa2ab4a4fdec50f36af746af830afe7} 
+\mbox{\hyperlink{classprt_1_1_pretty_logger_a614d01e4de5935800b5858484cf3bd31}{Severity}} prt\+::\+Pretty\+Logger\+::\+Get\+Severity (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+\Hypertarget{classprt_1_1_pretty_logger_a8aa482a6a725788941784866056c5d2f}\index{prt::PrettyLogger@{prt::PrettyLogger}!Indent@{Indent}}
+\index{Indent@{Indent}!prt::PrettyLogger@{prt::PrettyLogger}}
+\doxysubsubsection{\texorpdfstring{Indent()}{Indent()}}
+{\footnotesize\ttfamily \label{classprt_1_1_pretty_logger_a8aa482a6a725788941784866056c5d2f} 
+void prt\+::\+Pretty\+Logger\+::\+Indent (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_pretty_logger_a937d1f9c40751b127b9649f949575bea}\index{prt::PrettyLogger@{prt::PrettyLogger}!file\_@{file\_}}
+\index{file\_@{file\_}!prt::PrettyLogger@{prt::PrettyLogger}}
+\doxysubsubsection{\texorpdfstring{file\_}{file\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_pretty_logger_a937d1f9c40751b127b9649f949575bea} 
+char\texorpdfstring{$\ast$}{*} prt\+::\+Pretty\+Logger\+::file\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classprt_1_1_pretty_logger_a779fd217c99e693747a916eed72cdeba}\index{prt::PrettyLogger@{prt::PrettyLogger}!indent\_@{indent\_}}
+\index{indent\_@{indent\_}!prt::PrettyLogger@{prt::PrettyLogger}}
+\doxysubsubsection{\texorpdfstring{indent\_}{indent\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_pretty_logger_a779fd217c99e693747a916eed72cdeba} 
+int prt\+::\+Pretty\+Logger\+::indent\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classprt_1_1_pretty_logger_ae73ff96ea7d42c76bcd76adc5ab1e4cc}\index{prt::PrettyLogger@{prt::PrettyLogger}!line\_@{line\_}}
+\index{line\_@{line\_}!prt::PrettyLogger@{prt::PrettyLogger}}
+\doxysubsubsection{\texorpdfstring{line\_}{line\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_pretty_logger_ae73ff96ea7d42c76bcd76adc5ab1e4cc} 
+int prt\+::\+Pretty\+Logger\+::line\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classprt_1_1_pretty_logger_a25874d8bfd5b63e437e81e81b1392cad}\index{prt::PrettyLogger@{prt::PrettyLogger}!severity\_@{severity\_}}
+\index{severity\_@{severity\_}!prt::PrettyLogger@{prt::PrettyLogger}}
+\doxysubsubsection{\texorpdfstring{severity\_}{severity\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_pretty_logger_a25874d8bfd5b63e437e81e81b1392cad} 
+\mbox{\hyperlink{classprt_1_1_pretty_logger_a614d01e4de5935800b5858484cf3bd31}{Severity}} prt\+::\+Pretty\+Logger\+::severity\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{pretty__logger_8h}{pretty\+\_\+logger.\+h}}\end{DoxyCompactItemize}

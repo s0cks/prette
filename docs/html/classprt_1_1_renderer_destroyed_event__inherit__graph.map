@@ -1,0 +1,11 @@
+<map id="prt::RendererDestroyedEvent" name="prt::RendererDestroyedEvent">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,315,197,341"/>
+<area shape="rect" id="Node000002" href="$classprt_1_1_renderer_event_base.html" title=" " alt="" coords="20,241,182,267"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="104,282,104,315,98,315,98,282"/>
+<area shape="rect" id="Node000003" href="$classprt_1_1_template_renderer_event.html" title=" " alt="" coords="9,153,193,193"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="104,209,104,241,98,241,98,209"/>
+<area shape="rect" id="Node000004" href="$classprt_1_1_renderer_event.html" title=" " alt="" coords="35,79,167,105"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="104,120,104,152,98,152,98,120"/>
+<area shape="rect" id="Node000005" href="$classprt_1_1_event.html" title=" " alt="" coords="62,5,140,31"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="104,46,104,79,98,79,98,46"/>
+</map>

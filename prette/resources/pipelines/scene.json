@@ -1,0 +1,12 @@
+{
+  "type": "Pipeline",
+  "meta": {
+    "name": "ScenePipeline"
+  },
+  "data": {
+    "cullMode": "back",
+    "frontFace": "clockwise",
+    "vertexShader": "scene",
+    "fragmentShader": "scene"
+  }
+}

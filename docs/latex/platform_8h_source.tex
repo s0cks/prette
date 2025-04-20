@@ -1,0 +1,66 @@
+\doxysection{platform.\+h}
+\hypertarget{platform_8h_source}{}\label{platform_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/platform.h@{/Users/tazz/Projects/prette/Sources/prette/platform.h}}
+\mbox{\hyperlink{platform_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_PLATFORM\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_PLATFORM\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#if\ defined(\_M\_X64)\ ||\ defined(\_\_x86\_64\_\_)}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ ARCH\_IS\_X64\ 1}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#elif\ defined(\_M\_IX86)\ ||\ defined(\_\_i386\_\_)}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ ARCH\_IS\_X32\ 1}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#elif\ defined(\_\_ARMEL\_\_)}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#define\ ARCH\_IS\_ARM\ 1}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#elif\ defined(\_\_aarch64\_\_)}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ ARCH\_IS\_ARM64\ 1}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#if\ defined(\_\_linux\_\_)\ ||\ defined(\_\_FreeBSD\_\_)}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#define\ OS\_IS\_LINUX\ 1}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#elif\ defined(\_\_APPLE\_\_)}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#define\ OS\_IS\_OSX\ 1}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#elif\ defined(\_WIN32)}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#define\ OS\_IS\_WINDOWS\ 1}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{\ \textcolor{comment}{//TODO:\ cleanup\ this\ file}}
+\DoxyCodeLine{00025\ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ kInt8SizeLog2\ =\ 0;}
+\DoxyCodeLine{00026\ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ kInt8Size\ =\ 1\ <<\ kInt8SizeLog2;}
+\DoxyCodeLine{00027\ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ kInt16SizeLog2\ =\ 1;}
+\DoxyCodeLine{00028\ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ kInt16Size\ =\ 1\ <<\ kInt16SizeLog2;}
+\DoxyCodeLine{00029\ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ kInt32SizeLog2\ =\ 2;}
+\DoxyCodeLine{00030\ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ kInt32Size\ =\ 1\ <<\ kInt32SizeLog2;}
+\DoxyCodeLine{00031\ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ kInt64SizeLog2\ =\ 3;}
+\DoxyCodeLine{00032\ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ kInt64Size\ =\ 1\ <<\ kInt64SizeLog2;}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ kBitsPerByteLog2\ =\ 3;}
+\DoxyCodeLine{00035\ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ kBitsPerByte\ =\ 1\ <<\ kBitsPerByteLog2;}
+\DoxyCodeLine{00036\ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ kBitsPerInt8\ =\ kInt8Size\ *\ kBitsPerByte;}
+\DoxyCodeLine{00037\ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ kBitsPerInt16\ =\ kInt16Size\ *\ kBitsPerByte;}
+\DoxyCodeLine{00038\ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ kBitsPerInt32\ =\ kInt32Size\ *\ kBitsPerByte;}
+\DoxyCodeLine{00039\ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ kBitsPerInt64\ =\ kInt64Size\ *\ kBitsPerByte;}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceprt_a5b83ac41dda5a6f6a66917de0a70cdf1}{byte}}\ =\ int8\_t;}
+\DoxyCodeLine{00042\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceprt_a517334a0fef8c04a14b61e0bcfc64d9d}{ubyte}}\ =\ uint8\_t;}
+\DoxyCodeLine{00043\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceprt_ac37808e87ad335553ed38c21b3c91d4f}{word}}\ =\ intptr\_t;}
+\DoxyCodeLine{00044\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ =\ uintptr\_t;}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#ifdef\ ARCH\_IS\_X32}}
+\DoxyCodeLine{00047\ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ kWordSizeLog2\ =\ kInt32SizeLog2;}
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#elif\ defined(ARCH\_IS\_ARM64)\ ||\ defined(ARCH\_IS\_X64)}}
+\DoxyCodeLine{00049\ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ kWordSizeLog2\ =\ kInt64SizeLog2;}
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00051\ \ \ \textcolor{comment}{//\ cppcheck-\/suppress\ truncLongCastAssignment}}
+\DoxyCodeLine{00052\ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint64\_t\ kWordSize\ =\ 1\ <<\ kWordSizeLog2;}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ kBitsPerWordLog2\ =\ kWordSizeLog2\ +\ kBitsPerByteLog2;}
+\DoxyCodeLine{00055\ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ kBitsPerWord\ =\ 1\ <<\ kBitsPerWordLog2;}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ kUWordOne\ =\ 1U;}
+\DoxyCodeLine{00058\ \}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//PRT\_PLATFORM\_H}}
+
+\end{DoxyCode}

@@ -1,0 +1,203 @@
+\doxysection{prt\+::Region Class Reference}
+\hypertarget{classprt_1_1_region}{}\label{classprt_1_1_region}\index{prt::Region@{prt::Region}}
+
+
+{\ttfamily \#include $<$region.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_region_a97974f9dca72773222c05d7d6aa37439}{Region}} ()=default
+\item 
+\mbox{\hyperlink{classprt_1_1_region_a715801f864d1f6c63d0486448501ce40}{Region}} (const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} start, const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} size)
+\item 
+virtual \mbox{\hyperlink{classprt_1_1_region_addb8cf82e3b3949d7d440fbb370c2e19}{\texorpdfstring{$\sim$}{\string~}\+Region}} ()=default
+\item 
+\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} \mbox{\hyperlink{classprt_1_1_region_aa0c4e679b2ac31025f53e0eb7aee9c7d}{Get\+Starting\+Address}} () const
+\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1_region_ac2764dfb07eb63c587513c0941c11227}{Get\+Starting\+Address\+Pointer}} () const
+\item 
+\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} \mbox{\hyperlink{classprt_1_1_region_a93c279b835a8d42336b86e08214d517a}{Get\+Size}} () const
+\item 
+\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} \mbox{\hyperlink{classprt_1_1_region_a473fa2cf3b897896815f88f6af1a2daa}{Get\+Ending\+Address}} () const
+\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1_region_a2d3a1c73f7637081b9797cbc0dd429ef}{Get\+Ending\+Address\+Pointer}} () const
+\item 
+bool \mbox{\hyperlink{classprt_1_1_region_a647c6975c874dd1feee2cfcd13a7addd}{Contains}} (const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} address) const
+\item 
+bool \mbox{\hyperlink{classprt_1_1_region_a6ee171fa5b5d38d621d29296b0e375ae}{Contains}} (void \texorpdfstring{$\ast$}{*}ptr) const
+\item 
+bool \mbox{\hyperlink{classprt_1_1_region_a0158bb191174f29754828f55c3db7769}{Is\+Empty}} () const
+\item 
+bool \mbox{\hyperlink{classprt_1_1_region_a8a3625c9712fbdb04a83c20a7cc7548e}{operator==}} (const \mbox{\hyperlink{classprt_1_1_region}{Region}} \&rhs) const
+\item 
+bool \mbox{\hyperlink{classprt_1_1_region_a8f990bd0d2f0d6731921a34d90a3e633}{operator!=}} (const \mbox{\hyperlink{classprt_1_1_region}{Region}} \&rhs) const
+\item 
+bool \mbox{\hyperlink{classprt_1_1_region_a725d7e2f964a97d106ae271ca0c049d8}{operator$<$}} (const \mbox{\hyperlink{classprt_1_1_region}{Region}} \&rhs) const
+\item 
+bool \mbox{\hyperlink{classprt_1_1_region_a1c3e89666b206e188116640a28445943}{operator$>$}} (const \mbox{\hyperlink{classprt_1_1_region}{Region}} \&rhs) const
+\item 
+\mbox{\hyperlink{classprt_1_1_region_af435c8fc3709022d92d53673ef3ec774}{operator const ubyte \texorpdfstring{$\ast$}{*}}} () const
+\item 
+\mbox{\hyperlink{classprt_1_1_region_abbec2e08c3ea1db4f97b7518a717f919}{operator const GLvoid \texorpdfstring{$\ast$}{*}}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} \mbox{\hyperlink{classprt_1_1_region_a6f2ef1267081e6667ebc59ee14e34346}{start\+\_\+}}
+\item 
+\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} \mbox{\hyperlink{classprt_1_1_region_aacc695d16259e71bcca93c0a0d943671}{size\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_region_a9253b3688f1b0e82dd9e3d00c7116472}{DEFINE\+\_\+\+DEFAULT\+\_\+\+COPYABLE\+\_\+\+TYPE}} (\mbox{\hyperlink{classprt_1_1_region}{Region}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+std\+::ostream \& \mbox{\hyperlink{classprt_1_1_region_ade87832e0c91a7fbcc59454d708d65dc}{operator$<$$<$}} (std\+::ostream \&stream, const \mbox{\hyperlink{classprt_1_1_region}{Region}} \&rhs)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_region_a97974f9dca72773222c05d7d6aa37439}\index{prt::Region@{prt::Region}!Region@{Region}}
+\index{Region@{Region}!prt::Region@{prt::Region}}
+\doxysubsubsection{\texorpdfstring{Region()}{Region()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_region_a97974f9dca72773222c05d7d6aa37439} 
+prt\+::\+Region\+::\+Region (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{classprt_1_1_region_a715801f864d1f6c63d0486448501ce40}\index{prt::Region@{prt::Region}!Region@{Region}}
+\index{Region@{Region}!prt::Region@{prt::Region}}
+\doxysubsubsection{\texorpdfstring{Region()}{Region()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_region_a715801f864d1f6c63d0486448501ce40} 
+prt\+::\+Region\+::\+Region (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}}]{start}{, }\item[{const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}}]{size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_region_addb8cf82e3b3949d7d440fbb370c2e19}\index{prt::Region@{prt::Region}!````~Region@{\texorpdfstring{$\sim$}{\string~}Region}}
+\index{````~Region@{\texorpdfstring{$\sim$}{\string~}Region}!prt::Region@{prt::Region}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Region()}{\string~Region()}}
+{\footnotesize\ttfamily \label{classprt_1_1_region_addb8cf82e3b3949d7d440fbb370c2e19} 
+virtual prt\+::\+Region\+::\texorpdfstring{$\sim$}{\string~}\+Region (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_region_a647c6975c874dd1feee2cfcd13a7addd}\index{prt::Region@{prt::Region}!Contains@{Contains}}
+\index{Contains@{Contains}!prt::Region@{prt::Region}}
+\doxysubsubsection{\texorpdfstring{Contains()}{Contains()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_region_a647c6975c874dd1feee2cfcd13a7addd} 
+bool prt\+::\+Region\+::\+Contains (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}}]{address}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_region_a6ee171fa5b5d38d621d29296b0e375ae}\index{prt::Region@{prt::Region}!Contains@{Contains}}
+\index{Contains@{Contains}!prt::Region@{prt::Region}}
+\doxysubsubsection{\texorpdfstring{Contains()}{Contains()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_region_a6ee171fa5b5d38d621d29296b0e375ae} 
+bool prt\+::\+Region\+::\+Contains (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{ptr}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_region_a9253b3688f1b0e82dd9e3d00c7116472}\index{prt::Region@{prt::Region}!DEFINE\_DEFAULT\_COPYABLE\_TYPE@{DEFINE\_DEFAULT\_COPYABLE\_TYPE}}
+\index{DEFINE\_DEFAULT\_COPYABLE\_TYPE@{DEFINE\_DEFAULT\_COPYABLE\_TYPE}!prt::Region@{prt::Region}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_DEFAULT\_COPYABLE\_TYPE()}{DEFINE\_DEFAULT\_COPYABLE\_TYPE()}}
+{\footnotesize\ttfamily \label{classprt_1_1_region_a9253b3688f1b0e82dd9e3d00c7116472} 
+prt\+::\+Region\+::\+DEFINE\+\_\+\+DEFAULT\+\_\+\+COPYABLE\+\_\+\+TYPE (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_region}{Region}}}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_region_a473fa2cf3b897896815f88f6af1a2daa}\index{prt::Region@{prt::Region}!GetEndingAddress@{GetEndingAddress}}
+\index{GetEndingAddress@{GetEndingAddress}!prt::Region@{prt::Region}}
+\doxysubsubsection{\texorpdfstring{GetEndingAddress()}{GetEndingAddress()}}
+{\footnotesize\ttfamily \label{classprt_1_1_region_a473fa2cf3b897896815f88f6af1a2daa} 
+\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} prt\+::\+Region\+::\+Get\+Ending\+Address (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_region_a2d3a1c73f7637081b9797cbc0dd429ef}\index{prt::Region@{prt::Region}!GetEndingAddressPointer@{GetEndingAddressPointer}}
+\index{GetEndingAddressPointer@{GetEndingAddressPointer}!prt::Region@{prt::Region}}
+\doxysubsubsection{\texorpdfstring{GetEndingAddressPointer()}{GetEndingAddressPointer()}}
+{\footnotesize\ttfamily \label{classprt_1_1_region_a2d3a1c73f7637081b9797cbc0dd429ef} 
+void \texorpdfstring{$\ast$}{*} prt\+::\+Region\+::\+Get\+Ending\+Address\+Pointer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_region_a93c279b835a8d42336b86e08214d517a}\index{prt::Region@{prt::Region}!GetSize@{GetSize}}
+\index{GetSize@{GetSize}!prt::Region@{prt::Region}}
+\doxysubsubsection{\texorpdfstring{GetSize()}{GetSize()}}
+{\footnotesize\ttfamily \label{classprt_1_1_region_a93c279b835a8d42336b86e08214d517a} 
+\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} prt\+::\+Region\+::\+Get\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_region_aa0c4e679b2ac31025f53e0eb7aee9c7d}\index{prt::Region@{prt::Region}!GetStartingAddress@{GetStartingAddress}}
+\index{GetStartingAddress@{GetStartingAddress}!prt::Region@{prt::Region}}
+\doxysubsubsection{\texorpdfstring{GetStartingAddress()}{GetStartingAddress()}}
+{\footnotesize\ttfamily \label{classprt_1_1_region_aa0c4e679b2ac31025f53e0eb7aee9c7d} 
+\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} prt\+::\+Region\+::\+Get\+Starting\+Address (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_region_ac2764dfb07eb63c587513c0941c11227}\index{prt::Region@{prt::Region}!GetStartingAddressPointer@{GetStartingAddressPointer}}
+\index{GetStartingAddressPointer@{GetStartingAddressPointer}!prt::Region@{prt::Region}}
+\doxysubsubsection{\texorpdfstring{GetStartingAddressPointer()}{GetStartingAddressPointer()}}
+{\footnotesize\ttfamily \label{classprt_1_1_region_ac2764dfb07eb63c587513c0941c11227} 
+void \texorpdfstring{$\ast$}{*} prt\+::\+Region\+::\+Get\+Starting\+Address\+Pointer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_region_a0158bb191174f29754828f55c3db7769}\index{prt::Region@{prt::Region}!IsEmpty@{IsEmpty}}
+\index{IsEmpty@{IsEmpty}!prt::Region@{prt::Region}}
+\doxysubsubsection{\texorpdfstring{IsEmpty()}{IsEmpty()}}
+{\footnotesize\ttfamily \label{classprt_1_1_region_a0158bb191174f29754828f55c3db7769} 
+bool prt\+::\+Region\+::\+Is\+Empty (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_region_abbec2e08c3ea1db4f97b7518a717f919}\index{prt::Region@{prt::Region}!operator const GLvoid \texorpdfstring{$\ast$}{*}@{operator const GLvoid \texorpdfstring{$\ast$}{*}}}
+\index{operator const GLvoid \texorpdfstring{$\ast$}{*}@{operator const GLvoid \texorpdfstring{$\ast$}{*}}!prt::Region@{prt::Region}}
+\doxysubsubsection{\texorpdfstring{operator const GLvoid \texorpdfstring{$\ast$}{*}()}{operator const GLvoid *()}}
+{\footnotesize\ttfamily \label{classprt_1_1_region_abbec2e08c3ea1db4f97b7518a717f919} 
+prt\+::\+Region\+::operator const GLvoid \texorpdfstring{$\ast$}{*} (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+\Hypertarget{classprt_1_1_region_af435c8fc3709022d92d53673ef3ec774}\index{prt::Region@{prt::Region}!operator const ubyte \texorpdfstring{$\ast$}{*}@{operator const ubyte \texorpdfstring{$\ast$}{*}}}
+\index{operator const ubyte \texorpdfstring{$\ast$}{*}@{operator const ubyte \texorpdfstring{$\ast$}{*}}!prt::Region@{prt::Region}}
+\doxysubsubsection{\texorpdfstring{operator const ubyte \texorpdfstring{$\ast$}{*}()}{operator const ubyte *()}}
+{\footnotesize\ttfamily \label{classprt_1_1_region_af435c8fc3709022d92d53673ef3ec774} 
+prt\+::\+Region\+::operator const \mbox{\hyperlink{namespaceprt_a517334a0fef8c04a14b61e0bcfc64d9d}{ubyte}} \texorpdfstring{$\ast$}{*} (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+\Hypertarget{classprt_1_1_region_a8f990bd0d2f0d6731921a34d90a3e633}\index{prt::Region@{prt::Region}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!prt::Region@{prt::Region}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily \label{classprt_1_1_region_a8f990bd0d2f0d6731921a34d90a3e633} 
+bool prt\+::\+Region\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_region}{Region}} \&}]{rhs}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_region_a725d7e2f964a97d106ae271ca0c049d8}\index{prt::Region@{prt::Region}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!prt::Region@{prt::Region}}
+\doxysubsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily \label{classprt_1_1_region_a725d7e2f964a97d106ae271ca0c049d8} 
+bool prt\+::\+Region\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_region}{Region}} \&}]{rhs}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_region_a8a3625c9712fbdb04a83c20a7cc7548e}\index{prt::Region@{prt::Region}!operator==@{operator==}}
+\index{operator==@{operator==}!prt::Region@{prt::Region}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{classprt_1_1_region_a8a3625c9712fbdb04a83c20a7cc7548e} 
+bool prt\+::\+Region\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_region}{Region}} \&}]{rhs}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_region_a1c3e89666b206e188116640a28445943}\index{prt::Region@{prt::Region}!operator$>$@{operator$>$}}
+\index{operator$>$@{operator$>$}!prt::Region@{prt::Region}}
+\doxysubsubsection{\texorpdfstring{operator$>$()}{operator>()}}
+{\footnotesize\ttfamily \label{classprt_1_1_region_a1c3e89666b206e188116640a28445943} 
+bool prt\+::\+Region\+::operator$>$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_region}{Region}} \&}]{rhs}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classprt_1_1_region_ade87832e0c91a7fbcc59454d708d65dc}\index{prt::Region@{prt::Region}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!prt::Region@{prt::Region}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily \label{classprt_1_1_region_ade87832e0c91a7fbcc59454d708d65dc} 
+std\+::ostream \& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{stream}{, }\item[{const \mbox{\hyperlink{classprt_1_1_region}{Region}} \&}]{rhs}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_region_aacc695d16259e71bcca93c0a0d943671}\index{prt::Region@{prt::Region}!size\_@{size\_}}
+\index{size\_@{size\_}!prt::Region@{prt::Region}}
+\doxysubsubsection{\texorpdfstring{size\_}{size\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_region_aacc695d16259e71bcca93c0a0d943671} 
+\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} prt\+::\+Region\+::size\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classprt_1_1_region_a6f2ef1267081e6667ebc59ee14e34346}\index{prt::Region@{prt::Region}!start\_@{start\_}}
+\index{start\_@{start\_}!prt::Region@{prt::Region}}
+\doxysubsubsection{\texorpdfstring{start\_}{start\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_region_a6f2ef1267081e6667ebc59ee14e34346} 
+\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} prt\+::\+Region\+::start\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{region_8h}{region.\+h}}\end{DoxyCompactItemize}

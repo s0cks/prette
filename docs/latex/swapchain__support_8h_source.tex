@@ -1,0 +1,69 @@
+\doxysection{swapchain\+\_\+support.\+h}
+\hypertarget{swapchain__support_8h_source}{}\label{swapchain__support_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/swapchain\_support.h@{/Users/tazz/Projects/prette/Sources/prette/swapchain\_support.h}}
+\mbox{\hyperlink{swapchain__support_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_SWAPCHAIN\_SUPPORT\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_SWAPCHAIN\_SUPPORT\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}prette/gfx.h"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00007\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structprt_1_1_swap_chain_support_details}{SwapChainSupportDetails}}\ \{}
+\DoxyCodeLine{00008\ \ \ VkSurfaceCapabilitiesKHR\ \mbox{\hyperlink{structprt_1_1_swap_chain_support_details_ae95ab73105dbfaef465abb1518cebe72}{surface\_capabilities}}\{\};}
+\DoxyCodeLine{00009\ \ \ std::vector<VkSurfaceFormatKHR>\ \mbox{\hyperlink{structprt_1_1_swap_chain_support_details_a69c1e88f436f62c0d205917640766794}{surface\_formats}}\{\};}
+\DoxyCodeLine{00010\ \ \ std::vector<VkPresentModeKHR>\ \mbox{\hyperlink{structprt_1_1_swap_chain_support_details_ab763df3601f31c758a869fea29dca113}{present\_modes}}\{\};}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1_swap_chain_support_details_adb55d6402126cd9bb5f963296a05b79b}{HasSurfaceFormats}}()\ const\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordflow}{return}\ !\mbox{\hyperlink{structprt_1_1_swap_chain_support_details_a69c1e88f436f62c0d205917640766794}{surface\_formats}}.empty();}
+\DoxyCodeLine{00014\ \ \ \}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1_swap_chain_support_details_a940458d8108fcd9472735e94dde82a7b}{HasPresentModes}}()\ const\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordflow}{return}\ !\mbox{\hyperlink{structprt_1_1_swap_chain_support_details_ab763df3601f31c758a869fea29dca113}{present\_modes}}.empty();}
+\DoxyCodeLine{00018\ \ \ \}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1_swap_chain_support_details_aa52925adfd8c5b456dcb1deff2774e25}{FindSurfaceFormat}}(\textcolor{keyword}{const}\ std::function<\textcolor{keywordtype}{bool}(\textcolor{keyword}{const}\ VkSurfaceFormatKHR\&)>\&\ filter)\ \textcolor{keyword}{const}\ -\/>\ \textcolor{keyword}{const}\ VkSurfaceFormatKHR\&\ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ pos\ =\ std::ranges::find\_if(\mbox{\hyperlink{structprt_1_1_swap_chain_support_details_a69c1e88f436f62c0d205917640766794}{surface\_formats}},\ filter);}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordflow}{if}\ (pos\ !=\ std::end(\mbox{\hyperlink{structprt_1_1_swap_chain_support_details_a69c1e88f436f62c0d205917640766794}{surface\_formats}}))}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (*pos);}
+\DoxyCodeLine{00024\ \ \ \ \ DLOG(WARNING)\ <<\ \textcolor{stringliteral}{"{}failed\ to\ find\ valid\ surface\ format\ for\ swap\ chain."{}};}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structprt_1_1_swap_chain_support_details_a69c1e88f436f62c0d205917640766794}{surface\_formats}}[0];}
+\DoxyCodeLine{00026\ \ \ \}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1_swap_chain_support_details_ad61988eabe4066524b523de466096ee6}{FindPresentMode}}(\textcolor{keyword}{const}\ std::function<\textcolor{keywordtype}{bool}(\textcolor{keyword}{const}\ VkPresentModeKHR\&)>\&\ filter)\ \textcolor{keyword}{const}\ -\/>\ VkPresentModeKHR\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ pos\ =\ std::ranges::find\_if(\mbox{\hyperlink{structprt_1_1_swap_chain_support_details_ab763df3601f31c758a869fea29dca113}{present\_modes}},\ filter);}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordflow}{if}\ (pos\ !=\ std::end(\mbox{\hyperlink{structprt_1_1_swap_chain_support_details_ab763df3601f31c758a869fea29dca113}{present\_modes}}))}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (*pos);}
+\DoxyCodeLine{00032\ \ \ \ \ DLOG(WARNING)\ <<\ \textcolor{stringliteral}{"{}failed\ to\ find\ valid\ present\ mode\ for\ swap\ chain."{}};}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordflow}{return}\ VK\_PRESENT\_MODE\_FIFO\_KHR;}
+\DoxyCodeLine{00034\ \ \ \}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1_swap_chain_support_details_ad4f68d30b7a1920a320f00224d5dad7e}{GetMaxImageCount}}()\ const\ -\/>\ uint32\_t\ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structprt_1_1_swap_chain_support_details_ae95ab73105dbfaef465abb1518cebe72}{surface\_capabilities}}.maxImageCount;}
+\DoxyCodeLine{00038\ \ \ \}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1_swap_chain_support_details_a09a1f9c52d22e24ecc44c805d1b69c8d}{HasMaxImage}}()\ const\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structprt_1_1_swap_chain_support_details_ad4f68d30b7a1920a320f00224d5dad7e}{GetMaxImageCount}}()\ >\ 0;}
+\DoxyCodeLine{00042\ \ \ \}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{structprt_1_1_swap_chain_support_details_a748bf4d73e2a9d6b631b4bdd53bf3d34}{ClampImageCount}}(uint32\_t\&\ image\_count)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{structprt_1_1_swap_chain_support_details_a09a1f9c52d22e24ecc44c805d1b69c8d}{HasMaxImage}}()\ \&\&\ image\_count\ >\ \mbox{\hyperlink{structprt_1_1_swap_chain_support_details_ad4f68d30b7a1920a320f00224d5dad7e}{GetMaxImageCount}}())}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ image\_count\ =\ \mbox{\hyperlink{structprt_1_1_swap_chain_support_details_ad4f68d30b7a1920a320f00224d5dad7e}{GetMaxImageCount}}();}
+\DoxyCodeLine{00047\ \ \ \}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1_swap_chain_support_details_afdcbe589478ea5036c832e0313a85048}{GetExtent}}()\ const\ -\/>\ VkExtent2D;}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ operator\ \textcolor{keywordtype}{bool}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structprt_1_1_swap_chain_support_details_adb55d6402126cd9bb5f963296a05b79b}{HasSurfaceFormats}}()\ \&\&\ \mbox{\hyperlink{structprt_1_1_swap_chain_support_details_a940458d8108fcd9472735e94dde82a7b}{HasPresentModes}}();}
+\DoxyCodeLine{00053\ \ \ \}}
+\DoxyCodeLine{00054\ \};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{namespaceprt_a76990b8a8c57f97195b0269573f14fbf}{QuerySwapChainSupport}}(\textcolor{keyword}{const}\ VkPhysicalDevice\&\ device,\ \textcolor{keyword}{const}\ VkSurfaceKHR\&\ surface)\ -\/>\ SwapChainSupportDetails;}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ HasSwapChainSupport(\textcolor{keyword}{const}\ VkPhysicalDevice\&\ device,\ \textcolor{keyword}{const}\ VkSurfaceKHR\&\ surface)\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00059\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespaceprt_a76990b8a8c57f97195b0269573f14fbf}{QuerySwapChainSupport}}(device,\ surface);}
+\DoxyCodeLine{00060\ \}}
+\DoxyCodeLine{00061\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_SWAPCHAIN\_SUPPORT\_H}}
+
+\end{DoxyCode}

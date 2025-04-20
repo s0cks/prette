@@ -1,0 +1,196 @@
+\doxysection{prt\+::Rate\+Limited\+Ticker\texorpdfstring{$<$}{<} Rate \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classprt_1_1_rate_limited_ticker}{}\label{classprt_1_1_rate_limited_ticker}\index{prt::RateLimitedTicker$<$ Rate $>$@{prt::RateLimitedTicker$<$ Rate $>$}}
+
+
+{\ttfamily \#include $<$ticker.\+h$>$}
+
+
+
+Inheritance diagram for prt\+::Rate\+Limited\+Ticker\texorpdfstring{$<$}{<} Rate \texorpdfstring{$>$}{>}\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=193pt]{classprt_1_1_rate_limited_ticker__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for prt\+::Rate\+Limited\+Ticker\texorpdfstring{$<$}{<} Rate \texorpdfstring{$>$}{>}\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classprt_1_1_rate_limited_ticker__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_rate_limited_ticker_a8df8e546b1dd679eb8b6139dac579035}{Rate\+Limited\+Ticker}} (\mbox{\hyperlink{classprt_1_1uv_1_1_loop}{uv\+::\+Loop}} \texorpdfstring{$\ast$}{*}loop, const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} start\+\_\+ns=uv\+::\+Now())
+\item 
+\mbox{\hyperlink{classprt_1_1_rate_limited_ticker_a4e4df3e5414c1171b053d8426f5108c0}{\texorpdfstring{$\sim$}{\string~}\+Rate\+Limited\+Ticker}} () override=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1_rate_limited_ticker_aa8b9c589d4816f4ce797f0f06e470fd9}{Get\+Rate}} () const -\/$>$ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classprt_1_1_ticker}{prt\+::\+Ticker}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_ticker_aa81ebe2e3a2ae2e10edabf7552251c8c}{Ticker}} (\mbox{\hyperlink{classprt_1_1uv_1_1_loop}{uv\+::\+Loop}} \texorpdfstring{$\ast$}{*}loop, const uint64\+\_\+t start\+\_\+ns=uv\+::\+Now())
+\item 
+virtual \mbox{\hyperlink{classprt_1_1_ticker_ad7fb5c70ffa876dcdcd6b2713cf04f79}{\texorpdfstring{$\sim$}{\string~}\+Ticker}} ()=default
+\item 
+void \mbox{\hyperlink{classprt_1_1_ticker_abd42cfe498a50ea5c429d857e715b3b1}{Start}} ()
+\item 
+void \mbox{\hyperlink{classprt_1_1_ticker_abc6cd4ba905227a1833e02525f4f7f62}{Stop}} ()
+\item 
+void \mbox{\hyperlink{classprt_1_1_ticker_acec7fc4c8bef874213d44148ca48b429}{Close}} ()
+\item 
+auto \mbox{\hyperlink{classprt_1_1_ticker_ab33da97c393bf80b9887d7de392d4443}{Get\+Tick\+Subject}} () const -\/$>$ const rx\+::subject$<$ \mbox{\hyperlink{classprt_1_1_tick}{Tick}} $>$ \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_ticker_aaf3a2fa00fdb5833a2316a217568d23b}{On\+Tick}} () const -\/$>$ rx\+::observable$<$ \mbox{\hyperlink{classprt_1_1_tick}{Tick}} $>$
+\item 
+auto \mbox{\hyperlink{classprt_1_1_ticker_a3650bf022a54ae1f0c13cf9c1eb6ece2}{Get\+Epoch\+Tick}} () const -\/$>$ const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_ticker_a62bb7a93aae902de2f467ea3e19c6fe6}{Get\+Current\+Tick}} () const -\/$>$ const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_ticker_a207184ece440cfa3527561254b236538}{Get\+Previous\+Tick}} () const -\/$>$ const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_ticker_aac0a189366d974ec44f144ce71170467}{Get\+Total\+Ticks}} () const -\/$>$ uint64\+\_\+t
+\item 
+auto \mbox{\hyperlink{classprt_1_1_ticker_a1e0356e3323938cdc8a42692973b494b}{Get\+Time\+Since\+Current\+Tick}} (const uint64\+\_\+t ts=uv\+\_\+hrtime()) const -\/$>$ \mbox{\hyperlink{classprt_1_1_tick_delta}{Tick\+Delta}}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_ticker_a3d07b116e5bfb823fe41928bcaba3558}{Get\+Time\+Since\+Last\+Tick}} (const uint64\+\_\+t ts=uv\+\_\+hrtime()) const -\/$>$ \mbox{\hyperlink{classprt_1_1_tick_delta}{Tick\+Delta}}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_ticker_a5c289fc8ebb3002380c27ef68f05f1a8}{Get\+Ticks\+Per\+Second}} () const -\/$>$ const \mbox{\hyperlink{namespaceprt_ace24bc62766da60be0236f69bde71470}{Ticks\+Per\+Second}} \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_ticker_a7e5c1b99b43b1a7949fd2adb3fc7c361}{Get\+Tick\+Duration\+Series}} () const -\/$>$ const \mbox{\hyperlink{namespaceprt_ab6cd3df40a04449b31d111b69068dde8}{Tick\+Duration\+Series}} \&
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classprt_1_1_rate_limited_ticker_a0162946ec48257cf9bfe3fac3add39dd}{Set\+Skipped}} (const bool skipped=true)
+\item 
+void \mbox{\hyperlink{classprt_1_1_rate_limited_ticker_af0a3dc53c8253f16ac071c5ac13bf20c}{Clear\+Skipped}} ()
+\item 
+auto \mbox{\hyperlink{classprt_1_1_rate_limited_ticker_ae6041731d7282861dc28d8bf7c855830}{Is\+Skipped}} () -\/$>$ bool
+\item 
+void \mbox{\hyperlink{classprt_1_1_rate_limited_ticker_a23afef37e90b8790f2f3643116212d74}{Idle}} () override
+\item 
+void \mbox{\hyperlink{classprt_1_1_rate_limited_ticker_a1e8aa684bd605224f61edaf3bc4d00b9}{Prepare}} () override
+\item 
+void \mbox{\hyperlink{classprt_1_1_rate_limited_ticker_a5b02de11ba4de7b48abf284f47c586fe}{Check}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classprt_1_1_ticker}{prt\+::\+Ticker}}}
+\begin{DoxyCompactItemize}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_ticker_ac6b89476fe42ddfa5a64483014b916c7}{Get\+Duration}} () const -\/$>$ uint64\+\_\+t
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classprt_1_1_rate_limited_ticker_af87a5ed779417dfc0f138db860f92966}{remaining\+\_\+}} = 0
+\item 
+bool \mbox{\hyperlink{classprt_1_1_rate_limited_ticker_af339566d0266185013a13f3b4be2ee16}{skipped\+\_\+}} \{\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_rate_limited_ticker_a8df8e546b1dd679eb8b6139dac579035}\index{prt::RateLimitedTicker$<$ Rate $>$@{prt::RateLimitedTicker$<$ Rate $>$}!RateLimitedTicker@{RateLimitedTicker}}
+\index{RateLimitedTicker@{RateLimitedTicker}!prt::RateLimitedTicker$<$ Rate $>$@{prt::RateLimitedTicker$<$ Rate $>$}}
+\doxysubsubsection{\texorpdfstring{RateLimitedTicker()}{RateLimitedTicker()}}
+{\footnotesize\ttfamily \label{classprt_1_1_rate_limited_ticker_a8df8e546b1dd679eb8b6139dac579035} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Rate$>$ \\
+\mbox{\hyperlink{classprt_1_1_rate_limited_ticker}{prt\+::\+Rate\+Limited\+Ticker}}$<$ Rate $>$\+::\+Rate\+Limited\+Ticker (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1uv_1_1_loop}{uv\+::\+Loop}} \texorpdfstring{$\ast$}{*}}]{loop}{, }\item[{const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}}]{start\+\_\+ns}{ = {\ttfamily uv\+:\+:Now()}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+\Hypertarget{classprt_1_1_rate_limited_ticker_a4e4df3e5414c1171b053d8426f5108c0}\index{prt::RateLimitedTicker$<$ Rate $>$@{prt::RateLimitedTicker$<$ Rate $>$}!````~RateLimitedTicker@{\texorpdfstring{$\sim$}{\string~}RateLimitedTicker}}
+\index{````~RateLimitedTicker@{\texorpdfstring{$\sim$}{\string~}RateLimitedTicker}!prt::RateLimitedTicker$<$ Rate $>$@{prt::RateLimitedTicker$<$ Rate $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}RateLimitedTicker()}{\string~RateLimitedTicker()}}
+{\footnotesize\ttfamily \label{classprt_1_1_rate_limited_ticker_a4e4df3e5414c1171b053d8426f5108c0} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Rate$>$ \\
+\mbox{\hyperlink{classprt_1_1_rate_limited_ticker}{prt\+::\+Rate\+Limited\+Ticker}}$<$ Rate $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classprt_1_1_rate_limited_ticker}{Rate\+Limited\+Ticker}} (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_rate_limited_ticker_a5b02de11ba4de7b48abf284f47c586fe}\index{prt::RateLimitedTicker$<$ Rate $>$@{prt::RateLimitedTicker$<$ Rate $>$}!Check@{Check}}
+\index{Check@{Check}!prt::RateLimitedTicker$<$ Rate $>$@{prt::RateLimitedTicker$<$ Rate $>$}}
+\doxysubsubsection{\texorpdfstring{Check()}{Check()}}
+{\footnotesize\ttfamily \label{classprt_1_1_rate_limited_ticker_a5b02de11ba4de7b48abf284f47c586fe} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Rate$>$ \\
+void \mbox{\hyperlink{classprt_1_1_rate_limited_ticker}{prt\+::\+Rate\+Limited\+Ticker}}$<$ Rate $>$\+::\+Check (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{classprt_1_1_ticker_a26b4148373fc0d8d6039f8e120ef795e}{prt\+::\+Ticker}}.
+
+\Hypertarget{classprt_1_1_rate_limited_ticker_af0a3dc53c8253f16ac071c5ac13bf20c}\index{prt::RateLimitedTicker$<$ Rate $>$@{prt::RateLimitedTicker$<$ Rate $>$}!ClearSkipped@{ClearSkipped}}
+\index{ClearSkipped@{ClearSkipped}!prt::RateLimitedTicker$<$ Rate $>$@{prt::RateLimitedTicker$<$ Rate $>$}}
+\doxysubsubsection{\texorpdfstring{ClearSkipped()}{ClearSkipped()}}
+{\footnotesize\ttfamily \label{classprt_1_1_rate_limited_ticker_af0a3dc53c8253f16ac071c5ac13bf20c} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Rate$>$ \\
+void \mbox{\hyperlink{classprt_1_1_rate_limited_ticker}{prt\+::\+Rate\+Limited\+Ticker}}$<$ Rate $>$\+::\+Clear\+Skipped (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+\Hypertarget{classprt_1_1_rate_limited_ticker_aa8b9c589d4816f4ce797f0f06e470fd9}\index{prt::RateLimitedTicker$<$ Rate $>$@{prt::RateLimitedTicker$<$ Rate $>$}!GetRate@{GetRate}}
+\index{GetRate@{GetRate}!prt::RateLimitedTicker$<$ Rate $>$@{prt::RateLimitedTicker$<$ Rate $>$}}
+\doxysubsubsection{\texorpdfstring{GetRate()}{GetRate()}}
+{\footnotesize\ttfamily \label{classprt_1_1_rate_limited_ticker_aa8b9c589d4816f4ce797f0f06e470fd9} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Rate$>$ \\
+auto \mbox{\hyperlink{classprt_1_1_rate_limited_ticker}{prt\+::\+Rate\+Limited\+Ticker}}$<$ Rate $>$\+::\+Get\+Rate (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_rate_limited_ticker_a23afef37e90b8790f2f3643116212d74}\index{prt::RateLimitedTicker$<$ Rate $>$@{prt::RateLimitedTicker$<$ Rate $>$}!Idle@{Idle}}
+\index{Idle@{Idle}!prt::RateLimitedTicker$<$ Rate $>$@{prt::RateLimitedTicker$<$ Rate $>$}}
+\doxysubsubsection{\texorpdfstring{Idle()}{Idle()}}
+{\footnotesize\ttfamily \label{classprt_1_1_rate_limited_ticker_a23afef37e90b8790f2f3643116212d74} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Rate$>$ \\
+void \mbox{\hyperlink{classprt_1_1_rate_limited_ticker}{prt\+::\+Rate\+Limited\+Ticker}}$<$ Rate $>$\+::\+Idle (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{classprt_1_1_ticker_a9137142471f8cf571617325eccf642ee}{prt\+::\+Ticker}}.
+
+\Hypertarget{classprt_1_1_rate_limited_ticker_ae6041731d7282861dc28d8bf7c855830}\index{prt::RateLimitedTicker$<$ Rate $>$@{prt::RateLimitedTicker$<$ Rate $>$}!IsSkipped@{IsSkipped}}
+\index{IsSkipped@{IsSkipped}!prt::RateLimitedTicker$<$ Rate $>$@{prt::RateLimitedTicker$<$ Rate $>$}}
+\doxysubsubsection{\texorpdfstring{IsSkipped()}{IsSkipped()}}
+{\footnotesize\ttfamily \label{classprt_1_1_rate_limited_ticker_ae6041731d7282861dc28d8bf7c855830} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Rate$>$ \\
+auto \mbox{\hyperlink{classprt_1_1_rate_limited_ticker}{prt\+::\+Rate\+Limited\+Ticker}}$<$ Rate $>$\+::\+Is\+Skipped (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+\Hypertarget{classprt_1_1_rate_limited_ticker_a1e8aa684bd605224f61edaf3bc4d00b9}\index{prt::RateLimitedTicker$<$ Rate $>$@{prt::RateLimitedTicker$<$ Rate $>$}!Prepare@{Prepare}}
+\index{Prepare@{Prepare}!prt::RateLimitedTicker$<$ Rate $>$@{prt::RateLimitedTicker$<$ Rate $>$}}
+\doxysubsubsection{\texorpdfstring{Prepare()}{Prepare()}}
+{\footnotesize\ttfamily \label{classprt_1_1_rate_limited_ticker_a1e8aa684bd605224f61edaf3bc4d00b9} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Rate$>$ \\
+void \mbox{\hyperlink{classprt_1_1_rate_limited_ticker}{prt\+::\+Rate\+Limited\+Ticker}}$<$ Rate $>$\+::\+Prepare (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{classprt_1_1_ticker_a7f2701b497d35e564b7766ee70a42e47}{prt\+::\+Ticker}}.
+
+\Hypertarget{classprt_1_1_rate_limited_ticker_a0162946ec48257cf9bfe3fac3add39dd}\index{prt::RateLimitedTicker$<$ Rate $>$@{prt::RateLimitedTicker$<$ Rate $>$}!SetSkipped@{SetSkipped}}
+\index{SetSkipped@{SetSkipped}!prt::RateLimitedTicker$<$ Rate $>$@{prt::RateLimitedTicker$<$ Rate $>$}}
+\doxysubsubsection{\texorpdfstring{SetSkipped()}{SetSkipped()}}
+{\footnotesize\ttfamily \label{classprt_1_1_rate_limited_ticker_a0162946ec48257cf9bfe3fac3add39dd} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Rate$>$ \\
+void \mbox{\hyperlink{classprt_1_1_rate_limited_ticker}{prt\+::\+Rate\+Limited\+Ticker}}$<$ Rate $>$\+::\+Set\+Skipped (\begin{DoxyParamCaption}\item[{const bool}]{skipped}{ = {\ttfamily true}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_rate_limited_ticker_af87a5ed779417dfc0f138db860f92966}\index{prt::RateLimitedTicker$<$ Rate $>$@{prt::RateLimitedTicker$<$ Rate $>$}!remaining\_@{remaining\_}}
+\index{remaining\_@{remaining\_}!prt::RateLimitedTicker$<$ Rate $>$@{prt::RateLimitedTicker$<$ Rate $>$}}
+\doxysubsubsection{\texorpdfstring{remaining\_}{remaining\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_rate_limited_ticker_af87a5ed779417dfc0f138db860f92966} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Rate$>$ \\
+uint64\+\_\+t \mbox{\hyperlink{classprt_1_1_rate_limited_ticker}{prt\+::\+Rate\+Limited\+Ticker}}$<$ Rate $>$\+::remaining\+\_\+ = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_rate_limited_ticker_af339566d0266185013a13f3b4be2ee16}\index{prt::RateLimitedTicker$<$ Rate $>$@{prt::RateLimitedTicker$<$ Rate $>$}!skipped\_@{skipped\_}}
+\index{skipped\_@{skipped\_}!prt::RateLimitedTicker$<$ Rate $>$@{prt::RateLimitedTicker$<$ Rate $>$}}
+\doxysubsubsection{\texorpdfstring{skipped\_}{skipped\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_rate_limited_ticker_af339566d0266185013a13f3b4be2ee16} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Rate$>$ \\
+bool \mbox{\hyperlink{classprt_1_1_rate_limited_ticker}{prt\+::\+Rate\+Limited\+Ticker}}$<$ Rate $>$\+::skipped\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{ticker_8h}{ticker.\+h}}\end{DoxyCompactItemize}

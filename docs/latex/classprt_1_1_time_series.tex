@@ -1,0 +1,131 @@
+\doxysection{prt\+::Time\+Series\texorpdfstring{$<$}{<} Capacity \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classprt_1_1_time_series}{}\label{classprt_1_1_time_series}\index{prt::TimeSeries$<$ Capacity $>$@{prt::TimeSeries$<$ Capacity $>$}}
+
+
+{\ttfamily \#include $<$series.\+h$>$}
+
+
+
+Inheritance diagram for prt\+::Time\+Series\texorpdfstring{$<$}{<} Capacity \texorpdfstring{$>$}{>}\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=220pt]{classprt_1_1_time_series__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for prt\+::Time\+Series\texorpdfstring{$<$}{<} Capacity \texorpdfstring{$>$}{>}\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=220pt]{classprt_1_1_time_series__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_time_series_ad933e04156c8024e7c23be2af4bac572}{Time\+Series}} ()=default
+\item 
+\mbox{\hyperlink{classprt_1_1_time_series_a1f8bdbc426e2372747843492e9ac4495}{\texorpdfstring{$\sim$}{\string~}\+Time\+Series}} () override=default
+\item 
+\mbox{\hyperlink{classprt_1_1_time_series_a2cb1ad7183b03bab48224b81a4cb37fb}{operator rx\+::observable$<$ uint64\+\_\+t $>$}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classprt_1_1_numeric_series}{prt\+::\+Numeric\+Series$<$ uint64\+\_\+t, 10 $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_numeric_series_a79ca83a6ec36a555a9d67e96c0b78790}{Numeric\+Series}} ()=default
+\item 
+\mbox{\hyperlink{classprt_1_1_numeric_series_a2a9dc7cb90181a98676049efc20cac3f}{\texorpdfstring{$\sim$}{\string~}\+Numeric\+Series}} () override=default
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classprt_1_1_numeric_series_a540f50145218fff7072a80ff7ed78c06}{first}} () const
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classprt_1_1_numeric_series_a69aa8eb0283b6dcb3f5b4fb30622f1e1}{last}} () const
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classprt_1_1_numeric_series_a4c9ce9ed1b71d7151ff5935a776c8b5f}{average}} () const
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classprt_1_1_numeric_series_a8eab9f774b9055be83fa44c6031cccef}{max}} () const
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classprt_1_1_numeric_series_a9a7bc431f4de689caf2e3157e5d49ab7}{min}} () const
+\item 
+\mbox{\hyperlink{classprt_1_1_numeric_series_a51b7cbde4936a46011f4cb25b2ad41c7}{operator rx\+::observable$<$ uint64\+\_\+t $>$}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classprt_1_1_series}{prt\+::\+Series$<$ uint64\+\_\+t, Capacity $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classprt_1_1_series_aeb05a5ea5f917aa47f8cfd2475e07f38}{\texorpdfstring{$\sim$}{\string~}\+Series}} ()=default
+\item 
+void \mbox{\hyperlink{classprt_1_1_series_aa989071b531a5a265c4b6d2d4cc05619}{Append}} (const uint64\+\_\+t value)
+\item 
+uint64\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1_series_a16943d2ddf1c309b4fda96e008f11009}{begin}} ()
+\item 
+uint64\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1_series_a8419800925612a23ba6323351295b31f}{begin}} () const
+\item 
+uint64\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1_series_abb5406100a3cfdb006ac70d8c4a2e941}{end}} ()
+\item 
+uint64\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1_series_abe224c30af8f0e16937231b7c3ce06ca}{end}} () const
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classprt_1_1_series_a6fe427b2e66e63db8345283f16f6a750}{count}} () const
+\item 
+rx\+::observable$<$ uint64\+\_\+t $>$ \mbox{\hyperlink{classprt_1_1_series_adfbead28596b08bf36a979c4b9957aad}{To\+Observable}} () const
+\item 
+\mbox{\hyperlink{classprt_1_1_series_a2d61268ebe14ce36482bcd2bd728888c}{operator rx\+::observable$<$ uint64\+\_\+t $>$}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+std\+::ostream \& \mbox{\hyperlink{classprt_1_1_time_series_a591c390ad414fd5b4434a66721230ac8}{operator$<$$<$}} (std\+::ostream \&stream, const \mbox{\hyperlink{classprt_1_1_time_series}{Time\+Series}}$<$ Capacity $>$ \&rhs)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classprt_1_1_series}{prt\+::\+Series$<$ uint64\+\_\+t, Capacity $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_series_aea8588722fb2b1c49c8890aef7ab867c}{Series}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classprt_1_1_series}{prt\+::\+Series$<$ uint64\+\_\+t, Capacity $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_circular_buffer}{Circular\+Buffer}}$<$ uint64\+\_\+t, Capacity $>$ \mbox{\hyperlink{classprt_1_1_series_a1ca9ac6be2e5fa60345e5dfb480dd717}{data\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_time_series_ad933e04156c8024e7c23be2af4bac572}\index{prt::TimeSeries$<$ Capacity $>$@{prt::TimeSeries$<$ Capacity $>$}!TimeSeries@{TimeSeries}}
+\index{TimeSeries@{TimeSeries}!prt::TimeSeries$<$ Capacity $>$@{prt::TimeSeries$<$ Capacity $>$}}
+\doxysubsubsection{\texorpdfstring{TimeSeries()}{TimeSeries()}}
+{\footnotesize\ttfamily \label{classprt_1_1_time_series_ad933e04156c8024e7c23be2af4bac572} 
+template$<$const uint64\+\_\+t Capacity = 10$>$ \\
+\mbox{\hyperlink{classprt_1_1_time_series}{prt\+::\+Time\+Series}}$<$ Capacity $>$\+::\+Time\+Series (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{classprt_1_1_time_series_a1f8bdbc426e2372747843492e9ac4495}\index{prt::TimeSeries$<$ Capacity $>$@{prt::TimeSeries$<$ Capacity $>$}!````~TimeSeries@{\texorpdfstring{$\sim$}{\string~}TimeSeries}}
+\index{````~TimeSeries@{\texorpdfstring{$\sim$}{\string~}TimeSeries}!prt::TimeSeries$<$ Capacity $>$@{prt::TimeSeries$<$ Capacity $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}TimeSeries()}{\string~TimeSeries()}}
+{\footnotesize\ttfamily \label{classprt_1_1_time_series_a1f8bdbc426e2372747843492e9ac4495} 
+template$<$const uint64\+\_\+t Capacity = 10$>$ \\
+\mbox{\hyperlink{classprt_1_1_time_series}{prt\+::\+Time\+Series}}$<$ Capacity $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classprt_1_1_time_series}{Time\+Series}} (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_time_series_a2cb1ad7183b03bab48224b81a4cb37fb}\index{prt::TimeSeries$<$ Capacity $>$@{prt::TimeSeries$<$ Capacity $>$}!operator rx::observable$<$ uint64\_t $>$@{operator rx::observable$<$ uint64\_t $>$}}
+\index{operator rx::observable$<$ uint64\_t $>$@{operator rx::observable$<$ uint64\_t $>$}!prt::TimeSeries$<$ Capacity $>$@{prt::TimeSeries$<$ Capacity $>$}}
+\doxysubsubsection{\texorpdfstring{operator rx::observable$<$ uint64\_t $>$()}{operator rx::observable< uint64\_t >()}}
+{\footnotesize\ttfamily \label{classprt_1_1_time_series_a2cb1ad7183b03bab48224b81a4cb37fb} 
+template$<$const uint64\+\_\+t Capacity = 10$>$ \\
+\mbox{\hyperlink{classprt_1_1_time_series}{prt\+::\+Time\+Series}}$<$ Capacity $>$\+::operator rx\+::observable$<$ uint64\+\_\+t $>$ (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classprt_1_1_time_series_a591c390ad414fd5b4434a66721230ac8}\index{prt::TimeSeries$<$ Capacity $>$@{prt::TimeSeries$<$ Capacity $>$}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!prt::TimeSeries$<$ Capacity $>$@{prt::TimeSeries$<$ Capacity $>$}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily \label{classprt_1_1_time_series_a591c390ad414fd5b4434a66721230ac8} 
+template$<$const uint64\+\_\+t Capacity = 10$>$ \\
+std\+::ostream \& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{stream}{, }\item[{const \mbox{\hyperlink{classprt_1_1_time_series}{Time\+Series}}$<$ Capacity $>$ \&}]{rhs}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{series_8h}{series.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,93 @@
+\doxysection{prt\+::Gui\+Updated\+Event Class Reference}
+\hypertarget{classprt_1_1_gui_updated_event}{}\label{classprt_1_1_gui_updated_event}\index{prt::GuiUpdatedEvent@{prt::GuiUpdatedEvent}}
+
+
+{\ttfamily \#include $<$gui.\+h$>$}
+
+
+
+Inheritance diagram for prt\+::Gui\+Updated\+Event\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=191pt]{classprt_1_1_gui_updated_event__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for prt\+::Gui\+Updated\+Event\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=206pt]{classprt_1_1_gui_updated_event__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_gui_updated_event_a75f8c044a36c0b48791e1840423f0bc6}{Gui\+Updated\+Event}} (\mbox{\hyperlink{classprt_1_1_gui}{Gui}} \texorpdfstring{$\ast$}{*}gui)
+\item 
+\mbox{\hyperlink{classprt_1_1_gui_updated_event_adeb935b99eaf41f03840dd6d077d0663}{\texorpdfstring{$\sim$}{\string~}\+Gui\+Updated\+Event}} () override=default
+\item 
+\mbox{\hyperlink{classprt_1_1_gui_updated_event_a66df54b3b20e0746e0858890ab6b69cd}{DECLARE\+\_\+\+EVENT\+\_\+\+TYPE}} (\mbox{\hyperlink{classprt_1_1_gui_event}{Gui\+Event}}, Gui\+Updated)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classprt_1_1_gui_event}{prt\+::\+Gui\+Event}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_gui_event_aad9af3fcc3eced41bf3119cbcca04e90}{\texorpdfstring{$\sim$}{\string~}\+Gui\+Event}} () override=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1_gui_event_afcd516d67f7eb2df853d3e85bd5ae8ee}{Get\+Gui}} () const -\/$>$ \mbox{\hyperlink{classprt_1_1_gui}{Gui}} \texorpdfstring{$\ast$}{*}
+\item 
+\mbox{\hyperlink{classprt_1_1_gui_event_a6654b32f752a2dbf11a6b3b739dc720e}{DEFINE\+\_\+\+EVENT\+\_\+\+PROTOTYPE\+\_\+\+TYPE}} (\mbox{\hyperlink{classprt_1_1_gui}{Gui}}, \mbox{\hyperlink{namespaceprt_a71898c3f0b0bfdc40e2c14ecd1424bfa}{FOR\+\_\+\+EACH\+\_\+\+GUI\+\_\+\+EVENT}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classprt_1_1_event}{prt\+::\+Event}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classprt_1_1_event_a4852e85c48ebb80d6c96fe0d13d5ae6a}{\texorpdfstring{$\sim$}{\string~}\+Event}} ()=default
+\item 
+virtual auto \mbox{\hyperlink{classprt_1_1_event_a674cd356a472771aad69534b2959500e}{Get\+Name}} () const -\/$>$ const char \texorpdfstring{$\ast$}{*}=0
+\item 
+virtual auto \mbox{\hyperlink{classprt_1_1_event_a90911d9644cf7ec9b4f05053a3b632af}{To\+String}} () const -\/$>$ std\+::string=0
+\item 
+virtual void \mbox{\hyperlink{classprt_1_1_event_a9f54e07e32d052203fe0e08a185746bc}{To\+Table}} (lua\+\_\+\+State \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{engine_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}}) const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classprt_1_1_gui_event}{prt\+::\+Gui\+Event}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_gui_event_afb747e75f685cda53fcf6c4d1c9c7b3f}{Gui\+Event}} (\mbox{\hyperlink{classprt_1_1_gui}{Gui}} \texorpdfstring{$\ast$}{*}gui)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classprt_1_1_event}{prt\+::\+Event}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_event_a68ae1e6264631e55933648b66d5dd11b}{Event}} ()=default
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_gui_updated_event_a75f8c044a36c0b48791e1840423f0bc6}\index{prt::GuiUpdatedEvent@{prt::GuiUpdatedEvent}!GuiUpdatedEvent@{GuiUpdatedEvent}}
+\index{GuiUpdatedEvent@{GuiUpdatedEvent}!prt::GuiUpdatedEvent@{prt::GuiUpdatedEvent}}
+\doxysubsubsection{\texorpdfstring{GuiUpdatedEvent()}{GuiUpdatedEvent()}}
+{\footnotesize\ttfamily \label{classprt_1_1_gui_updated_event_a75f8c044a36c0b48791e1840423f0bc6} 
+prt\+::\+Gui\+Updated\+Event\+::\+Gui\+Updated\+Event (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_gui}{Gui}} \texorpdfstring{$\ast$}{*}}]{gui}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+\Hypertarget{classprt_1_1_gui_updated_event_adeb935b99eaf41f03840dd6d077d0663}\index{prt::GuiUpdatedEvent@{prt::GuiUpdatedEvent}!````~GuiUpdatedEvent@{\texorpdfstring{$\sim$}{\string~}GuiUpdatedEvent}}
+\index{````~GuiUpdatedEvent@{\texorpdfstring{$\sim$}{\string~}GuiUpdatedEvent}!prt::GuiUpdatedEvent@{prt::GuiUpdatedEvent}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}GuiUpdatedEvent()}{\string~GuiUpdatedEvent()}}
+{\footnotesize\ttfamily \label{classprt_1_1_gui_updated_event_adeb935b99eaf41f03840dd6d077d0663} 
+prt\+::\+Gui\+Updated\+Event\+::\texorpdfstring{$\sim$}{\string~}\+Gui\+Updated\+Event (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_gui_updated_event_a66df54b3b20e0746e0858890ab6b69cd}\index{prt::GuiUpdatedEvent@{prt::GuiUpdatedEvent}!DECLARE\_EVENT\_TYPE@{DECLARE\_EVENT\_TYPE}}
+\index{DECLARE\_EVENT\_TYPE@{DECLARE\_EVENT\_TYPE}!prt::GuiUpdatedEvent@{prt::GuiUpdatedEvent}}
+\doxysubsubsection{\texorpdfstring{DECLARE\_EVENT\_TYPE()}{DECLARE\_EVENT\_TYPE()}}
+{\footnotesize\ttfamily \label{classprt_1_1_gui_updated_event_a66df54b3b20e0746e0858890ab6b69cd} 
+prt\+::\+Gui\+Updated\+Event\+::\+DECLARE\+\_\+\+EVENT\+\_\+\+TYPE (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_gui_event}{Gui\+Event}}}]{}{, }\item[{Gui\+Updated}]{}{}\end{DoxyParamCaption})}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{gui_8h}{gui.\+h}}\end{DoxyCompactItemize}

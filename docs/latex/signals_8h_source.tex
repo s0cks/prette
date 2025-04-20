@@ -1,0 +1,54 @@
+\doxysection{signals.\+h}
+\hypertarget{signals_8h_source}{}\label{signals_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/signals.h@{/Users/tazz/Projects/prette/Sources/prette/signals.h}}
+\mbox{\hyperlink{signals_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_SIGNALS\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_SIGNALS\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <ostream>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <csignal>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ FOR\_EACH\_SIGNAL(V)\ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\ \ V(Abort,\ \ \ \ \ \ \ \ \ \ \ \ \ \ SIGABRT)\ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\ \ V(FpError,\ \ \ \ \ \ \ \ \ \ \ \ SIGFPE)\ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\ \ V(IllegalInstr,\ \ \ \ \ \ \ SIGILL)\ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\ \ V(Interrupt,\ \ \ \ \ \ \ \ \ \ SIGINT)\ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\ \ V(Segfault,\ \ \ \ \ \ \ \ \ \ \ SIGSEGV)\ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\ \ V(Terminate,\ \ \ \ \ \ \ \ \ \ SIGTERM)}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{namespaceprt_a3a577f506530fc09425c3e66708e277a}{Signal}}\ :\ \textcolor{keywordtype}{int}\ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{namespaceprt_a3a577f506530fc09425c3e66708e277aaeac9eac4d96848660d2790c5a49531ea}{kNone}}\ =\ 0,}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#define\ DEFINE\_SIGNAL(Name,\ Value)\ \ k\#\#Name\#\#Signal\ =\ (Value),}}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{signals_8h_ad3ddbe5fcb33438de9a52dc54465512a}{FOR\_EACH\_SIGNAL}}(\mbox{\hyperlink{signals_8h_aa10e1c4675bec3521d611d046ce1179b}{DEFINE\_SIGNAL}})}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#undef\ DEFINE\_SIGNAL}}
+\DoxyCodeLine{00021\ \ \ \};}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*}
+\DoxyCodeLine{00024\ \ \ GetSignalName(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a3a577f506530fc09425c3e66708e277a}{Signal}}\&\ rhs)\ \{}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordflow}{switch}(rhs)\ \{}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ DEFINE\_GET\_NAME(Name,\ Value)\ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\ \ \ \ \ \ case\ k\#\#Name\#\#Signal:\ return\ \#Name;}}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \mbox{\hyperlink{signals_8h_ad3ddbe5fcb33438de9a52dc54465512a}{FOR\_EACH\_SIGNAL}}(\mbox{\hyperlink{signals_8h_a92fafdf86b78f22e1f62e9bd89598293}{DEFINE\_GET\_NAME}})}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#undef\ DEFINE\_GET\_NAME}}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \textcolor{keywordflow}{default}:\ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Unknown\ Signal."{}};}
+\DoxyCodeLine{00031\ \ \ \ \ \}}
+\DoxyCodeLine{00032\ \ \ \}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ std::ostream\&}
+\DoxyCodeLine{00035\ \ \ operator<<(std::ostream\&\ stream,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a3a577f506530fc09425c3e66708e277a}{Signal}}\&\ rhs)\ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordflow}{switch}(rhs)\ \{}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#define\ DEFINE\_TO\_STRING(Name,\ Value)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\ \ \ \ \ \ case\ k\#\#Name\#\#Signal:\ return\ stream\ <<\ \#Name\ <<\ "{}\ ("{}\ <<\ \#Value\ <<\ "{}:"{}\ <<\ (Value)\ <<\ "{})"{};}}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \mbox{\hyperlink{signals_8h_ad3ddbe5fcb33438de9a52dc54465512a}{FOR\_EACH\_SIGNAL}}(\mbox{\hyperlink{pipeline__json_8h_a3a81f22f17b4931cbdde4b7218385134}{DEFINE\_TO\_STRING}})}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#undef\ DEFINE\_TO\_STRING}}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \textcolor{keywordflow}{default}:\ \textcolor{keywordflow}{return}\ stream\ <<\ \textcolor{stringliteral}{"{}Unknown\ Signal\ \#"{}}\ <<\ (\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(rhs))\ <<\ \textcolor{stringliteral}{"{}."{}};}
+\DoxyCodeLine{00042\ \ \ \ \ \}}
+\DoxyCodeLine{00043\ \ \ \}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceprt_acf5a0dd990211606f4603400add042b2}{InitSignalHandlers}}();}
+\DoxyCodeLine{00046\ \}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//PRT\_SIGNALS\_H}}
+
+\end{DoxyCode}

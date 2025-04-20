@@ -1,0 +1,116 @@
+\doxysection{prt\+::Tick\+Event Class Reference}
+\hypertarget{classprt_1_1_tick_event}{}\label{classprt_1_1_tick_event}\index{prt::TickEvent@{prt::TickEvent}}
+
+
+{\ttfamily \#include $<$engine\+\_\+event.\+h$>$}
+
+
+
+Inheritance diagram for prt\+::Tick\+Event\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=158pt]{classprt_1_1_tick_event__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for prt\+::Tick\+Event\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=224pt]{classprt_1_1_tick_event__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_tick_event_abdd3916196c7bddfd11d7481ee24892c}{Tick\+Event}} (const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&current, const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&previous)
+\item 
+\mbox{\hyperlink{classprt_1_1_tick_event_a8a9027b113cf14652e1ce36f3f707fa2}{Tick\+Event}} (const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&current)
+\item 
+\mbox{\hyperlink{classprt_1_1_tick_event_a199902420a71909ceb15d7c88f426a62}{\texorpdfstring{$\sim$}{\string~}\+Tick\+Event}} () override=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1_tick_event_a368bd6d952d4c080b213e13baba327c1}{Get\+Current\+Tick}} () const -\/$>$ const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_tick_event_a9aaf81f1e3a9d237f23d267c365c5510}{Get\+Previous\+Tick}} () const -\/$>$ const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_tick_event_a2e1724d728033749f0f81efe234f83c9}{Get\+Time\+Since\+Last}} () const -\/$>$ \mbox{\hyperlink{classprt_1_1_tick_delta}{Tick\+Delta}}
+\item 
+\mbox{\hyperlink{classprt_1_1_tick_event_acff1df8e2626ae748a2fefd61613e852}{DECLARE\+\_\+\+ENGINE\+\_\+\+EVENT\+\_\+\+TYPE}} (\mbox{\hyperlink{classprt_1_1_tick}{Tick}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_tick}{Tick}} \mbox{\hyperlink{classprt_1_1_tick_event_ab5210eabeddee9275db61967b0263298}{previous\+\_\+}}
+\item 
+\mbox{\hyperlink{classprt_1_1_tick}{Tick}} \mbox{\hyperlink{classprt_1_1_tick_event_a5c7c897aa3cab1d321446f81264491ef}{current\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_tick_event_abdd3916196c7bddfd11d7481ee24892c}\index{prt::TickEvent@{prt::TickEvent}!TickEvent@{TickEvent}}
+\index{TickEvent@{TickEvent}!prt::TickEvent@{prt::TickEvent}}
+\doxysubsubsection{\texorpdfstring{TickEvent()}{TickEvent()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_event_abdd3916196c7bddfd11d7481ee24892c} 
+prt\+::\+Tick\+Event\+::\+Tick\+Event (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&}]{current}{, }\item[{const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&}]{previous}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_tick_event_a8a9027b113cf14652e1ce36f3f707fa2}\index{prt::TickEvent@{prt::TickEvent}!TickEvent@{TickEvent}}
+\index{TickEvent@{TickEvent}!prt::TickEvent@{prt::TickEvent}}
+\doxysubsubsection{\texorpdfstring{TickEvent()}{TickEvent()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_event_a8a9027b113cf14652e1ce36f3f707fa2} 
+prt\+::\+Tick\+Event\+::\+Tick\+Event (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&}]{current}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+\Hypertarget{classprt_1_1_tick_event_a199902420a71909ceb15d7c88f426a62}\index{prt::TickEvent@{prt::TickEvent}!````~TickEvent@{\texorpdfstring{$\sim$}{\string~}TickEvent}}
+\index{````~TickEvent@{\texorpdfstring{$\sim$}{\string~}TickEvent}!prt::TickEvent@{prt::TickEvent}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}TickEvent()}{\string~TickEvent()}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_event_a199902420a71909ceb15d7c88f426a62} 
+prt\+::\+Tick\+Event\+::\texorpdfstring{$\sim$}{\string~}\+Tick\+Event (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_tick_event_acff1df8e2626ae748a2fefd61613e852}\index{prt::TickEvent@{prt::TickEvent}!DECLARE\_ENGINE\_EVENT\_TYPE@{DECLARE\_ENGINE\_EVENT\_TYPE}}
+\index{DECLARE\_ENGINE\_EVENT\_TYPE@{DECLARE\_ENGINE\_EVENT\_TYPE}!prt::TickEvent@{prt::TickEvent}}
+\doxysubsubsection{\texorpdfstring{DECLARE\_ENGINE\_EVENT\_TYPE()}{DECLARE\_ENGINE\_EVENT\_TYPE()}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_event_acff1df8e2626ae748a2fefd61613e852} 
+prt\+::\+Tick\+Event\+::\+DECLARE\+\_\+\+ENGINE\+\_\+\+EVENT\+\_\+\+TYPE (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_tick}{Tick}}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_tick_event_a368bd6d952d4c080b213e13baba327c1}\index{prt::TickEvent@{prt::TickEvent}!GetCurrentTick@{GetCurrentTick}}
+\index{GetCurrentTick@{GetCurrentTick}!prt::TickEvent@{prt::TickEvent}}
+\doxysubsubsection{\texorpdfstring{GetCurrentTick()}{GetCurrentTick()}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_event_a368bd6d952d4c080b213e13baba327c1} 
+auto prt\+::\+Tick\+Event\+::\+Get\+Current\+Tick (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const \mbox{\hyperlink{classprt_1_1_tick}{Tick}}\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_tick_event_a9aaf81f1e3a9d237f23d267c365c5510}\index{prt::TickEvent@{prt::TickEvent}!GetPreviousTick@{GetPreviousTick}}
+\index{GetPreviousTick@{GetPreviousTick}!prt::TickEvent@{prt::TickEvent}}
+\doxysubsubsection{\texorpdfstring{GetPreviousTick()}{GetPreviousTick()}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_event_a9aaf81f1e3a9d237f23d267c365c5510} 
+auto prt\+::\+Tick\+Event\+::\+Get\+Previous\+Tick (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const \mbox{\hyperlink{classprt_1_1_tick}{Tick}}\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_tick_event_a2e1724d728033749f0f81efe234f83c9}\index{prt::TickEvent@{prt::TickEvent}!GetTimeSinceLast@{GetTimeSinceLast}}
+\index{GetTimeSinceLast@{GetTimeSinceLast}!prt::TickEvent@{prt::TickEvent}}
+\doxysubsubsection{\texorpdfstring{GetTimeSinceLast()}{GetTimeSinceLast()}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_event_a2e1724d728033749f0f81efe234f83c9} 
+auto prt\+::\+Tick\+Event\+::\+Get\+Time\+Since\+Last (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ \mbox{\hyperlink{classprt_1_1_tick_delta}{Tick\+Delta}} \hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_tick_event_a5c7c897aa3cab1d321446f81264491ef}\index{prt::TickEvent@{prt::TickEvent}!current\_@{current\_}}
+\index{current\_@{current\_}!prt::TickEvent@{prt::TickEvent}}
+\doxysubsubsection{\texorpdfstring{current\_}{current\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_event_a5c7c897aa3cab1d321446f81264491ef} 
+\mbox{\hyperlink{classprt_1_1_tick}{Tick}} prt\+::\+Tick\+Event\+::current\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_tick_event_ab5210eabeddee9275db61967b0263298}\index{prt::TickEvent@{prt::TickEvent}!previous\_@{previous\_}}
+\index{previous\_@{previous\_}!prt::TickEvent@{prt::TickEvent}}
+\doxysubsubsection{\texorpdfstring{previous\_}{previous\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_event_ab5210eabeddee9275db61967b0263298} 
+\mbox{\hyperlink{classprt_1_1_tick}{Tick}} prt\+::\+Tick\+Event\+::previous\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{engine__event_8h}{engine\+\_\+event.\+h}}\end{DoxyCompactItemize}

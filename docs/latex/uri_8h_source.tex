@@ -1,0 +1,239 @@
+\doxysection{uri.\+h}
+\hypertarget{uri_8h_source}{}\label{uri_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/uri.h@{/Users/tazz/Projects/prette/Sources/prette/uri.h}}
+\mbox{\hyperlink{uri_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_URI\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_URI\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <fmt/format.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <leveldb/slice.h>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <cstdio>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <optional>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <set>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <unordered\_set>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <utility>}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{common_8h}{prette/common.h}}"{}}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt_1_1uri}{prt::uri}}\ \{}
+\DoxyCodeLine{00017\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceprt_1_1uri_ac7268ce718e3b3615fe3dd565040c4e3}{ExtensionSet}}\ =\ std::unordered\_set<std::string>;}
+\DoxyCodeLine{00018\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceprt_1_1uri_abd78a90444cc631e16c4484d1c03743f}{basic\_uri}}\ =\ std::string;}
+\DoxyCodeLine{00019\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceprt_1_1uri_a8d16d88011a7f47eca76c281d6fee57d}{Path}}\ =\ std::string;}
+\DoxyCodeLine{00020\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceprt_1_1uri_a678076225dd533b5e37a65e04ff7ecf2}{Scheme}}\ =\ std::string;}
+\DoxyCodeLine{00021\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceprt_1_1uri_aa0248aa8682ab71b8292c1b1bd6eeaff}{Fragment}}\ =\ std::string;}
+\DoxyCodeLine{00022\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceprt_1_1uri_a487da430806070600da37428f7a239ac}{Extension}}\ =\ std::string;}
+\DoxyCodeLine{00023\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceprt_1_1uri_a6ebfc51cc655f3bc80af827c79f1c0d8}{QueryMap}}\ =\ std::unordered\_map<std::string,\ std::string>;}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceprt_1_1uri_aefb10cb435038a60f3dd371e34a1f6d4}{SanitizePath}}(\mbox{\hyperlink{namespaceprt_1_1uri_a8d16d88011a7f47eca76c281d6fee57d}{Path}}\&\ value,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ root\ =\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00026\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceprt_1_1uri_a5a78eca16a680e41e2e0751320d37af8}{SanitizeExtension}}(\mbox{\hyperlink{namespaceprt_1_1uri_a487da430806070600da37428f7a239ac}{Extension}}\&\ value);}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1uri_1_1_parser}{Parser}};}
+\DoxyCodeLine{00029\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structprt_1_1uri_1_1_uri}{Uri}}\ \{}
+\DoxyCodeLine{00030\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00031\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_a7bf4a553364e44a1b3836a6bb9c2408e}{kMaxQueryParamNameLength}}\ =\ 512;}
+\DoxyCodeLine{00032\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_a77f59d72b76168e53714950bf8047997}{kMaxQueryParamValueLength}}\ =\ 1024;}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00035\ \ \ \mbox{\hyperlink{namespaceprt_1_1uri_a678076225dd533b5e37a65e04ff7ecf2}{Scheme}}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_af7fcc44775584d5fa58e69cbffe5136f}{scheme}};}
+\DoxyCodeLine{00036\ \ \ \mbox{\hyperlink{namespaceprt_1_1uri_a8d16d88011a7f47eca76c281d6fee57d}{Path}}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ab01cba92c6cf9e0c34987ac69036b5ae}{path}};}
+\DoxyCodeLine{00037\ \ \ \mbox{\hyperlink{namespaceprt_1_1uri_aa0248aa8682ab71b8292c1b1bd6eeaff}{Fragment}}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_a29979fc28a55fe84ea0bfa9f3607d436}{fragment}};}
+\DoxyCodeLine{00038\ \ \ \mbox{\hyperlink{namespaceprt_1_1uri_a6ebfc51cc655f3bc80af827c79f1c0d8}{QueryMap}}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ad3a1f04b250ab102ceac2a3def6accd4}{query}};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00041\ \ \ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ac7d10338a5929330927b6bf06c25ef9c}{Uri}}(\mbox{\hyperlink{namespaceprt_1_1uri_a678076225dd533b5e37a65e04ff7ecf2}{Scheme}}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_af7fcc44775584d5fa58e69cbffe5136f}{scheme}},\ \mbox{\hyperlink{namespaceprt_1_1uri_a8d16d88011a7f47eca76c281d6fee57d}{Path}}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ab01cba92c6cf9e0c34987ac69036b5ae}{path}})\ :}
+\DoxyCodeLine{00042\ \ \ \ \ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_af7fcc44775584d5fa58e69cbffe5136f}{scheme}}(\mbox{\hyperlink{namespacestd}{std}}::move(\mbox{\hyperlink{structprt_1_1uri_1_1_uri_af7fcc44775584d5fa58e69cbffe5136f}{scheme}})),}
+\DoxyCodeLine{00043\ \ \ \ \ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ab01cba92c6cf9e0c34987ac69036b5ae}{path}}(\mbox{\hyperlink{namespacestd}{std}}::move(\mbox{\hyperlink{structprt_1_1uri_1_1_uri_ab01cba92c6cf9e0c34987ac69036b5ae}{path}})),}
+\DoxyCodeLine{00044\ \ \ \ \ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_a29979fc28a55fe84ea0bfa9f3607d436}{fragment}}(),}
+\DoxyCodeLine{00045\ \ \ \ \ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ad3a1f04b250ab102ceac2a3def6accd4}{query}}()\ \{\}}
+\DoxyCodeLine{00046\ \ \ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_aeeba250ed9eea50d68b4b5a1e69ce2d7}{Uri}}(\mbox{\hyperlink{namespaceprt_1_1uri_a678076225dd533b5e37a65e04ff7ecf2}{Scheme}}\ s,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri}{Uri}}\&\ other)\ :}
+\DoxyCodeLine{00047\ \ \ \ \ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_af7fcc44775584d5fa58e69cbffe5136f}{scheme}}(\mbox{\hyperlink{namespacestd}{std}}::move(s)),}
+\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ab01cba92c6cf9e0c34987ac69036b5ae}{path}}(other.\mbox{\hyperlink{structprt_1_1uri_1_1_uri_ab01cba92c6cf9e0c34987ac69036b5ae}{path}}),}
+\DoxyCodeLine{00049\ \ \ \ \ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_a29979fc28a55fe84ea0bfa9f3607d436}{fragment}}(other.\mbox{\hyperlink{structprt_1_1uri_1_1_uri_a29979fc28a55fe84ea0bfa9f3607d436}{fragment}}),}
+\DoxyCodeLine{00050\ \ \ \ \ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ad3a1f04b250ab102ceac2a3def6accd4}{query}}(other.\mbox{\hyperlink{structprt_1_1uri_1_1_uri_ad3a1f04b250ab102ceac2a3def6accd4}{query}})\ \{\}}
+\DoxyCodeLine{00051\ \ \ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_a798846480e34ff25eae858935a6c226c}{Uri}}(\mbox{\hyperlink{namespaceprt_1_1uri_a678076225dd533b5e37a65e04ff7ecf2}{Scheme}}\ s,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_1_1uri_a8d16d88011a7f47eca76c281d6fee57d}{Path}}\&\ root,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri}{Uri}}\&\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ab01cba92c6cf9e0c34987ac69036b5ae}{path}})\ :}
+\DoxyCodeLine{00052\ \ \ \ \ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_af7fcc44775584d5fa58e69cbffe5136f}{scheme}}(\mbox{\hyperlink{namespacestd}{std}}::move(s)),}
+\DoxyCodeLine{00053\ \ \ \ \ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ab01cba92c6cf9e0c34987ac69036b5ae}{path}}(\mbox{\hyperlink{namespacefmt}{fmt}}::format(\textcolor{stringliteral}{"{}\{0:s\}/\{1:s\}"{}},\ root,\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ab01cba92c6cf9e0c34987ac69036b5ae}{path}}.\mbox{\hyperlink{structprt_1_1uri_1_1_uri_ab01cba92c6cf9e0c34987ac69036b5ae}{path}}[0]\ ==\ \textcolor{stringliteral}{'/'}\ ?\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ab01cba92c6cf9e0c34987ac69036b5ae}{path}}.\mbox{\hyperlink{structprt_1_1uri_1_1_uri_ab01cba92c6cf9e0c34987ac69036b5ae}{path}}.substr(1)\ :\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ab01cba92c6cf9e0c34987ac69036b5ae}{path}}.\mbox{\hyperlink{structprt_1_1uri_1_1_uri_ab01cba92c6cf9e0c34987ac69036b5ae}{path}})),}
+\DoxyCodeLine{00054\ \ \ \ \ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_a29979fc28a55fe84ea0bfa9f3607d436}{fragment}}(\mbox{\hyperlink{structprt_1_1uri_1_1_uri_ab01cba92c6cf9e0c34987ac69036b5ae}{path}}.\mbox{\hyperlink{structprt_1_1uri_1_1_uri_a29979fc28a55fe84ea0bfa9f3607d436}{fragment}}),}
+\DoxyCodeLine{00055\ \ \ \ \ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ad3a1f04b250ab102ceac2a3def6accd4}{query}}(\mbox{\hyperlink{structprt_1_1uri_1_1_uri_ab01cba92c6cf9e0c34987ac69036b5ae}{path}}.\mbox{\hyperlink{structprt_1_1uri_1_1_uri_ad3a1f04b250ab102ceac2a3def6accd4}{query}})\ \{\}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_aaddd9f8cfa19aac2f72c0faa69789d6f}{OnSchemeParsed}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser}{Parser}}*\ parser,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_af7fcc44775584d5fa58e69cbffe5136f}{scheme}},\ \textcolor{keyword}{const}\ uint64\_t\ length)\ -\/>\ bool;}
+\DoxyCodeLine{00058\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ae172724899710d0fa00f14eb4b57f272}{OnPathParsed}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser}{Parser}}*\ parser,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ab01cba92c6cf9e0c34987ac69036b5ae}{path}},\ \textcolor{keyword}{const}\ uint64\_t\ length)\ -\/>\ bool;}
+\DoxyCodeLine{00059\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_a1d4b74ebcbbd89ac1a81ecfac492a935}{OnQueryParsed0}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser}{Parser}}*\ parser,\ \textcolor{keyword}{const}\ uint64\_t\ idx,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ key,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ key\_length)\ -\/>\ bool;}
+\DoxyCodeLine{00060\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_a9f9567fe3cd0b4c976b1f9ff5b4f6f80}{OnQueryParsed1}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser}{Parser}}*\ parser,\ \textcolor{keyword}{const}\ uint64\_t\ idx,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ key,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ key\_length,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ value,}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ value\_length)\ -\/>\ bool;}
+\DoxyCodeLine{00062\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_abdcb11eb7c376ed23b40a79aacef70fc}{OnFragmentParsed}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser}{Parser}}*\ parser,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_a29979fc28a55fe84ea0bfa9f3607d436}{fragment}},\ \textcolor{keyword}{const}\ uint64\_t\ length)\ -\/>\ bool;}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00065\ \ \ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_a7c1a5e4b4fc76d1741e9aa3f9efd0d40}{Uri}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00066\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_a7c1a5e4b4fc76d1741e9aa3f9efd0d40}{Uri}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_1_1uri_abd78a90444cc631e16c4484d1c03743f}{basic\_uri}}\&\ uri,\ \textcolor{keyword}{const}\ uint8\_t\ flags\ =\ 0);}
+\DoxyCodeLine{00067\ \ \ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ad8e86b64d23d30d0c777bac1dbfa0889}{Uri}}(\mbox{\hyperlink{namespaceprt_1_1uri_a678076225dd533b5e37a65e04ff7ecf2}{Scheme}}\ s,\ \mbox{\hyperlink{namespaceprt_1_1uri_a8d16d88011a7f47eca76c281d6fee57d}{Path}}\ p,\ \mbox{\hyperlink{namespaceprt_1_1uri_aa0248aa8682ab71b8292c1b1bd6eeaff}{Fragment}}\ f,\ \mbox{\hyperlink{namespaceprt_1_1uri_a6ebfc51cc655f3bc80af827c79f1c0d8}{QueryMap}}\ q)\ :}
+\DoxyCodeLine{00068\ \ \ \ \ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_af7fcc44775584d5fa58e69cbffe5136f}{scheme}}(\mbox{\hyperlink{namespacestd}{std}}::move(s)),}
+\DoxyCodeLine{00069\ \ \ \ \ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ab01cba92c6cf9e0c34987ac69036b5ae}{path}}(\mbox{\hyperlink{namespacestd}{std}}::move(p)),}
+\DoxyCodeLine{00070\ \ \ \ \ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_a29979fc28a55fe84ea0bfa9f3607d436}{fragment}}(\mbox{\hyperlink{namespacestd}{std}}::move(f)),}
+\DoxyCodeLine{00071\ \ \ \ \ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ad3a1f04b250ab102ceac2a3def6accd4}{query}}(\mbox{\hyperlink{namespacestd}{std}}::move(q))\ \{\}}
+\DoxyCodeLine{00072\ \ \ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_a89da7dfc3a937fed564f8f188d588239}{Uri}}(\mbox{\hyperlink{structprt_1_1uri_1_1_uri}{Uri}}\&\&\ rhs)\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00073\ \ \ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_a74ed3d62de2804b1a7f1a183abf23c36}{Uri}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri}{Uri}}\&\ rhs)\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00074\ \ \ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_abb0bedf022aa78e0d6b90536ff33f620}{\string~Uri}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ae4c2230db1a96b23ac65a51f70814418}{HasScheme}}()\ const\ -\/>\ \textcolor{keywordtype}{bool};}
+\DoxyCodeLine{00077\ \ \ auto\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ae4c2230db1a96b23ac65a51f70814418}{HasScheme}}(const\ \mbox{\hyperlink{namespaceprt_1_1uri_a678076225dd533b5e37a65e04ff7ecf2}{Scheme}}\&\ a)\ const\ -\/>\ \textcolor{keywordtype}{bool};}
+\DoxyCodeLine{00078\ \ \ auto\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ae4c2230db1a96b23ac65a51f70814418}{HasScheme}}(const\ \mbox{\hyperlink{namespacestd}{std}}::vector<\mbox{\hyperlink{namespaceprt_1_1uri_a678076225dd533b5e37a65e04ff7ecf2}{Scheme}}>\&\ values)\ const\ -\/>\ \textcolor{keywordtype}{bool};}
+\DoxyCodeLine{00079\ \ \ auto\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ae4c2230db1a96b23ac65a51f70814418}{HasScheme}}(const\ \mbox{\hyperlink{namespacestd}{std}}::unordered\_set<\mbox{\hyperlink{namespaceprt_1_1uri_a678076225dd533b5e37a65e04ff7ecf2}{Scheme}}>\&\ values)\ const\ -\/>\ \textcolor{keywordtype}{bool};}
+\DoxyCodeLine{00080\ \ \ auto\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ae4c2230db1a96b23ac65a51f70814418}{HasScheme}}(const\ \mbox{\hyperlink{namespacestd}{std}}::set<\mbox{\hyperlink{namespaceprt_1_1uri_a678076225dd533b5e37a65e04ff7ecf2}{Scheme}}>\&\ values)\ const\ -\/>\ \textcolor{keywordtype}{bool};}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \ \ auto\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_abfb47f352aa9e9b924ca872d1763775f}{HasFragment}}()\ const\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordflow}{return}\ !\mbox{\hyperlink{structprt_1_1uri_1_1_uri_a29979fc28a55fe84ea0bfa9f3607d436}{fragment}}.empty();}
+\DoxyCodeLine{00084\ \ \ \}}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_a058e03b1c220395e1ec999f139d54a10}{HasQuery}}()\ const\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordflow}{return}\ !\mbox{\hyperlink{structprt_1_1uri_1_1_uri_ad3a1f04b250ab102ceac2a3def6accd4}{query}}.empty();}
+\DoxyCodeLine{00088\ \ \ \}}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_a1e7d68e54ddbfaf5ea84391b48a1befb}{GetExtension}}()\ const\ -\/>\ \mbox{\hyperlink{namespaceprt_1_1uri_a487da430806070600da37428f7a239ac}{Extension}};}
+\DoxyCodeLine{00091\ \ \ auto\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_a4aa6564c7df1480d8f908f1ca71d4aae}{HasExtension}}()\ const\ -\/>\ \textcolor{keywordtype}{bool};}
+\DoxyCodeLine{00092\ \ \ auto\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_a4aa6564c7df1480d8f908f1ca71d4aae}{HasExtension}}(const\ \mbox{\hyperlink{namespaceprt_1_1uri_a487da430806070600da37428f7a239ac}{Extension}}\&\ a)\ const\ -\/>\ \textcolor{keywordtype}{bool};}
+\DoxyCodeLine{00093\ \ \ auto\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_a4aa6564c7df1480d8f908f1ca71d4aae}{HasExtension}}(const\ \mbox{\hyperlink{namespacestd}{std}}::vector<\mbox{\hyperlink{namespaceprt_1_1uri_a487da430806070600da37428f7a239ac}{Extension}}>\&\ extensions)\ const\ -\/>\ \textcolor{keywordtype}{bool};}
+\DoxyCodeLine{00094\ \ \ auto\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_a4aa6564c7df1480d8f908f1ca71d4aae}{HasExtension}}(const\ \mbox{\hyperlink{namespacestd}{std}}::set<\mbox{\hyperlink{namespaceprt_1_1uri_a487da430806070600da37428f7a239ac}{Extension}}>\&\ extensions)\ const\ -\/>\ \textcolor{keywordtype}{bool};}
+\DoxyCodeLine{00095\ \ \ auto\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_a4aa6564c7df1480d8f908f1ca71d4aae}{HasExtension}}(const\ \mbox{\hyperlink{namespacestd}{std}}::unordered\_set<\mbox{\hyperlink{namespaceprt_1_1uri_a487da430806070600da37428f7a239ac}{Extension}}>\&\ extensions)\ const\ -\/>\ \textcolor{keywordtype}{bool};}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \ \ auto\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_a37ed6cd0f6c9e76c97fdb56a6aac09f0}{GetResourceName}}()\ const\ -\/>\ \mbox{\hyperlink{namespacestd}{std}}::\textcolor{keywordtype}{string}\ \{}
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ slashpos\ =\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ab01cba92c6cf9e0c34987ac69036b5ae}{path}}.find\_last\_of(\textcolor{charliteral}{'/'});}
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordflow}{if}\ (slashpos\ ==\ std::string::npos)}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ab01cba92c6cf9e0c34987ac69036b5ae}{path}};}
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ab01cba92c6cf9e0c34987ac69036b5ae}{path}}.substr(slashpos\ +\ 1);}
+\DoxyCodeLine{00102\ \ \ \}}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ae86aa81b934e5b0268d9f8e96fbb62be}{GetPathWithoutExtension}}()\ const\ -\/>\ \mbox{\hyperlink{namespacestd}{std}}::\textcolor{keywordtype}{string}\ \{}
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ dotpos\ =\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ab01cba92c6cf9e0c34987ac69036b5ae}{path}}.find\_first\_of(\textcolor{charliteral}{'.'});}
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keywordflow}{if}\ (dotpos\ !=\ std::string::npos)}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ab01cba92c6cf9e0c34987ac69036b5ae}{path}}.substr(0,\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ab01cba92c6cf9e0c34987ac69036b5ae}{path}}.size()\ -\/\ dotpos);}
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ab01cba92c6cf9e0c34987ac69036b5ae}{path}};}
+\DoxyCodeLine{00109\ \ \ \}}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_aef22f43d0dae7d7d24c2cf074915cd72}{GetQuery}}(\textcolor{keyword}{const}\ std::string\&\ name)\ \textcolor{keyword}{const}\ -\/>\ std::optional<std::string>\ \{}
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ pos\ =\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ad3a1f04b250ab102ceac2a3def6accd4}{query}}.find(name);}
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keywordflow}{if}\ (pos\ ==\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ad3a1f04b250ab102ceac2a3def6accd4}{query}}.end())}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::nullopt;}
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keywordflow}{return}\ \{pos-\/>second\};}
+\DoxyCodeLine{00116\ \ \ \}}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_a8fc8a406c9d03e6ebce11805e286cfab}{GetParentPath}}()\ const\ -\/>\ \mbox{\hyperlink{namespaceprt_1_1uri_a8d16d88011a7f47eca76c281d6fee57d}{Path}}\ \{}
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ slashpos\ =\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ab01cba92c6cf9e0c34987ac69036b5ae}{path}}.find\_last\_of(\textcolor{charliteral}{'/'});}
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keywordflow}{if}\ (slashpos\ ==\ std::string::npos)}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}/"{}};}
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ab01cba92c6cf9e0c34987ac69036b5ae}{path}}.substr(0,\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ab01cba92c6cf9e0c34987ac69036b5ae}{path}}.size()\ -\/\ (\mbox{\hyperlink{structprt_1_1uri_1_1_uri_ab01cba92c6cf9e0c34987ac69036b5ae}{path}}.size()\ -\/\ slashpos));}
+\DoxyCodeLine{00123\ \ \ \}}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_a0531dce03cacff68266d74dde06bec80}{GetParent}}()\ const\ -\/>\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri}{Uri}}\ \{}
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_a7c1a5e4b4fc76d1741e9aa3f9efd0d40}{Uri}}(\mbox{\hyperlink{structprt_1_1uri_1_1_uri_af7fcc44775584d5fa58e69cbffe5136f}{scheme}},\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_a8fc8a406c9d03e6ebce11805e286cfab}{GetParentPath}}());}
+\DoxyCodeLine{00127\ \ \ \}}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00129\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_abd001e819ec69ff6bf8fac561c79bec1}{GetChildPath}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_1_1uri_a8d16d88011a7f47eca76c281d6fee57d}{Path}}\&\ child)\ \textcolor{keyword}{const}\ -\/>\ \mbox{\hyperlink{namespaceprt_1_1uri_a8d16d88011a7f47eca76c281d6fee57d}{Path}}\ \{}
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{keyword}{auto}\ child\_path\ =\ child;}
+\DoxyCodeLine{00131\ \ \ \ \ \mbox{\hyperlink{namespaceprt_1_1uri_aefb10cb435038a60f3dd371e34a1f6d4}{SanitizePath}}(child\_path,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{keywordflow}{return}\ fmt::format(\textcolor{stringliteral}{"{}\{0:s\}/\{1:s\}"{}},\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ab01cba92c6cf9e0c34987ac69036b5ae}{path}},\ child\_path);}
+\DoxyCodeLine{00133\ \ \ \}}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_a21d134818fe20528a7cc51cf99bfd621}{GetChild}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_1_1uri_a8d16d88011a7f47eca76c281d6fee57d}{Path}}\&\ child)\ \textcolor{keyword}{const}\ -\/>\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri}{Uri}}\ \{}
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri}{Uri}}\{fmt::format(\textcolor{stringliteral}{"{}\{0:s\}://\{1:s\}"{}},\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_af7fcc44775584d5fa58e69cbffe5136f}{scheme}},\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_abd001e819ec69ff6bf8fac561c79bec1}{GetChildPath}}(child))\};}
+\DoxyCodeLine{00137\ \ \ \}}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00139\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_a46220790d20a6034a9a5d3ada0904f1e}{GetSiblingPath}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_1_1uri_a8d16d88011a7f47eca76c281d6fee57d}{Path}}\&\ sibling)\ \textcolor{keyword}{const}\ -\/>\ \mbox{\hyperlink{namespaceprt_1_1uri_a8d16d88011a7f47eca76c281d6fee57d}{Path}}\ \{}
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keyword}{auto}\ sibling\_path\ =\ sibling;}
+\DoxyCodeLine{00141\ \ \ \ \ \mbox{\hyperlink{namespaceprt_1_1uri_aefb10cb435038a60f3dd371e34a1f6d4}{SanitizePath}}(sibling\_path,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{keywordflow}{return}\ fmt::format(\textcolor{stringliteral}{"{}\{0:s\}/\{1:s\}"{}},\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_a8fc8a406c9d03e6ebce11805e286cfab}{GetParentPath}}(),\ sibling\_path);}
+\DoxyCodeLine{00143\ \ \ \}}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ade871aad6c9c23a1c6f25d9e37d9fb70}{GetSibling}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_1_1uri_a8d16d88011a7f47eca76c281d6fee57d}{Path}}\&\ sibling)\ \textcolor{keyword}{const}\ -\/>\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri}{Uri}}\ \{}
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri}{Uri}}\{fmt::format(\textcolor{stringliteral}{"{}\{0:s\}://\{1:s\}"{}},\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_af7fcc44775584d5fa58e69cbffe5136f}{scheme}},\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_a46220790d20a6034a9a5d3ada0904f1e}{GetSiblingPath}}(sibling))\};}
+\DoxyCodeLine{00147\ \ \ \}}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00149\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_add82ff0df5dc8ad516cc911eee95b4bb}{ToFileUri}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_1_1uri_a8d16d88011a7f47eca76c281d6fee57d}{Path}}\&\ root)\ \textcolor{keyword}{const}\ -\/>\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri}{Uri}}\ \{}
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keywordflow}{return}\ \{\textcolor{stringliteral}{"{}file"{}},\ root,\ *\textcolor{keyword}{this}\};}
+\DoxyCodeLine{00151\ \ \ \}}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00153\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ab4d479ca01e4030f8bb09beb41c2b4c3}{ToFileUri}}()\ const\ -\/>\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri}{Uri}}\ \{}
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{keywordflow}{return}\ \{\textcolor{stringliteral}{"{}file"{}},\ *\textcolor{keyword}{this}\};}
+\DoxyCodeLine{00155\ \ \ \}}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00157\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_a94b440e48f4cba7e7ee9231ab9679438}{IsFile}}()\ const\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keywordflow}{return}\ EqualsIgnoreCase(\mbox{\hyperlink{structprt_1_1uri_1_1_uri_af7fcc44775584d5fa58e69cbffe5136f}{scheme}},\ \textcolor{stringliteral}{"{}file"{}});}
+\DoxyCodeLine{00159\ \ \ \}}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00161\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_a9e2af02503521d7b1dd46728c52dbe74}{IsAbsolutePath}}()\ const\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00162\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_a94b440e48f4cba7e7ee9231ab9679438}{IsFile}}()\ \&\&\ (FileExists(\mbox{\hyperlink{structprt_1_1uri_1_1_uri_ab01cba92c6cf9e0c34987ac69036b5ae}{path}}));}
+\DoxyCodeLine{00163\ \ \ \}}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ab8bf7239d96089e00160c43d5236e1b5}{OpenFile}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ mode)\ \textcolor{keyword}{const}\ -\/>\ FILE*\ \{}
+\DoxyCodeLine{00166\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(\mbox{\hyperlink{structprt_1_1uri_1_1_uri_ae4c2230db1a96b23ac65a51f70814418}{HasScheme}}(\textcolor{stringliteral}{"{}file"{}}));}
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{keywordflow}{return}\ fopen(\mbox{\hyperlink{structprt_1_1uri_1_1_uri_ab01cba92c6cf9e0c34987ac69036b5ae}{path}}.c\_str(),\ mode);}
+\DoxyCodeLine{00168\ \ \ \}}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00170\ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_a0f91bf237d6d0d671f6cb9cf6a5e4d58}{OpenFileForReading}}()\ const\ -\/>\ FILE*\ \{}
+\DoxyCodeLine{00171\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ab8bf7239d96089e00160c43d5236e1b5}{OpenFile}}(\textcolor{stringliteral}{"{}rb"{}});}
+\DoxyCodeLine{00172\ \ \ \}}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00174\ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ac8ae66d39266aa17c3f94ff61abb84fa}{OpenFileForWriting}}()\ const\ -\/>\ FILE*\ \{}
+\DoxyCodeLine{00175\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ab8bf7239d96089e00160c43d5236e1b5}{OpenFile}}(\textcolor{stringliteral}{"{}wb"{}});}
+\DoxyCodeLine{00176\ \ \ \}}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00178\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_a597bbc9735fecc8f5f9fa3367ca811ac}{ToString}}()\ const\ -\/>\ \mbox{\hyperlink{namespacestd}{std}}::\textcolor{keywordtype}{string};}
+\DoxyCodeLine{00179\ }
+\DoxyCodeLine{00180\ \ \ explicit\ operator\ \mbox{\hyperlink{namespacestd}{std}}::\textcolor{keywordtype}{string}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00181\ \ \ \ \ \textcolor{keywordflow}{return}\ fmt::format(\textcolor{stringliteral}{"{}\{0:s\}://\{1:s\}"{}},\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_af7fcc44775584d5fa58e69cbffe5136f}{scheme}},\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ab01cba92c6cf9e0c34987ac69036b5ae}{path}});}
+\DoxyCodeLine{00182\ \ \ \}}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00184\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ae23ef7a05dcff7773c8532f9d92b3b44}{operator=}}(\mbox{\hyperlink{structprt_1_1uri_1_1_uri}{Uri}}\&\&\ rhs)\ -\/>\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri}{Uri}}\&\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00185\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_a4c5d5c989c73107cba313c169400b6cf}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri}{Uri}}\&\ rhs)\ -\/>\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri}{Uri}}\&\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00187\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_abb19a8c5ae1a3418e2b7648a0a4ef82f}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri}{Uri}}\&\ rhs)\ \textcolor{keyword}{const}\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00188\ \ \ \ \ \textcolor{keywordflow}{return}\ EqualsIgnoreCase(\mbox{\hyperlink{structprt_1_1uri_1_1_uri_af7fcc44775584d5fa58e69cbffe5136f}{scheme}},\ rhs.scheme)\ \&\&\ EqualsIgnoreCase(\mbox{\hyperlink{structprt_1_1uri_1_1_uri_ab01cba92c6cf9e0c34987ac69036b5ae}{path}},\ rhs.path);}
+\DoxyCodeLine{00189\ \ \ \}}
+\DoxyCodeLine{00190\ }
+\DoxyCodeLine{00191\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_af6cefccbf08b09835e33ea23a6e7082b}{operator!=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri}{Uri}}\&\ rhs)\ \textcolor{keyword}{const}\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00192\ \ \ \ \ \textcolor{keywordflow}{return}\ !EqualsIgnoreCase(\mbox{\hyperlink{structprt_1_1uri_1_1_uri_af7fcc44775584d5fa58e69cbffe5136f}{scheme}},\ rhs.scheme)\ ||\ !EqualsIgnoreCase(\mbox{\hyperlink{structprt_1_1uri_1_1_uri_ab01cba92c6cf9e0c34987ac69036b5ae}{path}},\ rhs.path);}
+\DoxyCodeLine{00193\ \ \ \}}
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00195\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_aad94bd0fb3f4ecad0f99eb981b681804}{operator<<}}(std::ostream\&\ stream,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri}{Uri}}\&\ rhs)\ -\/>\ std::ostream\&\ \{}
+\DoxyCodeLine{00196\ \ \ \ \ \textcolor{keywordflow}{return}\ stream\ <<\ rhs.ToString();}
+\DoxyCodeLine{00197\ \ \ \}}
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00199\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00200\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri_ae7a48d78166becede8c0751e02cd378a}{TryParse}}(\mbox{\hyperlink{structprt_1_1uri_1_1_uri}{uri::Uri}}\&\ result,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_1_1uri_abd78a90444cc631e16c4484d1c03743f}{basic\_uri}}\&\ uri,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_1_1uri_a678076225dd533b5e37a65e04ff7ecf2}{uri::Scheme}}\&\ default\_scheme)\ -\/>\ bool;}
+\DoxyCodeLine{00201\ \};}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00203\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ IsDirectory(\textcolor{keyword}{const}\ Uri\&\ uri)\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00204\ \ \ \textcolor{keywordflow}{return}\ prt::IsDirectory(uri.path);}
+\DoxyCodeLine{00205\ \}}
+\DoxyCodeLine{00206\ }
+\DoxyCodeLine{00207\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ IsDirectory(\textcolor{keyword}{const}\ std::string\&\ root,\ \textcolor{keyword}{const}\ Uri\&\ uri)\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00208\ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ abs\_path\ =\ fmt::format(\textcolor{stringliteral}{"{}\{0:s\}/\{1:s\}"{}},\ root,\ uri.path);}
+\DoxyCodeLine{00209\ \ \ \textcolor{keywordflow}{return}\ prt::IsDirectory(abs\_path);}
+\DoxyCodeLine{00210\ \}}
+\DoxyCodeLine{00211\ }
+\DoxyCodeLine{00212\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ FileExists(\textcolor{keyword}{const}\ uri::Uri\&\ uri)\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00213\ \ \ \textcolor{keywordflow}{return}\ prt::FileExists(uri.path);}
+\DoxyCodeLine{00214\ \}}
+\DoxyCodeLine{00215\ }
+\DoxyCodeLine{00216\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{namespaceprt_1_1uri_a5a99791459568f773bfa3cfaa69d8b0a}{IsValidUri}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_1_1uri_abd78a90444cc631e16c4484d1c03743f}{basic\_uri}}\&\ rhs)\ -\/>\ bool;}
+\DoxyCodeLine{00217\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{namespaceprt_1_1uri_a5a99791459568f773bfa3cfaa69d8b0a}{IsValidUri}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_1_1uri_abd78a90444cc631e16c4484d1c03743f}{basic\_uri}}\&\ rhs,\ \textcolor{keyword}{const}\ std::string\&\ scheme)\ -\/>\ bool;}
+\DoxyCodeLine{00218\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{namespaceprt_1_1uri_a5a99791459568f773bfa3cfaa69d8b0a}{IsValidUri}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_1_1uri_abd78a90444cc631e16c4484d1c03743f}{basic\_uri}}\&\ rhs,\ \textcolor{keyword}{const}\ std::set<std::string>\&\ schemes)\ -\/>\ bool;}
+\DoxyCodeLine{00219\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{namespaceprt_1_1uri_a5a99791459568f773bfa3cfaa69d8b0a}{IsValidUri}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_1_1uri_abd78a90444cc631e16c4484d1c03743f}{basic\_uri}}\&\ rhs,\ \textcolor{keyword}{const}\ std::unordered\_set<std::string>\&\ schemes)\ -\/>\ bool;}
+\DoxyCodeLine{00220\ \}\ \ \textcolor{comment}{//\ namespace\ prt::uri}}
+\DoxyCodeLine{00221\ }
+\DoxyCodeLine{00222\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacefmt}{fmt}}\ \{}
+\DoxyCodeLine{00223\ \textcolor{keyword}{using\ }\mbox{\hyperlink{structprt_1_1uri_1_1_uri}{prt::uri::Uri}};}
+\DoxyCodeLine{00224\ }
+\DoxyCodeLine{00225\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00226\ \textcolor{keyword}{struct\ }formatter<\mbox{\hyperlink{structprt_1_1uri_1_1_uri}{Uri}}>\ :\ formatter<std::string\_view>\ \{}
+\DoxyCodeLine{00227\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structfmt_1_1formatter_3_01_uri_01_4_ac9a0465fcbf196d368b5de51ff002fc8}{format}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structprt_1_1uri_1_1_uri}{Uri}}\&\ uri,\ format\_context\&\ ctx)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00228\ \ \ \ \ \textcolor{keywordflow}{return}\ formatter<std::string\_view>::format((\textcolor{keyword}{const}\ std::string\&)uri,\ ctx);}
+\DoxyCodeLine{00229\ \ \ \}}
+\DoxyCodeLine{00230\ \};}
+\DoxyCodeLine{00231\ \}\ \ \textcolor{comment}{//\ namespace\ fmt}}
+\DoxyCodeLine{00232\ }
+\DoxyCodeLine{00233\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_URI\_H}}
+
+\end{DoxyCode}

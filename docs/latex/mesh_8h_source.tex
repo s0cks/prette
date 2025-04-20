@@ -1,0 +1,40 @@
+\doxysection{mesh.\+h}
+\hypertarget{mesh_8h_source}{}\label{mesh_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/mesh.h@{/Users/tazz/Projects/prette/Sources/prette/mesh.h}}
+\mbox{\hyperlink{mesh_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_MESH\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_MESH\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{glm_8h}{prette/glm.h}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{renderer_8h}{prette/renderer.h}}"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00008\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_mesh}{Mesh}}\ \{}
+\DoxyCodeLine{00009\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00010\ \ \ glm::mat4\ \mbox{\hyperlink{classprt_1_1_mesh_a74ae96866d96a3951ce3f36bbc0f38aa}{model\_}}\ =\ glm::mat4(1.0f);}
+\DoxyCodeLine{00011\ \ \ std::vector<Vertex>\ \mbox{\hyperlink{classprt_1_1_mesh_adae413f922c0312663be1618f88c18e3}{vertices\_}};}
+\DoxyCodeLine{00012\ \ \ std::vector<uint32\_t>\ \mbox{\hyperlink{classprt_1_1_mesh_aae158b1c7137d46a852c0f5cd71b6515}{indices\_}};}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00015\ \ \ \mbox{\hyperlink{classprt_1_1_mesh_a0977859baf5b7dcd6b6720fe22ac4dbd}{Mesh}}(std::vector<Vertex>\&\&\ vertices,\ std::vector<uint32\_t>\&\&\ indices)\ :}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_mesh_adae413f922c0312663be1618f88c18e3}{vertices\_}}(\mbox{\hyperlink{namespacestd}{std}}::move(vertices)),}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_mesh_aae158b1c7137d46a852c0f5cd71b6515}{indices\_}}(\mbox{\hyperlink{namespacestd}{std}}::move(indices))\ \{\}}
+\DoxyCodeLine{00018\ \ \ \mbox{\hyperlink{classprt_1_1_mesh_a5143bc52ba64ba25db2c4f31c91a8acb}{\string~Mesh}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_mesh_a7dabc7801a53b637391fb9e9c588f32c}{Scale}}(\textcolor{keyword}{const}\ glm::vec3\&\ scale);}
+\DoxyCodeLine{00021\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_mesh_a79078162912966503026138144ef14bc}{Rotate}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ angle,\ \textcolor{keyword}{const}\ glm::vec3\&\ axis);}
+\DoxyCodeLine{00022\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_mesh_a7881d0a37b2570da54cbdef8f454fda3}{Translate}}(\textcolor{keyword}{const}\ glm::vec3\&\ translate);}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_mesh_acdf1e1934dd96920ecb0e168c3b438ed}{RotateUp}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ angle)\ \{}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_mesh_a79078162912966503026138144ef14bc}{Rotate}}(angle,\ glm::vec3(0.0f,\ 1.0f,\ 0.0f));}
+\DoxyCodeLine{00026\ \ \ \}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_mesh_ae03cac83e49f3f3fcc47f327260eeae6}{RotateDown}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ angle)\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_mesh_a79078162912966503026138144ef14bc}{Rotate}}(angle,\ glm::vec3(0.0f,\ -\/1.0f,\ 0.0f));}
+\DoxyCodeLine{00030\ \ \ \}}
+\DoxyCodeLine{00031\ \};}
+\DoxyCodeLine{00032\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_MESH\_H}}
+
+\end{DoxyCode}

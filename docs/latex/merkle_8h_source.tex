@@ -1,0 +1,219 @@
+\doxysection{merkle.\+h}
+\hypertarget{merkle_8h_source}{}\label{merkle_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/merkle.h@{/Users/tazz/Projects/prette/Sources/prette/merkle.h}}
+\mbox{\hyperlink{merkle_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_MERKLE\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_MERKLE\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <ostream>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{sha256_8h}{prette/sha256.h}}"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ TODO:\ cleanup\ memory\ usage}}
+\DoxyCodeLine{00011\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt_1_1merkle}{prt::merkle}}\ \{}
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }Node;}
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1merkle_1_1_node_visitor}{NodeVisitor}}\ \{}
+\DoxyCodeLine{00014\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00015\ \ \ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_visitor_abcffbd88a2cc7903da85ccce3bc98354}{NodeVisitor}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00018\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_visitor_a6bd898ef593ad804d4b5c82f7ece1a4c}{\string~NodeVisitor}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00019\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_visitor_a1d897ef17a241c6d522dec5553c91661}{Visit}}(\mbox{\hyperlink{classprt_1_1merkle_1_1_node}{Node}}*\ node)\ =\ 0;}
+\DoxyCodeLine{00020\ \};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1merkle_1_1_node}{Node}}\ \{}
+\DoxyCodeLine{00023\ \ \ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_aa4457b4d9c095ec9faf4db8bc8cfa06a}{DEFINE\_DEFAULT\_COPYABLE\_TYPE}}(\mbox{\hyperlink{classprt_1_1merkle_1_1_node}{Node}});}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00026\ \ \ \mbox{\hyperlink{classprt_1_1merkle_1_1_node}{Node}}*\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_ae377c517062c667f664250736159a3de}{parent\_}};}
+\DoxyCodeLine{00027\ \ \ \mbox{\hyperlink{classprt_1_1merkle_1_1_node}{Node}}*\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_a8f384b72a587031b8b1d6a7246fb35a3}{lchild\_}};}
+\DoxyCodeLine{00028\ \ \ \mbox{\hyperlink{classprt_1_1merkle_1_1_node}{Node}}*\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_a24a404a62b88aaef77f5d4913cb5d15e}{rchild\_}};}
+\DoxyCodeLine{00029\ \ \ \mbox{\hyperlink{classprt_1_1uint256}{uint256}}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_adccc50dcc4b065f5adf339d5652e3506}{hash\_}};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{classprt_1_1uint256}{uint256}}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_a9d166fc63b7f25aafec264f4cfd66672}{ConcatHashes}}(\mbox{\hyperlink{classprt_1_1merkle_1_1_node}{Node}}*\ lhs,\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node}{Node}}*\ rhs)\ \{}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespaceprt_1_1sha256_acba3cc9ae309cf5b619daa266719d370}{sha256::Concat}}(lhs-\/>\mbox{\hyperlink{classprt_1_1merkle_1_1_node_a75951f69171296db1f245af28d108464}{GetHash}}(),\ rhs-\/>\mbox{\hyperlink{classprt_1_1merkle_1_1_node_a75951f69171296db1f245af28d108464}{GetHash}}());}
+\DoxyCodeLine{00033\ \ \ \}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00036\ \ \ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_abe90b92d143985c52e67a64fe4338290}{Node}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00037\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_a0c57ea4ed804b85a6704d12f097a4d9b}{Node}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1uint256}{uint256}}\&\ hash)\ :}
+\DoxyCodeLine{00038\ \ \ \ \ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_ae377c517062c667f664250736159a3de}{parent\_}}(nullptr),}
+\DoxyCodeLine{00039\ \ \ \ \ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_a8f384b72a587031b8b1d6a7246fb35a3}{lchild\_}}(nullptr),}
+\DoxyCodeLine{00040\ \ \ \ \ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_a24a404a62b88aaef77f5d4913cb5d15e}{rchild\_}}(nullptr),}
+\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_adccc50dcc4b065f5adf339d5652e3506}{hash\_}}(hash)\ \{\}}
+\DoxyCodeLine{00042\ \ \ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_a3d134071ca43337faa7a218527683d14}{\string~Node}}()\ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classprt_1_1merkle_1_1_node_a8f384b72a587031b8b1d6a7246fb35a3}{lchild\_}})}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \textcolor{keyword}{delete}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_a8f384b72a587031b8b1d6a7246fb35a3}{lchild\_}};}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classprt_1_1merkle_1_1_node_a24a404a62b88aaef77f5d4913cb5d15e}{rchild\_}})}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \textcolor{keyword}{delete}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_a24a404a62b88aaef77f5d4913cb5d15e}{rchild\_}};}
+\DoxyCodeLine{00047\ \ \ \}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ std::string\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_af1ba5d8261a99643018f3293df130e5a}{ToString}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \mbox{\hyperlink{classprt_1_1merkle_1_1_node}{Node}}*\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_a332f4fc3ce26c0feb49ab88a3e85e78d}{GetParent}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_ae377c517062c667f664250736159a3de}{parent\_}};}
+\DoxyCodeLine{00053\ \ \ \}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_a60d2fa86f40c9911d593377a6635ac0f}{HasParent}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_ae377c517062c667f664250736159a3de}{parent\_}}\ !=\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00057\ \ \ \}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_a4776a592178974545483ee226025ac60}{SetParent}}(\mbox{\hyperlink{classprt_1_1merkle_1_1_node}{Node}}*\ node)\ \{}
+\DoxyCodeLine{00060\ \ \ \ \ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_ae377c517062c667f664250736159a3de}{parent\_}}\ =\ node;}
+\DoxyCodeLine{00061\ \ \ \}}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \mbox{\hyperlink{classprt_1_1merkle_1_1_node}{Node}}*\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_a51bf6148c4b5f09c54828f65f3c0b099}{GetLeft}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_a8f384b72a587031b8b1d6a7246fb35a3}{lchild\_}};}
+\DoxyCodeLine{00065\ \ \ \}}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_a1e298a64abd88b3b841bd31f8b2fb735}{HasLeft}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_a8f384b72a587031b8b1d6a7246fb35a3}{lchild\_}}\ !=\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00069\ \ \ \}}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_ad8a444eedbdecbadd3d125cbee286220}{SetLeft}}(\mbox{\hyperlink{classprt_1_1merkle_1_1_node}{Node}}*\ node)\ \{}
+\DoxyCodeLine{00072\ \ \ \ \ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_a8f384b72a587031b8b1d6a7246fb35a3}{lchild\_}}\ =\ node;}
+\DoxyCodeLine{00073\ \ \ \}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \mbox{\hyperlink{classprt_1_1merkle_1_1_node}{Node}}*\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_a40bba73a049af79a6630e1e8e07ee5d0}{GetRight}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_a24a404a62b88aaef77f5d4913cb5d15e}{rchild\_}};}
+\DoxyCodeLine{00077\ \ \ \}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_a12f991434da1d509ad964a4b1184f29b}{HasRight}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_a24a404a62b88aaef77f5d4913cb5d15e}{rchild\_}}\ !=\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00081\ \ \ \}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_accfab3f30e7e419aa6f2cd565c0e7b23}{SetRight}}(\mbox{\hyperlink{classprt_1_1merkle_1_1_node}{Node}}*\ node)\ \{}
+\DoxyCodeLine{00084\ \ \ \ \ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_a24a404a62b88aaef77f5d4913cb5d15e}{rchild\_}}\ =\ node;}
+\DoxyCodeLine{00085\ \ \ \}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1uint256}{uint256}}\&\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_a75951f69171296db1f245af28d108464}{GetHash}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_adccc50dcc4b065f5adf339d5652e3506}{hash\_}};}
+\DoxyCodeLine{00089\ \ \ \}}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_ab267e7e40281a375fe46d7b526887a1b}{IsLeaf}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordflow}{return}\ !\mbox{\hyperlink{classprt_1_1merkle_1_1_node_a1e298a64abd88b3b841bd31f8b2fb735}{HasLeft}}()\ \&\&\ !\mbox{\hyperlink{classprt_1_1merkle_1_1_node_a12f991434da1d509ad964a4b1184f29b}{HasRight}}();}
+\DoxyCodeLine{00093\ \ \ \}}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_a8da66ce50b71e17e6fd533e0b55c6216}{GetLeaves}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_ab267e7e40281a375fe46d7b526887a1b}{IsLeaf}}()\ ?\ 1\ :\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_a51bf6148c4b5f09c54828f65f3c0b099}{GetLeft}}()-\/>\mbox{\hyperlink{classprt_1_1merkle_1_1_node_a8da66ce50b71e17e6fd533e0b55c6216}{GetLeaves}}()\ +\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_a40bba73a049af79a6630e1e8e07ee5d0}{GetRight}}()-\/>\mbox{\hyperlink{classprt_1_1merkle_1_1_node_a8da66ce50b71e17e6fd533e0b55c6216}{GetLeaves}}();}
+\DoxyCodeLine{00097\ \ \ \}}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_a4c2ed89d47d3f094f2d425b433e04d5a}{CanVerifyHash}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_a1e298a64abd88b3b841bd31f8b2fb735}{HasLeft}}()\ \&\&\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_a12f991434da1d509ad964a4b1184f29b}{HasRight}}();}
+\DoxyCodeLine{00101\ \ \ \}}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \ \ \textcolor{keyword}{friend}\ std::ostream\&\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_a6cf91e8099928e5377c9c07b655da54b}{operator<<}}(std::ostream\&\ stream,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node}{Node}}\&\ rhs)\ \{}
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordflow}{return}\ stream\ <<\ rhs.\mbox{\hyperlink{classprt_1_1merkle_1_1_node_af1ba5d8261a99643018f3293df130e5a}{ToString}}();}
+\DoxyCodeLine{00105\ \ \ \}}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_aaad2ef6ed276d4a765ee11ca5ef94558}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node}{Node}}\&\ rhs)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_a75951f69171296db1f245af28d108464}{GetHash}}()\ ==\ rhs.\mbox{\hyperlink{classprt_1_1merkle_1_1_node_a75951f69171296db1f245af28d108464}{GetHash}}();}
+\DoxyCodeLine{00109\ \ \ \}}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_ac08e6040e23b47ee183db0aa83e9fbd3}{operator!=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node}{Node}}\&\ rhs)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_a75951f69171296db1f245af28d108464}{GetHash}}()\ !=\ rhs.\mbox{\hyperlink{classprt_1_1merkle_1_1_node_a75951f69171296db1f245af28d108464}{GetHash}}();}
+\DoxyCodeLine{00113\ \ \ \}}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00116\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node}{Node}}*\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_a8c8b1253e886e5b24e967324a2b44b69}{New}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1uint256}{uint256}}\&\ hash)\ \{}
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_abe90b92d143985c52e67a64fe4338290}{Node}}(hash);}
+\DoxyCodeLine{00118\ \ \ \}}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node}{Node}}*\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_a7e3d60f4405d96077b2666a44fda06dd}{Concat}}(\mbox{\hyperlink{classprt_1_1merkle_1_1_node}{Node}}*\ left,\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node}{Node}}*\ right)\ \{}
+\DoxyCodeLine{00121\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(left);}
+\DoxyCodeLine{00122\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(right);}
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ node\ =\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_a8c8b1253e886e5b24e967324a2b44b69}{New}}(\mbox{\hyperlink{classprt_1_1merkle_1_1_node_a9d166fc63b7f25aafec264f4cfd66672}{ConcatHashes}}(left,\ right));}
+\DoxyCodeLine{00124\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(node);}
+\DoxyCodeLine{00125\ \ \ \ \ node-\/>SetLeft(left);}
+\DoxyCodeLine{00126\ \ \ \ \ node-\/>SetRight(right);}
+\DoxyCodeLine{00127\ \ \ \ \ \textcolor{keywordflow}{return}\ node;}
+\DoxyCodeLine{00128\ \ \ \}}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00130\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node}{Node}}*\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_ac43db69d7da877ea7172087cbeef9fed}{Copy}}(\mbox{\hyperlink{classprt_1_1merkle_1_1_node}{Node}}*\ node)\ \{}
+\DoxyCodeLine{00131\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(node);}
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node_a8c8b1253e886e5b24e967324a2b44b69}{New}}(node-\/>\mbox{\hyperlink{classprt_1_1merkle_1_1_node_a75951f69171296db1f245af28d108464}{GetHash}}());}
+\DoxyCodeLine{00133\ \ \ \}}
+\DoxyCodeLine{00134\ \};}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00136\ \textcolor{keyword}{typedef}\ std::vector<Node*>\ \mbox{\hyperlink{namespaceprt_1_1merkle_a8f73765e3b08e8d859349fc660a9e9f3}{NodeList}};}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1merkle_1_1_tree}{Tree}}\ \{}
+\DoxyCodeLine{00139\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00140\ \ \ \mbox{\hyperlink{classprt_1_1merkle_1_1_node}{Node}}*\ \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_ab36a77111ca5c3af691c1370c6544e84}{root\_}};}
+\DoxyCodeLine{00141\ \ \ std::vector<Node*>\ \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_a96cb32e06dc8cca0609d1d14e3176d47}{leaves\_}};}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_aba91f08bd46b47d439be20d37a264df6}{SetRoot}}(\mbox{\hyperlink{classprt_1_1merkle_1_1_node}{Node}}*\ node)\ \{}
+\DoxyCodeLine{00144\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(node);}
+\DoxyCodeLine{00145\ \ \ \ \ \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_ab36a77111ca5c3af691c1370c6544e84}{root\_}}\ =\ node;}
+\DoxyCodeLine{00146\ \ \ \}}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00148\ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_node}{Node}}*\ \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_a3eb5f1e50067272a14b402a542aaba75}{ComputeRoot}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_1_1merkle_a8f73765e3b08e8d859349fc660a9e9f3}{NodeList}}\&\ nodes);}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00151\ \ \ \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_ae63928a23d9f36631767be4ea49fd358}{Tree}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00152\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_ae63928a23d9f36631767be4ea49fd358}{Tree}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_1_1merkle_a8f73765e3b08e8d859349fc660a9e9f3}{NodeList}}\&\ leaves);}
+\DoxyCodeLine{00153\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_ae63928a23d9f36631767be4ea49fd358}{Tree}}(\textcolor{keyword}{const}\ std::vector<uint256>\&\ leaves);}
+\DoxyCodeLine{00154\ \ \ \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_a48893a45549c0f505224ff32e02b2447}{Tree}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_tree}{Tree}}\&\ rhs)\ :}
+\DoxyCodeLine{00155\ \ \ \ \ \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_ab36a77111ca5c3af691c1370c6544e84}{root\_}}(rhs.\mbox{\hyperlink{classprt_1_1merkle_1_1_tree_ab36a77111ca5c3af691c1370c6544e84}{root\_}}),}
+\DoxyCodeLine{00156\ \ \ \ \ \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_a96cb32e06dc8cca0609d1d14e3176d47}{leaves\_}}(rhs.\mbox{\hyperlink{classprt_1_1merkle_1_1_tree_a96cb32e06dc8cca0609d1d14e3176d47}{leaves\_}})\ \{\}}
+\DoxyCodeLine{00157\ \ \ \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_a2d1925275b3335e0f65beba62dd41b46}{\string~Tree}}()\ \{}
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classprt_1_1merkle_1_1_tree_ab36a77111ca5c3af691c1370c6544e84}{root\_}})}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \textcolor{keyword}{delete}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_ab36a77111ca5c3af691c1370c6544e84}{root\_}};}
+\DoxyCodeLine{00160\ \ \ \}}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00162\ \ \ \mbox{\hyperlink{classprt_1_1merkle_1_1_node}{Node}}*\ \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_a26b2c9a96462c92ac69f355b7d559704}{GetRoot}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00163\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_ab36a77111ca5c3af691c1370c6544e84}{root\_}};}
+\DoxyCodeLine{00164\ \ \ \}}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00166\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_a949a616f09a12fae503376ff20c55ea8}{HasRoot}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_ab36a77111ca5c3af691c1370c6544e84}{root\_}}\ !=\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00168\ \ \ \}}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00170\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_a515421b7ca9cfe330d370b2eba6f7f94}{IsEmpty}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00171\ \ \ \ \ \textcolor{keywordflow}{return}\ !\mbox{\hyperlink{classprt_1_1merkle_1_1_tree_a949a616f09a12fae503376ff20c55ea8}{HasRoot}}()\ \&\&\ \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_a96cb32e06dc8cca0609d1d14e3176d47}{leaves\_}}.empty();}
+\DoxyCodeLine{00172\ \ \ \}}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00174\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_1_1merkle_a8f73765e3b08e8d859349fc660a9e9f3}{NodeList}}\&\ \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_afeac5fc5e9ef136fae8d229b47571f7b}{GetLeaves}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00175\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_a96cb32e06dc8cca0609d1d14e3176d47}{leaves\_}};}
+\DoxyCodeLine{00176\ \ \ \}}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00178\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1uint256}{uint256}}\&\ \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_afbe2603428d128ea8845d575f4ca9166}{GetRootHash}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00179\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(\mbox{\hyperlink{classprt_1_1merkle_1_1_tree_a949a616f09a12fae503376ff20c55ea8}{HasRoot}}());}
+\DoxyCodeLine{00180\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_a26b2c9a96462c92ac69f355b7d559704}{GetRoot}}()-\/>\mbox{\hyperlink{classprt_1_1merkle_1_1_node_a75951f69171296db1f245af28d108464}{GetHash}}();}
+\DoxyCodeLine{00181\ \ \ \}}
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00183\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_adbc6bd52885e413f35e091dcd0ad90d0}{VisitRoot}}(\mbox{\hyperlink{classprt_1_1merkle_1_1_node_visitor}{NodeVisitor}}*\ vis)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00184\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(vis);}
+\DoxyCodeLine{00185\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_a949a616f09a12fae503376ff20c55ea8}{HasRoot}}()\ ?\ vis-\/>\mbox{\hyperlink{classprt_1_1merkle_1_1_node_visitor_a1d897ef17a241c6d522dec5553c91661}{Visit}}(\mbox{\hyperlink{classprt_1_1merkle_1_1_tree_a26b2c9a96462c92ac69f355b7d559704}{GetRoot}}())\ :\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00186\ \ \ \}}
+\DoxyCodeLine{00187\ }
+\DoxyCodeLine{00188\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_a415c1230e8ea5ae44e349591b31aea3e}{VisitLeaves}}(\mbox{\hyperlink{classprt_1_1merkle_1_1_node_visitor}{NodeVisitor}}*\ vis)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00189\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(vis);}
+\DoxyCodeLine{00190\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ leaf\ :\ \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_a96cb32e06dc8cca0609d1d14e3176d47}{leaves\_}})\ \{}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!vis-\/>\mbox{\hyperlink{classprt_1_1merkle_1_1_node_visitor_a1d897ef17a241c6d522dec5553c91661}{Visit}}(leaf))}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00193\ \ \ \ \ \}}
+\DoxyCodeLine{00194\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00195\ \ \ \}}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00197\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_ae3be06f77930de82b365bbac8881b1c8}{Accept}}(\mbox{\hyperlink{classprt_1_1merkle_1_1_node_visitor}{NodeVisitor}}*\ vis)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00198\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(vis);}
+\DoxyCodeLine{00199\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_adbc6bd52885e413f35e091dcd0ad90d0}{VisitRoot}}(vis)\ \&\&\ \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_a415c1230e8ea5ae44e349591b31aea3e}{VisitLeaves}}(vis);}
+\DoxyCodeLine{00200\ \ \ \}}
+\DoxyCodeLine{00201\ }
+\DoxyCodeLine{00202\ \ \ \mbox{\hyperlink{classprt_1_1merkle_1_1_tree}{Tree}}\&\ \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_ab6c11d039442631268da3af0af7ec9a5}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1merkle_1_1_tree}{Tree}}\&\ rhs)\ \{}
+\DoxyCodeLine{00203\ \ \ \ \ \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_ab36a77111ca5c3af691c1370c6544e84}{root\_}}\ =\ rhs.\mbox{\hyperlink{classprt_1_1merkle_1_1_tree_ab36a77111ca5c3af691c1370c6544e84}{root\_}};}
+\DoxyCodeLine{00204\ \ \ \ \ \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_a96cb32e06dc8cca0609d1d14e3176d47}{leaves\_}}.clear();}
+\DoxyCodeLine{00205\ \ \ \ \ std::for\_each(std::begin(rhs.\mbox{\hyperlink{classprt_1_1merkle_1_1_tree_a96cb32e06dc8cca0609d1d14e3176d47}{leaves\_}}),\ std::begin(rhs.\mbox{\hyperlink{classprt_1_1merkle_1_1_tree_a96cb32e06dc8cca0609d1d14e3176d47}{leaves\_}}),\ [\textcolor{keyword}{this}](\mbox{\hyperlink{classprt_1_1merkle_1_1_node}{Node}}*\ node)\ \{}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ leaves\_.push\_back(node);}
+\DoxyCodeLine{00207\ \ \ \ \ \});}
+\DoxyCodeLine{00208\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00209\ \ \ \}}
+\DoxyCodeLine{00210\ \};}
+\DoxyCodeLine{00211\ \}\ \ \textcolor{comment}{//\ namespace\ prt::merkle}}
+\DoxyCodeLine{00212\ }
+\DoxyCodeLine{00213\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_MERKLE\_H}}
+
+\end{DoxyCode}

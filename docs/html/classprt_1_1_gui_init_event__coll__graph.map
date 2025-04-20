@@ -1,0 +1,9 @@
+<map id="prt::GuiInitEvent" name="prt::GuiInitEvent">
+<area shape="rect" id="Node000001" title=" " alt="" coords="34,169,151,195"/>
+<area shape="rect" id="Node000002" href="$classprt_1_1_gui_event.html" title=" " alt="" coords="43,94,142,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="95,135,95,169,90,169,90,135"/>
+<area shape="rect" id="Node000003" href="$classprt_1_1_event.html" title=" " alt="" coords="5,5,84,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="61,44,88,92,84,95,56,46"/>
+<area shape="rect" id="Node000004" href="$classprt_1_1_gui.html" title=" " alt="" coords="108,5,173,31"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="129,46,101,95,97,92,124,44"/>
+</map>

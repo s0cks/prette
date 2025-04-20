@@ -1,0 +1,130 @@
+\doxysection{prt\+::Registry\+Indexer Class Reference}
+\hypertarget{classprt_1_1_registry_indexer}{}\label{classprt_1_1_registry_indexer}\index{prt::RegistryIndexer@{prt::RegistryIndexer}}
+
+
+{\ttfamily \#include $<$registry.\+h$>$}
+
+
+
+Inheritance diagram for prt\+::Registry\+Indexer\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=182pt]{classprt_1_1_registry_indexer__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classprt_1_1_registry_indexer_abb06b7435716a0cde9cc17fd1ab9b073}{\texorpdfstring{$\sim$}{\string~}\+Registry\+Indexer}} ()=default
+\item 
+virtual void \mbox{\hyperlink{classprt_1_1_registry_indexer_a2aedec8148a9e024b6d3a7c3caa239c4}{Index}} (\mbox{\hyperlink{classprt_1_1_registry}{Registry}} \texorpdfstring{$\ast$}{*}registry)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_registry_indexer_a0a86ec311d594c1c4697dd96f53e9f6e}{Registry\+Indexer}} (fs\+::path root)
+\item 
+auto \mbox{\hyperlink{classprt_1_1_registry_indexer_a737e950315edf72903442221820a2bce}{Get\+Root}} () const -\/$>$ const fs\+::path \&
+\item 
+virtual void \mbox{\hyperlink{classprt_1_1_registry_indexer_aa5324d25b562122ddc99f19e5614326f}{Index\+Path}} (leveldb\+::\+Write\+Batch \&batch, const fs\+::path \&path)=0
+\item 
+virtual auto \mbox{\hyperlink{classprt_1_1_registry_indexer_a1f6f34bf581f70fabccdac6eaef0f834}{Create\+Stream}} () const -\/$>$ \mbox{\hyperlink{namespaceprt_a189cd3af64e89458ea1ee7ab9e0de979}{Path\+Stream}}
+\item 
+virtual auto \mbox{\hyperlink{classprt_1_1_registry_indexer_a3851adbaf5a20ae38d79719a7ec808b4}{Create\+Filter}} () const -\/$>$ \mbox{\hyperlink{namespaceprt_a9f32127cc126e363bab6995173fc63d7}{Path\+Predicate}}=0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_registry_indexer_ab37841133856bf992c8b0e52e44e5f1a}{Create\+Stream\+For\+Directory}} (const fs\+::path \&root, const bool is\+\_\+recursive=false) -\/$>$ \mbox{\hyperlink{namespaceprt_a189cd3af64e89458ea1ee7ab9e0de979}{Path\+Stream}}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_registry_indexer_a59e4ad350a02306867da08a184ec21c0}{Has\+File\+Extension}} (const std\+::unordered\+\_\+set$<$ std\+::string $>$ \&extensions) -\/$>$ \mbox{\hyperlink{namespaceprt_a9f32127cc126e363bab6995173fc63d7}{Path\+Predicate}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+fs\+::path \mbox{\hyperlink{classprt_1_1_registry_indexer_a2481243bbe397087032b83970476d60d}{root\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_registry_indexer_a0a86ec311d594c1c4697dd96f53e9f6e}\index{prt::RegistryIndexer@{prt::RegistryIndexer}!RegistryIndexer@{RegistryIndexer}}
+\index{RegistryIndexer@{RegistryIndexer}!prt::RegistryIndexer@{prt::RegistryIndexer}}
+\doxysubsubsection{\texorpdfstring{RegistryIndexer()}{RegistryIndexer()}}
+{\footnotesize\ttfamily \label{classprt_1_1_registry_indexer_a0a86ec311d594c1c4697dd96f53e9f6e} 
+prt\+::\+Registry\+Indexer\+::\+Registry\+Indexer (\begin{DoxyParamCaption}\item[{fs\+::path}]{root}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}, {\ttfamily [protected]}}
+
+\Hypertarget{classprt_1_1_registry_indexer_abb06b7435716a0cde9cc17fd1ab9b073}\index{prt::RegistryIndexer@{prt::RegistryIndexer}!````~RegistryIndexer@{\texorpdfstring{$\sim$}{\string~}RegistryIndexer}}
+\index{````~RegistryIndexer@{\texorpdfstring{$\sim$}{\string~}RegistryIndexer}!prt::RegistryIndexer@{prt::RegistryIndexer}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}RegistryIndexer()}{\string~RegistryIndexer()}}
+{\footnotesize\ttfamily \label{classprt_1_1_registry_indexer_abb06b7435716a0cde9cc17fd1ab9b073} 
+virtual prt\+::\+Registry\+Indexer\+::\texorpdfstring{$\sim$}{\string~}\+Registry\+Indexer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_registry_indexer_a3851adbaf5a20ae38d79719a7ec808b4}\index{prt::RegistryIndexer@{prt::RegistryIndexer}!CreateFilter@{CreateFilter}}
+\index{CreateFilter@{CreateFilter}!prt::RegistryIndexer@{prt::RegistryIndexer}}
+\doxysubsubsection{\texorpdfstring{CreateFilter()}{CreateFilter()}}
+{\footnotesize\ttfamily \label{classprt_1_1_registry_indexer_a3851adbaf5a20ae38d79719a7ec808b4} 
+virtual auto prt\+::\+Registry\+Indexer\+::\+Create\+Filter (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$  \mbox{\hyperlink{namespaceprt_a9f32127cc126e363bab6995173fc63d7}{Path\+Predicate}}\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{classprt_1_1_shader_indexer_a62c0d412dc0f2e483bfa60b22daded28}{prt\+::\+Shader\+Indexer}}.
+
+\Hypertarget{classprt_1_1_registry_indexer_a1f6f34bf581f70fabccdac6eaef0f834}\index{prt::RegistryIndexer@{prt::RegistryIndexer}!CreateStream@{CreateStream}}
+\index{CreateStream@{CreateStream}!prt::RegistryIndexer@{prt::RegistryIndexer}}
+\doxysubsubsection{\texorpdfstring{CreateStream()}{CreateStream()}}
+{\footnotesize\ttfamily \label{classprt_1_1_registry_indexer_a1f6f34bf581f70fabccdac6eaef0f834} 
+virtual auto prt\+::\+Registry\+Indexer\+::\+Create\+Stream (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ \mbox{\hyperlink{namespaceprt_a189cd3af64e89458ea1ee7ab9e0de979}{Path\+Stream}} \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+\Hypertarget{classprt_1_1_registry_indexer_ab37841133856bf992c8b0e52e44e5f1a}\index{prt::RegistryIndexer@{prt::RegistryIndexer}!CreateStreamForDirectory@{CreateStreamForDirectory}}
+\index{CreateStreamForDirectory@{CreateStreamForDirectory}!prt::RegistryIndexer@{prt::RegistryIndexer}}
+\doxysubsubsection{\texorpdfstring{CreateStreamForDirectory()}{CreateStreamForDirectory()}}
+{\footnotesize\ttfamily \label{classprt_1_1_registry_indexer_ab37841133856bf992c8b0e52e44e5f1a} 
+auto prt\+::\+Registry\+Indexer\+::\+Create\+Stream\+For\+Directory (\begin{DoxyParamCaption}\item[{const fs\+::path \&}]{root}{, }\item[{const bool}]{is\+\_\+recursive}{ = {\ttfamily false}}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{namespaceprt_a189cd3af64e89458ea1ee7ab9e0de979}{Path\+Stream}}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+\Hypertarget{classprt_1_1_registry_indexer_a737e950315edf72903442221820a2bce}\index{prt::RegistryIndexer@{prt::RegistryIndexer}!GetRoot@{GetRoot}}
+\index{GetRoot@{GetRoot}!prt::RegistryIndexer@{prt::RegistryIndexer}}
+\doxysubsubsection{\texorpdfstring{GetRoot()}{GetRoot()}}
+{\footnotesize\ttfamily \label{classprt_1_1_registry_indexer_a737e950315edf72903442221820a2bce} 
+auto prt\+::\+Registry\+Indexer\+::\+Get\+Root (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const fs\+::path\& \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+\Hypertarget{classprt_1_1_registry_indexer_a59e4ad350a02306867da08a184ec21c0}\index{prt::RegistryIndexer@{prt::RegistryIndexer}!HasFileExtension@{HasFileExtension}}
+\index{HasFileExtension@{HasFileExtension}!prt::RegistryIndexer@{prt::RegistryIndexer}}
+\doxysubsubsection{\texorpdfstring{HasFileExtension()}{HasFileExtension()}}
+{\footnotesize\ttfamily \label{classprt_1_1_registry_indexer_a59e4ad350a02306867da08a184ec21c0} 
+auto prt\+::\+Registry\+Indexer\+::\+Has\+File\+Extension (\begin{DoxyParamCaption}\item[{const std\+::unordered\+\_\+set$<$ std\+::string $>$ \&}]{extensions}{}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{namespaceprt_a9f32127cc126e363bab6995173fc63d7}{Path\+Predicate}}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+\Hypertarget{classprt_1_1_registry_indexer_a2aedec8148a9e024b6d3a7c3caa239c4}\index{prt::RegistryIndexer@{prt::RegistryIndexer}!Index@{Index}}
+\index{Index@{Index}!prt::RegistryIndexer@{prt::RegistryIndexer}}
+\doxysubsubsection{\texorpdfstring{Index()}{Index()}}
+{\footnotesize\ttfamily \label{classprt_1_1_registry_indexer_a2aedec8148a9e024b6d3a7c3caa239c4} 
+void prt\+::\+Registry\+Indexer\+::\+Index (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_registry}{Registry}} \texorpdfstring{$\ast$}{*}}]{registry}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+\Hypertarget{classprt_1_1_registry_indexer_aa5324d25b562122ddc99f19e5614326f}\index{prt::RegistryIndexer@{prt::RegistryIndexer}!IndexPath@{IndexPath}}
+\index{IndexPath@{IndexPath}!prt::RegistryIndexer@{prt::RegistryIndexer}}
+\doxysubsubsection{\texorpdfstring{IndexPath()}{IndexPath()}}
+{\footnotesize\ttfamily \label{classprt_1_1_registry_indexer_aa5324d25b562122ddc99f19e5614326f} 
+virtual void prt\+::\+Registry\+Indexer\+::\+Index\+Path (\begin{DoxyParamCaption}\item[{leveldb\+::\+Write\+Batch \&}]{batch}{, }\item[{const fs\+::path \&}]{path}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{classprt_1_1_shader_indexer_add82302d43d466ec442c6427ebb71080}{prt\+::\+Shader\+Indexer}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_registry_indexer_a2481243bbe397087032b83970476d60d}\index{prt::RegistryIndexer@{prt::RegistryIndexer}!root\_@{root\_}}
+\index{root\_@{root\_}!prt::RegistryIndexer@{prt::RegistryIndexer}}
+\doxysubsubsection{\texorpdfstring{root\_}{root\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_registry_indexer_a2481243bbe397087032b83970476d60d} 
+fs\+::path prt\+::\+Registry\+Indexer\+::root\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{registry_8h}{registry.\+h}}\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{registry_8cc}{registry.\+cc}}\end{DoxyCompactItemize}

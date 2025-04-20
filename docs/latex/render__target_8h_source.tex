@@ -1,0 +1,54 @@
+\doxysection{render\+\_\+target.\+h}
+\hypertarget{render__target_8h_source}{}\label{render__target_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/render\_target.h@{/Users/tazz/Projects/prette/Sources/prette/render\_target.h}}
+\mbox{\hyperlink{render__target_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_RENDER\_TARGET\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_RENDER\_TARGET\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{common_8h}{prette/common.h}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}prette/gfx.h"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00008\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_render_target}{RenderTarget}}\ \{}
+\DoxyCodeLine{00009\ \ \ \mbox{\hyperlink{classprt_1_1_render_target_a35750e3a8698783e24143dd21c6f410d}{DEFINE\_DEFAULT\_COPYABLE\_TYPE}}(\mbox{\hyperlink{classprt_1_1_render_target}{RenderTarget}});}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00012\ \ \ VkImage\ \mbox{\hyperlink{classprt_1_1_render_target_a10c07b43625d08376cf9221efd543e64}{image\_}}\{\};}
+\DoxyCodeLine{00013\ \ \ VkImageView\ \mbox{\hyperlink{classprt_1_1_render_target_a5a0d442d4591e184e00936da244832aa}{view\_}}\{\};}
+\DoxyCodeLine{00014\ \ \ VkDeviceMemory\ \mbox{\hyperlink{classprt_1_1_render_target_ac3936e86fae1dcf9ef3db3557f891b5b}{memory\_}}\{\};}
+\DoxyCodeLine{00015\ \ \ VkFramebuffer\ \mbox{\hyperlink{classprt_1_1_render_target_a1b2714855a23cdcff0b58b773ebf7482}{framebuffer\_}}\{\};}
+\DoxyCodeLine{00016\ \ \ VkExtent2D\ \mbox{\hyperlink{classprt_1_1_render_target_ab2c6b33dc5910a23e3ad9c495d7fa183}{extent\_}}\{\};}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00019\ \ \ \mbox{\hyperlink{classprt_1_1_render_target_ac095972af85ab0e50e8524ed75e91739}{RenderTarget}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00020\ \ \ \mbox{\hyperlink{classprt_1_1_render_target_ac095972af85ab0e50e8524ed75e91739}{RenderTarget}}(\textcolor{keyword}{const}\ VkRenderPass\&\ pass,\ \textcolor{keyword}{const}\ VkExtent2D\&\ extent,\ \textcolor{keyword}{const}\ VkImageView\ depth\_view\ =\ VK\_NULL\_HANDLE,}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ VkFormat\ format\ =\ VK\_FORMAT\_B8G8R8A8\_SRGB);}
+\DoxyCodeLine{00022\ \ \ \mbox{\hyperlink{classprt_1_1_render_target_a041a23abab898ccb380b36fd59b0f0b1}{\string~RenderTarget}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_render_target_a7ceccdaf9a7fba873e0e3de012fd453a}{GetImage}}()\ const\ -\/>\ VkImage\ const\&\ \{}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_render_target_a10c07b43625d08376cf9221efd543e64}{image\_}};}
+\DoxyCodeLine{00026\ \ \ \}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_render_target_a6054993a7a425725f04f38a9fe484523}{GetView}}()\ const\ -\/>\ VkImageView\ const\&\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_render_target_a5a0d442d4591e184e00936da244832aa}{view\_}};}
+\DoxyCodeLine{00030\ \ \ \}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_render_target_ae6cfa8b54e4a6c638aaacd760a927a8a}{GetMemory}}()\ const\ -\/>\ VkDeviceMemory\ const\&\ \{}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_render_target_ac3936e86fae1dcf9ef3db3557f891b5b}{memory\_}};}
+\DoxyCodeLine{00034\ \ \ \}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_render_target_af3afa55992f1cbfaecb8bfdf5417fe2c}{GetFramebuffer}}()\ const\ -\/>\ VkFramebuffer\ const\&\ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_render_target_a1b2714855a23cdcff0b58b773ebf7482}{framebuffer\_}};}
+\DoxyCodeLine{00038\ \ \ \}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_render_target_a9b5716510d9ede32e0753394add8277d}{GetExtent}}()\ const\ -\/>\ VkExtent2D\ const\&\ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_render_target_ab2c6b33dc5910a23e3ad9c495d7fa183}{extent\_}};}
+\DoxyCodeLine{00042\ \ \ \}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_render_target_a29377d7629964ab3bddc6a33eb5b98bc}{Destroy}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00045\ \};}
+\DoxyCodeLine{00046\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_RENDER\_TARGET\_H}}
+
+\end{DoxyCode}

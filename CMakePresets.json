@@ -23,10 +23,8 @@
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
         "CMAKE_C_STANDARD": "11",
         "CMAKE_C_STANDARD_REQUIRED": "ON",
-        "CMAKE_C_COMPILER": "clang",
         "CMAKE_CXX_STANDARD": "20",
         "CMAKE_CXX_STANDARD_REQUIRED": "ON",
-        "CMAKE_CXX_COMPILER": "clang++",
         "CMAKE_CXX_EXTENSIONS": "OFF",
         "VCPKG_APPLOCAL_DEPS": "ON"
       }
@@ -34,6 +32,11 @@
     {
       "name": "darwin-arm64",
       "hidden": true,
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "clang",
+        "CMAKE_CXX_COMPILER": "clang++",
+        "VCPKG_TARGET_TRIPLET": "arm64-osx-dynamic"
+      },
       "vendor": {
         "microsoft.com/VisualStudioSettings/CMake/1.0": {
           "intelliSenseMode": "ios-clang-arm64",
@@ -63,11 +66,27 @@
       ]
     },
     {
+      "name": "tracing",
+      "hidden": true,
+      "cacheVariables": {
+        "PRT_TRACING_ENABLED": "ON"
+      }
+    },
+    {
       "name": "debug-darwin-arm64",
       "displayName": "Debug (Darwin/arm64)",
       "inherits": [
         "debug",
         "darwin-arm64"
+      ]
+    },
+    {
+      "name": "debug-tracing-darwin-arm64",
+      "displayName": "Debug w/ Tracy (Darwin/arm64)",
+      "inherits": [
+        "debug",
+        "darwin-arm64",
+        "tracing"
       ]
     },
     {
@@ -93,30 +112,6 @@
         "release",
         "darwin-arm64"
       ]
-    }
-  ],
-  "buildPresets": [
-    {
-      "name": "debug",
-      "displayName": "Debug",
-      "configurePreset": "debug"
-    },
-    {
-      "name": "debug-darwin-arm64",
-      "displayName": "Debug (Darwin/arm64)",
-      "configurePreset": "debug-darwin-arm64"
-    },
-    {
-      "name": "release",
-      "displayName": "Release",
-      "configurePreset": "release",
-      "cleanFirst": true
-    },
-    {
-      "name": "release-darwin-arm64",
-      "displayName": "Release (Darwin/arm64)",
-      "configurePreset": "release-darwin-arm64",
-      "cleanFirst": true
     }
   ]
 }

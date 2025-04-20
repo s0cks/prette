@@ -1,0 +1,77 @@
+\doxysection{uint128.\+h}
+\hypertarget{uint128_8h_source}{}\label{uint128_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/uint128.h@{/Users/tazz/Projects/prette/Sources/prette/uint128.h}}
+\mbox{\hyperlink{uint128_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_UINT128\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_UINT128\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{big__number_8h}{prette/big\_number.h}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{common_8h}{prette/common.h}}"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00008\ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ kUInt128Size\ =\ 128\ /\ 8;}
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1uint128}{uint128}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1_big_number_template}{BigNumberTemplate}}<kUInt128Size>\ \{}
+\DoxyCodeLine{00010\ \ \ \mbox{\hyperlink{classprt_1_1uint128_ad2b84d5eaf52445c308537f2b27c8ef9}{DEFINE\_DEFAULT\_COPYABLE\_TYPE}}(\mbox{\hyperlink{classprt_1_1uint128}{uint128}});}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00013\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classprt_1_1uint128_ad4f346042f5020f2958696725b9de444}{Compare}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1uint128}{uint128}}\&\ lhs,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1uint128}{uint128}}\&\ rhs)\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordflow}{return}\ memcmp(lhs.\mbox{\hyperlink{classprt_1_1_big_number_template_a4dec58403d03babe7f7c1e051aab93f3}{data}}(),\ rhs.\mbox{\hyperlink{classprt_1_1_big_number_template_a4dec58403d03babe7f7c1e051aab93f3}{data}}(),\ kUInt128Size);}
+\DoxyCodeLine{00015\ \ \ \}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00018\ \ \ \mbox{\hyperlink{classprt_1_1uint128_a4e5a39c41ec61c0780db006919e2d1d1}{uint128}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00019\ \ \ \mbox{\hyperlink{classprt_1_1uint128_aa77a3b8bb525271a16c586c710156e2a}{uint128}}(\textcolor{keyword}{const}\ uint8\_t*\ bytes,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ num\_bytes)\ :}
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_big_number_template}{BigNumberTemplate}}(bytes,\ num\_bytes)\ \{\}}
+\DoxyCodeLine{00021\ \ \ \mbox{\hyperlink{classprt_1_1uint128_ad14a0d16c31a80b8d39a099ea9754b2a}{uint128}}(\textcolor{keyword}{const}\ uint32\_t\ a,\ \textcolor{keyword}{const}\ uint32\_t\ b,\ \textcolor{keyword}{const}\ uint32\_t\ c,\ \textcolor{keyword}{const}\ uint32\_t\ d)\ :}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{classprt_1_1uint128}{uint128}}()\ \{}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ \mbox{\hyperlink{classprt_1_1_big_number_template_a4dec58403d03babe7f7c1e051aab93f3}{data}}[]\ =\ \{a,\ b,\ c,\ d\};}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_big_number_template_a10750af0c82a9495a698560fc2c611cf}{CopyFrom}}((\textcolor{keyword}{const}\ uint8\_t*)\mbox{\hyperlink{classprt_1_1_big_number_template_a4dec58403d03babe7f7c1e051aab93f3}{data}},\ \mbox{\hyperlink{classprt_1_1_big_number_template_aaec701adaec9858ddf019f619c4da0ea}{kSizeInBytes}});}
+\DoxyCodeLine{00025\ \ \ \}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#if\ defined(ARCH\_IS\_X64)\ ||\ defined(ARCH\_IS\_ARM64)}}
+\DoxyCodeLine{00027\ \ \ \mbox{\hyperlink{classprt_1_1uint128_a4e5a39c41ec61c0780db006919e2d1d1}{uint128}}(\textcolor{keyword}{const}\ uint64\_t\ a,\ \textcolor{keyword}{const}\ uint64\_t\ b)\ :}
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{classprt_1_1uint128}{uint128}}()\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{const}\ uint64\_t\ \mbox{\hyperlink{classprt_1_1_big_number_template_a4dec58403d03babe7f7c1e051aab93f3}{data}}[]\ =\ \{a,\ b\};}
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_big_number_template_a10750af0c82a9495a698560fc2c611cf}{CopyFrom}}((\textcolor{keyword}{const}\ uint8\_t*)\mbox{\hyperlink{classprt_1_1_big_number_template_a4dec58403d03babe7f7c1e051aab93f3}{data}},\ \mbox{\hyperlink{classprt_1_1_big_number_template_aaec701adaec9858ddf019f619c4da0ea}{kSizeInBytes}});}
+\DoxyCodeLine{00031\ \ \ \}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ ARCH\_IS\_X64\ ||\ ARCH\_IS\_ARM64}}
+\DoxyCodeLine{00033\ \ \ \mbox{\hyperlink{classprt_1_1uint128_ae578fbdf85834330fc2da8c5e4c5dec2}{\string~uint128}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\&\ \mbox{\hyperlink{classprt_1_1uint128_a3ee9451d1ca7060c977611bf4d86ea74}{operator[]}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ idx)\ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(idx\ >=\ 0\ \&\&\ idx\ <=\ \mbox{\hyperlink{classprt_1_1_big_number_template_ada0c8349e9f0b6fe017c0675045ed3d7}{size}}());}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_big_number_template_a541301fbc305e5d0a2d59230bda27190}{data\_}}[idx];}
+\DoxyCodeLine{00038\ \ \ \}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ \mbox{\hyperlink{classprt_1_1uint128_aafb08e1245e1d175b48f9f3d1ccb19f1}{operator[]}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ idx)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(idx\ >=\ 0\ \&\&\ idx\ <=\ \mbox{\hyperlink{classprt_1_1_big_number_template_ada0c8349e9f0b6fe017c0675045ed3d7}{size}}());}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_big_number_template_a541301fbc305e5d0a2d59230bda27190}{data\_}}[idx];}
+\DoxyCodeLine{00043\ \ \ \}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classprt_1_1uint128_aa79d3d2ba787769b1300008dc6673a68}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1uint128}{uint128}}\&\ rhs)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1uint128_ad4f346042f5020f2958696725b9de444}{Compare}}(*\textcolor{keyword}{this},\ rhs)\ ==\ 0;}
+\DoxyCodeLine{00047\ \ \ \}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classprt_1_1uint128_ae8a4b746bb8d21588165a3bcefec26f5}{operator!=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1uint128}{uint128}}\&\ rhs)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1uint128_ad4f346042f5020f2958696725b9de444}{Compare}}(*\textcolor{keyword}{this},\ rhs)\ !=\ 0;}
+\DoxyCodeLine{00051\ \ \ \}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classprt_1_1uint128_a68e858c88a071d7c648b2ad588cb7d84}{operator<}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1uint128}{uint128}}\&\ rhs)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1uint128_ad4f346042f5020f2958696725b9de444}{Compare}}(*\textcolor{keyword}{this},\ rhs)\ <\ 0;}
+\DoxyCodeLine{00055\ \ \ \}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classprt_1_1uint128_a362fa88079ce9fa3555bdf7a97b005d2}{operator>}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1uint128}{uint128}}\&\ rhs)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1uint128_ad4f346042f5020f2958696725b9de444}{Compare}}(*\textcolor{keyword}{this},\ rhs)\ >\ 0;}
+\DoxyCodeLine{00059\ \ \ \}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \textcolor{keyword}{explicit}\ \textcolor{keyword}{operator}\ std::string()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_big_number_template_af4417815a3c504db709c3194deacb058}{ToHexString}}();}
+\DoxyCodeLine{00063\ \ \ \}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \textcolor{keyword}{friend}\ std::ostream\&\ \mbox{\hyperlink{classprt_1_1uint128_afbe84dd08fffdd730e69d572470ab370}{operator<<}}(std::ostream\&\ stream,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1uint128}{uint128}}\&\ rhs)\ \{}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordflow}{return}\ stream\ <<\ ((\textcolor{keyword}{const}\ std::string\&)rhs);}
+\DoxyCodeLine{00067\ \ \ \}}
+\DoxyCodeLine{00068\ \};}
+\DoxyCodeLine{00069\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_UINT128\_H}}
+
+\end{DoxyCode}

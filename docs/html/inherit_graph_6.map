@@ -1,0 +1,13 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$classprt_1_1_big_number.html" title=" " alt="" coords="5,78,115,104"/>
+<area shape="rect" id="Node000001" href="$classprt_1_1_big_number_template.html" title=" " alt="" coords="163,5,325,46"/>
+<area shape="poly" id="edge16_Node000000_Node000001" title=" " alt="" coords="112,70,183,44,185,49,113,75"/>
+<area shape="rect" id="Node000003" href="$classprt_1_1_big_number_template.html" title=" " alt="" coords="163,71,325,111"/>
+<area shape="poly" id="edge18_Node000000_Node000003" title=" " alt="" coords="130,88,162,88,162,94,130,94"/>
+<area shape="rect" id="Node000005" href="$classprt_1_1_big_number_template.html" title=" " alt="" coords="163,136,325,177"/>
+<area shape="poly" id="edge20_Node000000_Node000005" title=" " alt="" coords="113,107,185,133,183,138,112,112"/>
+<area shape="rect" id="Node000002" href="$classprt_1_1uint128.html" title=" " alt="" coords="373,13,459,38"/>
+<area shape="poly" id="edge17_Node000001_Node000002" title=" " alt="" coords="341,23,373,23,373,28,341,28"/>
+<area shape="rect" id="Node000004" href="$classprt_1_1uint256.html" title=" " alt="" coords="373,78,459,104"/>
+<area shape="poly" id="edge19_Node000003_Node000004" title=" " alt="" coords="341,88,373,88,373,94,341,94"/>
+</map>

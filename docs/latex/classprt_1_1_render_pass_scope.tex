@@ -1,0 +1,91 @@
+\doxysection{prt\+::Render\+Pass\+Scope Class Reference}
+\hypertarget{classprt_1_1_render_pass_scope}{}\label{classprt_1_1_render_pass_scope}\index{prt::RenderPassScope@{prt::RenderPassScope}}
+
+
+{\ttfamily \#include $<$gfx\+\_\+vk.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_render_pass_scope_a65fbeb56dee9fdb941a4e5757007c1c5}{Render\+Pass\+Scope}} (const Vk\+Command\+Buffer \&buffer, const Vk\+Render\+Pass \&pass, const Vk\+Framebuffer \&framebuffer, const std\+::vector$<$ Vk\+Clear\+Value $>$ \&clear\+\_\+values)
+\item 
+\mbox{\hyperlink{classprt_1_1_render_pass_scope_ae90b7d0f9ed5caf63a3fd2981ae3ae25}{\texorpdfstring{$\sim$}{\string~}\+Render\+Pass\+Scope}} ()
+\item 
+auto \mbox{\hyperlink{classprt_1_1_render_pass_scope_afafc2821b6b55bb86a1c0362fd918060}{Get\+Begin\+Info}} () const -\/$>$ Vk\+Render\+Pass\+Begin\+Info const \&
+\item 
+void \mbox{\hyperlink{classprt_1_1_render_pass_scope_a3017917f0cf0574e3d73e4425c61090a}{Bind}} (\mbox{\hyperlink{classprt_1_1_graphics_pipeline}{Graphics\+Pipeline}} \texorpdfstring{$\ast$}{*}pipeline)
+\item 
+\mbox{\hyperlink{classprt_1_1_render_pass_scope_a09e3a67cdafb9c26ad6e2286d0a44d22}{operator const Vk\+Render\+Pass \&}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const Vk\+Command\+Buffer \& \mbox{\hyperlink{classprt_1_1_render_pass_scope_a30b142f4a65e8eb423a105e82e5f767c}{buffer\+\_\+}}
+\item 
+Vk\+Render\+Pass\+Begin\+Info \mbox{\hyperlink{classprt_1_1_render_pass_scope_adbc9711c7123e6fe5d15bd8622e016f6}{begin\+\_\+info\+\_\+}} \{\}
+\item 
+const Vk\+Render\+Pass \& \mbox{\hyperlink{classprt_1_1_render_pass_scope_a349b89379208dd9ad99e738f172480c4}{pass\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_render_pass_scope_a65fbeb56dee9fdb941a4e5757007c1c5}\index{prt::RenderPassScope@{prt::RenderPassScope}!RenderPassScope@{RenderPassScope}}
+\index{RenderPassScope@{RenderPassScope}!prt::RenderPassScope@{prt::RenderPassScope}}
+\doxysubsubsection{\texorpdfstring{RenderPassScope()}{RenderPassScope()}}
+{\footnotesize\ttfamily \label{classprt_1_1_render_pass_scope_a65fbeb56dee9fdb941a4e5757007c1c5} 
+prt\+::\+Render\+Pass\+Scope\+::\+Render\+Pass\+Scope (\begin{DoxyParamCaption}\item[{const Vk\+Command\+Buffer \&}]{buffer}{, }\item[{const Vk\+Render\+Pass \&}]{pass}{, }\item[{const Vk\+Framebuffer \&}]{framebuffer}{, }\item[{const std\+::vector$<$ Vk\+Clear\+Value $>$ \&}]{clear\+\_\+values}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+\Hypertarget{classprt_1_1_render_pass_scope_ae90b7d0f9ed5caf63a3fd2981ae3ae25}\index{prt::RenderPassScope@{prt::RenderPassScope}!````~RenderPassScope@{\texorpdfstring{$\sim$}{\string~}RenderPassScope}}
+\index{````~RenderPassScope@{\texorpdfstring{$\sim$}{\string~}RenderPassScope}!prt::RenderPassScope@{prt::RenderPassScope}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}RenderPassScope()}{\string~RenderPassScope()}}
+{\footnotesize\ttfamily \label{classprt_1_1_render_pass_scope_ae90b7d0f9ed5caf63a3fd2981ae3ae25} 
+prt\+::\+Render\+Pass\+Scope\+::\texorpdfstring{$\sim$}{\string~}\+Render\+Pass\+Scope (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_render_pass_scope_a3017917f0cf0574e3d73e4425c61090a}\index{prt::RenderPassScope@{prt::RenderPassScope}!Bind@{Bind}}
+\index{Bind@{Bind}!prt::RenderPassScope@{prt::RenderPassScope}}
+\doxysubsubsection{\texorpdfstring{Bind()}{Bind()}}
+{\footnotesize\ttfamily \label{classprt_1_1_render_pass_scope_a3017917f0cf0574e3d73e4425c61090a} 
+void prt\+::\+Render\+Pass\+Scope\+::\+Bind (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_graphics_pipeline}{Graphics\+Pipeline}} \texorpdfstring{$\ast$}{*}}]{pipeline}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_render_pass_scope_afafc2821b6b55bb86a1c0362fd918060}\index{prt::RenderPassScope@{prt::RenderPassScope}!GetBeginInfo@{GetBeginInfo}}
+\index{GetBeginInfo@{GetBeginInfo}!prt::RenderPassScope@{prt::RenderPassScope}}
+\doxysubsubsection{\texorpdfstring{GetBeginInfo()}{GetBeginInfo()}}
+{\footnotesize\ttfamily \label{classprt_1_1_render_pass_scope_afafc2821b6b55bb86a1c0362fd918060} 
+auto prt\+::\+Render\+Pass\+Scope\+::\+Get\+Begin\+Info (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ Vk\+Render\+Pass\+Begin\+Info const\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_render_pass_scope_a09e3a67cdafb9c26ad6e2286d0a44d22}\index{prt::RenderPassScope@{prt::RenderPassScope}!operator const VkRenderPass \&@{operator const VkRenderPass \&}}
+\index{operator const VkRenderPass \&@{operator const VkRenderPass \&}!prt::RenderPassScope@{prt::RenderPassScope}}
+\doxysubsubsection{\texorpdfstring{operator const VkRenderPass \&()}{operator const VkRenderPass \&()}}
+{\footnotesize\ttfamily \label{classprt_1_1_render_pass_scope_a09e3a67cdafb9c26ad6e2286d0a44d22} 
+prt\+::\+Render\+Pass\+Scope\+::operator const Vk\+Render\+Pass \& (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_render_pass_scope_adbc9711c7123e6fe5d15bd8622e016f6}\index{prt::RenderPassScope@{prt::RenderPassScope}!begin\_info\_@{begin\_info\_}}
+\index{begin\_info\_@{begin\_info\_}!prt::RenderPassScope@{prt::RenderPassScope}}
+\doxysubsubsection{\texorpdfstring{begin\_info\_}{begin\_info\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_render_pass_scope_adbc9711c7123e6fe5d15bd8622e016f6} 
+Vk\+Render\+Pass\+Begin\+Info prt\+::\+Render\+Pass\+Scope\+::begin\+\_\+info\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_render_pass_scope_a30b142f4a65e8eb423a105e82e5f767c}\index{prt::RenderPassScope@{prt::RenderPassScope}!buffer\_@{buffer\_}}
+\index{buffer\_@{buffer\_}!prt::RenderPassScope@{prt::RenderPassScope}}
+\doxysubsubsection{\texorpdfstring{buffer\_}{buffer\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_render_pass_scope_a30b142f4a65e8eb423a105e82e5f767c} 
+const Vk\+Command\+Buffer\& prt\+::\+Render\+Pass\+Scope\+::buffer\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_render_pass_scope_a349b89379208dd9ad99e738f172480c4}\index{prt::RenderPassScope@{prt::RenderPassScope}!pass\_@{pass\_}}
+\index{pass\_@{pass\_}!prt::RenderPassScope@{prt::RenderPassScope}}
+\doxysubsubsection{\texorpdfstring{pass\_}{pass\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_render_pass_scope_a349b89379208dd9ad99e738f172480c4} 
+const Vk\+Render\+Pass\& prt\+::\+Render\+Pass\+Scope\+::pass\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{gfx__vk_8h}{gfx\+\_\+vk.\+h}}\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{gfx__vk_8cc}{gfx\+\_\+vk.\+cc}}\end{DoxyCompactItemize}

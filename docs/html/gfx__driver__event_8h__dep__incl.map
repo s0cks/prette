@@ -1,0 +1,30 @@
+<map id="/Users/tazz/Projects/prette/Sources/prette/gfx_driver_event.h" name="/Users/tazz/Projects/prette/Sources/prette/gfx_driver_event.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="717,5,865,61"/>
+<area shape="rect" id="Node000002" href="$gfx__driver_8h.html" title=" " alt="" coords="632,109,779,165"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="761,75,731,110,727,107,756,71"/>
+<area shape="rect" id="Node000013" href="$gfx__driver__event_8cc.html" title=" " alt="" coords="804,109,951,165"/>
+<area shape="poly" id="edge15_Node000001_Node000013" title=" " alt="" coords="826,71,856,107,852,110,822,75"/>
+<area shape="rect" id="Node000003" href="$gfx__driver_8cc.html" title=" " alt="" coords="300,213,447,268"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="618,168,448,219,447,214,616,163"/>
+<area shape="rect" id="Node000004" href="$gfx__vk_8cc.html" title=" " alt="" coords="5,316,153,372"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="618,164,563,186,511,215,496,229,487,243,477,257,460,271,419,290,383,301,349,306,317,307,250,308,211,311,166,319,154,322,152,317,165,314,210,306,249,302,317,302,349,301,382,296,417,285,458,266,473,254,483,240,492,225,508,211,561,181,616,160"/>
+<area shape="rect" id="Node000005" href="$gfx__vk_8h.html" title=" " alt="" coords="521,213,669,268"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="667,177,627,214,623,210,663,174"/>
+<area shape="rect" id="Node000008" href="$renderer_8cc.html" title=" " alt="" coords="693,316,841,372"/>
+<area shape="poly" id="edge13_Node000002_Node000008" title=" " alt="" coords="717,179,740,268,758,315,753,317,735,269,712,180"/>
+<area shape="rect" id="Node000010" href="$swapchain_8cc.html" title=" " alt="" coords="865,316,1013,372"/>
+<area shape="poly" id="edge14_Node000002_Node000010" title=" " alt="" coords="724,178,749,223,783,266,823,295,866,316,864,321,820,299,780,270,744,226,719,180"/>
+<area shape="rect" id="Node000011" href="$gui_8cc.html" title=" " alt="" coords="793,213,941,268"/>
+<area shape="poly" id="edge11_Node000002_Node000011" title=" " alt="" coords="763,171,825,210,822,214,760,176"/>
+<area shape="rect" id="Node000012" href="$gui__viewport_8cc.html" title=" " alt="" coords="965,213,1113,268"/>
+<area shape="poly" id="edge12_Node000002_Node000012" title=" " alt="" coords="795,163,953,210,966,214,964,219,952,215,794,168"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="507,270,504,271,409,287,334,295,260,302,166,319,154,322,152,317,165,314,260,297,334,289,408,282,502,266,506,265"/>
+<area shape="rect" id="Node000006" href="$gui__renderer_8cc.html" title=" " alt="" coords="177,316,325,372"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="507,270,338,319,326,323,324,318,337,314,506,265"/>
+<area shape="rect" id="Node000007" href="$picking_8cc.html" title=" " alt="" coords="349,316,497,372"/>
+<area shape="poly" id="edge7_Node000005_Node000007" title=" " alt="" coords="537,279,471,318,468,313,534,274"/>
+<area shape="poly" id="edge8_Node000005_Node000008" title=" " alt="" coords="656,274,722,313,719,318,653,279"/>
+<area shape="rect" id="Node000009" href="$scene__renderer_8cc.html" title=" " alt="" coords="521,316,669,372"/>
+<area shape="poly" id="edge9_Node000005_Node000009" title=" " alt="" coords="598,284,598,316,592,316,592,284"/>
+<area shape="poly" id="edge10_Node000005_Node000010" title=" " alt="" coords="684,264,853,314,866,318,864,323,852,319,682,270"/>
+</map>

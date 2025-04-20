@@ -1,0 +1,75 @@
+\doxysection{prt\+::Renderer Class Reference}
+\hypertarget{classprt_1_1_renderer}{}\label{classprt_1_1_renderer}\index{prt::Renderer@{prt::Renderer}}
+
+
+{\ttfamily \#include $<$renderer.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classprt_1_1_renderer_a0a1e862a23436a21316112e535790970}{Init}} ()
+\item 
+static void \mbox{\hyperlink{classprt_1_1_renderer_abb13d736d5572a54de99fc80bbf9301b}{Draw\+Frame}} (\mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}driver, const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&current, const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&previous)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classprt_1_1_renderer_ac2fce6a4a316b5f88b347e445dc84197}{Init\+Command\+Buffers}} (const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}driver)
+\item 
+static void \mbox{\hyperlink{classprt_1_1_renderer_a94cbebd232a4bde5746c7ae62c8537af}{Destroy}} ()
+\item 
+static void \mbox{\hyperlink{classprt_1_1_renderer_a95fbd833e0d772a75391a156590fdcb1}{Init}} (\mbox{\hyperlink{classprt_1_1_lua_state}{Lua\+State}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{engine_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1_renderer_a9aa251d710bba4f257a519ebc5d01d51}{Lua\+State}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_renderer_a94cbebd232a4bde5746c7ae62c8537af}\index{prt::Renderer@{prt::Renderer}!Destroy@{Destroy}}
+\index{Destroy@{Destroy}!prt::Renderer@{prt::Renderer}}
+\doxysubsubsection{\texorpdfstring{Destroy()}{Destroy()}}
+{\footnotesize\ttfamily \label{classprt_1_1_renderer_a94cbebd232a4bde5746c7ae62c8537af} 
+void prt\+::\+Renderer\+::\+Destroy (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_renderer_abb13d736d5572a54de99fc80bbf9301b}\index{prt::Renderer@{prt::Renderer}!DrawFrame@{DrawFrame}}
+\index{DrawFrame@{DrawFrame}!prt::Renderer@{prt::Renderer}}
+\doxysubsubsection{\texorpdfstring{DrawFrame()}{DrawFrame()}}
+{\footnotesize\ttfamily \label{classprt_1_1_renderer_abb13d736d5572a54de99fc80bbf9301b} 
+void prt\+::\+Renderer\+::\+Draw\+Frame (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}}]{driver}{, }\item[{const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&}]{current}{, }\item[{const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&}]{previous}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_renderer_a0a1e862a23436a21316112e535790970}\index{prt::Renderer@{prt::Renderer}!Init@{Init}}
+\index{Init@{Init}!prt::Renderer@{prt::Renderer}}
+\doxysubsubsection{\texorpdfstring{Init()}{Init()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_renderer_a0a1e862a23436a21316112e535790970} 
+void prt\+::\+Renderer\+::\+Init (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_renderer_a95fbd833e0d772a75391a156590fdcb1}\index{prt::Renderer@{prt::Renderer}!Init@{Init}}
+\index{Init@{Init}!prt::Renderer@{prt::Renderer}}
+\doxysubsubsection{\texorpdfstring{Init()}{Init()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_renderer_a95fbd833e0d772a75391a156590fdcb1} 
+static void prt\+::\+Renderer\+::\+Init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_lua_state}{Lua\+State}} \texorpdfstring{$\ast$}{*}}]{L}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_renderer_ac2fce6a4a316b5f88b347e445dc84197}\index{prt::Renderer@{prt::Renderer}!InitCommandBuffers@{InitCommandBuffers}}
+\index{InitCommandBuffers@{InitCommandBuffers}!prt::Renderer@{prt::Renderer}}
+\doxysubsubsection{\texorpdfstring{InitCommandBuffers()}{InitCommandBuffers()}}
+{\footnotesize\ttfamily \label{classprt_1_1_renderer_ac2fce6a4a316b5f88b347e445dc84197} 
+void prt\+::\+Renderer\+::\+Init\+Command\+Buffers (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}}]{driver}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classprt_1_1_renderer_a9aa251d710bba4f257a519ebc5d01d51}\index{prt::Renderer@{prt::Renderer}!LuaState@{LuaState}}
+\index{LuaState@{LuaState}!prt::Renderer@{prt::Renderer}}
+\doxysubsubsection{\texorpdfstring{LuaState}{LuaState}}
+{\footnotesize\ttfamily \label{classprt_1_1_renderer_a9aa251d710bba4f257a519ebc5d01d51} 
+friend class \mbox{\hyperlink{classprt_1_1_lua_state}{Lua\+State}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{renderer_8h}{renderer.\+h}}\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{renderer_8cc}{renderer.\+cc}}\end{DoxyCompactItemize}

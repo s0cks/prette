@@ -1,0 +1,11 @@
+namespace prt.raw;
+
+struct Tile {
+  material: short;
+}
+
+table Chunk {
+  tiles: [Tile];
+}
+
+root_type Chunk;

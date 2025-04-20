@@ -1,0 +1,333 @@
+\doxysection{prt\+::Texture Class Reference}
+\hypertarget{classprt_1_1_texture}{}\label{classprt_1_1_texture}\index{prt::Texture@{prt::Texture}}
+
+
+{\ttfamily \#include $<$texture.\+h$>$}
+
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classprt_1_1_texture_aea10803232eeb9a13f96f26397d2c34b}{Type}} \{ \mbox{\hyperlink{classprt_1_1_texture_aea10803232eeb9a13f96f26397d2c34bae4ff2b1bb18b90307a6267be861d2d9f}{k\+Diffuse\+Map}}
+, \mbox{\hyperlink{classprt_1_1_texture_aea10803232eeb9a13f96f26397d2c34bacff6a85fc37a1255a4d8f54e4c170bea}{k\+Specular\+Map}}
+, \mbox{\hyperlink{classprt_1_1_texture_aea10803232eeb9a13f96f26397d2c34ba6fa6a13ee36a64972ffe6a07c721a677}{k\+Normal\+Map}}
+, \mbox{\hyperlink{classprt_1_1_texture_aea10803232eeb9a13f96f26397d2c34bae566a0d3a887b809fe33539b037ad1a6}{k\+Cube\+Map}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_texture_ae6a0f5a7fffcf4d7f54936a7db48c056}{Texture}} (const \mbox{\hyperlink{classprt_1_1_texture_aea10803232eeb9a13f96f26397d2c34b}{Type}} type, std\+::string filename, const bool flip=false)
+\item 
+\mbox{\hyperlink{classprt_1_1_texture_ae89c94a257b955b252c53393b4b26238}{Texture}} ()=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1_texture_abe1bdd4b86039d99adfab6c761c01591}{Get\+Name}} () const -\/$>$ const std\+::string \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_texture_ac2be361af682794984729af69b6ac5bd}{Get\+Type}} () const -\/$>$ \mbox{\hyperlink{classprt_1_1_texture_aea10803232eeb9a13f96f26397d2c34b}{Type}}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_texture_afe8031e701d1d894ae4267a29964d398}{Get\+Image}} () const -\/$>$ Vk\+Image const \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_texture_a0dcd9f326953643567f00a9eb7f9822f}{Get\+Image\+View}} () const -\/$>$ Vk\+Image\+View const \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_texture_a83f97dc0bb4cdc45e96a00d39af0d5ff}{Get\+Sampler}} () const -\/$>$ Vk\+Sampler const \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_texture_a6af91bd9cc431dfac3633f52e8fbf035}{Get\+Format}} () const -\/$>$ Vk\+Format const \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_texture_aac5d22078239a5d7dcf04828d24443d8}{Get\+Mip\+Level}} () const -\/$>$ uint32\+\_\+t
+\item 
+auto \mbox{\hyperlink{classprt_1_1_texture_a70e7ab82fcd93362a68caabec2956d85}{Get\+Number\+Of\+Channels}} () const -\/$>$ uint32\+\_\+t
+\item 
+auto \mbox{\hyperlink{classprt_1_1_texture_a6a2facb430c6f50c6d4761967a8eb61a}{Get\+Width}} () const -\/$>$ uint32\+\_\+t
+\item 
+auto \mbox{\hyperlink{classprt_1_1_texture_acb3dd7783ac832eef475849b499c5cac}{Get\+Height}} () const -\/$>$ uint32\+\_\+t
+\item 
+void \mbox{\hyperlink{classprt_1_1_texture_a87a9ccfe2466b1377fc4a3b0a93f1fd1}{Destroy}} ()
+\item 
+void \mbox{\hyperlink{classprt_1_1_texture_a2a194ef7e07b4a3e238892c0ea63f392}{Copy\+Buffer\+To\+Image}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}data)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_texture_a67aba8b79ec271310c1ba62afba566a9}{Create\+Image}} (uint32\+\_\+t width, uint32\+\_\+t height, uint32\+\_\+t mip\+Levels, Vk\+Sample\+Count\+Flag\+Bits num\+Samples, Vk\+Format format, Vk\+Image\+Tiling tiling, Vk\+Image\+Usage\+Flags usage, Vk\+Memory\+Property\+Flags properties, bool cubemap=false) -\/$>$ std\+::pair$<$ Vk\+Image, Vk\+Device\+Memory $>$
+\item 
+static void \mbox{\hyperlink{classprt_1_1_texture_a7bc615979bd4f14577ebb9bdf29354c3}{Generate\+Mipmaps}} (Vk\+Image image, Vk\+Format image\+Format, int32\+\_\+t tex\+Width, int32\+\_\+t tex\+Height, uint32\+\_\+t mip\+Levels)
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_texture_a4d1958da0ba34c740b5a448108091f7a}{Create\+Image\+View}} (Vk\+Image image, Vk\+Format format, Vk\+Image\+Aspect\+Flags aspect\+Flags, uint32\+\_\+t mip\+Levels, bool cubemap=false) -\/$>$ Vk\+Image\+View
+\item 
+static void \mbox{\hyperlink{classprt_1_1_texture_a086c313ad40222c7a080b804c34bc7aa}{Init\+Sampler}} (Vk\+Sampler \&sampler, const uint32\+\_\+t mips)
+\item 
+static void \mbox{\hyperlink{classprt_1_1_texture_a751ba69e967ec1fb2fc140c9d17aa0d1}{Transition\+Image\+Layout}} (Vk\+Image image, Vk\+Image\+Layout old\+Layout, Vk\+Image\+Layout new\+Layout, uint32\+\_\+t mip\+Levels, bool cubemap=false)
+\item 
+static void \mbox{\hyperlink{classprt_1_1_texture_af58df5d228809ecc507157bad8d2e4f3}{Copy\+Buffer\+To\+Cubemap\+Image}} (Vk\+Image image, uint32\+\_\+t tex\+Width, uint32\+\_\+t tex\+Height, uint8\+\_\+t \texorpdfstring{$\ast$}{*}data)
+\item 
+static void \mbox{\hyperlink{classprt_1_1_texture_a8e2b82d341be4662aee2f491f568e739}{Copy\+Buffer\+To\+Image}} (Vk\+Image image, uint32\+\_\+t tex\+Width, uint32\+\_\+t tex\+Height, uint8\+\_\+t \texorpdfstring{$\ast$}{*}data)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classprt_1_1_texture_aff1b8eb30b67c4e28d1e61e4d6caf1d9}{Transition\+Image\+Layout}} (Vk\+Image\+Layout old\+Layout, Vk\+Image\+Layout new\+Layout, uint32\+\_\+t mip\+Levels)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classprt_1_1_texture_a6208eac3187d36fc7343dc16acbb1b96}{name\+\_\+}} = "{}default\+\_\+texture\+\_\+name"{}
+\item 
+\mbox{\hyperlink{classprt_1_1_texture_aea10803232eeb9a13f96f26397d2c34b}{Type}} \mbox{\hyperlink{classprt_1_1_texture_a075cfb73936e84e2665cc6a034138ff7}{type\+\_\+}}
+\item 
+Vk\+Image \mbox{\hyperlink{classprt_1_1_texture_a9ee8e8ca66a229de472be330a5d1ac63}{image\+\_\+}} = \{\}
+\item 
+Vk\+Device\+Memory \mbox{\hyperlink{classprt_1_1_texture_a56f33c37087a0022a3731ad92eec268d}{memory\+\_\+}} = \{\}
+\item 
+Vk\+Image\+View \mbox{\hyperlink{classprt_1_1_texture_a544e6760626ee215d6308af469629b7a}{view\+\_\+}} = \{\}
+\item 
+Vk\+Sampler \mbox{\hyperlink{classprt_1_1_texture_ae8ef66b7851775d562f30a8ab8d30931}{sampler\+\_\+}} = \{\}
+\item 
+Vk\+Format \mbox{\hyperlink{classprt_1_1_texture_ab83ac3f2f6a898b34ae3405118c540f0}{format\+\_\+}} = \{\}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classprt_1_1_texture_a85ea1ab4e52142301fa541802312207e}{mips\+\_\+}} = \{\}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classprt_1_1_texture_aeaf57944be8b521244e8e113cb8d8e3b}{channels\+\_\+}} = \{\}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classprt_1_1_texture_adb7359f163d82832334adc8c2bf019a2}{width\+\_\+}} = \{\}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classprt_1_1_texture_a9c5bf970f4af2f5aa27b3eb763fa5b6c}{height\+\_\+}} = \{\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classprt_1_1_texture_aea10803232eeb9a13f96f26397d2c34b}\index{prt::Texture@{prt::Texture}!Type@{Type}}
+\index{Type@{Type}!prt::Texture@{prt::Texture}}
+\doxysubsubsection{\texorpdfstring{Type}{Type}}
+{\footnotesize\ttfamily \label{classprt_1_1_texture_aea10803232eeb9a13f96f26397d2c34b} 
+enum \mbox{\hyperlink{classprt_1_1_texture_aea10803232eeb9a13f96f26397d2c34b}{prt\+::\+Texture\+::\+Type}}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kDiffuseMap@{kDiffuseMap}!prt::Texture@{prt::Texture}}\index{prt::Texture@{prt::Texture}!kDiffuseMap@{kDiffuseMap}}}\Hypertarget{classprt_1_1_texture_aea10803232eeb9a13f96f26397d2c34bae4ff2b1bb18b90307a6267be861d2d9f}\label{classprt_1_1_texture_aea10803232eeb9a13f96f26397d2c34b} 
+k\+Diffuse\+Map&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kSpecularMap@{kSpecularMap}!prt::Texture@{prt::Texture}}\index{prt::Texture@{prt::Texture}!kSpecularMap@{kSpecularMap}}}\Hypertarget{classprt_1_1_texture_aea10803232eeb9a13f96f26397d2c34bacff6a85fc37a1255a4d8f54e4c170bea}\label{classprt_1_1_texture_aea10803232eeb9a13f96f26397d2c34b} 
+k\+Specular\+Map&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kNormalMap@{kNormalMap}!prt::Texture@{prt::Texture}}\index{prt::Texture@{prt::Texture}!kNormalMap@{kNormalMap}}}\Hypertarget{classprt_1_1_texture_aea10803232eeb9a13f96f26397d2c34ba6fa6a13ee36a64972ffe6a07c721a677}\label{classprt_1_1_texture_aea10803232eeb9a13f96f26397d2c34b} 
+k\+Normal\+Map&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kCubeMap@{kCubeMap}!prt::Texture@{prt::Texture}}\index{prt::Texture@{prt::Texture}!kCubeMap@{kCubeMap}}}\Hypertarget{classprt_1_1_texture_aea10803232eeb9a13f96f26397d2c34bae566a0d3a887b809fe33539b037ad1a6}\label{classprt_1_1_texture_aea10803232eeb9a13f96f26397d2c34b} 
+k\+Cube\+Map&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_texture_ae6a0f5a7fffcf4d7f54936a7db48c056}\index{prt::Texture@{prt::Texture}!Texture@{Texture}}
+\index{Texture@{Texture}!prt::Texture@{prt::Texture}}
+\doxysubsubsection{\texorpdfstring{Texture()}{Texture()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_texture_ae6a0f5a7fffcf4d7f54936a7db48c056} 
+prt\+::\+Texture\+::\+Texture (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_texture_aea10803232eeb9a13f96f26397d2c34b}{Type}}}]{type}{, }\item[{std\+::string}]{filename}{, }\item[{const bool}]{flip}{ = {\ttfamily false}}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_texture_ae89c94a257b955b252c53393b4b26238}\index{prt::Texture@{prt::Texture}!Texture@{Texture}}
+\index{Texture@{Texture}!prt::Texture@{prt::Texture}}
+\doxysubsubsection{\texorpdfstring{Texture()}{Texture()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_texture_ae89c94a257b955b252c53393b4b26238} 
+prt\+::\+Texture\+::\+Texture (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_texture_af58df5d228809ecc507157bad8d2e4f3}\index{prt::Texture@{prt::Texture}!CopyBufferToCubemapImage@{CopyBufferToCubemapImage}}
+\index{CopyBufferToCubemapImage@{CopyBufferToCubemapImage}!prt::Texture@{prt::Texture}}
+\doxysubsubsection{\texorpdfstring{CopyBufferToCubemapImage()}{CopyBufferToCubemapImage()}}
+{\footnotesize\ttfamily \label{classprt_1_1_texture_af58df5d228809ecc507157bad8d2e4f3} 
+static void prt\+::\+Texture\+::\+Copy\+Buffer\+To\+Cubemap\+Image (\begin{DoxyParamCaption}\item[{Vk\+Image}]{image}{, }\item[{uint32\+\_\+t}]{tex\+Width}{, }\item[{uint32\+\_\+t}]{tex\+Height}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_texture_a2a194ef7e07b4a3e238892c0ea63f392}\index{prt::Texture@{prt::Texture}!CopyBufferToImage@{CopyBufferToImage}}
+\index{CopyBufferToImage@{CopyBufferToImage}!prt::Texture@{prt::Texture}}
+\doxysubsubsection{\texorpdfstring{CopyBufferToImage()}{CopyBufferToImage()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_texture_a2a194ef7e07b4a3e238892c0ea63f392} 
+void prt\+::\+Texture\+::\+Copy\+Buffer\+To\+Image (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_texture_a8e2b82d341be4662aee2f491f568e739}\index{prt::Texture@{prt::Texture}!CopyBufferToImage@{CopyBufferToImage}}
+\index{CopyBufferToImage@{CopyBufferToImage}!prt::Texture@{prt::Texture}}
+\doxysubsubsection{\texorpdfstring{CopyBufferToImage()}{CopyBufferToImage()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_texture_a8e2b82d341be4662aee2f491f568e739} 
+void prt\+::\+Texture\+::\+Copy\+Buffer\+To\+Image (\begin{DoxyParamCaption}\item[{Vk\+Image}]{image}{, }\item[{uint32\+\_\+t}]{tex\+Width}{, }\item[{uint32\+\_\+t}]{tex\+Height}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_texture_a67aba8b79ec271310c1ba62afba566a9}\index{prt::Texture@{prt::Texture}!CreateImage@{CreateImage}}
+\index{CreateImage@{CreateImage}!prt::Texture@{prt::Texture}}
+\doxysubsubsection{\texorpdfstring{CreateImage()}{CreateImage()}}
+{\footnotesize\ttfamily \label{classprt_1_1_texture_a67aba8b79ec271310c1ba62afba566a9} 
+auto prt\+::\+Texture\+::\+Create\+Image (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{width}{, }\item[{uint32\+\_\+t}]{height}{, }\item[{uint32\+\_\+t}]{mip\+Levels}{, }\item[{Vk\+Sample\+Count\+Flag\+Bits}]{num\+Samples}{, }\item[{Vk\+Format}]{format}{, }\item[{Vk\+Image\+Tiling}]{tiling}{, }\item[{Vk\+Image\+Usage\+Flags}]{usage}{, }\item[{Vk\+Memory\+Property\+Flags}]{properties}{, }\item[{bool}]{cubemap}{ = {\ttfamily false}}\end{DoxyParamCaption}) -\/$>$ std\+::pair$<$Vk\+Image, Vk\+Device\+Memory$>$\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_texture_a4d1958da0ba34c740b5a448108091f7a}\index{prt::Texture@{prt::Texture}!CreateImageView@{CreateImageView}}
+\index{CreateImageView@{CreateImageView}!prt::Texture@{prt::Texture}}
+\doxysubsubsection{\texorpdfstring{CreateImageView()}{CreateImageView()}}
+{\footnotesize\ttfamily \label{classprt_1_1_texture_a4d1958da0ba34c740b5a448108091f7a} 
+auto prt\+::\+Texture\+::\+Create\+Image\+View (\begin{DoxyParamCaption}\item[{Vk\+Image}]{image}{, }\item[{Vk\+Format}]{format}{, }\item[{Vk\+Image\+Aspect\+Flags}]{aspect\+Flags}{, }\item[{uint32\+\_\+t}]{mip\+Levels}{, }\item[{bool}]{cubemap}{ = {\ttfamily false}}\end{DoxyParamCaption}) -\/$>$ Vk\+Image\+View\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_texture_a87a9ccfe2466b1377fc4a3b0a93f1fd1}\index{prt::Texture@{prt::Texture}!Destroy@{Destroy}}
+\index{Destroy@{Destroy}!prt::Texture@{prt::Texture}}
+\doxysubsubsection{\texorpdfstring{Destroy()}{Destroy()}}
+{\footnotesize\ttfamily \label{classprt_1_1_texture_a87a9ccfe2466b1377fc4a3b0a93f1fd1} 
+void prt\+::\+Texture\+::\+Destroy (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_texture_a7bc615979bd4f14577ebb9bdf29354c3}\index{prt::Texture@{prt::Texture}!GenerateMipmaps@{GenerateMipmaps}}
+\index{GenerateMipmaps@{GenerateMipmaps}!prt::Texture@{prt::Texture}}
+\doxysubsubsection{\texorpdfstring{GenerateMipmaps()}{GenerateMipmaps()}}
+{\footnotesize\ttfamily \label{classprt_1_1_texture_a7bc615979bd4f14577ebb9bdf29354c3} 
+void prt\+::\+Texture\+::\+Generate\+Mipmaps (\begin{DoxyParamCaption}\item[{Vk\+Image}]{image}{, }\item[{Vk\+Format}]{image\+Format}{, }\item[{int32\+\_\+t}]{tex\+Width}{, }\item[{int32\+\_\+t}]{tex\+Height}{, }\item[{uint32\+\_\+t}]{mip\+Levels}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_texture_a6af91bd9cc431dfac3633f52e8fbf035}\index{prt::Texture@{prt::Texture}!GetFormat@{GetFormat}}
+\index{GetFormat@{GetFormat}!prt::Texture@{prt::Texture}}
+\doxysubsubsection{\texorpdfstring{GetFormat()}{GetFormat()}}
+{\footnotesize\ttfamily \label{classprt_1_1_texture_a6af91bd9cc431dfac3633f52e8fbf035} 
+auto prt\+::\+Texture\+::\+Get\+Format (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ Vk\+Format const\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_texture_acb3dd7783ac832eef475849b499c5cac}\index{prt::Texture@{prt::Texture}!GetHeight@{GetHeight}}
+\index{GetHeight@{GetHeight}!prt::Texture@{prt::Texture}}
+\doxysubsubsection{\texorpdfstring{GetHeight()}{GetHeight()}}
+{\footnotesize\ttfamily \label{classprt_1_1_texture_acb3dd7783ac832eef475849b499c5cac} 
+auto prt\+::\+Texture\+::\+Get\+Height (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ uint32\+\_\+t \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_texture_afe8031e701d1d894ae4267a29964d398}\index{prt::Texture@{prt::Texture}!GetImage@{GetImage}}
+\index{GetImage@{GetImage}!prt::Texture@{prt::Texture}}
+\doxysubsubsection{\texorpdfstring{GetImage()}{GetImage()}}
+{\footnotesize\ttfamily \label{classprt_1_1_texture_afe8031e701d1d894ae4267a29964d398} 
+auto prt\+::\+Texture\+::\+Get\+Image (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ Vk\+Image const\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_texture_a0dcd9f326953643567f00a9eb7f9822f}\index{prt::Texture@{prt::Texture}!GetImageView@{GetImageView}}
+\index{GetImageView@{GetImageView}!prt::Texture@{prt::Texture}}
+\doxysubsubsection{\texorpdfstring{GetImageView()}{GetImageView()}}
+{\footnotesize\ttfamily \label{classprt_1_1_texture_a0dcd9f326953643567f00a9eb7f9822f} 
+auto prt\+::\+Texture\+::\+Get\+Image\+View (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ Vk\+Image\+View const\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_texture_aac5d22078239a5d7dcf04828d24443d8}\index{prt::Texture@{prt::Texture}!GetMipLevel@{GetMipLevel}}
+\index{GetMipLevel@{GetMipLevel}!prt::Texture@{prt::Texture}}
+\doxysubsubsection{\texorpdfstring{GetMipLevel()}{GetMipLevel()}}
+{\footnotesize\ttfamily \label{classprt_1_1_texture_aac5d22078239a5d7dcf04828d24443d8} 
+auto prt\+::\+Texture\+::\+Get\+Mip\+Level (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ uint32\+\_\+t \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_texture_abe1bdd4b86039d99adfab6c761c01591}\index{prt::Texture@{prt::Texture}!GetName@{GetName}}
+\index{GetName@{GetName}!prt::Texture@{prt::Texture}}
+\doxysubsubsection{\texorpdfstring{GetName()}{GetName()}}
+{\footnotesize\ttfamily \label{classprt_1_1_texture_abe1bdd4b86039d99adfab6c761c01591} 
+auto prt\+::\+Texture\+::\+Get\+Name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const std\+::string\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_texture_a70e7ab82fcd93362a68caabec2956d85}\index{prt::Texture@{prt::Texture}!GetNumberOfChannels@{GetNumberOfChannels}}
+\index{GetNumberOfChannels@{GetNumberOfChannels}!prt::Texture@{prt::Texture}}
+\doxysubsubsection{\texorpdfstring{GetNumberOfChannels()}{GetNumberOfChannels()}}
+{\footnotesize\ttfamily \label{classprt_1_1_texture_a70e7ab82fcd93362a68caabec2956d85} 
+auto prt\+::\+Texture\+::\+Get\+Number\+Of\+Channels (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ uint32\+\_\+t \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_texture_a83f97dc0bb4cdc45e96a00d39af0d5ff}\index{prt::Texture@{prt::Texture}!GetSampler@{GetSampler}}
+\index{GetSampler@{GetSampler}!prt::Texture@{prt::Texture}}
+\doxysubsubsection{\texorpdfstring{GetSampler()}{GetSampler()}}
+{\footnotesize\ttfamily \label{classprt_1_1_texture_a83f97dc0bb4cdc45e96a00d39af0d5ff} 
+auto prt\+::\+Texture\+::\+Get\+Sampler (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ Vk\+Sampler const\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_texture_ac2be361af682794984729af69b6ac5bd}\index{prt::Texture@{prt::Texture}!GetType@{GetType}}
+\index{GetType@{GetType}!prt::Texture@{prt::Texture}}
+\doxysubsubsection{\texorpdfstring{GetType()}{GetType()}}
+{\footnotesize\ttfamily \label{classprt_1_1_texture_ac2be361af682794984729af69b6ac5bd} 
+auto prt\+::\+Texture\+::\+Get\+Type (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ \mbox{\hyperlink{classprt_1_1_texture_aea10803232eeb9a13f96f26397d2c34b}{Type}} \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_texture_a6a2facb430c6f50c6d4761967a8eb61a}\index{prt::Texture@{prt::Texture}!GetWidth@{GetWidth}}
+\index{GetWidth@{GetWidth}!prt::Texture@{prt::Texture}}
+\doxysubsubsection{\texorpdfstring{GetWidth()}{GetWidth()}}
+{\footnotesize\ttfamily \label{classprt_1_1_texture_a6a2facb430c6f50c6d4761967a8eb61a} 
+auto prt\+::\+Texture\+::\+Get\+Width (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ uint32\+\_\+t \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_texture_a086c313ad40222c7a080b804c34bc7aa}\index{prt::Texture@{prt::Texture}!InitSampler@{InitSampler}}
+\index{InitSampler@{InitSampler}!prt::Texture@{prt::Texture}}
+\doxysubsubsection{\texorpdfstring{InitSampler()}{InitSampler()}}
+{\footnotesize\ttfamily \label{classprt_1_1_texture_a086c313ad40222c7a080b804c34bc7aa} 
+void prt\+::\+Texture\+::\+Init\+Sampler (\begin{DoxyParamCaption}\item[{Vk\+Sampler \&}]{sampler}{, }\item[{const uint32\+\_\+t}]{mips}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_texture_a751ba69e967ec1fb2fc140c9d17aa0d1}\index{prt::Texture@{prt::Texture}!TransitionImageLayout@{TransitionImageLayout}}
+\index{TransitionImageLayout@{TransitionImageLayout}!prt::Texture@{prt::Texture}}
+\doxysubsubsection{\texorpdfstring{TransitionImageLayout()}{TransitionImageLayout()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_texture_a751ba69e967ec1fb2fc140c9d17aa0d1} 
+void prt\+::\+Texture\+::\+Transition\+Image\+Layout (\begin{DoxyParamCaption}\item[{Vk\+Image}]{image}{, }\item[{Vk\+Image\+Layout}]{old\+Layout}{, }\item[{Vk\+Image\+Layout}]{new\+Layout}{, }\item[{uint32\+\_\+t}]{mip\+Levels}{, }\item[{bool}]{cubemap}{ = {\ttfamily false}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_texture_aff1b8eb30b67c4e28d1e61e4d6caf1d9}\index{prt::Texture@{prt::Texture}!TransitionImageLayout@{TransitionImageLayout}}
+\index{TransitionImageLayout@{TransitionImageLayout}!prt::Texture@{prt::Texture}}
+\doxysubsubsection{\texorpdfstring{TransitionImageLayout()}{TransitionImageLayout()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_texture_aff1b8eb30b67c4e28d1e61e4d6caf1d9} 
+void prt\+::\+Texture\+::\+Transition\+Image\+Layout (\begin{DoxyParamCaption}\item[{Vk\+Image\+Layout}]{old\+Layout}{, }\item[{Vk\+Image\+Layout}]{new\+Layout}{, }\item[{uint32\+\_\+t}]{mip\+Levels}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_texture_aeaf57944be8b521244e8e113cb8d8e3b}\index{prt::Texture@{prt::Texture}!channels\_@{channels\_}}
+\index{channels\_@{channels\_}!prt::Texture@{prt::Texture}}
+\doxysubsubsection{\texorpdfstring{channels\_}{channels\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_texture_aeaf57944be8b521244e8e113cb8d8e3b} 
+uint32\+\_\+t prt\+::\+Texture\+::channels\+\_\+ = \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_texture_ab83ac3f2f6a898b34ae3405118c540f0}\index{prt::Texture@{prt::Texture}!format\_@{format\_}}
+\index{format\_@{format\_}!prt::Texture@{prt::Texture}}
+\doxysubsubsection{\texorpdfstring{format\_}{format\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_texture_ab83ac3f2f6a898b34ae3405118c540f0} 
+Vk\+Format prt\+::\+Texture\+::format\+\_\+ = \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_texture_a9c5bf970f4af2f5aa27b3eb763fa5b6c}\index{prt::Texture@{prt::Texture}!height\_@{height\_}}
+\index{height\_@{height\_}!prt::Texture@{prt::Texture}}
+\doxysubsubsection{\texorpdfstring{height\_}{height\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_texture_a9c5bf970f4af2f5aa27b3eb763fa5b6c} 
+uint32\+\_\+t prt\+::\+Texture\+::height\+\_\+ = \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_texture_a9ee8e8ca66a229de472be330a5d1ac63}\index{prt::Texture@{prt::Texture}!image\_@{image\_}}
+\index{image\_@{image\_}!prt::Texture@{prt::Texture}}
+\doxysubsubsection{\texorpdfstring{image\_}{image\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_texture_a9ee8e8ca66a229de472be330a5d1ac63} 
+Vk\+Image prt\+::\+Texture\+::image\+\_\+ = \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_texture_a56f33c37087a0022a3731ad92eec268d}\index{prt::Texture@{prt::Texture}!memory\_@{memory\_}}
+\index{memory\_@{memory\_}!prt::Texture@{prt::Texture}}
+\doxysubsubsection{\texorpdfstring{memory\_}{memory\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_texture_a56f33c37087a0022a3731ad92eec268d} 
+Vk\+Device\+Memory prt\+::\+Texture\+::memory\+\_\+ = \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_texture_a85ea1ab4e52142301fa541802312207e}\index{prt::Texture@{prt::Texture}!mips\_@{mips\_}}
+\index{mips\_@{mips\_}!prt::Texture@{prt::Texture}}
+\doxysubsubsection{\texorpdfstring{mips\_}{mips\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_texture_a85ea1ab4e52142301fa541802312207e} 
+uint32\+\_\+t prt\+::\+Texture\+::mips\+\_\+ = \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_texture_a6208eac3187d36fc7343dc16acbb1b96}\index{prt::Texture@{prt::Texture}!name\_@{name\_}}
+\index{name\_@{name\_}!prt::Texture@{prt::Texture}}
+\doxysubsubsection{\texorpdfstring{name\_}{name\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_texture_a6208eac3187d36fc7343dc16acbb1b96} 
+std\+::string prt\+::\+Texture\+::name\+\_\+ = "{}default\+\_\+texture\+\_\+name"{}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_texture_ae8ef66b7851775d562f30a8ab8d30931}\index{prt::Texture@{prt::Texture}!sampler\_@{sampler\_}}
+\index{sampler\_@{sampler\_}!prt::Texture@{prt::Texture}}
+\doxysubsubsection{\texorpdfstring{sampler\_}{sampler\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_texture_ae8ef66b7851775d562f30a8ab8d30931} 
+Vk\+Sampler prt\+::\+Texture\+::sampler\+\_\+ = \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_texture_a075cfb73936e84e2665cc6a034138ff7}\index{prt::Texture@{prt::Texture}!type\_@{type\_}}
+\index{type\_@{type\_}!prt::Texture@{prt::Texture}}
+\doxysubsubsection{\texorpdfstring{type\_}{type\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_texture_a075cfb73936e84e2665cc6a034138ff7} 
+\mbox{\hyperlink{classprt_1_1_texture_aea10803232eeb9a13f96f26397d2c34b}{Type}} prt\+::\+Texture\+::type\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_texture_a544e6760626ee215d6308af469629b7a}\index{prt::Texture@{prt::Texture}!view\_@{view\_}}
+\index{view\_@{view\_}!prt::Texture@{prt::Texture}}
+\doxysubsubsection{\texorpdfstring{view\_}{view\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_texture_a544e6760626ee215d6308af469629b7a} 
+Vk\+Image\+View prt\+::\+Texture\+::view\+\_\+ = \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_texture_adb7359f163d82832334adc8c2bf019a2}\index{prt::Texture@{prt::Texture}!width\_@{width\_}}
+\index{width\_@{width\_}!prt::Texture@{prt::Texture}}
+\doxysubsubsection{\texorpdfstring{width\_}{width\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_texture_adb7359f163d82832334adc8c2bf019a2} 
+uint32\+\_\+t prt\+::\+Texture\+::width\+\_\+ = \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{texture_8h}{texture.\+h}}\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{texture_8cc}{texture.\+cc}}\end{DoxyCompactItemize}

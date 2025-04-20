@@ -1,0 +1,137 @@
+\doxysection{prt\+::tree\+::Node\texorpdfstring{$<$}{<} N \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classprt_1_1tree_1_1_node}{}\label{classprt_1_1tree_1_1_node}\index{prt::tree::Node$<$ N $>$@{prt::tree::Node$<$ N $>$}}
+
+
+{\ttfamily \#include $<$tree.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classprt_1_1tree_1_1_node_a82a0f04924b4f75a5949c39fc23c2739}{\texorpdfstring{$\sim$}{\string~}\+Node}} ()=default
+\item 
+virtual N \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1tree_1_1_node_a0dd2f5f4981fc8e8ee92caf3394be9d6}{Get\+Parent}} () const
+\item 
+virtual void \mbox{\hyperlink{classprt_1_1tree_1_1_node_a2780f35873b3873d5d34081cab302a11}{Set\+Parent}} (N \texorpdfstring{$\ast$}{*}node)
+\item 
+virtual \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} \mbox{\hyperlink{classprt_1_1tree_1_1_node_aa21002fbea46f93136c33277d2ec8863}{Get\+Number\+Of\+Children}} () const
+\item 
+virtual N \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1tree_1_1_node_a4e5eb9f90b2150bec95b69a78fe5a0f3}{Get\+Child\+At}} (const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} idx) const
+\item 
+virtual void \mbox{\hyperlink{classprt_1_1tree_1_1_node_a2b7bc23976845338bf697c9b6b303506}{Set\+Child\+At}} (const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} idx, N \texorpdfstring{$\ast$}{*}node)
+\item 
+virtual void \mbox{\hyperlink{classprt_1_1tree_1_1_node_aa0025c510a17488431d806a5c12bccc4}{Add\+Child}} (N \texorpdfstring{$\ast$}{*}node)
+\item 
+bool \mbox{\hyperlink{classprt_1_1tree_1_1_node_a7888b249a05773d09f3cf603a434a43a}{Has\+Children}} () const
+\item 
+bool \mbox{\hyperlink{classprt_1_1tree_1_1_node_ac620a2002e230fc2c708c67ccbcd2607}{Is\+Leaf}} () const
+\item 
+bool \mbox{\hyperlink{classprt_1_1tree_1_1_node_a42b05bafcf1ed82b9b522df5f06e1f7f}{Is\+Root}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1tree_1_1_node_a69129e1f49fd81203028aec235efbca7}{Node}} (N \texorpdfstring{$\ast$}{*}parent=nullptr)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+N \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1tree_1_1_node_afdbe4ab8b8e2f8054bf4b5bba86ad4ba}{parent\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1tree_1_1_node_a69129e1f49fd81203028aec235efbca7}\index{prt::tree::Node$<$ N $>$@{prt::tree::Node$<$ N $>$}!Node@{Node}}
+\index{Node@{Node}!prt::tree::Node$<$ N $>$@{prt::tree::Node$<$ N $>$}}
+\doxysubsubsection{\texorpdfstring{Node()}{Node()}}
+{\footnotesize\ttfamily \label{classprt_1_1tree_1_1_node_a69129e1f49fd81203028aec235efbca7} 
+template$<$class N $>$ \\
+\mbox{\hyperlink{classprt_1_1tree_1_1_node}{prt\+::tree\+::\+Node}}$<$ N $>$\+::\+Node (\begin{DoxyParamCaption}\item[{N \texorpdfstring{$\ast$}{*}}]{parent}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}, {\ttfamily [protected]}}
+
+\Hypertarget{classprt_1_1tree_1_1_node_a82a0f04924b4f75a5949c39fc23c2739}\index{prt::tree::Node$<$ N $>$@{prt::tree::Node$<$ N $>$}!````~Node@{\texorpdfstring{$\sim$}{\string~}Node}}
+\index{````~Node@{\texorpdfstring{$\sim$}{\string~}Node}!prt::tree::Node$<$ N $>$@{prt::tree::Node$<$ N $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Node()}{\string~Node()}}
+{\footnotesize\ttfamily \label{classprt_1_1tree_1_1_node_a82a0f04924b4f75a5949c39fc23c2739} 
+template$<$class N $>$ \\
+virtual \mbox{\hyperlink{classprt_1_1tree_1_1_node}{prt\+::tree\+::\+Node}}$<$ N $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classprt_1_1tree_1_1_node}{Node}} (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1tree_1_1_node_aa0025c510a17488431d806a5c12bccc4}\index{prt::tree::Node$<$ N $>$@{prt::tree::Node$<$ N $>$}!AddChild@{AddChild}}
+\index{AddChild@{AddChild}!prt::tree::Node$<$ N $>$@{prt::tree::Node$<$ N $>$}}
+\doxysubsubsection{\texorpdfstring{AddChild()}{AddChild()}}
+{\footnotesize\ttfamily \label{classprt_1_1tree_1_1_node_aa0025c510a17488431d806a5c12bccc4} 
+template$<$class N $>$ \\
+virtual void \mbox{\hyperlink{classprt_1_1tree_1_1_node}{prt\+::tree\+::\+Node}}$<$ N $>$\+::\+Add\+Child (\begin{DoxyParamCaption}\item[{N \texorpdfstring{$\ast$}{*}}]{node}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+\Hypertarget{classprt_1_1tree_1_1_node_a4e5eb9f90b2150bec95b69a78fe5a0f3}\index{prt::tree::Node$<$ N $>$@{prt::tree::Node$<$ N $>$}!GetChildAt@{GetChildAt}}
+\index{GetChildAt@{GetChildAt}!prt::tree::Node$<$ N $>$@{prt::tree::Node$<$ N $>$}}
+\doxysubsubsection{\texorpdfstring{GetChildAt()}{GetChildAt()}}
+{\footnotesize\ttfamily \label{classprt_1_1tree_1_1_node_a4e5eb9f90b2150bec95b69a78fe5a0f3} 
+template$<$class N $>$ \\
+virtual N \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1tree_1_1_node}{prt\+::tree\+::\+Node}}$<$ N $>$\+::\+Get\+Child\+At (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}}]{idx}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+\Hypertarget{classprt_1_1tree_1_1_node_aa21002fbea46f93136c33277d2ec8863}\index{prt::tree::Node$<$ N $>$@{prt::tree::Node$<$ N $>$}!GetNumberOfChildren@{GetNumberOfChildren}}
+\index{GetNumberOfChildren@{GetNumberOfChildren}!prt::tree::Node$<$ N $>$@{prt::tree::Node$<$ N $>$}}
+\doxysubsubsection{\texorpdfstring{GetNumberOfChildren()}{GetNumberOfChildren()}}
+{\footnotesize\ttfamily \label{classprt_1_1tree_1_1_node_aa21002fbea46f93136c33277d2ec8863} 
+template$<$class N $>$ \\
+virtual \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} \mbox{\hyperlink{classprt_1_1tree_1_1_node}{prt\+::tree\+::\+Node}}$<$ N $>$\+::\+Get\+Number\+Of\+Children (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+\Hypertarget{classprt_1_1tree_1_1_node_a0dd2f5f4981fc8e8ee92caf3394be9d6}\index{prt::tree::Node$<$ N $>$@{prt::tree::Node$<$ N $>$}!GetParent@{GetParent}}
+\index{GetParent@{GetParent}!prt::tree::Node$<$ N $>$@{prt::tree::Node$<$ N $>$}}
+\doxysubsubsection{\texorpdfstring{GetParent()}{GetParent()}}
+{\footnotesize\ttfamily \label{classprt_1_1tree_1_1_node_a0dd2f5f4981fc8e8ee92caf3394be9d6} 
+template$<$class N $>$ \\
+virtual N \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1tree_1_1_node}{prt\+::tree\+::\+Node}}$<$ N $>$\+::\+Get\+Parent (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+\Hypertarget{classprt_1_1tree_1_1_node_a7888b249a05773d09f3cf603a434a43a}\index{prt::tree::Node$<$ N $>$@{prt::tree::Node$<$ N $>$}!HasChildren@{HasChildren}}
+\index{HasChildren@{HasChildren}!prt::tree::Node$<$ N $>$@{prt::tree::Node$<$ N $>$}}
+\doxysubsubsection{\texorpdfstring{HasChildren()}{HasChildren()}}
+{\footnotesize\ttfamily \label{classprt_1_1tree_1_1_node_a7888b249a05773d09f3cf603a434a43a} 
+template$<$class N $>$ \\
+bool \mbox{\hyperlink{classprt_1_1tree_1_1_node}{prt\+::tree\+::\+Node}}$<$ N $>$\+::\+Has\+Children (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1tree_1_1_node_ac620a2002e230fc2c708c67ccbcd2607}\index{prt::tree::Node$<$ N $>$@{prt::tree::Node$<$ N $>$}!IsLeaf@{IsLeaf}}
+\index{IsLeaf@{IsLeaf}!prt::tree::Node$<$ N $>$@{prt::tree::Node$<$ N $>$}}
+\doxysubsubsection{\texorpdfstring{IsLeaf()}{IsLeaf()}}
+{\footnotesize\ttfamily \label{classprt_1_1tree_1_1_node_ac620a2002e230fc2c708c67ccbcd2607} 
+template$<$class N $>$ \\
+bool \mbox{\hyperlink{classprt_1_1tree_1_1_node}{prt\+::tree\+::\+Node}}$<$ N $>$\+::\+Is\+Leaf (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1tree_1_1_node_a42b05bafcf1ed82b9b522df5f06e1f7f}\index{prt::tree::Node$<$ N $>$@{prt::tree::Node$<$ N $>$}!IsRoot@{IsRoot}}
+\index{IsRoot@{IsRoot}!prt::tree::Node$<$ N $>$@{prt::tree::Node$<$ N $>$}}
+\doxysubsubsection{\texorpdfstring{IsRoot()}{IsRoot()}}
+{\footnotesize\ttfamily \label{classprt_1_1tree_1_1_node_a42b05bafcf1ed82b9b522df5f06e1f7f} 
+template$<$class N $>$ \\
+bool \mbox{\hyperlink{classprt_1_1tree_1_1_node}{prt\+::tree\+::\+Node}}$<$ N $>$\+::\+Is\+Root (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1tree_1_1_node_a2b7bc23976845338bf697c9b6b303506}\index{prt::tree::Node$<$ N $>$@{prt::tree::Node$<$ N $>$}!SetChildAt@{SetChildAt}}
+\index{SetChildAt@{SetChildAt}!prt::tree::Node$<$ N $>$@{prt::tree::Node$<$ N $>$}}
+\doxysubsubsection{\texorpdfstring{SetChildAt()}{SetChildAt()}}
+{\footnotesize\ttfamily \label{classprt_1_1tree_1_1_node_a2b7bc23976845338bf697c9b6b303506} 
+template$<$class N $>$ \\
+virtual void \mbox{\hyperlink{classprt_1_1tree_1_1_node}{prt\+::tree\+::\+Node}}$<$ N $>$\+::\+Set\+Child\+At (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}}]{idx}{, }\item[{N \texorpdfstring{$\ast$}{*}}]{node}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+\Hypertarget{classprt_1_1tree_1_1_node_a2780f35873b3873d5d34081cab302a11}\index{prt::tree::Node$<$ N $>$@{prt::tree::Node$<$ N $>$}!SetParent@{SetParent}}
+\index{SetParent@{SetParent}!prt::tree::Node$<$ N $>$@{prt::tree::Node$<$ N $>$}}
+\doxysubsubsection{\texorpdfstring{SetParent()}{SetParent()}}
+{\footnotesize\ttfamily \label{classprt_1_1tree_1_1_node_a2780f35873b3873d5d34081cab302a11} 
+template$<$class N $>$ \\
+virtual void \mbox{\hyperlink{classprt_1_1tree_1_1_node}{prt\+::tree\+::\+Node}}$<$ N $>$\+::\+Set\+Parent (\begin{DoxyParamCaption}\item[{N \texorpdfstring{$\ast$}{*}}]{node}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1tree_1_1_node_afdbe4ab8b8e2f8054bf4b5bba86ad4ba}\index{prt::tree::Node$<$ N $>$@{prt::tree::Node$<$ N $>$}!parent\_@{parent\_}}
+\index{parent\_@{parent\_}!prt::tree::Node$<$ N $>$@{prt::tree::Node$<$ N $>$}}
+\doxysubsubsection{\texorpdfstring{parent\_}{parent\_}}
+{\footnotesize\ttfamily \label{classprt_1_1tree_1_1_node_afdbe4ab8b8e2f8054bf4b5bba86ad4ba} 
+template$<$class N $>$ \\
+N\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1tree_1_1_node}{prt\+::tree\+::\+Node}}$<$ N $>$\+::parent\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{tree_8h}{tree.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,139 @@
+\doxysection{prt\+::Model Class Reference}
+\hypertarget{classprt_1_1_model}{}\label{classprt_1_1_model}\index{prt::Model@{prt::Model}}
+
+
+{\ttfamily \#include $<$model.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_model_a373d8ece2d468037a25a13bc26b99ec5}{Model}} ()=default
+\item 
+\mbox{\hyperlink{classprt_1_1_model_ada518c4de2144c3bda4075d42d347f1b}{\texorpdfstring{$\sim$}{\string~}\+Model}} ()=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1_model_a570becd276d29fa49e96a21978037892}{Get\+Meshes}} () const -\/$>$ const std\+::vector$<$ \mbox{\hyperlink{classprt_1_1_mesh}{Mesh}} $>$ \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_model_ab3522ea4418a44da25cf3a6af9ff68e4}{Get\+Number\+Of\+Meshes}} () const -\/$>$ uint64\+\_\+t
+\item 
+auto \mbox{\hyperlink{classprt_1_1_model_ac3408d8fc6988b9b4b0cc96af8daf9cc}{Get\+Number\+Of\+Vertices}} () const -\/$>$ uint64\+\_\+t
+\item 
+auto \mbox{\hyperlink{classprt_1_1_model_a4640f19215252fe435500bef7e3ba3f0}{Get\+Number\+Of\+Indices}} () const -\/$>$ uint64\+\_\+t
+\item 
+void \mbox{\hyperlink{classprt_1_1_model_aad78d22dee901fc67e515d8fba654aa0}{Scale}} (const glm\+::vec3 \&scale)
+\item 
+void \mbox{\hyperlink{classprt_1_1_model_ac66f05c2f38bf7c85569df3ae56d71f8}{Rotate}} (const float angle, const glm\+::vec3 \&axis)
+\item 
+void \mbox{\hyperlink{classprt_1_1_model_aaf8ff103dd6396926617639f3b9fc61f}{Translate}} (const glm\+::vec3 \&translation)
+\item 
+void \mbox{\hyperlink{classprt_1_1_model_a6a78e7e31b8a7632dffc4e1581ea27c0}{Rotate\+Up}} (const float angle)
+\item 
+void \mbox{\hyperlink{classprt_1_1_model_a3db20fd9618b5ee1914fec146834d3dd}{Rotate\+Down}} (const float angle)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classprt_1_1_mesh}{Mesh}} $>$ \mbox{\hyperlink{classprt_1_1_model_a8ce82254822106957118c64b95c47585}{meshes\+\_\+}} \{\}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classprt_1_1_model_a2225ba276b6f6f6fe0b0ffdf47b9b840}{num\+\_\+vertices\+\_\+}} \{\}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classprt_1_1_model_ad0731e4c5576c39e376224e53c97240f}{num\+\_\+indices\+\_\+}} \{\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_model_a373d8ece2d468037a25a13bc26b99ec5}\index{prt::Model@{prt::Model}!Model@{Model}}
+\index{Model@{Model}!prt::Model@{prt::Model}}
+\doxysubsubsection{\texorpdfstring{Model()}{Model()}}
+{\footnotesize\ttfamily \label{classprt_1_1_model_a373d8ece2d468037a25a13bc26b99ec5} 
+prt\+::\+Model\+::\+Model (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{classprt_1_1_model_ada518c4de2144c3bda4075d42d347f1b}\index{prt::Model@{prt::Model}!````~Model@{\texorpdfstring{$\sim$}{\string~}Model}}
+\index{````~Model@{\texorpdfstring{$\sim$}{\string~}Model}!prt::Model@{prt::Model}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Model()}{\string~Model()}}
+{\footnotesize\ttfamily \label{classprt_1_1_model_ada518c4de2144c3bda4075d42d347f1b} 
+prt\+::\+Model\+::\texorpdfstring{$\sim$}{\string~}\+Model (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_model_a570becd276d29fa49e96a21978037892}\index{prt::Model@{prt::Model}!GetMeshes@{GetMeshes}}
+\index{GetMeshes@{GetMeshes}!prt::Model@{prt::Model}}
+\doxysubsubsection{\texorpdfstring{GetMeshes()}{GetMeshes()}}
+{\footnotesize\ttfamily \label{classprt_1_1_model_a570becd276d29fa49e96a21978037892} 
+auto prt\+::\+Model\+::\+Get\+Meshes (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const std\+::vector$<$\mbox{\hyperlink{classprt_1_1_mesh}{Mesh}}$>$\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_model_a4640f19215252fe435500bef7e3ba3f0}\index{prt::Model@{prt::Model}!GetNumberOfIndices@{GetNumberOfIndices}}
+\index{GetNumberOfIndices@{GetNumberOfIndices}!prt::Model@{prt::Model}}
+\doxysubsubsection{\texorpdfstring{GetNumberOfIndices()}{GetNumberOfIndices()}}
+{\footnotesize\ttfamily \label{classprt_1_1_model_a4640f19215252fe435500bef7e3ba3f0} 
+auto prt\+::\+Model\+::\+Get\+Number\+Of\+Indices (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ uint64\+\_\+t \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_model_ab3522ea4418a44da25cf3a6af9ff68e4}\index{prt::Model@{prt::Model}!GetNumberOfMeshes@{GetNumberOfMeshes}}
+\index{GetNumberOfMeshes@{GetNumberOfMeshes}!prt::Model@{prt::Model}}
+\doxysubsubsection{\texorpdfstring{GetNumberOfMeshes()}{GetNumberOfMeshes()}}
+{\footnotesize\ttfamily \label{classprt_1_1_model_ab3522ea4418a44da25cf3a6af9ff68e4} 
+auto prt\+::\+Model\+::\+Get\+Number\+Of\+Meshes (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ uint64\+\_\+t \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_model_ac3408d8fc6988b9b4b0cc96af8daf9cc}\index{prt::Model@{prt::Model}!GetNumberOfVertices@{GetNumberOfVertices}}
+\index{GetNumberOfVertices@{GetNumberOfVertices}!prt::Model@{prt::Model}}
+\doxysubsubsection{\texorpdfstring{GetNumberOfVertices()}{GetNumberOfVertices()}}
+{\footnotesize\ttfamily \label{classprt_1_1_model_ac3408d8fc6988b9b4b0cc96af8daf9cc} 
+auto prt\+::\+Model\+::\+Get\+Number\+Of\+Vertices (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ uint64\+\_\+t \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_model_ac66f05c2f38bf7c85569df3ae56d71f8}\index{prt::Model@{prt::Model}!Rotate@{Rotate}}
+\index{Rotate@{Rotate}!prt::Model@{prt::Model}}
+\doxysubsubsection{\texorpdfstring{Rotate()}{Rotate()}}
+{\footnotesize\ttfamily \label{classprt_1_1_model_ac66f05c2f38bf7c85569df3ae56d71f8} 
+void prt\+::\+Model\+::\+Rotate (\begin{DoxyParamCaption}\item[{const float}]{angle}{, }\item[{const glm\+::vec3 \&}]{axis}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_model_a3db20fd9618b5ee1914fec146834d3dd}\index{prt::Model@{prt::Model}!RotateDown@{RotateDown}}
+\index{RotateDown@{RotateDown}!prt::Model@{prt::Model}}
+\doxysubsubsection{\texorpdfstring{RotateDown()}{RotateDown()}}
+{\footnotesize\ttfamily \label{classprt_1_1_model_a3db20fd9618b5ee1914fec146834d3dd} 
+void prt\+::\+Model\+::\+Rotate\+Down (\begin{DoxyParamCaption}\item[{const float}]{angle}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_model_a6a78e7e31b8a7632dffc4e1581ea27c0}\index{prt::Model@{prt::Model}!RotateUp@{RotateUp}}
+\index{RotateUp@{RotateUp}!prt::Model@{prt::Model}}
+\doxysubsubsection{\texorpdfstring{RotateUp()}{RotateUp()}}
+{\footnotesize\ttfamily \label{classprt_1_1_model_a6a78e7e31b8a7632dffc4e1581ea27c0} 
+void prt\+::\+Model\+::\+Rotate\+Up (\begin{DoxyParamCaption}\item[{const float}]{angle}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_model_aad78d22dee901fc67e515d8fba654aa0}\index{prt::Model@{prt::Model}!Scale@{Scale}}
+\index{Scale@{Scale}!prt::Model@{prt::Model}}
+\doxysubsubsection{\texorpdfstring{Scale()}{Scale()}}
+{\footnotesize\ttfamily \label{classprt_1_1_model_aad78d22dee901fc67e515d8fba654aa0} 
+void prt\+::\+Model\+::\+Scale (\begin{DoxyParamCaption}\item[{const glm\+::vec3 \&}]{scale}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_model_aaf8ff103dd6396926617639f3b9fc61f}\index{prt::Model@{prt::Model}!Translate@{Translate}}
+\index{Translate@{Translate}!prt::Model@{prt::Model}}
+\doxysubsubsection{\texorpdfstring{Translate()}{Translate()}}
+{\footnotesize\ttfamily \label{classprt_1_1_model_aaf8ff103dd6396926617639f3b9fc61f} 
+void prt\+::\+Model\+::\+Translate (\begin{DoxyParamCaption}\item[{const glm\+::vec3 \&}]{translation}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_model_a8ce82254822106957118c64b95c47585}\index{prt::Model@{prt::Model}!meshes\_@{meshes\_}}
+\index{meshes\_@{meshes\_}!prt::Model@{prt::Model}}
+\doxysubsubsection{\texorpdfstring{meshes\_}{meshes\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_model_a8ce82254822106957118c64b95c47585} 
+std\+::vector$<$\mbox{\hyperlink{classprt_1_1_mesh}{Mesh}}$>$ prt\+::\+Model\+::meshes\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_model_ad0731e4c5576c39e376224e53c97240f}\index{prt::Model@{prt::Model}!num\_indices\_@{num\_indices\_}}
+\index{num\_indices\_@{num\_indices\_}!prt::Model@{prt::Model}}
+\doxysubsubsection{\texorpdfstring{num\_indices\_}{num\_indices\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_model_ad0731e4c5576c39e376224e53c97240f} 
+uint64\+\_\+t prt\+::\+Model\+::num\+\_\+indices\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_model_a2225ba276b6f6f6fe0b0ffdf47b9b840}\index{prt::Model@{prt::Model}!num\_vertices\_@{num\_vertices\_}}
+\index{num\_vertices\_@{num\_vertices\_}!prt::Model@{prt::Model}}
+\doxysubsubsection{\texorpdfstring{num\_vertices\_}{num\_vertices\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_model_a2225ba276b6f6f6fe0b0ffdf47b9b840} 
+uint64\+\_\+t prt\+::\+Model\+::num\+\_\+vertices\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{model_8h}{model.\+h}}\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{model_8cc}{model.\+cc}}\end{DoxyCompactItemize}

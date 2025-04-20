@@ -1,0 +1,184 @@
+\doxysection{/\+Users/tazz/\+Projects/prette/\+Sources/prette/uv/utils.h File Reference}
+\hypertarget{utils_8h}{}\label{utils_8h}\index{/Users/tazz/Projects/prette/Sources/prette/uv/utils.h@{/Users/tazz/Projects/prette/Sources/prette/uv/utils.h}}
+{\ttfamily \#include $<$glog/logging.\+h$>$}\newline
+{\ttfamily \#include $<$uv.\+h$>$}\newline
+{\ttfamily \#include $<$functional$>$}\newline
+{\ttfamily \#include $<$type\+\_\+traits$>$}\newline
+{\ttfamily \#include "{}prette/common.\+h"{}}\newline
+Include dependency graph for utils.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{utils_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{utils_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1uv_1_1_status}{prt\+::uv\+::\+Status}}
+\item 
+struct \mbox{\hyperlink{structprt_1_1uv_1_1is__uv__handle}{prt\+::uv\+::is\+\_\+uv\+\_\+handle$<$ T $>$}}
+\item 
+class \mbox{\hyperlink{classprt_1_1uv_1_1_loop}{prt\+::uv\+::\+Loop}}
+\item 
+class \mbox{\hyperlink{classprt_1_1uv_1_1_handle_base}{prt\+::uv\+::\+Handle\+Base}}
+\item 
+class \mbox{\hyperlink{classprt_1_1uv_1_1_handle_template}{prt\+::uv\+::\+Handle\+Template$<$ H $>$}}
+\item 
+class \mbox{\hyperlink{classprt_1_1uv_1_1_async}{prt\+::uv\+::\+Async}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceprt}{prt}}
+\item 
+namespace \mbox{\hyperlink{namespaceprt_1_1uv}{prt\+::uv}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{utils_8h_ace2d2813e9ea1a57493a6295bd4310a1}{UV\+\_\+\+OK}}~0
+\item 
+\#define \mbox{\hyperlink{utils_8h_aa3a31aaa4737a50ccf91287fa95c9e4c}{DECLARE\+\_\+\+IS\+\_\+\+UV\+\_\+\+HANDLE}}(Name)
+\item 
+\#define \mbox{\hyperlink{utils_8h_ad9bfda17425a457fdc7226d14459900a}{CHECK\+\_\+\+UV\+\_\+\+RESULT}}(Severity,  Result,  Message)
+\item 
+\#define \mbox{\hyperlink{utils_8h_af38c0afbc77f83f43b08ab1d3a150db3}{CHECK\+\_\+\+UV}}(Severity,  Result,  Message)
+\item 
+\#define \mbox{\hyperlink{utils_8h_a569f3c73901cf45169b4f08925de1edd}{FOR\+\_\+\+EACH\+\_\+\+UV\+\_\+\+RUN\+\_\+\+MODE}}(V)
+\item 
+\#define \mbox{\hyperlink{utils_8h_a3a81f22f17b4931cbdde4b7218385134}{DEFINE\+\_\+\+TO\+\_\+\+STRING}}(Name)
+\item 
+\#define \mbox{\hyperlink{utils_8h_ab7c3f2d7c9af97aa7a192c93c4c53dec}{DEFINE\+\_\+\+RUN\+\_\+\+WITH\+\_\+\+MODE}}(Name)
+\item 
+\#define \mbox{\hyperlink{utils_8h_a665779f84c5710c925601035d5f4d1c1}{DECLARE\+\_\+\+UV\+\_\+\+HANDLE}}(Name,  Type)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{namespaceprt_1_1uv_a76457731a07865315da46335a5b53193}{prt\+::uv\+::\+Status\+Id}} = int
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{namespaceprt_1_1uv_af8a610099472f39fe8ee81a55f0d4025}{prt\+::uv\+::\+Run\+Mode}} \{ \mbox{\hyperlink{namespaceprt_1_1uv_af8a610099472f39fe8ee81a55f0d4025ae04b8230cf6cc5bc77d4befe64ba4fac}{prt\+::uv\+::k\+Run\+Default}} = UV\+\_\+\+RUN\+\_\+\+DEFAULT
+, \mbox{\hyperlink{namespaceprt_1_1uv_af8a610099472f39fe8ee81a55f0d4025aa19a2273f799f951561ecbd663c639aa}{prt\+::uv\+::k\+Run\+No\+Wait}} = UV\+\_\+\+RUN\+\_\+\+NOWAIT
+, \mbox{\hyperlink{namespaceprt_1_1uv_af8a610099472f39fe8ee81a55f0d4025a90ab87c6810e5d52508e96d03b108385}{prt\+::uv\+::k\+Run\+Once}} = UV\+\_\+\+RUN\+\_\+\+ONCE
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceprt_1_1uv_a2684c4caabcdffb66a058655c7e321e8}{prt\+::uv\+::\+DECLARE\+\_\+\+IS\+\_\+\+UV\+\_\+\+HANDLE}} (uv\+\_\+idle\+\_\+t)
+\item 
+\mbox{\hyperlink{namespaceprt_1_1uv_a40b62125e4fc869020d658b929941b29}{prt\+::uv\+::\+DECLARE\+\_\+\+IS\+\_\+\+UV\+\_\+\+HANDLE}} (uv\+\_\+check\+\_\+t)
+\item 
+\mbox{\hyperlink{namespaceprt_1_1uv_a3ef52855b7bf067240322e844fb7e3c0}{prt\+::uv\+::\+DECLARE\+\_\+\+IS\+\_\+\+UV\+\_\+\+HANDLE}} (uv\+\_\+prepare\+\_\+t)
+\item 
+\mbox{\hyperlink{namespaceprt_1_1uv_aca41d518e3b760efc4da53b945eeb8ae}{prt\+::uv\+::\+DECLARE\+\_\+\+IS\+\_\+\+UV\+\_\+\+HANDLE}} (uv\+\_\+async\+\_\+t)
+\item 
+\mbox{\hyperlink{namespaceprt_1_1uv_ad1b0f304122f74526a9023d38d0c0e05}{prt\+::uv\+::\+DECLARE\+\_\+\+UV\+\_\+\+HANDLE}} (Idle, uv\+\_\+idle\+\_\+t)
+\item 
+\mbox{\hyperlink{namespaceprt_1_1uv_a69db181c1ac82004d0df9572017d9590}{prt\+::uv\+::\+DECLARE\+\_\+\+UV\+\_\+\+HANDLE}} (Prepare, uv\+\_\+prepare\+\_\+t)
+\item 
+\mbox{\hyperlink{namespaceprt_1_1uv_a0a26ee83690537398686eb0335783450}{prt\+::uv\+::\+DECLARE\+\_\+\+UV\+\_\+\+HANDLE}} (Check, uv\+\_\+check\+\_\+t)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{utils_8h_af38c0afbc77f83f43b08ab1d3a150db3}\index{utils.h@{utils.h}!CHECK\_UV@{CHECK\_UV}}
+\index{CHECK\_UV@{CHECK\_UV}!utils.h@{utils.h}}
+\doxysubsubsection{\texorpdfstring{CHECK\_UV}{CHECK\_UV}}
+{\footnotesize\ttfamily \label{utils_8h_af38c0afbc77f83f43b08ab1d3a150db3} 
+\#define CHECK\+\_\+\+UV(\begin{DoxyParamCaption}\item[{}]{Severity}{, }\item[{}]{Result}{, }\item[{}]{Message}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ (\{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ status\ =\ (Result);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ LOG\_IF(Severity,\ !status)\ <<\ (Message)\ <<\ \textcolor{stringliteral}{"{}:\ "{}}\ <<\ status;\ \(\backslash\)}
+\DoxyCodeLine{\ \ \})}
+
+\end{DoxyCode}
+\Hypertarget{utils_8h_ad9bfda17425a457fdc7226d14459900a}\index{utils.h@{utils.h}!CHECK\_UV\_RESULT@{CHECK\_UV\_RESULT}}
+\index{CHECK\_UV\_RESULT@{CHECK\_UV\_RESULT}!utils.h@{utils.h}}
+\doxysubsubsection{\texorpdfstring{CHECK\_UV\_RESULT}{CHECK\_UV\_RESULT}}
+{\footnotesize\ttfamily \label{utils_8h_ad9bfda17425a457fdc7226d14459900a} 
+\#define CHECK\+\_\+\+UV\+\_\+\+RESULT(\begin{DoxyParamCaption}\item[{}]{Severity}{, }\item[{}]{Result}{, }\item[{}]{Message}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ LOG\_IF(Severity,\ (Result)\ !=\ \mbox{\hyperlink{utils_8h_ace2d2813e9ea1a57493a6295bd4310a1}{UV\_OK}})\ <<\ (Message)\ <<\ \textcolor{stringliteral}{"{}:\ "{}}\ <<\ uv\_strerror((Result));}
+
+\end{DoxyCode}
+\Hypertarget{utils_8h_aa3a31aaa4737a50ccf91287fa95c9e4c}\index{utils.h@{utils.h}!DECLARE\_IS\_UV\_HANDLE@{DECLARE\_IS\_UV\_HANDLE}}
+\index{DECLARE\_IS\_UV\_HANDLE@{DECLARE\_IS\_UV\_HANDLE}!utils.h@{utils.h}}
+\doxysubsubsection{\texorpdfstring{DECLARE\_IS\_UV\_HANDLE}{DECLARE\_IS\_UV\_HANDLE}}
+{\footnotesize\ttfamily \label{utils_8h_aa3a31aaa4737a50ccf91287fa95c9e4c} 
+\#define DECLARE\+\_\+\+IS\+\_\+\+UV\+\_\+\+HANDLE(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \textcolor{keyword}{template}\ <>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \textcolor{keyword}{struct\ }is\_uv\_handle<Name>\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ value\ =\ \textcolor{keyword}{true};\ \(\backslash\)}
+\DoxyCodeLine{\ \ \};}
+
+\end{DoxyCode}
+\Hypertarget{utils_8h_a665779f84c5710c925601035d5f4d1c1}\index{utils.h@{utils.h}!DECLARE\_UV\_HANDLE@{DECLARE\_UV\_HANDLE}}
+\index{DECLARE\_UV\_HANDLE@{DECLARE\_UV\_HANDLE}!utils.h@{utils.h}}
+\doxysubsubsection{\texorpdfstring{DECLARE\_UV\_HANDLE}{DECLARE\_UV\_HANDLE}}
+{\footnotesize\ttfamily \label{utils_8h_a665779f84c5710c925601035d5f4d1c1} 
+\#define DECLARE\+\_\+\+UV\+\_\+\+HANDLE(\begin{DoxyParamCaption}\item[{}]{Name}{, }\item[{}]{Type}{}\end{DoxyParamCaption})}
+
+\Hypertarget{utils_8h_ab7c3f2d7c9af97aa7a192c93c4c53dec}\index{utils.h@{utils.h}!DEFINE\_RUN\_WITH\_MODE@{DEFINE\_RUN\_WITH\_MODE}}
+\index{DEFINE\_RUN\_WITH\_MODE@{DEFINE\_RUN\_WITH\_MODE}!utils.h@{utils.h}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_RUN\_WITH\_MODE}{DEFINE\_RUN\_WITH\_MODE}}
+{\footnotesize\ttfamily \label{utils_8h_ab7c3f2d7c9af97aa7a192c93c4c53dec} 
+\#define DEFINE\+\_\+\+RUN\+\_\+\+WITH\+\_\+\+MODE(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ Run\#\#Name()\ \{\ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ Run(RunMode::kRun\#\#Name);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{utils_8h_a3a81f22f17b4931cbdde4b7218385134}\index{utils.h@{utils.h}!DEFINE\_TO\_STRING@{DEFINE\_TO\_STRING}}
+\index{DEFINE\_TO\_STRING@{DEFINE\_TO\_STRING}!utils.h@{utils.h}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_TO\_STRING}{DEFINE\_TO\_STRING}}
+{\footnotesize\ttfamily \label{utils_8h_a3a81f22f17b4931cbdde4b7218385134} 
+\#define DEFINE\+\_\+\+TO\+\_\+\+STRING(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{case}\ RunMode::kRun\#\#Name:\ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ stream\ <<\ \#Name;}
+
+\end{DoxyCode}
+\Hypertarget{utils_8h_a569f3c73901cf45169b4f08925de1edd}\index{utils.h@{utils.h}!FOR\_EACH\_UV\_RUN\_MODE@{FOR\_EACH\_UV\_RUN\_MODE}}
+\index{FOR\_EACH\_UV\_RUN\_MODE@{FOR\_EACH\_UV\_RUN\_MODE}!utils.h@{utils.h}}
+\doxysubsubsection{\texorpdfstring{FOR\_EACH\_UV\_RUN\_MODE}{FOR\_EACH\_UV\_RUN\_MODE}}
+{\footnotesize\ttfamily \label{utils_8h_a569f3c73901cf45169b4f08925de1edd} 
+\#define FOR\+\_\+\+EACH\+\_\+\+UV\+\_\+\+RUN\+\_\+\+MODE(\begin{DoxyParamCaption}\item[{}]{V}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ V(Default)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(NoWait)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(Once)}
+
+\end{DoxyCode}
+\Hypertarget{utils_8h_ace2d2813e9ea1a57493a6295bd4310a1}\index{utils.h@{utils.h}!UV\_OK@{UV\_OK}}
+\index{UV\_OK@{UV\_OK}!utils.h@{utils.h}}
+\doxysubsubsection{\texorpdfstring{UV\_OK}{UV\_OK}}
+{\footnotesize\ttfamily \label{utils_8h_ace2d2813e9ea1a57493a6295bd4310a1} 
+\#define UV\+\_\+\+OK~0}
+

@@ -1,4 +1,3 @@
-# TODO: move docs output to ${CMAKE_SOURCE_DIR}/docs/
 include(FetchContent)
 function(download_file url hash output_dir)
   fetchcontent_declare(
@@ -37,7 +36,7 @@ if(DOXYGEN_FOUND)
   set(DOXYGEN_IN ${CMAKE_SOURCE_DIR}/Doxyfile.in)
   set(DOXYGEN_OUT ${CMAKE_BINARY_DIR}/Doxyfile)
   set(DOXYGEN_INPUT_DIR ${CMAKE_SOURCE_DIR}/Sources/)
-  set(DOXYGEN_BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}/docs/)
+  set(DOXYGEN_BUILD_DIR ${CMAKE_SOURCE_DIR}/docs/)
 
   list(APPEND DOXYGEN_EXCLUDES "*/vcpkg_installed/*")
   list(JOIN DOXYGEN_EXCLUDES " " DOXYGEN_EXCLUDE_PATTERNS)

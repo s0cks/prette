@@ -1,0 +1,105 @@
+\doxysection{/\+Users/tazz/\+Projects/prette/\+Sources/prette/window.h File Reference}
+\hypertarget{window_8h}{}\label{window_8h}\index{/Users/tazz/Projects/prette/Sources/prette/window.h@{/Users/tazz/Projects/prette/Sources/prette/window.h}}
+{\ttfamily \#include "{}prette/event.\+h"{}}\newline
+{\ttfamily \#include "{}prette/gfx.\+h"{}}\newline
+{\ttfamily \#include "{}prette/lua.\+h"{}}\newline
+{\ttfamily \#include "{}prette/monitor.\+h"{}}\newline
+{\ttfamily \#include "{}prette/window\+\_\+event.\+h"{}}\newline
+Include dependency graph for window.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{window_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{window_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1_window_event_source}{prt\+::\+Window\+Event\+Source}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_window}{prt\+::\+Window}}
+\item 
+struct \mbox{\hyperlink{structprt_1_1_window_1_1_comparator}{prt\+::\+Window\+::\+Comparator}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_window_builder}{prt\+::\+Window\+Builder}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceprt}{prt}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{window_8h_ae28240040173cc818c48b6b0e0516138}{DEFINE\+\_\+\+ON\+\_\+\+WINDOW\+\_\+\+EVENT}}(Name)
+\item 
+\#define \mbox{\hyperlink{window_8h_a7aefd655c075cbd8b7bcd26d3abb336d}{DEFINE\+\_\+\+PUBLISH\+\_\+\+EVENT}}(Name)
+\item 
+\#define \mbox{\hyperlink{window_8h_a2672365a233e0c9f3c1ccb0d78388308}{DEFINE\+\_\+\+ON\+\_\+\+EVENT}}(Name)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{namespaceprt_a059134249785043514450af01ce694c0}{prt\+::\+Window\+Set}} = std\+::set$<$\mbox{\hyperlink{classprt_1_1_window}{Window}}\texorpdfstring{$\ast$}{*}, \mbox{\hyperlink{structprt_1_1_window_1_1_comparator}{Window\+::\+Comparator}}$>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceprt_a70d08b496daa78e192a2fa9e00856b4b}{prt\+::\+DECLARE\+\_\+string}} (window\+\_\+size)
+\item 
+auto \mbox{\hyperlink{namespaceprt_a523b1c3e770cbc10c957fdbd02a1c6c7}{prt\+::\+Get\+App\+Window}} () -\/$>$ \mbox{\hyperlink{classprt_1_1_window}{Window}} \texorpdfstring{$\ast$}{*}
+\item 
+auto \mbox{\hyperlink{namespaceprt_aca6b7e6198d4c7d002a4f83e014b8917}{prt\+::\+Visit\+All\+Windows}} (const std\+::function$<$ bool(\mbox{\hyperlink{classprt_1_1_window}{Window}} \texorpdfstring{$\ast$}{*})$>$ \&vis) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{namespaceprt_af700bfe1de8dc2f0aeba82002aa1bbf9}{prt\+::\+On\+Window\+Event}} () -\/$>$ Window\+Event\+Observable
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{window_8h_a2672365a233e0c9f3c1ccb0d78388308}\index{window.h@{window.h}!DEFINE\_ON\_EVENT@{DEFINE\_ON\_EVENT}}
+\index{DEFINE\_ON\_EVENT@{DEFINE\_ON\_EVENT}!window.h@{window.h}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_ON\_EVENT}{DEFINE\_ON\_EVENT}}
+{\footnotesize\ttfamily \label{window_8h_a2672365a233e0c9f3c1ccb0d78388308} 
+\#define DEFINE\+\_\+\+ON\+\_\+\+EVENT(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ On\#\#Name\#\#Event()-\/>Name\#\#EventObservable\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ OnWindowEvent().filter(Name\#\#Event::Filter).map(Name\#\#Event::Cast);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{window_8h_ae28240040173cc818c48b6b0e0516138}\index{window.h@{window.h}!DEFINE\_ON\_WINDOW\_EVENT@{DEFINE\_ON\_WINDOW\_EVENT}}
+\index{DEFINE\_ON\_WINDOW\_EVENT@{DEFINE\_ON\_WINDOW\_EVENT}!window.h@{window.h}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_ON\_WINDOW\_EVENT}{DEFINE\_ON\_WINDOW\_EVENT}}
+{\footnotesize\ttfamily \label{window_8h_ae28240040173cc818c48b6b0e0516138} 
+\#define DEFINE\+\_\+\+ON\+\_\+\+WINDOW\+\_\+\+EVENT(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ On\#\#Name\#\#Event()-\/>Name\#\#EventObservable\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ OnEvent().filter(Name\#\#Event::Filter).map(Name\#\#Event::Cast);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{window_8h_a7aefd655c075cbd8b7bcd26d3abb336d}\index{window.h@{window.h}!DEFINE\_PUBLISH\_EVENT@{DEFINE\_PUBLISH\_EVENT}}
+\index{DEFINE\_PUBLISH\_EVENT@{DEFINE\_PUBLISH\_EVENT}!window.h@{window.h}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_PUBLISH\_EVENT}{DEFINE\_PUBLISH\_EVENT}}
+{\footnotesize\ttfamily \label{window_8h_a7aefd655c075cbd8b7bcd26d3abb336d} 
+\#define DEFINE\+\_\+\+PUBLISH\+\_\+\+EVENT(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}...\ Args>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ Publish\#\#Name\#\#Event(Args...\ args)\textcolor{keyword}{\ const\ }\{\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ Publish<Name\#\#Event>(args...);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCode}

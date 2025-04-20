@@ -1,0 +1,67 @@
+\doxysection{pipeline\+\_\+builder.\+h}
+\hypertarget{pipeline__builder_8h_source}{}\label{pipeline__builder_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/pipeline\_builder.h@{/Users/tazz/Projects/prette/Sources/prette/pipeline\_builder.h}}
+\mbox{\hyperlink{pipeline__builder_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_PIPELINE\_BUILDER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_PIPELINE\_BUILDER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}prette/gfx.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{shader_8h}{prette/shader.h}}"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00008\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_pipeline_cache_builder}{PipelineCacheBuilder}}\ \{}
+\DoxyCodeLine{00009\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00010\ \ \ \mbox{\hyperlink{classprt_1_1_pipeline_cache_builder_a3839922494fcf145f4be697bf50bad04}{PipelineCacheBuilder}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00011\ \ \ \mbox{\hyperlink{classprt_1_1_pipeline_cache_builder_af9215c965799f314a45f9715edc81194}{\string~PipelineCacheBuilder}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_pipeline_cache_builder_ae1010e8eec25096cfbd4833c1350e96d}{Build}}(VkPipelineCache\&\ cache);}
+\DoxyCodeLine{00014\ \};}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_pipeline_layout_builder}{PipelineLayoutBuilder}}\ \{}
+\DoxyCodeLine{00017\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classprt_1_1_pipeline_layout_builder_ac84941bb10e4d1f9f79b09da6f26da17}{VkDescriptorSetLayoutList}}\ =\ std::vector<VkDescriptorSetLayout>;}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00020\ \ \ \mbox{\hyperlink{classprt_1_1_pipeline_layout_builder_ac84941bb10e4d1f9f79b09da6f26da17}{VkDescriptorSetLayoutList}}\ \mbox{\hyperlink{classprt_1_1_pipeline_layout_builder_aecb00be2bd10614e4e6044f9991d76d6}{descriptor\_set\_layouts\_}}\{\};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00023\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_pipeline_layout_builder_a2c890f21dc3a3dc49da832dae41a6c5a}{PipelineLayoutBuilder}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_pipeline_layout_builder_ac84941bb10e4d1f9f79b09da6f26da17}{VkDescriptorSetLayoutList}}\&\ descriptor\_set\_layouts)\ :}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_pipeline_layout_builder_aecb00be2bd10614e4e6044f9991d76d6}{descriptor\_set\_layouts\_}}(descriptor\_set\_layouts)\ \{\}}
+\DoxyCodeLine{00025\ \ \ \mbox{\hyperlink{classprt_1_1_pipeline_layout_builder_a8bce18dedfc8b38c969e26c3cba21455}{\string~PipelineLayoutBuilder}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_pipeline_layout_builder_aa797053135838d6612c04484da351fa7}{Build}}(VkPipelineLayout\&\ layout);}
+\DoxyCodeLine{00028\ \};}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_shader}{Shader}};}
+\DoxyCodeLine{00031\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structprt_1_1_graphics_pipeline_builder}{GraphicsPipelineBuilder}}\ \{}
+\DoxyCodeLine{00032\ \ \ VkViewport\ \mbox{\hyperlink{structprt_1_1_graphics_pipeline_builder_a2abe25b7e2458ce9af312548a7a273a6}{vp}}\{\};}
+\DoxyCodeLine{00033\ \ \ VkRect2D\ \mbox{\hyperlink{structprt_1_1_graphics_pipeline_builder_a1e121ff86276ac2d29531d7e988797d2}{scissor}}\{\};}
+\DoxyCodeLine{00034\ \ \ VkPipelineViewportStateCreateInfo\ \mbox{\hyperlink{structprt_1_1_graphics_pipeline_builder_a624738f8d0f01a4710d3dfde1fbc2521}{viewport}}\{\};}
+\DoxyCodeLine{00035\ \ \ VkPipelineDepthStencilStateCreateInfo\ \mbox{\hyperlink{structprt_1_1_graphics_pipeline_builder_a7dc6daf4437ab597f578532bedd2f9a2}{depth\_stencil}}\{\};}
+\DoxyCodeLine{00036\ \ \ VkPipelineInputAssemblyStateCreateInfo\ \mbox{\hyperlink{structprt_1_1_graphics_pipeline_builder_a895f6af77468555bf4a154dbe16862c7}{input\_assembly}}\{\};}
+\DoxyCodeLine{00037\ \ \ VkPipelineVertexInputStateCreateInfo\ \mbox{\hyperlink{structprt_1_1_graphics_pipeline_builder_a23a634981691e46c19d1d3b696774b40}{vertex\_input}}\{\};}
+\DoxyCodeLine{00038\ \ \ VkPipelineRasterizationStateCreateInfo\ \mbox{\hyperlink{structprt_1_1_graphics_pipeline_builder_ad5f5396c23ac18b91f378848cba31f4d}{rasterizer}}\{\};}
+\DoxyCodeLine{00039\ \ \ VkPipelineMultisampleStateCreateInfo\ \mbox{\hyperlink{structprt_1_1_graphics_pipeline_builder_a154dc40747f9a6ff5444be0988d586d9}{multisampling}}\{\};}
+\DoxyCodeLine{00040\ \ \ VkPipelineColorBlendStateCreateInfo\ \mbox{\hyperlink{structprt_1_1_graphics_pipeline_builder_a52edb9148090c8479ddb0031196627ae}{blending}}\{\};}
+\DoxyCodeLine{00041\ \ \ VkPipelineDynamicStateCreateInfo\ \mbox{\hyperlink{structprt_1_1_graphics_pipeline_builder_a3d5f362471304d50a5ed62fc4b3de772}{dynamic\_state}}\{\};}
+\DoxyCodeLine{00042\ \ \ VkGraphicsPipelineCreateInfo\ \mbox{\hyperlink{structprt_1_1_graphics_pipeline_builder_a0a6c67981715e7df30acfbdf52e95d7b}{pipeline}}\{\};}
+\DoxyCodeLine{00043\ \ \ std::vector<ShaderPtr>\ \mbox{\hyperlink{structprt_1_1_graphics_pipeline_builder_a6c74c53ac15e49d95aee23c549266adf}{attached\_shaders}}\{\};}
+\DoxyCodeLine{00044\ \ \ std::vector<VkPipelineShaderStageCreateInfo>\ \mbox{\hyperlink{structprt_1_1_graphics_pipeline_builder_a2c123d2ff3c13345966224bd748325e1}{shader\_attachments}}\{\};}
+\DoxyCodeLine{00045\ \ \ std::vector<VkPipelineColorBlendAttachmentState>\ \mbox{\hyperlink{structprt_1_1_graphics_pipeline_builder_a84e3bcd807dc263552862f1bd51f553f}{blending\_attachments}}\{\};}
+\DoxyCodeLine{00046\ \ \ std::vector<VkDynamicState>\ \mbox{\hyperlink{structprt_1_1_graphics_pipeline_builder_a41c83def29f53b07e66925ae5435f904}{dynamic\_states}}\{\};}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \mbox{\hyperlink{structprt_1_1_graphics_pipeline_builder_a0b26a81e13829768854f4493b20561f2}{GraphicsPipelineBuilder}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00049\ \ \ \mbox{\hyperlink{structprt_1_1_graphics_pipeline_builder_acda104f4f2a09df4a1ef0000cd92c069}{\string~GraphicsPipelineBuilder}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{structprt_1_1_graphics_pipeline_builder_a05f722e2d1147ffab9b54c1ba831cbd4}{SetRasterizerCullMode}}(\textcolor{keyword}{const}\ std::string\&\ rhs);}
+\DoxyCodeLine{00052\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{structprt_1_1_graphics_pipeline_builder_ac9bd91a1cf7d2b9446dc1f69e95d1330}{SetRasterizerFrontFace}}(\textcolor{keyword}{const}\ std::string\&\ rhs);}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{structprt_1_1_graphics_pipeline_builder_a54fea8aa1812932b150518fd392758f0}{AttachVertexShader}}(\mbox{\hyperlink{namespaceprt_ad0294cf04b50dbb8f9f566540e8f6f73}{ShaderPtr}}\ shader);}
+\DoxyCodeLine{00055\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{structprt_1_1_graphics_pipeline_builder_a015dd2294ff92b006d194af49ee79593}{AttachFragmentShader}}(\mbox{\hyperlink{namespaceprt_ad0294cf04b50dbb8f9f566540e8f6f73}{ShaderPtr}}\ shader);}
+\DoxyCodeLine{00056\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{structprt_1_1_graphics_pipeline_builder_a21d925bfc366586acf5a0b5bb5ed127d}{Build}}(\textcolor{keyword}{const}\ VkExtent2D\&\ extent,\ \textcolor{keyword}{const}\ VkPipelineLayout\&\ layout,\ \textcolor{keyword}{const}\ VkRenderPass\&\ pass,\ \textcolor{keyword}{const}\ VkPipelineCache\&\ cache,}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ VkPipeline\&\ \mbox{\hyperlink{structprt_1_1_graphics_pipeline_builder_a0a6c67981715e7df30acfbdf52e95d7b}{pipeline}});}
+\DoxyCodeLine{00058\ \};}
+\DoxyCodeLine{00059\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_PIPELINE\_BUILDER\_H}}
+
+\end{DoxyCode}

@@ -1,0 +1,191 @@
+\doxysection{/\+Users/tazz/\+Projects/prette/\+Sources/prette/common.h File Reference}
+\hypertarget{common_8h}{}\label{common_8h}\index{/Users/tazz/Projects/prette/Sources/prette/common.h@{/Users/tazz/Projects/prette/Sources/prette/common.h}}
+{\ttfamily \#include $<$glog/logging.\+h$>$}\newline
+{\ttfamily \#include $<$units.\+h$>$}\newline
+{\ttfamily \#include $<$uuid.\+h$>$}\newline
+{\ttfamily \#include $<$uv.\+h$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$cstdint$>$}\newline
+{\ttfamily \#include $<$cstdio$>$}\newline
+{\ttfamily \#include $<$filesystem$>$}\newline
+{\ttfamily \#include $<$functional$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$optional$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include "{}prette/platform.\+h"{}}\newline
+Include dependency graph for common.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{common_8h__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1_environment_variable}{prt\+::\+Environment\+Variable}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceprt}{prt}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(x)
+\item 
+\#define \mbox{\hyperlink{common_8h_a109e0c82e06d546fecf0948e2643966e}{UNALLOCATED}}~0
+\item 
+\#define \mbox{\hyperlink{common_8h_a13f7c284387d288c7c8319e1a236f7c8}{TRACE\+\_\+\+MARK}}
+\item 
+\#define \mbox{\hyperlink{common_8h_aecf622ecd9473cd350673fe01acf8905}{TRACE\+\_\+\+ZONE}}
+\item 
+\#define \mbox{\hyperlink{common_8h_a44032f6dd388f829e622b00649bc9918}{TRACE\+\_\+\+ZONE\+\_\+\+NAMED}}(Name)
+\item 
+\#define \mbox{\hyperlink{common_8h_ab481554fbd6c6e87afdf03cd4f3aa4d2}{TRACE\+\_\+\+TAG}}(Value)
+\item 
+\#define \mbox{\hyperlink{common_8h_ae3d610aab7d1b1da7e8fcbb8d81d7913}{TRACE\+\_\+\+TAG\+\_\+\+STR}}(Value)
+\item 
+\#define \mbox{\hyperlink{common_8h_aff92626c05b258f87ce06435c4c40e58}{DEFINE\+\_\+\+NON\+\_\+\+COPYABLE\+\_\+\+TYPE}}(Name)
+\item 
+\#define \mbox{\hyperlink{common_8h_a95d6387b1ce030724fa989be2d109b7e}{DEFINE\+\_\+\+NON\+\_\+\+INSTANTIABLE\+\_\+\+TYPE}}(Name)
+\item 
+\#define \mbox{\hyperlink{common_8h_a88f5d2d6cb7c4d5d1bd9fa9e3f47e602}{DEFINE\+\_\+\+DEFAULT\+\_\+\+COPYABLE\+\_\+\+TYPE}}(Name)
+\item 
+\#define \mbox{\hyperlink{common_8h_a3fd92503e109db50cfdc99bde5cd2b40}{NOT\+\_\+\+IMPLEMENTED}}(Level)
+\item 
+\#define \mbox{\hyperlink{common_8h_ac899055cec5a6567dc3d811c38976953}{\+\_\+\+TIMED\+\_\+\+EXECUTION\+\_\+}}(Name,  Function,  Args...)
+\item 
+\#define \mbox{\hyperlink{common_8h_a9020a436b4115eb2e73c0e5547850ca9}{TIMED\+\_\+\+EXECUTION}}(Code)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename A , typename B $>$ }\\auto \mbox{\hyperlink{namespaceprt_a1685b01aab7430a05854e61acd6113d5}{prt\+::map}} (std\+::optional$<$ A $>$ a, std\+::function$<$ std\+::optional$<$ B $>$(const A \&)$>$ f) -\/$>$ std\+::optional$<$ B $>$
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{common_8h_ac899055cec5a6567dc3d811c38976953}\index{common.h@{common.h}!\_TIMED\_EXECUTION\_@{\_TIMED\_EXECUTION\_}}
+\index{\_TIMED\_EXECUTION\_@{\_TIMED\_EXECUTION\_}!common.h@{common.h}}
+\doxysubsubsection{\texorpdfstring{\_TIMED\_EXECUTION\_}{\_TIMED\_EXECUTION\_}}
+{\footnotesize\ttfamily \label{common_8h_ac899055cec5a6567dc3d811c38976953} 
+\#define \+\_\+\+TIMED\+\_\+\+EXECUTION\+\_\+(\begin{DoxyParamCaption}\item[{}]{Name}{, }\item[{}]{Function}{, }\item[{}]{Args...}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{do}\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \{Function\};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \}\ \textcolor{keywordflow}{while}\ (0);}
+
+\end{DoxyCode}
+\Hypertarget{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}\index{common.h@{common.h}!ASSERT@{ASSERT}}
+\index{ASSERT@{ASSERT}!common.h@{common.h}}
+\doxysubsubsection{\texorpdfstring{ASSERT}{ASSERT}}
+{\footnotesize\ttfamily \label{common_8h_aca68c0d4ac8df0838e209fb5300f7be3} 
+\#define ASSERT(\begin{DoxyParamCaption}\item[{}]{x}{}\end{DoxyParamCaption})}
+
+\Hypertarget{common_8h_a88f5d2d6cb7c4d5d1bd9fa9e3f47e602}\index{common.h@{common.h}!DEFINE\_DEFAULT\_COPYABLE\_TYPE@{DEFINE\_DEFAULT\_COPYABLE\_TYPE}}
+\index{DEFINE\_DEFAULT\_COPYABLE\_TYPE@{DEFINE\_DEFAULT\_COPYABLE\_TYPE}!common.h@{common.h}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_DEFAULT\_COPYABLE\_TYPE}{DEFINE\_DEFAULT\_COPYABLE\_TYPE}}
+{\footnotesize\ttfamily \label{common_8h_a88f5d2d6cb7c4d5d1bd9fa9e3f47e602} 
+\#define DEFINE\+\_\+\+DEFAULT\+\_\+\+COPYABLE\+\_\+\+TYPE(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \textcolor{keyword}{public}:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ Name(Name\&\&\ rhs)\ =\ \textcolor{keywordflow}{default};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ Name(\textcolor{keyword}{const}\ Name\&\ rhs)\ =\ \textcolor{keywordflow}{default};\ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \textcolor{keyword}{auto}\ operator=(Name\&\&\ rhs)-\/>Name\&\ =\ \textcolor{keywordflow}{default};\ \(\backslash\)}
+\DoxyCodeLine{\ \ \textcolor{keyword}{auto}\ operator=(\textcolor{keyword}{const}\ Name\&\ rhs)-\/>Name\&\ =\ \textcolor{keywordflow}{default};}
+
+\end{DoxyCode}
+\Hypertarget{common_8h_aff92626c05b258f87ce06435c4c40e58}\index{common.h@{common.h}!DEFINE\_NON\_COPYABLE\_TYPE@{DEFINE\_NON\_COPYABLE\_TYPE}}
+\index{DEFINE\_NON\_COPYABLE\_TYPE@{DEFINE\_NON\_COPYABLE\_TYPE}!common.h@{common.h}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_NON\_COPYABLE\_TYPE}{DEFINE\_NON\_COPYABLE\_TYPE}}
+{\footnotesize\ttfamily \label{common_8h_aff92626c05b258f87ce06435c4c40e58} 
+\#define DEFINE\+\_\+\+NON\+\_\+\+COPYABLE\+\_\+\+TYPE(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \textcolor{keyword}{public}:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ Name(\textcolor{keyword}{const}\ Name\&\ rhs)\ =\ \textcolor{keyword}{delete};\ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ Name(Name\&\&\ rhs)\ =\ \textcolor{keyword}{delete};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \textcolor{keyword}{auto}\ operator=(Name\&\&\ rhs)-\/>Name\&\ =\ \textcolor{keyword}{delete};\ \(\backslash\)}
+\DoxyCodeLine{\ \ \textcolor{keyword}{auto}\ operator=(\textcolor{keyword}{const}\ Name\&\ rhs)-\/>Name\&\ =\ \textcolor{keyword}{delete};}
+
+\end{DoxyCode}
+\Hypertarget{common_8h_a95d6387b1ce030724fa989be2d109b7e}\index{common.h@{common.h}!DEFINE\_NON\_INSTANTIABLE\_TYPE@{DEFINE\_NON\_INSTANTIABLE\_TYPE}}
+\index{DEFINE\_NON\_INSTANTIABLE\_TYPE@{DEFINE\_NON\_INSTANTIABLE\_TYPE}!common.h@{common.h}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_NON\_INSTANTIABLE\_TYPE}{DEFINE\_NON\_INSTANTIABLE\_TYPE}}
+{\footnotesize\ttfamily \label{common_8h_a95d6387b1ce030724fa989be2d109b7e} 
+\#define DEFINE\+\_\+\+NON\+\_\+\+INSTANTIABLE\+\_\+\+TYPE(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \textcolor{keyword}{public}:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ Name()\ =\ \textcolor{keyword}{delete};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \string~Name()\ =\ \textcolor{keyword}{delete};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ DEFINE\_NON\_COPYABLE\_TYPE(Name);}
+
+\end{DoxyCode}
+\Hypertarget{common_8h_a3fd92503e109db50cfdc99bde5cd2b40}\index{common.h@{common.h}!NOT\_IMPLEMENTED@{NOT\_IMPLEMENTED}}
+\index{NOT\_IMPLEMENTED@{NOT\_IMPLEMENTED}!common.h@{common.h}}
+\doxysubsubsection{\texorpdfstring{NOT\_IMPLEMENTED}{NOT\_IMPLEMENTED}}
+{\footnotesize\ttfamily \label{common_8h_a3fd92503e109db50cfdc99bde5cd2b40} 
+\#define NOT\+\_\+\+IMPLEMENTED(\begin{DoxyParamCaption}\item[{}]{Level}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{LOG(Level)\ <<\ \_\_FUNCTION\_\_\ <<\ \textcolor{stringliteral}{"{}\ is\ not\ implemented!"{}};}
+
+\end{DoxyCode}
+\Hypertarget{common_8h_a9020a436b4115eb2e73c0e5547850ca9}\index{common.h@{common.h}!TIMED\_EXECUTION@{TIMED\_EXECUTION}}
+\index{TIMED\_EXECUTION@{TIMED\_EXECUTION}!common.h@{common.h}}
+\doxysubsubsection{\texorpdfstring{TIMED\_EXECUTION}{TIMED\_EXECUTION}}
+{\footnotesize\ttfamily \label{common_8h_a9020a436b4115eb2e73c0e5547850ca9} 
+\#define TIMED\+\_\+\+EXECUTION(\begin{DoxyParamCaption}\item[{}]{Code}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{common_8h_ac899055cec5a6567dc3d811c38976953}{\_TIMED\_EXECUTION\_}}(\_\_FUNCTION\_\_,\ Code);}
+
+\end{DoxyCode}
+\Hypertarget{common_8h_a13f7c284387d288c7c8319e1a236f7c8}\index{common.h@{common.h}!TRACE\_MARK@{TRACE\_MARK}}
+\index{TRACE\_MARK@{TRACE\_MARK}!common.h@{common.h}}
+\doxysubsubsection{\texorpdfstring{TRACE\_MARK}{TRACE\_MARK}}
+{\footnotesize\ttfamily \label{common_8h_a13f7c284387d288c7c8319e1a236f7c8} 
+\#define TRACE\+\_\+\+MARK}
+
+\Hypertarget{common_8h_ab481554fbd6c6e87afdf03cd4f3aa4d2}\index{common.h@{common.h}!TRACE\_TAG@{TRACE\_TAG}}
+\index{TRACE\_TAG@{TRACE\_TAG}!common.h@{common.h}}
+\doxysubsubsection{\texorpdfstring{TRACE\_TAG}{TRACE\_TAG}}
+{\footnotesize\ttfamily \label{common_8h_ab481554fbd6c6e87afdf03cd4f3aa4d2} 
+\#define TRACE\+\_\+\+TAG(\begin{DoxyParamCaption}\item[{}]{Value}{}\end{DoxyParamCaption})}
+
+\Hypertarget{common_8h_ae3d610aab7d1b1da7e8fcbb8d81d7913}\index{common.h@{common.h}!TRACE\_TAG\_STR@{TRACE\_TAG\_STR}}
+\index{TRACE\_TAG\_STR@{TRACE\_TAG\_STR}!common.h@{common.h}}
+\doxysubsubsection{\texorpdfstring{TRACE\_TAG\_STR}{TRACE\_TAG\_STR}}
+{\footnotesize\ttfamily \label{common_8h_ae3d610aab7d1b1da7e8fcbb8d81d7913} 
+\#define TRACE\+\_\+\+TAG\+\_\+\+STR(\begin{DoxyParamCaption}\item[{}]{Value}{}\end{DoxyParamCaption})}
+
+\Hypertarget{common_8h_aecf622ecd9473cd350673fe01acf8905}\index{common.h@{common.h}!TRACE\_ZONE@{TRACE\_ZONE}}
+\index{TRACE\_ZONE@{TRACE\_ZONE}!common.h@{common.h}}
+\doxysubsubsection{\texorpdfstring{TRACE\_ZONE}{TRACE\_ZONE}}
+{\footnotesize\ttfamily \label{common_8h_aecf622ecd9473cd350673fe01acf8905} 
+\#define TRACE\+\_\+\+ZONE}
+
+\Hypertarget{common_8h_a44032f6dd388f829e622b00649bc9918}\index{common.h@{common.h}!TRACE\_ZONE\_NAMED@{TRACE\_ZONE\_NAMED}}
+\index{TRACE\_ZONE\_NAMED@{TRACE\_ZONE\_NAMED}!common.h@{common.h}}
+\doxysubsubsection{\texorpdfstring{TRACE\_ZONE\_NAMED}{TRACE\_ZONE\_NAMED}}
+{\footnotesize\ttfamily \label{common_8h_a44032f6dd388f829e622b00649bc9918} 
+\#define TRACE\+\_\+\+ZONE\+\_\+\+NAMED(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+\Hypertarget{common_8h_a109e0c82e06d546fecf0948e2643966e}\index{common.h@{common.h}!UNALLOCATED@{UNALLOCATED}}
+\index{UNALLOCATED@{UNALLOCATED}!common.h@{common.h}}
+\doxysubsubsection{\texorpdfstring{UNALLOCATED}{UNALLOCATED}}
+{\footnotesize\ttfamily \label{common_8h_a109e0c82e06d546fecf0948e2643966e} 
+\#define UNALLOCATED~0}
+

@@ -1,0 +1,124 @@
+\doxysection{prt\+::Glfw\+Error Class Reference}
+\hypertarget{classprt_1_1_glfw_error}{}\label{classprt_1_1_glfw_error}\index{prt::GlfwError@{prt::GlfwError}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_glfw_error_a872da283b58e7c69c3cf97a5b6c90dcc}{Glfw\+Error}} (const char \texorpdfstring{$\ast$}{*}file, const int line, const int code, const char \texorpdfstring{$\ast$}{*}description)
+\item 
+\mbox{\hyperlink{classprt_1_1_glfw_error_a6d370eab439fab26199212bf2115c4fd}{\texorpdfstring{$\sim$}{\string~}\+Glfw\+Error}} ()=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1_glfw_error_a2ffabd92a0402b70e7bbfd45280979de}{Get\+File}} () const -\/$>$ const char \texorpdfstring{$\ast$}{*}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_glfw_error_aac5abe92d74f0db1b0b56208b25c5402}{Get\+Line}} () const -\/$>$ int
+\item 
+auto \mbox{\hyperlink{classprt_1_1_glfw_error_a20934cba1138d475d36ac9ffc8022399}{Get\+Message}} () const -\/$>$ const std\+::string \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_glfw_error_aa6bb327a95515a05a214c955015321e6}{Get\+Code}} () const -\/$>$ int
+\item 
+auto \mbox{\hyperlink{classprt_1_1_glfw_error_ad42c6ffe7d9ab5f429c26b986e86181b}{Get\+Severity}} () const -\/$>$ google\+::\+Log\+Severity
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1_glfw_error_ace4f6a6dbfdfde5092a1e510ef5b290d}{file\+\_\+}}
+\item 
+int \mbox{\hyperlink{classprt_1_1_glfw_error_ad94244b8b3d34971d862d2c41866a5da}{line\+\_\+}}
+\item 
+int \mbox{\hyperlink{classprt_1_1_glfw_error_a772201a205008c38af78d5848540f7f1}{code\+\_\+}}
+\item 
+std\+::string \mbox{\hyperlink{classprt_1_1_glfw_error_ad91745920d05c03604c1cdf333e5605e}{message\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_glfw_error_a885abf6d4eef3033e1236d402c4ed45c}{operator$<$$<$}} (std\+::ostream \&stream, const \mbox{\hyperlink{classprt_1_1_glfw_error}{Glfw\+Error}} \&rhs) -\/$>$ std\+::ostream \&
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_glfw_error_a872da283b58e7c69c3cf97a5b6c90dcc}\index{prt::GlfwError@{prt::GlfwError}!GlfwError@{GlfwError}}
+\index{GlfwError@{GlfwError}!prt::GlfwError@{prt::GlfwError}}
+\doxysubsubsection{\texorpdfstring{GlfwError()}{GlfwError()}}
+{\footnotesize\ttfamily \label{classprt_1_1_glfw_error_a872da283b58e7c69c3cf97a5b6c90dcc} 
+prt\+::\+Glfw\+Error\+::\+Glfw\+Error (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{file}{, }\item[{const int}]{line}{, }\item[{const int}]{code}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{description}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_glfw_error_a6d370eab439fab26199212bf2115c4fd}\index{prt::GlfwError@{prt::GlfwError}!````~GlfwError@{\texorpdfstring{$\sim$}{\string~}GlfwError}}
+\index{````~GlfwError@{\texorpdfstring{$\sim$}{\string~}GlfwError}!prt::GlfwError@{prt::GlfwError}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}GlfwError()}{\string~GlfwError()}}
+{\footnotesize\ttfamily \label{classprt_1_1_glfw_error_a6d370eab439fab26199212bf2115c4fd} 
+prt\+::\+Glfw\+Error\+::\texorpdfstring{$\sim$}{\string~}\+Glfw\+Error (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_glfw_error_aa6bb327a95515a05a214c955015321e6}\index{prt::GlfwError@{prt::GlfwError}!GetCode@{GetCode}}
+\index{GetCode@{GetCode}!prt::GlfwError@{prt::GlfwError}}
+\doxysubsubsection{\texorpdfstring{GetCode()}{GetCode()}}
+{\footnotesize\ttfamily \label{classprt_1_1_glfw_error_aa6bb327a95515a05a214c955015321e6} 
+auto prt\+::\+Glfw\+Error\+::\+Get\+Code (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ int \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_glfw_error_a2ffabd92a0402b70e7bbfd45280979de}\index{prt::GlfwError@{prt::GlfwError}!GetFile@{GetFile}}
+\index{GetFile@{GetFile}!prt::GlfwError@{prt::GlfwError}}
+\doxysubsubsection{\texorpdfstring{GetFile()}{GetFile()}}
+{\footnotesize\ttfamily \label{classprt_1_1_glfw_error_a2ffabd92a0402b70e7bbfd45280979de} 
+auto prt\+::\+Glfw\+Error\+::\+Get\+File (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const char\texorpdfstring{$\ast$}{*} \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_glfw_error_aac5abe92d74f0db1b0b56208b25c5402}\index{prt::GlfwError@{prt::GlfwError}!GetLine@{GetLine}}
+\index{GetLine@{GetLine}!prt::GlfwError@{prt::GlfwError}}
+\doxysubsubsection{\texorpdfstring{GetLine()}{GetLine()}}
+{\footnotesize\ttfamily \label{classprt_1_1_glfw_error_aac5abe92d74f0db1b0b56208b25c5402} 
+auto prt\+::\+Glfw\+Error\+::\+Get\+Line (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ int \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_glfw_error_a20934cba1138d475d36ac9ffc8022399}\index{prt::GlfwError@{prt::GlfwError}!GetMessage@{GetMessage}}
+\index{GetMessage@{GetMessage}!prt::GlfwError@{prt::GlfwError}}
+\doxysubsubsection{\texorpdfstring{GetMessage()}{GetMessage()}}
+{\footnotesize\ttfamily \label{classprt_1_1_glfw_error_a20934cba1138d475d36ac9ffc8022399} 
+auto prt\+::\+Glfw\+Error\+::\+Get\+Message (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const std\+::string\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_glfw_error_ad42c6ffe7d9ab5f429c26b986e86181b}\index{prt::GlfwError@{prt::GlfwError}!GetSeverity@{GetSeverity}}
+\index{GetSeverity@{GetSeverity}!prt::GlfwError@{prt::GlfwError}}
+\doxysubsubsection{\texorpdfstring{GetSeverity()}{GetSeverity()}}
+{\footnotesize\ttfamily \label{classprt_1_1_glfw_error_ad42c6ffe7d9ab5f429c26b986e86181b} 
+auto prt\+::\+Glfw\+Error\+::\+Get\+Severity (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ google\+::\+Log\+Severity \hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classprt_1_1_glfw_error_a885abf6d4eef3033e1236d402c4ed45c}\index{prt::GlfwError@{prt::GlfwError}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!prt::GlfwError@{prt::GlfwError}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily \label{classprt_1_1_glfw_error_a885abf6d4eef3033e1236d402c4ed45c} 
+auto operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{stream}{, }\item[{const \mbox{\hyperlink{classprt_1_1_glfw_error}{Glfw\+Error}} \&}]{rhs}{}\end{DoxyParamCaption}) -\/$>$ std\+::ostream\& \hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_glfw_error_a772201a205008c38af78d5848540f7f1}\index{prt::GlfwError@{prt::GlfwError}!code\_@{code\_}}
+\index{code\_@{code\_}!prt::GlfwError@{prt::GlfwError}}
+\doxysubsubsection{\texorpdfstring{code\_}{code\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_glfw_error_a772201a205008c38af78d5848540f7f1} 
+int prt\+::\+Glfw\+Error\+::code\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_glfw_error_ace4f6a6dbfdfde5092a1e510ef5b290d}\index{prt::GlfwError@{prt::GlfwError}!file\_@{file\_}}
+\index{file\_@{file\_}!prt::GlfwError@{prt::GlfwError}}
+\doxysubsubsection{\texorpdfstring{file\_}{file\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_glfw_error_ace4f6a6dbfdfde5092a1e510ef5b290d} 
+const char\texorpdfstring{$\ast$}{*} prt\+::\+Glfw\+Error\+::file\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_glfw_error_ad94244b8b3d34971d862d2c41866a5da}\index{prt::GlfwError@{prt::GlfwError}!line\_@{line\_}}
+\index{line\_@{line\_}!prt::GlfwError@{prt::GlfwError}}
+\doxysubsubsection{\texorpdfstring{line\_}{line\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_glfw_error_ad94244b8b3d34971d862d2c41866a5da} 
+int prt\+::\+Glfw\+Error\+::line\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_glfw_error_ad91745920d05c03604c1cdf333e5605e}\index{prt::GlfwError@{prt::GlfwError}!message\_@{message\_}}
+\index{message\_@{message\_}!prt::GlfwError@{prt::GlfwError}}
+\doxysubsubsection{\texorpdfstring{message\_}{message\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_glfw_error_ad91745920d05c03604c1cdf333e5605e} 
+std\+::string prt\+::\+Glfw\+Error\+::message\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{prette_8cc}{prette.\+cc}}\end{DoxyCompactItemize}

@@ -1,0 +1,24 @@
+\doxysection{rx.\+h}
+\hypertarget{rx_8h_source}{}\label{rx_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/rx.h@{/Users/tazz/Projects/prette/Sources/prette/rx.h}}
+\mbox{\hyperlink{rx_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_RX\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_RX\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <rxcpp/rx.hpp>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt_1_1rx}{prt::rx}}\ \{}
+\DoxyCodeLine{00007\ \ \ \textcolor{keyword}{using\ }rxcpp::subjects::subject;}
+\DoxyCodeLine{00008\ \ \ \textcolor{keyword}{using\ namespace\ }rxcpp;}
+\DoxyCodeLine{00009\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceprt_1_1rx_ac7e321cdc4f31ca1ff9746fc8129b70a}{error\_ptr}}\ =\ rxcpp::util::error\_ptr;}
+\DoxyCodeLine{00010\ \ \ \textcolor{keyword}{using\ }rxcpp::util::what;}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00013\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ identity(\textcolor{keyword}{const}\ T\&\ value)\ -\/>\ T\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordflow}{return}\ value;}
+\DoxyCodeLine{00015\ \ \ \}}
+\DoxyCodeLine{00016\ \}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//PRT\_RX\_H}}
+
+\end{DoxyCode}

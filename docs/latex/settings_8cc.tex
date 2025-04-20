@@ -1,0 +1,111 @@
+\doxysection{/\+Users/tazz/\+Projects/prette/\+Sources/prette/settings.cc File Reference}
+\hypertarget{settings_8cc}{}\label{settings_8cc}\index{/Users/tazz/Projects/prette/Sources/prette/settings.cc@{/Users/tazz/Projects/prette/Sources/prette/settings.cc}}
+{\ttfamily \#include "{}prette/settings.\+h"{}}\newline
+{\ttfamily \#include $<$fmt/format.\+h$>$}\newline
+{\ttfamily \#include $<$glog/logging.\+h$>$}\newline
+{\ttfamily \#include $<$libconfig.\+h$>$}\newline
+{\ttfamily \#include "{}prette/common.\+h"{}}\newline
+{\ttfamily \#include "{}prette/lua.\+h"{}}\newline
+{\ttfamily \#include "{}prette/settings\+\_\+event.\+h"{}}\newline
+{\ttfamily \#include "{}prette/to\+\_\+string.\+h"{}}\newline
+Include dependency graph for settings.\+cc\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{settings_8cc__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1_settings_module}{prt\+::\+Settings\+Module}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceprt}{prt}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{settings_8cc_aef94c1e62af41a49eff5300046cbf4f0}{LUA\+\_\+\+SETTINGS\+\_\+F}}(Name)
+\item 
+\#define \mbox{\hyperlink{settings_8cc_a883bc9ae9206c92ed074a39a9a30192a}{DEFINE\+\_\+\+ON\+\_\+\+EVENT\+\_\+\+FUNC}}(Name)
+\item 
+\#define \mbox{\hyperlink{settings_8cc_aef94c1e62af41a49eff5300046cbf4f0}{LUA\+\_\+\+SETTINGS\+\_\+F}}(Name)
+\item 
+\#define \mbox{\hyperlink{settings_8cc_a2672365a233e0c9f3c1ccb0d78388308}{DEFINE\+\_\+\+ON\+\_\+\+EVENT}}(Name)
+\item 
+\#define \mbox{\hyperlink{settings_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}}~Lua\+State\+::\+Get()-\/$>$Get\+State()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+auto \mbox{\hyperlink{namespaceprt_a000e1db281cd74ac72ea70587ff0ff60}{prt\+::\+On\+Settings\+Event}} () -\/$>$ Settings\+Event\+Observable
+\item 
+\mbox{\hyperlink{namespaceprt_a9e8b34221c1c949316dbfcffe484ec3f}{prt\+::\+LUA\+\_\+\+SETTINGS\+\_\+F}} (load)
+\item 
+\mbox{\hyperlink{namespaceprt_a862f3441fb511d2f9f07c37d252ed2e3}{prt\+::\+LUA\+\_\+\+SETTINGS\+\_\+F}} (save)
+\item 
+\mbox{\hyperlink{namespaceprt_a2b27472dda1739a95d44aba6655dad08}{prt\+::\+LUA\+\_\+\+SETTINGS\+\_\+F}} (on\+Event)
+\item 
+\mbox{\hyperlink{namespaceprt_aa41ed1533684c4d4141b9cd990a56b1d}{prt\+::\+FOR\+\_\+\+EACH\+\_\+\+SETTINGS\+\_\+\+EVENT}} (\mbox{\hyperlink{engine_8cc_a883bc9ae9206c92ed074a39a9a30192a}{DEFINE\+\_\+\+ON\+\_\+\+EVENT\+\_\+\+FUNC}})
+\item 
+\mbox{\hyperlink{namespaceprt_a182b1dfe01d3bffa2e07669d5300a47d}{prt\+::\+LUA\+\_\+F}} (settings\+\_\+index)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{settings_8cc_a2672365a233e0c9f3c1ccb0d78388308}\index{settings.cc@{settings.cc}!DEFINE\_ON\_EVENT@{DEFINE\_ON\_EVENT}}
+\index{DEFINE\_ON\_EVENT@{DEFINE\_ON\_EVENT}!settings.cc@{settings.cc}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_ON\_EVENT}{DEFINE\_ON\_EVENT}}
+{\footnotesize\ttfamily \label{settings_8cc_a2672365a233e0c9f3c1ccb0d78388308} 
+\#define DEFINE\+\_\+\+ON\+\_\+\+EVENT(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{settings_8cc_aef94c1e62af41a49eff5300046cbf4f0}{LUA\_SETTINGS\_F}}(on\#\#Name\#\#Event),}
+
+\end{DoxyCode}
+\Hypertarget{settings_8cc_a883bc9ae9206c92ed074a39a9a30192a}\index{settings.cc@{settings.cc}!DEFINE\_ON\_EVENT\_FUNC@{DEFINE\_ON\_EVENT\_FUNC}}
+\index{DEFINE\_ON\_EVENT\_FUNC@{DEFINE\_ON\_EVENT\_FUNC}!settings.cc@{settings.cc}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_ON\_EVENT\_FUNC}{DEFINE\_ON\_EVENT\_FUNC}}
+{\footnotesize\ttfamily \label{settings_8cc_a883bc9ae9206c92ed074a39a9a30192a} 
+\#define DEFINE\+\_\+\+ON\+\_\+\+EVENT\+\_\+\+FUNC(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{settings_8cc_aef94c1e62af41a49eff5300046cbf4f0}{LUA\_SETTINGS\_F}}(on\#\#Name\#\#Event)\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ On\#\#Name\#\#Event().subscribe(CreateSubscriber<Name\#\#Event>(\mbox{\hyperlink{settings_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}}));\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{settings_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}\index{settings.cc@{settings.cc}!L@{L}}
+\index{L@{L}!settings.cc@{settings.cc}}
+\doxysubsubsection{\texorpdfstring{L}{L}}
+{\footnotesize\ttfamily \label{settings_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53} 
+\#define L~Lua\+State\+::\+Get()-\/$>$Get\+State()}
+
+\Hypertarget{settings_8cc_aef94c1e62af41a49eff5300046cbf4f0}\index{settings.cc@{settings.cc}!LUA\_SETTINGS\_F@{LUA\_SETTINGS\_F}}
+\index{LUA\_SETTINGS\_F@{LUA\_SETTINGS\_F}!settings.cc@{settings.cc}}
+\doxysubsubsection{\texorpdfstring{LUA\_SETTINGS\_F}{LUA\_SETTINGS\_F}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{settings_8cc_aef94c1e62af41a49eff5300046cbf4f0} 
+\#define LUA\+\_\+\+SETTINGS\+\_\+F(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{lua_8h_a4c3a947c2f5c2f6244ffac8dfa005527}{LUA\_F}}(settings\_\#\#Name)}
+
+\end{DoxyCode}
+\Hypertarget{settings_8cc_aef94c1e62af41a49eff5300046cbf4f0}\index{settings.cc@{settings.cc}!LUA\_SETTINGS\_F@{LUA\_SETTINGS\_F}}
+\index{LUA\_SETTINGS\_F@{LUA\_SETTINGS\_F}!settings.cc@{settings.cc}}
+\doxysubsubsection{\texorpdfstring{LUA\_SETTINGS\_F}{LUA\_SETTINGS\_F}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{settings_8cc_aef94c1e62af41a49eff5300046cbf4f0} 
+\#define LUA\+\_\+\+SETTINGS\+\_\+F(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \{.name\ =\ \#Name,\ .func\ =\ \&lua\_settings\_\#\#Name\ \}}
+
+\end{DoxyCode}

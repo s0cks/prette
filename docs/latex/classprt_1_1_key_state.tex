@@ -1,0 +1,155 @@
+\doxysection{prt\+::Key\+State Class Reference}
+\hypertarget{classprt_1_1_key_state}{}\label{classprt_1_1_key_state}\index{prt::KeyState@{prt::KeyState}}
+
+
+{\ttfamily \#include $<$keyboard.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_key_state_a24ffdea4e0a11d048a836b0e1069719e}{Key\+State}} ()=default
+\item 
+\mbox{\hyperlink{classprt_1_1_key_state_aaba2f4edcda76c774fae910835a1b89a}{Key\+State}} (const int code, const int state)
+\item 
+\mbox{\hyperlink{classprt_1_1_key_state_ad32e43765b9d4b621b9174daeb2e0c56}{\texorpdfstring{$\sim$}{\string~}\+Key\+State}} ()=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1_key_state_aea9a7698aca1f2a4ed036013798796d8}{Get\+Code}} () const
+\item 
+auto \mbox{\hyperlink{classprt_1_1_key_state_a15174b38b5a144c1fb5b7f20b72ada02}{Get\+State}} () const -\/$>$ int
+\item 
+auto \mbox{\hyperlink{classprt_1_1_key_state_a59333080091c7947916d37f3e5be4fd6}{Is\+Repeat}} () const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_key_state_acf9c03fb3dde8139d4f53e6ed35a9b0f}{Is\+Pressed}} () const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_key_state_ac7e79998dc927c3561308325dbce0db7}{Is\+Released}} () const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_key_state_ae47897bc0928802d582ee9ee6f415e2e}{To\+String}} () const -\/$>$ std\+::string
+\item 
+auto \mbox{\hyperlink{classprt_1_1_key_state_a2ccc68f624d22a8d7c7f2de6f4b3dd69}{operator==}} (const \mbox{\hyperlink{classprt_1_1_key_state}{Key\+State}} \&rhs) const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_key_state_ad9650c6fd8e3b421e20e08b668fa543f}{operator!=}} (const \mbox{\hyperlink{classprt_1_1_key_state}{Key\+State}} \&rhs) const -\/$>$ bool
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_key_state_aca7cc675e3c2c17dc242c1298c714ff5}{DEFINE\+\_\+\+DEFAULT\+\_\+\+COPYABLE\+\_\+\+TYPE}} (\mbox{\hyperlink{classprt_1_1_key_state}{Key\+State}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{classprt_1_1_key_state_a68917bc420917bd13407653263ab525e}{code\+\_\+}}
+\item 
+int \mbox{\hyperlink{classprt_1_1_key_state_a77e9cdfca7fe49df1a948995b7a6ccc4}{state\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_key_state_a9f6740b9bae25e6074baefac2f60fe32}{operator$<$$<$}} (std\+::ostream \&stream, const \mbox{\hyperlink{classprt_1_1_key_state}{Key\+State}} \&rhs) -\/$>$ std\+::ostream \&
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_key_state_a24ffdea4e0a11d048a836b0e1069719e}\index{prt::KeyState@{prt::KeyState}!KeyState@{KeyState}}
+\index{KeyState@{KeyState}!prt::KeyState@{prt::KeyState}}
+\doxysubsubsection{\texorpdfstring{KeyState()}{KeyState()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_key_state_a24ffdea4e0a11d048a836b0e1069719e} 
+prt\+::\+Key\+State\+::\+Key\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{classprt_1_1_key_state_aaba2f4edcda76c774fae910835a1b89a}\index{prt::KeyState@{prt::KeyState}!KeyState@{KeyState}}
+\index{KeyState@{KeyState}!prt::KeyState@{prt::KeyState}}
+\doxysubsubsection{\texorpdfstring{KeyState()}{KeyState()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_key_state_aaba2f4edcda76c774fae910835a1b89a} 
+prt\+::\+Key\+State\+::\+Key\+State (\begin{DoxyParamCaption}\item[{const int}]{code}{, }\item[{const int}]{state}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_key_state_ad32e43765b9d4b621b9174daeb2e0c56}\index{prt::KeyState@{prt::KeyState}!````~KeyState@{\texorpdfstring{$\sim$}{\string~}KeyState}}
+\index{````~KeyState@{\texorpdfstring{$\sim$}{\string~}KeyState}!prt::KeyState@{prt::KeyState}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}KeyState()}{\string~KeyState()}}
+{\footnotesize\ttfamily \label{classprt_1_1_key_state_ad32e43765b9d4b621b9174daeb2e0c56} 
+prt\+::\+Key\+State\+::\texorpdfstring{$\sim$}{\string~}\+Key\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_key_state_aca7cc675e3c2c17dc242c1298c714ff5}\index{prt::KeyState@{prt::KeyState}!DEFINE\_DEFAULT\_COPYABLE\_TYPE@{DEFINE\_DEFAULT\_COPYABLE\_TYPE}}
+\index{DEFINE\_DEFAULT\_COPYABLE\_TYPE@{DEFINE\_DEFAULT\_COPYABLE\_TYPE}!prt::KeyState@{prt::KeyState}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_DEFAULT\_COPYABLE\_TYPE()}{DEFINE\_DEFAULT\_COPYABLE\_TYPE()}}
+{\footnotesize\ttfamily \label{classprt_1_1_key_state_aca7cc675e3c2c17dc242c1298c714ff5} 
+prt\+::\+Key\+State\+::\+DEFINE\+\_\+\+DEFAULT\+\_\+\+COPYABLE\+\_\+\+TYPE (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_key_state}{Key\+State}}}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_key_state_aea9a7698aca1f2a4ed036013798796d8}\index{prt::KeyState@{prt::KeyState}!GetCode@{GetCode}}
+\index{GetCode@{GetCode}!prt::KeyState@{prt::KeyState}}
+\doxysubsubsection{\texorpdfstring{GetCode()}{GetCode()}}
+{\footnotesize\ttfamily \label{classprt_1_1_key_state_aea9a7698aca1f2a4ed036013798796d8} 
+auto prt\+::\+Key\+State\+::\+Get\+Code (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_key_state_a15174b38b5a144c1fb5b7f20b72ada02}\index{prt::KeyState@{prt::KeyState}!GetState@{GetState}}
+\index{GetState@{GetState}!prt::KeyState@{prt::KeyState}}
+\doxysubsubsection{\texorpdfstring{GetState()}{GetState()}}
+{\footnotesize\ttfamily \label{classprt_1_1_key_state_a15174b38b5a144c1fb5b7f20b72ada02} 
+auto prt\+::\+Key\+State\+::\+Get\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ int \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_key_state_acf9c03fb3dde8139d4f53e6ed35a9b0f}\index{prt::KeyState@{prt::KeyState}!IsPressed@{IsPressed}}
+\index{IsPressed@{IsPressed}!prt::KeyState@{prt::KeyState}}
+\doxysubsubsection{\texorpdfstring{IsPressed()}{IsPressed()}}
+{\footnotesize\ttfamily \label{classprt_1_1_key_state_acf9c03fb3dde8139d4f53e6ed35a9b0f} 
+auto prt\+::\+Key\+State\+::\+Is\+Pressed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_key_state_ac7e79998dc927c3561308325dbce0db7}\index{prt::KeyState@{prt::KeyState}!IsReleased@{IsReleased}}
+\index{IsReleased@{IsReleased}!prt::KeyState@{prt::KeyState}}
+\doxysubsubsection{\texorpdfstring{IsReleased()}{IsReleased()}}
+{\footnotesize\ttfamily \label{classprt_1_1_key_state_ac7e79998dc927c3561308325dbce0db7} 
+auto prt\+::\+Key\+State\+::\+Is\+Released (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_key_state_a59333080091c7947916d37f3e5be4fd6}\index{prt::KeyState@{prt::KeyState}!IsRepeat@{IsRepeat}}
+\index{IsRepeat@{IsRepeat}!prt::KeyState@{prt::KeyState}}
+\doxysubsubsection{\texorpdfstring{IsRepeat()}{IsRepeat()}}
+{\footnotesize\ttfamily \label{classprt_1_1_key_state_a59333080091c7947916d37f3e5be4fd6} 
+auto prt\+::\+Key\+State\+::\+Is\+Repeat (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_key_state_ad9650c6fd8e3b421e20e08b668fa543f}\index{prt::KeyState@{prt::KeyState}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!prt::KeyState@{prt::KeyState}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily \label{classprt_1_1_key_state_ad9650c6fd8e3b421e20e08b668fa543f} 
+auto prt\+::\+Key\+State\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_key_state}{Key\+State}} \&}]{rhs}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_key_state_a2ccc68f624d22a8d7c7f2de6f4b3dd69}\index{prt::KeyState@{prt::KeyState}!operator==@{operator==}}
+\index{operator==@{operator==}!prt::KeyState@{prt::KeyState}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{classprt_1_1_key_state_a2ccc68f624d22a8d7c7f2de6f4b3dd69} 
+auto prt\+::\+Key\+State\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_key_state}{Key\+State}} \&}]{rhs}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_key_state_ae47897bc0928802d582ee9ee6f415e2e}\index{prt::KeyState@{prt::KeyState}!ToString@{ToString}}
+\index{ToString@{ToString}!prt::KeyState@{prt::KeyState}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily \label{classprt_1_1_key_state_ae47897bc0928802d582ee9ee6f415e2e} 
+auto prt\+::\+Key\+State\+::\+To\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ std\+::string \hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classprt_1_1_key_state_a9f6740b9bae25e6074baefac2f60fe32}\index{prt::KeyState@{prt::KeyState}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!prt::KeyState@{prt::KeyState}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily \label{classprt_1_1_key_state_a9f6740b9bae25e6074baefac2f60fe32} 
+auto operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{stream}{, }\item[{const \mbox{\hyperlink{classprt_1_1_key_state}{Key\+State}} \&}]{rhs}{}\end{DoxyParamCaption}) -\/$>$ std\+::ostream\& \hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_key_state_a68917bc420917bd13407653263ab525e}\index{prt::KeyState@{prt::KeyState}!code\_@{code\_}}
+\index{code\_@{code\_}!prt::KeyState@{prt::KeyState}}
+\doxysubsubsection{\texorpdfstring{code\_}{code\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_key_state_a68917bc420917bd13407653263ab525e} 
+int prt\+::\+Key\+State\+::code\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_key_state_a77e9cdfca7fe49df1a948995b7a6ccc4}\index{prt::KeyState@{prt::KeyState}!state\_@{state\_}}
+\index{state\_@{state\_}!prt::KeyState@{prt::KeyState}}
+\doxysubsubsection{\texorpdfstring{state\_}{state\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_key_state_a77e9cdfca7fe49df1a948995b7a6ccc4} 
+int prt\+::\+Key\+State\+::state\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{keyboard_8h}{keyboard.\+h}}\end{DoxyCompactItemize}

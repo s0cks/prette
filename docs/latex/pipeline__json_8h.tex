@@ -1,0 +1,103 @@
+\doxysection{/\+Users/tazz/\+Projects/prette/\+Sources/prette/pipeline\+\_\+json.h File Reference}
+\hypertarget{pipeline__json_8h}{}\label{pipeline__json_8h}\index{/Users/tazz/Projects/prette/Sources/prette/pipeline\_json.h@{/Users/tazz/Projects/prette/Sources/prette/pipeline\_json.h}}
+{\ttfamily \#include $<$fmt/format.\+h$>$}\newline
+{\ttfamily \#include $<$glog/logging.\+h$>$}\newline
+{\ttfamily \#include $<$rapidjson/error/en.\+h$>$}\newline
+{\ttfamily \#include $<$rapidjson/reader.\+h$>$}\newline
+{\ttfamily \#include "{}prette/common.\+h"{}}\newline
+{\ttfamily \#include "{}prette/pipeline.\+h"{}}\newline
+Include dependency graph for pipeline\+\_\+json.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{pipeline__json_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=320pt]{pipeline__json_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler}{prt\+::json\+::\+Pipeline\+Handler}}
+\item 
+struct \mbox{\hyperlink{structprt_1_1json_1_1_pipeline_handler_1_1_key_state}{prt\+::json\+::\+Pipeline\+Handler\+::\+Key\+State}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceprt}{prt}}
+\item 
+namespace \mbox{\hyperlink{namespaceprt_1_1json}{prt\+::json}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{pipeline__json_8h_adc55f8542dfe23953f87a0ce42c9a2f8}{FOR\+\_\+\+EACH\+\_\+\+PIPELINE\+\_\+\+HANDLER\+\_\+\+STATE}}(V)
+\item 
+\#define \mbox{\hyperlink{pipeline__json_8h_a41ec59e2b2f86812bbe28afed642afdb}{DEFINE\+\_\+\+STATE}}(Name)
+\item 
+\#define \mbox{\hyperlink{pipeline__json_8h_a3a81f22f17b4931cbdde4b7218385134}{DEFINE\+\_\+\+TO\+\_\+\+STRING}}(Name)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+auto \mbox{\hyperlink{namespaceprt_1_1json_a3fd475c964bcee53242e4629707a97cf}{prt\+::json\+::\+Read\+Json\+From\+File}} (fs\+::path path, std\+::string \&result) -\/$>$ bool
+\item 
+{\footnotesize template$<$typename H $>$ }\\void \mbox{\hyperlink{namespaceprt_1_1json_a8be73343ec23c5d58763b72db25af350}{prt\+::json\+::\+Parse\+Json\+Document\+From}} (fs\+::path path, H \&handler)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{pipeline__json_8h_a41ec59e2b2f86812bbe28afed642afdb}\index{pipeline\_json.h@{pipeline\_json.h}!DEFINE\_STATE@{DEFINE\_STATE}}
+\index{DEFINE\_STATE@{DEFINE\_STATE}!pipeline\_json.h@{pipeline\_json.h}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_STATE}{DEFINE\_STATE}}
+{\footnotesize\ttfamily \label{pipeline__json_8h_a41ec59e2b2f86812bbe28afed642afdb} 
+\#define DEFINE\+\_\+\+STATE(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{k\#\#Name,}
+
+\end{DoxyCode}
+\Hypertarget{pipeline__json_8h_a3a81f22f17b4931cbdde4b7218385134}\index{pipeline\_json.h@{pipeline\_json.h}!DEFINE\_TO\_STRING@{DEFINE\_TO\_STRING}}
+\index{DEFINE\_TO\_STRING@{DEFINE\_TO\_STRING}!pipeline\_json.h@{pipeline\_json.h}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_TO\_STRING}{DEFINE\_TO\_STRING}}
+{\footnotesize\ttfamily \label{pipeline__json_8h_a3a81f22f17b4931cbdde4b7218385134} 
+\#define DEFINE\+\_\+\+TO\+\_\+\+STRING(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{case}\ k\#\#Name:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ stream\ <<\ \#Name;}
+
+\end{DoxyCode}
+\Hypertarget{pipeline__json_8h_adc55f8542dfe23953f87a0ce42c9a2f8}\index{pipeline\_json.h@{pipeline\_json.h}!FOR\_EACH\_PIPELINE\_HANDLER\_STATE@{FOR\_EACH\_PIPELINE\_HANDLER\_STATE}}
+\index{FOR\_EACH\_PIPELINE\_HANDLER\_STATE@{FOR\_EACH\_PIPELINE\_HANDLER\_STATE}!pipeline\_json.h@{pipeline\_json.h}}
+\doxysubsubsection{\texorpdfstring{FOR\_EACH\_PIPELINE\_HANDLER\_STATE}{FOR\_EACH\_PIPELINE\_HANDLER\_STATE}}
+{\footnotesize\ttfamily \label{pipeline__json_8h_adc55f8542dfe23953f87a0ce42c9a2f8} 
+\#define FOR\+\_\+\+EACH\+\_\+\+PIPELINE\+\_\+\+HANDLER\+\_\+\+STATE(\begin{DoxyParamCaption}\item[{}]{V}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ V(OpenDoc)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(ParsingType)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(ExpectMeta)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(ParsingMeta)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(ParsingName)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(ExpectData)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(ParsingData)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(ParsingVertexShader)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(ParsingFragmentShader)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(ParsingCullMode)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(ParsingFrontFace)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(ExpectDynamicStates)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(ParsingDynamicStates)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(ClosedDoc)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(Error)}
+
+\end{DoxyCode}

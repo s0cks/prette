@@ -1,0 +1,147 @@
+\doxysection{/\+Users/tazz/\+Projects/prette/\+Sources/prette/monitor.h File Reference}
+\hypertarget{monitor_8h}{}\label{monitor_8h}\index{/Users/tazz/Projects/prette/Sources/prette/monitor.h@{/Users/tazz/Projects/prette/Sources/prette/monitor.h}}
+{\ttfamily \#include $<$units.\+h$>$}\newline
+{\ttfamily \#include "{}prette/common.\+h"{}}\newline
+{\ttfamily \#include "{}prette/dimension.\+h"{}}\newline
+{\ttfamily \#include "{}prette/event.\+h"{}}\newline
+{\ttfamily \#include "{}prette/geometry/rectangle.\+h"{}}\newline
+{\ttfamily \#include "{}prette/gfx.\+h"{}}\newline
+{\ttfamily \#include "{}prette/resolution.\+h"{}}\newline
+{\ttfamily \#include "{}prette/rx.\+h"{}}\newline
+Include dependency graph for monitor.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{monitor_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{monitor_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1_monitor_event}{prt\+::\+Monitor\+Event}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_monitor_connected_event}{prt\+::\+Monitor\+Connected\+Event}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_monitor_disconnected_event}{prt\+::\+Monitor\+Disconnected\+Event}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_monitor}{prt\+::\+Monitor}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceprt}{prt}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{monitor_8h_a859af8c8f0c8035c82fa1167176b83f2}{FOR\+\_\+\+EACH\+\_\+\+MONITOR\+\_\+\+EVENT}}(V)
+\item 
+\#define \mbox{\hyperlink{monitor_8h_a45535920ced8bceedd645fc21b86ac57}{FORWARD\+\_\+\+DECLARE\+\_\+\+MONITOR\+\_\+\+EVENT}}(Name)
+\item 
+\#define \mbox{\hyperlink{monitor_8h_a77f9204068666cf5a372104b73b01fbd}{DEFINE\+\_\+\+MONITOR\+\_\+\+EVENT}}(Name)
+\item 
+\#define \mbox{\hyperlink{monitor_8h_aa211e0b721530489ded727ad1afb73a2}{DECLARE\+\_\+\+EVENT\+\_\+\+OBSERVABLE}}(Name)
+\item 
+\#define \mbox{\hyperlink{monitor_8h_a7aefd655c075cbd8b7bcd26d3abb336d}{DEFINE\+\_\+\+PUBLISH\+\_\+\+EVENT}}(Name)
+\item 
+\#define \mbox{\hyperlink{monitor_8h_ac47a2a645494429e6c4fb22435b35d8b}{DECLARE\+\_\+\+ON\+\_\+\+MONITOR\+\_\+\+EVENT}}(Name)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{namespaceprt_aeb06223d09f723daae43e91d027fbc13}{prt\+::\+Monitor\+Event\+Subject}} = rx\+::subject$<$\mbox{\hyperlink{classprt_1_1_monitor_event}{Monitor\+Event}}\texorpdfstring{$\ast$}{*}$>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceprt_aa7fb00066fe9d363d36ce63961e8d152}{prt\+::\+DECLARE\+\_\+\+EVENT\+\_\+\+OBSERVABLE}} (\mbox{\hyperlink{classprt_1_1_monitor}{Monitor}})
+\item 
+\mbox{\hyperlink{namespaceprt_afc40a413eb25a9c1a226ad5df9a64b82}{prt\+::\+FOR\+\_\+\+EACH\+\_\+\+MONITOR\+\_\+\+EVENT}} (\mbox{\hyperlink{namespaceprt_aa7fb00066fe9d363d36ce63961e8d152}{DECLARE\+\_\+\+EVENT\+\_\+\+OBSERVABLE}})
+\item 
+auto \mbox{\hyperlink{namespaceprt_ae9b0d19e74de0acecf3a87ffaeda5f99}{prt\+::\+Get\+Total\+Number\+Of\+Monitors}} () -\/$>$ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}
+\item 
+auto \mbox{\hyperlink{namespaceprt_ac19551275a2506920476f7831ff7752b}{prt\+::\+Get\+Primary\+Monitor}} () -\/$>$ \mbox{\hyperlink{classprt_1_1_monitor}{Monitor}} \texorpdfstring{$\ast$}{*}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{monitor_8h_aa211e0b721530489ded727ad1afb73a2}\index{monitor.h@{monitor.h}!DECLARE\_EVENT\_OBSERVABLE@{DECLARE\_EVENT\_OBSERVABLE}}
+\index{DECLARE\_EVENT\_OBSERVABLE@{DECLARE\_EVENT\_OBSERVABLE}!monitor.h@{monitor.h}}
+\doxysubsubsection{\texorpdfstring{DECLARE\_EVENT\_OBSERVABLE}{DECLARE\_EVENT\_OBSERVABLE}}
+{\footnotesize\ttfamily \label{monitor_8h_aa211e0b721530489ded727ad1afb73a2} 
+\#define DECLARE\+\_\+\+EVENT\+\_\+\+OBSERVABLE(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{using\ }Name\#\#EventObservable\ =\ rx::observable<Name\#\#Event*>;}
+
+\end{DoxyCode}
+\Hypertarget{monitor_8h_ac47a2a645494429e6c4fb22435b35d8b}\index{monitor.h@{monitor.h}!DECLARE\_ON\_MONITOR\_EVENT@{DECLARE\_ON\_MONITOR\_EVENT}}
+\index{DECLARE\_ON\_MONITOR\_EVENT@{DECLARE\_ON\_MONITOR\_EVENT}!monitor.h@{monitor.h}}
+\doxysubsubsection{\texorpdfstring{DECLARE\_ON\_MONITOR\_EVENT}{DECLARE\_ON\_MONITOR\_EVENT}}
+{\footnotesize\ttfamily \label{monitor_8h_ac47a2a645494429e6c4fb22435b35d8b} 
+\#define DECLARE\+\_\+\+ON\+\_\+\+MONITOR\+\_\+\+EVENT(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ On\#\#Name\#\#Event()\ const-\/>Name\textcolor{preprocessor}{\#\#EventObservable\ \{\ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ return\ OnEvent().filter(Name\#\#Event::Filter).map(Name\#\#Event::Cast);\ \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \}}}
+
+\end{DoxyCode}
+\Hypertarget{monitor_8h_a77f9204068666cf5a372104b73b01fbd}\index{monitor.h@{monitor.h}!DEFINE\_MONITOR\_EVENT@{DEFINE\_MONITOR\_EVENT}}
+\index{DEFINE\_MONITOR\_EVENT@{DEFINE\_MONITOR\_EVENT}!monitor.h@{monitor.h}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_MONITOR\_EVENT}{DEFINE\_MONITOR\_EVENT}}
+{\footnotesize\ttfamily \label{monitor_8h_a77f9204068666cf5a372104b73b01fbd} 
+\#define DEFINE\+\_\+\+MONITOR\+\_\+\+EVENT(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }Monitor;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }EventSource<MonitorEvent>;\ \(\backslash\)}
+\DoxyCodeLine{\ \ DECLARE\_EVENT\_TYPE(MonitorEvent,\ Name);}
+
+\end{DoxyCode}
+\Hypertarget{monitor_8h_a7aefd655c075cbd8b7bcd26d3abb336d}\index{monitor.h@{monitor.h}!DEFINE\_PUBLISH\_EVENT@{DEFINE\_PUBLISH\_EVENT}}
+\index{DEFINE\_PUBLISH\_EVENT@{DEFINE\_PUBLISH\_EVENT}!monitor.h@{monitor.h}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_PUBLISH\_EVENT}{DEFINE\_PUBLISH\_EVENT}}
+{\footnotesize\ttfamily \label{monitor_8h_a7aefd655c075cbd8b7bcd26d3abb336d} 
+\#define DEFINE\+\_\+\+PUBLISH\+\_\+\+EVENT(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ Publish\#\#Name\#\#Event()\textcolor{keyword}{\ const\ }\{\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ Publish<Name\#\#Event>(\textcolor{keyword}{this});\ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{monitor_8h_a859af8c8f0c8035c82fa1167176b83f2}\index{monitor.h@{monitor.h}!FOR\_EACH\_MONITOR\_EVENT@{FOR\_EACH\_MONITOR\_EVENT}}
+\index{FOR\_EACH\_MONITOR\_EVENT@{FOR\_EACH\_MONITOR\_EVENT}!monitor.h@{monitor.h}}
+\doxysubsubsection{\texorpdfstring{FOR\_EACH\_MONITOR\_EVENT}{FOR\_EACH\_MONITOR\_EVENT}}
+{\footnotesize\ttfamily \label{monitor_8h_a859af8c8f0c8035c82fa1167176b83f2} 
+\#define FOR\+\_\+\+EACH\+\_\+\+MONITOR\+\_\+\+EVENT(\begin{DoxyParamCaption}\item[{}]{V}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ V(MonitorConnected)\ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(MonitorDisconnected)}
+
+\end{DoxyCode}
+\Hypertarget{monitor_8h_a45535920ced8bceedd645fc21b86ac57}\index{monitor.h@{monitor.h}!FORWARD\_DECLARE\_MONITOR\_EVENT@{FORWARD\_DECLARE\_MONITOR\_EVENT}}
+\index{FORWARD\_DECLARE\_MONITOR\_EVENT@{FORWARD\_DECLARE\_MONITOR\_EVENT}!monitor.h@{monitor.h}}
+\doxysubsubsection{\texorpdfstring{FORWARD\_DECLARE\_MONITOR\_EVENT}{FORWARD\_DECLARE\_MONITOR\_EVENT}}
+{\footnotesize\ttfamily \label{monitor_8h_a45535920ced8bceedd645fc21b86ac57} 
+\#define FORWARD\+\_\+\+DECLARE\+\_\+\+MONITOR\+\_\+\+EVENT(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{class\ }Name\#\#Event;}
+
+\end{DoxyCode}

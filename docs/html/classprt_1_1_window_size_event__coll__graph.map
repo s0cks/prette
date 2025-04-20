@@ -1,0 +1,9 @@
+<map id="prt::WindowSizeEvent" name="prt::WindowSizeEvent">
+<area shape="rect" id="Node000001" title=" " alt="" coords="62,169,213,195"/>
+<area shape="rect" id="Node000002" href="$classprt_1_1_window_event.html" title=" " alt="" coords="5,80,131,106"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="89,117,130,167,126,170,85,120"/>
+<area shape="rect" id="Node000003" href="$classprt_1_1_event.html" title=" " alt="" coords="29,5,107,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="71,46,71,80,65,80,65,46"/>
+<area shape="rect" id="Node000004" href="$classprt_1_1_dimension.html" title=" " alt="" coords="155,80,261,106"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="191,120,149,170,145,167,187,116"/>
+</map>

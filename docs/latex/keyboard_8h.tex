@@ -1,0 +1,106 @@
+\doxysection{/\+Users/tazz/\+Projects/prette/\+Sources/prette/keyboard.h File Reference}
+\hypertarget{keyboard_8h}{}\label{keyboard_8h}\index{/Users/tazz/Projects/prette/Sources/prette/keyboard.h@{/Users/tazz/Projects/prette/Sources/prette/keyboard.h}}
+{\ttfamily \#include $<$glfw/glfw3.\+h$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include "{}prette/common.\+h"{}}\newline
+{\ttfamily \#include "{}prette/event.\+h"{}}\newline
+{\ttfamily \#include "{}prette/lua.\+h"{}}\newline
+{\ttfamily \#include "{}prette/to\+\_\+string.\+h"{}}\newline
+Include dependency graph for keyboard.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{keyboard_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{keyboard_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1_key_state}{prt\+::\+Key\+State}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_keyboard_event_base}{prt\+::\+Keyboard\+Event\+Base}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_keyboard_init_event}{prt\+::\+Keyboard\+Init\+Event}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_keyboard_destroyed_event}{prt\+::\+Keyboard\+Destroyed\+Event}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_key_state_event}{prt\+::\+Key\+State\+Event}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_keyboard}{prt\+::\+Keyboard}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceprt}{prt}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{keyboard_8h_a12713d1531ca6dc0ff9f9bdc84e3c9db}{FOR\+\_\+\+EACH\+\_\+\+KEYBOARD\+\_\+\+EVENT}}(V)
+\item 
+\#define \mbox{\hyperlink{keyboard_8h_a83d2d158052fc2dc9bdf9bece3fd251e}{FORWARD\+\_\+\+DECLARE}}(Name)
+\item 
+\#define \mbox{\hyperlink{keyboard_8h_a2672365a233e0c9f3c1ccb0d78388308}{DEFINE\+\_\+\+ON\+\_\+\+EVENT}}(Name)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceprt_ab82b5d054c2788e476094bc8fab6c306}{prt\+::\+DEFINE\+\_\+\+EVENT\+\_\+\+PROTOTYPE}} (\mbox{\hyperlink{classprt_1_1_keyboard}{Keyboard}}, \mbox{\hyperlink{namespaceprt_aa4f226f61f3524a8a417269fd6b27e68}{FOR\+\_\+\+EACH\+\_\+\+KEYBOARD\+\_\+\+EVENT}})
+\item 
+\mbox{\hyperlink{namespaceprt_ae172e242c8c9e2d0e9649e96a90e6431}{prt\+::\+DEFINE\+\_\+\+EVENT\+\_\+\+SUBJECT}} (\mbox{\hyperlink{classprt_1_1_keyboard}{Keyboard}})
+\item 
+\mbox{\hyperlink{namespaceprt_a8c69350e56fba02be7e2795ba74dad63}{prt\+::\+DEFINE\+\_\+\+EVENT\+\_\+\+OBSERVABLE}} (\mbox{\hyperlink{classprt_1_1_keyboard}{Keyboard}})
+\item 
+\mbox{\hyperlink{namespaceprt_abbf61b3e7e1cbd7d4fe940182a948124}{prt\+::\+FOR\+\_\+\+EACH\+\_\+\+KEYBOARD\+\_\+\+EVENT}} (\mbox{\hyperlink{namespaceprt_a1a037a7c66a8e0c9eafb4608fef52cca}{DEFINE\+\_\+\+EVENT\+\_\+\+OBSERVABLE}})
+\item 
+auto \mbox{\hyperlink{namespaceprt_aa73f5cd88a555c91433e2649fa4809de}{prt\+::\+On\+Keyboard\+Event}} () -\/$>$ Keyboard\+Event\+Observable
+\item 
+\mbox{\hyperlink{namespaceprt_a3ebf9ff799b9677fc4d8938c7377bc6e}{prt\+::\+FOR\+\_\+\+EACH\+\_\+\+KEYBOARD\+\_\+\+EVENT}} (\mbox{\hyperlink{engine_8cc_a2672365a233e0c9f3c1ccb0d78388308}{DEFINE\+\_\+\+ON\+\_\+\+EVENT}})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{keyboard_8h_a2672365a233e0c9f3c1ccb0d78388308}\index{keyboard.h@{keyboard.h}!DEFINE\_ON\_EVENT@{DEFINE\_ON\_EVENT}}
+\index{DEFINE\_ON\_EVENT@{DEFINE\_ON\_EVENT}!keyboard.h@{keyboard.h}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_ON\_EVENT}{DEFINE\_ON\_EVENT}}
+{\footnotesize\ttfamily \label{keyboard_8h_a2672365a233e0c9f3c1ccb0d78388308} 
+\#define DEFINE\+\_\+\+ON\+\_\+\+EVENT(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ On\#\#Name\#\#Event()-\/>Name\#\#EventObservable\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ OnKeyboardEvent().filter(Name\#\#Event::Filter).map(Name\#\#Event::Cast);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{keyboard_8h_a12713d1531ca6dc0ff9f9bdc84e3c9db}\index{keyboard.h@{keyboard.h}!FOR\_EACH\_KEYBOARD\_EVENT@{FOR\_EACH\_KEYBOARD\_EVENT}}
+\index{FOR\_EACH\_KEYBOARD\_EVENT@{FOR\_EACH\_KEYBOARD\_EVENT}!keyboard.h@{keyboard.h}}
+\doxysubsubsection{\texorpdfstring{FOR\_EACH\_KEYBOARD\_EVENT}{FOR\_EACH\_KEYBOARD\_EVENT}}
+{\footnotesize\ttfamily \label{keyboard_8h_a12713d1531ca6dc0ff9f9bdc84e3c9db} 
+\#define FOR\+\_\+\+EACH\+\_\+\+KEYBOARD\+\_\+\+EVENT(\begin{DoxyParamCaption}\item[{}]{V}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ V(KeyboardInit)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(KeyState)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(KeyboardDestroyed)}
+
+\end{DoxyCode}
+\Hypertarget{keyboard_8h_a83d2d158052fc2dc9bdf9bece3fd251e}\index{keyboard.h@{keyboard.h}!FORWARD\_DECLARE@{FORWARD\_DECLARE}}
+\index{FORWARD\_DECLARE@{FORWARD\_DECLARE}!keyboard.h@{keyboard.h}}
+\doxysubsubsection{\texorpdfstring{FORWARD\_DECLARE}{FORWARD\_DECLARE}}
+{\footnotesize\ttfamily \label{keyboard_8h_a83d2d158052fc2dc9bdf9bece3fd251e} 
+\#define FORWARD\+\_\+\+DECLARE(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{class\ }Name\#\#Event;}
+
+\end{DoxyCode}

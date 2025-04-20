@@ -1,0 +1,128 @@
+\doxysection{/\+Users/tazz/\+Projects/prette/\+Sources/prette/window\+\_\+event.h File Reference}
+\hypertarget{window__event_8h}{}\label{window__event_8h}\index{/Users/tazz/Projects/prette/Sources/prette/window\_event.h@{/Users/tazz/Projects/prette/Sources/prette/window\_event.h}}
+{\ttfamily \#include "{}prette/dimension.\+h"{}}\newline
+{\ttfamily \#include "{}prette/event.\+h"{}}\newline
+{\ttfamily \#include "{}prette/geometry/shape.\+h"{}}\newline
+Include dependency graph for window\+\_\+event.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{window__event_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{window__event_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1_window_event}{prt\+::\+Window\+Event}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_window_pos_event}{prt\+::\+Window\+Pos\+Event}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_window_size_event}{prt\+::\+Window\+Size\+Event}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_window_focus_event}{prt\+::\+Window\+Focus\+Event}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_window_iconify_event}{prt\+::\+Window\+Iconify\+Event}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_window_maximize_event}{prt\+::\+Window\+Maximize\+Event}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_window_content_scale_event}{prt\+::\+Window\+Content\+Scale\+Event}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceprt}{prt}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{window__event_8h_a8a75169cb2d9f0c82bb53fd315b4baf7}{FOR\+\_\+\+EACH\+\_\+\+WINDOW\+\_\+\+EVENT}}(V)
+\item 
+\#define \mbox{\hyperlink{window__event_8h_a83d2d158052fc2dc9bdf9bece3fd251e}{FORWARD\+\_\+\+DECLARE}}(Name)
+\item 
+\#define \mbox{\hyperlink{window__event_8h_a71bea0abe846da91fabadb26fbb99764}{DECLARE\+\_\+\+WINDOW\+\_\+\+EVENT\+\_\+\+TYPE}}(Name)
+\item 
+\#define \mbox{\hyperlink{window__event_8h_aefcfc0bd059232b20e3c7c528d08dd37}{DEFINE\+\_\+\+WINDOW\+\_\+\+EVENT}}(Name)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceprt_a2c46a70bb321b9601a2a0e22dc46dedc}{prt\+::\+DEFINE\+\_\+\+WINDOW\+\_\+\+EVENT}} (Window\+Created)
+\item 
+\mbox{\hyperlink{namespaceprt_ae5a49a3a42ba386902c0e2c04e76fe76}{prt\+::\+DEFINE\+\_\+\+WINDOW\+\_\+\+EVENT}} (Window\+Opened)
+\item 
+\mbox{\hyperlink{namespaceprt_a7258401812814e5c28d73272a91ce0c1}{prt\+::\+DEFINE\+\_\+\+WINDOW\+\_\+\+EVENT}} (Window\+Closed)
+\item 
+\mbox{\hyperlink{namespaceprt_a4f6f236c7e95484551497b5fbd223913}{prt\+::\+DEFINE\+\_\+\+WINDOW\+\_\+\+EVENT}} (Window\+Refresh)
+\item 
+\mbox{\hyperlink{namespaceprt_a1b4f96be91f37c9813d3541d41defb65}{prt\+::\+DEFINE\+\_\+\+EVENT\+\_\+\+SUBJECT}} (\mbox{\hyperlink{classprt_1_1_window}{Window}})
+\item 
+\mbox{\hyperlink{namespaceprt_a0480bfa380ace1dae449c178c3da1ea9}{prt\+::\+DEFINE\+\_\+\+EVENT\+\_\+\+OBSERVABLE}} (\mbox{\hyperlink{classprt_1_1_window}{Window}})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{window__event_8h_a71bea0abe846da91fabadb26fbb99764}\index{window\_event.h@{window\_event.h}!DECLARE\_WINDOW\_EVENT\_TYPE@{DECLARE\_WINDOW\_EVENT\_TYPE}}
+\index{DECLARE\_WINDOW\_EVENT\_TYPE@{DECLARE\_WINDOW\_EVENT\_TYPE}!window\_event.h@{window\_event.h}}
+\doxysubsubsection{\texorpdfstring{DECLARE\_WINDOW\_EVENT\_TYPE}{DECLARE\_WINDOW\_EVENT\_TYPE}}
+{\footnotesize\ttfamily \label{window__event_8h_a71bea0abe846da91fabadb26fbb99764} 
+\#define DECLARE\+\_\+\+WINDOW\+\_\+\+EVENT\+\_\+\+TYPE(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{event_8h_aa8d2371509853602194dfe7289ca052e}{DECLARE\_EVENT\_TYPE}}(WindowEvent,\ Name)}
+
+\end{DoxyCode}
+\Hypertarget{window__event_8h_aefcfc0bd059232b20e3c7c528d08dd37}\index{window\_event.h@{window\_event.h}!DEFINE\_WINDOW\_EVENT@{DEFINE\_WINDOW\_EVENT}}
+\index{DEFINE\_WINDOW\_EVENT@{DEFINE\_WINDOW\_EVENT}!window\_event.h@{window\_event.h}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_WINDOW\_EVENT}{DEFINE\_WINDOW\_EVENT}}
+{\footnotesize\ttfamily \label{window__event_8h_aefcfc0bd059232b20e3c7c528d08dd37} 
+\#define DEFINE\+\_\+\+WINDOW\+\_\+\+EVENT(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \textcolor{keyword}{class\ }Name\#\#Event\ :\ \textcolor{keyword}{public}\ WindowEvent\ \{\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{public}:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ Name\#\#Event()\ =\ \textcolor{keywordflow}{default};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \string~Name\#\#Event()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};\ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ DECLARE\_WINDOW\_EVENT\_TYPE(Name);\ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \};}
+
+\end{DoxyCode}
+\Hypertarget{window__event_8h_a8a75169cb2d9f0c82bb53fd315b4baf7}\index{window\_event.h@{window\_event.h}!FOR\_EACH\_WINDOW\_EVENT@{FOR\_EACH\_WINDOW\_EVENT}}
+\index{FOR\_EACH\_WINDOW\_EVENT@{FOR\_EACH\_WINDOW\_EVENT}!window\_event.h@{window\_event.h}}
+\doxysubsubsection{\texorpdfstring{FOR\_EACH\_WINDOW\_EVENT}{FOR\_EACH\_WINDOW\_EVENT}}
+{\footnotesize\ttfamily \label{window__event_8h_a8a75169cb2d9f0c82bb53fd315b4baf7} 
+\#define FOR\+\_\+\+EACH\+\_\+\+WINDOW\+\_\+\+EVENT(\begin{DoxyParamCaption}\item[{}]{V}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ V(WindowCreated)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(WindowOpened)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(WindowClosed)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(WindowPos)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(WindowSize)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(WindowFocus)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(WindowIconify)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(WindowRefresh)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(WindowMaximize)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(WindowContentScale)}
+
+\end{DoxyCode}
+\Hypertarget{window__event_8h_a83d2d158052fc2dc9bdf9bece3fd251e}\index{window\_event.h@{window\_event.h}!FORWARD\_DECLARE@{FORWARD\_DECLARE}}
+\index{FORWARD\_DECLARE@{FORWARD\_DECLARE}!window\_event.h@{window\_event.h}}
+\doxysubsubsection{\texorpdfstring{FORWARD\_DECLARE}{FORWARD\_DECLARE}}
+{\footnotesize\ttfamily \label{window__event_8h_a83d2d158052fc2dc9bdf9bece3fd251e} 
+\#define FORWARD\+\_\+\+DECLARE(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{class\ }Name\#\#Event;}
+
+\end{DoxyCode}

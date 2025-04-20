@@ -1,0 +1,176 @@
+\doxysection{prt\+::Counter\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classprt_1_1_counter}{}\label{classprt_1_1_counter}\index{prt::Counter$<$ T $>$@{prt::Counter$<$ T $>$}}
+
+
+{\ttfamily \#include $<$counter.\+h$>$}
+
+
+
+Inheritance diagram for prt\+::Counter\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=220pt]{classprt_1_1_counter__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_counter_ae94f9ab35a2222afac4575b1beb631af}{Counter}} (const T init\+\_\+value=0)
+\item 
+\mbox{\hyperlink{classprt_1_1_counter_a1142915252a4595e379acb144550d143}{Counter}} (const \mbox{\hyperlink{classprt_1_1_counter}{Counter}}$<$ T $>$ \&\&rhs)=default
+\item 
+\mbox{\hyperlink{classprt_1_1_counter_a54dcf11503c0d8c62feb847015ba3aa9}{Counter}} (const \mbox{\hyperlink{classprt_1_1_counter}{Counter}}$<$ T $>$ \&rhs)=default
+\item 
+virtual \mbox{\hyperlink{classprt_1_1_counter_a6e786236210c8ef4af34c2a1d3833c3e}{\texorpdfstring{$\sim$}{\string~}\+Counter}} ()=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1_counter_a501ffc9176863e824cea6072dd50fd4d}{value}} () const -\/$>$ T
+\item 
+auto \mbox{\hyperlink{classprt_1_1_counter_a01efa4c22caee4734779c636686aecfb}{operator=}} (\mbox{\hyperlink{classprt_1_1_counter}{Counter}}$<$ T $>$ \&\&rhs) -\/$>$ \mbox{\hyperlink{classprt_1_1_counter}{Counter}}$<$ T $>$ \&=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1_counter_a415213545f1b0e739d436f62e6ff4e35}{operator=}} (const \mbox{\hyperlink{classprt_1_1_counter}{Counter}}$<$ T $>$ \&rhs) -\/$>$ \mbox{\hyperlink{classprt_1_1_counter}{Counter}}$<$ T $>$ \&=default
+\item 
+\mbox{\hyperlink{classprt_1_1_counter_aafd316368cf18d1ab4bb923f37ee8509}{operator T}} () const
+\item 
+auto \mbox{\hyperlink{classprt_1_1_counter_a3b6a714112e3ecf7d08f89390ae1172c}{operator=}} (const T \&rhs) -\/$>$ \mbox{\hyperlink{classprt_1_1_counter}{Counter}}$<$ T $>$ \&
+\item 
+void \mbox{\hyperlink{classprt_1_1_counter_ae6f08d4b9da40106d0af9d66634b0779}{operator++}} ()
+\item 
+void \mbox{\hyperlink{classprt_1_1_counter_a3338636793608614a3242992d9196273}{operator+=}} (const T \&rhs)
+\item 
+void \mbox{\hyperlink{classprt_1_1_counter_a2349becd5dc05f9466361574e09dc575}{operator-\/-\/}} ()
+\item 
+void \mbox{\hyperlink{classprt_1_1_counter_af56efc23a8185586007e6a3cacd2ccaa}{operator-\/=}} (const T \&rhs)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_relaxed_atomic}{Relaxed\+Atomic}}$<$ T $>$ \mbox{\hyperlink{classprt_1_1_counter_a3711a04be2288e1a34daa7ef7e2f8250}{value\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_counter_a6abdf779ee15ade6393127a156314873}{operator$<$$<$}} (std\+::ostream \&stream, const \mbox{\hyperlink{classprt_1_1_counter}{Counter}}$<$ T $>$ \&rhs) -\/$>$ std\+::ostream \&
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_counter_ae94f9ab35a2222afac4575b1beb631af}\index{prt::Counter$<$ T $>$@{prt::Counter$<$ T $>$}!Counter@{Counter}}
+\index{Counter@{Counter}!prt::Counter$<$ T $>$@{prt::Counter$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Counter()}{Counter()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classprt_1_1_counter_ae94f9ab35a2222afac4575b1beb631af} 
+template$<$typename T $>$ \\
+\mbox{\hyperlink{classprt_1_1_counter}{prt\+::\+Counter}}$<$ T $>$\+::\+Counter (\begin{DoxyParamCaption}\item[{const T}]{init\+\_\+value}{ = {\ttfamily 0}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+\Hypertarget{classprt_1_1_counter_a1142915252a4595e379acb144550d143}\index{prt::Counter$<$ T $>$@{prt::Counter$<$ T $>$}!Counter@{Counter}}
+\index{Counter@{Counter}!prt::Counter$<$ T $>$@{prt::Counter$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Counter()}{Counter()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classprt_1_1_counter_a1142915252a4595e379acb144550d143} 
+template$<$typename T $>$ \\
+\mbox{\hyperlink{classprt_1_1_counter}{prt\+::\+Counter}}$<$ T $>$\+::\+Counter (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_counter}{Counter}}$<$ T $>$ \&\&}]{rhs}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{classprt_1_1_counter_a54dcf11503c0d8c62feb847015ba3aa9}\index{prt::Counter$<$ T $>$@{prt::Counter$<$ T $>$}!Counter@{Counter}}
+\index{Counter@{Counter}!prt::Counter$<$ T $>$@{prt::Counter$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Counter()}{Counter()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classprt_1_1_counter_a54dcf11503c0d8c62feb847015ba3aa9} 
+template$<$typename T $>$ \\
+\mbox{\hyperlink{classprt_1_1_counter}{prt\+::\+Counter}}$<$ T $>$\+::\+Counter (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_counter}{Counter}}$<$ T $>$ \&}]{rhs}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{classprt_1_1_counter_a6e786236210c8ef4af34c2a1d3833c3e}\index{prt::Counter$<$ T $>$@{prt::Counter$<$ T $>$}!````~Counter@{\texorpdfstring{$\sim$}{\string~}Counter}}
+\index{````~Counter@{\texorpdfstring{$\sim$}{\string~}Counter}!prt::Counter$<$ T $>$@{prt::Counter$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Counter()}{\string~Counter()}}
+{\footnotesize\ttfamily \label{classprt_1_1_counter_a6e786236210c8ef4af34c2a1d3833c3e} 
+template$<$typename T $>$ \\
+virtual \mbox{\hyperlink{classprt_1_1_counter}{prt\+::\+Counter}}$<$ T $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classprt_1_1_counter}{Counter}} (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_counter_aafd316368cf18d1ab4bb923f37ee8509}\index{prt::Counter$<$ T $>$@{prt::Counter$<$ T $>$}!operator T@{operator T}}
+\index{operator T@{operator T}!prt::Counter$<$ T $>$@{prt::Counter$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator T()}{operator T()}}
+{\footnotesize\ttfamily \label{classprt_1_1_counter_aafd316368cf18d1ab4bb923f37ee8509} 
+template$<$typename T $>$ \\
+\mbox{\hyperlink{classprt_1_1_counter}{prt\+::\+Counter}}$<$ T $>$\+::operator T (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_counter_ae6f08d4b9da40106d0af9d66634b0779}\index{prt::Counter$<$ T $>$@{prt::Counter$<$ T $>$}!operator++@{operator++}}
+\index{operator++@{operator++}!prt::Counter$<$ T $>$@{prt::Counter$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator++()}{operator++()}}
+{\footnotesize\ttfamily \label{classprt_1_1_counter_ae6f08d4b9da40106d0af9d66634b0779} 
+template$<$typename T $>$ \\
+void \mbox{\hyperlink{classprt_1_1_counter}{prt\+::\+Counter}}$<$ T $>$\+::operator++ (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_counter_a3338636793608614a3242992d9196273}\index{prt::Counter$<$ T $>$@{prt::Counter$<$ T $>$}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!prt::Counter$<$ T $>$@{prt::Counter$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator+=()}{operator+=()}}
+{\footnotesize\ttfamily \label{classprt_1_1_counter_a3338636793608614a3242992d9196273} 
+template$<$typename T $>$ \\
+void \mbox{\hyperlink{classprt_1_1_counter}{prt\+::\+Counter}}$<$ T $>$\+::operator+= (\begin{DoxyParamCaption}\item[{const T \&}]{rhs}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_counter_a2349becd5dc05f9466361574e09dc575}\index{prt::Counter$<$ T $>$@{prt::Counter$<$ T $>$}!operator-\/-\/@{operator-\/-\/}}
+\index{operator-\/-\/@{operator-\/-\/}!prt::Counter$<$ T $>$@{prt::Counter$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator-\/-\/()}{operator--()}}
+{\footnotesize\ttfamily \label{classprt_1_1_counter_a2349becd5dc05f9466361574e09dc575} 
+template$<$typename T $>$ \\
+void \mbox{\hyperlink{classprt_1_1_counter}{prt\+::\+Counter}}$<$ T $>$\+::operator-\/-\/ (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_counter_af56efc23a8185586007e6a3cacd2ccaa}\index{prt::Counter$<$ T $>$@{prt::Counter$<$ T $>$}!operator-\/=@{operator-\/=}}
+\index{operator-\/=@{operator-\/=}!prt::Counter$<$ T $>$@{prt::Counter$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator-\/=()}{operator-=()}}
+{\footnotesize\ttfamily \label{classprt_1_1_counter_af56efc23a8185586007e6a3cacd2ccaa} 
+template$<$typename T $>$ \\
+void \mbox{\hyperlink{classprt_1_1_counter}{prt\+::\+Counter}}$<$ T $>$\+::operator-\/= (\begin{DoxyParamCaption}\item[{const T \&}]{rhs}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_counter_a415213545f1b0e739d436f62e6ff4e35}\index{prt::Counter$<$ T $>$@{prt::Counter$<$ T $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!prt::Counter$<$ T $>$@{prt::Counter$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classprt_1_1_counter_a415213545f1b0e739d436f62e6ff4e35} 
+template$<$typename T $>$ \\
+auto \mbox{\hyperlink{classprt_1_1_counter}{prt\+::\+Counter}}$<$ T $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_counter}{Counter}}$<$ T $>$ \&}]{rhs}{}\end{DoxyParamCaption}) -\/$>$  \mbox{\hyperlink{classprt_1_1_counter}{Counter}}$<$ T $>$ \&=default\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{classprt_1_1_counter_a3b6a714112e3ecf7d08f89390ae1172c}\index{prt::Counter$<$ T $>$@{prt::Counter$<$ T $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!prt::Counter$<$ T $>$@{prt::Counter$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classprt_1_1_counter_a3b6a714112e3ecf7d08f89390ae1172c} 
+template$<$typename T $>$ \\
+auto \mbox{\hyperlink{classprt_1_1_counter}{prt\+::\+Counter}}$<$ T $>$\+::operator= (\begin{DoxyParamCaption}\item[{const T \&}]{rhs}{}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{classprt_1_1_counter}{Counter}}$<$T$>$\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_counter_a01efa4c22caee4734779c636686aecfb}\index{prt::Counter$<$ T $>$@{prt::Counter$<$ T $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!prt::Counter$<$ T $>$@{prt::Counter$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classprt_1_1_counter_a01efa4c22caee4734779c636686aecfb} 
+template$<$typename T $>$ \\
+auto \mbox{\hyperlink{classprt_1_1_counter}{prt\+::\+Counter}}$<$ T $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_counter}{Counter}}$<$ T $>$ \&\&}]{rhs}{}\end{DoxyParamCaption}) -\/$>$  \mbox{\hyperlink{classprt_1_1_counter}{Counter}}$<$ T $>$ \&=default\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{classprt_1_1_counter_a501ffc9176863e824cea6072dd50fd4d}\index{prt::Counter$<$ T $>$@{prt::Counter$<$ T $>$}!value@{value}}
+\index{value@{value}!prt::Counter$<$ T $>$@{prt::Counter$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{value()}{value()}}
+{\footnotesize\ttfamily \label{classprt_1_1_counter_a501ffc9176863e824cea6072dd50fd4d} 
+template$<$typename T $>$ \\
+auto \mbox{\hyperlink{classprt_1_1_counter}{prt\+::\+Counter}}$<$ T $>$\+::value (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ T \hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classprt_1_1_counter_a6abdf779ee15ade6393127a156314873}\index{prt::Counter$<$ T $>$@{prt::Counter$<$ T $>$}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!prt::Counter$<$ T $>$@{prt::Counter$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily \label{classprt_1_1_counter_a6abdf779ee15ade6393127a156314873} 
+template$<$typename T $>$ \\
+auto operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{stream}{, }\item[{const \mbox{\hyperlink{classprt_1_1_counter}{Counter}}$<$ T $>$ \&}]{rhs}{}\end{DoxyParamCaption}) -\/$>$ std\+::ostream\& \hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_counter_a3711a04be2288e1a34daa7ef7e2f8250}\index{prt::Counter$<$ T $>$@{prt::Counter$<$ T $>$}!value\_@{value\_}}
+\index{value\_@{value\_}!prt::Counter$<$ T $>$@{prt::Counter$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{value\_}{value\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_counter_a3711a04be2288e1a34daa7ef7e2f8250} 
+template$<$typename T $>$ \\
+\mbox{\hyperlink{classprt_1_1_relaxed_atomic}{Relaxed\+Atomic}}$<$T$>$ \mbox{\hyperlink{classprt_1_1_counter}{prt\+::\+Counter}}$<$ T $>$\+::value\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{counter_8h}{counter.\+h}}\end{DoxyCompactItemize}

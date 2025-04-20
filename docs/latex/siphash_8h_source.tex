@@ -1,0 +1,124 @@
+\doxysection{siphash.\+h}
+\hypertarget{siphash_8h_source}{}\label{siphash_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/hash/siphash.h@{/Users/tazz/Projects/prette/Sources/prette/hash/siphash.h}}
+\mbox{\hyperlink{siphash_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_SIPHASH\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_SIPHASH\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{siphash__digest_8h}{prette/hash/siphash\_digest.h}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00007\ \ \ \textcolor{keyword}{template}<const\ uword\ KeySize>}
+\DoxyCodeLine{00008\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00009\ \ \ SipHash(\textcolor{keyword}{const}\ uint8\_t*\ bytes,}
+\DoxyCodeLine{00010\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ num\_bytes,}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::array<uint8\_t,\ KeySize>\&\ key,}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ c,}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ d)\ -\/>\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ hash::SipHashDigest<KeySize>\ digest(key,\ c,\ d);}
+\DoxyCodeLine{00015\ \ \ \ \ digest.Update(bytes,\ num\_bytes);}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordflow}{return}\ digest.Digest();}
+\DoxyCodeLine{00017\ \ \ \}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \textcolor{keyword}{template}<const\ uword\ KeySize>}
+\DoxyCodeLine{00020\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00021\ \ \ SipHash(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ data,}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ length,}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::array<uint8\_t,\ KeySize>\&\ key,}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ c,}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ d)\ -\/>\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ \{}
+\DoxyCodeLine{00026\ \ \ \ \ hash::SipHashDigest<KeySize>\ digest(key,\ c,\ d);}
+\DoxyCodeLine{00027\ \ \ \ \ digest.Update(data,\ length);}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordflow}{return}\ digest.Digest();}
+\DoxyCodeLine{00029\ \ \ \}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \textcolor{keyword}{template}<const\ uword\ KeySize>}
+\DoxyCodeLine{00032\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00033\ \ \ SipHash(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ data,}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::array<uint8\_t,\ KeySize>\&\ key,}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ c,}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ d)\ -\/>\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ \{}
+\DoxyCodeLine{00037\ \ \ \ \ hash::SipHashDigest<KeySize>\ digest(key,\ c,\ d);}
+\DoxyCodeLine{00038\ \ \ \ \ digest.Update(data);}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordflow}{return}\ digest.Digest();}
+\DoxyCodeLine{00040\ \ \ \}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \textcolor{keyword}{template}<const\ uword\ KeySize>}
+\DoxyCodeLine{00043\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00044\ \ \ SipHash(\textcolor{keyword}{const}\ std::string\&\ data,}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::array<uint8\_t,\ KeySize>\&\ key,}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ c,}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ d)\ -\/>\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ \{}
+\DoxyCodeLine{00048\ \ \ \ \ hash::SipHashDigest<KeySize>\ digest(key,\ c,\ d);}
+\DoxyCodeLine{00049\ \ \ \ \ digest.Update(data);}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordflow}{return}\ digest.Digest();}
+\DoxyCodeLine{00051\ \ \ \}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \textcolor{keyword}{namespace\ }siphash24\ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keyword}{template}<const\ uword\ KeySize>}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00056\ \ \ \ \ of(\textcolor{keyword}{const}\ uint8\_t*\ bytes,}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ num\_bytes,}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::array<uint8\_t,\ KeySize>\&\ key)\ -\/>\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ \{}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ SipHash<KeySize>(bytes,\ num\_bytes,\ key,\ 2,\ 4);\ \textcolor{comment}{//\ NOLINT(cppcoreguidelines-\/avoid-\/magic-\/numbers)}}
+\DoxyCodeLine{00060\ \ \ \ \ \}}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keyword}{template}<const\ uword\ KeySize>}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00064\ \ \ \ \ of(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ data,}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ length,}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::array<uint8\_t,\ KeySize>\&\ key)\ -\/>\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ \{}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ of((\textcolor{keyword}{const}\ uint8\_t*)\ data,\ length,\ key);\ \textcolor{comment}{//\ NOLINT(cppcoreguidelines-\/pro-\/type-\/cstyle-\/cast)}}
+\DoxyCodeLine{00068\ \ \ \ \ \}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keyword}{template}<const\ uword\ KeySize>}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00072\ \ \ \ \ of(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ data,}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::array<uint8\_t,\ KeySize>\&\ key)\ -\/>\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ \{}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ of(data,\ strlen(data),\ key);}
+\DoxyCodeLine{00075\ \ \ \ \ \}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keyword}{template}<const\ uword\ KeySize>}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00079\ \ \ \ \ of(\textcolor{keyword}{const}\ std::string\&\ data,}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::array<uint8\_t,\ KeySize>\&\ key)\ -\/>\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ \{}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ of(data.data(),\ data.length(),\ key);}
+\DoxyCodeLine{00082\ \ \ \ \ \}}
+\DoxyCodeLine{00083\ \ \ \}}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \ \ \textcolor{keyword}{namespace\ }siphash48\ \{}
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keyword}{template}<const\ uword\ KeySize>}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00088\ \ \ \ \ of(\textcolor{keyword}{const}\ uint8\_t*\ bytes,}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ num\_bytes,}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::array<uint8\_t,\ KeySize>\&\ key)\ -\/>\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ \{}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ SipHash<KeySize>(bytes,\ num\_bytes,\ key,\ 4,\ 8);\ \textcolor{comment}{//\ NOLINT(cppcoreguidelines-\/avoid-\/magic-\/numbers)}}
+\DoxyCodeLine{00092\ \ \ \ \ \}}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keyword}{template}<const\ uword\ KeySize>}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00096\ \ \ \ \ of(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ data,}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ length,}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::array<uint8\_t,\ KeySize>\&\ key)\ -\/>\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ \{}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ of((\textcolor{keyword}{const}\ uint8\_t*)\ data,\ length,\ key);\ \textcolor{comment}{//\ NOLINT(cppcoreguidelines-\/pro-\/type-\/cstyle-\/cast)}}
+\DoxyCodeLine{00100\ \ \ \ \ \}}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keyword}{template}<const\ uword\ KeySize>}
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00104\ \ \ \ \ of(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ data,}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::array<uint8\_t,\ KeySize>\&\ key)\ -\/>\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ \{}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ of(data,\ strlen(data),\ key);}
+\DoxyCodeLine{00107\ \ \ \ \ \}}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keyword}{template}<const\ uword\ KeySize>}
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00111\ \ \ \ \ of(\textcolor{keyword}{const}\ std::string\&\ data,}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::array<uint8\_t,\ KeySize>\&\ key)\ -\/>\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ \{}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ of(data.data(),\ data.length(),\ key);}
+\DoxyCodeLine{00114\ \ \ \ \ \}}
+\DoxyCodeLine{00115\ \ \ \}}
+\DoxyCodeLine{00116\ \}}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//PRT\_SIPHASH\_H}}
+
+\end{DoxyCode}

@@ -1,0 +1,201 @@
+\doxysection{tick.\+h}
+\hypertarget{tick_8h_source}{}\label{tick_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/tick.h@{/Users/tazz/Projects/prette/Sources/prette/tick.h}}
+\mbox{\hyperlink{tick_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_TICK\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_TICK\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <units.h>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{counter_8h}{prette/counter.h}}"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{rx_8h}{prette/rx.h}}"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{series_8h}{prette/series.h}}"{}}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceprt_a81a827dee322afa183a20b7e10ced277}{TickId}}\ =\ uint64\_t;}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_tick_delta}{TickDelta}}\ \{}
+\DoxyCodeLine{00017\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00018\ \ \ uint64\_t\ \mbox{\hyperlink{classprt_1_1_tick_delta_ab15b273c459eed1ab29e968f5841cc7e}{value\_}};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \textcolor{keyword}{constexpr}\ \mbox{\hyperlink{classprt_1_1_tick_delta_a7b3f45d57f20d2eaaaacf030ef630d48}{TickDelta}}(\textcolor{keyword}{const}\ uint64\_t\ \mbox{\hyperlink{classprt_1_1_tick_delta_a74d06a57cb0cda6e29f169de49803dc9}{value}})\ :}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_tick_delta_ab15b273c459eed1ab29e968f5841cc7e}{value\_}}(\mbox{\hyperlink{classprt_1_1_tick_delta_a74d06a57cb0cda6e29f169de49803dc9}{value}})\ \{\}}
+\DoxyCodeLine{00023\ \ \ \textcolor{keyword}{constexpr}\ \mbox{\hyperlink{classprt_1_1_tick_delta_a9e85b504a045db43b2b9710d6641d55c}{TickDelta}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_tick_delta}{TickDelta}}\&\ rhs)\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00024\ \ \ \mbox{\hyperlink{classprt_1_1_tick_delta_af65589e4661047b094ad11d56b5ac372}{\string~TickDelta}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_tick_delta_a74d06a57cb0cda6e29f169de49803dc9}{value}}()\ const\ -\/>\ uint64\_t\ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_tick_delta_ab15b273c459eed1ab29e968f5841cc7e}{value\_}};}
+\DoxyCodeLine{00028\ \ \ \}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_tick_delta_acf4e971e2dd92465bed3cae3e24ceada}{operator=}}(\textcolor{keyword}{const}\ uint64\_t\&\ rhs)\ -\/>\ \mbox{\hyperlink{classprt_1_1_tick_delta}{TickDelta}}\&\ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_tick_delta_ab15b273c459eed1ab29e968f5841cc7e}{value\_}}\ =\ rhs;}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00033\ \ \ \}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_tick_delta_a13b474dde4c6eccf0e32296bc0913d8d}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_tick_delta}{TickDelta}}\&\ rhs)\ -\/>\ \mbox{\hyperlink{classprt_1_1_tick_delta}{TickDelta}}\&\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_tick_delta_ab607a58f0fe6b1e5b592277734301feb}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_tick_delta}{TickDelta}}\&\ rhs)\ \textcolor{keyword}{const}\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_tick_delta_a74d06a57cb0cda6e29f169de49803dc9}{value}}()\ ==\ rhs.value();}
+\DoxyCodeLine{00039\ \ \ \}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_tick_delta_af031f5429e954f7de3898414305c3e22}{operator==}}(\textcolor{keyword}{const}\ uint64\_t\&\ rhs)\ \textcolor{keyword}{const}\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_tick_delta_a74d06a57cb0cda6e29f169de49803dc9}{value}}()\ ==\ rhs;}
+\DoxyCodeLine{00043\ \ \ \}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_tick_delta_aebe956eab861c94ff26e74acb805aad9}{operator!=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_tick_delta}{TickDelta}}\&\ rhs)\ \textcolor{keyword}{const}\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_tick_delta_a74d06a57cb0cda6e29f169de49803dc9}{value}}()\ !=\ rhs.value();}
+\DoxyCodeLine{00047\ \ \ \}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_tick_delta_a9afa13118392b57daae2a539749654be}{operator!=}}(\textcolor{keyword}{const}\ uint64\_t\&\ rhs)\ \textcolor{keyword}{const}\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_tick_delta_a74d06a57cb0cda6e29f169de49803dc9}{value}}()\ !=\ rhs;}
+\DoxyCodeLine{00051\ \ \ \}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_tick_delta_a0421d705a059a77d6c085dedd3abc92e}{operator<}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_tick_delta}{TickDelta}}\&\ rhs)\ \textcolor{keyword}{const}\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_tick_delta_a74d06a57cb0cda6e29f169de49803dc9}{value}}()\ <\ rhs.value();}
+\DoxyCodeLine{00055\ \ \ \}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_tick_delta_ae93e6cd447c99c8437951b5202e745ea}{operator<}}(\textcolor{keyword}{const}\ uint64\_t\&\ rhs)\ \textcolor{keyword}{const}\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_tick_delta_a74d06a57cb0cda6e29f169de49803dc9}{value}}()\ <\ rhs;}
+\DoxyCodeLine{00059\ \ \ \}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_tick_delta_abf65c7673c9ee8d121d7f8a3053a5c8f}{operator>}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_tick_delta}{TickDelta}}\&\ rhs)\ \textcolor{keyword}{const}\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_tick_delta_a74d06a57cb0cda6e29f169de49803dc9}{value}}()\ >\ rhs.value();}
+\DoxyCodeLine{00063\ \ \ \}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_tick_delta_a5d326f1f9283c68caa5fcde3e4f37135}{operator>}}(\textcolor{keyword}{const}\ uint64\_t\&\ rhs)\ \textcolor{keyword}{const}\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_tick_delta_a74d06a57cb0cda6e29f169de49803dc9}{value}}()\ >\ rhs;}
+\DoxyCodeLine{00067\ \ \ \}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_tick_delta_ac2c74d70e279b1e8d5d411f0160ce444}{operator/}}(\textcolor{keyword}{const}\ uint64\_t\&\ rhs)\ \textcolor{keyword}{const}\ -\/>\ \textcolor{keywordtype}{float}\ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(\mbox{\hyperlink{classprt_1_1_tick_delta_a74d06a57cb0cda6e29f169de49803dc9}{value}}())\ /\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(rhs);}
+\DoxyCodeLine{00071\ \ \ \}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_tick_delta_a02c5698fc12c91f70d063c01e2bae8a7}{operator<<}}(std::ostream\&\ stream,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_tick_delta}{TickDelta}}\&\ rhs)\ -\/>\ std::ostream\&\ \{}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordflow}{return}\ stream\ <<\ units::time::nanosecond\_t(rhs.value());\ \ \textcolor{comment}{//\ NOLINT(cppcoreguidelines-\/narrowing-\/conversions)}}
+\DoxyCodeLine{00075\ \ \ \}}
+\DoxyCodeLine{00076\ \};}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_tick}{Tick}}\ \{}
+\DoxyCodeLine{00079\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00080\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_tick_a43009a931e59db8ece5fb1260e5e6750}{Compare}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_tick}{Tick}}\&\ lhs,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_tick}{Tick}}\&\ rhs)\ -\/>\ \textcolor{keywordtype}{int}\ \{}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordflow}{if}\ (lhs.GetId()\ <\ rhs.GetId())\ \{}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00083\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (lhs.GetId()\ >\ rhs.GetId())\ \{}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ +1;}
+\DoxyCodeLine{00085\ \ \ \ \ \}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordflow}{if}\ (lhs.GetTimestamp()\ <\ rhs.GetTimestamp())\ \{}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00089\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (lhs.GetTimestamp()\ >\ rhs.GetTimestamp())\ \{}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ +1;}
+\DoxyCodeLine{00091\ \ \ \ \ \}}
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00093\ \ \ \}}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00096\ \ \ \mbox{\hyperlink{namespaceprt_a81a827dee322afa183a20b7e10ced277}{TickId}}\ \mbox{\hyperlink{classprt_1_1_tick_afb8719e75dce7db8e7d83bb5fb526b14}{id\_}};}
+\DoxyCodeLine{00097\ \ \ uint64\_t\ \mbox{\hyperlink{classprt_1_1_tick_a70e9e4759feaa31b285fbe998304ce95}{ts\_}};}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00100\ \ \ \textcolor{keyword}{constexpr}\ \mbox{\hyperlink{classprt_1_1_tick_a2e4bcf74ef440b02119959d88d2efe4d}{Tick}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a81a827dee322afa183a20b7e10ced277}{TickId}}\ \textcolor{keywordtype}{id},\ \textcolor{keyword}{const}\ uint64\_t\ ts\ =\ uv\_hrtime())\ :}
+\DoxyCodeLine{00101\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_tick_afb8719e75dce7db8e7d83bb5fb526b14}{id\_}}(id),}
+\DoxyCodeLine{00102\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_tick_a70e9e4759feaa31b285fbe998304ce95}{ts\_}}(ts)\ \{\}}
+\DoxyCodeLine{00103\ \ \ \textcolor{keyword}{constexpr}\ \mbox{\hyperlink{classprt_1_1_tick_a3ba31ee2b7c5439f0a121b4689698010}{Tick}}()\ :}
+\DoxyCodeLine{00104\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_tick}{Tick}}(0,\ 0)\ \{\}}
+\DoxyCodeLine{00105\ \ \ \textcolor{keyword}{constexpr}\ \mbox{\hyperlink{classprt_1_1_tick_ab6a591be85d06b434dd2f76fc2049711}{Tick}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_tick}{Tick}}\&\ rhs)\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00106\ \ \ \mbox{\hyperlink{classprt_1_1_tick_afd814b7d1d31f8c4bdb816d9793f6f8c}{\string~Tick}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_tick_a5b9349530367cec127494095277716ba}{GetId}}()\ const\ -\/>\ \mbox{\hyperlink{namespaceprt_a81a827dee322afa183a20b7e10ced277}{TickId}}\ \{}
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_tick_afb8719e75dce7db8e7d83bb5fb526b14}{id\_}};}
+\DoxyCodeLine{00110\ \ \ \}}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_tick_acf54aa39aa448595fd04a905a66cc05a}{GetTimestamp}}()\ const\ -\/>\ uint64\_t\ \{}
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_tick_a70e9e4759feaa31b285fbe998304ce95}{ts\_}};}
+\DoxyCodeLine{00114\ \ \ \}}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{operator}\ uint64\_t()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_tick_a70e9e4759feaa31b285fbe998304ce95}{ts\_}};}
+\DoxyCodeLine{00118\ \ \ \}}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_tick_a6bb37f8f73709d1f2f0a86989db945aa}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_tick}{Tick}}\&\ rhs)\ -\/>\ \mbox{\hyperlink{classprt_1_1_tick}{Tick}}\&\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_tick_a5c4798dad6a2de36a15490e0fbffe6a6}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_tick}{Tick}}\&\ rhs)\ \textcolor{keyword}{const}\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_tick_a43009a931e59db8ece5fb1260e5e6750}{Compare}}(*\textcolor{keyword}{this},\ rhs)\ ==\ 0;}
+\DoxyCodeLine{00124\ \ \ \}}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_tick_a8dcca4f4959b0a6a6eb8ac63670a9f0b}{operator!=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_tick}{Tick}}\&\ rhs)\ \textcolor{keyword}{const}\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00127\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_tick_a43009a931e59db8ece5fb1260e5e6750}{Compare}}(*\textcolor{keyword}{this},\ rhs)\ !=\ 0;}
+\DoxyCodeLine{00128\ \ \ \}}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00130\ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_tick_af1eb8cf9c891898a7be440e489c77eca}{operator<}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_tick}{Tick}}\&\ rhs)\ \textcolor{keyword}{const}\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_tick_a43009a931e59db8ece5fb1260e5e6750}{Compare}}(*\textcolor{keyword}{this},\ rhs)\ <\ 0;}
+\DoxyCodeLine{00132\ \ \ \}}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00134\ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_tick_a234600d8dcaa21fc30757de4546ae673}{operator>}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_tick}{Tick}}\&\ rhs)\ \textcolor{keyword}{const}\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_tick_a43009a931e59db8ece5fb1260e5e6750}{Compare}}(*\textcolor{keyword}{this},\ rhs)\ >\ 0;}
+\DoxyCodeLine{00136\ \ \ \}}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_tick_a7534f9adcbc891d4ffa646ae1d522e89}{operator+}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_tick}{Tick}}\&\ lhs,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_tick}{Tick}}\&\ rhs)\ -\/>\ \mbox{\hyperlink{classprt_1_1_tick_delta}{TickDelta}}\ \{}
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keywordflow}{return}\ \{lhs.GetTimestamp()\ +\ rhs.GetTimestamp()\};}
+\DoxyCodeLine{00140\ \ \ \}}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_tick_a4baf7391c97bed4ea9abce9aa8b558fd}{operator+}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_tick}{Tick}}\&\ lhs,\ \textcolor{keyword}{const}\ uint64\_t\&\ rhs)\ -\/>\ \mbox{\hyperlink{classprt_1_1_tick_delta}{TickDelta}}\ \{}
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordflow}{return}\ \{lhs.GetTimestamp()\ +\ rhs\};}
+\DoxyCodeLine{00144\ \ \ \}}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_tick_ac7de2eb00889ddff6a07e87f3d879ceb}{operator+=}}(\textcolor{keyword}{const}\ uint64\_t\&\ rhs)\ \{}
+\DoxyCodeLine{00147\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_tick_a70e9e4759feaa31b285fbe998304ce95}{ts\_}}\ +=\ rhs;}
+\DoxyCodeLine{00148\ \ \ \}}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_tick_a53c2647cea3c39430fe33a9f9a6ba4fb}{operator-\/}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_tick}{Tick}}\&\ lhs,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_tick}{Tick}}\&\ rhs)\ -\/>\ \mbox{\hyperlink{classprt_1_1_tick_delta}{TickDelta}}\ \{}
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keywordflow}{return}\ \{lhs.GetTimestamp()\ -\/\ rhs.GetTimestamp()\};}
+\DoxyCodeLine{00152\ \ \ \}}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_tick_abaa2e22910542b75f2b89d463119c1e6}{operator-\/}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_tick}{Tick}}\&\ lhs,\ \textcolor{keyword}{const}\ uint64\_t\&\ rhs)\ -\/>\ \mbox{\hyperlink{classprt_1_1_tick_delta}{TickDelta}}\ \{}
+\DoxyCodeLine{00155\ \ \ \ \ \textcolor{keywordflow}{return}\ \{lhs.GetTimestamp()\ -\/\ rhs\};}
+\DoxyCodeLine{00156\ \ \ \}}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00158\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_tick_a0a4517691e3d46dc6a10ced8fcf6e063}{operator-\/=}}(\textcolor{keyword}{const}\ uint64\_t\&\ rhs)\ \{}
+\DoxyCodeLine{00159\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_tick_a70e9e4759feaa31b285fbe998304ce95}{ts\_}}\ -\/=\ rhs;}
+\DoxyCodeLine{00160\ \ \ \}}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00162\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_tick_a425c52fd41bf43f2257571b5a5cc241c}{operator<<}}(std::ostream\&\ stream,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_tick}{Tick}}\&\ rhs)\ -\/>\ std::ostream\&\ \{}
+\DoxyCodeLine{00163\ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{}Tick("{}};}
+\DoxyCodeLine{00164\ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{}id="{}}\ <<\ rhs.GetId()\ <<\ \textcolor{stringliteral}{"{},\ "{}};}
+\DoxyCodeLine{00165\ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{}timestamp="{}}\ <<\ rhs.GetTimestamp();}
+\DoxyCodeLine{00166\ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{})"{}};}
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{keywordflow}{return}\ stream;}
+\DoxyCodeLine{00168\ \ \ \}}
+\DoxyCodeLine{00169\ \};}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00171\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ operator+(\textcolor{keyword}{const}\ uint64\_t\&\ lhs,\ \textcolor{keyword}{const}\ Tick\&\ rhs)\ -\/>\ TickDelta\ \{}
+\DoxyCodeLine{00172\ \ \ \textcolor{keywordflow}{return}\ lhs\ +\ rhs.GetTimestamp();}
+\DoxyCodeLine{00173\ \}}
+\DoxyCodeLine{00174\ }
+\DoxyCodeLine{00175\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ operator+=(uint64\_t\&\ lhs,\ \textcolor{keyword}{const}\ TickDelta\&\ rhs)\ -\/>\ uint64\_t\&\ \{}
+\DoxyCodeLine{00176\ \ \ lhs\ +=\ rhs.value();}
+\DoxyCodeLine{00177\ \ \ \textcolor{keywordflow}{return}\ lhs;}
+\DoxyCodeLine{00178\ \}}
+\DoxyCodeLine{00179\ }
+\DoxyCodeLine{00180\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ operator-\/(\textcolor{keyword}{const}\ uint64\_t\&\ lhs,\ \textcolor{keyword}{const}\ Tick\&\ rhs)\ -\/>\ TickDelta\ \{}
+\DoxyCodeLine{00181\ \ \ \textcolor{keywordflow}{return}\ lhs\ -\/\ rhs.GetTimestamp();}
+\DoxyCodeLine{00182\ \}}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00184\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ operator-\/=(uint64\_t\&\ lhs,\ \textcolor{keyword}{const}\ TickDelta\&\ rhs)\ -\/>\ uint64\_t\&\ \{}
+\DoxyCodeLine{00185\ \ \ lhs\ -\/=\ rhs.value();}
+\DoxyCodeLine{00186\ \ \ \textcolor{keywordflow}{return}\ lhs;}
+\DoxyCodeLine{00187\ \}}
+\DoxyCodeLine{00188\ }
+\DoxyCodeLine{00189\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceprt_a397b4efb00ea3e7263aaf7fb0587a871}{TickSubject}}\ =\ rx::subject<Tick>;}
+\DoxyCodeLine{00190\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceprt_a5f24dd671541b6d53ed66b5fb35c0790}{TickObservable}}\ =\ rx::observable<Tick>;}
+\DoxyCodeLine{00191\ \textcolor{keyword}{using\ }\mbox{\hyperlink{classprt_1_1_time_series}{TickDurationSeries}}\ =\ \mbox{\hyperlink{classprt_1_1_time_series}{TimeSeries<>}};}
+\DoxyCodeLine{00192\ \textcolor{keyword}{using\ }\mbox{\hyperlink{classprt_1_1_per_second_counter}{TicksPerSecond}}\ =\ \mbox{\hyperlink{classprt_1_1_per_second_counter}{PerSecondCounter<uint64\_t>}};}
+\DoxyCodeLine{00193\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00195\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_TICK\_H}}
+
+\end{DoxyCode}

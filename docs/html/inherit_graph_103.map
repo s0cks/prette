@@ -1,0 +1,7 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$classprt_1_1_ticker.html" title=" " alt="" coords="5,46,86,72"/>
+<area shape="rect" id="Node000001" href="$classprt_1_1_rate_limited_ticker.html" title=" " alt="" coords="134,5,284,46"/>
+<area shape="poly" id="edge93_Node000000_Node000001" title=" " alt="" coords="100,45,133,38,134,44,101,50"/>
+<area shape="rect" id="Node000002" href="$classprt_1_1_rate_limited_ticker.html" title=" " alt="" coords="134,71,284,111"/>
+<area shape="poly" id="edge94_Node000000_Node000002" title=" " alt="" coords="101,67,134,74,133,79,100,72"/>
+</map>

@@ -1,0 +1,105 @@
+\doxysection{prt\+::Mouse\+Motion\+Event Class Reference}
+\hypertarget{classprt_1_1_mouse_motion_event}{}\label{classprt_1_1_mouse_motion_event}\index{prt::MouseMotionEvent@{prt::MouseMotionEvent}}
+
+
+{\ttfamily \#include $<$mouse.\+h$>$}
+
+
+
+Inheritance diagram for prt\+::Mouse\+Motion\+Event\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=197pt]{classprt_1_1_mouse_motion_event__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for prt\+::Mouse\+Motion\+Event\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classprt_1_1_mouse_motion_event__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_mouse_motion_event_adbd47fe35bddb741c3d66f53eb788528}{Mouse\+Motion\+Event}} (const \mbox{\hyperlink{classprt_1_1_mouse}{Mouse}} \texorpdfstring{$\ast$}{*}mouse, const glm\+::vec2 \&dir)
+\item 
+\mbox{\hyperlink{classprt_1_1_mouse_motion_event_a9a4700ed8171525628d0f71bfadf5598}{Mouse\+Motion\+Event}} (const \mbox{\hyperlink{classprt_1_1_mouse}{Mouse}} \texorpdfstring{$\ast$}{*}mouse, const double x\+Pos, const double y\+Pos)
+\item 
+\mbox{\hyperlink{classprt_1_1_mouse_motion_event_adba529313735ac791aa9d4ce6e626837}{\texorpdfstring{$\sim$}{\string~}\+Mouse\+Motion\+Event}} ()=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1_mouse_motion_event_a27eae33473f640118e7c4398b28eda44}{Get\+Direction}} () const -\/$>$ glm\+::vec2 const \&
+\item 
+\mbox{\hyperlink{classprt_1_1_mouse_motion_event_aff51ad831982b49c22f7ec19504466db}{DECLARE\+\_\+\+EVENT\+\_\+\+TYPE}} (Mouse\+Event, Mouse\+Motion)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classprt_1_1_mouse_event_base}{prt\+::\+Mouse\+Event\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_mouse_event_base_a48fe31a906e67c07134e5d181e35a5d0}{\texorpdfstring{$\sim$}{\string~}\+Mouse\+Event\+Base}} () override=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1_mouse_event_base_af2e262f625226f0805e5b6010de9be9f}{Get\+Mouse}} () const -\/$>$ const \mbox{\hyperlink{classprt_1_1_mouse}{Mouse}} \texorpdfstring{$\ast$}{*}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+glm\+::vec2 \mbox{\hyperlink{classprt_1_1_mouse_motion_event_a0508ba0e7294dc7aacc0147884a80bb2}{direction\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classprt_1_1_mouse_event_base}{prt\+::\+Mouse\+Event\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_mouse_event_base_a719e5a72de8df69042426df381b0c07a}{Mouse\+Event\+Base}} (const \mbox{\hyperlink{classprt_1_1_mouse}{Mouse}} \texorpdfstring{$\ast$}{*}mouse)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_mouse_motion_event_adbd47fe35bddb741c3d66f53eb788528}\index{prt::MouseMotionEvent@{prt::MouseMotionEvent}!MouseMotionEvent@{MouseMotionEvent}}
+\index{MouseMotionEvent@{MouseMotionEvent}!prt::MouseMotionEvent@{prt::MouseMotionEvent}}
+\doxysubsubsection{\texorpdfstring{MouseMotionEvent()}{MouseMotionEvent()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_mouse_motion_event_adbd47fe35bddb741c3d66f53eb788528} 
+prt\+::\+Mouse\+Motion\+Event\+::\+Mouse\+Motion\+Event (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_mouse}{Mouse}} \texorpdfstring{$\ast$}{*}}]{mouse}{, }\item[{const glm\+::vec2 \&}]{dir}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_mouse_motion_event_a9a4700ed8171525628d0f71bfadf5598}\index{prt::MouseMotionEvent@{prt::MouseMotionEvent}!MouseMotionEvent@{MouseMotionEvent}}
+\index{MouseMotionEvent@{MouseMotionEvent}!prt::MouseMotionEvent@{prt::MouseMotionEvent}}
+\doxysubsubsection{\texorpdfstring{MouseMotionEvent()}{MouseMotionEvent()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_mouse_motion_event_a9a4700ed8171525628d0f71bfadf5598} 
+prt\+::\+Mouse\+Motion\+Event\+::\+Mouse\+Motion\+Event (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_mouse}{Mouse}} \texorpdfstring{$\ast$}{*}}]{mouse}{, }\item[{const double}]{x\+Pos}{, }\item[{const double}]{y\+Pos}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_mouse_motion_event_adba529313735ac791aa9d4ce6e626837}\index{prt::MouseMotionEvent@{prt::MouseMotionEvent}!````~MouseMotionEvent@{\texorpdfstring{$\sim$}{\string~}MouseMotionEvent}}
+\index{````~MouseMotionEvent@{\texorpdfstring{$\sim$}{\string~}MouseMotionEvent}!prt::MouseMotionEvent@{prt::MouseMotionEvent}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}MouseMotionEvent()}{\string~MouseMotionEvent()}}
+{\footnotesize\ttfamily \label{classprt_1_1_mouse_motion_event_adba529313735ac791aa9d4ce6e626837} 
+prt\+::\+Mouse\+Motion\+Event\+::\texorpdfstring{$\sim$}{\string~}\+Mouse\+Motion\+Event (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_mouse_motion_event_aff51ad831982b49c22f7ec19504466db}\index{prt::MouseMotionEvent@{prt::MouseMotionEvent}!DECLARE\_EVENT\_TYPE@{DECLARE\_EVENT\_TYPE}}
+\index{DECLARE\_EVENT\_TYPE@{DECLARE\_EVENT\_TYPE}!prt::MouseMotionEvent@{prt::MouseMotionEvent}}
+\doxysubsubsection{\texorpdfstring{DECLARE\_EVENT\_TYPE()}{DECLARE\_EVENT\_TYPE()}}
+{\footnotesize\ttfamily \label{classprt_1_1_mouse_motion_event_aff51ad831982b49c22f7ec19504466db} 
+prt\+::\+Mouse\+Motion\+Event\+::\+DECLARE\+\_\+\+EVENT\+\_\+\+TYPE (\begin{DoxyParamCaption}\item[{Mouse\+Event}]{}{, }\item[{Mouse\+Motion}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_mouse_motion_event_a27eae33473f640118e7c4398b28eda44}\index{prt::MouseMotionEvent@{prt::MouseMotionEvent}!GetDirection@{GetDirection}}
+\index{GetDirection@{GetDirection}!prt::MouseMotionEvent@{prt::MouseMotionEvent}}
+\doxysubsubsection{\texorpdfstring{GetDirection()}{GetDirection()}}
+{\footnotesize\ttfamily \label{classprt_1_1_mouse_motion_event_a27eae33473f640118e7c4398b28eda44} 
+auto prt\+::\+Mouse\+Motion\+Event\+::\+Get\+Direction (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ glm\+::vec2 const\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_mouse_motion_event_a0508ba0e7294dc7aacc0147884a80bb2}\index{prt::MouseMotionEvent@{prt::MouseMotionEvent}!direction\_@{direction\_}}
+\index{direction\_@{direction\_}!prt::MouseMotionEvent@{prt::MouseMotionEvent}}
+\doxysubsubsection{\texorpdfstring{direction\_}{direction\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_mouse_motion_event_a0508ba0e7294dc7aacc0147884a80bb2} 
+glm\+::vec2 prt\+::\+Mouse\+Motion\+Event\+::direction\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{mouse_8h}{mouse.\+h}}\end{DoxyCompactItemize}

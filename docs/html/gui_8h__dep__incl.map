@@ -1,0 +1,26 @@
+<map id="/Users/tazz/Projects/prette/Sources/prette/gui.h" name="/Users/tazz/Projects/prette/Sources/prette/gui.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="394,5,574,46"/>
+<area shape="rect" id="Node000002" href="$main_8cc.html" title=" " alt="" coords="5,102,166,142"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="380,51,178,97,152,103,151,98,177,91,379,46"/>
+<area shape="rect" id="Node000003" href="$gui_8cc.html" title=" " alt="" coords="300,198,447,253"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="438,57,418,75,401,95,389,121,382,148,376,198,371,197,377,147,384,119,397,93,414,71,435,53"/>
+<area shape="rect" id="Node000004" href="$gui__camera_8h.html" title=" " alt="" coords="189,94,336,150"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="425,55,328,96,326,91,423,50"/>
+<area shape="rect" id="Node000006" href="$gui__debug_8h.html" title=" " alt="" coords="410,94,558,150"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="487,61,487,93,482,93,482,61"/>
+<area shape="rect" id="Node000008" href="$gui__viewport_8h.html" title=" " alt="" coords="582,94,730,150"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="534,51,608,91,605,96,532,56"/>
+<area shape="rect" id="Node000010" href="$renderer_8cc.html" title=" " alt="" coords="754,94,902,150"/>
+<area shape="poly" id="edge12_Node000001_Node000010" title=" " alt="" coords="578,48,742,91,755,95,753,100,741,97,577,53"/>
+<area shape="rect" id="Node000011" href="$scene__renderer_8cc.html" title=" " alt="" coords="926,94,1074,150"/>
+<area shape="poly" id="edge13_Node000001_Node000011" title=" " alt="" coords="589,36,743,59,914,91,927,95,925,100,913,97,742,64,588,42"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="306,159,346,195,342,199,302,162"/>
+<area shape="rect" id="Node000005" href="$gui__camera_8cc.html" title=" " alt="" coords="128,198,275,253"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="241,164,220,198,216,196,236,162"/>
+<area shape="poly" id="edge7_Node000006_Node000003" title=" " alt="" coords="445,162,405,199,401,195,441,159"/>
+<area shape="rect" id="Node000007" href="$gui__debug_8cc.html" title=" " alt="" coords="472,198,619,253"/>
+<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="511,162,531,196,527,198,506,164"/>
+<area shape="poly" id="edge10_Node000008_Node000003" title=" " alt="" coords="568,157,449,200,447,195,567,152"/>
+<area shape="rect" id="Node000009" href="$gui__viewport_8cc.html" title=" " alt="" coords="644,198,791,253"/>
+<area shape="poly" id="edge11_Node000008_Node000009" title=" " alt="" coords="683,162,703,196,699,198,678,164"/>
+</map>

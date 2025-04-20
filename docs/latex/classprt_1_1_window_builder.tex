@@ -1,0 +1,262 @@
+\doxysection{prt\+::Window\+Builder Class Reference}
+\hypertarget{classprt_1_1_window_builder}{}\label{classprt_1_1_window_builder}\index{prt::WindowBuilder@{prt::WindowBuilder}}
+
+
+{\ttfamily \#include $<$window.\+h$>$}
+
+
+
+Collaboration diagram for prt\+::Window\+Builder\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classprt_1_1_window_builder__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_window_builder_ad06eb780f30a26dc451be23a3918f881}{Window\+Builder}} (const char \texorpdfstring{$\ast$}{*}title="{}"{})
+\item 
+\mbox{\hyperlink{classprt_1_1_window_builder_a2ce8b4e22e28f7d6cae7d76bacac6522}{\texorpdfstring{$\sim$}{\string~}\+Window\+Builder}} ()=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1_window_builder_a75f349265e631557aebf821bef5b507f}{Has\+Monitor}} () const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_window_builder_a272f28fd7604512ffb710cb0641ae93e}{Get\+Monitor}} () const -\/$>$ \mbox{\hyperlink{classprt_1_1_monitor}{Monitor}} \texorpdfstring{$\ast$}{*}
+\item 
+void \mbox{\hyperlink{classprt_1_1_window_builder_a906368e1d27410b1c5f00a3fc5a954fd}{Set\+Size}} (const \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} \&size)
+\item 
+auto \mbox{\hyperlink{classprt_1_1_window_builder_a7bc8b56a0647089b05db312bdeeaebe5}{Get\+Size}} () const -\/$>$ const \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_window_builder_ae47246e5be7fa3af96c11a091982c803}{Has\+Share}} () const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_window_builder_a9aa401e0b18fdbf9deb9e780210bb292}{Get\+Share}} () const -\/$>$ \mbox{\hyperlink{classprt_1_1_window}{Window}} \texorpdfstring{$\ast$}{*}
+\item 
+void \mbox{\hyperlink{classprt_1_1_window_builder_a08ad32abcb0e0731a5dec2793686ec4e}{Set\+Share}} (\mbox{\hyperlink{classprt_1_1_window}{Window}} \texorpdfstring{$\ast$}{*}share)
+\item 
+void \mbox{\hyperlink{classprt_1_1_window_builder_a7cb8effd70c48073131be68264740b6c}{Set\+Floating}} (const bool value)
+\item 
+void \mbox{\hyperlink{classprt_1_1_window_builder_a0c07d0f0bb1356476f978603ba4c9923}{Set\+Resizable}} (const bool value)
+\item 
+void \mbox{\hyperlink{classprt_1_1_window_builder_a04bf98b84ba8deebb170ee0172aa45d1}{Set\+Visible}} (const bool value)
+\item 
+void \mbox{\hyperlink{classprt_1_1_window_builder_a87f074fb1ef18ed881431a086ac345f1}{Set\+Decorated}} (const bool value)
+\item 
+void \mbox{\hyperlink{classprt_1_1_window_builder_af4086e2609341c00f91fda05c8664e95}{Set\+Focused}} (const bool value)
+\item 
+void \mbox{\hyperlink{classprt_1_1_window_builder_ae85725f660cb9718f163df22d99a2c12}{Set\+Auto\+Iconify}} (const bool value)
+\item 
+void \mbox{\hyperlink{classprt_1_1_window_builder_aaafe55c4fd9c14c53284692ac46ff90a}{Set\+Maximized}} (const bool value)
+\item 
+void \mbox{\hyperlink{classprt_1_1_window_builder_a46cfe68705283430a96cb04eb7079f25}{Set\+Center\+Cursor}} (const bool value)
+\item 
+void \mbox{\hyperlink{classprt_1_1_window_builder_acde31070fe853a260870705a7aca97c1}{Set\+Transparent\+Framebuffer}} (const bool value)
+\item 
+void \mbox{\hyperlink{classprt_1_1_window_builder_a9ebdc175038fb3dab78e788394aba286}{Set\+Focus\+On\+Show}} (const bool value)
+\item 
+void \mbox{\hyperlink{classprt_1_1_window_builder_a1c73eaa16c604ff2b25c43f8b61569ae}{Set\+Scale\+To\+Monitor}} (const bool value)
+\item 
+auto \mbox{\hyperlink{classprt_1_1_window_builder_a7dd36f3c1fcd595b4dfea9b8e21b9519}{Build}} () const -\/$>$ \mbox{\hyperlink{classprt_1_1_window}{Window}} \texorpdfstring{$\ast$}{*}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_window_builder_a86ac197226ff9cf2a828935381735bca}{DEFINE\+\_\+\+NON\+\_\+\+COPYABLE\+\_\+\+TYPE}} (\mbox{\hyperlink{classprt_1_1_window_builder}{Window\+Builder}})
+\item 
+auto \mbox{\hyperlink{classprt_1_1_window_builder_a11e33f42758612dfbdc4fdbae1522992}{Get\+Share\+Handle}} () const -\/$>$ GLFWwindow \texorpdfstring{$\ast$}{*}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_window_builder_a3d4df5d3522d45683cf188fb97b401cd}{Get\+Monitor\+Handle}} () const -\/$>$ GLFWmonitor \texorpdfstring{$\ast$}{*}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classprt_1_1_window_builder_a5fd6368884f630484a3cbaba3b39d9ee}{title\+\_\+}}
+\item 
+\mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} \mbox{\hyperlink{classprt_1_1_window_builder_a6c6b2b6d2f8a03f33c21c4620dcaf1d3}{size\+\_\+}} \{\}
+\item 
+\mbox{\hyperlink{classprt_1_1_monitor}{Monitor}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1_window_builder_abbd970aa73943ef6f393d4e6e13cdeab}{monitor\+\_\+}} \{\}
+\item 
+\mbox{\hyperlink{classprt_1_1_window}{Window}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1_window_builder_a9f04df2deeb52fd2268c8d559990020e}{share\+\_\+}} \{\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_window_builder_ad06eb780f30a26dc451be23a3918f881}\index{prt::WindowBuilder@{prt::WindowBuilder}!WindowBuilder@{WindowBuilder}}
+\index{WindowBuilder@{WindowBuilder}!prt::WindowBuilder@{prt::WindowBuilder}}
+\doxysubsubsection{\texorpdfstring{WindowBuilder()}{WindowBuilder()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_builder_ad06eb780f30a26dc451be23a3918f881} 
+prt\+::\+Window\+Builder\+::\+Window\+Builder (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{title}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+\Hypertarget{classprt_1_1_window_builder_a2ce8b4e22e28f7d6cae7d76bacac6522}\index{prt::WindowBuilder@{prt::WindowBuilder}!````~WindowBuilder@{\texorpdfstring{$\sim$}{\string~}WindowBuilder}}
+\index{````~WindowBuilder@{\texorpdfstring{$\sim$}{\string~}WindowBuilder}!prt::WindowBuilder@{prt::WindowBuilder}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}WindowBuilder()}{\string~WindowBuilder()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_builder_a2ce8b4e22e28f7d6cae7d76bacac6522} 
+prt\+::\+Window\+Builder\+::\texorpdfstring{$\sim$}{\string~}\+Window\+Builder (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_window_builder_a7dd36f3c1fcd595b4dfea9b8e21b9519}\index{prt::WindowBuilder@{prt::WindowBuilder}!Build@{Build}}
+\index{Build@{Build}!prt::WindowBuilder@{prt::WindowBuilder}}
+\doxysubsubsection{\texorpdfstring{Build()}{Build()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_builder_a7dd36f3c1fcd595b4dfea9b8e21b9519} 
+auto prt\+::\+Window\+Builder\+::\+Build (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$  \mbox{\hyperlink{classprt_1_1_window}{Window}} \texorpdfstring{$\ast$}{*}}
+
+\Hypertarget{classprt_1_1_window_builder_a86ac197226ff9cf2a828935381735bca}\index{prt::WindowBuilder@{prt::WindowBuilder}!DEFINE\_NON\_COPYABLE\_TYPE@{DEFINE\_NON\_COPYABLE\_TYPE}}
+\index{DEFINE\_NON\_COPYABLE\_TYPE@{DEFINE\_NON\_COPYABLE\_TYPE}!prt::WindowBuilder@{prt::WindowBuilder}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_NON\_COPYABLE\_TYPE()}{DEFINE\_NON\_COPYABLE\_TYPE()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_builder_a86ac197226ff9cf2a828935381735bca} 
+prt\+::\+Window\+Builder\+::\+DEFINE\+\_\+\+NON\+\_\+\+COPYABLE\+\_\+\+TYPE (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_window_builder}{Window\+Builder}}}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_window_builder_a272f28fd7604512ffb710cb0641ae93e}\index{prt::WindowBuilder@{prt::WindowBuilder}!GetMonitor@{GetMonitor}}
+\index{GetMonitor@{GetMonitor}!prt::WindowBuilder@{prt::WindowBuilder}}
+\doxysubsubsection{\texorpdfstring{GetMonitor()}{GetMonitor()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_builder_a272f28fd7604512ffb710cb0641ae93e} 
+auto prt\+::\+Window\+Builder\+::\+Get\+Monitor (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ \mbox{\hyperlink{classprt_1_1_monitor}{Monitor}}\texorpdfstring{$\ast$}{*} \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_window_builder_a3d4df5d3522d45683cf188fb97b401cd}\index{prt::WindowBuilder@{prt::WindowBuilder}!GetMonitorHandle@{GetMonitorHandle}}
+\index{GetMonitorHandle@{GetMonitorHandle}!prt::WindowBuilder@{prt::WindowBuilder}}
+\doxysubsubsection{\texorpdfstring{GetMonitorHandle()}{GetMonitorHandle()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_builder_a3d4df5d3522d45683cf188fb97b401cd} 
+auto prt\+::\+Window\+Builder\+::\+Get\+Monitor\+Handle (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$  GLFWmonitor \texorpdfstring{$\ast$}{*}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_window_builder_a9aa401e0b18fdbf9deb9e780210bb292}\index{prt::WindowBuilder@{prt::WindowBuilder}!GetShare@{GetShare}}
+\index{GetShare@{GetShare}!prt::WindowBuilder@{prt::WindowBuilder}}
+\doxysubsubsection{\texorpdfstring{GetShare()}{GetShare()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_builder_a9aa401e0b18fdbf9deb9e780210bb292} 
+auto prt\+::\+Window\+Builder\+::\+Get\+Share (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ \mbox{\hyperlink{classprt_1_1_window}{Window}}\texorpdfstring{$\ast$}{*} \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_window_builder_a11e33f42758612dfbdc4fdbae1522992}\index{prt::WindowBuilder@{prt::WindowBuilder}!GetShareHandle@{GetShareHandle}}
+\index{GetShareHandle@{GetShareHandle}!prt::WindowBuilder@{prt::WindowBuilder}}
+\doxysubsubsection{\texorpdfstring{GetShareHandle()}{GetShareHandle()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_builder_a11e33f42758612dfbdc4fdbae1522992} 
+auto prt\+::\+Window\+Builder\+::\+Get\+Share\+Handle (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$  GLFWwindow \texorpdfstring{$\ast$}{*}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_window_builder_a7bc8b56a0647089b05db312bdeeaebe5}\index{prt::WindowBuilder@{prt::WindowBuilder}!GetSize@{GetSize}}
+\index{GetSize@{GetSize}!prt::WindowBuilder@{prt::WindowBuilder}}
+\doxysubsubsection{\texorpdfstring{GetSize()}{GetSize()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_builder_a7bc8b56a0647089b05db312bdeeaebe5} 
+auto prt\+::\+Window\+Builder\+::\+Get\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}}\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_window_builder_a75f349265e631557aebf821bef5b507f}\index{prt::WindowBuilder@{prt::WindowBuilder}!HasMonitor@{HasMonitor}}
+\index{HasMonitor@{HasMonitor}!prt::WindowBuilder@{prt::WindowBuilder}}
+\doxysubsubsection{\texorpdfstring{HasMonitor()}{HasMonitor()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_builder_a75f349265e631557aebf821bef5b507f} 
+auto prt\+::\+Window\+Builder\+::\+Has\+Monitor (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_window_builder_ae47246e5be7fa3af96c11a091982c803}\index{prt::WindowBuilder@{prt::WindowBuilder}!HasShare@{HasShare}}
+\index{HasShare@{HasShare}!prt::WindowBuilder@{prt::WindowBuilder}}
+\doxysubsubsection{\texorpdfstring{HasShare()}{HasShare()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_builder_ae47246e5be7fa3af96c11a091982c803} 
+auto prt\+::\+Window\+Builder\+::\+Has\+Share (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_window_builder_ae85725f660cb9718f163df22d99a2c12}\index{prt::WindowBuilder@{prt::WindowBuilder}!SetAutoIconify@{SetAutoIconify}}
+\index{SetAutoIconify@{SetAutoIconify}!prt::WindowBuilder@{prt::WindowBuilder}}
+\doxysubsubsection{\texorpdfstring{SetAutoIconify()}{SetAutoIconify()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_builder_ae85725f660cb9718f163df22d99a2c12} 
+void prt\+::\+Window\+Builder\+::\+Set\+Auto\+Iconify (\begin{DoxyParamCaption}\item[{const bool}]{value}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_window_builder_a46cfe68705283430a96cb04eb7079f25}\index{prt::WindowBuilder@{prt::WindowBuilder}!SetCenterCursor@{SetCenterCursor}}
+\index{SetCenterCursor@{SetCenterCursor}!prt::WindowBuilder@{prt::WindowBuilder}}
+\doxysubsubsection{\texorpdfstring{SetCenterCursor()}{SetCenterCursor()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_builder_a46cfe68705283430a96cb04eb7079f25} 
+void prt\+::\+Window\+Builder\+::\+Set\+Center\+Cursor (\begin{DoxyParamCaption}\item[{const bool}]{value}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_window_builder_a87f074fb1ef18ed881431a086ac345f1}\index{prt::WindowBuilder@{prt::WindowBuilder}!SetDecorated@{SetDecorated}}
+\index{SetDecorated@{SetDecorated}!prt::WindowBuilder@{prt::WindowBuilder}}
+\doxysubsubsection{\texorpdfstring{SetDecorated()}{SetDecorated()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_builder_a87f074fb1ef18ed881431a086ac345f1} 
+void prt\+::\+Window\+Builder\+::\+Set\+Decorated (\begin{DoxyParamCaption}\item[{const bool}]{value}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_window_builder_a7cb8effd70c48073131be68264740b6c}\index{prt::WindowBuilder@{prt::WindowBuilder}!SetFloating@{SetFloating}}
+\index{SetFloating@{SetFloating}!prt::WindowBuilder@{prt::WindowBuilder}}
+\doxysubsubsection{\texorpdfstring{SetFloating()}{SetFloating()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_builder_a7cb8effd70c48073131be68264740b6c} 
+void prt\+::\+Window\+Builder\+::\+Set\+Floating (\begin{DoxyParamCaption}\item[{const bool}]{value}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_window_builder_af4086e2609341c00f91fda05c8664e95}\index{prt::WindowBuilder@{prt::WindowBuilder}!SetFocused@{SetFocused}}
+\index{SetFocused@{SetFocused}!prt::WindowBuilder@{prt::WindowBuilder}}
+\doxysubsubsection{\texorpdfstring{SetFocused()}{SetFocused()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_builder_af4086e2609341c00f91fda05c8664e95} 
+void prt\+::\+Window\+Builder\+::\+Set\+Focused (\begin{DoxyParamCaption}\item[{const bool}]{value}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_window_builder_a9ebdc175038fb3dab78e788394aba286}\index{prt::WindowBuilder@{prt::WindowBuilder}!SetFocusOnShow@{SetFocusOnShow}}
+\index{SetFocusOnShow@{SetFocusOnShow}!prt::WindowBuilder@{prt::WindowBuilder}}
+\doxysubsubsection{\texorpdfstring{SetFocusOnShow()}{SetFocusOnShow()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_builder_a9ebdc175038fb3dab78e788394aba286} 
+void prt\+::\+Window\+Builder\+::\+Set\+Focus\+On\+Show (\begin{DoxyParamCaption}\item[{const bool}]{value}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_window_builder_aaafe55c4fd9c14c53284692ac46ff90a}\index{prt::WindowBuilder@{prt::WindowBuilder}!SetMaximized@{SetMaximized}}
+\index{SetMaximized@{SetMaximized}!prt::WindowBuilder@{prt::WindowBuilder}}
+\doxysubsubsection{\texorpdfstring{SetMaximized()}{SetMaximized()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_builder_aaafe55c4fd9c14c53284692ac46ff90a} 
+void prt\+::\+Window\+Builder\+::\+Set\+Maximized (\begin{DoxyParamCaption}\item[{const bool}]{value}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_window_builder_a0c07d0f0bb1356476f978603ba4c9923}\index{prt::WindowBuilder@{prt::WindowBuilder}!SetResizable@{SetResizable}}
+\index{SetResizable@{SetResizable}!prt::WindowBuilder@{prt::WindowBuilder}}
+\doxysubsubsection{\texorpdfstring{SetResizable()}{SetResizable()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_builder_a0c07d0f0bb1356476f978603ba4c9923} 
+void prt\+::\+Window\+Builder\+::\+Set\+Resizable (\begin{DoxyParamCaption}\item[{const bool}]{value}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_window_builder_a1c73eaa16c604ff2b25c43f8b61569ae}\index{prt::WindowBuilder@{prt::WindowBuilder}!SetScaleToMonitor@{SetScaleToMonitor}}
+\index{SetScaleToMonitor@{SetScaleToMonitor}!prt::WindowBuilder@{prt::WindowBuilder}}
+\doxysubsubsection{\texorpdfstring{SetScaleToMonitor()}{SetScaleToMonitor()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_builder_a1c73eaa16c604ff2b25c43f8b61569ae} 
+void prt\+::\+Window\+Builder\+::\+Set\+Scale\+To\+Monitor (\begin{DoxyParamCaption}\item[{const bool}]{value}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_window_builder_a08ad32abcb0e0731a5dec2793686ec4e}\index{prt::WindowBuilder@{prt::WindowBuilder}!SetShare@{SetShare}}
+\index{SetShare@{SetShare}!prt::WindowBuilder@{prt::WindowBuilder}}
+\doxysubsubsection{\texorpdfstring{SetShare()}{SetShare()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_builder_a08ad32abcb0e0731a5dec2793686ec4e} 
+void prt\+::\+Window\+Builder\+::\+Set\+Share (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_window}{Window}} \texorpdfstring{$\ast$}{*}}]{share}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_window_builder_a906368e1d27410b1c5f00a3fc5a954fd}\index{prt::WindowBuilder@{prt::WindowBuilder}!SetSize@{SetSize}}
+\index{SetSize@{SetSize}!prt::WindowBuilder@{prt::WindowBuilder}}
+\doxysubsubsection{\texorpdfstring{SetSize()}{SetSize()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_builder_a906368e1d27410b1c5f00a3fc5a954fd} 
+void prt\+::\+Window\+Builder\+::\+Set\+Size (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} \&}]{size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_window_builder_acde31070fe853a260870705a7aca97c1}\index{prt::WindowBuilder@{prt::WindowBuilder}!SetTransparentFramebuffer@{SetTransparentFramebuffer}}
+\index{SetTransparentFramebuffer@{SetTransparentFramebuffer}!prt::WindowBuilder@{prt::WindowBuilder}}
+\doxysubsubsection{\texorpdfstring{SetTransparentFramebuffer()}{SetTransparentFramebuffer()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_builder_acde31070fe853a260870705a7aca97c1} 
+void prt\+::\+Window\+Builder\+::\+Set\+Transparent\+Framebuffer (\begin{DoxyParamCaption}\item[{const bool}]{value}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_window_builder_a04bf98b84ba8deebb170ee0172aa45d1}\index{prt::WindowBuilder@{prt::WindowBuilder}!SetVisible@{SetVisible}}
+\index{SetVisible@{SetVisible}!prt::WindowBuilder@{prt::WindowBuilder}}
+\doxysubsubsection{\texorpdfstring{SetVisible()}{SetVisible()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_builder_a04bf98b84ba8deebb170ee0172aa45d1} 
+void prt\+::\+Window\+Builder\+::\+Set\+Visible (\begin{DoxyParamCaption}\item[{const bool}]{value}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_window_builder_abbd970aa73943ef6f393d4e6e13cdeab}\index{prt::WindowBuilder@{prt::WindowBuilder}!monitor\_@{monitor\_}}
+\index{monitor\_@{monitor\_}!prt::WindowBuilder@{prt::WindowBuilder}}
+\doxysubsubsection{\texorpdfstring{monitor\_}{monitor\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_builder_abbd970aa73943ef6f393d4e6e13cdeab} 
+\mbox{\hyperlink{classprt_1_1_monitor}{Monitor}}\texorpdfstring{$\ast$}{*} prt\+::\+Window\+Builder\+::monitor\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_window_builder_a9f04df2deeb52fd2268c8d559990020e}\index{prt::WindowBuilder@{prt::WindowBuilder}!share\_@{share\_}}
+\index{share\_@{share\_}!prt::WindowBuilder@{prt::WindowBuilder}}
+\doxysubsubsection{\texorpdfstring{share\_}{share\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_builder_a9f04df2deeb52fd2268c8d559990020e} 
+\mbox{\hyperlink{classprt_1_1_window}{Window}}\texorpdfstring{$\ast$}{*} prt\+::\+Window\+Builder\+::share\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_window_builder_a6c6b2b6d2f8a03f33c21c4620dcaf1d3}\index{prt::WindowBuilder@{prt::WindowBuilder}!size\_@{size\_}}
+\index{size\_@{size\_}!prt::WindowBuilder@{prt::WindowBuilder}}
+\doxysubsubsection{\texorpdfstring{size\_}{size\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_builder_a6c6b2b6d2f8a03f33c21c4620dcaf1d3} 
+\mbox{\hyperlink{classprt_1_1_dimension}{Dimension}} prt\+::\+Window\+Builder\+::size\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_window_builder_a5fd6368884f630484a3cbaba3b39d9ee}\index{prt::WindowBuilder@{prt::WindowBuilder}!title\_@{title\_}}
+\index{title\_@{title\_}!prt::WindowBuilder@{prt::WindowBuilder}}
+\doxysubsubsection{\texorpdfstring{title\_}{title\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_builder_a5fd6368884f630484a3cbaba3b39d9ee} 
+std\+::string prt\+::\+Window\+Builder\+::title\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{window_8h}{window.\+h}}\end{DoxyCompactItemize}

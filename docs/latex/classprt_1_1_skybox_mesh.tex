@@ -1,0 +1,123 @@
+\doxysection{prt\+::Skybox\+Mesh Class Reference}
+\hypertarget{classprt_1_1_skybox_mesh}{}\label{classprt_1_1_skybox_mesh}\index{prt::SkyboxMesh@{prt::SkyboxMesh}}
+
+
+{\ttfamily \#include $<$skybox.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_skybox_mesh_a78baa39fe39ac7f2f5e9c96ab90e71c2}{Skybox\+Mesh}} ()
+\item 
+\mbox{\hyperlink{classprt_1_1_skybox_mesh_ab6c39c95507d525fd56e56dca2c45744}{\texorpdfstring{$\sim$}{\string~}\+Skybox\+Mesh}} ()
+\item 
+auto \mbox{\hyperlink{classprt_1_1_skybox_mesh_a503b93e140f486d408029cbf64136b61}{Get\+Vertex\+Buffer}} () const -\/$>$ vk\+::\+Buffer \texorpdfstring{$\ast$}{*}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_skybox_mesh_a0621b402846869db0f1786b080bcc748}{Get\+Number\+Of\+Vertices}} () const -\/$>$ uint64\+\_\+t
+\item 
+auto \mbox{\hyperlink{classprt_1_1_skybox_mesh_a511bae4e1e4413f084980727c221faee}{Get\+Index\+Buffer}} () const -\/$>$ vk\+::\+Buffer \texorpdfstring{$\ast$}{*}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_skybox_mesh_a0822bbd362ac1dd06c316d91bb6e5c7e}{Get\+Number\+Of\+Indices}} () const -\/$>$ uint64\+\_\+t
+\item 
+void \mbox{\hyperlink{classprt_1_1_skybox_mesh_a651aea16ee1be1fe15445a14cedb2e34}{Draw}} (Vk\+Command\+Buffer \&buffer)
+\item 
+void \mbox{\hyperlink{classprt_1_1_skybox_mesh_ae5e09f01d79ab67f5d563f0195c60aa5}{Destroy}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+vk\+::\+Buffer \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1_skybox_mesh_a123f662d61478e5e7b9b3535fd5ae2ea}{vertices\+\_\+}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classprt_1_1_skybox_mesh_ae0be1265c4fa146f1971fc43dbc28505}{num\+\_\+vertices\+\_\+}}
+\item 
+vk\+::\+Buffer \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1_skybox_mesh_a33988acb3c7920388028d9c4b99a24c3}{indices\+\_\+}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classprt_1_1_skybox_mesh_ae0fe057ba1d39e39c16b50391a75cb3e}{num\+\_\+indices\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_skybox_mesh_a78baa39fe39ac7f2f5e9c96ab90e71c2}\index{prt::SkyboxMesh@{prt::SkyboxMesh}!SkyboxMesh@{SkyboxMesh}}
+\index{SkyboxMesh@{SkyboxMesh}!prt::SkyboxMesh@{prt::SkyboxMesh}}
+\doxysubsubsection{\texorpdfstring{SkyboxMesh()}{SkyboxMesh()}}
+{\footnotesize\ttfamily \label{classprt_1_1_skybox_mesh_a78baa39fe39ac7f2f5e9c96ab90e71c2} 
+prt\+::\+Skybox\+Mesh\+::\+Skybox\+Mesh (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_skybox_mesh_ab6c39c95507d525fd56e56dca2c45744}\index{prt::SkyboxMesh@{prt::SkyboxMesh}!````~SkyboxMesh@{\texorpdfstring{$\sim$}{\string~}SkyboxMesh}}
+\index{````~SkyboxMesh@{\texorpdfstring{$\sim$}{\string~}SkyboxMesh}!prt::SkyboxMesh@{prt::SkyboxMesh}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}SkyboxMesh()}{\string~SkyboxMesh()}}
+{\footnotesize\ttfamily \label{classprt_1_1_skybox_mesh_ab6c39c95507d525fd56e56dca2c45744} 
+prt\+::\+Skybox\+Mesh\+::\texorpdfstring{$\sim$}{\string~}\+Skybox\+Mesh (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_skybox_mesh_ae5e09f01d79ab67f5d563f0195c60aa5}\index{prt::SkyboxMesh@{prt::SkyboxMesh}!Destroy@{Destroy}}
+\index{Destroy@{Destroy}!prt::SkyboxMesh@{prt::SkyboxMesh}}
+\doxysubsubsection{\texorpdfstring{Destroy()}{Destroy()}}
+{\footnotesize\ttfamily \label{classprt_1_1_skybox_mesh_ae5e09f01d79ab67f5d563f0195c60aa5} 
+void prt\+::\+Skybox\+Mesh\+::\+Destroy (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_skybox_mesh_a651aea16ee1be1fe15445a14cedb2e34}\index{prt::SkyboxMesh@{prt::SkyboxMesh}!Draw@{Draw}}
+\index{Draw@{Draw}!prt::SkyboxMesh@{prt::SkyboxMesh}}
+\doxysubsubsection{\texorpdfstring{Draw()}{Draw()}}
+{\footnotesize\ttfamily \label{classprt_1_1_skybox_mesh_a651aea16ee1be1fe15445a14cedb2e34} 
+void prt\+::\+Skybox\+Mesh\+::\+Draw (\begin{DoxyParamCaption}\item[{Vk\+Command\+Buffer \&}]{buffer}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_skybox_mesh_a511bae4e1e4413f084980727c221faee}\index{prt::SkyboxMesh@{prt::SkyboxMesh}!GetIndexBuffer@{GetIndexBuffer}}
+\index{GetIndexBuffer@{GetIndexBuffer}!prt::SkyboxMesh@{prt::SkyboxMesh}}
+\doxysubsubsection{\texorpdfstring{GetIndexBuffer()}{GetIndexBuffer()}}
+{\footnotesize\ttfamily \label{classprt_1_1_skybox_mesh_a511bae4e1e4413f084980727c221faee} 
+auto prt\+::\+Skybox\+Mesh\+::\+Get\+Index\+Buffer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ vk\+::\+Buffer\texorpdfstring{$\ast$}{*} \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_skybox_mesh_a0822bbd362ac1dd06c316d91bb6e5c7e}\index{prt::SkyboxMesh@{prt::SkyboxMesh}!GetNumberOfIndices@{GetNumberOfIndices}}
+\index{GetNumberOfIndices@{GetNumberOfIndices}!prt::SkyboxMesh@{prt::SkyboxMesh}}
+\doxysubsubsection{\texorpdfstring{GetNumberOfIndices()}{GetNumberOfIndices()}}
+{\footnotesize\ttfamily \label{classprt_1_1_skybox_mesh_a0822bbd362ac1dd06c316d91bb6e5c7e} 
+auto prt\+::\+Skybox\+Mesh\+::\+Get\+Number\+Of\+Indices (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ uint64\+\_\+t \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_skybox_mesh_a0621b402846869db0f1786b080bcc748}\index{prt::SkyboxMesh@{prt::SkyboxMesh}!GetNumberOfVertices@{GetNumberOfVertices}}
+\index{GetNumberOfVertices@{GetNumberOfVertices}!prt::SkyboxMesh@{prt::SkyboxMesh}}
+\doxysubsubsection{\texorpdfstring{GetNumberOfVertices()}{GetNumberOfVertices()}}
+{\footnotesize\ttfamily \label{classprt_1_1_skybox_mesh_a0621b402846869db0f1786b080bcc748} 
+auto prt\+::\+Skybox\+Mesh\+::\+Get\+Number\+Of\+Vertices (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ uint64\+\_\+t \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_skybox_mesh_a503b93e140f486d408029cbf64136b61}\index{prt::SkyboxMesh@{prt::SkyboxMesh}!GetVertexBuffer@{GetVertexBuffer}}
+\index{GetVertexBuffer@{GetVertexBuffer}!prt::SkyboxMesh@{prt::SkyboxMesh}}
+\doxysubsubsection{\texorpdfstring{GetVertexBuffer()}{GetVertexBuffer()}}
+{\footnotesize\ttfamily \label{classprt_1_1_skybox_mesh_a503b93e140f486d408029cbf64136b61} 
+auto prt\+::\+Skybox\+Mesh\+::\+Get\+Vertex\+Buffer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ vk\+::\+Buffer\texorpdfstring{$\ast$}{*} \hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_skybox_mesh_a33988acb3c7920388028d9c4b99a24c3}\index{prt::SkyboxMesh@{prt::SkyboxMesh}!indices\_@{indices\_}}
+\index{indices\_@{indices\_}!prt::SkyboxMesh@{prt::SkyboxMesh}}
+\doxysubsubsection{\texorpdfstring{indices\_}{indices\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_skybox_mesh_a33988acb3c7920388028d9c4b99a24c3} 
+vk\+::\+Buffer\texorpdfstring{$\ast$}{*} prt\+::\+Skybox\+Mesh\+::indices\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_skybox_mesh_ae0fe057ba1d39e39c16b50391a75cb3e}\index{prt::SkyboxMesh@{prt::SkyboxMesh}!num\_indices\_@{num\_indices\_}}
+\index{num\_indices\_@{num\_indices\_}!prt::SkyboxMesh@{prt::SkyboxMesh}}
+\doxysubsubsection{\texorpdfstring{num\_indices\_}{num\_indices\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_skybox_mesh_ae0fe057ba1d39e39c16b50391a75cb3e} 
+uint64\+\_\+t prt\+::\+Skybox\+Mesh\+::num\+\_\+indices\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_skybox_mesh_ae0be1265c4fa146f1971fc43dbc28505}\index{prt::SkyboxMesh@{prt::SkyboxMesh}!num\_vertices\_@{num\_vertices\_}}
+\index{num\_vertices\_@{num\_vertices\_}!prt::SkyboxMesh@{prt::SkyboxMesh}}
+\doxysubsubsection{\texorpdfstring{num\_vertices\_}{num\_vertices\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_skybox_mesh_ae0be1265c4fa146f1971fc43dbc28505} 
+uint64\+\_\+t prt\+::\+Skybox\+Mesh\+::num\+\_\+vertices\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_skybox_mesh_a123f662d61478e5e7b9b3535fd5ae2ea}\index{prt::SkyboxMesh@{prt::SkyboxMesh}!vertices\_@{vertices\_}}
+\index{vertices\_@{vertices\_}!prt::SkyboxMesh@{prt::SkyboxMesh}}
+\doxysubsubsection{\texorpdfstring{vertices\_}{vertices\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_skybox_mesh_a123f662d61478e5e7b9b3535fd5ae2ea} 
+vk\+::\+Buffer\texorpdfstring{$\ast$}{*} prt\+::\+Skybox\+Mesh\+::vertices\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{skybox_8h}{skybox.\+h}}\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{skybox_8cc}{skybox.\+cc}}\end{DoxyCompactItemize}

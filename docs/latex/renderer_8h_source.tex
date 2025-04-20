@@ -1,0 +1,178 @@
+\doxysection{renderer.\+h}
+\hypertarget{renderer_8h_source}{}\label{renderer_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/renderer.h@{/Users/tazz/Projects/prette/Sources/prette/renderer.h}}
+\mbox{\hyperlink{renderer_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_RENDERER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_RENDERER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vulkan/vulkan\_core.h>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{event_8h}{prette/event.h}}"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}prette/gfx.h"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tick_8h}{prette/tick.h}}"{}}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ FOR\_EACH\_RENDERER\_EVENT(V)\ \(\backslash\)}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\ \ V(RendererInit)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\ \ V(PreFrame)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\ \ V(PostFrame)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\ \ V(RendererDestroyed)}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{class\ }Renderer;}
+\DoxyCodeLine{00020\ \textcolor{keyword}{class\ }RendererEvent;}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#define\ FORWARD\_DECLARE(Name)\ class\ Name\#\#Event;}}
+\DoxyCodeLine{00022\ \mbox{\hyperlink{renderer_8h_ae9988c73a80f5b53389f3f54a6dc4039}{FOR\_EACH\_RENDERER\_EVENT}}(\mbox{\hyperlink{gui_8h_a83d2d158052fc2dc9bdf9bece3fd251e}{FORWARD\_DECLARE}})}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#undef\ FORWARD\_DECLARE}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_renderer_event}{RendererEvent}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1_event}{Event}}\ \{}
+\DoxyCodeLine{00026\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00027\ \ \ \mbox{\hyperlink{classprt_1_1_renderer_event_a31e5df7a8c3b03e10c60ce56a0a0081a}{RendererEvent}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00028\ \ \ \mbox{\hyperlink{classprt_1_1_renderer_event_ae3438bb018a29f07eba18e79cc02820f}{\string~RendererEvent}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00029\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_renderer_event_af9f1b4078fb042d85f297b7be05bebc9}{IsFrameEvent}}()\ const\ -\/>\ \textcolor{keywordtype}{bool}\ =\ 0;}
+\DoxyCodeLine{00030\ \ \ \mbox{\hyperlink{event_8h_abdcaadf856ca76712e066a46ac2f1c40}{DEFINE\_EVENT\_PROTOTYPE\_TYPE}}(\mbox{\hyperlink{classprt_1_1_renderer}{Renderer}},\ \mbox{\hyperlink{renderer_8h_ae9988c73a80f5b53389f3f54a6dc4039}{FOR\_EACH\_RENDERER\_EVENT}});}
+\DoxyCodeLine{00031\ \};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ template\ <const\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classprt_1_1_frame_event}{FrameEvent}}>}
+\DoxyCodeLine{00034\ class\ \mbox{\hyperlink{classprt_1_1_template_renderer_event}{TemplateRendererEvent}}\ :\ public\ \mbox{\hyperlink{classprt_1_1_renderer_event}{RendererEvent}}\ \{}
+\DoxyCodeLine{00035\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00036\ \ \ \mbox{\hyperlink{classprt_1_1_template_renderer_event_a873407588867fb3077b5f3120cb3d63c}{TemplateRendererEvent}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00037\ \ \ \mbox{\hyperlink{classprt_1_1_template_renderer_event_a7f4a4a0c04542b2dcd2c4b5b6f11405c}{\string~TemplateRendererEvent}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_template_renderer_event_ac2b6e92542b27633d5db45d55a3b7648}{IsFrameEvent}}()\ const\ -\/>\ \textcolor{keywordtype}{bool}\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_frame_event}{FrameEvent}};}
+\DoxyCodeLine{00041\ \ \ \}}
+\DoxyCodeLine{00042\ \};}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_renderer_event_base}{RendererEventBase}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1_template_renderer_event}{TemplateRendererEvent}}<false>\ \{}
+\DoxyCodeLine{00045\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00046\ \ \ \mbox{\hyperlink{classprt_1_1_renderer_event_base_adc0ee007af61d910227cdbd061c64b35}{RendererEventBase}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00049\ \ \ \mbox{\hyperlink{classprt_1_1_renderer_event_base_ab710be2797f572ac1e90777e5593ad76}{\string~RendererEventBase}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00050\ \};}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_frame_event}{FrameEvent}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1_template_renderer_event}{TemplateRendererEvent}}<true>\ \{}
+\DoxyCodeLine{00053\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00054\ \ \ \mbox{\hyperlink{classprt_1_1_frame_event_a3125006df7471272476f9368e63a6e28}{FrameEvent}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00057\ \ \ \mbox{\hyperlink{classprt_1_1_frame_event_a69cab804853f8d6a1b87a06125c36a6b}{\string~FrameEvent}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00058\ \};}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_renderer_init_event}{RendererInitEvent}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1_renderer_event_base}{RendererEventBase}}\ \{}
+\DoxyCodeLine{00061\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00062\ \ \ \mbox{\hyperlink{classprt_1_1_renderer_init_event_a15e272a97b2a33989324dbf6e84a9db7}{RendererInitEvent}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00063\ \ \ \mbox{\hyperlink{classprt_1_1_renderer_init_event_a8c3fd5bdd5891d8d31cba528cb74a877}{\string~RendererInitEvent}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00064\ \ \ \mbox{\hyperlink{classprt_1_1_renderer_init_event_ad87bcf739ab970eb923107bd3cca0ce3}{DECLARE\_EVENT\_TYPE}}(\mbox{\hyperlink{classprt_1_1_renderer_event}{RendererEvent}},\ RendererInit);}
+\DoxyCodeLine{00065\ \};}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_pre_frame_event}{PreFrameEvent}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1_frame_event}{FrameEvent}}\ \{}
+\DoxyCodeLine{00068\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00069\ \ \ \mbox{\hyperlink{classprt_1_1_pre_frame_event_a72f1126fd59695f79876eb9768d4728d}{PreFrameEvent}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00070\ \ \ \mbox{\hyperlink{classprt_1_1_pre_frame_event_a2df24bae34fbc110b13c794e6252145a}{\string~PreFrameEvent}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00071\ \ \ \mbox{\hyperlink{classprt_1_1_pre_frame_event_ad509691d58114df798f873484a27127f}{DECLARE\_EVENT\_TYPE}}(\mbox{\hyperlink{classprt_1_1_renderer_event}{RendererEvent}},\ PreFrame);}
+\DoxyCodeLine{00072\ \};}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_post_frame_event}{PostFrameEvent}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1_frame_event}{FrameEvent}}\ \{}
+\DoxyCodeLine{00075\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00076\ \ \ \mbox{\hyperlink{classprt_1_1_post_frame_event_ad6de84f6100396fb6f466b8337e261b5}{PostFrameEvent}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00077\ \ \ \mbox{\hyperlink{classprt_1_1_post_frame_event_ad5d24d928fa14992a97f2f824f72d7cf}{\string~PostFrameEvent}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00078\ \ \ \mbox{\hyperlink{classprt_1_1_post_frame_event_a86729f173fd8e1cc9692bf51f6e48b78}{DECLARE\_EVENT\_TYPE}}(\mbox{\hyperlink{classprt_1_1_renderer_event}{RendererEvent}},\ PostFrame);}
+\DoxyCodeLine{00079\ \};}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_renderer_destroyed_event}{RendererDestroyedEvent}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1_renderer_event_base}{RendererEventBase}}\ \{}
+\DoxyCodeLine{00082\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00083\ \ \ \mbox{\hyperlink{classprt_1_1_renderer_destroyed_event_ac798c343d717ded51afc2d9034425d57}{RendererDestroyedEvent}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00084\ \ \ \mbox{\hyperlink{classprt_1_1_renderer_destroyed_event_a2985f35871e43054c94d2558cdf6bcd5}{\string~RendererDestroyedEvent}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00085\ \ \ \mbox{\hyperlink{classprt_1_1_renderer_destroyed_event_aaf08982a074583a0dcab7d418515c61d}{DECLARE\_EVENT\_TYPE}}(\mbox{\hyperlink{classprt_1_1_renderer_event}{RendererEvent}},\ RendererDestroyed);}
+\DoxyCodeLine{00086\ \};}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \mbox{\hyperlink{event_8h_a75f747c7c3ad9804780471c5ce370793}{DEFINE\_EVENT\_SUBJECT}}(\mbox{\hyperlink{classprt_1_1_renderer}{Renderer}});}
+\DoxyCodeLine{00089\ \mbox{\hyperlink{event_8h_a77dcd0ad69e8fd51c473d76aca5bba76}{DEFINE\_EVENT\_OBSERVABLE}}(\mbox{\hyperlink{classprt_1_1_renderer}{Renderer}});}
+\DoxyCodeLine{00090\ \mbox{\hyperlink{renderer_8h_ae9988c73a80f5b53389f3f54a6dc4039}{FOR\_EACH\_RENDERER\_EVENT}}(\mbox{\hyperlink{event_8h_a77dcd0ad69e8fd51c473d76aca5bba76}{DEFINE\_EVENT\_OBSERVABLE}});}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{namespaceprt_a59fc17725eff26f75ccc5fc0964c7846}{OnRendererEvent}}()\ -\/>\ RendererEventObservable;}
+\DoxyCodeLine{00093\ \textcolor{preprocessor}{\#define\ DEFINE\_ON\_EVENT(Name)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00094\ \textcolor{preprocessor}{\ \ static\ inline\ auto\ On\#\#Name\#\#Event()-\/>Name\#\#EventObservable\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00095\ \textcolor{preprocessor}{\ \ \ \ return\ OnRendererEvent().filter(Name\#\#Event::Filter).map(Name\#\#Event::Cast);\ \(\backslash\)}}
+\DoxyCodeLine{00096\ \textcolor{preprocessor}{\ \ \}}}
+\DoxyCodeLine{00097\ \mbox{\hyperlink{renderer_8h_ae9988c73a80f5b53389f3f54a6dc4039}{FOR\_EACH\_RENDERER\_EVENT}}(\mbox{\hyperlink{engine_8cc_a2672365a233e0c9f3c1ccb0d78388308}{DEFINE\_ON\_EVENT}})}
+\DoxyCodeLine{00098\ \textcolor{preprocessor}{\#undef\ DEFINE\_ON\_EVENT}}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structprt_1_1_vertex}{Vertex}}\ \{}
+\DoxyCodeLine{00101\ \ \ glm::vec3\ \mbox{\hyperlink{structprt_1_1_vertex_ae66aed046eeda4ceea1482ffecff7590}{pos}};}
+\DoxyCodeLine{00102\ \ \ glm::vec3\ \mbox{\hyperlink{structprt_1_1_vertex_add2c192a1cc9a7a849fbc159c50bc7f4}{color}};}
+\DoxyCodeLine{00103\ \ \ glm::vec2\ \mbox{\hyperlink{structprt_1_1_vertex_a3766f8c054799734dd305d17a60b3e43}{uv}};}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1_vertex_a89765777098afe7a2466f7d9d8fd61e9}{GetBindingDescription}}()\ -\/>\ VkVertexInputBindingDescription\ \{}
+\DoxyCodeLine{00106\ \ \ \ \ VkVertexInputBindingDescription\ binding\{\};}
+\DoxyCodeLine{00107\ \ \ \ \ binding.binding\ =\ 0;}
+\DoxyCodeLine{00108\ \ \ \ \ binding.stride\ =\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structprt_1_1_vertex}{Vertex}});}
+\DoxyCodeLine{00109\ \ \ \ \ binding.inputRate\ =\ VK\_VERTEX\_INPUT\_RATE\_VERTEX;}
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordflow}{return}\ binding;}
+\DoxyCodeLine{00111\ \ \ \}}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1_vertex_a3b2f3772cbc14ec1badcb2ec2256d980}{GetAttributeDescriptions}}()\ -\/>\ std::array<VkVertexInputAttributeDescription,\ 3>\ \{}
+\DoxyCodeLine{00114\ \ \ \ \ std::array<VkVertexInputAttributeDescription,\ 3>\ attributes\{\};}
+\DoxyCodeLine{00115\ \ \ \ \ attributes.at(0).binding\ =\ 0;}
+\DoxyCodeLine{00116\ \ \ \ \ attributes.at(0).location\ =\ 0;}
+\DoxyCodeLine{00117\ \ \ \ \ attributes.at(0).format\ =\ VK\_FORMAT\_R32G32B32\_SFLOAT;}
+\DoxyCodeLine{00118\ \ \ \ \ attributes.at(0).offset\ =\ offsetof(\mbox{\hyperlink{structprt_1_1_vertex}{Vertex}},\ pos);}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \ \ \ \ attributes.at(1).binding\ =\ 0;}
+\DoxyCodeLine{00121\ \ \ \ \ attributes.at(1).location\ =\ 1;}
+\DoxyCodeLine{00122\ \ \ \ \ attributes.at(1).format\ =\ VK\_FORMAT\_R32G32B32\_SFLOAT;}
+\DoxyCodeLine{00123\ \ \ \ \ attributes.at(1).offset\ =\ offsetof(\mbox{\hyperlink{structprt_1_1_vertex}{Vertex}},\ color);}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \ \ \ \ attributes.at(2).binding\ =\ 0;}
+\DoxyCodeLine{00126\ \ \ \ \ attributes.at(2).location\ =\ 2;}
+\DoxyCodeLine{00127\ \ \ \ \ attributes.at(2).format\ =\ VK\_FORMAT\_R32G32\_SFLOAT;}
+\DoxyCodeLine{00128\ \ \ \ \ attributes.at(2).offset\ =\ offsetof(\mbox{\hyperlink{structprt_1_1_vertex}{Vertex}},\ uv);}
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{keywordflow}{return}\ attributes;}
+\DoxyCodeLine{00130\ \ \ \}}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00132\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1_vertex_a1cc538d1d5f7c66c05b9714cfdee8dea}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structprt_1_1_vertex}{Vertex}}\&\ rhs)\ \textcolor{keyword}{const}\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keywordflow}{return}\ pos\ ==\ rhs.pos\ \&\&\ color\ ==\ rhs.color\ \&\&\ uv\ ==\ rhs.uv;}
+\DoxyCodeLine{00134\ \ \ \}}
+\DoxyCodeLine{00135\ \};}
+\DoxyCodeLine{00136\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_renderer}{Renderer}}\ \{}
+\DoxyCodeLine{00137\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_lua_state}{LuaState}};}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00139\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00140\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ InitCommandBuffers(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_driver}{Driver}}*\ driver);}
+\DoxyCodeLine{00141\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ Destroy();}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00144\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_renderer_a95fbd833e0d772a75391a156590fdcb1}{Init}}(\mbox{\hyperlink{classprt_1_1_lua_state}{LuaState}}*\ \mbox{\hyperlink{engine_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}});}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00147\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ Init();}
+\DoxyCodeLine{00148\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ DrawFrame(\mbox{\hyperlink{classprt_1_1_driver}{Driver}}*\ driver,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_tick}{Tick}}\&\ current,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_tick}{Tick}}\&\ previous);}
+\DoxyCodeLine{00149\ \};}
+\DoxyCodeLine{00150\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00152\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacestd}{std}}\ \{}
+\DoxyCodeLine{00153\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00154\ \textcolor{keyword}{struct\ }hash<\mbox{\hyperlink{namespaceprt}{prt}}::Vertex>\ \{}
+\DoxyCodeLine{00155\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structstd_1_1hash_3_01prt_1_1_vertex_01_4_a85d90afb205dc9d2c8248b30e2a5ce4c}{operator()}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structprt_1_1_vertex}{prt::Vertex}}\&\ rhs)\ \textcolor{keyword}{const}\ -\/>\ \textcolor{keywordtype}{size\_t}\ \{}
+\DoxyCodeLine{00156\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ hash\ =\ 0;}
+\DoxyCodeLine{00157\ \ \ \ \ Combine(hash,\ rhs.pos);}
+\DoxyCodeLine{00158\ \ \ \ \ Combine(hash,\ rhs.color);}
+\DoxyCodeLine{00159\ \ \ \ \ Combine(hash,\ rhs.uv);}
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{keywordflow}{return}\ hash;}
+\DoxyCodeLine{00161\ \ \ \}}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00163\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00164\ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00165\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{structstd_1_1hash_3_01prt_1_1_vertex_01_4_a67e99438cee91839bd7a2947ebfecc50}{Combine}}(std::size\_t\&\ seed,\ \textcolor{keyword}{const}\ T\&\ v)\ \{}
+\DoxyCodeLine{00166\ \ \ \ \ std::hash<T>\ hasher;}
+\DoxyCodeLine{00167\ \ \ \ \ seed\ \string^=\ hasher(v)\ +\ 0x9e3779b9\ +\ (seed\ <<\ 6)\ +\ (seed\ >>\ 2);}
+\DoxyCodeLine{00168\ \ \ \}}
+\DoxyCodeLine{00169\ \};}
+\DoxyCodeLine{00170\ \}\ \ \textcolor{comment}{//\ namespace\ std}}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00172\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_RENDERER\_H}}
+
+\end{DoxyCode}

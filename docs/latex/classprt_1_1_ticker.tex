@@ -1,0 +1,345 @@
+\doxysection{prt\+::Ticker Class Reference}
+\hypertarget{classprt_1_1_ticker}{}\label{classprt_1_1_ticker}\index{prt::Ticker@{prt::Ticker}}
+
+
+{\ttfamily \#include $<$ticker.\+h$>$}
+
+
+
+Inheritance diagram for prt\+::Ticker\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=324pt]{classprt_1_1_ticker__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for prt\+::Ticker\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classprt_1_1_ticker__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_ticker_aa81ebe2e3a2ae2e10edabf7552251c8c}{Ticker}} (\mbox{\hyperlink{classprt_1_1uv_1_1_loop}{uv\+::\+Loop}} \texorpdfstring{$\ast$}{*}loop, const uint64\+\_\+t start\+\_\+ns=uv\+::\+Now())
+\item 
+virtual \mbox{\hyperlink{classprt_1_1_ticker_ad7fb5c70ffa876dcdcd6b2713cf04f79}{\texorpdfstring{$\sim$}{\string~}\+Ticker}} ()=default
+\item 
+void \mbox{\hyperlink{classprt_1_1_ticker_abd42cfe498a50ea5c429d857e715b3b1}{Start}} ()
+\item 
+void \mbox{\hyperlink{classprt_1_1_ticker_abc6cd4ba905227a1833e02525f4f7f62}{Stop}} ()
+\item 
+void \mbox{\hyperlink{classprt_1_1_ticker_acec7fc4c8bef874213d44148ca48b429}{Close}} ()
+\item 
+auto \mbox{\hyperlink{classprt_1_1_ticker_ab33da97c393bf80b9887d7de392d4443}{Get\+Tick\+Subject}} () const -\/$>$ const rx\+::subject$<$ \mbox{\hyperlink{classprt_1_1_tick}{Tick}} $>$ \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_ticker_aaf3a2fa00fdb5833a2316a217568d23b}{On\+Tick}} () const -\/$>$ rx\+::observable$<$ \mbox{\hyperlink{classprt_1_1_tick}{Tick}} $>$
+\item 
+auto \mbox{\hyperlink{classprt_1_1_ticker_a3650bf022a54ae1f0c13cf9c1eb6ece2}{Get\+Epoch\+Tick}} () const -\/$>$ const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_ticker_a62bb7a93aae902de2f467ea3e19c6fe6}{Get\+Current\+Tick}} () const -\/$>$ const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_ticker_a207184ece440cfa3527561254b236538}{Get\+Previous\+Tick}} () const -\/$>$ const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_ticker_aac0a189366d974ec44f144ce71170467}{Get\+Total\+Ticks}} () const -\/$>$ uint64\+\_\+t
+\item 
+auto \mbox{\hyperlink{classprt_1_1_ticker_a1e0356e3323938cdc8a42692973b494b}{Get\+Time\+Since\+Current\+Tick}} (const uint64\+\_\+t ts=uv\+\_\+hrtime()) const -\/$>$ \mbox{\hyperlink{classprt_1_1_tick_delta}{Tick\+Delta}}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_ticker_a3d07b116e5bfb823fe41928bcaba3558}{Get\+Time\+Since\+Last\+Tick}} (const uint64\+\_\+t ts=uv\+\_\+hrtime()) const -\/$>$ \mbox{\hyperlink{classprt_1_1_tick_delta}{Tick\+Delta}}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_ticker_a5c289fc8ebb3002380c27ef68f05f1a8}{Get\+Ticks\+Per\+Second}} () const -\/$>$ const \mbox{\hyperlink{namespaceprt_ace24bc62766da60be0236f69bde71470}{Ticks\+Per\+Second}} \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_ticker_a7e5c1b99b43b1a7949fd2adb3fc7c361}{Get\+Tick\+Duration\+Series}} () const -\/$>$ const \mbox{\hyperlink{namespaceprt_ab6cd3df40a04449b31d111b69068dde8}{Tick\+Duration\+Series}} \&
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_ticker_ac6b89476fe42ddfa5a64483014b916c7}{Get\+Duration}} () const -\/$>$ uint64\+\_\+t
+\item 
+virtual void \mbox{\hyperlink{classprt_1_1_ticker_a9137142471f8cf571617325eccf642ee}{Idle}} ()
+\item 
+virtual void \mbox{\hyperlink{classprt_1_1_ticker_a7f2701b497d35e564b7766ee70a42e47}{Prepare}} ()
+\item 
+virtual void \mbox{\hyperlink{classprt_1_1_ticker_a26b4148373fc0d8d6039f8e120ef795e}{Check}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classprt_1_1_ticker_a2c9a486e5ec37d8bc4373cae2cb848fe}{Set\+Epoch}} (const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&rhs)
+\item 
+void \mbox{\hyperlink{classprt_1_1_ticker_a55cb11ec8db1601a475da2ff6df7c4a7}{Set\+Epoch}} (const uint64\+\_\+t start\+\_\+ns)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classprt_1_1_ticker_ac80454f69b6916255ee4f9ff1f8c28d2}{On\+Idle}} (uv\+\_\+idle\+\_\+t \texorpdfstring{$\ast$}{*}handle)
+\item 
+static void \mbox{\hyperlink{classprt_1_1_ticker_a826d25e577e18a5a66e4c18e3ab366e7}{On\+Prepare}} (uv\+\_\+prepare\+\_\+t \texorpdfstring{$\ast$}{*}handle)
+\item 
+static void \mbox{\hyperlink{classprt_1_1_ticker_aafa0d05ba3c110b36d708f13d69a2422}{On\+Check}} (uv\+\_\+check\+\_\+t \texorpdfstring{$\ast$}{*}handle)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_tick}{Tick}} \mbox{\hyperlink{classprt_1_1_ticker_ac4c1cd95aa755ec56267954156c76184}{epoch\+\_\+}} \{\}
+\item 
+\mbox{\hyperlink{classprt_1_1_tick}{Tick}} \mbox{\hyperlink{classprt_1_1_ticker_a9d827545be6bc980002a2dc8ec8e8fed}{current\+\_\+}} \{\}
+\item 
+\mbox{\hyperlink{classprt_1_1_tick}{Tick}} \mbox{\hyperlink{classprt_1_1_ticker_adda5a4191d110d9f9cd15a4b92ab9a78}{previous\+\_\+}} \{\}
+\item 
+rx\+::subject$<$ \mbox{\hyperlink{classprt_1_1_tick}{Tick}} $>$ \mbox{\hyperlink{classprt_1_1_ticker_a219dfabc832a87b7d3c432a3f3145f70}{ticks\+\_\+}}
+\item 
+\mbox{\hyperlink{classprt_1_1uv_1_1_loop}{uv\+::\+Loop}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1_ticker_aa4c1b12fcd1b6e08ef39fe37015f9009}{loop\+\_\+}}
+\item 
+uv\+::\+Idle \mbox{\hyperlink{classprt_1_1_ticker_a2f013c6417cca90f7e1ed246e5ff7fec}{idle\+\_\+}}
+\item 
+uv\+::\+Prepare \mbox{\hyperlink{classprt_1_1_ticker_af9e91f297869a42d63c658039b1245c8}{prepare\+\_\+}}
+\item 
+uv\+::\+Check \mbox{\hyperlink{classprt_1_1_ticker_a60004d887b1fc3bc96816007f0e5b8b6}{check\+\_\+}}
+\item 
+\mbox{\hyperlink{namespaceprt_ace24bc62766da60be0236f69bde71470}{Ticks\+Per\+Second}} \mbox{\hyperlink{classprt_1_1_ticker_a439fc1d25f9e3c9d3b772725d0bf35ca}{count\+\_\+}} \{\}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classprt_1_1_ticker_a57058d25382e40c155aa1e8703de2b66}{duration\+\_\+}} = 0
+\item 
+\mbox{\hyperlink{namespaceprt_ab6cd3df40a04449b31d111b69068dde8}{Tick\+Duration\+Series}} \mbox{\hyperlink{classprt_1_1_ticker_a254027ece805fe85fa7b87b384d6d423}{durations\+\_\+}} \{\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_ticker_aa81ebe2e3a2ae2e10edabf7552251c8c}\index{prt::Ticker@{prt::Ticker}!Ticker@{Ticker}}
+\index{Ticker@{Ticker}!prt::Ticker@{prt::Ticker}}
+\doxysubsubsection{\texorpdfstring{Ticker()}{Ticker()}}
+{\footnotesize\ttfamily \label{classprt_1_1_ticker_aa81ebe2e3a2ae2e10edabf7552251c8c} 
+prt\+::\+Ticker\+::\+Ticker (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1uv_1_1_loop}{uv\+::\+Loop}} \texorpdfstring{$\ast$}{*}}]{loop}{, }\item[{const uint64\+\_\+t}]{start\+\_\+ns}{ = {\ttfamily uv\+:\+:Now()}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+\Hypertarget{classprt_1_1_ticker_ad7fb5c70ffa876dcdcd6b2713cf04f79}\index{prt::Ticker@{prt::Ticker}!````~Ticker@{\texorpdfstring{$\sim$}{\string~}Ticker}}
+\index{````~Ticker@{\texorpdfstring{$\sim$}{\string~}Ticker}!prt::Ticker@{prt::Ticker}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Ticker()}{\string~Ticker()}}
+{\footnotesize\ttfamily \label{classprt_1_1_ticker_ad7fb5c70ffa876dcdcd6b2713cf04f79} 
+virtual prt\+::\+Ticker\+::\texorpdfstring{$\sim$}{\string~}\+Ticker (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_ticker_a26b4148373fc0d8d6039f8e120ef795e}\index{prt::Ticker@{prt::Ticker}!Check@{Check}}
+\index{Check@{Check}!prt::Ticker@{prt::Ticker}}
+\doxysubsubsection{\texorpdfstring{Check()}{Check()}}
+{\footnotesize\ttfamily \label{classprt_1_1_ticker_a26b4148373fc0d8d6039f8e120ef795e} 
+virtual void prt\+::\+Ticker\+::\+Check (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented in \mbox{\hyperlink{classprt_1_1_rate_limited_ticker_a5b02de11ba4de7b48abf284f47c586fe}{prt\+::\+Rate\+Limited\+Ticker$<$ Rate $>$}}, and \mbox{\hyperlink{classprt_1_1_rate_limited_ticker_a5b02de11ba4de7b48abf284f47c586fe}{prt\+::\+Rate\+Limited\+Ticker$<$ k\+Target\+Tick\+Rate $>$}}.
+
+\Hypertarget{classprt_1_1_ticker_acec7fc4c8bef874213d44148ca48b429}\index{prt::Ticker@{prt::Ticker}!Close@{Close}}
+\index{Close@{Close}!prt::Ticker@{prt::Ticker}}
+\doxysubsubsection{\texorpdfstring{Close()}{Close()}}
+{\footnotesize\ttfamily \label{classprt_1_1_ticker_acec7fc4c8bef874213d44148ca48b429} 
+void prt\+::\+Ticker\+::\+Close (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_ticker_a62bb7a93aae902de2f467ea3e19c6fe6}\index{prt::Ticker@{prt::Ticker}!GetCurrentTick@{GetCurrentTick}}
+\index{GetCurrentTick@{GetCurrentTick}!prt::Ticker@{prt::Ticker}}
+\doxysubsubsection{\texorpdfstring{GetCurrentTick()}{GetCurrentTick()}}
+{\footnotesize\ttfamily \label{classprt_1_1_ticker_a62bb7a93aae902de2f467ea3e19c6fe6} 
+auto prt\+::\+Ticker\+::\+Get\+Current\+Tick (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const \mbox{\hyperlink{classprt_1_1_tick}{Tick}}\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_ticker_ac6b89476fe42ddfa5a64483014b916c7}\index{prt::Ticker@{prt::Ticker}!GetDuration@{GetDuration}}
+\index{GetDuration@{GetDuration}!prt::Ticker@{prt::Ticker}}
+\doxysubsubsection{\texorpdfstring{GetDuration()}{GetDuration()}}
+{\footnotesize\ttfamily \label{classprt_1_1_ticker_ac6b89476fe42ddfa5a64483014b916c7} 
+auto prt\+::\+Ticker\+::\+Get\+Duration (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ uint64\+\_\+t \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+\Hypertarget{classprt_1_1_ticker_a3650bf022a54ae1f0c13cf9c1eb6ece2}\index{prt::Ticker@{prt::Ticker}!GetEpochTick@{GetEpochTick}}
+\index{GetEpochTick@{GetEpochTick}!prt::Ticker@{prt::Ticker}}
+\doxysubsubsection{\texorpdfstring{GetEpochTick()}{GetEpochTick()}}
+{\footnotesize\ttfamily \label{classprt_1_1_ticker_a3650bf022a54ae1f0c13cf9c1eb6ece2} 
+auto prt\+::\+Ticker\+::\+Get\+Epoch\+Tick (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const \mbox{\hyperlink{classprt_1_1_tick}{Tick}}\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_ticker_a207184ece440cfa3527561254b236538}\index{prt::Ticker@{prt::Ticker}!GetPreviousTick@{GetPreviousTick}}
+\index{GetPreviousTick@{GetPreviousTick}!prt::Ticker@{prt::Ticker}}
+\doxysubsubsection{\texorpdfstring{GetPreviousTick()}{GetPreviousTick()}}
+{\footnotesize\ttfamily \label{classprt_1_1_ticker_a207184ece440cfa3527561254b236538} 
+auto prt\+::\+Ticker\+::\+Get\+Previous\+Tick (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const \mbox{\hyperlink{classprt_1_1_tick}{Tick}}\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_ticker_a7e5c1b99b43b1a7949fd2adb3fc7c361}\index{prt::Ticker@{prt::Ticker}!GetTickDurationSeries@{GetTickDurationSeries}}
+\index{GetTickDurationSeries@{GetTickDurationSeries}!prt::Ticker@{prt::Ticker}}
+\doxysubsubsection{\texorpdfstring{GetTickDurationSeries()}{GetTickDurationSeries()}}
+{\footnotesize\ttfamily \label{classprt_1_1_ticker_a7e5c1b99b43b1a7949fd2adb3fc7c361} 
+auto prt\+::\+Ticker\+::\+Get\+Tick\+Duration\+Series (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const \mbox{\hyperlink{namespaceprt_ab6cd3df40a04449b31d111b69068dde8}{Tick\+Duration\+Series}}\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_ticker_a5c289fc8ebb3002380c27ef68f05f1a8}\index{prt::Ticker@{prt::Ticker}!GetTicksPerSecond@{GetTicksPerSecond}}
+\index{GetTicksPerSecond@{GetTicksPerSecond}!prt::Ticker@{prt::Ticker}}
+\doxysubsubsection{\texorpdfstring{GetTicksPerSecond()}{GetTicksPerSecond()}}
+{\footnotesize\ttfamily \label{classprt_1_1_ticker_a5c289fc8ebb3002380c27ef68f05f1a8} 
+auto prt\+::\+Ticker\+::\+Get\+Ticks\+Per\+Second (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const \mbox{\hyperlink{namespaceprt_ace24bc62766da60be0236f69bde71470}{Ticks\+Per\+Second}}\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_ticker_ab33da97c393bf80b9887d7de392d4443}\index{prt::Ticker@{prt::Ticker}!GetTickSubject@{GetTickSubject}}
+\index{GetTickSubject@{GetTickSubject}!prt::Ticker@{prt::Ticker}}
+\doxysubsubsection{\texorpdfstring{GetTickSubject()}{GetTickSubject()}}
+{\footnotesize\ttfamily \label{classprt_1_1_ticker_ab33da97c393bf80b9887d7de392d4443} 
+auto prt\+::\+Ticker\+::\+Get\+Tick\+Subject (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const rx\+::subject$<$\mbox{\hyperlink{classprt_1_1_tick}{Tick}}$>$\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_ticker_a1e0356e3323938cdc8a42692973b494b}\index{prt::Ticker@{prt::Ticker}!GetTimeSinceCurrentTick@{GetTimeSinceCurrentTick}}
+\index{GetTimeSinceCurrentTick@{GetTimeSinceCurrentTick}!prt::Ticker@{prt::Ticker}}
+\doxysubsubsection{\texorpdfstring{GetTimeSinceCurrentTick()}{GetTimeSinceCurrentTick()}}
+{\footnotesize\ttfamily \label{classprt_1_1_ticker_a1e0356e3323938cdc8a42692973b494b} 
+auto prt\+::\+Ticker\+::\+Get\+Time\+Since\+Current\+Tick (\begin{DoxyParamCaption}\item[{const uint64\+\_\+t}]{ts}{ = {\ttfamily uv\+\_\+hrtime()}}\end{DoxyParamCaption}) const -\/$>$ \mbox{\hyperlink{classprt_1_1_tick_delta}{Tick\+Delta}} \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_ticker_a3d07b116e5bfb823fe41928bcaba3558}\index{prt::Ticker@{prt::Ticker}!GetTimeSinceLastTick@{GetTimeSinceLastTick}}
+\index{GetTimeSinceLastTick@{GetTimeSinceLastTick}!prt::Ticker@{prt::Ticker}}
+\doxysubsubsection{\texorpdfstring{GetTimeSinceLastTick()}{GetTimeSinceLastTick()}}
+{\footnotesize\ttfamily \label{classprt_1_1_ticker_a3d07b116e5bfb823fe41928bcaba3558} 
+auto prt\+::\+Ticker\+::\+Get\+Time\+Since\+Last\+Tick (\begin{DoxyParamCaption}\item[{const uint64\+\_\+t}]{ts}{ = {\ttfamily uv\+\_\+hrtime()}}\end{DoxyParamCaption}) const -\/$>$ \mbox{\hyperlink{classprt_1_1_tick_delta}{Tick\+Delta}} \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_ticker_aac0a189366d974ec44f144ce71170467}\index{prt::Ticker@{prt::Ticker}!GetTotalTicks@{GetTotalTicks}}
+\index{GetTotalTicks@{GetTotalTicks}!prt::Ticker@{prt::Ticker}}
+\doxysubsubsection{\texorpdfstring{GetTotalTicks()}{GetTotalTicks()}}
+{\footnotesize\ttfamily \label{classprt_1_1_ticker_aac0a189366d974ec44f144ce71170467} 
+auto prt\+::\+Ticker\+::\+Get\+Total\+Ticks (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ uint64\+\_\+t \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_ticker_a9137142471f8cf571617325eccf642ee}\index{prt::Ticker@{prt::Ticker}!Idle@{Idle}}
+\index{Idle@{Idle}!prt::Ticker@{prt::Ticker}}
+\doxysubsubsection{\texorpdfstring{Idle()}{Idle()}}
+{\footnotesize\ttfamily \label{classprt_1_1_ticker_a9137142471f8cf571617325eccf642ee} 
+virtual void prt\+::\+Ticker\+::\+Idle (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented in \mbox{\hyperlink{classprt_1_1_rate_limited_ticker_a23afef37e90b8790f2f3643116212d74}{prt\+::\+Rate\+Limited\+Ticker$<$ Rate $>$}}, and \mbox{\hyperlink{classprt_1_1_rate_limited_ticker_a23afef37e90b8790f2f3643116212d74}{prt\+::\+Rate\+Limited\+Ticker$<$ k\+Target\+Tick\+Rate $>$}}.
+
+\Hypertarget{classprt_1_1_ticker_aafa0d05ba3c110b36d708f13d69a2422}\index{prt::Ticker@{prt::Ticker}!OnCheck@{OnCheck}}
+\index{OnCheck@{OnCheck}!prt::Ticker@{prt::Ticker}}
+\doxysubsubsection{\texorpdfstring{OnCheck()}{OnCheck()}}
+{\footnotesize\ttfamily \label{classprt_1_1_ticker_aafa0d05ba3c110b36d708f13d69a2422} 
+static void prt\+::\+Ticker\+::\+On\+Check (\begin{DoxyParamCaption}\item[{uv\+\_\+check\+\_\+t \texorpdfstring{$\ast$}{*}}]{handle}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_ticker_ac80454f69b6916255ee4f9ff1f8c28d2}\index{prt::Ticker@{prt::Ticker}!OnIdle@{OnIdle}}
+\index{OnIdle@{OnIdle}!prt::Ticker@{prt::Ticker}}
+\doxysubsubsection{\texorpdfstring{OnIdle()}{OnIdle()}}
+{\footnotesize\ttfamily \label{classprt_1_1_ticker_ac80454f69b6916255ee4f9ff1f8c28d2} 
+static void prt\+::\+Ticker\+::\+On\+Idle (\begin{DoxyParamCaption}\item[{uv\+\_\+idle\+\_\+t \texorpdfstring{$\ast$}{*}}]{handle}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_ticker_a826d25e577e18a5a66e4c18e3ab366e7}\index{prt::Ticker@{prt::Ticker}!OnPrepare@{OnPrepare}}
+\index{OnPrepare@{OnPrepare}!prt::Ticker@{prt::Ticker}}
+\doxysubsubsection{\texorpdfstring{OnPrepare()}{OnPrepare()}}
+{\footnotesize\ttfamily \label{classprt_1_1_ticker_a826d25e577e18a5a66e4c18e3ab366e7} 
+static void prt\+::\+Ticker\+::\+On\+Prepare (\begin{DoxyParamCaption}\item[{uv\+\_\+prepare\+\_\+t \texorpdfstring{$\ast$}{*}}]{handle}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_ticker_aaf3a2fa00fdb5833a2316a217568d23b}\index{prt::Ticker@{prt::Ticker}!OnTick@{OnTick}}
+\index{OnTick@{OnTick}!prt::Ticker@{prt::Ticker}}
+\doxysubsubsection{\texorpdfstring{OnTick()}{OnTick()}}
+{\footnotesize\ttfamily \label{classprt_1_1_ticker_aaf3a2fa00fdb5833a2316a217568d23b} 
+auto prt\+::\+Ticker\+::\+On\+Tick (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ rx\+::observable$<$\mbox{\hyperlink{classprt_1_1_tick}{Tick}}$>$ \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_ticker_a7f2701b497d35e564b7766ee70a42e47}\index{prt::Ticker@{prt::Ticker}!Prepare@{Prepare}}
+\index{Prepare@{Prepare}!prt::Ticker@{prt::Ticker}}
+\doxysubsubsection{\texorpdfstring{Prepare()}{Prepare()}}
+{\footnotesize\ttfamily \label{classprt_1_1_ticker_a7f2701b497d35e564b7766ee70a42e47} 
+virtual void prt\+::\+Ticker\+::\+Prepare (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented in \mbox{\hyperlink{classprt_1_1_rate_limited_ticker_a1e8aa684bd605224f61edaf3bc4d00b9}{prt\+::\+Rate\+Limited\+Ticker$<$ Rate $>$}}, and \mbox{\hyperlink{classprt_1_1_rate_limited_ticker_a1e8aa684bd605224f61edaf3bc4d00b9}{prt\+::\+Rate\+Limited\+Ticker$<$ k\+Target\+Tick\+Rate $>$}}.
+
+\Hypertarget{classprt_1_1_ticker_a2c9a486e5ec37d8bc4373cae2cb848fe}\index{prt::Ticker@{prt::Ticker}!SetEpoch@{SetEpoch}}
+\index{SetEpoch@{SetEpoch}!prt::Ticker@{prt::Ticker}}
+\doxysubsubsection{\texorpdfstring{SetEpoch()}{SetEpoch()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_ticker_a2c9a486e5ec37d8bc4373cae2cb848fe} 
+void prt\+::\+Ticker\+::\+Set\+Epoch (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&}]{rhs}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_ticker_a55cb11ec8db1601a475da2ff6df7c4a7}\index{prt::Ticker@{prt::Ticker}!SetEpoch@{SetEpoch}}
+\index{SetEpoch@{SetEpoch}!prt::Ticker@{prt::Ticker}}
+\doxysubsubsection{\texorpdfstring{SetEpoch()}{SetEpoch()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_ticker_a55cb11ec8db1601a475da2ff6df7c4a7} 
+void prt\+::\+Ticker\+::\+Set\+Epoch (\begin{DoxyParamCaption}\item[{const uint64\+\_\+t}]{start\+\_\+ns}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_ticker_abd42cfe498a50ea5c429d857e715b3b1}\index{prt::Ticker@{prt::Ticker}!Start@{Start}}
+\index{Start@{Start}!prt::Ticker@{prt::Ticker}}
+\doxysubsubsection{\texorpdfstring{Start()}{Start()}}
+{\footnotesize\ttfamily \label{classprt_1_1_ticker_abd42cfe498a50ea5c429d857e715b3b1} 
+void prt\+::\+Ticker\+::\+Start (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_ticker_abc6cd4ba905227a1833e02525f4f7f62}\index{prt::Ticker@{prt::Ticker}!Stop@{Stop}}
+\index{Stop@{Stop}!prt::Ticker@{prt::Ticker}}
+\doxysubsubsection{\texorpdfstring{Stop()}{Stop()}}
+{\footnotesize\ttfamily \label{classprt_1_1_ticker_abc6cd4ba905227a1833e02525f4f7f62} 
+void prt\+::\+Ticker\+::\+Stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_ticker_a60004d887b1fc3bc96816007f0e5b8b6}\index{prt::Ticker@{prt::Ticker}!check\_@{check\_}}
+\index{check\_@{check\_}!prt::Ticker@{prt::Ticker}}
+\doxysubsubsection{\texorpdfstring{check\_}{check\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_ticker_a60004d887b1fc3bc96816007f0e5b8b6} 
+uv\+::\+Check prt\+::\+Ticker\+::check\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_ticker_a439fc1d25f9e3c9d3b772725d0bf35ca}\index{prt::Ticker@{prt::Ticker}!count\_@{count\_}}
+\index{count\_@{count\_}!prt::Ticker@{prt::Ticker}}
+\doxysubsubsection{\texorpdfstring{count\_}{count\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_ticker_a439fc1d25f9e3c9d3b772725d0bf35ca} 
+\mbox{\hyperlink{namespaceprt_ace24bc62766da60be0236f69bde71470}{Ticks\+Per\+Second}} prt\+::\+Ticker\+::count\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_ticker_a9d827545be6bc980002a2dc8ec8e8fed}\index{prt::Ticker@{prt::Ticker}!current\_@{current\_}}
+\index{current\_@{current\_}!prt::Ticker@{prt::Ticker}}
+\doxysubsubsection{\texorpdfstring{current\_}{current\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_ticker_a9d827545be6bc980002a2dc8ec8e8fed} 
+\mbox{\hyperlink{classprt_1_1_tick}{Tick}} prt\+::\+Ticker\+::current\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_ticker_a57058d25382e40c155aa1e8703de2b66}\index{prt::Ticker@{prt::Ticker}!duration\_@{duration\_}}
+\index{duration\_@{duration\_}!prt::Ticker@{prt::Ticker}}
+\doxysubsubsection{\texorpdfstring{duration\_}{duration\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_ticker_a57058d25382e40c155aa1e8703de2b66} 
+uint64\+\_\+t prt\+::\+Ticker\+::duration\+\_\+ = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_ticker_a254027ece805fe85fa7b87b384d6d423}\index{prt::Ticker@{prt::Ticker}!durations\_@{durations\_}}
+\index{durations\_@{durations\_}!prt::Ticker@{prt::Ticker}}
+\doxysubsubsection{\texorpdfstring{durations\_}{durations\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_ticker_a254027ece805fe85fa7b87b384d6d423} 
+\mbox{\hyperlink{namespaceprt_ab6cd3df40a04449b31d111b69068dde8}{Tick\+Duration\+Series}} prt\+::\+Ticker\+::durations\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_ticker_ac4c1cd95aa755ec56267954156c76184}\index{prt::Ticker@{prt::Ticker}!epoch\_@{epoch\_}}
+\index{epoch\_@{epoch\_}!prt::Ticker@{prt::Ticker}}
+\doxysubsubsection{\texorpdfstring{epoch\_}{epoch\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_ticker_ac4c1cd95aa755ec56267954156c76184} 
+\mbox{\hyperlink{classprt_1_1_tick}{Tick}} prt\+::\+Ticker\+::epoch\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_ticker_a2f013c6417cca90f7e1ed246e5ff7fec}\index{prt::Ticker@{prt::Ticker}!idle\_@{idle\_}}
+\index{idle\_@{idle\_}!prt::Ticker@{prt::Ticker}}
+\doxysubsubsection{\texorpdfstring{idle\_}{idle\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_ticker_a2f013c6417cca90f7e1ed246e5ff7fec} 
+uv\+::\+Idle prt\+::\+Ticker\+::idle\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_ticker_aa4c1b12fcd1b6e08ef39fe37015f9009}\index{prt::Ticker@{prt::Ticker}!loop\_@{loop\_}}
+\index{loop\_@{loop\_}!prt::Ticker@{prt::Ticker}}
+\doxysubsubsection{\texorpdfstring{loop\_}{loop\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_ticker_aa4c1b12fcd1b6e08ef39fe37015f9009} 
+\mbox{\hyperlink{classprt_1_1uv_1_1_loop}{uv\+::\+Loop}}\texorpdfstring{$\ast$}{*} prt\+::\+Ticker\+::loop\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_ticker_af9e91f297869a42d63c658039b1245c8}\index{prt::Ticker@{prt::Ticker}!prepare\_@{prepare\_}}
+\index{prepare\_@{prepare\_}!prt::Ticker@{prt::Ticker}}
+\doxysubsubsection{\texorpdfstring{prepare\_}{prepare\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_ticker_af9e91f297869a42d63c658039b1245c8} 
+uv\+::\+Prepare prt\+::\+Ticker\+::prepare\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_ticker_adda5a4191d110d9f9cd15a4b92ab9a78}\index{prt::Ticker@{prt::Ticker}!previous\_@{previous\_}}
+\index{previous\_@{previous\_}!prt::Ticker@{prt::Ticker}}
+\doxysubsubsection{\texorpdfstring{previous\_}{previous\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_ticker_adda5a4191d110d9f9cd15a4b92ab9a78} 
+\mbox{\hyperlink{classprt_1_1_tick}{Tick}} prt\+::\+Ticker\+::previous\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_ticker_a219dfabc832a87b7d3c432a3f3145f70}\index{prt::Ticker@{prt::Ticker}!ticks\_@{ticks\_}}
+\index{ticks\_@{ticks\_}!prt::Ticker@{prt::Ticker}}
+\doxysubsubsection{\texorpdfstring{ticks\_}{ticks\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_ticker_a219dfabc832a87b7d3c432a3f3145f70} 
+rx\+::subject$<$\mbox{\hyperlink{classprt_1_1_tick}{Tick}}$>$ prt\+::\+Ticker\+::ticks\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{ticker_8h}{ticker.\+h}}\end{DoxyCompactItemize}

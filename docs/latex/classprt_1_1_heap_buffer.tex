@@ -1,0 +1,204 @@
+\doxysection{prt\+::Heap\+Buffer Class Reference}
+\hypertarget{classprt_1_1_heap_buffer}{}\label{classprt_1_1_heap_buffer}\index{prt::HeapBuffer@{prt::HeapBuffer}}
+
+
+Inheritance diagram for prt\+::Heap\+Buffer\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=163pt]{classprt_1_1_heap_buffer__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for prt\+::Heap\+Buffer\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=163pt]{classprt_1_1_heap_buffer__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_heap_buffer_acabc4a7f53380d3a1aad2d7bd81dbe25}{Heap\+Buffer}} ()=delete
+\item 
+\mbox{\hyperlink{classprt_1_1_heap_buffer_a0eb959a46ce10883d5cba5e171162004}{Heap\+Buffer}} (const uint64\+\_\+t init\+\_\+cap)
+\item 
+\mbox{\hyperlink{classprt_1_1_heap_buffer_a82dcbd04ac6a3ff56fe15abc3362172f}{Heap\+Buffer}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classprt_1_1_buffer_af01e66dba295c2bd79a094993fadcf6a}{data}}, const uint64\+\_\+t nbytes, const uint64\+\_\+t wpos, const uint64\+\_\+t rpos)
+\item 
+\mbox{\hyperlink{classprt_1_1_heap_buffer_ac3c872c020b3f8eb72c5c20253b45bdc}{\texorpdfstring{$\sim$}{\string~}\+Heap\+Buffer}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classprt_1_1_buffer}{prt\+::\+Buffer}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_buffer_a4b3534e71bd8468058eda3e0146e805e}{Buffer}} ()=delete
+\item 
+virtual \mbox{\hyperlink{classprt_1_1_buffer_aae34c00b39d6b6bd4aee205b59400410}{\texorpdfstring{$\sim$}{\string~}\+Buffer}} ()=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1_buffer_af01e66dba295c2bd79a094993fadcf6a}{data}} () const -\/$>$ uint8\+\_\+t \texorpdfstring{$\ast$}{*}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_buffer_a4d32eec194b90214d2aa99d7ab741b22}{capacity}} () const -\/$>$ uint64\+\_\+t
+\item 
+auto \mbox{\hyperlink{classprt_1_1_buffer_a3f935a4d416e694dfb1ed3e384517c3b}{write\+\_\+pos}} () const -\/$>$ uint64\+\_\+t
+\item 
+void \mbox{\hyperlink{classprt_1_1_buffer_a18344b9822b6030e5e57cde9dc982a34}{set\+\_\+write\+\_\+pos}} (const uint64\+\_\+t pos)
+\item 
+auto \mbox{\hyperlink{classprt_1_1_buffer_a77bc55bd583c5f50c0fe2986480a99f9}{read\+\_\+pos}} () const -\/$>$ uint64\+\_\+t
+\item 
+void \mbox{\hyperlink{classprt_1_1_buffer_ae2eca76e9a1b0fe21d9c004ef738bb5c}{set\+\_\+read\+\_\+pos}} (const uint64\+\_\+t pos)
+\item 
+auto \mbox{\hyperlink{classprt_1_1_buffer_a2017e1b469d07d670aef240e0ff722b3}{empty}} () const -\/$>$ bool
+\item 
+{\footnotesize template$<$typename T $>$ }\\auto \mbox{\hyperlink{classprt_1_1_buffer_af9c65a370135a63b561c0ec5cc113f7c}{Insert}} (const T value, const uint64\+\_\+t pos) -\/$>$ bool
+\item 
+{\footnotesize template$<$typename T $>$ }\\auto \mbox{\hyperlink{classprt_1_1_buffer_a597b59d7bf30cb5a50f963048c623e7a}{Append}} (const T value) -\/$>$ bool
+\item 
+{\footnotesize template$<$typename T $>$ }\\auto \mbox{\hyperlink{classprt_1_1_buffer_a5be2c6913e2827ecc61d89d276f21b53}{Read}} (const uint64\+\_\+t pos) -\/$>$ T
+\item 
+{\footnotesize template$<$typename T $>$ }\\auto \mbox{\hyperlink{classprt_1_1_buffer_a4470b335c1a51a3f7154e232bf62d1d0}{Read}} () -\/$>$ T
+\item 
+auto \mbox{\hyperlink{classprt_1_1_buffer_ac4c4f327a0b083fbf55636e7d965b51f}{Write\+To}} (FILE \texorpdfstring{$\ast$}{*}file) const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_buffer_aeb886994408c75f824f0f1b7e5a75773}{Write\+To}} (std\+::fstream \&stream) const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_buffer_a6011d0a614cf688fc04ec27768db258a}{Read\+From}} (FILE \texorpdfstring{$\ast$}{*}file, const uint64\+\_\+t pos, const uint64\+\_\+t nbytes) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_buffer_a7c1752193ee91e426b5bdd1540bf75e4}{Read\+From}} (FILE \texorpdfstring{$\ast$}{*}file, const uint64\+\_\+t nbytes) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_buffer_ac9dfe2e5b23c1ea37d4058327c76400c}{Read\+From}} (FILE \texorpdfstring{$\ast$}{*}file) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_buffer_af101842b6bd3e9e6c1a4c47a8a600b13}{Read\+From}} (std\+::ifstream \&stream, const uint64\+\_\+t pos, const uint64\+\_\+t nbytes) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_buffer_aaf9b7b8a4ef358433963563342407543}{Read\+From}} (std\+::ifstream \&stream, const uint64\+\_\+t nbytes) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_buffer_ae433f61398e37683a48863f2f6557140}{Put}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classprt_1_1_buffer_af01e66dba295c2bd79a094993fadcf6a}{data}}, const uint64\+\_\+t pos, const uint64\+\_\+t nbytes) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_buffer_a3a0b9ef78cf85a8ffe26f314aa12d3eb}{Put}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classprt_1_1_buffer_af01e66dba295c2bd79a094993fadcf6a}{data}}, const uint64\+\_\+t nbytes) -\/$>$ bool
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classprt_1_1_heap_buffer_a47dcd698e41480477a049efde8f365ea}{Resize}} (const uint64\+\_\+t new\+\_\+size) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classprt_1_1_buffer}{prt\+::\+Buffer}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_buffer_aafa85b3db085c2bd75cac2c7cb116a81}{Buffer}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classprt_1_1_buffer_af01e66dba295c2bd79a094993fadcf6a}{data}}, uint64\+\_\+t \mbox{\hyperlink{classprt_1_1_buffer_a4d32eec194b90214d2aa99d7ab741b22}{capacity}}, uint64\+\_\+t wpos, uint64\+\_\+t rpos)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_heap_buffer_ad07164b1a466311edec403f52ad484d8}{DEFINE\+\_\+\+NON\+\_\+\+COPYABLE\+\_\+\+TYPE}} (\mbox{\hyperlink{classprt_1_1_heap_buffer}{Heap\+Buffer}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1_heap_buffer_a5ba04a2bf0ca34a0f845cd759950664d}{Buffer}}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_heap_buffer_a75ffa50fafd9b6660bda2abfd847c721}{operator$<$$<$}} (std\+::ostream \&stream, const \mbox{\hyperlink{classprt_1_1_heap_buffer}{Heap\+Buffer}} \&rhs) -\/$>$ std\+::ostream \&
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classprt_1_1_buffer}{prt\+::\+Buffer}}}
+\begin{DoxyCompactItemize}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_buffer_a15d96b76af635d72052dd72164238d6d}{New}} (const uint64\+\_\+t init\+\_\+capacity) -\/$>$ \mbox{\hyperlink{namespaceprt_a9ceee812bda43d46e4fb1359366b5cb0}{Buffer\+Ptr}}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_buffer_a6dd6a3f90ebd04e4dd92252e0a5ca461}{From\+File}} (const std\+::string \&filename) -\/$>$ \mbox{\hyperlink{namespaceprt_a9ceee812bda43d46e4fb1359366b5cb0}{Buffer\+Ptr}}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_buffer_acad14da5f347c1f351d2b9c030bfb30e}{From\+File}} (const \mbox{\hyperlink{structprt_1_1uri_1_1_uri}{uri\+::\+Uri}} \&uri) -\/$>$ \mbox{\hyperlink{namespaceprt_a9ceee812bda43d46e4fb1359366b5cb0}{Buffer\+Ptr}}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_buffer_ac47ef579d62840f96eed54997d4ac0a8}{Copy\+From}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classprt_1_1_buffer_af01e66dba295c2bd79a094993fadcf6a}{data}}, const uint64\+\_\+t length, const uint64\+\_\+t wpos, const uint64\+\_\+t rpos=0) -\/$>$ \mbox{\hyperlink{namespaceprt_a9ceee812bda43d46e4fb1359366b5cb0}{Buffer\+Ptr}}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_buffer_aaa056e2e5c0480f8a5b4b986d98891d4}{Copy\+From}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classprt_1_1_buffer_af01e66dba295c2bd79a094993fadcf6a}{data}}, const uint64\+\_\+t length) -\/$>$ \mbox{\hyperlink{namespaceprt_a9ceee812bda43d46e4fb1359366b5cb0}{Buffer\+Ptr}}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_buffer_ab8a44abf9840cea328f593dd0022fd43}{Copy\+From}} (const std\+::string \&\mbox{\hyperlink{classprt_1_1_buffer_af01e66dba295c2bd79a094993fadcf6a}{data}}) -\/$>$ \mbox{\hyperlink{namespaceprt_a9ceee812bda43d46e4fb1359366b5cb0}{Buffer\+Ptr}}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_buffer_a4ce44f79deb157c66e233f35096ed517}{Wrap}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classprt_1_1_buffer_af01e66dba295c2bd79a094993fadcf6a}{data}}, const uint64\+\_\+t length, const uint64\+\_\+t wpos, const uint64\+\_\+t rpos=0) -\/$>$ \mbox{\hyperlink{namespaceprt_a9ceee812bda43d46e4fb1359366b5cb0}{Buffer\+Ptr}}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_buffer_a8d53fae02e2b3d444c12136f05aa75f8}{Wrap}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classprt_1_1_buffer_af01e66dba295c2bd79a094993fadcf6a}{data}}, const uint64\+\_\+t length) -\/$>$ \mbox{\hyperlink{namespaceprt_a9ceee812bda43d46e4fb1359366b5cb0}{Buffer\+Ptr}}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_buffer_a2d4facc9e345ea27ec4f02e677819303}{Wrap}} (const std\+::string \&\mbox{\hyperlink{classprt_1_1_buffer_af01e66dba295c2bd79a094993fadcf6a}{data}}) -\/$>$ \mbox{\hyperlink{namespaceprt_a9ceee812bda43d46e4fb1359366b5cb0}{Buffer\+Ptr}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{classprt_1_1_buffer}{prt\+::\+Buffer}}}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr const uint64\+\_\+t \mbox{\hyperlink{classprt_1_1_buffer_a8c19cae4e2a2d7697167099b9ef01707}{k\+Default\+Buffer\+Size}} = 4096
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classprt_1_1_buffer}{prt\+::\+Buffer}}}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1_buffer_a63caec45bf498118b1d0e98d7ceb32c1}{data\+\_\+}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classprt_1_1_buffer_a1f8b6de8d4a40fb488f10983d7f4c140}{capacity\+\_\+}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classprt_1_1_buffer_a880de7e15427610680138c3b03b36e47}{wpos\+\_\+}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classprt_1_1_buffer_a311eb2659aea8a8677326cde0f04b1d0}{rpos\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_heap_buffer_acabc4a7f53380d3a1aad2d7bd81dbe25}\index{prt::HeapBuffer@{prt::HeapBuffer}!HeapBuffer@{HeapBuffer}}
+\index{HeapBuffer@{HeapBuffer}!prt::HeapBuffer@{prt::HeapBuffer}}
+\doxysubsubsection{\texorpdfstring{HeapBuffer()}{HeapBuffer()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classprt_1_1_heap_buffer_acabc4a7f53380d3a1aad2d7bd81dbe25} 
+prt\+::\+Heap\+Buffer\+::\+Heap\+Buffer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\Hypertarget{classprt_1_1_heap_buffer_a0eb959a46ce10883d5cba5e171162004}\index{prt::HeapBuffer@{prt::HeapBuffer}!HeapBuffer@{HeapBuffer}}
+\index{HeapBuffer@{HeapBuffer}!prt::HeapBuffer@{prt::HeapBuffer}}
+\doxysubsubsection{\texorpdfstring{HeapBuffer()}{HeapBuffer()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classprt_1_1_heap_buffer_a0eb959a46ce10883d5cba5e171162004} 
+prt\+::\+Heap\+Buffer\+::\+Heap\+Buffer (\begin{DoxyParamCaption}\item[{const uint64\+\_\+t}]{init\+\_\+cap}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+\Hypertarget{classprt_1_1_heap_buffer_a82dcbd04ac6a3ff56fe15abc3362172f}\index{prt::HeapBuffer@{prt::HeapBuffer}!HeapBuffer@{HeapBuffer}}
+\index{HeapBuffer@{HeapBuffer}!prt::HeapBuffer@{prt::HeapBuffer}}
+\doxysubsubsection{\texorpdfstring{HeapBuffer()}{HeapBuffer()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classprt_1_1_heap_buffer_a82dcbd04ac6a3ff56fe15abc3362172f} 
+prt\+::\+Heap\+Buffer\+::\+Heap\+Buffer (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{const uint64\+\_\+t}]{nbytes}{, }\item[{const uint64\+\_\+t}]{wpos}{, }\item[{const uint64\+\_\+t}]{rpos}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_heap_buffer_ac3c872c020b3f8eb72c5c20253b45bdc}\index{prt::HeapBuffer@{prt::HeapBuffer}!````~HeapBuffer@{\texorpdfstring{$\sim$}{\string~}HeapBuffer}}
+\index{````~HeapBuffer@{\texorpdfstring{$\sim$}{\string~}HeapBuffer}!prt::HeapBuffer@{prt::HeapBuffer}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}HeapBuffer()}{\string~HeapBuffer()}}
+{\footnotesize\ttfamily \label{classprt_1_1_heap_buffer_ac3c872c020b3f8eb72c5c20253b45bdc} 
+prt\+::\+Heap\+Buffer\+::\texorpdfstring{$\sim$}{\string~}\+Heap\+Buffer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_heap_buffer_ad07164b1a466311edec403f52ad484d8}\index{prt::HeapBuffer@{prt::HeapBuffer}!DEFINE\_NON\_COPYABLE\_TYPE@{DEFINE\_NON\_COPYABLE\_TYPE}}
+\index{DEFINE\_NON\_COPYABLE\_TYPE@{DEFINE\_NON\_COPYABLE\_TYPE}!prt::HeapBuffer@{prt::HeapBuffer}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_NON\_COPYABLE\_TYPE()}{DEFINE\_NON\_COPYABLE\_TYPE()}}
+{\footnotesize\ttfamily \label{classprt_1_1_heap_buffer_ad07164b1a466311edec403f52ad484d8} 
+prt\+::\+Heap\+Buffer\+::\+DEFINE\+\_\+\+NON\+\_\+\+COPYABLE\+\_\+\+TYPE (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_heap_buffer}{Heap\+Buffer}}}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_heap_buffer_a47dcd698e41480477a049efde8f365ea}\index{prt::HeapBuffer@{prt::HeapBuffer}!Resize@{Resize}}
+\index{Resize@{Resize}!prt::HeapBuffer@{prt::HeapBuffer}}
+\doxysubsubsection{\texorpdfstring{Resize()}{Resize()}}
+{\footnotesize\ttfamily \label{classprt_1_1_heap_buffer_a47dcd698e41480477a049efde8f365ea} 
+void prt\+::\+Heap\+Buffer\+::\+Resize (\begin{DoxyParamCaption}\item[{const uint64\+\_\+t}]{new\+\_\+size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classprt_1_1_buffer_a9a591d1c9a76e9accfe4c1ea0d6bbaf3}{prt\+::\+Buffer}}.
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classprt_1_1_heap_buffer_a5ba04a2bf0ca34a0f845cd759950664d}\index{prt::HeapBuffer@{prt::HeapBuffer}!Buffer@{Buffer}}
+\index{Buffer@{Buffer}!prt::HeapBuffer@{prt::HeapBuffer}}
+\doxysubsubsection{\texorpdfstring{Buffer}{Buffer}}
+{\footnotesize\ttfamily \label{classprt_1_1_heap_buffer_a5ba04a2bf0ca34a0f845cd759950664d} 
+friend class \mbox{\hyperlink{classprt_1_1_buffer}{Buffer}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+\Hypertarget{classprt_1_1_heap_buffer_a75ffa50fafd9b6660bda2abfd847c721}\index{prt::HeapBuffer@{prt::HeapBuffer}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!prt::HeapBuffer@{prt::HeapBuffer}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily \label{classprt_1_1_heap_buffer_a75ffa50fafd9b6660bda2abfd847c721} 
+auto operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{stream}{, }\item[{const \mbox{\hyperlink{classprt_1_1_heap_buffer}{Heap\+Buffer}} \&}]{rhs}{}\end{DoxyParamCaption}) -\/$>$ std\+::ostream\& \hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{buffer_8cc}{buffer.\+cc}}\end{DoxyCompactItemize}

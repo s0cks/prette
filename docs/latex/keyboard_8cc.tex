@@ -1,0 +1,118 @@
+\doxysection{/\+Users/tazz/\+Projects/prette/\+Sources/prette/keyboard.cc File Reference}
+\hypertarget{keyboard_8cc}{}\label{keyboard_8cc}\index{/Users/tazz/Projects/prette/Sources/prette/keyboard.cc@{/Users/tazz/Projects/prette/Sources/prette/keyboard.cc}}
+{\ttfamily \#include "{}prette/keyboard.\+h"{}}\newline
+{\ttfamily \#include $<$GLFW/glfw3.\+h$>$}\newline
+{\ttfamily \#include $<$lauxlib.\+h$>$}\newline
+{\ttfamily \#include $<$lua.\+h$>$}\newline
+{\ttfamily \#include $<$filesystem$>$}\newline
+{\ttfamily \#include "{}prette/common.\+h"{}}\newline
+{\ttfamily \#include "{}prette/engine.\+h"{}}\newline
+{\ttfamily \#include "{}prette/to\+\_\+string.\+h"{}}\newline
+{\ttfamily \#include "{}prette/window.\+h"{}}\newline
+Include dependency graph for keyboard.\+cc\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{keyboard_8cc__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1_keyboard_module}{prt\+::\+Keyboard\+Module}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceprt}{prt}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{keyboard_8cc_a32c50df98f648495cd53c825e98f43d2}{LUA\+\_\+\+KEYBOARD\+\_\+F}}(Name)
+\item 
+\#define \mbox{\hyperlink{keyboard_8cc_a883bc9ae9206c92ed074a39a9a30192a}{DEFINE\+\_\+\+ON\+\_\+\+EVENT\+\_\+\+FUNC}}(Name)
+\item 
+\#define \mbox{\hyperlink{keyboard_8cc_a32c50df98f648495cd53c825e98f43d2}{LUA\+\_\+\+KEYBOARD\+\_\+F}}(Name)
+\item 
+\#define \mbox{\hyperlink{keyboard_8cc_a2672365a233e0c9f3c1ccb0d78388308}{DEFINE\+\_\+\+ON\+\_\+\+EVENT}}(Name)
+\item 
+\#define \mbox{\hyperlink{keyboard_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}}~lstate-\/$>$Get\+State()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+auto \mbox{\hyperlink{namespaceprt_aa73f5cd88a555c91433e2649fa4809de}{prt\+::\+On\+Keyboard\+Event}} () -\/$>$ Keyboard\+Event\+Observable
+\item 
+\mbox{\hyperlink{namespaceprt_a26688fe5a5f8d9cc1dd1a8c7a58e6e23}{prt\+::\+LUA\+\_\+\+KEYBOARD\+\_\+F}} (tostring)
+\item 
+\mbox{\hyperlink{namespaceprt_ac43b7f9ef7656386eb8ad1309c70fff3}{prt\+::\+LUA\+\_\+\+KEYBOARD\+\_\+F}} (on\+Event)
+\item 
+\mbox{\hyperlink{namespaceprt_aa4f226f61f3524a8a417269fd6b27e68}{prt\+::\+FOR\+\_\+\+EACH\+\_\+\+KEYBOARD\+\_\+\+EVENT}} (\mbox{\hyperlink{engine_8cc_a883bc9ae9206c92ed074a39a9a30192a}{DEFINE\+\_\+\+ON\+\_\+\+EVENT\+\_\+\+FUNC}})
+\item 
+\mbox{\hyperlink{namespaceprt_a5831663f2c32665f520c234ed3e5f600}{prt\+::\+LUA\+\_\+\+KEYBOARD\+\_\+F}} (is\+Pressed)
+\item 
+\mbox{\hyperlink{namespaceprt_aee5b8f693b668d510a0cc523003beaac}{prt\+::\+LUA\+\_\+\+KEYBOARD\+\_\+F}} (is\+Released)
+\item 
+\mbox{\hyperlink{namespaceprt_a74bbd9d9f53fa78eef33203d5eda5416}{prt\+::\+LUA\+\_\+\+KEYBOARD\+\_\+F}} (is\+Repeat)
+\item 
+\mbox{\hyperlink{namespaceprt_a20ab0a6e65c514863ef3931b353a5db5}{prt\+::\+LUA\+\_\+\+KEYBOARD\+\_\+F}} (on\+Pressed)
+\item 
+\mbox{\hyperlink{namespaceprt_a8034fd5a92bfff52824b62da26d3ae7b}{prt\+::\+LUA\+\_\+\+KEYBOARD\+\_\+F}} (on\+Released)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{keyboard_8cc_a2672365a233e0c9f3c1ccb0d78388308}\index{keyboard.cc@{keyboard.cc}!DEFINE\_ON\_EVENT@{DEFINE\_ON\_EVENT}}
+\index{DEFINE\_ON\_EVENT@{DEFINE\_ON\_EVENT}!keyboard.cc@{keyboard.cc}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_ON\_EVENT}{DEFINE\_ON\_EVENT}}
+{\footnotesize\ttfamily \label{keyboard_8cc_a2672365a233e0c9f3c1ccb0d78388308} 
+\#define DEFINE\+\_\+\+ON\+\_\+\+EVENT(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{keyboard_8cc_a32c50df98f648495cd53c825e98f43d2}{LUA\_KEYBOARD\_F}}(on\#\#Name\#\#Event),}
+
+\end{DoxyCode}
+\Hypertarget{keyboard_8cc_a883bc9ae9206c92ed074a39a9a30192a}\index{keyboard.cc@{keyboard.cc}!DEFINE\_ON\_EVENT\_FUNC@{DEFINE\_ON\_EVENT\_FUNC}}
+\index{DEFINE\_ON\_EVENT\_FUNC@{DEFINE\_ON\_EVENT\_FUNC}!keyboard.cc@{keyboard.cc}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_ON\_EVENT\_FUNC}{DEFINE\_ON\_EVENT\_FUNC}}
+{\footnotesize\ttfamily \label{keyboard_8cc_a883bc9ae9206c92ed074a39a9a30192a} 
+\#define DEFINE\+\_\+\+ON\+\_\+\+EVENT\+\_\+\+FUNC(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{lua_8h_a4c3a947c2f5c2f6244ffac8dfa005527}{LUA\_F}}(keyboard\_on\#\#Name\#\#Event)\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ On\#\#Name\#\#Event().subscribe(CreateSubscriber<Name\#\#Event>(\mbox{\hyperlink{keyboard_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}}));\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{keyboard_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}\index{keyboard.cc@{keyboard.cc}!L@{L}}
+\index{L@{L}!keyboard.cc@{keyboard.cc}}
+\doxysubsubsection{\texorpdfstring{L}{L}}
+{\footnotesize\ttfamily \label{keyboard_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53} 
+\#define L~lstate-\/$>$Get\+State()}
+
+\Hypertarget{keyboard_8cc_a32c50df98f648495cd53c825e98f43d2}\index{keyboard.cc@{keyboard.cc}!LUA\_KEYBOARD\_F@{LUA\_KEYBOARD\_F}}
+\index{LUA\_KEYBOARD\_F@{LUA\_KEYBOARD\_F}!keyboard.cc@{keyboard.cc}}
+\doxysubsubsection{\texorpdfstring{LUA\_KEYBOARD\_F}{LUA\_KEYBOARD\_F}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{keyboard_8cc_a32c50df98f648495cd53c825e98f43d2} 
+\#define LUA\+\_\+\+KEYBOARD\+\_\+F(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{lua_8h_a4c3a947c2f5c2f6244ffac8dfa005527}{LUA\_F}}(keyboard\_\#\#Name)}
+
+\end{DoxyCode}
+\Hypertarget{keyboard_8cc_a32c50df98f648495cd53c825e98f43d2}\index{keyboard.cc@{keyboard.cc}!LUA\_KEYBOARD\_F@{LUA\_KEYBOARD\_F}}
+\index{LUA\_KEYBOARD\_F@{LUA\_KEYBOARD\_F}!keyboard.cc@{keyboard.cc}}
+\doxysubsubsection{\texorpdfstring{LUA\_KEYBOARD\_F}{LUA\_KEYBOARD\_F}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{keyboard_8cc_a32c50df98f648495cd53c825e98f43d2} 
+\#define LUA\+\_\+\+KEYBOARD\+\_\+F(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \{.name\ =\ \#Name,\ .func\ =\ \&lua\_keyboard\_\#\#Name\ \}}
+
+\end{DoxyCode}

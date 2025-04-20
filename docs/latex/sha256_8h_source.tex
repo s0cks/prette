@@ -1,0 +1,32 @@
+\doxysection{sha256.\+h}
+\hypertarget{sha256_8h_source}{}\label{sha256_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/sha256.h@{/Users/tazz/Projects/prette/Sources/prette/sha256.h}}
+\mbox{\hyperlink{sha256_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_SHA256\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_SHA256\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <openssl/sha.h>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{uint256_8h}{prette/uint256.h}}"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt_1_1sha256}{prt::sha256}}\ \{}
+\DoxyCodeLine{00010\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ uint64\_t\ kDigestSize\ =\ SHA256\_DIGEST\_LENGTH;}
+\DoxyCodeLine{00011\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ uint64\_t\ kSize\ =\ kDigestSize;}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ uint64\_t\ kDefaultNonceSize\ =\ 4096;}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \ \ uint256\ \mbox{\hyperlink{namespaceprt_1_1sha256_a7ce36d648cf5cbc531a5e59e0ee48cc5}{Of}}(\textcolor{keyword}{const}\ uint8\_t*\ data,\ \textcolor{keyword}{const}\ uint64\_t\ length);}
+\DoxyCodeLine{00016\ \ \ uint256\ \mbox{\hyperlink{namespaceprt_1_1sha256_ac4082e006dd3f3537cd65120d04ccf19}{Nonce}}(\textcolor{keyword}{const}\ uint64\_t\ size\ =\ kDefaultNonceSize);}
+\DoxyCodeLine{00017\ \ \ uint256\ \mbox{\hyperlink{namespaceprt_1_1sha256_acba3cc9ae309cf5b619daa266719d370}{Concat}}(\textcolor{keyword}{const}\ uint256\&\ lhs,\ \textcolor{keyword}{const}\ uint256\&\ rhs);}
+\DoxyCodeLine{00018\ \ \ uint256\ \mbox{\hyperlink{namespaceprt_1_1sha256_a1f14e7fd2d7829bb08c729904341e74f}{FromHex}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ data,\ \textcolor{keyword}{const}\ uint64\_t\ length);}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint256}
+\DoxyCodeLine{00021\ \ \ \mbox{\hyperlink{namespaceprt_1_1sha256_a1f14e7fd2d7829bb08c729904341e74f}{FromHex}}(\textcolor{keyword}{const}\ std::string\&\ data)\{}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespaceprt_1_1sha256_a1f14e7fd2d7829bb08c729904341e74f}{FromHex}}(data.data(),\ data.length());}
+\DoxyCodeLine{00023\ \ \ \}}
+\DoxyCodeLine{00024\ \}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//PRT\_SHA256\_H}}
+
+\end{DoxyCode}

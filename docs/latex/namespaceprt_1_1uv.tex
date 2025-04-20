@@ -1,0 +1,148 @@
+\doxysection{prt\+::uv Namespace Reference}
+\hypertarget{namespaceprt_1_1uv}{}\label{namespaceprt_1_1uv}\index{prt::uv@{prt::uv}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1uv_1_1_async}{Async}}
+\item 
+class \mbox{\hyperlink{classprt_1_1uv_1_1_handle_base}{Handle\+Base}}
+\item 
+class \mbox{\hyperlink{classprt_1_1uv_1_1_handle_template}{Handle\+Template}}
+\item 
+struct \mbox{\hyperlink{structprt_1_1uv_1_1is__uv__handle}{is\+\_\+uv\+\_\+handle}}
+\item 
+class \mbox{\hyperlink{classprt_1_1uv_1_1_loop}{Loop}}
+\item 
+class \mbox{\hyperlink{classprt_1_1uv_1_1_status}{Status}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{namespaceprt_1_1uv_a76457731a07865315da46335a5b53193}{Status\+Id}} = int
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{namespaceprt_1_1uv_af8a610099472f39fe8ee81a55f0d4025}{Run\+Mode}} \{ \mbox{\hyperlink{namespaceprt_1_1uv_af8a610099472f39fe8ee81a55f0d4025ae04b8230cf6cc5bc77d4befe64ba4fac}{k\+Run\+Default}} = UV\+\_\+\+RUN\+\_\+\+DEFAULT
+, \mbox{\hyperlink{namespaceprt_1_1uv_af8a610099472f39fe8ee81a55f0d4025aa19a2273f799f951561ecbd663c639aa}{k\+Run\+No\+Wait}} = UV\+\_\+\+RUN\+\_\+\+NOWAIT
+, \mbox{\hyperlink{namespaceprt_1_1uv_af8a610099472f39fe8ee81a55f0d4025a90ab87c6810e5d52508e96d03b108385}{k\+Run\+Once}} = UV\+\_\+\+RUN\+\_\+\+ONCE
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceprt_1_1uv_a2f2962e35db7122dc228efcb1eb818f1}{DEFINE\+\_\+\+UV\+\_\+\+HANDLE\+\_\+\+FUNCS}} (Idle, uv\+\_\+idle)
+\item 
+\mbox{\hyperlink{namespaceprt_1_1uv_a5f955fa8acd650f17e87243d2aa83904}{DEFINE\+\_\+\+UV\+\_\+\+HANDLE\+\_\+\+FUNCS}} (Prepare, uv\+\_\+prepare)
+\item 
+\mbox{\hyperlink{namespaceprt_1_1uv_a5d813e91dfd3e85f7f00ee68bebe174e}{DEFINE\+\_\+\+UV\+\_\+\+HANDLE\+\_\+\+FUNCS}} (Check, uv\+\_\+check)
+\item 
+\mbox{\hyperlink{namespaceprt_1_1uv_a2684c4caabcdffb66a058655c7e321e8}{DECLARE\+\_\+\+IS\+\_\+\+UV\+\_\+\+HANDLE}} (uv\+\_\+idle\+\_\+t)
+\item 
+\mbox{\hyperlink{namespaceprt_1_1uv_a40b62125e4fc869020d658b929941b29}{DECLARE\+\_\+\+IS\+\_\+\+UV\+\_\+\+HANDLE}} (uv\+\_\+check\+\_\+t)
+\item 
+\mbox{\hyperlink{namespaceprt_1_1uv_a3ef52855b7bf067240322e844fb7e3c0}{DECLARE\+\_\+\+IS\+\_\+\+UV\+\_\+\+HANDLE}} (uv\+\_\+prepare\+\_\+t)
+\item 
+\mbox{\hyperlink{namespaceprt_1_1uv_aca41d518e3b760efc4da53b945eeb8ae}{DECLARE\+\_\+\+IS\+\_\+\+UV\+\_\+\+HANDLE}} (uv\+\_\+async\+\_\+t)
+\item 
+\mbox{\hyperlink{namespaceprt_1_1uv_ad1b0f304122f74526a9023d38d0c0e05}{DECLARE\+\_\+\+UV\+\_\+\+HANDLE}} (Idle, uv\+\_\+idle\+\_\+t)
+\item 
+\mbox{\hyperlink{namespaceprt_1_1uv_a69db181c1ac82004d0df9572017d9590}{DECLARE\+\_\+\+UV\+\_\+\+HANDLE}} (Prepare, uv\+\_\+prepare\+\_\+t)
+\item 
+\mbox{\hyperlink{namespaceprt_1_1uv_a0a26ee83690537398686eb0335783450}{DECLARE\+\_\+\+UV\+\_\+\+HANDLE}} (Check, uv\+\_\+check\+\_\+t)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\Hypertarget{namespaceprt_1_1uv_a76457731a07865315da46335a5b53193}\index{prt::uv@{prt::uv}!StatusId@{StatusId}}
+\index{StatusId@{StatusId}!prt::uv@{prt::uv}}
+\doxysubsubsection{\texorpdfstring{StatusId}{StatusId}}
+{\footnotesize\ttfamily \label{namespaceprt_1_1uv_a76457731a07865315da46335a5b53193} 
+using \mbox{\hyperlink{namespaceprt_1_1uv_a76457731a07865315da46335a5b53193}{prt\+::uv\+::\+Status\+Id}} = int}
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{namespaceprt_1_1uv_af8a610099472f39fe8ee81a55f0d4025}\index{prt::uv@{prt::uv}!RunMode@{RunMode}}
+\index{RunMode@{RunMode}!prt::uv@{prt::uv}}
+\doxysubsubsection{\texorpdfstring{RunMode}{RunMode}}
+{\footnotesize\ttfamily \label{namespaceprt_1_1uv_af8a610099472f39fe8ee81a55f0d4025} 
+enum \mbox{\hyperlink{namespaceprt_1_1uv_af8a610099472f39fe8ee81a55f0d4025}{prt\+::uv\+::\+Run\+Mode}}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kRunDefault@{kRunDefault}!prt::uv@{prt::uv}}\index{prt::uv@{prt::uv}!kRunDefault@{kRunDefault}}}\Hypertarget{namespaceprt_1_1uv_af8a610099472f39fe8ee81a55f0d4025ae04b8230cf6cc5bc77d4befe64ba4fac}\label{namespaceprt_1_1uv_af8a610099472f39fe8ee81a55f0d4025} 
+k\+Run\+Default&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kRunNoWait@{kRunNoWait}!prt::uv@{prt::uv}}\index{prt::uv@{prt::uv}!kRunNoWait@{kRunNoWait}}}\Hypertarget{namespaceprt_1_1uv_af8a610099472f39fe8ee81a55f0d4025aa19a2273f799f951561ecbd663c639aa}\label{namespaceprt_1_1uv_af8a610099472f39fe8ee81a55f0d4025} 
+k\+Run\+No\+Wait&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kRunOnce@{kRunOnce}!prt::uv@{prt::uv}}\index{prt::uv@{prt::uv}!kRunOnce@{kRunOnce}}}\Hypertarget{namespaceprt_1_1uv_af8a610099472f39fe8ee81a55f0d4025a90ab87c6810e5d52508e96d03b108385}\label{namespaceprt_1_1uv_af8a610099472f39fe8ee81a55f0d4025} 
+k\+Run\+Once&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceprt_1_1uv_aca41d518e3b760efc4da53b945eeb8ae}\index{prt::uv@{prt::uv}!DECLARE\_IS\_UV\_HANDLE@{DECLARE\_IS\_UV\_HANDLE}}
+\index{DECLARE\_IS\_UV\_HANDLE@{DECLARE\_IS\_UV\_HANDLE}!prt::uv@{prt::uv}}
+\doxysubsubsection{\texorpdfstring{DECLARE\_IS\_UV\_HANDLE()}{DECLARE\_IS\_UV\_HANDLE()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{namespaceprt_1_1uv_aca41d518e3b760efc4da53b945eeb8ae} 
+prt\+::uv\+::\+DECLARE\+\_\+\+IS\+\_\+\+UV\+\_\+\+HANDLE (\begin{DoxyParamCaption}\item[{uv\+\_\+async\+\_\+t}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{namespaceprt_1_1uv_a40b62125e4fc869020d658b929941b29}\index{prt::uv@{prt::uv}!DECLARE\_IS\_UV\_HANDLE@{DECLARE\_IS\_UV\_HANDLE}}
+\index{DECLARE\_IS\_UV\_HANDLE@{DECLARE\_IS\_UV\_HANDLE}!prt::uv@{prt::uv}}
+\doxysubsubsection{\texorpdfstring{DECLARE\_IS\_UV\_HANDLE()}{DECLARE\_IS\_UV\_HANDLE()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{namespaceprt_1_1uv_a40b62125e4fc869020d658b929941b29} 
+prt\+::uv\+::\+DECLARE\+\_\+\+IS\+\_\+\+UV\+\_\+\+HANDLE (\begin{DoxyParamCaption}\item[{uv\+\_\+check\+\_\+t}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{namespaceprt_1_1uv_a2684c4caabcdffb66a058655c7e321e8}\index{prt::uv@{prt::uv}!DECLARE\_IS\_UV\_HANDLE@{DECLARE\_IS\_UV\_HANDLE}}
+\index{DECLARE\_IS\_UV\_HANDLE@{DECLARE\_IS\_UV\_HANDLE}!prt::uv@{prt::uv}}
+\doxysubsubsection{\texorpdfstring{DECLARE\_IS\_UV\_HANDLE()}{DECLARE\_IS\_UV\_HANDLE()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{namespaceprt_1_1uv_a2684c4caabcdffb66a058655c7e321e8} 
+prt\+::uv\+::\+DECLARE\+\_\+\+IS\+\_\+\+UV\+\_\+\+HANDLE (\begin{DoxyParamCaption}\item[{uv\+\_\+idle\+\_\+t}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{namespaceprt_1_1uv_a3ef52855b7bf067240322e844fb7e3c0}\index{prt::uv@{prt::uv}!DECLARE\_IS\_UV\_HANDLE@{DECLARE\_IS\_UV\_HANDLE}}
+\index{DECLARE\_IS\_UV\_HANDLE@{DECLARE\_IS\_UV\_HANDLE}!prt::uv@{prt::uv}}
+\doxysubsubsection{\texorpdfstring{DECLARE\_IS\_UV\_HANDLE()}{DECLARE\_IS\_UV\_HANDLE()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{namespaceprt_1_1uv_a3ef52855b7bf067240322e844fb7e3c0} 
+prt\+::uv\+::\+DECLARE\+\_\+\+IS\+\_\+\+UV\+\_\+\+HANDLE (\begin{DoxyParamCaption}\item[{uv\+\_\+prepare\+\_\+t}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{namespaceprt_1_1uv_a0a26ee83690537398686eb0335783450}\index{prt::uv@{prt::uv}!DECLARE\_UV\_HANDLE@{DECLARE\_UV\_HANDLE}}
+\index{DECLARE\_UV\_HANDLE@{DECLARE\_UV\_HANDLE}!prt::uv@{prt::uv}}
+\doxysubsubsection{\texorpdfstring{DECLARE\_UV\_HANDLE()}{DECLARE\_UV\_HANDLE()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{namespaceprt_1_1uv_a0a26ee83690537398686eb0335783450} 
+prt\+::uv\+::\+DECLARE\+\_\+\+UV\+\_\+\+HANDLE (\begin{DoxyParamCaption}\item[{Check}]{}{, }\item[{uv\+\_\+check\+\_\+t}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{namespaceprt_1_1uv_ad1b0f304122f74526a9023d38d0c0e05}\index{prt::uv@{prt::uv}!DECLARE\_UV\_HANDLE@{DECLARE\_UV\_HANDLE}}
+\index{DECLARE\_UV\_HANDLE@{DECLARE\_UV\_HANDLE}!prt::uv@{prt::uv}}
+\doxysubsubsection{\texorpdfstring{DECLARE\_UV\_HANDLE()}{DECLARE\_UV\_HANDLE()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{namespaceprt_1_1uv_ad1b0f304122f74526a9023d38d0c0e05} 
+prt\+::uv\+::\+DECLARE\+\_\+\+UV\+\_\+\+HANDLE (\begin{DoxyParamCaption}\item[{Idle}]{}{, }\item[{uv\+\_\+idle\+\_\+t}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{namespaceprt_1_1uv_a69db181c1ac82004d0df9572017d9590}\index{prt::uv@{prt::uv}!DECLARE\_UV\_HANDLE@{DECLARE\_UV\_HANDLE}}
+\index{DECLARE\_UV\_HANDLE@{DECLARE\_UV\_HANDLE}!prt::uv@{prt::uv}}
+\doxysubsubsection{\texorpdfstring{DECLARE\_UV\_HANDLE()}{DECLARE\_UV\_HANDLE()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{namespaceprt_1_1uv_a69db181c1ac82004d0df9572017d9590} 
+prt\+::uv\+::\+DECLARE\+\_\+\+UV\+\_\+\+HANDLE (\begin{DoxyParamCaption}\item[{Prepare}]{}{, }\item[{uv\+\_\+prepare\+\_\+t}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{namespaceprt_1_1uv_a5d813e91dfd3e85f7f00ee68bebe174e}\index{prt::uv@{prt::uv}!DEFINE\_UV\_HANDLE\_FUNCS@{DEFINE\_UV\_HANDLE\_FUNCS}}
+\index{DEFINE\_UV\_HANDLE\_FUNCS@{DEFINE\_UV\_HANDLE\_FUNCS}!prt::uv@{prt::uv}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_UV\_HANDLE\_FUNCS()}{DEFINE\_UV\_HANDLE\_FUNCS()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{namespaceprt_1_1uv_a5d813e91dfd3e85f7f00ee68bebe174e} 
+prt\+::uv\+::\+DEFINE\+\_\+\+UV\+\_\+\+HANDLE\+\_\+\+FUNCS (\begin{DoxyParamCaption}\item[{Check}]{}{, }\item[{uv\+\_\+check}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{namespaceprt_1_1uv_a2f2962e35db7122dc228efcb1eb818f1}\index{prt::uv@{prt::uv}!DEFINE\_UV\_HANDLE\_FUNCS@{DEFINE\_UV\_HANDLE\_FUNCS}}
+\index{DEFINE\_UV\_HANDLE\_FUNCS@{DEFINE\_UV\_HANDLE\_FUNCS}!prt::uv@{prt::uv}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_UV\_HANDLE\_FUNCS()}{DEFINE\_UV\_HANDLE\_FUNCS()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{namespaceprt_1_1uv_a2f2962e35db7122dc228efcb1eb818f1} 
+prt\+::uv\+::\+DEFINE\+\_\+\+UV\+\_\+\+HANDLE\+\_\+\+FUNCS (\begin{DoxyParamCaption}\item[{Idle}]{}{, }\item[{uv\+\_\+idle}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{namespaceprt_1_1uv_a5f955fa8acd650f17e87243d2aa83904}\index{prt::uv@{prt::uv}!DEFINE\_UV\_HANDLE\_FUNCS@{DEFINE\_UV\_HANDLE\_FUNCS}}
+\index{DEFINE\_UV\_HANDLE\_FUNCS@{DEFINE\_UV\_HANDLE\_FUNCS}!prt::uv@{prt::uv}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_UV\_HANDLE\_FUNCS()}{DEFINE\_UV\_HANDLE\_FUNCS()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{namespaceprt_1_1uv_a5f955fa8acd650f17e87243d2aa83904} 
+prt\+::uv\+::\+DEFINE\+\_\+\+UV\+\_\+\+HANDLE\+\_\+\+FUNCS (\begin{DoxyParamCaption}\item[{Prepare}]{}{, }\item[{uv\+\_\+prepare}]{}{}\end{DoxyParamCaption})}
+

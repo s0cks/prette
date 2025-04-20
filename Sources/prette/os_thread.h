@@ -15,25 +15,25 @@
 #endif
 
 namespace prt {
-  ThreadId GetCurrentThreadId();
-  std::string GetThreadName(const ThreadId& thread);
-  bool SetThreadName(const ThreadId& thread, const std::string& name);
-  bool InitializeThreadLocal(ThreadLocalKey& key);
-  bool SetCurrentThreadLocal(const ThreadLocalKey& key, const void* value);
-  void* GetCurrentThreadLocal(const ThreadLocalKey& key);
-  bool Start(ThreadId* thread, const std::string& name, const ThreadHandler& func, void* data);
-  bool Join(const ThreadId& thread);
-  bool Compare(const ThreadId& lhs, const ThreadId& rhs);
-  int GetCurrentThreadCount();
-  rx::observable<std::string> GetCurrentThreadNames();
+  auto GetCurrentThreadId() -> ThreadId;
+  auto GetThreadName(const ThreadId& thread) -> std::string;
+  auto SetThreadName(const ThreadId& thread, const std::string& name) -> bool;
+  auto InitializeThreadLocal(ThreadLocalKey& key) -> bool;
+  auto SetCurrentThreadLocal(const ThreadLocalKey& key, const void* value) -> bool;
+  auto GetCurrentThreadLocal(const ThreadLocalKey& key) -> void*;
+  auto Start(ThreadId* thread, const std::string& name, const ThreadHandler& func, void* data) -> bool;
+  auto Join(const ThreadId& thread) -> bool;
+  auto Compare(const ThreadId& lhs, const ThreadId& rhs) -> bool;
+  auto GetCurrentThreadCount() -> int;
+  auto GetCurrentThreadNames() -> rx::observable<std::string>;
 
-  static inline std::string
-  GetCurrentThreadName(){
+  static inline auto
+  GetCurrentThreadName() -> std::string{
     return GetThreadName(GetCurrentThreadId());
   }
 
-  static inline bool
-  SetCurrentThreadName(const std::string& name){
+  static inline auto
+  SetCurrentThreadName(const std::string& name) -> bool{
     return SetThreadName(GetCurrentThreadId(), name);
   }
 
@@ -43,15 +43,15 @@ namespace prt {
     static void SetThreadId(const ThreadId id);
   public:
     static void Init(const ThreadId id = GetCurrentThreadId());
-    static ThreadId GetThreadId();
+    static auto GetThreadId() -> ThreadId;
 
-    static inline bool
-    IsThread(const ThreadId id) {
+    static inline auto
+    IsThread(const ThreadId id) -> bool {
       return Compare(GetThreadId(), id) == 0;
     }
 
-    static inline bool
-    IsCurrentThread() {
+    static inline auto
+    IsCurrentThread() -> bool {
       return IsThread(GetCurrentThreadId());
     }
   };

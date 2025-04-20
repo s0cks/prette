@@ -7,16 +7,9 @@ project(
   HOMEPAGE_URL ${BUILD_JSON_HOMEPAGE}
   LANGUAGES C CXX)
 
-option(ENABLE_CPPCHECK "Enable CppCheck" ON)
 option(ENABLE_CLANG_TIDY "Enable clang-tidy" ON)
-if(${CMAKE_BUILD_TYPE} MATCHES "^[rR]elease")
-  if(ENABLE_CLANG_TIDY)
-    include(ClangTidy)
-  endif()
-
-  if(ENABLE_CPPCHECK)
-    include(CppCheck)
-  endif()
+if(ENABLE_CLANG_TIDY)
+  include(ClangTidy)
 endif()
 
 option(PRT_BUILD_DOCS "Build documentation" ON)
@@ -24,19 +17,9 @@ if(PRT_BUILD_DOCS)
   include(Doxygen)
 endif()
 
-set(PRT_ENABLE_VK 1)
-if(PRT_ENABLE_VK)
-  find_package(Vulkan REQUIRED)
-  add_compile_definitions(PRT_VK)
-else()
-  find_package(OpenGL REQUIRED COMPONENTS OpenGL)
-  find_package(GLEW REQUIRED)
-  add_compile_definitions(PRT_GL)
-  set(PROJECT_GLFW_CONTEXT_VERSION_MAJOR 4)
-  set(PROJECT_GLFW_CONTEXT_VERSION_MINOR 1)
-endif()
+include(Vulkan)
+find_package(Vulkan REQUIRED)
 
-# cppcheck
 find_package(Threads REQUIRED)
 find_package(glfw3 CONFIG REQUIRED)
 find_package(glog CONFIG REQUIRED)
@@ -46,8 +29,15 @@ find_package(Freetype REQUIRED)
 find_package(PNG REQUIRED)
 find_package(JPEG REQUIRED)
 find_package(rxcpp CONFIG REQUIRED)
-find_package(OpenSSL REQUIRED)
-find_package(leveldb CONFIG REQUIRED)
+find_package(Jsonnet REQUIRED)
+
+set(OPENSSL_USE_STATIC_LIBS FALSE)
+if(APPLE)
+  find_package(OpenSSL PATHS /opt/homebrew REQUIRED)
+else()
+  find_package(OpenSSL REQUIRED)
+endif()
+
 find_package(fmt CONFIG REQUIRED)
 find_package(Backward CONFIG REQUIRED)
 find_package(units CONFIG REQUIRED)
@@ -55,40 +45,44 @@ find_package(tweeny CONFIG REQUIRED)
 find_package(flatbuffers CONFIG REQUIRED)
 set(GFLAGS_USE_TARGET_NAMESPACE ON)
 find_package(gflags CONFIG REQUIRED)
-find_package(unofficial-nuklear CONFIG REQUIRED)
 find_package(RapidJSON CONFIG REQUIRED)
+find_package(Lua REQUIRED)
 find_package(stduuid CONFIG REQUIRED)
+find_package(imgui CONFIG REQUIRED)
+find_package(implot CONFIG REQUIRED)
+find_package(absl CONFIG REQUIRED)
+find_package(tinyobjloader CONFIG REQUIRED)
+find_package(Stb REQUIRED)
+find_package(libconfig CONFIG REQUIRED)
+find_package(yoga CONFIG REQUIRED)
+find_package(RocksDB CONFIG REQUIRED)
 
 find_path(SEMVER_INCLUDE_DIRS "semver/semver.hpp")
-
-# TODO: convert to vcpkg
-find_package(utf8 REQUIRED)
-find_package(OpenAL REQUIRED)
 
 list(APPEND PRT_COMPILE_OPTS -frtti -fms-extensions -Wno-deprecated
      -Wno-sizeof-pointer-memaccess)
 
-option(ENABLE_COVERAGE "Enable code coverage reports using gcov/lcov" ON)
-if(ENABLE_COVERAGE)
-  include(Coverage)
-  # TODO: cleanup this logic, get it into Coverage.cmake
-  if(${CMAKE_CXX_COMPILER_ID} MATCHES "([aA]pple)?[cC]lang|GNU")
-    list(
-      APPEND
-      PRT_COMPILE_OPTS
-      -O0
-      -g
-      -fprofile-instr-generate
-      -fcoverage-mapping
-      --coverage)
-    list(APPEND PRT_LIBRARIES -fprofile-instr-generate -fprofile-instr-generate
-         -fcoverage-mapping --coverage)
-  elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    # TODO: implement
-  else()
-    message(FATAL_ERROR "unsupported compiler: ${CMAKE_CXX_COMPILER_ID}")
-  endif()
-endif()
+# option(ENABLE_COVERAGE "Enable code coverage reports using gcov/lcov" OFF)
+# if(ENABLE_COVERAGE)
+#   include(Coverage)
+#   # TODO: cleanup this logic, get it into Coverage.cmake
+#   if(${CMAKE_CXX_COMPILER_ID} MATCHES "([aA]pple)?[cC]lang|GNU")
+#     list(
+#       APPEND
+#       PRT_COMPILE_OPTS
+#       -O0
+#       -g
+#       -fprofile-instr-generate
+#       -fcoverage-mapping
+#       --coverage)
+#     list(APPEND PRT_LIBRARIES -fprofile-instr-generate -fprofile-instr-generate
+#          -fcoverage-mapping --coverage)
+#   elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+#     # TODO: implement
+#   else()
+#     message(FATAL_ERROR "unsupported compiler: ${CMAKE_CXX_COMPILER_ID}")
+#   endif()
+# endif()
 
 add_compile_definitions(PRT_GLFW)
 if(CMAKE_BUILD_TYPE MATCHES "^[Dd]ebug")
@@ -97,8 +91,15 @@ if(CMAKE_BUILD_TYPE MATCHES "^[Dd]ebug")
   add_compile_definitions(PTR_VMEMPROF)
 endif()
 
+option(PRT_TRACING_ENABLED "" OFF)
+if(PRT_TRACING_ENABLED)
+  find_package(Tracy CONFIG REQUIRED)
+  add_compile_definitions(PRT_TRACING)
+endif()
+
 link_libraries(Threads::Threads glog::glog gflags::gflags)
 
+add_subdirectory(prette)
 add_subdirectory(lib/semver)
 add_subdirectory(Sources)
 

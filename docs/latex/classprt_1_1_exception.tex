@@ -1,0 +1,95 @@
+\doxysection{prt\+::Exception Class Reference}
+\hypertarget{classprt_1_1_exception}{}\label{classprt_1_1_exception}\index{prt::Exception@{prt::Exception}}
+
+
+{\ttfamily \#include $<$exception.\+h$>$}
+
+
+
+Inheritance diagram for prt\+::Exception\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=158pt]{classprt_1_1_exception__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for prt\+::Exception\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=158pt]{classprt_1_1_exception__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_exception_ac5243171e908ca5d39dae9541ae08a60}{Exception}} (std\+::string \mbox{\hyperlink{classprt_1_1_exception_a9bff0d10caa9d58169552b7ce553cc1f}{message}})
+\item 
+\mbox{\hyperlink{classprt_1_1_exception_a00ca3171d262e23679c62edc279733a5}{\texorpdfstring{$\sim$}{\string~}\+Exception}} () override=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1_exception_a9bff0d10caa9d58169552b7ce553cc1f}{message}} () const -\/$>$ const std\+::string \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_exception_a0315b2a413e9910022b93b55de4d4611}{what}} () const noexcept -\/$>$ const char \texorpdfstring{$\ast$}{*}override
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_exception_a8faee27565a28c4c734513bf6ff7cebd}{New}} (const std\+::string \&\mbox{\hyperlink{classprt_1_1_exception_a9bff0d10caa9d58169552b7ce553cc1f}{message}}) -\/$>$ std\+::exception\+\_\+ptr
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classprt_1_1_exception_a004dd6852e1e12364bf2ab5a2a872fe4}{message\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_exception_ac5243171e908ca5d39dae9541ae08a60}\index{prt::Exception@{prt::Exception}!Exception@{Exception}}
+\index{Exception@{Exception}!prt::Exception@{prt::Exception}}
+\doxysubsubsection{\texorpdfstring{Exception()}{Exception()}}
+{\footnotesize\ttfamily \label{classprt_1_1_exception_ac5243171e908ca5d39dae9541ae08a60} 
+prt\+::\+Exception\+::\+Exception (\begin{DoxyParamCaption}\item[{std\+::string}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+\Hypertarget{classprt_1_1_exception_a00ca3171d262e23679c62edc279733a5}\index{prt::Exception@{prt::Exception}!````~Exception@{\texorpdfstring{$\sim$}{\string~}Exception}}
+\index{````~Exception@{\texorpdfstring{$\sim$}{\string~}Exception}!prt::Exception@{prt::Exception}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Exception()}{\string~Exception()}}
+{\footnotesize\ttfamily \label{classprt_1_1_exception_a00ca3171d262e23679c62edc279733a5} 
+prt\+::\+Exception\+::\texorpdfstring{$\sim$}{\string~}\+Exception (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_exception_a9bff0d10caa9d58169552b7ce553cc1f}\index{prt::Exception@{prt::Exception}!message@{message}}
+\index{message@{message}!prt::Exception@{prt::Exception}}
+\doxysubsubsection{\texorpdfstring{message()}{message()}}
+{\footnotesize\ttfamily \label{classprt_1_1_exception_a9bff0d10caa9d58169552b7ce553cc1f} 
+auto prt\+::\+Exception\+::message (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const std\+::string\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_exception_a8faee27565a28c4c734513bf6ff7cebd}\index{prt::Exception@{prt::Exception}!New@{New}}
+\index{New@{New}!prt::Exception@{prt::Exception}}
+\doxysubsubsection{\texorpdfstring{New()}{New()}}
+{\footnotesize\ttfamily \label{classprt_1_1_exception_a8faee27565a28c4c734513bf6ff7cebd} 
+static auto prt\+::\+Exception\+::\+New (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{message}{}\end{DoxyParamCaption}) -\/$>$ std\+::exception\+\_\+ptr \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_exception_a0315b2a413e9910022b93b55de4d4611}\index{prt::Exception@{prt::Exception}!what@{what}}
+\index{what@{what}!prt::Exception@{prt::Exception}}
+\doxysubsubsection{\texorpdfstring{what()}{what()}}
+{\footnotesize\ttfamily \label{classprt_1_1_exception_a0315b2a413e9910022b93b55de4d4611} 
+auto prt\+::\+Exception\+::what (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const char\texorpdfstring{$\ast$}{*}\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [noexcept]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_exception_a004dd6852e1e12364bf2ab5a2a872fe4}\index{prt::Exception@{prt::Exception}!message\_@{message\_}}
+\index{message\_@{message\_}!prt::Exception@{prt::Exception}}
+\doxysubsubsection{\texorpdfstring{message\_}{message\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_exception_a004dd6852e1e12364bf2ab5a2a872fe4} 
+std\+::string prt\+::\+Exception\+::message\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{exception_8h}{exception.\+h}}\end{DoxyCompactItemize}

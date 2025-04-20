@@ -1,0 +1,97 @@
+\doxysection{/\+Users/tazz/\+Projects/prette/\+Sources/prette/signals.h File Reference}
+\hypertarget{signals_8h}{}\label{signals_8h}\index{/Users/tazz/Projects/prette/Sources/prette/signals.h@{/Users/tazz/Projects/prette/Sources/prette/signals.h}}
+{\ttfamily \#include $<$ostream$>$}\newline
+{\ttfamily \#include $<$csignal$>$}\newline
+Include dependency graph for signals.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=196pt]{signals_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{signals_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceprt}{prt}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{signals_8h_ad3ddbe5fcb33438de9a52dc54465512a}{FOR\+\_\+\+EACH\+\_\+\+SIGNAL}}(V)
+\item 
+\#define \mbox{\hyperlink{signals_8h_aa10e1c4675bec3521d611d046ce1179b}{DEFINE\+\_\+\+SIGNAL}}(Name,  Value)
+\item 
+\#define \mbox{\hyperlink{signals_8h_a92fafdf86b78f22e1f62e9bd89598293}{DEFINE\+\_\+\+GET\+\_\+\+NAME}}(Name,  Value)
+\item 
+\#define \mbox{\hyperlink{signals_8h_a07385280f06cd27bbcca9128953c7f79}{DEFINE\+\_\+\+TO\+\_\+\+STRING}}(Name,  Value)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{namespaceprt_a3a577f506530fc09425c3e66708e277a}{prt\+::\+Signal}} \+: int \{ \mbox{\hyperlink{namespaceprt_a3a577f506530fc09425c3e66708e277aaeac9eac4d96848660d2790c5a49531ea}{prt\+::k\+None}} = 0
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespaceprt_acf5a0dd990211606f4603400add042b2}{prt\+::\+Init\+Signal\+Handlers}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{signals_8h_a92fafdf86b78f22e1f62e9bd89598293}\index{signals.h@{signals.h}!DEFINE\_GET\_NAME@{DEFINE\_GET\_NAME}}
+\index{DEFINE\_GET\_NAME@{DEFINE\_GET\_NAME}!signals.h@{signals.h}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_GET\_NAME}{DEFINE\_GET\_NAME}}
+{\footnotesize\ttfamily \label{signals_8h_a92fafdf86b78f22e1f62e9bd89598293} 
+\#define DEFINE\+\_\+\+GET\+\_\+\+NAME(\begin{DoxyParamCaption}\item[{}]{Name}{, }\item[{}]{Value}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{case}\ k\#\#Name\#\#Signal:\ \textcolor{keywordflow}{return}\ \#Name;}
+
+\end{DoxyCode}
+\Hypertarget{signals_8h_aa10e1c4675bec3521d611d046ce1179b}\index{signals.h@{signals.h}!DEFINE\_SIGNAL@{DEFINE\_SIGNAL}}
+\index{DEFINE\_SIGNAL@{DEFINE\_SIGNAL}!signals.h@{signals.h}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_SIGNAL}{DEFINE\_SIGNAL}}
+{\footnotesize\ttfamily \label{signals_8h_aa10e1c4675bec3521d611d046ce1179b} 
+\#define DEFINE\+\_\+\+SIGNAL(\begin{DoxyParamCaption}\item[{}]{Name}{, }\item[{}]{Value}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{k\#\#Name\#\#Signal\ =\ (Value),}
+
+\end{DoxyCode}
+\Hypertarget{signals_8h_a07385280f06cd27bbcca9128953c7f79}\index{signals.h@{signals.h}!DEFINE\_TO\_STRING@{DEFINE\_TO\_STRING}}
+\index{DEFINE\_TO\_STRING@{DEFINE\_TO\_STRING}!signals.h@{signals.h}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_TO\_STRING}{DEFINE\_TO\_STRING}}
+{\footnotesize\ttfamily \label{signals_8h_a07385280f06cd27bbcca9128953c7f79} 
+\#define DEFINE\+\_\+\+TO\+\_\+\+STRING(\begin{DoxyParamCaption}\item[{}]{Name}{, }\item[{}]{Value}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{case}\ k\#\#Name\#\#Signal:\ \textcolor{keywordflow}{return}\ stream\ <<\ \#Name\ <<\ \textcolor{stringliteral}{"{}\ ("{}}\ <<\ \#Value\ <<\ \textcolor{stringliteral}{"{}:"{}}\ <<\ (Value)\ <<\ \textcolor{stringliteral}{"{})"{}};}
+
+\end{DoxyCode}
+\Hypertarget{signals_8h_ad3ddbe5fcb33438de9a52dc54465512a}\index{signals.h@{signals.h}!FOR\_EACH\_SIGNAL@{FOR\_EACH\_SIGNAL}}
+\index{FOR\_EACH\_SIGNAL@{FOR\_EACH\_SIGNAL}!signals.h@{signals.h}}
+\doxysubsubsection{\texorpdfstring{FOR\_EACH\_SIGNAL}{FOR\_EACH\_SIGNAL}}
+{\footnotesize\ttfamily \label{signals_8h_ad3ddbe5fcb33438de9a52dc54465512a} 
+\#define FOR\+\_\+\+EACH\+\_\+\+SIGNAL(\begin{DoxyParamCaption}\item[{}]{V}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ V(Abort,\ \ \ \ \ \ \ \ \ \ \ \ \ \ SIGABRT)\ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(FpError,\ \ \ \ \ \ \ \ \ \ \ \ SIGFPE)\ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(IllegalInstr,\ \ \ \ \ \ \ SIGILL)\ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(Interrupt,\ \ \ \ \ \ \ \ \ \ SIGINT)\ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(Segfault,\ \ \ \ \ \ \ \ \ \ \ SIGSEGV)\ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(Terminate,\ \ \ \ \ \ \ \ \ \ SIGTERM)}
+
+\end{DoxyCode}

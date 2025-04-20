@@ -1,0 +1,49 @@
+\doxysection{swapchain\+\_\+target.\+h}
+\hypertarget{swapchain__target_8h_source}{}\label{swapchain__target_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/swapchain\_target.h@{/Users/tazz/Projects/prette/Sources/prette/swapchain\_target.h}}
+\mbox{\hyperlink{swapchain__target_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_SWAPCHAIN\_TARGET\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_SWAPCHAIN\_TARGET\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vulkan/vulkan\_core.h>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{common_8h}{prette/common.h}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}prette/gfx.h"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_swap_chain_target}{SwapChainTarget}}\ \{}
+\DoxyCodeLine{00011\ \ \ \mbox{\hyperlink{classprt_1_1_swap_chain_target_a46285b27aebe4bff87adc8e8ebf1d697}{DEFINE\_DEFAULT\_COPYABLE\_TYPE}}(\mbox{\hyperlink{classprt_1_1_swap_chain_target}{SwapChainTarget}});}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00014\ \ \ uint64\_t\ \mbox{\hyperlink{classprt_1_1_swap_chain_target_a6529635ed96b07c4e82bfee9c3005efe}{index\_}};}
+\DoxyCodeLine{00015\ \ \ VkImageView\ \mbox{\hyperlink{classprt_1_1_swap_chain_target_abc98719f83c9aa0c7e144607de4ad114}{view\_}}\ =\ VK\_NULL\_HANDLE;}
+\DoxyCodeLine{00016\ \ \ VkFramebuffer\ \mbox{\hyperlink{classprt_1_1_swap_chain_target_a90a45c65413344548196b7b383186d22}{framebuffer\_}}\ =\ VK\_NULL\_HANDLE;}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00019\ \ \ \mbox{\hyperlink{classprt_1_1_swap_chain_target_ac7f973ec27d95d5ccf04bd53a515b4a2}{SwapChainTarget}}(\textcolor{keyword}{const}\ uint64\_t\ idx,\ \textcolor{keyword}{const}\ VkFormat\&\ format,\ \textcolor{keyword}{const}\ VkRenderPass\&\ pass,\ \textcolor{keyword}{const}\ VkExtent2D\&\ extent,}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ VkImage\&\ image);}
+\DoxyCodeLine{00021\ \ \ \mbox{\hyperlink{classprt_1_1_swap_chain_target_a49e66c27b531bc7a0cc66dee12127fc8}{\string~SwapChainTarget}}();}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_swap_chain_target_a0daa27e383b94c6a0b3e5a0df4ea85be}{GetIndex}}()\ const\ -\/>\ uint64\_t\ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_swap_chain_target_a6529635ed96b07c4e82bfee9c3005efe}{index\_}};}
+\DoxyCodeLine{00025\ \ \ \}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_swap_chain_target_a47ce801702f3ef0df636f62212bd450f}{GetView}}()\ const\ -\/>\ const\ VkImageView\&\ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_swap_chain_target_abc98719f83c9aa0c7e144607de4ad114}{view\_}};}
+\DoxyCodeLine{00029\ \ \ \}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_swap_chain_target_a1d885fdcd8a33b493ba5e6ae5a48fb80}{GetFramebuffer}}()\ const\ -\/>\ const\ VkFramebuffer\&\ \{}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_swap_chain_target_a90a45c65413344548196b7b383186d22}{framebuffer\_}};}
+\DoxyCodeLine{00033\ \ \ \}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_swap_chain_target_a702a0d22d41f0cefc25eec09a134da63}{ToString}}()\ const\ -\/>\ \mbox{\hyperlink{namespacestd}{std}}::\textcolor{keywordtype}{string};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ friend\ auto\ operator<<(\mbox{\hyperlink{namespacestd}{std}}::ostream\&\ stream,\ const\ \mbox{\hyperlink{classprt_1_1_swap_chain_target}{SwapChainTarget}}\&\ rhs)\ -\/>\ \mbox{\hyperlink{namespacestd}{std}}::ostream\&\ \{}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordflow}{return}\ stream\ <<\ rhs.ToString();}
+\DoxyCodeLine{00039\ \ \ \}}
+\DoxyCodeLine{00040\ \};}
+\DoxyCodeLine{00041\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_SWAPCHAIN\_TARGET\_H}}
+
+\end{DoxyCode}

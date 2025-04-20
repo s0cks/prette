@@ -1,0 +1,268 @@
+\doxysection{engine.\+h}
+\hypertarget{engine_8h_source}{}\label{engine_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/engine.h@{/Users/tazz/Projects/prette/Sources/prette/engine.h}}
+\mbox{\hyperlink{engine_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_ENGINE\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_ENGINE\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <units.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <uv.h>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{common_8h}{prette/common.h}}"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{crash__report_8h}{prette/crash\_report.h}}"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{engine__event_8h}{prette/engine\_event.h}}"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{lua_8h}{prette/lua.h}}"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tick__profiler_8h}{prette/tick\_profiler.h}}"{}}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{ticker_8h}{prette/ticker.h}}"{}}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{utils_8h}{prette/uv/utils.h}}"{}}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }LuaState;}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{class\ }Engine;}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#define\ FOR\_EACH\_ENGINE\_STATE(V)\ \(\backslash\)}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\ \ V(Init)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\ \ V(Running)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\ \ V(Paused)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\ \ V(Terminated)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\ \ V(Error)}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{class\ }Engine;}
+\DoxyCodeLine{00029\ \textcolor{keyword}{class\ }EngineState;}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#define\ FORWARD\_DECLARE\_STATE(Name)\ class\ Name\#\#State;}}
+\DoxyCodeLine{00031\ \mbox{\hyperlink{engine_8h_a559db3ee6c9a96fa5511207455a2ae3c}{FOR\_EACH\_ENGINE\_STATE}}(\mbox{\hyperlink{engine_8h_a30012f0deb75f21fc8e3087ceb5935bd}{FORWARD\_DECLARE\_STATE}})}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#undef\ FORWARD\_DECLARE\_STATE}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#define\ DECLARE\_ENGINE\_STATE\_TYPE(Name)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\ protected:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\ \ virtual\ void\ EnterState(Engine*\ engine)\ override;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\ \ virtual\ void\ OnTick(Engine*\ engine,\ const\ Tick\&\ current,\ const\ Tick\&\ previous)\ override;\ \(\backslash\)}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\ \ virtual\ void\ ExitState(Engine*\ engine)\ override;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\ public:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\ \ auto\ GetStateName()\ const\ -\/>\ const\ char*\ override\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\ \ \ \ return\ \#Name;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\ \ auto\ As\#\#Name\#\#State()-\/>Name\#\#State*\ override\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\ \ \ \ return\ this;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\ \ \}}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#define\ DECLARE\_ENGINE\_STATE(Name)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\ \ class\ Name\#\#State\ :\ public\ EngineState\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\ \ \ public:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\ \ \ \ Name\#\#State()\ =\ default;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\ \ \ \ \string~Name\#\#State()\ override\ =\ default;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\ \ \ \ DECLARE\_ENGINE\_STATE\_TYPE(Name);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\ \ \ public:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00056\ \textcolor{preprocessor}{\ \ \ \ static\ inline\ auto\ New()\ -\/>\ std::unique\_ptr<Name\#\#State>\ \{\ \(\backslash\)}}
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\ \ \ \ \ \ return\ std::make\_unique<Name\#\#State>();\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\ \ \ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\ \ \};}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_engine_state}{EngineState}}\ \{}
+\DoxyCodeLine{00062\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_engine}{Engine}};}
+\DoxyCodeLine{00063\ \ \ \mbox{\hyperlink{classprt_1_1_engine_state_a38c550da12f07e802ffabd92957f53bf}{DEFINE\_NON\_COPYABLE\_TYPE}}(\mbox{\hyperlink{classprt_1_1_engine_state}{EngineState}});}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00066\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classprt_1_1_time_series}{DurationSeries}}\ =\ \mbox{\hyperlink{classprt_1_1_time_series}{TimeSeries<>}};}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00069\ \ \ \mbox{\hyperlink{classprt_1_1_engine_state_a1542ad73a83dfe5d8fe3db60deed6477}{EngineState}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00070\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_engine_state_a6675a3f7ac2f7ecc17694c98fbca8bb2}{EnterState}}(\mbox{\hyperlink{classprt_1_1_engine}{Engine}}*\ engine)\ =\ 0;}
+\DoxyCodeLine{00071\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_engine_state_a4d74eb7a8e380992be23ac8c4fabfb0e}{OnTick}}(\mbox{\hyperlink{classprt_1_1_engine}{Engine}}*\ engine,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_tick}{Tick}}\&\ current,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_tick}{Tick}}\&\ previous)\ =\ 0;}
+\DoxyCodeLine{00072\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_engine_state_a070edf1b108359efbc093dc1b432d5e5}{ExitState}}(\mbox{\hyperlink{classprt_1_1_engine}{Engine}}*\ engine)\ =\ 0;}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00075\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classprt_1_1_engine_state_a4fb51bde7f2f62145e5169b1e43f87b9}{\string~EngineState}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00076\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_engine_state_ae958fb727e6e355d56376467043e7a25}{GetStateName}}()\ const\ -\/>\ const\ \textcolor{keywordtype}{char}*\ =\ 0;}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ virtual\ auto\ \mbox{\hyperlink{classprt_1_1_engine_state_ae15ab114c1ef286785a6f23b327b0559}{Equals}}(\mbox{\hyperlink{classprt_1_1_engine_state}{EngineState}}*\ rhs)\ const\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00079\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(rhs);}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordflow}{return}\ strcmp(\mbox{\hyperlink{classprt_1_1_engine_state_ae958fb727e6e355d56376467043e7a25}{GetStateName}}(),\ rhs-\/>GetStateName())\ ==\ 0;}
+\DoxyCodeLine{00081\ \ \ \}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \textcolor{preprocessor}{\#define\ DEFINE\_TYPE\_CHECK(Name)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00084\ \textcolor{preprocessor}{\ \ virtual\ auto\ As\#\#Name\#\#State()-\/>Name\#\#State*\ \{\ \(\backslash\)}}
+\DoxyCodeLine{00085\ \textcolor{preprocessor}{\ \ \ \ return\ nullptr;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00086\ \textcolor{preprocessor}{\ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00087\ \textcolor{preprocessor}{\ \ auto\ Is\#\#Name\#\#State()-\/>bool\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00088\ \textcolor{preprocessor}{\ \ \ \ return\ As\#\#Name\#\#State()\ !=\ nullptr;\ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00089\ \textcolor{preprocessor}{\ \ \}}}
+\DoxyCodeLine{00090\ \ \ \mbox{\hyperlink{engine_8h_a559db3ee6c9a96fa5511207455a2ae3c}{FOR\_EACH\_ENGINE\_STATE}}(\mbox{\hyperlink{engine_8h_a3d1b15ee6cd792249ef8fe18a376bde5}{DEFINE\_TYPE\_CHECK}})}
+\DoxyCodeLine{00091\ \textcolor{preprocessor}{\#undef\ DEFINE\_TYPE\_CHECK}}
+\DoxyCodeLine{00092\ \};}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \mbox{\hyperlink{engine_8h_a8f32a23d3888c2c7b449e36e19804d77}{DECLARE\_ENGINE\_STATE}}(Init);}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_running_state}{RunningState}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1_engine_state}{EngineState}}\ \{}
+\DoxyCodeLine{00097\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_engine}{Engine}};}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00100\ \ \ rx::subscription\ \mbox{\hyperlink{classprt_1_1_running_state_ab30cd91af0491e2aa0c271a31f8f8847}{on\_tick\_}}\{\};}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00103\ \ \ \mbox{\hyperlink{classprt_1_1_running_state_ac712def6c805ed9d6ca6f292e6156d83}{RunningState}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00104\ \ \ \mbox{\hyperlink{classprt_1_1_running_state_aad66fb19cdb778904ef516e0d1d3fe16}{\string~RunningState}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \mbox{\hyperlink{classprt_1_1_running_state_aeb1b6e0cf10d09ade21f1ec0b400c725}{DECLARE\_ENGINE\_STATE\_TYPE}}(Running);}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00109\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_running_state_a7436f2ea605b64778b4ee6e04e8bd3e8}{New}}()\ -\/>\ std::unique\_ptr<RunningState>\ \{}
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordflow}{return}\ std::make\_unique<RunningState>();}
+\DoxyCodeLine{00111\ \ \ \}}
+\DoxyCodeLine{00112\ \};}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \mbox{\hyperlink{engine_8h_a8f32a23d3888c2c7b449e36e19804d77}{DECLARE\_ENGINE\_STATE}}(Paused);}
+\DoxyCodeLine{00115\ \mbox{\hyperlink{engine_8h_a8f32a23d3888c2c7b449e36e19804d77}{DECLARE\_ENGINE\_STATE}}(Terminated);}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_error_state}{ErrorState}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1_engine_state}{EngineState}}\ \{}
+\DoxyCodeLine{00118\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00119\ \ \ std::shared\_ptr<CrashReportCause>\ \mbox{\hyperlink{classprt_1_1_error_state_a036e1d4e49813f8f21f0fc458c422b73}{cause\_}};}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00122\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_error_state_afd0b2ff192b1074ab88544e1611095f5}{ErrorState}}(\textcolor{keyword}{const}\ std::shared\_ptr<CrashReportCause>\&\ cause)\ :}
+\DoxyCodeLine{00123\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_engine_state}{EngineState}}(),}
+\DoxyCodeLine{00124\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_error_state_a036e1d4e49813f8f21f0fc458c422b73}{cause\_}}(cause)\ \{\}}
+\DoxyCodeLine{00125\ \ \ \mbox{\hyperlink{classprt_1_1_error_state_a2fd72c21460f96593b26ef512d598eb1}{\string~ErrorState}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_error_state_af0f919c83cdb7e5f4772a94be930869b}{GetCause}}()\ const\ -\/>\ const\ \mbox{\hyperlink{namespacestd}{std}}::shared\_ptr<\mbox{\hyperlink{classprt_1_1_crash_report_cause}{CrashReportCause}}>\&\ \{}
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_error_state_a036e1d4e49813f8f21f0fc458c422b73}{cause\_}};}
+\DoxyCodeLine{00129\ \ \ \}}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00131\ \ \ \mbox{\hyperlink{classprt_1_1_error_state_ac60077becdbb7e9121e9457e9327e73f}{DECLARE\_ENGINE\_STATE\_TYPE}}(Error);}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00134\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_error_state_a79221a65352f59c33137c8ac340b5fac}{New}}(\textcolor{keyword}{const}\ std::shared\_ptr<CrashReportCause>\&\ cause)\ -\/>\ std::unique\_ptr<ErrorState>\ \{}
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keywordflow}{return}\ std::make\_unique<ErrorState>(cause);}
+\DoxyCodeLine{00136\ \ \ \}}
+\DoxyCodeLine{00137\ \};}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00139\ \textcolor{preprocessor}{\#define\ ENGINE\_STATE\_ENTER\_F(Name)\ void\ Name\#\#State::EnterState(Engine*\ engine)}}
+\DoxyCodeLine{00140\ \textcolor{preprocessor}{\#define\ ENGINE\_STATE\_TICK\_F(Name)\ \ void\ Name\#\#State::OnTick(Engine*\ engine,\ const\ Tick\&\ current,\ const\ Tick\&\ previous)}}
+\DoxyCodeLine{00141\ \textcolor{preprocessor}{\#define\ ENGINE\_STATE\_EXIT\_F(Name)\ \ void\ Name\#\#State::ExitState(Engine*\ engine)}}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{namespaceprt_a5b5f1395e909dafeffefb5506c1b9387}{OnEngineEvent}}()\ -\/>\ EngineEventObservable;}
+\DoxyCodeLine{00144\ \textcolor{preprocessor}{\#define\ DEFINE\_ON\_EVENT(Name)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00145\ \textcolor{preprocessor}{\ \ static\ inline\ auto\ On\#\#Name\#\#Event()-\/>Name\#\#EventObservable\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00146\ \textcolor{preprocessor}{\ \ \ \ return\ OnEngineEvent().filter(Name\#\#Event::Filter).map(Name\#\#Event::Cast);\ \(\backslash\)}}
+\DoxyCodeLine{00147\ \textcolor{preprocessor}{\ \ \}}}
+\DoxyCodeLine{00148\ \mbox{\hyperlink{engine__event_8h_aa553f12be86634d0b342890713cdb085}{FOR\_EACH\_ENGINE\_EVENT}}(\mbox{\hyperlink{engine_8cc_a2672365a233e0c9f3c1ccb0d78388308}{DEFINE\_ON\_EVENT}});}
+\DoxyCodeLine{00149\ \textcolor{preprocessor}{\#undef\ DEFINE\_ON\_EVENT}}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00151\ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ kTargetTicksPerSecond\ =\ 120;}
+\DoxyCodeLine{00152\ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ kTargetTickRate\ =\ NSEC\_PER\_SEC\ /\ kTargetTicksPerSecond;}
+\DoxyCodeLine{00153\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_engine}{Engine}}\ \{}
+\DoxyCodeLine{00154\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_lua_state}{prt::LuaState}};}
+\DoxyCodeLine{00155\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_engine_state}{EngineState}};}
+\DoxyCodeLine{00156\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_engine_a73d514fb9a4d35225a7c1449a14a666e}{InitState}};}
+\DoxyCodeLine{00157\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_error_state}{ErrorState}};}
+\DoxyCodeLine{00158\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_engine_ab5fb293c5b3f03a7793f2cf63187a6db}{PausedState}};}
+\DoxyCodeLine{00159\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_running_state}{RunningState}};}
+\DoxyCodeLine{00160\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_engine_af2a76f4eeacf0cd9bcdc2d618eafad6a}{TerminatingState}};}
+\DoxyCodeLine{00161\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_engine_a00dd4c52e691292fb4160b9fc83df7cb}{EngineTicker}};}
+\DoxyCodeLine{00162\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_engine_a29c748ef4d814963f9821a5c470b5fef}{TerminatedState}};}
+\DoxyCodeLine{00163\ \ \ \mbox{\hyperlink{classprt_1_1_engine_a5eacff6484389b0dced83e42239af4ae}{DEFINE\_NON\_COPYABLE\_TYPE}}(\mbox{\hyperlink{classprt_1_1_engine}{Engine}});}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00166\ \ \ \mbox{\hyperlink{classprt_1_1uv_1_1_loop}{uv::Loop}}\ \mbox{\hyperlink{classprt_1_1_engine_a05877edbe0920f159b749948e05c54ef}{loop\_}};}
+\DoxyCodeLine{00167\ \ \ \mbox{\hyperlink{classprt_1_1uv_1_1_async}{uv::Async}}\ \mbox{\hyperlink{classprt_1_1_engine_abaa0ef1e8db6e6b22539cecd67cf786a}{on\_shutdown\_}};}
+\DoxyCodeLine{00168\ \ \ \mbox{\hyperlink{classprt_1_1_rate_limited_ticker}{RateLimitedTicker<kTargetTickRate>}}\ \mbox{\hyperlink{classprt_1_1_engine_a7a1b355118e89f8d83266c9c91951beb}{ticker\_}};}
+\DoxyCodeLine{00169\ \textcolor{preprocessor}{\#ifdef\ PRT\_DEBUG}}
+\DoxyCodeLine{00170\ \ \ \mbox{\hyperlink{classprt_1_1_tick_profiler}{TickProfiler}}\ tick\_profiler\_;}
+\DoxyCodeLine{00171\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_DEBUG}}
+\DoxyCodeLine{00172\ \ \ rx::subscription\ \mbox{\hyperlink{classprt_1_1_engine_acdfd7cfd41637f9427e72eb71338879d}{on\_tick\_}};}
+\DoxyCodeLine{00173\ \ \ std::unique\_ptr<EngineState>\ \mbox{\hyperlink{classprt_1_1_engine_ad5b162f4ef1dfd98a8a05824ce3fb96b}{state\_}}\{\};}
+\DoxyCodeLine{00174\ \ \ std::shared\_ptr<CrashReportCause>\ \mbox{\hyperlink{classprt_1_1_engine_a3f74f31a1ffa80b79bd76f286aee0b5c}{cause\_}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00176\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_engine_a2dfc99b7a4a809198443029dc2818e6b}{EnterState}}(\textcolor{keyword}{const}\ std::unique\_ptr<EngineState>\&\ state);}
+\DoxyCodeLine{00177\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_engine_a8e887ea7d3332ebe861e85617c346e19}{ExitState}}(\textcolor{keyword}{const}\ std::unique\_ptr<EngineState>\&\ state);}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00179\ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{class\ }S,\ \textcolor{keyword}{typename}...\ Args>}
+\DoxyCodeLine{00180\ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_engine_af1c6b7d3128655760270ca5b4c9e84a1}{SetState}}(Args...\ args)\ \{}
+\DoxyCodeLine{00181\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_engine_acdfd7cfd41637f9427e72eb71338879d}{on\_tick\_}}.unsubscribe();}
+\DoxyCodeLine{00182\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classprt_1_1_engine_ad5b162f4ef1dfd98a8a05824ce3fb96b}{state\_}})}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_engine_a8e887ea7d3332ebe861e85617c346e19}{ExitState}}(\mbox{\hyperlink{classprt_1_1_engine_ad5b162f4ef1dfd98a8a05824ce3fb96b}{state\_}});}
+\DoxyCodeLine{00184\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_engine_ad5b162f4ef1dfd98a8a05824ce3fb96b}{state\_}}\ =\ S::New(args...);}
+\DoxyCodeLine{00185\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(\mbox{\hyperlink{classprt_1_1_engine_ad5b162f4ef1dfd98a8a05824ce3fb96b}{state\_}});}
+\DoxyCodeLine{00186\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_engine_a2dfc99b7a4a809198443029dc2818e6b}{EnterState}}(\mbox{\hyperlink{classprt_1_1_engine_ad5b162f4ef1dfd98a8a05824ce3fb96b}{state\_}});}
+\DoxyCodeLine{00187\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_engine_acdfd7cfd41637f9427e72eb71338879d}{on\_tick\_}}\ =\ \mbox{\hyperlink{classprt_1_1_engine_a96267d2a42fb719a508e636dfc5d1d55}{OnTick}}().subscribe([\textcolor{keyword}{this}](\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_tick}{Tick}}\&\ tick)\ \{}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(\mbox{\hyperlink{classprt_1_1_engine_ad5b162f4ef1dfd98a8a05824ce3fb96b}{state\_}});}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_engine_ad5b162f4ef1dfd98a8a05824ce3fb96b}{state\_}}-\/>OnTick(\textcolor{keyword}{this},\ tick,\ \mbox{\hyperlink{classprt_1_1_engine_a68067960e8c3e0866964c703378f616f}{GetPreviousTick}}());}
+\DoxyCodeLine{00190\ \ \ \ \ \});}
+\DoxyCodeLine{00191\ \ \ \}}
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00193\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_engine_af0900a6462f7930efa9c02f4f9347cf4}{Terminate}}();}
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00195\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_engine_a77d02b4afacba66737599afbab919736}{Stop}}()\ \{}
+\DoxyCodeLine{00196\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_engine_a7a1b355118e89f8d83266c9c91951beb}{ticker\_}}.\mbox{\hyperlink{classprt_1_1_ticker_abc6cd4ba905227a1833e02525f4f7f62}{Stop}}();}
+\DoxyCodeLine{00197\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_engine_a05877edbe0920f159b749948e05c54ef}{loop\_}}.\mbox{\hyperlink{classprt_1_1uv_1_1_loop_ab25833ad410f4f191ca915cb605a1ad6}{Stop}}();}
+\DoxyCodeLine{00198\ \ \ \}}
+\DoxyCodeLine{00199\ }
+\DoxyCodeLine{00200\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_engine_af0e40c7246ad4e711ae830028f72e32d}{OnShutdown}}(uv\_async\_t*\ handle);}
+\DoxyCodeLine{00201\ }
+\DoxyCodeLine{00202\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00203\ \ \ \mbox{\hyperlink{classprt_1_1_engine_a4003e39437f6a36da88f622527ed7187}{Engine}}();}
+\DoxyCodeLine{00204\ \ \ \mbox{\hyperlink{classprt_1_1_engine_a4217726fdc3fdded2878cb7c5d086c76}{\string~Engine}}();}
+\DoxyCodeLine{00205\ }
+\DoxyCodeLine{00206\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_engine_adc559ea47dbd015cbc54866c97f06dea}{GetLoop}}()\ const\ -\/>\ const\ uv::Loop\&\ \{}
+\DoxyCodeLine{00207\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_engine_a05877edbe0920f159b749948e05c54ef}{loop\_}};}
+\DoxyCodeLine{00208\ \ \ \}}
+\DoxyCodeLine{00209\ }
+\DoxyCodeLine{00210\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_engine_accc45ca5850268ab5298e6e9cb3d264c}{GetLoop}}()\ -\/>\ \mbox{\hyperlink{classprt_1_1uv_1_1_loop}{uv::Loop}}\&\ \{}
+\DoxyCodeLine{00211\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_engine_a05877edbe0920f159b749948e05c54ef}{loop\_}};}
+\DoxyCodeLine{00212\ \ \ \}}
+\DoxyCodeLine{00213\ }
+\DoxyCodeLine{00214\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_engine_a48c12d3c3f8bdbf44acdb6fc0ddb263c}{Run}}()\ -\/>\ int;}
+\DoxyCodeLine{00215\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_engine_a885832b2b051797ca0663f781583a041}{Shutdown}}(std::shared\_ptr<CrashReportCause>\ cause);}
+\DoxyCodeLine{00216\ }
+\DoxyCodeLine{00217\ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_engine_ace5824a174efe454de95f1dce7acd2c8}{Shutdown}}(\textcolor{keyword}{const}\ std::exception\_ptr\&\ cause\ =\ \textcolor{keyword}{nullptr},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ depth\ =\ \mbox{\hyperlink{classprt_1_1_crash_report_cause_a236da37a5d9c90fc786aa8a3dc0f8f48}{CrashReportCause::kDefaultDepth}},}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ offset\ =\ \mbox{\hyperlink{classprt_1_1_crash_report_cause_a3a9af7dfb9fd26456c3ce1235349e75c}{CrashReportCause::kDefaultOffset}})\ \{}
+\DoxyCodeLine{00219\ \ \ \ \ \textcolor{keywordflow}{if}\ (cause)}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_engine_a885832b2b051797ca0663f781583a041}{Shutdown}}(\mbox{\hyperlink{classprt_1_1_crash_report_cause_ad3290263dfb383c2b0207bee29403f06}{CrashReportCause::New}}(cause,\ depth,\ offset));}
+\DoxyCodeLine{00221\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_engine_a885832b2b051797ca0663f781583a041}{Shutdown}}((std::shared\_ptr<CrashReportCause>)\textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00222\ \ \ \}}
+\DoxyCodeLine{00223\ }
+\DoxyCodeLine{00224\ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_engine_ac15b22dfa82746cf6f5ae9e3dbb5af9f}{HasState}}()\ const\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00225\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_engine_ad5b162f4ef1dfd98a8a05824ce3fb96b}{state\_}}\ !=\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00226\ \ \ \}}
+\DoxyCodeLine{00227\ }
+\DoxyCodeLine{00228\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_engine_a139a609eb812e40ba4948ca233bd9531}{GetState}}()\ const\ -\/>\ const\ \mbox{\hyperlink{namespacestd}{std}}::unique\_ptr<\mbox{\hyperlink{classprt_1_1_engine_state}{EngineState}}>\&\ \{}
+\DoxyCodeLine{00229\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_engine_ad5b162f4ef1dfd98a8a05824ce3fb96b}{state\_}};}
+\DoxyCodeLine{00230\ \ \ \}}
+\DoxyCodeLine{00231\ }
+\DoxyCodeLine{00232\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_engine_a23ed794a5d1b9f068c43010a0dfb2e7a}{GetEpochTick}}()\ const\ -\/>\ const\ \mbox{\hyperlink{classprt_1_1_tick}{Tick}}\&\ \{}
+\DoxyCodeLine{00233\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_engine_a7a1b355118e89f8d83266c9c91951beb}{ticker\_}}.\mbox{\hyperlink{classprt_1_1_ticker_a3650bf022a54ae1f0c13cf9c1eb6ece2}{GetEpochTick}}();}
+\DoxyCodeLine{00234\ \ \ \}}
+\DoxyCodeLine{00235\ }
+\DoxyCodeLine{00236\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_engine_a6ef9aa7b2224c18c0199bac772d97d9a}{GetCurrentTick}}()\ const\ -\/>\ const\ \mbox{\hyperlink{classprt_1_1_tick}{Tick}}\&\ \{}
+\DoxyCodeLine{00237\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_engine_a7a1b355118e89f8d83266c9c91951beb}{ticker\_}}.\mbox{\hyperlink{classprt_1_1_ticker_a62bb7a93aae902de2f467ea3e19c6fe6}{GetCurrentTick}}();}
+\DoxyCodeLine{00238\ \ \ \}}
+\DoxyCodeLine{00239\ }
+\DoxyCodeLine{00240\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_engine_a68067960e8c3e0866964c703378f616f}{GetPreviousTick}}()\ const\ -\/>\ const\ \mbox{\hyperlink{classprt_1_1_tick}{Tick}}\&\ \{}
+\DoxyCodeLine{00241\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_engine_a7a1b355118e89f8d83266c9c91951beb}{ticker\_}}.\mbox{\hyperlink{classprt_1_1_ticker_a207184ece440cfa3527561254b236538}{GetPreviousTick}}();}
+\DoxyCodeLine{00242\ \ \ \}}
+\DoxyCodeLine{00243\ }
+\DoxyCodeLine{00244\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_engine_a37a967884a1e0be03869e495b4378259}{GetTicksPerSecond}}()\ const\ -\/>\ const\ \mbox{\hyperlink{classprt_1_1_per_second_counter}{TicksPerSecond}}\&\ \{}
+\DoxyCodeLine{00245\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_engine_a7a1b355118e89f8d83266c9c91951beb}{ticker\_}}.\mbox{\hyperlink{classprt_1_1_ticker_a5c289fc8ebb3002380c27ef68f05f1a8}{GetTicksPerSecond}}();}
+\DoxyCodeLine{00246\ \ \ \}}
+\DoxyCodeLine{00247\ }
+\DoxyCodeLine{00248\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_engine_a96267d2a42fb719a508e636dfc5d1d55}{OnTick}}()\ const\ -\/>\ rx::observable<\mbox{\hyperlink{classprt_1_1_tick}{Tick}}>\ \{}
+\DoxyCodeLine{00249\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_engine_a7a1b355118e89f8d83266c9c91951beb}{ticker\_}}.\mbox{\hyperlink{classprt_1_1_ticker_aaf3a2fa00fdb5833a2316a217568d23b}{OnTick}}();}
+\DoxyCodeLine{00250\ \ \ \}}
+\DoxyCodeLine{00251\ }
+\DoxyCodeLine{00252\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_engine_a47920ddf9604482f45649c88834f0321}{OnTickProfilerStats}}()\ const\ -\/>\ rx::observable<\mbox{\hyperlink{structprt_1_1_tick_stats}{TickStats}}>\ \{}
+\DoxyCodeLine{00253\ \ \ \ \ \textcolor{keywordflow}{return}\ tick\_profiler\_.\mbox{\hyperlink{classprt_1_1_tick_profiler_a3e4d2245c80e7ca72062596938104fdd}{OnStats}}();}
+\DoxyCodeLine{00254\ \ \ \}}
+\DoxyCodeLine{00255\ }
+\DoxyCodeLine{00256\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00257\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_engine_a450337cef00f7d9bbfc94a6b58424567}{Init}}();}
+\DoxyCodeLine{00258\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_engine_a551fa480b424845865136f9e1e6b003f}{Get}}()\ -\/>\ \mbox{\hyperlink{classprt_1_1_engine}{Engine}}*;}
+\DoxyCodeLine{00259\ \};}
+\DoxyCodeLine{00260\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00261\ }
+\DoxyCodeLine{00262\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_ENGINE\_H}}
+
+\end{DoxyCode}

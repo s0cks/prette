@@ -1,0 +1,280 @@
+\doxysection{mouse.\+h}
+\hypertarget{mouse_8h_source}{}\label{mouse_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/mouse.h@{/Users/tazz/Projects/prette/Sources/prette/mouse.h}}
+\mbox{\hyperlink{mouse_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_MOUSE\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_MOUSE\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{common_8h}{prette/common.h}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{event_8h}{prette/event.h}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}prette/gfx.h"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ FOR\_EACH\_MOUSE\_EVENT(V)\ \(\backslash\)}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\ \ V(MouseCreated)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\ \ V(MouseButtonState)\ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\ \ V(MouseMotion)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\ \ V(MouseDestroyed)}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }Mouse;}
+\DoxyCodeLine{00016\ \textcolor{keyword}{class\ }MouseEvent;}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#define\ FORWARD\_DECLARE(Name)\ class\ Name\#\#Event;}}
+\DoxyCodeLine{00018\ \mbox{\hyperlink{mouse_8h_a8f082bd64bba4f5b545bed8e85479aeb}{FOR\_EACH\_MOUSE\_EVENT}}(\mbox{\hyperlink{gui_8h_a83d2d158052fc2dc9bdf9bece3fd251e}{FORWARD\_DECLARE}})}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#undef\ FORWARD\_DECLARE}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_mouse_button_state}{MouseButtonState}}\ \{}
+\DoxyCodeLine{00022\ \ \ \mbox{\hyperlink{classprt_1_1_mouse_button_state_a50b0469d4633137e75fd08a7f641f82c}{DEFINE\_DEFAULT\_COPYABLE\_TYPE}}(\mbox{\hyperlink{classprt_1_1_mouse_button_state}{MouseButtonState}});}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00025\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state_ab8f377457e888def56016e3f95ab6d7b}{button\_}};}
+\DoxyCodeLine{00026\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state_a0fe7ec24ab787dd8fb288dad0b199536}{action\_}};}
+\DoxyCodeLine{00027\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state_a4291f907059b8b2b919cefcc7a81c20a}{mods\_}};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00030\ \ \ \mbox{\hyperlink{classprt_1_1_mouse_button_state_a58429fd72fa152e7969b908b1efec5e4}{MouseButtonState}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00031\ \ \ \mbox{\hyperlink{classprt_1_1_mouse_button_state_ac501b1f8b01502e7607bb2d4adecd826}{MouseButtonState}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ button,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ action,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ mods\ =\ 0)\ :}
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_mouse_button_state_ab8f377457e888def56016e3f95ab6d7b}{button\_}}(button),}
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_mouse_button_state_a0fe7ec24ab787dd8fb288dad0b199536}{action\_}}(action),}
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_mouse_button_state_a4291f907059b8b2b919cefcc7a81c20a}{mods\_}}(mods)\ \{\}}
+\DoxyCodeLine{00035\ \ \ \mbox{\hyperlink{classprt_1_1_mouse_button_state_a2f7b4cc9dcbdeb818edf9a93309fc3b6}{\string~MouseButtonState}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state_ac11a8c3feb6f7137b7064d563df695b2}{GetButton}}()\ const\ -\/>\ \textcolor{keywordtype}{int}\ \{}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state_ab8f377457e888def56016e3f95ab6d7b}{button\_}};}
+\DoxyCodeLine{00039\ \ \ \}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state_a51c4029a1ddd77bf5fe155d851aebe92}{GetAction}}()\ const\ -\/>\ \textcolor{keywordtype}{int}\ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state_a0fe7ec24ab787dd8fb288dad0b199536}{action\_}};}
+\DoxyCodeLine{00043\ \ \ \}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state_a877ef67ce30790e4e38dd3464141b569}{GetMods}}()\ const\ -\/>\ \textcolor{keywordtype}{int}\ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state_a4291f907059b8b2b919cefcc7a81c20a}{mods\_}};}
+\DoxyCodeLine{00047\ \ \ \}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state_a8f677a30ae059e494f484fb7b7ff92a4}{IsAction}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ action)\ \textcolor{keyword}{const}\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state_a51c4029a1ddd77bf5fe155d851aebe92}{GetAction}}()\ ==\ action;}
+\DoxyCodeLine{00051\ \ \ \}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state_a23f5e80c40e101ee9b9b29566bda8177}{IsPressed}}()\ const\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state_a8f677a30ae059e494f484fb7b7ff92a4}{IsAction}}(GLFW\_PRESS);}
+\DoxyCodeLine{00055\ \ \ \}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state_a6cb0d940a99d50421b48d0f45193f51e}{IsReleased}}()\ const\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state_a8f677a30ae059e494f484fb7b7ff92a4}{IsAction}}(GLFW\_RELEASE);}
+\DoxyCodeLine{00059\ \ \ \}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state_af99c48ea0c25fe21be0cd16e2e1a6416}{IsButton}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ button)\ \textcolor{keyword}{const}\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state_ac11a8c3feb6f7137b7064d563df695b2}{GetButton}}()\ ==\ button;}
+\DoxyCodeLine{00063\ \ \ \}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state_a36d4f563771d46ed15613cc128b7d0c9}{ToString}}()\ const\ -\/>\ \mbox{\hyperlink{namespacestd}{std}}::\textcolor{keywordtype}{string};}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ friend\ auto\ operator<<(\mbox{\hyperlink{namespacestd}{std}}::ostream\&\ stream,\ const\ \mbox{\hyperlink{classprt_1_1_mouse_button_state}{MouseButtonState}}\&\ rhs)\ -\/>\ \mbox{\hyperlink{namespacestd}{std}}::ostream\&\ \{}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordflow}{return}\ stream\ <<\ rhs.ToString();}
+\DoxyCodeLine{00069\ \ \ \}}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state_a034c859f8f3319f4b910379420228914}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state}{MouseButtonState}}\&\ rhs)\ \textcolor{keyword}{const}\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state_ab8f377457e888def56016e3f95ab6d7b}{button\_}}\ ==\ rhs.button\_\ \&\&\ \mbox{\hyperlink{classprt_1_1_mouse_button_state_a0fe7ec24ab787dd8fb288dad0b199536}{action\_}}\ ==\ rhs.action\_;}
+\DoxyCodeLine{00073\ \ \ \}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state_abe1cf00dbb72d3f42bd0ccf42917f3a3}{operator!=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state}{MouseButtonState}}\&\ rhs)\ \textcolor{keyword}{const}\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state_ab8f377457e888def56016e3f95ab6d7b}{button\_}}\ !=\ rhs.button\_\ ||\ \mbox{\hyperlink{classprt_1_1_mouse_button_state_a0fe7ec24ab787dd8fb288dad0b199536}{action\_}}\ !=\ rhs.action\_;}
+\DoxyCodeLine{00077\ \ \ \}}
+\DoxyCodeLine{00078\ \};}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \mbox{\hyperlink{event_8h_a1ee8f5215b2cce8affd6de0762ca1d7e}{DEFINE\_EVENT\_PROTOTYPE}}(\mbox{\hyperlink{classprt_1_1_mouse}{Mouse}},\ \mbox{\hyperlink{mouse_8h_a8f082bd64bba4f5b545bed8e85479aeb}{FOR\_EACH\_MOUSE\_EVENT}});}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_mouse_event_base}{MouseEventBase}}\ :\ \textcolor{keyword}{public}\ MouseEvent\ \{}
+\DoxyCodeLine{00083\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00084\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_mouse}{Mouse}}*\ \mbox{\hyperlink{classprt_1_1_mouse_event_base_a7da42178b70c2dd3ce3b0d315debac17}{mouse\_}};}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00087\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_mouse_event_base_a719e5a72de8df69042426df381b0c07a}{MouseEventBase}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_mouse}{Mouse}}*\ mouse)\ :}
+\DoxyCodeLine{00088\ \ \ \ \ MouseEvent(),}
+\DoxyCodeLine{00089\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_mouse_event_base_a7da42178b70c2dd3ce3b0d315debac17}{mouse\_}}(mouse)\ \{}
+\DoxyCodeLine{00090\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(\mbox{\hyperlink{classprt_1_1_mouse_event_base_a7da42178b70c2dd3ce3b0d315debac17}{mouse\_}});}
+\DoxyCodeLine{00091\ \ \ \}}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00094\ \ \ \mbox{\hyperlink{classprt_1_1_mouse_event_base_a48fe31a906e67c07134e5d181e35a5d0}{\string~MouseEventBase}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_mouse_event_base_af2e262f625226f0805e5b6010de9be9f}{GetMouse}}()\ const\ -\/>\ const\ \mbox{\hyperlink{classprt_1_1_mouse}{Mouse}}*\ \{}
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_mouse_event_base_a7da42178b70c2dd3ce3b0d315debac17}{mouse\_}};}
+\DoxyCodeLine{00098\ \ \ \}}
+\DoxyCodeLine{00099\ \};}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_mouse_created_event}{MouseCreatedEvent}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1_mouse_event_base}{MouseEventBase}}\ \{}
+\DoxyCodeLine{00102\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00103\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_mouse_created_event_ae14800e44246ffca9a918bae1e1d4ef6}{MouseCreatedEvent}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_mouse}{Mouse}}*\ mouse)\ :}
+\DoxyCodeLine{00104\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_mouse_event_base}{MouseEventBase}}(mouse)\ \{\}}
+\DoxyCodeLine{00105\ \ \ \mbox{\hyperlink{classprt_1_1_mouse_created_event_a0406d3d8dbb8023cd0d2677f1dc69f2f}{\string~MouseCreatedEvent}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00106\ \ \ \mbox{\hyperlink{classprt_1_1_mouse_created_event_a1589fa886164050bc1650f8f6ebec42c}{DECLARE\_EVENT\_TYPE}}(MouseEvent,\ MouseCreated);}
+\DoxyCodeLine{00107\ \};}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_mouse_button_state_event}{MouseButtonStateEvent}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1_mouse_event_base}{MouseEventBase}}\ \{}
+\DoxyCodeLine{00110\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00111\ \ \ \mbox{\hyperlink{classprt_1_1_mouse_button_state}{MouseButtonState}}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state_event_add9a8fdb61d871ca887778b743b97ca2}{state\_}};}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00114\ \ \ \mbox{\hyperlink{classprt_1_1_mouse_button_state_event_a5b518f6c8ebc3ddcda85223d0bc23bd3}{MouseButtonStateEvent}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_mouse}{Mouse}}*\ mouse,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state}{MouseButtonState}}\&\ state)\ :}
+\DoxyCodeLine{00115\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_mouse_event_base}{MouseEventBase}}(mouse),}
+\DoxyCodeLine{00116\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_mouse_button_state_event_add9a8fdb61d871ca887778b743b97ca2}{state\_}}(state)\ \{\}}
+\DoxyCodeLine{00117\ \ \ \mbox{\hyperlink{classprt_1_1_mouse_button_state_event_a90dd359a56f084c25805fac676f45074}{\string~MouseButtonStateEvent}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state_event_a123c17542a34d72c34cf555aecf302f6}{GetState}}()\ const\ -\/>\ const\ \mbox{\hyperlink{classprt_1_1_mouse_button_state}{MouseButtonState}}\&\ \{}
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state_event_add9a8fdb61d871ca887778b743b97ca2}{state\_}};}
+\DoxyCodeLine{00121\ \ \ \}}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ \ \ \mbox{\hyperlink{classprt_1_1_mouse_button_state_event_a3728a5ee5c5835faee9dab274c54e255}{DECLARE\_EVENT\_TYPE}}(MouseEvent,\ \mbox{\hyperlink{classprt_1_1_mouse_button_state}{MouseButtonState}});}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00126\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state_event_afa605405405836fbb9eb1e9b1b72b9b9}{FilterByState}}(\textcolor{keyword}{const}\ std::function<\textcolor{keywordtype}{bool}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state}{MouseButtonState}}\&)>\&\ filter)\ -\/>\ MouseEvent::Predicate\ \{}
+\DoxyCodeLine{00127\ \ \ \ \ \textcolor{keywordflow}{return}\ [filter](MouseEvent*\ event)\ \{}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{event}\ \&\&\ \textcolor{keyword}{event}-\/>IsMouseButtonStateEvent()\ \&\&\ filter(event-\/>AsMouseButtonStateEvent()-\/>GetState());}
+\DoxyCodeLine{00129\ \ \ \ \ \};}
+\DoxyCodeLine{00130\ \ \ \}}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00132\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state_event_ad77ce1b5e5c2b650d9d63a56edfb7c9a}{FilterByButton}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ button)\ -\/>\ MouseEvent::Predicate\ \{}
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state_event_afa605405405836fbb9eb1e9b1b72b9b9}{FilterByState}}([button](\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state}{MouseButtonState}}\&\ state)\ \{}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ state.\mbox{\hyperlink{classprt_1_1_mouse_button_state_af99c48ea0c25fe21be0cd16e2e1a6416}{IsButton}}(button);}
+\DoxyCodeLine{00135\ \ \ \ \ \});}
+\DoxyCodeLine{00136\ \ \ \}}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state_event_aa369d51ed3a39c95f3fd7dee0fc6b5a6}{FilterByState}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state}{MouseButtonState}}\&\ rhs)\ -\/>\ MouseEvent::Predicate\ \{}
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state_event_afa605405405836fbb9eb1e9b1b72b9b9}{FilterByState}}([=](\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state}{MouseButtonState}}\&\ lhs)\ \{}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ lhs\ ==\ rhs;}
+\DoxyCodeLine{00141\ \ \ \ \ \});}
+\DoxyCodeLine{00142\ \ \ \}}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state_event_a7672847e803236217836e8ec43ca118b}{FilterByPressed}}()\ -\/>\ MouseEvent::Predicate\ \{}
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state_event_afa605405405836fbb9eb1e9b1b72b9b9}{FilterByState}}([](\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state}{MouseButtonState}}\&\ state)\ \{}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ state.\mbox{\hyperlink{classprt_1_1_mouse_button_state_a23f5e80c40e101ee9b9b29566bda8177}{IsPressed}}();}
+\DoxyCodeLine{00147\ \ \ \ \ \});}
+\DoxyCodeLine{00148\ \ \ \}}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state_event_ab732df644df485c88200b0ab56ea78fd}{FilterByPressed}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ button,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ mods\ =\ 0)\ -\/>\ MouseEvent::Predicate\ \{}
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state_event_afa605405405836fbb9eb1e9b1b72b9b9}{FilterByState}}(\mbox{\hyperlink{classprt_1_1_mouse_button_state}{MouseButtonState}}(button,\ GLFW\_PRESS,\ mods));}
+\DoxyCodeLine{00152\ \ \ \}}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state_event_a94a48b2db67ed56f49455badd988f21e}{FilterByReleased}}()\ -\/>\ MouseEvent::Predicate\ \{}
+\DoxyCodeLine{00155\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state_event_afa605405405836fbb9eb1e9b1b72b9b9}{FilterByState}}([](\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state}{MouseButtonState}}\&\ state)\ \{}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ state.\mbox{\hyperlink{classprt_1_1_mouse_button_state_a6cb0d940a99d50421b48d0f45193f51e}{IsReleased}}();}
+\DoxyCodeLine{00157\ \ \ \ \ \});}
+\DoxyCodeLine{00158\ \ \ \}}
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00160\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state_event_a3575f2988bbeb8b23fcb6df96ff7b804}{FilterByReleased}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ button)\ -\/>\ MouseEvent::Predicate\ \{}
+\DoxyCodeLine{00161\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state_event_afa605405405836fbb9eb1e9b1b72b9b9}{FilterByState}}([button](\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_mouse_button_state}{MouseButtonState}}\&\ state)\ \{}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ state.\mbox{\hyperlink{classprt_1_1_mouse_button_state_af99c48ea0c25fe21be0cd16e2e1a6416}{IsButton}}(button);}
+\DoxyCodeLine{00163\ \ \ \ \ \});}
+\DoxyCodeLine{00164\ \ \ \}}
+\DoxyCodeLine{00165\ \};}
+\DoxyCodeLine{00166\ }
+\DoxyCodeLine{00167\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_mouse_motion_event}{MouseMotionEvent}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1_mouse_event_base}{MouseEventBase}}\ \{}
+\DoxyCodeLine{00168\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00169\ \ \ glm::vec2\ \mbox{\hyperlink{classprt_1_1_mouse_motion_event_a0508ba0e7294dc7aacc0147884a80bb2}{direction\_}};}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00171\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00172\ \ \ \mbox{\hyperlink{classprt_1_1_mouse_motion_event_adbd47fe35bddb741c3d66f53eb788528}{MouseMotionEvent}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_mouse}{Mouse}}*\ mouse,\ \textcolor{keyword}{const}\ glm::vec2\&\ dir)\ :}
+\DoxyCodeLine{00173\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_mouse_event_base}{MouseEventBase}}(mouse),}
+\DoxyCodeLine{00174\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_mouse_motion_event_a0508ba0e7294dc7aacc0147884a80bb2}{direction\_}}(dir)\ \{\}}
+\DoxyCodeLine{00175\ \ \ \mbox{\hyperlink{classprt_1_1_mouse_motion_event_a9a4700ed8171525628d0f71bfadf5598}{MouseMotionEvent}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_mouse}{Mouse}}*\ mouse,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ xPos,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ yPos)\ :}
+\DoxyCodeLine{00176\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_mouse_motion_event}{MouseMotionEvent}}(mouse,\ glm::vec2(xPos,\ yPos))\ \{\}}
+\DoxyCodeLine{00177\ \ \ \mbox{\hyperlink{classprt_1_1_mouse_motion_event_adba529313735ac791aa9d4ce6e626837}{\string~MouseMotionEvent}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00179\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_mouse_motion_event_a27eae33473f640118e7c4398b28eda44}{GetDirection}}()\ const\ -\/>\ glm::vec2\ const\&\ \{}
+\DoxyCodeLine{00180\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_mouse_motion_event_a0508ba0e7294dc7aacc0147884a80bb2}{direction\_}};}
+\DoxyCodeLine{00181\ \ \ \}}
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00183\ \ \ \mbox{\hyperlink{classprt_1_1_mouse_motion_event_aff51ad831982b49c22f7ec19504466db}{DECLARE\_EVENT\_TYPE}}(MouseEvent,\ MouseMotion);}
+\DoxyCodeLine{00184\ \};}
+\DoxyCodeLine{00185\ }
+\DoxyCodeLine{00186\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_mouse_destroyed_event}{MouseDestroyedEvent}}\ :\ \textcolor{keyword}{public}\ MouseEvent\ \{}
+\DoxyCodeLine{00187\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00188\ \ \ \mbox{\hyperlink{classprt_1_1_mouse_destroyed_event_a525dd6dc581ffbd5efe766362b35ba73}{MouseDestroyedEvent}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00189\ \ \ \mbox{\hyperlink{classprt_1_1_mouse_destroyed_event_a88f88c18a0f5a6270a0837027eecb392}{\string~MouseDestroyedEvent}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00190\ \ \ \mbox{\hyperlink{classprt_1_1_mouse_destroyed_event_a4c5701ec9db9252921f232e018fb5143}{DECLARE\_EVENT\_TYPE}}(MouseEvent,\ MouseDestroyed);}
+\DoxyCodeLine{00191\ \};}
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00193\ \mbox{\hyperlink{event_8h_a75f747c7c3ad9804780471c5ce370793}{DEFINE\_EVENT\_SUBJECT}}(\mbox{\hyperlink{classprt_1_1_mouse}{Mouse}});}
+\DoxyCodeLine{00194\ \mbox{\hyperlink{event_8h_a77dcd0ad69e8fd51c473d76aca5bba76}{DEFINE\_EVENT\_OBSERVABLE}}(\mbox{\hyperlink{classprt_1_1_mouse}{Mouse}});}
+\DoxyCodeLine{00195\ \mbox{\hyperlink{mouse_8h_a8f082bd64bba4f5b545bed8e85479aeb}{FOR\_EACH\_MOUSE\_EVENT}}(\mbox{\hyperlink{event_8h_a77dcd0ad69e8fd51c473d76aca5bba76}{DEFINE\_EVENT\_OBSERVABLE}});}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00197\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{namespaceprt_a677b6e3702935fcf83241c94ff37f846}{OnMouseEvent}}()\ -\/>\ MouseEventObservable;}
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00199\ \textcolor{preprocessor}{\#define\ DEFINE\_ON\_EVENT(Name)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00200\ \textcolor{preprocessor}{\ \ static\ inline\ auto\ On\#\#Name\#\#Event()-\/>Name\#\#EventObservable\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00201\ \textcolor{preprocessor}{\ \ \ \ return\ OnMouseEvent().filter(Name\#\#Event::Filter).map(Name\#\#Event::Cast);\ \(\backslash\)}}
+\DoxyCodeLine{00202\ \textcolor{preprocessor}{\ \ \}}}
+\DoxyCodeLine{00203\ \mbox{\hyperlink{mouse_8h_a8f082bd64bba4f5b545bed8e85479aeb}{FOR\_EACH\_MOUSE\_EVENT}}(\mbox{\hyperlink{engine_8cc_a2672365a233e0c9f3c1ccb0d78388308}{DEFINE\_ON\_EVENT}})}
+\DoxyCodeLine{00204\ \textcolor{preprocessor}{\#undef\ DEFINE\_ON\_EVENT}}
+\DoxyCodeLine{00205\ }
+\DoxyCodeLine{00206\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ OnMouseButton(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ button)\ -\/>\ MouseButtonStateEventObservable\ \{}
+\DoxyCodeLine{00207\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespaceprt_a677b6e3702935fcf83241c94ff37f846}{OnMouseEvent}}().filter(\mbox{\hyperlink{classprt_1_1_mouse_button_state_event_ad77ce1b5e5c2b650d9d63a56edfb7c9a}{MouseButtonStateEvent::FilterByButton}}(button)).map(MouseButtonStateEvent::Cast);}
+\DoxyCodeLine{00208\ \}}
+\DoxyCodeLine{00209\ }
+\DoxyCodeLine{00210\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ OnMousePressed()\ -\/>\ MouseButtonStateEventObservable\ \{}
+\DoxyCodeLine{00211\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespaceprt_a677b6e3702935fcf83241c94ff37f846}{OnMouseEvent}}().filter(\mbox{\hyperlink{classprt_1_1_mouse_button_state_event_a7672847e803236217836e8ec43ca118b}{MouseButtonStateEvent::FilterByPressed}}()).map(MouseButtonStateEvent::Cast);}
+\DoxyCodeLine{00212\ \}}
+\DoxyCodeLine{00213\ }
+\DoxyCodeLine{00214\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ OnMousePressed(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ button)\ -\/>\ MouseButtonStateEventObservable\ \{}
+\DoxyCodeLine{00215\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespaceprt_a677b6e3702935fcf83241c94ff37f846}{OnMouseEvent}}().filter(\mbox{\hyperlink{classprt_1_1_mouse_button_state_event_a7672847e803236217836e8ec43ca118b}{MouseButtonStateEvent::FilterByPressed}}(button)).map(MouseButtonStateEvent::Cast);}
+\DoxyCodeLine{00216\ \}}
+\DoxyCodeLine{00217\ }
+\DoxyCodeLine{00218\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ OnMouseReleased()\ -\/>\ MouseButtonStateEventObservable\ \{}
+\DoxyCodeLine{00219\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespaceprt_a677b6e3702935fcf83241c94ff37f846}{OnMouseEvent}}().filter(\mbox{\hyperlink{classprt_1_1_mouse_button_state_event_a94a48b2db67ed56f49455badd988f21e}{MouseButtonStateEvent::FilterByReleased}}()).map(MouseButtonStateEvent::Cast);}
+\DoxyCodeLine{00220\ \}}
+\DoxyCodeLine{00221\ }
+\DoxyCodeLine{00222\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ OnMouseReleased(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ button)\ -\/>\ MouseButtonStateEventObservable\ \{}
+\DoxyCodeLine{00223\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespaceprt_a677b6e3702935fcf83241c94ff37f846}{OnMouseEvent}}().filter(\mbox{\hyperlink{classprt_1_1_mouse_button_state_event_a94a48b2db67ed56f49455badd988f21e}{MouseButtonStateEvent::FilterByReleased}}(button)).map(MouseButtonStateEvent::Cast);}
+\DoxyCodeLine{00224\ \}}
+\DoxyCodeLine{00225\ }
+\DoxyCodeLine{00226\ \textcolor{keyword}{class\ }Window;}
+\DoxyCodeLine{00227\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_mouse}{Mouse}}\ \{}
+\DoxyCodeLine{00228\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_lua_state}{LuaState}};}
+\DoxyCodeLine{00229\ \textcolor{preprocessor}{\#ifdef\ PRT\_GLFW}}
+\DoxyCodeLine{00230\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ OnMouseButton(GLFWwindow*\ window,\ \textcolor{keywordtype}{int}\ button,\ \textcolor{keywordtype}{int}\ action,\ \textcolor{keywordtype}{int}\ mods);}
+\DoxyCodeLine{00231\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ OnMouseMotion(GLFWwindow*\ window,\ \textcolor{keywordtype}{double}\ xPos,\ \textcolor{keywordtype}{double}\ yPos);}
+\DoxyCodeLine{00232\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_GLFW}}
+\DoxyCodeLine{00233\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00234\ \ \ \mbox{\hyperlink{classprt_1_1_window}{Window}}*\ \mbox{\hyperlink{classprt_1_1_mouse_ad98fdcfa07b5a4ee654ec5d74630bef9}{owner\_}};}
+\DoxyCodeLine{00235\ \ \ glm::vec2\ \mbox{\hyperlink{classprt_1_1_mouse_ae6c7f8d90795bb7be3ab8f2f05f1b038}{previous\_pos\_}}\{\};}
+\DoxyCodeLine{00236\ }
+\DoxyCodeLine{00237\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_mouse_ae4345ebcf2b1bb506849e259b5aaa5e8}{PublishEvent}}(MouseEvent*\ event);}
+\DoxyCodeLine{00238\ }
+\DoxyCodeLine{00239\ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{class\ }E,\ \textcolor{keyword}{typename}...\ Args>}
+\DoxyCodeLine{00240\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_mouse_a52708351e4bb909b61f72705aed1377e}{Publish}}(Args...\ args)\ \{}
+\DoxyCodeLine{00241\ \ \ \ \ E\ event(args...);}
+\DoxyCodeLine{00242\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_mouse_ae4345ebcf2b1bb506849e259b5aaa5e8}{PublishEvent}}(\&event);}
+\DoxyCodeLine{00243\ \ \ \}}
+\DoxyCodeLine{00244\ }
+\DoxyCodeLine{00245\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00246\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_mouse_a59e5937615ac6f1fc90e91b924b8d524}{Mouse}}(\mbox{\hyperlink{classprt_1_1_window}{Window}}*\ owner);}
+\DoxyCodeLine{00247\ }
+\DoxyCodeLine{00248\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00249\ \ \ \mbox{\hyperlink{classprt_1_1_mouse_a7cfacc812a2ece33bae34e8f256c4dc7}{\string~Mouse}}();}
+\DoxyCodeLine{00250\ }
+\DoxyCodeLine{00251\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_mouse_a115aaded3e8b05b17df0c9cb86cdd521}{GetOwner}}()\ const\ -\/>\ \mbox{\hyperlink{classprt_1_1_window}{Window}}*\ \{}
+\DoxyCodeLine{00252\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_mouse_ad98fdcfa07b5a4ee654ec5d74630bef9}{owner\_}};}
+\DoxyCodeLine{00253\ \ \ \}}
+\DoxyCodeLine{00254\ }
+\DoxyCodeLine{00255\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_mouse_a54fa2e7c8646c8c86ef9f0966c6055a4}{GetPos}}()\ const\ -\/>\ glm::dvec2;}
+\DoxyCodeLine{00256\ }
+\DoxyCodeLine{00257\ \ \ auto\ \mbox{\hyperlink{classprt_1_1_mouse_abe2fd37ee313d77f37db9730094942fc}{GetPreviousPos}}()\ const\ -\/>\ glm::vec2\ const\&\ \{}
+\DoxyCodeLine{00258\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_mouse_ae6c7f8d90795bb7be3ab8f2f05f1b038}{previous\_pos\_}};}
+\DoxyCodeLine{00259\ \ \ \}}
+\DoxyCodeLine{00260\ }
+\DoxyCodeLine{00261\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_mouse_acffe2383df5867a739b9fd0c1898b0cc}{IsPressed}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ btn)\ \textcolor{keyword}{const}\ -\/>\ bool;}
+\DoxyCodeLine{00262\ }
+\DoxyCodeLine{00263\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00264\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_mouse_a3f6f1159594d58584316e8c20fce4548}{New}}(\mbox{\hyperlink{classprt_1_1_window}{Window}}*\ owner)\ -\/>\ \mbox{\hyperlink{classprt_1_1_mouse}{Mouse}}*;}
+\DoxyCodeLine{00265\ }
+\DoxyCodeLine{00266\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00267\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_mouse_a9597bd18bcc8950dd16a0911713959ab}{IsInitialized}}()\ -\/>\ bool;}
+\DoxyCodeLine{00268\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_mouse_ae0bedc62dd640ee680b9db1d29e3a57c}{Init}}(\mbox{\hyperlink{classprt_1_1_window}{Window}}*\ owner)\ -\/>\ \mbox{\hyperlink{classprt_1_1_mouse}{Mouse}}*;}
+\DoxyCodeLine{00269\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_mouse_afdb9d9b212cd9eaa8de41ba6581dd5c7}{Get}}()\ -\/>\ \mbox{\hyperlink{classprt_1_1_mouse}{Mouse}}*;}
+\DoxyCodeLine{00270\ \};}
+\DoxyCodeLine{00271\ }
+\DoxyCodeLine{00272\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00273\ }
+\DoxyCodeLine{00274\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_MOUSE\_H}}
+
+\end{DoxyCode}

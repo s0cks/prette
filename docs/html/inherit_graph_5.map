@@ -1,0 +1,13 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,31,100,56"/>
+<area shape="rect" id="Node000001" href="$classprt_1_1_mouse_destroyed_event.html" title=" " alt="" coords="148,5,325,31"/>
+<area shape="poly" id="edge11_Node000000_Node000001" title=" " alt="" coords="115,32,147,28,148,33,116,38"/>
+<area shape="rect" id="Node000002" href="$classprt_1_1_mouse_event_base.html" title=" " alt="" coords="163,55,310,80"/>
+<area shape="poly" id="edge12_Node000000_Node000002" title=" " alt="" coords="116,49,162,55,162,60,115,54"/>
+<area shape="rect" id="Node000003" href="$classprt_1_1_mouse_button_state_event.html" title=" " alt="" coords="373,5,559,31"/>
+<area shape="poly" id="edge13_Node000002_Node000003" title=" " alt="" coords="314,48,402,29,403,34,315,53"/>
+<area shape="rect" id="Node000004" href="$classprt_1_1_mouse_created_event.html" title=" " alt="" coords="384,55,548,80"/>
+<area shape="poly" id="edge14_Node000002_Node000004" title=" " alt="" coords="325,65,384,65,384,70,325,70"/>
+<area shape="rect" id="Node000005" href="$classprt_1_1_mouse_motion_event.html" title=" " alt="" coords="388,104,544,130"/>
+<area shape="poly" id="edge15_Node000002_Node000005" title=" " alt="" coords="315,82,403,101,402,106,314,87"/>
+</map>

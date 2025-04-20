@@ -1,0 +1,106 @@
+\doxysection{/\+Users/tazz/\+Projects/prette/\+Sources/prette/skybox.h File Reference}
+\hypertarget{skybox_8h}{}\label{skybox_8h}\index{/Users/tazz/Projects/prette/Sources/prette/skybox.h@{/Users/tazz/Projects/prette/Sources/prette/skybox.h}}
+{\ttfamily \#include $<$vulkan/vulkan\+\_\+core.\+h$>$}\newline
+{\ttfamily \#include "{}prette/event.\+h"{}}\newline
+{\ttfamily \#include "{}prette/gfx.\+h"{}}\newline
+{\ttfamily \#include "{}prette/texture.\+h"{}}\newline
+Include dependency graph for skybox.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{skybox_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=191pt]{skybox_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1_skybox_init_event}{prt\+::\+Skybox\+Init\+Event}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_skybox_rendered_event}{prt\+::\+Skybox\+Rendered\+Event}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_skybox_destroyed_event}{prt\+::\+Skybox\+Destroyed\+Event}}
+\item 
+struct \mbox{\hyperlink{structprt_1_1_skybox_data}{prt\+::\+Skybox\+Data}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_skybox_mesh}{prt\+::\+Skybox\+Mesh}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_skybox_pipeline}{prt\+::\+Skybox\+Pipeline}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_skybox}{prt\+::\+Skybox}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceprt}{prt}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{skybox_8h_a1661f9334544b9802eeac8a95e6d86e2}{FOR\+\_\+\+EACH\+\_\+\+SKYBOX\+\_\+\+EVENT}}(V)
+\item 
+\#define \mbox{\hyperlink{skybox_8h_a83d2d158052fc2dc9bdf9bece3fd251e}{FORWARD\+\_\+\+DECLARE}}(Name)
+\item 
+\#define \mbox{\hyperlink{skybox_8h_a2672365a233e0c9f3c1ccb0d78388308}{DEFINE\+\_\+\+ON\+\_\+\+EVENT}}(Name)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceprt_a84cc98b7e97eaf995a4bca4581743ddb}{prt\+::\+DEFINE\+\_\+\+EVENT\+\_\+\+PROTOTYPE}} (\mbox{\hyperlink{classprt_1_1_skybox}{Skybox}}, \mbox{\hyperlink{namespaceprt_a6dabf0161300a31754fe3a8b99cb1654}{FOR\+\_\+\+EACH\+\_\+\+SKYBOX\+\_\+\+EVENT}})
+\item 
+\mbox{\hyperlink{namespaceprt_a381449c671a473e1645176ed9fe69e18}{prt\+::\+DEFINE\+\_\+\+EVENT\+\_\+\+SUBJECT}} (\mbox{\hyperlink{classprt_1_1_skybox}{Skybox}})
+\item 
+\mbox{\hyperlink{namespaceprt_a667eb01e05caabb967c41e846d7ac00c}{prt\+::\+DEFINE\+\_\+\+EVENT\+\_\+\+OBSERVABLE}} (\mbox{\hyperlink{classprt_1_1_skybox}{Skybox}})
+\item 
+\mbox{\hyperlink{namespaceprt_a6dabf0161300a31754fe3a8b99cb1654}{prt\+::\+FOR\+\_\+\+EACH\+\_\+\+SKYBOX\+\_\+\+EVENT}} (\mbox{\hyperlink{namespaceprt_a1a037a7c66a8e0c9eafb4608fef52cca}{DEFINE\+\_\+\+EVENT\+\_\+\+OBSERVABLE}})
+\item 
+auto \mbox{\hyperlink{namespaceprt_aba17f68a6a22f469f820eed76882a3e8}{prt\+::\+On\+Skybox\+Event}} () -\/$>$ Skybox\+Event\+Observable
+\item 
+\mbox{\hyperlink{namespaceprt_af7f140268218f313fd8df1a21b525abd}{prt\+::\+FOR\+\_\+\+EACH\+\_\+\+SKYBOX\+\_\+\+EVENT}} (\mbox{\hyperlink{engine_8cc_a2672365a233e0c9f3c1ccb0d78388308}{DEFINE\+\_\+\+ON\+\_\+\+EVENT}})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{skybox_8h_a2672365a233e0c9f3c1ccb0d78388308}\index{skybox.h@{skybox.h}!DEFINE\_ON\_EVENT@{DEFINE\_ON\_EVENT}}
+\index{DEFINE\_ON\_EVENT@{DEFINE\_ON\_EVENT}!skybox.h@{skybox.h}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_ON\_EVENT}{DEFINE\_ON\_EVENT}}
+{\footnotesize\ttfamily \label{skybox_8h_a2672365a233e0c9f3c1ccb0d78388308} 
+\#define DEFINE\+\_\+\+ON\+\_\+\+EVENT(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ On\#\#Name\#\#Event()-\/>Name\#\#EventObservable\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ OnSkyboxEvent().filter(Name\#\#Event::Filter).map(Name\#\#Event::Cast);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{skybox_8h_a1661f9334544b9802eeac8a95e6d86e2}\index{skybox.h@{skybox.h}!FOR\_EACH\_SKYBOX\_EVENT@{FOR\_EACH\_SKYBOX\_EVENT}}
+\index{FOR\_EACH\_SKYBOX\_EVENT@{FOR\_EACH\_SKYBOX\_EVENT}!skybox.h@{skybox.h}}
+\doxysubsubsection{\texorpdfstring{FOR\_EACH\_SKYBOX\_EVENT}{FOR\_EACH\_SKYBOX\_EVENT}}
+{\footnotesize\ttfamily \label{skybox_8h_a1661f9334544b9802eeac8a95e6d86e2} 
+\#define FOR\+\_\+\+EACH\+\_\+\+SKYBOX\+\_\+\+EVENT(\begin{DoxyParamCaption}\item[{}]{V}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ V(SkyboxInit)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(SkyboxRendered)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(SkyboxDestroyed)}
+
+\end{DoxyCode}
+\Hypertarget{skybox_8h_a83d2d158052fc2dc9bdf9bece3fd251e}\index{skybox.h@{skybox.h}!FORWARD\_DECLARE@{FORWARD\_DECLARE}}
+\index{FORWARD\_DECLARE@{FORWARD\_DECLARE}!skybox.h@{skybox.h}}
+\doxysubsubsection{\texorpdfstring{FORWARD\_DECLARE}{FORWARD\_DECLARE}}
+{\footnotesize\ttfamily \label{skybox_8h_a83d2d158052fc2dc9bdf9bece3fd251e} 
+\#define FORWARD\+\_\+\+DECLARE(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{class\ }Name\#\#Event;}
+
+\end{DoxyCode}

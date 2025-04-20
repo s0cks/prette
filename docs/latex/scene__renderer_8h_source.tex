@@ -1,0 +1,44 @@
+\doxysection{scene\+\_\+renderer.\+h}
+\hypertarget{scene__renderer_8h_source}{}\label{scene__renderer_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/scene\_renderer.h@{/Users/tazz/Projects/prette/Sources/prette/scene\_renderer.h}}
+\mbox{\hyperlink{scene__renderer_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_SCENE\_RENDERER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_SCENE\_RENDERER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vulkan/vulkan\_core.h>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}prette/gfx.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{scene__render__pass_8h}{prette/scene\_render\_pass.h}}"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }Driver;}
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }SwapChainFrame;}
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_scene_renderer}{SceneRenderer}}\ \{}
+\DoxyCodeLine{00013\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00014\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_scene_renderer_ab9f41d89c4202e16f692c7624bbe641d}{InitImages}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_driver}{Driver}}*\ driver,\ \textcolor{keyword}{const}\ uint64\_t\ num\_images,\ \textcolor{keyword}{const}\ VkExtent2D\&\ extent);}
+\DoxyCodeLine{00015\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_scene_renderer_ac847b5421d4045cd8355900ce8a7205a}{InitDescriptorSetLayout}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_driver}{Driver}}*\ driver);}
+\DoxyCodeLine{00016\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_scene_renderer_ab3c1a96abb485bd65ae60d096657205e}{InitPipeline}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_driver}{Driver}}*\ driver);}
+\DoxyCodeLine{00017\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_scene_renderer_a80d94f3c1b1db33adea18af0575f7a81}{InitPipelineLayout}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_driver}{Driver}}*\ driver);}
+\DoxyCodeLine{00018\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_scene_renderer_adf81dafc28103e48aedd4e73c7d7ee45}{InitRenderPass}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_driver}{Driver}}*\ driver);}
+\DoxyCodeLine{00019\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_scene_renderer_a6eeddcd2eafb54575062243d632c45e0}{InitCommandBuffers}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_driver}{Driver}}*\ driver);}
+\DoxyCodeLine{00020\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_scene_renderer_ae2bb518f4b7deaf11acbccecd71c833c}{InitBuffers}}();}
+\DoxyCodeLine{00021\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_scene_renderer_a164a0e269158f6072afd03662eacf1d4}{InitDescriptorSets}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_driver}{Driver}}*\ driver);}
+\DoxyCodeLine{00022\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_scene_renderer_acaf131f6318b803c228c26449e7f9d18}{InitModel}}();}
+\DoxyCodeLine{00023\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_scene_renderer_a12dcd606d9d076fd0bb7ba26a5228f2f}{InitModelTexture}}();}
+\DoxyCodeLine{00024\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_scene_renderer_a3e4eb0ac046d0f3efd6d35f9e8ad2039}{InitDepthTexture}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_driver}{Driver}}*\ driver);}
+\DoxyCodeLine{00025\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_scene_renderer_a81ad15d643afd7e55cf56eeae5ad65e3}{InitPickingTexture}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_driver}{Driver}}*\ driver);}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_scene_renderer_ad30f09e38edfb4f781c0c0fd6aea5283}{Destroy}}(\mbox{\hyperlink{classprt_1_1_driver}{Driver}}*\ driver,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ is\_reinit);}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00030\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_scene_renderer_ab10bc8082f80885eecf43817a32e84f6}{Init}}();}
+\DoxyCodeLine{00031\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_scene_renderer_acfd4d14be5a1e6abf0c1bc4d7ca9d406}{GetCameraBuffer}}(\textcolor{keyword}{const}\ uint64\_t\ idx)\ -\/>\ vk::Buffer*;}
+\DoxyCodeLine{00032\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_scene_renderer_ab1dc195325d4ea3542515071448d2d6a}{GetRenderPass}}()\ -\/>\ \mbox{\hyperlink{classprt_1_1_scene_render_pass}{SceneRenderPass}}*;}
+\DoxyCodeLine{00033\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_scene_renderer_ac460dbb023e2916bee5a5ec62d1d4da9}{GetImageView}}(\textcolor{keyword}{const}\ uint64\_t\ idx)\ -\/>\ VkImageView\ \textcolor{keyword}{const}\&;}
+\DoxyCodeLine{00034\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_scene_renderer_a2f8e2d9c32353c1c0b3a4f8d4d7bc202}{Draw}}(\mbox{\hyperlink{classprt_1_1_swap_chain_frame}{SwapChainFrame}}*\ frame,\ std::vector<VkCommandBuffer>\&\ buffers);}
+\DoxyCodeLine{00035\ \};}
+\DoxyCodeLine{00036\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_SCENE\_RENDERER\_H}}
+
+\end{DoxyCode}

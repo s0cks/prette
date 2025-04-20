@@ -1,0 +1,115 @@
+\doxysection{/\+Users/tazz/\+Projects/prette/\+Sources/prette/window.cc File Reference}
+\hypertarget{window_8cc}{}\label{window_8cc}\index{/Users/tazz/Projects/prette/Sources/prette/window.cc@{/Users/tazz/Projects/prette/Sources/prette/window.cc}}
+{\ttfamily \#include "{}prette/window.\+h"{}}\newline
+{\ttfamily \#include $<$lua.\+h$>$}\newline
+{\ttfamily \#include $<$cstdlib$>$}\newline
+{\ttfamily \#include $<$unordered\+\_\+map$>$}\newline
+{\ttfamily \#include "{}prette/common.\+h"{}}\newline
+{\ttfamily \#include "{}prette/engine.\+h"{}}\newline
+{\ttfamily \#include "{}prette/keyboard.\+h"{}}\newline
+{\ttfamily \#include "{}prette/mouse.\+h"{}}\newline
+{\ttfamily \#include "{}prette/thread\+\_\+local.\+h"{}}\newline
+{\ttfamily \#include "{}prette/to\+\_\+string.\+h"{}}\newline
+Include dependency graph for window.\+cc\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{window_8cc__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1_window_module}{prt\+::\+Window\+Module}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceprt}{prt}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{window_8cc_af795595d0407b222ebf8f9a405dee6af}{LUA\+\_\+\+WINDOW\+\_\+F}}(Name)
+\item 
+\#define \mbox{\hyperlink{window_8cc_a883bc9ae9206c92ed074a39a9a30192a}{DEFINE\+\_\+\+ON\+\_\+\+EVENT\+\_\+\+FUNC}}(Name)
+\item 
+\#define \mbox{\hyperlink{window_8cc_af795595d0407b222ebf8f9a405dee6af}{LUA\+\_\+\+WINDOW\+\_\+F}}(Name)
+\item 
+\#define \mbox{\hyperlink{window_8cc_a2672365a233e0c9f3c1ccb0d78388308}{DEFINE\+\_\+\+ON\+\_\+\+EVENT}}(Name)
+\item 
+\#define \mbox{\hyperlink{window_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}}~lstate-\/$>$Get\+State()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceprt_a244586f7301f9ef41d28dab85c83bff9}{prt\+::\+DEFINE\+\_\+string}} (window\+\_\+size, k\+Default\+Window\+Size, "{}The size of the window."{})
+\item 
+auto \mbox{\hyperlink{namespaceprt_af700bfe1de8dc2f0aeba82002aa1bbf9}{prt\+::\+On\+Window\+Event}} () -\/$>$ Window\+Event\+Observable
+\item 
+auto \mbox{\hyperlink{namespaceprt_a523b1c3e770cbc10c957fdbd02a1c6c7}{prt\+::\+Get\+App\+Window}} () -\/$>$ \mbox{\hyperlink{classprt_1_1_window}{Window}} \texorpdfstring{$\ast$}{*}
+\item 
+auto \mbox{\hyperlink{namespaceprt_a3e5ad07a5bf51988ea446937335e68a2}{prt\+::\+Get\+Total\+Number\+Of\+Windows}} () -\/$>$ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}
+\item 
+auto \mbox{\hyperlink{namespaceprt_aca6b7e6198d4c7d002a4f83e014b8917}{prt\+::\+Visit\+All\+Windows}} (const std\+::function$<$ bool(\mbox{\hyperlink{classprt_1_1_window}{Window}} \texorpdfstring{$\ast$}{*})$>$ \&vis) -\/$>$ bool
+\item 
+\mbox{\hyperlink{namespaceprt_a833cf6fa0ad5c93cb91ef667ce627e86}{prt\+::\+LUA\+\_\+\+WINDOW\+\_\+F}} (on\+Event)
+\item 
+\mbox{\hyperlink{namespaceprt_a4d42e4eb12ffab41c8a0b96551af51ae}{prt\+::\+FOR\+\_\+\+EACH\+\_\+\+WINDOW\+\_\+\+EVENT}} (\mbox{\hyperlink{engine_8cc_a883bc9ae9206c92ed074a39a9a30192a}{DEFINE\+\_\+\+ON\+\_\+\+EVENT\+\_\+\+FUNC}})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{window_8cc_a2672365a233e0c9f3c1ccb0d78388308}\index{window.cc@{window.cc}!DEFINE\_ON\_EVENT@{DEFINE\_ON\_EVENT}}
+\index{DEFINE\_ON\_EVENT@{DEFINE\_ON\_EVENT}!window.cc@{window.cc}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_ON\_EVENT}{DEFINE\_ON\_EVENT}}
+{\footnotesize\ttfamily \label{window_8cc_a2672365a233e0c9f3c1ccb0d78388308} 
+\#define DEFINE\+\_\+\+ON\+\_\+\+EVENT(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{window_8cc_af795595d0407b222ebf8f9a405dee6af}{LUA\_WINDOW\_F}}(on\#\#Name\#\#Event),}
+
+\end{DoxyCode}
+\Hypertarget{window_8cc_a883bc9ae9206c92ed074a39a9a30192a}\index{window.cc@{window.cc}!DEFINE\_ON\_EVENT\_FUNC@{DEFINE\_ON\_EVENT\_FUNC}}
+\index{DEFINE\_ON\_EVENT\_FUNC@{DEFINE\_ON\_EVENT\_FUNC}!window.cc@{window.cc}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_ON\_EVENT\_FUNC}{DEFINE\_ON\_EVENT\_FUNC}}
+{\footnotesize\ttfamily \label{window_8cc_a883bc9ae9206c92ed074a39a9a30192a} 
+\#define DEFINE\+\_\+\+ON\+\_\+\+EVENT\+\_\+\+FUNC(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{window_8cc_af795595d0407b222ebf8f9a405dee6af}{LUA\_WINDOW\_F}}(on\#\#Name\#\#Event)\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ On\#\#Name\#\#Event().subscribe(CreateSubscriber<Name\#\#Event>(\mbox{\hyperlink{window_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}}));\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{window_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}\index{window.cc@{window.cc}!L@{L}}
+\index{L@{L}!window.cc@{window.cc}}
+\doxysubsubsection{\texorpdfstring{L}{L}}
+{\footnotesize\ttfamily \label{window_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53} 
+\#define L~lstate-\/$>$Get\+State()}
+
+\Hypertarget{window_8cc_af795595d0407b222ebf8f9a405dee6af}\index{window.cc@{window.cc}!LUA\_WINDOW\_F@{LUA\_WINDOW\_F}}
+\index{LUA\_WINDOW\_F@{LUA\_WINDOW\_F}!window.cc@{window.cc}}
+\doxysubsubsection{\texorpdfstring{LUA\_WINDOW\_F}{LUA\_WINDOW\_F}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{window_8cc_af795595d0407b222ebf8f9a405dee6af} 
+\#define LUA\+\_\+\+WINDOW\+\_\+F(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{lua_8h_a4c3a947c2f5c2f6244ffac8dfa005527}{LUA\_F}}(window\_\#\#Name)}
+
+\end{DoxyCode}
+\Hypertarget{window_8cc_af795595d0407b222ebf8f9a405dee6af}\index{window.cc@{window.cc}!LUA\_WINDOW\_F@{LUA\_WINDOW\_F}}
+\index{LUA\_WINDOW\_F@{LUA\_WINDOW\_F}!window.cc@{window.cc}}
+\doxysubsubsection{\texorpdfstring{LUA\_WINDOW\_F}{LUA\_WINDOW\_F}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{window_8cc_af795595d0407b222ebf8f9a405dee6af} 
+\#define LUA\+\_\+\+WINDOW\+\_\+F(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \{\ .name\ =\ \#Name,\ .func\ =\ \&lua\_window\_\#\#Name\ \}}
+
+\end{DoxyCode}

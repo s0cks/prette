@@ -1,0 +1,225 @@
+\doxysection{prt\+::Rectangle Class Reference}
+\hypertarget{classprt_1_1_rectangle}{}\label{classprt_1_1_rectangle}\index{prt::Rectangle@{prt::Rectangle}}
+
+
+{\ttfamily \#include $<$rectangle.\+h$>$}
+
+
+
+Inheritance diagram for prt\+::Rectangle\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=158pt]{classprt_1_1_rectangle__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for prt\+::Rectangle\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=158pt]{classprt_1_1_rectangle__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_rectangle_ac7ea72e47848996b6f4eb4e41fc73b5f}{Rectangle}} ()=default
+\item 
+\mbox{\hyperlink{classprt_1_1_rectangle_a98853830757bac8bb01fb2cde084df42}{Rectangle}} (const \mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}} \&pos, const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} width, const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} height)
+\item 
+\mbox{\hyperlink{classprt_1_1_rectangle_a80ca4545f645642e51321dede9e39b21}{Rectangle}} (const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} x\+Pos, const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} y\+Pos, const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} width, const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} height)
+\item 
+\mbox{\hyperlink{classprt_1_1_rectangle_ab303bb82ba58b3d19edd358602b95f8a}{\texorpdfstring{$\sim$}{\string~}\+Rectangle}} () override=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1_rectangle_a650b549b168470964bf6823d7f375ba4}{Get\+Pos}} () const -\/$>$ const \mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}} \&
+\item 
+void \mbox{\hyperlink{classprt_1_1_rectangle_a2cca6b4dea276c27e8ba202df7d69abd}{Set\+Pos}} (const \mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}} \&rhs)
+\item 
+auto \mbox{\hyperlink{classprt_1_1_rectangle_a19ed20c32f185995bb68f1ab2f4b31ff}{Get\+Top\+Left}} () const -\/$>$ \mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_rectangle_a932ca518e887d1295d7ec31fbeb80458}{Get\+Bottom\+Right}} () const -\/$>$ \mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_rectangle_a7c6e9bc44a35381465f2a5867cd7979e}{Get\+Top\+Right}} () const -\/$>$ \mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_rectangle_ab2213db7087b0a1fd0258cca529a6c35}{Get\+Bottom\+Left}} () const -\/$>$ \mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_rectangle_aadb7c27fdb0052ee0d9a3ba2a0123e1c}{Get\+Width}} () const -\/$>$ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_rectangle_a8b5cee289d5136a64f7a5e6fbaeb5669}{Get\+Height}} () const -\/$>$ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_rectangle_a4a44f45724c051fc34925b92fc71e526}{Contains}} (const \mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}} \&p) const -\/$>$ bool override
+\item 
+auto \mbox{\hyperlink{classprt_1_1_rectangle_ade6de2e42f8e9b6ea1b08832ce97c270}{To\+String}} () const -\/$>$ std\+::string override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classprt_1_1_shape}{prt\+::\+Shape}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classprt_1_1_shape_a83c63d764eb1bf672bde44b600d798ed}{\texorpdfstring{$\sim$}{\string~}\+Shape}} ()=default
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_rectangle_ac3183f73f41d9ce444da7c2a5e516d9b}{DEFINE\+\_\+\+DEFAULT\+\_\+\+COPYABLE\+\_\+\+TYPE}} (\mbox{\hyperlink{classprt_1_1_rectangle}{Rectangle}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}} \mbox{\hyperlink{classprt_1_1_rectangle_a8ca9d675476ee20bd85837d7f865cac5}{pos\+\_\+}} \{\}
+\item 
+\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} \mbox{\hyperlink{classprt_1_1_rectangle_a007f838c58ceee8a33268ecdce91b256}{width\+\_\+}} \{\}
+\item 
+\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} \mbox{\hyperlink{classprt_1_1_rectangle_a91e317409b6c358032322af1d88261a8}{height\+\_\+}} \{\}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_rectangle_a6252b1040449f573b1aec5fb46abcc53}{operator$<$$<$}} (std\+::ostream \&stream, const \mbox{\hyperlink{classprt_1_1_rectangle}{Rectangle}} \&rhs) -\/$>$ std\+::ostream \&
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classprt_1_1_shape}{prt\+::\+Shape}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_shape_a6a50d94269593680ec3d37c0a45b85c3}{Shape}} ()=default
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_rectangle_ac7ea72e47848996b6f4eb4e41fc73b5f}\index{prt::Rectangle@{prt::Rectangle}!Rectangle@{Rectangle}}
+\index{Rectangle@{Rectangle}!prt::Rectangle@{prt::Rectangle}}
+\doxysubsubsection{\texorpdfstring{Rectangle()}{Rectangle()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classprt_1_1_rectangle_ac7ea72e47848996b6f4eb4e41fc73b5f} 
+prt\+::\+Rectangle\+::\+Rectangle (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{classprt_1_1_rectangle_a98853830757bac8bb01fb2cde084df42}\index{prt::Rectangle@{prt::Rectangle}!Rectangle@{Rectangle}}
+\index{Rectangle@{Rectangle}!prt::Rectangle@{prt::Rectangle}}
+\doxysubsubsection{\texorpdfstring{Rectangle()}{Rectangle()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classprt_1_1_rectangle_a98853830757bac8bb01fb2cde084df42} 
+prt\+::\+Rectangle\+::\+Rectangle (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}} \&}]{pos}{, }\item[{const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}}]{width}{, }\item[{const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}}]{height}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_rectangle_a80ca4545f645642e51321dede9e39b21}\index{prt::Rectangle@{prt::Rectangle}!Rectangle@{Rectangle}}
+\index{Rectangle@{Rectangle}!prt::Rectangle@{prt::Rectangle}}
+\doxysubsubsection{\texorpdfstring{Rectangle()}{Rectangle()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classprt_1_1_rectangle_a80ca4545f645642e51321dede9e39b21} 
+prt\+::\+Rectangle\+::\+Rectangle (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}}]{x\+Pos}{, }\item[{const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}}]{y\+Pos}{, }\item[{const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}}]{width}{, }\item[{const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}}]{height}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_rectangle_ab303bb82ba58b3d19edd358602b95f8a}\index{prt::Rectangle@{prt::Rectangle}!````~Rectangle@{\texorpdfstring{$\sim$}{\string~}Rectangle}}
+\index{````~Rectangle@{\texorpdfstring{$\sim$}{\string~}Rectangle}!prt::Rectangle@{prt::Rectangle}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Rectangle()}{\string~Rectangle()}}
+{\footnotesize\ttfamily \label{classprt_1_1_rectangle_ab303bb82ba58b3d19edd358602b95f8a} 
+prt\+::\+Rectangle\+::\texorpdfstring{$\sim$}{\string~}\+Rectangle (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_rectangle_a4a44f45724c051fc34925b92fc71e526}\index{prt::Rectangle@{prt::Rectangle}!Contains@{Contains}}
+\index{Contains@{Contains}!prt::Rectangle@{prt::Rectangle}}
+\doxysubsubsection{\texorpdfstring{Contains()}{Contains()}}
+{\footnotesize\ttfamily \label{classprt_1_1_rectangle_a4a44f45724c051fc34925b92fc71e526} 
+auto prt\+::\+Rectangle\+::\+Contains (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}} \&}]{p}{}\end{DoxyParamCaption}) const -\/$>$ bool\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classprt_1_1_shape_a121212d34b5085488b14753ac9b2720c}{prt\+::\+Shape}}.
+
+\Hypertarget{classprt_1_1_rectangle_ac3183f73f41d9ce444da7c2a5e516d9b}\index{prt::Rectangle@{prt::Rectangle}!DEFINE\_DEFAULT\_COPYABLE\_TYPE@{DEFINE\_DEFAULT\_COPYABLE\_TYPE}}
+\index{DEFINE\_DEFAULT\_COPYABLE\_TYPE@{DEFINE\_DEFAULT\_COPYABLE\_TYPE}!prt::Rectangle@{prt::Rectangle}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_DEFAULT\_COPYABLE\_TYPE()}{DEFINE\_DEFAULT\_COPYABLE\_TYPE()}}
+{\footnotesize\ttfamily \label{classprt_1_1_rectangle_ac3183f73f41d9ce444da7c2a5e516d9b} 
+prt\+::\+Rectangle\+::\+DEFINE\+\_\+\+DEFAULT\+\_\+\+COPYABLE\+\_\+\+TYPE (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_rectangle}{Rectangle}}}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_rectangle_ab2213db7087b0a1fd0258cca529a6c35}\index{prt::Rectangle@{prt::Rectangle}!GetBottomLeft@{GetBottomLeft}}
+\index{GetBottomLeft@{GetBottomLeft}!prt::Rectangle@{prt::Rectangle}}
+\doxysubsubsection{\texorpdfstring{GetBottomLeft()}{GetBottomLeft()}}
+{\footnotesize\ttfamily \label{classprt_1_1_rectangle_ab2213db7087b0a1fd0258cca529a6c35} 
+auto prt\+::\+Rectangle\+::\+Get\+Bottom\+Left (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ \mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}} \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_rectangle_a932ca518e887d1295d7ec31fbeb80458}\index{prt::Rectangle@{prt::Rectangle}!GetBottomRight@{GetBottomRight}}
+\index{GetBottomRight@{GetBottomRight}!prt::Rectangle@{prt::Rectangle}}
+\doxysubsubsection{\texorpdfstring{GetBottomRight()}{GetBottomRight()}}
+{\footnotesize\ttfamily \label{classprt_1_1_rectangle_a932ca518e887d1295d7ec31fbeb80458} 
+auto prt\+::\+Rectangle\+::\+Get\+Bottom\+Right (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ \mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}} \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_rectangle_a8b5cee289d5136a64f7a5e6fbaeb5669}\index{prt::Rectangle@{prt::Rectangle}!GetHeight@{GetHeight}}
+\index{GetHeight@{GetHeight}!prt::Rectangle@{prt::Rectangle}}
+\doxysubsubsection{\texorpdfstring{GetHeight()}{GetHeight()}}
+{\footnotesize\ttfamily \label{classprt_1_1_rectangle_a8b5cee289d5136a64f7a5e6fbaeb5669} 
+auto prt\+::\+Rectangle\+::\+Get\+Height (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_rectangle_a650b549b168470964bf6823d7f375ba4}\index{prt::Rectangle@{prt::Rectangle}!GetPos@{GetPos}}
+\index{GetPos@{GetPos}!prt::Rectangle@{prt::Rectangle}}
+\doxysubsubsection{\texorpdfstring{GetPos()}{GetPos()}}
+{\footnotesize\ttfamily \label{classprt_1_1_rectangle_a650b549b168470964bf6823d7f375ba4} 
+auto prt\+::\+Rectangle\+::\+Get\+Pos (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const \mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}}\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_rectangle_a19ed20c32f185995bb68f1ab2f4b31ff}\index{prt::Rectangle@{prt::Rectangle}!GetTopLeft@{GetTopLeft}}
+\index{GetTopLeft@{GetTopLeft}!prt::Rectangle@{prt::Rectangle}}
+\doxysubsubsection{\texorpdfstring{GetTopLeft()}{GetTopLeft()}}
+{\footnotesize\ttfamily \label{classprt_1_1_rectangle_a19ed20c32f185995bb68f1ab2f4b31ff} 
+auto prt\+::\+Rectangle\+::\+Get\+Top\+Left (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ \mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}} \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_rectangle_a7c6e9bc44a35381465f2a5867cd7979e}\index{prt::Rectangle@{prt::Rectangle}!GetTopRight@{GetTopRight}}
+\index{GetTopRight@{GetTopRight}!prt::Rectangle@{prt::Rectangle}}
+\doxysubsubsection{\texorpdfstring{GetTopRight()}{GetTopRight()}}
+{\footnotesize\ttfamily \label{classprt_1_1_rectangle_a7c6e9bc44a35381465f2a5867cd7979e} 
+auto prt\+::\+Rectangle\+::\+Get\+Top\+Right (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ \mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}} \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_rectangle_aadb7c27fdb0052ee0d9a3ba2a0123e1c}\index{prt::Rectangle@{prt::Rectangle}!GetWidth@{GetWidth}}
+\index{GetWidth@{GetWidth}!prt::Rectangle@{prt::Rectangle}}
+\doxysubsubsection{\texorpdfstring{GetWidth()}{GetWidth()}}
+{\footnotesize\ttfamily \label{classprt_1_1_rectangle_aadb7c27fdb0052ee0d9a3ba2a0123e1c} 
+auto prt\+::\+Rectangle\+::\+Get\+Width (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_rectangle_a2cca6b4dea276c27e8ba202df7d69abd}\index{prt::Rectangle@{prt::Rectangle}!SetPos@{SetPos}}
+\index{SetPos@{SetPos}!prt::Rectangle@{prt::Rectangle}}
+\doxysubsubsection{\texorpdfstring{SetPos()}{SetPos()}}
+{\footnotesize\ttfamily \label{classprt_1_1_rectangle_a2cca6b4dea276c27e8ba202df7d69abd} 
+void prt\+::\+Rectangle\+::\+Set\+Pos (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}} \&}]{rhs}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_rectangle_ade6de2e42f8e9b6ea1b08832ce97c270}\index{prt::Rectangle@{prt::Rectangle}!ToString@{ToString}}
+\index{ToString@{ToString}!prt::Rectangle@{prt::Rectangle}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily \label{classprt_1_1_rectangle_ade6de2e42f8e9b6ea1b08832ce97c270} 
+auto prt\+::\+Rectangle\+::\+To\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ std\+::string\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classprt_1_1_shape_a8df176610d2a5282ae16496545fa3a6c}{prt\+::\+Shape}}.
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classprt_1_1_rectangle_a6252b1040449f573b1aec5fb46abcc53}\index{prt::Rectangle@{prt::Rectangle}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!prt::Rectangle@{prt::Rectangle}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily \label{classprt_1_1_rectangle_a6252b1040449f573b1aec5fb46abcc53} 
+auto operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{stream}{, }\item[{const \mbox{\hyperlink{classprt_1_1_rectangle}{Rectangle}} \&}]{rhs}{}\end{DoxyParamCaption}) -\/$>$ std\+::ostream\& \hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_rectangle_a91e317409b6c358032322af1d88261a8}\index{prt::Rectangle@{prt::Rectangle}!height\_@{height\_}}
+\index{height\_@{height\_}!prt::Rectangle@{prt::Rectangle}}
+\doxysubsubsection{\texorpdfstring{height\_}{height\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_rectangle_a91e317409b6c358032322af1d88261a8} 
+\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} prt\+::\+Rectangle\+::height\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_rectangle_a8ca9d675476ee20bd85837d7f865cac5}\index{prt::Rectangle@{prt::Rectangle}!pos\_@{pos\_}}
+\index{pos\_@{pos\_}!prt::Rectangle@{prt::Rectangle}}
+\doxysubsubsection{\texorpdfstring{pos\_}{pos\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_rectangle_a8ca9d675476ee20bd85837d7f865cac5} 
+\mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}} prt\+::\+Rectangle\+::pos\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_rectangle_a007f838c58ceee8a33268ecdce91b256}\index{prt::Rectangle@{prt::Rectangle}!width\_@{width\_}}
+\index{width\_@{width\_}!prt::Rectangle@{prt::Rectangle}}
+\doxysubsubsection{\texorpdfstring{width\_}{width\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_rectangle_a007f838c58ceee8a33268ecdce91b256} 
+\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} prt\+::\+Rectangle\+::width\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/geometry/\mbox{\hyperlink{rectangle_8h}{rectangle.\+h}}\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/geometry/\mbox{\hyperlink{rectangle_8cc}{rectangle.\+cc}}\end{DoxyCompactItemize}

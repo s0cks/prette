@@ -1,0 +1,121 @@
+\doxysection{prt\+::Error\+State Class Reference}
+\hypertarget{classprt_1_1_error_state}{}\label{classprt_1_1_error_state}\index{prt::ErrorState@{prt::ErrorState}}
+
+
+{\ttfamily \#include $<$engine.\+h$>$}
+
+
+
+Inheritance diagram for prt\+::Error\+State\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=167pt]{classprt_1_1_error_state__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for prt\+::Error\+State\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=167pt]{classprt_1_1_error_state__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_error_state_afd0b2ff192b1074ab88544e1611095f5}{Error\+State}} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classprt_1_1_crash_report_cause}{Crash\+Report\+Cause}} $>$ \&cause)
+\item 
+\mbox{\hyperlink{classprt_1_1_error_state_a2fd72c21460f96593b26ef512d598eb1}{\texorpdfstring{$\sim$}{\string~}\+Error\+State}} () override=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1_error_state_af0f919c83cdb7e5f4772a94be930869b}{Get\+Cause}} () const -\/$>$ const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classprt_1_1_crash_report_cause}{Crash\+Report\+Cause}} $>$ \&
+\item 
+\mbox{\hyperlink{classprt_1_1_error_state_ac60077becdbb7e9121e9457e9327e73f}{DECLARE\+\_\+\+ENGINE\+\_\+\+STATE\+\_\+\+TYPE}} (Error)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classprt_1_1_engine_state}{prt\+::\+Engine\+State}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classprt_1_1_engine_state_a4fb51bde7f2f62145e5169b1e43f87b9}{\texorpdfstring{$\sim$}{\string~}\+Engine\+State}} ()=default
+\item 
+virtual auto \mbox{\hyperlink{classprt_1_1_engine_state_ae958fb727e6e355d56376467043e7a25}{Get\+State\+Name}} () const -\/$>$ const char \texorpdfstring{$\ast$}{*}=0
+\item 
+virtual auto \mbox{\hyperlink{classprt_1_1_engine_state_ae15ab114c1ef286785a6f23b327b0559}{Equals}} (\mbox{\hyperlink{classprt_1_1_engine_state}{Engine\+State}} \texorpdfstring{$\ast$}{*}rhs) const -\/$>$ bool
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_error_state_a79221a65352f59c33137c8ac340b5fac}{New}} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classprt_1_1_crash_report_cause}{Crash\+Report\+Cause}} $>$ \&cause) -\/$>$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classprt_1_1_error_state}{Error\+State}} $>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classprt_1_1_crash_report_cause}{Crash\+Report\+Cause}} $>$ \mbox{\hyperlink{classprt_1_1_error_state_a036e1d4e49813f8f21f0fc458c422b73}{cause\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Types inherited from \mbox{\hyperlink{classprt_1_1_engine_state}{prt\+::\+Engine\+State}}}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classprt_1_1_engine_state_aada7037bee7f77920b63962f4c3822c5}{Duration\+Series}} = \mbox{\hyperlink{classprt_1_1_time_series}{Time\+Series}}$<$$>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classprt_1_1_engine_state}{prt\+::\+Engine\+State}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_engine_state_a1542ad73a83dfe5d8fe3db60deed6477}{Engine\+State}} ()=default
+\item 
+virtual void \mbox{\hyperlink{classprt_1_1_engine_state_a6675a3f7ac2f7ecc17694c98fbca8bb2}{Enter\+State}} (\mbox{\hyperlink{classprt_1_1_engine}{Engine}} \texorpdfstring{$\ast$}{*}engine)=0
+\item 
+virtual void \mbox{\hyperlink{classprt_1_1_engine_state_a4d74eb7a8e380992be23ac8c4fabfb0e}{On\+Tick}} (\mbox{\hyperlink{classprt_1_1_engine}{Engine}} \texorpdfstring{$\ast$}{*}engine, const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&current, const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&previous)=0
+\item 
+virtual void \mbox{\hyperlink{classprt_1_1_engine_state_a070edf1b108359efbc093dc1b432d5e5}{Exit\+State}} (\mbox{\hyperlink{classprt_1_1_engine}{Engine}} \texorpdfstring{$\ast$}{*}engine)=0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_error_state_afd0b2ff192b1074ab88544e1611095f5}\index{prt::ErrorState@{prt::ErrorState}!ErrorState@{ErrorState}}
+\index{ErrorState@{ErrorState}!prt::ErrorState@{prt::ErrorState}}
+\doxysubsubsection{\texorpdfstring{ErrorState()}{ErrorState()}}
+{\footnotesize\ttfamily \label{classprt_1_1_error_state_afd0b2ff192b1074ab88544e1611095f5} 
+prt\+::\+Error\+State\+::\+Error\+State (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classprt_1_1_crash_report_cause}{Crash\+Report\+Cause}} $>$ \&}]{cause}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+\Hypertarget{classprt_1_1_error_state_a2fd72c21460f96593b26ef512d598eb1}\index{prt::ErrorState@{prt::ErrorState}!````~ErrorState@{\texorpdfstring{$\sim$}{\string~}ErrorState}}
+\index{````~ErrorState@{\texorpdfstring{$\sim$}{\string~}ErrorState}!prt::ErrorState@{prt::ErrorState}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ErrorState()}{\string~ErrorState()}}
+{\footnotesize\ttfamily \label{classprt_1_1_error_state_a2fd72c21460f96593b26ef512d598eb1} 
+prt\+::\+Error\+State\+::\texorpdfstring{$\sim$}{\string~}\+Error\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_error_state_ac60077becdbb7e9121e9457e9327e73f}\index{prt::ErrorState@{prt::ErrorState}!DECLARE\_ENGINE\_STATE\_TYPE@{DECLARE\_ENGINE\_STATE\_TYPE}}
+\index{DECLARE\_ENGINE\_STATE\_TYPE@{DECLARE\_ENGINE\_STATE\_TYPE}!prt::ErrorState@{prt::ErrorState}}
+\doxysubsubsection{\texorpdfstring{DECLARE\_ENGINE\_STATE\_TYPE()}{DECLARE\_ENGINE\_STATE\_TYPE()}}
+{\footnotesize\ttfamily \label{classprt_1_1_error_state_ac60077becdbb7e9121e9457e9327e73f} 
+prt\+::\+Error\+State\+::\+DECLARE\+\_\+\+ENGINE\+\_\+\+STATE\+\_\+\+TYPE (\begin{DoxyParamCaption}\item[{Error}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_error_state_af0f919c83cdb7e5f4772a94be930869b}\index{prt::ErrorState@{prt::ErrorState}!GetCause@{GetCause}}
+\index{GetCause@{GetCause}!prt::ErrorState@{prt::ErrorState}}
+\doxysubsubsection{\texorpdfstring{GetCause()}{GetCause()}}
+{\footnotesize\ttfamily \label{classprt_1_1_error_state_af0f919c83cdb7e5f4772a94be930869b} 
+auto prt\+::\+Error\+State\+::\+Get\+Cause (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classprt_1_1_crash_report_cause}{Crash\+Report\+Cause}}$>$\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_error_state_a79221a65352f59c33137c8ac340b5fac}\index{prt::ErrorState@{prt::ErrorState}!New@{New}}
+\index{New@{New}!prt::ErrorState@{prt::ErrorState}}
+\doxysubsubsection{\texorpdfstring{New()}{New()}}
+{\footnotesize\ttfamily \label{classprt_1_1_error_state_a79221a65352f59c33137c8ac340b5fac} 
+static auto prt\+::\+Error\+State\+::\+New (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classprt_1_1_crash_report_cause}{Crash\+Report\+Cause}} $>$ \&}]{cause}{}\end{DoxyParamCaption}) -\/$>$ std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classprt_1_1_error_state}{Error\+State}}$>$ \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_error_state_a036e1d4e49813f8f21f0fc458c422b73}\index{prt::ErrorState@{prt::ErrorState}!cause\_@{cause\_}}
+\index{cause\_@{cause\_}!prt::ErrorState@{prt::ErrorState}}
+\doxysubsubsection{\texorpdfstring{cause\_}{cause\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_error_state_a036e1d4e49813f8f21f0fc458c422b73} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classprt_1_1_crash_report_cause}{Crash\+Report\+Cause}}$>$ prt\+::\+Error\+State\+::cause\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{engine_8h}{engine.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,211 @@
+\doxysection{prt\+::Swap\+Chain Class Reference}
+\hypertarget{classprt_1_1_swap_chain}{}\label{classprt_1_1_swap_chain}\index{prt::SwapChain@{prt::SwapChain}}
+
+
+{\ttfamily \#include $<$swapchain.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classprt_1_1_swap_chain_a3ae3351a4b17de0508d4976cf5e1890f}{Init}} ()
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_swap_chain_af01da41cdba2e6d3d8b1b40470a2558b}{Get\+Swap\+Chain}} () -\/$>$ Vk\+Swapchain\+KHR const \&
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_swap_chain_a10b91e5518b170ece6e270f57550dda1}{Get\+Images}} () -\/$>$ std\+::vector$<$ Vk\+Image $>$ const \&
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_swap_chain_a75d623958e155b06b66877ec21291dc0}{Get\+Image\+View}} (const uint32\+\_\+t idx) -\/$>$ Vk\+Image\+View const \&
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_swap_chain_a3ae2bc400533bfa1745a82bb360c5087}{Get\+Format}} () -\/$>$ Vk\+Format const \&
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_swap_chain_afa49c6454e286e09b5ae769d48e53597}{Get\+Extent}} () -\/$>$ Vk\+Extent2D const \&
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_swap_chain_a33468312f70a0796034f7d41f84743b5}{Get\+Render\+Pass}} () -\/$>$ \mbox{\hyperlink{classprt_1_1_swap_chain_render_pass}{Swap\+Chain\+Render\+Pass}} \texorpdfstring{$\ast$}{*}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_swap_chain_a709ad581fbdc2b06d11cabc0120c4acf}{Get\+Graphics\+Pipeline}} () -\/$>$ \mbox{\hyperlink{classprt_1_1_graphics_pipeline}{Graphics\+Pipeline}} \texorpdfstring{$\ast$}{*}const \&
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_swap_chain_aeb82c19f0cffc83ce0e9dd988cfd73b8}{Get\+Current\+Frame}} () -\/$>$ \mbox{\hyperlink{classprt_1_1_swap_chain_frame}{Swap\+Chain\+Frame}} \texorpdfstring{$\ast$}{*}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_swap_chain_abab409b7e20ce0e045896b1c627f4031}{Get\+Framebuffer}} (const uint32\+\_\+t idx) -\/$>$ Vk\+Framebuffer const \&
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_swap_chain_a79c5b22c1cb67e2ef65654c9195ae4e7}{Get\+Number\+Of\+Images}} () -\/$>$ uint64\+\_\+t
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_swap_chain_ac7c03e10bc8c0bfa23e870abd48ccd8d}{Get\+Current\+Image}} () -\/$>$ uint32\+\_\+t
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classprt_1_1_swap_chain_ac9798c9e75c1574fa1ced6709acae702}{Init\+Swap}} (const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}driver, const bool is\+\_\+reinit)
+\item 
+static void \mbox{\hyperlink{classprt_1_1_swap_chain_a2474db515fd32138a38b97cb6b6684a1}{Destroy\+Swap}} (const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}driver, const bool is\+\_\+reinit)
+\item 
+static void \mbox{\hyperlink{classprt_1_1_swap_chain_a759c8d2ec190555f90618efc39eb4779}{Re\+Init\+Swap}} (const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}driver)
+\item 
+static void \mbox{\hyperlink{classprt_1_1_swap_chain_a393aded0bbbad8858affead5c2b72bee}{Init\+Window\+Resize\+Listener}} ()
+\item 
+static void \mbox{\hyperlink{classprt_1_1_swap_chain_a4e4177e776834e1a79c28f85cd1c4b4d}{Init\+Render\+Pass}} (const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}driver)
+\item 
+static void \mbox{\hyperlink{classprt_1_1_swap_chain_a88c7e37d06a38251c963e8fc31123c70}{Init\+Pipeline}} (const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}driver)
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_swap_chain_a17068c87bf06430eba246036a3496406}{Acquire\+Next\+Image}} (const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}driver) -\/$>$ bool
+\item 
+static void \mbox{\hyperlink{classprt_1_1_swap_chain_a4e5c84faa6faf5b72d21cb79ae1b0930}{Present}} (const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}driver)
+\item 
+static void \mbox{\hyperlink{classprt_1_1_swap_chain_a1bd8c5c30edc93f256b1cd72dbcecda0}{Submit}} (const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}driver, const std\+::vector$<$ Vk\+Command\+Buffer $>$ \&cmd\+\_\+buffers)
+\item 
+static void \mbox{\hyperlink{classprt_1_1_swap_chain_aee8c6a065eb5e06b64610b46de61bff3}{Init\+Images}} (const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}driver)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1_swap_chain_a70538530bc36e033e360880ef311df61}{Renderer}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_swap_chain_a17068c87bf06430eba246036a3496406}\index{prt::SwapChain@{prt::SwapChain}!AcquireNextImage@{AcquireNextImage}}
+\index{AcquireNextImage@{AcquireNextImage}!prt::SwapChain@{prt::SwapChain}}
+\doxysubsubsection{\texorpdfstring{AcquireNextImage()}{AcquireNextImage()}}
+{\footnotesize\ttfamily \label{classprt_1_1_swap_chain_a17068c87bf06430eba246036a3496406} 
+auto prt\+::\+Swap\+Chain\+::\+Acquire\+Next\+Image (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}}]{driver}{}\end{DoxyParamCaption}) -\/$>$ bool\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_swap_chain_a2474db515fd32138a38b97cb6b6684a1}\index{prt::SwapChain@{prt::SwapChain}!DestroySwap@{DestroySwap}}
+\index{DestroySwap@{DestroySwap}!prt::SwapChain@{prt::SwapChain}}
+\doxysubsubsection{\texorpdfstring{DestroySwap()}{DestroySwap()}}
+{\footnotesize\ttfamily \label{classprt_1_1_swap_chain_a2474db515fd32138a38b97cb6b6684a1} 
+void prt\+::\+Swap\+Chain\+::\+Destroy\+Swap (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}}]{driver}{, }\item[{const bool}]{is\+\_\+reinit}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_swap_chain_aeb82c19f0cffc83ce0e9dd988cfd73b8}\index{prt::SwapChain@{prt::SwapChain}!GetCurrentFrame@{GetCurrentFrame}}
+\index{GetCurrentFrame@{GetCurrentFrame}!prt::SwapChain@{prt::SwapChain}}
+\doxysubsubsection{\texorpdfstring{GetCurrentFrame()}{GetCurrentFrame()}}
+{\footnotesize\ttfamily \label{classprt_1_1_swap_chain_aeb82c19f0cffc83ce0e9dd988cfd73b8} 
+auto prt\+::\+Swap\+Chain\+::\+Get\+Current\+Frame (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{classprt_1_1_swap_chain_frame}{Swap\+Chain\+Frame}}\texorpdfstring{$\ast$}{*}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_swap_chain_ac7c03e10bc8c0bfa23e870abd48ccd8d}\index{prt::SwapChain@{prt::SwapChain}!GetCurrentImage@{GetCurrentImage}}
+\index{GetCurrentImage@{GetCurrentImage}!prt::SwapChain@{prt::SwapChain}}
+\doxysubsubsection{\texorpdfstring{GetCurrentImage()}{GetCurrentImage()}}
+{\footnotesize\ttfamily \label{classprt_1_1_swap_chain_ac7c03e10bc8c0bfa23e870abd48ccd8d} 
+static auto prt\+::\+Swap\+Chain\+::\+Get\+Current\+Image (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ uint32\+\_\+t \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_swap_chain_afa49c6454e286e09b5ae769d48e53597}\index{prt::SwapChain@{prt::SwapChain}!GetExtent@{GetExtent}}
+\index{GetExtent@{GetExtent}!prt::SwapChain@{prt::SwapChain}}
+\doxysubsubsection{\texorpdfstring{GetExtent()}{GetExtent()}}
+{\footnotesize\ttfamily \label{classprt_1_1_swap_chain_afa49c6454e286e09b5ae769d48e53597} 
+auto prt\+::\+Swap\+Chain\+::\+Get\+Extent (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ Vk\+Extent2D const\&\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_swap_chain_a3ae2bc400533bfa1745a82bb360c5087}\index{prt::SwapChain@{prt::SwapChain}!GetFormat@{GetFormat}}
+\index{GetFormat@{GetFormat}!prt::SwapChain@{prt::SwapChain}}
+\doxysubsubsection{\texorpdfstring{GetFormat()}{GetFormat()}}
+{\footnotesize\ttfamily \label{classprt_1_1_swap_chain_a3ae2bc400533bfa1745a82bb360c5087} 
+auto prt\+::\+Swap\+Chain\+::\+Get\+Format (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ Vk\+Format const\&\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_swap_chain_abab409b7e20ce0e045896b1c627f4031}\index{prt::SwapChain@{prt::SwapChain}!GetFramebuffer@{GetFramebuffer}}
+\index{GetFramebuffer@{GetFramebuffer}!prt::SwapChain@{prt::SwapChain}}
+\doxysubsubsection{\texorpdfstring{GetFramebuffer()}{GetFramebuffer()}}
+{\footnotesize\ttfamily \label{classprt_1_1_swap_chain_abab409b7e20ce0e045896b1c627f4031} 
+auto prt\+::\+Swap\+Chain\+::\+Get\+Framebuffer (\begin{DoxyParamCaption}\item[{const uint32\+\_\+t}]{idx}{}\end{DoxyParamCaption}) -\/$>$ Vk\+Framebuffer const\&\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_swap_chain_a709ad581fbdc2b06d11cabc0120c4acf}\index{prt::SwapChain@{prt::SwapChain}!GetGraphicsPipeline@{GetGraphicsPipeline}}
+\index{GetGraphicsPipeline@{GetGraphicsPipeline}!prt::SwapChain@{prt::SwapChain}}
+\doxysubsubsection{\texorpdfstring{GetGraphicsPipeline()}{GetGraphicsPipeline()}}
+{\footnotesize\ttfamily \label{classprt_1_1_swap_chain_a709ad581fbdc2b06d11cabc0120c4acf} 
+auto prt\+::\+Swap\+Chain\+::\+Get\+Graphics\+Pipeline (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{classprt_1_1_graphics_pipeline}{Graphics\+Pipeline}}\texorpdfstring{$\ast$}{*} const\&\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_swap_chain_a10b91e5518b170ece6e270f57550dda1}\index{prt::SwapChain@{prt::SwapChain}!GetImages@{GetImages}}
+\index{GetImages@{GetImages}!prt::SwapChain@{prt::SwapChain}}
+\doxysubsubsection{\texorpdfstring{GetImages()}{GetImages()}}
+{\footnotesize\ttfamily \label{classprt_1_1_swap_chain_a10b91e5518b170ece6e270f57550dda1} 
+auto prt\+::\+Swap\+Chain\+::\+Get\+Images (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ std\+::vector$<$Vk\+Image$>$ const\&\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_swap_chain_a75d623958e155b06b66877ec21291dc0}\index{prt::SwapChain@{prt::SwapChain}!GetImageView@{GetImageView}}
+\index{GetImageView@{GetImageView}!prt::SwapChain@{prt::SwapChain}}
+\doxysubsubsection{\texorpdfstring{GetImageView()}{GetImageView()}}
+{\footnotesize\ttfamily \label{classprt_1_1_swap_chain_a75d623958e155b06b66877ec21291dc0} 
+auto prt\+::\+Swap\+Chain\+::\+Get\+Image\+View (\begin{DoxyParamCaption}\item[{const uint32\+\_\+t}]{idx}{}\end{DoxyParamCaption}) -\/$>$ Vk\+Image\+View const\&\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_swap_chain_a79c5b22c1cb67e2ef65654c9195ae4e7}\index{prt::SwapChain@{prt::SwapChain}!GetNumberOfImages@{GetNumberOfImages}}
+\index{GetNumberOfImages@{GetNumberOfImages}!prt::SwapChain@{prt::SwapChain}}
+\doxysubsubsection{\texorpdfstring{GetNumberOfImages()}{GetNumberOfImages()}}
+{\footnotesize\ttfamily \label{classprt_1_1_swap_chain_a79c5b22c1cb67e2ef65654c9195ae4e7} 
+static auto prt\+::\+Swap\+Chain\+::\+Get\+Number\+Of\+Images (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ uint64\+\_\+t \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_swap_chain_a33468312f70a0796034f7d41f84743b5}\index{prt::SwapChain@{prt::SwapChain}!GetRenderPass@{GetRenderPass}}
+\index{GetRenderPass@{GetRenderPass}!prt::SwapChain@{prt::SwapChain}}
+\doxysubsubsection{\texorpdfstring{GetRenderPass()}{GetRenderPass()}}
+{\footnotesize\ttfamily \label{classprt_1_1_swap_chain_a33468312f70a0796034f7d41f84743b5} 
+auto prt\+::\+Swap\+Chain\+::\+Get\+Render\+Pass (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{classprt_1_1_swap_chain_render_pass}{Swap\+Chain\+Render\+Pass}}\texorpdfstring{$\ast$}{*}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_swap_chain_af01da41cdba2e6d3d8b1b40470a2558b}\index{prt::SwapChain@{prt::SwapChain}!GetSwapChain@{GetSwapChain}}
+\index{GetSwapChain@{GetSwapChain}!prt::SwapChain@{prt::SwapChain}}
+\doxysubsubsection{\texorpdfstring{GetSwapChain()}{GetSwapChain()}}
+{\footnotesize\ttfamily \label{classprt_1_1_swap_chain_af01da41cdba2e6d3d8b1b40470a2558b} 
+auto prt\+::\+Swap\+Chain\+::\+Get\+Swap\+Chain (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ Vk\+Swapchain\+KHR const\&\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_swap_chain_a3ae3351a4b17de0508d4976cf5e1890f}\index{prt::SwapChain@{prt::SwapChain}!Init@{Init}}
+\index{Init@{Init}!prt::SwapChain@{prt::SwapChain}}
+\doxysubsubsection{\texorpdfstring{Init()}{Init()}}
+{\footnotesize\ttfamily \label{classprt_1_1_swap_chain_a3ae3351a4b17de0508d4976cf5e1890f} 
+void prt\+::\+Swap\+Chain\+::\+Init (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_swap_chain_aee8c6a065eb5e06b64610b46de61bff3}\index{prt::SwapChain@{prt::SwapChain}!InitImages@{InitImages}}
+\index{InitImages@{InitImages}!prt::SwapChain@{prt::SwapChain}}
+\doxysubsubsection{\texorpdfstring{InitImages()}{InitImages()}}
+{\footnotesize\ttfamily \label{classprt_1_1_swap_chain_aee8c6a065eb5e06b64610b46de61bff3} 
+void prt\+::\+Swap\+Chain\+::\+Init\+Images (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}}]{driver}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_swap_chain_a88c7e37d06a38251c963e8fc31123c70}\index{prt::SwapChain@{prt::SwapChain}!InitPipeline@{InitPipeline}}
+\index{InitPipeline@{InitPipeline}!prt::SwapChain@{prt::SwapChain}}
+\doxysubsubsection{\texorpdfstring{InitPipeline()}{InitPipeline()}}
+{\footnotesize\ttfamily \label{classprt_1_1_swap_chain_a88c7e37d06a38251c963e8fc31123c70} 
+void prt\+::\+Swap\+Chain\+::\+Init\+Pipeline (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}}]{driver}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_swap_chain_a4e4177e776834e1a79c28f85cd1c4b4d}\index{prt::SwapChain@{prt::SwapChain}!InitRenderPass@{InitRenderPass}}
+\index{InitRenderPass@{InitRenderPass}!prt::SwapChain@{prt::SwapChain}}
+\doxysubsubsection{\texorpdfstring{InitRenderPass()}{InitRenderPass()}}
+{\footnotesize\ttfamily \label{classprt_1_1_swap_chain_a4e4177e776834e1a79c28f85cd1c4b4d} 
+void prt\+::\+Swap\+Chain\+::\+Init\+Render\+Pass (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}}]{driver}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_swap_chain_ac9798c9e75c1574fa1ced6709acae702}\index{prt::SwapChain@{prt::SwapChain}!InitSwap@{InitSwap}}
+\index{InitSwap@{InitSwap}!prt::SwapChain@{prt::SwapChain}}
+\doxysubsubsection{\texorpdfstring{InitSwap()}{InitSwap()}}
+{\footnotesize\ttfamily \label{classprt_1_1_swap_chain_ac9798c9e75c1574fa1ced6709acae702} 
+void prt\+::\+Swap\+Chain\+::\+Init\+Swap (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}}]{driver}{, }\item[{const bool}]{is\+\_\+reinit}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_swap_chain_a393aded0bbbad8858affead5c2b72bee}\index{prt::SwapChain@{prt::SwapChain}!InitWindowResizeListener@{InitWindowResizeListener}}
+\index{InitWindowResizeListener@{InitWindowResizeListener}!prt::SwapChain@{prt::SwapChain}}
+\doxysubsubsection{\texorpdfstring{InitWindowResizeListener()}{InitWindowResizeListener()}}
+{\footnotesize\ttfamily \label{classprt_1_1_swap_chain_a393aded0bbbad8858affead5c2b72bee} 
+void prt\+::\+Swap\+Chain\+::\+Init\+Window\+Resize\+Listener (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_swap_chain_a4e5c84faa6faf5b72d21cb79ae1b0930}\index{prt::SwapChain@{prt::SwapChain}!Present@{Present}}
+\index{Present@{Present}!prt::SwapChain@{prt::SwapChain}}
+\doxysubsubsection{\texorpdfstring{Present()}{Present()}}
+{\footnotesize\ttfamily \label{classprt_1_1_swap_chain_a4e5c84faa6faf5b72d21cb79ae1b0930} 
+void prt\+::\+Swap\+Chain\+::\+Present (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}}]{driver}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_swap_chain_a759c8d2ec190555f90618efc39eb4779}\index{prt::SwapChain@{prt::SwapChain}!ReInitSwap@{ReInitSwap}}
+\index{ReInitSwap@{ReInitSwap}!prt::SwapChain@{prt::SwapChain}}
+\doxysubsubsection{\texorpdfstring{ReInitSwap()}{ReInitSwap()}}
+{\footnotesize\ttfamily \label{classprt_1_1_swap_chain_a759c8d2ec190555f90618efc39eb4779} 
+void prt\+::\+Swap\+Chain\+::\+Re\+Init\+Swap (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}}]{driver}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_swap_chain_a1bd8c5c30edc93f256b1cd72dbcecda0}\index{prt::SwapChain@{prt::SwapChain}!Submit@{Submit}}
+\index{Submit@{Submit}!prt::SwapChain@{prt::SwapChain}}
+\doxysubsubsection{\texorpdfstring{Submit()}{Submit()}}
+{\footnotesize\ttfamily \label{classprt_1_1_swap_chain_a1bd8c5c30edc93f256b1cd72dbcecda0} 
+void prt\+::\+Swap\+Chain\+::\+Submit (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}}]{driver}{, }\item[{const std\+::vector$<$ Vk\+Command\+Buffer $>$ \&}]{cmd\+\_\+buffers}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classprt_1_1_swap_chain_a70538530bc36e033e360880ef311df61}\index{prt::SwapChain@{prt::SwapChain}!Renderer@{Renderer}}
+\index{Renderer@{Renderer}!prt::SwapChain@{prt::SwapChain}}
+\doxysubsubsection{\texorpdfstring{Renderer}{Renderer}}
+{\footnotesize\ttfamily \label{classprt_1_1_swap_chain_a70538530bc36e033e360880ef311df61} 
+friend class \mbox{\hyperlink{classprt_1_1_renderer}{Renderer}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{swapchain_8h}{swapchain.\+h}}\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{swapchain_8cc}{swapchain.\+cc}}\end{DoxyCompactItemize}

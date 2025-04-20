@@ -1,0 +1,62 @@
+\doxysection{prt\+::Bit\+Field\texorpdfstring{$<$}{<} S, T, Position, Size \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classprt_1_1_bit_field}{}\label{classprt_1_1_bit_field}\index{prt::BitField$<$ S, T, Position, Size $>$@{prt::BitField$<$ S, T, Position, Size $>$}}
+
+
+{\ttfamily \#include $<$bitfield.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr auto \mbox{\hyperlink{classprt_1_1_bit_field_ac222787963821c64eafebd8963834189}{Mask}} () -\/$>$ S
+\item 
+static constexpr auto \mbox{\hyperlink{classprt_1_1_bit_field_a26cf9d1b5a8c9b2a87ddc000d353c2f8}{Mask\+In\+Place}} () -\/$>$ S
+\item 
+static constexpr auto \mbox{\hyperlink{classprt_1_1_bit_field_a8e529500723215d2c9cca9349173adb2}{Decode}} (S val) -\/$>$ T
+\item 
+static constexpr auto \mbox{\hyperlink{classprt_1_1_bit_field_adace18b6edf5a92ce2fb2275b6f10ac2}{Encode}} (T val) -\/$>$ S
+\item 
+static constexpr auto \mbox{\hyperlink{classprt_1_1_bit_field_ac2d8ac7ffdbd9c624d3e408822e41279}{Update}} (T val, S original) -\/$>$ S
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_bit_field_a8e529500723215d2c9cca9349173adb2}\index{prt::BitField$<$ S, T, Position, Size $>$@{prt::BitField$<$ S, T, Position, Size $>$}!Decode@{Decode}}
+\index{Decode@{Decode}!prt::BitField$<$ S, T, Position, Size $>$@{prt::BitField$<$ S, T, Position, Size $>$}}
+\doxysubsubsection{\texorpdfstring{Decode()}{Decode()}}
+{\footnotesize\ttfamily \label{classprt_1_1_bit_field_a8e529500723215d2c9cca9349173adb2} 
+template$<$typename S , typename T , int Position, int Size = (sizeof(\+S)\texorpdfstring{$\ast$}{*}k\+Bits\+Per\+Byte) -\/ Position$>$ \\
+static constexpr auto \mbox{\hyperlink{classprt_1_1_bit_field}{prt\+::\+Bit\+Field}}$<$ S, T, \mbox{\hyperlink{structprt_1_1_position}{Position}}, Size $>$\+::\+Decode (\begin{DoxyParamCaption}\item[{S}]{val}{}\end{DoxyParamCaption}) -\/$>$ T\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classprt_1_1_bit_field_adace18b6edf5a92ce2fb2275b6f10ac2}\index{prt::BitField$<$ S, T, Position, Size $>$@{prt::BitField$<$ S, T, Position, Size $>$}!Encode@{Encode}}
+\index{Encode@{Encode}!prt::BitField$<$ S, T, Position, Size $>$@{prt::BitField$<$ S, T, Position, Size $>$}}
+\doxysubsubsection{\texorpdfstring{Encode()}{Encode()}}
+{\footnotesize\ttfamily \label{classprt_1_1_bit_field_adace18b6edf5a92ce2fb2275b6f10ac2} 
+template$<$typename S , typename T , int Position, int Size = (sizeof(\+S)\texorpdfstring{$\ast$}{*}k\+Bits\+Per\+Byte) -\/ Position$>$ \\
+static constexpr auto \mbox{\hyperlink{classprt_1_1_bit_field}{prt\+::\+Bit\+Field}}$<$ S, T, \mbox{\hyperlink{structprt_1_1_position}{Position}}, Size $>$\+::\+Encode (\begin{DoxyParamCaption}\item[{T}]{val}{}\end{DoxyParamCaption}) -\/$>$ S\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classprt_1_1_bit_field_ac222787963821c64eafebd8963834189}\index{prt::BitField$<$ S, T, Position, Size $>$@{prt::BitField$<$ S, T, Position, Size $>$}!Mask@{Mask}}
+\index{Mask@{Mask}!prt::BitField$<$ S, T, Position, Size $>$@{prt::BitField$<$ S, T, Position, Size $>$}}
+\doxysubsubsection{\texorpdfstring{Mask()}{Mask()}}
+{\footnotesize\ttfamily \label{classprt_1_1_bit_field_ac222787963821c64eafebd8963834189} 
+template$<$typename S , typename T , int Position, int Size = (sizeof(\+S)\texorpdfstring{$\ast$}{*}k\+Bits\+Per\+Byte) -\/ Position$>$ \\
+static constexpr auto \mbox{\hyperlink{classprt_1_1_bit_field}{prt\+::\+Bit\+Field}}$<$ S, T, \mbox{\hyperlink{structprt_1_1_position}{Position}}, Size $>$\+::\+Mask (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ S\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classprt_1_1_bit_field_a26cf9d1b5a8c9b2a87ddc000d353c2f8}\index{prt::BitField$<$ S, T, Position, Size $>$@{prt::BitField$<$ S, T, Position, Size $>$}!MaskInPlace@{MaskInPlace}}
+\index{MaskInPlace@{MaskInPlace}!prt::BitField$<$ S, T, Position, Size $>$@{prt::BitField$<$ S, T, Position, Size $>$}}
+\doxysubsubsection{\texorpdfstring{MaskInPlace()}{MaskInPlace()}}
+{\footnotesize\ttfamily \label{classprt_1_1_bit_field_a26cf9d1b5a8c9b2a87ddc000d353c2f8} 
+template$<$typename S , typename T , int Position, int Size = (sizeof(\+S)\texorpdfstring{$\ast$}{*}k\+Bits\+Per\+Byte) -\/ Position$>$ \\
+static constexpr auto \mbox{\hyperlink{classprt_1_1_bit_field}{prt\+::\+Bit\+Field}}$<$ S, T, \mbox{\hyperlink{structprt_1_1_position}{Position}}, Size $>$\+::\+Mask\+In\+Place (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ S\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classprt_1_1_bit_field_ac2d8ac7ffdbd9c624d3e408822e41279}\index{prt::BitField$<$ S, T, Position, Size $>$@{prt::BitField$<$ S, T, Position, Size $>$}!Update@{Update}}
+\index{Update@{Update}!prt::BitField$<$ S, T, Position, Size $>$@{prt::BitField$<$ S, T, Position, Size $>$}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily \label{classprt_1_1_bit_field_ac2d8ac7ffdbd9c624d3e408822e41279} 
+template$<$typename S , typename T , int Position, int Size = (sizeof(\+S)\texorpdfstring{$\ast$}{*}k\+Bits\+Per\+Byte) -\/ Position$>$ \\
+static constexpr auto \mbox{\hyperlink{classprt_1_1_bit_field}{prt\+::\+Bit\+Field}}$<$ S, T, \mbox{\hyperlink{structprt_1_1_position}{Position}}, Size $>$\+::\+Update (\begin{DoxyParamCaption}\item[{T}]{val}{, }\item[{S}]{original}{}\end{DoxyParamCaption}) -\/$>$ S\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{bitfield_8h}{bitfield.\+h}}\end{DoxyCompactItemize}

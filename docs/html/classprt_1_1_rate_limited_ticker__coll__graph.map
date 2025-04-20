@@ -1,0 +1,15 @@
+<map id="prt::RateLimitedTicker&lt; Rate &gt;" name="prt::RateLimitedTicker&lt; Rate &gt;">
+<area shape="rect" id="Node000001" title=" " alt="" coords="70,393,220,433"/>
+<area shape="rect" id="Node000002" href="$classprt_1_1_ticker.html" title=" " alt="" coords="105,318,186,343"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="148,359,148,393,143,393,143,359"/>
+<area shape="rect" id="Node000003" href="$classprt_1_1_tick.html" title=" " alt="" coords="5,192,75,217"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="51,231,65,262,86,292,119,315,116,319,82,296,60,265,46,233"/>
+<area shape="rect" id="Node000004" href="$classprt_1_1uv_1_1_loop.html" title=" " alt="" coords="98,192,192,217"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="148,233,148,317,143,317,143,233"/>
+<area shape="rect" id="Node000005" href="$classprt_1_1_per_second_counter.html" title=" " alt="" coords="216,184,370,225"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="260,237,162,319,158,315,257,233"/>
+<area shape="rect" id="Node000006" href="$classprt_1_1_counter.html" title=" " alt="" coords="213,109,374,135"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="296,150,296,184,291,184,291,150"/>
+<area shape="rect" id="Node000007" href="$classprt_1_1_relaxed_atomic.html" title=" " alt="" coords="227,5,360,46"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="296,61,296,109,291,109,291,61"/>
+</map>

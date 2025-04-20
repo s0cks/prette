@@ -1,0 +1,55 @@
+\doxysection{/\+Users/tazz/\+Projects/prette/\+Sources/prette/os\+\_\+thread.h File Reference}
+\hypertarget{os__thread_8h}{}\label{os__thread_8h}\index{/Users/tazz/Projects/prette/Sources/prette/os\_thread.h@{/Users/tazz/Projects/prette/Sources/prette/os\_thread.h}}
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include "{}prette/rx.\+h"{}}\newline
+{\ttfamily \#include "{}prette/common.\+h"{}}\newline
+{\ttfamily \#include "{}prette/platform.\+h"{}}\newline
+Include dependency graph for os\+\_\+thread.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{os__thread_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{os__thread_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1_main_thread}{prt\+::\+Main\+Thread}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceprt}{prt}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+auto \mbox{\hyperlink{namespaceprt_a5918a098561b761a66d19127a1d63689}{prt\+::\+Get\+Current\+Thread\+Id}} () -\/$>$ \mbox{\hyperlink{namespaceprt_ae470469d22e60556e76251a50af0654e}{Thread\+Id}}
+\item 
+auto \mbox{\hyperlink{namespaceprt_ab32646d2c40756c86dcc6c6fb4d2e730}{prt\+::\+Get\+Thread\+Name}} (const \mbox{\hyperlink{namespaceprt_ae470469d22e60556e76251a50af0654e}{Thread\+Id}} \&thread) -\/$>$ std\+::string
+\item 
+auto \mbox{\hyperlink{namespaceprt_a151f3b1ed0808d8affe617e5cc2f8865}{prt\+::\+Set\+Thread\+Name}} (const \mbox{\hyperlink{namespaceprt_ae470469d22e60556e76251a50af0654e}{Thread\+Id}} \&thread, const std\+::string \&name) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{namespaceprt_af90c4d12e29f82e6cc5c6d5c3969e841}{prt\+::\+Initialize\+Thread\+Local}} (\mbox{\hyperlink{namespaceprt_a366a741d866403a24a0c5ea6ebdb9746}{Thread\+Local\+Key}} \&key) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{namespaceprt_a08377cc4a9cf31252cea0dfe999cb083}{prt\+::\+Set\+Current\+Thread\+Local}} (const \mbox{\hyperlink{namespaceprt_a366a741d866403a24a0c5ea6ebdb9746}{Thread\+Local\+Key}} \&key, const void \texorpdfstring{$\ast$}{*}value) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{namespaceprt_a690278fd4c6a75eaa4992ee7df8ab035}{prt\+::\+Get\+Current\+Thread\+Local}} (const \mbox{\hyperlink{namespaceprt_a366a741d866403a24a0c5ea6ebdb9746}{Thread\+Local\+Key}} \&key) -\/$>$ void \texorpdfstring{$\ast$}{*}
+\item 
+auto \mbox{\hyperlink{namespaceprt_a7939a84288181f1f86c88109370aeb27}{prt\+::\+Start}} (\mbox{\hyperlink{namespaceprt_ae470469d22e60556e76251a50af0654e}{Thread\+Id}} \texorpdfstring{$\ast$}{*}thread, const std\+::string \&name, const \mbox{\hyperlink{namespaceprt_a6f640847802d0ad35f8e5b2580187ab7}{Thread\+Handler}} \&func, void \texorpdfstring{$\ast$}{*}data) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{namespaceprt_a2b28665e1ea3806c6a44bc2b79e49617}{prt\+::\+Join}} (const \mbox{\hyperlink{namespaceprt_ae470469d22e60556e76251a50af0654e}{Thread\+Id}} \&thread) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{namespaceprt_a3b4b77abe7ac9b30162b6399d54500ab}{prt\+::\+Compare}} (const \mbox{\hyperlink{namespaceprt_ae470469d22e60556e76251a50af0654e}{Thread\+Id}} \&lhs, const \mbox{\hyperlink{namespaceprt_ae470469d22e60556e76251a50af0654e}{Thread\+Id}} \&rhs) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{namespaceprt_ad91d59e758c15ae97d43ddccda1d5ae8}{prt\+::\+Get\+Current\+Thread\+Count}} () -\/$>$ int
+\item 
+auto \mbox{\hyperlink{namespaceprt_a37f711086ec538493ae5b40e203e12a8}{prt\+::\+Get\+Current\+Thread\+Names}} () -\/$>$ rx\+::observable$<$ std\+::string $>$
+\end{DoxyCompactItemize}

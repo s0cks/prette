@@ -1,0 +1,163 @@
+\doxysection{/\+Users/tazz/\+Projects/prette/\+Sources/prette/engine.cc File Reference}
+\hypertarget{engine_8cc}{}\label{engine_8cc}\index{/Users/tazz/Projects/prette/Sources/prette/engine.cc@{/Users/tazz/Projects/prette/Sources/prette/engine.cc}}
+{\ttfamily \#include "{}prette/engine.\+h"{}}\newline
+{\ttfamily \#include $<$GLFW/glfw3.\+h$>$}\newline
+{\ttfamily \#include $<$lua.\+h$>$}\newline
+{\ttfamily \#include $<$uv.\+h$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$cctype$>$}\newline
+{\ttfamily \#include $<$cstdlib$>$}\newline
+{\ttfamily \#include $<$exception$>$}\newline
+{\ttfamily \#include $<$operators/rx-\/observe\+\_\+on.\+hpp$>$}\newline
+{\ttfamily \#include $<$rx-\/observable.\+hpp$>$}\newline
+{\ttfamily \#include "{}prette/common.\+h"{}}\newline
+{\ttfamily \#include "{}prette/crash\+\_\+report.\+h"{}}\newline
+{\ttfamily \#include "{}prette/engine\+\_\+event.\+h"{}}\newline
+{\ttfamily \#include "{}prette/exception.\+h"{}}\newline
+{\ttfamily \#include "{}prette/gfx.\+h"{}}\newline
+{\ttfamily \#include "{}prette/prette.\+h"{}}\newline
+{\ttfamily \#include "{}prette/renderer.\+h"{}}\newline
+{\ttfamily \#include "{}prette/signals.\+h"{}}\newline
+{\ttfamily \#include "{}prette/thread\+\_\+local.\+h"{}}\newline
+{\ttfamily \#include "{}prette/to\+\_\+string.\+h"{}}\newline
+{\ttfamily \#include "{}prette/uv/utils.\+h"{}}\newline
+{\ttfamily \#include "{}prette/window.\+h"{}}\newline
+Include dependency graph for engine.\+cc\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{engine_8cc__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1_engine_module}{prt\+::\+Engine\+Module}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceprt}{prt}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{engine_8cc_a0a87998f4e8cee4888f2a89df3d5639b}{\+\_\+\+\_\+}}~engine-\/$>$
+\item 
+\#define \mbox{\hyperlink{engine_8cc_a7be11d0636e692cf2cf81bb949e0247d}{LUA\+\_\+\+ENGINE\+\_\+F}}(Name)
+\item 
+\#define \mbox{\hyperlink{engine_8cc_a883bc9ae9206c92ed074a39a9a30192a}{DEFINE\+\_\+\+ON\+\_\+\+EVENT\+\_\+\+FUNC}}(Name)
+\item 
+\#define \mbox{\hyperlink{engine_8cc_a7be11d0636e692cf2cf81bb949e0247d}{LUA\+\_\+\+ENGINE\+\_\+F}}(Name)
+\item 
+\#define \mbox{\hyperlink{engine_8cc_a2672365a233e0c9f3c1ccb0d78388308}{DEFINE\+\_\+\+ON\+\_\+\+EVENT}}(Name)
+\item 
+\#define \mbox{\hyperlink{engine_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}}~lstate-\/$>$Get\+State()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+auto \mbox{\hyperlink{namespaceprt_a5b5f1395e909dafeffefb5506c1b9387}{prt\+::\+On\+Engine\+Event}} () -\/$>$ Engine\+Event\+Observable
+\item 
+\mbox{\hyperlink{namespaceprt_a2f00f134c5b21e00a277dd53585f6262}{prt\+::\+ENGINE\+\_\+\+STATE\+\_\+\+ENTER\+\_\+F}} (Init)
+\item 
+\mbox{\hyperlink{namespaceprt_a3b4b44112edb8726bcf2ad99dd556cdc}{prt\+::\+ENGINE\+\_\+\+STATE\+\_\+\+TICK\+\_\+F}} (Init)
+\item 
+\mbox{\hyperlink{namespaceprt_a681bf411cf43b8f5b4b447796574542a}{prt\+::\+ENGINE\+\_\+\+STATE\+\_\+\+EXIT\+\_\+F}} (Init)
+\item 
+\mbox{\hyperlink{namespaceprt_aaf009cbdc34795617868cb1794b5e279}{prt\+::\+ENGINE\+\_\+\+STATE\+\_\+\+ENTER\+\_\+F}} (Running)
+\item 
+\mbox{\hyperlink{namespaceprt_acab3d71b8409b7159cc0fc1f8892949e}{prt\+::\+ENGINE\+\_\+\+STATE\+\_\+\+TICK\+\_\+F}} (Running)
+\item 
+\mbox{\hyperlink{namespaceprt_a4937c6c34ded3a03ffd702b9fdceebc5}{prt\+::\+ENGINE\+\_\+\+STATE\+\_\+\+EXIT\+\_\+F}} (Running)
+\item 
+\mbox{\hyperlink{namespaceprt_a06b7f0fc0351b6e6239883d8cee01608}{prt\+::\+ENGINE\+\_\+\+STATE\+\_\+\+ENTER\+\_\+F}} (Paused)
+\item 
+\mbox{\hyperlink{namespaceprt_a388c5f0f87566f89bb5c01daed74bcc6}{prt\+::\+ENGINE\+\_\+\+STATE\+\_\+\+TICK\+\_\+F}} (Paused)
+\item 
+\mbox{\hyperlink{namespaceprt_a49092c7586816b481f990a9df7eb2401}{prt\+::\+ENGINE\+\_\+\+STATE\+\_\+\+EXIT\+\_\+F}} (Paused)
+\item 
+\mbox{\hyperlink{namespaceprt_a36d6b2508ad88e28490af99d4edd3aa0}{prt\+::\+ENGINE\+\_\+\+STATE\+\_\+\+ENTER\+\_\+F}} (Terminated)
+\item 
+\mbox{\hyperlink{namespaceprt_aa9964ea6777d364d3788d6fd460d40c9}{prt\+::\+ENGINE\+\_\+\+STATE\+\_\+\+TICK\+\_\+F}} (Terminated)
+\item 
+\mbox{\hyperlink{namespaceprt_a9ba002a78dbcb0600cfc23c8d83d5087}{prt\+::\+ENGINE\+\_\+\+STATE\+\_\+\+EXIT\+\_\+F}} (Terminated)
+\item 
+\mbox{\hyperlink{namespaceprt_a7696a167f5ee48424d31c8368a0937d0}{prt\+::\+ENGINE\+\_\+\+STATE\+\_\+\+ENTER\+\_\+F}} (Error)
+\item 
+\mbox{\hyperlink{namespaceprt_ad8ca3e17a3bf80f5154aab6a443b4bdd}{prt\+::\+ENGINE\+\_\+\+STATE\+\_\+\+TICK\+\_\+F}} (Error)
+\item 
+\mbox{\hyperlink{namespaceprt_abede07efc226308dc45f08c1730447f2}{prt\+::\+ENGINE\+\_\+\+STATE\+\_\+\+EXIT\+\_\+F}} (Error)
+\item 
+\mbox{\hyperlink{namespaceprt_abced349cc44dce3da25655ff665c9c2a}{prt\+::\+LUA\+\_\+\+ENGINE\+\_\+F}} (get\+State\+Name)
+\item 
+\mbox{\hyperlink{namespaceprt_a6e8fa8e0b48aa26e836d9133ee695165}{prt\+::\+LUA\+\_\+\+ENGINE\+\_\+F}} (shutdown)
+\item 
+\mbox{\hyperlink{namespaceprt_aef3e777f32003ed8c2fd3d85b2309e17}{prt\+::\+LUA\+\_\+\+ENGINE\+\_\+F}} (on\+Event)
+\item 
+\mbox{\hyperlink{namespaceprt_a1997ace4caa1eebeb17a2065a6c62bcb}{prt\+::\+FOR\+\_\+\+EACH\+\_\+\+ENGINE\+\_\+\+EVENT}} (\mbox{\hyperlink{engine_8cc_a883bc9ae9206c92ed074a39a9a30192a}{DEFINE\+\_\+\+ON\+\_\+\+EVENT\+\_\+\+FUNC}})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{engine_8cc_a0a87998f4e8cee4888f2a89df3d5639b}\index{engine.cc@{engine.cc}!\_\_@{\_\_}}
+\index{\_\_@{\_\_}!engine.cc@{engine.cc}}
+\doxysubsubsection{\texorpdfstring{\_\_}{\_\_}}
+{\footnotesize\ttfamily \label{engine_8cc_a0a87998f4e8cee4888f2a89df3d5639b} 
+\#define \+\_\+\+\_\+~engine-\/$>$}
+
+\Hypertarget{engine_8cc_a2672365a233e0c9f3c1ccb0d78388308}\index{engine.cc@{engine.cc}!DEFINE\_ON\_EVENT@{DEFINE\_ON\_EVENT}}
+\index{DEFINE\_ON\_EVENT@{DEFINE\_ON\_EVENT}!engine.cc@{engine.cc}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_ON\_EVENT}{DEFINE\_ON\_EVENT}}
+{\footnotesize\ttfamily \label{engine_8cc_a2672365a233e0c9f3c1ccb0d78388308} 
+\#define DEFINE\+\_\+\+ON\+\_\+\+EVENT(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{engine_8cc_a7be11d0636e692cf2cf81bb949e0247d}{LUA\_ENGINE\_F}}(on\#\#Name\#\#Event),}
+
+\end{DoxyCode}
+\Hypertarget{engine_8cc_a883bc9ae9206c92ed074a39a9a30192a}\index{engine.cc@{engine.cc}!DEFINE\_ON\_EVENT\_FUNC@{DEFINE\_ON\_EVENT\_FUNC}}
+\index{DEFINE\_ON\_EVENT\_FUNC@{DEFINE\_ON\_EVENT\_FUNC}!engine.cc@{engine.cc}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_ON\_EVENT\_FUNC}{DEFINE\_ON\_EVENT\_FUNC}}
+{\footnotesize\ttfamily \label{engine_8cc_a883bc9ae9206c92ed074a39a9a30192a} 
+\#define DEFINE\+\_\+\+ON\+\_\+\+EVENT\+\_\+\+FUNC(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{engine_8cc_a7be11d0636e692cf2cf81bb949e0247d}{LUA\_ENGINE\_F}}(on\#\#Name\#\#Event)\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ engine\ =\ Engine::Get();\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ ASSERT(engine);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ On\#\#Name\#\#Event().subscribe(CreateSubscriber<Name\#\#Event>(\mbox{\hyperlink{engine_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}}));\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{engine_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}\index{engine.cc@{engine.cc}!L@{L}}
+\index{L@{L}!engine.cc@{engine.cc}}
+\doxysubsubsection{\texorpdfstring{L}{L}}
+{\footnotesize\ttfamily \label{engine_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53} 
+\#define L~lstate-\/$>$Get\+State()}
+
+\Hypertarget{engine_8cc_a7be11d0636e692cf2cf81bb949e0247d}\index{engine.cc@{engine.cc}!LUA\_ENGINE\_F@{LUA\_ENGINE\_F}}
+\index{LUA\_ENGINE\_F@{LUA\_ENGINE\_F}!engine.cc@{engine.cc}}
+\doxysubsubsection{\texorpdfstring{LUA\_ENGINE\_F}{LUA\_ENGINE\_F}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{engine_8cc_a7be11d0636e692cf2cf81bb949e0247d} 
+\#define LUA\+\_\+\+ENGINE\+\_\+F(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{lua_8h_a4c3a947c2f5c2f6244ffac8dfa005527}{LUA\_F}}(engine\_\#\#Name)}
+
+\end{DoxyCode}
+\Hypertarget{engine_8cc_a7be11d0636e692cf2cf81bb949e0247d}\index{engine.cc@{engine.cc}!LUA\_ENGINE\_F@{LUA\_ENGINE\_F}}
+\index{LUA\_ENGINE\_F@{LUA\_ENGINE\_F}!engine.cc@{engine.cc}}
+\doxysubsubsection{\texorpdfstring{LUA\_ENGINE\_F}{LUA\_ENGINE\_F}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{engine_8cc_a7be11d0636e692cf2cf81bb949e0247d} 
+\#define LUA\+\_\+\+ENGINE\+\_\+F(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \{.name\ =\ \#Name,\ .func\ =\ \&lua\_engine\_\#\#Name\ \}}
+
+\end{DoxyCode}

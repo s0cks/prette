@@ -1,0 +1,74 @@
+\doxysection{rectangle.\+h}
+\hypertarget{rectangle_8h_source}{}\label{rectangle_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/geometry/rectangle.h@{/Users/tazz/Projects/prette/Sources/prette/geometry/rectangle.h}}
+\mbox{\hyperlink{rectangle_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_RECTANGLE\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_RECTANGLE\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{shape_8h}{prette/geometry/shape.h}}"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00008\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_rectangle}{Rectangle}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1_shape}{Shape}}\ \{\ \textcolor{comment}{//\ NOLINT(cppcoreguidelines-\/pro-\/type-\/member-\/init)}}
+\DoxyCodeLine{00009\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_rectangle_ac3183f73f41d9ce444da7c2a5e516d9b}{DEFINE\_DEFAULT\_COPYABLE\_TYPE}}(\mbox{\hyperlink{classprt_1_1_rectangle}{Rectangle}});}
+\DoxyCodeLine{00010\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00011\ \ \ \ \ \mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}}\ \mbox{\hyperlink{classprt_1_1_rectangle_a8ca9d675476ee20bd85837d7f865cac5}{pos\_}}\{\};}
+\DoxyCodeLine{00012\ \ \ \ \ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ \mbox{\hyperlink{classprt_1_1_rectangle_a007f838c58ceee8a33268ecdce91b256}{width\_}}\{\};}
+\DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ \mbox{\hyperlink{classprt_1_1_rectangle_a91e317409b6c358032322af1d88261a8}{height\_}}\{\};}
+\DoxyCodeLine{00014\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_rectangle_ac7ea72e47848996b6f4eb4e41fc73b5f}{Rectangle}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_rectangle_a98853830757bac8bb01fb2cde084df42}{Rectangle}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}}\&\ pos,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ width,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ height):}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_shape}{Shape}}(),}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_rectangle_a8ca9d675476ee20bd85837d7f865cac5}{pos\_}}(pos),}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_rectangle_a007f838c58ceee8a33268ecdce91b256}{width\_}}(width),}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_rectangle_a91e317409b6c358032322af1d88261a8}{height\_}}(height)\ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \}}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_rectangle_a80ca4545f645642e51321dede9e39b21}{Rectangle}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ xPos,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ yPos,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ width,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ height):}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_rectangle}{Rectangle}}(\mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}}(xPos,\ yPos),\ width,\ height)\ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \}}
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_rectangle_ab303bb82ba58b3d19edd358602b95f8a}{\string~Rectangle}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_rectangle_a650b549b168470964bf6823d7f375ba4}{GetPos}}()\ const\ -\/>\ const\ \mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}}\&\ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_rectangle_a8ca9d675476ee20bd85837d7f865cac5}{pos\_}};}
+\DoxyCodeLine{00029\ \ \ \ \ \}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_rectangle_a2cca6b4dea276c27e8ba202df7d69abd}{SetPos}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}}\&\ rhs)\ \{}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_rectangle_a8ca9d675476ee20bd85837d7f865cac5}{pos\_}}\ =\ rhs;}
+\DoxyCodeLine{00033\ \ \ \ \ \}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_rectangle_a19ed20c32f185995bb68f1ab2f4b31ff}{GetTopLeft}}()\ const\ -\/>\ \mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}}\ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_rectangle_a8ca9d675476ee20bd85837d7f865cac5}{pos\_}};}
+\DoxyCodeLine{00037\ \ \ \ \ \}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_rectangle_a932ca518e887d1295d7ec31fbeb80458}{GetBottomRight}}()\ const\ -\/>\ \mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}}\ \{}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_rectangle_a8ca9d675476ee20bd85837d7f865cac5}{pos\_}}\ +\ glm::vec2(\mbox{\hyperlink{classprt_1_1_rectangle_a007f838c58ceee8a33268ecdce91b256}{width\_}},\ \mbox{\hyperlink{classprt_1_1_rectangle_a91e317409b6c358032322af1d88261a8}{height\_}});}
+\DoxyCodeLine{00041\ \ \ \ \ \}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_rectangle_a7c6e9bc44a35381465f2a5867cd7979e}{GetTopRight}}()\ const\ -\/>\ \mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}}\ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\ \mbox{\hyperlink{classprt_1_1_rectangle_a8ca9d675476ee20bd85837d7f865cac5}{pos\_}}[0]\ +\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(\mbox{\hyperlink{classprt_1_1_rectangle_a007f838c58ceee8a33268ecdce91b256}{width\_}}),\ \mbox{\hyperlink{classprt_1_1_rectangle_a8ca9d675476ee20bd85837d7f865cac5}{pos\_}}[1]\ \};}
+\DoxyCodeLine{00045\ \ \ \ \ \}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_rectangle_ab2213db7087b0a1fd0258cca529a6c35}{GetBottomLeft}}()\ const\ -\/>\ \mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}}\ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\ \mbox{\hyperlink{classprt_1_1_rectangle_a8ca9d675476ee20bd85837d7f865cac5}{pos\_}}[0],\ \mbox{\hyperlink{classprt_1_1_rectangle_a8ca9d675476ee20bd85837d7f865cac5}{pos\_}}[1]\ +\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(\mbox{\hyperlink{classprt_1_1_rectangle_a91e317409b6c358032322af1d88261a8}{height\_}})\ \};}
+\DoxyCodeLine{00049\ \ \ \ \ \}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_rectangle_aadb7c27fdb0052ee0d9a3ba2a0123e1c}{GetWidth}}()\ const\ -\/>\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_rectangle_a007f838c58ceee8a33268ecdce91b256}{width\_}};}
+\DoxyCodeLine{00053\ \ \ \ \ \}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_rectangle_a8b5cee289d5136a64f7a5e6fbaeb5669}{GetHeight}}()\ const\ -\/>\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ \{}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_rectangle_a91e317409b6c358032322af1d88261a8}{height\_}};}
+\DoxyCodeLine{00057\ \ \ \ \ \}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_rectangle_a4a44f45724c051fc34925b92fc71e526}{Contains}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}}\&\ p)\ \textcolor{keyword}{const}\ -\/>\ \textcolor{keywordtype}{bool}\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_rectangle_ade6de2e42f8e9b6ea1b08832ce97c270}{ToString}}()\ const\ -\/>\ \mbox{\hyperlink{namespacestd}{std}}::\textcolor{keywordtype}{string}\ override;}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ friend\ auto\ operator<<(\mbox{\hyperlink{namespacestd}{std}}::ostream\&\ stream,\ const\ \mbox{\hyperlink{classprt_1_1_rectangle}{Rectangle}}\&\ rhs)\ -\/>\ \mbox{\hyperlink{namespacestd}{std}}::ostream\&\ \{}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ stream\ <<\ rhs.ToString();}
+\DoxyCodeLine{00064\ \ \ \ \ \}}
+\DoxyCodeLine{00065\ \ \ \};}
+\DoxyCodeLine{00066\ \}}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//PRT\_RECTANGLE\_H}}
+
+\end{DoxyCode}

@@ -1,0 +1,224 @@
+\doxysection{prt\+::Token\+Template\texorpdfstring{$<$}{<} Kind \texorpdfstring{$>$}{>} Struct Template Reference}
+\hypertarget{structprt_1_1_token_template}{}\label{structprt_1_1_token_template}\index{prt::TokenTemplate$<$ Kind $>$@{prt::TokenTemplate$<$ Kind $>$}}
+
+
+{\ttfamily \#include $<$parser.\+h$>$}
+
+
+
+Collaboration diagram for prt\+::Token\+Template\texorpdfstring{$<$}{<} Kind \texorpdfstring{$>$}{>}\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=179pt]{structprt_1_1_token_template__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structprt_1_1_token_template_addb5aca6541a8d352c1f17a3293b28e3}{Token\+Template}} ()
+\item 
+\mbox{\hyperlink{structprt_1_1_token_template_a4d26211ad56f6a171f1fd3d85e3c1179}{Token\+Template}} (const Kind k, const \mbox{\hyperlink{structprt_1_1_position}{Position}} \&p)
+\item 
+\mbox{\hyperlink{structprt_1_1_token_template_a5e81199db129491bdd7ea010d59c4df2}{Token\+Template}} (const Kind k, const uint64\+\_\+t r, const uint64\+\_\+t c)
+\item 
+\mbox{\hyperlink{structprt_1_1_token_template_a961f4e3438239623b07dca74cbeaee62}{Token\+Template}} (const Kind k, const \mbox{\hyperlink{structprt_1_1_position}{Position}} \&p, uint8\+\_\+t \texorpdfstring{$\ast$}{*}t, const uint64\+\_\+t l)
+\item 
+\mbox{\hyperlink{structprt_1_1_token_template_adf4a2597854efcff9dfa7437a3cbfa62}{Token\+Template}} (const Kind k, const uint64\+\_\+t r, const uint64\+\_\+t c, uint8\+\_\+t \texorpdfstring{$\ast$}{*}t, const uint64\+\_\+t l)
+\item 
+\mbox{\hyperlink{structprt_1_1_token_template_acbc1eaddedd03a82948761bfcc4e6656}{Token\+Template}} (const Kind k, const \mbox{\hyperlink{structprt_1_1_position}{Position}} \&p, const uint8\+\_\+t c)
+\item 
+\mbox{\hyperlink{structprt_1_1_token_template_a623bafd7bbf9bb865322cc5f18468952}{Token\+Template}} (const Kind k, const \mbox{\hyperlink{structprt_1_1_position}{Position}} \&p, const char c)
+\item 
+\mbox{\hyperlink{structprt_1_1_token_template_a36ed3ba489b61a4d53d16ef6098a7d12}{Token\+Template}} (const \mbox{\hyperlink{structprt_1_1_token_template}{Token\+Template}}$<$ Kind $>$ \&rhs)
+\item 
+\mbox{\hyperlink{structprt_1_1_token_template_aaef6ccafbb4fec5a9cea781735e17291}{\texorpdfstring{$\sim$}{\string~}\+Token\+Template}} ()=default
+\item 
+auto \mbox{\hyperlink{structprt_1_1_token_template_a12e0c5e4091a5360b9e217a5559d2955}{valid}} () const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{structprt_1_1_token_template_a5fdc7396038149ae418ad4e3d6bcb1b4}{invalid}} () const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{structprt_1_1_token_template_af362190ed8d378db285f0fbbadfcd5b2}{as\+\_\+u64}} () const -\/$>$ uint64\+\_\+t
+\item 
+auto \mbox{\hyperlink{structprt_1_1_token_template_aeefe2346d0b4d57d309da449bf63aeb3}{as\+\_\+float}} () const -\/$>$ float
+\item 
+auto \mbox{\hyperlink{structprt_1_1_token_template_ad6b7bf2faf9524f4a0466bcbd1f6b13d}{operator=}} (const auto rhs) -\/$>$ \mbox{\hyperlink{structprt_1_1_token_template}{Token\+Template}}$<$ Kind $>$ \&
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Kind \mbox{\hyperlink{structprt_1_1_token_template_a98df2fb6e916b6b671b0b18893e14fac}{kind}}
+\item 
+\mbox{\hyperlink{structprt_1_1_position}{Position}} \mbox{\hyperlink{structprt_1_1_token_template_a30ba869a04ce8854396b1cc37055cb8a}{pos}}
+\item 
+uint8\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structprt_1_1_token_template_a59a3684b56083dd2ca2a1f2b5a273e26}{data}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{structprt_1_1_token_template_a1927a89022bc10d249bfbf171de8ae4e}{length}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr const uint64\+\_\+t \mbox{\hyperlink{structprt_1_1_token_template_aadbe94ec7bdd48e01721d53e7cdf935f}{k\+Max\+Length}} = 1024
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+auto \mbox{\hyperlink{structprt_1_1_token_template_a16261cfdc10385e39e2a70c67c982bec}{operator$<$$<$}} (std\+::ostream \&stream, const \mbox{\hyperlink{structprt_1_1_token_template}{Token\+Template}}$<$ Kind $>$ \&rhs) -\/$>$ std\+::ostream \&
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{structprt_1_1_token_template_addb5aca6541a8d352c1f17a3293b28e3}\index{prt::TokenTemplate$<$ Kind $>$@{prt::TokenTemplate$<$ Kind $>$}!TokenTemplate@{TokenTemplate}}
+\index{TokenTemplate@{TokenTemplate}!prt::TokenTemplate$<$ Kind $>$@{prt::TokenTemplate$<$ Kind $>$}}
+\doxysubsubsection{\texorpdfstring{TokenTemplate()}{TokenTemplate()}\hspace{0.1cm}{\footnotesize\ttfamily [1/8]}}
+{\footnotesize\ttfamily \label{structprt_1_1_token_template_addb5aca6541a8d352c1f17a3293b28e3} 
+template$<$typename Kind $>$ \\
+\mbox{\hyperlink{structprt_1_1_token_template}{prt\+::\+Token\+Template}}$<$ Kind $>$\+::\+Token\+Template (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{structprt_1_1_token_template_a4d26211ad56f6a171f1fd3d85e3c1179}\index{prt::TokenTemplate$<$ Kind $>$@{prt::TokenTemplate$<$ Kind $>$}!TokenTemplate@{TokenTemplate}}
+\index{TokenTemplate@{TokenTemplate}!prt::TokenTemplate$<$ Kind $>$@{prt::TokenTemplate$<$ Kind $>$}}
+\doxysubsubsection{\texorpdfstring{TokenTemplate()}{TokenTemplate()}\hspace{0.1cm}{\footnotesize\ttfamily [2/8]}}
+{\footnotesize\ttfamily \label{structprt_1_1_token_template_a4d26211ad56f6a171f1fd3d85e3c1179} 
+template$<$typename Kind $>$ \\
+\mbox{\hyperlink{structprt_1_1_token_template}{prt\+::\+Token\+Template}}$<$ Kind $>$\+::\+Token\+Template (\begin{DoxyParamCaption}\item[{const Kind}]{k}{, }\item[{const \mbox{\hyperlink{structprt_1_1_position}{Position}} \&}]{p}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{structprt_1_1_token_template_a5e81199db129491bdd7ea010d59c4df2}\index{prt::TokenTemplate$<$ Kind $>$@{prt::TokenTemplate$<$ Kind $>$}!TokenTemplate@{TokenTemplate}}
+\index{TokenTemplate@{TokenTemplate}!prt::TokenTemplate$<$ Kind $>$@{prt::TokenTemplate$<$ Kind $>$}}
+\doxysubsubsection{\texorpdfstring{TokenTemplate()}{TokenTemplate()}\hspace{0.1cm}{\footnotesize\ttfamily [3/8]}}
+{\footnotesize\ttfamily \label{structprt_1_1_token_template_a5e81199db129491bdd7ea010d59c4df2} 
+template$<$typename Kind $>$ \\
+\mbox{\hyperlink{structprt_1_1_token_template}{prt\+::\+Token\+Template}}$<$ Kind $>$\+::\+Token\+Template (\begin{DoxyParamCaption}\item[{const Kind}]{k}{, }\item[{const uint64\+\_\+t}]{r}{, }\item[{const uint64\+\_\+t}]{c}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{structprt_1_1_token_template_a961f4e3438239623b07dca74cbeaee62}\index{prt::TokenTemplate$<$ Kind $>$@{prt::TokenTemplate$<$ Kind $>$}!TokenTemplate@{TokenTemplate}}
+\index{TokenTemplate@{TokenTemplate}!prt::TokenTemplate$<$ Kind $>$@{prt::TokenTemplate$<$ Kind $>$}}
+\doxysubsubsection{\texorpdfstring{TokenTemplate()}{TokenTemplate()}\hspace{0.1cm}{\footnotesize\ttfamily [4/8]}}
+{\footnotesize\ttfamily \label{structprt_1_1_token_template_a961f4e3438239623b07dca74cbeaee62} 
+template$<$typename Kind $>$ \\
+\mbox{\hyperlink{structprt_1_1_token_template}{prt\+::\+Token\+Template}}$<$ Kind $>$\+::\+Token\+Template (\begin{DoxyParamCaption}\item[{const Kind}]{k}{, }\item[{const \mbox{\hyperlink{structprt_1_1_position}{Position}} \&}]{p}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{t}{, }\item[{const uint64\+\_\+t}]{l}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{structprt_1_1_token_template_adf4a2597854efcff9dfa7437a3cbfa62}\index{prt::TokenTemplate$<$ Kind $>$@{prt::TokenTemplate$<$ Kind $>$}!TokenTemplate@{TokenTemplate}}
+\index{TokenTemplate@{TokenTemplate}!prt::TokenTemplate$<$ Kind $>$@{prt::TokenTemplate$<$ Kind $>$}}
+\doxysubsubsection{\texorpdfstring{TokenTemplate()}{TokenTemplate()}\hspace{0.1cm}{\footnotesize\ttfamily [5/8]}}
+{\footnotesize\ttfamily \label{structprt_1_1_token_template_adf4a2597854efcff9dfa7437a3cbfa62} 
+template$<$typename Kind $>$ \\
+\mbox{\hyperlink{structprt_1_1_token_template}{prt\+::\+Token\+Template}}$<$ Kind $>$\+::\+Token\+Template (\begin{DoxyParamCaption}\item[{const Kind}]{k}{, }\item[{const uint64\+\_\+t}]{r}{, }\item[{const uint64\+\_\+t}]{c}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{t}{, }\item[{const uint64\+\_\+t}]{l}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{structprt_1_1_token_template_acbc1eaddedd03a82948761bfcc4e6656}\index{prt::TokenTemplate$<$ Kind $>$@{prt::TokenTemplate$<$ Kind $>$}!TokenTemplate@{TokenTemplate}}
+\index{TokenTemplate@{TokenTemplate}!prt::TokenTemplate$<$ Kind $>$@{prt::TokenTemplate$<$ Kind $>$}}
+\doxysubsubsection{\texorpdfstring{TokenTemplate()}{TokenTemplate()}\hspace{0.1cm}{\footnotesize\ttfamily [6/8]}}
+{\footnotesize\ttfamily \label{structprt_1_1_token_template_acbc1eaddedd03a82948761bfcc4e6656} 
+template$<$typename Kind $>$ \\
+\mbox{\hyperlink{structprt_1_1_token_template}{prt\+::\+Token\+Template}}$<$ Kind $>$\+::\+Token\+Template (\begin{DoxyParamCaption}\item[{const Kind}]{k}{, }\item[{const \mbox{\hyperlink{structprt_1_1_position}{Position}} \&}]{p}{, }\item[{const uint8\+\_\+t}]{c}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{structprt_1_1_token_template_a623bafd7bbf9bb865322cc5f18468952}\index{prt::TokenTemplate$<$ Kind $>$@{prt::TokenTemplate$<$ Kind $>$}!TokenTemplate@{TokenTemplate}}
+\index{TokenTemplate@{TokenTemplate}!prt::TokenTemplate$<$ Kind $>$@{prt::TokenTemplate$<$ Kind $>$}}
+\doxysubsubsection{\texorpdfstring{TokenTemplate()}{TokenTemplate()}\hspace{0.1cm}{\footnotesize\ttfamily [7/8]}}
+{\footnotesize\ttfamily \label{structprt_1_1_token_template_a623bafd7bbf9bb865322cc5f18468952} 
+template$<$typename Kind $>$ \\
+\mbox{\hyperlink{structprt_1_1_token_template}{prt\+::\+Token\+Template}}$<$ Kind $>$\+::\+Token\+Template (\begin{DoxyParamCaption}\item[{const Kind}]{k}{, }\item[{const \mbox{\hyperlink{structprt_1_1_position}{Position}} \&}]{p}{, }\item[{const char}]{c}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{structprt_1_1_token_template_a36ed3ba489b61a4d53d16ef6098a7d12}\index{prt::TokenTemplate$<$ Kind $>$@{prt::TokenTemplate$<$ Kind $>$}!TokenTemplate@{TokenTemplate}}
+\index{TokenTemplate@{TokenTemplate}!prt::TokenTemplate$<$ Kind $>$@{prt::TokenTemplate$<$ Kind $>$}}
+\doxysubsubsection{\texorpdfstring{TokenTemplate()}{TokenTemplate()}\hspace{0.1cm}{\footnotesize\ttfamily [8/8]}}
+{\footnotesize\ttfamily \label{structprt_1_1_token_template_a36ed3ba489b61a4d53d16ef6098a7d12} 
+template$<$typename Kind $>$ \\
+\mbox{\hyperlink{structprt_1_1_token_template}{prt\+::\+Token\+Template}}$<$ Kind $>$\+::\+Token\+Template (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structprt_1_1_token_template}{Token\+Template}}$<$ Kind $>$ \&}]{rhs}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{structprt_1_1_token_template_aaef6ccafbb4fec5a9cea781735e17291}\index{prt::TokenTemplate$<$ Kind $>$@{prt::TokenTemplate$<$ Kind $>$}!````~TokenTemplate@{\texorpdfstring{$\sim$}{\string~}TokenTemplate}}
+\index{````~TokenTemplate@{\texorpdfstring{$\sim$}{\string~}TokenTemplate}!prt::TokenTemplate$<$ Kind $>$@{prt::TokenTemplate$<$ Kind $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}TokenTemplate()}{\string~TokenTemplate()}}
+{\footnotesize\ttfamily \label{structprt_1_1_token_template_aaef6ccafbb4fec5a9cea781735e17291} 
+template$<$typename Kind $>$ \\
+\mbox{\hyperlink{structprt_1_1_token_template}{prt\+::\+Token\+Template}}$<$ Kind $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{structprt_1_1_token_template}{Token\+Template}} (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{structprt_1_1_token_template_aeefe2346d0b4d57d309da449bf63aeb3}\index{prt::TokenTemplate$<$ Kind $>$@{prt::TokenTemplate$<$ Kind $>$}!as\_float@{as\_float}}
+\index{as\_float@{as\_float}!prt::TokenTemplate$<$ Kind $>$@{prt::TokenTemplate$<$ Kind $>$}}
+\doxysubsubsection{\texorpdfstring{as\_float()}{as\_float()}}
+{\footnotesize\ttfamily \label{structprt_1_1_token_template_aeefe2346d0b4d57d309da449bf63aeb3} 
+template$<$typename Kind $>$ \\
+auto \mbox{\hyperlink{structprt_1_1_token_template}{prt\+::\+Token\+Template}}$<$ Kind $>$\+::as\+\_\+float (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ float \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{structprt_1_1_token_template_af362190ed8d378db285f0fbbadfcd5b2}\index{prt::TokenTemplate$<$ Kind $>$@{prt::TokenTemplate$<$ Kind $>$}!as\_u64@{as\_u64}}
+\index{as\_u64@{as\_u64}!prt::TokenTemplate$<$ Kind $>$@{prt::TokenTemplate$<$ Kind $>$}}
+\doxysubsubsection{\texorpdfstring{as\_u64()}{as\_u64()}}
+{\footnotesize\ttfamily \label{structprt_1_1_token_template_af362190ed8d378db285f0fbbadfcd5b2} 
+template$<$typename Kind $>$ \\
+auto \mbox{\hyperlink{structprt_1_1_token_template}{prt\+::\+Token\+Template}}$<$ Kind $>$\+::as\+\_\+u64 (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ uint64\+\_\+t \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{structprt_1_1_token_template_a5fdc7396038149ae418ad4e3d6bcb1b4}\index{prt::TokenTemplate$<$ Kind $>$@{prt::TokenTemplate$<$ Kind $>$}!invalid@{invalid}}
+\index{invalid@{invalid}!prt::TokenTemplate$<$ Kind $>$@{prt::TokenTemplate$<$ Kind $>$}}
+\doxysubsubsection{\texorpdfstring{invalid()}{invalid()}}
+{\footnotesize\ttfamily \label{structprt_1_1_token_template_a5fdc7396038149ae418ad4e3d6bcb1b4} 
+template$<$typename Kind $>$ \\
+auto \mbox{\hyperlink{structprt_1_1_token_template}{prt\+::\+Token\+Template}}$<$ Kind $>$\+::invalid (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{structprt_1_1_token_template_ad6b7bf2faf9524f4a0466bcbd1f6b13d}\index{prt::TokenTemplate$<$ Kind $>$@{prt::TokenTemplate$<$ Kind $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!prt::TokenTemplate$<$ Kind $>$@{prt::TokenTemplate$<$ Kind $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \label{structprt_1_1_token_template_ad6b7bf2faf9524f4a0466bcbd1f6b13d} 
+template$<$typename Kind $>$ \\
+auto \mbox{\hyperlink{structprt_1_1_token_template}{prt\+::\+Token\+Template}}$<$ Kind $>$\+::operator= (\begin{DoxyParamCaption}\item[{const auto}]{rhs}{}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{structprt_1_1_token_template}{Token\+Template}}$<$Kind$>$\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{structprt_1_1_token_template_a12e0c5e4091a5360b9e217a5559d2955}\index{prt::TokenTemplate$<$ Kind $>$@{prt::TokenTemplate$<$ Kind $>$}!valid@{valid}}
+\index{valid@{valid}!prt::TokenTemplate$<$ Kind $>$@{prt::TokenTemplate$<$ Kind $>$}}
+\doxysubsubsection{\texorpdfstring{valid()}{valid()}}
+{\footnotesize\ttfamily \label{structprt_1_1_token_template_a12e0c5e4091a5360b9e217a5559d2955} 
+template$<$typename Kind $>$ \\
+auto \mbox{\hyperlink{structprt_1_1_token_template}{prt\+::\+Token\+Template}}$<$ Kind $>$\+::valid (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{structprt_1_1_token_template_a16261cfdc10385e39e2a70c67c982bec}\index{prt::TokenTemplate$<$ Kind $>$@{prt::TokenTemplate$<$ Kind $>$}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!prt::TokenTemplate$<$ Kind $>$@{prt::TokenTemplate$<$ Kind $>$}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily \label{structprt_1_1_token_template_a16261cfdc10385e39e2a70c67c982bec} 
+template$<$typename Kind $>$ \\
+auto operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{stream}{, }\item[{const \mbox{\hyperlink{structprt_1_1_token_template}{Token\+Template}}$<$ Kind $>$ \&}]{rhs}{}\end{DoxyParamCaption}) -\/$>$ std\+::ostream\& \hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structprt_1_1_token_template_a59a3684b56083dd2ca2a1f2b5a273e26}\index{prt::TokenTemplate$<$ Kind $>$@{prt::TokenTemplate$<$ Kind $>$}!data@{data}}
+\index{data@{data}!prt::TokenTemplate$<$ Kind $>$@{prt::TokenTemplate$<$ Kind $>$}}
+\doxysubsubsection{\texorpdfstring{data}{data}}
+{\footnotesize\ttfamily \label{structprt_1_1_token_template_a59a3684b56083dd2ca2a1f2b5a273e26} 
+template$<$typename Kind $>$ \\
+uint8\+\_\+t\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structprt_1_1_token_template}{prt\+::\+Token\+Template}}$<$ Kind $>$\+::data}
+
+\Hypertarget{structprt_1_1_token_template_a98df2fb6e916b6b671b0b18893e14fac}\index{prt::TokenTemplate$<$ Kind $>$@{prt::TokenTemplate$<$ Kind $>$}!kind@{kind}}
+\index{kind@{kind}!prt::TokenTemplate$<$ Kind $>$@{prt::TokenTemplate$<$ Kind $>$}}
+\doxysubsubsection{\texorpdfstring{kind}{kind}}
+{\footnotesize\ttfamily \label{structprt_1_1_token_template_a98df2fb6e916b6b671b0b18893e14fac} 
+template$<$typename Kind $>$ \\
+Kind \mbox{\hyperlink{structprt_1_1_token_template}{prt\+::\+Token\+Template}}$<$ Kind $>$\+::kind}
+
+\Hypertarget{structprt_1_1_token_template_aadbe94ec7bdd48e01721d53e7cdf935f}\index{prt::TokenTemplate$<$ Kind $>$@{prt::TokenTemplate$<$ Kind $>$}!kMaxLength@{kMaxLength}}
+\index{kMaxLength@{kMaxLength}!prt::TokenTemplate$<$ Kind $>$@{prt::TokenTemplate$<$ Kind $>$}}
+\doxysubsubsection{\texorpdfstring{kMaxLength}{kMaxLength}}
+{\footnotesize\ttfamily \label{structprt_1_1_token_template_aadbe94ec7bdd48e01721d53e7cdf935f} 
+template$<$typename Kind $>$ \\
+const uint64\+\_\+t \mbox{\hyperlink{structprt_1_1_token_template}{prt\+::\+Token\+Template}}$<$ Kind $>$\+::k\+Max\+Length = 1024\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{structprt_1_1_token_template_a1927a89022bc10d249bfbf171de8ae4e}\index{prt::TokenTemplate$<$ Kind $>$@{prt::TokenTemplate$<$ Kind $>$}!length@{length}}
+\index{length@{length}!prt::TokenTemplate$<$ Kind $>$@{prt::TokenTemplate$<$ Kind $>$}}
+\doxysubsubsection{\texorpdfstring{length}{length}}
+{\footnotesize\ttfamily \label{structprt_1_1_token_template_a1927a89022bc10d249bfbf171de8ae4e} 
+template$<$typename Kind $>$ \\
+uint64\+\_\+t \mbox{\hyperlink{structprt_1_1_token_template}{prt\+::\+Token\+Template}}$<$ Kind $>$\+::length}
+
+\Hypertarget{structprt_1_1_token_template_a30ba869a04ce8854396b1cc37055cb8a}\index{prt::TokenTemplate$<$ Kind $>$@{prt::TokenTemplate$<$ Kind $>$}!pos@{pos}}
+\index{pos@{pos}!prt::TokenTemplate$<$ Kind $>$@{prt::TokenTemplate$<$ Kind $>$}}
+\doxysubsubsection{\texorpdfstring{pos}{pos}}
+{\footnotesize\ttfamily \label{structprt_1_1_token_template_a30ba869a04ce8854396b1cc37055cb8a} 
+template$<$typename Kind $>$ \\
+\mbox{\hyperlink{structprt_1_1_position}{Position}} \mbox{\hyperlink{structprt_1_1_token_template}{prt\+::\+Token\+Template}}$<$ Kind $>$\+::pos}
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{parser_8h}{parser.\+h}}\end{DoxyCompactItemize}

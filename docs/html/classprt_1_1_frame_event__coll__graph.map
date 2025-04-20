@@ -1,0 +1,9 @@
+<map id="prt::FrameEvent" name="prt::FrameEvent">
+<area shape="rect" id="Node000001" title=" " alt="" coords="40,241,155,267"/>
+<area shape="rect" id="Node000002" href="$classprt_1_1_template_renderer_event.html" title=" " alt="" coords="5,153,190,193"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="100,209,100,241,95,241,95,209"/>
+<area shape="rect" id="Node000003" href="$classprt_1_1_renderer_event.html" title=" " alt="" coords="32,79,163,105"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="100,120,100,152,95,152,95,120"/>
+<area shape="rect" id="Node000004" href="$classprt_1_1_event.html" title=" " alt="" coords="58,5,137,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="100,46,100,79,95,79,95,46"/>
+</map>

@@ -1,5 +1,6 @@
 {
   "dependencies": [
+    "abseil",
     "backward-cpp",
     "benchmark",
     "flatbuffers",
@@ -12,18 +13,35 @@
     "glog",
     "gtest",
     "harfbuzz",
-    "leveldb",
+    {
+      "name": "imgui",
+      "features": [
+        "freetype",
+        "glfw-binding",
+        "vulkan-binding"
+      ]
+    },
+    "implot",
+    "libconfig",
+    "libpng",
     "libuv",
-    "nuklear",
-    "opengl",
-    "openssl",
+    "lua",
     "rapidjson",
+    "rocksdb",
     "rxcpp",
-    "stduuid",
+    "stb",
+    {
+      "name": "stduuid",
+      "features": [
+        "system-gen"
+      ]
+    },
     "termcolor",
+    "tinyobjloader",
+    "tracy",
     "tweeny",
     "units",
-    "z4kn4fein-semver",
-    "libogg-test"
+    "yoga",
+    "z4kn4fein-semver"
   ]
 }

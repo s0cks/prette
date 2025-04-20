@@ -1,0 +1,147 @@
+\doxysection{prt\+::Thread\+Local\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classprt_1_1_thread_local}{}\label{classprt_1_1_thread_local}\index{prt::ThreadLocal$<$ T $>$@{prt::ThreadLocal$<$ T $>$}}
+
+
+{\ttfamily \#include $<$thread\+\_\+local.\+h$>$}
+
+
+
+Inheritance diagram for prt\+::Thread\+Local\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=212pt]{classprt_1_1_thread_local__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_thread_local_ac13f13a0991c2d014dabe09545d9f5f7}{Thread\+Local}} ()
+\item 
+virtual \mbox{\hyperlink{classprt_1_1_thread_local_a57c1cd0148a1c6eda32c062445699d0e}{\texorpdfstring{$\sim$}{\string~}\+Thread\+Local}} ()=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1_thread_local_a3a4e353f6eaad3d1297d096e5a0b8199}{Get\+Key}} () const -\/$>$ const \mbox{\hyperlink{namespaceprt_a366a741d866403a24a0c5ea6ebdb9746}{Thread\+Local\+Key}} \&
+\item 
+virtual auto \mbox{\hyperlink{classprt_1_1_thread_local_a6d4bc3d408fd1521bb23ec29eac72cda}{Set}} (T \texorpdfstring{$\ast$}{*}value) const -\/$>$ bool
+\item 
+virtual auto \mbox{\hyperlink{classprt_1_1_thread_local_ac34bbe8c64ee6e1a7f88fd68c4dae63d}{Get}} () const -\/$>$ T \texorpdfstring{$\ast$}{*}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_thread_local_a9b74768b689094f9ed21a2aaadcb2084}{Has}} () const -\/$>$ bool
+\item 
+\mbox{\hyperlink{classprt_1_1_thread_local_a134b5553df39109fb5d1b1f33fde9b0a}{operator T\texorpdfstring{$\ast$}{*}}} ()
+\item 
+auto \mbox{\hyperlink{classprt_1_1_thread_local_abbebc8a4c22363585dea12b12e20e35b}{operator=}} (T \texorpdfstring{$\ast$}{*}value) -\/$>$ \mbox{\hyperlink{classprt_1_1_thread_local}{Thread\+Local}}$<$ T $>$ \&
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_thread_local_ad791b07a6f696b2b683a8d22c55e11aa}{DEFINE\+\_\+\+NON\+\_\+\+COPYABLE\+\_\+\+TYPE}} (\mbox{\hyperlink{classprt_1_1_thread_local}{Thread\+Local}}$<$ T $>$)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceprt_a366a741d866403a24a0c5ea6ebdb9746}{Thread\+Local\+Key}} \mbox{\hyperlink{classprt_1_1_thread_local_a6ee72c39f3ca4ace5100f38bb10c8ec8}{key\+\_\+}} \{\}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_thread_local_a39a73e01fdb9d3459b40750c66c0e930}{operator$<$$<$}} (std\+::ostream \&stream, const \mbox{\hyperlink{classprt_1_1_thread_local}{Thread\+Local}}$<$ T $>$ \&rhs) -\/$>$ std\+::ostream \&
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_thread_local_ac13f13a0991c2d014dabe09545d9f5f7}\index{prt::ThreadLocal$<$ T $>$@{prt::ThreadLocal$<$ T $>$}!ThreadLocal@{ThreadLocal}}
+\index{ThreadLocal@{ThreadLocal}!prt::ThreadLocal$<$ T $>$@{prt::ThreadLocal$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{ThreadLocal()}{ThreadLocal()}}
+{\footnotesize\ttfamily \label{classprt_1_1_thread_local_ac13f13a0991c2d014dabe09545d9f5f7} 
+template$<$typename T $>$ \\
+\mbox{\hyperlink{classprt_1_1_thread_local}{prt\+::\+Thread\+Local}}$<$ T $>$\+::\+Thread\+Local (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_thread_local_a57c1cd0148a1c6eda32c062445699d0e}\index{prt::ThreadLocal$<$ T $>$@{prt::ThreadLocal$<$ T $>$}!````~ThreadLocal@{\texorpdfstring{$\sim$}{\string~}ThreadLocal}}
+\index{````~ThreadLocal@{\texorpdfstring{$\sim$}{\string~}ThreadLocal}!prt::ThreadLocal$<$ T $>$@{prt::ThreadLocal$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ThreadLocal()}{\string~ThreadLocal()}}
+{\footnotesize\ttfamily \label{classprt_1_1_thread_local_a57c1cd0148a1c6eda32c062445699d0e} 
+template$<$typename T $>$ \\
+virtual \mbox{\hyperlink{classprt_1_1_thread_local}{prt\+::\+Thread\+Local}}$<$ T $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classprt_1_1_thread_local}{Thread\+Local}} (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_thread_local_ad791b07a6f696b2b683a8d22c55e11aa}\index{prt::ThreadLocal$<$ T $>$@{prt::ThreadLocal$<$ T $>$}!DEFINE\_NON\_COPYABLE\_TYPE@{DEFINE\_NON\_COPYABLE\_TYPE}}
+\index{DEFINE\_NON\_COPYABLE\_TYPE@{DEFINE\_NON\_COPYABLE\_TYPE}!prt::ThreadLocal$<$ T $>$@{prt::ThreadLocal$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_NON\_COPYABLE\_TYPE()}{DEFINE\_NON\_COPYABLE\_TYPE()}}
+{\footnotesize\ttfamily \label{classprt_1_1_thread_local_ad791b07a6f696b2b683a8d22c55e11aa} 
+template$<$typename T $>$ \\
+\mbox{\hyperlink{classprt_1_1_thread_local}{prt\+::\+Thread\+Local}}$<$ T $>$\+::\+DEFINE\+\_\+\+NON\+\_\+\+COPYABLE\+\_\+\+TYPE (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_thread_local}{Thread\+Local}}$<$ T $>$}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_thread_local_ac34bbe8c64ee6e1a7f88fd68c4dae63d}\index{prt::ThreadLocal$<$ T $>$@{prt::ThreadLocal$<$ T $>$}!Get@{Get}}
+\index{Get@{Get}!prt::ThreadLocal$<$ T $>$@{prt::ThreadLocal$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}}
+{\footnotesize\ttfamily \label{classprt_1_1_thread_local_ac34bbe8c64ee6e1a7f88fd68c4dae63d} 
+template$<$typename T $>$ \\
+virtual auto \mbox{\hyperlink{classprt_1_1_thread_local}{prt\+::\+Thread\+Local}}$<$ T $>$\+::\+Get (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ T\texorpdfstring{$\ast$}{*} \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented in \mbox{\hyperlink{classprt_1_1_lazy_thread_local_acce012ca0688f126335c67c5339a2f62}{prt\+::\+Lazy\+Thread\+Local$<$ T $>$}}.
+
+\Hypertarget{classprt_1_1_thread_local_a3a4e353f6eaad3d1297d096e5a0b8199}\index{prt::ThreadLocal$<$ T $>$@{prt::ThreadLocal$<$ T $>$}!GetKey@{GetKey}}
+\index{GetKey@{GetKey}!prt::ThreadLocal$<$ T $>$@{prt::ThreadLocal$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{GetKey()}{GetKey()}}
+{\footnotesize\ttfamily \label{classprt_1_1_thread_local_a3a4e353f6eaad3d1297d096e5a0b8199} 
+template$<$typename T $>$ \\
+auto \mbox{\hyperlink{classprt_1_1_thread_local}{prt\+::\+Thread\+Local}}$<$ T $>$\+::\+Get\+Key (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const \mbox{\hyperlink{namespaceprt_a366a741d866403a24a0c5ea6ebdb9746}{Thread\+Local\+Key}}\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_thread_local_a9b74768b689094f9ed21a2aaadcb2084}\index{prt::ThreadLocal$<$ T $>$@{prt::ThreadLocal$<$ T $>$}!Has@{Has}}
+\index{Has@{Has}!prt::ThreadLocal$<$ T $>$@{prt::ThreadLocal$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Has()}{Has()}}
+{\footnotesize\ttfamily \label{classprt_1_1_thread_local_a9b74768b689094f9ed21a2aaadcb2084} 
+template$<$typename T $>$ \\
+auto \mbox{\hyperlink{classprt_1_1_thread_local}{prt\+::\+Thread\+Local}}$<$ T $>$\+::\+Has (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_thread_local_a134b5553df39109fb5d1b1f33fde9b0a}\index{prt::ThreadLocal$<$ T $>$@{prt::ThreadLocal$<$ T $>$}!operator T\texorpdfstring{$\ast$}{*}@{operator T\texorpdfstring{$\ast$}{*}}}
+\index{operator T\texorpdfstring{$\ast$}{*}@{operator T\texorpdfstring{$\ast$}{*}}!prt::ThreadLocal$<$ T $>$@{prt::ThreadLocal$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator T\texorpdfstring{$\ast$}{*}()}{operator T*()}}
+{\footnotesize\ttfamily \label{classprt_1_1_thread_local_a134b5553df39109fb5d1b1f33fde9b0a} 
+template$<$typename T $>$ \\
+\mbox{\hyperlink{classprt_1_1_thread_local}{prt\+::\+Thread\+Local}}$<$ T $>$\+::operator T\texorpdfstring{$\ast$}{*} (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_thread_local_abbebc8a4c22363585dea12b12e20e35b}\index{prt::ThreadLocal$<$ T $>$@{prt::ThreadLocal$<$ T $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!prt::ThreadLocal$<$ T $>$@{prt::ThreadLocal$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \label{classprt_1_1_thread_local_abbebc8a4c22363585dea12b12e20e35b} 
+template$<$typename T $>$ \\
+auto \mbox{\hyperlink{classprt_1_1_thread_local}{prt\+::\+Thread\+Local}}$<$ T $>$\+::operator= (\begin{DoxyParamCaption}\item[{T \texorpdfstring{$\ast$}{*}}]{value}{}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{classprt_1_1_thread_local}{Thread\+Local}}$<$T$>$\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_thread_local_a6d4bc3d408fd1521bb23ec29eac72cda}\index{prt::ThreadLocal$<$ T $>$@{prt::ThreadLocal$<$ T $>$}!Set@{Set}}
+\index{Set@{Set}!prt::ThreadLocal$<$ T $>$@{prt::ThreadLocal$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Set()}{Set()}}
+{\footnotesize\ttfamily \label{classprt_1_1_thread_local_a6d4bc3d408fd1521bb23ec29eac72cda} 
+template$<$typename T $>$ \\
+virtual auto \mbox{\hyperlink{classprt_1_1_thread_local}{prt\+::\+Thread\+Local}}$<$ T $>$\+::\+Set (\begin{DoxyParamCaption}\item[{T \texorpdfstring{$\ast$}{*}}]{value}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classprt_1_1_thread_local_a39a73e01fdb9d3459b40750c66c0e930}\index{prt::ThreadLocal$<$ T $>$@{prt::ThreadLocal$<$ T $>$}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!prt::ThreadLocal$<$ T $>$@{prt::ThreadLocal$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily \label{classprt_1_1_thread_local_a39a73e01fdb9d3459b40750c66c0e930} 
+template$<$typename T $>$ \\
+auto operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{stream}{, }\item[{const \mbox{\hyperlink{classprt_1_1_thread_local}{Thread\+Local}}$<$ T $>$ \&}]{rhs}{}\end{DoxyParamCaption}) -\/$>$ std\+::ostream\& \hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_thread_local_a6ee72c39f3ca4ace5100f38bb10c8ec8}\index{prt::ThreadLocal$<$ T $>$@{prt::ThreadLocal$<$ T $>$}!key\_@{key\_}}
+\index{key\_@{key\_}!prt::ThreadLocal$<$ T $>$@{prt::ThreadLocal$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{key\_}{key\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_thread_local_a6ee72c39f3ca4ace5100f38bb10c8ec8} 
+template$<$typename T $>$ \\
+\mbox{\hyperlink{namespaceprt_a366a741d866403a24a0c5ea6ebdb9746}{Thread\+Local\+Key}} \mbox{\hyperlink{classprt_1_1_thread_local}{prt\+::\+Thread\+Local}}$<$ T $>$\+::key\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{thread__local_8h}{thread\+\_\+local.\+h}}\end{DoxyCompactItemize}

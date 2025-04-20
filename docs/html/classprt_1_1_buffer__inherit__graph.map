@@ -1,0 +1,7 @@
+<map id="prt::Buffer" name="prt::Buffer">
+<area shape="rect" id="Node000001" title=" " alt="" coords="89,5,168,31"/>
+<area shape="rect" id="Node000002" href="$classprt_1_1_heap_buffer.html" title=" " alt="" coords="5,79,116,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="109,44,74,80,70,77,105,40"/>
+<area shape="rect" id="Node000003" href="$classprt_1_1_stack_buffer.html" title=" " alt="" coords="140,79,253,105"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="152,40,187,77,183,80,148,44"/>
+</map>

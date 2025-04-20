@@ -1,0 +1,261 @@
+\doxysection{prt\+::Key\+State\+Event Class Reference}
+\hypertarget{classprt_1_1_key_state_event}{}\label{classprt_1_1_key_state_event}\index{prt::KeyStateEvent@{prt::KeyStateEvent}}
+
+
+{\ttfamily \#include $<$keyboard.\+h$>$}
+
+
+
+Inheritance diagram for prt\+::Key\+State\+Event\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=203pt]{classprt_1_1_key_state_event__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for prt\+::Key\+State\+Event\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classprt_1_1_key_state_event__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_key_state_event_a8661fd2be5208f3dbf89d9130b8c64ea}{Key\+State\+Event}} (const \mbox{\hyperlink{classprt_1_1_keyboard}{Keyboard}} \texorpdfstring{$\ast$}{*}keyboard, const int key, const int scancode, const int action, const int mods)
+\item 
+\mbox{\hyperlink{classprt_1_1_key_state_event_a84177de6c280053b84f3d7f90eefa4a4}{\texorpdfstring{$\sim$}{\string~}\+Key\+State\+Event}} () override=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1_key_state_event_aeffddfaa4d881e56cb81016db91832d2}{Get\+State}} () const -\/$>$ const \mbox{\hyperlink{classprt_1_1_key_state}{Key\+State}} \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_key_state_event_ae19970ba35ae232a53a3c244ac58d6e6}{Get\+Code}} () const -\/$>$ int
+\item 
+auto \mbox{\hyperlink{classprt_1_1_key_state_event_ae0f9ef88512ac36f8d4d82d1ecaef230}{Is\+Code}} (const int code) const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_key_state_event_ad142199b0bb0e3745df55eee6ddf0723}{Get\+Mods}} () const -\/$>$ int
+\item 
+auto \mbox{\hyperlink{classprt_1_1_key_state_event_a119fe5eedb5ddf51f1fd68438d7b0fa7}{Get\+Scan\+Code}} () const -\/$>$ int
+\item 
+auto \mbox{\hyperlink{classprt_1_1_key_state_event_a6e84d374d94a6c0cbfae3206a565075f}{Is\+Repeat}} () const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_key_state_event_a62325e802872cbb9083850ab2b3aea36}{Is\+Repeat}} (const int code) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_key_state_event_ae0ceaf097cba9b72e978d83b623b21dd}{Is\+Released}} () const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_key_state_event_aa6a1436d95a9d04f14a1442999f95c6d}{Is\+Released}} (const int code) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_key_state_event_ac89121169f305039e1c0fc57194c257e}{Is\+Pressed}} () const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_key_state_event_a89aaa21101e598adfceb3655ab7d726d}{Is\+Pressed}} (const int code) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_key_state_event_af8811cac37540d44c5bf1d71c407c775}{Get\+Key}} () const -\/$>$ const char \texorpdfstring{$\ast$}{*}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_key_state_event_aea52b53f0e729c3abb8fdab570b434ee}{Is\+State}} (const \mbox{\hyperlink{classprt_1_1_key_state}{Key\+State}} \&rhs) const -\/$>$ bool
+\item 
+void \mbox{\hyperlink{classprt_1_1_key_state_event_a6517e1e674a5a7ddfa70188622d180b5}{To\+Table}} (lua\+\_\+\+State \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{engine_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}}) const override
+\item 
+\mbox{\hyperlink{classprt_1_1_key_state_event_a211036e6066387c3d451ad4e7b180e11}{DECLARE\+\_\+\+EVENT\+\_\+\+TYPE}} (Keyboard\+Event, \mbox{\hyperlink{classprt_1_1_key_state}{Key\+State}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classprt_1_1_keyboard_event_base}{prt\+::\+Keyboard\+Event\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_keyboard_event_base_a9f64734a436a2448258047061248daf3}{\texorpdfstring{$\sim$}{\string~}\+Keyboard\+Event\+Base}} () override=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1_keyboard_event_base_a78bbb2351032e0e8bde12eddbbe63211}{Get\+Keyboard}} () const -\/$>$ const \mbox{\hyperlink{classprt_1_1_keyboard}{Keyboard}} \texorpdfstring{$\ast$}{*}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_key_state_event_adccf0d997481164b154e5fe5814f8615}{Filter\+By}} (const \mbox{\hyperlink{classprt_1_1_key_state}{Key\+State}} \&state) -\/$>$ Keyboard\+Event\+::\+Predicate
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_key_state_event_a21a76ea78c5b8c82bf2252669dd7612e}{Filter\+By\+Pressed}} () -\/$>$ Keyboard\+Event\+::\+Predicate
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_key_state_event_aee94e4b0b0ba3554e1a01f500e4c3f95}{Filter\+By\+Pressed}} (const int code) -\/$>$ std\+::function$<$ bool(Keyboard\+Event \texorpdfstring{$\ast$}{*})$>$
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_key_state_event_ae13ee6887f079b8996b84eccd50921a3}{Filter\+By\+Released}} (const int code) -\/$>$ Keyboard\+Event\+::\+Predicate
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_key_state_event_af9dada283597d8683e499b922c82e117}{Filter\+By\+Released}} () -\/$>$ Keyboard\+Event\+::\+Predicate
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_key_state}{Key\+State}} \mbox{\hyperlink{classprt_1_1_key_state_event_abfd65bd89845add47911b71dbc16e0c2}{state\+\_\+}}
+\item 
+int \mbox{\hyperlink{classprt_1_1_key_state_event_afebe7d6c6c5baca92799045d3f357e37}{mods\+\_\+}}
+\item 
+int \mbox{\hyperlink{classprt_1_1_key_state_event_acb0d9f3bbb18a28e77ba86636b6f11b7}{scancode\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classprt_1_1_keyboard_event_base}{prt\+::\+Keyboard\+Event\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_keyboard_event_base_afb32f98ba75e7fbfd54597d1fc6e4fad}{Keyboard\+Event\+Base}} (const \mbox{\hyperlink{classprt_1_1_keyboard}{Keyboard}} \texorpdfstring{$\ast$}{*}keyboard)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_key_state_event_a8661fd2be5208f3dbf89d9130b8c64ea}\index{prt::KeyStateEvent@{prt::KeyStateEvent}!KeyStateEvent@{KeyStateEvent}}
+\index{KeyStateEvent@{KeyStateEvent}!prt::KeyStateEvent@{prt::KeyStateEvent}}
+\doxysubsubsection{\texorpdfstring{KeyStateEvent()}{KeyStateEvent()}}
+{\footnotesize\ttfamily \label{classprt_1_1_key_state_event_a8661fd2be5208f3dbf89d9130b8c64ea} 
+prt\+::\+Key\+State\+Event\+::\+Key\+State\+Event (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_keyboard}{Keyboard}} \texorpdfstring{$\ast$}{*}}]{keyboard}{, }\item[{const int}]{key}{, }\item[{const int}]{scancode}{, }\item[{const int}]{action}{, }\item[{const int}]{mods}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_key_state_event_a84177de6c280053b84f3d7f90eefa4a4}\index{prt::KeyStateEvent@{prt::KeyStateEvent}!````~KeyStateEvent@{\texorpdfstring{$\sim$}{\string~}KeyStateEvent}}
+\index{````~KeyStateEvent@{\texorpdfstring{$\sim$}{\string~}KeyStateEvent}!prt::KeyStateEvent@{prt::KeyStateEvent}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}KeyStateEvent()}{\string~KeyStateEvent()}}
+{\footnotesize\ttfamily \label{classprt_1_1_key_state_event_a84177de6c280053b84f3d7f90eefa4a4} 
+prt\+::\+Key\+State\+Event\+::\texorpdfstring{$\sim$}{\string~}\+Key\+State\+Event (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_key_state_event_a211036e6066387c3d451ad4e7b180e11}\index{prt::KeyStateEvent@{prt::KeyStateEvent}!DECLARE\_EVENT\_TYPE@{DECLARE\_EVENT\_TYPE}}
+\index{DECLARE\_EVENT\_TYPE@{DECLARE\_EVENT\_TYPE}!prt::KeyStateEvent@{prt::KeyStateEvent}}
+\doxysubsubsection{\texorpdfstring{DECLARE\_EVENT\_TYPE()}{DECLARE\_EVENT\_TYPE()}}
+{\footnotesize\ttfamily \label{classprt_1_1_key_state_event_a211036e6066387c3d451ad4e7b180e11} 
+prt\+::\+Key\+State\+Event\+::\+DECLARE\+\_\+\+EVENT\+\_\+\+TYPE (\begin{DoxyParamCaption}\item[{Keyboard\+Event}]{}{, }\item[{\mbox{\hyperlink{classprt_1_1_key_state}{Key\+State}}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_key_state_event_adccf0d997481164b154e5fe5814f8615}\index{prt::KeyStateEvent@{prt::KeyStateEvent}!FilterBy@{FilterBy}}
+\index{FilterBy@{FilterBy}!prt::KeyStateEvent@{prt::KeyStateEvent}}
+\doxysubsubsection{\texorpdfstring{FilterBy()}{FilterBy()}}
+{\footnotesize\ttfamily \label{classprt_1_1_key_state_event_adccf0d997481164b154e5fe5814f8615} 
+static auto prt\+::\+Key\+State\+Event\+::\+Filter\+By (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_key_state}{Key\+State}} \&}]{state}{}\end{DoxyParamCaption}) -\/$>$ Keyboard\+Event\+::\+Predicate \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_key_state_event_a21a76ea78c5b8c82bf2252669dd7612e}\index{prt::KeyStateEvent@{prt::KeyStateEvent}!FilterByPressed@{FilterByPressed}}
+\index{FilterByPressed@{FilterByPressed}!prt::KeyStateEvent@{prt::KeyStateEvent}}
+\doxysubsubsection{\texorpdfstring{FilterByPressed()}{FilterByPressed()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_key_state_event_a21a76ea78c5b8c82bf2252669dd7612e} 
+static auto prt\+::\+Key\+State\+Event\+::\+Filter\+By\+Pressed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ Keyboard\+Event\+::\+Predicate \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_key_state_event_aee94e4b0b0ba3554e1a01f500e4c3f95}\index{prt::KeyStateEvent@{prt::KeyStateEvent}!FilterByPressed@{FilterByPressed}}
+\index{FilterByPressed@{FilterByPressed}!prt::KeyStateEvent@{prt::KeyStateEvent}}
+\doxysubsubsection{\texorpdfstring{FilterByPressed()}{FilterByPressed()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_key_state_event_aee94e4b0b0ba3554e1a01f500e4c3f95} 
+static auto prt\+::\+Key\+State\+Event\+::\+Filter\+By\+Pressed (\begin{DoxyParamCaption}\item[{const int}]{code}{}\end{DoxyParamCaption}) -\/$>$ std\+::function$<$bool(Keyboard\+Event\texorpdfstring{$\ast$}{*})$>$ \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_key_state_event_af9dada283597d8683e499b922c82e117}\index{prt::KeyStateEvent@{prt::KeyStateEvent}!FilterByReleased@{FilterByReleased}}
+\index{FilterByReleased@{FilterByReleased}!prt::KeyStateEvent@{prt::KeyStateEvent}}
+\doxysubsubsection{\texorpdfstring{FilterByReleased()}{FilterByReleased()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_key_state_event_af9dada283597d8683e499b922c82e117} 
+static auto prt\+::\+Key\+State\+Event\+::\+Filter\+By\+Released (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ Keyboard\+Event\+::\+Predicate \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_key_state_event_ae13ee6887f079b8996b84eccd50921a3}\index{prt::KeyStateEvent@{prt::KeyStateEvent}!FilterByReleased@{FilterByReleased}}
+\index{FilterByReleased@{FilterByReleased}!prt::KeyStateEvent@{prt::KeyStateEvent}}
+\doxysubsubsection{\texorpdfstring{FilterByReleased()}{FilterByReleased()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_key_state_event_ae13ee6887f079b8996b84eccd50921a3} 
+static auto prt\+::\+Key\+State\+Event\+::\+Filter\+By\+Released (\begin{DoxyParamCaption}\item[{const int}]{code}{}\end{DoxyParamCaption}) -\/$>$ Keyboard\+Event\+::\+Predicate \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_key_state_event_ae19970ba35ae232a53a3c244ac58d6e6}\index{prt::KeyStateEvent@{prt::KeyStateEvent}!GetCode@{GetCode}}
+\index{GetCode@{GetCode}!prt::KeyStateEvent@{prt::KeyStateEvent}}
+\doxysubsubsection{\texorpdfstring{GetCode()}{GetCode()}}
+{\footnotesize\ttfamily \label{classprt_1_1_key_state_event_ae19970ba35ae232a53a3c244ac58d6e6} 
+auto prt\+::\+Key\+State\+Event\+::\+Get\+Code (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ int \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_key_state_event_af8811cac37540d44c5bf1d71c407c775}\index{prt::KeyStateEvent@{prt::KeyStateEvent}!GetKey@{GetKey}}
+\index{GetKey@{GetKey}!prt::KeyStateEvent@{prt::KeyStateEvent}}
+\doxysubsubsection{\texorpdfstring{GetKey()}{GetKey()}}
+{\footnotesize\ttfamily \label{classprt_1_1_key_state_event_af8811cac37540d44c5bf1d71c407c775} 
+auto prt\+::\+Key\+State\+Event\+::\+Get\+Key (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const char\texorpdfstring{$\ast$}{*}}
+
+\Hypertarget{classprt_1_1_key_state_event_ad142199b0bb0e3745df55eee6ddf0723}\index{prt::KeyStateEvent@{prt::KeyStateEvent}!GetMods@{GetMods}}
+\index{GetMods@{GetMods}!prt::KeyStateEvent@{prt::KeyStateEvent}}
+\doxysubsubsection{\texorpdfstring{GetMods()}{GetMods()}}
+{\footnotesize\ttfamily \label{classprt_1_1_key_state_event_ad142199b0bb0e3745df55eee6ddf0723} 
+auto prt\+::\+Key\+State\+Event\+::\+Get\+Mods (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ int \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_key_state_event_a119fe5eedb5ddf51f1fd68438d7b0fa7}\index{prt::KeyStateEvent@{prt::KeyStateEvent}!GetScanCode@{GetScanCode}}
+\index{GetScanCode@{GetScanCode}!prt::KeyStateEvent@{prt::KeyStateEvent}}
+\doxysubsubsection{\texorpdfstring{GetScanCode()}{GetScanCode()}}
+{\footnotesize\ttfamily \label{classprt_1_1_key_state_event_a119fe5eedb5ddf51f1fd68438d7b0fa7} 
+auto prt\+::\+Key\+State\+Event\+::\+Get\+Scan\+Code (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ int \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_key_state_event_aeffddfaa4d881e56cb81016db91832d2}\index{prt::KeyStateEvent@{prt::KeyStateEvent}!GetState@{GetState}}
+\index{GetState@{GetState}!prt::KeyStateEvent@{prt::KeyStateEvent}}
+\doxysubsubsection{\texorpdfstring{GetState()}{GetState()}}
+{\footnotesize\ttfamily \label{classprt_1_1_key_state_event_aeffddfaa4d881e56cb81016db91832d2} 
+auto prt\+::\+Key\+State\+Event\+::\+Get\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const \mbox{\hyperlink{classprt_1_1_key_state}{Key\+State}}\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_key_state_event_ae0f9ef88512ac36f8d4d82d1ecaef230}\index{prt::KeyStateEvent@{prt::KeyStateEvent}!IsCode@{IsCode}}
+\index{IsCode@{IsCode}!prt::KeyStateEvent@{prt::KeyStateEvent}}
+\doxysubsubsection{\texorpdfstring{IsCode()}{IsCode()}}
+{\footnotesize\ttfamily \label{classprt_1_1_key_state_event_ae0f9ef88512ac36f8d4d82d1ecaef230} 
+auto prt\+::\+Key\+State\+Event\+::\+Is\+Code (\begin{DoxyParamCaption}\item[{const int}]{code}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_key_state_event_ac89121169f305039e1c0fc57194c257e}\index{prt::KeyStateEvent@{prt::KeyStateEvent}!IsPressed@{IsPressed}}
+\index{IsPressed@{IsPressed}!prt::KeyStateEvent@{prt::KeyStateEvent}}
+\doxysubsubsection{\texorpdfstring{IsPressed()}{IsPressed()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_key_state_event_ac89121169f305039e1c0fc57194c257e} 
+auto prt\+::\+Key\+State\+Event\+::\+Is\+Pressed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_key_state_event_a89aaa21101e598adfceb3655ab7d726d}\index{prt::KeyStateEvent@{prt::KeyStateEvent}!IsPressed@{IsPressed}}
+\index{IsPressed@{IsPressed}!prt::KeyStateEvent@{prt::KeyStateEvent}}
+\doxysubsubsection{\texorpdfstring{IsPressed()}{IsPressed()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_key_state_event_a89aaa21101e598adfceb3655ab7d726d} 
+auto prt\+::\+Key\+State\+Event\+::\+Is\+Pressed (\begin{DoxyParamCaption}\item[{const int}]{code}{}\end{DoxyParamCaption}) -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_key_state_event_ae0ceaf097cba9b72e978d83b623b21dd}\index{prt::KeyStateEvent@{prt::KeyStateEvent}!IsReleased@{IsReleased}}
+\index{IsReleased@{IsReleased}!prt::KeyStateEvent@{prt::KeyStateEvent}}
+\doxysubsubsection{\texorpdfstring{IsReleased()}{IsReleased()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_key_state_event_ae0ceaf097cba9b72e978d83b623b21dd} 
+auto prt\+::\+Key\+State\+Event\+::\+Is\+Released (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_key_state_event_aa6a1436d95a9d04f14a1442999f95c6d}\index{prt::KeyStateEvent@{prt::KeyStateEvent}!IsReleased@{IsReleased}}
+\index{IsReleased@{IsReleased}!prt::KeyStateEvent@{prt::KeyStateEvent}}
+\doxysubsubsection{\texorpdfstring{IsReleased()}{IsReleased()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_key_state_event_aa6a1436d95a9d04f14a1442999f95c6d} 
+auto prt\+::\+Key\+State\+Event\+::\+Is\+Released (\begin{DoxyParamCaption}\item[{const int}]{code}{}\end{DoxyParamCaption}) -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_key_state_event_a6e84d374d94a6c0cbfae3206a565075f}\index{prt::KeyStateEvent@{prt::KeyStateEvent}!IsRepeat@{IsRepeat}}
+\index{IsRepeat@{IsRepeat}!prt::KeyStateEvent@{prt::KeyStateEvent}}
+\doxysubsubsection{\texorpdfstring{IsRepeat()}{IsRepeat()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_key_state_event_a6e84d374d94a6c0cbfae3206a565075f} 
+auto prt\+::\+Key\+State\+Event\+::\+Is\+Repeat (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_key_state_event_a62325e802872cbb9083850ab2b3aea36}\index{prt::KeyStateEvent@{prt::KeyStateEvent}!IsRepeat@{IsRepeat}}
+\index{IsRepeat@{IsRepeat}!prt::KeyStateEvent@{prt::KeyStateEvent}}
+\doxysubsubsection{\texorpdfstring{IsRepeat()}{IsRepeat()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_key_state_event_a62325e802872cbb9083850ab2b3aea36} 
+auto prt\+::\+Key\+State\+Event\+::\+Is\+Repeat (\begin{DoxyParamCaption}\item[{const int}]{code}{}\end{DoxyParamCaption}) -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_key_state_event_aea52b53f0e729c3abb8fdab570b434ee}\index{prt::KeyStateEvent@{prt::KeyStateEvent}!IsState@{IsState}}
+\index{IsState@{IsState}!prt::KeyStateEvent@{prt::KeyStateEvent}}
+\doxysubsubsection{\texorpdfstring{IsState()}{IsState()}}
+{\footnotesize\ttfamily \label{classprt_1_1_key_state_event_aea52b53f0e729c3abb8fdab570b434ee} 
+auto prt\+::\+Key\+State\+Event\+::\+Is\+State (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_key_state}{Key\+State}} \&}]{rhs}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_key_state_event_a6517e1e674a5a7ddfa70188622d180b5}\index{prt::KeyStateEvent@{prt::KeyStateEvent}!ToTable@{ToTable}}
+\index{ToTable@{ToTable}!prt::KeyStateEvent@{prt::KeyStateEvent}}
+\doxysubsubsection{\texorpdfstring{ToTable()}{ToTable()}}
+{\footnotesize\ttfamily \label{classprt_1_1_key_state_event_a6517e1e674a5a7ddfa70188622d180b5} 
+void prt\+::\+Key\+State\+Event\+::\+To\+Table (\begin{DoxyParamCaption}\item[{lua\+\_\+\+State \texorpdfstring{$\ast$}{*}}]{L}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_key_state_event_afebe7d6c6c5baca92799045d3f357e37}\index{prt::KeyStateEvent@{prt::KeyStateEvent}!mods\_@{mods\_}}
+\index{mods\_@{mods\_}!prt::KeyStateEvent@{prt::KeyStateEvent}}
+\doxysubsubsection{\texorpdfstring{mods\_}{mods\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_key_state_event_afebe7d6c6c5baca92799045d3f357e37} 
+int prt\+::\+Key\+State\+Event\+::mods\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_key_state_event_acb0d9f3bbb18a28e77ba86636b6f11b7}\index{prt::KeyStateEvent@{prt::KeyStateEvent}!scancode\_@{scancode\_}}
+\index{scancode\_@{scancode\_}!prt::KeyStateEvent@{prt::KeyStateEvent}}
+\doxysubsubsection{\texorpdfstring{scancode\_}{scancode\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_key_state_event_acb0d9f3bbb18a28e77ba86636b6f11b7} 
+int prt\+::\+Key\+State\+Event\+::scancode\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_key_state_event_abfd65bd89845add47911b71dbc16e0c2}\index{prt::KeyStateEvent@{prt::KeyStateEvent}!state\_@{state\_}}
+\index{state\_@{state\_}!prt::KeyStateEvent@{prt::KeyStateEvent}}
+\doxysubsubsection{\texorpdfstring{state\_}{state\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_key_state_event_abfd65bd89845add47911b71dbc16e0c2} 
+\mbox{\hyperlink{classprt_1_1_key_state}{Key\+State}} prt\+::\+Key\+State\+Event\+::state\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{keyboard_8h}{keyboard.\+h}}\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{keyboard_8cc}{keyboard.\+cc}}\end{DoxyCompactItemize}

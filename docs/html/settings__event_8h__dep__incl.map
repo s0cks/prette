@@ -1,0 +1,16 @@
+<map id="/Users/tazz/Projects/prette/Sources/prette/settings_event.h" name="/Users/tazz/Projects/prette/Sources/prette/settings_event.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="183,5,330,61"/>
+<area shape="rect" id="Node000002" href="$settings_8cc.html" title=" " alt="" coords="5,213,153,268"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="212,73,173,111,131,164,97,214,93,211,126,161,169,107,209,69"/>
+<area shape="rect" id="Node000003" href="$settings_8h.html" title=" " alt="" coords="183,109,330,165"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="259,77,259,108,254,108,254,77"/>
+<area shape="rect" id="Node000007" href="$settings__event_8cc.html" title=" " alt="" coords="355,109,502,165"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="317,67,383,106,381,111,314,72"/>
+<area shape="poly" id="edge6_Node000003_Node000002" title=" " alt="" coords="197,175,128,214,125,210,195,170"/>
+<area shape="rect" id="Node000004" href="$main_8cc.html" title=" " alt="" coords="176,220,336,261"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="259,180,259,220,254,220,254,180"/>
+<area shape="rect" id="Node000005" href="$camera_8cc.html" title=" " alt="" coords="360,213,507,268"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="318,170,387,210,385,214,315,175"/>
+<area shape="rect" id="Node000006" href="$lua_8cc.html" title=" " alt="" coords="532,213,679,268"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="346,163,520,210,532,214,531,219,518,215,345,168"/>
+</map>

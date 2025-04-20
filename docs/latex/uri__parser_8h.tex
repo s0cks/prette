@@ -1,0 +1,66 @@
+\doxysection{/\+Users/tazz/\+Projects/prette/\+Sources/prette/uri\+\_\+parser.h File Reference}
+\hypertarget{uri__parser_8h}{}\label{uri__parser_8h}\index{/Users/tazz/Projects/prette/Sources/prette/uri\_parser.h@{/Users/tazz/Projects/prette/Sources/prette/uri\_parser.h}}
+{\ttfamily \#include $<$cstdint$>$}\newline
+{\ttfamily \#include $<$ostream$>$}\newline
+{\ttfamily \#include $<$utility$>$}\newline
+{\ttfamily \#include "{}prette/uri.\+h"{}}\newline
+{\ttfamily \#include "{}prette/parser.\+h"{}}\newline
+{\ttfamily \#include "{}prette/bitfield.\+h"{}}\newline
+Include dependency graph for uri\+\_\+parser.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{uri__parser_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=320pt]{uri__parser_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result}{prt\+::uri\+::\+Parse\+Result}}
+\item 
+class \mbox{\hyperlink{classprt_1_1uri_1_1_parser}{prt\+::uri\+::\+Parser}}
+\item 
+struct \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config}{prt\+::uri\+::\+Parser\+::\+Config}}
+\item 
+class \mbox{\hyperlink{classprt_1_1uri_1_1_parser_1_1_config_1_1_flags_field}{prt\+::uri\+::\+Parser\+::\+Config\+::\+Flags\+Field$<$ Offset $>$}}
+\item 
+class \mbox{\hyperlink{classprt_1_1uri_1_1_parser_1_1_config_1_1_strict_field}{prt\+::uri\+::\+Parser\+::\+Config\+::\+Strict\+Field}}
+\item 
+class \mbox{\hyperlink{classprt_1_1uri_1_1_parser_1_1_config_1_1_parse_queries_field}{prt\+::uri\+::\+Parser\+::\+Config\+::\+Parse\+Queries\+Field}}
+\item 
+class \mbox{\hyperlink{classprt_1_1uri_1_1_parser_1_1_config_1_1_parse_fragments_field}{prt\+::uri\+::\+Parser\+::\+Config\+::\+Parse\+Fragments\+Field}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceprt}{prt}}
+\item 
+namespace \mbox{\hyperlink{namespaceprt_1_1uri}{prt\+::uri}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{uri__parser_8h_a7e75387c90ad0dfbcb5abe689aeac7ed}{FOR\+\_\+\+EACH\+\_\+\+URI\+\_\+\+PARSER\+\_\+\+ERROR}}(V)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{uri__parser_8h_a7e75387c90ad0dfbcb5abe689aeac7ed}\index{uri\_parser.h@{uri\_parser.h}!FOR\_EACH\_URI\_PARSER\_ERROR@{FOR\_EACH\_URI\_PARSER\_ERROR}}
+\index{FOR\_EACH\_URI\_PARSER\_ERROR@{FOR\_EACH\_URI\_PARSER\_ERROR}!uri\_parser.h@{uri\_parser.h}}
+\doxysubsubsection{\texorpdfstring{FOR\_EACH\_URI\_PARSER\_ERROR}{FOR\_EACH\_URI\_PARSER\_ERROR}}
+{\footnotesize\ttfamily \label{uri__parser_8h_a7e75387c90ad0dfbcb5abe689aeac7ed} 
+\#define FOR\+\_\+\+EACH\+\_\+\+URI\+\_\+\+PARSER\+\_\+\+ERROR(\begin{DoxyParamCaption}\item[{}]{V}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ V(UnexpectedToken)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(UnexpectedEndOfStream)}
+
+\end{DoxyCode}

@@ -1,0 +1,256 @@
+\doxysection{uri\+\_\+parser.\+h}
+\hypertarget{uri__parser_8h_source}{}\label{uri__parser_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/uri\_parser.h@{/Users/tazz/Projects/prette/Sources/prette/uri\_parser.h}}
+\mbox{\hyperlink{uri__parser_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_URI\_PARSER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_URI\_PARSER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <ostream>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <utility>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{uri_8h}{prette/uri.h}}"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{parser_8h}{prette/parser.h}}"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{bitfield_8h}{prette/bitfield.h}}"{}}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt_1_1uri}{prt::uri}}\ \{}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ FOR\_EACH\_URI\_PARSER\_ERROR(V)\ \ \(\backslash\)}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\ \ V(UnexpectedToken)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\ \ V(UnexpectedEndOfStream)}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1uri_1_1_parse_result}{ParseResult}}\ \{}
+\DoxyCodeLine{00018\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result_a98497b5a51b708ff8479938085a52e11}{success\_}}\{\};}
+\DoxyCodeLine{00020\ \ \ \ \ std::string\ \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result_afdbe5369e8824037e792e673e559e750}{message\_}}\{\};}
+\DoxyCodeLine{00021\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result_a2ea8af10526890e42ce645dbd96b03da}{ParseResult}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result_a00eed913ea8a932119f47faebb3b5f2c}{ParseResult}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ success,\ \textcolor{keyword}{const}\ std::string\&\ message):}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result_a98497b5a51b708ff8479938085a52e11}{success\_}}(success),}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result_afdbe5369e8824037e792e673e559e750}{message\_}}(message)\ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \}}
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result_a8948773df0683ba6982ec3d6ebcd14b2}{ParseResult}}(\mbox{\hyperlink{classprt_1_1uri_1_1_parse_result}{ParseResult}}\&\&\ rhs)\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result_aa68f680114a3863b59640da141db4033}{ParseResult}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result}{ParseResult}}\&\ rhs)\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result_aba02b6b6aa26e1e37949f45a6adc1442}{\string~ParseResult}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result_ad1abe20e804fb7c07ecb2fd58cb614ce}{IsSuccess}}()\ const\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result_a98497b5a51b708ff8479938085a52e11}{success\_}};}
+\DoxyCodeLine{00033\ \ \ \ \ \}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result_a592d04b3c4afac8322dcb7394542b8cc}{GetMessage}}()\ const\ -\/>\ const\ \mbox{\hyperlink{namespacestd}{std}}::\textcolor{keywordtype}{string}\&\ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result_afdbe5369e8824037e792e673e559e750}{message\_}};}
+\DoxyCodeLine{00037\ \ \ \ \ \}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keyword}{operator}\ bool()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result_ad1abe20e804fb7c07ecb2fd58cb614ce}{IsSuccess}}();}
+\DoxyCodeLine{00041\ \ \ \ \ \}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result_ac1b6ae654036b9c398dbadbc6b97943f}{operator=}}(\mbox{\hyperlink{classprt_1_1uri_1_1_parse_result}{ParseResult}}\&\&\ rhs)\ -\/>\ \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result}{ParseResult}}\&\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result_a6e547177ba5aa00ee27a0bb951c1b507}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result}{ParseResult}}\&\ rhs)\ -\/>\ \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result}{ParseResult}}\&\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result_a420e6f739a161da87a98c0eeeb4027b5}{operator<<}}(std::ostream\&\ stream,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result}{ParseResult}}\&\ rhs)\ -\/>\ std::ostream\&\ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{}uri::ParseResult("{}};}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{}success="{}}\ <<\ (rhs.IsSuccess()\ ?\ \textcolor{charliteral}{'y'}\ :\ \textcolor{charliteral}{'n'});}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(!rhs)}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{},\ message="{}}\ <<\ rhs.GetMessage();}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{})"{}};}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ stream;}
+\DoxyCodeLine{00053\ \ \ \ \ \}}
+\DoxyCodeLine{00054\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00056\ \ \ \ \ \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result_ac0ded13342a648682946682860b31670}{Success}}(\textcolor{keyword}{const}\ std::string\&\ message\ =\ \textcolor{stringliteral}{"{}Success."{}})\ -\/>\ \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result}{ParseResult}}\ \{}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\textcolor{keyword}{true},\ message\};}
+\DoxyCodeLine{00058\ \ \ \ \ \}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00061\ \ \ \ \ \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result_a9d84a330ef9efbe947b369afb2ac6356}{Failure}}(\textcolor{keyword}{const}\ std::string\&\ message)\ -\/>\ \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result}{ParseResult}}\ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordflow}{return}\ \{\textcolor{keyword}{false},\ message\};}
+\DoxyCodeLine{00063\ \ \ \ \ \}}
+\DoxyCodeLine{00064\ \ \ \};}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ uint64\_t\ kDefaultParserBufferSize\ =\ 4096;}
+\DoxyCodeLine{00067\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ uint64\_t\ kDefaultTokenBufferSize\ =\ 1024;}
+\DoxyCodeLine{00068\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1uri_1_1_parser}{Parser}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1_parser_template}{ParserTemplate}}<kDefaultParserBufferSize,\ kDefaultTokenBufferSize>\ \{}
+\DoxyCodeLine{00069\ \ \ \ \ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a312e0843e0cad5956032c65253b9f693}{DEFINE\_NON\_COPYABLE\_TYPE}}(\mbox{\hyperlink{classprt_1_1uri_1_1_parser}{Parser}});}
+\DoxyCodeLine{00070\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config}{Config}}\ \{}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a49f2d46e250bd18ccb5e2481c51e6599}{Flags}}\ =\ uint8\_t;}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a49f2d46e250bd18ccb5e2481c51e6599}{Flags}}\ \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a34b59ff36e87bec02142e9833f697b65}{kNoFlags}}\ =\ 0x0;}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_ac90f1b9b93eb11402ce88538669308a8}{FlagsLayout}}\ \{}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_ac90f1b9b93eb11402ce88538669308a8a44996c7bbf12180dac98692b0b80ff8b}{kStrictOffset}}\ =\ 0,}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_ac90f1b9b93eb11402ce88538669308a8aec68365c64f81279af68c5d38fd4c9d0}{kParseQueriesOffset}}\ =\ \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_ac90f1b9b93eb11402ce88538669308a8a44996c7bbf12180dac98692b0b80ff8b}{kStrictOffset}}\ +\ 1,}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_ac90f1b9b93eb11402ce88538669308a8a4ac531e73b73773e4bad8fb420fe3288}{kParseFragmentsOffset}}\ =\ \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_ac90f1b9b93eb11402ce88538669308a8aec68365c64f81279af68c5d38fd4c9d0}{kParseQueriesOffset}}\ +\ 1,}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \textcolor{keyword}{template}<const\ u\textcolor{keywordtype}{int}64\_t\ Offset>}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1uri_1_1_parser_1_1_config_1_1_flags_field}{FlagsField}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1_bit_field}{BitField}}<Flags,\ bool,\ Offset,\ 1>\ \{\};}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1uri_1_1_parser_1_1_config_1_1_strict_field}{StrictField}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_1_1_config_1_1_flags_field}{FlagsField}}<kStrictOffset>\{\};}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1uri_1_1_parser_1_1_config_1_1_parse_queries_field}{ParseQueriesField}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_1_1_config_1_1_flags_field}{FlagsField}}<kParseQueriesOffset>\{\};}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1uri_1_1_parser_1_1_config_1_1_parse_fragments_field}{ParseFragmentsField}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_1_1_config_1_1_flags_field}{FlagsField}}<kParseFragmentsOffset>\{\};}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \mbox{\hyperlink{namespaceprt_1_1uri_a678076225dd533b5e37a65e04ff7ecf2}{Scheme}}\ \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a426ac58f10e8ddcf9aa7bc46056dc9db}{default\_scheme}};}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a49f2d46e250bd18ccb5e2481c51e6599}{Flags}}\ \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a96634705271d6a3155ce927681455f3d}{flags}};}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ bool\ (*\mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_ab47c51f94669e2cb5429dbb46b8945a8}{OnParseScheme}})(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser}{Parser}}*\ parser,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ scheme,\ \textcolor{keyword}{const}\ uint64\_t\ length);}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ bool\ (*\mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_aae7ff5e3b2d5b3d37446e48b3d9d2233}{OnParsePath}})(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser}{Parser}}*\ parser,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ path,\ \textcolor{keyword}{const}\ uint64\_t\ length);}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ bool\ (*\mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a42216da785a157744e1c33b349c4abb1}{OnParseQuery0}})(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser}{Parser}}*\ parser,\ \textcolor{keyword}{const}\ uint64\_t\ idx,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ key,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ key\_length);}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ bool\ (*\mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a0ebcd7b4afde77d3649ea10c8f0902e6}{OnParseQuery1}})(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser}{Parser}}*\ parser,\ \textcolor{keyword}{const}\ uint64\_t\ idx,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ key,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ key\_len,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ value,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ value\_len);}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ bool\ (*\mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a9f3cae545d68d10b92afd3cbf1e398b9}{OnParseFragment}})(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser}{Parser}}*\ parser,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ fragment,\ \textcolor{keyword}{const}\ uint64\_t\ length);}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ bool\ (*\mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a41b22b9c1535c87d7c8dceabbe66931b}{OnParseError}})(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser}{Parser}}*\ parser);}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a8359aba785eb8a43af6e07149bca3f37}{IsStrict}}()\ const\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_bit_field_a8e529500723215d2c9cca9349173adb2}{StrictField::Decode}}(\mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a96634705271d6a3155ce927681455f3d}{flags}});}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a4a506a7adf86d44b8007a8fa2f0f7dc7}{ShouldParseQueries}}()\ const\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_bit_field_a8e529500723215d2c9cca9349173adb2}{ParseQueriesField::Decode}}(\mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a96634705271d6a3155ce927681455f3d}{flags}});}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a1af11a410599b1f36d3ab5b53d4fe271}{ShouldParseFragments}}()\ const\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_bit_field_a8e529500723215d2c9cca9349173adb2}{ParseFragmentsField::Decode}}(\mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a96634705271d6a3155ce927681455f3d}{flags}});}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a0eef3061d299fb2848f02991997f2f0d}{HasDefaultScheme}}()\ const\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ !\mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a426ac58f10e8ddcf9aa7bc46056dc9db}{default\_scheme}}.empty();}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00113\ \ \ \ \ \};}
+\DoxyCodeLine{00114\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00116\ \ \ \ \ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a89ffd507ee376c2811e0e5fe3686a6ab}{NoFlags}}()\ -\/>\ \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a49f2d46e250bd18ccb5e2481c51e6599}{Config::Flags}}\ \{}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a34b59ff36e87bec02142e9833f697b65}{Config::kNoFlags}};}
+\DoxyCodeLine{00118\ \ \ \ \ \}}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00121\ \ \ \ \ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_ac2019d22ab92ccbde53076be2cb6f52b}{Strict}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ value\ =\ \textcolor{keyword}{true})\ -\/>\ \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a49f2d46e250bd18ccb5e2481c51e6599}{Config::Flags}}\ \{}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a89ffd507ee376c2811e0e5fe3686a6ab}{NoFlags}}()\ |\ \mbox{\hyperlink{classprt_1_1_bit_field_adace18b6edf5a92ce2fb2275b6f10ac2}{Config::StrictField::Encode}}(value);}
+\DoxyCodeLine{00123\ \ \ \ \ \}}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00126\ \ \ \ \ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_aab4267c5bb398506a50d9ee59d405625}{ParseFragments}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ value\ =\ \textcolor{keyword}{true})\ -\/>\ \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a49f2d46e250bd18ccb5e2481c51e6599}{Config::Flags}}\ \{}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a89ffd507ee376c2811e0e5fe3686a6ab}{NoFlags}}()\ |\ \mbox{\hyperlink{classprt_1_1_bit_field_adace18b6edf5a92ce2fb2275b6f10ac2}{Config::ParseFragmentsField::Encode}}(value);}
+\DoxyCodeLine{00128\ \ \ \ \ \}}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00131\ \ \ \ \ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a79b059578997c92170dac469c9b27bb8}{ParseQueries}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ value\ =\ \textcolor{keyword}{true})\ -\/>\ \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a49f2d46e250bd18ccb5e2481c51e6599}{Config::Flags}}\ \{}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a89ffd507ee376c2811e0e5fe3686a6ab}{NoFlags}}()\ |\ \mbox{\hyperlink{classprt_1_1_bit_field_adace18b6edf5a92ce2fb2275b6f10ac2}{Config::ParseQueriesField::Encode}}(value);}
+\DoxyCodeLine{00133\ \ \ \ \ \}}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00136\ \ \ \ \ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a193bee0522c0b1a405edb627a0c63acc}{DefaultFlags}}()\ -\/>\ \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a49f2d46e250bd18ccb5e2481c51e6599}{Config::Flags}}\ \{}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_ac2019d22ab92ccbde53076be2cb6f52b}{Strict}}(\textcolor{keyword}{true})}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ |\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_aab4267c5bb398506a50d9ee59d405625}{ParseFragments}}(\textcolor{keyword}{false})}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ |\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a79b059578997c92170dac469c9b27bb8}{ParseQueries}}(\textcolor{keyword}{false});}
+\DoxyCodeLine{00140\ \ \ \ \ \}}
+\DoxyCodeLine{00141\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00142\ \ \ \ \ \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config}{Config}}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a6a6582960d98679ae2e6b6bb097e4df6}{config\_}};}
+\DoxyCodeLine{00143\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a7bc7173c806f104046c72bcdf5fad48d}{num\_query\_params\_}};}
+\DoxyCodeLine{00144\ \ \ \ \ std::array<char,\ kDefaultTokenBufferSize>\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a9b582a27f58a1d2e9d58cfc8598b8c23}{key\_}};}
+\DoxyCodeLine{00145\ \ \ \ \ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a8d9aae82a1be6e89eb00a1a197069903}{key\_length\_}};}
+\DoxyCodeLine{00146\ \ \ \ \ std::array<char,\ kDefaultTokenBufferSize>\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a2840f1260298522f97dc659947f7581c}{value\_}};}
+\DoxyCodeLine{00147\ \ \ \ \ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a8ddb161187aac5db1ac6c13ca1582c2c}{value\_length\_}};}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00149\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a9dc1e43166741e620dd5dc4155144e91}{ParseScheme}}()\ -\/>\ bool;}
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a59b958eedf1d93858a16fd2a2c8d91f0}{ParsePath}}()\ -\/>\ bool;}
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a9060addc999e3bae33549d782b15d2bc}{ParseQueryParameterKey}}()\ -\/>\ bool;}
+\DoxyCodeLine{00152\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a52d5156bdeee0c4e0ee307443789bd4b}{ParseQueryParameterValue}}()\ -\/>\ bool;}
+\DoxyCodeLine{00153\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a41dd7c468b8f86c82f784ff61ee3c0ed}{ParseQueryParameter}}()\ -\/>\ bool;}
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a422520c2af7df02a75970a85ea58f3b8}{ParseQueryParameterList}}()\ -\/>\ bool;}
+\DoxyCodeLine{00155\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a2fe3eb2594e542633d096ef4afaa5304}{ParseFragment}}()\ -\/>\ bool;}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00157\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00158\ \ \ \ \ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a14d3681cb3d558facba2b40ee953cd90}{IsQueryDelimiter}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ c)\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \textcolor{keywordflow}{switch}(c)\ \{}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'\&'}:}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{';'}:}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00166\ \ \ \ \ \}}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00168\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00169\ \ \ \ \ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_ae64633f7a484f8e44551e46aca580718}{IsValidQueryKeyChar}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ c)\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \textcolor{keywordflow}{switch}(c)\ \{}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'\#'}:}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'='}:}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'\(\backslash\)0'}:}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ EOF:}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00179\ \ \ \ \ \}}
+\DoxyCodeLine{00180\ }
+\DoxyCodeLine{00181\ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Func,\ \textcolor{keyword}{typename}...\ Args>}
+\DoxyCodeLine{00182\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00183\ \ \ \ \ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_ae748e2f505acd9f1e0dc03f595d6f2f3}{CallIfExists}}(Func*\ func,\ Args...\ args)\ \textcolor{keyword}{const}\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ func\ ?\ func(\textcolor{keyword}{this},\ args...)\ :\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00185\ \ \ \ \ \}}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00187\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00188\ \ \ \ \ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a659e4e6f6310fc829ea0d3c7c1a2f300}{OnParseScheme}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ scheme,\ \textcolor{keyword}{const}\ uint64\_t\ length)\ \textcolor{keyword}{const}\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_ae748e2f505acd9f1e0dc03f595d6f2f3}{CallIfExists}}(\mbox{\hyperlink{classprt_1_1uri_1_1_parser_a6a6582960d98679ae2e6b6bb097e4df6}{config\_}}.\mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_ab47c51f94669e2cb5429dbb46b8945a8}{OnParseScheme}},\ scheme,\ length);}
+\DoxyCodeLine{00190\ \ \ \ \ \}}
+\DoxyCodeLine{00191\ }
+\DoxyCodeLine{00192\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00193\ \ \ \ \ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_ab8f8cdc4a6a42686b51d4fd2262c90ad}{OnParsePath}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ path,\ \textcolor{keyword}{const}\ uint64\_t\ length)\ \textcolor{keyword}{const}\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_ae748e2f505acd9f1e0dc03f595d6f2f3}{CallIfExists}}(\mbox{\hyperlink{classprt_1_1uri_1_1_parser_a6a6582960d98679ae2e6b6bb097e4df6}{config\_}}.\mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_aae7ff5e3b2d5b3d37446e48b3d9d2233}{OnParsePath}},\ path,\ length);}
+\DoxyCodeLine{00195\ \ \ \ \ \}}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00197\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00198\ \ \ \ \ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_aa63d90f02db03070599404ffc6683b0a}{OnParseQuery0}}(\textcolor{keyword}{const}\ uint64\_t\ idx,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ key,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ key\_length)\ \textcolor{keyword}{const}\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_ae748e2f505acd9f1e0dc03f595d6f2f3}{CallIfExists}}(\mbox{\hyperlink{classprt_1_1uri_1_1_parser_a6a6582960d98679ae2e6b6bb097e4df6}{config\_}}.\mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a42216da785a157744e1c33b349c4abb1}{OnParseQuery0}},\ idx,\ key,\ key\_length);}
+\DoxyCodeLine{00200\ \ \ \ \ \}}
+\DoxyCodeLine{00201\ }
+\DoxyCodeLine{00202\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00203\ \ \ \ \ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_af48e5d6ff108395a7854f3b83399f4b9}{OnParseQuery1}}(\textcolor{keyword}{const}\ uint64\_t\ idx,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ key,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ key\_len,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ value,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ value\_len)\ \textcolor{keyword}{const}\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_ae748e2f505acd9f1e0dc03f595d6f2f3}{CallIfExists}}(\mbox{\hyperlink{classprt_1_1uri_1_1_parser_a6a6582960d98679ae2e6b6bb097e4df6}{config\_}}.\mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a0ebcd7b4afde77d3649ea10c8f0902e6}{OnParseQuery1}},\ idx,\ key,\ key\_len,\ value,\ value\_len);}
+\DoxyCodeLine{00205\ \ \ \ \ \}}
+\DoxyCodeLine{00206\ }
+\DoxyCodeLine{00207\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00208\ \ \ \ \ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a4cc9490bbb3d7b8a1767f5d18ee70c81}{OnParseFragment}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ fragment,\ \textcolor{keyword}{const}\ uint64\_t\ length)\ \textcolor{keyword}{const}\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_ae748e2f505acd9f1e0dc03f595d6f2f3}{CallIfExists}}(\mbox{\hyperlink{classprt_1_1uri_1_1_parser_a6a6582960d98679ae2e6b6bb097e4df6}{config\_}}.\mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a9f3cae545d68d10b92afd3cbf1e398b9}{OnParseFragment}},\ fragment,\ length);}
+\DoxyCodeLine{00210\ \ \ \ \ \}}
+\DoxyCodeLine{00211\ }
+\DoxyCodeLine{00212\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00213\ \ \ \ \ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_adfbef1550084963f3e63e73333a9e601}{OnParseError}}()\ const\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_ae748e2f505acd9f1e0dc03f595d6f2f3}{CallIfExists}}(\mbox{\hyperlink{classprt_1_1uri_1_1_parser_a6a6582960d98679ae2e6b6bb097e4df6}{config\_}}.\mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a41b22b9c1535c87d7c8dceabbe66931b}{OnParseError}});}
+\DoxyCodeLine{00215\ \ \ \ \ \}}
+\DoxyCodeLine{00216\ }
+\DoxyCodeLine{00217\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_ae4a247314bc6c79e2d29446776a13a80}{TryParseScheme}}()\ -\/>\ bool;}
+\DoxyCodeLine{00218\ }
+\DoxyCodeLine{00219\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a924795f01aaf6901faa8c6a11dacd23b}{Reset}}()\ \{}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_parser_template_a86a3609bfbdd5c75c8e5d17e7c3af174}{pos\_}}\ =\ \mbox{\hyperlink{structprt_1_1_position}{Position}}();}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ memset(\mbox{\hyperlink{classprt_1_1_parser_template_aee92f987a83cfe6bcbf5f7378f4f9f45}{buffer\_}}.data(),\ 0,\ \mbox{\hyperlink{classprt_1_1_parser_template_aee92f987a83cfe6bcbf5f7378f4f9f45}{buffer\_}}.size());}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_parser_template_a1c4d59a33b1f8fe651145ae5bda10575}{wpos\_}}\ =\ 0;}
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_parser_template_ac7776676f5baf940a786b3fac872c907}{rpos\_}}\ =\ 0;}
+\DoxyCodeLine{00224\ \ \ \ \ \ \ memset(\mbox{\hyperlink{classprt_1_1_parser_template_adff02420577fb25765d8e81580a9cd37}{token\_}}.data(),\ 0,\ \mbox{\hyperlink{classprt_1_1_parser_template_adff02420577fb25765d8e81580a9cd37}{token\_}}.size());}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_parser_template_aa5805d43880d1548b774863f8c668ad8}{token\_len\_}}\ =\ 0;}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ memset(\mbox{\hyperlink{classprt_1_1uri_1_1_parser_a9b582a27f58a1d2e9d58cfc8598b8c23}{key\_}}.data(),\ 0,\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a9b582a27f58a1d2e9d58cfc8598b8c23}{key\_}}.size());}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ memset(\mbox{\hyperlink{classprt_1_1uri_1_1_parser_a2840f1260298522f97dc659947f7581c}{value\_}}.data(),\ 0,\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a2840f1260298522f97dc659947f7581c}{value\_}}.size());}
+\DoxyCodeLine{00228\ \ \ \ \ \}}
+\DoxyCodeLine{00229\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00230\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_adb3438508a0673266d3570641d187cb5}{Parser}}(\mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config}{Config}}\ config,\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{classprt_1_1_parser_template_a0f16d45dd01c07b4d3261520f640a62e}{data}}\ =\ \textcolor{keyword}{nullptr}):}
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_parser_template}{ParserTemplate}}(\mbox{\hyperlink{classprt_1_1_parser_template_a0f16d45dd01c07b4d3261520f640a62e}{data}}),}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a6a6582960d98679ae2e6b6bb097e4df6}{config\_}}(\mbox{\hyperlink{namespacestd}{std}}::move(config)),}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a7bc7173c806f104046c72bcdf5fad48d}{num\_query\_params\_}}(0),}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a9b582a27f58a1d2e9d58cfc8598b8c23}{key\_}}(),}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a8d9aae82a1be6e89eb00a1a197069903}{key\_length\_}}(0),}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a2840f1260298522f97dc659947f7581c}{value\_}}(),}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a8ddb161187aac5db1ac6c13ca1582c2c}{value\_length\_}}(0)\ \{}
+\DoxyCodeLine{00238\ \ \ \ \ \}}
+\DoxyCodeLine{00239\ \ \ \ \ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a248aa4cb0c3b7c118237ff9754d4cf09}{Parser}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config_a49f2d46e250bd18ccb5e2481c51e6599}{Config::Flags}}\ flags,\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{classprt_1_1_parser_template_a0f16d45dd01c07b4d3261520f640a62e}{data}}\ =\ \textcolor{keyword}{nullptr}):}
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1uri_1_1_parser}{Parser}}(\mbox{\hyperlink{structprt_1_1uri_1_1_parser_1_1_config}{Config}}\ \{\ .flags\ =\ flags\ \},\ \mbox{\hyperlink{classprt_1_1_parser_template_a0f16d45dd01c07b4d3261520f640a62e}{data}})\ \{}
+\DoxyCodeLine{00241\ \ \ \ \ \}}
+\DoxyCodeLine{00242\ \ \ \ \ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a8d43e3324033c2c583c523cad0464bb4}{Parser}}(\textcolor{keywordtype}{void}*\ \mbox{\hyperlink{classprt_1_1_parser_template_a0f16d45dd01c07b4d3261520f640a62e}{data}}\ =\ \textcolor{keyword}{nullptr}):}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1uri_1_1_parser}{Parser}}(\mbox{\hyperlink{classprt_1_1uri_1_1_parser_a193bee0522c0b1a405edb627a0c63acc}{DefaultFlags}}(),\ \mbox{\hyperlink{classprt_1_1_parser_template_a0f16d45dd01c07b4d3261520f640a62e}{data}})\ \{}
+\DoxyCodeLine{00244\ \ \ \ \ \}}
+\DoxyCodeLine{00245\ \ \ \ \ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a784d8df9b4e5c0a06d07efc09b76b2ba}{\string~Parser}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00246\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1uri_1_1_parser_a975ad043fd05046ef7d4cf1b33d1823b}{Parse}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_1_1uri_abd78a90444cc631e16c4484d1c03743f}{basic\_uri}}\&\ raw)\ -\/>\ \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result}{ParseResult}};}
+\DoxyCodeLine{00247\ \ \ \};}
+\DoxyCodeLine{00248\ \}}
+\DoxyCodeLine{00249\ }
+\DoxyCodeLine{00250\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//PRT\_URI\_PARSER\_H}}
+
+\end{DoxyCode}

@@ -1,0 +1,101 @@
+\doxysection{prt\+::Swap\+Chain\+Event Class Reference}
+\hypertarget{classprt_1_1_swap_chain_event}{}\label{classprt_1_1_swap_chain_event}\index{prt::SwapChainEvent@{prt::SwapChainEvent}}
+
+
+{\ttfamily \#include $<$swapchain\+\_\+event.\+h$>$}
+
+
+
+Inheritance diagram for prt\+::Swap\+Chain\+Event\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classprt_1_1_swap_chain_event__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for prt\+::Swap\+Chain\+Event\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=189pt]{classprt_1_1_swap_chain_event__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_swap_chain_event_a14d2f0b59107fd092a1e9aa0ee7f0fc9}{Swap\+Chain\+Event}} (const bool reinit)
+\item 
+\mbox{\hyperlink{classprt_1_1_swap_chain_event_ab95e0702377c7b46494ec59899231093}{\texorpdfstring{$\sim$}{\string~}\+Swap\+Chain\+Event}} () override=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1_swap_chain_event_a87fa988d191f3d38ffc1642f8f62e49e}{Is\+Reinit}} () const -\/$>$ bool
+\item 
+\mbox{\hyperlink{classprt_1_1_swap_chain_event_a467170ad5dd01c169bc385310a0da8d1}{DEFINE\+\_\+\+EVENT\+\_\+\+PROTOTYPE\+\_\+\+TYPE}} (\mbox{\hyperlink{classprt_1_1_swap_chain}{Swap\+Chain}}, \mbox{\hyperlink{namespaceprt_aea1956ad02cd44711f4e533c8aa26799}{FOR\+\_\+\+EACH\+\_\+\+SWAPCHAIN\+\_\+\+EVENT}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classprt_1_1_event}{prt\+::\+Event}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classprt_1_1_event_a4852e85c48ebb80d6c96fe0d13d5ae6a}{\texorpdfstring{$\sim$}{\string~}\+Event}} ()=default
+\item 
+virtual auto \mbox{\hyperlink{classprt_1_1_event_a674cd356a472771aad69534b2959500e}{Get\+Name}} () const -\/$>$ const char \texorpdfstring{$\ast$}{*}=0
+\item 
+virtual auto \mbox{\hyperlink{classprt_1_1_event_a90911d9644cf7ec9b4f05053a3b632af}{To\+String}} () const -\/$>$ std\+::string=0
+\item 
+virtual void \mbox{\hyperlink{classprt_1_1_event_a9f54e07e32d052203fe0e08a185746bc}{To\+Table}} (lua\+\_\+\+State \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{engine_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}}) const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classprt_1_1_swap_chain_event_ae0cc386a347a9239e190d76e33fe9c9f}{reinit\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classprt_1_1_event}{prt\+::\+Event}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_event_a68ae1e6264631e55933648b66d5dd11b}{Event}} ()=default
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_swap_chain_event_a14d2f0b59107fd092a1e9aa0ee7f0fc9}\index{prt::SwapChainEvent@{prt::SwapChainEvent}!SwapChainEvent@{SwapChainEvent}}
+\index{SwapChainEvent@{SwapChainEvent}!prt::SwapChainEvent@{prt::SwapChainEvent}}
+\doxysubsubsection{\texorpdfstring{SwapChainEvent()}{SwapChainEvent()}}
+{\footnotesize\ttfamily \label{classprt_1_1_swap_chain_event_a14d2f0b59107fd092a1e9aa0ee7f0fc9} 
+prt\+::\+Swap\+Chain\+Event\+::\+Swap\+Chain\+Event (\begin{DoxyParamCaption}\item[{const bool}]{reinit}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+\Hypertarget{classprt_1_1_swap_chain_event_ab95e0702377c7b46494ec59899231093}\index{prt::SwapChainEvent@{prt::SwapChainEvent}!````~SwapChainEvent@{\texorpdfstring{$\sim$}{\string~}SwapChainEvent}}
+\index{````~SwapChainEvent@{\texorpdfstring{$\sim$}{\string~}SwapChainEvent}!prt::SwapChainEvent@{prt::SwapChainEvent}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}SwapChainEvent()}{\string~SwapChainEvent()}}
+{\footnotesize\ttfamily \label{classprt_1_1_swap_chain_event_ab95e0702377c7b46494ec59899231093} 
+prt\+::\+Swap\+Chain\+Event\+::\texorpdfstring{$\sim$}{\string~}\+Swap\+Chain\+Event (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_swap_chain_event_a467170ad5dd01c169bc385310a0da8d1}\index{prt::SwapChainEvent@{prt::SwapChainEvent}!DEFINE\_EVENT\_PROTOTYPE\_TYPE@{DEFINE\_EVENT\_PROTOTYPE\_TYPE}}
+\index{DEFINE\_EVENT\_PROTOTYPE\_TYPE@{DEFINE\_EVENT\_PROTOTYPE\_TYPE}!prt::SwapChainEvent@{prt::SwapChainEvent}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_EVENT\_PROTOTYPE\_TYPE()}{DEFINE\_EVENT\_PROTOTYPE\_TYPE()}}
+{\footnotesize\ttfamily \label{classprt_1_1_swap_chain_event_a467170ad5dd01c169bc385310a0da8d1} 
+prt\+::\+Swap\+Chain\+Event\+::\+DEFINE\+\_\+\+EVENT\+\_\+\+PROTOTYPE\+\_\+\+TYPE (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_swap_chain}{Swap\+Chain}}}]{}{, }\item[{\mbox{\hyperlink{namespaceprt_aea1956ad02cd44711f4e533c8aa26799}{FOR\+\_\+\+EACH\+\_\+\+SWAPCHAIN\+\_\+\+EVENT}}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_swap_chain_event_a87fa988d191f3d38ffc1642f8f62e49e}\index{prt::SwapChainEvent@{prt::SwapChainEvent}!IsReinit@{IsReinit}}
+\index{IsReinit@{IsReinit}!prt::SwapChainEvent@{prt::SwapChainEvent}}
+\doxysubsubsection{\texorpdfstring{IsReinit()}{IsReinit()}}
+{\footnotesize\ttfamily \label{classprt_1_1_swap_chain_event_a87fa988d191f3d38ffc1642f8f62e49e} 
+auto prt\+::\+Swap\+Chain\+Event\+::\+Is\+Reinit (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_swap_chain_event_ae0cc386a347a9239e190d76e33fe9c9f}\index{prt::SwapChainEvent@{prt::SwapChainEvent}!reinit\_@{reinit\_}}
+\index{reinit\_@{reinit\_}!prt::SwapChainEvent@{prt::SwapChainEvent}}
+\doxysubsubsection{\texorpdfstring{reinit\_}{reinit\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_swap_chain_event_ae0cc386a347a9239e190d76e33fe9c9f} 
+bool prt\+::\+Swap\+Chain\+Event\+::reinit\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{swapchain__event_8h}{swapchain\+\_\+event.\+h}}\end{DoxyCompactItemize}

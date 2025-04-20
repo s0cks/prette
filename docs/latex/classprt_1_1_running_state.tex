@@ -1,0 +1,127 @@
+\doxysection{prt\+::Running\+State Class Reference}
+\hypertarget{classprt_1_1_running_state}{}\label{classprt_1_1_running_state}\index{prt::RunningState@{prt::RunningState}}
+
+
+{\ttfamily \#include $<$engine.\+h$>$}
+
+
+
+Inheritance diagram for prt\+::Running\+State\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=173pt]{classprt_1_1_running_state__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for prt\+::Running\+State\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=173pt]{classprt_1_1_running_state__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_running_state_ac712def6c805ed9d6ca6f292e6156d83}{Running\+State}} ()=default
+\item 
+\mbox{\hyperlink{classprt_1_1_running_state_aad66fb19cdb778904ef516e0d1d3fe16}{\texorpdfstring{$\sim$}{\string~}\+Running\+State}} () override=default
+\item 
+\mbox{\hyperlink{classprt_1_1_running_state_aeb1b6e0cf10d09ade21f1ec0b400c725}{DECLARE\+\_\+\+ENGINE\+\_\+\+STATE\+\_\+\+TYPE}} (Running)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classprt_1_1_engine_state}{prt\+::\+Engine\+State}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classprt_1_1_engine_state_a4fb51bde7f2f62145e5169b1e43f87b9}{\texorpdfstring{$\sim$}{\string~}\+Engine\+State}} ()=default
+\item 
+virtual auto \mbox{\hyperlink{classprt_1_1_engine_state_ae958fb727e6e355d56376467043e7a25}{Get\+State\+Name}} () const -\/$>$ const char \texorpdfstring{$\ast$}{*}=0
+\item 
+virtual auto \mbox{\hyperlink{classprt_1_1_engine_state_ae15ab114c1ef286785a6f23b327b0559}{Equals}} (\mbox{\hyperlink{classprt_1_1_engine_state}{Engine\+State}} \texorpdfstring{$\ast$}{*}rhs) const -\/$>$ bool
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_running_state_a7436f2ea605b64778b4ee6e04e8bd3e8}{New}} () -\/$>$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classprt_1_1_running_state}{Running\+State}} $>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+rx\+::subscription \mbox{\hyperlink{classprt_1_1_running_state_ab30cd91af0491e2aa0c271a31f8f8847}{on\+\_\+tick\+\_\+}} \{\}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1_running_state_a3e1914489e4bed4f9f23cdeab34a43dc}{Engine}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Types inherited from \mbox{\hyperlink{classprt_1_1_engine_state}{prt\+::\+Engine\+State}}}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classprt_1_1_engine_state_aada7037bee7f77920b63962f4c3822c5}{Duration\+Series}} = \mbox{\hyperlink{classprt_1_1_time_series}{Time\+Series}}$<$$>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classprt_1_1_engine_state}{prt\+::\+Engine\+State}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_engine_state_a1542ad73a83dfe5d8fe3db60deed6477}{Engine\+State}} ()=default
+\item 
+virtual void \mbox{\hyperlink{classprt_1_1_engine_state_a6675a3f7ac2f7ecc17694c98fbca8bb2}{Enter\+State}} (\mbox{\hyperlink{classprt_1_1_engine}{Engine}} \texorpdfstring{$\ast$}{*}engine)=0
+\item 
+virtual void \mbox{\hyperlink{classprt_1_1_engine_state_a4d74eb7a8e380992be23ac8c4fabfb0e}{On\+Tick}} (\mbox{\hyperlink{classprt_1_1_engine}{Engine}} \texorpdfstring{$\ast$}{*}engine, const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&current, const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&previous)=0
+\item 
+virtual void \mbox{\hyperlink{classprt_1_1_engine_state_a070edf1b108359efbc093dc1b432d5e5}{Exit\+State}} (\mbox{\hyperlink{classprt_1_1_engine}{Engine}} \texorpdfstring{$\ast$}{*}engine)=0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_running_state_ac712def6c805ed9d6ca6f292e6156d83}\index{prt::RunningState@{prt::RunningState}!RunningState@{RunningState}}
+\index{RunningState@{RunningState}!prt::RunningState@{prt::RunningState}}
+\doxysubsubsection{\texorpdfstring{RunningState()}{RunningState()}}
+{\footnotesize\ttfamily \label{classprt_1_1_running_state_ac712def6c805ed9d6ca6f292e6156d83} 
+prt\+::\+Running\+State\+::\+Running\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{classprt_1_1_running_state_aad66fb19cdb778904ef516e0d1d3fe16}\index{prt::RunningState@{prt::RunningState}!````~RunningState@{\texorpdfstring{$\sim$}{\string~}RunningState}}
+\index{````~RunningState@{\texorpdfstring{$\sim$}{\string~}RunningState}!prt::RunningState@{prt::RunningState}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}RunningState()}{\string~RunningState()}}
+{\footnotesize\ttfamily \label{classprt_1_1_running_state_aad66fb19cdb778904ef516e0d1d3fe16} 
+prt\+::\+Running\+State\+::\texorpdfstring{$\sim$}{\string~}\+Running\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_running_state_aeb1b6e0cf10d09ade21f1ec0b400c725}\index{prt::RunningState@{prt::RunningState}!DECLARE\_ENGINE\_STATE\_TYPE@{DECLARE\_ENGINE\_STATE\_TYPE}}
+\index{DECLARE\_ENGINE\_STATE\_TYPE@{DECLARE\_ENGINE\_STATE\_TYPE}!prt::RunningState@{prt::RunningState}}
+\doxysubsubsection{\texorpdfstring{DECLARE\_ENGINE\_STATE\_TYPE()}{DECLARE\_ENGINE\_STATE\_TYPE()}}
+{\footnotesize\ttfamily \label{classprt_1_1_running_state_aeb1b6e0cf10d09ade21f1ec0b400c725} 
+prt\+::\+Running\+State\+::\+DECLARE\+\_\+\+ENGINE\+\_\+\+STATE\+\_\+\+TYPE (\begin{DoxyParamCaption}\item[{Running}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_running_state_a7436f2ea605b64778b4ee6e04e8bd3e8}\index{prt::RunningState@{prt::RunningState}!New@{New}}
+\index{New@{New}!prt::RunningState@{prt::RunningState}}
+\doxysubsubsection{\texorpdfstring{New()}{New()}}
+{\footnotesize\ttfamily \label{classprt_1_1_running_state_a7436f2ea605b64778b4ee6e04e8bd3e8} 
+static auto prt\+::\+Running\+State\+::\+New (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classprt_1_1_running_state}{Running\+State}}$>$ \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classprt_1_1_running_state_a3e1914489e4bed4f9f23cdeab34a43dc}\index{prt::RunningState@{prt::RunningState}!Engine@{Engine}}
+\index{Engine@{Engine}!prt::RunningState@{prt::RunningState}}
+\doxysubsubsection{\texorpdfstring{Engine}{Engine}}
+{\footnotesize\ttfamily \label{classprt_1_1_running_state_a3e1914489e4bed4f9f23cdeab34a43dc} 
+friend class \mbox{\hyperlink{classprt_1_1_engine}{Engine}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_running_state_ab30cd91af0491e2aa0c271a31f8f8847}\index{prt::RunningState@{prt::RunningState}!on\_tick\_@{on\_tick\_}}
+\index{on\_tick\_@{on\_tick\_}!prt::RunningState@{prt::RunningState}}
+\doxysubsubsection{\texorpdfstring{on\_tick\_}{on\_tick\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_running_state_ab30cd91af0491e2aa0c271a31f8f8847} 
+rx\+::subscription prt\+::\+Running\+State\+::on\+\_\+tick\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{engine_8h}{engine.\+h}}\end{DoxyCompactItemize}

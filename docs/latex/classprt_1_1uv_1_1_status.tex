@@ -1,0 +1,131 @@
+\doxysection{prt\+::uv\+::Status Class Reference}
+\hypertarget{classprt_1_1uv_1_1_status}{}\label{classprt_1_1uv_1_1_status}\index{prt::uv::Status@{prt::uv::Status}}
+
+
+{\ttfamily \#include $<$utils.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+constexpr \mbox{\hyperlink{classprt_1_1uv_1_1_status_ab15d39a302936977885f3a02970e2878}{Status}} (const \mbox{\hyperlink{namespaceprt_1_1uv_a76457731a07865315da46335a5b53193}{Status\+Id}} \mbox{\hyperlink{classprt_1_1uv_1_1_status_aa3445ef003c10f6814541c5e29315494}{id}}=\mbox{\hyperlink{utils_8h_ace2d2813e9ea1a57493a6295bd4310a1}{UV\+\_\+\+OK}})
+\item 
+constexpr \mbox{\hyperlink{classprt_1_1uv_1_1_status_afefd6d7fe6179ac9db9e590c20f1232f}{Status}} (const \mbox{\hyperlink{classprt_1_1uv_1_1_status}{Status}} \&rhs)=default
+\item 
+\mbox{\hyperlink{classprt_1_1uv_1_1_status_ae34fd9ad3ef3ee0cfa7e32c2a5b6c50d}{\texorpdfstring{$\sim$}{\string~}\+Status}} ()=default
+\item 
+constexpr auto \mbox{\hyperlink{classprt_1_1uv_1_1_status_aa3445ef003c10f6814541c5e29315494}{id}} () const -\/$>$ \mbox{\hyperlink{namespaceprt_1_1uv_a76457731a07865315da46335a5b53193}{Status\+Id}}
+\item 
+constexpr auto \mbox{\hyperlink{classprt_1_1uv_1_1_status_a37ab5c13225516bd773648963ef964a8}{Is\+Ok}} () const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1uv_1_1_status_a363b288caf078a9d9722a78e88aa4f4a}{message}} () const -\/$>$ const char \texorpdfstring{$\ast$}{*}
+\item 
+constexpr \mbox{\hyperlink{classprt_1_1uv_1_1_status_a6b68161040f31b8e8dd829f0928b11d1}{operator Status\+Id}} () const
+\item 
+constexpr \mbox{\hyperlink{classprt_1_1uv_1_1_status_ab7451efd13d126968e0fc6da1aec9bd7}{operator bool}} () const
+\item 
+auto \mbox{\hyperlink{classprt_1_1uv_1_1_status_ad1c85c30f7fdb373c12dc92241e25faf}{operator=}} (const \mbox{\hyperlink{classprt_1_1uv_1_1_status}{Status}} \&rhs) -\/$>$ \mbox{\hyperlink{classprt_1_1uv_1_1_status}{Status}} \&=default
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr auto \mbox{\hyperlink{classprt_1_1uv_1_1_status_ab06d68952df1e43317136b1df5fca53e}{Ok}} () -\/$>$ \mbox{\hyperlink{classprt_1_1uv_1_1_status}{Status}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceprt_1_1uv_a76457731a07865315da46335a5b53193}{Status\+Id}} \mbox{\hyperlink{classprt_1_1uv_1_1_status_a68487e5e239ae1fd631054d7c38fda2c}{id\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+auto \mbox{\hyperlink{classprt_1_1uv_1_1_status_aa3364e9f88b7d606c86d8845ab2aa320}{operator$<$$<$}} (std\+::ostream \&stream, const \mbox{\hyperlink{classprt_1_1uv_1_1_status}{Status}} \&rhs) -\/$>$ std\+::ostream \&
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1uv_1_1_status_ab15d39a302936977885f3a02970e2878}\index{prt::uv::Status@{prt::uv::Status}!Status@{Status}}
+\index{Status@{Status}!prt::uv::Status@{prt::uv::Status}}
+\doxysubsubsection{\texorpdfstring{Status()}{Status()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1uv_1_1_status_ab15d39a302936977885f3a02970e2878} 
+prt\+::uv\+::\+Status\+::\+Status (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceprt_1_1uv_a76457731a07865315da46335a5b53193}{Status\+Id}}}]{id}{ = {\ttfamily \mbox{\hyperlink{utils_8h_ace2d2813e9ea1a57493a6295bd4310a1}{UV\+\_\+\+OK}}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classprt_1_1uv_1_1_status_afefd6d7fe6179ac9db9e590c20f1232f}\index{prt::uv::Status@{prt::uv::Status}!Status@{Status}}
+\index{Status@{Status}!prt::uv::Status@{prt::uv::Status}}
+\doxysubsubsection{\texorpdfstring{Status()}{Status()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1uv_1_1_status_afefd6d7fe6179ac9db9e590c20f1232f} 
+prt\+::uv\+::\+Status\+::\+Status (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1uv_1_1_status}{Status}} \&}]{rhs}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [constexpr]}, {\ttfamily [default]}}
+
+\Hypertarget{classprt_1_1uv_1_1_status_ae34fd9ad3ef3ee0cfa7e32c2a5b6c50d}\index{prt::uv::Status@{prt::uv::Status}!````~Status@{\texorpdfstring{$\sim$}{\string~}Status}}
+\index{````~Status@{\texorpdfstring{$\sim$}{\string~}Status}!prt::uv::Status@{prt::uv::Status}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Status()}{\string~Status()}}
+{\footnotesize\ttfamily \label{classprt_1_1uv_1_1_status_ae34fd9ad3ef3ee0cfa7e32c2a5b6c50d} 
+prt\+::uv\+::\+Status\+::\texorpdfstring{$\sim$}{\string~}\+Status (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1uv_1_1_status_aa3445ef003c10f6814541c5e29315494}\index{prt::uv::Status@{prt::uv::Status}!id@{id}}
+\index{id@{id}!prt::uv::Status@{prt::uv::Status}}
+\doxysubsubsection{\texorpdfstring{id()}{id()}}
+{\footnotesize\ttfamily \label{classprt_1_1uv_1_1_status_aa3445ef003c10f6814541c5e29315494} 
+auto prt\+::uv\+::\+Status\+::id (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ \mbox{\hyperlink{namespaceprt_1_1uv_a76457731a07865315da46335a5b53193}{Status\+Id}} \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classprt_1_1uv_1_1_status_a37ab5c13225516bd773648963ef964a8}\index{prt::uv::Status@{prt::uv::Status}!IsOk@{IsOk}}
+\index{IsOk@{IsOk}!prt::uv::Status@{prt::uv::Status}}
+\doxysubsubsection{\texorpdfstring{IsOk()}{IsOk()}}
+{\footnotesize\ttfamily \label{classprt_1_1uv_1_1_status_a37ab5c13225516bd773648963ef964a8} 
+auto prt\+::uv\+::\+Status\+::\+Is\+Ok (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classprt_1_1uv_1_1_status_a363b288caf078a9d9722a78e88aa4f4a}\index{prt::uv::Status@{prt::uv::Status}!message@{message}}
+\index{message@{message}!prt::uv::Status@{prt::uv::Status}}
+\doxysubsubsection{\texorpdfstring{message()}{message()}}
+{\footnotesize\ttfamily \label{classprt_1_1uv_1_1_status_a363b288caf078a9d9722a78e88aa4f4a} 
+auto prt\+::uv\+::\+Status\+::message (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const char\texorpdfstring{$\ast$}{*} \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1uv_1_1_status_ab06d68952df1e43317136b1df5fca53e}\index{prt::uv::Status@{prt::uv::Status}!Ok@{Ok}}
+\index{Ok@{Ok}!prt::uv::Status@{prt::uv::Status}}
+\doxysubsubsection{\texorpdfstring{Ok()}{Ok()}}
+{\footnotesize\ttfamily \label{classprt_1_1uv_1_1_status_ab06d68952df1e43317136b1df5fca53e} 
+static constexpr auto prt\+::uv\+::\+Status\+::\+Ok (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{classprt_1_1uv_1_1_status}{Status}} \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classprt_1_1uv_1_1_status_ab7451efd13d126968e0fc6da1aec9bd7}\index{prt::uv::Status@{prt::uv::Status}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!prt::uv::Status@{prt::uv::Status}}
+\doxysubsubsection{\texorpdfstring{operator bool()}{operator bool()}}
+{\footnotesize\ttfamily \label{classprt_1_1uv_1_1_status_ab7451efd13d126968e0fc6da1aec9bd7} 
+prt\+::uv\+::\+Status\+::operator bool (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classprt_1_1uv_1_1_status_a6b68161040f31b8e8dd829f0928b11d1}\index{prt::uv::Status@{prt::uv::Status}!operator StatusId@{operator StatusId}}
+\index{operator StatusId@{operator StatusId}!prt::uv::Status@{prt::uv::Status}}
+\doxysubsubsection{\texorpdfstring{operator StatusId()}{operator StatusId()}}
+{\footnotesize\ttfamily \label{classprt_1_1uv_1_1_status_a6b68161040f31b8e8dd829f0928b11d1} 
+prt\+::uv\+::\+Status\+::operator \mbox{\hyperlink{namespaceprt_1_1uv_a76457731a07865315da46335a5b53193}{Status\+Id}} (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classprt_1_1uv_1_1_status_ad1c85c30f7fdb373c12dc92241e25faf}\index{prt::uv::Status@{prt::uv::Status}!operator=@{operator=}}
+\index{operator=@{operator=}!prt::uv::Status@{prt::uv::Status}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \label{classprt_1_1uv_1_1_status_ad1c85c30f7fdb373c12dc92241e25faf} 
+auto prt\+::uv\+::\+Status\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1uv_1_1_status}{Status}} \&}]{rhs}{}\end{DoxyParamCaption}) -\/$>$  \mbox{\hyperlink{classprt_1_1uv_1_1_status}{Status}} \&=default\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classprt_1_1uv_1_1_status_aa3364e9f88b7d606c86d8845ab2aa320}\index{prt::uv::Status@{prt::uv::Status}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!prt::uv::Status@{prt::uv::Status}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily \label{classprt_1_1uv_1_1_status_aa3364e9f88b7d606c86d8845ab2aa320} 
+auto operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{stream}{, }\item[{const \mbox{\hyperlink{classprt_1_1uv_1_1_status}{Status}} \&}]{rhs}{}\end{DoxyParamCaption}) -\/$>$ std\+::ostream\& \hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1uv_1_1_status_a68487e5e239ae1fd631054d7c38fda2c}\index{prt::uv::Status@{prt::uv::Status}!id\_@{id\_}}
+\index{id\_@{id\_}!prt::uv::Status@{prt::uv::Status}}
+\doxysubsubsection{\texorpdfstring{id\_}{id\_}}
+{\footnotesize\ttfamily \label{classprt_1_1uv_1_1_status_a68487e5e239ae1fd631054d7c38fda2c} 
+\mbox{\hyperlink{namespaceprt_1_1uv_a76457731a07865315da46335a5b53193}{Status\+Id}} prt\+::uv\+::\+Status\+::id\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/uv/\mbox{\hyperlink{utils_8h}{utils.\+h}}\end{DoxyCompactItemize}

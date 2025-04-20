@@ -1,0 +1,145 @@
+\doxysection{prt\+::Ortho\+Camera Class Reference}
+\hypertarget{classprt_1_1_ortho_camera}{}\label{classprt_1_1_ortho_camera}\index{prt::OrthoCamera@{prt::OrthoCamera}}
+
+
+{\ttfamily \#include $<$camera.\+h$>$}
+
+
+
+Inheritance diagram for prt\+::Ortho\+Camera\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=172pt]{classprt_1_1_ortho_camera__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for prt\+::Ortho\+Camera\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=172pt]{classprt_1_1_ortho_camera__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_ortho_camera_af14dba85c59c1ccebc8ffe51d3c39a39}{Ortho\+Camera}} (const float top, const float left, const float bottom, const float right, const glm\+::vec3 \&pos)
+\item 
+\mbox{\hyperlink{classprt_1_1_ortho_camera_ae840b7f882ebfa5dd1a5a4d2ecaa5066}{\texorpdfstring{$\sim$}{\string~}\+Ortho\+Camera}} () override
+\item 
+void \mbox{\hyperlink{classprt_1_1_ortho_camera_ac107eff10e00a53a0f4778d48d97d8e9}{Update}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classprt_1_1_camera}{prt\+::\+Camera}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classprt_1_1_camera_a8b25072dd446b8cb6b2f558a4fa11203}{\texorpdfstring{$\sim$}{\string~}\+Camera}} ()=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1_camera_a81b75099ac0ee231ebb7dcf436c29e81}{Get\+Type}} () const -\/$>$ \mbox{\hyperlink{namespaceprt_a973fc0420f88e5528954ef787073978a}{Camera\+Type}}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_camera_ac20243d667176e635bd9520686af1292}{Is\+Ortho}} () const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_camera_aabaeb97743df2583e76d0eddeb04a7e0}{Is\+Iso}} () const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_camera_a4f1009fd8791a97e355c740539063198}{Is\+Perspective}} () const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_camera_ab37eed2926e74d09fb0e4d3eb5d5e07c}{data}} () const -\/$>$ const \mbox{\hyperlink{structprt_1_1_camera_data}{Camera\+Data}} \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_camera_ae09ecb6c5f28b4857134b8c076554636}{Get\+View}} () const -\/$>$ const glm\+::mat4 \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_camera_a38e94b67b52e98f8024806c3651d8b8f}{Get\+Projection}} () const -\/$>$ const glm\+::mat4 \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_camera_a6c4aa60ace0cf790987b07550effc76c}{Get\+Pos}} () const -\/$>$ const glm\+::vec3 \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_camera_a1ec33d95ed89fbb5e36ce08f8752d71a}{Get\+Up}} () const -\/$>$ const glm\+::vec3 \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_camera_ab6758d4328f88f83da2e43383dad4f6e}{Get\+Right}} () const -\/$>$ const glm\+::vec3 \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_camera_a385e6d2a0dc6f57d44d99b7b988d3341}{Get\+Direction}} () const -\/$>$ const glm\+::vec3 \&
+\item 
+void \mbox{\hyperlink{classprt_1_1_camera_a6d4a342da2c628619484dbba4fde7ccd}{Set\+Pos}} (const glm\+::vec3 \&pos)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classprt_1_1_ortho_camera_a70a65c4cb176dfbd025bcafe8c2293bc}{Update\+View\+Matrix}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classprt_1_1_camera}{prt\+::\+Camera}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_camera_a90720a27db51ed05a5e62d5057a19952}{Camera}} (const \mbox{\hyperlink{namespaceprt_a973fc0420f88e5528954ef787073978a}{Camera\+Type}} type, const glm\+::mat4 \&projection, const glm\+::vec3 \&pos, const glm\+::vec3 \&direction=glm\+::vec3(0.\+0f, 0.\+0f, -\/1.\+0f))
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+rx\+::subscription \mbox{\hyperlink{classprt_1_1_ortho_camera_a57fdd8479a6ff696891ea2a4415d3501}{on\+\_\+key\+\_\+}} \{\}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classprt_1_1_camera}{prt\+::\+Camera}}}
+\begin{DoxyCompactItemize}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_camera_acc55a1bf5506b129dad49cc2397fc827}{Get}} () -\/$>$ \mbox{\hyperlink{classprt_1_1_camera}{Camera}} \texorpdfstring{$\ast$}{*}
+\item 
+static void \mbox{\hyperlink{classprt_1_1_camera_a4ea4057570cd63baa41a3b16e32f6559}{Init}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classprt_1_1_camera}{prt\+::\+Camera}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceprt_a973fc0420f88e5528954ef787073978a}{Camera\+Type}} \mbox{\hyperlink{classprt_1_1_camera_a806800822947842a37c9f22590f0f18b}{type\+\_\+}}
+\item 
+\mbox{\hyperlink{structprt_1_1_camera_data}{Camera\+Data}} \mbox{\hyperlink{classprt_1_1_camera_a11aab69b276f449cd1fa11a00393c56a}{data\+\_\+}} \{\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_ortho_camera_af14dba85c59c1ccebc8ffe51d3c39a39}\index{prt::OrthoCamera@{prt::OrthoCamera}!OrthoCamera@{OrthoCamera}}
+\index{OrthoCamera@{OrthoCamera}!prt::OrthoCamera@{prt::OrthoCamera}}
+\doxysubsubsection{\texorpdfstring{OrthoCamera()}{OrthoCamera()}}
+{\footnotesize\ttfamily \label{classprt_1_1_ortho_camera_af14dba85c59c1ccebc8ffe51d3c39a39} 
+prt\+::\+Ortho\+Camera\+::\+Ortho\+Camera (\begin{DoxyParamCaption}\item[{const float}]{top}{, }\item[{const float}]{left}{, }\item[{const float}]{bottom}{, }\item[{const float}]{right}{, }\item[{const glm\+::vec3 \&}]{pos}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_ortho_camera_ae840b7f882ebfa5dd1a5a4d2ecaa5066}\index{prt::OrthoCamera@{prt::OrthoCamera}!````~OrthoCamera@{\texorpdfstring{$\sim$}{\string~}OrthoCamera}}
+\index{````~OrthoCamera@{\texorpdfstring{$\sim$}{\string~}OrthoCamera}!prt::OrthoCamera@{prt::OrthoCamera}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}OrthoCamera()}{\string~OrthoCamera()}}
+{\footnotesize\ttfamily \label{classprt_1_1_ortho_camera_ae840b7f882ebfa5dd1a5a4d2ecaa5066} 
+prt\+::\+Ortho\+Camera\+::\texorpdfstring{$\sim$}{\string~}\+Ortho\+Camera (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_ortho_camera_ac107eff10e00a53a0f4778d48d97d8e9}\index{prt::OrthoCamera@{prt::OrthoCamera}!Update@{Update}}
+\index{Update@{Update}!prt::OrthoCamera@{prt::OrthoCamera}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily \label{classprt_1_1_ortho_camera_ac107eff10e00a53a0f4778d48d97d8e9} 
+void prt\+::\+Ortho\+Camera\+::\+Update (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{classprt_1_1_camera_ae71ee88b7646022c8f9c0d41f17fd996}{prt\+::\+Camera}}.
+
+\Hypertarget{classprt_1_1_ortho_camera_a70a65c4cb176dfbd025bcafe8c2293bc}\index{prt::OrthoCamera@{prt::OrthoCamera}!UpdateViewMatrix@{UpdateViewMatrix}}
+\index{UpdateViewMatrix@{UpdateViewMatrix}!prt::OrthoCamera@{prt::OrthoCamera}}
+\doxysubsubsection{\texorpdfstring{UpdateViewMatrix()}{UpdateViewMatrix()}}
+{\footnotesize\ttfamily \label{classprt_1_1_ortho_camera_a70a65c4cb176dfbd025bcafe8c2293bc} 
+void prt\+::\+Ortho\+Camera\+::\+Update\+View\+Matrix (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{classprt_1_1_camera_abb4b477c16a02c385b72b1596e3c9a06}{prt\+::\+Camera}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_ortho_camera_a57fdd8479a6ff696891ea2a4415d3501}\index{prt::OrthoCamera@{prt::OrthoCamera}!on\_key\_@{on\_key\_}}
+\index{on\_key\_@{on\_key\_}!prt::OrthoCamera@{prt::OrthoCamera}}
+\doxysubsubsection{\texorpdfstring{on\_key\_}{on\_key\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_ortho_camera_a57fdd8479a6ff696891ea2a4415d3501} 
+rx\+::subscription prt\+::\+Ortho\+Camera\+::on\+\_\+key\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{camera_8h}{camera.\+h}}\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{camera_8cc}{camera.\+cc}}\end{DoxyCompactItemize}

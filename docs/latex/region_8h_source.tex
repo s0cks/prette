@@ -1,0 +1,103 @@
+\doxysection{region.\+h}
+\hypertarget{region_8h_source}{}\label{region_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/region.h@{/Users/tazz/Projects/prette/Sources/prette/region.h}}
+\mbox{\hyperlink{region_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_REGION\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_REGION\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <units.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}prette/gfx.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{common_8h}{prette/common.h}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{platform_8h}{prette/platform.h}}"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00010\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_region}{Region}}\ \{}
+\DoxyCodeLine{00011\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_region_a9253b3688f1b0e82dd9e3d00c7116472}{DEFINE\_DEFAULT\_COPYABLE\_TYPE}}(\mbox{\hyperlink{classprt_1_1_region}{Region}});}
+\DoxyCodeLine{00012\ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ \mbox{\hyperlink{classprt_1_1_region_a6f2ef1267081e6667ebc59ee14e34346}{start\_}};}
+\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ \mbox{\hyperlink{classprt_1_1_region_aacc695d16259e71bcca93c0a0d943671}{size\_}};}
+\DoxyCodeLine{00015\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_region_a97974f9dca72773222c05d7d6aa37439}{Region}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_region_a715801f864d1f6c63d0486448501ce40}{Region}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ start,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ size):}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_region_a6f2ef1267081e6667ebc59ee14e34346}{start\_}}(start),}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_region_aacc695d16259e71bcca93c0a0d943671}{size\_}}(size)\ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \}}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classprt_1_1_region_addb8cf82e3b3949d7d440fbb370c2e19}{\string~Region}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ \mbox{\hyperlink{classprt_1_1_region_aa0c4e679b2ac31025f53e0eb7aee9c7d}{GetStartingAddress}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_region_a6f2ef1267081e6667ebc59ee14e34346}{start\_}};}
+\DoxyCodeLine{00025\ \ \ \ \ \}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{classprt_1_1_region_ac2764dfb07eb63c587513c0941c11227}{GetStartingAddressPointer}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keywordtype}{void}*)\ \mbox{\hyperlink{classprt_1_1_region_aa0c4e679b2ac31025f53e0eb7aee9c7d}{GetStartingAddress}}();}
+\DoxyCodeLine{00029\ \ \ \ \ \}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ \mbox{\hyperlink{classprt_1_1_region_a93c279b835a8d42336b86e08214d517a}{GetSize}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_region_aacc695d16259e71bcca93c0a0d943671}{size\_}};}
+\DoxyCodeLine{00033\ \ \ \ \ \}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ \mbox{\hyperlink{classprt_1_1_region_a473fa2cf3b897896815f88f6af1a2daa}{GetEndingAddress}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_region_aa0c4e679b2ac31025f53e0eb7aee9c7d}{GetStartingAddress}}()\ +\ \mbox{\hyperlink{classprt_1_1_region_a93c279b835a8d42336b86e08214d517a}{GetSize}}();}
+\DoxyCodeLine{00037\ \ \ \ \ \}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{classprt_1_1_region_a2d3a1c73f7637081b9797cbc0dd429ef}{GetEndingAddressPointer}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keywordtype}{void}*)\ \mbox{\hyperlink{classprt_1_1_region_a473fa2cf3b897896815f88f6af1a2daa}{GetEndingAddress}}();}
+\DoxyCodeLine{00041\ \ \ \ \ \}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classprt_1_1_region_a647c6975c874dd1feee2cfcd13a7addd}{Contains}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ address)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_region_aa0c4e679b2ac31025f53e0eb7aee9c7d}{GetStartingAddress}}()\ <=\ address}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \&\&\ \mbox{\hyperlink{classprt_1_1_region_a473fa2cf3b897896815f88f6af1a2daa}{GetEndingAddress}}()\ >=\ address;}
+\DoxyCodeLine{00046\ \ \ \ \ \}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classprt_1_1_region_a6ee171fa5b5d38d621d29296b0e375ae}{Contains}}(\textcolor{keywordtype}{void}*\ ptr)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_region_a647c6975c874dd1feee2cfcd13a7addd}{Contains}}((\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}})\ ptr);}
+\DoxyCodeLine{00050\ \ \ \ \ \}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classprt_1_1_region_a0158bb191174f29754828f55c3db7769}{IsEmpty}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_region_a93c279b835a8d42336b86e08214d517a}{GetSize}}()\ ==\ 0;}
+\DoxyCodeLine{00054\ \ \ \ \ \}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classprt_1_1_region_a8a3625c9712fbdb04a83c20a7cc7548e}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_region}{Region}}\&\ rhs)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_region_aa0c4e679b2ac31025f53e0eb7aee9c7d}{GetStartingAddress}}()\ ==\ rhs.\mbox{\hyperlink{classprt_1_1_region_aa0c4e679b2ac31025f53e0eb7aee9c7d}{GetStartingAddress}}()}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \&\&\ \mbox{\hyperlink{classprt_1_1_region_a93c279b835a8d42336b86e08214d517a}{GetSize}}()\ ==\ rhs.\mbox{\hyperlink{classprt_1_1_region_a93c279b835a8d42336b86e08214d517a}{GetSize}}();}
+\DoxyCodeLine{00059\ \ \ \ \ \}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classprt_1_1_region_a8f990bd0d2f0d6731921a34d90a3e633}{operator!=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_region}{Region}}\&\ rhs)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_region_aa0c4e679b2ac31025f53e0eb7aee9c7d}{GetStartingAddress}}()\ !=\ rhs.\mbox{\hyperlink{classprt_1_1_region_aa0c4e679b2ac31025f53e0eb7aee9c7d}{GetStartingAddress}}()}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ ||\ \mbox{\hyperlink{classprt_1_1_region_a93c279b835a8d42336b86e08214d517a}{GetSize}}()\ !=\ rhs.\mbox{\hyperlink{classprt_1_1_region_a93c279b835a8d42336b86e08214d517a}{GetSize}}();}
+\DoxyCodeLine{00064\ \ \ \ \ \}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classprt_1_1_region_a725d7e2f964a97d106ae271ca0c049d8}{operator<}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_region}{Region}}\&\ rhs)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{classprt_1_1_region_aa0c4e679b2ac31025f53e0eb7aee9c7d}{GetStartingAddress}}()\ <\ rhs.\mbox{\hyperlink{classprt_1_1_region_aa0c4e679b2ac31025f53e0eb7aee9c7d}{GetStartingAddress}}())}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_region_a93c279b835a8d42336b86e08214d517a}{GetSize}}()\ <\ rhs.\mbox{\hyperlink{classprt_1_1_region_a93c279b835a8d42336b86e08214d517a}{GetSize}}();}
+\DoxyCodeLine{00070\ \ \ \ \ \}}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classprt_1_1_region_a1c3e89666b206e188116640a28445943}{operator>}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_region}{Region}}\&\ rhs)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{classprt_1_1_region_aa0c4e679b2ac31025f53e0eb7aee9c7d}{GetStartingAddress}}()\ >\ rhs.\mbox{\hyperlink{classprt_1_1_region_aa0c4e679b2ac31025f53e0eb7aee9c7d}{GetStartingAddress}}())}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_region_a93c279b835a8d42336b86e08214d517a}{GetSize}}()\ >\ rhs.\mbox{\hyperlink{classprt_1_1_region_a93c279b835a8d42336b86e08214d517a}{GetSize}}();}
+\DoxyCodeLine{00076\ \ \ \ \ \}}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keyword}{friend}\ std::ostream\&\ \mbox{\hyperlink{classprt_1_1_region_ade87832e0c91a7fbcc59454d708d65dc}{operator<<}}(std::ostream\&\ stream,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_region}{Region}}\&\ rhs)\ \{}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \textcolor{keyword}{using\ namespace\ }units::data;}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{}Region("{}};}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{}start="{}}\ <<\ rhs.\mbox{\hyperlink{classprt_1_1_region_ac2764dfb07eb63c587513c0941c11227}{GetStartingAddressPointer}}()\ <<\ \textcolor{stringliteral}{"{},\ "{}};}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{}size="{}}\ <<\ byte\_t(rhs.\mbox{\hyperlink{classprt_1_1_region_a93c279b835a8d42336b86e08214d517a}{GetSize}}());}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{})"{}};}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ stream;}
+\DoxyCodeLine{00085\ \ \ \ \ \}}
+\DoxyCodeLine{00086\ \ \ \ \ }
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keyword}{explicit}\ \textcolor{keyword}{operator}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a517334a0fef8c04a14b61e0bcfc64d9d}{ubyte}}*\ ()\ \textcolor{keyword}{const}\ \{}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a517334a0fef8c04a14b61e0bcfc64d9d}{ubyte}}*)\ \mbox{\hyperlink{classprt_1_1_region_aa0c4e679b2ac31025f53e0eb7aee9c7d}{GetStartingAddress}}();}
+\DoxyCodeLine{00089\ \ \ \ \ \}}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keyword}{explicit}\ \textcolor{keyword}{operator}\ \textcolor{keyword}{const}\ GLvoid*\ ()\ \textcolor{keyword}{const}\ \{}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keyword}{const}\ GLvoid*)\ \mbox{\hyperlink{classprt_1_1_region_aa0c4e679b2ac31025f53e0eb7aee9c7d}{GetStartingAddress}}();}
+\DoxyCodeLine{00093\ \ \ \ \ \}}
+\DoxyCodeLine{00094\ \ \ \};}
+\DoxyCodeLine{00095\ \}}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//PRT\_REGION\_H}}
+
+\end{DoxyCode}

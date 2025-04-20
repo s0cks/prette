@@ -1,0 +1,101 @@
+\doxysection{/\+Users/tazz/\+Projects/prette/\+Sources/prette/gui.h File Reference}
+\hypertarget{gui_8h}{}\label{gui_8h}\index{/Users/tazz/Projects/prette/Sources/prette/gui.h@{/Users/tazz/Projects/prette/Sources/prette/gui.h}}
+{\ttfamily \#include $<$fmt/format.\+h$>$}\newline
+{\ttfamily \#include $<$imgui\+\_\+freetype.\+h$>$}\newline
+{\ttfamily \#include $<$imgui\+\_\+impl\+\_\+glfw.\+h$>$}\newline
+{\ttfamily \#include $<$imgui\+\_\+impl\+\_\+vulkan.\+h$>$}\newline
+{\ttfamily \#include $<$implot.\+h$>$}\newline
+{\ttfamily \#include "{}prette/event.\+h"{}}\newline
+{\ttfamily \#include "{}prette/gfx.\+h"{}}\newline
+{\ttfamily \#include "{}prette/gui\+\_\+renderer.\+h"{}}\newline
+Include dependency graph for gui.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{gui_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{gui_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1_gui_event}{prt\+::\+Gui\+Event}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_gui_init_event}{prt\+::\+Gui\+Init\+Event}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_gui_opened_event}{prt\+::\+Gui\+Opened\+Event}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_gui_rendered_event}{prt\+::\+Gui\+Rendered\+Event}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_gui_updated_event}{prt\+::\+Gui\+Updated\+Event}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_gui_closed_event}{prt\+::\+Gui\+Closed\+Event}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_gui}{prt\+::\+Gui}}
+\item 
+struct \mbox{\hyperlink{structprt_1_1gui_1_1_push_const_block}{prt\+::gui\+::\+Push\+Const\+Block}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceprt}{prt}}
+\item 
+namespace \mbox{\hyperlink{namespaceprt_1_1gui}{prt\+::gui}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{gui_8h_a9249bba07bf2ad86052788756989dc00}{FOR\+\_\+\+EACH\+\_\+\+GUI\+\_\+\+EVENT}}(V)
+\item 
+\#define \mbox{\hyperlink{gui_8h_a83d2d158052fc2dc9bdf9bece3fd251e}{FORWARD\+\_\+\+DECLARE}}(Name)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceprt_a6a3ba57e6d6787bf53257734b1fa7e56}{prt\+::\+DEFINE\+\_\+\+EVENT\+\_\+\+SUBJECT}} (\mbox{\hyperlink{classprt_1_1_gui}{Gui}})
+\item 
+\mbox{\hyperlink{namespaceprt_a01bae7cc533f27fa1f79a7b9576e3d7a}{prt\+::\+DEFINE\+\_\+\+EVENT\+\_\+\+OBSERVABLE}} (\mbox{\hyperlink{classprt_1_1_gui}{Gui}})
+\item 
+\mbox{\hyperlink{namespaceprt_a71898c3f0b0bfdc40e2c14ecd1424bfa}{prt\+::\+FOR\+\_\+\+EACH\+\_\+\+GUI\+\_\+\+EVENT}} (\mbox{\hyperlink{namespaceprt_a1a037a7c66a8e0c9eafb4608fef52cca}{DEFINE\+\_\+\+EVENT\+\_\+\+OBSERVABLE}})
+\item 
+void \mbox{\hyperlink{namespaceprt_1_1gui_a21dded5ca67905ff89bc3060dab4be41}{prt\+::gui\+::\+Init}} ()
+\item 
+void \mbox{\hyperlink{namespaceprt_1_1gui_a53f14f7ac031017bb7341a3071c061a4}{prt\+::gui\+::\+Shutdown}} ()
+\item 
+auto \mbox{\hyperlink{namespaceprt_1_1gui_a7e4e035aa8421e80c4929c287623b9f7}{prt\+::gui\+::\+Update}} (const glm\+::u32vec2 \&size) -\/$>$ bool
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{gui_8h_a9249bba07bf2ad86052788756989dc00}\index{gui.h@{gui.h}!FOR\_EACH\_GUI\_EVENT@{FOR\_EACH\_GUI\_EVENT}}
+\index{FOR\_EACH\_GUI\_EVENT@{FOR\_EACH\_GUI\_EVENT}!gui.h@{gui.h}}
+\doxysubsubsection{\texorpdfstring{FOR\_EACH\_GUI\_EVENT}{FOR\_EACH\_GUI\_EVENT}}
+{\footnotesize\ttfamily \label{gui_8h_a9249bba07bf2ad86052788756989dc00} 
+\#define FOR\+\_\+\+EACH\+\_\+\+GUI\+\_\+\+EVENT(\begin{DoxyParamCaption}\item[{}]{V}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ V(GuiInit)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(GuiOpened)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(GuiRendered)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(GuiUpdated)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(GuiClosed)}
+
+\end{DoxyCode}
+\Hypertarget{gui_8h_a83d2d158052fc2dc9bdf9bece3fd251e}\index{gui.h@{gui.h}!FORWARD\_DECLARE@{FORWARD\_DECLARE}}
+\index{FORWARD\_DECLARE@{FORWARD\_DECLARE}!gui.h@{gui.h}}
+\doxysubsubsection{\texorpdfstring{FORWARD\_DECLARE}{FORWARD\_DECLARE}}
+{\footnotesize\ttfamily \label{gui_8h_a83d2d158052fc2dc9bdf9bece3fd251e} 
+\#define FORWARD\+\_\+\+DECLARE(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{class\ }Name\#\#Event;}
+
+\end{DoxyCode}

@@ -1,0 +1,39 @@
+\doxysection{/\+Users/tazz/\+Projects/prette/\+Sources/prette/timestamp.h File Reference}
+\hypertarget{timestamp_8h}{}\label{timestamp_8h}\index{/Users/tazz/Projects/prette/Sources/prette/timestamp.h@{/Users/tazz/Projects/prette/Sources/prette/timestamp.h}}
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+Include dependency graph for timestamp.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=191pt]{timestamp_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=191pt]{timestamp_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceprt}{prt}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{namespaceprt_af51b2ebc6af9f99a72308e1fccf052a8}{prt\+::\+Raw\+Timestamp}} = uint64\+\_\+t
+\item 
+using \mbox{\hyperlink{namespaceprt_a3b42b9f074b18f02b9aab3eddda0ccae}{prt\+::\+Sys\+Clock}} = std\+::chrono\+::system\+\_\+clock
+\item 
+using \mbox{\hyperlink{namespaceprt_ae74a28741beec5d2cd9d84fe207b89fb}{prt\+::\+Timestamp}} = Sys\+Clock\+::time\+\_\+point
+\item 
+using \mbox{\hyperlink{namespaceprt_aa91a5697dfcc01c56a7ba32a0063396d}{prt\+::\+Duration}} = Sys\+Clock\+::duration
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+auto \mbox{\hyperlink{namespaceprt_ac18bb49ac0fd116a691aeb25ea5ff8dd}{prt\+::\+Format\+Timestamp}} (const \mbox{\hyperlink{namespaceprt_ae74a28741beec5d2cd9d84fe207b89fb}{Timestamp}} ts, const std\+::string \&format) -\/$>$ std\+::string
+\end{DoxyCompactItemize}

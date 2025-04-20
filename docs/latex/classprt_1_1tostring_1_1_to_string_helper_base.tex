@@ -1,0 +1,129 @@
+\doxysection{prt\+::tostring\+::To\+String\+Helper\+Base Class Reference}
+\hypertarget{classprt_1_1tostring_1_1_to_string_helper_base}{}\label{classprt_1_1tostring_1_1_to_string_helper_base}\index{prt::tostring::ToStringHelperBase@{prt::tostring::ToStringHelperBase}}
+
+
+{\ttfamily \#include $<$to\+\_\+string.\+h$>$}
+
+
+
+Inheritance diagram for prt\+::tostring\+::To\+String\+Helper\+Base\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=240pt]{classprt_1_1tostring_1_1_to_string_helper_base__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_1_1_field}{Field}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_a1827269e4d5fe8fc073945ee7b513ec4}{Field\+List}} = std\+::vector$<$\mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_1_1_field}{Field}}$>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_abd311710074c5f6446eed3f30c1190c7}{\texorpdfstring{$\sim$}{\string~}\+To\+String\+Helper\+Base}} ()=default
+\item 
+virtual auto \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_ad21a629e26b711b3ddb474e4226502db}{To\+String}} () const -\/$>$ std\+::string
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_a37c19ae76943b6977a61fcb715c30e06}{To\+String\+Helper\+Base}} (\mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_a1827269e4d5fe8fc073945ee7b513ec4}{Field\+List}} fields)
+\item 
+\mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_a1d9f540bc7ce173ac96fa065d4369326}{To\+String\+Helper\+Base}} (const size\+\_\+t num\+\_\+fields=0)
+\item 
+void \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_a86d71d97f19c3c841a96e21cb96777d8}{Emplace\+Back\+Field}} (const \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_1_1_field_a2e8110fc545266b914a36a3a1dcd14ae}{Field\+::\+Name\+Supplier}} \&name, const \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_1_1_field_a11246e512a0ab1e97534cf3331a9f7b4}{Field\+::\+Value\+Supplier}} \&value)
+\item 
+virtual auto \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_ab6af6d1e16180b8605c8f4a0a4070732}{Get\+Typename}} () const -\/$>$ std\+::string=0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_a30965b702b0679ca6e409bd69f9dd016}{DEFINE\+\_\+\+DEFAULT\+\_\+\+COPYABLE\+\_\+\+TYPE}} (\mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base}{To\+String\+Helper\+Base}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_a1827269e4d5fe8fc073945ee7b513ec4}{Field\+List}} \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_a82db5fcce2246345fd0374e46e131cba}{fields\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classprt_1_1tostring_1_1_to_string_helper_base_a1827269e4d5fe8fc073945ee7b513ec4}\index{prt::tostring::ToStringHelperBase@{prt::tostring::ToStringHelperBase}!FieldList@{FieldList}}
+\index{FieldList@{FieldList}!prt::tostring::ToStringHelperBase@{prt::tostring::ToStringHelperBase}}
+\doxysubsubsection{\texorpdfstring{FieldList}{FieldList}}
+{\footnotesize\ttfamily \label{classprt_1_1tostring_1_1_to_string_helper_base_a1827269e4d5fe8fc073945ee7b513ec4} 
+using \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_a1827269e4d5fe8fc073945ee7b513ec4}{prt\+::tostring\+::\+To\+String\+Helper\+Base\+::\+Field\+List}} = std\+::vector$<$\mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_1_1_field}{Field}}$>$}
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1tostring_1_1_to_string_helper_base_a37c19ae76943b6977a61fcb715c30e06}\index{prt::tostring::ToStringHelperBase@{prt::tostring::ToStringHelperBase}!ToStringHelperBase@{ToStringHelperBase}}
+\index{ToStringHelperBase@{ToStringHelperBase}!prt::tostring::ToStringHelperBase@{prt::tostring::ToStringHelperBase}}
+\doxysubsubsection{\texorpdfstring{ToStringHelperBase()}{ToStringHelperBase()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1tostring_1_1_to_string_helper_base_a37c19ae76943b6977a61fcb715c30e06} 
+prt\+::tostring\+::\+To\+String\+Helper\+Base\+::\+To\+String\+Helper\+Base (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_a1827269e4d5fe8fc073945ee7b513ec4}{Field\+List}}}]{fields}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}, {\ttfamily [protected]}}
+
+\Hypertarget{classprt_1_1tostring_1_1_to_string_helper_base_a1d9f540bc7ce173ac96fa065d4369326}\index{prt::tostring::ToStringHelperBase@{prt::tostring::ToStringHelperBase}!ToStringHelperBase@{ToStringHelperBase}}
+\index{ToStringHelperBase@{ToStringHelperBase}!prt::tostring::ToStringHelperBase@{prt::tostring::ToStringHelperBase}}
+\doxysubsubsection{\texorpdfstring{ToStringHelperBase()}{ToStringHelperBase()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1tostring_1_1_to_string_helper_base_a1d9f540bc7ce173ac96fa065d4369326} 
+prt\+::tostring\+::\+To\+String\+Helper\+Base\+::\+To\+String\+Helper\+Base (\begin{DoxyParamCaption}\item[{const size\+\_\+t}]{num\+\_\+fields}{ = {\ttfamily 0}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}, {\ttfamily [protected]}}
+
+\Hypertarget{classprt_1_1tostring_1_1_to_string_helper_base_abd311710074c5f6446eed3f30c1190c7}\index{prt::tostring::ToStringHelperBase@{prt::tostring::ToStringHelperBase}!````~ToStringHelperBase@{\texorpdfstring{$\sim$}{\string~}ToStringHelperBase}}
+\index{````~ToStringHelperBase@{\texorpdfstring{$\sim$}{\string~}ToStringHelperBase}!prt::tostring::ToStringHelperBase@{prt::tostring::ToStringHelperBase}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ToStringHelperBase()}{\string~ToStringHelperBase()}}
+{\footnotesize\ttfamily \label{classprt_1_1tostring_1_1_to_string_helper_base_abd311710074c5f6446eed3f30c1190c7} 
+virtual prt\+::tostring\+::\+To\+String\+Helper\+Base\+::\texorpdfstring{$\sim$}{\string~}\+To\+String\+Helper\+Base (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1tostring_1_1_to_string_helper_base_a30965b702b0679ca6e409bd69f9dd016}\index{prt::tostring::ToStringHelperBase@{prt::tostring::ToStringHelperBase}!DEFINE\_DEFAULT\_COPYABLE\_TYPE@{DEFINE\_DEFAULT\_COPYABLE\_TYPE}}
+\index{DEFINE\_DEFAULT\_COPYABLE\_TYPE@{DEFINE\_DEFAULT\_COPYABLE\_TYPE}!prt::tostring::ToStringHelperBase@{prt::tostring::ToStringHelperBase}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_DEFAULT\_COPYABLE\_TYPE()}{DEFINE\_DEFAULT\_COPYABLE\_TYPE()}}
+{\footnotesize\ttfamily \label{classprt_1_1tostring_1_1_to_string_helper_base_a30965b702b0679ca6e409bd69f9dd016} 
+prt\+::tostring\+::\+To\+String\+Helper\+Base\+::\+DEFINE\+\_\+\+DEFAULT\+\_\+\+COPYABLE\+\_\+\+TYPE (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base}{To\+String\+Helper\+Base}}}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1tostring_1_1_to_string_helper_base_a86d71d97f19c3c841a96e21cb96777d8}\index{prt::tostring::ToStringHelperBase@{prt::tostring::ToStringHelperBase}!EmplaceBackField@{EmplaceBackField}}
+\index{EmplaceBackField@{EmplaceBackField}!prt::tostring::ToStringHelperBase@{prt::tostring::ToStringHelperBase}}
+\doxysubsubsection{\texorpdfstring{EmplaceBackField()}{EmplaceBackField()}}
+{\footnotesize\ttfamily \label{classprt_1_1tostring_1_1_to_string_helper_base_a86d71d97f19c3c841a96e21cb96777d8} 
+void prt\+::tostring\+::\+To\+String\+Helper\+Base\+::\+Emplace\+Back\+Field (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_1_1_field_a2e8110fc545266b914a36a3a1dcd14ae}{Field\+::\+Name\+Supplier}} \&}]{name}{, }\item[{const \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_1_1_field_a11246e512a0ab1e97534cf3331a9f7b4}{Field\+::\+Value\+Supplier}} \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+\Hypertarget{classprt_1_1tostring_1_1_to_string_helper_base_ab6af6d1e16180b8605c8f4a0a4070732}\index{prt::tostring::ToStringHelperBase@{prt::tostring::ToStringHelperBase}!GetTypename@{GetTypename}}
+\index{GetTypename@{GetTypename}!prt::tostring::ToStringHelperBase@{prt::tostring::ToStringHelperBase}}
+\doxysubsubsection{\texorpdfstring{GetTypename()}{GetTypename()}}
+{\footnotesize\ttfamily \label{classprt_1_1tostring_1_1_to_string_helper_base_ab6af6d1e16180b8605c8f4a0a4070732} 
+virtual auto prt\+::tostring\+::\+To\+String\+Helper\+Base\+::\+Get\+Typename (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$  std\+::string\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_af3d7783d81285815e70c43663cd6d69f}{prt\+::tostring\+::\+To\+String\+Helper$<$ T $>$}}.
+
+\Hypertarget{classprt_1_1tostring_1_1_to_string_helper_base_ad21a629e26b711b3ddb474e4226502db}\index{prt::tostring::ToStringHelperBase@{prt::tostring::ToStringHelperBase}!ToString@{ToString}}
+\index{ToString@{ToString}!prt::tostring::ToStringHelperBase@{prt::tostring::ToStringHelperBase}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily \label{classprt_1_1tostring_1_1_to_string_helper_base_ad21a629e26b711b3ddb474e4226502db} 
+auto prt\+::tostring\+::\+To\+String\+Helper\+Base\+::\+To\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ std\+::string\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1tostring_1_1_to_string_helper_base_a82db5fcce2246345fd0374e46e131cba}\index{prt::tostring::ToStringHelperBase@{prt::tostring::ToStringHelperBase}!fields\_@{fields\_}}
+\index{fields\_@{fields\_}!prt::tostring::ToStringHelperBase@{prt::tostring::ToStringHelperBase}}
+\doxysubsubsection{\texorpdfstring{fields\_}{fields\_}}
+{\footnotesize\ttfamily \label{classprt_1_1tostring_1_1_to_string_helper_base_a82db5fcce2246345fd0374e46e131cba} 
+\mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_a1827269e4d5fe8fc073945ee7b513ec4}{Field\+List}} prt\+::tostring\+::\+To\+String\+Helper\+Base\+::fields\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{to__string_8h}{to\+\_\+string.\+h}}\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{to__string_8cc}{to\+\_\+string.\+cc}}\end{DoxyCompactItemize}

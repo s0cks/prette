@@ -1,0 +1,115 @@
+\doxysection{crash\+\_\+report.\+h}
+\hypertarget{crash__report_8h_source}{}\label{crash__report_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/crash\_report.h@{/Users/tazz/Projects/prette/Sources/prette/crash\_report.h}}
+\mbox{\hyperlink{crash__report_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_CRASH\_REPORT\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_CRASH\_REPORT\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <backward.hpp>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <exception>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <ostream>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <utility>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{common_8h}{prette/common.h}}"{}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00012\ \textcolor{keyword}{using\ }backward::StackTrace;}
+\DoxyCodeLine{00013\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceprt_acc736f72f064aa43e9e2eb941c309196}{ColorMode}}\ =\ backward::ColorMode::type;}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_crash_report_cause}{CrashReportCause}}\ \{}
+\DoxyCodeLine{00016\ \ \ \mbox{\hyperlink{classprt_1_1_crash_report_cause_a589a8b07d85c1dd799c515f4a5a1790e}{DEFINE\_NON\_COPYABLE\_TYPE}}(\mbox{\hyperlink{classprt_1_1_crash_report_cause}{CrashReportCause}});}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00019\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_crash_report_cause_a236da37a5d9c90fc786aa8a3dc0f8f48}{kDefaultDepth}}\ =\ 32;}
+\DoxyCodeLine{00020\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_crash_report_cause_a3a9af7dfb9fd26456c3ce1235349e75c}{kDefaultOffset}}\ =\ 13;}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00023\ \ \ std::exception\_ptr\ \mbox{\hyperlink{classprt_1_1_crash_report_cause_ae82948943fa9b7fd6a4e53a380c6670e}{cause\_}};}
+\DoxyCodeLine{00024\ \ \ StackTrace\ \mbox{\hyperlink{classprt_1_1_crash_report_cause_aedec4853f83f4a328a8cda242d541248}{trace\_}};}
+\DoxyCodeLine{00025\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classprt_1_1_crash_report_cause_a7c1f32d1a7eb36617099eaf8f1b8033f}{depth\_}};}
+\DoxyCodeLine{00026\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classprt_1_1_crash_report_cause_a866dc7fb6c08bbe58faf837e409a3658}{offset\_}};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_crash_report_cause_a1627ada7adef2f31f586555fc48a4c74}{LoadTrace}}()\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_crash_report_cause_aedec4853f83f4a328a8cda242d541248}{trace\_}}.load\_here(\mbox{\hyperlink{classprt_1_1_crash_report_cause_a2b3b000f6256ce9317a70e97a0f06f54}{GetDepth}}());}
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_crash_report_cause_aedec4853f83f4a328a8cda242d541248}{trace\_}}.skip\_n\_firsts(\mbox{\hyperlink{classprt_1_1_crash_report_cause_a76b0ac42e563de1ecdaf4cc491e3f72e}{GetOffset}}());}
+\DoxyCodeLine{00031\ \ \ \}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00034\ \ \ \mbox{\hyperlink{classprt_1_1_crash_report_cause_a84d6d53befac413a7170a2f173010b73}{CrashReportCause}}()\ :}
+\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_crash_report_cause_ae82948943fa9b7fd6a4e53a380c6670e}{cause\_}}(nullptr),}
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_crash_report_cause_aedec4853f83f4a328a8cda242d541248}{trace\_}}(),}
+\DoxyCodeLine{00037\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_crash_report_cause_a7c1f32d1a7eb36617099eaf8f1b8033f}{depth\_}}(\mbox{\hyperlink{classprt_1_1_crash_report_cause_a236da37a5d9c90fc786aa8a3dc0f8f48}{kDefaultDepth}}),}
+\DoxyCodeLine{00038\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_crash_report_cause_a866dc7fb6c08bbe58faf837e409a3658}{offset\_}}(\mbox{\hyperlink{classprt_1_1_crash_report_cause_a3a9af7dfb9fd26456c3ce1235349e75c}{kDefaultOffset}})\ \{\}}
+\DoxyCodeLine{00039\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_crash_report_cause_a9151147ee70143da186fffcfdeb12196}{CrashReportCause}}(\textcolor{keyword}{const}\ std::exception\_ptr\&\ cause,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ depth\ =\ \mbox{\hyperlink{classprt_1_1_crash_report_cause_a236da37a5d9c90fc786aa8a3dc0f8f48}{kDefaultDepth}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ offset\ =\ \mbox{\hyperlink{classprt_1_1_crash_report_cause_a3a9af7dfb9fd26456c3ce1235349e75c}{kDefaultOffset}})\ :}
+\DoxyCodeLine{00040\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_crash_report_cause_ae82948943fa9b7fd6a4e53a380c6670e}{cause\_}}(cause),}
+\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_crash_report_cause_aedec4853f83f4a328a8cda242d541248}{trace\_}}(),}
+\DoxyCodeLine{00042\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_crash_report_cause_a7c1f32d1a7eb36617099eaf8f1b8033f}{depth\_}}(depth),}
+\DoxyCodeLine{00043\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_crash_report_cause_a866dc7fb6c08bbe58faf837e409a3658}{offset\_}}(offset)\ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classprt_1_1_crash_report_cause_a7c1f32d1a7eb36617099eaf8f1b8033f}{depth\_}}\ <\ \mbox{\hyperlink{classprt_1_1_crash_report_cause_a866dc7fb6c08bbe58faf837e409a3658}{offset\_}})}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_crash_report_cause_a7c1f32d1a7eb36617099eaf8f1b8033f}{depth\_}}\ =\ (\mbox{\hyperlink{classprt_1_1_crash_report_cause_a866dc7fb6c08bbe58faf837e409a3658}{offset\_}}\ +\ \mbox{\hyperlink{classprt_1_1_crash_report_cause_a7c1f32d1a7eb36617099eaf8f1b8033f}{depth\_}});}
+\DoxyCodeLine{00046\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_crash_report_cause_a1627ada7adef2f31f586555fc48a4c74}{LoadTrace}}();}
+\DoxyCodeLine{00047\ \ \ \}}
+\DoxyCodeLine{00048\ \ \ \mbox{\hyperlink{classprt_1_1_crash_report_cause_adf01657cbe93727d9f7926a384dd0e12}{\string~CrashReportCause}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_crash_report_cause_a517c9967dfc135ccf4c9c7c1b822aef1}{GetException}}()\ const\ -\/>\ const\ \mbox{\hyperlink{namespacestd}{std}}::exception\_ptr\&\ \{}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_crash_report_cause_ae82948943fa9b7fd6a4e53a380c6670e}{cause\_}};}
+\DoxyCodeLine{00052\ \ \ \}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_crash_report_cause_a6a5c9d8224b94e38d64bc30fdfddb0be}{GetTrace}}()\ const\ -\/>\ const\ StackTrace\&\ \{}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_crash_report_cause_aedec4853f83f4a328a8cda242d541248}{trace\_}};}
+\DoxyCodeLine{00056\ \ \ \}}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_crash_report_cause_a2b3b000f6256ce9317a70e97a0f06f54}{GetDepth}}()\ const\ -\/>\ \textcolor{keywordtype}{int}\ \{}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_crash_report_cause_a7c1f32d1a7eb36617099eaf8f1b8033f}{depth\_}};}
+\DoxyCodeLine{00060\ \ \ \}}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_crash_report_cause_a76b0ac42e563de1ecdaf4cc491e3f72e}{GetOffset}}()\ const\ -\/>\ \textcolor{keywordtype}{int}\ \{}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_crash_report_cause_a866dc7fb6c08bbe58faf837e409a3658}{offset\_}};}
+\DoxyCodeLine{00064\ \ \ \}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_crash_report_cause_a495cfe9e628393de8b9f1c9360671748}{operator=}}(\textcolor{keyword}{const}\ std::exception\_ptr\&\ cause)\ -\/>\ \mbox{\hyperlink{classprt_1_1_crash_report_cause}{CrashReportCause}}\&\ \{}
+\DoxyCodeLine{00067\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_crash_report_cause_ae82948943fa9b7fd6a4e53a380c6670e}{cause\_}}\ =\ cause;}
+\DoxyCodeLine{00068\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_crash_report_cause_a1627ada7adef2f31f586555fc48a4c74}{LoadTrace}}();}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00070\ \ \ \}}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \textcolor{keyword}{explicit}\ \textcolor{keyword}{operator}\ bool()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keywordtype}{bool})\mbox{\hyperlink{classprt_1_1_crash_report_cause_ae82948943fa9b7fd6a4e53a380c6670e}{cause\_}};}
+\DoxyCodeLine{00074\ \ \ \}}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00077\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_crash_report_cause_ad3290263dfb383c2b0207bee29403f06}{New}}(\textcolor{keyword}{const}\ std::exception\_ptr\&\ cause,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ depth\ =\ \mbox{\hyperlink{classprt_1_1_crash_report_cause_a236da37a5d9c90fc786aa8a3dc0f8f48}{kDefaultDepth}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ offset\ =\ \mbox{\hyperlink{classprt_1_1_crash_report_cause_a3a9af7dfb9fd26456c3ce1235349e75c}{kDefaultOffset}})}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ -\/>\ std::shared\_ptr<CrashReportCause>\ \{}
+\DoxyCodeLine{00079\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(cause);}
+\DoxyCodeLine{00080\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(depth\ >=\ 1);}
+\DoxyCodeLine{00081\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(offset\ >=\ 0);}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordflow}{return}\ std::make\_shared<CrashReportCause>(cause,\ depth,\ offset);}
+\DoxyCodeLine{00083\ \ \ \}}
+\DoxyCodeLine{00084\ \};}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_crash_report}{CrashReport}}\ \{}
+\DoxyCodeLine{00087\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00088\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_crash_report_a9760f34a0a306452fb4b6558c6f6e21e}{kDefaultColorMode}}\ =\ ColorMode::always;}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00091\ \ \ std::shared\_ptr<CrashReportCause>\ \mbox{\hyperlink{classprt_1_1_crash_report_ad9b5f9c2327465398143e45b1f08f228}{cause\_}};}
+\DoxyCodeLine{00092\ \ \ \mbox{\hyperlink{namespaceprt_acc736f72f064aa43e9e2eb941c309196}{ColorMode}}\ \mbox{\hyperlink{classprt_1_1_crash_report_aecd96760300abb6403a29c9ff9df8b5f}{color\_mode\_}};}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_crash_report_ab17d5bc4dff50ef4c263afad3d5e0a6d}{PrintStackTrace}}(std::ostream\&\ stream);}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00097\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_crash_report_a413c0b364b7053560890dff2d98c5030}{CrashReport}}(std::shared\_ptr<CrashReportCause>\ cause,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_acc736f72f064aa43e9e2eb941c309196}{ColorMode}}\ color\_mode\ =\ \mbox{\hyperlink{classprt_1_1_crash_report_a9760f34a0a306452fb4b6558c6f6e21e}{kDefaultColorMode}})\ :}
+\DoxyCodeLine{00098\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_crash_report_aecd96760300abb6403a29c9ff9df8b5f}{color\_mode\_}}(color\_mode),}
+\DoxyCodeLine{00099\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_crash_report_ad9b5f9c2327465398143e45b1f08f228}{cause\_}}(\mbox{\hyperlink{namespacestd}{std}}::move(cause))\ \{\}}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_crash_report_a206232e21d9452ace9e1db6539994797}{GetColorMode}}()\ const\ -\/>\ \mbox{\hyperlink{namespaceprt_acc736f72f064aa43e9e2eb941c309196}{ColorMode}}\ \{}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_crash_report_aecd96760300abb6403a29c9ff9df8b5f}{color\_mode\_}};}
+\DoxyCodeLine{00103\ \ \ \}}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_crash_report_a4ae98abdc690b0abe36dde77e7a2377d}{Print}}(std::ostream\&\ stream\ =\ std::cerr);}
+\DoxyCodeLine{00106\ \};}
+\DoxyCodeLine{00107\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_CRASH\_REPORT\_H}}
+
+\end{DoxyCode}

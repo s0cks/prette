@@ -1,0 +1,118 @@
+\doxysection{file\+\_\+resolver.\+h}
+\hypertarget{file__resolver_8h_source}{}\label{file__resolver_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/file\_resolver.h@{/Users/tazz/Projects/prette/Sources/prette/file\_resolver.h}}
+\mbox{\hyperlink{file__resolver_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_FILE\_RESOLVER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_FILE\_RESOLVER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <optional>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <filesystem>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <fmt/format.h>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <unordered\_set>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <glog/logging.h>}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{rx_8h}{prette/rx.h}}"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{common_8h}{prette/common.h}}"{}}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{\ \textcolor{comment}{//TODO:\ cleanup}}
+\DoxyCodeLine{00016\ \ \ \textcolor{keyword}{namespace\ }fs\ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{using\ namespace\ }std::filesystem;}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}}
+\DoxyCodeLine{00020\ \ \ \ \ IsRegularFile(\textcolor{keyword}{const}\ directory\_entry\&\ entry)\ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ entry.is\_regular\_file();}
+\DoxyCodeLine{00022\ \ \ \ \ \}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}}
+\DoxyCodeLine{00025\ \ \ \ \ IsDirectory(\textcolor{keyword}{const}\ directory\_entry\&\ entry)\ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ entry.is\_directory();}
+\DoxyCodeLine{00027\ \ \ \ \ \}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ std::string}
+\DoxyCodeLine{00030\ \ \ \ \ ToPath(\textcolor{keyword}{const}\ directory\_entry\&\ entry)\ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keyword}{const}\ std::string\&)\ entry.path();}
+\DoxyCodeLine{00032\ \ \ \ \ \}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ std::string}
+\DoxyCodeLine{00035\ \ \ \ \ GetExtension(\textcolor{keyword}{const}\ directory\_entry\&\ entry)\ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ path\ =\ ToPath(entry);}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ dotpos\ =\ path.find\_last\_of(\textcolor{charliteral}{'.'});}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(dotpos\ ==\ std::string::npos)}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\};}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ path.substr(dotpos);}
+\DoxyCodeLine{00041\ \ \ \ \ \}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{template}<const\ \textcolor{keywordtype}{bool}\ IsRecursive\ =\ false>}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ rx::observable<directory\_entry>}
+\DoxyCodeLine{00045\ \ \ \ \ ListAllInDirectory(\textcolor{keyword}{const}\ std::string\&\ dir)\ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(!FileExists(dir))\ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ err\ =\ fmt::format(\textcolor{stringliteral}{"{}cannot\ ls\ directory\ \{0:s\},\ directory\ doesn't\ exist"{}},\ dir);}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ rx::observable<>::error<directory\_entry>(std::runtime\_error(err));}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ rx::observable<>::create<directory\_entry>([dir](rx::subscriber<directory\_entry>\ s)\ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(IsRecursive)\ \{}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ entry\ :\ recursive\_directory\_iterator(dir))}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ s.on\_next(entry);}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ entry\ :\ directory\_iterator(dir))}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ s.on\_next(entry);}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ s.on\_completed();}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \});}
+\DoxyCodeLine{00061\ \ \ \ \ \}}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keyword}{template}<const\ \textcolor{keywordtype}{bool}\ IsRecursive\ =\ false>}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ rx::observable<directory\_entry>}
+\DoxyCodeLine{00065\ \ \ \ \ ListFilesInDirectory(\textcolor{keyword}{const}\ std::string\&\ dir)\ \{}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ListAllInDirectory<IsRecursive>(dir)}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ .filter(IsRegularFile);}
+\DoxyCodeLine{00068\ \ \ \ \ \}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keyword}{template}<const\ \textcolor{keywordtype}{bool}\ IsRecursive\ =\ false>}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ rx::observable<directory\_entry>}
+\DoxyCodeLine{00072\ \ \ \ \ ListDirsInDirectory(\textcolor{keyword}{const}\ std::string\&\ dir)\ \{}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ListAllInDirectory<IsRecursive>(dir)}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ .filter(IsDirectory);}
+\DoxyCodeLine{00075\ \ \ \ \ \}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}}
+\DoxyCodeLine{00078\ \ \ \ \ SanitizeFileExtension(std::string\&\ extension)\ \{}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(extension[0]\ ==\ \textcolor{charliteral}{'.'})}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ extension\ =\ extension.substr(1);}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ ToLowercase(extension);}
+\DoxyCodeLine{00082\ \ \ \ \ \}}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ std::function<bool(\textcolor{keyword}{const}\ directory\_entry)>}
+\DoxyCodeLine{00085\ \ \ \ \ FilterByExtension(\textcolor{keyword}{const}\ std::set<std::string>\&\ extensions)\ \{}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ [\&extensions](\textcolor{keyword}{const}\ directory\_entry\ entry)\ \{}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ path\ =\ entry.path();}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(!path.has\_extension())}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ extension\ =\ path.extension().string();}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ SanitizeFileExtension(extension);}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ pos\ =\ extensions.find(extension);}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ pos\ !=\ extensions.end();}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00095\ \ \ \ \ \}}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ std::function<bool(\textcolor{keyword}{const}\ directory\_entry)>}
+\DoxyCodeLine{00098\ \ \ \ \ FilterByExtension(\textcolor{keyword}{const}\ std::unordered\_set<std::string>\&\ extensions)\ \{}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ [\&extensions](\textcolor{keyword}{const}\ directory\_entry\ entry)\ \{}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ path\ =\ entry.path();}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(!path.has\_extension())}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ extension\ =\ (std::string)\ path.extension();}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ SanitizeFileExtension(extension);}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ pos\ =\ extensions.find(extension);}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ pos\ !=\ extensions.end();}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00108\ \ \ \ \ \}}
+\DoxyCodeLine{00109\ \ \ \}}
+\DoxyCodeLine{00110\ \}}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//PRT\_FILE\_RESOLVER\_H}}
+
+\end{DoxyCode}

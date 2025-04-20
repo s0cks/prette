@@ -1,0 +1,118 @@
+\doxysection{/\+Users/tazz/\+Projects/prette/\+Sources/prette/renderer.cc File Reference}
+\hypertarget{renderer_8cc}{}\label{renderer_8cc}\index{/Users/tazz/Projects/prette/Sources/prette/renderer.cc@{/Users/tazz/Projects/prette/Sources/prette/renderer.cc}}
+{\ttfamily \#include "{}prette/renderer.\+h"{}}\newline
+{\ttfamily \#include $<$easing.\+h$>$}\newline
+{\ttfamily \#include $<$imgui\+\_\+impl\+\_\+vulkan.\+h$>$}\newline
+{\ttfamily \#include $<$mach/clock\+\_\+types.\+h$>$}\newline
+{\ttfamily \#include $<$tweeny.\+h$>$}\newline
+{\ttfamily \#include $<$vulkan/vulkan\+\_\+core.\+h$>$}\newline
+{\ttfamily \#include $<$glm/ext/matrix\+\_\+clip\+\_\+space.\+hpp$>$}\newline
+{\ttfamily \#include "{}prette/camera.\+h"{}}\newline
+{\ttfamily \#include "{}prette/engine.\+h"{}}\newline
+{\ttfamily \#include "{}prette/gfx.\+h"{}}\newline
+{\ttfamily \#include "{}prette/gfx\+\_\+driver.\+h"{}}\newline
+{\ttfamily \#include "{}prette/gfx\+\_\+vk.\+h"{}}\newline
+{\ttfamily \#include "{}prette/gui.\+h"{}}\newline
+{\ttfamily \#include "{}prette/lua.\+h"{}}\newline
+{\ttfamily \#include "{}prette/lua\+\_\+event.\+h"{}}\newline
+{\ttfamily \#include "{}prette/pipeline.\+h"{}}\newline
+{\ttfamily \#include "{}prette/relaxed\+\_\+atomic.\+h"{}}\newline
+{\ttfamily \#include "{}prette/scene\+\_\+renderer.\+h"{}}\newline
+{\ttfamily \#include "{}prette/swapchain.\+h"{}}\newline
+{\ttfamily \#include "{}prette/to\+\_\+string.\+h"{}}\newline
+{\ttfamily \#include "{}prette/window.\+h"{}}\newline
+Include dependency graph for renderer.\+cc\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{renderer_8cc__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1_renderer_module}{prt\+::\+Renderer\+Module}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceprt}{prt}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{renderer_8cc_afdcfae2b22c2f46c54e2f06702b49d5d}{LUA\+\_\+\+RENDERER\+\_\+F}}(Name)
+\item 
+\#define \mbox{\hyperlink{renderer_8cc_a883bc9ae9206c92ed074a39a9a30192a}{DEFINE\+\_\+\+ON\+\_\+\+EVENT\+\_\+\+FUNC}}(Name)
+\item 
+\#define \mbox{\hyperlink{renderer_8cc_afdcfae2b22c2f46c54e2f06702b49d5d}{LUA\+\_\+\+RENDERER\+\_\+F}}(Name)
+\item 
+\#define \mbox{\hyperlink{renderer_8cc_a2672365a233e0c9f3c1ccb0d78388308}{DEFINE\+\_\+\+ON\+\_\+\+EVENT}}(Name)
+\item 
+\#define \mbox{\hyperlink{renderer_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}}~lstate-\/$>$Get\+State()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+auto \mbox{\hyperlink{namespaceprt_a59fc17725eff26f75ccc5fc0964c7846}{prt\+::\+On\+Renderer\+Event}} () -\/$>$ Renderer\+Event\+Observable
+\item 
+\mbox{\hyperlink{namespaceprt_a58faba03d1617291249320ff7eae246c}{prt\+::\+LUA\+\_\+\+RENDERER\+\_\+F}} (on\+Event)
+\item 
+\mbox{\hyperlink{namespaceprt_a50fd62542de32dd3e6a6d37abcff1911}{prt\+::\+FOR\+\_\+\+EACH\+\_\+\+RENDERER\+\_\+\+EVENT}} (\mbox{\hyperlink{engine_8cc_a883bc9ae9206c92ed074a39a9a30192a}{DEFINE\+\_\+\+ON\+\_\+\+EVENT\+\_\+\+FUNC}})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{renderer_8cc_a2672365a233e0c9f3c1ccb0d78388308}\index{renderer.cc@{renderer.cc}!DEFINE\_ON\_EVENT@{DEFINE\_ON\_EVENT}}
+\index{DEFINE\_ON\_EVENT@{DEFINE\_ON\_EVENT}!renderer.cc@{renderer.cc}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_ON\_EVENT}{DEFINE\_ON\_EVENT}}
+{\footnotesize\ttfamily \label{renderer_8cc_a2672365a233e0c9f3c1ccb0d78388308} 
+\#define DEFINE\+\_\+\+ON\+\_\+\+EVENT(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{renderer_8cc_afdcfae2b22c2f46c54e2f06702b49d5d}{LUA\_RENDERER\_F}}(on\#\#Name\#\#Event),}
+
+\end{DoxyCode}
+\Hypertarget{renderer_8cc_a883bc9ae9206c92ed074a39a9a30192a}\index{renderer.cc@{renderer.cc}!DEFINE\_ON\_EVENT\_FUNC@{DEFINE\_ON\_EVENT\_FUNC}}
+\index{DEFINE\_ON\_EVENT\_FUNC@{DEFINE\_ON\_EVENT\_FUNC}!renderer.cc@{renderer.cc}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_ON\_EVENT\_FUNC}{DEFINE\_ON\_EVENT\_FUNC}}
+{\footnotesize\ttfamily \label{renderer_8cc_a883bc9ae9206c92ed074a39a9a30192a} 
+\#define DEFINE\+\_\+\+ON\+\_\+\+EVENT\+\_\+\+FUNC(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{renderer_8cc_afdcfae2b22c2f46c54e2f06702b49d5d}{LUA\_RENDERER\_F}}(on\#\#Name\#\#Event)\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ On\#\#Name\#\#Event().subscribe(CreateSubscriber<Name\#\#Event>(\mbox{\hyperlink{renderer_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}}));\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{renderer_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}\index{renderer.cc@{renderer.cc}!L@{L}}
+\index{L@{L}!renderer.cc@{renderer.cc}}
+\doxysubsubsection{\texorpdfstring{L}{L}}
+{\footnotesize\ttfamily \label{renderer_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53} 
+\#define L~lstate-\/$>$Get\+State()}
+
+\Hypertarget{renderer_8cc_afdcfae2b22c2f46c54e2f06702b49d5d}\index{renderer.cc@{renderer.cc}!LUA\_RENDERER\_F@{LUA\_RENDERER\_F}}
+\index{LUA\_RENDERER\_F@{LUA\_RENDERER\_F}!renderer.cc@{renderer.cc}}
+\doxysubsubsection{\texorpdfstring{LUA\_RENDERER\_F}{LUA\_RENDERER\_F}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{renderer_8cc_afdcfae2b22c2f46c54e2f06702b49d5d} 
+\#define LUA\+\_\+\+RENDERER\+\_\+F(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{lua_8h_a4c3a947c2f5c2f6244ffac8dfa005527}{LUA\_F}}(renderer\_\#\#Name)}
+
+\end{DoxyCode}
+\Hypertarget{renderer_8cc_afdcfae2b22c2f46c54e2f06702b49d5d}\index{renderer.cc@{renderer.cc}!LUA\_RENDERER\_F@{LUA\_RENDERER\_F}}
+\index{LUA\_RENDERER\_F@{LUA\_RENDERER\_F}!renderer.cc@{renderer.cc}}
+\doxysubsubsection{\texorpdfstring{LUA\_RENDERER\_F}{LUA\_RENDERER\_F}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{renderer_8cc_afdcfae2b22c2f46c54e2f06702b49d5d} 
+\#define LUA\+\_\+\+RENDERER\+\_\+F(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \{\ .name\ =\ \#Name,\ .func\ =\ \&lua\_renderer\_\#\#Name\ \}}
+
+\end{DoxyCode}

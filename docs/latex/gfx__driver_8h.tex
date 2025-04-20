@@ -1,0 +1,57 @@
+\doxysection{/\+Users/tazz/\+Projects/prette/\+Sources/prette/gfx\+\_\+driver.h File Reference}
+\hypertarget{gfx__driver_8h}{}\label{gfx__driver_8h}\index{/Users/tazz/Projects/prette/Sources/prette/gfx\_driver.h@{/Users/tazz/Projects/prette/Sources/prette/gfx\_driver.h}}
+{\ttfamily \#include "{}prette/gfx\+\_\+driver\+\_\+event.\+h"{}}\newline
+Include dependency graph for gfx\+\_\+driver.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{gfx__driver_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{gfx__driver_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1_driver_base}{prt\+::\+Driver\+Base}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceprt}{prt}}
+\item 
+namespace \mbox{\hyperlink{namespaceprt_1_1engine}{prt\+::engine}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{gfx__driver_8h_acc112ec5265a9ab254dc3c6e9c23d1ee}{DEFINE\+\_\+\+ON\+\_\+\+DRIVER\+\_\+\+EVENT}}(Name)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+auto \mbox{\hyperlink{namespaceprt_a36d337888521b9ff8f3dea3e3dc5ac4c}{prt\+::\+On\+Driver\+Event}} () -\/$>$ Driver\+Event\+Observable
+\item 
+\mbox{\hyperlink{namespaceprt_a353e6504fbc49d6a27a39ce6eccf9665}{prt\+::\+FOR\+\_\+\+EACH\+\_\+\+DRIVER\+\_\+\+EVENT}} (\mbox{\hyperlink{gfx__driver_8h_acc112ec5265a9ab254dc3c6e9c23d1ee}{DEFINE\+\_\+\+ON\+\_\+\+DRIVER\+\_\+\+EVENT}})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{gfx__driver_8h_acc112ec5265a9ab254dc3c6e9c23d1ee}\index{gfx\_driver.h@{gfx\_driver.h}!DEFINE\_ON\_DRIVER\_EVENT@{DEFINE\_ON\_DRIVER\_EVENT}}
+\index{DEFINE\_ON\_DRIVER\_EVENT@{DEFINE\_ON\_DRIVER\_EVENT}!gfx\_driver.h@{gfx\_driver.h}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_ON\_DRIVER\_EVENT}{DEFINE\_ON\_DRIVER\_EVENT}}
+{\footnotesize\ttfamily \label{gfx__driver_8h_acc112ec5265a9ab254dc3c6e9c23d1ee} 
+\#define DEFINE\+\_\+\+ON\+\_\+\+DRIVER\+\_\+\+EVENT(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ On\#\#Name\#\#Event()-\/>Name\#\#EventObservable\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ OnDriverEvent().filter(Name\#\#Event::Filter).map(Name\#\#Event::Cast);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCode}

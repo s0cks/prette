@@ -2,181 +2,183 @@
 #define PRT_DIMENSION_H
 
 #include <fmt/format.h>
+#include <vulkan/vulkan_core.h>
+
 #include "prette/glm.h"
+#include "prette/lua.h"
 #include "prette/parser.h"
 
 namespace prt {
-  using RawDimension = glm::i32vec2;
-  class Dimension {
-    static constexpr const auto kWidthComponent = 0;
-    static constexpr const auto kHeightComponent = 1;
-  public:
-    static inline auto
-    CompareArea(const Dimension& lhs, const Dimension& rhs) -> int {
-      const auto larea = lhs.width() * rhs.height();
-      const auto rarea = rhs.width() * rhs.height();
-      if(larea < rarea) {
-        return -1;
-      } else if(larea > rarea) {
-        return +1;
-      }
-      return 0;
-    }
+using RawDimension = glm::u32vec2;
+class Dimension {
+  static constexpr const auto kWidthComponent = 0;
+  static constexpr const auto kHeightComponent = 1;
 
-    static inline auto
-    CompareWidth(const Dimension& lhs, const Dimension& rhs) -> int {
-      if(lhs.width() < rhs.width()) {
-        return -1;
-      } else if(lhs.width() > rhs.width()) {
-        return +1;
-      }
-      return 0;
+ public:
+  static inline auto CompareArea(const Dimension& lhs, const Dimension& rhs) -> int {
+    const auto larea = lhs.width() * rhs.height();
+    const auto rarea = rhs.width() * rhs.height();
+    if (larea < rarea) {
+      return -1;
+    } else if (larea > rarea) {
+      return +1;
     }
+    return 0;
+  }
 
-    static inline auto
-    CompareHeight(const Dimension& lhs, const Dimension& rhs) -> int {
-      if(lhs.height() < rhs.height()) {
-        return -1;
-      } else if(lhs.height() > rhs.height()) {
-        return +1;
-      }
-      return 0;
+  static inline auto CompareWidth(const Dimension& lhs, const Dimension& rhs) -> int {
+    if (lhs.width() < rhs.width()) {
+      return -1;
+    } else if (lhs.width() > rhs.width()) {
+      return +1;
     }
+    return 0;
+  }
 
-    static inline auto
-    Compare(const Dimension& lhs, const Dimension& rhs) -> int {
-      int result = 0;
-      if((result = CompareArea(lhs, rhs)) != 0)
-        return result;
-      if((result = CompareWidth(lhs, rhs)) != 0)
-        return result;
-      if((result = CompareHeight(lhs, rhs)) != 0)
-        return result;
-      return 0;
+  static inline auto CompareHeight(const Dimension& lhs, const Dimension& rhs) -> int {
+    if (lhs.height() < rhs.height()) {
+      return -1;
+    } else if (lhs.height() > rhs.height()) {
+      return +1;
     }
-  private:
-    RawDimension data_;
-  public:
-    Dimension() = default;
-    explicit Dimension(const RawDimension& value):
-      data_(value) {  
-    }
-    Dimension(const int32_t width, const int32_t height):
-      data_(width, height) {
-    }
-    explicit Dimension(const std::string& value);
-    Dimension(const Dimension& rhs) = default;
-    Dimension(const Dimension&& rhs) = delete;
-    ~Dimension() = default;
+    return 0;
+  }
 
-    inline auto data() const -> const RawDimension& {
-      return data_;
-    }
+  static inline auto Compare(const Dimension& lhs, const Dimension& rhs) -> int {
+    int result = 0;
+    if ((result = CompareArea(lhs, rhs)) != 0)
+      return result;
+    if ((result = CompareWidth(lhs, rhs)) != 0)
+      return result;
+    if ((result = CompareHeight(lhs, rhs)) != 0)
+      return result;
+    return 0;
+  }
 
-    auto width() -> int32_t& {
-      return data_[kWidthComponent];
-    }
+ private:
+  RawDimension data_;
 
-    auto width() const -> const int32_t& {
-      return data_[kWidthComponent];
-    }
+ public:
+  Dimension() = default;
+  explicit Dimension(const RawDimension& value) :
+    data_(value) {}
+  Dimension(const uint32_t width, const uint32_t height) :
+    data_(width, height) {}
+  explicit Dimension(const std::string& value);
+  Dimension(const Dimension& rhs) = default;
+  Dimension(const Dimension&& rhs) = delete;
+  ~Dimension() = default;
 
-    auto height() -> int32_t& {
-      return data_[kHeightComponent];
-    }
+  inline auto data() const -> const RawDimension& {
+    return data_;
+  }
 
-    auto height() const -> const int32_t& {
-      return data_[kHeightComponent];
-    }
+  auto width() -> uint32_t& {
+    return data_[kWidthComponent];
+  }
 
-    auto operator=(Dimension&& rhs) -> Dimension& = default;
-    auto operator=(const Dimension& rhs) -> Dimension& = default;
+  auto width() const -> const uint32_t& {
+    return data_[kWidthComponent];
+  }
 
-    operator std::string() const {
-      return fmt::format("{0:d}x{1:d}", width(), height());
-    }
+  auto height() -> uint32_t& {
+    return data_[kHeightComponent];
+  }
 
-    auto operator==(const Dimension& rhs) const -> bool {
-      return width() == rhs.width()
-          && height() == rhs.height();
-    }
+  auto height() const -> const uint32_t& {
+    return data_[kHeightComponent];
+  }
 
-    auto operator!=(const Dimension& rhs) const -> bool {
-      return width() != rhs.width()
-          || height() != rhs.height();
-    }
+  auto GetAspectRatio() const -> float {
+    return static_cast<float>(width()) / static_cast<float>(height());
+  }
 
-    auto operator<(const Dimension& rhs) const -> bool {
-      return Compare(*this, rhs) < 0;
-    }
+  auto operator=(Dimension&& rhs) -> Dimension& = default;
+  auto operator=(const Dimension& rhs) -> Dimension& = default;
 
-    auto operator>(const Dimension& rhs) const -> bool {
-      return Compare(*this, rhs) > 0;
-    }
+  operator std::string() const {
+    return fmt::format("{0:d}x{1:d}", width(), height());
+  }
 
-    friend auto operator<<(std::ostream& stream, const Dimension& rhs) -> std::ostream& {
-      return stream << rhs.width() << "x" << rhs.height();
-    }
-  };
+  auto operator==(const Dimension& rhs) const -> bool {
+    return width() == rhs.width() && height() == rhs.height();
+  }
 
-  static constexpr const uint64_t kDefaultDimensionParserBufferSize = 4096;
-  static constexpr const uint64_t kDefaultDimensionTokenBufferSize = 1024;
-  class DimensionParser : public ParserTemplate<kDefaultDimensionParserBufferSize, kDefaultDimensionTokenBufferSize> {
-    DEFINE_NON_COPYABLE_TYPE(DimensionParser);
-  public:
-    struct Config {
-      bool (*OnParseStarted)(const DimensionParser*);
-      bool (*OnParseWidth)(const DimensionParser*, const int32_t& value);
-      bool (*OnParseHeight)(const DimensionParser*, const int32_t& value);
-      bool (*OnParseFinished)(const DimensionParser*);
-      bool (*OnParseError)(const DimensionParser*);
+  auto operator!=(const Dimension& rhs) const -> bool {
+    return width() != rhs.width() || height() != rhs.height();
+  }
+
+  auto operator<(const Dimension& rhs) const -> bool {
+    return Compare(*this, rhs) < 0;
+  }
+
+  auto operator>(const Dimension& rhs) const -> bool {
+    return Compare(*this, rhs) > 0;
+  }
+
+  void SetTable(lua_State* L, const int index) const;
+
+  friend auto operator<<(std::ostream& stream, const Dimension& rhs) -> std::ostream& {
+    return stream << rhs.width() << "x" << rhs.height();
+  }
+
+  operator VkExtent2D() const {
+    return VkExtent2D{
+        .width = width(),
+        .height = height(),
     };
-  private:
-    Config config_;
+  }
+};
 
-    auto OnParseStarted() const -> bool {
-      return config_.OnParseStarted
-           ? config_.OnParseStarted(this)
-           : true;
-    }
+static constexpr const uint64_t kDefaultDimensionParserBufferSize = 4096;
+static constexpr const uint64_t kDefaultDimensionTokenBufferSize = 1024;
+class DimensionParser : public ParserTemplate<kDefaultDimensionParserBufferSize, kDefaultDimensionTokenBufferSize> {
+  DEFINE_NON_COPYABLE_TYPE(DimensionParser);
 
-    auto OnParseWidth(const int32_t value) const -> bool {
-      return config_.OnParseWidth
-           ? config_.OnParseWidth(this, value)
-           : true;
-    }
-
-    auto OnParseHeight(const int32_t value) const -> bool {
-      return config_.OnParseHeight
-           ? config_.OnParseHeight(this, value)
-           : true;
-    }
-
-    auto OnParseFinished() const -> bool {
-      return config_.OnParseFinished
-           ? config_.OnParseFinished(this)
-           : true;
-    }
-
-    auto OnParseError() const -> bool {
-      return config_.OnParseError
-           ? config_.OnParseError(this)
-           : false;
-    }
-
-    auto ParseInt32(int32_t* value) -> bool;
-  public:
-    DimensionParser(const Config& config, const std::string& value, void* data = nullptr):
-      ParserTemplate(data, value),
-      config_(config) {
-    }
-    DimensionParser(const std::string& value, void* data = nullptr):
-      ParserTemplate(data, value),
-      config_() {
-    }
-    ~DimensionParser() override = default;
-    virtual auto ParseDimension() -> bool;
+ public:
+  struct Config {
+    bool (*OnParseStarted)(const DimensionParser*);
+    bool (*OnParseWidth)(const DimensionParser*, const uint32_t& value);
+    bool (*OnParseHeight)(const DimensionParser*, const uint32_t& value);
+    bool (*OnParseFinished)(const DimensionParser*);
+    bool (*OnParseError)(const DimensionParser*);
   };
-}
 
-#endif //PRT_DIMENSION_H
+ private:
+  Config config_;
+
+  auto OnParseStarted() const -> bool {
+    return config_.OnParseStarted ? config_.OnParseStarted(this) : true;
+  }
+
+  auto OnParseWidth(const uint32_t& value) const -> bool {
+    return config_.OnParseWidth ? config_.OnParseWidth(this, value) : true;
+  }
+
+  auto OnParseHeight(const uint32_t& value) const -> bool {
+    return config_.OnParseHeight ? config_.OnParseHeight(this, value) : true;
+  }
+
+  auto OnParseFinished() const -> bool {
+    return config_.OnParseFinished ? config_.OnParseFinished(this) : true;
+  }
+
+  auto OnParseError() const -> bool {
+    return config_.OnParseError ? config_.OnParseError(this) : false;
+  }
+
+  auto ParseUInt32(uint32_t* value) -> bool;
+
+ public:
+  DimensionParser(const Config& config, const std::string& value, void* data = nullptr) :
+    ParserTemplate(data, value),
+    config_(config) {}
+  DimensionParser(const std::string& value, void* data = nullptr) :
+    ParserTemplate(data, value),
+    config_() {}
+  ~DimensionParser() override = default;
+  virtual auto ParseDimension() -> bool;
+};
+}  // namespace prt
+
+#endif  // PRT_DIMENSION_H

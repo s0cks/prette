@@ -1,0 +1,132 @@
+\doxysection{prt\+::Window\+Content\+Scale\+Event Class Reference}
+\hypertarget{classprt_1_1_window_content_scale_event}{}\label{classprt_1_1_window_content_scale_event}\index{prt::WindowContentScaleEvent@{prt::WindowContentScaleEvent}}
+
+
+{\ttfamily \#include $<$window\+\_\+event.\+h$>$}
+
+
+
+Inheritance diagram for prt\+::Window\+Content\+Scale\+Event\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=233pt]{classprt_1_1_window_content_scale_event__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for prt\+::Window\+Content\+Scale\+Event\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=233pt]{classprt_1_1_window_content_scale_event__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_window_content_scale_event_ae25ca95677e14d11420f8d895df4729d}{Window\+Content\+Scale\+Event}} (const \mbox{\hyperlink{classprt_1_1_window_content_scale_event_a37fca9aa3cbf1dfd38dc502a7595295d}{Scale}} \&scale)
+\item 
+\mbox{\hyperlink{classprt_1_1_window_content_scale_event_aa95d76a31d221a22b7ce7c20571ca49b}{Window\+Content\+Scale\+Event}} (const float x\+Scale, const float y\+Scale)
+\item 
+\mbox{\hyperlink{classprt_1_1_window_content_scale_event_a03c6010b909f9c3ece4f9e596057097d}{\texorpdfstring{$\sim$}{\string~}\+Window\+Content\+Scale\+Event}} () override=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1_window_content_scale_event_aca8c50e7a3cfb3a722b4a305d1af9513}{Get\+Scale}} () const -\/$>$ const \mbox{\hyperlink{classprt_1_1_window_content_scale_event_a37fca9aa3cbf1dfd38dc502a7595295d}{Scale}} \&
+\item 
+\mbox{\hyperlink{classprt_1_1_window_content_scale_event_a3c7d2dfaac37f0ad3ea49cfd4953b905}{DECLARE\+\_\+\+WINDOW\+\_\+\+EVENT\+\_\+\+TYPE}} (Window\+Content\+Scale)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classprt_1_1_window_event}{prt\+::\+Window\+Event}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_window_event_a73dc5c806af4d3af62804362b1dfe6ef}{Window\+Event}} ()=default
+\item 
+\mbox{\hyperlink{classprt_1_1_window_event_a8a5719e27f083bae94ef7c9d89fddb90}{\texorpdfstring{$\sim$}{\string~}\+Window\+Event}} () override=default
+\item 
+void \mbox{\hyperlink{classprt_1_1_window_event_a1241f05b5d887227878650ec78b3d75c}{To\+Table}} (lua\+\_\+\+State \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{engine_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}}) const override
+\item 
+\mbox{\hyperlink{classprt_1_1_window_event_a95125bb1675dd6f3aaec40b75bf69cb8}{DEFINE\+\_\+\+EVENT\+\_\+\+PROTOTYPE\+\_\+\+TYPE}} (\mbox{\hyperlink{classprt_1_1_window}{Window}}, \mbox{\hyperlink{namespaceprt_a4d42e4eb12ffab41c8a0b96551af51ae}{FOR\+\_\+\+EACH\+\_\+\+WINDOW\+\_\+\+EVENT}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classprt_1_1_event}{prt\+::\+Event}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classprt_1_1_event_a4852e85c48ebb80d6c96fe0d13d5ae6a}{\texorpdfstring{$\sim$}{\string~}\+Event}} ()=default
+\item 
+virtual auto \mbox{\hyperlink{classprt_1_1_event_a674cd356a472771aad69534b2959500e}{Get\+Name}} () const -\/$>$ const char \texorpdfstring{$\ast$}{*}=0
+\item 
+virtual auto \mbox{\hyperlink{classprt_1_1_event_a90911d9644cf7ec9b4f05053a3b632af}{To\+String}} () const -\/$>$ std\+::string=0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classprt_1_1_window_content_scale_event_a37fca9aa3cbf1dfd38dc502a7595295d}{Scale}} = glm\+::vec2
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_window_content_scale_event_a37fca9aa3cbf1dfd38dc502a7595295d}{Scale}} \mbox{\hyperlink{classprt_1_1_window_content_scale_event_acae3eb72564b1bf238346604eacb117e}{scale\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classprt_1_1_event}{prt\+::\+Event}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_event_a68ae1e6264631e55933648b66d5dd11b}{Event}} ()=default
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classprt_1_1_window_content_scale_event_a37fca9aa3cbf1dfd38dc502a7595295d}\index{prt::WindowContentScaleEvent@{prt::WindowContentScaleEvent}!Scale@{Scale}}
+\index{Scale@{Scale}!prt::WindowContentScaleEvent@{prt::WindowContentScaleEvent}}
+\doxysubsubsection{\texorpdfstring{Scale}{Scale}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_content_scale_event_a37fca9aa3cbf1dfd38dc502a7595295d} 
+using \mbox{\hyperlink{classprt_1_1_window_content_scale_event_a37fca9aa3cbf1dfd38dc502a7595295d}{prt\+::\+Window\+Content\+Scale\+Event\+::\+Scale}} = glm\+::vec2\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_window_content_scale_event_ae25ca95677e14d11420f8d895df4729d}\index{prt::WindowContentScaleEvent@{prt::WindowContentScaleEvent}!WindowContentScaleEvent@{WindowContentScaleEvent}}
+\index{WindowContentScaleEvent@{WindowContentScaleEvent}!prt::WindowContentScaleEvent@{prt::WindowContentScaleEvent}}
+\doxysubsubsection{\texorpdfstring{WindowContentScaleEvent()}{WindowContentScaleEvent()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_content_scale_event_ae25ca95677e14d11420f8d895df4729d} 
+prt\+::\+Window\+Content\+Scale\+Event\+::\+Window\+Content\+Scale\+Event (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_window_content_scale_event_a37fca9aa3cbf1dfd38dc502a7595295d}{Scale}} \&}]{scale}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+\Hypertarget{classprt_1_1_window_content_scale_event_aa95d76a31d221a22b7ce7c20571ca49b}\index{prt::WindowContentScaleEvent@{prt::WindowContentScaleEvent}!WindowContentScaleEvent@{WindowContentScaleEvent}}
+\index{WindowContentScaleEvent@{WindowContentScaleEvent}!prt::WindowContentScaleEvent@{prt::WindowContentScaleEvent}}
+\doxysubsubsection{\texorpdfstring{WindowContentScaleEvent()}{WindowContentScaleEvent()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_content_scale_event_aa95d76a31d221a22b7ce7c20571ca49b} 
+prt\+::\+Window\+Content\+Scale\+Event\+::\+Window\+Content\+Scale\+Event (\begin{DoxyParamCaption}\item[{const float}]{x\+Scale}{, }\item[{const float}]{y\+Scale}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_window_content_scale_event_a03c6010b909f9c3ece4f9e596057097d}\index{prt::WindowContentScaleEvent@{prt::WindowContentScaleEvent}!````~WindowContentScaleEvent@{\texorpdfstring{$\sim$}{\string~}WindowContentScaleEvent}}
+\index{````~WindowContentScaleEvent@{\texorpdfstring{$\sim$}{\string~}WindowContentScaleEvent}!prt::WindowContentScaleEvent@{prt::WindowContentScaleEvent}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}WindowContentScaleEvent()}{\string~WindowContentScaleEvent()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_content_scale_event_a03c6010b909f9c3ece4f9e596057097d} 
+prt\+::\+Window\+Content\+Scale\+Event\+::\texorpdfstring{$\sim$}{\string~}\+Window\+Content\+Scale\+Event (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_window_content_scale_event_a3c7d2dfaac37f0ad3ea49cfd4953b905}\index{prt::WindowContentScaleEvent@{prt::WindowContentScaleEvent}!DECLARE\_WINDOW\_EVENT\_TYPE@{DECLARE\_WINDOW\_EVENT\_TYPE}}
+\index{DECLARE\_WINDOW\_EVENT\_TYPE@{DECLARE\_WINDOW\_EVENT\_TYPE}!prt::WindowContentScaleEvent@{prt::WindowContentScaleEvent}}
+\doxysubsubsection{\texorpdfstring{DECLARE\_WINDOW\_EVENT\_TYPE()}{DECLARE\_WINDOW\_EVENT\_TYPE()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_content_scale_event_a3c7d2dfaac37f0ad3ea49cfd4953b905} 
+prt\+::\+Window\+Content\+Scale\+Event\+::\+DECLARE\+\_\+\+WINDOW\+\_\+\+EVENT\+\_\+\+TYPE (\begin{DoxyParamCaption}\item[{Window\+Content\+Scale}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_window_content_scale_event_aca8c50e7a3cfb3a722b4a305d1af9513}\index{prt::WindowContentScaleEvent@{prt::WindowContentScaleEvent}!GetScale@{GetScale}}
+\index{GetScale@{GetScale}!prt::WindowContentScaleEvent@{prt::WindowContentScaleEvent}}
+\doxysubsubsection{\texorpdfstring{GetScale()}{GetScale()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_content_scale_event_aca8c50e7a3cfb3a722b4a305d1af9513} 
+auto prt\+::\+Window\+Content\+Scale\+Event\+::\+Get\+Scale (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const \mbox{\hyperlink{classprt_1_1_window_content_scale_event_a37fca9aa3cbf1dfd38dc502a7595295d}{Scale}}\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_window_content_scale_event_acae3eb72564b1bf238346604eacb117e}\index{prt::WindowContentScaleEvent@{prt::WindowContentScaleEvent}!scale\_@{scale\_}}
+\index{scale\_@{scale\_}!prt::WindowContentScaleEvent@{prt::WindowContentScaleEvent}}
+\doxysubsubsection{\texorpdfstring{scale\_}{scale\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_content_scale_event_acae3eb72564b1bf238346604eacb117e} 
+\mbox{\hyperlink{classprt_1_1_window_content_scale_event_a37fca9aa3cbf1dfd38dc502a7595295d}{Scale}} prt\+::\+Window\+Content\+Scale\+Event\+::scale\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{window__event_8h}{window\+\_\+event.\+h}}\end{DoxyCompactItemize}

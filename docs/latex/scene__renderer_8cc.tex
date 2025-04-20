@@ -1,0 +1,50 @@
+\doxysection{/\+Users/tazz/\+Projects/prette/\+Sources/prette/scene\+\_\+renderer.cc File Reference}
+\hypertarget{scene__renderer_8cc}{}\label{scene__renderer_8cc}\index{/Users/tazz/Projects/prette/Sources/prette/scene\_renderer.cc@{/Users/tazz/Projects/prette/Sources/prette/scene\_renderer.cc}}
+{\ttfamily \#include "{}prette/scene\+\_\+renderer.\+h"{}}\newline
+{\ttfamily \#include $<$fmt/format.\+h$>$}\newline
+{\ttfamily \#include $<$tiny\+\_\+obj\+\_\+loader.\+h$>$}\newline
+{\ttfamily \#include $<$vulkan/vulkan\+\_\+core.\+h$>$}\newline
+{\ttfamily \#include "{}prette/camera.\+h"{}}\newline
+{\ttfamily \#include "{}prette/common.\+h"{}}\newline
+{\ttfamily \#include "{}prette/gfx.\+h"{}}\newline
+{\ttfamily \#include "{}prette/gfx\+\_\+vk.\+h"{}}\newline
+{\ttfamily \#include "{}prette/gui.\+h"{}}\newline
+{\ttfamily \#include "{}prette/pipeline.\+h"{}}\newline
+{\ttfamily \#include "{}prette/render\+\_\+target.\+h"{}}\newline
+{\ttfamily \#include "{}prette/renderer.\+h"{}}\newline
+{\ttfamily \#include "{}prette/swapchain.\+h"{}}\newline
+{\ttfamily \#include "{}prette/texture.\+h"{}}\newline
+Include dependency graph for scene\+\_\+renderer.\+cc\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{scene__renderer_8cc__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceprt}{prt}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{scene__renderer_8cc_aaaa253a12856f3bb8c463ce490dfcd4e}{MODEL\+\_\+\+PATH}}~"{}/Users/tazz/Projects/prette/prette/resources/meshes/sphere/sphere.\+obj"{}
+\item 
+\#define \mbox{\hyperlink{scene__renderer_8cc_a0777b1d05127a4abf7671f3d9b4b4622}{TEXTURE\+\_\+\+PATH}}~"{}concrete.\+png"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{scene__renderer_8cc_aaaa253a12856f3bb8c463ce490dfcd4e}\index{scene\_renderer.cc@{scene\_renderer.cc}!MODEL\_PATH@{MODEL\_PATH}}
+\index{MODEL\_PATH@{MODEL\_PATH}!scene\_renderer.cc@{scene\_renderer.cc}}
+\doxysubsubsection{\texorpdfstring{MODEL\_PATH}{MODEL\_PATH}}
+{\footnotesize\ttfamily \label{scene__renderer_8cc_aaaa253a12856f3bb8c463ce490dfcd4e} 
+\#define MODEL\+\_\+\+PATH~"{}/Users/tazz/Projects/prette/prette/resources/meshes/sphere/sphere.\+obj"{}}
+
+\Hypertarget{scene__renderer_8cc_a0777b1d05127a4abf7671f3d9b4b4622}\index{scene\_renderer.cc@{scene\_renderer.cc}!TEXTURE\_PATH@{TEXTURE\_PATH}}
+\index{TEXTURE\_PATH@{TEXTURE\_PATH}!scene\_renderer.cc@{scene\_renderer.cc}}
+\doxysubsubsection{\texorpdfstring{TEXTURE\_PATH}{TEXTURE\_PATH}}
+{\footnotesize\ttfamily \label{scene__renderer_8cc_a0777b1d05127a4abf7671f3d9b4b4622} 
+\#define TEXTURE\+\_\+\+PATH~"{}concrete.\+png"{}}
+

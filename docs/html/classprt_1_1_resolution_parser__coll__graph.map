@@ -1,0 +1,9 @@
+<map id="prt::ResolutionParser" name="prt::ResolutionParser">
+<area shape="rect" id="Node000001" title=" " alt="" coords="507,90,651,116"/>
+<area shape="rect" id="Node000002" href="$classprt_1_1_parser_template.html" title=" " alt="" coords="177,5,413,76"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="429,67,518,87,517,92,428,73"/>
+<area shape="rect" id="Node000003" href="$structprt_1_1_position.html" title=" " alt="" coords="5,28,97,54"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="112,38,176,38,176,43,112,43"/>
+<area shape="rect" id="Node000004" href="$structprt_1_1_resolution_parser_1_1_config.html" title=" " alt="" coords="223,100,367,141"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="382,113,506,105,507,110,383,118"/>
+</map>

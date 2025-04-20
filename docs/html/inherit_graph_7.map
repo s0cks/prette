@@ -1,0 +1,17 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$classprt_1_1_bit_field.html" title=" " alt="" coords="5,104,142,145"/>
+<area shape="rect" id="Node000001" href="$classprt_1_1uri_1_1_parser_1_1_config_1_1_flags_field.html" title=" " alt="" coords="190,5,442,46"/>
+<area shape="poly" id="edge21_Node000000_Node000001" title=" " alt="" coords="118,93,189,57,224,44,226,49,191,61,121,98"/>
+<area shape="rect" id="Node000003" href="$classprt_1_1uri_1_1_parser_1_1_config_1_1_flags_field.html" title=" " alt="" coords="198,71,434,111"/>
+<area shape="poly" id="edge23_Node000000_Node000003" title=" " alt="" coords="157,110,197,105,198,110,158,116"/>
+<area shape="rect" id="Node000005" href="$classprt_1_1uri_1_1_parser_1_1_config_1_1_flags_field.html" title=" " alt="" coords="222,136,410,177"/>
+<area shape="poly" id="edge25_Node000000_Node000005" title=" " alt="" coords="157,133,222,141,221,147,157,138"/>
+<area shape="rect" id="Node000007" href="$classprt_1_1uri_1_1_parser_1_1_config_1_1_flags_field.html" title=" " alt="" coords="241,201,391,242"/>
+<area shape="poly" id="edge27_Node000000_Node000007" title=" " alt="" coords="121,150,191,186,241,203,239,208,189,191,119,155"/>
+<area shape="rect" id="Node000002" href="$classprt_1_1uri_1_1_parser_1_1_config_1_1_parse_fragments_field.html" title=" " alt="" coords="490,5,643,46"/>
+<area shape="poly" id="edge22_Node000001_Node000002" title=" " alt="" coords="457,23,490,23,490,28,457,28"/>
+<area shape="rect" id="Node000004" href="$classprt_1_1uri_1_1_parser_1_1_config_1_1_parse_queries_field.html" title=" " alt="" coords="492,71,642,111"/>
+<area shape="poly" id="edge24_Node000003_Node000004" title=" " alt="" coords="449,88,491,88,491,94,449,94"/>
+<area shape="rect" id="Node000006" href="$classprt_1_1uri_1_1_parser_1_1_config_1_1_strict_field.html" title=" " alt="" coords="492,136,642,177"/>
+<area shape="poly" id="edge26_Node000005_Node000006" title=" " alt="" coords="425,154,491,154,491,159,425,159"/>
+</map>

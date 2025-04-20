@@ -1,0 +1,47 @@
+\doxysection{/\+Users/tazz/\+Projects/prette/\+Sources/prette/registry.h File Reference}
+\hypertarget{registry_8h}{}\label{registry_8h}\index{/Users/tazz/Projects/prette/Sources/prette/registry.h@{/Users/tazz/Projects/prette/Sources/prette/registry.h}}
+{\ttfamily \#include $<$leveldb/db.\+h$>$}\newline
+{\ttfamily \#include $<$leveldb/options.\+h$>$}\newline
+{\ttfamily \#include $<$leveldb/write\+\_\+batch.\+h$>$}\newline
+{\ttfamily \#include $<$filesystem$>$}\newline
+{\ttfamily \#include $<$unordered\+\_\+set$>$}\newline
+{\ttfamily \#include $<$utility$>$}\newline
+{\ttfamily \#include "{}prette/common.\+h"{}}\newline
+{\ttfamily \#include "{}prette/rx.\+h"{}}\newline
+Include dependency graph for registry.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{registry_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=328pt]{registry_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1_registry_indexer}{prt\+::\+Registry\+Indexer}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_registry}{prt\+::\+Registry}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_shader_indexer}{prt\+::\+Shader\+Indexer}}
+\item 
+struct \mbox{\hyperlink{structprt_1_1_shader_indexer_1_1_shader_info}{prt\+::\+Shader\+Indexer\+::\+Shader\+Info}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceprt}{prt}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{namespaceprt_a189cd3af64e89458ea1ee7ab9e0de979}{prt\+::\+Path\+Stream}} = rx\+::observable$<$fs\+::path$>$
+\item 
+using \mbox{\hyperlink{namespaceprt_a9f32127cc126e363bab6995173fc63d7}{prt\+::\+Path\+Predicate}} = std\+::function$<$bool(const fs\+::path\&)$>$
+\end{DoxyCompactItemize}

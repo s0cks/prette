@@ -1,0 +1,165 @@
+\doxysection{prt\+::Scene\+Renderer Class Reference}
+\hypertarget{classprt_1_1_scene_renderer}{}\label{classprt_1_1_scene_renderer}\index{prt::SceneRenderer@{prt::SceneRenderer}}
+
+
+{\ttfamily \#include $<$scene\+\_\+renderer.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classprt_1_1_scene_renderer_ab10bc8082f80885eecf43817a32e84f6}{Init}} ()
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_scene_renderer_acfd4d14be5a1e6abf0c1bc4d7ca9d406}{Get\+Camera\+Buffer}} (const uint64\+\_\+t idx) -\/$>$ vk\+::\+Buffer \texorpdfstring{$\ast$}{*}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_scene_renderer_ab1dc195325d4ea3542515071448d2d6a}{Get\+Render\+Pass}} () -\/$>$ \mbox{\hyperlink{classprt_1_1_scene_render_pass}{Scene\+Render\+Pass}} \texorpdfstring{$\ast$}{*}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_scene_renderer_ac460dbb023e2916bee5a5ec62d1d4da9}{Get\+Image\+View}} (const uint64\+\_\+t idx) -\/$>$ Vk\+Image\+View const \&
+\item 
+static void \mbox{\hyperlink{classprt_1_1_scene_renderer_a2f8e2d9c32353c1c0b3a4f8d4d7bc202}{Draw}} (\mbox{\hyperlink{classprt_1_1_swap_chain_frame}{Swap\+Chain\+Frame}} \texorpdfstring{$\ast$}{*}frame, std\+::vector$<$ Vk\+Command\+Buffer $>$ \&buffers)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classprt_1_1_scene_renderer_ab9f41d89c4202e16f692c7624bbe641d}{Init\+Images}} (const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}driver, const uint64\+\_\+t num\+\_\+images, const Vk\+Extent2D \&extent)
+\item 
+static void \mbox{\hyperlink{classprt_1_1_scene_renderer_ac847b5421d4045cd8355900ce8a7205a}{Init\+Descriptor\+Set\+Layout}} (const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}driver)
+\item 
+static void \mbox{\hyperlink{classprt_1_1_scene_renderer_ab3c1a96abb485bd65ae60d096657205e}{Init\+Pipeline}} (const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}driver)
+\item 
+static void \mbox{\hyperlink{classprt_1_1_scene_renderer_a80d94f3c1b1db33adea18af0575f7a81}{Init\+Pipeline\+Layout}} (const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}driver)
+\item 
+static void \mbox{\hyperlink{classprt_1_1_scene_renderer_adf81dafc28103e48aedd4e73c7d7ee45}{Init\+Render\+Pass}} (const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}driver)
+\item 
+static void \mbox{\hyperlink{classprt_1_1_scene_renderer_a6eeddcd2eafb54575062243d632c45e0}{Init\+Command\+Buffers}} (const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}driver)
+\item 
+static void \mbox{\hyperlink{classprt_1_1_scene_renderer_ae2bb518f4b7deaf11acbccecd71c833c}{Init\+Buffers}} ()
+\item 
+static void \mbox{\hyperlink{classprt_1_1_scene_renderer_a164a0e269158f6072afd03662eacf1d4}{Init\+Descriptor\+Sets}} (const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}driver)
+\item 
+static void \mbox{\hyperlink{classprt_1_1_scene_renderer_acaf131f6318b803c228c26449e7f9d18}{Init\+Model}} ()
+\item 
+static void \mbox{\hyperlink{classprt_1_1_scene_renderer_a12dcd606d9d076fd0bb7ba26a5228f2f}{Init\+Model\+Texture}} ()
+\item 
+static void \mbox{\hyperlink{classprt_1_1_scene_renderer_a3e4eb0ac046d0f3efd6d35f9e8ad2039}{Init\+Depth\+Texture}} (const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}driver)
+\item 
+static void \mbox{\hyperlink{classprt_1_1_scene_renderer_a81ad15d643afd7e55cf56eeae5ad65e3}{Init\+Picking\+Texture}} (const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}driver)
+\item 
+static void \mbox{\hyperlink{classprt_1_1_scene_renderer_ad30f09e38edfb4f781c0c0fd6aea5283}{Destroy}} (\mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}driver, const bool is\+\_\+reinit)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_scene_renderer_ad30f09e38edfb4f781c0c0fd6aea5283}\index{prt::SceneRenderer@{prt::SceneRenderer}!Destroy@{Destroy}}
+\index{Destroy@{Destroy}!prt::SceneRenderer@{prt::SceneRenderer}}
+\doxysubsubsection{\texorpdfstring{Destroy()}{Destroy()}}
+{\footnotesize\ttfamily \label{classprt_1_1_scene_renderer_ad30f09e38edfb4f781c0c0fd6aea5283} 
+void prt\+::\+Scene\+Renderer\+::\+Destroy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}}]{driver}{, }\item[{const bool}]{is\+\_\+reinit}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_scene_renderer_a2f8e2d9c32353c1c0b3a4f8d4d7bc202}\index{prt::SceneRenderer@{prt::SceneRenderer}!Draw@{Draw}}
+\index{Draw@{Draw}!prt::SceneRenderer@{prt::SceneRenderer}}
+\doxysubsubsection{\texorpdfstring{Draw()}{Draw()}}
+{\footnotesize\ttfamily \label{classprt_1_1_scene_renderer_a2f8e2d9c32353c1c0b3a4f8d4d7bc202} 
+void prt\+::\+Scene\+Renderer\+::\+Draw (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_swap_chain_frame}{Swap\+Chain\+Frame}} \texorpdfstring{$\ast$}{*}}]{frame}{, }\item[{std\+::vector$<$ Vk\+Command\+Buffer $>$ \&}]{buffers}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_scene_renderer_acfd4d14be5a1e6abf0c1bc4d7ca9d406}\index{prt::SceneRenderer@{prt::SceneRenderer}!GetCameraBuffer@{GetCameraBuffer}}
+\index{GetCameraBuffer@{GetCameraBuffer}!prt::SceneRenderer@{prt::SceneRenderer}}
+\doxysubsubsection{\texorpdfstring{GetCameraBuffer()}{GetCameraBuffer()}}
+{\footnotesize\ttfamily \label{classprt_1_1_scene_renderer_acfd4d14be5a1e6abf0c1bc4d7ca9d406} 
+auto prt\+::\+Scene\+Renderer\+::\+Get\+Camera\+Buffer (\begin{DoxyParamCaption}\item[{const uint64\+\_\+t}]{idx}{}\end{DoxyParamCaption}) -\/$>$ vk\+::\+Buffer\texorpdfstring{$\ast$}{*}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_scene_renderer_ac460dbb023e2916bee5a5ec62d1d4da9}\index{prt::SceneRenderer@{prt::SceneRenderer}!GetImageView@{GetImageView}}
+\index{GetImageView@{GetImageView}!prt::SceneRenderer@{prt::SceneRenderer}}
+\doxysubsubsection{\texorpdfstring{GetImageView()}{GetImageView()}}
+{\footnotesize\ttfamily \label{classprt_1_1_scene_renderer_ac460dbb023e2916bee5a5ec62d1d4da9} 
+auto prt\+::\+Scene\+Renderer\+::\+Get\+Image\+View (\begin{DoxyParamCaption}\item[{const uint64\+\_\+t}]{idx}{}\end{DoxyParamCaption}) -\/$>$ Vk\+Image\+View const\&\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_scene_renderer_ab1dc195325d4ea3542515071448d2d6a}\index{prt::SceneRenderer@{prt::SceneRenderer}!GetRenderPass@{GetRenderPass}}
+\index{GetRenderPass@{GetRenderPass}!prt::SceneRenderer@{prt::SceneRenderer}}
+\doxysubsubsection{\texorpdfstring{GetRenderPass()}{GetRenderPass()}}
+{\footnotesize\ttfamily \label{classprt_1_1_scene_renderer_ab1dc195325d4ea3542515071448d2d6a} 
+auto prt\+::\+Scene\+Renderer\+::\+Get\+Render\+Pass (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{classprt_1_1_scene_render_pass}{Scene\+Render\+Pass}}\texorpdfstring{$\ast$}{*}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_scene_renderer_ab10bc8082f80885eecf43817a32e84f6}\index{prt::SceneRenderer@{prt::SceneRenderer}!Init@{Init}}
+\index{Init@{Init}!prt::SceneRenderer@{prt::SceneRenderer}}
+\doxysubsubsection{\texorpdfstring{Init()}{Init()}}
+{\footnotesize\ttfamily \label{classprt_1_1_scene_renderer_ab10bc8082f80885eecf43817a32e84f6} 
+void prt\+::\+Scene\+Renderer\+::\+Init (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_scene_renderer_ae2bb518f4b7deaf11acbccecd71c833c}\index{prt::SceneRenderer@{prt::SceneRenderer}!InitBuffers@{InitBuffers}}
+\index{InitBuffers@{InitBuffers}!prt::SceneRenderer@{prt::SceneRenderer}}
+\doxysubsubsection{\texorpdfstring{InitBuffers()}{InitBuffers()}}
+{\footnotesize\ttfamily \label{classprt_1_1_scene_renderer_ae2bb518f4b7deaf11acbccecd71c833c} 
+void prt\+::\+Scene\+Renderer\+::\+Init\+Buffers (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_scene_renderer_a6eeddcd2eafb54575062243d632c45e0}\index{prt::SceneRenderer@{prt::SceneRenderer}!InitCommandBuffers@{InitCommandBuffers}}
+\index{InitCommandBuffers@{InitCommandBuffers}!prt::SceneRenderer@{prt::SceneRenderer}}
+\doxysubsubsection{\texorpdfstring{InitCommandBuffers()}{InitCommandBuffers()}}
+{\footnotesize\ttfamily \label{classprt_1_1_scene_renderer_a6eeddcd2eafb54575062243d632c45e0} 
+void prt\+::\+Scene\+Renderer\+::\+Init\+Command\+Buffers (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}}]{driver}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_scene_renderer_a3e4eb0ac046d0f3efd6d35f9e8ad2039}\index{prt::SceneRenderer@{prt::SceneRenderer}!InitDepthTexture@{InitDepthTexture}}
+\index{InitDepthTexture@{InitDepthTexture}!prt::SceneRenderer@{prt::SceneRenderer}}
+\doxysubsubsection{\texorpdfstring{InitDepthTexture()}{InitDepthTexture()}}
+{\footnotesize\ttfamily \label{classprt_1_1_scene_renderer_a3e4eb0ac046d0f3efd6d35f9e8ad2039} 
+void prt\+::\+Scene\+Renderer\+::\+Init\+Depth\+Texture (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}}]{driver}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_scene_renderer_ac847b5421d4045cd8355900ce8a7205a}\index{prt::SceneRenderer@{prt::SceneRenderer}!InitDescriptorSetLayout@{InitDescriptorSetLayout}}
+\index{InitDescriptorSetLayout@{InitDescriptorSetLayout}!prt::SceneRenderer@{prt::SceneRenderer}}
+\doxysubsubsection{\texorpdfstring{InitDescriptorSetLayout()}{InitDescriptorSetLayout()}}
+{\footnotesize\ttfamily \label{classprt_1_1_scene_renderer_ac847b5421d4045cd8355900ce8a7205a} 
+void prt\+::\+Scene\+Renderer\+::\+Init\+Descriptor\+Set\+Layout (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}}]{driver}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_scene_renderer_a164a0e269158f6072afd03662eacf1d4}\index{prt::SceneRenderer@{prt::SceneRenderer}!InitDescriptorSets@{InitDescriptorSets}}
+\index{InitDescriptorSets@{InitDescriptorSets}!prt::SceneRenderer@{prt::SceneRenderer}}
+\doxysubsubsection{\texorpdfstring{InitDescriptorSets()}{InitDescriptorSets()}}
+{\footnotesize\ttfamily \label{classprt_1_1_scene_renderer_a164a0e269158f6072afd03662eacf1d4} 
+void prt\+::\+Scene\+Renderer\+::\+Init\+Descriptor\+Sets (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}}]{driver}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_scene_renderer_ab9f41d89c4202e16f692c7624bbe641d}\index{prt::SceneRenderer@{prt::SceneRenderer}!InitImages@{InitImages}}
+\index{InitImages@{InitImages}!prt::SceneRenderer@{prt::SceneRenderer}}
+\doxysubsubsection{\texorpdfstring{InitImages()}{InitImages()}}
+{\footnotesize\ttfamily \label{classprt_1_1_scene_renderer_ab9f41d89c4202e16f692c7624bbe641d} 
+void prt\+::\+Scene\+Renderer\+::\+Init\+Images (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}}]{driver}{, }\item[{const uint64\+\_\+t}]{num\+\_\+images}{, }\item[{const Vk\+Extent2D \&}]{extent}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_scene_renderer_acaf131f6318b803c228c26449e7f9d18}\index{prt::SceneRenderer@{prt::SceneRenderer}!InitModel@{InitModel}}
+\index{InitModel@{InitModel}!prt::SceneRenderer@{prt::SceneRenderer}}
+\doxysubsubsection{\texorpdfstring{InitModel()}{InitModel()}}
+{\footnotesize\ttfamily \label{classprt_1_1_scene_renderer_acaf131f6318b803c228c26449e7f9d18} 
+void prt\+::\+Scene\+Renderer\+::\+Init\+Model (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_scene_renderer_a12dcd606d9d076fd0bb7ba26a5228f2f}\index{prt::SceneRenderer@{prt::SceneRenderer}!InitModelTexture@{InitModelTexture}}
+\index{InitModelTexture@{InitModelTexture}!prt::SceneRenderer@{prt::SceneRenderer}}
+\doxysubsubsection{\texorpdfstring{InitModelTexture()}{InitModelTexture()}}
+{\footnotesize\ttfamily \label{classprt_1_1_scene_renderer_a12dcd606d9d076fd0bb7ba26a5228f2f} 
+void prt\+::\+Scene\+Renderer\+::\+Init\+Model\+Texture (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_scene_renderer_a81ad15d643afd7e55cf56eeae5ad65e3}\index{prt::SceneRenderer@{prt::SceneRenderer}!InitPickingTexture@{InitPickingTexture}}
+\index{InitPickingTexture@{InitPickingTexture}!prt::SceneRenderer@{prt::SceneRenderer}}
+\doxysubsubsection{\texorpdfstring{InitPickingTexture()}{InitPickingTexture()}}
+{\footnotesize\ttfamily \label{classprt_1_1_scene_renderer_a81ad15d643afd7e55cf56eeae5ad65e3} 
+static void prt\+::\+Scene\+Renderer\+::\+Init\+Picking\+Texture (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}}]{driver}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_scene_renderer_ab3c1a96abb485bd65ae60d096657205e}\index{prt::SceneRenderer@{prt::SceneRenderer}!InitPipeline@{InitPipeline}}
+\index{InitPipeline@{InitPipeline}!prt::SceneRenderer@{prt::SceneRenderer}}
+\doxysubsubsection{\texorpdfstring{InitPipeline()}{InitPipeline()}}
+{\footnotesize\ttfamily \label{classprt_1_1_scene_renderer_ab3c1a96abb485bd65ae60d096657205e} 
+void prt\+::\+Scene\+Renderer\+::\+Init\+Pipeline (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}}]{driver}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_scene_renderer_a80d94f3c1b1db33adea18af0575f7a81}\index{prt::SceneRenderer@{prt::SceneRenderer}!InitPipelineLayout@{InitPipelineLayout}}
+\index{InitPipelineLayout@{InitPipelineLayout}!prt::SceneRenderer@{prt::SceneRenderer}}
+\doxysubsubsection{\texorpdfstring{InitPipelineLayout()}{InitPipelineLayout()}}
+{\footnotesize\ttfamily \label{classprt_1_1_scene_renderer_a80d94f3c1b1db33adea18af0575f7a81} 
+static void prt\+::\+Scene\+Renderer\+::\+Init\+Pipeline\+Layout (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}}]{driver}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_scene_renderer_adf81dafc28103e48aedd4e73c7d7ee45}\index{prt::SceneRenderer@{prt::SceneRenderer}!InitRenderPass@{InitRenderPass}}
+\index{InitRenderPass@{InitRenderPass}!prt::SceneRenderer@{prt::SceneRenderer}}
+\doxysubsubsection{\texorpdfstring{InitRenderPass()}{InitRenderPass()}}
+{\footnotesize\ttfamily \label{classprt_1_1_scene_renderer_adf81dafc28103e48aedd4e73c7d7ee45} 
+void prt\+::\+Scene\+Renderer\+::\+Init\+Render\+Pass (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}}]{driver}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{scene__renderer_8h}{scene\+\_\+renderer.\+h}}\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{scene__renderer_8cc}{scene\+\_\+renderer.\+cc}}\end{DoxyCompactItemize}

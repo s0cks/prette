@@ -1,0 +1,119 @@
+\doxysection{chunk.\+h}
+\hypertarget{chunk_8h_source}{}\label{chunk_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/chunk.h@{/Users/tazz/Projects/prette/Sources/prette/chunk.h}}
+\mbox{\hyperlink{chunk_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_CHUNK\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_CHUNK\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{common_8h}{prette/common.h}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{glm_8h}{prette/glm.h}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tile_8h}{prette/tile.h}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{to__string_8h}{prette/to\_string.h}}"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00010\ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ uint32\_t\ kChunkWidth\ =\ 32;}
+\DoxyCodeLine{00011\ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ uint32\_t\ kChunkHeight\ =\ 32;}
+\DoxyCodeLine{00012\ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ kTotalChunkSize\ =\ kChunkWidth\ *\ kChunkHeight;}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceprt_a417886d23aeea354e544f47ad952fd84}{ChunkPos}}\ =\ glm::u32vec2;}
+\DoxyCodeLine{00015\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceprt_a48c350434af7dd830a8e46eaec4121cb}{ChunkData}}\ =\ std::array<Tile,\ kTotalChunkSize>;}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_chunk}{Chunk}};}
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_chunk_visitor}{ChunkVisitor}}\ \{}
+\DoxyCodeLine{00019\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00020\ \ \ \mbox{\hyperlink{classprt_1_1_chunk_visitor_a9a75c16bbef90fa56b3a9246702be4f8}{ChunkVisitor}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00023\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classprt_1_1_chunk_visitor_a3aa5b1c402b9df3cfc2e82e8f7678f39}{\string~ChunkVisitor}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00024\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_chunk_visitor_a50268751e77e05e8874eec37251a2c39}{Visit}}(\mbox{\hyperlink{classprt_1_1_chunk}{Chunk}}*\ chunk)\ -\/>\ \textcolor{keywordtype}{bool}\ =\ 0;}
+\DoxyCodeLine{00025\ \};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_chunk}{Chunk}}\ \{}
+\DoxyCodeLine{00028\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_chunk_1_1_chunk_tile_iterator}{ChunkTileIterator}};}
+\DoxyCodeLine{00029\ \ \ \mbox{\hyperlink{classprt_1_1_chunk_a3103682416203ce0b04d42fa7d5404e0}{DEFINE\_DEFAULT\_COPYABLE\_TYPE}}(\mbox{\hyperlink{classprt_1_1_chunk}{Chunk}});}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00032\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_chunk_1_1_chunk_tile_iterator}{ChunkTileIterator}}\ \{}
+\DoxyCodeLine{00033\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_chunk}{Chunk}}*\ \mbox{\hyperlink{classprt_1_1_chunk_1_1_chunk_tile_iterator_a3051182d769d8401def58b908d189468}{chunk\_}};}
+\DoxyCodeLine{00035\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classprt_1_1_chunk_1_1_chunk_tile_iterator_a78fe7c03bb1fe12b07873e1b00250343}{current\_}}\ =\ 0;}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_chunk_1_1_chunk_tile_iterator_a656245c5a46d8d35d58e023f7dfd591c}{ChunkTileIterator}}(\mbox{\hyperlink{classprt_1_1_chunk}{Chunk}}*\ chunk)\ :}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_chunk_1_1_chunk_tile_iterator_a3051182d769d8401def58b908d189468}{chunk\_}}(chunk)\ \{\}}
+\DoxyCodeLine{00040\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_chunk_1_1_chunk_tile_iterator_adfb504f3be4a9637a9cc41f137d655d0}{\string~ChunkTileIterator}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_chunk_1_1_chunk_tile_iterator_ae1194ba211151779c83a8c1678868a83}{HasNext}}()\ const\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_chunk_1_1_chunk_tile_iterator_a78fe7c03bb1fe12b07873e1b00250343}{current\_}}\ <\ kTotalChunkSize;}
+\DoxyCodeLine{00044\ \ \ \ \ \}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_chunk_1_1_chunk_tile_iterator_a6e90933f55ffe9d7c782226b2ddd2bb2}{Next}}()\ -\/>\ \mbox{\hyperlink{classprt_1_1_tile}{Tile}}*\ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \textcolor{keyword}{auto}\ next\ =\ \&\mbox{\hyperlink{classprt_1_1_chunk_1_1_chunk_tile_iterator_a3051182d769d8401def58b908d189468}{chunk\_}}-\/>\mbox{\hyperlink{classprt_1_1_chunk_aabc612bcb3ac096594a018e18db24a94}{tile}}(\mbox{\hyperlink{classprt_1_1_chunk_1_1_chunk_tile_iterator_a78fe7c03bb1fe12b07873e1b00250343}{current\_}});}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_chunk_1_1_chunk_tile_iterator_a78fe7c03bb1fe12b07873e1b00250343}{current\_}}\ +=\ 1;}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ next;}
+\DoxyCodeLine{00050\ \ \ \ \ \}}
+\DoxyCodeLine{00051\ \ \ \};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00054\ \ \ \mbox{\hyperlink{namespaceprt_a417886d23aeea354e544f47ad952fd84}{ChunkPos}}\ \mbox{\hyperlink{classprt_1_1_chunk_a5cc432dcec5d9c617e4fc31eee042b3a}{pos\_}}\{\};}
+\DoxyCodeLine{00055\ \ \ \mbox{\hyperlink{namespaceprt_a48c350434af7dd830a8e46eaec4121cb}{ChunkData}}\ \mbox{\hyperlink{classprt_1_1_chunk_a01b1138d7dfddcc11c7612872ff58856}{tiles\_}}\{\};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_chunk_aef8c7d11abf3511fe4896ead2e7394a1}{data}}()\ -\/>\ \mbox{\hyperlink{namespaceprt_a48c350434af7dd830a8e46eaec4121cb}{ChunkData}}\&\ \{}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_chunk_a01b1138d7dfddcc11c7612872ff58856}{tiles\_}};}
+\DoxyCodeLine{00059\ \ \ \}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_chunk_aabc612bcb3ac096594a018e18db24a94}{tile}}(\textcolor{keyword}{const}\ uint32\_t\ idx)\ -\/>\ \mbox{\hyperlink{classprt_1_1_tile}{Tile}}\&\ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(idx\ >=\ 0\ \&\&\ idx\ <=\ \mbox{\hyperlink{classprt_1_1_chunk_a01b1138d7dfddcc11c7612872ff58856}{tiles\_}}.size());}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_chunk_a01b1138d7dfddcc11c7612872ff58856}{tiles\_}}.at(idx);}
+\DoxyCodeLine{00064\ \ \ \}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_chunk_a2b2266645c836b9bc46142743bd88af7}{tile}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a2b26a6eb256a6eefff5896d1df8e78c3}{TilePos}}\ pos)\ -\/>\ \mbox{\hyperlink{classprt_1_1_tile}{Tile}}\&\ \{}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_chunk_aabc612bcb3ac096594a018e18db24a94}{tile}}(\mbox{\hyperlink{classprt_1_1_chunk_a5c604ad3dbe06013204bbdd651d82fd7}{GetTileIndex}}(pos));}
+\DoxyCodeLine{00068\ \ \ \}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_chunk_a0a495bd5ed0a4ee75b67f3ecbc4e1c51}{tile}}(\textcolor{keyword}{const}\ uint32\_t\ idx)\ \textcolor{keyword}{const}\ -\/>\ \mbox{\hyperlink{classprt_1_1_tile}{Tile}}\ \textcolor{keyword}{const}\&\ \{}
+\DoxyCodeLine{00071\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(idx\ >=\ 0\ \&\&\ idx\ <=\ \mbox{\hyperlink{classprt_1_1_chunk_a01b1138d7dfddcc11c7612872ff58856}{tiles\_}}.size());}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_chunk_a01b1138d7dfddcc11c7612872ff58856}{tiles\_}}.at(idx);}
+\DoxyCodeLine{00073\ \ \ \}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_chunk_acdc5d71c0422b49271a595c1f5a2d876}{tile}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a2b26a6eb256a6eefff5896d1df8e78c3}{TilePos}}\ pos)\ \textcolor{keyword}{const}\ -\/>\ \mbox{\hyperlink{classprt_1_1_tile}{Tile}}\ \textcolor{keyword}{const}\&\ \{}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_chunk_aabc612bcb3ac096594a018e18db24a94}{tile}}(\mbox{\hyperlink{classprt_1_1_chunk_a5c604ad3dbe06013204bbdd651d82fd7}{GetTileIndex}}(pos));}
+\DoxyCodeLine{00077\ \ \ \}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_chunk_a5c604ad3dbe06013204bbdd651d82fd7}{GetTileIndex}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a2b26a6eb256a6eefff5896d1df8e78c3}{TilePos}}\&\ pos)\ -\/>\ uint32\_t\ \{}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordflow}{return}\ pos.y\ *\ kChunkWidth\ +\ pos.x;}
+\DoxyCodeLine{00081\ \ \ \}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00084\ \ \ \mbox{\hyperlink{classprt_1_1_chunk_a6269dd7e7510ac8e772f839a107e9fc2}{Chunk}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00085\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_chunk_a6269dd7e7510ac8e772f839a107e9fc2}{Chunk}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a417886d23aeea354e544f47ad952fd84}{ChunkPos}}\ pos);}
+\DoxyCodeLine{00086\ \ \ \mbox{\hyperlink{classprt_1_1_chunk_a0be8a4bd7439dbe12c2439de0b6e13e8}{Chunk}}(\textcolor{keyword}{const}\ uint32\_t\ x,\ \textcolor{keyword}{const}\ uint32\_t\ y)\ :}
+\DoxyCodeLine{00087\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_chunk}{Chunk}}(\mbox{\hyperlink{namespaceprt_a417886d23aeea354e544f47ad952fd84}{ChunkPos}}(x,\ y))\ \{\}}
+\DoxyCodeLine{00088\ \ \ \mbox{\hyperlink{classprt_1_1_chunk_a7f0258e56d3c58b21123a4665424c808}{\string~Chunk}}();}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_chunk_a9b4662aa811f2898dfc7713d604394c6}{GetPos}}()\ const\ -\/>\ const\ \mbox{\hyperlink{namespaceprt_a417886d23aeea354e544f47ad952fd84}{ChunkPos}}\&\ \{}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_chunk_a5cc432dcec5d9c617e4fc31eee042b3a}{pos\_}};}
+\DoxyCodeLine{00092\ \ \ \}}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_chunk_af61eba0a02d062fa185ce44e1e3dc7fd}{GetTileAt}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a2b26a6eb256a6eefff5896d1df8e78c3}{TilePos}}\ pos)\ -\/>\ \mbox{\hyperlink{classprt_1_1_tile}{Tile}}\ \textcolor{keyword}{const}\&\ \{}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_chunk_aabc612bcb3ac096594a018e18db24a94}{tile}}(std::move(pos));}
+\DoxyCodeLine{00096\ \ \ \}}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_chunk_a80bfd2a6ad2c6a7ee3887ad74d141e65}{Accept}}(\mbox{\hyperlink{classprt_1_1_chunk_visitor}{ChunkVisitor}}*\ vis)\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00099\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(vis);}
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordflow}{return}\ vis-\/>Visit(\textcolor{keyword}{this});}
+\DoxyCodeLine{00101\ \ \ \}}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_chunk_ad4d6798b226391a85dd9c62bc567553f}{VisitTiles}}(\mbox{\hyperlink{classprt_1_1_tile_visitor}{TileVisitor}}*\ vis)\ -\/>\ bool;}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_chunk_a04f86597c4c4f467c0361b33718d9045}{operator<<}}(std::ostream\&\ stream,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_chunk}{Chunk}}\&\ rhs)\ -\/>\ std::ostream\&\ \{}
+\DoxyCodeLine{00106\ \ \ \ \ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper}{ToStringHelper<Chunk>}}\ helper\{\};}
+\DoxyCodeLine{00107\ \ \ \ \ helper.\mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_ae60636e2df5f8d3c44242232330ed9da}{AddFieldRef}}(\textcolor{stringliteral}{"{}pos"{}},\ rhs.GetPos());}
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordflow}{return}\ stream\ <<\ helper;}
+\DoxyCodeLine{00109\ \ \ \}}
+\DoxyCodeLine{00110\ \};}
+\DoxyCodeLine{00111\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_CHUNK\_H}}
+
+\end{DoxyCode}

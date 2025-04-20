@@ -1,0 +1,132 @@
+\doxysection{prt\+::Tick\+Profiler Class Reference}
+\hypertarget{classprt_1_1_tick_profiler}{}\label{classprt_1_1_tick_profiler}\index{prt::TickProfiler@{prt::TickProfiler}}
+
+
+{\ttfamily \#include $<$tick\+\_\+profiler.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_tick_profiler_aef979f5609293786132706a397b9b12a}{DEFINE\+\_\+\+NON\+\_\+\+COPYABLE\+\_\+\+TYPE}} (\mbox{\hyperlink{classprt_1_1_tick_profiler}{Tick\+Profiler}})
+\item 
+\mbox{\hyperlink{classprt_1_1_tick_profiler_a6bca579ce21a851d3efd344613433fe5}{Tick\+Profiler}} (rx\+::observable$<$ uint64\+\_\+t $>$ deltas)
+\item 
+\mbox{\hyperlink{classprt_1_1_tick_profiler_aa695d4f6c864d3f22e97b111910c27c2}{\texorpdfstring{$\sim$}{\string~}\+Tick\+Profiler}} ()
+\item 
+auto \mbox{\hyperlink{classprt_1_1_tick_profiler_a3e4d2245c80e7ca72062596938104fdd}{On\+Stats}} () const -\/$>$ rx\+::observable$<$ \mbox{\hyperlink{structprt_1_1_tick_stats}{Tick\+Stats}} $>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr const auto \mbox{\hyperlink{classprt_1_1_tick_profiler_ab1a394581a579e51df8fffb6ee2cb563}{k\+Tick\+Profiler\+Max\+Count}} = 10
+\item 
+static constexpr const auto \mbox{\hyperlink{classprt_1_1_tick_profiler_acdfa52c937be1a550483b0811439e55a}{k\+Tick\+Profiler\+Rate}} = std\+::chrono\+::seconds(1)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename N $>$ }\\static auto \mbox{\hyperlink{classprt_1_1_tick_profiler_adbdc93a7c254297294d99c9b196d400b}{Sum}} (const std\+::vector$<$ N $>$ \&values) -\/$>$ N
+\item 
+{\footnotesize template$<$typename N $>$ }\\static auto \mbox{\hyperlink{classprt_1_1_tick_profiler_a5b76a9ecd285ec0ca2f9321f4a8f0877}{Average}} (const std\+::vector$<$ N $>$ \&values) -\/$>$ double
+\item 
+{\footnotesize template$<$typename T , typename Container $>$ }\\static auto \mbox{\hyperlink{classprt_1_1_tick_profiler_ac86d904f0d8d2c4feb174429f8ea2415}{max\+\_\+or}} (const Container \&container, const T default\+\_\+value) -\/$>$ T
+\item 
+{\footnotesize template$<$typename T , typename Container $>$ }\\static auto \mbox{\hyperlink{classprt_1_1_tick_profiler_a14849d9ee76d50dc42bb0390b74cfadb}{min\+\_\+or}} (const Container \&container, const T default\+\_\+value) -\/$>$ T
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+rx\+::subject$<$ \mbox{\hyperlink{structprt_1_1_tick_stats}{Tick\+Stats}} $>$ \mbox{\hyperlink{classprt_1_1_tick_profiler_a644f765d5d997e68a7659af6be3787ba}{stats\+\_\+}} \{\}
+\item 
+rx\+::subscription \mbox{\hyperlink{classprt_1_1_tick_profiler_a18a46dc8ea736a441fa196fff2d9123e}{on\+\_\+delta\+\_\+}} \{\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_tick_profiler_a6bca579ce21a851d3efd344613433fe5}\index{prt::TickProfiler@{prt::TickProfiler}!TickProfiler@{TickProfiler}}
+\index{TickProfiler@{TickProfiler}!prt::TickProfiler@{prt::TickProfiler}}
+\doxysubsubsection{\texorpdfstring{TickProfiler()}{TickProfiler()}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_profiler_a6bca579ce21a851d3efd344613433fe5} 
+prt\+::\+Tick\+Profiler\+::\+Tick\+Profiler (\begin{DoxyParamCaption}\item[{rx\+::observable$<$ uint64\+\_\+t $>$}]{deltas}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+\Hypertarget{classprt_1_1_tick_profiler_aa695d4f6c864d3f22e97b111910c27c2}\index{prt::TickProfiler@{prt::TickProfiler}!````~TickProfiler@{\texorpdfstring{$\sim$}{\string~}TickProfiler}}
+\index{````~TickProfiler@{\texorpdfstring{$\sim$}{\string~}TickProfiler}!prt::TickProfiler@{prt::TickProfiler}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}TickProfiler()}{\string~TickProfiler()}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_profiler_aa695d4f6c864d3f22e97b111910c27c2} 
+prt\+::\+Tick\+Profiler\+::\texorpdfstring{$\sim$}{\string~}\+Tick\+Profiler (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_tick_profiler_a5b76a9ecd285ec0ca2f9321f4a8f0877}\index{prt::TickProfiler@{prt::TickProfiler}!Average@{Average}}
+\index{Average@{Average}!prt::TickProfiler@{prt::TickProfiler}}
+\doxysubsubsection{\texorpdfstring{Average()}{Average()}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_profiler_a5b76a9ecd285ec0ca2f9321f4a8f0877} 
+template$<$typename N $>$ \\
+static auto prt\+::\+Tick\+Profiler\+::\+Average (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ N $>$ \&}]{values}{}\end{DoxyParamCaption}) -\/$>$ double \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_tick_profiler_aef979f5609293786132706a397b9b12a}\index{prt::TickProfiler@{prt::TickProfiler}!DEFINE\_NON\_COPYABLE\_TYPE@{DEFINE\_NON\_COPYABLE\_TYPE}}
+\index{DEFINE\_NON\_COPYABLE\_TYPE@{DEFINE\_NON\_COPYABLE\_TYPE}!prt::TickProfiler@{prt::TickProfiler}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_NON\_COPYABLE\_TYPE()}{DEFINE\_NON\_COPYABLE\_TYPE()}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_profiler_aef979f5609293786132706a397b9b12a} 
+prt\+::\+Tick\+Profiler\+::\+DEFINE\+\_\+\+NON\+\_\+\+COPYABLE\+\_\+\+TYPE (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_tick_profiler}{Tick\+Profiler}}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_tick_profiler_ac86d904f0d8d2c4feb174429f8ea2415}\index{prt::TickProfiler@{prt::TickProfiler}!max\_or@{max\_or}}
+\index{max\_or@{max\_or}!prt::TickProfiler@{prt::TickProfiler}}
+\doxysubsubsection{\texorpdfstring{max\_or()}{max\_or()}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_profiler_ac86d904f0d8d2c4feb174429f8ea2415} 
+template$<$typename T , typename Container $>$ \\
+static auto prt\+::\+Tick\+Profiler\+::max\+\_\+or (\begin{DoxyParamCaption}\item[{const Container \&}]{container}{, }\item[{const T}]{default\+\_\+value}{}\end{DoxyParamCaption}) -\/$>$ T \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_tick_profiler_a14849d9ee76d50dc42bb0390b74cfadb}\index{prt::TickProfiler@{prt::TickProfiler}!min\_or@{min\_or}}
+\index{min\_or@{min\_or}!prt::TickProfiler@{prt::TickProfiler}}
+\doxysubsubsection{\texorpdfstring{min\_or()}{min\_or()}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_profiler_a14849d9ee76d50dc42bb0390b74cfadb} 
+template$<$typename T , typename Container $>$ \\
+static auto prt\+::\+Tick\+Profiler\+::min\+\_\+or (\begin{DoxyParamCaption}\item[{const Container \&}]{container}{, }\item[{const T}]{default\+\_\+value}{}\end{DoxyParamCaption}) -\/$>$ T \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_tick_profiler_a3e4d2245c80e7ca72062596938104fdd}\index{prt::TickProfiler@{prt::TickProfiler}!OnStats@{OnStats}}
+\index{OnStats@{OnStats}!prt::TickProfiler@{prt::TickProfiler}}
+\doxysubsubsection{\texorpdfstring{OnStats()}{OnStats()}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_profiler_a3e4d2245c80e7ca72062596938104fdd} 
+auto prt\+::\+Tick\+Profiler\+::\+On\+Stats (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ rx\+::observable$<$\mbox{\hyperlink{structprt_1_1_tick_stats}{Tick\+Stats}}$>$ \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_tick_profiler_adbdc93a7c254297294d99c9b196d400b}\index{prt::TickProfiler@{prt::TickProfiler}!Sum@{Sum}}
+\index{Sum@{Sum}!prt::TickProfiler@{prt::TickProfiler}}
+\doxysubsubsection{\texorpdfstring{Sum()}{Sum()}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_profiler_adbdc93a7c254297294d99c9b196d400b} 
+template$<$typename N $>$ \\
+static auto prt\+::\+Tick\+Profiler\+::\+Sum (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ N $>$ \&}]{values}{}\end{DoxyParamCaption}) -\/$>$ N \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_tick_profiler_ab1a394581a579e51df8fffb6ee2cb563}\index{prt::TickProfiler@{prt::TickProfiler}!kTickProfilerMaxCount@{kTickProfilerMaxCount}}
+\index{kTickProfilerMaxCount@{kTickProfilerMaxCount}!prt::TickProfiler@{prt::TickProfiler}}
+\doxysubsubsection{\texorpdfstring{kTickProfilerMaxCount}{kTickProfilerMaxCount}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_profiler_ab1a394581a579e51df8fffb6ee2cb563} 
+const auto prt\+::\+Tick\+Profiler\+::k\+Tick\+Profiler\+Max\+Count = 10\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classprt_1_1_tick_profiler_acdfa52c937be1a550483b0811439e55a}\index{prt::TickProfiler@{prt::TickProfiler}!kTickProfilerRate@{kTickProfilerRate}}
+\index{kTickProfilerRate@{kTickProfilerRate}!prt::TickProfiler@{prt::TickProfiler}}
+\doxysubsubsection{\texorpdfstring{kTickProfilerRate}{kTickProfilerRate}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_profiler_acdfa52c937be1a550483b0811439e55a} 
+const auto prt\+::\+Tick\+Profiler\+::k\+Tick\+Profiler\+Rate = std\+::chrono\+::seconds(1)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classprt_1_1_tick_profiler_a18a46dc8ea736a441fa196fff2d9123e}\index{prt::TickProfiler@{prt::TickProfiler}!on\_delta\_@{on\_delta\_}}
+\index{on\_delta\_@{on\_delta\_}!prt::TickProfiler@{prt::TickProfiler}}
+\doxysubsubsection{\texorpdfstring{on\_delta\_}{on\_delta\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_profiler_a18a46dc8ea736a441fa196fff2d9123e} 
+rx\+::subscription prt\+::\+Tick\+Profiler\+::on\+\_\+delta\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_tick_profiler_a644f765d5d997e68a7659af6be3787ba}\index{prt::TickProfiler@{prt::TickProfiler}!stats\_@{stats\_}}
+\index{stats\_@{stats\_}!prt::TickProfiler@{prt::TickProfiler}}
+\doxysubsubsection{\texorpdfstring{stats\_}{stats\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_profiler_a644f765d5d997e68a7659af6be3787ba} 
+rx\+::subject$<$\mbox{\hyperlink{structprt_1_1_tick_stats}{Tick\+Stats}}$>$ prt\+::\+Tick\+Profiler\+::stats\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{tick__profiler_8h}{tick\+\_\+profiler.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,110 @@
+\doxysection{prt\+::Window\+Maximize\+Event Class Reference}
+\hypertarget{classprt_1_1_window_maximize_event}{}\label{classprt_1_1_window_maximize_event}\index{prt::WindowMaximizeEvent@{prt::WindowMaximizeEvent}}
+
+
+{\ttfamily \#include $<$window\+\_\+event.\+h$>$}
+
+
+
+Inheritance diagram for prt\+::Window\+Maximize\+Event\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=216pt]{classprt_1_1_window_maximize_event__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for prt\+::Window\+Maximize\+Event\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=216pt]{classprt_1_1_window_maximize_event__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_window_maximize_event_a39d8467ec0c96f0f8d7ed31011c9a9b2}{Window\+Maximize\+Event}} (const bool maximized)
+\item 
+\mbox{\hyperlink{classprt_1_1_window_maximize_event_a26730ff1346998aed152560029b1a563}{\texorpdfstring{$\sim$}{\string~}\+Window\+Maximize\+Event}} () override=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1_window_maximize_event_a70e0186bea753c4416ed60c21751d73e}{Is\+Maximized}} () const -\/$>$ bool
+\item 
+\mbox{\hyperlink{classprt_1_1_window_maximize_event_aec12548849befed4e39a6d48d98d0644}{DECLARE\+\_\+\+WINDOW\+\_\+\+EVENT\+\_\+\+TYPE}} (Window\+Maximize)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classprt_1_1_window_event}{prt\+::\+Window\+Event}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_window_event_a73dc5c806af4d3af62804362b1dfe6ef}{Window\+Event}} ()=default
+\item 
+\mbox{\hyperlink{classprt_1_1_window_event_a8a5719e27f083bae94ef7c9d89fddb90}{\texorpdfstring{$\sim$}{\string~}\+Window\+Event}} () override=default
+\item 
+void \mbox{\hyperlink{classprt_1_1_window_event_a1241f05b5d887227878650ec78b3d75c}{To\+Table}} (lua\+\_\+\+State \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{engine_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}}) const override
+\item 
+\mbox{\hyperlink{classprt_1_1_window_event_a95125bb1675dd6f3aaec40b75bf69cb8}{DEFINE\+\_\+\+EVENT\+\_\+\+PROTOTYPE\+\_\+\+TYPE}} (\mbox{\hyperlink{classprt_1_1_window}{Window}}, \mbox{\hyperlink{namespaceprt_a4d42e4eb12ffab41c8a0b96551af51ae}{FOR\+\_\+\+EACH\+\_\+\+WINDOW\+\_\+\+EVENT}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classprt_1_1_event}{prt\+::\+Event}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classprt_1_1_event_a4852e85c48ebb80d6c96fe0d13d5ae6a}{\texorpdfstring{$\sim$}{\string~}\+Event}} ()=default
+\item 
+virtual auto \mbox{\hyperlink{classprt_1_1_event_a674cd356a472771aad69534b2959500e}{Get\+Name}} () const -\/$>$ const char \texorpdfstring{$\ast$}{*}=0
+\item 
+virtual auto \mbox{\hyperlink{classprt_1_1_event_a90911d9644cf7ec9b4f05053a3b632af}{To\+String}} () const -\/$>$ std\+::string=0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classprt_1_1_window_maximize_event_a4bf99167ad3b4d28fd5bb23e4e685a96}{maximized\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classprt_1_1_event}{prt\+::\+Event}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_event_a68ae1e6264631e55933648b66d5dd11b}{Event}} ()=default
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_window_maximize_event_a39d8467ec0c96f0f8d7ed31011c9a9b2}\index{prt::WindowMaximizeEvent@{prt::WindowMaximizeEvent}!WindowMaximizeEvent@{WindowMaximizeEvent}}
+\index{WindowMaximizeEvent@{WindowMaximizeEvent}!prt::WindowMaximizeEvent@{prt::WindowMaximizeEvent}}
+\doxysubsubsection{\texorpdfstring{WindowMaximizeEvent()}{WindowMaximizeEvent()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_maximize_event_a39d8467ec0c96f0f8d7ed31011c9a9b2} 
+prt\+::\+Window\+Maximize\+Event\+::\+Window\+Maximize\+Event (\begin{DoxyParamCaption}\item[{const bool}]{maximized}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+\Hypertarget{classprt_1_1_window_maximize_event_a26730ff1346998aed152560029b1a563}\index{prt::WindowMaximizeEvent@{prt::WindowMaximizeEvent}!````~WindowMaximizeEvent@{\texorpdfstring{$\sim$}{\string~}WindowMaximizeEvent}}
+\index{````~WindowMaximizeEvent@{\texorpdfstring{$\sim$}{\string~}WindowMaximizeEvent}!prt::WindowMaximizeEvent@{prt::WindowMaximizeEvent}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}WindowMaximizeEvent()}{\string~WindowMaximizeEvent()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_maximize_event_a26730ff1346998aed152560029b1a563} 
+prt\+::\+Window\+Maximize\+Event\+::\texorpdfstring{$\sim$}{\string~}\+Window\+Maximize\+Event (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_window_maximize_event_aec12548849befed4e39a6d48d98d0644}\index{prt::WindowMaximizeEvent@{prt::WindowMaximizeEvent}!DECLARE\_WINDOW\_EVENT\_TYPE@{DECLARE\_WINDOW\_EVENT\_TYPE}}
+\index{DECLARE\_WINDOW\_EVENT\_TYPE@{DECLARE\_WINDOW\_EVENT\_TYPE}!prt::WindowMaximizeEvent@{prt::WindowMaximizeEvent}}
+\doxysubsubsection{\texorpdfstring{DECLARE\_WINDOW\_EVENT\_TYPE()}{DECLARE\_WINDOW\_EVENT\_TYPE()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_maximize_event_aec12548849befed4e39a6d48d98d0644} 
+prt\+::\+Window\+Maximize\+Event\+::\+DECLARE\+\_\+\+WINDOW\+\_\+\+EVENT\+\_\+\+TYPE (\begin{DoxyParamCaption}\item[{Window\+Maximize}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_window_maximize_event_a70e0186bea753c4416ed60c21751d73e}\index{prt::WindowMaximizeEvent@{prt::WindowMaximizeEvent}!IsMaximized@{IsMaximized}}
+\index{IsMaximized@{IsMaximized}!prt::WindowMaximizeEvent@{prt::WindowMaximizeEvent}}
+\doxysubsubsection{\texorpdfstring{IsMaximized()}{IsMaximized()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_maximize_event_a70e0186bea753c4416ed60c21751d73e} 
+auto prt\+::\+Window\+Maximize\+Event\+::\+Is\+Maximized (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_window_maximize_event_a4bf99167ad3b4d28fd5bb23e4e685a96}\index{prt::WindowMaximizeEvent@{prt::WindowMaximizeEvent}!maximized\_@{maximized\_}}
+\index{maximized\_@{maximized\_}!prt::WindowMaximizeEvent@{prt::WindowMaximizeEvent}}
+\doxysubsubsection{\texorpdfstring{maximized\_}{maximized\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_maximize_event_a4bf99167ad3b4d28fd5bb23e4e685a96} 
+bool prt\+::\+Window\+Maximize\+Event\+::maximized\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{window__event_8h}{window\+\_\+event.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,101 @@
+\doxysection{thread\+\_\+local.\+h}
+\hypertarget{thread__local_8h_source}{}\label{thread__local_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/thread\_local.h@{/Users/tazz/Projects/prette/Sources/prette/thread\_local.h}}
+\mbox{\hyperlink{thread__local_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_THREAD\_LOCAL\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_THREAD\_LOCAL\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <glog/logging.h>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{os__thread_8h}{prette/os\_thread.h}}"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00009\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_thread_local}{ThreadLocal}}\ \{}
+\DoxyCodeLine{00011\ \ \ \mbox{\hyperlink{classprt_1_1_thread_local_ad791b07a6f696b2b683a8d22c55e11aa}{DEFINE\_NON\_COPYABLE\_TYPE}}(\mbox{\hyperlink{classprt_1_1_thread_local}{ThreadLocal<T>}});}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00014\ \ \ \mbox{\hyperlink{namespaceprt_a366a741d866403a24a0c5ea6ebdb9746}{ThreadLocalKey}}\ \mbox{\hyperlink{classprt_1_1_thread_local_a6ee72c39f3ca4ace5100f38bb10c8ec8}{key\_}}\{\};}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \mbox{\hyperlink{classprt_1_1_thread_local_ac13f13a0991c2d014dabe09545d9f5f7}{ThreadLocal}}()\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ LOG\_IF(FATAL,\ !\mbox{\hyperlink{namespaceprt_af90c4d12e29f82e6cc5c6d5c3969e841}{InitializeThreadLocal}}(\mbox{\hyperlink{classprt_1_1_thread_local_a6ee72c39f3ca4ace5100f38bb10c8ec8}{key\_}}));}
+\DoxyCodeLine{00019\ \ \ \}}
+\DoxyCodeLine{00020\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classprt_1_1_thread_local_a57c1cd0148a1c6eda32c062445699d0e}{\string~ThreadLocal}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_thread_local_a3a4e353f6eaad3d1297d096e5a0b8199}{GetKey}}()\ const\ -\/>\ const\ \mbox{\hyperlink{namespaceprt_a366a741d866403a24a0c5ea6ebdb9746}{ThreadLocalKey}}\&\ \{}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_thread_local_a6ee72c39f3ca4ace5100f38bb10c8ec8}{key\_}};}
+\DoxyCodeLine{00024\ \ \ \}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_thread_local_a6d4bc3d408fd1521bb23ec29eac72cda}{Set}}(T*\ value)\ \textcolor{keyword}{const}\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespaceprt_a08377cc4a9cf31252cea0dfe999cb083}{SetCurrentThreadLocal}}(\mbox{\hyperlink{classprt_1_1_thread_local_a3a4e353f6eaad3d1297d096e5a0b8199}{GetKey}}(),\ (\textcolor{keywordtype}{void}*)value);}
+\DoxyCodeLine{00028\ \ \ \}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_thread_local_ac34bbe8c64ee6e1a7f88fd68c4dae63d}{Get}}()\ const\ -\/>\ T*\ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordflow}{return}\ (T*)\mbox{\hyperlink{namespaceprt_a690278fd4c6a75eaa4992ee7df8ab035}{GetCurrentThreadLocal}}(\mbox{\hyperlink{classprt_1_1_thread_local_a3a4e353f6eaad3d1297d096e5a0b8199}{GetKey}}());}
+\DoxyCodeLine{00032\ \ \ \}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_thread_local_a9b74768b689094f9ed21a2aaadcb2084}{Has}}()\ const\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_thread_local_ac34bbe8c64ee6e1a7f88fd68c4dae63d}{Get}}()\ !=\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00036\ \ \ \}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \textcolor{keyword}{operator}\ T*()\ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_thread_local_ac34bbe8c64ee6e1a7f88fd68c4dae63d}{Get}}();}
+\DoxyCodeLine{00040\ \ \ \}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_thread_local_abbebc8a4c22363585dea12b12e20e35b}{operator=}}(T*\ value)\ -\/>\ \mbox{\hyperlink{classprt_1_1_thread_local}{ThreadLocal<T>}}\&\ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(value);}
+\DoxyCodeLine{00044\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_thread_local_a6d4bc3d408fd1521bb23ec29eac72cda}{Set}}(value);}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00046\ \ \ \}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_thread_local_a39a73e01fdb9d3459b40750c66c0e930}{operator<<}}(std::ostream\&\ stream,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_thread_local}{ThreadLocal<T>}}\&\ rhs)\ -\/>\ std::ostream\&\ \{}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordflow}{return}\ stream\ <<\ *rhs.Get();}
+\DoxyCodeLine{00050\ \ \ \}}
+\DoxyCodeLine{00051\ \};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00054\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_lazy_thread_local}{LazyThreadLocal}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1_thread_local}{ThreadLocal}}<T>\ \{}
+\DoxyCodeLine{00055\ \ \ \mbox{\hyperlink{classprt_1_1_lazy_thread_local_ab4d1b15f1f23ebad712690c35f246d22}{DEFINE\_NON\_COPYABLE\_TYPE}}(\mbox{\hyperlink{classprt_1_1_lazy_thread_local}{LazyThreadLocal<T>}});}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00058\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classprt_1_1_lazy_thread_local_a39d4d686158cd44cc9650b363a8ef645}{Supplier}}\ =\ std::function<T*()>;}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00061\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_lazy_thread_local_a49562784da59580599deb48d1f16b4b8}{CreateDefaultSupplier}}()\ -\/>\ \mbox{\hyperlink{classprt_1_1_lazy_thread_local_a39d4d686158cd44cc9650b363a8ef645}{Supplier}}\ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordflow}{return}\ []()\ \{}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ T();}
+\DoxyCodeLine{00064\ \ \ \ \ \};}
+\DoxyCodeLine{00065\ \ \ \}}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00068\ \ \ \mbox{\hyperlink{classprt_1_1_lazy_thread_local_a39d4d686158cd44cc9650b363a8ef645}{Supplier}}\ \mbox{\hyperlink{classprt_1_1_lazy_thread_local_aa9bdd6c0ddbd6d33893646a22e5cfb89}{supplier\_}};}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_lazy_thread_local_a417c9ec56f2d64c54666690efb0dbc3f}{Supply}}()\ const\ -\/>\ T*\ \{}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_lazy_thread_local_aa9bdd6c0ddbd6d33893646a22e5cfb89}{supplier\_}}();}
+\DoxyCodeLine{00072\ \ \ \}}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00075\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_lazy_thread_local_a2238c994f7547c4919465baf18239071}{LazyThreadLocal}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_lazy_thread_local_a39d4d686158cd44cc9650b363a8ef645}{Supplier}}\&\ supplier\ =\ \mbox{\hyperlink{classprt_1_1_lazy_thread_local_a49562784da59580599deb48d1f16b4b8}{CreateDefaultSupplier}}())\ :}
+\DoxyCodeLine{00076\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_lazy_thread_local_aa9bdd6c0ddbd6d33893646a22e5cfb89}{supplier\_}}(supplier)\ \{\}}
+\DoxyCodeLine{00077\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classprt_1_1_lazy_thread_local_acd8bc6cc994bde6c4da91e0f17583ba9}{\string~LazyThreadLocal}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_lazy_thread_local_a9241777e20a6a30ae7d44c0dda4d3d4b}{GetSupplier}}()\ const\ -\/>\ const\ \mbox{\hyperlink{classprt_1_1_lazy_thread_local_a39d4d686158cd44cc9650b363a8ef645}{Supplier}}\&\ \{}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_lazy_thread_local_aa9bdd6c0ddbd6d33893646a22e5cfb89}{supplier\_}};}
+\DoxyCodeLine{00081\ \ \ \}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_lazy_thread_local_acce012ca0688f126335c67c5339a2f62}{Get}}()\ const\ -\/>\ T*\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ value\ =\ \mbox{\hyperlink{classprt_1_1_thread_local_ac34bbe8c64ee6e1a7f88fd68c4dae63d}{ThreadLocal<T>::Get}}();}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordflow}{if}\ (value)}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ value;}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ supplied\ =\ \mbox{\hyperlink{classprt_1_1_lazy_thread_local_a417c9ec56f2d64c54666690efb0dbc3f}{Supply}}();}
+\DoxyCodeLine{00088\ \ \ \ \ LOG\_IF(FATAL,\ !supplied)\ <<\ \textcolor{stringliteral}{"{}failed\ to\ supply\ value\ for\ ThreadLocal."{}};}
+\DoxyCodeLine{00089\ \ \ \ \ LOG\_IF(FATAL,\ !\mbox{\hyperlink{classprt_1_1_thread_local}{ThreadLocal<T>::Set}}(supplied))\ <<\ \textcolor{stringliteral}{"{}failed\ to\ set\ ThreadLocal\ value."{}};}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordflow}{return}\ supplied;}
+\DoxyCodeLine{00091\ \ \ \}}
+\DoxyCodeLine{00092\ \};}
+\DoxyCodeLine{00093\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_THREAD\_LOCAL\_H}}
+
+\end{DoxyCode}

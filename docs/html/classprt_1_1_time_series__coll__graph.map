@@ -1,0 +1,9 @@
+<map id="prt::TimeSeries&lt; Capacity &gt;" name="prt::TimeSeries&lt; Capacity &gt;">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,289,192,315"/>
+<area shape="rect" id="Node000002" href="$classprt_1_1_numeric_series.html" title=" " alt="" coords="33,199,164,240"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="101,255,101,289,96,289,96,255"/>
+<area shape="rect" id="Node000003" href="$classprt_1_1_series.html" title=" " alt="" coords="34,109,163,150"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="101,165,101,199,96,199,96,165"/>
+<area shape="rect" id="Node000004" href="$classprt_1_1_circular_buffer.html" title=" " alt="" coords="23,5,174,46"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="101,62,101,109,96,109,96,62"/>
+</map>

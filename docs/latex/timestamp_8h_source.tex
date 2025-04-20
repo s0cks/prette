@@ -1,0 +1,57 @@
+\doxysection{timestamp.\+h}
+\hypertarget{timestamp_8h_source}{}\label{timestamp_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/timestamp.h@{/Users/tazz/Projects/prette/Sources/prette/timestamp.h}}
+\mbox{\hyperlink{timestamp_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_TIMESTAMP\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_TIMESTAMP\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00008\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceprt_af51b2ebc6af9f99a72308e1fccf052a8}{RawTimestamp}}\ =\ uint64\_t;}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceprt_a3b42b9f074b18f02b9aab3eddda0ccae}{SysClock}}\ =\ std::chrono::system\_clock;}
+\DoxyCodeLine{00011\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceprt_ae74a28741beec5d2cd9d84fe207b89fb}{Timestamp}}\ =\ SysClock::time\_point;}
+\DoxyCodeLine{00012\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceprt_aa91a5697dfcc01c56a7ba32a0063396d}{Duration}}\ =\ SysClock::duration;}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00015\ \ \ Now()\ -\/>\ \mbox{\hyperlink{namespaceprt_ae74a28741beec5d2cd9d84fe207b89fb}{Timestamp}}\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordflow}{return}\ SysClock::now();}
+\DoxyCodeLine{00017\ \ \ \}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00020\ \ \ GetElapsedTimeMilliseconds(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_ae74a28741beec5d2cd9d84fe207b89fb}{Timestamp}}\ start,}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_ae74a28741beec5d2cd9d84fe207b89fb}{Timestamp}}\ stop\ =\ Now())\ -\/>\ uint64\_t\ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{using\ namespace\ }std::chrono;}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordflow}{return}\ duration\_cast<milliseconds>(stop\ -\/\ start).count();}
+\DoxyCodeLine{00024\ \ \ \}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00027\ \ \ ToUnixTimestamp(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_ae74a28741beec5d2cd9d84fe207b89fb}{Timestamp}}\ ts\ =\ Now())\ -\/>\ \mbox{\hyperlink{namespaceprt_af51b2ebc6af9f99a72308e1fccf052a8}{RawTimestamp}}\{}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{using\ namespace\ }std::chrono;}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordflow}{return}\ duration\_cast<milliseconds>(ts.time\_since\_epoch()).count();}
+\DoxyCodeLine{00030\ \ \ \}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00033\ \ \ FromUnixTimestamp(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_af51b2ebc6af9f99a72308e1fccf052a8}{RawTimestamp}}\ ms)\ -\/>\ \mbox{\hyperlink{namespaceprt_ae74a28741beec5d2cd9d84fe207b89fb}{Timestamp}}\{}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{using\ namespace\ }std::chrono;}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespaceprt_ae74a28741beec5d2cd9d84fe207b89fb}{Timestamp}}(milliseconds(ms));}
+\DoxyCodeLine{00036\ \ \ \}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{namespaceprt_ac18bb49ac0fd116a691aeb25ea5ff8dd}{FormatTimestamp}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_ae74a28741beec5d2cd9d84fe207b89fb}{Timestamp}}\ ts,\ \textcolor{keyword}{const}\ std::string\&\ format)\ -\/>\ std::string;}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00041\ \ \ FormatTimestampReadable(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_ae74a28741beec5d2cd9d84fe207b89fb}{Timestamp}}\ ts)\ -\/>\ std::string\ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespaceprt_ac18bb49ac0fd116a691aeb25ea5ff8dd}{FormatTimestamp}}(ts,\ \textcolor{stringliteral}{"{}\%m/\%d/\%Y\ \%H:\%M:\%S"{}});}
+\DoxyCodeLine{00043\ \ \ \}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00046\ \ \ FormatTimestampFileSafe(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_ae74a28741beec5d2cd9d84fe207b89fb}{Timestamp}}\ ts)\ -\/>\ std::string\ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespaceprt_ac18bb49ac0fd116a691aeb25ea5ff8dd}{FormatTimestamp}}(ts,\ \textcolor{stringliteral}{"{}\%Y\%m\%d-\/\%H\%M\%S"{}});}
+\DoxyCodeLine{00048\ \ \ \}}
+\DoxyCodeLine{00049\ \}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//PRT\_TIMESTAMP\_H}}
+
+\end{DoxyCode}

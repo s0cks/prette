@@ -1,0 +1,120 @@
+\doxysection{prt\+::Swap\+Chain\+Support\+Details Struct Reference}
+\hypertarget{structprt_1_1_swap_chain_support_details}{}\label{structprt_1_1_swap_chain_support_details}\index{prt::SwapChainSupportDetails@{prt::SwapChainSupportDetails}}
+
+
+{\ttfamily \#include $<$swapchain\+\_\+support.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+auto \mbox{\hyperlink{structprt_1_1_swap_chain_support_details_adb55d6402126cd9bb5f963296a05b79b}{Has\+Surface\+Formats}} () const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{structprt_1_1_swap_chain_support_details_a940458d8108fcd9472735e94dde82a7b}{Has\+Present\+Modes}} () const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{structprt_1_1_swap_chain_support_details_aa52925adfd8c5b456dcb1deff2774e25}{Find\+Surface\+Format}} (const std\+::function$<$ bool(const Vk\+Surface\+Format\+KHR \&)$>$ \&filter) const -\/$>$ const Vk\+Surface\+Format\+KHR \&
+\item 
+auto \mbox{\hyperlink{structprt_1_1_swap_chain_support_details_ad61988eabe4066524b523de466096ee6}{Find\+Present\+Mode}} (const std\+::function$<$ bool(const Vk\+Present\+Mode\+KHR \&)$>$ \&filter) const -\/$>$ Vk\+Present\+Mode\+KHR
+\item 
+auto \mbox{\hyperlink{structprt_1_1_swap_chain_support_details_ad4f68d30b7a1920a320f00224d5dad7e}{Get\+Max\+Image\+Count}} () const -\/$>$ uint32\+\_\+t
+\item 
+auto \mbox{\hyperlink{structprt_1_1_swap_chain_support_details_a09a1f9c52d22e24ecc44c805d1b69c8d}{Has\+Max\+Image}} () const -\/$>$ bool
+\item 
+void \mbox{\hyperlink{structprt_1_1_swap_chain_support_details_a748bf4d73e2a9d6b631b4bdd53bf3d34}{Clamp\+Image\+Count}} (uint32\+\_\+t \&image\+\_\+count) const
+\item 
+auto \mbox{\hyperlink{structprt_1_1_swap_chain_support_details_afdcbe589478ea5036c832e0313a85048}{Get\+Extent}} () const -\/$>$ Vk\+Extent2D
+\item 
+\mbox{\hyperlink{structprt_1_1_swap_chain_support_details_ae4badd533a94e588dc1218a2aa5f78d4}{operator bool}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Vk\+Surface\+Capabilities\+KHR \mbox{\hyperlink{structprt_1_1_swap_chain_support_details_ae95ab73105dbfaef465abb1518cebe72}{surface\+\_\+capabilities}} \{\}
+\item 
+std\+::vector$<$ Vk\+Surface\+Format\+KHR $>$ \mbox{\hyperlink{structprt_1_1_swap_chain_support_details_a69c1e88f436f62c0d205917640766794}{surface\+\_\+formats}} \{\}
+\item 
+std\+::vector$<$ Vk\+Present\+Mode\+KHR $>$ \mbox{\hyperlink{structprt_1_1_swap_chain_support_details_ab763df3601f31c758a869fea29dca113}{present\+\_\+modes}} \{\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{structprt_1_1_swap_chain_support_details_a748bf4d73e2a9d6b631b4bdd53bf3d34}\index{prt::SwapChainSupportDetails@{prt::SwapChainSupportDetails}!ClampImageCount@{ClampImageCount}}
+\index{ClampImageCount@{ClampImageCount}!prt::SwapChainSupportDetails@{prt::SwapChainSupportDetails}}
+\doxysubsubsection{\texorpdfstring{ClampImageCount()}{ClampImageCount()}}
+{\footnotesize\ttfamily \label{structprt_1_1_swap_chain_support_details_a748bf4d73e2a9d6b631b4bdd53bf3d34} 
+void prt\+::\+Swap\+Chain\+Support\+Details\+::\+Clamp\+Image\+Count (\begin{DoxyParamCaption}\item[{uint32\+\_\+t \&}]{image\+\_\+count}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{structprt_1_1_swap_chain_support_details_ad61988eabe4066524b523de466096ee6}\index{prt::SwapChainSupportDetails@{prt::SwapChainSupportDetails}!FindPresentMode@{FindPresentMode}}
+\index{FindPresentMode@{FindPresentMode}!prt::SwapChainSupportDetails@{prt::SwapChainSupportDetails}}
+\doxysubsubsection{\texorpdfstring{FindPresentMode()}{FindPresentMode()}}
+{\footnotesize\ttfamily \label{structprt_1_1_swap_chain_support_details_ad61988eabe4066524b523de466096ee6} 
+auto prt\+::\+Swap\+Chain\+Support\+Details\+::\+Find\+Present\+Mode (\begin{DoxyParamCaption}\item[{const std\+::function$<$ bool(const Vk\+Present\+Mode\+KHR \&)$>$ \&}]{filter}{}\end{DoxyParamCaption}) const -\/$>$ Vk\+Present\+Mode\+KHR \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{structprt_1_1_swap_chain_support_details_aa52925adfd8c5b456dcb1deff2774e25}\index{prt::SwapChainSupportDetails@{prt::SwapChainSupportDetails}!FindSurfaceFormat@{FindSurfaceFormat}}
+\index{FindSurfaceFormat@{FindSurfaceFormat}!prt::SwapChainSupportDetails@{prt::SwapChainSupportDetails}}
+\doxysubsubsection{\texorpdfstring{FindSurfaceFormat()}{FindSurfaceFormat()}}
+{\footnotesize\ttfamily \label{structprt_1_1_swap_chain_support_details_aa52925adfd8c5b456dcb1deff2774e25} 
+auto prt\+::\+Swap\+Chain\+Support\+Details\+::\+Find\+Surface\+Format (\begin{DoxyParamCaption}\item[{const std\+::function$<$ bool(const Vk\+Surface\+Format\+KHR \&)$>$ \&}]{filter}{}\end{DoxyParamCaption}) const -\/$>$ const Vk\+Surface\+Format\+KHR\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{structprt_1_1_swap_chain_support_details_afdcbe589478ea5036c832e0313a85048}\index{prt::SwapChainSupportDetails@{prt::SwapChainSupportDetails}!GetExtent@{GetExtent}}
+\index{GetExtent@{GetExtent}!prt::SwapChainSupportDetails@{prt::SwapChainSupportDetails}}
+\doxysubsubsection{\texorpdfstring{GetExtent()}{GetExtent()}}
+{\footnotesize\ttfamily \label{structprt_1_1_swap_chain_support_details_afdcbe589478ea5036c832e0313a85048} 
+auto prt\+::\+Swap\+Chain\+Support\+Details\+::\+Get\+Extent (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ Vk\+Extent2D}
+
+\Hypertarget{structprt_1_1_swap_chain_support_details_ad4f68d30b7a1920a320f00224d5dad7e}\index{prt::SwapChainSupportDetails@{prt::SwapChainSupportDetails}!GetMaxImageCount@{GetMaxImageCount}}
+\index{GetMaxImageCount@{GetMaxImageCount}!prt::SwapChainSupportDetails@{prt::SwapChainSupportDetails}}
+\doxysubsubsection{\texorpdfstring{GetMaxImageCount()}{GetMaxImageCount()}}
+{\footnotesize\ttfamily \label{structprt_1_1_swap_chain_support_details_ad4f68d30b7a1920a320f00224d5dad7e} 
+auto prt\+::\+Swap\+Chain\+Support\+Details\+::\+Get\+Max\+Image\+Count (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ uint32\+\_\+t \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{structprt_1_1_swap_chain_support_details_a09a1f9c52d22e24ecc44c805d1b69c8d}\index{prt::SwapChainSupportDetails@{prt::SwapChainSupportDetails}!HasMaxImage@{HasMaxImage}}
+\index{HasMaxImage@{HasMaxImage}!prt::SwapChainSupportDetails@{prt::SwapChainSupportDetails}}
+\doxysubsubsection{\texorpdfstring{HasMaxImage()}{HasMaxImage()}}
+{\footnotesize\ttfamily \label{structprt_1_1_swap_chain_support_details_a09a1f9c52d22e24ecc44c805d1b69c8d} 
+auto prt\+::\+Swap\+Chain\+Support\+Details\+::\+Has\+Max\+Image (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{structprt_1_1_swap_chain_support_details_a940458d8108fcd9472735e94dde82a7b}\index{prt::SwapChainSupportDetails@{prt::SwapChainSupportDetails}!HasPresentModes@{HasPresentModes}}
+\index{HasPresentModes@{HasPresentModes}!prt::SwapChainSupportDetails@{prt::SwapChainSupportDetails}}
+\doxysubsubsection{\texorpdfstring{HasPresentModes()}{HasPresentModes()}}
+{\footnotesize\ttfamily \label{structprt_1_1_swap_chain_support_details_a940458d8108fcd9472735e94dde82a7b} 
+auto prt\+::\+Swap\+Chain\+Support\+Details\+::\+Has\+Present\+Modes (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{structprt_1_1_swap_chain_support_details_adb55d6402126cd9bb5f963296a05b79b}\index{prt::SwapChainSupportDetails@{prt::SwapChainSupportDetails}!HasSurfaceFormats@{HasSurfaceFormats}}
+\index{HasSurfaceFormats@{HasSurfaceFormats}!prt::SwapChainSupportDetails@{prt::SwapChainSupportDetails}}
+\doxysubsubsection{\texorpdfstring{HasSurfaceFormats()}{HasSurfaceFormats()}}
+{\footnotesize\ttfamily \label{structprt_1_1_swap_chain_support_details_adb55d6402126cd9bb5f963296a05b79b} 
+auto prt\+::\+Swap\+Chain\+Support\+Details\+::\+Has\+Surface\+Formats (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{structprt_1_1_swap_chain_support_details_ae4badd533a94e588dc1218a2aa5f78d4}\index{prt::SwapChainSupportDetails@{prt::SwapChainSupportDetails}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!prt::SwapChainSupportDetails@{prt::SwapChainSupportDetails}}
+\doxysubsubsection{\texorpdfstring{operator bool()}{operator bool()}}
+{\footnotesize\ttfamily \label{structprt_1_1_swap_chain_support_details_ae4badd533a94e588dc1218a2aa5f78d4} 
+prt\+::\+Swap\+Chain\+Support\+Details\+::operator bool (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structprt_1_1_swap_chain_support_details_ab763df3601f31c758a869fea29dca113}\index{prt::SwapChainSupportDetails@{prt::SwapChainSupportDetails}!present\_modes@{present\_modes}}
+\index{present\_modes@{present\_modes}!prt::SwapChainSupportDetails@{prt::SwapChainSupportDetails}}
+\doxysubsubsection{\texorpdfstring{present\_modes}{present\_modes}}
+{\footnotesize\ttfamily \label{structprt_1_1_swap_chain_support_details_ab763df3601f31c758a869fea29dca113} 
+std\+::vector$<$Vk\+Present\+Mode\+KHR$>$ prt\+::\+Swap\+Chain\+Support\+Details\+::present\+\_\+modes \{\}}
+
+\Hypertarget{structprt_1_1_swap_chain_support_details_ae95ab73105dbfaef465abb1518cebe72}\index{prt::SwapChainSupportDetails@{prt::SwapChainSupportDetails}!surface\_capabilities@{surface\_capabilities}}
+\index{surface\_capabilities@{surface\_capabilities}!prt::SwapChainSupportDetails@{prt::SwapChainSupportDetails}}
+\doxysubsubsection{\texorpdfstring{surface\_capabilities}{surface\_capabilities}}
+{\footnotesize\ttfamily \label{structprt_1_1_swap_chain_support_details_ae95ab73105dbfaef465abb1518cebe72} 
+Vk\+Surface\+Capabilities\+KHR prt\+::\+Swap\+Chain\+Support\+Details\+::surface\+\_\+capabilities \{\}}
+
+\Hypertarget{structprt_1_1_swap_chain_support_details_a69c1e88f436f62c0d205917640766794}\index{prt::SwapChainSupportDetails@{prt::SwapChainSupportDetails}!surface\_formats@{surface\_formats}}
+\index{surface\_formats@{surface\_formats}!prt::SwapChainSupportDetails@{prt::SwapChainSupportDetails}}
+\doxysubsubsection{\texorpdfstring{surface\_formats}{surface\_formats}}
+{\footnotesize\ttfamily \label{structprt_1_1_swap_chain_support_details_a69c1e88f436f62c0d205917640766794} 
+std\+::vector$<$Vk\+Surface\+Format\+KHR$>$ prt\+::\+Swap\+Chain\+Support\+Details\+::surface\+\_\+formats \{\}}
+
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{swapchain__support_8h}{swapchain\+\_\+support.\+h}}\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{swapchain__support_8cc}{swapchain\+\_\+support.\+cc}}\end{DoxyCompactItemize}

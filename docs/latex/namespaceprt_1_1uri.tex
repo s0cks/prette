@@ -1,0 +1,136 @@
+\doxysection{prt\+::uri Namespace Reference}
+\hypertarget{namespaceprt_1_1uri}{}\label{namespaceprt_1_1uri}\index{prt::uri@{prt::uri}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1uri_1_1_parser}{Parser}}
+\item 
+class \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result}{Parse\+Result}}
+\item 
+struct \mbox{\hyperlink{structprt_1_1uri_1_1_uri}{Uri}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{namespaceprt_1_1uri_ac7268ce718e3b3615fe3dd565040c4e3}{Extension\+Set}} = std\+::unordered\+\_\+set$<$std\+::string$>$
+\item 
+using \mbox{\hyperlink{namespaceprt_1_1uri_abd78a90444cc631e16c4484d1c03743f}{basic\+\_\+uri}} = std\+::string
+\item 
+using \mbox{\hyperlink{namespaceprt_1_1uri_a8d16d88011a7f47eca76c281d6fee57d}{Path}} = std\+::string
+\item 
+using \mbox{\hyperlink{namespaceprt_1_1uri_a678076225dd533b5e37a65e04ff7ecf2}{Scheme}} = std\+::string
+\item 
+using \mbox{\hyperlink{namespaceprt_1_1uri_aa0248aa8682ab71b8292c1b1bd6eeaff}{Fragment}} = std\+::string
+\item 
+using \mbox{\hyperlink{namespaceprt_1_1uri_a487da430806070600da37428f7a239ac}{Extension}} = std\+::string
+\item 
+using \mbox{\hyperlink{namespaceprt_1_1uri_a6ebfc51cc655f3bc80af827c79f1c0d8}{Query\+Map}} = std\+::unordered\+\_\+map$<$std\+::string, std\+::string$>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespaceprt_1_1uri_a5a78eca16a680e41e2e0751320d37af8}{Sanitize\+Extension}} (\mbox{\hyperlink{namespaceprt_1_1uri_a487da430806070600da37428f7a239ac}{Extension}} \&extension)
+\item 
+void \mbox{\hyperlink{namespaceprt_1_1uri_aefb10cb435038a60f3dd371e34a1f6d4}{Sanitize\+Path}} (\mbox{\hyperlink{namespaceprt_1_1uri_a8d16d88011a7f47eca76c281d6fee57d}{Path}} \&path, const bool root)
+\item 
+{\footnotesize template$<$class Container $>$ }\\auto \mbox{\hyperlink{namespaceprt_1_1uri_a5eae699ca398d9a716d0f6be6ad1e99e}{Has}} (const \mbox{\hyperlink{namespaceprt_1_1uri_a678076225dd533b5e37a65e04ff7ecf2}{Scheme}} \&value, const Container \&values) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{namespaceprt_1_1uri_a5a99791459568f773bfa3cfaa69d8b0a}{Is\+Valid\+Uri}} (const \mbox{\hyperlink{namespaceprt_1_1uri_abd78a90444cc631e16c4484d1c03743f}{basic\+\_\+uri}} \&value) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{namespaceprt_1_1uri_aee08b6daf031c958ef61a3c8ba236588}{Is\+Valid\+Uri}} (const \mbox{\hyperlink{namespaceprt_1_1uri_abd78a90444cc631e16c4484d1c03743f}{basic\+\_\+uri}} \&value, const std\+::string \&scheme) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{namespaceprt_1_1uri_a037a833277d691ae0323351db8d8a6dc}{Is\+Valid\+Uri}} (const \mbox{\hyperlink{namespaceprt_1_1uri_abd78a90444cc631e16c4484d1c03743f}{basic\+\_\+uri}} \&value, const std\+::set$<$ \mbox{\hyperlink{namespaceprt_1_1uri_a678076225dd533b5e37a65e04ff7ecf2}{Scheme}} $>$ \&schemes) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{namespaceprt_1_1uri_a83eab53679c31fc60834b3598f1d75af}{Is\+Valid\+Uri}} (const \mbox{\hyperlink{namespaceprt_1_1uri_abd78a90444cc631e16c4484d1c03743f}{basic\+\_\+uri}} \&value, const std\+::unordered\+\_\+set$<$ \mbox{\hyperlink{namespaceprt_1_1uri_a678076225dd533b5e37a65e04ff7ecf2}{Scheme}} $>$ \&schemes) -\/$>$ bool
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\Hypertarget{namespaceprt_1_1uri_abd78a90444cc631e16c4484d1c03743f}\index{prt::uri@{prt::uri}!basic\_uri@{basic\_uri}}
+\index{basic\_uri@{basic\_uri}!prt::uri@{prt::uri}}
+\doxysubsubsection{\texorpdfstring{basic\_uri}{basic\_uri}}
+{\footnotesize\ttfamily \label{namespaceprt_1_1uri_abd78a90444cc631e16c4484d1c03743f} 
+using \mbox{\hyperlink{namespaceprt_1_1uri_abd78a90444cc631e16c4484d1c03743f}{prt\+::uri\+::basic\+\_\+uri}} = std\+::string}
+
+\Hypertarget{namespaceprt_1_1uri_a487da430806070600da37428f7a239ac}\index{prt::uri@{prt::uri}!Extension@{Extension}}
+\index{Extension@{Extension}!prt::uri@{prt::uri}}
+\doxysubsubsection{\texorpdfstring{Extension}{Extension}}
+{\footnotesize\ttfamily \label{namespaceprt_1_1uri_a487da430806070600da37428f7a239ac} 
+using \mbox{\hyperlink{namespaceprt_1_1uri_a487da430806070600da37428f7a239ac}{prt\+::uri\+::\+Extension}} = std\+::string}
+
+\Hypertarget{namespaceprt_1_1uri_ac7268ce718e3b3615fe3dd565040c4e3}\index{prt::uri@{prt::uri}!ExtensionSet@{ExtensionSet}}
+\index{ExtensionSet@{ExtensionSet}!prt::uri@{prt::uri}}
+\doxysubsubsection{\texorpdfstring{ExtensionSet}{ExtensionSet}}
+{\footnotesize\ttfamily \label{namespaceprt_1_1uri_ac7268ce718e3b3615fe3dd565040c4e3} 
+using \mbox{\hyperlink{namespaceprt_1_1uri_ac7268ce718e3b3615fe3dd565040c4e3}{prt\+::uri\+::\+Extension\+Set}} = std\+::unordered\+\_\+set$<$std\+::string$>$}
+
+\Hypertarget{namespaceprt_1_1uri_aa0248aa8682ab71b8292c1b1bd6eeaff}\index{prt::uri@{prt::uri}!Fragment@{Fragment}}
+\index{Fragment@{Fragment}!prt::uri@{prt::uri}}
+\doxysubsubsection{\texorpdfstring{Fragment}{Fragment}}
+{\footnotesize\ttfamily \label{namespaceprt_1_1uri_aa0248aa8682ab71b8292c1b1bd6eeaff} 
+using \mbox{\hyperlink{namespaceprt_1_1uri_aa0248aa8682ab71b8292c1b1bd6eeaff}{prt\+::uri\+::\+Fragment}} = std\+::string}
+
+\Hypertarget{namespaceprt_1_1uri_a8d16d88011a7f47eca76c281d6fee57d}\index{prt::uri@{prt::uri}!Path@{Path}}
+\index{Path@{Path}!prt::uri@{prt::uri}}
+\doxysubsubsection{\texorpdfstring{Path}{Path}}
+{\footnotesize\ttfamily \label{namespaceprt_1_1uri_a8d16d88011a7f47eca76c281d6fee57d} 
+using \mbox{\hyperlink{namespaceprt_1_1uri_a8d16d88011a7f47eca76c281d6fee57d}{prt\+::uri\+::\+Path}} = std\+::string}
+
+\Hypertarget{namespaceprt_1_1uri_a6ebfc51cc655f3bc80af827c79f1c0d8}\index{prt::uri@{prt::uri}!QueryMap@{QueryMap}}
+\index{QueryMap@{QueryMap}!prt::uri@{prt::uri}}
+\doxysubsubsection{\texorpdfstring{QueryMap}{QueryMap}}
+{\footnotesize\ttfamily \label{namespaceprt_1_1uri_a6ebfc51cc655f3bc80af827c79f1c0d8} 
+using \mbox{\hyperlink{namespaceprt_1_1uri_a6ebfc51cc655f3bc80af827c79f1c0d8}{prt\+::uri\+::\+Query\+Map}} = std\+::unordered\+\_\+map$<$std\+::string, std\+::string$>$}
+
+\Hypertarget{namespaceprt_1_1uri_a678076225dd533b5e37a65e04ff7ecf2}\index{prt::uri@{prt::uri}!Scheme@{Scheme}}
+\index{Scheme@{Scheme}!prt::uri@{prt::uri}}
+\doxysubsubsection{\texorpdfstring{Scheme}{Scheme}}
+{\footnotesize\ttfamily \label{namespaceprt_1_1uri_a678076225dd533b5e37a65e04ff7ecf2} 
+using \mbox{\hyperlink{namespaceprt_1_1uri_a678076225dd533b5e37a65e04ff7ecf2}{prt\+::uri\+::\+Scheme}} = std\+::string}
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceprt_1_1uri_a5eae699ca398d9a716d0f6be6ad1e99e}\index{prt::uri@{prt::uri}!Has@{Has}}
+\index{Has@{Has}!prt::uri@{prt::uri}}
+\doxysubsubsection{\texorpdfstring{Has()}{Has()}}
+{\footnotesize\ttfamily \label{namespaceprt_1_1uri_a5eae699ca398d9a716d0f6be6ad1e99e} 
+template$<$class Container $>$ \\
+auto prt\+::uri\+::\+Has (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceprt_1_1uri_a678076225dd533b5e37a65e04ff7ecf2}{Scheme}} \&}]{value}{, }\item[{const Container \&}]{values}{}\end{DoxyParamCaption}) -\/$>$ bool }
+
+\Hypertarget{namespaceprt_1_1uri_a5a99791459568f773bfa3cfaa69d8b0a}\index{prt::uri@{prt::uri}!IsValidUri@{IsValidUri}}
+\index{IsValidUri@{IsValidUri}!prt::uri@{prt::uri}}
+\doxysubsubsection{\texorpdfstring{IsValidUri()}{IsValidUri()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{namespaceprt_1_1uri_a5a99791459568f773bfa3cfaa69d8b0a} 
+auto prt\+::uri\+::\+Is\+Valid\+Uri (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceprt_1_1uri_abd78a90444cc631e16c4484d1c03743f}{basic\+\_\+uri}} \&}]{value}{}\end{DoxyParamCaption}) -\/$>$  bool}
+
+\Hypertarget{namespaceprt_1_1uri_a037a833277d691ae0323351db8d8a6dc}\index{prt::uri@{prt::uri}!IsValidUri@{IsValidUri}}
+\index{IsValidUri@{IsValidUri}!prt::uri@{prt::uri}}
+\doxysubsubsection{\texorpdfstring{IsValidUri()}{IsValidUri()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{namespaceprt_1_1uri_a037a833277d691ae0323351db8d8a6dc} 
+auto prt\+::uri\+::\+Is\+Valid\+Uri (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceprt_1_1uri_abd78a90444cc631e16c4484d1c03743f}{basic\+\_\+uri}} \&}]{value}{, }\item[{const std\+::set$<$ \mbox{\hyperlink{namespaceprt_1_1uri_a678076225dd533b5e37a65e04ff7ecf2}{Scheme}} $>$ \&}]{schemes}{}\end{DoxyParamCaption}) -\/$>$  bool}
+
+\Hypertarget{namespaceprt_1_1uri_aee08b6daf031c958ef61a3c8ba236588}\index{prt::uri@{prt::uri}!IsValidUri@{IsValidUri}}
+\index{IsValidUri@{IsValidUri}!prt::uri@{prt::uri}}
+\doxysubsubsection{\texorpdfstring{IsValidUri()}{IsValidUri()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{namespaceprt_1_1uri_aee08b6daf031c958ef61a3c8ba236588} 
+auto prt\+::uri\+::\+Is\+Valid\+Uri (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceprt_1_1uri_abd78a90444cc631e16c4484d1c03743f}{basic\+\_\+uri}} \&}]{value}{, }\item[{const std\+::string \&}]{scheme}{}\end{DoxyParamCaption}) -\/$>$  bool}
+
+\Hypertarget{namespaceprt_1_1uri_a83eab53679c31fc60834b3598f1d75af}\index{prt::uri@{prt::uri}!IsValidUri@{IsValidUri}}
+\index{IsValidUri@{IsValidUri}!prt::uri@{prt::uri}}
+\doxysubsubsection{\texorpdfstring{IsValidUri()}{IsValidUri()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{namespaceprt_1_1uri_a83eab53679c31fc60834b3598f1d75af} 
+auto prt\+::uri\+::\+Is\+Valid\+Uri (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceprt_1_1uri_abd78a90444cc631e16c4484d1c03743f}{basic\+\_\+uri}} \&}]{value}{, }\item[{const std\+::unordered\+\_\+set$<$ \mbox{\hyperlink{namespaceprt_1_1uri_a678076225dd533b5e37a65e04ff7ecf2}{Scheme}} $>$ \&}]{schemes}{}\end{DoxyParamCaption}) -\/$>$  bool}
+
+\Hypertarget{namespaceprt_1_1uri_a5a78eca16a680e41e2e0751320d37af8}\index{prt::uri@{prt::uri}!SanitizeExtension@{SanitizeExtension}}
+\index{SanitizeExtension@{SanitizeExtension}!prt::uri@{prt::uri}}
+\doxysubsubsection{\texorpdfstring{SanitizeExtension()}{SanitizeExtension()}}
+{\footnotesize\ttfamily \label{namespaceprt_1_1uri_a5a78eca16a680e41e2e0751320d37af8} 
+void prt\+::uri\+::\+Sanitize\+Extension (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceprt_1_1uri_a487da430806070600da37428f7a239ac}{Extension}} \&}]{extension}{}\end{DoxyParamCaption})}
+
+\Hypertarget{namespaceprt_1_1uri_aefb10cb435038a60f3dd371e34a1f6d4}\index{prt::uri@{prt::uri}!SanitizePath@{SanitizePath}}
+\index{SanitizePath@{SanitizePath}!prt::uri@{prt::uri}}
+\doxysubsubsection{\texorpdfstring{SanitizePath()}{SanitizePath()}}
+{\footnotesize\ttfamily \label{namespaceprt_1_1uri_aefb10cb435038a60f3dd371e34a1f6d4} 
+void prt\+::uri\+::\+Sanitize\+Path (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceprt_1_1uri_a8d16d88011a7f47eca76c281d6fee57d}{Path}} \&}]{path}{, }\item[{const bool}]{root}{}\end{DoxyParamCaption})}
+

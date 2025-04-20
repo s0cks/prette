@@ -1,0 +1,134 @@
+\doxysection{prt\+::Skybox\+Pipeline Class Reference}
+\hypertarget{classprt_1_1_skybox_pipeline}{}\label{classprt_1_1_skybox_pipeline}\index{prt::SkyboxPipeline@{prt::SkyboxPipeline}}
+
+
+{\ttfamily \#include $<$skybox.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_skybox_pipeline_aeb8da8ec68370c3212565b07de9a4e92}{Skybox\+Pipeline}} ()
+\item 
+\mbox{\hyperlink{classprt_1_1_skybox_pipeline_ab3028719eab8b2c5169a0cb1f0833e9c}{\texorpdfstring{$\sim$}{\string~}\+Skybox\+Pipeline}} ()
+\item 
+auto \mbox{\hyperlink{classprt_1_1_skybox_pipeline_ae822ff3843e77a6c850652480243d0e6}{Get}} () const -\/$>$ Vk\+Pipeline const \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_skybox_pipeline_ac2da547b59da46f7deb7e385fe89c831}{Get\+Layout}} () const -\/$>$ Vk\+Pipeline\+Layout const \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_skybox_pipeline_abb51e70e9548c58dc1c387e18111b644}{Get\+Cache}} () const -\/$>$ Vk\+Pipeline\+Cache const \&
+\item 
+void \mbox{\hyperlink{classprt_1_1_skybox_pipeline_af3825bcd09e9679873750201007d472e}{Draw}} (const Vk\+Command\+Buffer \&buffer)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classprt_1_1_skybox_pipeline_ab138bffdf571eca9a693ce60afa152b9}{Init\+Descriptor\+Set}} (const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}driver, Vk\+Descriptor\+Set\+Layout \&dset\+\_\+layout, Vk\+Descriptor\+Set \&dset)
+\item 
+static void \mbox{\hyperlink{classprt_1_1_skybox_pipeline_ac833a23a92accde959eb8291691f5f7b}{Init\+Layout}} (const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}driver, Vk\+Pipeline\+Layout \&layout, const std\+::vector$<$ Vk\+Descriptor\+Set\+Layout $>$ \&dset\+\_\+layouts)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Vk\+Pipeline \mbox{\hyperlink{classprt_1_1_skybox_pipeline_a5d295bd2e6cf71019746c17f1c21ef6d}{pipeline\+\_\+}} \{\}
+\item 
+Vk\+Pipeline\+Layout \mbox{\hyperlink{classprt_1_1_skybox_pipeline_ae51b43d4a2d2a4629ae823aeb25dcc0e}{layout\+\_\+}} \{\}
+\item 
+Vk\+Pipeline\+Cache \mbox{\hyperlink{classprt_1_1_skybox_pipeline_a8f8510a20bbb1a8fcbde01b3e82ac157}{cache\+\_\+}} \{\}
+\item 
+Vk\+Descriptor\+Set\+Layout \mbox{\hyperlink{classprt_1_1_skybox_pipeline_a346aee6179580b75aba6b31f23997a0f}{dset\+\_\+layout\+\_\+}} \{\}
+\item 
+Vk\+Descriptor\+Set \mbox{\hyperlink{classprt_1_1_skybox_pipeline_a79cbc0e7e65cd9906ffc873137669996}{dset\+\_\+}} \{\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_skybox_pipeline_aeb8da8ec68370c3212565b07de9a4e92}\index{prt::SkyboxPipeline@{prt::SkyboxPipeline}!SkyboxPipeline@{SkyboxPipeline}}
+\index{SkyboxPipeline@{SkyboxPipeline}!prt::SkyboxPipeline@{prt::SkyboxPipeline}}
+\doxysubsubsection{\texorpdfstring{SkyboxPipeline()}{SkyboxPipeline()}}
+{\footnotesize\ttfamily \label{classprt_1_1_skybox_pipeline_aeb8da8ec68370c3212565b07de9a4e92} 
+prt\+::\+Skybox\+Pipeline\+::\+Skybox\+Pipeline (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_skybox_pipeline_ab3028719eab8b2c5169a0cb1f0833e9c}\index{prt::SkyboxPipeline@{prt::SkyboxPipeline}!````~SkyboxPipeline@{\texorpdfstring{$\sim$}{\string~}SkyboxPipeline}}
+\index{````~SkyboxPipeline@{\texorpdfstring{$\sim$}{\string~}SkyboxPipeline}!prt::SkyboxPipeline@{prt::SkyboxPipeline}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}SkyboxPipeline()}{\string~SkyboxPipeline()}}
+{\footnotesize\ttfamily \label{classprt_1_1_skybox_pipeline_ab3028719eab8b2c5169a0cb1f0833e9c} 
+prt\+::\+Skybox\+Pipeline\+::\texorpdfstring{$\sim$}{\string~}\+Skybox\+Pipeline (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_skybox_pipeline_af3825bcd09e9679873750201007d472e}\index{prt::SkyboxPipeline@{prt::SkyboxPipeline}!Draw@{Draw}}
+\index{Draw@{Draw}!prt::SkyboxPipeline@{prt::SkyboxPipeline}}
+\doxysubsubsection{\texorpdfstring{Draw()}{Draw()}}
+{\footnotesize\ttfamily \label{classprt_1_1_skybox_pipeline_af3825bcd09e9679873750201007d472e} 
+void prt\+::\+Skybox\+Pipeline\+::\+Draw (\begin{DoxyParamCaption}\item[{const Vk\+Command\+Buffer \&}]{buffer}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_skybox_pipeline_ae822ff3843e77a6c850652480243d0e6}\index{prt::SkyboxPipeline@{prt::SkyboxPipeline}!Get@{Get}}
+\index{Get@{Get}!prt::SkyboxPipeline@{prt::SkyboxPipeline}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}}
+{\footnotesize\ttfamily \label{classprt_1_1_skybox_pipeline_ae822ff3843e77a6c850652480243d0e6} 
+auto prt\+::\+Skybox\+Pipeline\+::\+Get (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ Vk\+Pipeline const\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_skybox_pipeline_abb51e70e9548c58dc1c387e18111b644}\index{prt::SkyboxPipeline@{prt::SkyboxPipeline}!GetCache@{GetCache}}
+\index{GetCache@{GetCache}!prt::SkyboxPipeline@{prt::SkyboxPipeline}}
+\doxysubsubsection{\texorpdfstring{GetCache()}{GetCache()}}
+{\footnotesize\ttfamily \label{classprt_1_1_skybox_pipeline_abb51e70e9548c58dc1c387e18111b644} 
+auto prt\+::\+Skybox\+Pipeline\+::\+Get\+Cache (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ Vk\+Pipeline\+Cache const\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_skybox_pipeline_ac2da547b59da46f7deb7e385fe89c831}\index{prt::SkyboxPipeline@{prt::SkyboxPipeline}!GetLayout@{GetLayout}}
+\index{GetLayout@{GetLayout}!prt::SkyboxPipeline@{prt::SkyboxPipeline}}
+\doxysubsubsection{\texorpdfstring{GetLayout()}{GetLayout()}}
+{\footnotesize\ttfamily \label{classprt_1_1_skybox_pipeline_ac2da547b59da46f7deb7e385fe89c831} 
+auto prt\+::\+Skybox\+Pipeline\+::\+Get\+Layout (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ Vk\+Pipeline\+Layout const\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_skybox_pipeline_ab138bffdf571eca9a693ce60afa152b9}\index{prt::SkyboxPipeline@{prt::SkyboxPipeline}!InitDescriptorSet@{InitDescriptorSet}}
+\index{InitDescriptorSet@{InitDescriptorSet}!prt::SkyboxPipeline@{prt::SkyboxPipeline}}
+\doxysubsubsection{\texorpdfstring{InitDescriptorSet()}{InitDescriptorSet()}}
+{\footnotesize\ttfamily \label{classprt_1_1_skybox_pipeline_ab138bffdf571eca9a693ce60afa152b9} 
+void prt\+::\+Skybox\+Pipeline\+::\+Init\+Descriptor\+Set (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}}]{driver}{, }\item[{Vk\+Descriptor\+Set\+Layout \&}]{dset\+\_\+layout}{, }\item[{Vk\+Descriptor\+Set \&}]{dset}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_skybox_pipeline_ac833a23a92accde959eb8291691f5f7b}\index{prt::SkyboxPipeline@{prt::SkyboxPipeline}!InitLayout@{InitLayout}}
+\index{InitLayout@{InitLayout}!prt::SkyboxPipeline@{prt::SkyboxPipeline}}
+\doxysubsubsection{\texorpdfstring{InitLayout()}{InitLayout()}}
+{\footnotesize\ttfamily \label{classprt_1_1_skybox_pipeline_ac833a23a92accde959eb8291691f5f7b} 
+void prt\+::\+Skybox\+Pipeline\+::\+Init\+Layout (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_driver}{Driver}} \texorpdfstring{$\ast$}{*}}]{driver}{, }\item[{Vk\+Pipeline\+Layout \&}]{layout}{, }\item[{const std\+::vector$<$ Vk\+Descriptor\+Set\+Layout $>$ \&}]{dset\+\_\+layouts}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_skybox_pipeline_a8f8510a20bbb1a8fcbde01b3e82ac157}\index{prt::SkyboxPipeline@{prt::SkyboxPipeline}!cache\_@{cache\_}}
+\index{cache\_@{cache\_}!prt::SkyboxPipeline@{prt::SkyboxPipeline}}
+\doxysubsubsection{\texorpdfstring{cache\_}{cache\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_skybox_pipeline_a8f8510a20bbb1a8fcbde01b3e82ac157} 
+Vk\+Pipeline\+Cache prt\+::\+Skybox\+Pipeline\+::cache\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_skybox_pipeline_a79cbc0e7e65cd9906ffc873137669996}\index{prt::SkyboxPipeline@{prt::SkyboxPipeline}!dset\_@{dset\_}}
+\index{dset\_@{dset\_}!prt::SkyboxPipeline@{prt::SkyboxPipeline}}
+\doxysubsubsection{\texorpdfstring{dset\_}{dset\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_skybox_pipeline_a79cbc0e7e65cd9906ffc873137669996} 
+Vk\+Descriptor\+Set prt\+::\+Skybox\+Pipeline\+::dset\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_skybox_pipeline_a346aee6179580b75aba6b31f23997a0f}\index{prt::SkyboxPipeline@{prt::SkyboxPipeline}!dset\_layout\_@{dset\_layout\_}}
+\index{dset\_layout\_@{dset\_layout\_}!prt::SkyboxPipeline@{prt::SkyboxPipeline}}
+\doxysubsubsection{\texorpdfstring{dset\_layout\_}{dset\_layout\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_skybox_pipeline_a346aee6179580b75aba6b31f23997a0f} 
+Vk\+Descriptor\+Set\+Layout prt\+::\+Skybox\+Pipeline\+::dset\+\_\+layout\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_skybox_pipeline_ae51b43d4a2d2a4629ae823aeb25dcc0e}\index{prt::SkyboxPipeline@{prt::SkyboxPipeline}!layout\_@{layout\_}}
+\index{layout\_@{layout\_}!prt::SkyboxPipeline@{prt::SkyboxPipeline}}
+\doxysubsubsection{\texorpdfstring{layout\_}{layout\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_skybox_pipeline_ae51b43d4a2d2a4629ae823aeb25dcc0e} 
+Vk\+Pipeline\+Layout prt\+::\+Skybox\+Pipeline\+::layout\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_skybox_pipeline_a5d295bd2e6cf71019746c17f1c21ef6d}\index{prt::SkyboxPipeline@{prt::SkyboxPipeline}!pipeline\_@{pipeline\_}}
+\index{pipeline\_@{pipeline\_}!prt::SkyboxPipeline@{prt::SkyboxPipeline}}
+\doxysubsubsection{\texorpdfstring{pipeline\_}{pipeline\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_skybox_pipeline_a5d295bd2e6cf71019746c17f1c21ef6d} 
+Vk\+Pipeline prt\+::\+Skybox\+Pipeline\+::pipeline\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{skybox_8h}{skybox.\+h}}\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{skybox_8cc}{skybox.\+cc}}\end{DoxyCompactItemize}

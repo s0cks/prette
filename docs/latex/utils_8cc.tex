@@ -1,0 +1,114 @@
+\doxysection{/\+Users/tazz/\+Projects/prette/\+Sources/prette/uv/utils.cc File Reference}
+\hypertarget{utils_8cc}{}\label{utils_8cc}\index{/Users/tazz/Projects/prette/Sources/prette/uv/utils.cc@{/Users/tazz/Projects/prette/Sources/prette/uv/utils.cc}}
+{\ttfamily \#include "{}prette/uv/utils.\+h"{}}\newline
+{\ttfamily \#include $<$uv.\+h$>$}\newline
+Include dependency graph for utils.\+cc\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{utils_8cc__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceprt}{prt}}
+\item 
+namespace \mbox{\hyperlink{namespaceprt_1_1uv}{prt\+::uv}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{utils_8cc_ad78d86cb3220bf8e5fdeeb2c7f0d07e3}{DEFINE\+\_\+\+UV\+\_\+\+HANDLE\+\_\+\+INIT}}(Name,  Prefix)
+\item 
+\#define \mbox{\hyperlink{utils_8cc_a778fd8dd2ae606a03cc61fb4e88d8909}{DEFINE\+\_\+\+UV\+\_\+\+HANDLE\+\_\+\+START}}(Name,  Prefix)
+\item 
+\#define \mbox{\hyperlink{utils_8cc_aadee93fe77c3b8451169b19a03166b4f}{DEFINE\+\_\+\+UV\+\_\+\+HANDLE\+\_\+\+STOP}}(Name,  Prefix)
+\item 
+\#define \mbox{\hyperlink{utils_8cc_af567bac90c645d3d89d0784488d25b55}{DEFINE\+\_\+\+UV\+\_\+\+HANDLE\+\_\+\+CLOSE}}(Name,  Prefix)
+\item 
+\#define \mbox{\hyperlink{utils_8cc_a33959d542d36142f012c48b235d2e1a4}{DEFINE\+\_\+\+UV\+\_\+\+HANDLE\+\_\+\+FUNCS}}(Name,  Prefix)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceprt_1_1uv_a2f2962e35db7122dc228efcb1eb818f1}{prt\+::uv\+::\+DEFINE\+\_\+\+UV\+\_\+\+HANDLE\+\_\+\+FUNCS}} (Idle, uv\+\_\+idle)
+\item 
+\mbox{\hyperlink{namespaceprt_1_1uv_a5f955fa8acd650f17e87243d2aa83904}{prt\+::uv\+::\+DEFINE\+\_\+\+UV\+\_\+\+HANDLE\+\_\+\+FUNCS}} (Prepare, uv\+\_\+prepare)
+\item 
+\mbox{\hyperlink{namespaceprt_1_1uv_a5d813e91dfd3e85f7f00ee68bebe174e}{prt\+::uv\+::\+DEFINE\+\_\+\+UV\+\_\+\+HANDLE\+\_\+\+FUNCS}} (Check, uv\+\_\+check)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{utils_8cc_af567bac90c645d3d89d0784488d25b55}\index{utils.cc@{utils.cc}!DEFINE\_UV\_HANDLE\_CLOSE@{DEFINE\_UV\_HANDLE\_CLOSE}}
+\index{DEFINE\_UV\_HANDLE\_CLOSE@{DEFINE\_UV\_HANDLE\_CLOSE}!utils.cc@{utils.cc}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_UV\_HANDLE\_CLOSE}{DEFINE\_UV\_HANDLE\_CLOSE}}
+{\footnotesize\ttfamily \label{utils_8cc_af567bac90c645d3d89d0784488d25b55} 
+\#define DEFINE\+\_\+\+UV\+\_\+\+HANDLE\+\_\+\+CLOSE(\begin{DoxyParamCaption}\item[{}]{Name}{, }\item[{}]{Prefix}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \textcolor{keyword}{auto}\ Name::Close(Handle*\ handle)\ -\/>\ Status\ \{\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ ASSERT(handle);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ uv\_close((uv\_handle\_t*)handle);\ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{utils_8cc_a33959d542d36142f012c48b235d2e1a4}\index{utils.cc@{utils.cc}!DEFINE\_UV\_HANDLE\_FUNCS@{DEFINE\_UV\_HANDLE\_FUNCS}}
+\index{DEFINE\_UV\_HANDLE\_FUNCS@{DEFINE\_UV\_HANDLE\_FUNCS}!utils.cc@{utils.cc}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_UV\_HANDLE\_FUNCS}{DEFINE\_UV\_HANDLE\_FUNCS}}
+{\footnotesize\ttfamily \label{utils_8cc_a33959d542d36142f012c48b235d2e1a4} 
+\#define DEFINE\+\_\+\+UV\+\_\+\+HANDLE\+\_\+\+FUNCS(\begin{DoxyParamCaption}\item[{}]{Name}{, }\item[{}]{Prefix}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{utils_8cc_ad78d86cb3220bf8e5fdeeb2c7f0d07e3}{DEFINE\_UV\_HANDLE\_INIT}}(Name,\ Prefix);\ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ DEFINE\_UV\_HANDLE\_START(Name,\ Prefix);\ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ DEFINE\_UV\_HANDLE\_STOP(Name,\ Prefix);}
+
+\end{DoxyCode}
+\Hypertarget{utils_8cc_ad78d86cb3220bf8e5fdeeb2c7f0d07e3}\index{utils.cc@{utils.cc}!DEFINE\_UV\_HANDLE\_INIT@{DEFINE\_UV\_HANDLE\_INIT}}
+\index{DEFINE\_UV\_HANDLE\_INIT@{DEFINE\_UV\_HANDLE\_INIT}!utils.cc@{utils.cc}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_UV\_HANDLE\_INIT}{DEFINE\_UV\_HANDLE\_INIT}}
+{\footnotesize\ttfamily \label{utils_8cc_ad78d86cb3220bf8e5fdeeb2c7f0d07e3} 
+\#define DEFINE\+\_\+\+UV\+\_\+\+HANDLE\+\_\+\+INIT(\begin{DoxyParamCaption}\item[{}]{Name}{, }\item[{}]{Prefix}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \textcolor{keyword}{auto}\ Name::Init(Loop*\ loop,\ Handle*\ handle)\ -\/>\ Status\ \{\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ ASSERT(loop);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ ASSERT(handle);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ Prefix\#\#\_init(loop-\/>GetHandle(),\ handle);\ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{utils_8cc_a778fd8dd2ae606a03cc61fb4e88d8909}\index{utils.cc@{utils.cc}!DEFINE\_UV\_HANDLE\_START@{DEFINE\_UV\_HANDLE\_START}}
+\index{DEFINE\_UV\_HANDLE\_START@{DEFINE\_UV\_HANDLE\_START}!utils.cc@{utils.cc}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_UV\_HANDLE\_START}{DEFINE\_UV\_HANDLE\_START}}
+{\footnotesize\ttfamily \label{utils_8cc_a778fd8dd2ae606a03cc61fb4e88d8909} 
+\#define DEFINE\+\_\+\+UV\+\_\+\+HANDLE\+\_\+\+START(\begin{DoxyParamCaption}\item[{}]{Name}{, }\item[{}]{Prefix}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \textcolor{keyword}{auto}\ Name::Start(Handle*\ handle,\ Callback\ callback)\ -\/>\ Status\ \{\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ ASSERT(handle);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ ASSERT(callback);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ Prefix\#\#\_start(handle,\ callback);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{utils_8cc_aadee93fe77c3b8451169b19a03166b4f}\index{utils.cc@{utils.cc}!DEFINE\_UV\_HANDLE\_STOP@{DEFINE\_UV\_HANDLE\_STOP}}
+\index{DEFINE\_UV\_HANDLE\_STOP@{DEFINE\_UV\_HANDLE\_STOP}!utils.cc@{utils.cc}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_UV\_HANDLE\_STOP}{DEFINE\_UV\_HANDLE\_STOP}}
+{\footnotesize\ttfamily \label{utils_8cc_aadee93fe77c3b8451169b19a03166b4f} 
+\#define DEFINE\+\_\+\+UV\+\_\+\+HANDLE\+\_\+\+STOP(\begin{DoxyParamCaption}\item[{}]{Name}{, }\item[{}]{Prefix}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \textcolor{keyword}{auto}\ Name::Stop(Handle*\ handle)\ -\/>\ Status\ \{\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ ASSERT(handle);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ Prefix\#\#\_stop(handle);\ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCode}

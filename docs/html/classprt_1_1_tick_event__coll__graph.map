@@ -1,0 +1,7 @@
+<map id="prt::TickEvent" name="prt::TickEvent">
+<area shape="rect" id="Node000001" title=" " alt="" coords="55,109,158,135"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,101,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="69,43,102,107,98,110,64,46"/>
+<area shape="rect" id="Node000003" href="$classprt_1_1_tick.html" title=" " alt="" coords="125,5,194,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="149,46,115,110,110,107,144,43"/>
+</map>

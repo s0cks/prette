@@ -1,0 +1,103 @@
+\doxysection{/\+Users/tazz/\+Projects/prette/\+Sources/prette/lua\+\_\+event.h File Reference}
+\hypertarget{lua__event_8h}{}\label{lua__event_8h}\index{/Users/tazz/Projects/prette/Sources/prette/lua\_event.h@{/Users/tazz/Projects/prette/Sources/prette/lua\_event.h}}
+{\ttfamily \#include "{}prette/event.\+h"{}}\newline
+Include dependency graph for lua\+\_\+event.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{lua__event_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{lua__event_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceprt}{prt}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{lua__event_8h_a8aa4600c08c05f6339712a02b1e97910}{FOR\+\_\+\+EACH\+\_\+\+LUA\+\_\+\+STATE\+\_\+\+EVENT}}(V)
+\item 
+\#define \mbox{\hyperlink{lua__event_8h_a83d2d158052fc2dc9bdf9bece3fd251e}{FORWARD\+\_\+\+DECLARE}}(Name)
+\item 
+\#define \mbox{\hyperlink{lua__event_8h_ae426929cf29a11351644eb22bbf0e237}{DEFINE\+\_\+\+LUA\+\_\+\+STATE\+\_\+\+EVENT\+\_\+\+TYPE}}(Name)
+\item 
+\#define \mbox{\hyperlink{lua__event_8h_a7d01b244a885fb755de54cc9349976c8}{DEFINE\+\_\+\+LUA\+\_\+\+STATE\+\_\+\+EVENT}}(Name)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceprt_aba77b70a0109232072a78a6ea409d7c8}{prt\+::\+FOR\+\_\+\+EACH\+\_\+\+LUA\+\_\+\+STATE\+\_\+\+EVENT}} (\mbox{\hyperlink{gui_8h_a83d2d158052fc2dc9bdf9bece3fd251e}{FORWARD\+\_\+\+DECLARE}})
+\item 
+\mbox{\hyperlink{namespaceprt_a1c3c87dc090f3159e98320a830f2d9a0}{prt\+::\+DEFINE\+\_\+\+EVENT\+\_\+\+PROTOTYPE}} (\mbox{\hyperlink{classprt_1_1_lua_state}{Lua\+State}}, \mbox{\hyperlink{namespaceprt_a335910623c86e2b56b55c660d56fb2fd}{FOR\+\_\+\+EACH\+\_\+\+LUA\+\_\+\+STATE\+\_\+\+EVENT}})
+\item 
+\mbox{\hyperlink{namespaceprt_aa62c06a1c101354bd049426fc8020a8c}{prt\+::\+DEFINE\+\_\+\+LUA\+\_\+\+STATE\+\_\+\+EVENT}} (Init)
+\item 
+\mbox{\hyperlink{namespaceprt_a77a53e7f3bb024ae4cb4f5e04b3ba241}{prt\+::\+DEFINE\+\_\+\+LUA\+\_\+\+STATE\+\_\+\+EVENT}} (Destroyed)
+\item 
+\mbox{\hyperlink{namespaceprt_aa09ed4f0032bc3e7aba45a042b1230a3}{prt\+::\+DEFINE\+\_\+\+EVENT\+\_\+\+SUBJECT}} (\mbox{\hyperlink{classprt_1_1_lua_state}{Lua\+State}})
+\item 
+\mbox{\hyperlink{namespaceprt_a16d5050e1bd2870866384163737fbb90}{prt\+::\+DEFINE\+\_\+\+EVENT\+\_\+\+OBSERVABLE}} (\mbox{\hyperlink{classprt_1_1_lua_state}{Lua\+State}})
+\item 
+\mbox{\hyperlink{namespaceprt_a05ff4e6cbf579f704dd3d95e5ff25557}{prt\+::\+FOR\+\_\+\+EACH\+\_\+\+LUA\+\_\+\+STATE\+\_\+\+EVENT}} (\mbox{\hyperlink{namespaceprt_a1a037a7c66a8e0c9eafb4608fef52cca}{DEFINE\+\_\+\+EVENT\+\_\+\+OBSERVABLE}})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{lua__event_8h_a7d01b244a885fb755de54cc9349976c8}\index{lua\_event.h@{lua\_event.h}!DEFINE\_LUA\_STATE\_EVENT@{DEFINE\_LUA\_STATE\_EVENT}}
+\index{DEFINE\_LUA\_STATE\_EVENT@{DEFINE\_LUA\_STATE\_EVENT}!lua\_event.h@{lua\_event.h}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_LUA\_STATE\_EVENT}{DEFINE\_LUA\_STATE\_EVENT}}
+{\footnotesize\ttfamily \label{lua__event_8h_a7d01b244a885fb755de54cc9349976c8} 
+\#define DEFINE\+\_\+\+LUA\+\_\+\+STATE\+\_\+\+EVENT(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \textcolor{keyword}{class\ }LuaState\#\#Name\#\#Event\ :\ \textcolor{keyword}{public}\ LuaStateEvent\ \{\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{public}:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ LuaState\#\#Name\#\#Event()\ =\ \textcolor{keywordflow}{default};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \string~LuaState\#\#Name\#\#Event()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};\ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ DEFINE\_LUA\_STATE\_EVENT\_TYPE(Name);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \};}
+
+\end{DoxyCode}
+\Hypertarget{lua__event_8h_ae426929cf29a11351644eb22bbf0e237}\index{lua\_event.h@{lua\_event.h}!DEFINE\_LUA\_STATE\_EVENT\_TYPE@{DEFINE\_LUA\_STATE\_EVENT\_TYPE}}
+\index{DEFINE\_LUA\_STATE\_EVENT\_TYPE@{DEFINE\_LUA\_STATE\_EVENT\_TYPE}!lua\_event.h@{lua\_event.h}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_LUA\_STATE\_EVENT\_TYPE}{DEFINE\_LUA\_STATE\_EVENT\_TYPE}}
+{\footnotesize\ttfamily \label{lua__event_8h_ae426929cf29a11351644eb22bbf0e237} 
+\#define DEFINE\+\_\+\+LUA\+\_\+\+STATE\+\_\+\+EVENT\+\_\+\+TYPE(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{event_8h_aa8d2371509853602194dfe7289ca052e}{DECLARE\_EVENT\_TYPE}}(LuaStateEvent,\ LuaState\#\#Name)}
+
+\end{DoxyCode}
+\Hypertarget{lua__event_8h_a8aa4600c08c05f6339712a02b1e97910}\index{lua\_event.h@{lua\_event.h}!FOR\_EACH\_LUA\_STATE\_EVENT@{FOR\_EACH\_LUA\_STATE\_EVENT}}
+\index{FOR\_EACH\_LUA\_STATE\_EVENT@{FOR\_EACH\_LUA\_STATE\_EVENT}!lua\_event.h@{lua\_event.h}}
+\doxysubsubsection{\texorpdfstring{FOR\_EACH\_LUA\_STATE\_EVENT}{FOR\_EACH\_LUA\_STATE\_EVENT}}
+{\footnotesize\ttfamily \label{lua__event_8h_a8aa4600c08c05f6339712a02b1e97910} 
+\#define FOR\+\_\+\+EACH\+\_\+\+LUA\+\_\+\+STATE\+\_\+\+EVENT(\begin{DoxyParamCaption}\item[{}]{V}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ V(LuaStateInit)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(LuaStateDestroyed)}
+
+\end{DoxyCode}
+\Hypertarget{lua__event_8h_a83d2d158052fc2dc9bdf9bece3fd251e}\index{lua\_event.h@{lua\_event.h}!FORWARD\_DECLARE@{FORWARD\_DECLARE}}
+\index{FORWARD\_DECLARE@{FORWARD\_DECLARE}!lua\_event.h@{lua\_event.h}}
+\doxysubsubsection{\texorpdfstring{FORWARD\_DECLARE}{FORWARD\_DECLARE}}
+{\footnotesize\ttfamily \label{lua__event_8h_a83d2d158052fc2dc9bdf9bece3fd251e} 
+\#define FORWARD\+\_\+\+DECLARE(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{class\ }Name\#\#Event;}
+
+\end{DoxyCode}

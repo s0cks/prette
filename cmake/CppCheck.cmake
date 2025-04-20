@@ -1,5 +1,15 @@
 # TODO: cleanup
-find_program(CPPCHECK_BIN NAMES cppcheck REQUIRED)
+
+mark_as_advanced(
+  CPPCHECK_BIN
+  CPPCHECK_PROJECT_ARG
+  CPPCHECK_THREADS_ARG
+  CPPCHECK_BUILD_DIR_ARG
+  CPPCHECK_EXITCODE_ARG
+  CPPCHECK_EXCLUDES
+  CPPCHECK_OTHER_ARGS)
+
+find_program(CPPCHECK_BIN NAMES cppcheck)
 if(CPPCHECK_BIN)
   execute_process(
     COMMAND ${CPPCHECK_BIN} --version
@@ -79,34 +89,38 @@ if(CPPCHECK_BIN)
       "--quiet"
       "--enable=all"
       "--inline-suppr"
+      "--force"
+      "--suppress=*:*lib\*"
+      "--check-level=exhaustive"
+      "--project=${CMAKE_CURRENT_BINARY_DIR}/compile_commands.json"
+      -I
+      ${CMAKE_CURRENT_SOURCE_DIR}
       ${CPPCHECK_TEMPLATE_ARG}
       ${CPPCHECK_OTHER_ARGS}
       ${CPPCHECK_EXCLUDES_ARG})
   if(CPPCHECK_XML_OUTPUT)
     list(APPEND CPPCHECK_OPTS --xml --xml-version=2 2> ${CPPCHECK_XML_OUTPUT})
   endif()
-endif()
 
-include(FindPackageHandleStandardArgs)
-find_package_handle_standard_args(cppcheck DEFAULT_MSG CPPCHECK_BIN)
-
-mark_as_advanced(
-  CPPCHECK_BIN
-  CPPCHECK_PROJECT_ARG
-  CPPCHECK_THREADS_ARG
-  CPPCHECK_BUILD_DIR_ARG
-  CPPCHECK_EXITCODE_ARG
-  CPPCHECK_EXCLUDES
-  CPPCHECK_OTHER_ARGS)
-
-if(CPPCHECK_FOUND)
   message(STATUS "found ${CPPCHECK_VERSION}: ${CPPCHECK_BIN}")
   message(STATUS "cppcheck options: ${CPPCHECK_OPTS}")
   message(STATUS "cppcheck suppressions: ${CPPCHECK_SUPRESSIONS_FILE}")
-  set(CMAKE_C_CPPCHECK ${CPPCHECK_BIN} --std=c${CMAKE_C_STANDARD}
-                       ${CPPCHECK_OPTS})
-  set(CMAKE_CXX_CPPCHECK ${CPPCHECK_BIN} --std=c++${CMAKE_CXX_STANDARD}
+
+  macro(enable_cppcheck)
+    message(STATUS "enabling ${CPPCHECK_VERSION}")
+    set(CMAKE_C_CPPCHECK ${CPPCHECK_BIN} --std=c${CMAKE_C_STANDARD}
                          ${CPPCHECK_OPTS})
-else()
-  message(STATUS "cannot find Cppcheck.")
+    set(CMAKE_CXX_CPPCHECK ${CPPCHECK_BIN} --std=c++${CMAKE_CXX_STANDARD}
+                           ${CPPCHECK_OPTS})
+  endmacro(enable_cppcheck)
+
+  function(create_cppcheck_target target)
+    message(STATUS "creating CppCheck target ${target}")
+    add_custom_target(
+      ${target}-cppcheck
+      COMMENT "run cppcheck for ${target}"
+      COMMAND echo ${CPPCHECK_BIN} --std=c++${CMAKE_CXX_STANDARD}
+              ${CPPCHECK_OPTS} ${CMAKE_CURRENT_SOURCE_DIR}
+      COMMAND ${CPPCHECK_BIN} --std=c++${CMAKE_CXX_STANDARD} ${CPPCHECK_OPTS})
+  endfunction()
 endif()

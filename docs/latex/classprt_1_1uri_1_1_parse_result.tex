@@ -1,0 +1,155 @@
+\doxysection{prt\+::uri\+::Parse\+Result Class Reference}
+\hypertarget{classprt_1_1uri_1_1_parse_result}{}\label{classprt_1_1uri_1_1_parse_result}\index{prt::uri::ParseResult@{prt::uri::ParseResult}}
+
+
+{\ttfamily \#include $<$uri\+\_\+parser.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1uri_1_1_parse_result_a2ea8af10526890e42ce645dbd96b03da}{Parse\+Result}} ()=default
+\item 
+\mbox{\hyperlink{classprt_1_1uri_1_1_parse_result_a00eed913ea8a932119f47faebb3b5f2c}{Parse\+Result}} (const bool success, const std\+::string \&message)
+\item 
+\mbox{\hyperlink{classprt_1_1uri_1_1_parse_result_a8948773df0683ba6982ec3d6ebcd14b2}{Parse\+Result}} (\mbox{\hyperlink{classprt_1_1uri_1_1_parse_result}{Parse\+Result}} \&\&rhs)=default
+\item 
+\mbox{\hyperlink{classprt_1_1uri_1_1_parse_result_aa68f680114a3863b59640da141db4033}{Parse\+Result}} (const \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result}{Parse\+Result}} \&rhs)=default
+\item 
+\mbox{\hyperlink{classprt_1_1uri_1_1_parse_result_aba02b6b6aa26e1e37949f45a6adc1442}{\texorpdfstring{$\sim$}{\string~}\+Parse\+Result}} ()=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result_ad1abe20e804fb7c07ecb2fd58cb614ce}{Is\+Success}} () const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result_a592d04b3c4afac8322dcb7394542b8cc}{Get\+Message}} () const -\/$>$ const std\+::string \&
+\item 
+\mbox{\hyperlink{classprt_1_1uri_1_1_parse_result_aa5cfc405fbc0c683a39d2f9d3ebdcacf}{operator bool}} () const
+\item 
+auto \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result_ac1b6ae654036b9c398dbadbc6b97943f}{operator=}} (\mbox{\hyperlink{classprt_1_1uri_1_1_parse_result}{Parse\+Result}} \&\&rhs) -\/$>$ \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result}{Parse\+Result}} \&=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result_a6e547177ba5aa00ee27a0bb951c1b507}{operator=}} (const \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result}{Parse\+Result}} \&rhs) -\/$>$ \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result}{Parse\+Result}} \&=default
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result_ac0ded13342a648682946682860b31670}{Success}} (const std\+::string \&message="{}Success."{}) -\/$>$ \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result}{Parse\+Result}}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result_a9d84a330ef9efbe947b369afb2ac6356}{Failure}} (const std\+::string \&message) -\/$>$ \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result}{Parse\+Result}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result_a98497b5a51b708ff8479938085a52e11}{success\+\_\+}} \{\}
+\item 
+std\+::string \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result_afdbe5369e8824037e792e673e559e750}{message\+\_\+}} \{\}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+auto \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result_a420e6f739a161da87a98c0eeeb4027b5}{operator$<$$<$}} (std\+::ostream \&stream, const \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result}{Parse\+Result}} \&rhs) -\/$>$ std\+::ostream \&
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1uri_1_1_parse_result_a2ea8af10526890e42ce645dbd96b03da}\index{prt::uri::ParseResult@{prt::uri::ParseResult}!ParseResult@{ParseResult}}
+\index{ParseResult@{ParseResult}!prt::uri::ParseResult@{prt::uri::ParseResult}}
+\doxysubsubsection{\texorpdfstring{ParseResult()}{ParseResult()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parse_result_a2ea8af10526890e42ce645dbd96b03da} 
+prt\+::uri\+::\+Parse\+Result\+::\+Parse\+Result (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{classprt_1_1uri_1_1_parse_result_a00eed913ea8a932119f47faebb3b5f2c}\index{prt::uri::ParseResult@{prt::uri::ParseResult}!ParseResult@{ParseResult}}
+\index{ParseResult@{ParseResult}!prt::uri::ParseResult@{prt::uri::ParseResult}}
+\doxysubsubsection{\texorpdfstring{ParseResult()}{ParseResult()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parse_result_a00eed913ea8a932119f47faebb3b5f2c} 
+prt\+::uri\+::\+Parse\+Result\+::\+Parse\+Result (\begin{DoxyParamCaption}\item[{const bool}]{success}{, }\item[{const std\+::string \&}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1uri_1_1_parse_result_a8948773df0683ba6982ec3d6ebcd14b2}\index{prt::uri::ParseResult@{prt::uri::ParseResult}!ParseResult@{ParseResult}}
+\index{ParseResult@{ParseResult}!prt::uri::ParseResult@{prt::uri::ParseResult}}
+\doxysubsubsection{\texorpdfstring{ParseResult()}{ParseResult()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parse_result_a8948773df0683ba6982ec3d6ebcd14b2} 
+prt\+::uri\+::\+Parse\+Result\+::\+Parse\+Result (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1uri_1_1_parse_result}{Parse\+Result}} \&\&}]{rhs}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{classprt_1_1uri_1_1_parse_result_aa68f680114a3863b59640da141db4033}\index{prt::uri::ParseResult@{prt::uri::ParseResult}!ParseResult@{ParseResult}}
+\index{ParseResult@{ParseResult}!prt::uri::ParseResult@{prt::uri::ParseResult}}
+\doxysubsubsection{\texorpdfstring{ParseResult()}{ParseResult()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parse_result_aa68f680114a3863b59640da141db4033} 
+prt\+::uri\+::\+Parse\+Result\+::\+Parse\+Result (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result}{Parse\+Result}} \&}]{rhs}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{classprt_1_1uri_1_1_parse_result_aba02b6b6aa26e1e37949f45a6adc1442}\index{prt::uri::ParseResult@{prt::uri::ParseResult}!````~ParseResult@{\texorpdfstring{$\sim$}{\string~}ParseResult}}
+\index{````~ParseResult@{\texorpdfstring{$\sim$}{\string~}ParseResult}!prt::uri::ParseResult@{prt::uri::ParseResult}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ParseResult()}{\string~ParseResult()}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parse_result_aba02b6b6aa26e1e37949f45a6adc1442} 
+prt\+::uri\+::\+Parse\+Result\+::\texorpdfstring{$\sim$}{\string~}\+Parse\+Result (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1uri_1_1_parse_result_a9d84a330ef9efbe947b369afb2ac6356}\index{prt::uri::ParseResult@{prt::uri::ParseResult}!Failure@{Failure}}
+\index{Failure@{Failure}!prt::uri::ParseResult@{prt::uri::ParseResult}}
+\doxysubsubsection{\texorpdfstring{Failure()}{Failure()}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parse_result_a9d84a330ef9efbe947b369afb2ac6356} 
+static auto prt\+::uri\+::\+Parse\+Result\+::\+Failure (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{message}{}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result}{Parse\+Result}} \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1uri_1_1_parse_result_a592d04b3c4afac8322dcb7394542b8cc}\index{prt::uri::ParseResult@{prt::uri::ParseResult}!GetMessage@{GetMessage}}
+\index{GetMessage@{GetMessage}!prt::uri::ParseResult@{prt::uri::ParseResult}}
+\doxysubsubsection{\texorpdfstring{GetMessage()}{GetMessage()}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parse_result_a592d04b3c4afac8322dcb7394542b8cc} 
+auto prt\+::uri\+::\+Parse\+Result\+::\+Get\+Message (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const std\+::string\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1uri_1_1_parse_result_ad1abe20e804fb7c07ecb2fd58cb614ce}\index{prt::uri::ParseResult@{prt::uri::ParseResult}!IsSuccess@{IsSuccess}}
+\index{IsSuccess@{IsSuccess}!prt::uri::ParseResult@{prt::uri::ParseResult}}
+\doxysubsubsection{\texorpdfstring{IsSuccess()}{IsSuccess()}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parse_result_ad1abe20e804fb7c07ecb2fd58cb614ce} 
+auto prt\+::uri\+::\+Parse\+Result\+::\+Is\+Success (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1uri_1_1_parse_result_aa5cfc405fbc0c683a39d2f9d3ebdcacf}\index{prt::uri::ParseResult@{prt::uri::ParseResult}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!prt::uri::ParseResult@{prt::uri::ParseResult}}
+\doxysubsubsection{\texorpdfstring{operator bool()}{operator bool()}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parse_result_aa5cfc405fbc0c683a39d2f9d3ebdcacf} 
+prt\+::uri\+::\+Parse\+Result\+::operator bool (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1uri_1_1_parse_result_a6e547177ba5aa00ee27a0bb951c1b507}\index{prt::uri::ParseResult@{prt::uri::ParseResult}!operator=@{operator=}}
+\index{operator=@{operator=}!prt::uri::ParseResult@{prt::uri::ParseResult}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parse_result_a6e547177ba5aa00ee27a0bb951c1b507} 
+auto prt\+::uri\+::\+Parse\+Result\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result}{Parse\+Result}} \&}]{rhs}{}\end{DoxyParamCaption}) -\/$>$  \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result}{Parse\+Result}} \&=default\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{classprt_1_1uri_1_1_parse_result_ac1b6ae654036b9c398dbadbc6b97943f}\index{prt::uri::ParseResult@{prt::uri::ParseResult}!operator=@{operator=}}
+\index{operator=@{operator=}!prt::uri::ParseResult@{prt::uri::ParseResult}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parse_result_ac1b6ae654036b9c398dbadbc6b97943f} 
+auto prt\+::uri\+::\+Parse\+Result\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1uri_1_1_parse_result}{Parse\+Result}} \&\&}]{rhs}{}\end{DoxyParamCaption}) -\/$>$  \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result}{Parse\+Result}} \&=default\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{classprt_1_1uri_1_1_parse_result_ac0ded13342a648682946682860b31670}\index{prt::uri::ParseResult@{prt::uri::ParseResult}!Success@{Success}}
+\index{Success@{Success}!prt::uri::ParseResult@{prt::uri::ParseResult}}
+\doxysubsubsection{\texorpdfstring{Success()}{Success()}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parse_result_ac0ded13342a648682946682860b31670} 
+static auto prt\+::uri\+::\+Parse\+Result\+::\+Success (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{message}{ = {\ttfamily "{}Success."{}}}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result}{Parse\+Result}} \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classprt_1_1uri_1_1_parse_result_a420e6f739a161da87a98c0eeeb4027b5}\index{prt::uri::ParseResult@{prt::uri::ParseResult}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!prt::uri::ParseResult@{prt::uri::ParseResult}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parse_result_a420e6f739a161da87a98c0eeeb4027b5} 
+auto operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{stream}{, }\item[{const \mbox{\hyperlink{classprt_1_1uri_1_1_parse_result}{Parse\+Result}} \&}]{rhs}{}\end{DoxyParamCaption}) -\/$>$ std\+::ostream\& \hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1uri_1_1_parse_result_afdbe5369e8824037e792e673e559e750}\index{prt::uri::ParseResult@{prt::uri::ParseResult}!message\_@{message\_}}
+\index{message\_@{message\_}!prt::uri::ParseResult@{prt::uri::ParseResult}}
+\doxysubsubsection{\texorpdfstring{message\_}{message\_}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parse_result_afdbe5369e8824037e792e673e559e750} 
+std\+::string prt\+::uri\+::\+Parse\+Result\+::message\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1uri_1_1_parse_result_a98497b5a51b708ff8479938085a52e11}\index{prt::uri::ParseResult@{prt::uri::ParseResult}!success\_@{success\_}}
+\index{success\_@{success\_}!prt::uri::ParseResult@{prt::uri::ParseResult}}
+\doxysubsubsection{\texorpdfstring{success\_}{success\_}}
+{\footnotesize\ttfamily \label{classprt_1_1uri_1_1_parse_result_a98497b5a51b708ff8479938085a52e11} 
+bool prt\+::uri\+::\+Parse\+Result\+::success\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{uri__parser_8h}{uri\+\_\+parser.\+h}}\end{DoxyCompactItemize}

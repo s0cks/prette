@@ -1,0 +1,25 @@
+<map id="prt::MouseButtonStateEvent" name="prt::MouseButtonStateEvent">
+<area shape="rect" id="Node000001" title=" " alt="" coords="106,303,292,328"/>
+<area shape="rect" id="Node000002" href="$classprt_1_1_mouse_event_base.html" title=" " alt="" coords="5,206,153,232"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="108,240,185,300,182,304,105,244"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="32,103,126,128"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="82,144,82,206,76,206,76,144"/>
+<area shape="rect" id="Node000004" href="$classprt_1_1_mouse.html" title=" " alt="" coords="207,103,290,128"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="216,139,100,208,98,204,214,135"/>
+<area shape="rect" id="Node000005" href="$classprt_1_1_window.html" title=" " alt="" coords="352,206,443,232"/>
+<area shape="poly" id="edge11_Node000005_Node000004" title=" " alt="" coords="250,143,253,159,260,173,278,187,296,191,316,192,341,196,363,203,361,208,340,202,315,197,295,196,276,192,256,177,248,161,244,144"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="366,200,265,131,268,127,369,195"/>
+<area shape="rect" id="Node000008" href="$classprt_1_1_keyboard.html" title=" " alt="" coords="425,303,525,328"/>
+<area shape="poly" id="edge10_Node000008_Node000005" title=" " alt="" coords="392,247,392,263,397,277,410,291,426,300,424,305,406,295,392,280,387,264,387,247"/>
+<area shape="rect" id="Node000006" href="$classprt_1_1_window_event_source.html" title=" " alt="" coords="314,103,481,128"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="400,144,400,206,395,206,395,144"/>
+<area shape="rect" id="Node000007" href="$classprt_1_1_event_source.html" title=" " alt="" coords="308,5,487,46"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="400,62,400,102,395,102,395,62"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="460,291,444,265,412,235,415,231,448,262,465,288"/>
+<area shape="rect" id="Node000009" href="$classprt_1_1_event_source_template.html" title=" " alt="" coords="502,199,674,240"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="559,253,527,281,495,304,492,300,524,277,556,249"/>
+<area shape="rect" id="Node000010" href="$classprt_1_1_event_source.html" title=" " alt="" coords="504,95,691,136"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="597,152,593,199,587,198,592,151"/>
+<area shape="rect" id="Node000011" href="$classprt_1_1_mouse_button_state.html" title=" " alt="" coords="176,206,328,232"/>
+<area shape="poly" id="edge12_Node000001_Node000011" title=" " alt="" coords="240,247,208,303,204,301,236,244"/>
+</map>

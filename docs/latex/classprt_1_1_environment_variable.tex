@@ -1,0 +1,88 @@
+\doxysection{prt\+::Environment\+Variable Class Reference}
+\hypertarget{classprt_1_1_environment_variable}{}\label{classprt_1_1_environment_variable}\index{prt::EnvironmentVariable@{prt::EnvironmentVariable}}
+
+
+{\ttfamily \#include $<$common.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_environment_variable_a6f7f8c818869b85ff39d874cacbbe654}{Environment\+Variable}} (const char \texorpdfstring{$\ast$}{*}name)
+\item 
+\mbox{\hyperlink{classprt_1_1_environment_variable_aebdbe4319d778ac945f1c4343645923d}{\texorpdfstring{$\sim$}{\string~}\+Environment\+Variable}} ()=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1_environment_variable_a3f2218aec6d331df2b0f44b5e81cbf4a}{Get\+Name}} () const -\/$>$ const char \texorpdfstring{$\ast$}{*}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_environment_variable_ac80647f4b616295ef7f557e5921f14bf}{Get}} () const -\/$>$ std\+::optional$<$ std\+::string $>$
+\item 
+void \mbox{\hyperlink{classprt_1_1_environment_variable_a707488380b7cb81be2917f241fc9d2da}{Get\+List}} (std\+::vector$<$ std\+::string $>$ \&results) const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classprt_1_1_environment_variable_a163f56c0bd577c2298084dd2dbbffe43}{name\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_environment_variable_a46f6440f53f691d142470056ec1cb6f8}{operator$>$$>$}} (const \mbox{\hyperlink{classprt_1_1_environment_variable}{Environment\+Variable}} \&ev, std\+::vector$<$ std\+::string $>$ \&results) -\/$>$ std\+::vector$<$ std\+::string $>$ \&
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_environment_variable_a6f7f8c818869b85ff39d874cacbbe654}\index{prt::EnvironmentVariable@{prt::EnvironmentVariable}!EnvironmentVariable@{EnvironmentVariable}}
+\index{EnvironmentVariable@{EnvironmentVariable}!prt::EnvironmentVariable@{prt::EnvironmentVariable}}
+\doxysubsubsection{\texorpdfstring{EnvironmentVariable()}{EnvironmentVariable()}}
+{\footnotesize\ttfamily \label{classprt_1_1_environment_variable_a6f7f8c818869b85ff39d874cacbbe654} 
+prt\+::\+Environment\+Variable\+::\+Environment\+Variable (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+\Hypertarget{classprt_1_1_environment_variable_aebdbe4319d778ac945f1c4343645923d}\index{prt::EnvironmentVariable@{prt::EnvironmentVariable}!````~EnvironmentVariable@{\texorpdfstring{$\sim$}{\string~}EnvironmentVariable}}
+\index{````~EnvironmentVariable@{\texorpdfstring{$\sim$}{\string~}EnvironmentVariable}!prt::EnvironmentVariable@{prt::EnvironmentVariable}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}EnvironmentVariable()}{\string~EnvironmentVariable()}}
+{\footnotesize\ttfamily \label{classprt_1_1_environment_variable_aebdbe4319d778ac945f1c4343645923d} 
+prt\+::\+Environment\+Variable\+::\texorpdfstring{$\sim$}{\string~}\+Environment\+Variable (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_environment_variable_ac80647f4b616295ef7f557e5921f14bf}\index{prt::EnvironmentVariable@{prt::EnvironmentVariable}!Get@{Get}}
+\index{Get@{Get}!prt::EnvironmentVariable@{prt::EnvironmentVariable}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}}
+{\footnotesize\ttfamily \label{classprt_1_1_environment_variable_ac80647f4b616295ef7f557e5921f14bf} 
+auto prt\+::\+Environment\+Variable\+::\+Get (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ std\+::optional$<$std\+::string$>$ \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_environment_variable_a707488380b7cb81be2917f241fc9d2da}\index{prt::EnvironmentVariable@{prt::EnvironmentVariable}!GetList@{GetList}}
+\index{GetList@{GetList}!prt::EnvironmentVariable@{prt::EnvironmentVariable}}
+\doxysubsubsection{\texorpdfstring{GetList()}{GetList()}}
+{\footnotesize\ttfamily \label{classprt_1_1_environment_variable_a707488380b7cb81be2917f241fc9d2da} 
+void prt\+::\+Environment\+Variable\+::\+Get\+List (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::string $>$ \&}]{results}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_environment_variable_a3f2218aec6d331df2b0f44b5e81cbf4a}\index{prt::EnvironmentVariable@{prt::EnvironmentVariable}!GetName@{GetName}}
+\index{GetName@{GetName}!prt::EnvironmentVariable@{prt::EnvironmentVariable}}
+\doxysubsubsection{\texorpdfstring{GetName()}{GetName()}}
+{\footnotesize\ttfamily \label{classprt_1_1_environment_variable_a3f2218aec6d331df2b0f44b5e81cbf4a} 
+auto prt\+::\+Environment\+Variable\+::\+Get\+Name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const char\texorpdfstring{$\ast$}{*} \hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classprt_1_1_environment_variable_a46f6440f53f691d142470056ec1cb6f8}\index{prt::EnvironmentVariable@{prt::EnvironmentVariable}!operator$>$$>$@{operator$>$$>$}}
+\index{operator$>$$>$@{operator$>$$>$}!prt::EnvironmentVariable@{prt::EnvironmentVariable}}
+\doxysubsubsection{\texorpdfstring{operator$>$$>$}{operator>>}}
+{\footnotesize\ttfamily \label{classprt_1_1_environment_variable_a46f6440f53f691d142470056ec1cb6f8} 
+auto operator$>$$>$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_environment_variable}{Environment\+Variable}} \&}]{ev}{, }\item[{std\+::vector$<$ std\+::string $>$ \&}]{results}{}\end{DoxyParamCaption}) -\/$>$ std\+::vector$<$std\+::string$>$\& \hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_environment_variable_a163f56c0bd577c2298084dd2dbbffe43}\index{prt::EnvironmentVariable@{prt::EnvironmentVariable}!name\_@{name\_}}
+\index{name\_@{name\_}!prt::EnvironmentVariable@{prt::EnvironmentVariable}}
+\doxysubsubsection{\texorpdfstring{name\_}{name\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_environment_variable_a163f56c0bd577c2298084dd2dbbffe43} 
+std\+::string prt\+::\+Environment\+Variable\+::name\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{common_8h}{common.\+h}}\end{DoxyCompactItemize}

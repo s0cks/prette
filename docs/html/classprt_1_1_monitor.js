@@ -1,0 +1,25 @@
+var classprt_1_1_monitor =
+[
+    [ "Monitor", "classprt_1_1_monitor.html#a53fd36a6968570c9a5afd125bf9ec22c", null ],
+    [ "~Monitor", "classprt_1_1_monitor.html#aab86d4a5db04691bc524ac322aba0b93", null ],
+    [ "DEFINE_NON_COPYABLE_TYPE", "classprt_1_1_monitor.html#ad498e83d4edd3b419f0eb2a09029068a", null ],
+    [ "FOR_EACH_MONITOR_EVENT", "classprt_1_1_monitor.html#a705ed5d25e0c2e02c576ec5a33a17876", null ],
+    [ "GetBlueBits", "classprt_1_1_monitor.html#a8803be90440b2320deb7c9601bb23978", null ],
+    [ "GetContentScale", "classprt_1_1_monitor.html#a33010c20afa4ba1c13637ccafe9e2382", null ],
+    [ "GetGreenBits", "classprt_1_1_monitor.html#acd9ca4c31ed9bae7e9543e56f55eafae", null ],
+    [ "GetHandle", "classprt_1_1_monitor.html#a2931cf0960d5d7a124eec47d00344722", null ],
+    [ "GetName", "classprt_1_1_monitor.html#a5f09d3e887b4899b0975496e7c34fb2a", null ],
+    [ "GetPhysicalSize", "classprt_1_1_monitor.html#ad17fc61def51596c83dc8a753b4aedc0", null ],
+    [ "GetPos", "classprt_1_1_monitor.html#a4b06e9a687b40b6f016d8c5e538849a2", null ],
+    [ "GetRedBits", "classprt_1_1_monitor.html#a75accd5d2f2a4232ca36a8d43f268238", null ],
+    [ "GetRefreshRateInHertz", "classprt_1_1_monitor.html#a4906bbf8ae158a2e4e87cf492360ef15", null ],
+    [ "GetResolution", "classprt_1_1_monitor.html#ab65a73e37e28286211bf3923447ff88b", null ],
+    [ "GetSubject", "classprt_1_1_monitor.html#acacf1b9f5bae1586a92ee3ca3cae9831", null ],
+    [ "GetWorkArea", "classprt_1_1_monitor.html#aa76a4bd5692c8c1c060d06a55b0b2c0a", null ],
+    [ "OnEvent", "classprt_1_1_monitor.html#ad0f00e012938512c53bdb8ac0cc9379d", null ],
+    [ "PublishEvent", "classprt_1_1_monitor.html#a670071e1430312833bca35048fa2487a", null ],
+    [ "ToString", "classprt_1_1_monitor.html#a7a4f64c77b6c95f52327e413617cb49e", null ],
+    [ "WindowBuilder", "classprt_1_1_monitor.html#a0d4d3f443518aa9f5c616c435bde1a74", null ],
+    [ "events_", "classprt_1_1_monitor.html#a42c619d7d202e239086b47d84f7c9ac6", null ],
+    [ "handle_", "classprt_1_1_monitor.html#ae5067e48aa2a84a60dc683be179c0be7", null ]
+];

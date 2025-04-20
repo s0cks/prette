@@ -1,0 +1,140 @@
+\doxysection{prt\+::Shader\+Code Class Reference}
+\hypertarget{classprt_1_1_shader_code}{}\label{classprt_1_1_shader_code}\index{prt::ShaderCode@{prt::ShaderCode}}
+
+
+{\ttfamily \#include $<$shader.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_shader_code_a4cd0f272fabf599f697ab38df192649a}{Shader\+Code}} ()=default
+\item 
+\mbox{\hyperlink{classprt_1_1_shader_code_ad067d5f6eabd1ba6ece7b719f3f688fb}{Shader\+Code}} (fs\+::path path)
+\item 
+\mbox{\hyperlink{classprt_1_1_shader_code_a6931da4dbdd157d51de25617c5885c21}{\texorpdfstring{$\sim$}{\string~}\+Shader\+Code}} ()=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1_shader_code_af1b9725faab1cec79b34232a7f5f82a4}{Get\+Path}} () const -\/$>$ const fs\+::path \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_shader_code_ad7c3d6bc7580fda9213707f3f213d386}{Get\+Size}} () const -\/$>$ uint64\+\_\+t
+\item 
+auto \mbox{\hyperlink{classprt_1_1_shader_code_ad531f3387cf7fde33039a4719024376b}{data}} () const -\/$>$ const uint8\+\_\+t \texorpdfstring{$\ast$}{*}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_shader_code_a1b7c448cf9c71f68174beb57c95cd20e}{Is\+Empty}} () const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_shader_code_ab84307cfd680a370dce326cd14b895c3}{Is\+Valid}} () const -\/$>$ bool
+\item 
+\mbox{\hyperlink{classprt_1_1_shader_code_a05384aa79382c096df16a247d455e69e}{operator bool}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classprt_1_1_shader_code_a657666d6540e46cdceedf1694d714ae8}{Shader\+Code\+Buffer}} = std\+::vector$<$uint8\+\_\+t$>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_shader_code_aeeafdbc12fa1ea5cb2fa208a9a47cf70}{DEFINE\+\_\+\+DEFAULT\+\_\+\+COPYABLE\+\_\+\+TYPE}} (\mbox{\hyperlink{classprt_1_1_shader_code}{Shader\+Code}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+fs\+::path \mbox{\hyperlink{classprt_1_1_shader_code_a3d03bec50746dbfba127b9c503356055}{path\+\_\+}}
+\item 
+\mbox{\hyperlink{classprt_1_1_shader_code_a657666d6540e46cdceedf1694d714ae8}{Shader\+Code\+Buffer}} \mbox{\hyperlink{classprt_1_1_shader_code_a202391e4ca97d090522436d023839704}{buffer\+\_\+}} \{\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classprt_1_1_shader_code_a657666d6540e46cdceedf1694d714ae8}\index{prt::ShaderCode@{prt::ShaderCode}!ShaderCodeBuffer@{ShaderCodeBuffer}}
+\index{ShaderCodeBuffer@{ShaderCodeBuffer}!prt::ShaderCode@{prt::ShaderCode}}
+\doxysubsubsection{\texorpdfstring{ShaderCodeBuffer}{ShaderCodeBuffer}}
+{\footnotesize\ttfamily \label{classprt_1_1_shader_code_a657666d6540e46cdceedf1694d714ae8} 
+using \mbox{\hyperlink{classprt_1_1_shader_code_a657666d6540e46cdceedf1694d714ae8}{prt\+::\+Shader\+Code\+::\+Shader\+Code\+Buffer}} = std\+::vector$<$uint8\+\_\+t$>$\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_shader_code_a4cd0f272fabf599f697ab38df192649a}\index{prt::ShaderCode@{prt::ShaderCode}!ShaderCode@{ShaderCode}}
+\index{ShaderCode@{ShaderCode}!prt::ShaderCode@{prt::ShaderCode}}
+\doxysubsubsection{\texorpdfstring{ShaderCode()}{ShaderCode()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_shader_code_a4cd0f272fabf599f697ab38df192649a} 
+prt\+::\+Shader\+Code\+::\+Shader\+Code (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{classprt_1_1_shader_code_ad067d5f6eabd1ba6ece7b719f3f688fb}\index{prt::ShaderCode@{prt::ShaderCode}!ShaderCode@{ShaderCode}}
+\index{ShaderCode@{ShaderCode}!prt::ShaderCode@{prt::ShaderCode}}
+\doxysubsubsection{\texorpdfstring{ShaderCode()}{ShaderCode()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_shader_code_ad067d5f6eabd1ba6ece7b719f3f688fb} 
+prt\+::\+Shader\+Code\+::\+Shader\+Code (\begin{DoxyParamCaption}\item[{fs\+::path}]{path}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_shader_code_a6931da4dbdd157d51de25617c5885c21}\index{prt::ShaderCode@{prt::ShaderCode}!````~ShaderCode@{\texorpdfstring{$\sim$}{\string~}ShaderCode}}
+\index{````~ShaderCode@{\texorpdfstring{$\sim$}{\string~}ShaderCode}!prt::ShaderCode@{prt::ShaderCode}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ShaderCode()}{\string~ShaderCode()}}
+{\footnotesize\ttfamily \label{classprt_1_1_shader_code_a6931da4dbdd157d51de25617c5885c21} 
+prt\+::\+Shader\+Code\+::\texorpdfstring{$\sim$}{\string~}\+Shader\+Code (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_shader_code_ad531f3387cf7fde33039a4719024376b}\index{prt::ShaderCode@{prt::ShaderCode}!data@{data}}
+\index{data@{data}!prt::ShaderCode@{prt::ShaderCode}}
+\doxysubsubsection{\texorpdfstring{data()}{data()}}
+{\footnotesize\ttfamily \label{classprt_1_1_shader_code_ad531f3387cf7fde33039a4719024376b} 
+auto prt\+::\+Shader\+Code\+::data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const uint8\+\_\+t\texorpdfstring{$\ast$}{*} \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_shader_code_aeeafdbc12fa1ea5cb2fa208a9a47cf70}\index{prt::ShaderCode@{prt::ShaderCode}!DEFINE\_DEFAULT\_COPYABLE\_TYPE@{DEFINE\_DEFAULT\_COPYABLE\_TYPE}}
+\index{DEFINE\_DEFAULT\_COPYABLE\_TYPE@{DEFINE\_DEFAULT\_COPYABLE\_TYPE}!prt::ShaderCode@{prt::ShaderCode}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_DEFAULT\_COPYABLE\_TYPE()}{DEFINE\_DEFAULT\_COPYABLE\_TYPE()}}
+{\footnotesize\ttfamily \label{classprt_1_1_shader_code_aeeafdbc12fa1ea5cb2fa208a9a47cf70} 
+prt\+::\+Shader\+Code\+::\+DEFINE\+\_\+\+DEFAULT\+\_\+\+COPYABLE\+\_\+\+TYPE (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_shader_code}{Shader\+Code}}}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_shader_code_af1b9725faab1cec79b34232a7f5f82a4}\index{prt::ShaderCode@{prt::ShaderCode}!GetPath@{GetPath}}
+\index{GetPath@{GetPath}!prt::ShaderCode@{prt::ShaderCode}}
+\doxysubsubsection{\texorpdfstring{GetPath()}{GetPath()}}
+{\footnotesize\ttfamily \label{classprt_1_1_shader_code_af1b9725faab1cec79b34232a7f5f82a4} 
+auto prt\+::\+Shader\+Code\+::\+Get\+Path (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const fs\+::path\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_shader_code_ad7c3d6bc7580fda9213707f3f213d386}\index{prt::ShaderCode@{prt::ShaderCode}!GetSize@{GetSize}}
+\index{GetSize@{GetSize}!prt::ShaderCode@{prt::ShaderCode}}
+\doxysubsubsection{\texorpdfstring{GetSize()}{GetSize()}}
+{\footnotesize\ttfamily \label{classprt_1_1_shader_code_ad7c3d6bc7580fda9213707f3f213d386} 
+auto prt\+::\+Shader\+Code\+::\+Get\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ uint64\+\_\+t \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_shader_code_a1b7c448cf9c71f68174beb57c95cd20e}\index{prt::ShaderCode@{prt::ShaderCode}!IsEmpty@{IsEmpty}}
+\index{IsEmpty@{IsEmpty}!prt::ShaderCode@{prt::ShaderCode}}
+\doxysubsubsection{\texorpdfstring{IsEmpty()}{IsEmpty()}}
+{\footnotesize\ttfamily \label{classprt_1_1_shader_code_a1b7c448cf9c71f68174beb57c95cd20e} 
+auto prt\+::\+Shader\+Code\+::\+Is\+Empty (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_shader_code_ab84307cfd680a370dce326cd14b895c3}\index{prt::ShaderCode@{prt::ShaderCode}!IsValid@{IsValid}}
+\index{IsValid@{IsValid}!prt::ShaderCode@{prt::ShaderCode}}
+\doxysubsubsection{\texorpdfstring{IsValid()}{IsValid()}}
+{\footnotesize\ttfamily \label{classprt_1_1_shader_code_ab84307cfd680a370dce326cd14b895c3} 
+auto prt\+::\+Shader\+Code\+::\+Is\+Valid (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_shader_code_a05384aa79382c096df16a247d455e69e}\index{prt::ShaderCode@{prt::ShaderCode}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!prt::ShaderCode@{prt::ShaderCode}}
+\doxysubsubsection{\texorpdfstring{operator bool()}{operator bool()}}
+{\footnotesize\ttfamily \label{classprt_1_1_shader_code_a05384aa79382c096df16a247d455e69e} 
+prt\+::\+Shader\+Code\+::operator bool (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_shader_code_a202391e4ca97d090522436d023839704}\index{prt::ShaderCode@{prt::ShaderCode}!buffer\_@{buffer\_}}
+\index{buffer\_@{buffer\_}!prt::ShaderCode@{prt::ShaderCode}}
+\doxysubsubsection{\texorpdfstring{buffer\_}{buffer\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_shader_code_a202391e4ca97d090522436d023839704} 
+\mbox{\hyperlink{classprt_1_1_shader_code_a657666d6540e46cdceedf1694d714ae8}{Shader\+Code\+Buffer}} prt\+::\+Shader\+Code\+::buffer\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_shader_code_a3d03bec50746dbfba127b9c503356055}\index{prt::ShaderCode@{prt::ShaderCode}!path\_@{path\_}}
+\index{path\_@{path\_}!prt::ShaderCode@{prt::ShaderCode}}
+\doxysubsubsection{\texorpdfstring{path\_}{path\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_shader_code_a3d03bec50746dbfba127b9c503356055} 
+fs\+::path prt\+::\+Shader\+Code\+::path\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{shader_8h}{shader.\+h}}\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{shader_8cc}{shader.\+cc}}\end{DoxyCompactItemize}

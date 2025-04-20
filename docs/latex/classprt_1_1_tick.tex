@@ -1,0 +1,211 @@
+\doxysection{prt\+::Tick Class Reference}
+\hypertarget{classprt_1_1_tick}{}\label{classprt_1_1_tick}\index{prt::Tick@{prt::Tick}}
+
+
+{\ttfamily \#include $<$tick.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+constexpr \mbox{\hyperlink{classprt_1_1_tick_a2e4bcf74ef440b02119959d88d2efe4d}{Tick}} (const \mbox{\hyperlink{namespaceprt_a81a827dee322afa183a20b7e10ced277}{Tick\+Id}} id, const uint64\+\_\+t ts=uv\+\_\+hrtime())
+\item 
+constexpr \mbox{\hyperlink{classprt_1_1_tick_a3ba31ee2b7c5439f0a121b4689698010}{Tick}} ()
+\item 
+constexpr \mbox{\hyperlink{classprt_1_1_tick_ab6a591be85d06b434dd2f76fc2049711}{Tick}} (const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&rhs)=default
+\item 
+\mbox{\hyperlink{classprt_1_1_tick_afd814b7d1d31f8c4bdb816d9793f6f8c}{\texorpdfstring{$\sim$}{\string~}\+Tick}} ()=default
+\item 
+constexpr auto \mbox{\hyperlink{classprt_1_1_tick_a5b9349530367cec127494095277716ba}{Get\+Id}} () const -\/$>$ \mbox{\hyperlink{namespaceprt_a81a827dee322afa183a20b7e10ced277}{Tick\+Id}}
+\item 
+constexpr auto \mbox{\hyperlink{classprt_1_1_tick_acf54aa39aa448595fd04a905a66cc05a}{Get\+Timestamp}} () const -\/$>$ uint64\+\_\+t
+\item 
+constexpr \mbox{\hyperlink{classprt_1_1_tick_a36dfdd29ebc4a853407eab39204abe00}{operator uint64\+\_\+t}} () const
+\item 
+auto \mbox{\hyperlink{classprt_1_1_tick_a6bb37f8f73709d1f2f0a86989db945aa}{operator=}} (const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&rhs) -\/$>$ \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&=default
+\item 
+constexpr auto \mbox{\hyperlink{classprt_1_1_tick_a5c4798dad6a2de36a15490e0fbffe6a6}{operator==}} (const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&rhs) const -\/$>$ bool
+\item 
+constexpr auto \mbox{\hyperlink{classprt_1_1_tick_a8dcca4f4959b0a6a6eb8ac63670a9f0b}{operator!=}} (const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&rhs) const -\/$>$ bool
+\item 
+constexpr auto \mbox{\hyperlink{classprt_1_1_tick_af1eb8cf9c891898a7be440e489c77eca}{operator$<$}} (const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&rhs) const -\/$>$ bool
+\item 
+constexpr auto \mbox{\hyperlink{classprt_1_1_tick_a234600d8dcaa21fc30757de4546ae673}{operator$>$}} (const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&rhs) const -\/$>$ bool
+\item 
+void \mbox{\hyperlink{classprt_1_1_tick_ac7de2eb00889ddff6a07e87f3d879ceb}{operator+=}} (const uint64\+\_\+t \&rhs)
+\item 
+void \mbox{\hyperlink{classprt_1_1_tick_a0a4517691e3d46dc6a10ced8fcf6e063}{operator-\/=}} (const uint64\+\_\+t \&rhs)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_tick_a43009a931e59db8ece5fb1260e5e6750}{Compare}} (const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&lhs, const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&rhs) -\/$>$ int
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceprt_a81a827dee322afa183a20b7e10ced277}{Tick\+Id}} \mbox{\hyperlink{classprt_1_1_tick_afb8719e75dce7db8e7d83bb5fb526b14}{id\+\_\+}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classprt_1_1_tick_a70e9e4759feaa31b285fbe998304ce95}{ts\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+constexpr auto \mbox{\hyperlink{classprt_1_1_tick_a7534f9adcbc891d4ffa646ae1d522e89}{operator+}} (const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&lhs, const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&rhs) -\/$>$ \mbox{\hyperlink{classprt_1_1_tick_delta}{Tick\+Delta}}
+\item 
+constexpr auto \mbox{\hyperlink{classprt_1_1_tick_a4baf7391c97bed4ea9abce9aa8b558fd}{operator+}} (const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&lhs, const uint64\+\_\+t \&rhs) -\/$>$ \mbox{\hyperlink{classprt_1_1_tick_delta}{Tick\+Delta}}
+\item 
+constexpr auto \mbox{\hyperlink{classprt_1_1_tick_a53c2647cea3c39430fe33a9f9a6ba4fb}{operator-\/}} (const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&lhs, const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&rhs) -\/$>$ \mbox{\hyperlink{classprt_1_1_tick_delta}{Tick\+Delta}}
+\item 
+constexpr auto \mbox{\hyperlink{classprt_1_1_tick_abaa2e22910542b75f2b89d463119c1e6}{operator-\/}} (const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&lhs, const uint64\+\_\+t \&rhs) -\/$>$ \mbox{\hyperlink{classprt_1_1_tick_delta}{Tick\+Delta}}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_tick_a425c52fd41bf43f2257571b5a5cc241c}{operator$<$$<$}} (std\+::ostream \&stream, const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&rhs) -\/$>$ std\+::ostream \&
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_tick_a2e4bcf74ef440b02119959d88d2efe4d}\index{prt::Tick@{prt::Tick}!Tick@{Tick}}
+\index{Tick@{Tick}!prt::Tick@{prt::Tick}}
+\doxysubsubsection{\texorpdfstring{Tick()}{Tick()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_a2e4bcf74ef440b02119959d88d2efe4d} 
+prt\+::\+Tick\+::\+Tick (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceprt_a81a827dee322afa183a20b7e10ced277}{Tick\+Id}}}]{id}{, }\item[{const uint64\+\_\+t}]{ts}{ = {\ttfamily uv\+\_\+hrtime()}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classprt_1_1_tick_a3ba31ee2b7c5439f0a121b4689698010}\index{prt::Tick@{prt::Tick}!Tick@{Tick}}
+\index{Tick@{Tick}!prt::Tick@{prt::Tick}}
+\doxysubsubsection{\texorpdfstring{Tick()}{Tick()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_a3ba31ee2b7c5439f0a121b4689698010} 
+prt\+::\+Tick\+::\+Tick (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classprt_1_1_tick_ab6a591be85d06b434dd2f76fc2049711}\index{prt::Tick@{prt::Tick}!Tick@{Tick}}
+\index{Tick@{Tick}!prt::Tick@{prt::Tick}}
+\doxysubsubsection{\texorpdfstring{Tick()}{Tick()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_ab6a591be85d06b434dd2f76fc2049711} 
+prt\+::\+Tick\+::\+Tick (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&}]{rhs}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [constexpr]}, {\ttfamily [default]}}
+
+\Hypertarget{classprt_1_1_tick_afd814b7d1d31f8c4bdb816d9793f6f8c}\index{prt::Tick@{prt::Tick}!````~Tick@{\texorpdfstring{$\sim$}{\string~}Tick}}
+\index{````~Tick@{\texorpdfstring{$\sim$}{\string~}Tick}!prt::Tick@{prt::Tick}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Tick()}{\string~Tick()}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_afd814b7d1d31f8c4bdb816d9793f6f8c} 
+prt\+::\+Tick\+::\texorpdfstring{$\sim$}{\string~}\+Tick (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_tick_a43009a931e59db8ece5fb1260e5e6750}\index{prt::Tick@{prt::Tick}!Compare@{Compare}}
+\index{Compare@{Compare}!prt::Tick@{prt::Tick}}
+\doxysubsubsection{\texorpdfstring{Compare()}{Compare()}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_a43009a931e59db8ece5fb1260e5e6750} 
+static auto prt\+::\+Tick\+::\+Compare (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&}]{lhs}{, }\item[{const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&}]{rhs}{}\end{DoxyParamCaption}) -\/$>$ int \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_tick_a5b9349530367cec127494095277716ba}\index{prt::Tick@{prt::Tick}!GetId@{GetId}}
+\index{GetId@{GetId}!prt::Tick@{prt::Tick}}
+\doxysubsubsection{\texorpdfstring{GetId()}{GetId()}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_a5b9349530367cec127494095277716ba} 
+auto prt\+::\+Tick\+::\+Get\+Id (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ \mbox{\hyperlink{namespaceprt_a81a827dee322afa183a20b7e10ced277}{Tick\+Id}} \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classprt_1_1_tick_acf54aa39aa448595fd04a905a66cc05a}\index{prt::Tick@{prt::Tick}!GetTimestamp@{GetTimestamp}}
+\index{GetTimestamp@{GetTimestamp}!prt::Tick@{prt::Tick}}
+\doxysubsubsection{\texorpdfstring{GetTimestamp()}{GetTimestamp()}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_acf54aa39aa448595fd04a905a66cc05a} 
+auto prt\+::\+Tick\+::\+Get\+Timestamp (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ uint64\+\_\+t \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classprt_1_1_tick_a36dfdd29ebc4a853407eab39204abe00}\index{prt::Tick@{prt::Tick}!operator uint64\_t@{operator uint64\_t}}
+\index{operator uint64\_t@{operator uint64\_t}!prt::Tick@{prt::Tick}}
+\doxysubsubsection{\texorpdfstring{operator uint64\_t()}{operator uint64\_t()}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_a36dfdd29ebc4a853407eab39204abe00} 
+prt\+::\+Tick\+::operator uint64\+\_\+t (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classprt_1_1_tick_a8dcca4f4959b0a6a6eb8ac63670a9f0b}\index{prt::Tick@{prt::Tick}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!prt::Tick@{prt::Tick}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_a8dcca4f4959b0a6a6eb8ac63670a9f0b} 
+auto prt\+::\+Tick\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&}]{rhs}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classprt_1_1_tick_ac7de2eb00889ddff6a07e87f3d879ceb}\index{prt::Tick@{prt::Tick}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!prt::Tick@{prt::Tick}}
+\doxysubsubsection{\texorpdfstring{operator+=()}{operator+=()}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_ac7de2eb00889ddff6a07e87f3d879ceb} 
+void prt\+::\+Tick\+::operator+= (\begin{DoxyParamCaption}\item[{const uint64\+\_\+t \&}]{rhs}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_tick_a0a4517691e3d46dc6a10ced8fcf6e063}\index{prt::Tick@{prt::Tick}!operator-\/=@{operator-\/=}}
+\index{operator-\/=@{operator-\/=}!prt::Tick@{prt::Tick}}
+\doxysubsubsection{\texorpdfstring{operator-\/=()}{operator-=()}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_a0a4517691e3d46dc6a10ced8fcf6e063} 
+void prt\+::\+Tick\+::operator-\/= (\begin{DoxyParamCaption}\item[{const uint64\+\_\+t \&}]{rhs}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_tick_af1eb8cf9c891898a7be440e489c77eca}\index{prt::Tick@{prt::Tick}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!prt::Tick@{prt::Tick}}
+\doxysubsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_af1eb8cf9c891898a7be440e489c77eca} 
+auto prt\+::\+Tick\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&}]{rhs}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classprt_1_1_tick_a6bb37f8f73709d1f2f0a86989db945aa}\index{prt::Tick@{prt::Tick}!operator=@{operator=}}
+\index{operator=@{operator=}!prt::Tick@{prt::Tick}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_a6bb37f8f73709d1f2f0a86989db945aa} 
+auto prt\+::\+Tick\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&}]{rhs}{}\end{DoxyParamCaption}) -\/$>$  \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&=default\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{classprt_1_1_tick_a5c4798dad6a2de36a15490e0fbffe6a6}\index{prt::Tick@{prt::Tick}!operator==@{operator==}}
+\index{operator==@{operator==}!prt::Tick@{prt::Tick}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_a5c4798dad6a2de36a15490e0fbffe6a6} 
+auto prt\+::\+Tick\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&}]{rhs}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classprt_1_1_tick_a234600d8dcaa21fc30757de4546ae673}\index{prt::Tick@{prt::Tick}!operator$>$@{operator$>$}}
+\index{operator$>$@{operator$>$}!prt::Tick@{prt::Tick}}
+\doxysubsubsection{\texorpdfstring{operator$>$()}{operator>()}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_a234600d8dcaa21fc30757de4546ae673} 
+auto prt\+::\+Tick\+::operator$>$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&}]{rhs}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classprt_1_1_tick_a7534f9adcbc891d4ffa646ae1d522e89}\index{prt::Tick@{prt::Tick}!operator+@{operator+}}
+\index{operator+@{operator+}!prt::Tick@{prt::Tick}}
+\doxysubsubsection{\texorpdfstring{operator+}{operator+}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_a7534f9adcbc891d4ffa646ae1d522e89} 
+auto operator+ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&}]{lhs}{, }\item[{const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&}]{rhs}{}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{classprt_1_1_tick_delta}{Tick\+Delta}} \hspace{0.3cm}{\ttfamily [friend]}}
+
+\Hypertarget{classprt_1_1_tick_a4baf7391c97bed4ea9abce9aa8b558fd}\index{prt::Tick@{prt::Tick}!operator+@{operator+}}
+\index{operator+@{operator+}!prt::Tick@{prt::Tick}}
+\doxysubsubsection{\texorpdfstring{operator+}{operator+}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_a4baf7391c97bed4ea9abce9aa8b558fd} 
+auto operator+ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&}]{lhs}{, }\item[{const uint64\+\_\+t \&}]{rhs}{}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{classprt_1_1_tick_delta}{Tick\+Delta}} \hspace{0.3cm}{\ttfamily [friend]}}
+
+\Hypertarget{classprt_1_1_tick_a53c2647cea3c39430fe33a9f9a6ba4fb}\index{prt::Tick@{prt::Tick}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!prt::Tick@{prt::Tick}}
+\doxysubsubsection{\texorpdfstring{operator-\/}{operator-}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_a53c2647cea3c39430fe33a9f9a6ba4fb} 
+auto operator-\/ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&}]{lhs}{, }\item[{const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&}]{rhs}{}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{classprt_1_1_tick_delta}{Tick\+Delta}} \hspace{0.3cm}{\ttfamily [friend]}}
+
+\Hypertarget{classprt_1_1_tick_abaa2e22910542b75f2b89d463119c1e6}\index{prt::Tick@{prt::Tick}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!prt::Tick@{prt::Tick}}
+\doxysubsubsection{\texorpdfstring{operator-\/}{operator-}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_abaa2e22910542b75f2b89d463119c1e6} 
+auto operator-\/ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&}]{lhs}{, }\item[{const uint64\+\_\+t \&}]{rhs}{}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{classprt_1_1_tick_delta}{Tick\+Delta}} \hspace{0.3cm}{\ttfamily [friend]}}
+
+\Hypertarget{classprt_1_1_tick_a425c52fd41bf43f2257571b5a5cc241c}\index{prt::Tick@{prt::Tick}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!prt::Tick@{prt::Tick}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_a425c52fd41bf43f2257571b5a5cc241c} 
+auto operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{stream}{, }\item[{const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&}]{rhs}{}\end{DoxyParamCaption}) -\/$>$ std\+::ostream\& \hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_tick_afb8719e75dce7db8e7d83bb5fb526b14}\index{prt::Tick@{prt::Tick}!id\_@{id\_}}
+\index{id\_@{id\_}!prt::Tick@{prt::Tick}}
+\doxysubsubsection{\texorpdfstring{id\_}{id\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_afb8719e75dce7db8e7d83bb5fb526b14} 
+\mbox{\hyperlink{namespaceprt_a81a827dee322afa183a20b7e10ced277}{Tick\+Id}} prt\+::\+Tick\+::id\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_tick_a70e9e4759feaa31b285fbe998304ce95}\index{prt::Tick@{prt::Tick}!ts\_@{ts\_}}
+\index{ts\_@{ts\_}!prt::Tick@{prt::Tick}}
+\doxysubsubsection{\texorpdfstring{ts\_}{ts\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_tick_a70e9e4759feaa31b285fbe998304ce95} 
+uint64\+\_\+t prt\+::\+Tick\+::ts\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{tick_8h}{tick.\+h}}\end{DoxyCompactItemize}

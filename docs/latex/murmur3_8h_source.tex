@@ -1,0 +1,60 @@
+\doxysection{murmur3.\+h}
+\hypertarget{murmur3_8h_source}{}\label{murmur3_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/hash/murmur3.h@{/Users/tazz/Projects/prette/Sources/prette/hash/murmur3.h}}
+\mbox{\hyperlink{murmur3_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_MURMUR3\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_MURMUR3\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <cstring>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{uint128_8h}{prette/uint128.h}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{platform_8h}{prette/platform.h}}"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00011\ \ \ \textcolor{keyword}{namespace\ }murmur3\_32\ \{}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceprt_1_1adler32_abd9e01318d707bf5b51ed08e0683018d}{Digest}}\ =\ uint32\_t;}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{namespaceprt_1_1murmur3__32_af116e78896b4f49c88c92b804533811f}{of}}(\textcolor{keyword}{const}\ uint8\_t*\ bytes,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ num\_bytes)\ -\/>\ \mbox{\hyperlink{namespaceprt_1_1adler32_abd9e01318d707bf5b51ed08e0683018d}{Digest}};}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{namespaceprt_1_1murmur3__32_af116e78896b4f49c88c92b804533811f}{of}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ value,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ len)\ -\/>\ \mbox{\hyperlink{namespaceprt_1_1adler32_abd9e01318d707bf5b51ed08e0683018d}{Digest}}\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespaceprt_1_1murmur3__32_af116e78896b4f49c88c92b804533811f}{of}}((\textcolor{keyword}{const}\ uint8\_t*)\ value,\ len);\ \textcolor{comment}{//\ NOLINT(cppcoreguidelines-\/pro-\/type-\/cstyle-\/cast)}}
+\DoxyCodeLine{00019\ \ \ \ \ \}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{namespaceprt_1_1murmur3__32_af116e78896b4f49c88c92b804533811f}{of}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ value)\ -\/>\ \mbox{\hyperlink{namespaceprt_1_1adler32_abd9e01318d707bf5b51ed08e0683018d}{Digest}}\ \{}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespaceprt_1_1murmur3__32_af116e78896b4f49c88c92b804533811f}{of}}(value,\ strlen(value));}
+\DoxyCodeLine{00024\ \ \ \ \ \}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{namespaceprt_1_1murmur3__32_af116e78896b4f49c88c92b804533811f}{of}}(\textcolor{keyword}{const}\ std::string\&\ value)\ -\/>\ \mbox{\hyperlink{namespaceprt_1_1adler32_abd9e01318d707bf5b51ed08e0683018d}{Digest}}\ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespaceprt_1_1murmur3__32_af116e78896b4f49c88c92b804533811f}{of}}(value.data(),\ value.length());}
+\DoxyCodeLine{00029\ \ \ \ \ \}}
+\DoxyCodeLine{00030\ \ \ \}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \textcolor{keyword}{namespace\ }murmur3\_128\ \{}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classprt_1_1uint128}{Digest}}\ =\ \mbox{\hyperlink{classprt_1_1uint128}{uint128}};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{namespaceprt_1_1murmur3__128_a82adda4beccdc1adf3c58d6bc92eff73}{of}}(\textcolor{keyword}{const}\ uint8\_t*\ bytes,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ num\_bytes)\ -\/>\ \mbox{\hyperlink{namespaceprt_1_1murmur3__128_aaa4ba76c42d176882970b3738717a158}{Digest}};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00038\ \ \ \ \ \mbox{\hyperlink{namespaceprt_1_1murmur3__128_a82adda4beccdc1adf3c58d6bc92eff73}{of}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ value,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\ len)\ -\/>\ \mbox{\hyperlink{classprt_1_1uint128}{Digest}}\ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespaceprt_1_1murmur3__128_a82adda4beccdc1adf3c58d6bc92eff73}{of}}((\textcolor{keyword}{const}\ uint8\_t*)\ value,\ len);\ \textcolor{comment}{//\ NOLINT(cppcoreguidelines-\/pro-\/type-\/cstyle-\/cast)}}
+\DoxyCodeLine{00040\ \ \ \ \ \}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00043\ \ \ \ \ \mbox{\hyperlink{namespaceprt_1_1murmur3__128_a82adda4beccdc1adf3c58d6bc92eff73}{of}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ value)\ -\/>\ \mbox{\hyperlink{namespaceprt_1_1murmur3__128_aaa4ba76c42d176882970b3738717a158}{Digest}}\ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespaceprt_1_1murmur3__128_a82adda4beccdc1adf3c58d6bc92eff73}{of}}(value,\ strlen(value));}
+\DoxyCodeLine{00045\ \ \ \ \ \}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{namespaceprt_1_1murmur3__128_a82adda4beccdc1adf3c58d6bc92eff73}{of}}(\textcolor{keyword}{const}\ std::string\&\ value)\ -\/>\ \mbox{\hyperlink{namespaceprt_1_1murmur3__128_aaa4ba76c42d176882970b3738717a158}{Digest}}\ \{}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespaceprt_1_1murmur3__128_a82adda4beccdc1adf3c58d6bc92eff73}{of}}(value.data(),\ value.length());}
+\DoxyCodeLine{00050\ \ \ \ \ \}}
+\DoxyCodeLine{00051\ \ \ \}}
+\DoxyCodeLine{00052\ \}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//PRT\_MURMUR3\_H}}
+
+\end{DoxyCode}

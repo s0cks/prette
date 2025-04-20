@@ -1,0 +1,305 @@
+\doxysection{keyboard.\+h}
+\hypertarget{keyboard_8h_source}{}\label{keyboard_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/keyboard.h@{/Users/tazz/Projects/prette/Sources/prette/keyboard.h}}
+\mbox{\hyperlink{keyboard_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_KEYBOARD\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_KEYBOARD\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <glfw/glfw3.h>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{common_8h}{prette/common.h}}"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{event_8h}{prette/event.h}}"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{lua_8h}{prette/lua.h}}"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{to__string_8h}{prette/to\_string.h}}"{}}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_key_state}{KeyState}}\ \{}
+\DoxyCodeLine{00015\ \ \ \mbox{\hyperlink{classprt_1_1_key_state_aca7cc675e3c2c17dc242c1298c714ff5}{DEFINE\_DEFAULT\_COPYABLE\_TYPE}}(\mbox{\hyperlink{classprt_1_1_key_state}{KeyState}});}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00018\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classprt_1_1_key_state_a68917bc420917bd13407653263ab525e}{code\_}};}
+\DoxyCodeLine{00019\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classprt_1_1_key_state_a77e9cdfca7fe49df1a948995b7a6ccc4}{state\_}};}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00022\ \ \ \mbox{\hyperlink{classprt_1_1_key_state_a24ffdea4e0a11d048a836b0e1069719e}{KeyState}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00023\ \ \ \mbox{\hyperlink{classprt_1_1_key_state_aaba2f4edcda76c774fae910835a1b89a}{KeyState}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ code,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ state)\ :}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_key_state_a68917bc420917bd13407653263ab525e}{code\_}}(code),}
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_key_state_a77e9cdfca7fe49df1a948995b7a6ccc4}{state\_}}(state)\ \{\}}
+\DoxyCodeLine{00026\ \ \ \mbox{\hyperlink{classprt_1_1_key_state_ad32e43765b9d4b621b9174daeb2e0c56}{\string~KeyState}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_key_state_aea9a7698aca1f2a4ed036013798796d8}{GetCode}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_key_state_a68917bc420917bd13407653263ab525e}{code\_}};}
+\DoxyCodeLine{00030\ \ \ \}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_key_state_a15174b38b5a144c1fb5b7f20b72ada02}{GetState}}()\ const\ -\/>\ \textcolor{keywordtype}{int}\ \{}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_key_state_a77e9cdfca7fe49df1a948995b7a6ccc4}{state\_}};}
+\DoxyCodeLine{00034\ \ \ \}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_key_state_a59333080091c7947916d37f3e5be4fd6}{IsRepeat}}()\ const\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_key_state_a15174b38b5a144c1fb5b7f20b72ada02}{GetState}}()\ ==\ GLFW\_REPEAT;}
+\DoxyCodeLine{00038\ \ \ \}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_key_state_acf9c03fb3dde8139d4f53e6ed35a9b0f}{IsPressed}}()\ const\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_key_state_a15174b38b5a144c1fb5b7f20b72ada02}{GetState}}()\ ==\ GLFW\_PRESS;}
+\DoxyCodeLine{00042\ \ \ \}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_key_state_ac7e79998dc927c3561308325dbce0db7}{IsReleased}}()\ const\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_key_state_a15174b38b5a144c1fb5b7f20b72ada02}{GetState}}()\ ==\ GLFW\_RELEASE;}
+\DoxyCodeLine{00046\ \ \ \}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_key_state_ae47897bc0928802d582ee9ee6f415e2e}{ToString}}()\ const\ -\/>\ \mbox{\hyperlink{namespacestd}{std}}::\textcolor{keywordtype}{string}\ \{}
+\DoxyCodeLine{00049\ \ \ \ \ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper}{ToStringHelper<KeyState>}}\ helper\{\};}
+\DoxyCodeLine{00050\ \ \ \ \ helper.\mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_ae60636e2df5f8d3c44242232330ed9da}{AddFieldRef}}(\textcolor{stringliteral}{"{}code"{}},\ \mbox{\hyperlink{classprt_1_1_key_state_aea9a7698aca1f2a4ed036013798796d8}{GetCode}}());}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classprt_1_1_key_state_acf9c03fb3dde8139d4f53e6ed35a9b0f}{IsPressed}}())\ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ helper.AddField(\textcolor{stringliteral}{"{}state"{}},\ \textcolor{stringliteral}{"{}pressed"{}});}
+\DoxyCodeLine{00053\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classprt_1_1_key_state_ac7e79998dc927c3561308325dbce0db7}{IsReleased}}())\ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ helper.AddField(\textcolor{stringliteral}{"{}state"{}},\ \textcolor{stringliteral}{"{}released"{}});}
+\DoxyCodeLine{00055\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classprt_1_1_key_state_a59333080091c7947916d37f3e5be4fd6}{IsRepeat}}())\ \{}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ helper.AddField(\textcolor{stringliteral}{"{}state"{}},\ \textcolor{stringliteral}{"{}repeat"{}});}
+\DoxyCodeLine{00057\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ std::stringstream\ ss;}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ ss\ <<\ \textcolor{stringliteral}{"{}unknown\ state:\ "{}}\ <<\ \mbox{\hyperlink{classprt_1_1_key_state_a15174b38b5a144c1fb5b7f20b72ada02}{GetState}}();}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ helper.AddField(\textcolor{stringliteral}{"{}state"{}},\ ss);}
+\DoxyCodeLine{00061\ \ \ \ \ \}}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordflow}{return}\ helper;}
+\DoxyCodeLine{00063\ \ \ \}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_key_state_a2ccc68f624d22a8d7c7f2de6f4b3dd69}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_key_state}{KeyState}}\&\ rhs)\ \textcolor{keyword}{const}\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_key_state_a68917bc420917bd13407653263ab525e}{code\_}}\ ==\ rhs.code\_\ \&\&\ \mbox{\hyperlink{classprt_1_1_key_state_a77e9cdfca7fe49df1a948995b7a6ccc4}{state\_}}\ ==\ rhs.state\_;}
+\DoxyCodeLine{00067\ \ \ \}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_key_state_ad9650c6fd8e3b421e20e08b668fa543f}{operator!=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_key_state}{KeyState}}\&\ rhs)\ \textcolor{keyword}{const}\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_key_state_a68917bc420917bd13407653263ab525e}{code\_}}\ !=\ rhs.code\_\ ||\ \mbox{\hyperlink{classprt_1_1_key_state_a77e9cdfca7fe49df1a948995b7a6ccc4}{state\_}}\ !=\ rhs.state\_;}
+\DoxyCodeLine{00071\ \ \ \}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_key_state_a9f6740b9bae25e6074baefac2f60fe32}{operator<<}}(std::ostream\&\ stream,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_key_state}{KeyState}}\&\ rhs)\ -\/>\ std::ostream\&\ \{}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordflow}{if}\ (rhs.IsPressed())\ \{}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ stream\ <<\ \textcolor{stringliteral}{"{}pressed"{}};}
+\DoxyCodeLine{00076\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (rhs.IsReleased())\ \{}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ stream\ <<\ \textcolor{stringliteral}{"{}release"{}};}
+\DoxyCodeLine{00078\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (rhs.IsRepeat())\ \{}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ stream\ <<\ \textcolor{stringliteral}{"{}repeat"{}};}
+\DoxyCodeLine{00080\ \ \ \ \ \}}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordflow}{return}\ stream\ <<\ \textcolor{stringliteral}{"{}unknown\ state"{}};}
+\DoxyCodeLine{00082\ \ \ \}}
+\DoxyCodeLine{00083\ \};}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \textcolor{preprocessor}{\#define\ FOR\_EACH\_KEYBOARD\_EVENT(V)\ \(\backslash\)}}
+\DoxyCodeLine{00086\ \textcolor{preprocessor}{\ \ V(KeyboardInit)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00087\ \textcolor{preprocessor}{\ \ V(KeyState)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00088\ \textcolor{preprocessor}{\ \ V(KeyboardDestroyed)}}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \textcolor{keyword}{class\ }Keyboard;}
+\DoxyCodeLine{00091\ \textcolor{keyword}{class\ }KeyboardEvent;}
+\DoxyCodeLine{00092\ \textcolor{preprocessor}{\#define\ FORWARD\_DECLARE(Name)\ class\ Name\#\#Event;}}
+\DoxyCodeLine{00093\ \mbox{\hyperlink{keyboard_8h_a12713d1531ca6dc0ff9f9bdc84e3c9db}{FOR\_EACH\_KEYBOARD\_EVENT}}(\mbox{\hyperlink{gui_8h_a83d2d158052fc2dc9bdf9bece3fd251e}{FORWARD\_DECLARE}})}
+\DoxyCodeLine{00094\ \textcolor{preprocessor}{\#undef\ FORWARD\_DECLARE}}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \mbox{\hyperlink{event_8h_a1ee8f5215b2cce8affd6de0762ca1d7e}{DEFINE\_EVENT\_PROTOTYPE}}(\mbox{\hyperlink{classprt_1_1_keyboard}{Keyboard}},\ \mbox{\hyperlink{keyboard_8h_a12713d1531ca6dc0ff9f9bdc84e3c9db}{FOR\_EACH\_KEYBOARD\_EVENT}});}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_keyboard_event_base}{KeyboardEventBase}}\ :\ \textcolor{keyword}{public}\ KeyboardEvent\ \{}
+\DoxyCodeLine{00099\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00100\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_keyboard}{Keyboard}}*\ \mbox{\hyperlink{classprt_1_1_keyboard_event_base_af4e162e0cea90959a70dbbeb3f323849}{keyboard\_}};}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00103\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_keyboard_event_base_afb32f98ba75e7fbfd54597d1fc6e4fad}{KeyboardEventBase}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_keyboard}{Keyboard}}*\ keyboard)\ :}
+\DoxyCodeLine{00104\ \ \ \ \ KeyboardEvent(),}
+\DoxyCodeLine{00105\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_keyboard_event_base_af4e162e0cea90959a70dbbeb3f323849}{keyboard\_}}(keyboard)\ \{}
+\DoxyCodeLine{00106\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(\mbox{\hyperlink{classprt_1_1_keyboard_event_base_af4e162e0cea90959a70dbbeb3f323849}{keyboard\_}});}
+\DoxyCodeLine{00107\ \ \ \}}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00110\ \ \ \mbox{\hyperlink{classprt_1_1_keyboard_event_base_a9f64734a436a2448258047061248daf3}{\string~KeyboardEventBase}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_keyboard_event_base_a78bbb2351032e0e8bde12eddbbe63211}{GetKeyboard}}()\ const\ -\/>\ const\ \mbox{\hyperlink{classprt_1_1_keyboard}{Keyboard}}*\ \{}
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_keyboard_event_base_af4e162e0cea90959a70dbbeb3f323849}{keyboard\_}};}
+\DoxyCodeLine{00114\ \ \ \}}
+\DoxyCodeLine{00115\ \};}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_keyboard_init_event}{KeyboardInitEvent}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1_keyboard_event_base}{KeyboardEventBase}}\ \{}
+\DoxyCodeLine{00118\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00119\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_keyboard_init_event_a4b1d0c0a528833644e6a01993adf999b}{KeyboardInitEvent}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_keyboard}{Keyboard}}*\ keyboard)\ :}
+\DoxyCodeLine{00120\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_keyboard_event_base}{KeyboardEventBase}}(keyboard)\ \{\}}
+\DoxyCodeLine{00121\ \ \ \mbox{\hyperlink{classprt_1_1_keyboard_init_event_a82eb12e8321f02de94a8f6983c16794a}{\string~KeyboardInitEvent}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00122\ \ \ \mbox{\hyperlink{classprt_1_1_keyboard_init_event_a52d746a8c224555def2e0da485107789}{DECLARE\_EVENT\_TYPE}}(KeyboardEvent,\ KeyboardInit);}
+\DoxyCodeLine{00123\ \};}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_keyboard_destroyed_event}{KeyboardDestroyedEvent}}\ :\ \textcolor{keyword}{public}\ KeyboardEvent\ \{}
+\DoxyCodeLine{00126\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00127\ \ \ \mbox{\hyperlink{classprt_1_1_keyboard_destroyed_event_a55f547fd2cd2c9c019d23f99182908ed}{KeyboardDestroyedEvent}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00128\ \ \ \mbox{\hyperlink{classprt_1_1_keyboard_destroyed_event_aebfbd364e5cb658be5d36bcb8ec0df50}{\string~KeyboardDestroyedEvent}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00129\ \ \ \mbox{\hyperlink{classprt_1_1_keyboard_destroyed_event_afb6c9a925bfc603701f556cf5ce1bfc2}{DECLARE\_EVENT\_TYPE}}(KeyboardEvent,\ KeyboardDestroyed);}
+\DoxyCodeLine{00130\ \};}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00132\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_key_state_event}{KeyStateEvent}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1_keyboard_event_base}{KeyboardEventBase}}\ \{}
+\DoxyCodeLine{00133\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00134\ \ \ \mbox{\hyperlink{classprt_1_1_key_state}{KeyState}}\ \mbox{\hyperlink{classprt_1_1_key_state_event_abfd65bd89845add47911b71dbc16e0c2}{state\_}};}
+\DoxyCodeLine{00135\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classprt_1_1_key_state_event_afebe7d6c6c5baca92799045d3f357e37}{mods\_}};}
+\DoxyCodeLine{00136\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classprt_1_1_key_state_event_acb0d9f3bbb18a28e77ba86636b6f11b7}{scancode\_}};}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00139\ \ \ \mbox{\hyperlink{classprt_1_1_key_state_event_a8661fd2be5208f3dbf89d9130b8c64ea}{KeyStateEvent}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_keyboard}{Keyboard}}*\ keyboard,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ key,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ scancode,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ action,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ mods)\ :}
+\DoxyCodeLine{00140\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_keyboard_event_base}{KeyboardEventBase}}(keyboard),}
+\DoxyCodeLine{00141\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_key_state_event_abfd65bd89845add47911b71dbc16e0c2}{state\_}}(key,\ action),}
+\DoxyCodeLine{00142\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_key_state_event_afebe7d6c6c5baca92799045d3f357e37}{mods\_}}(mods),}
+\DoxyCodeLine{00143\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_key_state_event_acb0d9f3bbb18a28e77ba86636b6f11b7}{scancode\_}}(scancode)\ \{\}}
+\DoxyCodeLine{00144\ \ \ \mbox{\hyperlink{classprt_1_1_key_state_event_a84177de6c280053b84f3d7f90eefa4a4}{\string~KeyStateEvent}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_key_state_event_aeffddfaa4d881e56cb81016db91832d2}{GetState}}()\ const\ -\/>\ const\ \mbox{\hyperlink{classprt_1_1_key_state}{KeyState}}\&\ \{}
+\DoxyCodeLine{00147\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_key_state_event_abfd65bd89845add47911b71dbc16e0c2}{state\_}};}
+\DoxyCodeLine{00148\ \ \ \}}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_key_state_event_ae19970ba35ae232a53a3c244ac58d6e6}{GetCode}}()\ const\ -\/>\ \textcolor{keywordtype}{int}\ \{}
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_key_state_event_abfd65bd89845add47911b71dbc16e0c2}{state\_}}.\mbox{\hyperlink{classprt_1_1_key_state_aea9a7698aca1f2a4ed036013798796d8}{GetCode}}();}
+\DoxyCodeLine{00152\ \ \ \}}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_key_state_event_ae0f9ef88512ac36f8d4d82d1ecaef230}{IsCode}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ code)\ \textcolor{keyword}{const}\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00155\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_key_state_event_ae19970ba35ae232a53a3c244ac58d6e6}{GetCode}}()\ ==\ code;}
+\DoxyCodeLine{00156\ \ \ \}}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00158\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_key_state_event_ad142199b0bb0e3745df55eee6ddf0723}{GetMods}}()\ const\ -\/>\ \textcolor{keywordtype}{int}\ \{}
+\DoxyCodeLine{00159\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_key_state_event_afebe7d6c6c5baca92799045d3f357e37}{mods\_}};}
+\DoxyCodeLine{00160\ \ \ \}}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00162\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_key_state_event_a119fe5eedb5ddf51f1fd68438d7b0fa7}{GetScanCode}}()\ const\ -\/>\ \textcolor{keywordtype}{int}\ \{}
+\DoxyCodeLine{00163\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_key_state_event_acb0d9f3bbb18a28e77ba86636b6f11b7}{scancode\_}};}
+\DoxyCodeLine{00164\ \ \ \}}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00166\ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_key_state_event_a6e84d374d94a6c0cbfae3206a565075f}{IsRepeat}}()\ const\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_key_state_event_abfd65bd89845add47911b71dbc16e0c2}{state\_}}.\mbox{\hyperlink{classprt_1_1_key_state_a59333080091c7947916d37f3e5be4fd6}{IsRepeat}}();}
+\DoxyCodeLine{00168\ \ \ \}}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00170\ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_key_state_event_a62325e802872cbb9083850ab2b3aea36}{IsRepeat}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ code)\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00171\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_key_state_event_a6e84d374d94a6c0cbfae3206a565075f}{IsRepeat}}()\ \&\&\ \mbox{\hyperlink{classprt_1_1_key_state_event_ae19970ba35ae232a53a3c244ac58d6e6}{GetCode}}()\ ==\ code;}
+\DoxyCodeLine{00172\ \ \ \}}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00174\ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_key_state_event_ae0ceaf097cba9b72e978d83b623b21dd}{IsReleased}}()\ const\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00175\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_key_state_event_abfd65bd89845add47911b71dbc16e0c2}{state\_}}.\mbox{\hyperlink{classprt_1_1_key_state_ac7e79998dc927c3561308325dbce0db7}{IsReleased}}();}
+\DoxyCodeLine{00176\ \ \ \}}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00178\ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_key_state_event_aa6a1436d95a9d04f14a1442999f95c6d}{IsReleased}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ code)\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00179\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_key_state_event_ae0ceaf097cba9b72e978d83b623b21dd}{IsReleased}}()\ \&\&\ \mbox{\hyperlink{classprt_1_1_key_state_event_ae19970ba35ae232a53a3c244ac58d6e6}{GetCode}}()\ ==\ code;}
+\DoxyCodeLine{00180\ \ \ \}}
+\DoxyCodeLine{00181\ }
+\DoxyCodeLine{00182\ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_key_state_event_ac89121169f305039e1c0fc57194c257e}{IsPressed}}()\ const\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00183\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_key_state_event_abfd65bd89845add47911b71dbc16e0c2}{state\_}}.\mbox{\hyperlink{classprt_1_1_key_state_acf9c03fb3dde8139d4f53e6ed35a9b0f}{IsPressed}}();}
+\DoxyCodeLine{00184\ \ \ \}}
+\DoxyCodeLine{00185\ }
+\DoxyCodeLine{00186\ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_key_state_event_a89aaa21101e598adfceb3655ab7d726d}{IsPressed}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ code)\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00187\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_key_state_event_ac89121169f305039e1c0fc57194c257e}{IsPressed}}()\ \&\&\ \mbox{\hyperlink{classprt_1_1_key_state_event_ae19970ba35ae232a53a3c244ac58d6e6}{GetCode}}()\ ==\ code;}
+\DoxyCodeLine{00188\ \ \ \}}
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00190\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_key_state_event_af8811cac37540d44c5bf1d71c407c775}{GetKey}}()\ const\ -\/>\ const\ \textcolor{keywordtype}{char}*;}
+\DoxyCodeLine{00191\ }
+\DoxyCodeLine{00192\ \ \ auto\ \mbox{\hyperlink{classprt_1_1_key_state_event_aea52b53f0e729c3abb8fdab570b434ee}{IsState}}(const\ \mbox{\hyperlink{classprt_1_1_key_state}{KeyState}}\&\ rhs)\ const\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00193\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_key_state_event_abfd65bd89845add47911b71dbc16e0c2}{state\_}}\ ==\ rhs;}
+\DoxyCodeLine{00194\ \ \ \}}
+\DoxyCodeLine{00195\ }
+\DoxyCodeLine{00196\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_key_state_event_a6517e1e674a5a7ddfa70188622d180b5}{ToTable}}(lua\_State*\ \mbox{\hyperlink{engine_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}})\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00197\ \ \ \mbox{\hyperlink{classprt_1_1_key_state_event_a211036e6066387c3d451ad4e7b180e11}{DECLARE\_EVENT\_TYPE}}(KeyboardEvent,\ \mbox{\hyperlink{classprt_1_1_key_state}{KeyState}});}
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00199\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00200\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_key_state_event_adccf0d997481164b154e5fe5814f8615}{FilterBy}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_key_state}{KeyState}}\&\ state)\ -\/>\ KeyboardEvent::Predicate\ \{}
+\DoxyCodeLine{00201\ \ \ \ \ \textcolor{keywordflow}{return}\ [=](KeyboardEvent*\ event)\ \{}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{event}\ \&\&\ \textcolor{keyword}{event}-\/>IsKeyStateEvent()\ \&\&\ \textcolor{keyword}{event}-\/>AsKeyStateEvent()-\/>IsState(state);}
+\DoxyCodeLine{00203\ \ \ \ \ \};}
+\DoxyCodeLine{00204\ \ \ \}}
+\DoxyCodeLine{00205\ }
+\DoxyCodeLine{00206\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_key_state_event_a21a76ea78c5b8c82bf2252669dd7612e}{FilterByPressed}}()\ -\/>\ KeyboardEvent::Predicate\ \{}
+\DoxyCodeLine{00207\ \ \ \ \ \textcolor{keywordflow}{return}\ [](KeyboardEvent*\ event)\ \{}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{event}\ \&\&\ \textcolor{keyword}{event}-\/>IsKeyStateEvent()\ \&\&\ \textcolor{keyword}{event}-\/>AsKeyStateEvent()-\/>IsPressed();}
+\DoxyCodeLine{00209\ \ \ \ \ \};}
+\DoxyCodeLine{00210\ \ \ \}}
+\DoxyCodeLine{00211\ }
+\DoxyCodeLine{00212\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_key_state_event_aee94e4b0b0ba3554e1a01f500e4c3f95}{FilterByPressed}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ code)\ -\/>\ std::function<bool(KeyboardEvent*)>\ \{}
+\DoxyCodeLine{00213\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_key_state_event_adccf0d997481164b154e5fe5814f8615}{FilterBy}}(\mbox{\hyperlink{classprt_1_1_key_state}{KeyState}}(code,\ GLFW\_PRESS));}
+\DoxyCodeLine{00214\ \ \ \}}
+\DoxyCodeLine{00215\ }
+\DoxyCodeLine{00216\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_key_state_event_ae13ee6887f079b8996b84eccd50921a3}{FilterByReleased}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ code)\ -\/>\ KeyboardEvent::Predicate\ \{}
+\DoxyCodeLine{00217\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_key_state_event_adccf0d997481164b154e5fe5814f8615}{FilterBy}}(\mbox{\hyperlink{classprt_1_1_key_state}{KeyState}}(code,\ GLFW\_RELEASE));}
+\DoxyCodeLine{00218\ \ \ \}}
+\DoxyCodeLine{00219\ }
+\DoxyCodeLine{00220\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_key_state_event_af9dada283597d8683e499b922c82e117}{FilterByReleased}}()\ -\/>\ KeyboardEvent::Predicate\ \{}
+\DoxyCodeLine{00221\ \ \ \ \ \textcolor{keywordflow}{return}\ [](KeyboardEvent*\ event)\ \{}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{event}\ \&\&\ \textcolor{keyword}{event}-\/>IsKeyStateEvent()\ \&\&\ \textcolor{keyword}{event}-\/>AsKeyStateEvent()-\/>IsReleased();}
+\DoxyCodeLine{00223\ \ \ \ \ \};}
+\DoxyCodeLine{00224\ \ \ \}}
+\DoxyCodeLine{00225\ \};}
+\DoxyCodeLine{00226\ }
+\DoxyCodeLine{00227\ \mbox{\hyperlink{event_8h_a75f747c7c3ad9804780471c5ce370793}{DEFINE\_EVENT\_SUBJECT}}(\mbox{\hyperlink{classprt_1_1_keyboard}{Keyboard}});}
+\DoxyCodeLine{00228\ \mbox{\hyperlink{event_8h_a77dcd0ad69e8fd51c473d76aca5bba76}{DEFINE\_EVENT\_OBSERVABLE}}(\mbox{\hyperlink{classprt_1_1_keyboard}{Keyboard}});}
+\DoxyCodeLine{00229\ \mbox{\hyperlink{keyboard_8h_a12713d1531ca6dc0ff9f9bdc84e3c9db}{FOR\_EACH\_KEYBOARD\_EVENT}}(\mbox{\hyperlink{event_8h_a77dcd0ad69e8fd51c473d76aca5bba76}{DEFINE\_EVENT\_OBSERVABLE}});}
+\DoxyCodeLine{00230\ }
+\DoxyCodeLine{00231\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{namespaceprt_aa73f5cd88a555c91433e2649fa4809de}{OnKeyboardEvent}}()\ -\/>\ KeyboardEventObservable;}
+\DoxyCodeLine{00232\ \textcolor{preprocessor}{\#define\ DEFINE\_ON\_EVENT(Name)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00233\ \textcolor{preprocessor}{\ \ static\ inline\ auto\ On\#\#Name\#\#Event()-\/>Name\#\#EventObservable\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00234\ \textcolor{preprocessor}{\ \ \ \ return\ OnKeyboardEvent().filter(Name\#\#Event::Filter).map(Name\#\#Event::Cast);\ \(\backslash\)}}
+\DoxyCodeLine{00235\ \textcolor{preprocessor}{\ \ \}}}
+\DoxyCodeLine{00236\ \mbox{\hyperlink{keyboard_8h_a12713d1531ca6dc0ff9f9bdc84e3c9db}{FOR\_EACH\_KEYBOARD\_EVENT}}(\mbox{\hyperlink{engine_8cc_a2672365a233e0c9f3c1ccb0d78388308}{DEFINE\_ON\_EVENT}});}
+\DoxyCodeLine{00237\ \textcolor{preprocessor}{\#undef\ DEFINE\_ON\_EVENT}}
+\DoxyCodeLine{00238\ }
+\DoxyCodeLine{00239\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ OnKeyPressed()\ -\/>\ KeyStateEventObservable\ \{}
+\DoxyCodeLine{00240\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespaceprt_aa73f5cd88a555c91433e2649fa4809de}{OnKeyboardEvent}}().filter(\mbox{\hyperlink{classprt_1_1_key_state_event_a21a76ea78c5b8c82bf2252669dd7612e}{KeyStateEvent::FilterByPressed}}()).map(KeyStateEvent::Cast);}
+\DoxyCodeLine{00241\ \}}
+\DoxyCodeLine{00242\ }
+\DoxyCodeLine{00243\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ OnKeyPressed(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ code)\ -\/>\ KeyStateEventObservable\ \{}
+\DoxyCodeLine{00244\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespaceprt_aa73f5cd88a555c91433e2649fa4809de}{OnKeyboardEvent}}().filter(\mbox{\hyperlink{classprt_1_1_key_state_event_a21a76ea78c5b8c82bf2252669dd7612e}{KeyStateEvent::FilterByPressed}}(code)).map(KeyStateEvent::Cast);}
+\DoxyCodeLine{00245\ \}}
+\DoxyCodeLine{00246\ }
+\DoxyCodeLine{00247\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ OnKeyReleased()\ -\/>\ KeyStateEventObservable\ \{}
+\DoxyCodeLine{00248\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespaceprt_aa73f5cd88a555c91433e2649fa4809de}{OnKeyboardEvent}}().filter(\mbox{\hyperlink{classprt_1_1_key_state_event_af9dada283597d8683e499b922c82e117}{KeyStateEvent::FilterByReleased}}()).map(KeyStateEvent::Cast);}
+\DoxyCodeLine{00249\ \}}
+\DoxyCodeLine{00250\ }
+\DoxyCodeLine{00251\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ OnKeyReleased(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ code)\ -\/>\ KeyStateEventObservable\ \{}
+\DoxyCodeLine{00252\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespaceprt_aa73f5cd88a555c91433e2649fa4809de}{OnKeyboardEvent}}().filter(\mbox{\hyperlink{classprt_1_1_key_state_event_af9dada283597d8683e499b922c82e117}{KeyStateEvent::FilterByReleased}}(code)).map(KeyStateEvent::Cast);}
+\DoxyCodeLine{00253\ \}}
+\DoxyCodeLine{00254\ }
+\DoxyCodeLine{00255\ \textcolor{keyword}{class\ }LuaState;}
+\DoxyCodeLine{00256\ \textcolor{keyword}{class\ }Window;}
+\DoxyCodeLine{00257\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_keyboard}{Keyboard}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1_event_source_template}{EventSourceTemplate}}<KeyboardEvent>\ \{}
+\DoxyCodeLine{00258\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_lua_state}{LuaState}};}
+\DoxyCodeLine{00259\ \textcolor{preprocessor}{\#ifdef\ PRT\_GLFW}}
+\DoxyCodeLine{00260\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ OnKey(GLFWwindow*\ window,\ \textcolor{keywordtype}{int}\ key,\ \textcolor{keywordtype}{int}\ scancode,\ \textcolor{keywordtype}{int}\ action,\ \textcolor{keywordtype}{int}\ mods);}
+\DoxyCodeLine{00261\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ GetKeyboard(GLFWwindow*\ handle)\ -\/>\ \mbox{\hyperlink{classprt_1_1_keyboard}{Keyboard}}*;}
+\DoxyCodeLine{00262\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_GLFW}}
+\DoxyCodeLine{00263\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00264\ \ \ \mbox{\hyperlink{classprt_1_1_window}{Window}}*\ \mbox{\hyperlink{classprt_1_1_keyboard_afa75d8483c44e4c96ca4a4c44af3d936}{owner\_}};}
+\DoxyCodeLine{00265\ }
+\DoxyCodeLine{00266\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_keyboard_aa645187d3c00e15188980824283650d4}{PublishEvent}}(KeyboardEvent*\ event)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00267\ }
+\DoxyCodeLine{00268\ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{class\ }E,\ \textcolor{keyword}{typename}...\ Args>}
+\DoxyCodeLine{00269\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_keyboard_aa6c22eaffaf4634a7f4afcd2d6248be6}{Publish}}(Args...\ args)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00270\ \ \ \ \ E\ event(args...);}
+\DoxyCodeLine{00271\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_keyboard_aa645187d3c00e15188980824283650d4}{PublishEvent}}(\&event);}
+\DoxyCodeLine{00272\ \ \ \}}
+\DoxyCodeLine{00273\ }
+\DoxyCodeLine{00274\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00275\ \ \ \mbox{\hyperlink{classprt_1_1_keyboard_a1b31069696e875cecbd501fc052e3f66}{Keyboard}}(\mbox{\hyperlink{classprt_1_1_window}{Window}}*\ owner);}
+\DoxyCodeLine{00276\ \ \ \mbox{\hyperlink{classprt_1_1_keyboard_adc64a7bb17f6ce0144bd8a2ebc8cac81}{\string~Keyboard}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00277\ }
+\DoxyCodeLine{00278\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_keyboard_a7618ef2e46b23281f85a8e3919d83740}{GetOwner}}()\ const\ -\/>\ \mbox{\hyperlink{classprt_1_1_window}{Window}}*\ \{}
+\DoxyCodeLine{00279\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_keyboard_afa75d8483c44e4c96ca4a4c44af3d936}{owner\_}};}
+\DoxyCodeLine{00280\ \ \ \}}
+\DoxyCodeLine{00281\ }
+\DoxyCodeLine{00282\ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_keyboard_ac06e04bc1a8109497c2da42b670dd30d}{HasOwner}}()\ const\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00283\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_keyboard_a7618ef2e46b23281f85a8e3919d83740}{GetOwner}}()\ !=\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00284\ \ \ \}}
+\DoxyCodeLine{00285\ }
+\DoxyCodeLine{00286\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_keyboard_a8069771e28ffe873730922e75534dd92}{GetKey}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ code)\ \textcolor{keyword}{const}\ -\/>\ \mbox{\hyperlink{classprt_1_1_key_state}{KeyState}};}
+\DoxyCodeLine{00287\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_keyboard_ad887e0a5f5396ce196910f3cade121f6}{ToString}}()\ const\ -\/>\ \mbox{\hyperlink{namespacestd}{std}}::\textcolor{keywordtype}{string};}
+\DoxyCodeLine{00288\ }
+\DoxyCodeLine{00289\ \ private:}
+\DoxyCodeLine{00290\ \ \ static\ auto\ \mbox{\hyperlink{classprt_1_1_keyboard_a75c34d450288f5ec10d6503c0feb771c}{New}}(\mbox{\hyperlink{classprt_1_1_window}{Window}}*\ owner)\ -\/>\ \mbox{\hyperlink{classprt_1_1_keyboard}{Keyboard}}*;}
+\DoxyCodeLine{00291\ }
+\DoxyCodeLine{00292\ \ public:}
+\DoxyCodeLine{00293\ \ \ static\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_keyboard_a392d28e83a00773b213bbb4ed5e34727}{Init}}(\mbox{\hyperlink{classprt_1_1_window}{Window}}*\ window);}
+\DoxyCodeLine{00294\ \ \ static\ auto\ \mbox{\hyperlink{classprt_1_1_keyboard_af5a8ac8d813e3e6a66d889f4ec1e2de5}{IsInitialized}}()\ -\/>\ \textcolor{keywordtype}{bool};}
+\DoxyCodeLine{00295\ \ \ static\ auto\ \mbox{\hyperlink{classprt_1_1_keyboard_a7c27854e0e4f030516980d4848dec9dc}{Get}}()\ -\/>\ \mbox{\hyperlink{classprt_1_1_keyboard}{Keyboard}}*;}
+\DoxyCodeLine{00296\ \};}
+\DoxyCodeLine{00297\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00298\ }
+\DoxyCodeLine{00299\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_KEYBOARD\_H}}
+
+\end{DoxyCode}

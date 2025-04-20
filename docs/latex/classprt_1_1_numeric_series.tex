@@ -1,0 +1,142 @@
+\doxysection{prt\+::Numeric\+Series\texorpdfstring{$<$}{<} T, Capacity \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classprt_1_1_numeric_series}{}\label{classprt_1_1_numeric_series}\index{prt::NumericSeries$<$ T, Capacity $>$@{prt::NumericSeries$<$ T, Capacity $>$}}
+
+
+{\ttfamily \#include $<$series.\+h$>$}
+
+
+
+Inheritance diagram for prt\+::Numeric\+Series\texorpdfstring{$<$}{<} T, Capacity \texorpdfstring{$>$}{>}\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=178pt]{classprt_1_1_numeric_series__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for prt\+::Numeric\+Series\texorpdfstring{$<$}{<} T, Capacity \texorpdfstring{$>$}{>}\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=194pt]{classprt_1_1_numeric_series__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_numeric_series_a79ca83a6ec36a555a9d67e96c0b78790}{Numeric\+Series}} ()=default
+\item 
+\mbox{\hyperlink{classprt_1_1_numeric_series_a2a9dc7cb90181a98676049efc20cac3f}{\texorpdfstring{$\sim$}{\string~}\+Numeric\+Series}} () override=default
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classprt_1_1_numeric_series_a540f50145218fff7072a80ff7ed78c06}{first}} () const
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classprt_1_1_numeric_series_a69aa8eb0283b6dcb3f5b4fb30622f1e1}{last}} () const
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classprt_1_1_numeric_series_a4c9ce9ed1b71d7151ff5935a776c8b5f}{average}} () const
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classprt_1_1_numeric_series_a8eab9f774b9055be83fa44c6031cccef}{max}} () const
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classprt_1_1_numeric_series_a9a7bc431f4de689caf2e3157e5d49ab7}{min}} () const
+\item 
+\mbox{\hyperlink{classprt_1_1_numeric_series_a51b7cbde4936a46011f4cb25b2ad41c7}{operator rx\+::observable$<$ uint64\+\_\+t $>$}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classprt_1_1_series}{prt\+::\+Series$<$ uint64\+\_\+t, 10 $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classprt_1_1_series_aeb05a5ea5f917aa47f8cfd2475e07f38}{\texorpdfstring{$\sim$}{\string~}\+Series}} ()=default
+\item 
+void \mbox{\hyperlink{classprt_1_1_series_aa989071b531a5a265c4b6d2d4cc05619}{Append}} (const uint64\+\_\+t value)
+\item 
+uint64\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1_series_a16943d2ddf1c309b4fda96e008f11009}{begin}} ()
+\item 
+uint64\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1_series_a8419800925612a23ba6323351295b31f}{begin}} () const
+\item 
+uint64\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1_series_abb5406100a3cfdb006ac70d8c4a2e941}{end}} ()
+\item 
+uint64\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1_series_abe224c30af8f0e16937231b7c3ce06ca}{end}} () const
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classprt_1_1_series_a6fe427b2e66e63db8345283f16f6a750}{count}} () const
+\item 
+rx\+::observable$<$ uint64\+\_\+t $>$ \mbox{\hyperlink{classprt_1_1_series_adfbead28596b08bf36a979c4b9957aad}{To\+Observable}} () const
+\item 
+\mbox{\hyperlink{classprt_1_1_series_a2d61268ebe14ce36482bcd2bd728888c}{operator rx\+::observable$<$ uint64\+\_\+t $>$}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classprt_1_1_series}{prt\+::\+Series$<$ uint64\+\_\+t, 10 $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_series_aea8588722fb2b1c49c8890aef7ab867c}{Series}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classprt_1_1_series}{prt\+::\+Series$<$ uint64\+\_\+t, 10 $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_circular_buffer}{Circular\+Buffer}}$<$ uint64\+\_\+t, Capacity $>$ \mbox{\hyperlink{classprt_1_1_series_a1ca9ac6be2e5fa60345e5dfb480dd717}{data\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_numeric_series_a79ca83a6ec36a555a9d67e96c0b78790}\index{prt::NumericSeries$<$ T, Capacity $>$@{prt::NumericSeries$<$ T, Capacity $>$}!NumericSeries@{NumericSeries}}
+\index{NumericSeries@{NumericSeries}!prt::NumericSeries$<$ T, Capacity $>$@{prt::NumericSeries$<$ T, Capacity $>$}}
+\doxysubsubsection{\texorpdfstring{NumericSeries()}{NumericSeries()}}
+{\footnotesize\ttfamily \label{classprt_1_1_numeric_series_a79ca83a6ec36a555a9d67e96c0b78790} 
+template$<$typename T , const uint64\+\_\+t Capacity = 10$>$ \\
+\mbox{\hyperlink{classprt_1_1_numeric_series}{prt\+::\+Numeric\+Series}}$<$ T, Capacity $>$\+::\+Numeric\+Series (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{classprt_1_1_numeric_series_a2a9dc7cb90181a98676049efc20cac3f}\index{prt::NumericSeries$<$ T, Capacity $>$@{prt::NumericSeries$<$ T, Capacity $>$}!````~NumericSeries@{\texorpdfstring{$\sim$}{\string~}NumericSeries}}
+\index{````~NumericSeries@{\texorpdfstring{$\sim$}{\string~}NumericSeries}!prt::NumericSeries$<$ T, Capacity $>$@{prt::NumericSeries$<$ T, Capacity $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}NumericSeries()}{\string~NumericSeries()}}
+{\footnotesize\ttfamily \label{classprt_1_1_numeric_series_a2a9dc7cb90181a98676049efc20cac3f} 
+template$<$typename T , const uint64\+\_\+t Capacity = 10$>$ \\
+\mbox{\hyperlink{classprt_1_1_numeric_series}{prt\+::\+Numeric\+Series}}$<$ T, Capacity $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classprt_1_1_numeric_series}{Numeric\+Series}} (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_numeric_series_a4c9ce9ed1b71d7151ff5935a776c8b5f}\index{prt::NumericSeries$<$ T, Capacity $>$@{prt::NumericSeries$<$ T, Capacity $>$}!average@{average}}
+\index{average@{average}!prt::NumericSeries$<$ T, Capacity $>$@{prt::NumericSeries$<$ T, Capacity $>$}}
+\doxysubsubsection{\texorpdfstring{average()}{average()}}
+{\footnotesize\ttfamily \label{classprt_1_1_numeric_series_a4c9ce9ed1b71d7151ff5935a776c8b5f} 
+template$<$typename T , const uint64\+\_\+t Capacity = 10$>$ \\
+uint64\+\_\+t \mbox{\hyperlink{classprt_1_1_numeric_series}{prt\+::\+Numeric\+Series}}$<$ T, Capacity $>$\+::average (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_numeric_series_a540f50145218fff7072a80ff7ed78c06}\index{prt::NumericSeries$<$ T, Capacity $>$@{prt::NumericSeries$<$ T, Capacity $>$}!first@{first}}
+\index{first@{first}!prt::NumericSeries$<$ T, Capacity $>$@{prt::NumericSeries$<$ T, Capacity $>$}}
+\doxysubsubsection{\texorpdfstring{first()}{first()}}
+{\footnotesize\ttfamily \label{classprt_1_1_numeric_series_a540f50145218fff7072a80ff7ed78c06} 
+template$<$typename T , const uint64\+\_\+t Capacity = 10$>$ \\
+uint64\+\_\+t \mbox{\hyperlink{classprt_1_1_numeric_series}{prt\+::\+Numeric\+Series}}$<$ T, Capacity $>$\+::first (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_numeric_series_a69aa8eb0283b6dcb3f5b4fb30622f1e1}\index{prt::NumericSeries$<$ T, Capacity $>$@{prt::NumericSeries$<$ T, Capacity $>$}!last@{last}}
+\index{last@{last}!prt::NumericSeries$<$ T, Capacity $>$@{prt::NumericSeries$<$ T, Capacity $>$}}
+\doxysubsubsection{\texorpdfstring{last()}{last()}}
+{\footnotesize\ttfamily \label{classprt_1_1_numeric_series_a69aa8eb0283b6dcb3f5b4fb30622f1e1} 
+template$<$typename T , const uint64\+\_\+t Capacity = 10$>$ \\
+uint64\+\_\+t \mbox{\hyperlink{classprt_1_1_numeric_series}{prt\+::\+Numeric\+Series}}$<$ T, Capacity $>$\+::last (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_numeric_series_a8eab9f774b9055be83fa44c6031cccef}\index{prt::NumericSeries$<$ T, Capacity $>$@{prt::NumericSeries$<$ T, Capacity $>$}!max@{max}}
+\index{max@{max}!prt::NumericSeries$<$ T, Capacity $>$@{prt::NumericSeries$<$ T, Capacity $>$}}
+\doxysubsubsection{\texorpdfstring{max()}{max()}}
+{\footnotesize\ttfamily \label{classprt_1_1_numeric_series_a8eab9f774b9055be83fa44c6031cccef} 
+template$<$typename T , const uint64\+\_\+t Capacity = 10$>$ \\
+uint64\+\_\+t \mbox{\hyperlink{classprt_1_1_numeric_series}{prt\+::\+Numeric\+Series}}$<$ T, Capacity $>$\+::max (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_numeric_series_a9a7bc431f4de689caf2e3157e5d49ab7}\index{prt::NumericSeries$<$ T, Capacity $>$@{prt::NumericSeries$<$ T, Capacity $>$}!min@{min}}
+\index{min@{min}!prt::NumericSeries$<$ T, Capacity $>$@{prt::NumericSeries$<$ T, Capacity $>$}}
+\doxysubsubsection{\texorpdfstring{min()}{min()}}
+{\footnotesize\ttfamily \label{classprt_1_1_numeric_series_a9a7bc431f4de689caf2e3157e5d49ab7} 
+template$<$typename T , const uint64\+\_\+t Capacity = 10$>$ \\
+uint64\+\_\+t \mbox{\hyperlink{classprt_1_1_numeric_series}{prt\+::\+Numeric\+Series}}$<$ T, Capacity $>$\+::min (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_numeric_series_a51b7cbde4936a46011f4cb25b2ad41c7}\index{prt::NumericSeries$<$ T, Capacity $>$@{prt::NumericSeries$<$ T, Capacity $>$}!operator rx::observable$<$ uint64\_t $>$@{operator rx::observable$<$ uint64\_t $>$}}
+\index{operator rx::observable$<$ uint64\_t $>$@{operator rx::observable$<$ uint64\_t $>$}!prt::NumericSeries$<$ T, Capacity $>$@{prt::NumericSeries$<$ T, Capacity $>$}}
+\doxysubsubsection{\texorpdfstring{operator rx::observable$<$ uint64\_t $>$()}{operator rx::observable< uint64\_t >()}}
+{\footnotesize\ttfamily \label{classprt_1_1_numeric_series_a51b7cbde4936a46011f4cb25b2ad41c7} 
+template$<$typename T , const uint64\+\_\+t Capacity = 10$>$ \\
+\mbox{\hyperlink{classprt_1_1_numeric_series}{prt\+::\+Numeric\+Series}}$<$ T, Capacity $>$\+::operator rx\+::observable$<$ uint64\+\_\+t $>$ (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{series_8h}{series.\+h}}\end{DoxyCompactItemize}

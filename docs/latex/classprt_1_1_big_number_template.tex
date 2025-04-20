@@ -1,0 +1,202 @@
+\doxysection{prt\+::Big\+Number\+Template\texorpdfstring{$<$}{<} Number\+Of\+Bits \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classprt_1_1_big_number_template}{}\label{classprt_1_1_big_number_template}\index{prt::BigNumberTemplate$<$ NumberOfBits $>$@{prt::BigNumberTemplate$<$ NumberOfBits $>$}}
+
+
+{\ttfamily \#include $<$big\+\_\+number.\+h$>$}
+
+
+
+Inheritance diagram for prt\+::Big\+Number\+Template\texorpdfstring{$<$}{<} Number\+Of\+Bits \texorpdfstring{$>$}{>}\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=202pt]{classprt_1_1_big_number_template__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for prt\+::Big\+Number\+Template\texorpdfstring{$<$}{<} Number\+Of\+Bits \texorpdfstring{$>$}{>}\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=202pt]{classprt_1_1_big_number_template__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_big_number_template_abd86847075d6bf2e9f6cfd71c44053e0}{\texorpdfstring{$\sim$}{\string~}\+Big\+Number\+Template}} () override=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1_big_number_template_a4dec58403d03babe7f7c1e051aab93f3}{data}} () const -\/$>$ const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} \texorpdfstring{$\ast$}{*}override
+\item 
+auto \mbox{\hyperlink{classprt_1_1_big_number_template_ada0c8349e9f0b6fe017c0675045ed3d7}{size}} () const -\/$>$ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} override
+\item 
+void \mbox{\hyperlink{classprt_1_1_big_number_template_a35fd8880de9f3bfda677c66474917ecc}{clear}} () override
+\item 
+virtual auto \mbox{\hyperlink{classprt_1_1_big_number_template_af4417815a3c504db709c3194deacb058}{To\+Hex\+String}} () const -\/$>$ std\+::string
+\item 
+virtual auto \mbox{\hyperlink{classprt_1_1_big_number_template_af865045add6ee194566f401603fe4af9}{To\+Binary\+String}} () const -\/$>$ std\+::string
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classprt_1_1_big_number}{prt\+::\+Big\+Number}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classprt_1_1_big_number_ae5fc2c2c86187920db45875b09f80349}{\texorpdfstring{$\sim$}{\string~}\+Big\+Number}} ()=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1_big_number_af7b0c4815fbc57c625b2ffab5e6b7a1f}{const\+\_\+begin}} () const -\/$>$ const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} \texorpdfstring{$\ast$}{*}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_big_number_a76d3e53685187f92017ad5141638ac91}{const\+\_\+end}} () const -\/$>$ const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} \texorpdfstring{$\ast$}{*}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr const auto \mbox{\hyperlink{classprt_1_1_big_number_template_a6ca3b74ebfbde64f3736f57b5323c6e8}{k\+Size\+In\+Bits}} = Number\+Of\+Bits
+\item 
+static constexpr const auto \mbox{\hyperlink{classprt_1_1_big_number_template_aaec701adaec9858ddf019f619c4da0ea}{k\+Size\+In\+Bytes}} = \mbox{\hyperlink{classprt_1_1_big_number_template_a6ca3b74ebfbde64f3736f57b5323c6e8}{k\+Size\+In\+Bits}} / k\+Bits\+Per\+Byte
+\item 
+static constexpr const auto \mbox{\hyperlink{classprt_1_1_big_number_template_ab231f7aa5b063343cb1e6cbda7629a54}{k\+Size\+In\+Words}} = \mbox{\hyperlink{classprt_1_1_big_number_template_a6ca3b74ebfbde64f3736f57b5323c6e8}{k\+Size\+In\+Bits}} / k\+Bits\+Per\+Word
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+constexpr \mbox{\hyperlink{classprt_1_1_big_number_template_a58e52616f6773a765f004752ce20f314}{Big\+Number\+Template}} ()
+\item 
+constexpr \mbox{\hyperlink{classprt_1_1_big_number_template_a6ada7ed9db834295dc0f29541a1d1d1f}{Big\+Number\+Template}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}bytes, const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} num\+\_\+bytes)
+\item 
+void \mbox{\hyperlink{classprt_1_1_big_number_template_a10750af0c82a9495a698560fc2c611cf}{Copy\+From}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}bytes, const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} num\+\_\+bytes)
+\item 
+void \mbox{\hyperlink{classprt_1_1_big_number_template_aaf4ec59b486efa9a3a36c72ecce4cade}{Copy\+From}} (const \mbox{\hyperlink{classprt_1_1_big_number_template}{Big\+Number\+Template}}$<$ Number\+Of\+Bits $>$ \&rhs)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classprt_1_1_big_number}{prt\+::\+Big\+Number}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_big_number_af65892939123a14a53a906cc502e140d}{Big\+Number}} ()=default
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::array$<$ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}, \mbox{\hyperlink{classprt_1_1_big_number_template_ab231f7aa5b063343cb1e6cbda7629a54}{k\+Size\+In\+Words}} $>$ \mbox{\hyperlink{classprt_1_1_big_number_template_a541301fbc305e5d0a2d59230bda27190}{data\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_big_number_template_a58e52616f6773a765f004752ce20f314}\index{prt::BigNumberTemplate$<$ NumberOfBits $>$@{prt::BigNumberTemplate$<$ NumberOfBits $>$}!BigNumberTemplate@{BigNumberTemplate}}
+\index{BigNumberTemplate@{BigNumberTemplate}!prt::BigNumberTemplate$<$ NumberOfBits $>$@{prt::BigNumberTemplate$<$ NumberOfBits $>$}}
+\doxysubsubsection{\texorpdfstring{BigNumberTemplate()}{BigNumberTemplate()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_big_number_template_a58e52616f6773a765f004752ce20f314} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Number\+Of\+Bits$>$ \\
+\mbox{\hyperlink{classprt_1_1_big_number_template}{prt\+::\+Big\+Number\+Template}}$<$ Number\+Of\+Bits $>$\+::\+Big\+Number\+Template (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}, {\ttfamily [protected]}}
+
+\Hypertarget{classprt_1_1_big_number_template_a6ada7ed9db834295dc0f29541a1d1d1f}\index{prt::BigNumberTemplate$<$ NumberOfBits $>$@{prt::BigNumberTemplate$<$ NumberOfBits $>$}!BigNumberTemplate@{BigNumberTemplate}}
+\index{BigNumberTemplate@{BigNumberTemplate}!prt::BigNumberTemplate$<$ NumberOfBits $>$@{prt::BigNumberTemplate$<$ NumberOfBits $>$}}
+\doxysubsubsection{\texorpdfstring{BigNumberTemplate()}{BigNumberTemplate()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_big_number_template_a6ada7ed9db834295dc0f29541a1d1d1f} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Number\+Of\+Bits$>$ \\
+\mbox{\hyperlink{classprt_1_1_big_number_template}{prt\+::\+Big\+Number\+Template}}$<$ Number\+Of\+Bits $>$\+::\+Big\+Number\+Template (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{bytes}{, }\item[{const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}}]{num\+\_\+bytes}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}, {\ttfamily [protected]}}
+
+\Hypertarget{classprt_1_1_big_number_template_abd86847075d6bf2e9f6cfd71c44053e0}\index{prt::BigNumberTemplate$<$ NumberOfBits $>$@{prt::BigNumberTemplate$<$ NumberOfBits $>$}!````~BigNumberTemplate@{\texorpdfstring{$\sim$}{\string~}BigNumberTemplate}}
+\index{````~BigNumberTemplate@{\texorpdfstring{$\sim$}{\string~}BigNumberTemplate}!prt::BigNumberTemplate$<$ NumberOfBits $>$@{prt::BigNumberTemplate$<$ NumberOfBits $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}BigNumberTemplate()}{\string~BigNumberTemplate()}}
+{\footnotesize\ttfamily \label{classprt_1_1_big_number_template_abd86847075d6bf2e9f6cfd71c44053e0} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Number\+Of\+Bits$>$ \\
+\mbox{\hyperlink{classprt_1_1_big_number_template}{prt\+::\+Big\+Number\+Template}}$<$ Number\+Of\+Bits $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classprt_1_1_big_number_template}{Big\+Number\+Template}} (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_big_number_template_a35fd8880de9f3bfda677c66474917ecc}\index{prt::BigNumberTemplate$<$ NumberOfBits $>$@{prt::BigNumberTemplate$<$ NumberOfBits $>$}!clear@{clear}}
+\index{clear@{clear}!prt::BigNumberTemplate$<$ NumberOfBits $>$@{prt::BigNumberTemplate$<$ NumberOfBits $>$}}
+\doxysubsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily \label{classprt_1_1_big_number_template_a35fd8880de9f3bfda677c66474917ecc} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Number\+Of\+Bits$>$ \\
+void \mbox{\hyperlink{classprt_1_1_big_number_template}{prt\+::\+Big\+Number\+Template}}$<$ Number\+Of\+Bits $>$\+::clear (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classprt_1_1_big_number_a4a7a92a2b068197257ebdbeaabc50c59}{prt\+::\+Big\+Number}}.
+
+\Hypertarget{classprt_1_1_big_number_template_aaf4ec59b486efa9a3a36c72ecce4cade}\index{prt::BigNumberTemplate$<$ NumberOfBits $>$@{prt::BigNumberTemplate$<$ NumberOfBits $>$}!CopyFrom@{CopyFrom}}
+\index{CopyFrom@{CopyFrom}!prt::BigNumberTemplate$<$ NumberOfBits $>$@{prt::BigNumberTemplate$<$ NumberOfBits $>$}}
+\doxysubsubsection{\texorpdfstring{CopyFrom()}{CopyFrom()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_big_number_template_aaf4ec59b486efa9a3a36c72ecce4cade} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Number\+Of\+Bits$>$ \\
+void \mbox{\hyperlink{classprt_1_1_big_number_template}{prt\+::\+Big\+Number\+Template}}$<$ Number\+Of\+Bits $>$\+::\+Copy\+From (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1_big_number_template}{Big\+Number\+Template}}$<$ Number\+Of\+Bits $>$ \&}]{rhs}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+\Hypertarget{classprt_1_1_big_number_template_a10750af0c82a9495a698560fc2c611cf}\index{prt::BigNumberTemplate$<$ NumberOfBits $>$@{prt::BigNumberTemplate$<$ NumberOfBits $>$}!CopyFrom@{CopyFrom}}
+\index{CopyFrom@{CopyFrom}!prt::BigNumberTemplate$<$ NumberOfBits $>$@{prt::BigNumberTemplate$<$ NumberOfBits $>$}}
+\doxysubsubsection{\texorpdfstring{CopyFrom()}{CopyFrom()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_big_number_template_a10750af0c82a9495a698560fc2c611cf} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Number\+Of\+Bits$>$ \\
+void \mbox{\hyperlink{classprt_1_1_big_number_template}{prt\+::\+Big\+Number\+Template}}$<$ Number\+Of\+Bits $>$\+::\+Copy\+From (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{bytes}{, }\item[{const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}}]{num\+\_\+bytes}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+\Hypertarget{classprt_1_1_big_number_template_a4dec58403d03babe7f7c1e051aab93f3}\index{prt::BigNumberTemplate$<$ NumberOfBits $>$@{prt::BigNumberTemplate$<$ NumberOfBits $>$}!data@{data}}
+\index{data@{data}!prt::BigNumberTemplate$<$ NumberOfBits $>$@{prt::BigNumberTemplate$<$ NumberOfBits $>$}}
+\doxysubsubsection{\texorpdfstring{data()}{data()}}
+{\footnotesize\ttfamily \label{classprt_1_1_big_number_template_a4dec58403d03babe7f7c1e051aab93f3} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Number\+Of\+Bits$>$ \\
+auto \mbox{\hyperlink{classprt_1_1_big_number_template}{prt\+::\+Big\+Number\+Template}}$<$ Number\+Of\+Bits $>$\+::data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} \texorpdfstring{$\ast$}{*}\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classprt_1_1_big_number_ace9cbd88189d02c09678fdf22ec8df80}{prt\+::\+Big\+Number}}.
+
+\Hypertarget{classprt_1_1_big_number_template_ada0c8349e9f0b6fe017c0675045ed3d7}\index{prt::BigNumberTemplate$<$ NumberOfBits $>$@{prt::BigNumberTemplate$<$ NumberOfBits $>$}!size@{size}}
+\index{size@{size}!prt::BigNumberTemplate$<$ NumberOfBits $>$@{prt::BigNumberTemplate$<$ NumberOfBits $>$}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily \label{classprt_1_1_big_number_template_ada0c8349e9f0b6fe017c0675045ed3d7} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Number\+Of\+Bits$>$ \\
+auto \mbox{\hyperlink{classprt_1_1_big_number_template}{prt\+::\+Big\+Number\+Template}}$<$ Number\+Of\+Bits $>$\+::size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classprt_1_1_big_number_a3271231088342316626a7a63e372abeb}{prt\+::\+Big\+Number}}.
+
+\Hypertarget{classprt_1_1_big_number_template_af865045add6ee194566f401603fe4af9}\index{prt::BigNumberTemplate$<$ NumberOfBits $>$@{prt::BigNumberTemplate$<$ NumberOfBits $>$}!ToBinaryString@{ToBinaryString}}
+\index{ToBinaryString@{ToBinaryString}!prt::BigNumberTemplate$<$ NumberOfBits $>$@{prt::BigNumberTemplate$<$ NumberOfBits $>$}}
+\doxysubsubsection{\texorpdfstring{ToBinaryString()}{ToBinaryString()}}
+{\footnotesize\ttfamily \label{classprt_1_1_big_number_template_af865045add6ee194566f401603fe4af9} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Number\+Of\+Bits$>$ \\
+virtual auto \mbox{\hyperlink{classprt_1_1_big_number_template}{prt\+::\+Big\+Number\+Template}}$<$ Number\+Of\+Bits $>$\+::\+To\+Binary\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ std\+::string \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+\Hypertarget{classprt_1_1_big_number_template_af4417815a3c504db709c3194deacb058}\index{prt::BigNumberTemplate$<$ NumberOfBits $>$@{prt::BigNumberTemplate$<$ NumberOfBits $>$}!ToHexString@{ToHexString}}
+\index{ToHexString@{ToHexString}!prt::BigNumberTemplate$<$ NumberOfBits $>$@{prt::BigNumberTemplate$<$ NumberOfBits $>$}}
+\doxysubsubsection{\texorpdfstring{ToHexString()}{ToHexString()}}
+{\footnotesize\ttfamily \label{classprt_1_1_big_number_template_af4417815a3c504db709c3194deacb058} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Number\+Of\+Bits$>$ \\
+virtual auto \mbox{\hyperlink{classprt_1_1_big_number_template}{prt\+::\+Big\+Number\+Template}}$<$ Number\+Of\+Bits $>$\+::\+To\+Hex\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ std\+::string \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_big_number_template_a541301fbc305e5d0a2d59230bda27190}\index{prt::BigNumberTemplate$<$ NumberOfBits $>$@{prt::BigNumberTemplate$<$ NumberOfBits $>$}!data\_@{data\_}}
+\index{data\_@{data\_}!prt::BigNumberTemplate$<$ NumberOfBits $>$@{prt::BigNumberTemplate$<$ NumberOfBits $>$}}
+\doxysubsubsection{\texorpdfstring{data\_}{data\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_big_number_template_a541301fbc305e5d0a2d59230bda27190} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Number\+Of\+Bits$>$ \\
+std\+::array$<$\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}, \mbox{\hyperlink{classprt_1_1_big_number_template_ab231f7aa5b063343cb1e6cbda7629a54}{k\+Size\+In\+Words}}$>$ \mbox{\hyperlink{classprt_1_1_big_number_template}{prt\+::\+Big\+Number\+Template}}$<$ Number\+Of\+Bits $>$\+::data\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classprt_1_1_big_number_template_a6ca3b74ebfbde64f3736f57b5323c6e8}\index{prt::BigNumberTemplate$<$ NumberOfBits $>$@{prt::BigNumberTemplate$<$ NumberOfBits $>$}!kSizeInBits@{kSizeInBits}}
+\index{kSizeInBits@{kSizeInBits}!prt::BigNumberTemplate$<$ NumberOfBits $>$@{prt::BigNumberTemplate$<$ NumberOfBits $>$}}
+\doxysubsubsection{\texorpdfstring{kSizeInBits}{kSizeInBits}}
+{\footnotesize\ttfamily \label{classprt_1_1_big_number_template_a6ca3b74ebfbde64f3736f57b5323c6e8} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Number\+Of\+Bits$>$ \\
+const auto \mbox{\hyperlink{classprt_1_1_big_number_template}{prt\+::\+Big\+Number\+Template}}$<$ Number\+Of\+Bits $>$\+::k\+Size\+In\+Bits = Number\+Of\+Bits\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classprt_1_1_big_number_template_aaec701adaec9858ddf019f619c4da0ea}\index{prt::BigNumberTemplate$<$ NumberOfBits $>$@{prt::BigNumberTemplate$<$ NumberOfBits $>$}!kSizeInBytes@{kSizeInBytes}}
+\index{kSizeInBytes@{kSizeInBytes}!prt::BigNumberTemplate$<$ NumberOfBits $>$@{prt::BigNumberTemplate$<$ NumberOfBits $>$}}
+\doxysubsubsection{\texorpdfstring{kSizeInBytes}{kSizeInBytes}}
+{\footnotesize\ttfamily \label{classprt_1_1_big_number_template_aaec701adaec9858ddf019f619c4da0ea} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Number\+Of\+Bits$>$ \\
+const auto \mbox{\hyperlink{classprt_1_1_big_number_template}{prt\+::\+Big\+Number\+Template}}$<$ Number\+Of\+Bits $>$\+::k\+Size\+In\+Bytes = \mbox{\hyperlink{classprt_1_1_big_number_template_a6ca3b74ebfbde64f3736f57b5323c6e8}{k\+Size\+In\+Bits}} / k\+Bits\+Per\+Byte\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classprt_1_1_big_number_template_ab231f7aa5b063343cb1e6cbda7629a54}\index{prt::BigNumberTemplate$<$ NumberOfBits $>$@{prt::BigNumberTemplate$<$ NumberOfBits $>$}!kSizeInWords@{kSizeInWords}}
+\index{kSizeInWords@{kSizeInWords}!prt::BigNumberTemplate$<$ NumberOfBits $>$@{prt::BigNumberTemplate$<$ NumberOfBits $>$}}
+\doxysubsubsection{\texorpdfstring{kSizeInWords}{kSizeInWords}}
+{\footnotesize\ttfamily \label{classprt_1_1_big_number_template_ab231f7aa5b063343cb1e6cbda7629a54} 
+template$<$const \mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}} Number\+Of\+Bits$>$ \\
+const auto \mbox{\hyperlink{classprt_1_1_big_number_template}{prt\+::\+Big\+Number\+Template}}$<$ Number\+Of\+Bits $>$\+::k\+Size\+In\+Words = \mbox{\hyperlink{classprt_1_1_big_number_template_a6ca3b74ebfbde64f3736f57b5323c6e8}{k\+Size\+In\+Bits}} / k\+Bits\+Per\+Word\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{big__number_8h}{big\+\_\+number.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,58 @@
+\doxysection{gfx\+\_\+driver.\+h}
+\hypertarget{gfx__driver_8h_source}{}\label{gfx__driver_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/gfx\_driver.h@{/Users/tazz/Projects/prette/Sources/prette/gfx\_driver.h}}
+\mbox{\hyperlink{gfx__driver_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_GFX\_DRIVER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_GFX\_DRIVER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{gfx__driver__event_8h}{prette/gfx\_driver\_event.h}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00007\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{namespaceprt_a36d337888521b9ff8f3dea3e3dc5ac4c}{OnDriverEvent}}()\ -\/>\ DriverEventObservable;}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ DEFINE\_ON\_DRIVER\_EVENT(Name)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\ \ static\ inline\ auto\ On\#\#Name\#\#Event()-\/>Name\#\#EventObservable\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\ \ \ \ return\ OnDriverEvent().filter(Name\#\#Event::Filter).map(Name\#\#Event::Cast);\ \(\backslash\)}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\ \ \}}}
+\DoxyCodeLine{00013\ \mbox{\hyperlink{gfx__driver__event_8h_ac3c335264ec8e86107d2a49f98493ba7}{FOR\_EACH\_DRIVER\_EVENT}}(\mbox{\hyperlink{gfx__driver_8h_acc112ec5265a9ab254dc3c6e9c23d1ee}{DEFINE\_ON\_DRIVER\_EVENT}});}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#undef\ DEFINE\_ON\_DRIVER\_EVENT}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{namespace\ }engine\ \{}
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }InitState;}
+\DoxyCodeLine{00018\ \}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_lua_state}{LuaState}};}
+\DoxyCodeLine{00021\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_driver_base}{DriverBase}}\ \{}
+\DoxyCodeLine{00022\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_lua_state}{LuaState}};}
+\DoxyCodeLine{00023\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_driver_base_afda0dca6355150b79ae46df82bc74bdd}{engine::InitState}};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00026\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_driver_base_a0d6eed44c4b11f90da1041f1e2fec397}{PublishEvent}}(DriverEvent*\ event);}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{class\ }E,\ \textcolor{keyword}{typename}...\ Args>}
+\DoxyCodeLine{00029\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_driver_base_acf8a8ad5fe457ddb7a056197225d8ffa}{Publish}}(Args...\ args)\ \{}
+\DoxyCodeLine{00030\ \ \ \ \ E\ event(args...);}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_driver_base_a0d6eed44c4b11f90da1041f1e2fec397}{PublishEvent}}(\&event);}
+\DoxyCodeLine{00032\ \ \ \}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00035\ \ \ \mbox{\hyperlink{classprt_1_1_driver_base_ad064939c42260daba8ac182a3775c017}{DriverBase}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00038\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classprt_1_1_driver_base_a888e963ce7ae681e427959c16fd573f1}{\string~DriverBase}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00041\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_driver_base_acd22a9eb0ad3e8396214c9285de823ae}{DestroyDriver}}();}
+\DoxyCodeLine{00042\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_driver_base_add2e2c88ce329409d0adab4fc4338c50}{InitDriver}}();}
+\DoxyCodeLine{00043\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_driver_base_accb7fc038992b07e4a7c5f5ca51b582a}{Init}}(\mbox{\hyperlink{classprt_1_1_lua_state}{LuaState}}*\ \mbox{\hyperlink{engine_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}});}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00046\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_driver_base_a5b3657be0a8a6df6fd68c84aebd98e6f}{IsInitialized}}()\ -\/>\ bool;}
+\DoxyCodeLine{00047\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_driver_base_a91e0251d6ec0b82e3908fa15e021780f}{Init}}();}
+\DoxyCodeLine{00048\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_driver_base_a3e9721ab1d3911692ddbed01267f4b02}{Get}}()\ -\/>\ \mbox{\hyperlink{classprt_1_1_driver}{Driver}}*;}
+\DoxyCodeLine{00049\ \};}
+\DoxyCodeLine{00050\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_GFX\_DRIVER\_H}}
+
+\end{DoxyCode}

@@ -1,0 +1,29 @@
+\doxysection{swapchain\+\_\+render\+\_\+pass.\+h}
+\hypertarget{swapchain__render__pass_8h_source}{}\label{swapchain__render__pass_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/swapchain\_render\_pass.h@{/Users/tazz/Projects/prette/Sources/prette/swapchain\_render\_pass.h}}
+\mbox{\hyperlink{swapchain__render__pass_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_SWAPCHAIN\_RENDER\_PASS\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_SWAPCHAIN\_RENDER\_PASS\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vulkan/vulkan\_core.h>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}prette/gfx.h"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_swap_chain_render_pass}{SwapChainRenderPass}}\ \{}
+\DoxyCodeLine{00010\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00011\ \ \ VkRenderPass\ \mbox{\hyperlink{classprt_1_1_swap_chain_render_pass_a4d3e45c0617249a8457caaa162894fee}{pass\_}}\ =\ VK\_NULL\_HANDLE;}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00014\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_swap_chain_render_pass_ab779aff3ee1e487cdb099a5ea1ed8ad0}{SwapChainRenderPass}}(\textcolor{keyword}{const}\ VkFormat\&\ format);}
+\DoxyCodeLine{00015\ \ \ \mbox{\hyperlink{classprt_1_1_swap_chain_render_pass_a4f1ec40191a4d76b548be9a3ef7e6cae}{\string~SwapChainRenderPass}}();}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_swap_chain_render_pass_a3836793079f671bd8fbcd4e25ab54cae}{Get}}()\ const\ -\/>\ const\ VkRenderPass\&\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_swap_chain_render_pass_a4d3e45c0617249a8457caaa162894fee}{pass\_}};}
+\DoxyCodeLine{00019\ \ \ \}}
+\DoxyCodeLine{00020\ \};}
+\DoxyCodeLine{00021\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_SWAPCHAIN\_RENDER\_PASS\_H}}
+
+\end{DoxyCode}

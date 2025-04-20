@@ -1,0 +1,103 @@
+\doxysection{lua.\+h}
+\hypertarget{lua_8h_source}{}\label{lua_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/lua.h@{/Users/tazz/Projects/prette/Sources/prette/lua.h}}
+\mbox{\hyperlink{lua_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_LUA\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_LUA\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <filesystem>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{common_8h}{prette/common.h}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{lua__event_8h}{prette/lua\_event.h}}"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00011\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <lauxlib.h>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{lua_8h}{lua.h}}>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <lualib.h>}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00019\ \}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00023\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{namespaceprt_af2819a73ad14128b8fdfcab55c3d8b08}{OnLuaStateEvent}}()\ -\/>\ LuaStateEventObservable;}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#define\ DEFINE\_ON\_EVENT(Name)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\ \ static\ inline\ auto\ On\#\#Name\#\#Event()-\/>Name\#\#EventObservable\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\ \ \ \ return\ OnLuaStateEvent().filter(Name\#\#Event::Filter).map(Name\#\#Event::Cast);\ \(\backslash\)}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\ \ \}}}
+\DoxyCodeLine{00028\ \mbox{\hyperlink{lua__event_8h_a8aa4600c08c05f6339712a02b1e97910}{FOR\_EACH\_LUA\_STATE\_EVENT}}(\mbox{\hyperlink{engine_8cc_a2672365a233e0c9f3c1ccb0d78388308}{DEFINE\_ON\_EVENT}});}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#undef\ DEFINE\_ON\_EVENT}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_lua_state}{LuaState}}\ \{}
+\DoxyCodeLine{00032\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00033\ \ \ lua\_State*\ \mbox{\hyperlink{classprt_1_1_lua_state_acb294d1eeb446a7a1d8d5773f63d1266}{state\_}};}
+\DoxyCodeLine{00034\ \ \ std::filesystem::path\ \mbox{\hyperlink{classprt_1_1_lua_state_a5aedff1dcae1591bdf296a380265565d}{root\_}};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00037\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_lua_state_a3e0666ada006bbe372e8dfbd6b640881}{LuaState}}(fs::path\ root);}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00040\ \ \ \mbox{\hyperlink{classprt_1_1_lua_state_a73593a1f88ad44d0689cf8bd066fb0a7}{\string~LuaState}}();}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_lua_state_ab51d94b01ef5f1c67fe3ff1b3b3d61d3}{GetState}}()\ const\ -\/>\ lua\_State*\ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_lua_state_acb294d1eeb446a7a1d8d5773f63d1266}{state\_}};}
+\DoxyCodeLine{00044\ \ \ \}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_lua_state_a0a3db88f71f678a65ca4a39535f12e58}{GetRoot}}()\ const\ -\/>\ const\ \mbox{\hyperlink{namespacestd}{std}}::filesystem::path\&\ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_lua_state_a5aedff1dcae1591bdf296a380265565d}{root\_}};}
+\DoxyCodeLine{00048\ \ \ \}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_lua_state_a54edbdbec67b46ae72c5fc14c964fca6}{GetScriptPath}}(\textcolor{keyword}{const}\ std::string\&\ filename)\ \textcolor{keyword}{const}\ -\/>\ std::filesystem::path\ \{}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_lua_state_a0a3db88f71f678a65ca4a39535f12e58}{GetRoot}}()\ /\ filename;}
+\DoxyCodeLine{00052\ \ \ \}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_lua_state_a052c16d7379c083962cb0097cf489994}{ExecuteCode}}(\textcolor{keyword}{const}\ std::string\&\ code);}
+\DoxyCodeLine{00055\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_lua_state_a2c394892ae709b4efbc8b073de24bb07}{ExecuteScript}}(\textcolor{keyword}{const}\ std::string\&\ path);}
+\DoxyCodeLine{00056\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_lua_state_ad1f8a0631487c507b32e5ace87fdecca}{ExecuteGlobalFunction}}(\textcolor{keyword}{const}\ std::string\&\ global,\ \textcolor{keyword}{const}\ std::string\&\ func);}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00059\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_lua_state_a0587fa6a8079c69430fa8efe46d524c4}{New}}(\textcolor{keyword}{const}\ std::filesystem::path\&\ root)\ -\/>\ \mbox{\hyperlink{classprt_1_1_lua_state}{LuaState}}*;}
+\DoxyCodeLine{00060\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_lua_state_a1243f824fb770c98481b0463a7695831}{InitLua}}(lua\_State*\ \mbox{\hyperlink{engine_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}});}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00063\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_lua_state_a9cbf1c884f056b8fa56015364b579825}{Init}}();}
+\DoxyCodeLine{00064\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_lua_state_aac9c8191bb320fe6bc6f83a3286f28b2}{IsInitialized}}()\ -\/>\ bool;}
+\DoxyCodeLine{00065\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_lua_state_a0612d94b8671de21e31b3dbf3621e13e}{Get}}()\ -\/>\ \mbox{\hyperlink{classprt_1_1_lua_state}{LuaState}}*;}
+\DoxyCodeLine{00066\ \};}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \textcolor{preprocessor}{\#define\ EXTERN\_LUA\ \ extern\ "{}C"{}\ inline}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \textcolor{preprocessor}{\#define\ LUA\_F(Name)\ EXTERN\_LUA\ auto\ lua\_\#\#Name(lua\_State*\ L)-\/>int}}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_lua_module}{LuaModule}}\ \{}
+\DoxyCodeLine{00073\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00074\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_lua_module_a61bce995bd8f9c13dfd71fb31a3640bb}{InitModule}}(lua\_State*\ \mbox{\hyperlink{engine_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ name,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ tname,\ \textcolor{keyword}{const}\ \textcolor{keyword}{struct}\ luaL\_Reg*\ lib\_funcs,}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lua\_CFunction\ tostring,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ nup\ =\ 0);}
+\DoxyCodeLine{00076\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_lua_module_a61bce995bd8f9c13dfd71fb31a3640bb}{InitModule}}(lua\_State*\ \mbox{\hyperlink{engine_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ name,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ tname,\ \textcolor{keyword}{const}\ \textcolor{keyword}{struct}\ luaL\_Reg*\ lib\_funcs,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ nup\ =\ 0);}
+\DoxyCodeLine{00077\ \};}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \textcolor{preprocessor}{\#ifndef\ LUA\_SUCCESS}}
+\DoxyCodeLine{00080\ \textcolor{preprocessor}{\#define\ LUA\_SUCCESS\ 1}}
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ LUA\_SUCCESS}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ E>}
+\DoxyCodeLine{00084\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ CreateSubscriber(lua\_State*\ \mbox{\hyperlink{engine_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ index\ =\ 1)\ -\/>\ std::function<void(E*)>\ \{}
+\DoxyCodeLine{00085\ \ \ luaL\_checktype(\mbox{\hyperlink{engine_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}},\ index,\ LUA\_TFUNCTION);}
+\DoxyCodeLine{00086\ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ callback\ =\ luaL\_ref(\mbox{\hyperlink{engine_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}},\ LUA\_REGISTRYINDEX);}
+\DoxyCodeLine{00087\ \ \ \textcolor{keywordflow}{return}\ [\mbox{\hyperlink{engine_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}},\ callback](E*\ event)\ \{}
+\DoxyCodeLine{00088\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(event);}
+\DoxyCodeLine{00089\ \ \ \ \ lua\_rawgeti(\mbox{\hyperlink{engine_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}},\ LUA\_REGISTRYINDEX,\ callback);}
+\DoxyCodeLine{00090\ \ \ \ \ luaL\_checktype(\mbox{\hyperlink{engine_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}},\ 1,\ LUA\_TFUNCTION);}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keyword}{event}-\/>ToTable(\mbox{\hyperlink{engine_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}});}
+\DoxyCodeLine{00092\ \ \ \ \ lua\_call(\mbox{\hyperlink{engine_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}},\ 1,\ 0);}
+\DoxyCodeLine{00093\ \ \ \};}
+\DoxyCodeLine{00094\ \}}
+\DoxyCodeLine{00095\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_LUA\_H}}
+
+\end{DoxyCode}

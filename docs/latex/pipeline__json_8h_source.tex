@@ -1,0 +1,328 @@
+\doxysection{pipeline\+\_\+json.\+h}
+\hypertarget{pipeline__json_8h_source}{}\label{pipeline__json_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/pipeline\_json.h@{/Users/tazz/Projects/prette/Sources/prette/pipeline\_json.h}}
+\mbox{\hyperlink{pipeline__json_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_PIPELINE\_JSON\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_PIPELINE\_JSON\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <fmt/format.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <glog/logging.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <rapidjson/error/en.h>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <rapidjson/reader.h>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{common_8h}{prette/common.h}}"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{pipeline_8h}{prette/pipeline.h}}"{}}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }GraphicsPipeline;}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{namespace\ }json\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{using\ namespace\ }rapidjson;}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#define\ FOR\_EACH\_PIPELINE\_HANDLER\_STATE(V)\ \(\backslash\)}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\ \ V(OpenDoc)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\ \ V(ParsingType)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\ \ V(ExpectMeta)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\ \ V(ParsingMeta)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\ \ V(ParsingName)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\ \ V(ExpectData)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\ \ V(ParsingData)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\ \ V(ParsingVertexShader)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\ \ V(ParsingFragmentShader)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\ \ V(ParsingCullMode)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\ \ V(ParsingFrontFace)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\ \ V(ExpectDynamicStates)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\ \ V(ParsingDynamicStates)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\ \ V(ClosedDoc)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\ \ V(Error)}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler}{PipelineHandler}}\ :\ \textcolor{keyword}{public}\ BaseReaderHandler<UTF8<>,\ PipelineHandler>\ \{}
+\DoxyCodeLine{00036\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_graphics_pipeline}{prt::GraphicsPipeline}};\ \ \textcolor{comment}{//\ TODO:\ remove}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a7a3dba96a8f60e8807a73d893648d561}{State}}\ \{}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#define\ DEFINE\_STATE(Name)\ k\#\#Name,}}
+\DoxyCodeLine{00040\ \ \ \ \ \mbox{\hyperlink{pipeline__json_8h_adc55f8542dfe23953f87a0ce42c9a2f8}{FOR\_EACH\_PIPELINE\_HANDLER\_STATE}}(\mbox{\hyperlink{pipeline__json_8h_a41ec59e2b2f86812bbe28afed642afdb}{DEFINE\_STATE}})}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#undef\ DEFINE\_STATE}}
+\DoxyCodeLine{00042\ \ \ \};}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a56bd914f87645dc84792fec1d29ac1f9}{operator<<}}(std::ostream\&\ stream,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a7a3dba96a8f60e8807a73d893648d561}{State}}\&\ rhs)\ -\/>\ std::ostream\&\ \{}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordflow}{switch}\ (rhs)\ \{}
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#define\ DEFINE\_TO\_STRING(Name)\ \(\backslash\)}}
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\ \ case\ k\#\#Name:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\ \ \ \ return\ stream\ <<\ \#Name;}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \mbox{\hyperlink{pipeline__json_8h_adc55f8542dfe23953f87a0ce42c9a2f8}{FOR\_EACH\_PIPELINE\_HANDLER\_STATE}}(\mbox{\hyperlink{pipeline__json_8h_a3a81f22f17b4931cbdde4b7218385134}{DEFINE\_TO\_STRING}})}
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#undef\ DEFINE\_TO\_STRING}}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ stream\ <<\ \textcolor{stringliteral}{"{}invalid\ state."{}};}
+\DoxyCodeLine{00054\ \ \ \ \ \}}
+\DoxyCodeLine{00055\ \ \ \}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structprt_1_1json_1_1_pipeline_handler_1_1_key_state}{KeyState}}\ \{}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{structprt_1_1json_1_1_pipeline_handler_1_1_key_state_add48436682f224da469f47c5dd74a95a}{name}};}
+\DoxyCodeLine{00059\ \ \ \ \ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a7a3dba96a8f60e8807a73d893648d561}{State}}\ \mbox{\hyperlink{structprt_1_1json_1_1_pipeline_handler_1_1_key_state_a6e227ed69fb6c88df013f0bcaa09e095}{state}};}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1json_1_1_pipeline_handler_1_1_key_state_ad01c548cd11a59e54fabd2560cf8a711}{operator==}}(\textcolor{keyword}{const}\ std::string\&\ rhs)\ \textcolor{keyword}{const}\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structprt_1_1json_1_1_pipeline_handler_1_1_key_state_add48436682f224da469f47c5dd74a95a}{name}}\ ==\ rhs;}
+\DoxyCodeLine{00063\ \ \ \ \ \}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keyword}{operator}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a7a3dba96a8f60e8807a73d893648d561}{State}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structprt_1_1json_1_1_pipeline_handler_1_1_key_state_a6e227ed69fb6c88df013f0bcaa09e095}{state}};}
+\DoxyCodeLine{00067\ \ \ \ \ \}}
+\DoxyCodeLine{00068\ \ \ \};}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00071\ \ \ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a7a3dba96a8f60e8807a73d893648d561}{State}}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_ab27f241fb8863a05daf36ce135fd9e67}{state\_}}\ =\ kClosedDoc;}
+\DoxyCodeLine{00072\ \ \ std::string\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a26e236005bcbdc5f301cdd07bef81e5f}{error\_}}\{\};}
+\DoxyCodeLine{00073\ \ \ \mbox{\hyperlink{structprt_1_1_graphics_pipeline_builder}{GraphicsPipelineBuilder}}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a1af04c5ad1492bb3355e0b94baf643bd}{builder\_}}\{\};}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a53649cf657995ceb9e43ff90fa534858}{Continue}}()\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00077\ \ \ \}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a9c8308e2bfa6ea741163309777fb3124}{GetState}}()\ const\ -\/>\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a7a3dba96a8f60e8807a73d893648d561}{State}}\ \{}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_ab27f241fb8863a05daf36ce135fd9e67}{state\_}};}
+\DoxyCodeLine{00081\ \ \ \}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_ae5edff9bf6ce49a0a93d212c8cd03be2}{SetState}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a7a3dba96a8f60e8807a73d893648d561}{State}}\ rhs)\ \{}
+\DoxyCodeLine{00084\ \ \ \ \ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_ab27f241fb8863a05daf36ce135fd9e67}{state\_}}\ =\ rhs;}
+\DoxyCodeLine{00085\ \ \ \}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a5154a679ccfbf4c0366988099915e32c}{SetError}}(\textcolor{keyword}{const}\ std::string\&\ rhs)\ \{}
+\DoxyCodeLine{00088\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(!rhs.empty());}
+\DoxyCodeLine{00089\ \ \ \ \ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a26e236005bcbdc5f301cdd07bef81e5f}{error\_}}\ =\ rhs;}
+\DoxyCodeLine{00090\ \ \ \}}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_ac9047c4832ba06a8989d9a1b064e09d6}{Error}}(\textcolor{keyword}{const}\ std::string\&\ rhs)\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00093\ \ \ \ \ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_ae5edff9bf6ce49a0a93d212c8cd03be2}{SetState}}(kError);}
+\DoxyCodeLine{00094\ \ \ \ \ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a5154a679ccfbf4c0366988099915e32c}{SetError}}(rhs);}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00096\ \ \ \}}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_ae1b10a6fe3dd33fb1f76b6f4d35a7724}{InvalidState}}()\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_ac9047c4832ba06a8989d9a1b064e09d6}{Error}}(\textcolor{stringliteral}{"{}Invalid\ State"{}});}
+\DoxyCodeLine{00100\ \ \ \}}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a19bc3ae9c0d5a5a5304ab929910ae445}{TransitionTo}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a7a3dba96a8f60e8807a73d893648d561}{State}}\ rhs)\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00103\ \ \ \ \ DLOG(INFO)\ <<\ \textcolor{stringliteral}{"{}transitioning\ to\ "{}}\ <<\ rhs\ <<\ \textcolor{stringliteral}{"{}....."{}};}
+\DoxyCodeLine{00104\ \ \ \ \ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_ae5edff9bf6ce49a0a93d212c8cd03be2}{SetState}}(rhs);}
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a53649cf657995ceb9e43ff90fa534858}{Continue}}();}
+\DoxyCodeLine{00106\ \ \ \}}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Container>}
+\DoxyCodeLine{00109\ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_ac1c61ef3296c4893db0fbe93ea2db214}{CheckKeyTable}}(\textcolor{keyword}{const}\ std::string\&\ key,\ \textcolor{keyword}{const}\ Container\&\ key\_table)\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ entry\ :\ key\_table)\ \{}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (key\ ==\ entry)}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a19bc3ae9c0d5a5a5304ab929910ae445}{TransitionTo}}(entry);}
+\DoxyCodeLine{00113\ \ \ \ \ \}}
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_ac9047c4832ba06a8989d9a1b064e09d6}{Error}}(fmt::format(\textcolor{stringliteral}{"{}invalid\ key\ \`{}\{\}`"{}},\ key));}
+\DoxyCodeLine{00115\ \ \ \}}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a92af85d72d645be2ecb9e173953deb4d}{OnParseRasterizerCullMode}}(\textcolor{keyword}{const}\ std::string\&\ value);}
+\DoxyCodeLine{00118\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_ace54dc574c598296554b768c827fd427}{OnParseRasterizerFrontFace}}(\textcolor{keyword}{const}\ std::string\&\ value);}
+\DoxyCodeLine{00119\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_aa388af387334ff8effdc7d0fe8b977d0}{OnParseVertexShader}}(\textcolor{keyword}{const}\ std::string\&\ value);}
+\DoxyCodeLine{00120\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a87e3f93d00268fc38e9d689de39ac5fd}{OnParseFragmentShader}}(\textcolor{keyword}{const}\ std::string\&\ value);}
+\DoxyCodeLine{00121\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_af0a0bccc772f3d42c7e7edfeee865857}{OnParseDynamicState}}(\textcolor{keyword}{const}\ std::string\&\ value);}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00124\ \ \ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a86c06e5cb25385c2a474ca884754e976}{PipelineHandler}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00125\ \ \ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a6d23c3db3f84ad3ee08d61f8fcbdcab8}{\string~PipelineHandler}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a9a87529732783c2bebe00a5f094d201e}{HasError}}()\ const\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keywordflow}{return}\ !\mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a26e236005bcbdc5f301cdd07bef81e5f}{error\_}}.empty();}
+\DoxyCodeLine{00129\ \ \ \}}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00131\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a49737a493c2f4d7080d21fd73ba1ab1e}{GetError}}()\ const\ -\/>\ const\ \mbox{\hyperlink{namespacestd}{std}}::\textcolor{keywordtype}{string}\&\ \{}
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a26e236005bcbdc5f301cdd07bef81e5f}{error\_}};}
+\DoxyCodeLine{00133\ \ \ \}}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_affc674e37bbfe59a590409e3b487e928}{Null}}()\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_ae1b10a6fe3dd33fb1f76b6f4d35a7724}{InvalidState}}();}
+\DoxyCodeLine{00137\ \ \ \}}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00139\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a58a383f6a52fe0328a5d20c01d870f4b}{Bool}}(\textcolor{keywordtype}{bool}\ b)\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_ae1b10a6fe3dd33fb1f76b6f4d35a7724}{InvalidState}}();}
+\DoxyCodeLine{00141\ \ \ \}}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_af195b66f5146667f2e17d5a8d3bb5b5f}{Int}}(\textcolor{keywordtype}{int}\ i)\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_ae1b10a6fe3dd33fb1f76b6f4d35a7724}{InvalidState}}();}
+\DoxyCodeLine{00145\ \ \ \}}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00147\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_aaa285b077cd95f74eda72232a73fb71f}{Uint}}(\textcolor{keywordtype}{unsigned}\ u)\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_ae1b10a6fe3dd33fb1f76b6f4d35a7724}{InvalidState}}();}
+\DoxyCodeLine{00149\ \ \ \}}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00151\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_aed8de752c2c38270c8455dec5a1bb7c3}{Int64}}(int64\_t\ i)\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00152\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_ae1b10a6fe3dd33fb1f76b6f4d35a7724}{InvalidState}}();}
+\DoxyCodeLine{00153\ \ \ \}}
+\DoxyCodeLine{00154\ }
+\DoxyCodeLine{00155\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a593537c1163c0d00f39b8530cdc492fd}{Uint64}}(uint64\_t\ u)\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00156\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_ae1b10a6fe3dd33fb1f76b6f4d35a7724}{InvalidState}}();}
+\DoxyCodeLine{00157\ \ \ \}}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a3801553af1263b77beac6defc6484a74}{Double}}(\textcolor{keywordtype}{double}\ d)\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_ae1b10a6fe3dd33fb1f76b6f4d35a7724}{InvalidState}}();}
+\DoxyCodeLine{00161\ \ \ \}}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00163\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_ae655e2e269ec3bfd7e3fcabc779532a4}{String}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ str,\ SizeType\ length,\ \textcolor{keywordtype}{bool}\ copy)\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00164\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ value\ =\ std::string(str,\ length);}
+\DoxyCodeLine{00165\ \ \ \ \ \textcolor{keywordflow}{switch}\ (\mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a9c8308e2bfa6ea741163309777fb3124}{GetState}}())\ \{}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ kParsingType:\ \{}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (value\ !=\ \textcolor{stringliteral}{"{}Pipeline"{}})}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_ac9047c4832ba06a8989d9a1b064e09d6}{Error}}(fmt::format(\textcolor{stringliteral}{"{}unexpected\ value\ for\ 'type'\ field:\ \`{}\{\}`"{}},\ value));}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a19bc3ae9c0d5a5a5304ab929910ae445}{TransitionTo}}(kOpenDoc);}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ kParsingName:}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ DLOG(INFO)\ <<\ \textcolor{stringliteral}{"{}parsed\ name:\ "{}}\ <<\ value;}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a19bc3ae9c0d5a5a5304ab929910ae445}{TransitionTo}}(kParsingMeta);}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ kParsingCullMode:}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a92af85d72d645be2ecb9e173953deb4d}{OnParseRasterizerCullMode}}(value);}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a19bc3ae9c0d5a5a5304ab929910ae445}{TransitionTo}}(kParsingData);}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ kParsingFrontFace:}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_ace54dc574c598296554b768c827fd427}{OnParseRasterizerFrontFace}}(value);}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a19bc3ae9c0d5a5a5304ab929910ae445}{TransitionTo}}(kParsingData);}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ kParsingVertexShader:}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_aa388af387334ff8effdc7d0fe8b977d0}{OnParseVertexShader}}(value);}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a19bc3ae9c0d5a5a5304ab929910ae445}{TransitionTo}}(kParsingData);}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ kParsingFragmentShader:}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a87e3f93d00268fc38e9d689de39ac5fd}{OnParseFragmentShader}}(value);}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a19bc3ae9c0d5a5a5304ab929910ae445}{TransitionTo}}(kParsingData);}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ kParsingDynamicStates:}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_af0a0bccc772f3d42c7e7edfeee865857}{OnParseDynamicState}}(value);}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a53649cf657995ceb9e43ff90fa534858}{Continue}}();}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00191\ \ \ \ \ \}}
+\DoxyCodeLine{00192\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_ae1b10a6fe3dd33fb1f76b6f4d35a7724}{InvalidState}}();}
+\DoxyCodeLine{00193\ \ \ \}}
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00195\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a533fa8c69781e7417529a8ebe4f20177}{StartObject}}()\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00196\ \ \ \ \ \textcolor{keywordflow}{switch}\ (\mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a9c8308e2bfa6ea741163309777fb3124}{GetState}}())\ \{}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ kClosedDoc:}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a19bc3ae9c0d5a5a5304ab929910ae445}{TransitionTo}}(kOpenDoc);}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ kExpectMeta:}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a19bc3ae9c0d5a5a5304ab929910ae445}{TransitionTo}}(kParsingMeta);}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ kExpectData:}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a19bc3ae9c0d5a5a5304ab929910ae445}{TransitionTo}}(kParsingData);}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00205\ \ \ \ \ \}}
+\DoxyCodeLine{00206\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_ae1b10a6fe3dd33fb1f76b6f4d35a7724}{InvalidState}}();}
+\DoxyCodeLine{00207\ \ \ \}}
+\DoxyCodeLine{00208\ }
+\DoxyCodeLine{00209\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_ae6d27521181ce7f5e128ca01cdb45087}{Key}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ str,\ SizeType\ length,\ \textcolor{keywordtype}{bool}\ copy)\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00210\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ key\ =\ std::string(str,\ length);}
+\DoxyCodeLine{00211\ \ \ \ \ \textcolor{keywordflow}{switch}\ (\mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a9c8308e2bfa6ea741163309777fb3124}{GetState}}())\ \{}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ kOpenDoc:\ \{}
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ std::array<KeyState,\ 3>\ kPipelineKeys\ =\ \{}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structprt_1_1json_1_1_pipeline_handler_1_1_key_state}{KeyState}}\{.name\ =\ \textcolor{stringliteral}{"{}type"{}},\ .state\ =\ kParsingType\},}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structprt_1_1json_1_1_pipeline_handler_1_1_key_state}{KeyState}}\{.name\ =\ \textcolor{stringliteral}{"{}meta"{}},\ .state\ =\ kExpectMeta\},}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structprt_1_1json_1_1_pipeline_handler_1_1_key_state}{KeyState}}\{.name\ =\ \textcolor{stringliteral}{"{}data"{}},\ .state\ =\ kExpectData\},}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_ac1c61ef3296c4893db0fbe93ea2db214}{CheckKeyTable}}(key,\ kPipelineKeys);}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ kParsingMeta:\ \{}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ std::array<KeyState,\ 1>\ kMetaKeys\ =\ \{}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structprt_1_1json_1_1_pipeline_handler_1_1_key_state}{KeyState}}\{.name\ =\ \textcolor{stringliteral}{"{}name"{}},\ .state\ =\ kParsingName\},}
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_ac1c61ef3296c4893db0fbe93ea2db214}{CheckKeyTable}}(key,\ kMetaKeys);}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ kParsingData:\ \{}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ std::array<KeyState,\ 5>\ kDataKeys\ =\ \{}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structprt_1_1json_1_1_pipeline_handler_1_1_key_state}{KeyState}}\{.name\ =\ \textcolor{stringliteral}{"{}cullMode"{}},\ .state\ =\ kParsingCullMode\},}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structprt_1_1json_1_1_pipeline_handler_1_1_key_state}{KeyState}}\{.name\ =\ \textcolor{stringliteral}{"{}frontFace"{}},\ .state\ =\ kParsingFrontFace\},}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structprt_1_1json_1_1_pipeline_handler_1_1_key_state}{KeyState}}\{.name\ =\ \textcolor{stringliteral}{"{}vertexShader"{}},\ .state\ =\ kParsingVertexShader\},}
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structprt_1_1json_1_1_pipeline_handler_1_1_key_state}{KeyState}}\{.name\ =\ \textcolor{stringliteral}{"{}fragmentShader"{}},\ .state\ =\ kParsingFragmentShader\},}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structprt_1_1json_1_1_pipeline_handler_1_1_key_state}{KeyState}}\{.name\ =\ \textcolor{stringliteral}{"{}dynamicStates"{}},\ .state\ =\ kExpectDynamicStates\},}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_ac1c61ef3296c4893db0fbe93ea2db214}{CheckKeyTable}}(key,\ kDataKeys);}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00238\ \ \ \ \ \}}
+\DoxyCodeLine{00239\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_ae1b10a6fe3dd33fb1f76b6f4d35a7724}{InvalidState}}();}
+\DoxyCodeLine{00240\ \ \ \}}
+\DoxyCodeLine{00241\ }
+\DoxyCodeLine{00242\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a5f910aff9d1a1316ed69a43bda82a9ba}{EndObject}}(SizeType\ memberCount)\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00243\ \ \ \ \ \textcolor{keywordflow}{switch}\ (\mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a9c8308e2bfa6ea741163309777fb3124}{GetState}}())\ \{}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ kOpenDoc:}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a19bc3ae9c0d5a5a5304ab929910ae445}{TransitionTo}}(kClosedDoc);}
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ kParsingMeta:}
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ kParsingData:}
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a19bc3ae9c0d5a5a5304ab929910ae445}{TransitionTo}}(kOpenDoc);}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ kParsingCullMode:}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ kParsingFrontFace:}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ kParsingVertexShader:}
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ kParsingFragmentShader:}
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a19bc3ae9c0d5a5a5304ab929910ae445}{TransitionTo}}(kParsingData);}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00256\ \ \ \ \ \}}
+\DoxyCodeLine{00257\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_ae1b10a6fe3dd33fb1f76b6f4d35a7724}{InvalidState}}();}
+\DoxyCodeLine{00258\ \ \ \}}
+\DoxyCodeLine{00259\ }
+\DoxyCodeLine{00260\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_ab9527ab2b214bbe183784d194d5d30c7}{StartArray}}()\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00261\ \ \ \ \ \textcolor{keywordflow}{switch}\ (\mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a9c8308e2bfa6ea741163309777fb3124}{GetState}}())\ \{}
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ kExpectDynamicStates:}
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a19bc3ae9c0d5a5a5304ab929910ae445}{TransitionTo}}(kParsingDynamicStates);}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00266\ \ \ \ \ \}}
+\DoxyCodeLine{00267\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_ae1b10a6fe3dd33fb1f76b6f4d35a7724}{InvalidState}}();}
+\DoxyCodeLine{00268\ \ \ \}}
+\DoxyCodeLine{00269\ }
+\DoxyCodeLine{00270\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_aec5bc4bd56d695c4721849eebeb93b42}{EndArray}}(SizeType\ elementCount)\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00271\ \ \ \ \ \textcolor{keywordflow}{switch}\ (\mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a9c8308e2bfa6ea741163309777fb3124}{GetState}}())\ \{}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ kParsingDynamicStates:}
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_a19bc3ae9c0d5a5a5304ab929910ae445}{TransitionTo}}(kParsingData);}
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00276\ \ \ \ \ \}}
+\DoxyCodeLine{00277\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1json_1_1_pipeline_handler_ae1b10a6fe3dd33fb1f76b6f4d35a7724}{InvalidState}}();}
+\DoxyCodeLine{00278\ \ \ \}}
+\DoxyCodeLine{00279\ \};}
+\DoxyCodeLine{00280\ }
+\DoxyCodeLine{00281\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{namespaceprt_1_1json_a3fd475c964bcee53242e4629707a97cf}{ReadJsonFromFile}}(fs::path\ path,\ std::string\&\ result)\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00282\ \ \ \textcolor{keywordflow}{if}\ (!fs::exists(path))\ \{}
+\DoxyCodeLine{00283\ \ \ \ \ LOG(ERROR)\ <<\ \textcolor{stringliteral}{"{}failed\ to\ find\ ShaderCode\ at:\ "{}}\ <<\ path;}
+\DoxyCodeLine{00284\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00285\ \ \ \}}
+\DoxyCodeLine{00286\ \ \ std::ifstream\ file(path,\ std::ios::ate\ |\ std::ios::binary);}
+\DoxyCodeLine{00287\ \ \ \textcolor{keywordflow}{if}\ (!file.is\_open())\ \{}
+\DoxyCodeLine{00288\ \ \ \ \ LOG(ERROR)\ <<\ \textcolor{stringliteral}{"{}failed\ to\ open\ ShaderCode\ at:\ "{}}\ <<\ path;}
+\DoxyCodeLine{00289\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00290\ \ \ \}}
+\DoxyCodeLine{00291\ \ \ \textcolor{keyword}{auto}\ filesize\ =\ \textcolor{keyword}{static\_cast<}std::streamsize\textcolor{keyword}{>}(file.tellg());}
+\DoxyCodeLine{00292\ \ \ result.resize(filesize\ +\ 1);}
+\DoxyCodeLine{00293\ \ \ file.seekg(0);}
+\DoxyCodeLine{00294\ \ \ file.read((\textcolor{keywordtype}{char}*)result.data(),\ filesize);}
+\DoxyCodeLine{00295\ \ \ file.close();}
+\DoxyCodeLine{00296\ \ \ result[filesize]\ =\ \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{00297\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00298\ \}}
+\DoxyCodeLine{00299\ }
+\DoxyCodeLine{00300\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ H>}
+\DoxyCodeLine{00301\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceprt_1_1json_a8be73343ec23c5d58763b72db25af350}{ParseJsonDocumentFrom}}(fs::path\ path,\ H\&\ handler)\ \{}
+\DoxyCodeLine{00302\ \ \ std::string\ buffer\{\};}
+\DoxyCodeLine{00303\ \ \ LOG\_IF(FATAL,\ !\mbox{\hyperlink{namespaceprt_1_1json_a3fd475c964bcee53242e4629707a97cf}{ReadJsonFromFile}}(path,\ buffer))\ <<\ \textcolor{stringliteral}{"{}failed\ to\ read\ json\ from\ file:\ "{}}\ <<\ path;}
+\DoxyCodeLine{00304\ \ \ json::Reader\ reader\{\};}
+\DoxyCodeLine{00305\ \ \ json::StringStream\ ss(buffer.data());}
+\DoxyCodeLine{00306\ \ \ \textcolor{keywordflow}{if}\ (!reader.Parse(ss,\ handler))\ \{}
+\DoxyCodeLine{00307\ \ \ \ \ json::ParseErrorCode\ e\ =\ reader.GetParseErrorCode();}
+\DoxyCodeLine{00308\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ o\ =\ reader.GetErrorOffset();}
+\DoxyCodeLine{00309\ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}Error:\ "{}};}
+\DoxyCodeLine{00310\ \ \ \ \ \textcolor{keywordflow}{if}\ (handler.HasError())\ \{}
+\DoxyCodeLine{00311\ \ \ \ \ \ \ std::cerr\ <<\ handler.GetError();}
+\DoxyCodeLine{00312\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00313\ \ \ \ \ \ \ std::cerr\ <<\ json::GetParseError\_En(e);}
+\DoxyCodeLine{00314\ \ \ \ \ \}}
+\DoxyCodeLine{00315\ \ \ \ \ std::cerr\ <<\ std::endl;}
+\DoxyCodeLine{00316\ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}\ at\ offset\ "{}}\ <<\ o\ <<\ \textcolor{stringliteral}{"{}\ near\ '"{}}\ <<\ std::string(buffer.data()).substr(o,\ 10)\ <<\ \textcolor{stringliteral}{"{}...'"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00317\ \ \ \}}
+\DoxyCodeLine{00318\ \}}
+\DoxyCodeLine{00319\ \}\ \ \textcolor{comment}{//\ namespace\ json}}
+\DoxyCodeLine{00320\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00321\ }
+\DoxyCodeLine{00322\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_PIPELINE\_JSON\_H}}
+
+\end{DoxyCode}

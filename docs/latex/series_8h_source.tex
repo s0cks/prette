@@ -1,0 +1,122 @@
+\doxysection{series.\+h}
+\hypertarget{series_8h_source}{}\label{series_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/series.h@{/Users/tazz/Projects/prette/Sources/prette/series.h}}
+\mbox{\hyperlink{series_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_SERIES\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_SERIES\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <units.h>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{circular__buffer_8h}{prette/circular\_buffer.h}}"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{rx_8h}{prette/rx.h}}"{}}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00013\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T,\ const\ u\textcolor{keywordtype}{int}64\_t\ Capacity>}
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_series}{Series}}\ \{}
+\DoxyCodeLine{00015\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00016\ \ \ \mbox{\hyperlink{classprt_1_1_circular_buffer}{CircularBuffer<T,\ Capacity>}}\ \mbox{\hyperlink{classprt_1_1_series_a1ca9ac6be2e5fa60345e5dfb480dd717}{data\_}};}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \ \mbox{\hyperlink{classprt_1_1_series_aea8588722fb2b1c49c8890aef7ab867c}{Series}}()\ :}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_series_a1ca9ac6be2e5fa60345e5dfb480dd717}{data\_}}()\ \{\}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00022\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classprt_1_1_series_aeb05a5ea5f917aa47f8cfd2475e07f38}{\string~Series}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_series_aa989071b531a5a265c4b6d2d4cc05619}{Append}}(\textcolor{keyword}{const}\ T\ value)\ \{}
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_series_a1ca9ac6be2e5fa60345e5dfb480dd717}{data\_}}.put(value);}
+\DoxyCodeLine{00026\ \ \ \}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ T*\ \mbox{\hyperlink{classprt_1_1_series_a16943d2ddf1c309b4fda96e008f11009}{begin}}()\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_series_a1ca9ac6be2e5fa60345e5dfb480dd717}{data\_}}.begin();}
+\DoxyCodeLine{00030\ \ \ \}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ T*\ \mbox{\hyperlink{classprt_1_1_series_a8419800925612a23ba6323351295b31f}{begin}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_series_a1ca9ac6be2e5fa60345e5dfb480dd717}{data\_}}.begin();}
+\DoxyCodeLine{00034\ \ \ \}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ T*\ \mbox{\hyperlink{classprt_1_1_series_abb5406100a3cfdb006ac70d8c4a2e941}{end}}()\ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_series_a1ca9ac6be2e5fa60345e5dfb480dd717}{data\_}}.end();}
+\DoxyCodeLine{00038\ \ \ \}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ T*\ \mbox{\hyperlink{classprt_1_1_series_abe224c30af8f0e16937231b7c3ce06ca}{end}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_series_a1ca9ac6be2e5fa60345e5dfb480dd717}{data\_}}.end();}
+\DoxyCodeLine{00042\ \ \ \}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ uint64\_t\ \mbox{\hyperlink{classprt_1_1_series_a6fe427b2e66e63db8345283f16f6a750}{count}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_series_adfbead28596b08bf36a979c4b9957aad}{ToObservable}}().as\_blocking().count();}
+\DoxyCodeLine{00046\ \ \ \}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ rx::observable<T>\ \mbox{\hyperlink{classprt_1_1_series_adfbead28596b08bf36a979c4b9957aad}{ToObservable}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordflow}{return}\ rx::observable<>::create<T>([\textcolor{keyword}{this}](rx::subscriber<T>\ s)\ \{}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ value\ :\ \mbox{\hyperlink{classprt_1_1_series_a1ca9ac6be2e5fa60345e5dfb480dd717}{data\_}})\ \{}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ s.on\_next(value);}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ s.on\_completed();}
+\DoxyCodeLine{00054\ \ \ \ \ \});}
+\DoxyCodeLine{00055\ \ \ \}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \textcolor{keyword}{explicit}\ \textcolor{keyword}{operator}\ rx::observable<T>()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_series_adfbead28596b08bf36a979c4b9957aad}{ToObservable}}();}
+\DoxyCodeLine{00059\ \ \ \}}
+\DoxyCodeLine{00060\ \};}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T,\ const\ u\textcolor{keywordtype}{int}64\_t\ Capacity\ =\ 10>}
+\DoxyCodeLine{00063\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_numeric_series}{NumericSeries}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1_series}{Series}}<uint64\_t,\ Capacity>\ \{}
+\DoxyCodeLine{00064\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00065\ \ \ \mbox{\hyperlink{classprt_1_1_numeric_series_a79ca83a6ec36a555a9d67e96c0b78790}{NumericSeries}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00066\ \ \ \mbox{\hyperlink{classprt_1_1_numeric_series_a2a9dc7cb90181a98676049efc20cac3f}{\string~NumericSeries}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \textcolor{keyword}{inline}\ uint64\_t\ \mbox{\hyperlink{classprt_1_1_numeric_series_a540f50145218fff7072a80ff7ed78c06}{first}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_series_adfbead28596b08bf36a979c4b9957aad}{Series<uint64\_t,\ Capacity>::ToObservable}}().as\_blocking().first();}
+\DoxyCodeLine{00070\ \ \ \}}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \textcolor{keyword}{inline}\ uint64\_t\ \mbox{\hyperlink{classprt_1_1_numeric_series_a69aa8eb0283b6dcb3f5b4fb30622f1e1}{last}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_series_adfbead28596b08bf36a979c4b9957aad}{Series<uint64\_t,\ Capacity>::ToObservable}}().as\_blocking().last();}
+\DoxyCodeLine{00074\ \ \ \}}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \textcolor{keyword}{inline}\ uint64\_t\ \mbox{\hyperlink{classprt_1_1_numeric_series_a4c9ce9ed1b71d7151ff5935a776c8b5f}{average}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_series_adfbead28596b08bf36a979c4b9957aad}{Series<uint64\_t,\ Capacity>::ToObservable}}().as\_blocking().average();}
+\DoxyCodeLine{00078\ \ \ \}}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \textcolor{keyword}{inline}\ uint64\_t\ \mbox{\hyperlink{classprt_1_1_numeric_series_a8eab9f774b9055be83fa44c6031cccef}{max}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_series_adfbead28596b08bf36a979c4b9957aad}{Series<uint64\_t,\ Capacity>::ToObservable}}().as\_blocking().max();}
+\DoxyCodeLine{00082\ \ \ \}}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \textcolor{keyword}{inline}\ uint64\_t\ \mbox{\hyperlink{classprt_1_1_numeric_series_a9a7bc431f4de689caf2e3157e5d49ab7}{min}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_series_adfbead28596b08bf36a979c4b9957aad}{Series<uint64\_t,\ Capacity>::ToObservable}}().as\_blocking().min();}
+\DoxyCodeLine{00086\ \ \ \}}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \ \ \textcolor{keyword}{explicit}\ \textcolor{keyword}{operator}\ rx::observable<uint64\_t>()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_series_adfbead28596b08bf36a979c4b9957aad}{Series<uint64\_t,\ Capacity>::ToObservable}}();}
+\DoxyCodeLine{00090\ \ \ \}}
+\DoxyCodeLine{00091\ \};}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \textcolor{keyword}{template}\ <const\ u\textcolor{keywordtype}{int}64\_t\ Capacity\ =\ 10>}
+\DoxyCodeLine{00094\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_time_series}{TimeSeries}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1_numeric_series}{NumericSeries}}<uint64\_t,\ Capacity>\ \{}
+\DoxyCodeLine{00095\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00096\ \ \ \mbox{\hyperlink{classprt_1_1_time_series_ad933e04156c8024e7c23be2af4bac572}{TimeSeries}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00097\ \ \ \mbox{\hyperlink{classprt_1_1_time_series_a1f8bdbc426e2372747843492e9ac4495}{\string~TimeSeries}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \textcolor{keyword}{explicit}\ \textcolor{keyword}{operator}\ rx::observable<uint64\_t>()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_series_adfbead28596b08bf36a979c4b9957aad}{Series<uint64\_t,\ Capacity>::ToObservable}}();}
+\DoxyCodeLine{00101\ \ \ \}}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \ \ \textcolor{keyword}{friend}\ std::ostream\&\ \mbox{\hyperlink{classprt_1_1_time_series_a591c390ad414fd5b4434a66721230ac8}{operator<<}}(std::ostream\&\ stream,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_time_series}{TimeSeries<Capacity>}}\&\ rhs)\ \{}
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keyword}{using\ namespace\ }units::time;}
+\DoxyCodeLine{00105\ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{}TimeSeries("{}};}
+\DoxyCodeLine{00106\ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{}size="{}}\ <<\ (Capacity)\ <<\ \textcolor{stringliteral}{"{},\ "{}};}
+\DoxyCodeLine{00107\ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{}avg="{}}\ <<\ nanosecond\_t(rhs.\mbox{\hyperlink{classprt_1_1_numeric_series_a4c9ce9ed1b71d7151ff5935a776c8b5f}{average}}())\ <<\ \textcolor{stringliteral}{"{},\ "{}};}
+\DoxyCodeLine{00108\ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{}min="{}}\ <<\ nanosecond\_t(rhs.\mbox{\hyperlink{classprt_1_1_numeric_series_a9a7bc431f4de689caf2e3157e5d49ab7}{min}}())\ <<\ \textcolor{stringliteral}{"{},\ "{}};}
+\DoxyCodeLine{00109\ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{}max="{}}\ <<\ nanosecond\_t(rhs.\mbox{\hyperlink{classprt_1_1_numeric_series_a8eab9f774b9055be83fa44c6031cccef}{max}}());}
+\DoxyCodeLine{00110\ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{})"{}};}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordflow}{return}\ stream;}
+\DoxyCodeLine{00112\ \ \ \}}
+\DoxyCodeLine{00113\ \};}
+\DoxyCodeLine{00114\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_SERIES\_H}}
+
+\end{DoxyCode}

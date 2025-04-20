@@ -1,0 +1,104 @@
+\doxysection{/\+Users/tazz/\+Projects/prette/\+Sources/prette/mouse.h File Reference}
+\hypertarget{mouse_8h}{}\label{mouse_8h}\index{/Users/tazz/Projects/prette/Sources/prette/mouse.h@{/Users/tazz/Projects/prette/Sources/prette/mouse.h}}
+{\ttfamily \#include "{}prette/common.\+h"{}}\newline
+{\ttfamily \#include "{}prette/event.\+h"{}}\newline
+{\ttfamily \#include "{}prette/gfx.\+h"{}}\newline
+Include dependency graph for mouse.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mouse_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mouse_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1_mouse_button_state}{prt\+::\+Mouse\+Button\+State}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_mouse_event_base}{prt\+::\+Mouse\+Event\+Base}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_mouse_created_event}{prt\+::\+Mouse\+Created\+Event}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_mouse_button_state_event}{prt\+::\+Mouse\+Button\+State\+Event}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_mouse_motion_event}{prt\+::\+Mouse\+Motion\+Event}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_mouse_destroyed_event}{prt\+::\+Mouse\+Destroyed\+Event}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_mouse}{prt\+::\+Mouse}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceprt}{prt}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{mouse_8h_a8f082bd64bba4f5b545bed8e85479aeb}{FOR\+\_\+\+EACH\+\_\+\+MOUSE\+\_\+\+EVENT}}(V)
+\item 
+\#define \mbox{\hyperlink{mouse_8h_a83d2d158052fc2dc9bdf9bece3fd251e}{FORWARD\+\_\+\+DECLARE}}(Name)
+\item 
+\#define \mbox{\hyperlink{mouse_8h_a2672365a233e0c9f3c1ccb0d78388308}{DEFINE\+\_\+\+ON\+\_\+\+EVENT}}(Name)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceprt_a60d6093ba134d06a0b9b0c1dcfecf58f}{prt\+::\+DEFINE\+\_\+\+EVENT\+\_\+\+PROTOTYPE}} (\mbox{\hyperlink{classprt_1_1_mouse}{Mouse}}, \mbox{\hyperlink{namespaceprt_a5e5ab41ebb0d00cb3859c741666f3ef8}{FOR\+\_\+\+EACH\+\_\+\+MOUSE\+\_\+\+EVENT}})
+\item 
+\mbox{\hyperlink{namespaceprt_a62b2d3851e7f6864c786935077eb83dc}{prt\+::\+DEFINE\+\_\+\+EVENT\+\_\+\+SUBJECT}} (\mbox{\hyperlink{classprt_1_1_mouse}{Mouse}})
+\item 
+\mbox{\hyperlink{namespaceprt_a02fcfcefbb8abe3cd1c2c0008552e233}{prt\+::\+DEFINE\+\_\+\+EVENT\+\_\+\+OBSERVABLE}} (\mbox{\hyperlink{classprt_1_1_mouse}{Mouse}})
+\item 
+\mbox{\hyperlink{namespaceprt_a2f74002044fc34b9af5fbacbda1c1899}{prt\+::\+FOR\+\_\+\+EACH\+\_\+\+MOUSE\+\_\+\+EVENT}} (\mbox{\hyperlink{namespaceprt_a1a037a7c66a8e0c9eafb4608fef52cca}{DEFINE\+\_\+\+EVENT\+\_\+\+OBSERVABLE}})
+\item 
+auto \mbox{\hyperlink{namespaceprt_a677b6e3702935fcf83241c94ff37f846}{prt\+::\+On\+Mouse\+Event}} () -\/$>$ Mouse\+Event\+Observable
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{mouse_8h_a2672365a233e0c9f3c1ccb0d78388308}\index{mouse.h@{mouse.h}!DEFINE\_ON\_EVENT@{DEFINE\_ON\_EVENT}}
+\index{DEFINE\_ON\_EVENT@{DEFINE\_ON\_EVENT}!mouse.h@{mouse.h}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_ON\_EVENT}{DEFINE\_ON\_EVENT}}
+{\footnotesize\ttfamily \label{mouse_8h_a2672365a233e0c9f3c1ccb0d78388308} 
+\#define DEFINE\+\_\+\+ON\+\_\+\+EVENT(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ On\#\#Name\#\#Event()-\/>Name\#\#EventObservable\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ OnMouseEvent().filter(Name\#\#Event::Filter).map(Name\#\#Event::Cast);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{mouse_8h_a8f082bd64bba4f5b545bed8e85479aeb}\index{mouse.h@{mouse.h}!FOR\_EACH\_MOUSE\_EVENT@{FOR\_EACH\_MOUSE\_EVENT}}
+\index{FOR\_EACH\_MOUSE\_EVENT@{FOR\_EACH\_MOUSE\_EVENT}!mouse.h@{mouse.h}}
+\doxysubsubsection{\texorpdfstring{FOR\_EACH\_MOUSE\_EVENT}{FOR\_EACH\_MOUSE\_EVENT}}
+{\footnotesize\ttfamily \label{mouse_8h_a8f082bd64bba4f5b545bed8e85479aeb} 
+\#define FOR\+\_\+\+EACH\+\_\+\+MOUSE\+\_\+\+EVENT(\begin{DoxyParamCaption}\item[{}]{V}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ V(MouseCreated)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(MouseButtonState)\ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(MouseMotion)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ V(MouseDestroyed)}
+
+\end{DoxyCode}
+\Hypertarget{mouse_8h_a83d2d158052fc2dc9bdf9bece3fd251e}\index{mouse.h@{mouse.h}!FORWARD\_DECLARE@{FORWARD\_DECLARE}}
+\index{FORWARD\_DECLARE@{FORWARD\_DECLARE}!mouse.h@{mouse.h}}
+\doxysubsubsection{\texorpdfstring{FORWARD\_DECLARE}{FORWARD\_DECLARE}}
+{\footnotesize\ttfamily \label{mouse_8h_a83d2d158052fc2dc9bdf9bece3fd251e} 
+\#define FORWARD\+\_\+\+DECLARE(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{class\ }Name\#\#Event;}
+
+\end{DoxyCode}

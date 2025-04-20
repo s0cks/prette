@@ -1,0 +1,119 @@
+\doxysection{shader.\+h}
+\hypertarget{shader_8h_source}{}\label{shader_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/shader.h@{/Users/tazz/Projects/prette/Sources/prette/shader.h}}
+\mbox{\hyperlink{shader_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_SHADER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_SHADER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <fmt/format.h>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{common_8h}{prette/common.h}}"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}prette/gfx.h"{}}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_shader_code}{ShaderCode}}\ \{}
+\DoxyCodeLine{00015\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classprt_1_1_shader_code_a657666d6540e46cdceedf1694d714ae8}{ShaderCodeBuffer}}\ =\ std::vector<uint8\_t>;}
+\DoxyCodeLine{00016\ \ \ \mbox{\hyperlink{classprt_1_1_shader_code_aeeafdbc12fa1ea5cb2fa208a9a47cf70}{DEFINE\_DEFAULT\_COPYABLE\_TYPE}}(\mbox{\hyperlink{classprt_1_1_shader_code}{ShaderCode}});}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00019\ \ \ fs::path\ \mbox{\hyperlink{classprt_1_1_shader_code_a3d03bec50746dbfba127b9c503356055}{path\_}};}
+\DoxyCodeLine{00020\ \ \ \mbox{\hyperlink{classprt_1_1_shader_code_a657666d6540e46cdceedf1694d714ae8}{ShaderCodeBuffer}}\ \mbox{\hyperlink{classprt_1_1_shader_code_a202391e4ca97d090522436d023839704}{buffer\_}}\{\};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00023\ \ \ \mbox{\hyperlink{classprt_1_1_shader_code_a4cd0f272fabf599f697ab38df192649a}{ShaderCode}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00024\ \ \ \mbox{\hyperlink{classprt_1_1_shader_code_a4cd0f272fabf599f697ab38df192649a}{ShaderCode}}(fs::path\ path);}
+\DoxyCodeLine{00025\ \ \ \mbox{\hyperlink{classprt_1_1_shader_code_a6931da4dbdd157d51de25617c5885c21}{\string~ShaderCode}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_shader_code_af1b9725faab1cec79b34232a7f5f82a4}{GetPath}}()\ const\ -\/>\ const\ fs::path\&\ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_shader_code_a3d03bec50746dbfba127b9c503356055}{path\_}};}
+\DoxyCodeLine{00029\ \ \ \}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_shader_code_ad7c3d6bc7580fda9213707f3f213d386}{GetSize}}()\ const\ -\/>\ uint64\_t\ \{}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_shader_code_a202391e4ca97d090522436d023839704}{buffer\_}}.size();}
+\DoxyCodeLine{00033\ \ \ \}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_shader_code_ad531f3387cf7fde33039a4719024376b}{data}}()\ const\ -\/>\ const\ uint8\_t*\ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_shader_code_a202391e4ca97d090522436d023839704}{buffer\_}}.data();}
+\DoxyCodeLine{00037\ \ \ \}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_shader_code_a1b7c448cf9c71f68174beb57c95cd20e}{IsEmpty}}()\ const\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_shader_code_a202391e4ca97d090522436d023839704}{buffer\_}}.empty();}
+\DoxyCodeLine{00041\ \ \ \}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_shader_code_ab84307cfd680a370dce326cd14b895c3}{IsValid}}()\ const\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordflow}{return}\ !\mbox{\hyperlink{classprt_1_1_shader_code_a1b7c448cf9c71f68174beb57c95cd20e}{IsEmpty}}();}
+\DoxyCodeLine{00045\ \ \ \}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \textcolor{keyword}{operator}\ bool()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_shader_code_ab84307cfd680a370dce326cd14b895c3}{IsValid}}();}
+\DoxyCodeLine{00049\ \ \ \}}
+\DoxyCodeLine{00050\ \};}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{namespaceprt_adc18a1d42c60d7387667581ca1ae72ae}{FindShaderCode}}(std::string\ name)\ -\/>\ ShaderCode;}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ FindVertexShaderCode(std::string\ filename)\ -\/>\ ShaderCode\ \{}
+\DoxyCodeLine{00055\ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(!filename.empty());}
+\DoxyCodeLine{00056\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespaceprt_adc18a1d42c60d7387667581ca1ae72ae}{FindShaderCode}}(fmt::format(\textcolor{stringliteral}{"{}\{\}.vert"{}},\ filename));}
+\DoxyCodeLine{00057\ \}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ FindFragmentShaderCode(std::string\ filename)\ -\/>\ ShaderCode\ \{}
+\DoxyCodeLine{00060\ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(!filename.empty());}
+\DoxyCodeLine{00061\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespaceprt_adc18a1d42c60d7387667581ca1ae72ae}{FindShaderCode}}(fmt::format(\textcolor{stringliteral}{"{}\{\}.frag"{}},\ filename));}
+\DoxyCodeLine{00062\ \}}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_shader}{Shader}}\ \{}
+\DoxyCodeLine{00065\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classprt_1_1_shader_af1d98b5e49e0eea65bd8996068520f0e}{Handle}}\ =\ VkShaderModule;}
+\DoxyCodeLine{00066\ \ \ \mbox{\hyperlink{classprt_1_1_shader_a3ba3996bcc399f0d5f17f0b2740556f7}{DEFINE\_NON\_COPYABLE\_TYPE}}(\mbox{\hyperlink{classprt_1_1_shader}{Shader}});}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00069\ \ \ std::string\ \mbox{\hyperlink{classprt_1_1_shader_a75f81ae6e204a201893a7c3f5bacfd44}{name\_}};}
+\DoxyCodeLine{00070\ \ \ \mbox{\hyperlink{classprt_1_1_shader_af1d98b5e49e0eea65bd8996068520f0e}{Handle}}\ \mbox{\hyperlink{classprt_1_1_shader_a4cfc53e1ccd7df664d8560a8b42c2268}{handle\_}}\{\};}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00073\ \ \ \mbox{\hyperlink{classprt_1_1_shader_a151ca6afb192df6457af88087996ea95}{Shader}}(std::string\ name,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_shader_code}{ShaderCode}}\&\ code);}
+\DoxyCodeLine{00074\ \ \ \mbox{\hyperlink{classprt_1_1_shader_a95af3b32810c7fb642a28993651f4149}{\string~Shader}}();}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_shader_a148372135b837cb721cc847a9309d00b}{GetName}}()\ const\ -\/>\ const\ \mbox{\hyperlink{namespacestd}{std}}::\textcolor{keywordtype}{string}\&\ \{}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_shader_a75f81ae6e204a201893a7c3f5bacfd44}{name\_}};}
+\DoxyCodeLine{00078\ \ \ \}}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_shader_ae22b72e860fba88c2b6188fe24894190}{GetHandle}}()\ const\ -\/>\ const\ \mbox{\hyperlink{classprt_1_1_shader_af1d98b5e49e0eea65bd8996068520f0e}{Handle}}\&\ \{}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_shader_a4cfc53e1ccd7df664d8560a8b42c2268}{handle\_}};}
+\DoxyCodeLine{00082\ \ \ \}}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \textcolor{keyword}{operator}\ \mbox{\hyperlink{classprt_1_1_shader_af1d98b5e49e0eea65bd8996068520f0e}{Handle}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_shader_a4cfc53e1ccd7df664d8560a8b42c2268}{handle\_}};}
+\DoxyCodeLine{00086\ \ \ \}}
+\DoxyCodeLine{00087\ \};}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceprt_ad0294cf04b50dbb8f9f566540e8f6f73}{ShaderPtr}}\ =\ std::shared\_ptr<Shader>;}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{namespaceprt_adb7dc278130ce695af3925dbf8c6d692}{GetVertexShader}}(\textcolor{keyword}{const}\ std::string\&\ name)\ -\/>\ \mbox{\hyperlink{namespaceprt_ad0294cf04b50dbb8f9f566540e8f6f73}{ShaderPtr}};}
+\DoxyCodeLine{00092\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{namespaceprt_a3460d27dd31aa701998e73d76c25bc47}{GetFragmentShader}}(\textcolor{keyword}{const}\ std::string\&\ name)\ -\/>\ \mbox{\hyperlink{namespaceprt_ad0294cf04b50dbb8f9f566540e8f6f73}{ShaderPtr}};}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ InitPipelineShaderStage(VkPipelineShaderStageCreateInfo\&\ create\_info,\ \mbox{\hyperlink{namespaceprt_ad0294cf04b50dbb8f9f566540e8f6f73}{ShaderPtr}}\ shader,}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ VkShaderStageFlagBits\ stage,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ name\ =\ \textcolor{stringliteral}{"{}main"{}})\ \{}
+\DoxyCodeLine{00096\ \ \ create\_info.sType\ =\ VK\_STRUCTURE\_TYPE\_PIPELINE\_SHADER\_STAGE\_CREATE\_INFO;}
+\DoxyCodeLine{00097\ \ \ create\_info.stage\ =\ stage;}
+\DoxyCodeLine{00098\ \ \ create\_info.module\ =\ shader-\/>GetHandle();}
+\DoxyCodeLine{00099\ \ \ create\_info.pName\ =\ name;}
+\DoxyCodeLine{00100\ \}}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ InitPipelineVertexShaderStage(VkPipelineShaderStageCreateInfo\&\ create\_info,\ \mbox{\hyperlink{namespaceprt_ad0294cf04b50dbb8f9f566540e8f6f73}{ShaderPtr}}\ shader,}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ name\ =\ \textcolor{stringliteral}{"{}main"{}})\ \{}
+\DoxyCodeLine{00104\ \ \ \textcolor{keywordflow}{return}\ InitPipelineShaderStage(create\_info,\ shader,\ VK\_SHADER\_STAGE\_VERTEX\_BIT,\ name);}
+\DoxyCodeLine{00105\ \}}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ InitPipelineFragmentShaderStage(VkPipelineShaderStageCreateInfo\&\ create\_info,\ \mbox{\hyperlink{namespaceprt_ad0294cf04b50dbb8f9f566540e8f6f73}{ShaderPtr}}\ shader,}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ name\ =\ \textcolor{stringliteral}{"{}main"{}})\ \{}
+\DoxyCodeLine{00109\ \ \ \textcolor{keywordflow}{return}\ InitPipelineShaderStage(create\_info,\ shader,\ VK\_SHADER\_STAGE\_FRAGMENT\_BIT,\ name);}
+\DoxyCodeLine{00110\ \}}
+\DoxyCodeLine{00111\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_SHADER\_H}}
+
+\end{DoxyCode}

@@ -1,0 +1,118 @@
+\doxysection{prt\+::Window\+Pos\+Event Class Reference}
+\hypertarget{classprt_1_1_window_pos_event}{}\label{classprt_1_1_window_pos_event}\index{prt::WindowPosEvent@{prt::WindowPosEvent}}
+
+
+{\ttfamily \#include $<$window\+\_\+event.\+h$>$}
+
+
+
+Inheritance diagram for prt\+::Window\+Pos\+Event\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=191pt]{classprt_1_1_window_pos_event__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for prt\+::Window\+Pos\+Event\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=191pt]{classprt_1_1_window_pos_event__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_window_pos_event_a76692d23cc77ddd00a05e7e2a2ac499d}{Window\+Pos\+Event}} (const \mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}} \&pos)
+\item 
+\mbox{\hyperlink{classprt_1_1_window_pos_event_ab8a162c42ebd16acaacb6a4ac29993f1}{Window\+Pos\+Event}} (const int32\+\_\+t x, const int32\+\_\+t y)
+\item 
+\mbox{\hyperlink{classprt_1_1_window_pos_event_ad95f497707b00be527f1ed48f62f2d13}{\texorpdfstring{$\sim$}{\string~}\+Window\+Pos\+Event}} () override=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1_window_pos_event_a1cadf0ae8602359bcde791c4054311be}{Get\+Pos}} () const -\/$>$ const \mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}} \&
+\item 
+\mbox{\hyperlink{classprt_1_1_window_pos_event_aa845cecaa046ae0565a0f1627575419a}{DECLARE\+\_\+\+WINDOW\+\_\+\+EVENT\+\_\+\+TYPE}} (Window\+Pos)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classprt_1_1_window_event}{prt\+::\+Window\+Event}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_window_event_a73dc5c806af4d3af62804362b1dfe6ef}{Window\+Event}} ()=default
+\item 
+\mbox{\hyperlink{classprt_1_1_window_event_a8a5719e27f083bae94ef7c9d89fddb90}{\texorpdfstring{$\sim$}{\string~}\+Window\+Event}} () override=default
+\item 
+void \mbox{\hyperlink{classprt_1_1_window_event_a1241f05b5d887227878650ec78b3d75c}{To\+Table}} (lua\+\_\+\+State \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{engine_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}}) const override
+\item 
+\mbox{\hyperlink{classprt_1_1_window_event_a95125bb1675dd6f3aaec40b75bf69cb8}{DEFINE\+\_\+\+EVENT\+\_\+\+PROTOTYPE\+\_\+\+TYPE}} (\mbox{\hyperlink{classprt_1_1_window}{Window}}, \mbox{\hyperlink{namespaceprt_a4d42e4eb12ffab41c8a0b96551af51ae}{FOR\+\_\+\+EACH\+\_\+\+WINDOW\+\_\+\+EVENT}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classprt_1_1_event}{prt\+::\+Event}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classprt_1_1_event_a4852e85c48ebb80d6c96fe0d13d5ae6a}{\texorpdfstring{$\sim$}{\string~}\+Event}} ()=default
+\item 
+virtual auto \mbox{\hyperlink{classprt_1_1_event_a674cd356a472771aad69534b2959500e}{Get\+Name}} () const -\/$>$ const char \texorpdfstring{$\ast$}{*}=0
+\item 
+virtual auto \mbox{\hyperlink{classprt_1_1_event_a90911d9644cf7ec9b4f05053a3b632af}{To\+String}} () const -\/$>$ std\+::string=0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}} \mbox{\hyperlink{classprt_1_1_window_pos_event_a12c236e35252edc323476deec3d2cc92}{pos\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classprt_1_1_event}{prt\+::\+Event}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_event_a68ae1e6264631e55933648b66d5dd11b}{Event}} ()=default
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_window_pos_event_a76692d23cc77ddd00a05e7e2a2ac499d}\index{prt::WindowPosEvent@{prt::WindowPosEvent}!WindowPosEvent@{WindowPosEvent}}
+\index{WindowPosEvent@{WindowPosEvent}!prt::WindowPosEvent@{prt::WindowPosEvent}}
+\doxysubsubsection{\texorpdfstring{WindowPosEvent()}{WindowPosEvent()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_pos_event_a76692d23cc77ddd00a05e7e2a2ac499d} 
+prt\+::\+Window\+Pos\+Event\+::\+Window\+Pos\+Event (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}} \&}]{pos}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+\Hypertarget{classprt_1_1_window_pos_event_ab8a162c42ebd16acaacb6a4ac29993f1}\index{prt::WindowPosEvent@{prt::WindowPosEvent}!WindowPosEvent@{WindowPosEvent}}
+\index{WindowPosEvent@{WindowPosEvent}!prt::WindowPosEvent@{prt::WindowPosEvent}}
+\doxysubsubsection{\texorpdfstring{WindowPosEvent()}{WindowPosEvent()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_pos_event_ab8a162c42ebd16acaacb6a4ac29993f1} 
+prt\+::\+Window\+Pos\+Event\+::\+Window\+Pos\+Event (\begin{DoxyParamCaption}\item[{const int32\+\_\+t}]{x}{, }\item[{const int32\+\_\+t}]{y}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_window_pos_event_ad95f497707b00be527f1ed48f62f2d13}\index{prt::WindowPosEvent@{prt::WindowPosEvent}!````~WindowPosEvent@{\texorpdfstring{$\sim$}{\string~}WindowPosEvent}}
+\index{````~WindowPosEvent@{\texorpdfstring{$\sim$}{\string~}WindowPosEvent}!prt::WindowPosEvent@{prt::WindowPosEvent}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}WindowPosEvent()}{\string~WindowPosEvent()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_pos_event_ad95f497707b00be527f1ed48f62f2d13} 
+prt\+::\+Window\+Pos\+Event\+::\texorpdfstring{$\sim$}{\string~}\+Window\+Pos\+Event (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_window_pos_event_aa845cecaa046ae0565a0f1627575419a}\index{prt::WindowPosEvent@{prt::WindowPosEvent}!DECLARE\_WINDOW\_EVENT\_TYPE@{DECLARE\_WINDOW\_EVENT\_TYPE}}
+\index{DECLARE\_WINDOW\_EVENT\_TYPE@{DECLARE\_WINDOW\_EVENT\_TYPE}!prt::WindowPosEvent@{prt::WindowPosEvent}}
+\doxysubsubsection{\texorpdfstring{DECLARE\_WINDOW\_EVENT\_TYPE()}{DECLARE\_WINDOW\_EVENT\_TYPE()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_pos_event_aa845cecaa046ae0565a0f1627575419a} 
+prt\+::\+Window\+Pos\+Event\+::\+DECLARE\+\_\+\+WINDOW\+\_\+\+EVENT\+\_\+\+TYPE (\begin{DoxyParamCaption}\item[{Window\+Pos}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_window_pos_event_a1cadf0ae8602359bcde791c4054311be}\index{prt::WindowPosEvent@{prt::WindowPosEvent}!GetPos@{GetPos}}
+\index{GetPos@{GetPos}!prt::WindowPosEvent@{prt::WindowPosEvent}}
+\doxysubsubsection{\texorpdfstring{GetPos()}{GetPos()}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_pos_event_a1cadf0ae8602359bcde791c4054311be} 
+auto prt\+::\+Window\+Pos\+Event\+::\+Get\+Pos (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const \mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}}\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_window_pos_event_a12c236e35252edc323476deec3d2cc92}\index{prt::WindowPosEvent@{prt::WindowPosEvent}!pos\_@{pos\_}}
+\index{pos\_@{pos\_}!prt::WindowPosEvent@{prt::WindowPosEvent}}
+\doxysubsubsection{\texorpdfstring{pos\_}{pos\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_window_pos_event_a12c236e35252edc323476deec3d2cc92} 
+\mbox{\hyperlink{namespaceprt_ad3656889cc918cf5f13f5834c0005a47}{Point}} prt\+::\+Window\+Pos\+Event\+::pos\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{window__event_8h}{window\+\_\+event.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,108 @@
+\doxysection{engine\+\_\+event.\+h}
+\hypertarget{engine__event_8h_source}{}\label{engine__event_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/engine\_event.h@{/Users/tazz/Projects/prette/Sources/prette/engine\_event.h}}
+\mbox{\hyperlink{engine__event_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_ENGINE\_EVENT\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_ENGINE\_EVENT\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{event_8h}{prette/event.h}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tick_8h}{prette/tick.h}}"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ FOR\_EACH\_ENGINE\_EVENT(V)\ \(\backslash\)}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\ \ V(PreInit)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\ \ V(PostInit)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\ \ V(PreTick)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\ \ V(Tick)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\ \ V(PostTick)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\ \ V(Terminating)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\ \ V(Terminated)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\ \ V(Error)}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }Engine;}
+\DoxyCodeLine{00019\ \textcolor{keyword}{class\ }EngineEvent;}
+\DoxyCodeLine{00020\ \textcolor{keyword}{class\ }StateEvent;}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#define\ FORWARD\_DECLARE\_ENGINE\_EVENT(Name)\ class\ Name\#\#Event;}}
+\DoxyCodeLine{00022\ \mbox{\hyperlink{engine__event_8h_aa553f12be86634d0b342890713cdb085}{FOR\_EACH\_ENGINE\_EVENT}}(\mbox{\hyperlink{engine__event_8h_a05172607c43d176ec5c76bad45f5a145}{FORWARD\_DECLARE\_ENGINE\_EVENT}})}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#undef\ FORWARD\_DECLARE\_ENGINE\_EVENT}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \mbox{\hyperlink{event_8h_a1ee8f5215b2cce8affd6de0762ca1d7e}{DEFINE\_EVENT\_PROTOTYPE}}(\mbox{\hyperlink{classprt_1_1_engine}{Engine}},\ \mbox{\hyperlink{engine__event_8h_aa553f12be86634d0b342890713cdb085}{FOR\_EACH\_ENGINE\_EVENT}});}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#define\ DECLARE\_ENGINE\_EVENT\_TYPE(Name)\ DECLARE\_EVENT\_TYPE(EngineEvent,\ Name)}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#define\ DECLARE\_ENGINE\_EVENT(Name)\ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\ \ class\ Name\#\#Event\ :\ public\ EngineEvent\ \{\ \(\backslash\)}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\ \ \ public:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\ \ \ \ Name\#\#Event()\ =\ default;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\ \ \ \ \string~Name\#\#Event()\ override\ =\ default;\ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\ \ \ \ DECLARE\_ENGINE\_EVENT\_TYPE(Name);\ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\ \ \};}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \mbox{\hyperlink{engine__event_8h_a22b173d9600a9784e930c7f842e1531f}{DECLARE\_ENGINE\_EVENT}}(PreInit);}
+\DoxyCodeLine{00038\ \mbox{\hyperlink{engine__event_8h_a22b173d9600a9784e930c7f842e1531f}{DECLARE\_ENGINE\_EVENT}}(PostInit);}
+\DoxyCodeLine{00039\ \mbox{\hyperlink{engine__event_8h_a22b173d9600a9784e930c7f842e1531f}{DECLARE\_ENGINE\_EVENT}}(PreTick);}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_tick_event}{TickEvent}}\ :\ \textcolor{keyword}{public}\ EngineEvent\ \{}
+\DoxyCodeLine{00042\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00043\ \ \ \mbox{\hyperlink{classprt_1_1_tick}{Tick}}\ \mbox{\hyperlink{classprt_1_1_tick_event_ab5210eabeddee9275db61967b0263298}{previous\_}};}
+\DoxyCodeLine{00044\ \ \ \mbox{\hyperlink{classprt_1_1_tick}{Tick}}\ \mbox{\hyperlink{classprt_1_1_tick_event_a5c7c897aa3cab1d321446f81264491ef}{current\_}};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00047\ \ \ \mbox{\hyperlink{classprt_1_1_tick_event_abdd3916196c7bddfd11d7481ee24892c}{TickEvent}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_tick}{Tick}}\&\ current,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_tick}{Tick}}\&\ previous)\ :}
+\DoxyCodeLine{00048\ \ \ \ \ EngineEvent(),}
+\DoxyCodeLine{00049\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_tick_event_a5c7c897aa3cab1d321446f81264491ef}{current\_}}(current),}
+\DoxyCodeLine{00050\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_tick_event_ab5210eabeddee9275db61967b0263298}{previous\_}}(previous)\ \{\}}
+\DoxyCodeLine{00051\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_tick_event_a8a9027b113cf14652e1ce36f3f707fa2}{TickEvent}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_tick}{Tick}}\&\ current)\ :}
+\DoxyCodeLine{00052\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_tick_event}{TickEvent}}(current,\ current)\ \{\}}
+\DoxyCodeLine{00053\ \ \ \mbox{\hyperlink{classprt_1_1_tick_event_a199902420a71909ceb15d7c88f426a62}{\string~TickEvent}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_tick_event_a368bd6d952d4c080b213e13baba327c1}{GetCurrentTick}}()\ const\ -\/>\ const\ \mbox{\hyperlink{classprt_1_1_tick}{Tick}}\&\ \{}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_tick_event_a5c7c897aa3cab1d321446f81264491ef}{current\_}};}
+\DoxyCodeLine{00057\ \ \ \}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_tick_event_a9aaf81f1e3a9d237f23d267c365c5510}{GetPreviousTick}}()\ const\ -\/>\ const\ \mbox{\hyperlink{classprt_1_1_tick}{Tick}}\&\ \{}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_tick_event_ab5210eabeddee9275db61967b0263298}{previous\_}};}
+\DoxyCodeLine{00061\ \ \ \}}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_tick_event_a2e1724d728033749f0f81efe234f83c9}{GetTimeSinceLast}}()\ const\ -\/>\ \mbox{\hyperlink{classprt_1_1_tick_delta}{TickDelta}}\ \{}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_tick_event_a368bd6d952d4c080b213e13baba327c1}{GetCurrentTick}}()\ -\/\ \mbox{\hyperlink{classprt_1_1_tick_event_a9aaf81f1e3a9d237f23d267c365c5510}{GetPreviousTick}}();}
+\DoxyCodeLine{00065\ \ \ \}}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \mbox{\hyperlink{classprt_1_1_tick_event_acff1df8e2626ae748a2fefd61613e852}{DECLARE\_ENGINE\_EVENT\_TYPE}}(\mbox{\hyperlink{classprt_1_1_tick}{Tick}});}
+\DoxyCodeLine{00068\ \};}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_post_tick_event}{PostTickEvent}}\ :\ \textcolor{keyword}{public}\ EngineEvent\ \{}
+\DoxyCodeLine{00071\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00072\ \ \ \mbox{\hyperlink{classprt_1_1_tick}{Tick}}\ \mbox{\hyperlink{classprt_1_1_post_tick_event_aeb2074e33bf313097bc73ff881e8e1ce}{tick\_}};}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00075\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_post_tick_event_a7a84c739d2884db376defcd34dee44b1}{PostTickEvent}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_tick}{Tick}}\&\ tick)\ :}
+\DoxyCodeLine{00076\ \ \ \ \ EngineEvent(),}
+\DoxyCodeLine{00077\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_post_tick_event_aeb2074e33bf313097bc73ff881e8e1ce}{tick\_}}(tick)\ \{\}}
+\DoxyCodeLine{00078\ \ \ \mbox{\hyperlink{classprt_1_1_post_tick_event_a4473452d1a4323269e22a3417fb47326}{\string~PostTickEvent}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_post_tick_event_a4b0bc9cbe8eeb50da0fdf23ea833de97}{GetTick}}()\ const\ -\/>\ const\ \mbox{\hyperlink{classprt_1_1_tick}{Tick}}\&\ \{}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_post_tick_event_aeb2074e33bf313097bc73ff881e8e1ce}{tick\_}};}
+\DoxyCodeLine{00082\ \ \ \}}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \mbox{\hyperlink{classprt_1_1_post_tick_event_ab139a1bbab2252808aac44466d9ef02e}{DECLARE\_ENGINE\_EVENT\_TYPE}}(PostTick);}
+\DoxyCodeLine{00085\ \};}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \mbox{\hyperlink{engine__event_8h_a22b173d9600a9784e930c7f842e1531f}{DECLARE\_ENGINE\_EVENT}}(Terminating);}
+\DoxyCodeLine{00088\ \mbox{\hyperlink{engine__event_8h_a22b173d9600a9784e930c7f842e1531f}{DECLARE\_ENGINE\_EVENT}}(Terminated);}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_error_event}{ErrorEvent}}\ :\ \textcolor{keyword}{public}\ EngineEvent\ \{}
+\DoxyCodeLine{00091\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00092\ \ \ \mbox{\hyperlink{classprt_1_1_error_event_ad10304d1405b7d41c7b9c0c95e9e0333}{ErrorEvent}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00093\ \ \ \mbox{\hyperlink{classprt_1_1_error_event_a9c5295d70fa6e492146a97d81b4f1987}{\string~ErrorEvent}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00094\ \ \ \mbox{\hyperlink{classprt_1_1_error_event_a907ce120c31355bac1c9fc58a1288928}{DECLARE\_ENGINE\_EVENT\_TYPE}}(Error);}
+\DoxyCodeLine{00095\ \};}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \mbox{\hyperlink{event_8h_a75f747c7c3ad9804780471c5ce370793}{DEFINE\_EVENT\_SUBJECT}}(\mbox{\hyperlink{classprt_1_1_engine}{Engine}});}
+\DoxyCodeLine{00098\ \mbox{\hyperlink{event_8h_a77dcd0ad69e8fd51c473d76aca5bba76}{DEFINE\_EVENT\_OBSERVABLE}}(\mbox{\hyperlink{classprt_1_1_engine}{Engine}});}
+\DoxyCodeLine{00099\ \mbox{\hyperlink{engine__event_8h_aa553f12be86634d0b342890713cdb085}{FOR\_EACH\_ENGINE\_EVENT}}(\mbox{\hyperlink{event_8h_a77dcd0ad69e8fd51c473d76aca5bba76}{DEFINE\_EVENT\_OBSERVABLE}});}
+\DoxyCodeLine{00100\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_ENGINE\_EVENT\_H}}
+
+\end{DoxyCode}

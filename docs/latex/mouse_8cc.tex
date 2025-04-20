@@ -1,0 +1,109 @@
+\doxysection{/\+Users/tazz/\+Projects/prette/\+Sources/prette/mouse.cc File Reference}
+\hypertarget{mouse_8cc}{}\label{mouse_8cc}\index{/Users/tazz/Projects/prette/Sources/prette/mouse.cc@{/Users/tazz/Projects/prette/Sources/prette/mouse.cc}}
+{\ttfamily \#include "{}prette/mouse.\+h"{}}\newline
+{\ttfamily \#include $<$GLFW/glfw3.\+h$>$}\newline
+{\ttfamily \#include $<$lauxlib.\+h$>$}\newline
+{\ttfamily \#include $<$lua.\+h$>$}\newline
+{\ttfamily \#include "{}prette/to\+\_\+string.\+h"{}}\newline
+{\ttfamily \#include "{}prette/window.\+h"{}}\newline
+Include dependency graph for mouse.\+cc\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mouse_8cc__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1_mouse_module}{prt\+::\+Mouse\+Module}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceprt}{prt}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{mouse_8cc_afca8604a9aaf0bc15b60e8d8866f9474}{LUA\+\_\+\+MOUSE\+\_\+F}}(Name)
+\item 
+\#define \mbox{\hyperlink{mouse_8cc_a883bc9ae9206c92ed074a39a9a30192a}{DEFINE\+\_\+\+ON\+\_\+\+EVENT\+\_\+\+FUNC}}(Name)
+\item 
+\#define \mbox{\hyperlink{mouse_8cc_afca8604a9aaf0bc15b60e8d8866f9474}{LUA\+\_\+\+MOUSE\+\_\+F}}(Name)
+\item 
+\#define \mbox{\hyperlink{mouse_8cc_a2672365a233e0c9f3c1ccb0d78388308}{DEFINE\+\_\+\+ON\+\_\+\+EVENT}}(Name)
+\item 
+\#define \mbox{\hyperlink{mouse_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}}~lstate-\/$>$Get\+State()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+auto \mbox{\hyperlink{namespaceprt_a677b6e3702935fcf83241c94ff37f846}{prt\+::\+On\+Mouse\+Event}} () -\/$>$ Mouse\+Event\+Observable
+\item 
+\mbox{\hyperlink{namespaceprt_aec6c0c1d72b6477b7f40fab4221ad720}{prt\+::\+LUA\+\_\+\+MOUSE\+\_\+F}} (on\+Event)
+\item 
+\mbox{\hyperlink{namespaceprt_a4dd495211db3ecfc3ce70f737b062ecd}{prt\+::\+LUA\+\_\+\+MOUSE\+\_\+F}} (on\+Button)
+\item 
+\mbox{\hyperlink{namespaceprt_aa470a6d3c6023c0fa30b82e2ea3a4a48}{prt\+::\+LUA\+\_\+\+MOUSE\+\_\+F}} (on\+Button\+Pressed)
+\item 
+\mbox{\hyperlink{namespaceprt_a6f14d2c9fa280405889b655455cbd569}{prt\+::\+LUA\+\_\+\+MOUSE\+\_\+F}} (on\+Button\+Released)
+\item 
+\mbox{\hyperlink{namespaceprt_a5e5ab41ebb0d00cb3859c741666f3ef8}{prt\+::\+FOR\+\_\+\+EACH\+\_\+\+MOUSE\+\_\+\+EVENT}} (\mbox{\hyperlink{engine_8cc_a883bc9ae9206c92ed074a39a9a30192a}{DEFINE\+\_\+\+ON\+\_\+\+EVENT\+\_\+\+FUNC}})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{mouse_8cc_a2672365a233e0c9f3c1ccb0d78388308}\index{mouse.cc@{mouse.cc}!DEFINE\_ON\_EVENT@{DEFINE\_ON\_EVENT}}
+\index{DEFINE\_ON\_EVENT@{DEFINE\_ON\_EVENT}!mouse.cc@{mouse.cc}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_ON\_EVENT}{DEFINE\_ON\_EVENT}}
+{\footnotesize\ttfamily \label{mouse_8cc_a2672365a233e0c9f3c1ccb0d78388308} 
+\#define DEFINE\+\_\+\+ON\+\_\+\+EVENT(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{mouse_8cc_afca8604a9aaf0bc15b60e8d8866f9474}{LUA\_MOUSE\_F}}(on\#\#Name\#\#Event),}
+
+\end{DoxyCode}
+\Hypertarget{mouse_8cc_a883bc9ae9206c92ed074a39a9a30192a}\index{mouse.cc@{mouse.cc}!DEFINE\_ON\_EVENT\_FUNC@{DEFINE\_ON\_EVENT\_FUNC}}
+\index{DEFINE\_ON\_EVENT\_FUNC@{DEFINE\_ON\_EVENT\_FUNC}!mouse.cc@{mouse.cc}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_ON\_EVENT\_FUNC}{DEFINE\_ON\_EVENT\_FUNC}}
+{\footnotesize\ttfamily \label{mouse_8cc_a883bc9ae9206c92ed074a39a9a30192a} 
+\#define DEFINE\+\_\+\+ON\+\_\+\+EVENT\+\_\+\+FUNC(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{mouse_8cc_afca8604a9aaf0bc15b60e8d8866f9474}{LUA\_MOUSE\_F}}(on\#\#Name\#\#Event)\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ On\#\#Name\#\#Event().subscribe(CreateSubscriber<Name\#\#Event>(\mbox{\hyperlink{mouse_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}}));\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{mouse_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}\index{mouse.cc@{mouse.cc}!L@{L}}
+\index{L@{L}!mouse.cc@{mouse.cc}}
+\doxysubsubsection{\texorpdfstring{L}{L}}
+{\footnotesize\ttfamily \label{mouse_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53} 
+\#define L~lstate-\/$>$Get\+State()}
+
+\Hypertarget{mouse_8cc_afca8604a9aaf0bc15b60e8d8866f9474}\index{mouse.cc@{mouse.cc}!LUA\_MOUSE\_F@{LUA\_MOUSE\_F}}
+\index{LUA\_MOUSE\_F@{LUA\_MOUSE\_F}!mouse.cc@{mouse.cc}}
+\doxysubsubsection{\texorpdfstring{LUA\_MOUSE\_F}{LUA\_MOUSE\_F}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{mouse_8cc_afca8604a9aaf0bc15b60e8d8866f9474} 
+\#define LUA\+\_\+\+MOUSE\+\_\+F(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{lua_8h_a4c3a947c2f5c2f6244ffac8dfa005527}{LUA\_F}}(mouse\_\#\#Name)}
+
+\end{DoxyCode}
+\Hypertarget{mouse_8cc_afca8604a9aaf0bc15b60e8d8866f9474}\index{mouse.cc@{mouse.cc}!LUA\_MOUSE\_F@{LUA\_MOUSE\_F}}
+\index{LUA\_MOUSE\_F@{LUA\_MOUSE\_F}!mouse.cc@{mouse.cc}}
+\doxysubsubsection{\texorpdfstring{LUA\_MOUSE\_F}{LUA\_MOUSE\_F}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{mouse_8cc_afca8604a9aaf0bc15b60e8d8866f9474} 
+\#define LUA\+\_\+\+MOUSE\+\_\+F(\begin{DoxyParamCaption}\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \{.name\ =\ \#Name,\ .func\ =\ \&lua\_mouse\_\#\#Name\ \}}
+
+\end{DoxyCode}

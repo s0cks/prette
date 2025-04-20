@@ -1,0 +1,186 @@
+\doxysection{prt\+::merkle\+::Tree Class Reference}
+\hypertarget{classprt_1_1merkle_1_1_tree}{}\label{classprt_1_1merkle_1_1_tree}\index{prt::merkle::Tree@{prt::merkle::Tree}}
+
+
+{\ttfamily \#include $<$merkle.\+h$>$}
+
+
+
+Collaboration diagram for prt\+::merkle\+::Tree\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=237pt]{classprt_1_1merkle_1_1_tree__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1merkle_1_1_tree_ae63928a23d9f36631767be4ea49fd358}{Tree}} ()=default
+\item 
+\mbox{\hyperlink{classprt_1_1merkle_1_1_tree_af2a082059d34f05e570b0f1fc327696e}{Tree}} (const \mbox{\hyperlink{namespaceprt_1_1merkle_a8f73765e3b08e8d859349fc660a9e9f3}{Node\+List}} \&leaves)
+\item 
+\mbox{\hyperlink{classprt_1_1merkle_1_1_tree_a4394b3b973d94f033417c691bd937afd}{Tree}} (const std\+::vector$<$ \mbox{\hyperlink{classprt_1_1uint256}{uint256}} $>$ \&leaves)
+\item 
+\mbox{\hyperlink{classprt_1_1merkle_1_1_tree_a48893a45549c0f505224ff32e02b2447}{Tree}} (const \mbox{\hyperlink{classprt_1_1merkle_1_1_tree}{Tree}} \&rhs)
+\item 
+\mbox{\hyperlink{classprt_1_1merkle_1_1_tree_a2d1925275b3335e0f65beba62dd41b46}{\texorpdfstring{$\sim$}{\string~}\+Tree}} ()
+\item 
+\mbox{\hyperlink{classprt_1_1merkle_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_a26b2c9a96462c92ac69f355b7d559704}{Get\+Root}} () const
+\item 
+bool \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_a949a616f09a12fae503376ff20c55ea8}{Has\+Root}} () const
+\item 
+bool \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_a515421b7ca9cfe330d370b2eba6f7f94}{Is\+Empty}} () const
+\item 
+const \mbox{\hyperlink{namespaceprt_1_1merkle_a8f73765e3b08e8d859349fc660a9e9f3}{Node\+List}} \& \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_afeac5fc5e9ef136fae8d229b47571f7b}{Get\+Leaves}} () const
+\item 
+const \mbox{\hyperlink{classprt_1_1uint256}{uint256}} \& \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_afbe2603428d128ea8845d575f4ca9166}{Get\+Root\+Hash}} () const
+\item 
+bool \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_adbc6bd52885e413f35e091dcd0ad90d0}{Visit\+Root}} (\mbox{\hyperlink{classprt_1_1merkle_1_1_node_visitor}{Node\+Visitor}} \texorpdfstring{$\ast$}{*}vis) const
+\item 
+bool \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_a415c1230e8ea5ae44e349591b31aea3e}{Visit\+Leaves}} (\mbox{\hyperlink{classprt_1_1merkle_1_1_node_visitor}{Node\+Visitor}} \texorpdfstring{$\ast$}{*}vis) const
+\item 
+bool \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_ae3be06f77930de82b365bbac8881b1c8}{Accept}} (\mbox{\hyperlink{classprt_1_1merkle_1_1_node_visitor}{Node\+Visitor}} \texorpdfstring{$\ast$}{*}vis) const
+\item 
+\mbox{\hyperlink{classprt_1_1merkle_1_1_tree}{Tree}} \& \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_ab6c11d039442631268da3af0af7ec9a5}{operator=}} (const \mbox{\hyperlink{classprt_1_1merkle_1_1_tree}{Tree}} \&rhs)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_aba91f08bd46b47d439be20d37a264df6}{Set\+Root}} (\mbox{\hyperlink{classprt_1_1merkle_1_1_node}{Node}} \texorpdfstring{$\ast$}{*}node)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classprt_1_1merkle_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_a3eb5f1e50067272a14b402a542aaba75}{Compute\+Root}} (const \mbox{\hyperlink{namespaceprt_1_1merkle_a8f73765e3b08e8d859349fc660a9e9f3}{Node\+List}} \&nodes)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1merkle_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_ab36a77111ca5c3af691c1370c6544e84}{root\+\_\+}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classprt_1_1merkle_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classprt_1_1merkle_1_1_tree_a96cb32e06dc8cca0609d1d14e3176d47}{leaves\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1merkle_1_1_tree_ae63928a23d9f36631767be4ea49fd358}\index{prt::merkle::Tree@{prt::merkle::Tree}!Tree@{Tree}}
+\index{Tree@{Tree}!prt::merkle::Tree@{prt::merkle::Tree}}
+\doxysubsubsection{\texorpdfstring{Tree()}{Tree()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{classprt_1_1merkle_1_1_tree_ae63928a23d9f36631767be4ea49fd358} 
+prt\+::merkle\+::\+Tree\+::\+Tree (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{classprt_1_1merkle_1_1_tree_af2a082059d34f05e570b0f1fc327696e}\index{prt::merkle::Tree@{prt::merkle::Tree}!Tree@{Tree}}
+\index{Tree@{Tree}!prt::merkle::Tree@{prt::merkle::Tree}}
+\doxysubsubsection{\texorpdfstring{Tree()}{Tree()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{classprt_1_1merkle_1_1_tree_af2a082059d34f05e570b0f1fc327696e} 
+prt\+::merkle\+::\+Tree\+::\+Tree (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceprt_1_1merkle_a8f73765e3b08e8d859349fc660a9e9f3}{Node\+List}} \&}]{leaves}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+\Hypertarget{classprt_1_1merkle_1_1_tree_a4394b3b973d94f033417c691bd937afd}\index{prt::merkle::Tree@{prt::merkle::Tree}!Tree@{Tree}}
+\index{Tree@{Tree}!prt::merkle::Tree@{prt::merkle::Tree}}
+\doxysubsubsection{\texorpdfstring{Tree()}{Tree()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{classprt_1_1merkle_1_1_tree_a4394b3b973d94f033417c691bd937afd} 
+prt\+::merkle\+::\+Tree\+::\+Tree (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{classprt_1_1uint256}{uint256}} $>$ \&}]{leaves}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+\Hypertarget{classprt_1_1merkle_1_1_tree_a48893a45549c0f505224ff32e02b2447}\index{prt::merkle::Tree@{prt::merkle::Tree}!Tree@{Tree}}
+\index{Tree@{Tree}!prt::merkle::Tree@{prt::merkle::Tree}}
+\doxysubsubsection{\texorpdfstring{Tree()}{Tree()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{classprt_1_1merkle_1_1_tree_a48893a45549c0f505224ff32e02b2447} 
+prt\+::merkle\+::\+Tree\+::\+Tree (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1merkle_1_1_tree}{Tree}} \&}]{rhs}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1merkle_1_1_tree_a2d1925275b3335e0f65beba62dd41b46}\index{prt::merkle::Tree@{prt::merkle::Tree}!````~Tree@{\texorpdfstring{$\sim$}{\string~}Tree}}
+\index{````~Tree@{\texorpdfstring{$\sim$}{\string~}Tree}!prt::merkle::Tree@{prt::merkle::Tree}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Tree()}{\string~Tree()}}
+{\footnotesize\ttfamily \label{classprt_1_1merkle_1_1_tree_a2d1925275b3335e0f65beba62dd41b46} 
+prt\+::merkle\+::\+Tree\+::\texorpdfstring{$\sim$}{\string~}\+Tree (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1merkle_1_1_tree_ae3be06f77930de82b365bbac8881b1c8}\index{prt::merkle::Tree@{prt::merkle::Tree}!Accept@{Accept}}
+\index{Accept@{Accept}!prt::merkle::Tree@{prt::merkle::Tree}}
+\doxysubsubsection{\texorpdfstring{Accept()}{Accept()}}
+{\footnotesize\ttfamily \label{classprt_1_1merkle_1_1_tree_ae3be06f77930de82b365bbac8881b1c8} 
+bool prt\+::merkle\+::\+Tree\+::\+Accept (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1merkle_1_1_node_visitor}{Node\+Visitor}} \texorpdfstring{$\ast$}{*}}]{vis}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1merkle_1_1_tree_a3eb5f1e50067272a14b402a542aaba75}\index{prt::merkle::Tree@{prt::merkle::Tree}!ComputeRoot@{ComputeRoot}}
+\index{ComputeRoot@{ComputeRoot}!prt::merkle::Tree@{prt::merkle::Tree}}
+\doxysubsubsection{\texorpdfstring{ComputeRoot()}{ComputeRoot()}}
+{\footnotesize\ttfamily \label{classprt_1_1merkle_1_1_tree_a3eb5f1e50067272a14b402a542aaba75} 
+\mbox{\hyperlink{classprt_1_1merkle_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} prt\+::merkle\+::\+Tree\+::\+Compute\+Root (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceprt_1_1merkle_a8f73765e3b08e8d859349fc660a9e9f3}{Node\+List}} \&}]{nodes}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+\Hypertarget{classprt_1_1merkle_1_1_tree_afeac5fc5e9ef136fae8d229b47571f7b}\index{prt::merkle::Tree@{prt::merkle::Tree}!GetLeaves@{GetLeaves}}
+\index{GetLeaves@{GetLeaves}!prt::merkle::Tree@{prt::merkle::Tree}}
+\doxysubsubsection{\texorpdfstring{GetLeaves()}{GetLeaves()}}
+{\footnotesize\ttfamily \label{classprt_1_1merkle_1_1_tree_afeac5fc5e9ef136fae8d229b47571f7b} 
+const \mbox{\hyperlink{namespaceprt_1_1merkle_a8f73765e3b08e8d859349fc660a9e9f3}{Node\+List}} \& prt\+::merkle\+::\+Tree\+::\+Get\+Leaves (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1merkle_1_1_tree_a26b2c9a96462c92ac69f355b7d559704}\index{prt::merkle::Tree@{prt::merkle::Tree}!GetRoot@{GetRoot}}
+\index{GetRoot@{GetRoot}!prt::merkle::Tree@{prt::merkle::Tree}}
+\doxysubsubsection{\texorpdfstring{GetRoot()}{GetRoot()}}
+{\footnotesize\ttfamily \label{classprt_1_1merkle_1_1_tree_a26b2c9a96462c92ac69f355b7d559704} 
+\mbox{\hyperlink{classprt_1_1merkle_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} prt\+::merkle\+::\+Tree\+::\+Get\+Root (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1merkle_1_1_tree_afbe2603428d128ea8845d575f4ca9166}\index{prt::merkle::Tree@{prt::merkle::Tree}!GetRootHash@{GetRootHash}}
+\index{GetRootHash@{GetRootHash}!prt::merkle::Tree@{prt::merkle::Tree}}
+\doxysubsubsection{\texorpdfstring{GetRootHash()}{GetRootHash()}}
+{\footnotesize\ttfamily \label{classprt_1_1merkle_1_1_tree_afbe2603428d128ea8845d575f4ca9166} 
+const \mbox{\hyperlink{classprt_1_1uint256}{uint256}} \& prt\+::merkle\+::\+Tree\+::\+Get\+Root\+Hash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1merkle_1_1_tree_a949a616f09a12fae503376ff20c55ea8}\index{prt::merkle::Tree@{prt::merkle::Tree}!HasRoot@{HasRoot}}
+\index{HasRoot@{HasRoot}!prt::merkle::Tree@{prt::merkle::Tree}}
+\doxysubsubsection{\texorpdfstring{HasRoot()}{HasRoot()}}
+{\footnotesize\ttfamily \label{classprt_1_1merkle_1_1_tree_a949a616f09a12fae503376ff20c55ea8} 
+bool prt\+::merkle\+::\+Tree\+::\+Has\+Root (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1merkle_1_1_tree_a515421b7ca9cfe330d370b2eba6f7f94}\index{prt::merkle::Tree@{prt::merkle::Tree}!IsEmpty@{IsEmpty}}
+\index{IsEmpty@{IsEmpty}!prt::merkle::Tree@{prt::merkle::Tree}}
+\doxysubsubsection{\texorpdfstring{IsEmpty()}{IsEmpty()}}
+{\footnotesize\ttfamily \label{classprt_1_1merkle_1_1_tree_a515421b7ca9cfe330d370b2eba6f7f94} 
+bool prt\+::merkle\+::\+Tree\+::\+Is\+Empty (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1merkle_1_1_tree_ab6c11d039442631268da3af0af7ec9a5}\index{prt::merkle::Tree@{prt::merkle::Tree}!operator=@{operator=}}
+\index{operator=@{operator=}!prt::merkle::Tree@{prt::merkle::Tree}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \label{classprt_1_1merkle_1_1_tree_ab6c11d039442631268da3af0af7ec9a5} 
+\mbox{\hyperlink{classprt_1_1merkle_1_1_tree}{Tree}} \& prt\+::merkle\+::\+Tree\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classprt_1_1merkle_1_1_tree}{Tree}} \&}]{rhs}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1merkle_1_1_tree_aba91f08bd46b47d439be20d37a264df6}\index{prt::merkle::Tree@{prt::merkle::Tree}!SetRoot@{SetRoot}}
+\index{SetRoot@{SetRoot}!prt::merkle::Tree@{prt::merkle::Tree}}
+\doxysubsubsection{\texorpdfstring{SetRoot()}{SetRoot()}}
+{\footnotesize\ttfamily \label{classprt_1_1merkle_1_1_tree_aba91f08bd46b47d439be20d37a264df6} 
+void prt\+::merkle\+::\+Tree\+::\+Set\+Root (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1merkle_1_1_node}{Node}} \texorpdfstring{$\ast$}{*}}]{node}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+\Hypertarget{classprt_1_1merkle_1_1_tree_a415c1230e8ea5ae44e349591b31aea3e}\index{prt::merkle::Tree@{prt::merkle::Tree}!VisitLeaves@{VisitLeaves}}
+\index{VisitLeaves@{VisitLeaves}!prt::merkle::Tree@{prt::merkle::Tree}}
+\doxysubsubsection{\texorpdfstring{VisitLeaves()}{VisitLeaves()}}
+{\footnotesize\ttfamily \label{classprt_1_1merkle_1_1_tree_a415c1230e8ea5ae44e349591b31aea3e} 
+bool prt\+::merkle\+::\+Tree\+::\+Visit\+Leaves (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1merkle_1_1_node_visitor}{Node\+Visitor}} \texorpdfstring{$\ast$}{*}}]{vis}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1merkle_1_1_tree_adbc6bd52885e413f35e091dcd0ad90d0}\index{prt::merkle::Tree@{prt::merkle::Tree}!VisitRoot@{VisitRoot}}
+\index{VisitRoot@{VisitRoot}!prt::merkle::Tree@{prt::merkle::Tree}}
+\doxysubsubsection{\texorpdfstring{VisitRoot()}{VisitRoot()}}
+{\footnotesize\ttfamily \label{classprt_1_1merkle_1_1_tree_adbc6bd52885e413f35e091dcd0ad90d0} 
+bool prt\+::merkle\+::\+Tree\+::\+Visit\+Root (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1merkle_1_1_node_visitor}{Node\+Visitor}} \texorpdfstring{$\ast$}{*}}]{vis}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1merkle_1_1_tree_a96cb32e06dc8cca0609d1d14e3176d47}\index{prt::merkle::Tree@{prt::merkle::Tree}!leaves\_@{leaves\_}}
+\index{leaves\_@{leaves\_}!prt::merkle::Tree@{prt::merkle::Tree}}
+\doxysubsubsection{\texorpdfstring{leaves\_}{leaves\_}}
+{\footnotesize\ttfamily \label{classprt_1_1merkle_1_1_tree_a96cb32e06dc8cca0609d1d14e3176d47} 
+std\+::vector$<$\mbox{\hyperlink{classprt_1_1merkle_1_1_node}{Node}}\texorpdfstring{$\ast$}{*}$>$ prt\+::merkle\+::\+Tree\+::leaves\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classprt_1_1merkle_1_1_tree_ab36a77111ca5c3af691c1370c6544e84}\index{prt::merkle::Tree@{prt::merkle::Tree}!root\_@{root\_}}
+\index{root\_@{root\_}!prt::merkle::Tree@{prt::merkle::Tree}}
+\doxysubsubsection{\texorpdfstring{root\_}{root\_}}
+{\footnotesize\ttfamily \label{classprt_1_1merkle_1_1_tree_ab36a77111ca5c3af691c1370c6544e84} 
+\mbox{\hyperlink{classprt_1_1merkle_1_1_node}{Node}}\texorpdfstring{$\ast$}{*} prt\+::merkle\+::\+Tree\+::root\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{merkle_8h}{merkle.\+h}}\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{merkle_8cc}{merkle.\+cc}}\end{DoxyCompactItemize}

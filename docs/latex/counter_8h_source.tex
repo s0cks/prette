@@ -1,0 +1,136 @@
+\doxysection{counter.\+h}
+\hypertarget{counter_8h_source}{}\label{counter_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/counter.h@{/Users/tazz/Projects/prette/Sources/prette/counter.h}}
+\mbox{\hyperlink{counter_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ COUNTER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ COUNTER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <glog/logging.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <units.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <uv.h>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{relaxed__atomic_8h}{prette/relaxed\_atomic.h}}"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00011\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_counter}{Counter}}\ \{}
+\DoxyCodeLine{00013\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00014\ \ \ \mbox{\hyperlink{classprt_1_1_relaxed_atomic}{RelaxedAtomic<T>}}\ \mbox{\hyperlink{classprt_1_1_counter_a3711a04be2288e1a34daa7ef7e2f8250}{value\_}};}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_counter_ae94f9ab35a2222afac4575b1beb631af}{Counter}}(\textcolor{keyword}{const}\ T\ init\_value\ =\ 0)\ :}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_counter_a3711a04be2288e1a34daa7ef7e2f8250}{value\_}}(init\_value)\ \{\}}
+\DoxyCodeLine{00019\ \ \ \mbox{\hyperlink{classprt_1_1_counter_a1142915252a4595e379acb144550d143}{Counter}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_counter}{Counter<T>}}\&\&\ rhs)\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00020\ \ \ \mbox{\hyperlink{classprt_1_1_counter_a54dcf11503c0d8c62feb847015ba3aa9}{Counter}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_counter}{Counter<T>}}\&\ rhs)\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00021\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classprt_1_1_counter_a6e786236210c8ef4af34c2a1d3833c3e}{\string~Counter}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_counter_a501ffc9176863e824cea6072dd50fd4d}{value}}()\ const\ -\/>\ T\ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordflow}{return}\ (T)\mbox{\hyperlink{classprt_1_1_counter_a3711a04be2288e1a34daa7ef7e2f8250}{value\_}};}
+\DoxyCodeLine{00025\ \ \ \}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_counter_a01efa4c22caee4734779c636686aecfb}{operator=}}(\mbox{\hyperlink{classprt_1_1_counter}{Counter<T>}}\&\&\ rhs)\ -\/>\ \mbox{\hyperlink{classprt_1_1_counter}{Counter<T>}}\&\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00028\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_counter_a415213545f1b0e739d436f62e6ff4e35}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_counter}{Counter<T>}}\&\ rhs)\ -\/>\ \mbox{\hyperlink{classprt_1_1_counter}{Counter<T>}}\&\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \textcolor{keyword}{operator}\ T()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_counter_a501ffc9176863e824cea6072dd50fd4d}{value}}();}
+\DoxyCodeLine{00032\ \ \ \}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_counter_a3b6a714112e3ecf7d08f89390ae1172c}{operator=}}(\textcolor{keyword}{const}\ T\&\ rhs)\ -\/>\ \mbox{\hyperlink{classprt_1_1_counter}{Counter<T>}}\&\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_counter_a3711a04be2288e1a34daa7ef7e2f8250}{value\_}}\ =\ rhs;}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00037\ \ \ \}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_counter_ae6f08d4b9da40106d0af9d66634b0779}{operator++}}()\ \{}
+\DoxyCodeLine{00040\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_counter_a3711a04be2288e1a34daa7ef7e2f8250}{value\_}}\ +=\ 1;}
+\DoxyCodeLine{00041\ \ \ \}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_counter_a3338636793608614a3242992d9196273}{operator+=}}(\textcolor{keyword}{const}\ T\&\ rhs)\ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_counter_a3711a04be2288e1a34daa7ef7e2f8250}{value\_}}\ +=\ rhs;}
+\DoxyCodeLine{00045\ \ \ \}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_counter_a2349becd5dc05f9466361574e09dc575}{operator-\/-\/}}()\ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_counter_a3711a04be2288e1a34daa7ef7e2f8250}{value\_}}\ -\/=\ 1;}
+\DoxyCodeLine{00049\ \ \ \}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_counter_af56efc23a8185586007e6a3cacd2ccaa}{operator-\/=}}(\textcolor{keyword}{const}\ T\&\ rhs)\ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_counter_a3711a04be2288e1a34daa7ef7e2f8250}{value\_}}\ -\/=\ rhs;}
+\DoxyCodeLine{00053\ \ \ \}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_counter_a6abdf779ee15ade6393127a156314873}{operator<<}}(std::ostream\&\ stream,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_counter}{Counter<T>}}\&\ rhs)\ -\/>\ std::ostream\&\ \{}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordflow}{return}\ stream\ <<\ (T)rhs;}
+\DoxyCodeLine{00057\ \ \ \}}
+\DoxyCodeLine{00058\ \};}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00061\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_per_second_counter}{PerSecondCounter}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1_counter}{Counter}}<T>\ \{}
+\DoxyCodeLine{00062\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00063\ \ \ uint64\_t\ \mbox{\hyperlink{classprt_1_1_per_second_counter_ac0719da9d3a403b06e02104b0ffe80c3}{last\_second\_}};}
+\DoxyCodeLine{00064\ \ \ T\ \mbox{\hyperlink{classprt_1_1_per_second_counter_a741fe05473be0d7182a691b8e0549611}{per\_second\_}};}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_per_second_counter_a37c15ad372e316236b85d9f001db8334}{SecondHasElapsed}}(\textcolor{keyword}{const}\ uint64\_t\ ts)\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordflow}{return}\ (ts\ -\/\ \mbox{\hyperlink{classprt_1_1_per_second_counter_ac0719da9d3a403b06e02104b0ffe80c3}{last\_second\_}})\ >=\ NSEC\_PER\_SEC;}
+\DoxyCodeLine{00068\ \ \ \}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00071\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_per_second_counter_a8c4ae958e4eab5d46fabb311cc59faa3}{PerSecondCounter}}(\textcolor{keyword}{const}\ T\ init\_value\ =\ 0)\ :}
+\DoxyCodeLine{00072\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_counter}{Counter}}<T>(init\_value),}
+\DoxyCodeLine{00073\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_per_second_counter_ac0719da9d3a403b06e02104b0ffe80c3}{last\_second\_}}(uv\_hrtime()),}
+\DoxyCodeLine{00074\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_per_second_counter_a741fe05473be0d7182a691b8e0549611}{per\_second\_}}(0)\ \{\}}
+\DoxyCodeLine{00075\ \ \ \mbox{\hyperlink{classprt_1_1_per_second_counter_a7db2325586423f2b94562585d7cb6a7e}{PerSecondCounter}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_per_second_counter}{PerSecondCounter<T>}}\&\&\ rhs)\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00076\ \ \ \mbox{\hyperlink{classprt_1_1_per_second_counter_aa1f8acb3ecc597c1df34aa6c3496e6f2}{PerSecondCounter}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_per_second_counter}{PerSecondCounter<T>}}\&\ rhs)\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00077\ \ \ \mbox{\hyperlink{classprt_1_1_per_second_counter_a7e68f0c8b329beab26e4753b4aaf7312}{\string~PerSecondCounter}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_per_second_counter_a0c756473e11e57b664f7c1e4bb63296f}{per\_sec}}()\ const\ -\/>\ T\ \{}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_per_second_counter_a741fe05473be0d7182a691b8e0549611}{per\_second\_}};}
+\DoxyCodeLine{00081\ \ \ \}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_per_second_counter_aa2038c58f3971a6279c25252932da1c5}{Increment}}(\textcolor{keyword}{const}\ T\ \mbox{\hyperlink{classprt_1_1_counter_a501ffc9176863e824cea6072dd50fd4d}{value}}\ =\ 1,\ \textcolor{keyword}{const}\ uint64\_t\ ts\ =\ uv\_hrtime())\ \{}
+\DoxyCodeLine{00084\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_counter_a3338636793608614a3242992d9196273}{Counter<T>::operator+=}}(\mbox{\hyperlink{classprt_1_1_counter_a501ffc9176863e824cea6072dd50fd4d}{value}});}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classprt_1_1_per_second_counter_a37c15ad372e316236b85d9f001db8334}{SecondHasElapsed}}(ts))\ \{}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_per_second_counter_a741fe05473be0d7182a691b8e0549611}{per\_second\_}}\ =\ (T)\mbox{\hyperlink{classprt_1_1_counter}{Counter<T>::value}}();}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_per_second_counter_ac0719da9d3a403b06e02104b0ffe80c3}{last\_second\_}}\ =\ ts;}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_counter_a01efa4c22caee4734779c636686aecfb}{Counter<T>::operator=}}(0);}
+\DoxyCodeLine{00089\ \ \ \ \ \}}
+\DoxyCodeLine{00090\ \ \ \}}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_per_second_counter_ad52032a8787f6eb27ed5f808df70b10a}{Decrement}}(\textcolor{keyword}{const}\ T\ \mbox{\hyperlink{classprt_1_1_counter_a501ffc9176863e824cea6072dd50fd4d}{value}}\ =\ 1,\ \textcolor{keyword}{const}\ uint64\_t\ ts\ =\ uv\_hrtime())\ \{}
+\DoxyCodeLine{00093\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_counter_af56efc23a8185586007e6a3cacd2ccaa}{Counter<T>::operator-\/=}}(\mbox{\hyperlink{classprt_1_1_counter_a501ffc9176863e824cea6072dd50fd4d}{value}});}
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classprt_1_1_per_second_counter_a37c15ad372e316236b85d9f001db8334}{SecondHasElapsed}}(ts))\ \{}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_per_second_counter_a741fe05473be0d7182a691b8e0549611}{per\_second\_}}\ =\ (T)\mbox{\hyperlink{classprt_1_1_counter}{Counter<T>::value}}();}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_per_second_counter_ac0719da9d3a403b06e02104b0ffe80c3}{last\_second\_}}\ =\ ts;}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1_counter_a01efa4c22caee4734779c636686aecfb}{Counter<T>::operator=}}(0);}
+\DoxyCodeLine{00098\ \ \ \ \ \}}
+\DoxyCodeLine{00099\ \ \ \}}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_per_second_counter_aff567e48a82b407dc7240c59caf66022}{operator++}}()\ \{}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_per_second_counter_aa2038c58f3971a6279c25252932da1c5}{Increment}}();}
+\DoxyCodeLine{00103\ \ \ \}}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_per_second_counter_a719c8e2276c32e2187a504db862970b3}{operator+=}}(\textcolor{keyword}{const}\ T\&\ rhs)\ \{}
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_per_second_counter_aa2038c58f3971a6279c25252932da1c5}{Increment}}(rhs);}
+\DoxyCodeLine{00107\ \ \ \}}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_per_second_counter_abee18823c5bba2e1219c2dfd24b31646}{operator-\/-\/}}()\ \{}
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_per_second_counter_ad52032a8787f6eb27ed5f808df70b10a}{Decrement}}();}
+\DoxyCodeLine{00111\ \ \ \}}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_per_second_counter_a5514d323f4ea2499e1a559e4fd3a2f67}{operator-\/=}}(\textcolor{keyword}{const}\ T\&\ rhs)\ \{}
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_per_second_counter_ad52032a8787f6eb27ed5f808df70b10a}{Decrement}}(rhs);}
+\DoxyCodeLine{00115\ \ \ \}}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \ \ \textcolor{keyword}{operator}\ T()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keywordflow}{return}\ (T)\mbox{\hyperlink{classprt_1_1_counter_a501ffc9176863e824cea6072dd50fd4d}{Counter<T>::value}}();}
+\DoxyCodeLine{00119\ \ \ \}}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_per_second_counter_a286ad79b4985b3ec838f1d51e16ef368}{operator<<}}(std::ostream\&\ stream,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_per_second_counter}{PerSecondCounter<T>}}\&\ rhs)\ -\/>\ std::ostream\&\ \{}
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keywordflow}{return}\ stream\ <<\ (T)rhs\ <<\ \textcolor{stringliteral}{"{}\ ("{}}\ <<\ rhs.per\_sec()\ <<\ \textcolor{stringliteral}{"{}/s)"{}};}
+\DoxyCodeLine{00123\ \ \ \}}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_per_second_counter_a6a047d144cb127c7bbba6e7d16c47080}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_per_second_counter}{PerSecondCounter<T>}}\&\ rhs)\ -\/>\ \mbox{\hyperlink{classprt_1_1_per_second_counter}{PerSecondCounter<T>}}\&\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00126\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_per_second_counter_affc536363bbc109e3afda24b04e68763}{operator=}}(\mbox{\hyperlink{classprt_1_1_per_second_counter}{PerSecondCounter<T>}}\&\&\ rhs)\ -\/>\ \mbox{\hyperlink{classprt_1_1_per_second_counter}{PerSecondCounter<T>}}\&\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00127\ \};}
+\DoxyCodeLine{00128\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00130\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ COUNTER\_H}}
+
+\end{DoxyCode}

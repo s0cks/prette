@@ -1,0 +1,172 @@
+\doxysection{prt\+::Mouse Class Reference}
+\hypertarget{classprt_1_1_mouse}{}\label{classprt_1_1_mouse}\index{prt::Mouse@{prt::Mouse}}
+
+
+{\ttfamily \#include $<$mouse.\+h$>$}
+
+
+
+Collaboration diagram for prt\+::Mouse\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classprt_1_1_mouse__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_mouse_a7cfacc812a2ece33bae34e8f256c4dc7}{\texorpdfstring{$\sim$}{\string~}\+Mouse}} ()
+\item 
+auto \mbox{\hyperlink{classprt_1_1_mouse_a115aaded3e8b05b17df0c9cb86cdd521}{Get\+Owner}} () const -\/$>$ \mbox{\hyperlink{classprt_1_1_window}{Window}} \texorpdfstring{$\ast$}{*}
+\item 
+auto \mbox{\hyperlink{classprt_1_1_mouse_a54fa2e7c8646c8c86ef9f0966c6055a4}{Get\+Pos}} () const -\/$>$ glm\+::dvec2
+\item 
+auto \mbox{\hyperlink{classprt_1_1_mouse_abe2fd37ee313d77f37db9730094942fc}{Get\+Previous\+Pos}} () const -\/$>$ glm\+::vec2 const \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_mouse_acffe2383df5867a739b9fd0c1898b0cc}{Is\+Pressed}} (const int btn) const -\/$>$ bool
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_mouse_a9597bd18bcc8950dd16a0911713959ab}{Is\+Initialized}} () -\/$>$ bool
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_mouse_ae0bedc62dd640ee680b9db1d29e3a57c}{Init}} (\mbox{\hyperlink{classprt_1_1_window}{Window}} \texorpdfstring{$\ast$}{*}owner) -\/$>$ \mbox{\hyperlink{classprt_1_1_mouse}{Mouse}} \texorpdfstring{$\ast$}{*}
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_mouse_afdb9d9b212cd9eaa8de41ba6581dd5c7}{Get}} () -\/$>$ \mbox{\hyperlink{classprt_1_1_mouse}{Mouse}} \texorpdfstring{$\ast$}{*}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_mouse_a59e5937615ac6f1fc90e91b924b8d524}{Mouse}} (\mbox{\hyperlink{classprt_1_1_window}{Window}} \texorpdfstring{$\ast$}{*}owner)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classprt_1_1_mouse_ae4345ebcf2b1bb506849e259b5aaa5e8}{Publish\+Event}} (Mouse\+Event \texorpdfstring{$\ast$}{*}event)
+\item 
+{\footnotesize template$<$class E , typename... Args$>$ }\\static void \mbox{\hyperlink{classprt_1_1_mouse_a52708351e4bb909b61f72705aed1377e}{Publish}} (Args... args)
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_mouse_a3f6f1159594d58584316e8c20fce4548}{New}} (\mbox{\hyperlink{classprt_1_1_window}{Window}} \texorpdfstring{$\ast$}{*}owner) -\/$>$ \mbox{\hyperlink{classprt_1_1_mouse}{Mouse}} \texorpdfstring{$\ast$}{*}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_window}{Window}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1_mouse_ad98fdcfa07b5a4ee654ec5d74630bef9}{owner\+\_\+}}
+\item 
+glm\+::vec2 \mbox{\hyperlink{classprt_1_1_mouse_ae6c7f8d90795bb7be3ab8f2f05f1b038}{previous\+\_\+pos\+\_\+}} \{\}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1_mouse_a9aa251d710bba4f257a519ebc5d01d51}{Lua\+State}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_mouse_a59e5937615ac6f1fc90e91b924b8d524}\index{prt::Mouse@{prt::Mouse}!Mouse@{Mouse}}
+\index{Mouse@{Mouse}!prt::Mouse@{prt::Mouse}}
+\doxysubsubsection{\texorpdfstring{Mouse()}{Mouse()}}
+{\footnotesize\ttfamily \label{classprt_1_1_mouse_a59e5937615ac6f1fc90e91b924b8d524} 
+prt\+::\+Mouse\+::\+Mouse (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_window}{Window}} \texorpdfstring{$\ast$}{*}}]{owner}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}, {\ttfamily [protected]}}
+
+\Hypertarget{classprt_1_1_mouse_a7cfacc812a2ece33bae34e8f256c4dc7}\index{prt::Mouse@{prt::Mouse}!````~Mouse@{\texorpdfstring{$\sim$}{\string~}Mouse}}
+\index{````~Mouse@{\texorpdfstring{$\sim$}{\string~}Mouse}!prt::Mouse@{prt::Mouse}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Mouse()}{\string~Mouse()}}
+{\footnotesize\ttfamily \label{classprt_1_1_mouse_a7cfacc812a2ece33bae34e8f256c4dc7} 
+prt\+::\+Mouse\+::\texorpdfstring{$\sim$}{\string~}\+Mouse (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_mouse_afdb9d9b212cd9eaa8de41ba6581dd5c7}\index{prt::Mouse@{prt::Mouse}!Get@{Get}}
+\index{Get@{Get}!prt::Mouse@{prt::Mouse}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}}
+{\footnotesize\ttfamily \label{classprt_1_1_mouse_afdb9d9b212cd9eaa8de41ba6581dd5c7} 
+auto prt\+::\+Mouse\+::\+Get (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{classprt_1_1_mouse}{Mouse}}\texorpdfstring{$\ast$}{*}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_mouse_a115aaded3e8b05b17df0c9cb86cdd521}\index{prt::Mouse@{prt::Mouse}!GetOwner@{GetOwner}}
+\index{GetOwner@{GetOwner}!prt::Mouse@{prt::Mouse}}
+\doxysubsubsection{\texorpdfstring{GetOwner()}{GetOwner()}}
+{\footnotesize\ttfamily \label{classprt_1_1_mouse_a115aaded3e8b05b17df0c9cb86cdd521} 
+auto prt\+::\+Mouse\+::\+Get\+Owner (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ \mbox{\hyperlink{classprt_1_1_window}{Window}}\texorpdfstring{$\ast$}{*} \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_mouse_a54fa2e7c8646c8c86ef9f0966c6055a4}\index{prt::Mouse@{prt::Mouse}!GetPos@{GetPos}}
+\index{GetPos@{GetPos}!prt::Mouse@{prt::Mouse}}
+\doxysubsubsection{\texorpdfstring{GetPos()}{GetPos()}}
+{\footnotesize\ttfamily \label{classprt_1_1_mouse_a54fa2e7c8646c8c86ef9f0966c6055a4} 
+auto prt\+::\+Mouse\+::\+Get\+Pos (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ glm\+::dvec2}
+
+\Hypertarget{classprt_1_1_mouse_abe2fd37ee313d77f37db9730094942fc}\index{prt::Mouse@{prt::Mouse}!GetPreviousPos@{GetPreviousPos}}
+\index{GetPreviousPos@{GetPreviousPos}!prt::Mouse@{prt::Mouse}}
+\doxysubsubsection{\texorpdfstring{GetPreviousPos()}{GetPreviousPos()}}
+{\footnotesize\ttfamily \label{classprt_1_1_mouse_abe2fd37ee313d77f37db9730094942fc} 
+auto prt\+::\+Mouse\+::\+Get\+Previous\+Pos (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ glm\+::vec2 const\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_mouse_ae0bedc62dd640ee680b9db1d29e3a57c}\index{prt::Mouse@{prt::Mouse}!Init@{Init}}
+\index{Init@{Init}!prt::Mouse@{prt::Mouse}}
+\doxysubsubsection{\texorpdfstring{Init()}{Init()}}
+{\footnotesize\ttfamily \label{classprt_1_1_mouse_ae0bedc62dd640ee680b9db1d29e3a57c} 
+auto prt\+::\+Mouse\+::\+Init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_window}{Window}} \texorpdfstring{$\ast$}{*}}]{owner}{}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{classprt_1_1_mouse}{Mouse}}\texorpdfstring{$\ast$}{*}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_mouse_a9597bd18bcc8950dd16a0911713959ab}\index{prt::Mouse@{prt::Mouse}!IsInitialized@{IsInitialized}}
+\index{IsInitialized@{IsInitialized}!prt::Mouse@{prt::Mouse}}
+\doxysubsubsection{\texorpdfstring{IsInitialized()}{IsInitialized()}}
+{\footnotesize\ttfamily \label{classprt_1_1_mouse_a9597bd18bcc8950dd16a0911713959ab} 
+auto prt\+::\+Mouse\+::\+Is\+Initialized (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ bool\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_mouse_acffe2383df5867a739b9fd0c1898b0cc}\index{prt::Mouse@{prt::Mouse}!IsPressed@{IsPressed}}
+\index{IsPressed@{IsPressed}!prt::Mouse@{prt::Mouse}}
+\doxysubsubsection{\texorpdfstring{IsPressed()}{IsPressed()}}
+{\footnotesize\ttfamily \label{classprt_1_1_mouse_acffe2383df5867a739b9fd0c1898b0cc} 
+auto prt\+::\+Mouse\+::\+Is\+Pressed (\begin{DoxyParamCaption}\item[{const int}]{btn}{}\end{DoxyParamCaption}) const -\/$>$ bool}
+
+\Hypertarget{classprt_1_1_mouse_a3f6f1159594d58584316e8c20fce4548}\index{prt::Mouse@{prt::Mouse}!New@{New}}
+\index{New@{New}!prt::Mouse@{prt::Mouse}}
+\doxysubsubsection{\texorpdfstring{New()}{New()}}
+{\footnotesize\ttfamily \label{classprt_1_1_mouse_a3f6f1159594d58584316e8c20fce4548} 
+auto prt\+::\+Mouse\+::\+New (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_window}{Window}} \texorpdfstring{$\ast$}{*}}]{owner}{}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{classprt_1_1_mouse}{Mouse}}\texorpdfstring{$\ast$}{*}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_mouse_a52708351e4bb909b61f72705aed1377e}\index{prt::Mouse@{prt::Mouse}!Publish@{Publish}}
+\index{Publish@{Publish}!prt::Mouse@{prt::Mouse}}
+\doxysubsubsection{\texorpdfstring{Publish()}{Publish()}}
+{\footnotesize\ttfamily \label{classprt_1_1_mouse_a52708351e4bb909b61f72705aed1377e} 
+template$<$class E , typename... Args$>$ \\
+static void prt\+::\+Mouse\+::\+Publish (\begin{DoxyParamCaption}\item[{Args...}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_mouse_ae4345ebcf2b1bb506849e259b5aaa5e8}\index{prt::Mouse@{prt::Mouse}!PublishEvent@{PublishEvent}}
+\index{PublishEvent@{PublishEvent}!prt::Mouse@{prt::Mouse}}
+\doxysubsubsection{\texorpdfstring{PublishEvent()}{PublishEvent()}}
+{\footnotesize\ttfamily \label{classprt_1_1_mouse_ae4345ebcf2b1bb506849e259b5aaa5e8} 
+void prt\+::\+Mouse\+::\+Publish\+Event (\begin{DoxyParamCaption}\item[{Mouse\+Event \texorpdfstring{$\ast$}{*}}]{event}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classprt_1_1_mouse_a9aa251d710bba4f257a519ebc5d01d51}\index{prt::Mouse@{prt::Mouse}!LuaState@{LuaState}}
+\index{LuaState@{LuaState}!prt::Mouse@{prt::Mouse}}
+\doxysubsubsection{\texorpdfstring{LuaState}{LuaState}}
+{\footnotesize\ttfamily \label{classprt_1_1_mouse_a9aa251d710bba4f257a519ebc5d01d51} 
+friend class \mbox{\hyperlink{classprt_1_1_lua_state}{Lua\+State}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_mouse_ad98fdcfa07b5a4ee654ec5d74630bef9}\index{prt::Mouse@{prt::Mouse}!owner\_@{owner\_}}
+\index{owner\_@{owner\_}!prt::Mouse@{prt::Mouse}}
+\doxysubsubsection{\texorpdfstring{owner\_}{owner\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_mouse_ad98fdcfa07b5a4ee654ec5d74630bef9} 
+\mbox{\hyperlink{classprt_1_1_window}{Window}}\texorpdfstring{$\ast$}{*} prt\+::\+Mouse\+::owner\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_mouse_ae6c7f8d90795bb7be3ab8f2f05f1b038}\index{prt::Mouse@{prt::Mouse}!previous\_pos\_@{previous\_pos\_}}
+\index{previous\_pos\_@{previous\_pos\_}!prt::Mouse@{prt::Mouse}}
+\doxysubsubsection{\texorpdfstring{previous\_pos\_}{previous\_pos\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_mouse_ae6c7f8d90795bb7be3ab8f2f05f1b038} 
+glm\+::vec2 prt\+::\+Mouse\+::previous\+\_\+pos\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{mouse_8h}{mouse.\+h}}\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{mouse_8cc}{mouse.\+cc}}\end{DoxyCompactItemize}

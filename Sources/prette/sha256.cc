@@ -8,14 +8,14 @@
 #include "prette/uv/utils.h"
 
 namespace prt::sha256 {
-  uint256 Of(const uint8_t* data, const uint64_t length){
+  auto Of(const uint8_t* data, const uint64_t length) -> uint256{
     EVP_MD_CTX* ctx;
     if((ctx = EVP_MD_CTX_new()) == nullptr){
       LOG(ERROR) << "failed to initialize sha256 context.";
       return {};
     }
 
-    EVP_MD* sha256;
+    EVP_MD* sha256{};
     if((sha256 = EVP_MD_fetch(nullptr, "SHA256", nullptr)) == nullptr){
       LOG(ERROR) << "failed to fetch sha256 algorithm.";
       return {};
@@ -31,7 +31,7 @@ namespace prt::sha256 {
       return {};
     }
 
-    auto digest = (uint8_t*) OPENSSL_malloc(EVP_MD_get_size(sha256));
+    auto digest = (uint8_t*) OPENSSL_malloc(EVP_MD_get_size(sha256)); // NOLINT(cppcoreguidelines-pro-type-cstyle-cast)
     uint32_t len = 0;
     if(!EVP_DigestFinal_ex(ctx, digest, &len)){
       LOG(ERROR) << "failed to calculate sha256 digest.";
@@ -46,14 +46,14 @@ namespace prt::sha256 {
     return hash;
   }
 
-  uint256 Concat(const uint256& lhs, const uint256& rhs){
-    uint8_t data[kDigestSize * 2];
+  auto Concat(const uint256& lhs, const uint256& rhs) -> uint256{
+    std::array<uint8_t, kDigestSize * 2> data;
     memcpy(&data[0], lhs.data(), kDigestSize);
     memcpy(&data[kDigestSize], rhs.data(), kDigestSize);
-    return Of(data, kDigestSize * 2);
+    return Of(data.cbegin(), kDigestSize * 2);
   }
 
-  uint256 FromHex(const char* data, const uint64_t length){
+  auto FromHex(const char* data, const uint64_t length) -> uint256{
     // mapping of ASCII characters to hex values
     static const uint8_t kHexadecimalHashmap[] = {
         0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, // 01234567
@@ -71,7 +71,7 @@ namespace prt::sha256 {
     return hash;
   }
 
-  uint256 Nonce(const uint64_t length) {
+  auto Nonce(const uint64_t length) -> uint256 {
     using random_bytes_engine = std::independent_bits_engine<std::default_random_engine, CHAR_BIT, uint8_t>;
     static random_bytes_engine kRandomBytesEngine(uv_hrtime());
 

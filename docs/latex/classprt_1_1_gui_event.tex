@@ -1,0 +1,103 @@
+\doxysection{prt\+::Gui\+Event Class Reference}
+\hypertarget{classprt_1_1_gui_event}{}\label{classprt_1_1_gui_event}\index{prt::GuiEvent@{prt::GuiEvent}}
+
+
+{\ttfamily \#include $<$gui.\+h$>$}
+
+
+
+Inheritance diagram for prt\+::Gui\+Event\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classprt_1_1_gui_event__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for prt\+::Gui\+Event\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=206pt]{classprt_1_1_gui_event__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_gui_event_aad9af3fcc3eced41bf3119cbcca04e90}{\texorpdfstring{$\sim$}{\string~}\+Gui\+Event}} () override=default
+\item 
+auto \mbox{\hyperlink{classprt_1_1_gui_event_afcd516d67f7eb2df853d3e85bd5ae8ee}{Get\+Gui}} () const -\/$>$ \mbox{\hyperlink{classprt_1_1_gui}{Gui}} \texorpdfstring{$\ast$}{*}
+\item 
+\mbox{\hyperlink{classprt_1_1_gui_event_a6654b32f752a2dbf11a6b3b739dc720e}{DEFINE\+\_\+\+EVENT\+\_\+\+PROTOTYPE\+\_\+\+TYPE}} (\mbox{\hyperlink{classprt_1_1_gui}{Gui}}, \mbox{\hyperlink{namespaceprt_a71898c3f0b0bfdc40e2c14ecd1424bfa}{FOR\+\_\+\+EACH\+\_\+\+GUI\+\_\+\+EVENT}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classprt_1_1_event}{prt\+::\+Event}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classprt_1_1_event_a4852e85c48ebb80d6c96fe0d13d5ae6a}{\texorpdfstring{$\sim$}{\string~}\+Event}} ()=default
+\item 
+virtual auto \mbox{\hyperlink{classprt_1_1_event_a674cd356a472771aad69534b2959500e}{Get\+Name}} () const -\/$>$ const char \texorpdfstring{$\ast$}{*}=0
+\item 
+virtual auto \mbox{\hyperlink{classprt_1_1_event_a90911d9644cf7ec9b4f05053a3b632af}{To\+String}} () const -\/$>$ std\+::string=0
+\item 
+virtual void \mbox{\hyperlink{classprt_1_1_event_a9f54e07e32d052203fe0e08a185746bc}{To\+Table}} (lua\+\_\+\+State \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{engine_8cc_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}}) const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_gui_event_afb747e75f685cda53fcf6c4d1c9c7b3f}{Gui\+Event}} (\mbox{\hyperlink{classprt_1_1_gui}{Gui}} \texorpdfstring{$\ast$}{*}gui)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classprt_1_1_event}{prt\+::\+Event}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_event_a68ae1e6264631e55933648b66d5dd11b}{Event}} ()=default
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_gui}{Gui}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classprt_1_1_gui_event_a92efeb3f97cda78b67bda002b962fe9f}{gui\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_gui_event_afb747e75f685cda53fcf6c4d1c9c7b3f}\index{prt::GuiEvent@{prt::GuiEvent}!GuiEvent@{GuiEvent}}
+\index{GuiEvent@{GuiEvent}!prt::GuiEvent@{prt::GuiEvent}}
+\doxysubsubsection{\texorpdfstring{GuiEvent()}{GuiEvent()}}
+{\footnotesize\ttfamily \label{classprt_1_1_gui_event_afb747e75f685cda53fcf6c4d1c9c7b3f} 
+prt\+::\+Gui\+Event\+::\+Gui\+Event (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_gui}{Gui}} \texorpdfstring{$\ast$}{*}}]{gui}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}, {\ttfamily [protected]}}
+
+\Hypertarget{classprt_1_1_gui_event_aad9af3fcc3eced41bf3119cbcca04e90}\index{prt::GuiEvent@{prt::GuiEvent}!````~GuiEvent@{\texorpdfstring{$\sim$}{\string~}GuiEvent}}
+\index{````~GuiEvent@{\texorpdfstring{$\sim$}{\string~}GuiEvent}!prt::GuiEvent@{prt::GuiEvent}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}GuiEvent()}{\string~GuiEvent()}}
+{\footnotesize\ttfamily \label{classprt_1_1_gui_event_aad9af3fcc3eced41bf3119cbcca04e90} 
+prt\+::\+Gui\+Event\+::\texorpdfstring{$\sim$}{\string~}\+Gui\+Event (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_gui_event_a6654b32f752a2dbf11a6b3b739dc720e}\index{prt::GuiEvent@{prt::GuiEvent}!DEFINE\_EVENT\_PROTOTYPE\_TYPE@{DEFINE\_EVENT\_PROTOTYPE\_TYPE}}
+\index{DEFINE\_EVENT\_PROTOTYPE\_TYPE@{DEFINE\_EVENT\_PROTOTYPE\_TYPE}!prt::GuiEvent@{prt::GuiEvent}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_EVENT\_PROTOTYPE\_TYPE()}{DEFINE\_EVENT\_PROTOTYPE\_TYPE()}}
+{\footnotesize\ttfamily \label{classprt_1_1_gui_event_a6654b32f752a2dbf11a6b3b739dc720e} 
+prt\+::\+Gui\+Event\+::\+DEFINE\+\_\+\+EVENT\+\_\+\+PROTOTYPE\+\_\+\+TYPE (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_gui}{Gui}}}]{}{, }\item[{\mbox{\hyperlink{namespaceprt_a71898c3f0b0bfdc40e2c14ecd1424bfa}{FOR\+\_\+\+EACH\+\_\+\+GUI\+\_\+\+EVENT}}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_gui_event_afcd516d67f7eb2df853d3e85bd5ae8ee}\index{prt::GuiEvent@{prt::GuiEvent}!GetGui@{GetGui}}
+\index{GetGui@{GetGui}!prt::GuiEvent@{prt::GuiEvent}}
+\doxysubsubsection{\texorpdfstring{GetGui()}{GetGui()}}
+{\footnotesize\ttfamily \label{classprt_1_1_gui_event_afcd516d67f7eb2df853d3e85bd5ae8ee} 
+auto prt\+::\+Gui\+Event\+::\+Get\+Gui (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ \mbox{\hyperlink{classprt_1_1_gui}{Gui}}\texorpdfstring{$\ast$}{*} \hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_gui_event_a92efeb3f97cda78b67bda002b962fe9f}\index{prt::GuiEvent@{prt::GuiEvent}!gui\_@{gui\_}}
+\index{gui\_@{gui\_}!prt::GuiEvent@{prt::GuiEvent}}
+\doxysubsubsection{\texorpdfstring{gui\_}{gui\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_gui_event_a92efeb3f97cda78b67bda002b962fe9f} 
+\mbox{\hyperlink{classprt_1_1_gui}{Gui}}\texorpdfstring{$\ast$}{*} prt\+::\+Gui\+Event\+::gui\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{gui_8h}{gui.\+h}}\end{DoxyCompactItemize}

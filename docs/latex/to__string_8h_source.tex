@@ -1,0 +1,186 @@
+\doxysection{to\+\_\+string.\+h}
+\hypertarget{to__string_8h_source}{}\label{to__string_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/to\_string.h@{/Users/tazz/Projects/prette/Sources/prette/to\_string.h}}
+\mbox{\hyperlink{to__string_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_TO\_STRING\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_TO\_STRING\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <glog/logging.h>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <type\_traits>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <utility>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{common_8h}{prette/common.h}}"{}}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }Window;}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{namespace\ }tostring\ \{}
+\DoxyCodeLine{00017\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00018\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structprt_1_1tostring_1_1has__to__string}{has\_to\_string}}\ \{}
+\DoxyCodeLine{00019\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1tostring_1_1has__to__string_a27028b4a8225175c5d3a2df6e1573073}{value}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00020\ \};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#define\ DECLARE\_HAS\_TO\_STRING(Name)\ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\ \ template\ <>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\ \ struct\ has\_to\_string<Name>\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\ \ \ \ static\ constexpr\ const\ auto\ value\ =\ true;\ \(\backslash\)}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\ \ \};}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \mbox{\hyperlink{to__string_8h_a4b9d56a6c4763c186a58deb57bf4ce44}{DECLARE\_HAS\_TO\_STRING}}(\mbox{\hyperlink{classprt_1_1_window}{prt::Window}});}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#undef\ DECLARE\_HAS\_TO\_STRING}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base}{ToStringHelperBase}}\ \{}
+\DoxyCodeLine{00032\ \ \ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_a30965b702b0679ca6e409bd69f9dd016}{DEFINE\_DEFAULT\_COPYABLE\_TYPE}}(\mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base}{ToStringHelperBase}});}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00035\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_1_1_field}{Field}}\ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_1_1_field_a703ac0c258df12e4c385bf36d123402a}{DEFINE\_DEFAULT\_COPYABLE\_TYPE}}(\mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_1_1_field}{Field}});}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_1_1_field_a2e8110fc545266b914a36a3a1dcd14ae}{NameSupplier}}\ =\ std::function<std::string()>;}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_1_1_field_a11246e512a0ab1e97534cf3331a9f7b4}{ValueSupplier}}\ =\ std::function<std::string()>;}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00043\ \ \ \ \ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_1_1_field_a2e8110fc545266b914a36a3a1dcd14ae}{NameSupplier}}\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_1_1_field_adc7912c71e1951835435f56160b29c44}{name\_}};}
+\DoxyCodeLine{00044\ \ \ \ \ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_1_1_field_a11246e512a0ab1e97534cf3331a9f7b4}{ValueSupplier}}\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_1_1_field_a0885dadd44faa31b90af6d038f5d7350}{value\_}};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00047\ \ \ \ \ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_1_1_field_a7044fdf791c2b3e9682ebb16e25dca2f}{Field}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_1_1_field_a6c31592996936b4541dcae944930bb0a}{Field}}(\mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_1_1_field_a2e8110fc545266b914a36a3a1dcd14ae}{NameSupplier}}\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_1_1_field_af8f4d2c33249962b26baa2e6c2a2eac3}{name}},\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_1_1_field_a11246e512a0ab1e97534cf3331a9f7b4}{ValueSupplier}}\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_1_1_field_a68455791b173f38f7434209df2cfea57}{value}})\ :}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_1_1_field_adc7912c71e1951835435f56160b29c44}{name\_}}(\mbox{\hyperlink{namespacestd}{std}}::move(\mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_1_1_field_af8f4d2c33249962b26baa2e6c2a2eac3}{name}})),}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_1_1_field_a0885dadd44faa31b90af6d038f5d7350}{value\_}}(\mbox{\hyperlink{namespacestd}{std}}::move(\mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_1_1_field_a68455791b173f38f7434209df2cfea57}{value}}))\ \{\}}
+\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_1_1_field_a2f093e503d6de043eff6381c74979d0f}{\string~Field}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_1_1_field_af8f4d2c33249962b26baa2e6c2a2eac3}{name}}()\ const\ -\/>\ const\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_1_1_field_a2e8110fc545266b914a36a3a1dcd14ae}{NameSupplier}}\&\ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_1_1_field_adc7912c71e1951835435f56160b29c44}{name\_}};}
+\DoxyCodeLine{00055\ \ \ \ \ \}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_1_1_field_acc3b40b6bcbfd4308e79f37c07c08f71}{GetName}}()\ const\ -\/>\ \mbox{\hyperlink{namespacestd}{std}}::\textcolor{keywordtype}{string}\ \{}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_1_1_field_adc7912c71e1951835435f56160b29c44}{name\_}}();}
+\DoxyCodeLine{00059\ \ \ \ \ \}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_1_1_field_a68455791b173f38f7434209df2cfea57}{value}}()\ const\ -\/>\ const\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_1_1_field_a11246e512a0ab1e97534cf3331a9f7b4}{ValueSupplier}}\&\ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_1_1_field_a0885dadd44faa31b90af6d038f5d7350}{value\_}};}
+\DoxyCodeLine{00063\ \ \ \ \ \}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_1_1_field_acdc473d9f579211af8b01f911f9ef048}{GetValue}}()\ const\ -\/>\ \mbox{\hyperlink{namespacestd}{std}}::\textcolor{keywordtype}{string}\ \{}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_1_1_field_a0885dadd44faa31b90af6d038f5d7350}{value\_}}();}
+\DoxyCodeLine{00067\ \ \ \ \ \}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_1_1_field_af2206386ac03dc0f70ed0f2294473d39}{operator<<}}(std::ostream\&\ stream,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_1_1_field}{Field}}\&\ rhs)\ -\/>\ std::ostream\&\ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ stream\ <<\ rhs.GetName()\ <<\ \textcolor{stringliteral}{"{}="{}}\ <<\ rhs.GetValue();}
+\DoxyCodeLine{00071\ \ \ \ \ \}}
+\DoxyCodeLine{00072\ \ \ \};}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_a1827269e4d5fe8fc073945ee7b513ec4}{FieldList}}\ =\ std::vector<Field>;}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00077\ \ \ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_a1827269e4d5fe8fc073945ee7b513ec4}{FieldList}}\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_a82db5fcce2246345fd0374e46e131cba}{fields\_}};}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00080\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_a37c19ae76943b6977a61fcb715c30e06}{ToStringHelperBase}}(\mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_a1827269e4d5fe8fc073945ee7b513ec4}{FieldList}}\ fields)\ :}
+\DoxyCodeLine{00081\ \ \ \ \ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_a82db5fcce2246345fd0374e46e131cba}{fields\_}}(\mbox{\hyperlink{namespacestd}{std}}::move(fields))\ \{\}}
+\DoxyCodeLine{00082\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_a1d9f540bc7ce173ac96fa065d4369326}{ToStringHelperBase}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ num\_fields\ =\ 0)\ :}
+\DoxyCodeLine{00083\ \ \ \ \ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_a82db5fcce2246345fd0374e46e131cba}{fields\_}}(num\_fields)\ \{\}}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_a86d71d97f19c3c841a96e21cb96777d8}{EmplaceBackField}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_1_1_field_a2e8110fc545266b914a36a3a1dcd14ae}{Field::NameSupplier}}\&\ name,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_1_1_field_a11246e512a0ab1e97534cf3331a9f7b4}{Field::ValueSupplier}}\&\ value)\ \{}
+\DoxyCodeLine{00086\ \ \ \ \ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_a82db5fcce2246345fd0374e46e131cba}{fields\_}}.emplace\_back(name,\ value);}
+\DoxyCodeLine{00087\ \ \ \}}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_ab6af6d1e16180b8605c8f4a0a4070732}{GetTypename}}()\ const\ -\/>\ \mbox{\hyperlink{namespacestd}{std}}::\textcolor{keywordtype}{string}\ =\ 0;}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ public:}
+\DoxyCodeLine{00092\ \ \ virtual\ \string~\mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base}{ToStringHelperBase}}()\ =\ default;}
+\DoxyCodeLine{00093\ \ \ virtual\ auto\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_ad21a629e26b711b3ddb474e4226502db}{ToString}}()\ const\ -\/>\ \mbox{\hyperlink{namespacestd}{std}}::\textcolor{keywordtype}{string};}
+\DoxyCodeLine{00094\ \};}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ template\ <typename\ T>}
+\DoxyCodeLine{00097\ class\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper}{ToStringHelper}}\ :\ public\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base}{ToStringHelperBase}}\ \{}
+\DoxyCodeLine{00098\ \ \ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_a01d4cd586b2d48b00f6ce69ec0504027}{DEFINE\_DEFAULT\_COPYABLE\_TYPE}}(\mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper}{ToStringHelper<T>}});}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00101\ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ V>}
+\DoxyCodeLine{00102\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_a8feb2a875c8592fa6d89178a5e434c42}{Identity}}(V\ value)\ -\/>\ std::function<V()>\ \{}
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordflow}{return}\ [value]()\ \{}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ value;}
+\DoxyCodeLine{00105\ \ \ \ \ \};}
+\DoxyCodeLine{00106\ \ \ \}}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00109\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_af3d7783d81285815e70c43663cd6d69f}{GetTypename}}()\ const\ -\/>\ \mbox{\hyperlink{namespacestd}{std}}::\textcolor{keywordtype}{string}\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordflow}{return}\ prt::GetTypename<T>();}
+\DoxyCodeLine{00111\ \ \ \}}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00114\ \ \ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_ad021f1807a6fd26310b2ce012da41bbc}{ToStringHelper}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00115\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_ad89dee41a43de9599bfbfe29c5a84f24}{ToStringHelper}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_a1827269e4d5fe8fc073945ee7b513ec4}{FieldList}}\&\ fields)\ :}
+\DoxyCodeLine{00116\ \ \ \ \ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base}{ToStringHelperBase}}(fields)\ \{\}}
+\DoxyCodeLine{00117\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_a5bbadea1b0293af017d25352f4f4b85a}{ToStringHelper}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ num\_fields)\ :}
+\DoxyCodeLine{00118\ \ \ \ \ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base}{ToStringHelperBase}}(num\_fields)\ \{\}}
+\DoxyCodeLine{00119\ \ \ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_ad5ccafa9078992ac2ee25557b9f9c5dc}{\string~ToStringHelper}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_a23b8b4f1b241b412866b816d68dbd95f}{AddField}}(std::string\ name,\ std::string\ value)\ -\/>\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper}{ToStringHelper<T>}}\&\ \{}
+\DoxyCodeLine{00122\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(!name.empty());}
+\DoxyCodeLine{00123\ \ \ \ \ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_a86d71d97f19c3c841a96e21cb96777d8}{EmplaceBackField}}(Identity(name),\ Identity(value));}
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00125\ \ \ \}}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_ab68658b6ad708e4018abe3766cacaa60}{AddField}}(std::string\ name,\ \textcolor{keyword}{const}\ std::stringstream\&\ ss)\ -\/>\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper}{ToStringHelper<T>}}\&\ \{}
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keywordflow}{return}\ AddField(std::move(name),\ ss.str());}
+\DoxyCodeLine{00129\ \ \ \}}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00131\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_ab60c96dfdc02d14edf0437f6d845c4d9}{AddFieldPtr}}(std::string\ name,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ value)\ -\/>\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper}{ToStringHelper<T>}}\&\ \{}
+\DoxyCodeLine{00132\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(!name.empty());}
+\DoxyCodeLine{00133\ \ \ \ \ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_a86d71d97f19c3c841a96e21cb96777d8}{EmplaceBackField}}(Identity(name),\ [value]()\ -\/>\ std::string\ \{}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (value\ ==\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}nullptr"{}};}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ std::stringstream\ ss;}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ ss\ <<\ value;}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ss.str();}
+\DoxyCodeLine{00139\ \ \ \ \ \});}
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00141\ \ \ \}}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ V>}
+\DoxyCodeLine{00144\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_a11332aa49ac1c5f5640d18b18f4a9941}{AddFieldPtr}}(std::string\ name,\ \textcolor{keyword}{const}\ V*\ value,\ std::enable\_if\_t<\mbox{\hyperlink{structprt_1_1tostring_1_1has__to__string}{has\_to\_string<V>::value}}>*\ =\ \textcolor{keyword}{nullptr})\ -\/>\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper}{ToStringHelper<T>}}\&\ \{}
+\DoxyCodeLine{00145\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(!name.empty());}
+\DoxyCodeLine{00146\ \ \ \ \ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_a86d71d97f19c3c841a96e21cb96777d8}{EmplaceBackField}}(Identity(name),\ [value]()\ -\/>\ std::string\ \{}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (value\ ==\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}nullptr"{}};}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ std::stringstream\ ss;}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ ss\ <<\ value-\/>ToString();}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ss.str();}
+\DoxyCodeLine{00152\ \ \ \ \ \});}
+\DoxyCodeLine{00153\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00154\ \ \ \}}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ V>}
+\DoxyCodeLine{00157\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_ae60636e2df5f8d3c44242232330ed9da}{AddFieldRef}}(std::string\ name,\ \textcolor{keyword}{const}\ V\&\ value)\ -\/>\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper}{ToStringHelper<T>}}\&\ \{}
+\DoxyCodeLine{00158\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(!name.empty());}
+\DoxyCodeLine{00159\ \ \ \ \ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_a86d71d97f19c3c841a96e21cb96777d8}{EmplaceBackField}}(Identity(name),\ [value]()\ -\/>\ std::string\ \{}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ std::stringstream\ ss;}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ ss\ <<\ value;}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ss.str();}
+\DoxyCodeLine{00163\ \ \ \ \ \});}
+\DoxyCodeLine{00164\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00165\ \ \ \}}
+\DoxyCodeLine{00166\ }
+\DoxyCodeLine{00167\ \ \ \textcolor{keyword}{operator}\ std::string()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00168\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_base_ad21a629e26b711b3ddb474e4226502db}{ToString}}();}
+\DoxyCodeLine{00169\ \ \ \}}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00171\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_a6180b40160afbb53984fa955ab286a21}{operator<<}}(std::ostream\&\ stream,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper}{ToStringHelper<T>}}\&\ rhs)\ -\/>\ std::ostream\&\ \{}
+\DoxyCodeLine{00172\ \ \ \ \ \textcolor{keywordflow}{return}\ stream\ <<\ (std::string)rhs;}
+\DoxyCodeLine{00173\ \ \ \}}
+\DoxyCodeLine{00174\ \};}
+\DoxyCodeLine{00175\ \}\ \ \textcolor{comment}{//\ namespace\ tostring}}
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00177\ \textcolor{keyword}{using\ }tostring::ToStringHelper;}
+\DoxyCodeLine{00178\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00179\ }
+\DoxyCodeLine{00180\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_TO\_STRING\_H}}
+
+\end{DoxyCode}

@@ -1,0 +1,142 @@
+\doxysection{gui.\+h}
+\hypertarget{gui_8h_source}{}\label{gui_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/gui.h@{/Users/tazz/Projects/prette/Sources/prette/gui.h}}
+\mbox{\hyperlink{gui_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_GUI\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_GUI\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <fmt/format.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <imgui\_freetype.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <imgui\_impl\_glfw.h>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <imgui\_impl\_vulkan.h>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <implot.h>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{event_8h}{prette/event.h}}"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}prette/gfx.h"{}}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#define\ FOR\_EACH\_GUI\_EVENT(V)\ \(\backslash\)}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\ \ V(GuiInit)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\ \ V(GuiOpened)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\ \ V(GuiRendered)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\ \ V(GuiUpdated)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\ \ V(GuiClosed)}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{class\ }Gui;}
+\DoxyCodeLine{00022\ \textcolor{keyword}{class\ }GuiEvent;}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#define\ FORWARD\_DECLARE(Name)\ class\ Name\#\#Event;}}
+\DoxyCodeLine{00024\ \mbox{\hyperlink{gui_8h_a9249bba07bf2ad86052788756989dc00}{FOR\_EACH\_GUI\_EVENT}}(\mbox{\hyperlink{gui_8h_a83d2d158052fc2dc9bdf9bece3fd251e}{FORWARD\_DECLARE}})}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#undef\ FORWARD\_DECLARE}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_gui_event}{GuiEvent}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1_event}{Event}}\ \{}
+\DoxyCodeLine{00028\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00029\ \ \ \mbox{\hyperlink{classprt_1_1_gui}{Gui}}*\ \mbox{\hyperlink{classprt_1_1_gui_event_a92efeb3f97cda78b67bda002b962fe9f}{gui\_}};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00032\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_gui_event_afb747e75f685cda53fcf6c4d1c9c7b3f}{GuiEvent}}(\mbox{\hyperlink{classprt_1_1_gui}{Gui}}*\ gui)\ :}
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_event}{Event}}(),}
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_gui_event_a92efeb3f97cda78b67bda002b962fe9f}{gui\_}}(gui)\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(\mbox{\hyperlink{classprt_1_1_gui_event_a92efeb3f97cda78b67bda002b962fe9f}{gui\_}});}
+\DoxyCodeLine{00036\ \ \ \}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00039\ \ \ \mbox{\hyperlink{classprt_1_1_gui_event_aad9af3fcc3eced41bf3119cbcca04e90}{\string~GuiEvent}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_gui_event_afcd516d67f7eb2df853d3e85bd5ae8ee}{GetGui}}()\ const\ -\/>\ \mbox{\hyperlink{classprt_1_1_gui}{Gui}}*\ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_gui_event_a92efeb3f97cda78b67bda002b962fe9f}{gui\_}};}
+\DoxyCodeLine{00043\ \ \ \}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \mbox{\hyperlink{classprt_1_1_gui_event_a6654b32f752a2dbf11a6b3b739dc720e}{DEFINE\_EVENT\_PROTOTYPE\_TYPE}}(\mbox{\hyperlink{classprt_1_1_gui}{Gui}},\ \mbox{\hyperlink{gui_8h_a9249bba07bf2ad86052788756989dc00}{FOR\_EACH\_GUI\_EVENT}});}
+\DoxyCodeLine{00046\ \};}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_gui_init_event}{GuiInitEvent}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1_gui_event}{GuiEvent}}\ \{}
+\DoxyCodeLine{00049\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00050\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_gui_init_event_aa00d71bbc953110a234fd40a9f19e2f9}{GuiInitEvent}}(\mbox{\hyperlink{classprt_1_1_gui}{Gui}}*\ gui)\ :}
+\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_gui_event}{GuiEvent}}(gui)\ \{\}}
+\DoxyCodeLine{00052\ \ \ \mbox{\hyperlink{classprt_1_1_gui_init_event_ac85f49a3ff4b7827d2214283ddac488b}{\string~GuiInitEvent}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00053\ \ \ \mbox{\hyperlink{classprt_1_1_gui_init_event_a994bb90b100a68f3dacfca9acc3ac99c}{DECLARE\_EVENT\_TYPE}}(\mbox{\hyperlink{classprt_1_1_gui_event}{GuiEvent}},\ GuiInit);}
+\DoxyCodeLine{00054\ \};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_gui_opened_event}{GuiOpenedEvent}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1_gui_event}{GuiEvent}}\ \{}
+\DoxyCodeLine{00057\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00058\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_gui_opened_event_a60ca5476af76f19681f7db6451f690e9}{GuiOpenedEvent}}(\mbox{\hyperlink{classprt_1_1_gui}{Gui}}*\ gui)\ :}
+\DoxyCodeLine{00059\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_gui_event}{GuiEvent}}(gui)\ \{\}}
+\DoxyCodeLine{00060\ \ \ \mbox{\hyperlink{classprt_1_1_gui_opened_event_ab6dfb77d1229868852b1793810cb2c21}{\string~GuiOpenedEvent}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00061\ \ \ \mbox{\hyperlink{classprt_1_1_gui_opened_event_adedfe91223f501d53388992ac9e4211b}{DECLARE\_EVENT\_TYPE}}(\mbox{\hyperlink{classprt_1_1_gui_event}{GuiEvent}},\ GuiOpened);}
+\DoxyCodeLine{00062\ \};}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_gui_rendered_event}{GuiRenderedEvent}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1_gui_event}{GuiEvent}}\ \{}
+\DoxyCodeLine{00065\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00066\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_gui_rendered_event_a44c07ff178283393aa396355316ac197}{GuiRenderedEvent}}(\mbox{\hyperlink{classprt_1_1_gui}{Gui}}*\ gui)\ :}
+\DoxyCodeLine{00067\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_gui_event}{GuiEvent}}(gui)\ \{\}}
+\DoxyCodeLine{00068\ \ \ \mbox{\hyperlink{classprt_1_1_gui_rendered_event_a6417dc32aba7c5e31714d86b1dcc373c}{\string~GuiRenderedEvent}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00069\ \ \ \mbox{\hyperlink{classprt_1_1_gui_rendered_event_a9c3a16c7964927c20b3296e1448ae80f}{DECLARE\_EVENT\_TYPE}}(\mbox{\hyperlink{classprt_1_1_gui_event}{GuiEvent}},\ GuiRendered);}
+\DoxyCodeLine{00070\ \};}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_gui_updated_event}{GuiUpdatedEvent}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1_gui_event}{GuiEvent}}\ \{}
+\DoxyCodeLine{00073\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00074\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_gui_updated_event_a75f8c044a36c0b48791e1840423f0bc6}{GuiUpdatedEvent}}(\mbox{\hyperlink{classprt_1_1_gui}{Gui}}*\ gui)\ :}
+\DoxyCodeLine{00075\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_gui_event}{GuiEvent}}(gui)\ \{\}}
+\DoxyCodeLine{00076\ \ \ \mbox{\hyperlink{classprt_1_1_gui_updated_event_adeb935b99eaf41f03840dd6d077d0663}{\string~GuiUpdatedEvent}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00077\ \ \ \mbox{\hyperlink{classprt_1_1_gui_updated_event_a66df54b3b20e0746e0858890ab6b69cd}{DECLARE\_EVENT\_TYPE}}(\mbox{\hyperlink{classprt_1_1_gui_event}{GuiEvent}},\ GuiUpdated);}
+\DoxyCodeLine{00078\ \};}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_gui_closed_event}{GuiClosedEvent}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1_gui_event}{GuiEvent}}\ \{}
+\DoxyCodeLine{00081\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00082\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_gui_closed_event_a1046bba5ec122594341af1e7a323f3bb}{GuiClosedEvent}}(\mbox{\hyperlink{classprt_1_1_gui}{Gui}}*\ gui)\ :}
+\DoxyCodeLine{00083\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_gui_event}{GuiEvent}}(gui)\ \{\}}
+\DoxyCodeLine{00084\ \ \ \mbox{\hyperlink{classprt_1_1_gui_closed_event_a1adaa27b673d974ebf8eec7ce57b0dde}{\string~GuiClosedEvent}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00085\ \ \ \mbox{\hyperlink{classprt_1_1_gui_closed_event_a946f04d8652a0541dddab37faf135da6}{DECLARE\_EVENT\_TYPE}}(\mbox{\hyperlink{classprt_1_1_gui_event}{GuiEvent}},\ GuiClosed);}
+\DoxyCodeLine{00086\ \};}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \mbox{\hyperlink{event_8h_a75f747c7c3ad9804780471c5ce370793}{DEFINE\_EVENT\_SUBJECT}}(\mbox{\hyperlink{classprt_1_1_gui}{Gui}});}
+\DoxyCodeLine{00089\ \mbox{\hyperlink{event_8h_a77dcd0ad69e8fd51c473d76aca5bba76}{DEFINE\_EVENT\_OBSERVABLE}}(\mbox{\hyperlink{classprt_1_1_gui}{Gui}});}
+\DoxyCodeLine{00090\ \mbox{\hyperlink{gui_8h_a9249bba07bf2ad86052788756989dc00}{FOR\_EACH\_GUI\_EVENT}}(\mbox{\hyperlink{event_8h_a77dcd0ad69e8fd51c473d76aca5bba76}{DEFINE\_EVENT\_OBSERVABLE}});}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_gui}{Gui}}\ \{}
+\DoxyCodeLine{00093\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00094\ \ \ std::string\ \mbox{\hyperlink{classprt_1_1_gui_aedf738e4d63d926b285466e2fbcb52e3}{name\_}};}
+\DoxyCodeLine{00095\ \ \ rx::subscription\ \mbox{\hyperlink{classprt_1_1_gui_a97d6292f6035e6de6cf3269d6a87e9be}{on\_tick\_}}\{\};}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00098\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_gui_aa8b454b38bd9082c22b75991636d2aa8}{Gui}}(std::string\ name);}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_gui_a827e83fc3f1653755a716f55415d2b3c}{LoadLuaScript}}(\textcolor{keyword}{const}\ std::string\&\ name)\ \{}
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ lua\ =\ \mbox{\hyperlink{classprt_1_1_lua_state_a0612d94b8671de21e31b3dbf3621e13e}{LuaState::Get}}();}
+\DoxyCodeLine{00102\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(lua);}
+\DoxyCodeLine{00103\ \ \ \ \ lua-\/>ExecuteScript(name);}
+\DoxyCodeLine{00104\ \ \ \}}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}...\ Args>}
+\DoxyCodeLine{00107\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_gui_aed52360396df7011ddc7742e6e852495}{InvokeLuaCallback}}(\textcolor{keyword}{const}\ std::string\&\ name,\ Args...\ args)\ \{}
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ lua\ =\ \mbox{\hyperlink{classprt_1_1_lua_state_a0612d94b8671de21e31b3dbf3621e13e}{LuaState::Get}}();}
+\DoxyCodeLine{00109\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(lua);}
+\DoxyCodeLine{00110\ \ \ \ \ lua-\/>ExecuteGlobalFunction(\mbox{\hyperlink{classprt_1_1_gui_aedf738e4d63d926b285466e2fbcb52e3}{name\_}},\ name);}
+\DoxyCodeLine{00111\ \ \ \}}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00114\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classprt_1_1_gui_aeabb2c2cc065007b3f4e0e23f320a0ab}{\string~Gui}}();}
+\DoxyCodeLine{00115\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_gui_a637f852342d2279b73fd5a4d8e071807}{GetGuiName}}()\ const\ -\/>\ const\ \textcolor{keywordtype}{char}*\ =\ 0;}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \ public:\ \ \textcolor{comment}{//\ TODO:\ reduce\ visibility}}
+\DoxyCodeLine{00118\ \ \ virtual\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_gui_a1babbaab76bfeeee0f44f6cf48b43209}{Update}}()\ =\ 0;}
+\DoxyCodeLine{00119\ \ \ virtual\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_gui_a9ec0dbab4550e416cabbd0b6b09a98f8}{Render}}()\ =\ 0;}
+\DoxyCodeLine{00120\ \};}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ namespace\ gui\ \{}
+\DoxyCodeLine{00123\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structprt_1_1gui_1_1_push_const_block}{PushConstBlock}}\ \{}
+\DoxyCodeLine{00124\ \ \ glm::vec2\ scale\{\};}
+\DoxyCodeLine{00125\ \ \ glm::vec2\ translate\{\};}
+\DoxyCodeLine{00126\ \};}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \textcolor{keywordtype}{void}\ Init();}
+\DoxyCodeLine{00129\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceprt_1_1gui_a53f14f7ac031017bb7341a3071c061a4}{Shutdown}}();}
+\DoxyCodeLine{00130\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_gui_a1babbaab76bfeeee0f44f6cf48b43209}{Update}}(\textcolor{keyword}{const}\ glm::u32vec2\&\ size)\ -\/>\ bool;}
+\DoxyCodeLine{00131\ \}\ \ \textcolor{comment}{//\ namespace\ gui}}
+\DoxyCodeLine{00132\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00134\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{gui__renderer_8h}{prette/gui\_renderer.h}}"{}}}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00136\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_GUI\_H}}
+
+\end{DoxyCode}

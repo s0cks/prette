@@ -1,0 +1,45 @@
+\doxysection{glm.\+h}
+\hypertarget{glm_8h_source}{}\label{glm_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/glm.h@{/Users/tazz/Projects/prette/Sources/prette/glm.h}}
+\mbox{\hyperlink{glm_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_GLM\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_GLM\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#define\ GLM\_FORCE\_RADIANS}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ GLM\_FORCE\_DEFAULT\_ALIGNED\_GENTYPES}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ GLM\_ENABLE\_EXPERIMENTAL}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ GLM\_FORCE\_DEPTH\_ZERO\_TO\_ONE}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <glm/glm.hpp>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <glm/gtc/matrix\_transform.hpp>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <glm/gtc/type\_ptr.hpp>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <glm/gtx/hash.hpp>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <glm/gtx/string\_cast.hpp>}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ Clamp(glm::vec2\&\ pos,\ \textcolor{keyword}{const}\ glm::vec4\&\ bounds)\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00017\ \ \ \textcolor{keywordtype}{bool}\ changed\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00018\ \ \ \textcolor{keywordflow}{if}\ (pos.x\ <\ bounds[0])\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ pos.x\ =\ bounds[0];}
+\DoxyCodeLine{00020\ \ \ \ \ changed\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00021\ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (pos.x\ >\ bounds[2])\ \{}
+\DoxyCodeLine{00022\ \ \ \ \ pos.x\ =\ bounds[2];}
+\DoxyCodeLine{00023\ \ \ \ \ changed\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00024\ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (pos.y\ <\ bounds[1])\ \{}
+\DoxyCodeLine{00025\ \ \ \ \ pos.y\ =\ bounds[1];}
+\DoxyCodeLine{00026\ \ \ \ \ changed\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00027\ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (pos.y\ >\ bounds[3])\ \{}
+\DoxyCodeLine{00028\ \ \ \ \ pos.y\ =\ bounds[3];}
+\DoxyCodeLine{00029\ \ \ \ \ changed\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00030\ \ \ \}}
+\DoxyCodeLine{00031\ \ \ \textcolor{keywordflow}{return}\ changed;}
+\DoxyCodeLine{00032\ \}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ Clamp(glm::vec2\&\ pos,\ \textcolor{keyword}{const}\ glm::vec2\&\ size)\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00035\ \ \ \textcolor{keywordflow}{return}\ Clamp(pos,\ glm::vec4(0.0f,\ 0.0f,\ size));}
+\DoxyCodeLine{00036\ \}}
+\DoxyCodeLine{00037\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_GLM\_H}}
+
+\end{DoxyCode}

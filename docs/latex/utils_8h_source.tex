@@ -1,0 +1,289 @@
+\doxysection{utils.\+h}
+\hypertarget{utils_8h_source}{}\label{utils_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/uv/utils.h@{/Users/tazz/Projects/prette/Sources/prette/uv/utils.h}}
+\mbox{\hyperlink{utils_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ UTILS\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ UTILS\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <glog/logging.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <uv.h>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <type\_traits>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{common_8h}{prette/common.h}}"{}}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt_1_1uv}{prt::uv}}\ \{}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#ifndef\ UV\_OK}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#define\ UV\_OK\ 0}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ UV\_OK}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceprt_1_1uv_a76457731a07865315da46335a5b53193}{StatusId}}\ =\ int;}
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1uv_1_1_status}{Status}}\ \{}
+\DoxyCodeLine{00019\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00020\ \ \ \mbox{\hyperlink{namespaceprt_1_1uv_a76457731a07865315da46335a5b53193}{StatusId}}\ \mbox{\hyperlink{classprt_1_1uv_1_1_status_a68487e5e239ae1fd631054d7c38fda2c}{id\_}};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00023\ \ \ \textcolor{keyword}{constexpr}\ \mbox{\hyperlink{classprt_1_1uv_1_1_status_ab15d39a302936977885f3a02970e2878}{Status}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_1_1uv_a76457731a07865315da46335a5b53193}{StatusId}}\ \textcolor{keywordtype}{id}\ =\ \mbox{\hyperlink{utils_8h_ace2d2813e9ea1a57493a6295bd4310a1}{UV\_OK}})\ :}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{classprt_1_1uv_1_1_status_a68487e5e239ae1fd631054d7c38fda2c}{id\_}}(\mbox{\hyperlink{classprt_1_1uv_1_1_status_aa3445ef003c10f6814541c5e29315494}{id}})\ \{\}}
+\DoxyCodeLine{00025\ \ \ \textcolor{keyword}{constexpr}\ \mbox{\hyperlink{classprt_1_1uv_1_1_status_afefd6d7fe6179ac9db9e590c20f1232f}{Status}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1uv_1_1_status}{Status}}\&\ rhs)\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00026\ \ \ \mbox{\hyperlink{classprt_1_1uv_1_1_status_ae34fd9ad3ef3ee0cfa7e32c2a5b6c50d}{\string~Status}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1uv_1_1_status_aa3445ef003c10f6814541c5e29315494}{id}}()\ const\ -\/>\ \mbox{\hyperlink{namespaceprt_1_1uv_a76457731a07865315da46335a5b53193}{StatusId}}\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1uv_1_1_status_a68487e5e239ae1fd631054d7c38fda2c}{id\_}};}
+\DoxyCodeLine{00030\ \ \ \}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1uv_1_1_status_a37ab5c13225516bd773648963ef964a8}{IsOk}}()\ const\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1uv_1_1_status_aa3445ef003c10f6814541c5e29315494}{id}}()\ >=\ \mbox{\hyperlink{utils_8h_ace2d2813e9ea1a57493a6295bd4310a1}{UV\_OK}};\ \ \textcolor{comment}{//\ TODO:\ this\ might\ be\ wrong}}
+\DoxyCodeLine{00034\ \ \ \}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1uv_1_1_status_a363b288caf078a9d9722a78e88aa4f4a}{message}}()\ const\ -\/>\ const\ \textcolor{keywordtype}{char}*\ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1uv_1_1_status_a37ab5c13225516bd773648963ef964a8}{IsOk}}()\ ?\ \textcolor{stringliteral}{"{}Ok"{}}\ :\ uv\_strerror(\textcolor{keywordtype}{id}());}
+\DoxyCodeLine{00038\ \ \ \}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{operator}\ \mbox{\hyperlink{namespaceprt_1_1uv_a76457731a07865315da46335a5b53193}{StatusId}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1uv_1_1_status_aa3445ef003c10f6814541c5e29315494}{id}}();}
+\DoxyCodeLine{00042\ \ \ \}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{operator}\ bool()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1uv_1_1_status_a37ab5c13225516bd773648963ef964a8}{IsOk}}();}
+\DoxyCodeLine{00046\ \ \ \}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1uv_1_1_status_ad1c85c30f7fdb373c12dc92241e25faf}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1uv_1_1_status}{Status}}\&\ rhs)\ -\/>\ \mbox{\hyperlink{classprt_1_1uv_1_1_status}{Status}}\&\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1uv_1_1_status_aa3364e9f88b7d606c86d8845ab2aa320}{operator<<}}(std::ostream\&\ stream,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1uv_1_1_status}{Status}}\&\ rhs)\ -\/>\ std::ostream\&\ \{}
+\DoxyCodeLine{00051\ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{}uv::Status("{}};}
+\DoxyCodeLine{00052\ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{}id="{}}\ <<\ rhs.id()\ <<\ \textcolor{stringliteral}{"{},\ "{}};}
+\DoxyCodeLine{00053\ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{}is\_ok="{}}\ <<\ rhs.IsOk();}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordflow}{if}\ (!rhs)}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{},\ message=\(\backslash\)"{}"{}}\ <<\ rhs.message()\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)"{}"{}};}
+\DoxyCodeLine{00056\ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{})"{}};}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordflow}{return}\ stream;}
+\DoxyCodeLine{00058\ \ \ \}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00061\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1uv_1_1_status_ab06d68952df1e43317136b1df5fca53e}{Ok}}()\ -\/>\ \mbox{\hyperlink{classprt_1_1uv_1_1_status}{Status}}\ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{utils_8h_ace2d2813e9ea1a57493a6295bd4310a1}{UV\_OK}};}
+\DoxyCodeLine{00063\ \ \ \}}
+\DoxyCodeLine{00064\ \};}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00067\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structprt_1_1uv_1_1is__uv__handle}{is\_uv\_handle}}\ \{}
+\DoxyCodeLine{00068\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1uv_1_1is__uv__handle_af0c7e6e6a047be39406c97bb75985d86}{value}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00069\ \};}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \textcolor{preprocessor}{\#define\ DECLARE\_IS\_UV\_HANDLE(Name)\ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00072\ \textcolor{preprocessor}{\ \ template\ <>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00073\ \textcolor{preprocessor}{\ \ struct\ is\_uv\_handle<Name>\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00074\ \textcolor{preprocessor}{\ \ \ \ static\ constexpr\ const\ auto\ value\ =\ true;\ \(\backslash\)}}
+\DoxyCodeLine{00075\ \textcolor{preprocessor}{\ \ \};}}
+\DoxyCodeLine{00076\ \mbox{\hyperlink{utils_8h_aa3a31aaa4737a50ccf91287fa95c9e4c}{DECLARE\_IS\_UV\_HANDLE}}(uv\_idle\_t);}
+\DoxyCodeLine{00077\ \mbox{\hyperlink{utils_8h_aa3a31aaa4737a50ccf91287fa95c9e4c}{DECLARE\_IS\_UV\_HANDLE}}(uv\_check\_t);}
+\DoxyCodeLine{00078\ \mbox{\hyperlink{utils_8h_aa3a31aaa4737a50ccf91287fa95c9e4c}{DECLARE\_IS\_UV\_HANDLE}}(uv\_prepare\_t);}
+\DoxyCodeLine{00079\ \mbox{\hyperlink{utils_8h_aa3a31aaa4737a50ccf91287fa95c9e4c}{DECLARE\_IS\_UV\_HANDLE}}(uv\_async\_t);}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#define\ CHECK\_UV\_RESULT(Severity,\ Result,\ Message)\ \(\backslash\)}}
+\DoxyCodeLine{00082\ \textcolor{preprocessor}{\ \ LOG\_IF(Severity,\ (Result)\ !=\ UV\_OK)\ <<\ (Message)\ <<\ "{}:\ "{}\ <<\ uv\_strerror((Result));}}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \textcolor{preprocessor}{\#define\ CHECK\_UV(Severity,\ Result,\ Message)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00085\ \textcolor{preprocessor}{\ \ (\{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00086\ \textcolor{preprocessor}{\ \ \ \ const\ auto\ status\ =\ (Result);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00087\ \textcolor{preprocessor}{\ \ \ \ LOG\_IF(Severity,\ !status)\ <<\ (Message)\ <<\ "{}:\ "{}\ <<\ status;\ \(\backslash\)}}
+\DoxyCodeLine{00088\ \textcolor{preprocessor}{\ \ \})}}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ Now()\ -\/>\ uint64\_t\ \{}
+\DoxyCodeLine{00091\ \ \ \textcolor{keywordflow}{return}\ uv\_hrtime();}
+\DoxyCodeLine{00092\ \}}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ Close(uv\_handle\_t*\ handle,\ uv\_close\_cb\ on\_close\ =\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{00095\ \ \ uv\_close(handle,\ on\_close);}
+\DoxyCodeLine{00096\ \}}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00099\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ Close(T*\ handle,\ uv\_close\_cb\ on\_close\ =\ \textcolor{keyword}{nullptr},\ std::enable\_if\_t<\mbox{\hyperlink{structprt_1_1uv_1_1is__uv__handle_af0c7e6e6a047be39406c97bb75985d86}{is\_uv\_handle<T>::value}}>*\ =\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{00100\ \ \ \textcolor{keywordflow}{return}\ Close((uv\_handle\_t*)handle,\ on\_close);}
+\DoxyCodeLine{00101\ \}}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ D>}
+\DoxyCodeLine{00104\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ SetHandleData(uv\_handle\_t*\ handle,\ D*\ data)\ \{}
+\DoxyCodeLine{00105\ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(handle);}
+\DoxyCodeLine{00106\ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(data);}
+\DoxyCodeLine{00107\ \ \ \textcolor{keywordflow}{return}\ uv\_handle\_set\_data(handle,\ data);}
+\DoxyCodeLine{00108\ \}}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T,\ \textcolor{keyword}{typename}\ D>}
+\DoxyCodeLine{00111\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ SetHandleData(T*\ handle,\ D*\ data,\ std::enable\_if\_t<\mbox{\hyperlink{structprt_1_1uv_1_1is__uv__handle_af0c7e6e6a047be39406c97bb75985d86}{is\_uv\_handle<T>::value}}>*\ =\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{00112\ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(handle);}
+\DoxyCodeLine{00113\ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(data);}
+\DoxyCodeLine{00114\ \ \ \textcolor{keywordflow}{return}\ SetHandleData<D>((uv\_handle\_t*)handle,\ data);}
+\DoxyCodeLine{00115\ \}}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ D>}
+\DoxyCodeLine{00118\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ GetHandleData(uv\_handle\_t*\ handle)\ -\/>\ D*\ \{}
+\DoxyCodeLine{00119\ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(handle);}
+\DoxyCodeLine{00120\ \ \ \textcolor{keywordflow}{return}\ (D*)uv\_handle\_get\_data(handle);}
+\DoxyCodeLine{00121\ \}}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T,\ \textcolor{keyword}{typename}\ D>}
+\DoxyCodeLine{00124\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ GetHandleData(T*\ handle,\ std::enable\_if\_t<\mbox{\hyperlink{structprt_1_1uv_1_1is__uv__handle_af0c7e6e6a047be39406c97bb75985d86}{is\_uv\_handle<T>::value}}>*\ =\ \textcolor{keyword}{nullptr})\ -\/>\ D*\ \{}
+\DoxyCodeLine{00125\ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(handle);}
+\DoxyCodeLine{00126\ \ \ \textcolor{keywordflow}{return}\ GetHandleData<D>((uv\_handle\_t*)handle);}
+\DoxyCodeLine{00127\ \}}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00129\ \textcolor{preprocessor}{\#define\ FOR\_EACH\_UV\_RUN\_MODE(V)\ \(\backslash\)}}
+\DoxyCodeLine{00130\ \textcolor{preprocessor}{\ \ V(Default)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00131\ \textcolor{preprocessor}{\ \ V(NoWait)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00132\ \textcolor{preprocessor}{\ \ V(Once)}}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00134\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{namespaceprt_1_1uv_af8a610099472f39fe8ee81a55f0d4025}{RunMode}}\ \{}
+\DoxyCodeLine{00135\ \ \ \mbox{\hyperlink{namespaceprt_1_1uv_af8a610099472f39fe8ee81a55f0d4025ae04b8230cf6cc5bc77d4befe64ba4fac}{kRunDefault}}\ =\ UV\_RUN\_DEFAULT,}
+\DoxyCodeLine{00136\ \ \ \mbox{\hyperlink{namespaceprt_1_1uv_af8a610099472f39fe8ee81a55f0d4025aa19a2273f799f951561ecbd663c639aa}{kRunNoWait}}\ =\ UV\_RUN\_NOWAIT,}
+\DoxyCodeLine{00137\ \ \ \mbox{\hyperlink{namespaceprt_1_1uv_af8a610099472f39fe8ee81a55f0d4025a90ab87c6810e5d52508e96d03b108385}{kRunOnce}}\ =\ UV\_RUN\_ONCE,}
+\DoxyCodeLine{00138\ \};}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00140\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ operator<<(std::ostream\&\ stream,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_1_1uv_af8a610099472f39fe8ee81a55f0d4025}{RunMode}}\&\ rhs)\ -\/>\ std::ostream\&\ \{}
+\DoxyCodeLine{00141\ \ \ \textcolor{keywordflow}{switch}\ (rhs)\ \{}
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00143\ \textcolor{preprocessor}{\#define\ DEFINE\_TO\_STRING(Name)\ \(\backslash\)}}
+\DoxyCodeLine{00144\ \textcolor{preprocessor}{\ \ case\ RunMode::kRun\#\#Name:\ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00145\ \textcolor{preprocessor}{\ \ \ \ return\ stream\ <<\ \#Name;}}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \mbox{\hyperlink{utils_8h_a569f3c73901cf45169b4f08925de1edd}{FOR\_EACH\_UV\_RUN\_MODE}}(\mbox{\hyperlink{pipeline__json_8h_a3a81f22f17b4931cbdde4b7218385134}{DEFINE\_TO\_STRING}})}
+\DoxyCodeLine{00147\ \textcolor{preprocessor}{\#undef\ DEFINE\_TO\_STRING}}
+\DoxyCodeLine{00148\ \ \ \}}
+\DoxyCodeLine{00149\ \}}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00151\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1uv_1_1_loop}{Loop}}\ \{}
+\DoxyCodeLine{00152\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1uv_1_1_loop_ac031c432825fc9836eec35a38346788b}{Idle}};}
+\DoxyCodeLine{00153\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1uv_1_1_loop_a340d2e0eea68faab58a9001ff666a432}{Check}};}
+\DoxyCodeLine{00154\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1uv_1_1_loop_a1b73dd3c3ac1219541d6b5d436521509}{Prepare}};}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00157\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classprt_1_1uv_1_1_loop_a7dc860eaf13d69ce1948dbdacea5e648}{Handle}}\ =\ uv\_loop\_t;}
+\DoxyCodeLine{00158\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1uv_1_1_loop_a6e78fcda7702fcfbbaa7b18bdbcd509c}{InitLoop}}(\mbox{\hyperlink{classprt_1_1uv_1_1_loop_a7dc860eaf13d69ce1948dbdacea5e648}{Handle}}*\ handle)\ -\/>\ \mbox{\hyperlink{classprt_1_1uv_1_1_status}{Status}}\ \{}
+\DoxyCodeLine{00159\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(handle);}
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{keywordflow}{return}\ \{uv\_loop\_init(handle)\};}
+\DoxyCodeLine{00161\ \ \ \}}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00163\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1uv_1_1_loop_a5eee91d3010b74d22d7b99037c825531}{RunLoop}}(\mbox{\hyperlink{classprt_1_1uv_1_1_loop_a7dc860eaf13d69ce1948dbdacea5e648}{Handle}}*\ handle,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_1_1uv_af8a610099472f39fe8ee81a55f0d4025}{RunMode}}\ mode\ =\ \mbox{\hyperlink{namespaceprt_1_1uv_af8a610099472f39fe8ee81a55f0d4025ae04b8230cf6cc5bc77d4befe64ba4fac}{kRunDefault}})\ -\/>\ \mbox{\hyperlink{classprt_1_1uv_1_1_status}{Status}}\ \{}
+\DoxyCodeLine{00164\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(handle);}
+\DoxyCodeLine{00165\ \ \ \ \ \textcolor{keywordflow}{return}\ \{uv\_run(handle,\ \textcolor{keyword}{static\_cast<}uv\_run\_mode\textcolor{keyword}{>}(mode))\};}
+\DoxyCodeLine{00166\ \ \ \}}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00168\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1uv_1_1_loop_a04d3e982bd52d36d481b88f927270486}{StopLoop}}(\mbox{\hyperlink{classprt_1_1uv_1_1_loop_a7dc860eaf13d69ce1948dbdacea5e648}{Handle}}*\ handle)\ \{}
+\DoxyCodeLine{00169\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(handle);}
+\DoxyCodeLine{00170\ \ \ \ \ \textcolor{keywordflow}{return}\ uv\_stop(handle);}
+\DoxyCodeLine{00171\ \ \ \}}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00174\ \ \ \mbox{\hyperlink{classprt_1_1uv_1_1_loop_a7dc860eaf13d69ce1948dbdacea5e648}{Handle}}\ \mbox{\hyperlink{classprt_1_1uv_1_1_loop_ad154258db91585789140fa48c3dd379e}{handle\_}};}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00176\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1uv_1_1_loop_ad65960eab5713dbc0eda4887c7eba98a}{GetHandle}}()\ -\/>\ \mbox{\hyperlink{classprt_1_1uv_1_1_loop_a7dc860eaf13d69ce1948dbdacea5e648}{Handle}}*\ \{}
+\DoxyCodeLine{00177\ \ \ \ \ \textcolor{keywordflow}{return}\ \&\mbox{\hyperlink{classprt_1_1uv_1_1_loop_ad154258db91585789140fa48c3dd379e}{handle\_}};}
+\DoxyCodeLine{00178\ \ \ \}}
+\DoxyCodeLine{00179\ }
+\DoxyCodeLine{00180\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00181\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1uv_1_1_loop_a97c936a498fff2ed8d9f215dc1d452dc}{Loop}}();}
+\DoxyCodeLine{00182\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classprt_1_1uv_1_1_loop_a16d30683f4a79831db2ac53e011d2e1e}{\string~Loop}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00184\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1uv_1_1_loop_aaf471392aa03eb964bff1ad3eb68168f}{Run}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_1_1uv_af8a610099472f39fe8ee81a55f0d4025}{RunMode}}\ mode);}
+\DoxyCodeLine{00185\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1uv_1_1_loop_ab25833ad410f4f191ca915cb605a1ad6}{Stop}}();}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00187\ \textcolor{preprocessor}{\#define\ DEFINE\_RUN\_WITH\_MODE(Name)\ \ \ \(\backslash\)}}
+\DoxyCodeLine{00188\ \textcolor{preprocessor}{\ \ inline\ void\ Run\#\#Name()\ \{\ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00189\ \textcolor{preprocessor}{\ \ \ \ return\ Run(RunMode::kRun\#\#Name);\ \(\backslash\)}}
+\DoxyCodeLine{00190\ \textcolor{preprocessor}{\ \ \}}}
+\DoxyCodeLine{00191\ \ \ \mbox{\hyperlink{classprt_1_1uv_1_1_loop_ab5cb9537ca5e3424edd6ea314fb46b23}{FOR\_EACH\_UV\_RUN\_MODE}}(\mbox{\hyperlink{utils_8h_ab7c3f2d7c9af97aa7a192c93c4c53dec}{DEFINE\_RUN\_WITH\_MODE}});}
+\DoxyCodeLine{00192\ \textcolor{preprocessor}{\#undef\ DEFINE\_RUN\_WITH\_MODE}}
+\DoxyCodeLine{00193\ }
+\DoxyCodeLine{00194\ \ \ \textcolor{keyword}{operator}\ \mbox{\hyperlink{classprt_1_1uv_1_1_loop_a7dc860eaf13d69ce1948dbdacea5e648}{Handle}}*()\ \{}
+\DoxyCodeLine{00195\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1uv_1_1_loop_ad65960eab5713dbc0eda4887c7eba98a}{GetHandle}}();}
+\DoxyCodeLine{00196\ \ \ \}}
+\DoxyCodeLine{00197\ \};}
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00199\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1uv_1_1_handle_base}{HandleBase}}\ \{}
+\DoxyCodeLine{00200\ \ \ \mbox{\hyperlink{classprt_1_1uv_1_1_handle_base_aef467824de7d07a1f97611463c811252}{DEFINE\_NON\_COPYABLE\_TYPE}}(\mbox{\hyperlink{classprt_1_1uv_1_1_handle_base}{HandleBase}});}
+\DoxyCodeLine{00201\ }
+\DoxyCodeLine{00202\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00203\ \ \ \mbox{\hyperlink{classprt_1_1uv_1_1_handle_base_a3caabb27f2c6b3115f9ce08395d33196}{HandleBase}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00204\ }
+\DoxyCodeLine{00205\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00206\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classprt_1_1uv_1_1_handle_base_af46be5bb2dce0071441f31c6a792ca33}{\string~HandleBase}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00207\ \};}
+\DoxyCodeLine{00208\ }
+\DoxyCodeLine{00209\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ H>}
+\DoxyCodeLine{00210\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1uv_1_1_handle_template}{HandleTemplate}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1uv_1_1_handle_base}{HandleBase}}\ \{}
+\DoxyCodeLine{00211\ \ \ \mbox{\hyperlink{classprt_1_1uv_1_1_handle_template_a4c9aff59179e7af2f71d4b9600a800d9}{DEFINE\_NON\_COPYABLE\_TYPE}}(\mbox{\hyperlink{classprt_1_1uv_1_1_handle_template}{HandleTemplate<H>}});}
+\DoxyCodeLine{00212\ \ \ \textcolor{keyword}{static\_assert}(\mbox{\hyperlink{structprt_1_1uv_1_1is__uv__handle}{is\_uv\_handle<H>::value}},\ \textcolor{stringliteral}{"{}expected\ handle\ type\ to\ be\ a\ uv\_handle\_t."{}});}
+\DoxyCodeLine{00213\ }
+\DoxyCodeLine{00214\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00215\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classprt_1_1uv_1_1_handle_template_a532a0c3b5bc405da4b069295b2045be3}{Handle}}\ =\ H;}
+\DoxyCodeLine{00216\ }
+\DoxyCodeLine{00217\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00218\ \ \ H\ \mbox{\hyperlink{classprt_1_1uv_1_1_handle_template_a4c0d0d8639f7f8c1904aa7c933aec2c3}{handle\_}}\{\};}
+\DoxyCodeLine{00219\ }
+\DoxyCodeLine{00220\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00221\ \ \ \mbox{\hyperlink{classprt_1_1uv_1_1_handle_template_af24bcf5256966560325bccc200380180}{HandleTemplate}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00222\ }
+\DoxyCodeLine{00223\ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1uv_1_1_handle_template_a0761770308287637f214c8516777f811}{handle}}()\ -\/>\ H*\ \{}
+\DoxyCodeLine{00224\ \ \ \ \ \textcolor{keywordflow}{return}\ \&\mbox{\hyperlink{classprt_1_1uv_1_1_handle_template_a4c0d0d8639f7f8c1904aa7c933aec2c3}{handle\_}};}
+\DoxyCodeLine{00225\ \ \ \}}
+\DoxyCodeLine{00226\ }
+\DoxyCodeLine{00227\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00228\ \ \ \mbox{\hyperlink{classprt_1_1uv_1_1_handle_template_a1faf42130a8b6eb222c09cd586640dfe}{\string~HandleTemplate}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00229\ \};}
+\DoxyCodeLine{00230\ }
+\DoxyCodeLine{00231\ \textcolor{preprocessor}{\#define\ DECLARE\_UV\_HANDLE(Name,\ Type)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00232\ \textcolor{preprocessor}{\ \ class\ Name\ :\ public\ HandleTemplate<Type>\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00233\ \textcolor{preprocessor}{\ \ \ \ DEFINE\_NON\_COPYABLE\_TYPE(Name);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00234\ \textcolor{preprocessor}{\ \ \ \ using\ Callback\ =\ void\ (*)(Type*);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00235\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00236\ \textcolor{preprocessor}{\ \ \ public:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00237\ \textcolor{preprocessor}{\ \ \ \ static\ auto\ Init(Loop*\ loop,\ Handle*\ handle)\ -\/>\ Status;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00238\ \textcolor{preprocessor}{\ \ \ \ static\ auto\ Start(Handle*\ handle,\ Callback\ callback)\ -\/>\ Status;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00239\ \textcolor{preprocessor}{\ \ \ \ static\ auto\ Stop(Handle*\ handle)\ -\/>\ Status;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00240\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00241\ \textcolor{preprocessor}{\ \ \ private:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00242\ \textcolor{preprocessor}{\ \ \ \ Callback\ callback\_;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00243\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00244\ \textcolor{preprocessor}{\ \ \ public:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00245\ \textcolor{preprocessor}{\ \ \ \ Name(Loop*\ loop,\ Callback\ callback,\ void*\ data\ =\ nullptr)\ :\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00246\ \textcolor{preprocessor}{\ \ \ \ \ \ HandleTemplate<Type>(),\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00247\ \textcolor{preprocessor}{\ \ \ \ \ \ callback\_(callback)\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00248\ \textcolor{preprocessor}{\ \ \ \ \ \ ASSERT(loop);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00249\ \textcolor{preprocessor}{\ \ \ \ \ \ ASSERT(callback);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00250\ \textcolor{preprocessor}{\ \ \ \ \ \ CHECK\_UV(ERROR,\ Init(loop,\ handle()),\ "{}failed\ to\ initialize\ uv::"{}\ \#Name);\ \ \(\backslash\)}}
+\DoxyCodeLine{00251\ \textcolor{preprocessor}{\ \ \ \ \ \ if\ (data)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00252\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ SetHandleData<Type>(handle(),\ data);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00253\ \textcolor{preprocessor}{\ \ \ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00254\ \textcolor{preprocessor}{\ \ \ \ \string~Name()\ override\ =\ default;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00255\ \textcolor{preprocessor}{\ \ \ \ void\ Start()\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00256\ \textcolor{preprocessor}{\ \ \ \ \ \ CHECK\_UV(ERROR,\ Start(handle(),\ callback\_),\ "{}failed\ to\ start\ uv::"{}\ \#Name);\ \(\backslash\)}}
+\DoxyCodeLine{00257\ \textcolor{preprocessor}{\ \ \ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00258\ \textcolor{preprocessor}{\ \ \ \ void\ Stop()\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00259\ \textcolor{preprocessor}{\ \ \ \ \ \ CHECK\_UV(ERROR,\ Stop(handle()),\ "{}failed\ to\ stop\ uv::"{}\ \#Name);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00260\ \textcolor{preprocessor}{\ \ \ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00261\ \textcolor{preprocessor}{\ \ \ \ void\ Close(const\ uv\_close\_cb\ callback\ =\ nullptr)\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00262\ \textcolor{preprocessor}{\ \ \ \ \ \ return\ uv::Close<Type>(handle(),\ callback);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00263\ \textcolor{preprocessor}{\ \ \ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00264\ \textcolor{preprocessor}{\ \ \};}}
+\DoxyCodeLine{00265\ \mbox{\hyperlink{utils_8h_a665779f84c5710c925601035d5f4d1c1}{DECLARE\_UV\_HANDLE}}(Idle,\ uv\_idle\_t);}
+\DoxyCodeLine{00266\ \mbox{\hyperlink{utils_8h_a665779f84c5710c925601035d5f4d1c1}{DECLARE\_UV\_HANDLE}}(Prepare,\ uv\_prepare\_t);}
+\DoxyCodeLine{00267\ \mbox{\hyperlink{utils_8h_a665779f84c5710c925601035d5f4d1c1}{DECLARE\_UV\_HANDLE}}(Check,\ uv\_check\_t);}
+\DoxyCodeLine{00268\ \textcolor{preprocessor}{\#undef\ DECLARE\_UV\_HANDLE}}
+\DoxyCodeLine{00269\ }
+\DoxyCodeLine{00270\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1uv_1_1_async}{Async}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1uv_1_1_handle_template}{HandleTemplate}}<uv\_async\_t>\ \{}
+\DoxyCodeLine{00271\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00272\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1uv_1_1_async_a3e804432ff219996740c41cdcd3b8b49}{Init}}(\mbox{\hyperlink{classprt_1_1uv_1_1_loop}{Loop}}\&\ loop,\ \mbox{\hyperlink{classprt_1_1uv_1_1_handle_template_a532a0c3b5bc405da4b069295b2045be3}{Handle}}*\ \mbox{\hyperlink{classprt_1_1uv_1_1_handle_template_a0761770308287637f214c8516777f811}{handle}},\ uv\_async\_cb\ on\_send)\ -\/>\ \mbox{\hyperlink{classprt_1_1uv_1_1_status}{Status}};}
+\DoxyCodeLine{00273\ }
+\DoxyCodeLine{00274\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00275\ \ \ \mbox{\hyperlink{classprt_1_1uv_1_1_async_a0be98af3a5d0202570db9e64665f8cbe}{Async}}(\mbox{\hyperlink{classprt_1_1uv_1_1_loop}{Loop}}\&\ loop,\ uv\_async\_cb\ on\_send,\ \textcolor{keywordtype}{void}*\ data\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00276\ \ \ \mbox{\hyperlink{classprt_1_1uv_1_1_async_a24d41a40387b7a82b35c3d6011e87bba}{\string~Async}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00277\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1uv_1_1_async_aae5cf1c7553add737a1f9ac164f7eb2a}{Send}}();}
+\DoxyCodeLine{00278\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1uv_1_1_async_a40e5a54cb9adfac84ba4a070dd8aec1a}{Close}}(uv\_close\_cb\ on\_close\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00279\ \};}
+\DoxyCodeLine{00280\ }
+\DoxyCodeLine{00281\ \}\ \ \textcolor{comment}{//\ namespace\ prt::uv}}
+\DoxyCodeLine{00282\ }
+\DoxyCodeLine{00283\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ UTILS\_H}}
+
+\end{DoxyCode}

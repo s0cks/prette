@@ -1,0 +1,58 @@
+\doxysection{tile.\+h}
+\hypertarget{tile_8h_source}{}\label{tile_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/tile.h@{/Users/tazz/Projects/prette/Sources/prette/tile.h}}
+\mbox{\hyperlink{tile_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_TILE\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_TILE\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{common_8h}{prette/common.h}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{glm_8h}{prette/glm.h}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{to__string_8h}{prette/to\_string.h}}"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00009\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceprt_a2b26a6eb256a6eefff5896d1df8e78c3}{TilePos}}\ =\ glm::u32vec2;}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_tile}{Tile}};}
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_tile_visitor}{TileVisitor}}\ \{}
+\DoxyCodeLine{00013\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00014\ \ \ \mbox{\hyperlink{classprt_1_1_tile_visitor_a9ae835d5c00a67fa3bb35e22571d1c8e}{TileVisitor}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classprt_1_1_tile_visitor_afa55494ac5e20388a7e27ccdfe6eb84b}{\string~TileVisitor}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00018\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_tile_visitor_ab2aac851afe87463871b72f299c35ff3}{Visit}}(\mbox{\hyperlink{classprt_1_1_tile}{Tile}}*\ tile)\ -\/>\ \textcolor{keywordtype}{bool}\ =\ 0;}
+\DoxyCodeLine{00019\ \};}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_tile}{Tile}}\ \{}
+\DoxyCodeLine{00022\ \ \ \mbox{\hyperlink{classprt_1_1_tile_a6d2cb88680195dfefb6699ae0fe3c364}{DEFINE\_DEFAULT\_COPYABLE\_TYPE}}(\mbox{\hyperlink{classprt_1_1_tile}{Tile}});}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00025\ \ \ \mbox{\hyperlink{namespaceprt_a2b26a6eb256a6eefff5896d1df8e78c3}{TilePos}}\ \mbox{\hyperlink{classprt_1_1_tile_a0cc3822a4c48ffcd2bda19a61e4829f6}{pos\_}}\{\};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00028\ \ \ \mbox{\hyperlink{classprt_1_1_tile_a72ea69e7123439c82de03e354605d70e}{Tile}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00029\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_tile_a96a70e1cc70dd767faf4d0456c6c1608}{Tile}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_a2b26a6eb256a6eefff5896d1df8e78c3}{TilePos}}\ pos)\ :}
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_tile_a0cc3822a4c48ffcd2bda19a61e4829f6}{pos\_}}(\mbox{\hyperlink{namespacestd}{std}}::move(pos))\ \{\}}
+\DoxyCodeLine{00031\ \ \ \mbox{\hyperlink{classprt_1_1_tile_a3882ff1063eafa05e2d7f065acb19b55}{Tile}}(\textcolor{keyword}{const}\ uint32\_t\ x,\ \textcolor{keyword}{const}\ uint32\_t\ y)\ :}
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{classprt_1_1_tile}{Tile}}(\mbox{\hyperlink{namespaceprt_a2b26a6eb256a6eefff5896d1df8e78c3}{TilePos}}(x,\ y))\ \{\}}
+\DoxyCodeLine{00033\ \ \ \mbox{\hyperlink{classprt_1_1_tile_afc4bd07e32a7b88901fae669f7de9548}{\string~Tile}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_tile_a33d1e16ffd488c7840ce66db0cd04e67}{GetPos}}()\ const\ -\/>\ const\ \mbox{\hyperlink{namespaceprt_a2b26a6eb256a6eefff5896d1df8e78c3}{TilePos}}\&\ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_tile_a0cc3822a4c48ffcd2bda19a61e4829f6}{pos\_}};}
+\DoxyCodeLine{00037\ \ \ \}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_tile_a7332b882a9d9815888ee0dba51a77137}{Accept}}(\mbox{\hyperlink{classprt_1_1_tile_visitor}{TileVisitor}}*\ vis)\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00040\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(vis);}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordflow}{return}\ vis-\/>Visit(\textcolor{keyword}{this});}
+\DoxyCodeLine{00042\ \ \ \}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_tile_adb330c2d5d37dde9d35e624a69f96c49}{operator<<}}(std::ostream\&\ stream,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classprt_1_1_tile}{Tile}}\&\ rhs)\ -\/>\ std::ostream\&\ \{}
+\DoxyCodeLine{00045\ \ \ \ \ \mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper}{ToStringHelper<Tile>}}\ helper\{\};}
+\DoxyCodeLine{00046\ \ \ \ \ helper.\mbox{\hyperlink{classprt_1_1tostring_1_1_to_string_helper_ae60636e2df5f8d3c44242232330ed9da}{AddFieldRef}}(\textcolor{stringliteral}{"{}pos"{}},\ rhs.GetPos());}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordflow}{return}\ stream\ <<\ helper;}
+\DoxyCodeLine{00048\ \ \ \}}
+\DoxyCodeLine{00049\ \};}
+\DoxyCodeLine{00050\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_TILE\_H}}
+
+\end{DoxyCode}

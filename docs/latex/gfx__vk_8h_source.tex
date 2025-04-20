@@ -1,0 +1,636 @@
+\doxysection{gfx\+\_\+vk.\+h}
+\hypertarget{gfx__vk_8h_source}{}\label{gfx__vk_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/gfx\_vk.h@{/Users/tazz/Projects/prette/Sources/prette/gfx\_vk.h}}
+\mbox{\hyperlink{gfx__vk_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_GFX\_VK\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_GFX\_VK\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <glog/logging.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <vulkan/vk\_enum\_string\_helper.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <vulkan/vulkan.h>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <vulkan/vulkan\_core.h>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <unordered\_set>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{common_8h}{prette/common.h}}"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{gfx__driver_8h}{prette/gfx\_driver.h}}"{}}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{lua_8h}{prette/lua.h}}"{}}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}prette/prette.h"{}}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#ifndef\ VK\_DEFAULT\_FENCE\_TIMEOUT}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#define\ VK\_DEFAULT\_FENCE\_TIMEOUT\ 100000000000}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ VK\_DEFAULT\_FENCE\_TIMEOUT}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#ifndef\ VK\_FLAGS\_NONE}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#define\ VK\_FLAGS\_NONE\ 0}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ VK\_FLAGS\_NONE}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00026\ \textcolor{keyword}{class\ }Driver;}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structprt_1_1_memory_buffer}{MemoryBuffer}}\ \{}
+\DoxyCodeLine{00029\ \ \ VkBuffer\ \mbox{\hyperlink{structprt_1_1_memory_buffer_af8ec2cb9e668bd214010e1f07297c72b}{buffer}}\{\};}
+\DoxyCodeLine{00030\ \ \ VkDeviceMemory\ \mbox{\hyperlink{structprt_1_1_memory_buffer_a63cb0145b8bcab034e27605f207514be}{memory}}\{\};}
+\DoxyCodeLine{00031\ \};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ operator<<(std::ostream\&\ stream,\ \textcolor{keyword}{const}\ VkResult\&\ rhs)\ -\/>\ std::ostream\&\ \{}
+\DoxyCodeLine{00034\ \ \ \textcolor{keywordflow}{return}\ stream\ <<\ std::string(string\_VkResult(rhs));}
+\DoxyCodeLine{00035\ \}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#define\ CHECK\_VK(Severity,\ Result,\ Message)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\ \ (\{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\ \ \ \ const\ auto\ result\ =\ (Result);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\ \ \ \ LOG\_IF(Severity,\ result\ !=\ VK\_SUCCESS)\ <<\ (Message)\ <<\ "{}:\ "{}\ <<\ result;\ \(\backslash\)}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\ \ \})}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structprt_1_1_queue_family_indices}{QueueFamilyIndices}}\ \{}
+\DoxyCodeLine{00044\ \ \ std::optional<uint32\_t>\ \mbox{\hyperlink{structprt_1_1_queue_family_indices_a4450c0ad58283557939893d87f713b2c}{graphics}}\{\};}
+\DoxyCodeLine{00045\ \ \ std::optional<uint32\_t>\ \mbox{\hyperlink{structprt_1_1_queue_family_indices_afbd556e04609377bf1e28a5789cd8046}{present}}\{\};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1_queue_family_indices_aae551fd89e56683018e2c4cc7bf5c632}{GetGraphicsFamily}}()\ const\ -\/>\ uint32\_t\ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(\mbox{\hyperlink{structprt_1_1_queue_family_indices_a4450c0ad58283557939893d87f713b2c}{graphics}}.has\_value());}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structprt_1_1_queue_family_indices_a4450c0ad58283557939893d87f713b2c}{graphics}}.value();}
+\DoxyCodeLine{00050\ \ \ \}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1_queue_family_indices_a0d4269ce76496c84edd41df47550a142}{GetPresentFamily}}()\ const\ -\/>\ uint32\_t\ \{}
+\DoxyCodeLine{00053\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(\mbox{\hyperlink{structprt_1_1_queue_family_indices_a4450c0ad58283557939893d87f713b2c}{graphics}}.has\_value());}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structprt_1_1_queue_family_indices_a4450c0ad58283557939893d87f713b2c}{graphics}}.value();}
+\DoxyCodeLine{00055\ \ \ \}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{structprt_1_1_queue_family_indices_a15fc8e15fb62259caa096ce7be75f806}{IsComplete}}()\ const\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structprt_1_1_queue_family_indices_a4450c0ad58283557939893d87f713b2c}{graphics}}.has\_value()\ \&\&\ \mbox{\hyperlink{structprt_1_1_queue_family_indices_afbd556e04609377bf1e28a5789cd8046}{present}}.has\_value();}
+\DoxyCodeLine{00059\ \ \ \}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{structprt_1_1_queue_family_indices_a4501b1b8ceeba3f07609ab86df9e7013}{GetUniqueFamilies}}(std::unordered\_set<uint32\_t>\&\ families)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00062\ \ \ \ \ families.insert(\mbox{\hyperlink{structprt_1_1_queue_family_indices_afbd556e04609377bf1e28a5789cd8046}{present}}.value());}
+\DoxyCodeLine{00063\ \ \ \ \ families.insert(\mbox{\hyperlink{structprt_1_1_queue_family_indices_a4450c0ad58283557939893d87f713b2c}{graphics}}.value());}
+\DoxyCodeLine{00064\ \ \ \}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{structprt_1_1_queue_family_indices_a752d5597aec17c1f8c7ebae7b78e7adb}{GetGraphicsQueue}}(\textcolor{keyword}{const}\ VkDevice\&\ device,\ VkQueue\&\ queue,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ index\ =\ 0)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00067\ \ \ \ \ vkGetDeviceQueue(device,\ \mbox{\hyperlink{structprt_1_1_queue_family_indices_aae551fd89e56683018e2c4cc7bf5c632}{GetGraphicsFamily}}(),\ index,\ \&queue);}
+\DoxyCodeLine{00068\ \ \ \}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{structprt_1_1_queue_family_indices_a95aa096af873d0ac7b46d365f5a22902}{GetPresentQueue}}(\textcolor{keyword}{const}\ VkDevice\&\ device,\ VkQueue\&\ queue,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ index\ =\ 0)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00071\ \ \ \ \ vkGetDeviceQueue(device,\ \mbox{\hyperlink{structprt_1_1_queue_family_indices_a0d4269ce76496c84edd41df47550a142}{GetPresentFamily}}(),\ index,\ \&queue);}
+\DoxyCodeLine{00072\ \ \ \}}
+\DoxyCodeLine{00073\ \};}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \textcolor{preprocessor}{\#define\ MAX\_NUMBER\_OF\_FRAMES\_IN\_FLIGHT\ 2}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \textcolor{preprocessor}{\#define\ VK\_MAKE\_PRT\_VERSION\ \ \ \ \ \ \ \ \ \ \ \ VK\_MAKE\_VERSION(PRT\_VERSION\_MAJOR,\ PRT\_VERSION\_MINOR,\ PRT\_VERSION\_PATCH)}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ ClampExtent(VkExtent2D\&\ v,\ \textcolor{keyword}{const}\ VkExtent2D\&\ min,\ \textcolor{keyword}{const}\ VkExtent2D\&\ max)\ -\/>\ VkExtent2D\&\ \{}
+\DoxyCodeLine{00080\ \ \ v.width\ =\ std::clamp(v.width,\ min.width,\ max.width);}
+\DoxyCodeLine{00081\ \ \ v.height\ =\ std::clamp(v.height,\ min.height,\ max.height);}
+\DoxyCodeLine{00082\ \ \ \textcolor{keywordflow}{return}\ v;}
+\DoxyCodeLine{00083\ \}}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ ClampExtent(VkExtent2D\&\ v,\ \textcolor{keyword}{const}\ VkSurfaceCapabilitiesKHR\&\ surface\_capabilities)\ -\/>\ VkExtent2D\&\ \{}
+\DoxyCodeLine{00086\ \ \ \textcolor{keywordflow}{return}\ ClampExtent(v,\ surface\_capabilities.minImageExtent,\ surface\_capabilities.maxImageExtent);}
+\DoxyCodeLine{00087\ \}}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ FindQueueFamilies(\textcolor{keyword}{const}\ VkPhysicalDevice\&\ device,\ \textcolor{keyword}{const}\ VkSurfaceKHR\&\ surface)\ -\/>\ QueueFamilyIndices\ \{}
+\DoxyCodeLine{00090\ \ \ QueueFamilyIndices\ indices\{\};}
+\DoxyCodeLine{00091\ \ \ uint32\_t\ count\ =\ 0;}
+\DoxyCodeLine{00092\ \ \ vkGetPhysicalDeviceQueueFamilyProperties(device,\ \&count,\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00093\ \ \ std::vector<VkQueueFamilyProperties>\ families(count);}
+\DoxyCodeLine{00094\ \ \ vkGetPhysicalDeviceQueueFamilyProperties(device,\ \&count,\ \&families[0]);}
+\DoxyCodeLine{00095\ \ \ \textcolor{keyword}{auto}\ idx\ =\ 0;}
+\DoxyCodeLine{00096\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ family\ :\ families)\ \{}
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordflow}{if}\ (family.queueFlags\ \&\ VK\_QUEUE\_GRAPHICS\_BIT)\ \{}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ indices.graphics\ =\ idx;}
+\DoxyCodeLine{00099\ \ \ \ \ \}}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \ \ \ VkBool32\ present\_supported\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00102\ \ \ \ \ vkGetPhysicalDeviceSurfaceSupportKHR(device,\ idx,\ surface,\ \&present\_supported);}
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordflow}{if}\ (present\_supported)\ \{}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ indices.present\ =\ idx;}
+\DoxyCodeLine{00105\ \ \ \ \ \}}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordflow}{if}\ (indices.IsComplete())\ \{}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00109\ \ \ \ \ \}}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ \ \ \ \ idx++;}
+\DoxyCodeLine{00112\ \ \ \}}
+\DoxyCodeLine{00113\ \ \ \textcolor{keywordflow}{return}\ indices;}
+\DoxyCodeLine{00114\ \}}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ FindSuitablePhysicalDevice(\textcolor{keyword}{const}\ VkInstance\&\ instance,\ VkPhysicalDevice*\ result,}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::function<\textcolor{keywordtype}{bool}(\textcolor{keyword}{const}\ VkPhysicalDevice\&)>\&\ predicate)\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00118\ \ \ uint32\_t\ count\ =\ 0;}
+\DoxyCodeLine{00119\ \ \ vkEnumeratePhysicalDevices(instance,\ \&count,\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00120\ \ \ LOG\_IF(FATAL,\ count\ ==\ 0)\ <<\ \textcolor{stringliteral}{"{}failed\ to\ find\ GPUs\ w/\ vulkan\ support."{}};}
+\DoxyCodeLine{00121\ \ \ std::vector<VkPhysicalDevice>\ devices(count);}
+\DoxyCodeLine{00122\ \ \ vkEnumeratePhysicalDevices(instance,\ \&count,\ \&devices[0]);}
+\DoxyCodeLine{00123\ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ device\ =\ std::ranges::find\_if(devices,\ predicate);}
+\DoxyCodeLine{00124\ \ \ \textcolor{keywordflow}{if}\ (device\ ==\ std::end(devices))\ \{}
+\DoxyCodeLine{00125\ \ \ \ \ (*result)\ =\ VK\_NULL\_HANDLE;}
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00127\ \ \ \}}
+\DoxyCodeLine{00128\ \ \ (*result)\ =\ (*device);}
+\DoxyCodeLine{00129\ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}((*result)\ !=\ VK\_NULL\_HANDLE);}
+\DoxyCodeLine{00130\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00131\ \}}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ FindSupportedFormat(\textcolor{keyword}{const}\ VkPhysicalDevice\ physical\_device,\ \textcolor{keyword}{const}\ std::vector<VkFormat>\&\ formats,}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ VkImageTiling\ tiling,\ VkFormatFeatureFlags\ features)\ -\/>\ VkFormat\ \{}
+\DoxyCodeLine{00135\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ format\ :\ formats)\ \{}
+\DoxyCodeLine{00136\ \ \ \ \ VkFormatProperties\ properties\{\};}
+\DoxyCodeLine{00137\ \ \ \ \ vkGetPhysicalDeviceFormatProperties(physical\_device,\ format,\ \&properties);}
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{keywordflow}{if}\ (tiling\ ==\ VK\_IMAGE\_TILING\_LINEAR\ \&\&\ (properties.linearTilingFeatures\ \&\ features)\ ==\ features)\ \{}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ format;}
+\DoxyCodeLine{00140\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (tiling\ ==\ VK\_IMAGE\_TILING\_OPTIMAL\ \&\&\ (properties.optimalTilingFeatures\ \&\ features)\ ==\ features)\ \{}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ format;}
+\DoxyCodeLine{00142\ \ \ \ \ \}}
+\DoxyCodeLine{00143\ \ \ \}}
+\DoxyCodeLine{00144\ \ \ LOG(FATAL)\ <<\ \textcolor{stringliteral}{"{}failed\ to\ find\ supported\ depth\ format"{}};}
+\DoxyCodeLine{00145\ \}}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00147\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ FindDepthFormat(\textcolor{keyword}{const}\ VkPhysicalDevice\ physical\_device)\ -\/>\ VkFormat\ \{}
+\DoxyCodeLine{00148\ \ \ \textcolor{keywordflow}{return}\ FindSupportedFormat(physical\_device,\ \{VK\_FORMAT\_D32\_SFLOAT,\ VK\_FORMAT\_D32\_SFLOAT\_S8\_UINT,\ VK\_FORMAT\_D24\_UNORM\_S8\_UINT\},}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ VK\_IMAGE\_TILING\_OPTIMAL,\ VK\_FORMAT\_FEATURE\_DEPTH\_STENCIL\_ATTACHMENT\_BIT);}
+\DoxyCodeLine{00150\ \}}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00152\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ HasStencilComponent(\textcolor{keyword}{const}\ VkFormat\ format)\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00153\ \ \ \textcolor{keywordflow}{return}\ format\ ==\ VK\_FORMAT\_D32\_SFLOAT\_S8\_UINT\ ||\ format\ ==\ VK\_FORMAT\_D24\_UNORM\_S8\_UINT;}
+\DoxyCodeLine{00154\ \}}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ \textcolor{preprocessor}{\#ifdef\ PRT\_DEBUG}}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00158\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ PrintProperties(\textcolor{keyword}{const}\ VkPhysicalDevice\&\ device)\ \{}
+\DoxyCodeLine{00159\ \ \ VkPhysicalDeviceProperties\ properties;}
+\DoxyCodeLine{00160\ \ \ vkGetPhysicalDeviceProperties(device,\ \&properties);}
+\DoxyCodeLine{00161\ \ \ LOG(INFO)\ <<\ \textcolor{stringliteral}{"{}\ \ *\ Device\ Name:\ "{}}\ <<\ properties.deviceName;}
+\DoxyCodeLine{00162\ \ \ LOG(INFO)\ <<\ \textcolor{stringliteral}{"{}\ \ *\ Device\ Type:\ "{}}\ <<\ properties.deviceType;}
+\DoxyCodeLine{00163\ \ \ LOG(INFO)\ <<\ \textcolor{stringliteral}{"{}\ \ *\ Vendor\ ID:\ "{}}\ <<\ properties.vendorID;}
+\DoxyCodeLine{00164\ \ \ LOG(INFO)\ <<\ \textcolor{stringliteral}{"{}\ \ *\ Device\ ID:\ "{}}\ <<\ properties.deviceID;}
+\DoxyCodeLine{00165\ \ \ LOG(INFO)\ <<\ \textcolor{stringliteral}{"{}\ \ *\ API\ Version:\ "{}}\ <<\ VK\_VERSION\_MAJOR(properties.apiVersion)\ <<\ \textcolor{stringliteral}{"{}."{}}\ <<\ VK\_VERSION\_MINOR(properties.apiVersion)}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}."{}}\ <<\ VK\_VERSION\_PATCH(properties.apiVersion);}
+\DoxyCodeLine{00167\ \}}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00169\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ FindMemoryType(\textcolor{keyword}{const}\ VkPhysicalDevice\&\ physical\_device,\ \textcolor{keyword}{const}\ uint32\_t\ filter,}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ VkMemoryPropertyFlags\&\ flags)\ -\/>\ uint32\_t\ \{}
+\DoxyCodeLine{00171\ \ \ VkPhysicalDeviceMemoryProperties\ mem\_properties\{\};}
+\DoxyCodeLine{00172\ \ \ vkGetPhysicalDeviceMemoryProperties(physical\_device,\ \&mem\_properties);}
+\DoxyCodeLine{00173\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ idx\ =\ 0;\ idx\ <\ mem\_properties.memoryTypeCount;\ idx++)\ \{}
+\DoxyCodeLine{00174\ \ \ \ \ \textcolor{keywordflow}{if}\ ((filter\ \&\ (1\ <<\ idx))\ \&\&\ ((mem\_properties.memoryTypes[idx].propertyFlags\ \&\ flags)\ ==\ flags))}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ idx;}
+\DoxyCodeLine{00176\ \ \ \}}
+\DoxyCodeLine{00177\ \ \ LOG(FATAL)\ <<\ \textcolor{stringliteral}{"{}failed\ to\ find\ suitable\ memory\ for\ physical\ device."{}};}
+\DoxyCodeLine{00178\ \}}
+\DoxyCodeLine{00179\ }
+\DoxyCodeLine{00180\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ CopyVkBuffer(\textcolor{keyword}{const}\ VkDevice\&\ device,\ \textcolor{keyword}{const}\ VkCommandPool\&\ command\_pool,\ \textcolor{keyword}{const}\ VkQueue\&\ queue,\ VkBuffer\&\ dst,}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ VkBuffer\&\ src,\ \textcolor{keyword}{const}\ VkDeviceSize\ size)\ \{}
+\DoxyCodeLine{00182\ \ \ VkCommandBufferAllocateInfo\ alloc\_info\{\};}
+\DoxyCodeLine{00183\ \ \ alloc\_info.sType\ =\ VK\_STRUCTURE\_TYPE\_COMMAND\_BUFFER\_ALLOCATE\_INFO;}
+\DoxyCodeLine{00184\ \ \ alloc\_info.level\ =\ VK\_COMMAND\_BUFFER\_LEVEL\_PRIMARY;}
+\DoxyCodeLine{00185\ \ \ alloc\_info.commandPool\ =\ command\_pool;}
+\DoxyCodeLine{00186\ \ \ alloc\_info.commandBufferCount\ =\ 1;}
+\DoxyCodeLine{00187\ }
+\DoxyCodeLine{00188\ \ \ VkCommandBuffer\ command\_buffer\{\};}
+\DoxyCodeLine{00189\ \ \ \mbox{\hyperlink{gfx__vk_8h_a703ede7d843545f6c50bc2ea59164c80}{CHECK\_VK}}(FATAL,\ vkAllocateCommandBuffers(device,\ \&alloc\_info,\ \&command\_buffer),\ \textcolor{stringliteral}{"{}failed\ to\ allocate\ vk\ command\ buffer"{}});}
+\DoxyCodeLine{00190\ }
+\DoxyCodeLine{00191\ \ \ VkCommandBufferBeginInfo\ begin\_info\{\};}
+\DoxyCodeLine{00192\ \ \ begin\_info.sType\ =\ VK\_STRUCTURE\_TYPE\_COMMAND\_BUFFER\_BEGIN\_INFO;}
+\DoxyCodeLine{00193\ \ \ begin\_info.flags\ =\ VK\_COMMAND\_BUFFER\_USAGE\_ONE\_TIME\_SUBMIT\_BIT;}
+\DoxyCodeLine{00194\ \ \ vkBeginCommandBuffer(command\_buffer,\ \&begin\_info);}
+\DoxyCodeLine{00195\ \ \ \{}
+\DoxyCodeLine{00196\ \ \ \ \ VkBufferCopy\ copy\_region\{\};}
+\DoxyCodeLine{00197\ \ \ \ \ copy\_region.srcOffset\ =\ 0;}
+\DoxyCodeLine{00198\ \ \ \ \ copy\_region.dstOffset\ =\ 0;}
+\DoxyCodeLine{00199\ \ \ \ \ copy\_region.size\ =\ size;}
+\DoxyCodeLine{00200\ \ \ \ \ vkCmdCopyBuffer(command\_buffer,\ src,\ dst,\ 1,\ \&copy\_region);}
+\DoxyCodeLine{00201\ \ \ \}}
+\DoxyCodeLine{00202\ \ \ vkEndCommandBuffer(command\_buffer);}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00204\ \ \ VkSubmitInfo\ submit\_info\{\};}
+\DoxyCodeLine{00205\ \ \ submit\_info.sType\ =\ VK\_STRUCTURE\_TYPE\_SUBMIT\_INFO;}
+\DoxyCodeLine{00206\ \ \ submit\_info.commandBufferCount\ =\ 1;}
+\DoxyCodeLine{00207\ \ \ submit\_info.pCommandBuffers\ =\ \&command\_buffer;}
+\DoxyCodeLine{00208\ }
+\DoxyCodeLine{00209\ \ \ \mbox{\hyperlink{gfx__vk_8h_a703ede7d843545f6c50bc2ea59164c80}{CHECK\_VK}}(FATAL,\ vkQueueSubmit(queue,\ 1,\ \&submit\_info,\ VK\_NULL\_HANDLE),\ \textcolor{stringliteral}{"{}failed\ to\ submit\ to\ graphics\ queue"{}});}
+\DoxyCodeLine{00210\ \ \ \mbox{\hyperlink{gfx__vk_8h_a703ede7d843545f6c50bc2ea59164c80}{CHECK\_VK}}(FATAL,\ vkQueueWaitIdle(queue),\ \textcolor{stringliteral}{"{}failed\ to\ wait\ for\ graphics\ queue\ idle"{}});}
+\DoxyCodeLine{00211\ \ \ vkFreeCommandBuffers(device,\ command\_pool,\ 1,\ \&command\_buffer);}
+\DoxyCodeLine{00212\ \}}
+\DoxyCodeLine{00213\ }
+\DoxyCodeLine{00214\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ InitVkBuffer(\textcolor{keyword}{const}\ VkPhysicalDevice\&\ physical\_device,\ \textcolor{keyword}{const}\ VkDevice\&\ device,\ \textcolor{keyword}{const}\ VkDeviceSize\ size,}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ VkBufferUsageFlags\ usage,\ \textcolor{keyword}{const}\ VkMemoryPropertyFlags\ properties,\ VkBuffer\&\ buffer,}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ VkDeviceMemory\&\ buffer\_memory,\ \textcolor{keyword}{const}\ VkAllocationCallbacks*\ allocator\ =\ \textcolor{keyword}{nullptr},}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ VkDeviceSize\ offset\ =\ 0)\ \{}
+\DoxyCodeLine{00218\ \ \ VkBufferCreateInfo\ create\_info\{\};}
+\DoxyCodeLine{00219\ \ \ create\_info.sType\ =\ VK\_STRUCTURE\_TYPE\_BUFFER\_CREATE\_INFO;}
+\DoxyCodeLine{00220\ \ \ create\_info.size\ =\ size;}
+\DoxyCodeLine{00221\ \ \ create\_info.usage\ =\ usage;}
+\DoxyCodeLine{00222\ \ \ create\_info.sharingMode\ =\ VK\_SHARING\_MODE\_EXCLUSIVE;}
+\DoxyCodeLine{00223\ \ \ \mbox{\hyperlink{gfx__vk_8h_a703ede7d843545f6c50bc2ea59164c80}{CHECK\_VK}}(FATAL,\ vkCreateBuffer(device,\ \&create\_info,\ allocator,\ \&buffer),\ \textcolor{stringliteral}{"{}failed\ to\ create\ vk\ buffer"{}});}
+\DoxyCodeLine{00224\ }
+\DoxyCodeLine{00225\ \ \ VkMemoryRequirements\ mem\_requirements\{\};}
+\DoxyCodeLine{00226\ \ \ vkGetBufferMemoryRequirements(device,\ buffer,\ \&mem\_requirements);}
+\DoxyCodeLine{00227\ }
+\DoxyCodeLine{00228\ \ \ VkMemoryAllocateInfo\ alloc\_info\{\};}
+\DoxyCodeLine{00229\ \ \ alloc\_info.sType\ =\ VK\_STRUCTURE\_TYPE\_MEMORY\_ALLOCATE\_INFO;}
+\DoxyCodeLine{00230\ \ \ alloc\_info.allocationSize\ =\ mem\_requirements.size;}
+\DoxyCodeLine{00231\ \ \ alloc\_info.memoryTypeIndex\ =\ FindMemoryType(physical\_device,\ mem\_requirements.memoryTypeBits,\ properties);}
+\DoxyCodeLine{00232\ \ \ \mbox{\hyperlink{gfx__vk_8h_a703ede7d843545f6c50bc2ea59164c80}{CHECK\_VK}}(FATAL,\ vkAllocateMemory(device,\ \&alloc\_info,\ allocator,\ \&buffer\_memory),\ \textcolor{stringliteral}{"{}failed\ to\ allocate\ vk\ memory"{}});}
+\DoxyCodeLine{00233\ \ \ vkBindBufferMemory(device,\ buffer,\ buffer\_memory,\ offset);}
+\DoxyCodeLine{00234\ \}}
+\DoxyCodeLine{00235\ }
+\DoxyCodeLine{00236\ \textcolor{keyword}{namespace\ }vk\ \{}
+\DoxyCodeLine{00237\ \textcolor{keyword}{class\ }Buffer\ \{}
+\DoxyCodeLine{00238\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00239\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ VkMemoryPropertyFlags\ kDefaultBufferMemoryProperties\ =}
+\DoxyCodeLine{00240\ \ \ \ \ \ \ VK\_MEMORY\_PROPERTY\_HOST\_VISIBLE\_BIT\ |\ VK\_MEMORY\_PROPERTY\_HOST\_COHERENT\_BIT;}
+\DoxyCodeLine{00241\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ AllocateImageMemory(Driver*\ driver,\ \textcolor{keyword}{const}\ VkImage\&\ image,\ VkDeviceMemory\&\ bufferMemory,}
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ VkMemoryPropertyFlags\ properties);}
+\DoxyCodeLine{00243\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ CopyDataToImageWithStaging(\textcolor{keyword}{const}\ VkImage\&\ image,\ \textcolor{keyword}{const}\ uint8\_t*\ data,\ \textcolor{keyword}{const}\ uint64\_t\ num\_bytes,}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<VkBufferImageCopy>\&\ regions);}
+\DoxyCodeLine{00245\ }
+\DoxyCodeLine{00246\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00247\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ AllocateMemory(Driver*\ driver,\ \textcolor{keyword}{const}\ VkDeviceSize\ alloc\_size,\ \textcolor{keyword}{const}\ uint32\_t\ memory\_type,\ VkDeviceMemory\&\ memory);}
+\DoxyCodeLine{00248\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ AllocateMemory(Driver*\ driver,\ \textcolor{keyword}{const}\ VkMemoryRequirements\&\ mem\_requirements,\ VkDeviceMemory\&\ memory,}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ VkMemoryPropertyFlags\ properties);}
+\DoxyCodeLine{00250\ }
+\DoxyCodeLine{00251\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ InitDescriptor(VkDescriptorBufferInfo\&\ descriptor,\ \textcolor{keyword}{const}\ VkBuffer\&\ buffer,}
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ VkDeviceSize\ size\ =\ VK\_WHOLE\_SIZE,\ \textcolor{keyword}{const}\ VkDeviceSize\ offset\ =\ 0)\ \{}
+\DoxyCodeLine{00253\ \ \ \ \ descriptor.buffer\ =\ buffer;}
+\DoxyCodeLine{00254\ \ \ \ \ descriptor.offset\ =\ offset;}
+\DoxyCodeLine{00255\ \ \ \ \ descriptor.range\ =\ size;}
+\DoxyCodeLine{00256\ \ \ \}}
+\DoxyCodeLine{00257\ }
+\DoxyCodeLine{00258\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00259\ \ \ VkBuffer\ buffer\_\{\};}
+\DoxyCodeLine{00260\ \ \ VkDeviceMemory\ memory\_\{\};}
+\DoxyCodeLine{00261\ \ \ VkDeviceSize\ size\_;}
+\DoxyCodeLine{00262\ \ \ VkDescriptorBufferInfo\ descriptor\_\{\};}
+\DoxyCodeLine{00263\ }
+\DoxyCodeLine{00264\ \ \ \textcolor{keyword}{explicit}\ Buffer(\textcolor{keyword}{const}\ VkDeviceSize\ size,\ \textcolor{keyword}{const}\ VkBufferUsageFlags\ usage,\ \textcolor{keyword}{const}\ VkMemoryPropertyFlags\ properties);}
+\DoxyCodeLine{00265\ }
+\DoxyCodeLine{00266\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00267\ \ \ \textcolor{keyword}{virtual}\ \string~Buffer();}
+\DoxyCodeLine{00268\ }
+\DoxyCodeLine{00269\ \ \ \textcolor{keyword}{auto}\ GetBuffer()\ const\ -\/>\ const\ VkBuffer\&\ \{}
+\DoxyCodeLine{00270\ \ \ \ \ \textcolor{keywordflow}{return}\ buffer\_;}
+\DoxyCodeLine{00271\ \ \ \}}
+\DoxyCodeLine{00272\ }
+\DoxyCodeLine{00273\ \ \ \textcolor{keyword}{auto}\ GetMemory()\ const\ -\/>\ const\ VkDeviceMemory\&\ \{}
+\DoxyCodeLine{00274\ \ \ \ \ \textcolor{keywordflow}{return}\ memory\_;}
+\DoxyCodeLine{00275\ \ \ \}}
+\DoxyCodeLine{00276\ }
+\DoxyCodeLine{00277\ \ \ \textcolor{keyword}{auto}\ GetSize()\ const\ -\/>\ const\ VkDeviceSize\&\ \{}
+\DoxyCodeLine{00278\ \ \ \ \ \textcolor{keywordflow}{return}\ size\_;}
+\DoxyCodeLine{00279\ \ \ \}}
+\DoxyCodeLine{00280\ }
+\DoxyCodeLine{00281\ \ \ \textcolor{keyword}{auto}\ GetDescriptor()\ const\ -\/>\ const\ VkDescriptorBufferInfo\&\ \{}
+\DoxyCodeLine{00282\ \ \ \ \ \textcolor{keywordflow}{return}\ descriptor\_;}
+\DoxyCodeLine{00283\ \ \ \}}
+\DoxyCodeLine{00284\ }
+\DoxyCodeLine{00285\ \ \ \textcolor{keywordtype}{void}\ Destroy();}
+\DoxyCodeLine{00286\ \ \ \textcolor{keywordtype}{void}\ Flush(\textcolor{keyword}{const}\ VkDeviceSize\ size\ =\ VK\_WHOLE\_SIZE,\ \textcolor{keyword}{const}\ VkDeviceSize\ offset\ =\ 0);}
+\DoxyCodeLine{00287\ \ \ \textcolor{keywordtype}{void}\ CopyFromBytes(\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ data,\ \textcolor{keyword}{const}\ uint64\_t\ num\_bytes,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ staging\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00288\ \ \ \textcolor{keywordtype}{void}\ CopyFromBuffer(\textcolor{keyword}{const}\ VkBuffer\&\ src,\ \textcolor{keyword}{const}\ VkDeviceSize\ num\_bytes\ =\ VK\_WHOLE\_SIZE);}
+\DoxyCodeLine{00289\ }
+\DoxyCodeLine{00290\ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ CopyFromBuffer(\textcolor{keyword}{const}\ Buffer*\ buffer,\ \textcolor{keyword}{const}\ VkDeviceSize\ num\_bytes\ =\ VK\_WHOLE\_SIZE)\ \{}
+\DoxyCodeLine{00291\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(buffer\ \&\&\ buffer-\/>GetMemory()\ !=\ VK\_NULL\_HANDLE);}
+\DoxyCodeLine{00292\ \ \ \ \ \textcolor{keywordflow}{return}\ CopyFromBuffer(buffer-\/>GetBuffer(),\ num\_bytes);}
+\DoxyCodeLine{00293\ \ \ \}}
+\DoxyCodeLine{00294\ }
+\DoxyCodeLine{00295\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00296\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ New(\textcolor{keyword}{const}\ VkDeviceSize\ size,\ \textcolor{keyword}{const}\ VkBufferUsageFlags\ usage,}
+\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ VkMemoryPropertyFlags\ properties\ =\ kDefaultBufferMemoryProperties)\ -\/>\ Buffer*\ \{}
+\DoxyCodeLine{00298\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ Buffer(size,\ usage,\ properties);}
+\DoxyCodeLine{00299\ \ \ \}}
+\DoxyCodeLine{00300\ }
+\DoxyCodeLine{00301\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ NewUniformBuffer(\textcolor{keyword}{const}\ VkDeviceSize\ size,}
+\DoxyCodeLine{00302\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ VkMemoryPropertyFlags\ properties\ =\ kDefaultBufferMemoryProperties)\ -\/>\ Buffer*\ \{}
+\DoxyCodeLine{00303\ \ \ \ \ \textcolor{keywordflow}{return}\ New(size,\ VK\_BUFFER\_USAGE\_UNIFORM\_BUFFER\_BIT,\ properties);}
+\DoxyCodeLine{00304\ \ \ \}}
+\DoxyCodeLine{00305\ }
+\DoxyCodeLine{00306\ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00307\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ NewUniformBuffer(\textcolor{keyword}{const}\ VkMemoryPropertyFlags\ properties\ =\ kDefaultBufferMemoryProperties)\ -\/>\ Buffer*\ \{}
+\DoxyCodeLine{00308\ \ \ \ \ \textcolor{keywordflow}{return}\ NewUniformBuffer(\textcolor{keyword}{sizeof}(T),\ properties);}
+\DoxyCodeLine{00309\ \ \ \}}
+\DoxyCodeLine{00310\ }
+\DoxyCodeLine{00311\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ NewTransferSource(\textcolor{keyword}{const}\ VkDeviceSize\ size,}
+\DoxyCodeLine{00312\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ VkMemoryPropertyFlags\ properties\ =\ kDefaultBufferMemoryProperties)\ -\/>\ Buffer*\ \{}
+\DoxyCodeLine{00313\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ Buffer(size,\ VK\_BUFFER\_USAGE\_TRANSFER\_SRC\_BIT,\ properties);}
+\DoxyCodeLine{00314\ \ \ \}}
+\DoxyCodeLine{00315\ }
+\DoxyCodeLine{00316\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ NewStaging(\textcolor{keyword}{const}\ VkDeviceSize\ size,\ \textcolor{keyword}{const}\ VkMemoryPropertyFlags\ properties\ =\ kDefaultBufferMemoryProperties)}
+\DoxyCodeLine{00317\ \ \ \ \ \ \ -\/>\ Buffer*\ \{}
+\DoxyCodeLine{00318\ \ \ \ \ \textcolor{keywordflow}{return}\ New(size,\ VK\_BUFFER\_USAGE\_TRANSFER\_SRC\_BIT,\ properties);}
+\DoxyCodeLine{00319\ \ \ \}}
+\DoxyCodeLine{00320\ }
+\DoxyCodeLine{00321\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ NewVertex(\textcolor{keyword}{const}\ VkDeviceSize\ size,\ \textcolor{keyword}{const}\ VkMemoryPropertyFlags\ properties\ =\ kDefaultBufferMemoryProperties)}
+\DoxyCodeLine{00322\ \ \ \ \ \ \ -\/>\ Buffer*\ \{}
+\DoxyCodeLine{00323\ \ \ \ \ \textcolor{keywordflow}{return}\ New(size,\ VK\_BUFFER\_USAGE\_VERTEX\_BUFFER\_BIT,\ properties);}
+\DoxyCodeLine{00324\ \ \ \}}
+\DoxyCodeLine{00325\ }
+\DoxyCodeLine{00326\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ NewIndex(\textcolor{keyword}{const}\ VkDeviceSize\ size,\ \textcolor{keyword}{const}\ VkMemoryPropertyFlags\ properties\ =\ kDefaultBufferMemoryProperties)}
+\DoxyCodeLine{00327\ \ \ \ \ \ \ -\/>\ Buffer*\ \{}
+\DoxyCodeLine{00328\ \ \ \ \ \textcolor{keywordflow}{return}\ New(size,\ VK\_BUFFER\_USAGE\_INDEX\_BUFFER\_BIT,\ properties);}
+\DoxyCodeLine{00329\ \ \ \}}
+\DoxyCodeLine{00330\ \};}
+\DoxyCodeLine{00331\ }
+\DoxyCodeLine{00332\ \textcolor{keyword}{class\ }MappedBufferScope\ \{}
+\DoxyCodeLine{00333\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00334\ \ \ \textcolor{keyword}{const}\ Buffer*\ buffer\_;}
+\DoxyCodeLine{00335\ \ \ \textcolor{keywordtype}{void}*\ mapped\_memory\_\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00336\ }
+\DoxyCodeLine{00337\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00338\ \ \ MappedBufferScope(\textcolor{keyword}{const}\ Buffer*\ buffer,\ \textcolor{keyword}{const}\ VkDeviceSize\ size\ =\ VK\_WHOLE\_SIZE,\ \textcolor{keyword}{const}\ VkDeviceSize\ offset\ =\ 0,}
+\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ VkMemoryMapFlags\ flags\ =\ 0);}
+\DoxyCodeLine{00340\ \ \ \string~MappedBufferScope();}
+\DoxyCodeLine{00341\ }
+\DoxyCodeLine{00342\ \ \ \textcolor{keyword}{auto}\ GetBuffer()\ const\ -\/>\ const\ Buffer*\ \{}
+\DoxyCodeLine{00343\ \ \ \ \ \textcolor{keywordflow}{return}\ buffer\_;}
+\DoxyCodeLine{00344\ \ \ \}}
+\DoxyCodeLine{00345\ }
+\DoxyCodeLine{00346\ \ \ \textcolor{keyword}{auto}\ GetMappedMemory()\ const\ -\/>\ \textcolor{keywordtype}{void}*\ \{}
+\DoxyCodeLine{00347\ \ \ \ \ \textcolor{keywordflow}{return}\ mapped\_memory\_;}
+\DoxyCodeLine{00348\ \ \ \}}
+\DoxyCodeLine{00349\ }
+\DoxyCodeLine{00350\ \ \ \textcolor{keyword}{auto}\ IsMapped()\ const\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00351\ \ \ \ \ \textcolor{keywordflow}{return}\ GetMappedMemory()\ !=\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00352\ \ \ \}}
+\DoxyCodeLine{00353\ }
+\DoxyCodeLine{00354\ \ \ \textcolor{keywordtype}{void}\ Flush(\textcolor{keyword}{const}\ VkDeviceSize\ num\_bytes\ =\ VK\_WHOLE\_SIZE,\ \textcolor{keyword}{const}\ VkDeviceSize\ offset\ =\ 0);}
+\DoxyCodeLine{00355\ \ \ \textcolor{keywordtype}{void}\ CopyFrom(\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ data,\ \textcolor{keyword}{const}\ VkDeviceSize\ num\_bytes\ =\ VK\_WHOLE\_SIZE);}
+\DoxyCodeLine{00356\ }
+\DoxyCodeLine{00357\ \ \ \textcolor{keyword}{operator}\ bool()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00358\ \ \ \ \ \textcolor{keywordflow}{return}\ IsMapped();}
+\DoxyCodeLine{00359\ \ \ \}}
+\DoxyCodeLine{00360\ \};}
+\DoxyCodeLine{00361\ }
+\DoxyCodeLine{00362\ \textcolor{keyword}{using\ }ValidationLayerList\ =\ std::vector<const\ char*>;}
+\DoxyCodeLine{00363\ \textcolor{keyword}{using\ }ExtensionList\ =\ std::vector<const\ char*>;}
+\DoxyCodeLine{00364\ \}\ \ \textcolor{comment}{//\ namespace\ vk}}
+\DoxyCodeLine{00365\ }
+\DoxyCodeLine{00366\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_DEBUG}}
+\DoxyCodeLine{00367\ }
+\DoxyCodeLine{00368\ \textcolor{keyword}{namespace\ }engine\ \{}
+\DoxyCodeLine{00369\ \textcolor{keyword}{class\ }InitState;}
+\DoxyCodeLine{00370\ \textcolor{keyword}{class\ }TerminatedState;}
+\DoxyCodeLine{00371\ \}\ \ \textcolor{comment}{//\ namespace\ engine}}
+\DoxyCodeLine{00372\ }
+\DoxyCodeLine{00373\ \textcolor{keyword}{class\ }Window;}
+\DoxyCodeLine{00374\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_driver}{Driver}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classprt_1_1_driver_base}{DriverBase}}\ \{}
+\DoxyCodeLine{00375\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_driver_af3d14e26ba8af9e6cc5a32aad8446de7}{Runtime}};}
+\DoxyCodeLine{00376\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_lua_state}{LuaState}};}
+\DoxyCodeLine{00377\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_driver_base}{DriverBase}};}
+\DoxyCodeLine{00378\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_driver_a73d514fb9a4d35225a7c1449a14a666e}{InitState}};}
+\DoxyCodeLine{00379\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_driver_a29c748ef4d814963f9821a5c470b5fef}{TerminatedState}};}
+\DoxyCodeLine{00380\ \ \ \mbox{\hyperlink{classprt_1_1_driver_a6dfcf8e1e54146b5b9a9c2de36ed3768}{DEFINE\_NON\_COPYABLE\_TYPE}}(\mbox{\hyperlink{classprt_1_1_driver}{Driver}});}
+\DoxyCodeLine{00381\ }
+\DoxyCodeLine{00382\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00383\ \ \ VkApplicationInfo\ \mbox{\hyperlink{classprt_1_1_driver_aa84987098309067b133a681fea5e867c}{app\_info\_}}\{\};}
+\DoxyCodeLine{00384\ \ \ VkInstance\ \mbox{\hyperlink{classprt_1_1_driver_aa6d0dc78cac202e0e4386b9602fc1a21}{instance\_}}\{\};}
+\DoxyCodeLine{00385\ \ \ VkPhysicalDevice\ \mbox{\hyperlink{classprt_1_1_driver_aef22a0b75e18d1ac4c0765c49a498679}{physical\_device\_}}\{\};}
+\DoxyCodeLine{00386\ \ \ VkDevice\ \mbox{\hyperlink{classprt_1_1_driver_ae9f7b66c9fb61d5f20f17d8c0853ca71}{device\_}}\{\};}
+\DoxyCodeLine{00387\ \ \ VkQueue\ \mbox{\hyperlink{classprt_1_1_driver_a7a563f3ed172d408af2401ef7fd5eef2}{graphics\_queue\_}}\{\};}
+\DoxyCodeLine{00388\ \ \ VkQueue\ \mbox{\hyperlink{classprt_1_1_driver_a0dcef29393919dfbc9d2ef8ac77fd86e}{present\_queue\_}}\{\};}
+\DoxyCodeLine{00389\ \ \ VkSurfaceKHR\ \mbox{\hyperlink{classprt_1_1_driver_a840d165fa7766f07b8e4359bab2b6868}{surface\_}}\{\};}
+\DoxyCodeLine{00390\ \ \ VkCommandPool\ \mbox{\hyperlink{classprt_1_1_driver_a48bd59ea337e299c63afd619c2bc9467}{command\_pool\_}}\{\};}
+\DoxyCodeLine{00391\ \ \ VkDescriptorPool\ \mbox{\hyperlink{classprt_1_1_driver_a050fa206a41d403588d99ee4a6b7ee60}{descriptor\_pool\_}}\{\};}
+\DoxyCodeLine{00392\ \ \ VkAllocationCallbacks*\ \mbox{\hyperlink{classprt_1_1_driver_a70a9cc54d358214023a3abe2e12598eb}{allocator\_}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00393\ \ \ vk::ExtensionList\ \mbox{\hyperlink{classprt_1_1_driver_aeeede03c5c5e99056357ddcc09284387}{instance\_extensions\_}}\{\};}
+\DoxyCodeLine{00394\ \ \ vk::ExtensionList\ \mbox{\hyperlink{classprt_1_1_driver_a3bbf9791ce0e62b75d44d63bd3e4bd3e}{device\_extensions\_}}\{}
+\DoxyCodeLine{00395\ \ \ \ \ \ \ \textcolor{stringliteral}{"{}VK\_KHR\_portability\_subset"{}},}
+\DoxyCodeLine{00396\ \ \ \ \ \ \ VK\_KHR\_SWAPCHAIN\_EXTENSION\_NAME,}
+\DoxyCodeLine{00397\ \ \ \};}
+\DoxyCodeLine{00398\ \ \ vk::ValidationLayerList\ \mbox{\hyperlink{classprt_1_1_driver_a89d03bc7394ef7aae5d8653bc478450b}{validation\_layers\_}}\{\textcolor{stringliteral}{"{}VK\_LAYER\_KHRONOS\_validation"{}}\};}
+\DoxyCodeLine{00399\ \textcolor{preprocessor}{\#ifdef\ PRT\_DEBUG}}
+\DoxyCodeLine{00400\ \ \ VkDebugUtilsMessengerEXT\ debug\_\{\};}
+\DoxyCodeLine{00401\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_DEBUG}}
+\DoxyCodeLine{00402\ }
+\DoxyCodeLine{00403\ \ \ \mbox{\hyperlink{classprt_1_1_driver_a3cfdf510b3d4004ca6d662949b5dc29b}{Driver}}();}
+\DoxyCodeLine{00404\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_driver_a504cfe1293d5c7bcd2a59a96e4ddd2e0}{InitApplicationInfo}}();}
+\DoxyCodeLine{00405\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_driver_a813737f118b197b18b2cc1e55b396704}{InitInstance}}();}
+\DoxyCodeLine{00406\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_driver_ac9556a206684d94f16a872e765777216}{InitPhysicalDevice}}();}
+\DoxyCodeLine{00407\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_driver_abf0417525f37bcb76235f41f30e46742}{InitSurface}}();}
+\DoxyCodeLine{00408\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_driver_ae92b5dd68dc98fb40e8a70381624ca27}{InitLogicalDevice}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ priority);}
+\DoxyCodeLine{00409\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_driver_a1b8252f55392c6128d206795c8460e79}{InitCommandPool}}();}
+\DoxyCodeLine{00410\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_driver_a475761b5f3a189fadab12ae3ded1b39e}{InitDescriptorPool}}();}
+\DoxyCodeLine{00411\ \textcolor{preprocessor}{\#ifdef\ PRT\_DEBUG}}
+\DoxyCodeLine{00412\ \ \ \textcolor{keywordtype}{void}\ InitDebugMessenger();}
+\DoxyCodeLine{00413\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_DEBUG}}
+\DoxyCodeLine{00414\ }
+\DoxyCodeLine{00415\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00416\ \ \ \mbox{\hyperlink{classprt_1_1_driver_ab2f103fafb0f3970091a7e3944798ffa}{\string~Driver}}();}
+\DoxyCodeLine{00417\ }
+\DoxyCodeLine{00418\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_driver_a4bc3e78fee942ba9495a42a84549dd9b}{GetApplicationInfo}}()\ const\ -\/>\ VkApplicationInfo\ \{}
+\DoxyCodeLine{00419\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_driver_aa84987098309067b133a681fea5e867c}{app\_info\_}};}
+\DoxyCodeLine{00420\ \ \ \}}
+\DoxyCodeLine{00421\ }
+\DoxyCodeLine{00422\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_driver_ab668d50223bc184f85dfcb21c89b4110}{GetInstance}}()\ const\ -\/>\ VkInstance\ \{}
+\DoxyCodeLine{00423\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_driver_aa6d0dc78cac202e0e4386b9602fc1a21}{instance\_}};}
+\DoxyCodeLine{00424\ \ \ \}}
+\DoxyCodeLine{00425\ }
+\DoxyCodeLine{00426\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_driver_a00344f2beacba0c43dd724e02d283be1}{GetPhysicalDevice}}()\ const\ -\/>\ VkPhysicalDevice\ \{}
+\DoxyCodeLine{00427\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_driver_aef22a0b75e18d1ac4c0765c49a498679}{physical\_device\_}};}
+\DoxyCodeLine{00428\ \ \ \}}
+\DoxyCodeLine{00429\ }
+\DoxyCodeLine{00430\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_driver_a128c6679c2beba6f22040a2c142f77ec}{GetDevice}}()\ const\ -\/>\ VkDevice\ \{}
+\DoxyCodeLine{00431\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_driver_ae9f7b66c9fb61d5f20f17d8c0853ca71}{device\_}};}
+\DoxyCodeLine{00432\ \ \ \}}
+\DoxyCodeLine{00433\ }
+\DoxyCodeLine{00434\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_driver_a700c2521bcec49414cfc0c1fb972f592}{GetGraphicsQueue}}()\ const\ -\/>\ VkQueue\ \{}
+\DoxyCodeLine{00435\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_driver_a7a563f3ed172d408af2401ef7fd5eef2}{graphics\_queue\_}};}
+\DoxyCodeLine{00436\ \ \ \}}
+\DoxyCodeLine{00437\ }
+\DoxyCodeLine{00438\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_driver_a476ebbbfbede864fe82b89bbfdfd0d67}{GetPresentQueue}}()\ const\ -\/>\ VkQueue\ \{}
+\DoxyCodeLine{00439\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_driver_a0dcef29393919dfbc9d2ef8ac77fd86e}{present\_queue\_}};}
+\DoxyCodeLine{00440\ \ \ \}}
+\DoxyCodeLine{00441\ }
+\DoxyCodeLine{00442\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_driver_aeb474957a441994ecf8c7ce04435e18e}{GetValidationLayers}}()\ const\ -\/>\ const\ vk::ValidationLayerList\&\ \{}
+\DoxyCodeLine{00443\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_driver_a89d03bc7394ef7aae5d8653bc478450b}{validation\_layers\_}};}
+\DoxyCodeLine{00444\ \ \ \}}
+\DoxyCodeLine{00445\ }
+\DoxyCodeLine{00446\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_driver_a9244e5bd31a332ec31c709294686c68c}{GetInstanceExtensions}}()\ const\ -\/>\ const\ vk::ExtensionList\&\ \{}
+\DoxyCodeLine{00447\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_driver_aeeede03c5c5e99056357ddcc09284387}{instance\_extensions\_}};}
+\DoxyCodeLine{00448\ \ \ \}}
+\DoxyCodeLine{00449\ }
+\DoxyCodeLine{00450\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_driver_a0b00db0e1aaf63059865b78c8dde0f1f}{GetDeviceExtensions}}()\ const\ -\/>\ const\ vk::ExtensionList\&\ \{}
+\DoxyCodeLine{00451\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_driver_a3bbf9791ce0e62b75d44d63bd3e4bd3e}{device\_extensions\_}};}
+\DoxyCodeLine{00452\ \ \ \}}
+\DoxyCodeLine{00453\ }
+\DoxyCodeLine{00454\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_driver_a10a0c892ff7f73f7819461295dc5cf6a}{GetAllocator}}()\ const\ -\/>\ VkAllocationCallbacks*\ \{}
+\DoxyCodeLine{00455\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_driver_a70a9cc54d358214023a3abe2e12598eb}{allocator\_}};}
+\DoxyCodeLine{00456\ \ \ \}}
+\DoxyCodeLine{00457\ }
+\DoxyCodeLine{00458\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_driver_ae27002ae22401fed449356329a225792}{GetSurface}}()\ const\ -\/>\ const\ VkSurfaceKHR\&\ \{}
+\DoxyCodeLine{00459\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_driver_a840d165fa7766f07b8e4359bab2b6868}{surface\_}};}
+\DoxyCodeLine{00460\ \ \ \}}
+\DoxyCodeLine{00461\ }
+\DoxyCodeLine{00462\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_driver_a8028fcc88a9959f50044b7c783701dd8}{GetCommandPool}}()\ const\ -\/>\ VkCommandPool\ const\&\ \{}
+\DoxyCodeLine{00463\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_driver_a48bd59ea337e299c63afd619c2bc9467}{command\_pool\_}};}
+\DoxyCodeLine{00464\ \ \ \}}
+\DoxyCodeLine{00465\ }
+\DoxyCodeLine{00466\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_driver_ae191e56571dba3b26868c39e8a9fd467}{GetDescriptorPool}}()\ const\ -\/>\ VkDescriptorPool\ const\&\ \{}
+\DoxyCodeLine{00467\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_driver_a050fa206a41d403588d99ee4a6b7ee60}{descriptor\_pool\_}};}
+\DoxyCodeLine{00468\ \ \ \}}
+\DoxyCodeLine{00469\ }
+\DoxyCodeLine{00470\ \textcolor{preprocessor}{\#ifdef\ PRT\_DEBUG}}
+\DoxyCodeLine{00471\ \ \ \textcolor{keyword}{auto}\ GetDebugMessenger()\ const\ -\/>\ VkDebugUtilsMessengerEXT\ \{}
+\DoxyCodeLine{00472\ \ \ \ \ \textcolor{keywordflow}{return}\ debug\_;}
+\DoxyCodeLine{00473\ \ \ \}}
+\DoxyCodeLine{00474\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_DEBUG}}
+\DoxyCodeLine{00475\ }
+\DoxyCodeLine{00476\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_driver_a3289261b45f1601ec122541e9f87b68c}{WaitDeviceIdle}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00477\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_driver_a2db2b3119ce0ac9a7567d658f85a92dc}{GetDepthFormat}}()\ const\ -\/>\ VkFormat;}
+\DoxyCodeLine{00478\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_driver_a804ccedcc7d91eaf7d49ddcde3999d9c}{ReleaseCommandBuffers}}(const\ VkCommandBuffer*\ buffers,\ const\ uint64\_t\ num\_buffers)\ const;}
+\DoxyCodeLine{00479\ }
+\DoxyCodeLine{00480\ \ \ template\ <typename\ Container>}
+\DoxyCodeLine{00481\ \ \ inline\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_driver_a804ccedcc7d91eaf7d49ddcde3999d9c}{ReleaseCommandBuffers}}(const\ Container\&\ buffers)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00482\ \ \ \ \ \textcolor{keywordflow}{if}\ (buffers.empty())\ \{}
+\DoxyCodeLine{00483\ \ \ \ \ \ \ DLOG(WARNING)\ <<\ \textcolor{stringliteral}{"{}attempting\ to\ release\ 0\ VkCommandBuffers."{}};}
+\DoxyCodeLine{00484\ \ \ \ \ \ \ return;}
+\DoxyCodeLine{00485\ \ \ \ \ \}}
+\DoxyCodeLine{00486\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_driver_a804ccedcc7d91eaf7d49ddcde3999d9c}{ReleaseCommandBuffers}}(buffers.data(),\ buffers.size());}
+\DoxyCodeLine{00487\ \ \ \}}
+\DoxyCodeLine{00488\ }
+\DoxyCodeLine{00489\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_driver_aa81ce44aaa6a5ca6393978786adb5e5e}{CreateRenderPass}}(\textcolor{keyword}{const}\ VkRenderPassCreateInfo\&\ create\_info,\ VkRenderPass\&\ pass);}
+\DoxyCodeLine{00490\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_driver_a3e89658ddb6a84ad8431014bac3ec49d}{CreatePipelineLayout}}(\textcolor{keyword}{const}\ VkPipelineLayoutCreateInfo\&\ create\_info,\ VkPipelineLayout\&\ layout);}
+\DoxyCodeLine{00491\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_driver_a7eced8b199776b307b52bc7c246185f9}{CreatePipelineCache}}(\textcolor{keyword}{const}\ VkPipelineCacheCreateInfo\&\ create\_info,\ VkPipelineCache\&\ cache);}
+\DoxyCodeLine{00492\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_driver_a80a7477ca2fe4ccd1a1823f5874df46b}{CreateGraphicsPipeline}}(\textcolor{keyword}{const}\ VkGraphicsPipelineCreateInfo\&\ create\_info,\ \textcolor{keyword}{const}\ VkPipelineCache\&\ cache,}
+\DoxyCodeLine{00493\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ VkPipeline\&\ pipeline);}
+\DoxyCodeLine{00494\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_driver_a7b3c00f605721bd072d5c9698785fa3b}{AllocateCommandBuffers}}(\textcolor{keyword}{const}\ VkCommandBufferAllocateInfo\&\ alloc\_info,\ VkCommandBuffer*\ buffers);}
+\DoxyCodeLine{00495\ }
+\DoxyCodeLine{00496\ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ H>}
+\DoxyCodeLine{00497\ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_driver_a12eac05feda8696d1bdb9292c9196309}{Destroy}}(\textcolor{keyword}{const}\ H\&\ handle,\ \textcolor{keywordtype}{void}\ (*destroyer)(VkDevice,\ H,\ \textcolor{keyword}{const}\ VkAllocationCallbacks*))\ \{}
+\DoxyCodeLine{00498\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ !=\ VK\_NULL\_HANDLE)}
+\DoxyCodeLine{00499\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ destroyer(\mbox{\hyperlink{classprt_1_1_driver_a128c6679c2beba6f22040a2c142f77ec}{GetDevice}}(),\ handle,\ \mbox{\hyperlink{classprt_1_1_driver_a10a0c892ff7f73f7819461295dc5cf6a}{GetAllocator}}());}
+\DoxyCodeLine{00500\ \ \ \}}
+\DoxyCodeLine{00501\ }
+\DoxyCodeLine{00502\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_driver_a12eac05feda8696d1bdb9292c9196309}{Destroy}}(\textcolor{keyword}{const}\ VkDeviceMemory\&\ memory);}
+\DoxyCodeLine{00503\ }
+\DoxyCodeLine{00504\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00505\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_driver_a5139b6722670d6e86d11f039f1c7e250}{New}}()\ -\/>\ \mbox{\hyperlink{classprt_1_1_driver}{Driver}}*\ \{}
+\DoxyCodeLine{00506\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(!\mbox{\hyperlink{classprt_1_1_driver_base_a5b3657be0a8a6df6fd68c84aebd98e6f}{DriverBase::IsInitialized}}());}
+\DoxyCodeLine{00507\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classprt_1_1_driver_a3cfdf510b3d4004ca6d662949b5dc29b}{Driver}}();}
+\DoxyCodeLine{00508\ \ \ \}}
+\DoxyCodeLine{00509\ \};}
+\DoxyCodeLine{00510\ }
+\DoxyCodeLine{00511\ \textcolor{keyword}{class\ }CommandBufferPool;}
+\DoxyCodeLine{00512\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceprt_abe638dc49d5d7ee832535996a50375a1}{CommandBufferPoolPtr}}\ =\ std::shared\_ptr<CommandBufferPool>;}
+\DoxyCodeLine{00513\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_command_buffer_pool}{CommandBufferPool}}\ \{}
+\DoxyCodeLine{00514\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00515\ \ \ std::vector<VkCommandBuffer>\ \mbox{\hyperlink{classprt_1_1_command_buffer_pool_a2d3fdb0d87b3e6baec4b81b35dc58697}{buffers\_}}\{\};}
+\DoxyCodeLine{00516\ }
+\DoxyCodeLine{00517\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00518\ \ \ \mbox{\hyperlink{classprt_1_1_command_buffer_pool_a77dad5e28ea7b83f7bcda6d024d2de3b}{CommandBufferPool}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00519\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_command_buffer_pool_a77dad5e28ea7b83f7bcda6d024d2de3b}{CommandBufferPool}}(\textcolor{keyword}{const}\ VkCommandPool\&\ pool,\ \textcolor{keyword}{const}\ uint64\_t\ num\_buffers);}
+\DoxyCodeLine{00520\ \ \ \mbox{\hyperlink{classprt_1_1_command_buffer_pool_a8f270c215c79318db1c13f14b319cc1a}{\string~CommandBufferPool}}();}
+\DoxyCodeLine{00521\ }
+\DoxyCodeLine{00522\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_command_buffer_pool_a5b011cc8baf8e371d3be1942e9e7cd56}{IsEmpty}}()\ const\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00523\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_command_buffer_pool_a2d3fdb0d87b3e6baec4b81b35dc58697}{buffers\_}}.empty();}
+\DoxyCodeLine{00524\ \ \ \}}
+\DoxyCodeLine{00525\ }
+\DoxyCodeLine{00526\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_command_buffer_pool_ae95de04f853c63868ae13594ac76a99f}{GetNumberOfBuffers}}()\ const\ -\/>\ uint64\_t\ \{}
+\DoxyCodeLine{00527\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_command_buffer_pool_a2d3fdb0d87b3e6baec4b81b35dc58697}{buffers\_}}.size();}
+\DoxyCodeLine{00528\ \ \ \}}
+\DoxyCodeLine{00529\ }
+\DoxyCodeLine{00530\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_command_buffer_pool_afd3863f48f2043d922aa973a4624c8f3}{GetBufferAt}}(\textcolor{keyword}{const}\ uint64\_t\ idx)\ -\/>\ VkCommandBuffer\&\ \{}
+\DoxyCodeLine{00531\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(idx\ >=\ 0\ \&\&\ idx\ <=\ \mbox{\hyperlink{classprt_1_1_command_buffer_pool_ae95de04f853c63868ae13594ac76a99f}{GetNumberOfBuffers}}());}
+\DoxyCodeLine{00532\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_command_buffer_pool_a2d3fdb0d87b3e6baec4b81b35dc58697}{buffers\_}}[idx];}
+\DoxyCodeLine{00533\ \ \ \}}
+\DoxyCodeLine{00534\ }
+\DoxyCodeLine{00535\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00536\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_command_buffer_pool_a5b14da55c33944d0f713c3b3b20b2f62}{New}}(\textcolor{keyword}{const}\ VkCommandPool\&\ pool,\ \textcolor{keyword}{const}\ uint64\_t\ num\_buffers)\ -\/>\ \mbox{\hyperlink{classprt_1_1_command_buffer_pool}{CommandBufferPool}}*\ \{}
+\DoxyCodeLine{00537\ \ \ \ \ \mbox{\hyperlink{common_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(num\_buffers\ >\ 0);}
+\DoxyCodeLine{00538\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classprt_1_1_command_buffer_pool_a77dad5e28ea7b83f7bcda6d024d2de3b}{CommandBufferPool}}(pool,\ num\_buffers);}
+\DoxyCodeLine{00539\ \ \ \}}
+\DoxyCodeLine{00540\ \};}
+\DoxyCodeLine{00541\ }
+\DoxyCodeLine{00542\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_command_buffer_scope}{CommandBufferScope}}\ \{}
+\DoxyCodeLine{00543\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00544\ \ \ VkCommandBufferBeginInfo\ \mbox{\hyperlink{classprt_1_1_command_buffer_scope_a88cf7bfb12ba2484ac99e128dbce584a}{begin\_info\_}}\{\};}
+\DoxyCodeLine{00545\ \ \ VkCommandBuffer\&\ \mbox{\hyperlink{classprt_1_1_command_buffer_scope_a97a6f65b2201638180bdeb21bd9f4fbe}{buffer\_}};}
+\DoxyCodeLine{00546\ }
+\DoxyCodeLine{00547\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00548\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_command_buffer_scope_ac99f7558cce9fd08455ca0527e534bdb}{CommandBufferScope}}(VkCommandBuffer\&\ buffer,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ reset\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00549\ \ \ \mbox{\hyperlink{classprt_1_1_command_buffer_scope_a2d5eb84ef442f9d2ba4538731959856b}{\string~CommandBufferScope}}();}
+\DoxyCodeLine{00550\ }
+\DoxyCodeLine{00551\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_command_buffer_scope_a30c7a8461da8174914e6f6480db76b40}{GetBeginInfo}}()\ const\ -\/>\ VkCommandBufferBeginInfo\ const\&\ \{}
+\DoxyCodeLine{00552\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_command_buffer_scope_a88cf7bfb12ba2484ac99e128dbce584a}{begin\_info\_}};}
+\DoxyCodeLine{00553\ \ \ \}}
+\DoxyCodeLine{00554\ }
+\DoxyCodeLine{00555\ \ \ \textcolor{keyword}{operator}\ VkCommandBuffer\&()\ \textcolor{keyword}{const}\ \{}
+\DoxyCodeLine{00556\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_command_buffer_scope_a97a6f65b2201638180bdeb21bd9f4fbe}{buffer\_}};}
+\DoxyCodeLine{00557\ \ \ \}}
+\DoxyCodeLine{00558\ \};}
+\DoxyCodeLine{00559\ }
+\DoxyCodeLine{00560\ \textcolor{keyword}{class\ }GraphicsPipeline;}
+\DoxyCodeLine{00561\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_render_pass_scope}{RenderPassScope}}\ \{}
+\DoxyCodeLine{00562\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00563\ \ \ \textcolor{keyword}{const}\ VkCommandBuffer\&\ \mbox{\hyperlink{classprt_1_1_render_pass_scope_a30b142f4a65e8eb423a105e82e5f767c}{buffer\_}};}
+\DoxyCodeLine{00564\ \ \ VkRenderPassBeginInfo\ \mbox{\hyperlink{classprt_1_1_render_pass_scope_adbc9711c7123e6fe5d15bd8622e016f6}{begin\_info\_}}\{\};}
+\DoxyCodeLine{00565\ \ \ \textcolor{keyword}{const}\ VkRenderPass\&\ \mbox{\hyperlink{classprt_1_1_render_pass_scope_a349b89379208dd9ad99e738f172480c4}{pass\_}};}
+\DoxyCodeLine{00566\ }
+\DoxyCodeLine{00567\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00568\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classprt_1_1_render_pass_scope_a65fbeb56dee9fdb941a4e5757007c1c5}{RenderPassScope}}(\textcolor{keyword}{const}\ VkCommandBuffer\&\ buffer,\ \textcolor{keyword}{const}\ VkRenderPass\&\ pass,\ \textcolor{keyword}{const}\ VkFramebuffer\&\ framebuffer,}
+\DoxyCodeLine{00569\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<VkClearValue>\&\ clear\_values);}
+\DoxyCodeLine{00570\ \ \ \mbox{\hyperlink{classprt_1_1_render_pass_scope_ae90b7d0f9ed5caf63a3fd2981ae3ae25}{\string~RenderPassScope}}();}
+\DoxyCodeLine{00571\ }
+\DoxyCodeLine{00572\ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classprt_1_1_render_pass_scope_afafc2821b6b55bb86a1c0362fd918060}{GetBeginInfo}}()\ const\ -\/>\ VkRenderPassBeginInfo\ const\&\ \{}
+\DoxyCodeLine{00573\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_render_pass_scope_adbc9711c7123e6fe5d15bd8622e016f6}{begin\_info\_}};}
+\DoxyCodeLine{00574\ \ \ \}}
+\DoxyCodeLine{00575\ }
+\DoxyCodeLine{00576\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_render_pass_scope_a3017917f0cf0574e3d73e4425c61090a}{Bind}}(\mbox{\hyperlink{classprt_1_1_graphics_pipeline}{GraphicsPipeline}}*\ pipeline);}
+\DoxyCodeLine{00577\ }
+\DoxyCodeLine{00578\ \ \ \textcolor{keyword}{operator}\ \textcolor{keyword}{const}\ VkRenderPass\&()\ \textcolor{keyword}{const}\ \{}
+\DoxyCodeLine{00579\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_render_pass_scope_a349b89379208dd9ad99e738f172480c4}{pass\_}};}
+\DoxyCodeLine{00580\ \ \ \}}
+\DoxyCodeLine{00581\ \};}
+\DoxyCodeLine{00582\ }
+\DoxyCodeLine{00583\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classprt_1_1_single_use_command_buffer}{SingleUseCommandBuffer}}\ \{}
+\DoxyCodeLine{00584\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00585\ \ \ VkCommandBuffer\ \mbox{\hyperlink{classprt_1_1_single_use_command_buffer_a4fbe9d9ae77b4482d3168d70a3563108}{buffer\_}}\{\};}
+\DoxyCodeLine{00586\ }
+\DoxyCodeLine{00587\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_single_use_command_buffer_a67ece089cc30e2088e44736e5377645f}{Allocate}}(\textcolor{keyword}{const}\ VkDevice\&\ device,\ \textcolor{keyword}{const}\ VkCommandPool\&\ pool,\ VkCommandBuffer\&\ buffer);}
+\DoxyCodeLine{00588\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_single_use_command_buffer_a34bdbfbe7f69efc8ce2858cf8efc7ad5}{Start}}(\textcolor{keyword}{const}\ VkCommandBuffer\&\ buffer);}
+\DoxyCodeLine{00589\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_single_use_command_buffer_a20ae73f968b31788dddd2e74ff0b75f4}{Finish}}(\textcolor{keyword}{const}\ VkCommandBuffer\&\ buffer);}
+\DoxyCodeLine{00590\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_single_use_command_buffer_a1d166029c9a36ff5549372f5ed9b1fee}{Submit}}(\textcolor{keyword}{const}\ VkDevice\&\ device,\ \textcolor{keyword}{const}\ VkQueue\&\ queue,\ \textcolor{keyword}{const}\ VkCommandBuffer\&\ buffer,}
+\DoxyCodeLine{00591\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ VkAllocationCallbacks*\ allocator);}
+\DoxyCodeLine{00592\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_single_use_command_buffer_a2bbb2d0358a630b763953eb1c84fccfc}{Destroy}}(\textcolor{keyword}{const}\ VkDevice\&\ device,\ \textcolor{keyword}{const}\ VkCommandPool\&\ pool,\ \textcolor{keyword}{const}\ VkCommandBuffer\&\ buffer);}
+\DoxyCodeLine{00593\ }
+\DoxyCodeLine{00594\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00595\ \ \ \mbox{\hyperlink{classprt_1_1_single_use_command_buffer_a8d04c90adbb5e6f3decf44202dc1fae7}{SingleUseCommandBuffer}}();}
+\DoxyCodeLine{00596\ \ \ \mbox{\hyperlink{classprt_1_1_single_use_command_buffer_a4ae848fdf80e219a9305950e5fc69f14}{\string~SingleUseCommandBuffer}}();}
+\DoxyCodeLine{00597\ }
+\DoxyCodeLine{00598\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classprt_1_1_single_use_command_buffer_a20ae73f968b31788dddd2e74ff0b75f4}{Finish}}();}
+\DoxyCodeLine{00599\ }
+\DoxyCodeLine{00600\ \ \ \textcolor{keyword}{operator}\ VkCommandBuffer\&()\ \{}
+\DoxyCodeLine{00601\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classprt_1_1_single_use_command_buffer_a4fbe9d9ae77b4482d3168d70a3563108}{buffer\_}};}
+\DoxyCodeLine{00602\ \ \ \}}
+\DoxyCodeLine{00603\ \};}
+\DoxyCodeLine{00604\ }
+\DoxyCodeLine{00605\ \textcolor{keyword}{namespace\ }vk\ \{}
+\DoxyCodeLine{00606\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}\ NewImageView(\textcolor{keyword}{const}\ Driver*\ driver,\ \textcolor{keyword}{const}\ VkImage\&\ image,\ \textcolor{keyword}{const}\ VkFormat\&\ format,}
+\DoxyCodeLine{00607\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ VkImageAspectFlags\ flags)\ -\/>\ VkImageView\ \{}
+\DoxyCodeLine{00608\ \ \ VkImageViewCreateInfo\ create\_info\{\};}
+\DoxyCodeLine{00609\ \ \ create\_info.sType\ =\ VK\_STRUCTURE\_TYPE\_IMAGE\_VIEW\_CREATE\_INFO;}
+\DoxyCodeLine{00610\ \ \ create\_info.image\ =\ image;}
+\DoxyCodeLine{00611\ \ \ create\_info.viewType\ =\ VK\_IMAGE\_VIEW\_TYPE\_2D;}
+\DoxyCodeLine{00612\ \ \ create\_info.format\ =\ format;}
+\DoxyCodeLine{00613\ \ \ create\_info.subresourceRange.aspectMask\ =\ flags;}
+\DoxyCodeLine{00614\ \ \ create\_info.subresourceRange.baseMipLevel\ =\ 0;}
+\DoxyCodeLine{00615\ \ \ create\_info.subresourceRange.levelCount\ =\ 1;}
+\DoxyCodeLine{00616\ \ \ create\_info.subresourceRange.baseArrayLayer\ =\ 0;}
+\DoxyCodeLine{00617\ \ \ create\_info.subresourceRange.layerCount\ =\ 1;}
+\DoxyCodeLine{00618\ }
+\DoxyCodeLine{00619\ \ \ VkImageView\ view\{\};}
+\DoxyCodeLine{00620\ \ \ \mbox{\hyperlink{gfx__vk_8h_a703ede7d843545f6c50bc2ea59164c80}{CHECK\_VK}}(FATAL,\ vkCreateImageView(driver-\/>GetDevice(),\ \&create\_info,\ driver-\/>GetAllocator(),\ \&view),}
+\DoxyCodeLine{00621\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}failed\ to\ create\ vk\ image\ view"{}});}
+\DoxyCodeLine{00622\ \ \ \textcolor{keywordflow}{return}\ view;}
+\DoxyCodeLine{00623\ \}}
+\DoxyCodeLine{00624\ }
+\DoxyCodeLine{00625\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceprt_1_1vk_ac683403d68c8b583edf5e13a668555d7}{InitFramebuffers}}(\textcolor{keyword}{const}\ Driver*\ driver,\ \textcolor{keyword}{const}\ VkRenderPass\&\ pass,\ \textcolor{keyword}{const}\ VkExtent2D\&\ extent,}
+\DoxyCodeLine{00626\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<VkFramebuffer>\&\ framebuffers);}
+\DoxyCodeLine{00627\ \}\ \ \textcolor{comment}{//\ namespace\ vk}}
+\DoxyCodeLine{00628\ \}\ \ \textcolor{comment}{//\ namespace\ prt}}
+\DoxyCodeLine{00629\ }
+\DoxyCodeLine{00630\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ PRT\_GFX\_VK\_H}}
+
+\end{DoxyCode}

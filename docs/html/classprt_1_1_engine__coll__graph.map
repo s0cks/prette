@@ -1,0 +1,24 @@
+<map id="prt::Engine" name="prt::Engine">
+<area shape="rect" id="Node000001" title=" " alt="" coords="121,525,205,551"/>
+<area shape="rect" id="Node000002" href="$classprt_1_1uv_1_1_loop.html" title=" " alt="" coords="5,192,100,217"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="51,233,48,278,49,337,57,401,66,432,79,461,92,480,108,497,143,522,140,526,105,501,88,483,74,463,61,433,52,402,43,337,43,278,46,232"/>
+<area shape="rect" id="Node000007" href="$classprt_1_1_ticker.html" title=" " alt="" coords="122,325,202,351"/>
+<area shape="poly" id="edge8_Node000007_Node000002" title=" " alt="" coords="72,228,122,292,151,323,147,326,118,295,68,231"/>
+<area shape="rect" id="Node000003" href="$classprt_1_1uv_1_1_async.html" title=" " alt="" coords="300,429,403,454"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="315,464,188,527,186,522,312,459"/>
+<area shape="rect" id="Node000004" href="$classprt_1_1uv_1_1_handle_template.html" title=" " alt="" coords="364,318,525,358"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="418,372,364,430,360,427,414,368"/>
+<area shape="rect" id="Node000005" href="$classprt_1_1uv_1_1_handle_base.html" title=" " alt="" coords="396,192,533,217"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="463,233,450,317,445,317,458,232"/>
+<area shape="rect" id="Node000006" href="$classprt_1_1_rate_limited_ticker.html" title=" " alt="" coords="88,421,238,462"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="166,477,166,525,160,525,160,477"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="165,366,166,421,160,421,160,367"/>
+<area shape="rect" id="Node000008" href="$classprt_1_1_tick.html" title=" " alt="" coords="124,192,194,217"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="162,233,164,325,159,325,157,233"/>
+<area shape="rect" id="Node000009" href="$classprt_1_1_per_second_counter.html" title=" " alt="" coords="218,184,372,225"/>
+<area shape="poly" id="edge9_Node000007_Node000009" title=" " alt="" coords="274,239,224,296,183,327,180,323,220,292,270,235"/>
+<area shape="rect" id="Node000010" href="$classprt_1_1_counter.html" title=" " alt="" coords="215,109,375,135"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="298,150,298,184,292,184,292,150"/>
+<area shape="rect" id="Node000011" href="$classprt_1_1_relaxed_atomic.html" title=" " alt="" coords="228,5,362,46"/>
+<area shape="poly" id="edge11_Node000010_Node000011" title=" " alt="" coords="298,61,298,109,292,109,292,61"/>
+</map>

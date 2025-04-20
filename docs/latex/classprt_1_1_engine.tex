@@ -1,0 +1,364 @@
+\doxysection{prt\+::Engine Class Reference}
+\hypertarget{classprt_1_1_engine}{}\label{classprt_1_1_engine}\index{prt::Engine@{prt::Engine}}
+
+
+{\ttfamily \#include $<$engine.\+h$>$}
+
+
+
+Collaboration diagram for prt\+::Engine\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classprt_1_1_engine__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_engine_a4003e39437f6a36da88f622527ed7187}{Engine}} ()
+\item 
+\mbox{\hyperlink{classprt_1_1_engine_a4217726fdc3fdded2878cb7c5d086c76}{\texorpdfstring{$\sim$}{\string~}\+Engine}} ()
+\item 
+auto \mbox{\hyperlink{classprt_1_1_engine_adc559ea47dbd015cbc54866c97f06dea}{Get\+Loop}} () const -\/$>$ const \mbox{\hyperlink{classprt_1_1uv_1_1_loop}{uv\+::\+Loop}} \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_engine_accc45ca5850268ab5298e6e9cb3d264c}{Get\+Loop}} () -\/$>$ \mbox{\hyperlink{classprt_1_1uv_1_1_loop}{uv\+::\+Loop}} \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_engine_a48c12d3c3f8bdbf44acdb6fc0ddb263c}{Run}} () -\/$>$ int
+\item 
+void \mbox{\hyperlink{classprt_1_1_engine_a885832b2b051797ca0663f781583a041}{Shutdown}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classprt_1_1_crash_report_cause}{Crash\+Report\+Cause}} $>$ cause)
+\item 
+void \mbox{\hyperlink{classprt_1_1_engine_ace5824a174efe454de95f1dce7acd2c8}{Shutdown}} (const std\+::exception\+\_\+ptr \&cause=nullptr, const int depth=\mbox{\hyperlink{classprt_1_1_crash_report_cause_a236da37a5d9c90fc786aa8a3dc0f8f48}{Crash\+Report\+Cause\+::k\+Default\+Depth}}, const int offset=\mbox{\hyperlink{classprt_1_1_crash_report_cause_a3a9af7dfb9fd26456c3ce1235349e75c}{Crash\+Report\+Cause\+::k\+Default\+Offset}})
+\item 
+auto \mbox{\hyperlink{classprt_1_1_engine_ac15b22dfa82746cf6f5ae9e3dbb5af9f}{Has\+State}} () const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classprt_1_1_engine_a139a609eb812e40ba4948ca233bd9531}{Get\+State}} () const -\/$>$ const std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classprt_1_1_engine_state}{Engine\+State}} $>$ \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_engine_a23ed794a5d1b9f068c43010a0dfb2e7a}{Get\+Epoch\+Tick}} () const -\/$>$ const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_engine_a6ef9aa7b2224c18c0199bac772d97d9a}{Get\+Current\+Tick}} () const -\/$>$ const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_engine_a68067960e8c3e0866964c703378f616f}{Get\+Previous\+Tick}} () const -\/$>$ const \mbox{\hyperlink{classprt_1_1_tick}{Tick}} \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_engine_a37a967884a1e0be03869e495b4378259}{Get\+Ticks\+Per\+Second}} () const -\/$>$ const \mbox{\hyperlink{namespaceprt_ace24bc62766da60be0236f69bde71470}{Ticks\+Per\+Second}} \&
+\item 
+auto \mbox{\hyperlink{classprt_1_1_engine_a96267d2a42fb719a508e636dfc5d1d55}{On\+Tick}} () const -\/$>$ rx\+::observable$<$ \mbox{\hyperlink{classprt_1_1_tick}{Tick}} $>$
+\item 
+auto \mbox{\hyperlink{classprt_1_1_engine_a47920ddf9604482f45649c88834f0321}{On\+Tick\+Profiler\+Stats}} () const -\/$>$ rx\+::observable$<$ \mbox{\hyperlink{structprt_1_1_tick_stats}{Tick\+Stats}} $>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classprt_1_1_engine_a450337cef00f7d9bbfc94a6b58424567}{Init}} ()
+\item 
+static auto \mbox{\hyperlink{classprt_1_1_engine_a551fa480b424845865136f9e1e6b003f}{Get}} () -\/$>$ \mbox{\hyperlink{classprt_1_1_engine}{Engine}} \texorpdfstring{$\ast$}{*}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1_engine_a5eacff6484389b0dced83e42239af4ae}{DEFINE\+\_\+\+NON\+\_\+\+COPYABLE\+\_\+\+TYPE}} (\mbox{\hyperlink{classprt_1_1_engine}{Engine}})
+\item 
+void \mbox{\hyperlink{classprt_1_1_engine_a2dfc99b7a4a809198443029dc2818e6b}{Enter\+State}} (const std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classprt_1_1_engine_state}{Engine\+State}} $>$ \&state)
+\item 
+void \mbox{\hyperlink{classprt_1_1_engine_a8e887ea7d3332ebe861e85617c346e19}{Exit\+State}} (const std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classprt_1_1_engine_state}{Engine\+State}} $>$ \&state)
+\item 
+{\footnotesize template$<$class S , typename... Args$>$ }\\void \mbox{\hyperlink{classprt_1_1_engine_af1c6b7d3128655760270ca5b4c9e84a1}{Set\+State}} (Args... args)
+\item 
+void \mbox{\hyperlink{classprt_1_1_engine_af0900a6462f7930efa9c02f4f9347cf4}{Terminate}} ()
+\item 
+void \mbox{\hyperlink{classprt_1_1_engine_a77d02b4afacba66737599afbab919736}{Stop}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classprt_1_1_engine_af0e40c7246ad4e711ae830028f72e32d}{On\+Shutdown}} (uv\+\_\+async\+\_\+t \texorpdfstring{$\ast$}{*}handle)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classprt_1_1uv_1_1_loop}{uv\+::\+Loop}} \mbox{\hyperlink{classprt_1_1_engine_a05877edbe0920f159b749948e05c54ef}{loop\+\_\+}}
+\item 
+\mbox{\hyperlink{classprt_1_1uv_1_1_async}{uv\+::\+Async}} \mbox{\hyperlink{classprt_1_1_engine_abaa0ef1e8db6e6b22539cecd67cf786a}{on\+\_\+shutdown\+\_\+}}
+\item 
+\mbox{\hyperlink{classprt_1_1_rate_limited_ticker}{Rate\+Limited\+Ticker}}$<$ k\+Target\+Tick\+Rate $>$ \mbox{\hyperlink{classprt_1_1_engine_a7a1b355118e89f8d83266c9c91951beb}{ticker\+\_\+}}
+\item 
+rx\+::subscription \mbox{\hyperlink{classprt_1_1_engine_acdfd7cfd41637f9427e72eb71338879d}{on\+\_\+tick\+\_\+}}
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classprt_1_1_engine_state}{Engine\+State}} $>$ \mbox{\hyperlink{classprt_1_1_engine_ad5b162f4ef1dfd98a8a05824ce3fb96b}{state\+\_\+}} \{\}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classprt_1_1_crash_report_cause}{Crash\+Report\+Cause}} $>$ \mbox{\hyperlink{classprt_1_1_engine_a3f74f31a1ffa80b79bd76f286aee0b5c}{cause\+\_\+}} = nullptr
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classprt_1_1_engine_a0cd01dc88dec8792e78f8e75e04038d8}{prt\+::\+Lua\+State}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_engine_af3d1870b32f55c8106b0627a42520c17}{Engine\+State}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_engine_a73d514fb9a4d35225a7c1449a14a666e}{Init\+State}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_engine_a78c0c444e176e3b7613d33d6fa4f3607}{Error\+State}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_engine_ab5fb293c5b3f03a7793f2cf63187a6db}{Paused\+State}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_engine_a53d39bf74309c8c448c458a6a4079724}{Running\+State}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_engine_af2a76f4eeacf0cd9bcdc2d618eafad6a}{Terminating\+State}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_engine_a00dd4c52e691292fb4160b9fc83df7cb}{Engine\+Ticker}}
+\item 
+class \mbox{\hyperlink{classprt_1_1_engine_a29c748ef4d814963f9821a5c470b5fef}{Terminated\+State}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classprt_1_1_engine_a4003e39437f6a36da88f622527ed7187}\index{prt::Engine@{prt::Engine}!Engine@{Engine}}
+\index{Engine@{Engine}!prt::Engine@{prt::Engine}}
+\doxysubsubsection{\texorpdfstring{Engine()}{Engine()}}
+{\footnotesize\ttfamily \label{classprt_1_1_engine_a4003e39437f6a36da88f622527ed7187} 
+prt\+::\+Engine\+::\+Engine (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_engine_a4217726fdc3fdded2878cb7c5d086c76}\index{prt::Engine@{prt::Engine}!````~Engine@{\texorpdfstring{$\sim$}{\string~}Engine}}
+\index{````~Engine@{\texorpdfstring{$\sim$}{\string~}Engine}!prt::Engine@{prt::Engine}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Engine()}{\string~Engine()}}
+{\footnotesize\ttfamily \label{classprt_1_1_engine_a4217726fdc3fdded2878cb7c5d086c76} 
+prt\+::\+Engine\+::\texorpdfstring{$\sim$}{\string~}\+Engine (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classprt_1_1_engine_a5eacff6484389b0dced83e42239af4ae}\index{prt::Engine@{prt::Engine}!DEFINE\_NON\_COPYABLE\_TYPE@{DEFINE\_NON\_COPYABLE\_TYPE}}
+\index{DEFINE\_NON\_COPYABLE\_TYPE@{DEFINE\_NON\_COPYABLE\_TYPE}!prt::Engine@{prt::Engine}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_NON\_COPYABLE\_TYPE()}{DEFINE\_NON\_COPYABLE\_TYPE()}}
+{\footnotesize\ttfamily \label{classprt_1_1_engine_a5eacff6484389b0dced83e42239af4ae} 
+prt\+::\+Engine\+::\+DEFINE\+\_\+\+NON\+\_\+\+COPYABLE\+\_\+\+TYPE (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classprt_1_1_engine}{Engine}}}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_engine_a2dfc99b7a4a809198443029dc2818e6b}\index{prt::Engine@{prt::Engine}!EnterState@{EnterState}}
+\index{EnterState@{EnterState}!prt::Engine@{prt::Engine}}
+\doxysubsubsection{\texorpdfstring{EnterState()}{EnterState()}}
+{\footnotesize\ttfamily \label{classprt_1_1_engine_a2dfc99b7a4a809198443029dc2818e6b} 
+void prt\+::\+Engine\+::\+Enter\+State (\begin{DoxyParamCaption}\item[{const std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classprt_1_1_engine_state}{Engine\+State}} $>$ \&}]{state}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_engine_a8e887ea7d3332ebe861e85617c346e19}\index{prt::Engine@{prt::Engine}!ExitState@{ExitState}}
+\index{ExitState@{ExitState}!prt::Engine@{prt::Engine}}
+\doxysubsubsection{\texorpdfstring{ExitState()}{ExitState()}}
+{\footnotesize\ttfamily \label{classprt_1_1_engine_a8e887ea7d3332ebe861e85617c346e19} 
+void prt\+::\+Engine\+::\+Exit\+State (\begin{DoxyParamCaption}\item[{const std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classprt_1_1_engine_state}{Engine\+State}} $>$ \&}]{state}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_engine_a551fa480b424845865136f9e1e6b003f}\index{prt::Engine@{prt::Engine}!Get@{Get}}
+\index{Get@{Get}!prt::Engine@{prt::Engine}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}}
+{\footnotesize\ttfamily \label{classprt_1_1_engine_a551fa480b424845865136f9e1e6b003f} 
+auto prt\+::\+Engine\+::\+Get (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{classprt_1_1_engine}{Engine}}\texorpdfstring{$\ast$}{*}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_engine_a6ef9aa7b2224c18c0199bac772d97d9a}\index{prt::Engine@{prt::Engine}!GetCurrentTick@{GetCurrentTick}}
+\index{GetCurrentTick@{GetCurrentTick}!prt::Engine@{prt::Engine}}
+\doxysubsubsection{\texorpdfstring{GetCurrentTick()}{GetCurrentTick()}}
+{\footnotesize\ttfamily \label{classprt_1_1_engine_a6ef9aa7b2224c18c0199bac772d97d9a} 
+auto prt\+::\+Engine\+::\+Get\+Current\+Tick (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const \mbox{\hyperlink{classprt_1_1_tick}{Tick}}\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_engine_a23ed794a5d1b9f068c43010a0dfb2e7a}\index{prt::Engine@{prt::Engine}!GetEpochTick@{GetEpochTick}}
+\index{GetEpochTick@{GetEpochTick}!prt::Engine@{prt::Engine}}
+\doxysubsubsection{\texorpdfstring{GetEpochTick()}{GetEpochTick()}}
+{\footnotesize\ttfamily \label{classprt_1_1_engine_a23ed794a5d1b9f068c43010a0dfb2e7a} 
+auto prt\+::\+Engine\+::\+Get\+Epoch\+Tick (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const \mbox{\hyperlink{classprt_1_1_tick}{Tick}}\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_engine_accc45ca5850268ab5298e6e9cb3d264c}\index{prt::Engine@{prt::Engine}!GetLoop@{GetLoop}}
+\index{GetLoop@{GetLoop}!prt::Engine@{prt::Engine}}
+\doxysubsubsection{\texorpdfstring{GetLoop()}{GetLoop()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_engine_accc45ca5850268ab5298e6e9cb3d264c} 
+auto prt\+::\+Engine\+::\+Get\+Loop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{classprt_1_1uv_1_1_loop}{uv\+::\+Loop}}\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_engine_adc559ea47dbd015cbc54866c97f06dea}\index{prt::Engine@{prt::Engine}!GetLoop@{GetLoop}}
+\index{GetLoop@{GetLoop}!prt::Engine@{prt::Engine}}
+\doxysubsubsection{\texorpdfstring{GetLoop()}{GetLoop()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_engine_adc559ea47dbd015cbc54866c97f06dea} 
+auto prt\+::\+Engine\+::\+Get\+Loop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const \mbox{\hyperlink{classprt_1_1uv_1_1_loop}{uv\+::\+Loop}}\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_engine_a68067960e8c3e0866964c703378f616f}\index{prt::Engine@{prt::Engine}!GetPreviousTick@{GetPreviousTick}}
+\index{GetPreviousTick@{GetPreviousTick}!prt::Engine@{prt::Engine}}
+\doxysubsubsection{\texorpdfstring{GetPreviousTick()}{GetPreviousTick()}}
+{\footnotesize\ttfamily \label{classprt_1_1_engine_a68067960e8c3e0866964c703378f616f} 
+auto prt\+::\+Engine\+::\+Get\+Previous\+Tick (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const \mbox{\hyperlink{classprt_1_1_tick}{Tick}}\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_engine_a139a609eb812e40ba4948ca233bd9531}\index{prt::Engine@{prt::Engine}!GetState@{GetState}}
+\index{GetState@{GetState}!prt::Engine@{prt::Engine}}
+\doxysubsubsection{\texorpdfstring{GetState()}{GetState()}}
+{\footnotesize\ttfamily \label{classprt_1_1_engine_a139a609eb812e40ba4948ca233bd9531} 
+auto prt\+::\+Engine\+::\+Get\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classprt_1_1_engine_state}{Engine\+State}}$>$\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_engine_a37a967884a1e0be03869e495b4378259}\index{prt::Engine@{prt::Engine}!GetTicksPerSecond@{GetTicksPerSecond}}
+\index{GetTicksPerSecond@{GetTicksPerSecond}!prt::Engine@{prt::Engine}}
+\doxysubsubsection{\texorpdfstring{GetTicksPerSecond()}{GetTicksPerSecond()}}
+{\footnotesize\ttfamily \label{classprt_1_1_engine_a37a967884a1e0be03869e495b4378259} 
+auto prt\+::\+Engine\+::\+Get\+Ticks\+Per\+Second (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const \mbox{\hyperlink{namespaceprt_ace24bc62766da60be0236f69bde71470}{Ticks\+Per\+Second}}\& \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_engine_ac15b22dfa82746cf6f5ae9e3dbb5af9f}\index{prt::Engine@{prt::Engine}!HasState@{HasState}}
+\index{HasState@{HasState}!prt::Engine@{prt::Engine}}
+\doxysubsubsection{\texorpdfstring{HasState()}{HasState()}}
+{\footnotesize\ttfamily \label{classprt_1_1_engine_ac15b22dfa82746cf6f5ae9e3dbb5af9f} 
+auto prt\+::\+Engine\+::\+Has\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_engine_a450337cef00f7d9bbfc94a6b58424567}\index{prt::Engine@{prt::Engine}!Init@{Init}}
+\index{Init@{Init}!prt::Engine@{prt::Engine}}
+\doxysubsubsection{\texorpdfstring{Init()}{Init()}}
+{\footnotesize\ttfamily \label{classprt_1_1_engine_a450337cef00f7d9bbfc94a6b58424567} 
+void prt\+::\+Engine\+::\+Init (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classprt_1_1_engine_af0e40c7246ad4e711ae830028f72e32d}\index{prt::Engine@{prt::Engine}!OnShutdown@{OnShutdown}}
+\index{OnShutdown@{OnShutdown}!prt::Engine@{prt::Engine}}
+\doxysubsubsection{\texorpdfstring{OnShutdown()}{OnShutdown()}}
+{\footnotesize\ttfamily \label{classprt_1_1_engine_af0e40c7246ad4e711ae830028f72e32d} 
+void prt\+::\+Engine\+::\+On\+Shutdown (\begin{DoxyParamCaption}\item[{uv\+\_\+async\+\_\+t \texorpdfstring{$\ast$}{*}}]{handle}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_engine_a96267d2a42fb719a508e636dfc5d1d55}\index{prt::Engine@{prt::Engine}!OnTick@{OnTick}}
+\index{OnTick@{OnTick}!prt::Engine@{prt::Engine}}
+\doxysubsubsection{\texorpdfstring{OnTick()}{OnTick()}}
+{\footnotesize\ttfamily \label{classprt_1_1_engine_a96267d2a42fb719a508e636dfc5d1d55} 
+auto prt\+::\+Engine\+::\+On\+Tick (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ rx\+::observable$<$\mbox{\hyperlink{classprt_1_1_tick}{Tick}}$>$ \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_engine_a47920ddf9604482f45649c88834f0321}\index{prt::Engine@{prt::Engine}!OnTickProfilerStats@{OnTickProfilerStats}}
+\index{OnTickProfilerStats@{OnTickProfilerStats}!prt::Engine@{prt::Engine}}
+\doxysubsubsection{\texorpdfstring{OnTickProfilerStats()}{OnTickProfilerStats()}}
+{\footnotesize\ttfamily \label{classprt_1_1_engine_a47920ddf9604482f45649c88834f0321} 
+auto prt\+::\+Engine\+::\+On\+Tick\+Profiler\+Stats (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ rx\+::observable$<$\mbox{\hyperlink{structprt_1_1_tick_stats}{Tick\+Stats}}$>$ \hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_engine_a48c12d3c3f8bdbf44acdb6fc0ddb263c}\index{prt::Engine@{prt::Engine}!Run@{Run}}
+\index{Run@{Run}!prt::Engine@{prt::Engine}}
+\doxysubsubsection{\texorpdfstring{Run()}{Run()}}
+{\footnotesize\ttfamily \label{classprt_1_1_engine_a48c12d3c3f8bdbf44acdb6fc0ddb263c} 
+auto prt\+::\+Engine\+::\+Run (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ int}
+
+\Hypertarget{classprt_1_1_engine_af1c6b7d3128655760270ca5b4c9e84a1}\index{prt::Engine@{prt::Engine}!SetState@{SetState}}
+\index{SetState@{SetState}!prt::Engine@{prt::Engine}}
+\doxysubsubsection{\texorpdfstring{SetState()}{SetState()}}
+{\footnotesize\ttfamily \label{classprt_1_1_engine_af1c6b7d3128655760270ca5b4c9e84a1} 
+template$<$class S , typename... Args$>$ \\
+void prt\+::\+Engine\+::\+Set\+State (\begin{DoxyParamCaption}\item[{Args...}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_engine_ace5824a174efe454de95f1dce7acd2c8}\index{prt::Engine@{prt::Engine}!Shutdown@{Shutdown}}
+\index{Shutdown@{Shutdown}!prt::Engine@{prt::Engine}}
+\doxysubsubsection{\texorpdfstring{Shutdown()}{Shutdown()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_engine_ace5824a174efe454de95f1dce7acd2c8} 
+void prt\+::\+Engine\+::\+Shutdown (\begin{DoxyParamCaption}\item[{const std\+::exception\+\_\+ptr \&}]{cause}{ = {\ttfamily nullptr}, }\item[{const int}]{depth}{ = {\ttfamily \mbox{\hyperlink{classprt_1_1_crash_report_cause_a236da37a5d9c90fc786aa8a3dc0f8f48}{Crash\+Report\+Cause\+::k\+Default\+Depth}}}, }\item[{const int}]{offset}{ = {\ttfamily \mbox{\hyperlink{classprt_1_1_crash_report_cause_a3a9af7dfb9fd26456c3ce1235349e75c}{Crash\+Report\+Cause\+::k\+Default\+Offset}}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classprt_1_1_engine_a885832b2b051797ca0663f781583a041}\index{prt::Engine@{prt::Engine}!Shutdown@{Shutdown}}
+\index{Shutdown@{Shutdown}!prt::Engine@{prt::Engine}}
+\doxysubsubsection{\texorpdfstring{Shutdown()}{Shutdown()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classprt_1_1_engine_a885832b2b051797ca0663f781583a041} 
+void prt\+::\+Engine\+::\+Shutdown (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classprt_1_1_crash_report_cause}{Crash\+Report\+Cause}} $>$}]{cause}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classprt_1_1_engine_a77d02b4afacba66737599afbab919736}\index{prt::Engine@{prt::Engine}!Stop@{Stop}}
+\index{Stop@{Stop}!prt::Engine@{prt::Engine}}
+\doxysubsubsection{\texorpdfstring{Stop()}{Stop()}}
+{\footnotesize\ttfamily \label{classprt_1_1_engine_a77d02b4afacba66737599afbab919736} 
+void prt\+::\+Engine\+::\+Stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_engine_af0900a6462f7930efa9c02f4f9347cf4}\index{prt::Engine@{prt::Engine}!Terminate@{Terminate}}
+\index{Terminate@{Terminate}!prt::Engine@{prt::Engine}}
+\doxysubsubsection{\texorpdfstring{Terminate()}{Terminate()}}
+{\footnotesize\ttfamily \label{classprt_1_1_engine_af0900a6462f7930efa9c02f4f9347cf4} 
+void prt\+::\+Engine\+::\+Terminate (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classprt_1_1_engine_af3d1870b32f55c8106b0627a42520c17}\index{prt::Engine@{prt::Engine}!EngineState@{EngineState}}
+\index{EngineState@{EngineState}!prt::Engine@{prt::Engine}}
+\doxysubsubsection{\texorpdfstring{EngineState}{EngineState}}
+{\footnotesize\ttfamily \label{classprt_1_1_engine_af3d1870b32f55c8106b0627a42520c17} 
+friend class \mbox{\hyperlink{classprt_1_1_engine_state}{Engine\+State}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+\Hypertarget{classprt_1_1_engine_a00dd4c52e691292fb4160b9fc83df7cb}\index{prt::Engine@{prt::Engine}!EngineTicker@{EngineTicker}}
+\index{EngineTicker@{EngineTicker}!prt::Engine@{prt::Engine}}
+\doxysubsubsection{\texorpdfstring{EngineTicker}{EngineTicker}}
+{\footnotesize\ttfamily \label{classprt_1_1_engine_a00dd4c52e691292fb4160b9fc83df7cb} 
+friend class Engine\+Ticker\hspace{0.3cm}{\ttfamily [friend]}}
+
+\Hypertarget{classprt_1_1_engine_a78c0c444e176e3b7613d33d6fa4f3607}\index{prt::Engine@{prt::Engine}!ErrorState@{ErrorState}}
+\index{ErrorState@{ErrorState}!prt::Engine@{prt::Engine}}
+\doxysubsubsection{\texorpdfstring{ErrorState}{ErrorState}}
+{\footnotesize\ttfamily \label{classprt_1_1_engine_a78c0c444e176e3b7613d33d6fa4f3607} 
+friend class \mbox{\hyperlink{classprt_1_1_error_state}{Error\+State}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+\Hypertarget{classprt_1_1_engine_a73d514fb9a4d35225a7c1449a14a666e}\index{prt::Engine@{prt::Engine}!InitState@{InitState}}
+\index{InitState@{InitState}!prt::Engine@{prt::Engine}}
+\doxysubsubsection{\texorpdfstring{InitState}{InitState}}
+{\footnotesize\ttfamily \label{classprt_1_1_engine_a73d514fb9a4d35225a7c1449a14a666e} 
+friend class Init\+State\hspace{0.3cm}{\ttfamily [friend]}}
+
+\Hypertarget{classprt_1_1_engine_ab5fb293c5b3f03a7793f2cf63187a6db}\index{prt::Engine@{prt::Engine}!PausedState@{PausedState}}
+\index{PausedState@{PausedState}!prt::Engine@{prt::Engine}}
+\doxysubsubsection{\texorpdfstring{PausedState}{PausedState}}
+{\footnotesize\ttfamily \label{classprt_1_1_engine_ab5fb293c5b3f03a7793f2cf63187a6db} 
+friend class Paused\+State\hspace{0.3cm}{\ttfamily [friend]}}
+
+\Hypertarget{classprt_1_1_engine_a0cd01dc88dec8792e78f8e75e04038d8}\index{prt::Engine@{prt::Engine}!prt::LuaState@{prt::LuaState}}
+\index{prt::LuaState@{prt::LuaState}!prt::Engine@{prt::Engine}}
+\doxysubsubsection{\texorpdfstring{prt::LuaState}{prt::LuaState}}
+{\footnotesize\ttfamily \label{classprt_1_1_engine_a0cd01dc88dec8792e78f8e75e04038d8} 
+friend class \mbox{\hyperlink{classprt_1_1_lua_state}{prt\+::\+Lua\+State}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+\Hypertarget{classprt_1_1_engine_a53d39bf74309c8c448c458a6a4079724}\index{prt::Engine@{prt::Engine}!RunningState@{RunningState}}
+\index{RunningState@{RunningState}!prt::Engine@{prt::Engine}}
+\doxysubsubsection{\texorpdfstring{RunningState}{RunningState}}
+{\footnotesize\ttfamily \label{classprt_1_1_engine_a53d39bf74309c8c448c458a6a4079724} 
+friend class \mbox{\hyperlink{classprt_1_1_running_state}{Running\+State}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+\Hypertarget{classprt_1_1_engine_a29c748ef4d814963f9821a5c470b5fef}\index{prt::Engine@{prt::Engine}!TerminatedState@{TerminatedState}}
+\index{TerminatedState@{TerminatedState}!prt::Engine@{prt::Engine}}
+\doxysubsubsection{\texorpdfstring{TerminatedState}{TerminatedState}}
+{\footnotesize\ttfamily \label{classprt_1_1_engine_a29c748ef4d814963f9821a5c470b5fef} 
+friend class Terminated\+State\hspace{0.3cm}{\ttfamily [friend]}}
+
+\Hypertarget{classprt_1_1_engine_af2a76f4eeacf0cd9bcdc2d618eafad6a}\index{prt::Engine@{prt::Engine}!TerminatingState@{TerminatingState}}
+\index{TerminatingState@{TerminatingState}!prt::Engine@{prt::Engine}}
+\doxysubsubsection{\texorpdfstring{TerminatingState}{TerminatingState}}
+{\footnotesize\ttfamily \label{classprt_1_1_engine_af2a76f4eeacf0cd9bcdc2d618eafad6a} 
+friend class Terminating\+State\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classprt_1_1_engine_a3f74f31a1ffa80b79bd76f286aee0b5c}\index{prt::Engine@{prt::Engine}!cause\_@{cause\_}}
+\index{cause\_@{cause\_}!prt::Engine@{prt::Engine}}
+\doxysubsubsection{\texorpdfstring{cause\_}{cause\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_engine_a3f74f31a1ffa80b79bd76f286aee0b5c} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classprt_1_1_crash_report_cause}{Crash\+Report\+Cause}}$>$ prt\+::\+Engine\+::cause\+\_\+ = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_engine_a05877edbe0920f159b749948e05c54ef}\index{prt::Engine@{prt::Engine}!loop\_@{loop\_}}
+\index{loop\_@{loop\_}!prt::Engine@{prt::Engine}}
+\doxysubsubsection{\texorpdfstring{loop\_}{loop\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_engine_a05877edbe0920f159b749948e05c54ef} 
+\mbox{\hyperlink{classprt_1_1uv_1_1_loop}{uv\+::\+Loop}} prt\+::\+Engine\+::loop\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_engine_abaa0ef1e8db6e6b22539cecd67cf786a}\index{prt::Engine@{prt::Engine}!on\_shutdown\_@{on\_shutdown\_}}
+\index{on\_shutdown\_@{on\_shutdown\_}!prt::Engine@{prt::Engine}}
+\doxysubsubsection{\texorpdfstring{on\_shutdown\_}{on\_shutdown\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_engine_abaa0ef1e8db6e6b22539cecd67cf786a} 
+\mbox{\hyperlink{classprt_1_1uv_1_1_async}{uv\+::\+Async}} prt\+::\+Engine\+::on\+\_\+shutdown\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_engine_acdfd7cfd41637f9427e72eb71338879d}\index{prt::Engine@{prt::Engine}!on\_tick\_@{on\_tick\_}}
+\index{on\_tick\_@{on\_tick\_}!prt::Engine@{prt::Engine}}
+\doxysubsubsection{\texorpdfstring{on\_tick\_}{on\_tick\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_engine_acdfd7cfd41637f9427e72eb71338879d} 
+rx\+::subscription prt\+::\+Engine\+::on\+\_\+tick\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_engine_ad5b162f4ef1dfd98a8a05824ce3fb96b}\index{prt::Engine@{prt::Engine}!state\_@{state\_}}
+\index{state\_@{state\_}!prt::Engine@{prt::Engine}}
+\doxysubsubsection{\texorpdfstring{state\_}{state\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_engine_ad5b162f4ef1dfd98a8a05824ce3fb96b} 
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classprt_1_1_engine_state}{Engine\+State}}$>$ prt\+::\+Engine\+::state\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classprt_1_1_engine_a7a1b355118e89f8d83266c9c91951beb}\index{prt::Engine@{prt::Engine}!ticker\_@{ticker\_}}
+\index{ticker\_@{ticker\_}!prt::Engine@{prt::Engine}}
+\doxysubsubsection{\texorpdfstring{ticker\_}{ticker\_}}
+{\footnotesize\ttfamily \label{classprt_1_1_engine_a7a1b355118e89f8d83266c9c91951beb} 
+\mbox{\hyperlink{classprt_1_1_rate_limited_ticker}{Rate\+Limited\+Ticker}}$<$k\+Target\+Tick\+Rate$>$ prt\+::\+Engine\+::ticker\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{engine_8h}{engine.\+h}}\item 
+/\+Users/tazz/\+Projects/prette/\+Sources/prette/\mbox{\hyperlink{engine_8cc}{engine.\+cc}}\end{DoxyCompactItemize}

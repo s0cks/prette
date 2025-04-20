@@ -1,0 +1,38 @@
+\doxysection{/\+Users/tazz/\+Projects/prette/\+Sources/prette/uri.cc File Reference}
+\hypertarget{uri_8cc}{}\label{uri_8cc}\index{/Users/tazz/Projects/prette/Sources/prette/uri.cc@{/Users/tazz/Projects/prette/Sources/prette/uri.cc}}
+{\ttfamily \#include "{}prette/uri.\+h"{}}\newline
+{\ttfamily \#include $<$regex$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$unordered\+\_\+set$>$}\newline
+{\ttfamily \#include "{}prette/uri\+\_\+parser.\+h"{}}\newline
+Include dependency graph for uri.\+cc\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{uri_8cc__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceprt}{prt}}
+\item 
+namespace \mbox{\hyperlink{namespaceprt_1_1uri}{prt\+::uri}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespaceprt_1_1uri_a5a78eca16a680e41e2e0751320d37af8}{prt\+::uri\+::\+Sanitize\+Extension}} (\mbox{\hyperlink{namespaceprt_1_1uri_a487da430806070600da37428f7a239ac}{Extension}} \&extension)
+\item 
+void \mbox{\hyperlink{namespaceprt_1_1uri_aefb10cb435038a60f3dd371e34a1f6d4}{prt\+::uri\+::\+Sanitize\+Path}} (\mbox{\hyperlink{namespaceprt_1_1uri_a8d16d88011a7f47eca76c281d6fee57d}{Path}} \&path, const bool root)
+\item 
+{\footnotesize template$<$class Container $>$ }\\auto \mbox{\hyperlink{namespaceprt_1_1uri_a5eae699ca398d9a716d0f6be6ad1e99e}{prt\+::uri\+::\+Has}} (const \mbox{\hyperlink{namespaceprt_1_1uri_a678076225dd533b5e37a65e04ff7ecf2}{Scheme}} \&value, const Container \&values) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{namespaceprt_1_1uri_a5a99791459568f773bfa3cfaa69d8b0a}{prt\+::uri\+::\+Is\+Valid\+Uri}} (const \mbox{\hyperlink{namespaceprt_1_1uri_abd78a90444cc631e16c4484d1c03743f}{basic\+\_\+uri}} \&value) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{namespaceprt_1_1uri_aee08b6daf031c958ef61a3c8ba236588}{prt\+::uri\+::\+Is\+Valid\+Uri}} (const \mbox{\hyperlink{namespaceprt_1_1uri_abd78a90444cc631e16c4484d1c03743f}{basic\+\_\+uri}} \&value, const std\+::string \&scheme) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{namespaceprt_1_1uri_a037a833277d691ae0323351db8d8a6dc}{prt\+::uri\+::\+Is\+Valid\+Uri}} (const \mbox{\hyperlink{namespaceprt_1_1uri_abd78a90444cc631e16c4484d1c03743f}{basic\+\_\+uri}} \&value, const std\+::set$<$ \mbox{\hyperlink{namespaceprt_1_1uri_a678076225dd533b5e37a65e04ff7ecf2}{Scheme}} $>$ \&schemes) -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{namespaceprt_1_1uri_a83eab53679c31fc60834b3598f1d75af}{prt\+::uri\+::\+Is\+Valid\+Uri}} (const \mbox{\hyperlink{namespaceprt_1_1uri_abd78a90444cc631e16c4484d1c03743f}{basic\+\_\+uri}} \&value, const std\+::unordered\+\_\+set$<$ \mbox{\hyperlink{namespaceprt_1_1uri_a678076225dd533b5e37a65e04ff7ecf2}{Scheme}} $>$ \&schemes) -\/$>$ bool
+\end{DoxyCompactItemize}

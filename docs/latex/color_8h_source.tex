@@ -1,0 +1,107 @@
+\doxysection{color.\+h}
+\hypertarget{color_8h_source}{}\label{color_8h_source}\index{/Users/tazz/Projects/prette/Sources/prette/color.h@{/Users/tazz/Projects/prette/Sources/prette/color.h}}
+\mbox{\hyperlink{color_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRT\_COLOR\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRT\_COLOR\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <ostream>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{glm_8h}{prette/glm.h}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{platform_8h}{prette/platform.h}}"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceprt}{prt}}\ \{}
+\DoxyCodeLine{00009\ \ \ \textcolor{keyword}{namespace\ }rgb\ \{}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceprt_1_1rgb_a1b3364bb1736a6c06aa56164fb7f29a7}{Color}}\ =\ glm::u8vec4;}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00013\ \ \ \ \ GetAlphaComponent(\textcolor{keyword}{const}\ uint32\_t\&\ rhs)\ -\/>\ uint8\_t\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (rhs\ >>\ 24)\ \&\ 0xFF;}
+\DoxyCodeLine{00015\ \ \ \ \ \}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00018\ \ \ \ \ GetRedComponent(\textcolor{keyword}{const}\ uint32\_t\&\ rhs)\ -\/>\ uint8\_t\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (rhs\ >>\ 16)\ \&\ 0xFF;}
+\DoxyCodeLine{00020\ \ \ \ \ \}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00023\ \ \ \ \ GetGreenComponent(\textcolor{keyword}{const}\ uint32\_t\&\ rhs)\ -\/>\ uint8\_t\ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (rhs\ >>\ 8)\ \&\ 0xFF;}
+\DoxyCodeLine{00025\ \ \ \ \ \}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00028\ \ \ \ \ GetBlueComponent(\textcolor{keyword}{const}\ uint32\_t\&\ rhs)\ -\/>\ uint8\_t\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ rhs\ \&\ 0xFF;}
+\DoxyCodeLine{00030\ \ \ \ \ \}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00033\ \ \ \ \ Hex(\textcolor{keyword}{const}\ uint32\_t\ value)\ -\/>\ \mbox{\hyperlink{namespaceprt_1_1rgb_a1b3364bb1736a6c06aa56164fb7f29a7}{Color}}\ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ GetRedComponent(value),}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ GetGreenComponent(value),}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ GetBlueComponent(value),}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ 0xFF}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00040\ \ \ \ \ \}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{namespaceprt_1_1rgb_ad60b2862adcab58fb27eaf6744151861}{ColorComponent}}\ :\ int8\_t\ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \mbox{\hyperlink{namespaceprt_1_1rgb_ad60b2862adcab58fb27eaf6744151861ad64f8452a549fa634bfda7b99f6a7593}{kRedComponent}}\ =\ 0,}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \mbox{\hyperlink{namespaceprt_1_1rgb_ad60b2862adcab58fb27eaf6744151861a2ac3a562bb77d1a9e03c885d24c35f6c}{kGreenComponent}}\ =\ 1,}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \mbox{\hyperlink{namespaceprt_1_1rgb_ad60b2862adcab58fb27eaf6744151861a4fdee376c09fcc5940b34d89b28886a9}{kBlueComponent}}\ =\ 2,}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \mbox{\hyperlink{namespaceprt_1_1rgb_ad60b2862adcab58fb27eaf6744151861aaf31b393b8eecf63defed0c3d606aa48}{kAlphaComponent}}\ =\ 3,}
+\DoxyCodeLine{00047\ \ \ \ \ \};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00050\ \ \ \ \ operator<<(std::ostream\&\ stream,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_1_1rgb_ad60b2862adcab58fb27eaf6744151861}{ColorComponent}}\&\ rhs)\ -\/>\ std::ostream\&\ \{}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \textcolor{keywordflow}{switch}(rhs)\ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespaceprt_1_1rgb_ad60b2862adcab58fb27eaf6744151861ad64f8452a549fa634bfda7b99f6a7593}{kRedComponent}}:\ \textcolor{keywordflow}{return}\ stream\ <<\ \textcolor{stringliteral}{"{}Red\ ("{}}\ <<\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(rhs)\ <<\ \textcolor{stringliteral}{"{})"{}};}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespaceprt_1_1rgb_ad60b2862adcab58fb27eaf6744151861a2ac3a562bb77d1a9e03c885d24c35f6c}{kGreenComponent}}:\ \textcolor{keywordflow}{return}\ stream\ <<\ \textcolor{stringliteral}{"{}Green\ ("{}}\ <<\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(rhs)\ <<\ \textcolor{stringliteral}{"{})"{}};}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespaceprt_1_1rgb_ad60b2862adcab58fb27eaf6744151861a4fdee376c09fcc5940b34d89b28886a9}{kBlueComponent}}:\ \textcolor{keywordflow}{return}\ stream\ <<\ \textcolor{stringliteral}{"{}Blue\ ("{}}\ <<\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(rhs)\ <<\ \textcolor{stringliteral}{"{})"{}};}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespaceprt_1_1rgb_ad60b2862adcab58fb27eaf6744151861aaf31b393b8eecf63defed0c3d606aa48}{kAlphaComponent}}:\ \textcolor{keywordflow}{return}\ stream\ <<\ \textcolor{stringliteral}{"{}Alpha\ ("{}}\ <<\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(rhs)\ <<\ \textcolor{stringliteral}{"{})"{}};}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ stream\ <<\ \textcolor{stringliteral}{"{}Unknown\ ColorComponent:\ "{}}\ <<\ \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{namespaceprt_a87ccd959c8410d258ffe759e43ce8562}{uword}}\textcolor{keyword}{>}(rhs);}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00059\ \ \ \ \ \}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_1_1rgb_a1b3364bb1736a6c06aa56164fb7f29a7}{Color}}\ kBlack\ \ \ \ \ =\ Hex(0x000000);}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_1_1rgb_a1b3364bb1736a6c06aa56164fb7f29a7}{Color}}\ kWhite\ \ \ \ \ =\ Hex(0xFFFFFF);}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_1_1rgb_a1b3364bb1736a6c06aa56164fb7f29a7}{Color}}\ kRed\ \ \ \ \ \ \ =\ Hex(0xFF0000);}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_1_1rgb_a1b3364bb1736a6c06aa56164fb7f29a7}{Color}}\ kGreen\ \ \ \ \ =\ Hex(0x00FF00);}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_1_1rgb_a1b3364bb1736a6c06aa56164fb7f29a7}{Color}}\ kBlue\ \ \ \ \ \ =\ Hex(0x0000FF);}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00068\ \ \ \ \ operator\&(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_1_1rgb_a1b3364bb1736a6c06aa56164fb7f29a7}{Color}}\&\ lhs,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_1_1rgb_a1b3364bb1736a6c06aa56164fb7f29a7}{Color}}\&\ rhs)\ -\/>\ \mbox{\hyperlink{namespaceprt_1_1rgb_a1b3364bb1736a6c06aa56164fb7f29a7}{Color}}\ \{}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespaceprt_1_1rgb_a1b3364bb1736a6c06aa56164fb7f29a7}{Color}}\ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ lhs[\mbox{\hyperlink{namespaceprt_1_1rgb_ad60b2862adcab58fb27eaf6744151861ad64f8452a549fa634bfda7b99f6a7593}{kRedComponent}}]\ \&\ rhs[\mbox{\hyperlink{namespaceprt_1_1rgb_ad60b2862adcab58fb27eaf6744151861ad64f8452a549fa634bfda7b99f6a7593}{kRedComponent}}],}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ lhs[\mbox{\hyperlink{namespaceprt_1_1rgb_ad60b2862adcab58fb27eaf6744151861a2ac3a562bb77d1a9e03c885d24c35f6c}{kGreenComponent}}]\ \&\ rhs[\mbox{\hyperlink{namespaceprt_1_1rgb_ad60b2862adcab58fb27eaf6744151861a2ac3a562bb77d1a9e03c885d24c35f6c}{kGreenComponent}}],}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ lhs[\mbox{\hyperlink{namespaceprt_1_1rgb_ad60b2862adcab58fb27eaf6744151861a4fdee376c09fcc5940b34d89b28886a9}{kBlueComponent}}]\ \&\ rhs[\mbox{\hyperlink{namespaceprt_1_1rgb_ad60b2862adcab58fb27eaf6744151861a4fdee376c09fcc5940b34d89b28886a9}{kBlueComponent}}],}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ lhs[\mbox{\hyperlink{namespaceprt_1_1rgb_ad60b2862adcab58fb27eaf6744151861aaf31b393b8eecf63defed0c3d606aa48}{kAlphaComponent}}]\ \&\ rhs[\mbox{\hyperlink{namespaceprt_1_1rgb_ad60b2862adcab58fb27eaf6744151861aaf31b393b8eecf63defed0c3d606aa48}{kAlphaComponent}}],}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00075\ \ \ \ \ \}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00078\ \ \ \ \ operator\&(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_1_1rgb_a1b3364bb1736a6c06aa56164fb7f29a7}{Color}}\&\ lhs,\ \textcolor{keyword}{const}\ uint32\_t\&\ rhs)\ -\/>\ \mbox{\hyperlink{namespaceprt_1_1rgb_a1b3364bb1736a6c06aa56164fb7f29a7}{Color}}\ \{}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespaceprt_1_1rgb_a1b3364bb1736a6c06aa56164fb7f29a7}{Color}}\ \{}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ lhs[\mbox{\hyperlink{namespaceprt_1_1rgb_ad60b2862adcab58fb27eaf6744151861ad64f8452a549fa634bfda7b99f6a7593}{kRedComponent}}]\ \&\ GetRedComponent(rhs),}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ lhs[\mbox{\hyperlink{namespaceprt_1_1rgb_ad60b2862adcab58fb27eaf6744151861a2ac3a562bb77d1a9e03c885d24c35f6c}{kGreenComponent}}]\ \&\ GetGreenComponent(rhs),}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ lhs[\mbox{\hyperlink{namespaceprt_1_1rgb_ad60b2862adcab58fb27eaf6744151861a4fdee376c09fcc5940b34d89b28886a9}{kBlueComponent}}]\ \&\ GetBlueComponent(rhs),}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ lhs[\mbox{\hyperlink{namespaceprt_1_1rgb_ad60b2862adcab58fb27eaf6744151861aaf31b393b8eecf63defed0c3d606aa48}{kAlphaComponent}}],}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00085\ \ \ \ \ \}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{auto}}
+\DoxyCodeLine{00088\ \ \ \ \ operator<<(std::ostream\&\ stream,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceprt_1_1rgb_a1b3364bb1736a6c06aa56164fb7f29a7}{Color}}\&\ rhs)\ -\/>\ std::ostream\&\ \{}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{}rgb::Color("{}};}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{}r="{}}\ <<\ rhs.r\ <<\ \textcolor{stringliteral}{"{},\ "{}};}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{}g="{}}\ <<\ rhs.g\ <<\ \textcolor{stringliteral}{"{},\ "{}};}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{}b="{}}\ <<\ rhs.b\ <<\ \textcolor{stringliteral}{"{},\ "{}};}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{}a="{}}\ <<\ rhs.a;}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{})"{}};}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ stream;}
+\DoxyCodeLine{00096\ \ \ \ \ \}}
+\DoxyCodeLine{00097\ \ \ \}}
+\DoxyCodeLine{00098\ \ \ \textcolor{keyword}{using\ namespace\ }rgb;}
+\DoxyCodeLine{00099\ \}}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//PRT\_COLOR\_H}}
+
+\end{DoxyCode}
