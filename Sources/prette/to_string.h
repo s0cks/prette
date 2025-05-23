@@ -1,14 +1,18 @@
+
 #ifndef PRT_TO_STRING_H
 #define PRT_TO_STRING_H
 
-#include <glog/logging.h>
-
 #include <functional>
-#include <string>
 #include <type_traits>
 #include <utility>
+#include <vector>
+// IWYU pragma: begin_exports
+#include <sstream>
+#include <string>
+// IWYU pragma: end_exports
 
 #include "prette/common.h"
+#include "prette/glm.h"
 
 namespace prt {
 class Window;
@@ -141,7 +145,8 @@ class ToStringHelper : public ToStringHelperBase {
   }
 
   template <typename V>
-  auto AddFieldPtr(std::string name, const V* value, std::enable_if_t<has_to_string<V>::value>* = nullptr) -> ToStringHelper<T>& {
+  auto AddFieldPtr(std::string name, const V* value, std::enable_if_t<has_to_string<V>::value>* = nullptr)
+      -> ToStringHelper<T>& {
     ASSERT(!name.empty());
     EmplaceBackField(Identity(name), [value]() -> std::string {
       if (value == nullptr)
@@ -154,12 +159,23 @@ class ToStringHelper : public ToStringHelperBase {
   }
 
   template <typename V>
-  auto AddFieldRef(std::string name, const V& value) -> ToStringHelper<T>& {
+  auto AddFieldRef(std::string name, const V& value, std::enable_if_t<!is_glm_type<V>::value>* = nullptr)
+      -> ToStringHelper<T>& {
     ASSERT(!name.empty());
     EmplaceBackField(Identity(name), [value]() -> std::string {
       std::stringstream ss;
       ss << value;
       return ss.str();
+    });
+    return *this;
+  }
+
+  template <typename V>
+  auto AddFieldRef(std::string name, const V& value, std::enable_if_t<is_glm_type<V>::value>* = nullptr)
+      -> ToStringHelper<T>& {
+    ASSERT(!name.empty());
+    EmplaceBackField(Identity(name), [value]() -> std::string {
+      return glm::to_string(value);
     });
     return *this;
   }

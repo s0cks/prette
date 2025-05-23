@@ -1,12 +1,12 @@
 #ifndef PRT_TICK_H
 #define PRT_TICK_H
 
-#include <units.h>
-
-#include <cstdint>
 #include <iostream>
+#include <units.h>
+#include <uv.h>
 
 #include "prette/counter.h"
+#include "prette/platform.h"
 #include "prette/rx.h"
 #include "prette/series.h"
 

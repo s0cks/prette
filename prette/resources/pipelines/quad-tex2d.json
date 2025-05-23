@@ -1,0 +1,17 @@
+{
+  "type": "Pipeline",
+  "meta": {
+    "name": "quad-tex2d"
+  },
+  "data": {
+    "vertex_class": "tex2d",
+    "layout": "tex2d",
+    "rasterizer": {
+      "cullMode": "back",
+      "frontFace": "clockwise"
+    },
+    "vertex_shader": "simple_texture2d",
+    "fragment_shader": "simple_texture2d",
+    "pass": "scene"
+  }
+}

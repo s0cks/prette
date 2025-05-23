@@ -1,0 +1,12 @@
+find_program(CCACHE "ccache")
+if(CCACHE)
+  execute_process(COMMAND ${CCACHE} --version
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    ERROR_QUIET
+    OUTPUT_VARIABLE CCACHE_VERSION
+    OUTPUT_STRIP_TRAILING_WHITESPACE)
+  string(REGEX MATCH "[0-9]+\.[0-9]+\.[0-9]+" CCACHE_VERSION "${CCACHE_VERSION}")
+
+  list(APPEND CCACHE_OPTS)
+  message(STATUS "found ccache v${CCACHE_VERSION}: ${CCACHE}")
+endif()

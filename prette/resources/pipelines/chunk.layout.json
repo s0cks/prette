@@ -1,0 +1,11 @@
+{
+  "type": "PipelineLayout",
+  "meta": {
+    "name": "chunk"
+  },
+  "data": {
+    "descriptor_sets": [
+      "chunk"
+    ]
+  }
+}

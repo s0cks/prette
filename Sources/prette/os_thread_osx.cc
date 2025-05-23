@@ -1,14 +1,32 @@
 #include "prette/os_thread.h"
 #ifdef OS_IS_OSX
+
+#include <cstdio>
+#include <cstring>
 #include <fmt/format.h>
 #include <glog/logging.h>
+#include <mach/kern_return.h>
 #include <mach/mach.h>
+#include <mach/mach_error.h>
+#include <mach/mach_init.h>
 #include <mach/mach_types.h>
+#include <mach/message.h>
+#include <mach/task.h>
 #include <mach/thread_act.h>
+#include <mach/thread_info.h>
+#include <mach/vm_map.h>
+#include <mach/vm_types.h>
 #include <pthread.h>
-#include <pthread_spis.h>
-
+#include <stdexcept>
+#include <string>
 #include <utility>
+
+#include "prette/platform.h"
+#include "prette/rx.h"
+
+// IWYU pragma: no_include <ios>
+
+// NOLINTBEGIN(cppcoreguidelines-avoid-c-arrays,modernize-avoid-c-arrays)
 
 namespace prt {
 class ThreadStartData {
@@ -52,11 +70,12 @@ auto GetCurrentThreadCount() -> int {
       return -1;
   }
   {
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-cstyle-cast)
     const auto res = vm_deallocate(me, (vm_address_t)threads, num_threads * sizeof(*threads));
     if (res != KERN_SUCCESS)
       return -1;
   }
-  return num_threads;
+  return static_cast<int>(num_threads);
 }
 
 auto GetCurrentThreadNames() -> rx::observable<std::string> {
@@ -74,6 +93,7 @@ auto GetCurrentThreadNames() -> rx::observable<std::string> {
       const auto& th = threads[idx];
       thread_extended_info_data_t th_info;
       mach_msg_type_number_t num_th_info = THREAD_EXTENDED_INFO_COUNT;
+      // NOLINTNEXTLINE(cppcoreguidelines-pro-type-cstyle-cast)
       const auto res = thread_info(th, THREAD_EXTENDED_INFO, (thread_info_t)&th_info, &num_th_info);
       if (res != KERN_SUCCESS) {
         const auto err = fmt::format("failed to get thread info: {0:s}", mach_error_string(res));
@@ -83,6 +103,7 @@ auto GetCurrentThreadNames() -> rx::observable<std::string> {
     }
 
     {
+      // NOLINTNEXTLINE(cppcoreguidelines-pro-type-cstyle-cast)
       const auto res = vm_deallocate(me, (vm_address_t)threads, num_threads * sizeof(*threads));
       if (res != KERN_SUCCESS)
         return s.on_error(rx::util::make_error_ptr(std::runtime_error("")));
@@ -93,6 +114,7 @@ auto GetCurrentThreadNames() -> rx::observable<std::string> {
 
 auto SetThreadName(const ThreadId& thread, const char* name) -> bool {
   char truncated_name[kThreadNameMaxLength];
+  // NOLINTNEXTLINE(cppcoreguidelines-pro-type-vararg)
   snprintf(truncated_name, kThreadNameMaxLength - 1, "%s", name);
   int result = 0;
   if ((result = pthread_setname_np(truncated_name)) != 0) {
@@ -103,7 +125,7 @@ auto SetThreadName(const ThreadId& thread, const char* name) -> bool {
 }
 
 static auto HandleThread(void* pdata) -> void* {
-  auto data = (ThreadStartData*)pdata;
+  auto data = (ThreadStartData*)pdata;  // NOLINT(cppcoreguidelines-pro-type-cstyle-cast)
   auto& func = data->GetFunction();
   void* parameter = data->GetParameter();
 
@@ -122,7 +144,7 @@ auto GetCurrentThreadId() -> ThreadId {
 
 auto Start(ThreadId* thread, const std::string& name, const ThreadHandler& func, void* parameter) -> bool {
   int result = 0;
-  pthread_attr_t attrs;
+  pthread_attr_t attrs{};
   if ((result = pthread_attr_init(&attrs)) != 0) {
     LOG(ERROR) << "couldn't initialize the thread attributes: " << strerror(result);
     return false;
@@ -148,6 +170,7 @@ auto Join(const ThreadId& thread) -> bool {
   char return_data[kThreadMaxResultLength];
 
   int result = 0;
+  // NOLINTNEXTLINE(cppcoreguidelines-pro-type-cstyle-cast)
   if ((result = pthread_join(thread, (void**)&return_data)) != 0) {
     LOG(ERROR) << "couldn't join thread: " << strerror(result);
     return false;
@@ -174,6 +197,7 @@ auto GetThreadName(const ThreadId& thread) -> std::string {
 
 auto SetThreadName(const ThreadId& thread, const std::string& name) -> bool {
   char truncated_name[kThreadNameMaxLength];
+  // NOLINTNEXTLINE(cppcoreguidelines-pro-type-vararg)
   snprintf(truncated_name, kThreadNameMaxLength - 1, "%s", name.data());
   int result = 0;
   if ((result = pthread_setname_np(truncated_name)) != 0) {
@@ -208,5 +232,7 @@ auto GetCurrentThreadLocal(const ThreadLocalKey& key) -> void* {
   return nullptr;
 }
 }  // namespace prt
+
+// NOLINTEND(cppcoreguidelines-avoid-c-arrays,modernize-avoid-c-arrays)
 
 #endif  // OS_IS_OSX

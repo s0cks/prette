@@ -5,49 +5,60 @@
 
 namespace prt {
 #define FOR_EACH_SWAPCHAIN_EVENT(V) \
-  V(SwapChainInit)                  \
-  V(SwapChainDestroyed)
+  V(SwapchainCreated)               \
+  V(SwapchainInit)                  \
+  V(SwapchainDestroyed)
 
-class SwapChainEvent;
+class SwapchainEvent;
 #define FORWARD_DECLARE(Name) class Name##Event;
 FOR_EACH_SWAPCHAIN_EVENT(FORWARD_DECLARE)
 #undef FORWARD_DECLARE
 
-class SwapChainEvent : public Event {
+DEFINE_EVENT_PROTOTYPE(Swapchain, FOR_EACH_SWAPCHAIN_EVENT);
+
+class SwapchainCreatedEvent : public SwapchainEvent {
+ public:
+  SwapchainCreatedEvent() = default;
+  ~SwapchainCreatedEvent() override = default;
+  DECLARE_EVENT_TYPE(SwapchainEvent, SwapchainCreated);
+};
+
+class SwapchainInitEvent : public SwapchainEvent {
  private:
   bool reinit_;
 
  public:
-  explicit SwapChainEvent(const bool reinit) :
-    Event(),
+  explicit SwapchainInitEvent(const bool reinit) :
+    SwapchainEvent(),
     reinit_(reinit) {}
-  ~SwapChainEvent() override = default;
+  ~SwapchainInitEvent() override = default;
 
   auto IsReinit() const -> bool {
     return reinit_;
   }
 
-  DEFINE_EVENT_PROTOTYPE_TYPE(SwapChain, FOR_EACH_SWAPCHAIN_EVENT);
+  DECLARE_EVENT_TYPE(SwapchainEvent, SwapchainInit);
 };
 
-class SwapChainInitEvent : public SwapChainEvent {
+class SwapchainDestroyedEvent : public SwapchainEvent {
+ private:
+  bool reinit_;
+
  public:
-  explicit SwapChainInitEvent(const bool reinit) :
-    SwapChainEvent(reinit) {}
-  ~SwapChainInitEvent() override = default;
-  DECLARE_EVENT_TYPE(SwapChainEvent, SwapChainInit);
+  explicit SwapchainDestroyedEvent(const bool reinit) :
+    SwapchainEvent(),
+    reinit_(reinit) {}
+  ~SwapchainDestroyedEvent() override = default;
+
+  auto IsReinit() const -> bool {
+    return reinit_;
+  }
+
+  DECLARE_EVENT_TYPE(SwapchainEvent, SwapchainDestroyed);
 };
 
-class SwapChainDestroyedEvent : public SwapChainEvent {
- public:
-  explicit SwapChainDestroyedEvent(const bool reinit) :
-    SwapChainEvent(reinit) {}
-  ~SwapChainDestroyedEvent() override = default;
-  DECLARE_EVENT_TYPE(SwapChainEvent, SwapChainDestroyed);
-};
-
-DEFINE_EVENT_SUBJECT(SwapChain);
-DEFINE_EVENT_OBSERVABLE(SwapChain);
+DEFINE_EVENT_SUBJECT(Swapchain);
+DEFINE_EVENT_OBSERVABLE(Swapchain);
 FOR_EACH_SWAPCHAIN_EVENT(DEFINE_EVENT_OBSERVABLE);
 }  // namespace prt
 

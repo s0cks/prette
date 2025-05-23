@@ -2,7 +2,37 @@
 
 #include <uv.h>
 
+#include "prette/common.h"
+#include "prette/to_string.h"
+
 namespace prt::uv {
+auto Loop::Queue(Work* work) -> Status {
+  ASSERT(work);
+  return work->Submit(this);
+}
+
+void AnyWork::OnWork(uv_work_t* handle) {
+  const auto work = Unwrap(handle);
+  ASSERT(work);
+  return work->on_work_(work);
+}
+
+void AnyWork::OnWorkFinished(uv_work_t* handle, const int status) {
+  const auto work = Unwrap(handle);
+  ASSERT(work);
+  work->on_finished_(work, status);
+  work->SetFinished();
+}
+
+auto AnyWork::Submit(Loop* loop) -> Status {
+  ASSERT(loop);
+  return uv_queue_work(*loop, handle(), OnWork, OnWorkFinished);
+}
+
+auto AnyWork::ToString() const -> std::string {
+  return ToStringHelper<AnyWork>{};
+}
+
 Loop::Loop() :
   handle_() {
   CHECK_UV(FATAL, InitLoop(&handle_), "failed to initialize uv::Loop");

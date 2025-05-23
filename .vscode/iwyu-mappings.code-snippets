@@ -1,0 +1,37 @@
+{
+	"IWYU-mapping-quote-include": {
+		"body": "{ include: [ \"$1\", \"private\", \"\\\"$2\\\"\", \"public\" ] },",
+		"prefix": "iwyu-mapping-include",
+		"description": "Insert include-what-you-use include mapping w/ quoted include"
+	},
+	"IWYU-mapping-include-quote-pattern": {
+		"body": "{ include: [ \"@$1\", \"private\", \"\\\"$2\\\"\", \"public\" ] },",
+		"prefix": "iwyu-mapping-include-quote-pattern",
+		"description": "Insert include-what-you-use include mapping w/ quoted include and pattern"
+	},
+	"IWYU-mapping-angle-include": {
+		"body": "{ include: [ \"$1\", \"private\", \"<$2>\", \"public\" ] },",
+		"prefix": "iwyu-mapping-include",
+		"description": "Insert include-what-you-use include mapping w/ angled include"
+	},
+	"IWYU-mapping-include-angle-pattern": {
+		"body": "{ include: [ \"@$1\", \"private\", \"<$2>\", \"public\" ] },",
+		"prefix": "iwyu-mapping-include-quote-pattern",
+		"description": "Insert include-what-you-use include mapping w/ angled include and pattern"
+	},
+	"IWYU-mapping-symbol-quote": {
+		"body": "{ symbol:  [ \"$1\", \"private\", \"\\\"$2\\\"\", \"public\" ] },",
+		"prefix": "iwyu-mapping-symbol-quote",
+		"description": "Insert include-what-you-use symbol mapping w/ quoted include"
+	},
+	"IWYU-mapping-symbol-angle": {
+		"body": "{ symbol:  [ \"$1\", \"private\", \"<$2>\", \"public\" ] },",
+		"prefix": "iwyu-mapping-symbol-angle",
+		"description": "Insert include-what-you-use symbol mapping angled include"
+	},
+	"IWYU-mapping-ref": {
+		"body": "{ ref: \"$1\" },",
+		"prefix": "iwyu-mapping-ref",
+		"description": "Insert include-what-you-use ref mapping."
+	}
+}

@@ -2,9 +2,11 @@
 #define COUNTER_H
 
 #include <glog/logging.h>
+#include <ostream>
 #include <units.h>
 #include <uv.h>
 
+#include "prette/platform.h"
 #include "prette/relaxed_atomic.h"
 
 namespace prt {

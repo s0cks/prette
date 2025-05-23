@@ -1,11 +1,21 @@
 #ifndef PRT_TEXTURE_H
 #define PRT_TEXTURE_H
 
+#include <functional>
+#include <memory>
+#include <string>
+#include <utility>
 #include <vulkan/vulkan_core.h>
 
-#include "prette/gfx.h"
+#include "prette/common.h"
+#include "prette/image.h"
+#include "prette/image_view.h"
+#include "prette/platform.h"
+#include "prette/sampler.h"
+#include "prette/vk.h"
 
 namespace prt {
+// NOLINTNEXTLINE(cppcoreguidelines-avoid-c-arrays,modernize-avoid-c-arrays)
 using TextureBytes = std::unique_ptr<uint8_t[], std::function<void(uint8_t*)>>;
 
 struct TextureData {
@@ -13,98 +23,164 @@ struct TextureData {
   int width;
   int height;
   int num_channels;
+
+  inline auto GetTotalBufferSize() const -> VkDeviceSize {
+    return width * height * 4;
+  }
+
+  operator VkRect2D() const {
+    return VkRect2D{
+        .offset = {},
+        .extent = operator ::VkExtent2D(),
+    };
+  }
+
+  operator VkExtent2D() const {
+    return {.width = width, .height = height};
+  }
 };
 
 auto ReadTexture(const std::string& filename, const bool flip) -> TextureData;
 
+static constexpr const auto kDefaultTextureName = "default-texture";
 class Texture {
- public:
-  enum Type {
-    kDiffuseMap,
-    kSpecularMap,
-    kNormalMap,
-    kCubeMap,
-  };
+  friend class TextureBuilder;
 
  private:
-  std::string name_ = "default_texture_name";
-  Type type_;
-  VkImage image_ = {};
-  VkDeviceMemory memory_ = {};
-  VkImageView view_ = {};
-  VkSampler sampler_ = {};
-  VkFormat format_ = {};
-  uint32_t mips_ = {};
-  uint32_t channels_ = {};
-  uint32_t width_ = {};
-  uint32_t height_ = {};
-
-  inline void TransitionImageLayout(VkImageLayout oldLayout, VkImageLayout newLayout, uint32_t mipLevels) {
-    TransitionImageLayout(image_, oldLayout, newLayout, mipLevels);
-  }
+  std::string name_;
+  vk::Image* image_ = nullptr;
+  vk::ImageView* view_ = nullptr;
+  vk::Sampler* sampler_ = nullptr;
 
  public:
-  Texture(const Type type, std::string filename, const bool flip = false);
-  Texture() = default;
+  explicit Texture(const std::string name) :
+    name_(std::move(name)) {}
+  Texture(const std::string name, vk::Image* image, vk::ImageView* view, vk::Sampler* sampler = nullptr);
+  ~Texture();
 
   auto GetName() const -> const std::string& {
     return name_;
   }
 
-  auto GetType() const -> Type {
-    return type_;
+  inline auto HasName() const -> bool {
+    return !name_.empty();
   }
 
-  auto GetImage() const -> VkImage const& {
+  auto GetImage() const -> vk::Image* {
     return image_;
   }
 
-  auto GetImageView() const -> VkImageView const& {
+  inline auto HasImage() const -> bool {
+    return vk::IsInitialized(GetImage());
+  }
+
+  auto GetImageView() const -> vk::ImageView* {
     return view_;
   }
 
-  auto GetSampler() const -> VkSampler const& {
+  inline auto HasImageView() const -> bool {
+    return vk::IsInitialized(GetImageView());
+  }
+
+  auto GetSampler() const -> vk::Sampler* {
     return sampler_;
   }
 
-  auto GetFormat() const -> VkFormat const& {
-    return format_;
+  inline auto HasSampler() const -> bool {
+    return vk::IsInitialized(GetSampler());
   }
 
-  auto GetMipLevel() const -> uint32_t {
-    return mips_;
+  void SetSampler(vk::Sampler* rhs) {
+    ASSERT_INITIALIZED(rhs);
+    sampler_ = rhs;
   }
 
-  auto GetNumberOfChannels() const -> uint32_t {
-    return channels_;
-  }
+  auto IsInitialized() const -> bool;
+  auto ToString() const -> std::string;
+};
 
-  auto GetWidth() const -> uint32_t {
-    return width_;
-  }
+auto NewDepthTexture(const std::string name, const VkExtent2D& extent, VkFormat format, vk::Sampler* sampler = nullptr)
+    -> Texture*;
 
-  auto GetHeight() const -> uint32_t {
-    return height_;
-  }
-
-  void Destroy();
-  void CopyBufferToImage(uint8_t* data) {
-    return CopyBufferToImage(image_, width_, height_, data);
-  }
+class TextureBuilder {
+ private:
+  std::string name_ = kDefaultTextureName;
+  vk::Image* image_ = nullptr;
+  vk::ImageView* view_ = nullptr;
+  vk::Sampler* sampler_ = nullptr;
 
  public:
-  static auto CreateImage(uint32_t width, uint32_t height, uint32_t mipLevels, VkSampleCountFlagBits numSamples, VkFormat format,
-                          VkImageTiling tiling, VkImageUsageFlags usage, VkMemoryPropertyFlags properties, bool cubemap = false)
-      -> std::pair<VkImage, VkDeviceMemory>;
-  static void GenerateMipmaps(VkImage image, VkFormat imageFormat, int32_t texWidth, int32_t texHeight, uint32_t mipLevels);
-  static auto CreateImageView(VkImage image, VkFormat format, VkImageAspectFlags aspectFlags, uint32_t mipLevels,
-                              bool cubemap = false) -> VkImageView;
-  static void InitSampler(VkSampler& sampler, const uint32_t mips);
+  explicit TextureBuilder(const std::string name = kDefaultTextureName) :
+    name_(std::move(name)) {}
+  ~TextureBuilder() = default;
 
-  static void TransitionImageLayout(VkImage image, VkImageLayout oldLayout, VkImageLayout newLayout, uint32_t mipLevels,
-                                    bool cubemap = false);
-  static void CopyBufferToCubemapImage(VkImage image, uint32_t texWidth, uint32_t texHeight, uint8_t* data);
-  static void CopyBufferToImage(VkImage image, uint32_t texWidth, uint32_t texHeight, uint8_t* data);
+  auto GetName() const -> const std::string& {
+    return name_;
+  }
+
+  inline auto HasName() const -> bool {
+    return !name_.empty();
+  }
+
+  auto WithName(const std::string rhs) -> TextureBuilder& {
+    ASSERT(!rhs.empty());
+    name_ = std::move(rhs);
+    return *this;
+  }
+
+  auto GetImage() const -> vk::Image* {
+    return image_;
+  }
+
+  auto WithImage(vk::Image* rhs) -> TextureBuilder& {
+    ASSERT_INITIALIZED(rhs);
+    image_ = rhs;
+    return *this;
+  }
+
+  inline auto HasImage() const -> bool {
+    return vk::IsInitialized(GetImage());
+  }
+
+  auto GetImageView() const -> vk::ImageView* {
+    return view_;
+  }
+
+  inline auto HasImageView() const -> bool {
+    return vk::IsInitialized(GetImageView());
+  }
+
+  auto WithImageView(vk::ImageView* rhs) -> TextureBuilder& {
+    ASSERT_INITIALIZED(rhs);
+    view_ = rhs;
+    return *this;
+  }
+
+  auto GetSampler() const -> vk::Sampler* {
+    return sampler_;
+  }
+
+  inline auto HasSampler() const -> bool {
+    return vk::IsInitialized(GetSampler());
+  }
+
+  auto WithSampler(vk::Sampler* rhs) -> TextureBuilder& {
+    ASSERT_INITIALIZED(rhs);
+    sampler_ = rhs;
+    return *this;
+  }
+
+  auto WithTextureData(const TextureData& rhs, const VkFormat format, const bool staging = true) -> TextureBuilder&;
+  auto IsValid() const -> bool;
+  auto Build(const bool staging = true) -> Texture*;
+
+  auto operator()(const bool staging = true) -> Texture* {
+    return Build(staging);
+  }
+
+  operator Texture*() {
+    return Build();
+  }
 };
 }  // namespace prt
 

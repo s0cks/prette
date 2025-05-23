@@ -1,13 +1,10 @@
 #include "prette/keyboard.h"
 
-#include <GLFW/glfw3.h>
-#include <lauxlib.h>
-#include <lua.h>
-
-#include <filesystem>
+#include <string>
 
 #include "prette/common.h"
-#include "prette/engine.h"
+#include "prette/event.h"
+#include "prette/gfx.h"
 #include "prette/lua.h"
 #include "prette/to_string.h"
 #include "prette/window.h"
@@ -32,11 +29,7 @@ auto KeyboardInitEvent::ToString() const -> std::string {
   return helper;
 }
 
-auto KeyStateEvent::GetKey() const -> const char* {
-  const auto name = glfwGetKeyName(GetCode(), GetScanCode());
-  return name ? name : "";
-}
-
+#ifdef PRETTE_ENABLE_LUA
 void KeyStateEvent::ToTable(lua_State* L) const {
   ASSERT(L);
   KeyboardEvent::ToTable(L);
@@ -49,6 +42,7 @@ void KeyStateEvent::ToTable(lua_State* L) const {
   lua_pushnumber(L, GetMods());
   lua_setfield(L, -2, "mods");
 }
+#endif  // PRETTE_ENABLE_LUA
 
 auto KeyStateEvent::ToString() const -> std::string {
   ToStringHelper<KeyStateEvent> helper{};
@@ -65,6 +59,7 @@ auto KeyboardDestroyedEvent::ToString() const -> std::string {
   return ToStringHelper<KeyboardDestroyedEvent>{};
 }
 
+#ifdef PRT_GLFW
 auto Keyboard::GetKeyboard(GLFWwindow* handle) -> Keyboard* {
   const auto window = Window::Get(handle);
   ASSERT(window && window->HasKeyboard());
@@ -88,6 +83,16 @@ Keyboard::~Keyboard() {
   glfwSetKeyCallback(owner_->GetHandle(), nullptr);
 }
 
+auto Keyboard::GetKey(const int code) const -> KeyState {
+  return {code, glfwGetKey(GetOwner()->GetHandle(), code)};
+}
+
+auto KeyStateEvent::GetKey() const -> const char* {
+  const auto name = glfwGetKeyName(GetCode(), GetScanCode());
+  return name ? name : "";
+}
+#endif  // PRT_GLFW
+
 auto Keyboard::ToString() const -> std::string {
   return ToStringHelper<Keyboard>{};
 }
@@ -96,10 +101,6 @@ void Keyboard::PublishEvent(KeyboardEvent* event) const {
   ASSERT(event);
   prt::PublishEvent(event);
   return EventSourceTemplate<KeyboardEvent>::PublishEvent(event);
-}
-
-auto Keyboard::GetKey(const int code) const -> KeyState {
-  return {code, glfwGetKey(GetOwner()->GetHandle(), code)};
 }
 
 static inline auto SetKeyboard(Keyboard* rhs) -> Keyboard* {

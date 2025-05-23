@@ -2,15 +2,14 @@
 #define PRT_RESOLUTION_H
 
 #include <fmt/format.h>
-#include <rocksdb/slice.h>
-
 #include <ostream>
+#include <rocksdb/slice.h>
+#include <string>
 
 #include "prette/bitfield.h"
 #include "prette/common.h"
-#include "prette/glm.h"
-#include "prette/lua.h"
 #include "prette/parser.h"
+#include "prette/platform.h"
 
 namespace prt {
 class Resolution {
@@ -81,27 +80,27 @@ class ResolutionParser : public ParserTemplate<kDefaultResolutionParserBufferSiz
  protected:
   Config config_;
 
-  bool OnParseStarted() const {
+  auto OnParseStarted() const -> bool {
     return config_.OnParseStarted ? config_.OnParseStarted(this) : true;
   }
 
-  bool OnParseWidth(const int32_t value) const {
+  auto OnParseWidth(const int32_t value) const -> bool {
     return config_.OnParseWidth ? config_.OnParseWidth(this, value) : true;
   }
 
-  bool OnParseHeight(const int32_t value) const {
+  auto OnParseHeight(const int32_t value) const -> bool {
     return config_.OnParseHeight ? config_.OnParseHeight(this, value) : true;
   }
 
-  bool OnParseFinished() const {
+  auto OnParseFinished() const -> bool {
     return config_.OnParseFinished ? config_.OnParseFinished(this) : true;
   }
 
-  bool OnParseError() const {
+  auto OnParseError() const -> bool {
     return config_.OnParseError ? config_.OnParseError(this) : false;
   }
 
-  bool ParseInt32(int32_t* value);
+  auto ParseInt32(int32_t* value) -> bool;
 
  public:
   ResolutionParser(const Config& config, const std::string& value, void* data = nullptr) :
@@ -111,7 +110,7 @@ class ResolutionParser : public ParserTemplate<kDefaultResolutionParserBufferSiz
     ParserTemplate(data, value),
     config_() {}
   ~ResolutionParser() override = default;
-  virtual bool ParseResolution();
+  virtual auto ParseResolution() -> bool;
 };
 }  // namespace prt
 

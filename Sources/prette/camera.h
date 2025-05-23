@@ -1,70 +1,134 @@
 #ifndef PRT_CAMERA_H
 #define PRT_CAMERA_H
 
+#include <functional>
+#include <string>
+#include <unordered_set>
+#include <vector>
+
+#include "prette/common.h"
 #include "prette/glm.h"
-#include "prette/tick.h"
+#include "prette/rx.h"
+#include "prette/vk_buffer.h"
 
 namespace prt {
-static constexpr const auto kWorldUp = glm::vec3(0.0f, 1.0f, 0.0f);
-static constexpr const auto kWorldRight = glm::vec3(0.0f, 0.0f, 1.0f);
+static constexpr const auto kWorldUp = glm::vec3(0.0f, -1.0f, 0.0f);
+static constexpr const auto kWorldDown = glm::vec3(0.0f, 1.0f, 0.0f);
+static constexpr const auto kWorldRight = glm::vec3(1.0f, 0.0f, 0.0f);
+static constexpr const auto kWorldLeft = glm::vec3(-1.0f, 0.0f, 0.0f);
+
+static constexpr const auto kDefaultZoom = 100.0f;
+static constexpr const auto kZoomInterval = 2.0f;
+static constexpr const auto kMinZoom = 1.0f;
+static constexpr const auto kMaxZoom = 100.0f;
+
+static constexpr const auto kNearClip = 0.1f;
+static constexpr const auto kFarClip = 1000.0f;
+
+static constexpr const auto kDefaultCameraSpeed = 1.0f;
 
 struct CameraData {
-  alignas(16) glm::mat4 model{1.0f};
+  alignas(8) glm::vec2 viewport_size{};
+  alignas(16) glm::mat4 projection{1.0f};
   alignas(16) glm::mat4 view{1.0f};
-  alignas(16) glm::mat4 projection = glm::mat4(1.0f);
   alignas(16) glm::vec3 pos{};
-  alignas(16) glm::vec3 up{};
-  alignas(16) glm::vec3 right{};
+  alignas(16) glm::vec3 up = kWorldUp;
+  alignas(16) glm::vec3 right = kWorldRight;
   alignas(16) glm::vec3 direction{};
+  alignas(4) float zoom = kDefaultZoom;
+  alignas(4) float speed = kDefaultCameraSpeed;
 };
 
-enum CameraType {
-  kOrthoCamera,
-  kIsoCamera,
-  kPerspectiveCamera,
+#define FOR_EACH_CAMERA_DIRECTION(V) \
+  V(Up)                              \
+  V(Down)                            \
+  V(Left)                            \
+  V(Right)
+
+class Camera;
+using CameraList = std::vector<Camera*>;
+using CameraSet = std::unordered_set<Camera*>;
+using CameraPredicate = std::function<bool(Camera*)>;
+
+class CameraVisitor {
+ protected:
+  CameraVisitor() = default;
+
+ public:
+  virtual ~CameraVisitor() = default;
+  virtual auto Visit(Camera* camera) -> bool = 0;
 };
 
 class Camera {
- protected:
-  CameraType type_;
-  CameraData data_{};
-
-  Camera(const CameraType type, const glm::mat4& projection, const glm::vec3& pos,
-         const glm::vec3& direction = glm::vec3(0.0f, 0.0f, -1.0f)) :
-    type_(type),
-    data_() {
-    data_.direction = direction;
-    data_.right = glm::normalize(glm::cross(kWorldUp, data_.direction));
-    data_.up = glm::cross(data_.direction, data_.right);
-    data_.projection = projection;
-    data_.pos = pos;
-  }
-
-  virtual void UpdateViewMatrix() {
-    data_.view = glm::lookAt(GetPos(), GetPos() + GetDirection(), GetUp());
-  }
+  friend class Renderer;
+  friend class GuiCamera;
+  friend class CameraManager;
 
  public:
-  virtual ~Camera() = default;
+  static constexpr const auto kDefaultDirection = glm::vec3(0.0f, 0.0f, 1.0f);
+  static constexpr const auto kDefaultPos = glm::vec3(16.0f, 16.0f, 1.0f);
 
-  auto GetType() const -> CameraType {
-    return type_;
+ protected:
+  CameraData data_{};
+  vk::Buffer* buffer_ = nullptr;
+  rx::subscription on_key_{};
+  rx::subscription on_scroll_{};
+  rx::subscription dragging_{};
+  rx::subscription on_drag_start_{};
+  rx::subscription on_drag_finish_{};
+  rx::subscription on_swap_init_{};
+
+  auto data() -> CameraData& {
+    return data_;
   }
 
-  inline auto IsOrtho() const -> bool {
-    return GetType() == kOrthoCamera;
+  auto pos() -> glm::vec3& {
+    return data_.pos;
   }
 
-  inline auto IsIso() const -> bool {
-    return GetType() == kIsoCamera;
+  void UpdateViewMatrix();
+  void UpdateProjectionMatrix();
+
+ public:
+  Camera(const glm::vec2 viewport_size, const glm::vec3 pos = kDefaultPos,
+         const glm::vec3 direction = kDefaultDirection);
+  virtual ~Camera();
+
+  auto IsDragging() const -> bool {
+    return dragging_.is_subscribed();
   }
 
-  inline auto IsPerspective() const -> bool {
-    return GetType() == kPerspectiveCamera;
+  auto GetBuffer() const -> vk::Buffer* {
+    return buffer_;
+  }
+
+  inline auto HasBuffer() const -> bool {
+    return GetBuffer() != nullptr;
+  }
+
+  void SetBuffer(vk::Buffer* rhs) {
+    ASSERT(rhs);
+    buffer_ = rhs;
   }
 
   auto data() const -> const CameraData& {
     return data_;
+  }
+
+  auto GetViewportSize() const -> const glm::vec2& {
+    return data().viewport_size;
+  }
+
+  auto GetViewportWidth() const -> float {
+    return data().viewport_size[0];
+  }
+
+  auto GetViewportHeight() const -> float {
+    return data().viewport_size[1];
+  }
+
+  auto GetViewportAspectRatio() const -> float {
+    return GetViewportWidth() / GetViewportHeight();
   }
 
   auto GetView() const -> const glm::mat4& {
@@ -91,151 +155,67 @@ class Camera {
     return data().direction;
   }
 
-  void SetPos(const glm::vec3& pos) {
-    data_.pos = pos;
-    UpdateViewMatrix();
+  void SetPos(const glm::vec3& pos);
+
+  auto GetZoom() const -> float {
+    return data().zoom;
   }
 
-  virtual void Update() {
-    // do nothing?
+  auto GetZoomPercent() const -> float {
+    return (kMaxZoom - GetZoom()) / kMaxZoom;
   }
 
- public:
-  static auto Get() -> Camera*;
-  static void Init();
-};
+  void SetZoom(const float rhs);
 
-class OrthoCamera : public Camera {
- private:
-  rx::subscription on_key_{};
-
- protected:
-  void UpdateViewMatrix() override;
-
- public:
-  OrthoCamera(const float top, const float left, const float bottom, const float right, const glm::vec3& pos);
-  ~OrthoCamera() override;
-
-  void Update() override;
-};
-
-static constexpr const auto kDefaultYaw = -90.0f;
-static constexpr const auto kDefaultSpeed = 0.05f;
-static constexpr const auto kDefaultNearClip = 0.1f;
-static constexpr const auto kDefaultFarClip = 1000.0f;
-static constexpr const auto kDefaultPos = glm::vec3(0.0f, 0.0f, 3.0f);
-static constexpr const auto kDefaultFov = 70.0f;
-static constexpr const auto kDefaultSensitivity = 0.1f;
-class PerspectiveCamera : public Camera {
- private:
-  float yaw_ = kDefaultYaw;
-  float pitch_{};
-  float speed_ = kDefaultSpeed;
-  float sensitivity_ = kDefaultSensitivity;
-  float fov_;
-  float aspect_;
-  float near_;
-  float far_;
-  rx::subscription on_mouse_moved_{};
-  rx::subscription on_key_{};
-
-  inline void MoveLeft(const float velocity) {
-    data_.pos -= (data_.right * velocity);
+  inline void IncrementZoom() {
+    return SetZoom(GetZoom() + kZoomInterval);
   }
 
-  inline void MoveBack(const float velocity) {
-    data_.pos -= (data_.direction * velocity);
-  }
-
-  inline void MoveForward(const float velocity) {
-    data_.pos += (data_.direction * velocity);
-  }
-
-  inline void MoveRight(const float velocity) {
-    data_.pos += (data_.right * velocity);
-  }
-
-  inline auto CalculateVelocity(const TickDelta& dts) -> float {
-    return speed_ * (dts / NSEC_PER_MSEC);
-  }
-
- public:
-  PerspectiveCamera(const float fov, const float aspectRatio, const float nearClip, const float farClip, const glm::vec3& pos);
-  ~PerspectiveCamera() override;
-
-  auto GetFov() const -> float {
-    return fov_;
-  }
-
-  void SetFov(const float rhs) {
-    fov_ = rhs;
-  }
-
-  auto GetAspectRatio() const -> float {
-    return aspect_;
-  }
-
-  void SetAspectRatio(const float rhs) {
-    aspect_ = rhs;
-  }
-
-  auto GetNearClip() const -> float {
-    return near_;
-  }
-
-  void SetNearClip(const float rhs) {
-    near_ = rhs;
-  }
-
-  auto GetFarClip() const -> float {
-    return far_;
-  }
-
-  void SetFarClip(const float rhs) {
-    far_ = rhs;
-  }
-
-  auto GetYaw() const -> float {
-    return yaw_;
-  }
-
-  void SetYaw(const float rhs) {
-    yaw_ = rhs;
-  }
-
-  auto GetPitch() const -> float {
-    return pitch_;
-  }
-
-  void SetPitch(const float rhs) {
-    pitch_ = rhs;
+  inline void DecrementZoom() {
+    return SetZoom(GetZoom() - kZoomInterval);
   }
 
   auto GetSpeed() const -> float {
-    return speed_;
+    return data().speed;
   }
 
   void SetSpeed(const float rhs) {
-    ASSERT(rhs >= 0.0f);
-    speed_ = rhs;
+    data().speed = rhs;
   }
 
-  auto GetSensitivity() const -> float {
-    return sensitivity_;
-  }
+  void Update();
+  auto Unproject(const glm::vec2 pos) const -> glm::vec3;
+  auto ToString() const -> std::string;
 
-  void SetSensitivity(const float rhs) {
-    ASSERT(rhs >= 0.0f);
-    sensitivity_ = rhs;
+#define DEFINE_MOVE_DIRECTION(Name)                   \
+  inline void Move##Name(const float amount = 1.0f) { \
+    pos() += ((kWorld##Name * amount) * GetSpeed());  \
   }
+  FOR_EACH_CAMERA_DIRECTION(DEFINE_MOVE_DIRECTION);
+#undef DEFINE_MOVE_DIRECTION
 
-  void SetDirection(const glm::vec3& rhs) {
-    data_.direction = rhs;
-    UpdateViewMatrix();
-  }
-
-  void Update() override;
+ public:
+  static auto Get() -> Camera*;
 };
+
+class CameraFinalizer : public CameraVisitor {
+ private:
+  uint64_t num_finalized_ = 0;
+
+ public:
+  CameraFinalizer() = default;
+  ~CameraFinalizer() override = default;
+  auto Visit(Camera* rhs) -> bool override;
+
+  auto GetNumberOfObjectsFinalized() const -> uint64_t {
+    return num_finalized_;
+  }
+
+ public:
+  static void FinalizeAll(const std::vector<Camera*>& rhs);
+};
+
+auto GetCamera() -> Camera*;
 }  // namespace prt
 
 #endif  // PRT_CAMERA_H

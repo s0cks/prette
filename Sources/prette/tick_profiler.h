@@ -1,8 +1,14 @@
 #ifndef PRT_TICK_PROFILER_H
 #define PRT_TICK_PROFILER_H
 
+#include <algorithm>
+#include <chrono>
+#include <ostream>
+#include <units.h>
+#include <vector>
+
 #include "prette/common.h"
-#include "prette/tick.h"
+#include "prette/rx.h"
 
 namespace prt {
 struct TickStats {

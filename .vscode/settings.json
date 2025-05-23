@@ -134,5 +134,8 @@
   "clang-format.fallbackStyle": "Google",
   "bookmarks.saveBookmarksInProject": true,
   "cmake.clearOutputBeforeBuild": false,
-  "makefile.clearOutputBeforeBuild": false
+  "makefile.clearOutputBeforeBuild": false,
+  "C_Cpp.clang_format_fallbackStyle": "file",
+  "C_Cpp.clang_format_style": "file:${workspaceFolder}/.clang-format",
+  "C_Cpp.refactoring.includeHeader": "never"
 }

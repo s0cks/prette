@@ -1,0 +1,42 @@
+{
+  "type": "RenderPass",
+  "meta": {
+    "name": "swapchain"
+  },
+  "data": {
+    "attachments": {
+      "color": {
+        "samples": 1,
+        "loadOp": "clear",
+        "storeOp": "store",
+        "initialLayout": null,
+        "finalLayout": "color_optimal"
+      }
+    },
+    "subpasses": {
+      "subpass": {
+        "attachments": [
+          "color"
+        ]
+      }
+    },
+    "dependencies": [
+      {
+        "flags": "by_region",
+        "dest": {
+          "subpass": 0,
+          "stage": "color_attachment_out",
+          "access": [
+            "color_attachment_read",
+            "color_attachment_write"
+          ]
+        },
+        "src": {
+          "subpass": "external",
+          "stage": "bottom_of_pipe",
+          "access": "mem_read"
+        }
+      }
+    ]
+  }
+}

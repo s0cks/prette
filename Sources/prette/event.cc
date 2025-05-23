@@ -1,14 +1,18 @@
 #include "prette/event.h"
 
+#include <string>
+
+#include "prette/common.h"
 #include "prette/lua.h"
 
 namespace prt {
+#ifdef PRETTE_ENABLE_LUA
 static inline auto CheckEvent(lua_State* L, const int index) -> Event const* {
   ASSERT(L);
   lua_getmetatable(L, 1);
   lua_getfield(L, -1, "__data");
   luaL_checktype(L, -1, LUA_TLIGHTUSERDATA);
-  return (Event const*)lua_topointer(L, -1);
+  return (Event const*)lua_topointer(L, -1);  // NOLINT(cppcoreguidelines-pro-type-cstyle-cast)
 }
 
 LUA_F(event_toString) {
@@ -32,4 +36,5 @@ void Event::ToTable(lua_State* L) const {
   lua_setfield(L, -2, "__tostring");
   lua_setmetatable(L, -2);
 }
+#endif  // PRETTE_ENABLE_LUA
 }  // namespace prt

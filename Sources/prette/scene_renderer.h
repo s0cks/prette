@@ -1,38 +1,62 @@
 #ifndef PRT_SCENE_RENDERER_H
 #define PRT_SCENE_RENDERER_H
 
-#include <vulkan/vulkan_core.h>
-
-#include "prette/gfx.h"
-#include "prette/scene_render_pass.h"
+#include "prette/descriptor_set.h"
+#include "prette/pipeline.h"
+#include "prette/render_pass.h"
+#include "prette/render_target.h"
+#include "prette/rx.h"
+#include "prette/texture.h"
+#include "prette/vk.h"
 
 namespace prt {
 class Driver;
-class SwapChainFrame;
-class SceneRenderer {
- private:
-  static void InitImages(const Driver* driver, const uint64_t num_images, const VkExtent2D& extent);
-  static void InitDescriptorSetLayout(const Driver* driver);
-  static void InitPipeline(const Driver* driver);
-  static void InitPipelineLayout(const Driver* driver);
-  static void InitRenderPass(const Driver* driver);
-  static void InitCommandBuffers(const Driver* driver);
-  static void InitBuffers();
-  static void InitDescriptorSets(const Driver* driver);
-  static void InitModel();
-  static void InitModelTexture();
-  static void InitDepthTexture(const Driver* driver);
-  static void InitPickingTexture(const Driver* driver);
+class RenderTarget;
+class ChunkRenderer;
+class SwapchainFrame;
+namespace vk {
+class RenderPassBuilder;
+}
 
-  static void Destroy(Driver* driver, const bool is_reinit);
+class SceneRenderer : public vk::RenderPassTemplate<RenderTarget> {
+  friend class vk::RenderPassBuilder;
+  static auto CreatePipeline() -> vk::RenderPipeline*;
+  static auto CreateDescriptorSet() -> vk::DescriptorSet*;
+
+ private:
+  Texture* depth_texture_ = nullptr;
+  ChunkRenderer* chunk_renderer_ = nullptr;
+  rx::subscription on_swap_created_{};
+
+  SceneRenderer(const VkRenderPassCreateInfo* create_info);
+
+  void InitDepthTexture();
+  void UpdateDescriptors();
+  static void InitBuffers();
+
+  auto GetChunkRenderer() const -> ChunkRenderer* {
+    return chunk_renderer_;
+  }
+
+  void OnSwapInit(const bool reinit) override;
+  void OnSwapDestroyed(const bool reinit) override;
 
  public:
-  static void Init();
-  static auto GetCameraBuffer(const uint64_t idx) -> vk::Buffer*;
-  static auto GetRenderPass() -> SceneRenderPass*;
-  static auto GetImageView(const uint64_t idx) -> VkImageView const&;
-  static void Draw(SwapChainFrame* frame, std::vector<VkCommandBuffer>& buffers);
+  ~SceneRenderer() override;
+
+  auto GetDepthTexture() const -> Texture* {
+    return depth_texture_;
+  }
+
+  void Execute() override;
+
+ public:
+  static auto New() -> SceneRenderer*;
 };
+
+void InitSceneRenderer();
+auto IsSceneRendererInitialized() -> bool;
+auto GetSceneRenderer() -> SceneRenderer*;
 }  // namespace prt
 
 #endif  // PRT_SCENE_RENDERER_H

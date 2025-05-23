@@ -1,7 +1,15 @@
-#ifdef PRT_GLFW
-#include <GLFW/glfw3.h>
-
 #include "prette/monitor.h"
+#ifdef PRT_GLFW
+
+#include <string>
+
+#include "prette/common.h"
+#include "prette/dimension.h"
+#include "prette/geometry/rectangle.h"
+#include "prette/geometry/shape.h"
+#include "prette/gfx.h"
+#include "prette/glm.h"
+#include "prette/resolution.h"
 
 namespace prt {
 using Handle = Monitor::Handle;

@@ -1,8 +1,10 @@
 #include "prette/dimension.h"
 
 #include <glog/logging.h>
-#include <lauxlib.h>
-#include <lua.h>
+#include <string>
+
+#include "prette/common.h"
+#include "prette/lua.h"
 
 namespace prt {
 void Dimension::SetTable(lua_State* L, const int index) const {
@@ -19,7 +21,7 @@ void Dimension::SetTable(lua_State* L, const int index) const {
 }
 
 static inline auto GetDimension(const DimensionParser* parser) -> Dimension* {
-  return (Dimension*)parser->data();
+  return (Dimension*)parser->data();  // NOLINT(cppcoreguidelines-pro-type-cstyle-cast)
 }
 
 static inline auto OnParseWidth(const DimensionParser* parser, const uint32_t& width) -> bool {
@@ -54,7 +56,7 @@ auto DimensionParser::ParseUInt32(uint32_t* result) -> bool {
       break;
     }
 
-    token_[token_len_++] = NextChar();
+    token_[token_len_++] = NextChar();  // NOLINT(cppcoreguidelines-pro-bounds-constant-array-index)
     continue;
   } while (true);
 

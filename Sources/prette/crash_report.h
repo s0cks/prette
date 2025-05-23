@@ -3,7 +3,8 @@
 
 #include <backward.hpp>
 #include <exception>
-#include <ostream>
+#include <iostream>
+#include <memory>
 #include <utility>
 
 #include "prette/common.h"
@@ -36,7 +37,8 @@ class CrashReportCause {
     trace_(),
     depth_(kDefaultDepth),
     offset_(kDefaultOffset) {}
-  explicit CrashReportCause(const std::exception_ptr& cause, const int depth = kDefaultDepth, const int offset = kDefaultOffset) :
+  explicit CrashReportCause(const std::exception_ptr& cause, const int depth = kDefaultDepth,
+                            const int offset = kDefaultOffset) :
     cause_(cause),
     trace_(),
     depth_(depth),
@@ -74,8 +76,8 @@ class CrashReportCause {
   }
 
  public:
-  static inline auto New(const std::exception_ptr& cause, const int depth = kDefaultDepth, const int offset = kDefaultOffset)
-      -> std::shared_ptr<CrashReportCause> {
+  static inline auto New(const std::exception_ptr& cause, const int depth = kDefaultDepth,
+                         const int offset = kDefaultOffset) -> std::shared_ptr<CrashReportCause> {
     ASSERT(cause);
     ASSERT(depth >= 1);
     ASSERT(offset >= 0);

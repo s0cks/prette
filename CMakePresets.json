@@ -37,6 +37,9 @@
         "CMAKE_CXX_COMPILER": "clang++",
         "VCPKG_TARGET_TRIPLET": "arm64-osx-dynamic"
       },
+      "environment": {
+        "MTL_DEBUG_LAYER": "0"
+      },
       "vendor": {
         "microsoft.com/VisualStudioSettings/CMake/1.0": {
           "intelliSenseMode": "ios-clang-arm64",

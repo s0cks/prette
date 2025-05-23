@@ -1,12 +1,16 @@
 #include "prette/resolution.h"
 
+#include <cctype>
+#include <cstdio>
 #include <glog/logging.h>
-#include <lauxlib.h>
-#include <lua.h>
+#include <string>
+
+#include "prette/lua.h"
+#include "prette/platform.h"
 
 namespace prt {
 static inline auto GetResolution(const ResolutionParser* parser) -> Resolution* {
-  return (Resolution*)parser->data();
+  return (Resolution*)parser->data();  // NOLINT(cppcoreguidelines-pro-type-cstyle-cast)
 }
 
 static inline auto OnParseWidth(const ResolutionParser* parser, const int32_t& width) -> bool {
@@ -29,6 +33,7 @@ Resolution::Resolution(std::string value) :
   LOG_IF(ERROR, !parser.ParseResolution()) << "failed to parse Resolution from: " << value;
 }
 
+#ifdef PRETTE_ENABLE_LUA
 auto Resolution::ToTable(lua_State* L) const -> bool {
   lua_newtable(L);
   luaL_newmetatable(L, "Resolution");
@@ -41,10 +46,11 @@ auto Resolution::ToTable(lua_State* L) const -> bool {
   lua_setfield(L, -2, "height");
   return true;
 }
+#endif  // PRETTE_ENABLE_LUA
 
 auto ResolutionParser::ParseInt32(int32_t* result) -> bool {
   token_len_ = 0;
-  do {
+  do {  // NOLINT(cppcoreguidelines-avoid-do-while)
     const auto next = PeekChar();
     if (next == EOF) {
       break;
@@ -54,7 +60,7 @@ auto ResolutionParser::ParseInt32(int32_t* result) -> bool {
       break;
     }
 
-    token_[token_len_++] = NextChar();
+    token_[token_len_++] = NextChar();  // NOLINT(cppcoreguidelines-pro-bounds-constant-array-index)
     continue;
   } while (true);
 

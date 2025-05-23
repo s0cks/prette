@@ -1,94 +1,21 @@
 #ifndef PRT_RENDERER_H
 #define PRT_RENDERER_H
 
-#include <vulkan/vulkan_core.h>
-
-#include <vector>
-
-#include "prette/event.h"
-#include "prette/gfx.h"
+#include "prette/common.h"
+#include "prette/engine.h"
+#include "prette/lua.h"
+#include "prette/platform.h"
+#include "prette/relaxed_atomic.h"
+#include "prette/render_pass.h"
+#include "prette/renderer_event.h"
+#include "prette/renderer_state.h"
+#include "prette/rx.h"
 #include "prette/tick.h"
+#include "prette/ticker.h"
+#include "prette/vk.h"
+#include "prette/vk_cmd_buffers.h"
 
 namespace prt {
-#define FOR_EACH_RENDERER_EVENT(V) \
-  V(RendererInit)                  \
-  V(PreFrame)                      \
-  V(PostFrame)                     \
-  V(RendererDestroyed)
-
-class Renderer;
-class RendererEvent;
-#define FORWARD_DECLARE(Name) class Name##Event;
-FOR_EACH_RENDERER_EVENT(FORWARD_DECLARE)
-#undef FORWARD_DECLARE
-
-class RendererEvent : public Event {
- public:
-  RendererEvent() = default;
-  ~RendererEvent() override = default;
-  virtual auto IsFrameEvent() const -> bool = 0;
-  DEFINE_EVENT_PROTOTYPE_TYPE(Renderer, FOR_EACH_RENDERER_EVENT);
-};
-
-template <const bool FrameEvent>
-class TemplateRendererEvent : public RendererEvent {
- public:
-  TemplateRendererEvent() = default;
-  ~TemplateRendererEvent() override = default;
-
-  auto IsFrameEvent() const -> bool override {
-    return FrameEvent;
-  }
-};
-
-class RendererEventBase : public TemplateRendererEvent<false> {
- protected:
-  RendererEventBase() = default;
-
- public:
-  ~RendererEventBase() override = default;
-};
-
-class FrameEvent : public TemplateRendererEvent<true> {
- protected:
-  FrameEvent() = default;
-
- public:
-  ~FrameEvent() override = default;
-};
-
-class RendererInitEvent : public RendererEventBase {
- public:
-  RendererInitEvent() = default;
-  ~RendererInitEvent() override = default;
-  DECLARE_EVENT_TYPE(RendererEvent, RendererInit);
-};
-
-class PreFrameEvent : public FrameEvent {
- public:
-  PreFrameEvent() = default;
-  ~PreFrameEvent() override = default;
-  DECLARE_EVENT_TYPE(RendererEvent, PreFrame);
-};
-
-class PostFrameEvent : public FrameEvent {
- public:
-  PostFrameEvent() = default;
-  ~PostFrameEvent() override = default;
-  DECLARE_EVENT_TYPE(RendererEvent, PostFrame);
-};
-
-class RendererDestroyedEvent : public RendererEventBase {
- public:
-  RendererDestroyedEvent() = default;
-  ~RendererDestroyedEvent() override = default;
-  DECLARE_EVENT_TYPE(RendererEvent, RendererDestroyed);
-};
-
-DEFINE_EVENT_SUBJECT(Renderer);
-DEFINE_EVENT_OBSERVABLE(Renderer);
-FOR_EACH_RENDERER_EVENT(DEFINE_EVENT_OBSERVABLE);
-
 auto OnRendererEvent() -> RendererEventObservable;
 #define DEFINE_ON_EVENT(Name)                                                    \
   static inline auto On##Name##Event()->Name##EventObservable {                  \
@@ -97,76 +24,131 @@ auto OnRendererEvent() -> RendererEventObservable;
 FOR_EACH_RENDERER_EVENT(DEFINE_ON_EVENT)
 #undef DEFINE_ON_EVENT
 
-struct Vertex {
-  glm::vec3 pos;
-  glm::vec3 color;
-  glm::vec2 uv;
+static inline auto OnRendererState(const RendererState rhs) -> RendererStateEventObservable {
+  // clang-format off
+  return OnRendererEvent()
+    .filter(RendererStateEvent::FilterByState(rhs))
+    .map(RendererStateEvent::Cast);
+  // clang-format on
+}
 
-  static auto GetBindingDescription() -> VkVertexInputBindingDescription {
-    VkVertexInputBindingDescription binding{};
-    binding.binding = 0;
-    binding.stride = sizeof(Vertex);
-    binding.inputRate = VK_VERTEX_INPUT_RATE_VERTEX;
-    return binding;
+#define DEFINE_ON_STATE(Name)                                           \
+  static inline auto OnRenderer##Name()->RendererStateEventObservable { \
+    return OnRendererState(RendererState::k##Name);                     \
   }
+FOR_EACH_RENDERER_STATE(DEFINE_ON_STATE)
+#undef DEFINE_ON_STATE
 
-  static auto GetAttributeDescriptions() -> std::array<VkVertexInputAttributeDescription, 3> {
-    std::array<VkVertexInputAttributeDescription, 3> attributes{};
-    attributes.at(0).binding = 0;
-    attributes.at(0).location = 0;
-    attributes.at(0).format = VK_FORMAT_R32G32B32_SFLOAT;
-    attributes.at(0).offset = offsetof(Vertex, pos);
-
-    attributes.at(1).binding = 0;
-    attributes.at(1).location = 1;
-    attributes.at(1).format = VK_FORMAT_R32G32B32_SFLOAT;
-    attributes.at(1).offset = offsetof(Vertex, color);
-
-    attributes.at(2).binding = 0;
-    attributes.at(2).location = 2;
-    attributes.at(2).format = VK_FORMAT_R32G32_SFLOAT;
-    attributes.at(2).offset = offsetof(Vertex, uv);
-    return attributes;
-  }
-
-  auto operator==(const Vertex& rhs) const -> bool {
-    return pos == rhs.pos && color == rhs.color && uv == rhs.uv;
-  }
-};
 class Renderer {
   friend class LuaState;
+  friend class Swapchain;
+  friend class SwapchainFrameScope;
 
  private:
-  static void InitCommandBuffers(const Driver* driver);
-  static void Destroy();
-
- private:
+#ifdef PRETTE_ENABLE_LUA
   static void InitLua(lua_State* L);
+#endif  // PRETTE_ENABLE_LUA
+  static void PublishEvent(RendererEvent* event);
+
+  template <class E, typename... Args>
+  static inline void Publish(Args... args) {
+    E event(args...);
+    return PublishEvent(&event);
+  }
+
+ private:
+  RelaxedAtomic<RendererState> state_;
+  RateLimitedTicker<kTargetTickRate> ticker_;
+  vk::RenderPass* pass_ = nullptr;
+  vk::RenderPipeline* pipeline_ = nullptr;
+  vk::RenderPass* render_passes_ = nullptr;
+  vk::CommandBufferPool<>* command_buffers_ = nullptr;
+  RelaxedAtomic<bool> resized_{false};
+  rx::subscription on_tick_{};
+  rx::subscription on_window_resized_{};
+
+  void InitPipeline();
+  void InitRenderPass();
+  void InitSwap(const bool reinit);
+  void DestroySwap(const bool reinit);
+  void RenderSwap();
+  void OnWindowResized();
+  auto StartTicker() -> rx::composite_subscription;
+
+  inline void StopTicker() {
+    on_tick_.unsubscribe();
+    return ticker_.Stop();
+  }
+
+  void SetState(const RendererState rhs) {
+    state_ = rhs;
+    Publish<RendererStateEvent>(rhs);
+  }
+
+  auto GetRenderPass() const -> vk::RenderPass* {
+    return pass_;
+  }
+
+  auto GetPipeline() const -> vk::RenderPipeline* {
+    return pipeline_;
+  }
+
+  auto GetCommandBuffer(const uint32_t idx) -> VkCommandBuffer* {
+    return &command_buffers_->At(idx);
+  }
+
+  inline auto OnTick() -> rx::observable<Tick> {
+    return ticker_.OnTick();
+  }
+
+ public:
+  Renderer();
+  ~Renderer();
+
+  auto GetState() const -> RendererState {
+    return (RendererState)state_;
+  }
+
+#define DEFINE_STATE_CHECK(Name)                 \
+  inline auto Is##Name() const->bool {           \
+    return GetState() == RendererState::k##Name; \
+  }
+  FOR_EACH_RENDERER_STATE(DEFINE_STATE_CHECK)
+#undef DEFINE_STATE_CHECK
+
+  void DrawFrame(const Tick& current, const Tick& previous);
+
+  auto GetRenderPassList() const -> vk::RenderPass* {
+    return render_passes_;
+  }
+
+  inline auto HasRenderPasses() const -> bool {
+    return GetRenderPassList() != nullptr;
+  }
+
+  void AddRenderPass(vk::RenderPass* rhs) {
+    ASSERT(rhs);
+    Append(&render_passes_, rhs);
+  }
+
+  void RemoveRenderPass(vk::RenderPass* rhs) {
+    ASSERT(rhs);
+    Remove(&render_passes_, rhs);
+  }
 
  public:
   static void Init();
-  static void DrawFrame(Driver* driver, const Tick& current, const Tick& previous);
 };
+
+auto GetRenderer() -> Renderer*;
+auto GetRendererState() -> RendererState;
+
+#define DEFINE_STATE_CHECK(Name)                         \
+  static inline auto IsRenderer##Name()->bool {          \
+    return GetRendererState() == RendererState::k##Name; \
+  }
+FOR_EACH_RENDERER_STATE(DEFINE_STATE_CHECK)
+#undef DEFINE_STATE_CHECK
 }  // namespace prt
-
-namespace std {
-template <>
-struct hash<prt::Vertex> {
-  auto operator()(const prt::Vertex& rhs) const -> size_t {
-    size_t hash = 0;
-    Combine(hash, rhs.pos);
-    Combine(hash, rhs.color);
-    Combine(hash, rhs.uv);
-    return hash;
-  }
-
- private:
-  template <class T>
-  static inline void Combine(std::size_t& seed, const T& v) {
-    std::hash<T> hasher;
-    seed ^= hasher(v) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-  }
-};
-}  // namespace std
 
 #endif  // PRT_RENDERER_H

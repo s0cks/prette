@@ -3,78 +3,83 @@
 
 #include <fmt/format.h>
 #include <glog/logging.h>
-#include <rapidjson/error/en.h>
-#include <rapidjson/reader.h>
+#include <ostream>
+#include <string>
+#include <vector>
 
 #include "prette/common.h"
-#include "prette/pipeline.h"
+#include "prette/json.h"
 #include "prette/pipeline_builder.h"
-#include "vulkan/vulkan_core.h"
+#include "prette/pipeline_layout.h"
+#include "prette/rasterizer_json.h"
+#include "prette/render_pass_json.h"
+#include "prette/vk.h"  // IWYU pragma: keep
 
 namespace prt {
-class GraphicsPipeline;
+class Shader;  // TODO: remove
+}
 
-namespace json {
+namespace prt::json {
 using namespace rapidjson;
 
 #define FOR_EACH_PIPELINE_HANDLER_STATE(V) \
+  V(Empty)                                 \
   V(OpenDoc)                               \
-  V(ParsingType)                           \
-  V(ExpectMeta)                            \
-  V(ParsingMeta)                           \
-  V(ParsingName)                           \
-  V(ExpectData)                            \
   V(ParsingData)                           \
   V(ParsingVertexShader)                   \
   V(ParsingFragmentShader)                 \
-  V(ParsingCullMode)                       \
-  V(ParsingFrontFace)                      \
-  V(ExpectDynamicStates)                   \
+  V(ParsingRasterizer)                     \
   V(ParsingDynamicStates)                  \
+  V(ParsingRenderPass)                     \
+  V(ParsingVertexClass)                    \
+  V(ParsingLayout)                         \
+  V(ParsingExtent)                         \
   V(ClosedDoc)                             \
   V(Error)
 
-class PipelineHandler : public BaseReaderHandler<UTF8<>, PipelineHandler> {
-  friend class prt::GraphicsPipeline;  // TODO: remove
-
-  enum State {
+enum class PipelineHandlerState {
 #define DEFINE_STATE(Name) k##Name,
-    FOR_EACH_PIPELINE_HANDLER_STATE(DEFINE_STATE)
+  FOR_EACH_PIPELINE_HANDLER_STATE(DEFINE_STATE)
 #undef DEFINE_STATE
-  };
+};
 
-  friend auto operator<<(std::ostream& stream, const State& rhs) -> std::ostream& {
-    switch (rhs) {
-#define DEFINE_TO_STRING(Name) \
-  case k##Name:                \
+static inline auto operator<<(std::ostream& stream, const PipelineHandlerState& rhs) -> std::ostream& {
+  switch (rhs) {
+#define DEFINE_TO_STRING(Name)        \
+  case PipelineHandlerState::k##Name: \
     return stream << #Name;
 
-      FOR_EACH_PIPELINE_HANDLER_STATE(DEFINE_TO_STRING)
+    FOR_EACH_PIPELINE_HANDLER_STATE(DEFINE_TO_STRING)
 #undef DEFINE_TO_STRING
-      default:
-        return stream << "invalid state.";
-    }
+    default:
+      return stream << "invalid state.";
   }
+}
+
+class PipelineHandler : public BaseStatefulReaderHandler<PipelineHandlerState, PipelineHandler> {
+  friend class RenderPipeline;
 
   struct KeyState {
     const char* name;
-    State state;
+    PipelineHandlerState state;
 
     auto operator==(const std::string& rhs) const -> bool {
       return name == rhs;
     }
 
-    operator State() const {
+    operator PipelineHandlerState() const {
       return state;
     }
   };
 
  private:
-  State state_ = kClosedDoc;
-  std::string error_{};
-  BaseRenderPipelineBuilder* builder_;
+  vk::BaseRenderPipelineBuilder* builder_;
+  std::vector<vk::Shader*> shaders_{};
+  RasterizerHandler rasterizer_;
+  RenderPassHandler pass_{};
+  PipelineLayoutHandler layout_{};
 
-  inline auto builder() const -> BaseRenderPipelineBuilder* {
+  inline auto builder() const -> vk::BaseRenderPipelineBuilder* {
     return builder_;
   }
 
@@ -82,21 +87,8 @@ class PipelineHandler : public BaseReaderHandler<UTF8<>, PipelineHandler> {
     return true;
   }
 
-  auto GetState() const -> State {
-    return state_;
-  }
-
-  inline void SetState(const State rhs) {
-    state_ = rhs;
-  }
-
-  inline void SetError(const std::string& rhs) {
-    ASSERT(!rhs.empty());
-    error_ = rhs;
-  }
-
   inline auto Error(const std::string& rhs) -> bool {
-    SetState(kError);
+    SetState(PipelineHandlerState::kError);
     SetError(rhs);
     return false;
   }
@@ -105,9 +97,17 @@ class PipelineHandler : public BaseReaderHandler<UTF8<>, PipelineHandler> {
     return Error("Invalid State");
   }
 
-  inline auto TransitionTo(const State rhs) -> bool {
+  inline auto TransitionTo(const PipelineHandlerState rhs) -> bool {
     SetState(rhs);
     return Continue();
+  }
+
+  inline auto TransitionToOpen() -> bool {
+    return TransitionTo(PipelineHandlerState::kOpenDoc);
+  }
+
+  inline auto TransitionToClosed() -> bool {
+    return TransitionTo(PipelineHandlerState::kClosedDoc);
   }
 
   template <typename Container>
@@ -119,209 +119,65 @@ class PipelineHandler : public BaseReaderHandler<UTF8<>, PipelineHandler> {
     return Error(fmt::format("invalid key `{}`", key));
   }
 
-  void OnParseRasterizerCullMode(const std::string& value);
-  void OnParseRasterizerFrontFace(const std::string& value);
   void OnParseVertexShader(const std::string& value);
   void OnParseFragmentShader(const std::string& value);
   void OnParseDynamicState(const std::string& value);
+  auto OnParseVertexClass(const std::string& value) -> bool;
+  auto OnParseLayout(const std::string& value) -> bool;
 
  public:
-  explicit PipelineHandler(BaseRenderPipelineBuilder* builder) :
-    builder_(builder) {}
-  ~PipelineHandler() = default;
+  explicit PipelineHandler(vk::BaseRenderPipelineBuilder* builder) :
+    BaseStatefulReaderHandler<PipelineHandlerState, PipelineHandler>(PipelineHandlerState::kEmpty),
+    builder_(builder),
+    rasterizer_(&builder->rasterizer_) {}
+  ~PipelineHandler() override;
 
-  auto HasError() const -> bool {
-    return !error_.empty();
+#define DEFINE_STATE_CHECK(Name)                        \
+  inline auto Is##Name() const->bool {                  \
+    return GetState() == PipelineHandlerState::k##Name; \
+  }
+  FOR_EACH_PIPELINE_HANDLER_STATE(DEFINE_STATE_CHECK)
+#undef DEFINE_STATE_CHECK
+
+  inline auto IsClosed() const -> bool {
+    return IsClosedDoc();
   }
 
-  auto GetError() const -> const std::string& {
-    return error_;
-  }
-
-  auto Null() -> bool {
+  auto Null() -> bool override {
     return InvalidState();
   }
 
-  auto Bool(bool b) -> bool {
+  auto Bool(bool b) -> bool override {
     return InvalidState();
   }
 
-  auto Int(int i) -> bool {
+  auto Int(int i) -> bool override {
     return InvalidState();
   }
 
-  auto Uint(unsigned u) -> bool {
+  auto Uint(unsigned u) -> bool override {
     return InvalidState();
   }
 
-  auto Int64(int64_t i) -> bool {
+  auto Int64(int64_t i) -> bool override {
     return InvalidState();
   }
 
-  auto Uint64(uint64_t u) -> bool {
+  auto Uint64(uint64_t u) -> bool override {
     return InvalidState();
   }
 
-  auto Double(double d) -> bool {
+  auto Double(double d) -> bool override {
     return InvalidState();
   }
 
-  auto String(const char* str, SizeType length, bool copy) -> bool {
-    const auto value = std::string(str, length);
-    switch (GetState()) {
-      case kParsingType: {
-        if (value != "Pipeline")
-          return Error(fmt::format("unexpected value for 'type' field: `{}`", value));
-        return TransitionTo(kOpenDoc);
-      }
-      case kParsingName:
-        return TransitionTo(kParsingMeta);
-      case kParsingCullMode:
-        OnParseRasterizerCullMode(value);
-        return TransitionTo(kParsingData);
-      case kParsingFrontFace:
-        OnParseRasterizerFrontFace(value);
-        return TransitionTo(kParsingData);
-      case kParsingVertexShader:
-        OnParseVertexShader(value);
-        return TransitionTo(kParsingData);
-      case kParsingFragmentShader:
-        OnParseFragmentShader(value);
-        return TransitionTo(kParsingData);
-      case kParsingDynamicStates:
-        OnParseDynamicState(value);
-        return Continue();
-      default:
-        break;
-    }
-    return InvalidState();
-  }
-
-  auto StartObject() -> bool {
-    switch (GetState()) {
-      case kClosedDoc:
-        return TransitionTo(kOpenDoc);
-      case kExpectMeta:
-        return TransitionTo(kParsingMeta);
-      case kExpectData:
-        return TransitionTo(kParsingData);
-      default:
-        break;
-    }
-    return InvalidState();
-  }
-
-  auto Key(const char* str, SizeType length, bool copy) -> bool {
-    const auto key = std::string(str, length);
-    switch (GetState()) {
-      case kOpenDoc: {
-        static const std::array<KeyState, 3> kPipelineKeys = {
-            KeyState{.name = "type", .state = kParsingType},
-            KeyState{.name = "meta", .state = kExpectMeta},
-            KeyState{.name = "data", .state = kExpectData},
-        };
-        return CheckKeyTable(key, kPipelineKeys);
-      }
-      case kParsingMeta: {
-        static const std::array<KeyState, 1> kMetaKeys = {
-            KeyState{.name = "name", .state = kParsingName},
-        };
-        return CheckKeyTable(key, kMetaKeys);
-      }
-      case kParsingData: {
-        static const std::array<KeyState, 5> kDataKeys = {
-            KeyState{.name = "cullMode", .state = kParsingCullMode},
-            KeyState{.name = "frontFace", .state = kParsingFrontFace},
-            KeyState{.name = "vertexShader", .state = kParsingVertexShader},
-            KeyState{.name = "fragmentShader", .state = kParsingFragmentShader},
-            KeyState{.name = "dynamicStates", .state = kExpectDynamicStates},
-        };
-        return CheckKeyTable(key, kDataKeys);
-      }
-      default:
-        break;
-    }
-    return InvalidState();
-  }
-
-  auto EndObject(SizeType memberCount) -> bool {
-    switch (GetState()) {
-      case kOpenDoc:
-        return TransitionTo(kClosedDoc);
-      case kParsingMeta:
-      case kParsingData:
-        return TransitionTo(kOpenDoc);
-      case kParsingCullMode:
-      case kParsingFrontFace:
-      case kParsingVertexShader:
-      case kParsingFragmentShader:
-        return TransitionTo(kParsingData);
-      default:
-        break;
-    }
-    return InvalidState();
-  }
-
-  auto StartArray() -> bool {
-    switch (GetState()) {
-      case kExpectDynamicStates:
-        return TransitionTo(kParsingDynamicStates);
-      default:
-        break;
-    }
-    return InvalidState();
-  }
-
-  auto EndArray(SizeType elementCount) -> bool {
-    switch (GetState()) {
-      case kParsingDynamicStates:
-        return TransitionTo(kParsingData);
-      default:
-        break;
-    }
-    return InvalidState();
-  }
+  auto Key(const char* str, SizeType length, bool copy) -> bool override;
+  auto String(const char* str, SizeType length, bool copy) -> bool override;
+  auto StartObject() -> bool override;
+  auto EndObject(SizeType memberCount) -> bool override;
+  auto StartArray() -> bool override;
+  auto EndArray(SizeType elementCount) -> bool override;
 };
-
-inline auto ReadJsonFromFile(fs::path path, std::string& result) -> bool {
-  if (!fs::exists(path)) {
-    LOG(ERROR) << "failed to find ShaderCode at: " << path;
-    return false;
-  }
-  std::ifstream file(path, std::ios::ate | std::ios::binary);
-  if (!file.is_open()) {
-    LOG(ERROR) << "failed to open ShaderCode at: " << path;
-    return false;
-  }
-  auto filesize = static_cast<std::streamsize>(file.tellg());
-  result.resize(filesize + 1);
-  file.seekg(0);
-  file.read((char*)result.data(), filesize);
-  file.close();
-  result[filesize] = '\0';
-  return true;
-}
-
-template <typename H>
-void ParseJsonDocumentFrom(fs::path path, H& handler) {
-  std::string buffer{};
-  LOG_IF(FATAL, !ReadJsonFromFile(path, buffer)) << "failed to read json from file: " << path;
-  json::Reader reader{};
-  json::StringStream ss(buffer.data());
-  if (!reader.Parse(ss, handler)) {
-    json::ParseErrorCode e = reader.GetParseErrorCode();
-    size_t o = reader.GetErrorOffset();
-    std::cerr << "Error: ";
-    if (handler.HasError()) {
-      std::cerr << handler.GetError();
-    } else {
-      std::cerr << json::GetParseError_En(e);
-    }
-    std::cerr << std::endl;
-    std::cerr << " at offset " << o << " near '" << std::string(buffer.data()).substr(o, 10) << "...'" << std::endl;
-  }
-}
-}  // namespace json
-}  // namespace prt
+}  // namespace prt::json
 
 #endif  // PRT_PIPELINE_JSON_H

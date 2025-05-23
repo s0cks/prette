@@ -1,14 +1,18 @@
 #include "prette/settings.h"
 
+#include <filesystem>
 #include <fmt/format.h>
 #include <glog/logging.h>
+#include <optional>
+#include <rocksdb/db.h>
 #include <rocksdb/env.h>
 #include <rocksdb/options.h>
+#include <string>
 
 #include "prette/common.h"
 #include "prette/engine.h"
 #include "prette/engine_event.h"
-#include "prette/lua.h"
+#include "prette/resolution.h"
 #include "prette/settings_event.h"
 #include "prette/thread_local.h"
 #include "prette/to_string.h"
@@ -80,7 +84,8 @@ auto Settings::GetDB() -> SettingsDB* {
 void Settings::PutResolution(const std::string k, const Resolution v) {
   rocksdb::WriteOptions options{};
   const auto status = GetDB()->Put(options, k, v);
-  LOG_IF(FATAL, !status.ok()) << "failed to put Resolution " << k << " (" << v << ") in settings: " << status.ToString();
+  LOG_IF(FATAL, !status.ok()) << "failed to put Resolution " << k << " (" << v
+                              << ") in settings: " << status.ToString();
 }
 
 auto Settings::GetResolution(const std::string k) -> std::optional<Resolution> {
@@ -90,6 +95,6 @@ auto Settings::GetResolution(const std::string k) -> std::optional<Resolution> {
   if (status.IsNotFound())
     return std::nullopt;
   LOG_IF(FATAL, !status.ok()) << "failed to get Resolution name " << k << " in settings: " << status.ToString();
-  return {Resolution(*((uint64_t*)value.data()))};
+  return {Resolution(*((uint64_t*)value.data()))};  // NOLINT(cppcoreguidelines-pro-type-cstyle-cast)
 }
 }  // namespace prt

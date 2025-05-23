@@ -1,4 +1,9 @@
 #include "prette/mouse.h"
+#ifdef PRETTE_ENABLE_LUA
+
+#include <glog/logging.h>
+
+#include "prette/lua.h"
 
 namespace prt {
 class MouseModule : LuaModule {
@@ -75,3 +80,5 @@ void Mouse::InitLua(lua_State* L) {
   return MouseModule::Init(L);
 }
 }  // namespace prt
+
+#endif  // PRETTE_ENABLE_LUA

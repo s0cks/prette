@@ -2,67 +2,71 @@
 #define PRT_RECTANGLE_H
 
 #include <iostream>
+#include <string>
+
+#include "prette/common.h"
 #include "prette/geometry/shape.h"
+#include "prette/glm.h"
 
 namespace prt {
-  class Rectangle : public Shape { // NOLINT(cppcoreguidelines-pro-type-member-init)
-    DEFINE_DEFAULT_COPYABLE_TYPE(Rectangle);
-  private:
-    Point pos_{};
-    uword width_{};
-    uword height_{};
-  public:
-    Rectangle() = default;
-    Rectangle(const Point& pos, const uword width, const uword height):
-      Shape(),
-      pos_(pos),
-      width_(width),
-      height_(height) {
-    }
-    Rectangle(const uword xPos, const uword yPos, const uword width, const uword height):
-      Rectangle(Point(xPos, yPos), width, height) {
-    }
-    ~Rectangle() override = default;
+class Rectangle : public Shape {  // NOLINT(cppcoreguidelines-pro-type-member-init)
+  DEFINE_DEFAULT_COPYABLE_TYPE(Rectangle);
 
-    auto GetPos() const -> const Point& {
-      return pos_;
-    }
+ private:
+  Point pos_{};
+  uword width_{};
+  uword height_{};
 
-    void SetPos(const Point& rhs) {
-      pos_ = rhs;
-    }
+ public:
+  Rectangle() = default;
+  Rectangle(const Point& pos, const uword width, const uword height) :
+    Shape(),
+    pos_(pos),
+    width_(width),
+    height_(height) {}
+  Rectangle(const uword xPos, const uword yPos, const uword width, const uword height) :
+    Rectangle(Point(xPos, yPos), width, height) {}
+  ~Rectangle() override = default;
 
-    auto GetTopLeft() const -> Point {
-      return pos_;
-    }
+  auto GetPos() const -> const Point& {
+    return pos_;
+  }
 
-    auto GetBottomRight() const -> Point {
-      return pos_ + glm::vec2(width_, height_);
-    }
+  void SetPos(const Point& rhs) {
+    pos_ = rhs;
+  }
 
-    auto GetTopRight() const -> Point {
-      return { pos_[0] + static_cast<float>(width_), pos_[1] };
-    }
+  auto GetTopLeft() const -> Point {
+    return pos_;
+  }
 
-    auto GetBottomLeft() const -> Point {
-      return { pos_[0], pos_[1] + static_cast<float>(height_) };
-    }
+  auto GetBottomRight() const -> Point {
+    return pos_ + glm::vec2(width_, height_);
+  }
 
-    auto GetWidth() const -> uword {
-      return width_;
-    }
+  auto GetTopRight() const -> Point {
+    return {pos_[0] + static_cast<float>(width_), pos_[1]};
+  }
 
-    auto GetHeight() const -> uword {
-      return height_;
-    }
+  auto GetBottomLeft() const -> Point {
+    return {pos_[0], pos_[1] + static_cast<float>(height_)};
+  }
 
-    auto Contains(const Point& p) const -> bool override;
-    auto ToString() const -> std::string override;
+  auto GetWidth() const -> uword {
+    return width_;
+  }
 
-    friend auto operator<<(std::ostream& stream, const Rectangle& rhs) -> std::ostream& {
-      return stream << rhs.ToString();
-    }
-  };
-}
+  auto GetHeight() const -> uword {
+    return height_;
+  }
 
-#endif //PRT_RECTANGLE_H
+  auto Contains(const Point& p) const -> bool override;
+  auto ToString() const -> std::string override;
+
+  friend auto operator<<(std::ostream& stream, const Rectangle& rhs) -> std::ostream& {
+    return stream << rhs.ToString();
+  }
+};
+}  // namespace prt
+
+#endif  // PRT_RECTANGLE_H

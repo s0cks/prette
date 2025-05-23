@@ -1,8 +1,10 @@
 #ifndef PRT_TICKER_H
 #define PRT_TICKER_H
 
-#include <uv.h>
+#include <utility>
 
+#include "prette/common.h"
+#include "prette/platform.h"
 #include "prette/tick.h"
 #include "prette/uv/utils.h"
 

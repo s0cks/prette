@@ -3,24 +3,24 @@
 
 #include <cstdint>
 #include <openssl/sha.h>
+#include <string>
 
 #include "prette/uint256.h"
 
 namespace prt::sha256 {
-  static const uint64_t kDigestSize = SHA256_DIGEST_LENGTH;
-  static const uint64_t kSize = kDigestSize;
+static const uint64_t kDigestSize = SHA256_DIGEST_LENGTH;
+static const uint64_t kSize = kDigestSize;
 
-  static const uint64_t kDefaultNonceSize = 4096;
+static const uint64_t kDefaultNonceSize = 4096;
 
-  uint256 Of(const uint8_t* data, const uint64_t length);
-  uint256 Nonce(const uint64_t size = kDefaultNonceSize);
-  uint256 Concat(const uint256& lhs, const uint256& rhs);
-  uint256 FromHex(const char* data, const uint64_t length);
+auto Of(const uint8_t* data, const uint64_t length) -> uint256;
+auto Nonce(const uint64_t size = kDefaultNonceSize) -> uint256;
+auto Concat(const uint256& lhs, const uint256& rhs) -> uint256;
+auto FromHex(const char* data, const uint64_t length) -> uint256;
 
-  static inline uint256
-  FromHex(const std::string& data){
-    return FromHex(data.data(), data.length());
-  }
+static inline auto FromHex(const std::string& data) -> uint256 {
+  return FromHex(data.data(), data.length());
 }
+}  // namespace prt::sha256
 
-#endif //PRT_SHA256_H
+#endif  // PRT_SHA256_H

@@ -1,4 +1,8 @@
 #include "prette/keyboard.h"
+#ifdef PRETTE_ENABLE_LUA
+
+#include "prette/common.h"
+#include "prette/lua.h"
 
 namespace prt {
 class KeyboardModule : LuaModule {
@@ -108,3 +112,5 @@ void Keyboard::InitLua(lua_State* L) {
   KeyboardModule::Init(L);
 }
 }  // namespace prt
+
+#endif  // PRETTE_ENABLE_LUA

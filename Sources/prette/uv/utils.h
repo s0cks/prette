@@ -1,19 +1,28 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-#include <glog/logging.h>
-#include <uv.h>
-
 #include <functional>
+#include <ostream>
+#include <string>
 #include <type_traits>
+#include <utility>
+
+// IWYU pragma: begin_exports
+#include <uv.h>
+#include <vector>
+// IWYU pragma: end_exports
 
 #include "prette/common.h"
+#include "prette/platform.h"  // IWYU pragma: keep
+#include "prette/relaxed_atomic.h"
 
-namespace prt::uv {
 #ifndef UV_OK
 #define UV_OK 0
 #endif  // UV_OK
 
+#define NSEC_PER_MSEC 1000000ull
+
+namespace prt::uv {
 using StatusId = int;
 class Status {
  private:
@@ -77,6 +86,8 @@ DECLARE_IS_UV_HANDLE(uv_idle_t);
 DECLARE_IS_UV_HANDLE(uv_check_t);
 DECLARE_IS_UV_HANDLE(uv_prepare_t);
 DECLARE_IS_UV_HANDLE(uv_async_t);
+DECLARE_IS_UV_HANDLE(uv_work_t);
+DECLARE_IS_UV_HANDLE(uv_fs_t);
 
 #define CHECK_UV_RESULT(Severity, Result, Message) \
   LOG_IF(Severity, (Result) != UV_OK) << (Message) << ": " << uv_strerror((Result));
@@ -96,7 +107,8 @@ static inline void Close(uv_handle_t* handle, uv_close_cb on_close = nullptr) {
 }
 
 template <typename T>
-static inline void Close(T* handle, uv_close_cb on_close = nullptr, std::enable_if_t<is_uv_handle<T>::value>* = nullptr) {
+static inline void Close(T* handle, uv_close_cb on_close = nullptr,
+                         std::enable_if_t<is_uv_handle<T>::value>* = nullptr) {
   return Close((uv_handle_t*)handle, on_close);
 }
 
@@ -148,6 +160,132 @@ static inline auto operator<<(std::ostream& stream, const RunMode& rhs) -> std::
   }
 }
 
+class HandleBase {
+  DEFINE_NON_COPYABLE_TYPE(HandleBase);
+
+ protected:
+  HandleBase() = default;
+
+ public:
+  virtual ~HandleBase() = default;
+};
+
+template <typename H>
+class HandleTemplate : public HandleBase {
+  DEFINE_NON_COPYABLE_TYPE(HandleTemplate<H>);
+  static_assert(is_uv_handle<H>::value, "expected handle type to be a uv_handle_t.");
+
+ public:
+  using Handle = H;
+
+ private:
+  H handle_{};
+
+ protected:
+  HandleTemplate() = default;
+
+  inline auto handle() -> H* {
+    return &handle_;
+  }
+
+ public:
+  ~HandleTemplate() override = default;
+};
+
+class Loop;
+class Work {
+  friend class Loop;
+
+ protected:
+  Work() = default;
+
+ public:
+  virtual ~Work() = default;
+  virtual auto GetWorkName() const -> const char* = 0;
+  virtual auto ToString() const -> std::string = 0;
+  virtual auto Submit(Loop* loop) -> Status = 0;
+};
+
+template <typename Handle>
+class WorkTemplate : public Work, public HandleTemplate<Handle> {
+  friend class Loop;
+
+ public:
+  using OnWorkCallback = std::function<void(Work*)>;
+  using OnWorkFinishedCallback = std::function<void(Work*, int status)>;
+
+ private:
+  RelaxedAtomic<bool> finished_ = false;
+  RelaxedAtomic<int> status_ = UV_OK;
+
+ protected:
+  WorkTemplate() = default;
+
+  inline void SetFinished(const bool rhs = true) {
+    finished_ = rhs;
+  }
+
+ public:
+  ~WorkTemplate() override = default;
+
+  auto IsFinished() const -> bool {
+    return (bool)finished_;
+  }
+
+  auto GetState() const -> int {
+    return (int)status_;
+  }
+};
+
+class AnyWork : public WorkTemplate<uv_work_t> {
+  friend class Loop;
+
+ public:
+  using OnWorkCallback = std::function<void(Work*)>;
+  using OnWorkFinishedCallback = std::function<void(Work*, int status)>;
+
+ private:
+  static void OnWork(uv_work_t* handle);
+  static void OnWorkFinished(uv_work_t* handle, const int status);
+  static inline auto Unwrap(uv_work_t* handle) -> AnyWork* {
+    return (AnyWork*)handle->data;  // NOLINT(cppcoreguidelines-pro-type-cstyle-cast)
+  }
+
+ private:
+  OnWorkCallback on_work_;
+  OnWorkFinishedCallback on_finished_;
+  RelaxedAtomic<bool> finished_ = false;
+  RelaxedAtomic<int> status_ = UV_OK;
+
+  inline void SetFinished(const bool rhs = true) {
+    finished_ = rhs;
+  }
+
+ public:
+  AnyWork(OnWorkCallback on_work, OnWorkFinishedCallback on_finished = nullptr) :
+    WorkTemplate<uv_work_t>(),
+    on_work_(std::move(on_work)),
+    on_finished_(std::move(on_finished)) {
+    handle()->data = this;
+  }
+  ~AnyWork() override = default;
+  auto Submit(Loop* loop) -> Status override;
+
+  auto GetWorkName() const -> const char* override {
+    return "AnyWork";
+  }
+
+  auto IsFinished() const -> bool {
+    return (bool)finished_;
+  }
+
+  auto GetState() const -> int {
+    return (int)status_;
+  }
+
+  auto ToString() const -> std::string override;
+};
+
 class Loop {
   friend class Idle;
   friend class Check;
@@ -181,8 +319,9 @@ class Loop {
   explicit Loop();
   virtual ~Loop() = default;
 
-  void Run(const RunMode mode);
   void Stop();
+  void Run(const RunMode mode);
+  auto Queue(uv::Work* work) -> uv::Status;
 
 #define DEFINE_RUN_WITH_MODE(Name)   \
   inline void Run##Name() {          \
@@ -194,38 +333,6 @@ class Loop {
   operator Handle*() {
     return GetHandle();
   }
-};
-
-class HandleBase {
-  DEFINE_NON_COPYABLE_TYPE(HandleBase);
-
- protected:
-  HandleBase() = default;
-
- public:
-  virtual ~HandleBase() = default;
-};
-
-template <typename H>
-class HandleTemplate : public HandleBase {
-  DEFINE_NON_COPYABLE_TYPE(HandleTemplate<H>);
-  static_assert(is_uv_handle<H>::value, "expected handle type to be a uv_handle_t.");
-
- public:
-  using Handle = H;
-
- private:
-  H handle_{};
-
- protected:
-  HandleTemplate() = default;
-
-  inline auto handle() -> H* {
-    return &handle_;
-  }
-
- public:
-  ~HandleTemplate() override = default;
 };
 
 #define DECLARE_UV_HANDLE(Name, Type)                                            \
@@ -278,6 +385,8 @@ class Async : public HandleTemplate<uv_async_t> {
   void Close(uv_close_cb on_close = nullptr);
 };
 
+using FileHandle = uv_file;
+using Buffer = uv_buf_t;
 }  // namespace prt::uv
 
 #endif  // UTILS_H

@@ -1,14 +1,25 @@
 #ifndef PRT_PIPELINE_H
 #define PRT_PIPELINE_H
 
-#include "prette/common.h"
-#include "prette/gfx.h"
-#include "prette/shader.h"
-#include "vulkan/vulkan_core.h"
+#include <functional>
+#include <string>
+#include <vector>
+#include <vulkan/vulkan_core.h>
 
-namespace prt {
+#include "prette/common.h"
+#include "prette/copy_to_buffer.h"
+#include "prette/gfx.h"
+#include "prette/pipeline_builder.h"
+#include "prette/pipeline_cache.h"
+#include "prette/pipeline_layout.h"
+#include "prette/relaxed_atomic.h"
+#include "prette/vk.h"
+#include "prette/vk_buffer.h"
+
+namespace prt::vk {
 static inline void InitPipelineViewportState(VkPipelineViewportStateCreateInfo& create_info,
-                                             const std::vector<VkViewport>& viewports, const std::vector<VkRect2D>& scissors) {
+                                             const std::vector<VkViewport>& viewports,
+                                             const std::vector<VkRect2D>& scissors) {
   create_info.sType = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO;
   create_info.viewportCount = viewports.size();
   create_info.pViewports = viewports.data();
@@ -16,252 +27,22 @@ static inline void InitPipelineViewportState(VkPipelineViewportStateCreateInfo& 
   create_info.pScissors = scissors.data();
 }
 
-namespace json {
-class PipelineHandler;
-}
+class RenderPipeline;
+using RenderPipelinePredicate = std::function<bool(RenderPipeline*)>;
 
-class GraphicsPipeline;
-using GraphicsPipelinePtr = std::shared_ptr<GraphicsPipeline>;
-
-static constexpr const VkExtent2D kInvalidRenderPipelineExtent{0, 0};
-
-class BaseRenderPipelineBuilder {
-  friend class json::PipelineHandler;
-
- protected:
-  static inline void InitViewportAndScissor(VkViewport& viewport, VkRect2D& scissor, const VkExtent2D& extent,
-                                            const glm::fvec2& pos = glm::fvec2(0.0f), const float min_depth = 0.0f,
-                                            const float max_depth = 1.0f) {
-    // viewport
-    viewport.x = pos.x;
-    viewport.y = pos.y;
-    viewport.width = (float)extent.width;
-    viewport.height = (float)extent.height;
-    viewport.minDepth = min_depth;
-    viewport.maxDepth = max_depth;
-    // scissor
-    scissor.offset = {.x = static_cast<int32_t>(pos.x), .y = static_cast<int32_t>(pos.y)};
-    scissor.extent = extent;
-  }
-
-  static inline void InitViewportCreateInfo(VkPipelineViewportStateCreateInfo& create_info, const VkViewport& viewport,
-                                            const VkRect2D& scissor) {
-    create_info.sType = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO;
-    create_info.viewportCount = 1;
-    create_info.pViewports = &viewport;
-    create_info.scissorCount = 1;
-    create_info.pScissors = &scissor;
-  }
-
-  static inline void InitRasterizer(VkPipelineRasterizationStateCreateInfo& rasterizer) {
-    rasterizer.sType = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO;
-    rasterizer.depthClampEnable = VK_FALSE;
-    rasterizer.rasterizerDiscardEnable = VK_FALSE;
-    rasterizer.polygonMode = VK_POLYGON_MODE_FILL;
-    rasterizer.lineWidth = 1.0f;
-    rasterizer.cullMode = VK_CULL_MODE_BACK_BIT;
-    rasterizer.frontFace = VK_FRONT_FACE_CLOCKWISE;
-    rasterizer.depthBiasEnable = VK_FALSE;
-    rasterizer.depthBiasConstantFactor = 0.0f;
-    rasterizer.depthBiasClamp = 0.0f;
-    rasterizer.depthBiasSlopeFactor = 0.0f;
-  }
-
-  static inline void InitMultisampling(VkPipelineMultisampleStateCreateInfo& multisampling) {
-    multisampling.sType = VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO;
-    multisampling.sampleShadingEnable = VK_FALSE;
-    multisampling.rasterizationSamples = VK_SAMPLE_COUNT_1_BIT;
-    multisampling.minSampleShading = 1.0f;
-    multisampling.pSampleMask = nullptr;
-    multisampling.alphaToCoverageEnable = VK_FALSE;
-    multisampling.alphaToOneEnable = VK_FALSE;
-  }
-
-  static inline void InitDynamicState(VkPipelineDynamicStateCreateInfo& create_info,
-                                      const std::vector<VkDynamicState>& dynamic_states) {
-    create_info.sType = VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO;
-    create_info.dynamicStateCount = dynamic_states.size();
-    create_info.pDynamicStates = dynamic_states.data();
-  }
-
-  template <typename AttachmentsContainer>
-  static inline void InitBlending(VkPipelineColorBlendStateCreateInfo& create_info, const AttachmentsContainer& attachments) {
-    create_info.sType = VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO;
-    create_info.logicOpEnable = VK_FALSE;
-    create_info.logicOp = VK_LOGIC_OP_COPY;
-    create_info.attachmentCount = attachments.size();
-    create_info.pAttachments = attachments.data();
-    create_info.blendConstants[0] = 0.0f;
-    create_info.blendConstants[1] = 0.0f;
-    create_info.blendConstants[2] = 0.0f;
-    create_info.blendConstants[3] = 0.0f;
-  }
-
-  template <typename BindingsContainer, typename AttributesContainer>
-  static inline void InitInput(VkPipelineVertexInputStateCreateInfo& vertex_input,
-                               VkPipelineInputAssemblyStateCreateInfo& input_assembly, const BindingsContainer& bindings,
-                               const AttributesContainer& attributes) {
-    vertex_input.sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
-    vertex_input.vertexBindingDescriptionCount = bindings.size();
-    vertex_input.pVertexBindingDescriptions = bindings.data();
-    vertex_input.vertexAttributeDescriptionCount = attributes.size();
-    vertex_input.pVertexAttributeDescriptions = attributes.data();
-
-    input_assembly.sType = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;
-    input_assembly.topology = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST;
-    input_assembly.primitiveRestartEnable = VK_FALSE;
-  }
-
-  static inline void InitColorBlendAttachment(VkPipelineColorBlendAttachmentState& color_blend_attachment) {
-    color_blend_attachment.colorWriteMask =
-        VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT | VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
-    color_blend_attachment.blendEnable = VK_TRUE;
-    color_blend_attachment.srcColorBlendFactor = VK_BLEND_FACTOR_SRC_ALPHA;
-    color_blend_attachment.dstColorBlendFactor = VK_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA;
-    color_blend_attachment.colorBlendOp = VK_BLEND_OP_ADD;
-    color_blend_attachment.srcAlphaBlendFactor = VK_BLEND_FACTOR_ONE;
-    color_blend_attachment.dstAlphaBlendFactor = VK_BLEND_FACTOR_ZERO;
-    color_blend_attachment.alphaBlendOp = VK_BLEND_OP_ADD;
-  }
-
-  static inline void InitDepthStencil(VkPipelineDepthStencilStateCreateInfo& depth_stencil) {
-    depth_stencil.sType = VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO;
-    depth_stencil.depthTestEnable = VK_TRUE;
-    depth_stencil.depthWriteEnable = VK_TRUE;
-    depth_stencil.depthCompareOp = VK_COMPARE_OP_LESS;
-    depth_stencil.depthBoundsTestEnable = VK_FALSE;
-    depth_stencil.minDepthBounds = 0.0f;
-    depth_stencil.maxDepthBounds = 1.0f;
-    depth_stencil.stencilTestEnable = VK_FALSE;
-    depth_stencil.front = {};
-    depth_stencil.back = {};
-  }
-
- protected:
-  VkViewport vp_{};
-  VkRect2D scissor_{};
-  VkPipelineViewportStateCreateInfo viewport_{};
-  VkPipelineDepthStencilStateCreateInfo depth_stencil_{};
-  VkPipelineInputAssemblyStateCreateInfo input_assembly_{};
-  VkPipelineVertexInputStateCreateInfo vertex_input_{};
-  VkPipelineRasterizationStateCreateInfo rasterizer_{};
-  VkPipelineMultisampleStateCreateInfo multisampling_{};
-  VkPipelineColorBlendStateCreateInfo blending_{};
-  VkPipelineDynamicStateCreateInfo dynamic_state_{};
-  VkGraphicsPipelineCreateInfo pipeline_{};
-  std::vector<ShaderPtr> attached_shaders_{};
-  std::vector<VkPipelineShaderStageCreateInfo> shader_attachments_{};
-  std::vector<VkPipelineColorBlendAttachmentState> blending_attachments_{};
-  std::vector<VkDynamicState> dynamic_states_{};
-
-  VkPipelineLayout layout_ = VK_NULL_HANDLE;
-  VkPipelineCache cache_ = VK_NULL_HANDLE;
-  VkRenderPass render_pass_ = VK_NULL_HANDLE;
-  VkExtent2D extent_;
-
-  BaseRenderPipelineBuilder(const VkExtent2D extent) :
-    extent_(extent) {
-    InitDepthStencil(depth_stencil_);
-    InitViewportAndScissor(vp_, scissor_, extent_);
-    InitViewportCreateInfo(viewport_, vp_, scissor_);
-
-    InitRasterizer(rasterizer_);
-    InitMultisampling(multisampling_);
-
-    blending_attachments_.resize(1);
-    InitColorBlendAttachment(blending_attachments_[0]);
-    InitBlending(blending_, blending_attachments_);
-
-    attached_shaders_.reserve(2);
-
-    InitDynamicState(dynamic_state_, dynamic_states_);
-  }
-
- public:
-  virtual ~BaseRenderPipelineBuilder() = default;
-
-  auto GetExtent() const -> const VkExtent2D& {
-    return extent_;
-  }
-
-  auto GetRenderPass() const -> const VkRenderPass& {
-    return render_pass_;
-  }
-
-  void SetRenderPass(VkRenderPass rhs) {
-    ASSERT(rhs != VK_NULL_HANDLE);
-    render_pass_ = rhs;
-  }
-
-  inline auto HasRenderPass() const -> bool {
-    return GetRenderPass() != VK_NULL_HANDLE;
-  }
-
-  auto GetPipelineLayout() const -> const VkPipelineLayout& {
-    return layout_;
-  }
-
-  void SetPipelineLayout(const VkPipelineLayout& rhs) {
-    ASSERT(rhs != VK_NULL_HANDLE);
-    layout_ = rhs;
-  }
-
-  inline auto HasPipelineLayout() const -> bool {
-    return GetPipelineLayout() != VK_NULL_HANDLE;
-  }
-
-  auto GetPipelineCache() const -> const VkPipelineCache& {
-    return cache_;
-  }
-
-  void SetPipelineCache(const VkPipelineCache& rhs) {
-    ASSERT(rhs != VK_NULL_HANDLE);
-    cache_ = rhs;
-  }
-
-  inline auto HasPipelineCache() const -> bool {
-    return GetPipelineCache() != VK_NULL_HANDLE;
-  }
-
-  void SetRasterizerCullMode(const std::string& rhs);
-  void SetRasterizerFrontFace(const std::string& rhs);
-
-  void AttachVertexShader(ShaderPtr shader);
-  void AttachFragmentShader(ShaderPtr shader);
-};
-
-template <typename T>
-class TemplateRenderPipelineBuilder : public BaseRenderPipelineBuilder {
- protected:
-  explicit TemplateRenderPipelineBuilder(const VkExtent2D extent) :
-    BaseRenderPipelineBuilder(std::move(extent)) {}
-
- public:
-  ~TemplateRenderPipelineBuilder() override = default;
-  virtual auto Build() -> T* = 0;
-};
-
-class BaseRenderPipeline {
+class RenderPipeline : public vk::NamedHandleTemplate<VkPipeline> {
  public:
   static constexpr const VkExtent2D kDefaultExtent = {0, 0};
 
  protected:
-  VkPipeline pipeline_;
-  VkPipelineLayout layout_;
-  VkPipelineCache cache_;
-  VkRenderPass render_pass_;
+  vk::PipelineLayout* layout_;
+  vk::PipelineCache* cache_;
   VkExtent2D extent_;
 
-  BaseRenderPipeline(VkRenderPass render_pass, const VkExtent2D& extent, VkPipeline pipeline, VkPipelineLayout layout,
-                     VkPipelineCache cache) :
-    render_pass_(render_pass),
-    extent_(extent),
-    pipeline_(pipeline),
-    layout_(layout),
-    cache_(cache) {}
-
  public:
-  virtual ~BaseRenderPipeline();
+  RenderPipeline(std::string name, const VkExtent2D& extent, const VkGraphicsPipelineCreateInfo& create_info,
+                 vk::PipelineLayout* layout, vk::PipelineCache* cache);
+  ~RenderPipeline() override;
 
   auto GetExtent() const -> const VkExtent2D& {
     return extent_;
@@ -271,45 +52,244 @@ class BaseRenderPipeline {
     return GetExtent() != kDefaultExtent;
   }
 
-  auto GetRenderPass() const -> const VkRenderPass& {
-    return render_pass_;
-  }
-
-  inline auto HasRenderPass() const -> bool {
-    return GetRenderPass() != VK_NULL_HANDLE;
-  }
-
-  auto GetPipeline() const -> const VkPipeline& {
-    return pipeline_;
-  }
-
-  auto GetPipelineLayout() const -> const VkPipelineLayout& {
+  auto GetPipelineLayout() const -> vk::PipelineLayout* {
     return layout_;
   }
 
-  auto GetPipelineCache() const -> const VkPipelineCache& {
+  auto GetPipelineCache() const -> vk::PipelineCache* {
     return cache_;
+  }
+
+  auto ToString() const -> std::string override;
+  void Bind(VkCommandBuffer* buffer, const VkPipelineBindPoint bind_point = VK_PIPELINE_BIND_POINT_GRAPHICS);
+
+  operator VkPipeline() const {
+    return GetHandle();
+  }
+
+ public:
+  static auto FromJson(const std::string name) -> RenderPipeline*;
+};
+
+template <typename Vertex, const uint64_t MaxNumberOfVertices, typename Index, const uint64_t MaxNumberOfIndices>
+class RenderPipelineTemplate : public RenderPipeline {
+ public:
+  static constexpr const auto kVertexSize = sizeof(Vertex);
+  static constexpr const auto kMaxNumberOfVertices = MaxNumberOfVertices;
+  static constexpr const auto kTotalVertexBufferSize = kVertexSize * kMaxNumberOfVertices;
+
+  static constexpr const auto kIndexSize = sizeof(Index);
+  static constexpr const auto kMaxNumberOfIndices = MaxNumberOfIndices;
+  static constexpr const auto kTotalIndexBufferSize = kIndexSize * kMaxNumberOfIndices;
+
+  using VertexList = std::vector<Vertex>;
+  using IndexList = std::vector<Index>;
+
+ private:
+  VertexList vertices_{};
+  vk::Buffer* vbuffer_ = nullptr;
+  RelaxedAtomic<bool> vertices_changed_ = false;
+
+  IndexList indices_{};
+  vk::Buffer* ibuffer_ = nullptr;
+  RelaxedAtomic<bool> indices_changed_ = false;
+
+ protected:
+  RenderPipelineTemplate(std::string name, const VkExtent2D& extent, const VkGraphicsPipelineCreateInfo& create_info,
+                         vk::PipelineLayout* layout, vk::PipelineCache* cache) :
+    RenderPipeline(name, extent, create_info, layout, cache) {
+    {
+      vk::BufferBuilder builder{};
+      // clang-format off
+      vbuffer_ = builder.WithSize(kTotalVertexBufferSize)
+        .WithVertexBufferUsage()
+        .Build();
+      // clang-format on
+      ASSERT_INITIALIZED(vbuffer_);
+    }
+    {
+      vk::BufferBuilder builder{};
+      // clang-format off
+      ibuffer_ = builder.WithSize(kTotalIndexBufferSize)
+        .WithIndexBufferUsage()
+        .Build();
+      // clang-format on
+      ASSERT_INITIALIZED(ibuffer_);
+    }
+  }
+
+  void UpdateVertexBuffer(Vertex* data, const uint64_t num_vertices, const bool staging = true) {
+    ASSERT_INITIALIZED(vbuffer_);
+    ASSERT(data);
+    ASSERT(num_vertices >= 1 && num_vertices <= kMaxNumberOfVertices);
+    const auto total_size = sizeof(Vertex) * num_vertices;
+    if (staging) {
+      vk::CopyBytesToBufferWithStaging copy(data, total_size);
+      copy(GetVertexBuffer());
+    } else {
+      vk::CopyBytesToBuffer copy(data, total_size);
+      copy(GetVertexBuffer());
+    }
+    vertices_changed_ = false;
+  }
+
+  void UpdateVertexBuffer(const VertexList& data, const bool staging = true) {
+    ASSERT_INITIALIZED(vbuffer_);
+    ASSERT(!data.empty());
+    return UpdateVertexBuffer(data.data(), data.size(), staging);
+  }
+
+  void UpdateVertexBuffer(const bool staging = true) {
+    return UpdateVertexBuffer(vertices_.data(), vertices_.size(), staging);
+  }
+
+  auto AppendVertex(const Vertex& rhs) -> Index {
+    const auto index = GetNumberOfVertices();
+    vertices_changed_ = true;
+    vertices_.emplace_back(rhs);
+    return index;
+  }
+
+  auto AppendVertices(const VertexList& rhs) -> Index {
+    const auto start = GetNumberOfVertices();
+    vertices_changed_ = true;
+    vertices_.insert(std::end(vertices_), std::begin(rhs), std::end(rhs));
+    return start;
+  }
+
+  void UpdateIndexBuffer(Index* data, const uint64_t num_indices, const bool staging = true) {
+    ASSERT_INITIALIZED(ibuffer_);
+    ASSERT(data);
+    ASSERT(num_indices >= 1 && num_indices <= kMaxNumberOfIndices);
+    const auto total_size = sizeof(Index) * num_indices;
+    if (staging) {
+      vk::CopyBytesToBufferWithStaging copy(data, total_size);
+      copy(GetIndexBuffer());
+    } else {
+      vk::CopyBytesToBuffer copy(data, total_size);
+      copy(GetIndexBuffer());
+    }
+    indices_changed_ = false;
+  }
+
+  void UpdateIndexBuffer(const IndexList& data, const bool staging = true) {
+    ASSERT_INITIALIZED(ibuffer_);
+    ASSERT(!data.empty());
+    return UpdateIndexBuffer(data.data(), data.size(), staging);
+  }
+
+  void UpdateIndexBuffer(const bool staging = true) {
+    return UpdateIndexBuffer(indices_.data(), indices_.size(), staging);
+  }
+
+  void AppendIndex(const Index& rhs) {
+    indices_changed_ = true;
+    indices_.emplace_back(rhs);
+  }
+
+  void AppendIndices(const IndexList& rhs) {
+    indices_changed_ = true;
+    indices_.insert(std::end(indices_), std::begin(rhs), std::end(rhs));
+  }
+
+ public:
+  ~RenderPipelineTemplate() override {
+    delete vbuffer_;
+    delete ibuffer_;
+  }
+
+  void Update() {
+    if (HasVerticesChanged())
+      UpdateVertexBuffer();
+    if (HasIndicesChanged())
+      UpdateIndexBuffer();
+  }
+
+  auto GetVertexBuffer() const -> vk::Buffer* {
+    return vbuffer_;
+  }
+
+  inline auto HasVertexBuffer() const -> bool {
+    return vk::IsInitialized(GetVertexBuffer());
+  }
+
+  auto HasVerticesChanged() const -> bool {
+    return (bool)vertices_changed_;
+  }
+
+  auto GetNumberOfVertices() const -> uint64_t {
+    return vertices_.size();
+  }
+
+  auto GetIndexBuffer() const -> vk::Buffer* {
+    return ibuffer_;
+  }
+
+  inline auto HasIndexBuffer() const -> bool {
+    return vk::IsInitialized(GetIndexBuffer());
+  }
+
+  inline auto IsInitialized() const -> bool {
+    return vk::IsInitialized(GetVertexBuffer()) && vk::IsInitialized(GetIndexBuffer());
+  }
+
+  auto HasIndicesChanged() const -> bool {
+    return (bool)indices_changed_;
+  }
+
+  auto GetNumberOfIndices() const -> uint64_t {
+    return indices_.size();
   }
 };
 
-class GraphicsPipeline : public BaseRenderPipeline {
-  friend class json::PipelineHandler;
-  friend class GraphicsPipelineBuilder;
-  DEFINE_DEFAULT_COPYABLE_TYPE(GraphicsPipeline);
-
- private:
-  GraphicsPipeline(VkRenderPass render_pass, const VkExtent2D& extent, VkPipeline pipeline, VkPipelineLayout layout,
-                   VkPipelineCache cache) :
-    BaseRenderPipeline(render_pass, extent, pipeline, layout, cache) {}
-
+class RenderPipeline;
+class RenderPipelineBuilder : public TemplateRenderPipelineBuilder<RenderPipeline> {
  public:
-  ~GraphicsPipeline();
+  explicit RenderPipelineBuilder(const VkExtent2D extent = {}) :
+    TemplateRenderPipelineBuilder<RenderPipeline>(extent) {}
+  ~RenderPipelineBuilder() override = default;
 
- public:
-  static auto New(const std::vector<VkDescriptorSetLayout>& descriptor_set_layouts = {}) -> GraphicsPipeline*;
-  static auto FromJson(fs::path path, VkRenderPass pass, VkExtent2D extent,
-                       const std::vector<VkDescriptorSetLayout>& descriptor_set_layouts = {}) -> GraphicsPipeline*;
+  auto Build() -> RenderPipeline* override;
+
+  operator VkGraphicsPipelineCreateInfo() const {
+    return pipeline_;
+  }
 };
-}  // namespace prt
+
+class RenderPipelineVisitor {
+ protected:
+  RenderPipelineVisitor() = default;
+
+ public:
+  virtual ~RenderPipelineVisitor() = default;
+  virtual auto Visit(RenderPipeline* rhs) -> bool = 0;
+};
+
+auto VisitAllRenderPipelines(RenderPipelineVisitor* vis) -> bool;
+auto VisitAllRenderPipelines(RenderPipelinePredicate vis) -> bool;
+auto GetNumberOfRenderPipelines() -> uint64_t;
+
+class RenderPipelineFinalizer : public RenderPipelineVisitor {
+ private:
+  uint64_t num_finalized_ = 0;
+
+ public:
+  RenderPipelineFinalizer() = default;
+  ~RenderPipelineFinalizer() override = default;
+  auto Visit(RenderPipeline* rhs) -> bool override;
+
+  auto GetNumberOfObjectsFinalized() const -> uint64_t {
+    return num_finalized_;
+  }
+
+  auto operator()(RenderPipeline* rhs) -> bool {
+    return Visit(rhs);
+  }
+
+ public:
+  static void FinalizeAll();
+  static void FinalizeAll(const std::vector<RenderPipeline*>& rhs);
+};
+}  // namespace prt::vk
 
 #endif  // PRT_PIPELINE_H

@@ -1,5 +1,8 @@
 #include "prette/to_string.h"
 
+#include <sstream>
+#include <string>
+
 namespace prt::tostring {
 auto ToStringHelperBase::ToString() const -> std::string {
   std::stringstream ss;

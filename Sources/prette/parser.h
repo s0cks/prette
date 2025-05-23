@@ -1,10 +1,12 @@
 #ifndef PRT_PARSER_H
 #define PRT_PARSER_H
 
-#include <glog/logging.h>
-
+#include <algorithm>
+#include <array>
 #include <cstdint>
+#include <glog/logging.h>
 #include <ostream>
+#include <string>
 
 #include "prette/common.h"
 
@@ -59,6 +61,7 @@ struct TokenTemplate {
   TokenTemplate(const Kind k, const uint64_t r, const uint64_t c, uint8_t* t, const uint64_t l) :
     TokenTemplate(k, Position(r, c), t, l) {}
   TokenTemplate(const Kind k, const Position& p, const uint8_t c) :
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-cstyle-cast)
     TokenTemplate(k, p, (uint8_t*)&c, 1) {}
   TokenTemplate(const Kind k, const Position& p, const char c) :
     TokenTemplate(k, p, (uint8_t)c) {}
@@ -139,6 +142,7 @@ class ParserTemplate {
     CopyBufferFrom(bytes, nbytes);
   }
   ParserTemplate(void* data, const std::string& buffer) :
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-cstyle-cast)
     ParserTemplate(data, (const uint8_t*)&buffer[0], static_cast<uint64_t>(buffer.length())) {}
 
   inline void CopyBufferFrom(const uint8_t* data, const uint64_t nbytes) {
@@ -218,13 +222,15 @@ class ParserTemplate {
   }
 
   inline void SkipWhitespace() {
-    while (IsWhitespace(PeekChar())) NextChar();
+    while (IsWhitespace(PeekChar()))
+      NextChar();
   }
 
   inline void Advance(const uint64_t num) {
     ASSERT(num >= 1);
     auto idx = num;
-    while (idx-- > 0) NextChar();
+    while (idx-- > 0)
+      NextChar();
   }
 
   inline auto ParseUntil(const char expected) -> int {

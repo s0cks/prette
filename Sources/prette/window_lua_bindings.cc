@@ -1,4 +1,9 @@
 #include "prette/window.h"
+#ifdef PRETTE_ENABLE_LUA
+
+#include "prette/common.h"
+#include "prette/lua.h"
+#include "prette/window_event.h"
 
 namespace prt {
 class WindowModule : LuaModule {
@@ -50,3 +55,5 @@ void Window::InitLua(lua_State* L) {
   return WindowModule::Init(L);
 }
 }  // namespace prt
+
+#endif  // PRETTE_ENABLE_LUA

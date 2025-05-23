@@ -13,21 +13,21 @@ class RelaxedAtomic {
  public:
   RelaxedAtomic() :
     value_() {}
-  constexpr explicit RelaxedAtomic(const T& value) :
+  constexpr RelaxedAtomic(const T& value) :
     value_(value) {}
   RelaxedAtomic(const RelaxedAtomic<T>& rhs) :
     value_((T)rhs) {}
   ~RelaxedAtomic() = default;
 
-  T fetch_add(T arg, std::memory_order order = std::memory_order_relaxed) {
+  auto fetch_add(T arg, std::memory_order order = std::memory_order_relaxed) -> T {
     return value_.fetch_add(arg, order);
   }
 
-  T fetch_sub(T arg, std::memory_order order = std::memory_order_relaxed) {
+  auto fetch_sub(T arg, std::memory_order order = std::memory_order_relaxed) -> T {
     return value_.fetch_sub(arg, order);
   }
 
-  T load(std::memory_order order = std::memory_order_relaxed) const {
+  auto load(std::memory_order order = std::memory_order_relaxed) const -> T {
     return value_.load(order);
   }
 
@@ -35,11 +35,11 @@ class RelaxedAtomic {
     value_.store(arg, order);
   }
 
-  bool compare_exchange_weak(T& expected, T desired, std::memory_order order = std::memory_order_relaxed) {
+  auto compare_exchange_weak(T& expected, T desired, std::memory_order order = std::memory_order_relaxed) -> bool {
     return value_.compare_exchange_weak(expected, desired, order, order);
   }
 
-  bool compare_exchange_strong(T& expected, T desired, std::memory_order order = std::memory_order_relaxed) {
+  auto compare_exchange_strong(T& expected, T desired, std::memory_order order = std::memory_order_relaxed) -> bool {
     return value_.compare_exchange_strong(expected, desired, order, order);
   }
 
@@ -47,42 +47,42 @@ class RelaxedAtomic {
     return load();
   }
 
-  T operator=(T arg) {  // NOLINT(misc-unconventional-assign-operator)
+  auto operator=(T arg) -> RelaxedAtomic<T>& {
     store(arg);
-    return arg;
+    return *this;
   }
 
-  T operator=(const RelaxedAtomic& arg) {  // NOLINT(misc-unconventional-assign-operator)
+  auto operator=(const RelaxedAtomic& arg) -> RelaxedAtomic<T>& {
     T loaded = (T)arg;
     store(loaded);
-    return loaded;
+    return *this;
   }
 
-  T operator+=(T arg) {
+  auto operator+=(T arg) -> T {
     return fetch_add(arg) + arg;
   }
 
-  T operator-=(T arg) {
+  auto operator-=(T arg) -> T {
     return fetch_sub(arg) - arg;
   }
 
-  friend bool operator==(const RelaxedAtomic<T>& lhs, const T& rhs) {
+  friend auto operator==(const RelaxedAtomic<T>& lhs, const T& rhs) -> bool {
     return ((T)lhs) == rhs;
   }
 
-  friend bool operator!=(const RelaxedAtomic<T>& lhs, const T& rhs) {
+  friend auto operator!=(const RelaxedAtomic<T>& lhs, const T& rhs) -> bool {
     return ((T)lhs) != rhs;
   }
 
-  friend bool operator<(const RelaxedAtomic<T>& lhs, const T& rhs) {
+  friend auto operator<(const RelaxedAtomic<T>& lhs, const T& rhs) -> bool {
     return ((T)lhs) < rhs;
   }
 
-  friend bool operator>(const RelaxedAtomic<T>& lhs, const T& rhs) {
+  friend auto operator>(const RelaxedAtomic<T>& lhs, const T& rhs) -> bool {
     return ((T)lhs) > rhs;
   }
 
-  friend std::ostream& operator<<(std::ostream& stream, const RelaxedAtomic<T>& val) {
+  friend auto operator<<(std::ostream& stream, const RelaxedAtomic<T>& val) -> std::ostream& {
     return stream << ((T)val);
   }
 };

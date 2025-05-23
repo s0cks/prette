@@ -1,5 +1,8 @@
 #include "prette/monitor.h"
 
+#include <sstream>
+#include <string>
+
 namespace prt {
 auto MonitorConnectedEvent::ToString() const -> std::string {
   std::stringstream ss;

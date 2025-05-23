@@ -1,4 +1,19 @@
 CompileFlags:
   CompilationDatabase: build/
+Completion:
+  AllScopes: Yes
+Style:
+  QuotedHeaders:
+  - "prette/.*"
+  AngledHeaders:
+  - "GLFW/.*"
+  - "vulkan/.*"
 Diagnostics:
-  UnusedIncludes: None
+  UnusedIncludes: Strict
+  MissingIncludes: Strict
+  Includes:
+    IgnoreHeader:
+    - vulkan\.h
+    - "rx-*.hpp"
+    - "operators/rx-*.hpp"
+    - "subjects/rx-*.hpp"

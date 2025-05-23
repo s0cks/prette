@@ -2,11 +2,13 @@
 #define PRT_WORLD_EVENT_H
 
 #include "prette/event.h"
+#include "prette/world_state.h"
 
 namespace prt {
+// clang-format off
 #define FOR_EACH_WORLD_EVENT(V) \
-  V(WorldInit)                  \
-  V(WorldDeInit)
+  FOR_EACH_WORLD_STATE(V)
+// clang-format on
 
 class World;
 class WorldEvent;
@@ -26,8 +28,7 @@ DEFINE_EVENT_PROTOTYPE(World, FOR_EACH_WORLD_EVENT);
     DEFINE_WORLD_EVENT_TYPE(Name);        \
   };
 
-DEFINE_WORLD_EVENT(WorldInit);
-DEFINE_WORLD_EVENT(WorldDeInit);
+FOR_EACH_WORLD_STATE(DEFINE_WORLD_EVENT);
 
 DEFINE_EVENT_SUBJECT(World);
 DEFINE_EVENT_OBSERVABLE(World);

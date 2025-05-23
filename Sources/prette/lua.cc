@@ -1,23 +1,20 @@
 #include "prette/lua.h"
+#ifdef PRETTE_ENABLE_LUA
 
-#include <lauxlib.h>
-#include <lua.h>
-
-#include <array>
 #include <filesystem>
-#include <rx-coordination.hpp>
-#include <subjects/rx-replaysubject.hpp>
+#include <fmt/format.h>
+#include <gflags/gflags.h>
+#include <string>
+#include <utility>
 
 #include "prette/common.h"
 #include "prette/engine.h"
 #include "prette/engine_event.h"
 #include "prette/flags.h"
-#include "prette/gfx.h"
 #include "prette/keyboard.h"
 #include "prette/lua_event.h"
 #include "prette/mouse.h"
 #include "prette/prette.h"
-#include "prette/renderer.h"
 #include "prette/rx.h"
 #include "prette/settings.h"
 #include "prette/thread_local.h"
@@ -170,7 +167,7 @@ LUA_F(prette_print) {
   } else if (lua_istable(L, 1)) {
     if (!luaL_callmeta(L, 1, "__tostring")) {
       LOG(WARNING) << "unsupported lua value.";
-      return luaL_error(L, "unsupported lua value.");
+      return luaL_error(L, "unsupported lua value.");  // NOLINT(cppcoreguidelines-pro-type-vararg)
     }
     LOG(INFO) << luaL_checkstring(L, -1);
   }
@@ -282,7 +279,10 @@ void LuaModule::InitModule(lua_State* L, const char* name, const char* tname, co
   lua_setglobal(L, name);
 }
 
-void LuaModule::InitModule(lua_State* L, const char* name, const char* tname, const struct luaL_Reg* lib_funcs, const int nup) {
+void LuaModule::InitModule(lua_State* L, const char* name, const char* tname, const struct luaL_Reg* lib_funcs,
+                           const int nup) {
   return InitModule(L, name, tname, lib_funcs, &lua_module_default_tostring, nup);
 }
 }  // namespace prt
+
+#endif  // PRETTE_ENABLE_LUA

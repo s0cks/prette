@@ -1,65 +1,82 @@
 #ifndef PRT_BIG_NUMBER_H
 #define PRT_BIG_NUMBER_H
 
-#include <cstdint>
-#include <iomanip>
+#include <algorithm>
+#include <array>
+#include <bitset>
 #include <sstream>
 #include <string>
 
 #include "prette/platform.h"
 
+// IWYU pragma: no_include <ios>
+
 namespace prt {
 class BigNumber {
-protected:
+ protected:
   BigNumber() = default;
 
-public:
+ public:
   virtual ~BigNumber() = default;
-  virtual auto data() const -> const uword * = 0;
+  virtual auto data() const -> const uword* = 0;
   virtual auto size() const -> uword = 0;
   virtual void clear() = 0;
 
-  auto const_begin() const -> const uword * { return data(); }
+  auto const_begin() const -> const uword* {
+    return data();
+  }
 
-  auto const_end() const -> const uword * { return data() + size(); }
+  auto const_end() const -> const uword* {
+    return data() + size();
+  }
 };
 
-template <const uword NumberOfBits> class BigNumberTemplate : public BigNumber {
-public:
+template <const uword NumberOfBits>
+class BigNumberTemplate : public BigNumber {
+ public:
   static constexpr const auto kSizeInBits = NumberOfBits;
   static constexpr const auto kSizeInBytes = kSizeInBits / kBitsPerByte;
   static constexpr const auto kSizeInWords = kSizeInBits / kBitsPerWord;
 
-protected:
+ protected:
   // NOLINTNEXTLINE(cppcoreguidelines-non-private-member-variables-in-classes)
   std::array<uword, kSizeInWords> data_;
 
-  constexpr BigNumberTemplate() : BigNumber(), data_() {
+  constexpr BigNumberTemplate() :
+    BigNumber(),
+    data_() {
     memset(&data_[0], 0, sizeof(data_));
   }
-  constexpr BigNumberTemplate(const uint8_t *bytes, const uword num_bytes)
-      : BigNumber(), data_() {
+  constexpr BigNumberTemplate(const uint8_t* bytes, const uword num_bytes) :
+    BigNumber(),
+    data_() {
     CopyFrom(bytes, num_bytes);
   }
 
-  inline void CopyFrom(const uint8_t *bytes, const uword num_bytes) {
+  inline void CopyFrom(const uint8_t* bytes, const uword num_bytes) {
     memset(&data_[0], 0, kSizeInBytes);
     const auto total_bytes = std::min(num_bytes, kSizeInBytes);
     memcpy(&data_[0], &bytes[0], total_bytes);
   }
 
-  inline void CopyFrom(const BigNumberTemplate<NumberOfBits> &rhs) {
-    return CopyFrom((const uint8_t *)rhs.data(), rhs.size());
+  inline void CopyFrom(const BigNumberTemplate<NumberOfBits>& rhs) {
+    return CopyFrom((const uint8_t*)rhs.data(), rhs.size());
   }
 
-public:
+ public:
   ~BigNumberTemplate() override = default;
 
-  auto data() const -> const uword * override { return data_.data(); }
+  auto data() const -> const uword* override {
+    return data_.data();
+  }
 
-  auto size() const -> uword override { return kSizeInWords; }
+  auto size() const -> uword override {
+    return kSizeInWords;
+  }
 
-  void clear() override { memset(&data_[0], 0, sizeof(data_)); }
+  void clear() override {
+    memset(&data_[0], 0, sizeof(data_));
+  }
 
   virtual auto ToHexString() const -> std::string {
     std::stringstream ss;
@@ -80,6 +97,6 @@ public:
     return ss.str();
   }
 };
-} // namespace prt
+}  // namespace prt
 
-#endif // PRT_BIG_NUMBER_H
+#endif  // PRT_BIG_NUMBER_H

@@ -1,114 +1,149 @@
 #include "prette/camera.h"
 
-#include <glm/ext/matrix_transform.hpp>
-#include <glm/fwd.hpp>
+#include <string>
+#include <vector>
 
+#include "prette/camera_manager.h"
 #include "prette/common.h"
-#include "prette/engine.h"
+#include "prette/copy_to_buffer.h"
+#include "prette/gfx.h"
 #include "prette/glm.h"
 #include "prette/keyboard.h"
 #include "prette/mouse.h"
-#include "prette/settings.h"
+#include "prette/mouse_event.h"
+#include "prette/platform.h"
+#include "prette/rx.h"
 #include "prette/swapchain.h"
-#include "prette/window.h"
+#include "prette/swapchain_event.h"
+#include "prette/thread_local.h"
+#include "prette/tile.h"
+#include "prette/to_string.h"
+#include "prette/vk.h"
+#include "prette/vk_buffer.h"
 
 namespace prt {
-OrthoCamera::OrthoCamera(const float left, const float right, const float bottom, const float top, const glm::vec3& pos) :
-  Camera(kOrthoCamera, glm::ortho(left, right, bottom, top, kDefaultNearClip, kDefaultFarClip), pos) {
-  on_key_ = OnKeyStateEvent().subscribe([this](KeyStateEvent* event) {
-    ASSERT(event);
+static ThreadLocal<Camera> camera_{};
+
+Camera::Camera(const glm::vec2 viewport_size, const glm::vec3 pos, const glm::vec3 dir) :
+  data_(),
+  buffer_(buffer_ = vk::Buffer::New(sizeof(CameraData),
+                                    VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT)) {
+  ASSERT_INITIALIZED(buffer_);
+  data_.viewport_size = viewport_size;
+  data_.direction = dir;
+  data_.pos = pos;
+  UpdateProjectionMatrix();
+  UpdateViewMatrix();
+  on_key_ = OnKeyPressed().subscribe([this](KeyStateEvent* event) {
+    if (event->IsCode(GLFW_KEY_UP)) {
+      IncrementZoom();
+    } else if (event->IsCode(GLFW_KEY_DOWN)) {
+      DecrementZoom();
+    } else if (event->IsCode(GLFW_KEY_A)) {
+      MoveLeft();
+    } else if (event->IsCode(GLFW_KEY_D)) {
+      MoveRight();
+    } else if (event->IsCode(GLFW_KEY_W)) {
+      MoveUp();
+    } else if (event->IsCode(GLFW_KEY_S)) {
+      MoveDown();
+    }
   });
-  UpdateViewMatrix();
-}
-
-OrthoCamera::~OrthoCamera() {
-  on_key_.unsubscribe();
-}
-
-void OrthoCamera::UpdateViewMatrix() {
-  Camera::UpdateViewMatrix();
-}
-
-void OrthoCamera::Update() {
-  UpdateViewMatrix();
-}
-
-PerspectiveCamera::PerspectiveCamera(const float fov, const float aspectRatio, const float nearClip, const float farClip,
-                                     const glm::vec3& pos) :
-  fov_(fov),
-  aspect_(aspectRatio),
-  near_(nearClip),
-  far_(farClip),
-  Camera(kPerspectiveCamera, glm::perspective(fov, aspectRatio, nearClip, farClip), pos) {
-  on_key_ = OnKeyStateEvent().subscribe([this](KeyStateEvent* event) {
-    if (event->IsRepeat() || event->IsPressed()) {
-      ASSERT(event);
-      const auto engine = Engine::Get();
-      ASSERT(engine);
-      const auto velocity = CalculateVelocity(engine->GetCurrentTick() - engine->GetPreviousTick());
-      if (event->IsCode(GLFW_KEY_A)) {
-        return MoveLeft(velocity);
-      } else if (event->IsCode(GLFW_KEY_S)) {
-        return MoveBack(velocity);
-      } else if (event->IsCode(GLFW_KEY_W)) {
-        return MoveForward(velocity);
-      } else if (event->IsCode(GLFW_KEY_D)) {
-        return MoveRight(velocity);
+  on_swap_init_ = OnSwapchainInitEvent().subscribe([this](SwapchainInitEvent* event) {
+    UpdateProjectionMatrix();
+    UpdateViewMatrix();
+  });
+  on_drag_start_ = OnDragStartEvent().subscribe([this](DragStartEvent* event) {
+    dragging_ = OnMouseMotionEvent().subscribe([this](MouseMotionEvent* event) {
+      if (event->IsUp()) {
+        MoveUp(abs(event->GetDirection().y) / 100.0f);
+      } else if (event->IsDown()) {
+        MoveDown(abs(event->GetDirection().y) / 100.0f);
+      } else if (event->IsLeft()) {
+        MoveLeft(abs(event->GetDirection().x) / 100.0f);
+      } else if (event->IsRight()) {
+        MoveRight(abs(event->GetDirection().x) / 100.0f);
       }
+    });
+  });
+  on_drag_finish_ = OnDragFinishedEvent().subscribe([this](DragFinishedEvent* event) {
+    dragging_.unsubscribe();
+  });
+  on_scroll_ = OnScrollEvent().subscribe([this](ScrollEvent* event) {
+    const auto deltaY = event->GetDelta().y;
+    if (event->IsScrollUp()) {
+      IncrementZoom();
+    } else if (event->IsScrollDown()) {
+      DecrementZoom();
     }
   });
-  on_mouse_moved_ = OnMouseMotionEvent().skip(1).subscribe([this](MouseMotionEvent* event) {
-    ASSERT(event);
-    const auto keyboard = Keyboard::Get();
-    ASSERT(keyboard);
-    if (keyboard->GetKey(GLFW_KEY_SPACE).IsReleased()) {
-      const auto& direction = event->GetDirection();
-      yaw_ += (direction.x * sensitivity_);
-      pitch_ -= (direction.y * sensitivity_);
-      Clamp(pitch_, -89.0f, 89.0f);
-      glm::vec3 dir{};
-      dir.x = cos(glm::radians(yaw_)) * cos(glm::radians(pitch_));
-      dir.y = sin(glm::radians(pitch_));
-      dir.z = sin(glm::radians(yaw_)) * cos(glm::radians(pitch_));
-      data_.direction = glm::normalize(dir);
-    }
-  });
+  GetCameraManager()->Register(this);
 }
 
-PerspectiveCamera::~PerspectiveCamera() {
-  on_mouse_moved_.unsubscribe();
+Camera::~Camera() {
+  GetCameraManager()->Deregister(this);
   on_key_.unsubscribe();
+  dragging_.unsubscribe();
+  on_scroll_.unsubscribe();
+  delete buffer_;
 }
 
-void PerspectiveCamera::Update() {
-  glm::vec3 front;
-  front.x = cos(glm::radians(GetYaw()) * cos(glm::radians(GetPitch())));
-  front.y = sin(glm::radians(GetPitch()));
-  front.z = sin(glm::radians(GetYaw()) * cos(glm::radians(GetPitch())));
-  data_.direction = glm::normalize(front);
-  data_.right = glm::normalize(glm::cross(GetDirection(), GetUp()));
-  data_.up = glm::normalize(glm::cross(GetRight(), GetDirection()));
+auto Camera::ToString() const -> std::string {
+  return ToStringHelper<Camera>{};
+}
+
+void Camera::UpdateViewMatrix() {
+  data_.view = glm::lookAt(GetPos(), GetPos() + GetDirection(), GetUp());
+}
+
+void Camera::Update() {
+  UpdateViewMatrix();
+  ASSERT_INITIALIZED(GetBuffer());
+  vk::CopyBytesToBufferWithStaging copy(data_);
+  copy(GetBuffer());
+}
+
+auto Camera::Unproject(const glm::vec2 ndc) const -> glm::vec3 {
+  glm::vec4 clip_coords = glm::vec4(ndc.x, ndc.y, -1.0f, 1.0f);
+  glm::mat4 pv = GetProjection() * GetView();
+  glm::mat4 ipv = glm::inverse(pv);
+  glm::vec4 world_coords = ipv * clip_coords;
+  return world_coords;
+}
+
+void Camera::UpdateProjectionMatrix() {
+  const auto ar = GetViewportAspectRatio();
+  const auto w = (GetViewportWidth() / kTileSizeInPixels) * 0.5f;
+  const auto h = (GetViewportHeight() / kTileSizeInPixels) * 0.5f * ar;
+  const auto z = GetZoomPercent() + 0.6f;
+  data_.projection = glm::ortho(-w * z, w * z, -h * z, h * z, kNearClip, kFarClip);
+}
+
+void Camera::SetPos(const glm::vec3& pos) {
+  data_.pos = pos;
   UpdateViewMatrix();
 }
 
-static Camera* camera_ = nullptr;
-
-void Camera::Init() {
-  OnSwapChainInitEvent().subscribe([](SwapChainInitEvent* event) {
-    ASSERT(event);
-    const auto window = GetAppWindow();
-    ASSERT(window);
-    const auto fb_size = window->GetFramebufferSize();
-    const auto aspect_ratio = fb_size.GetAspectRatio();
-    // camera_ = new PerspectiveCamera(kDefaultFov, aspect_ratio, kDefaultNearClip, kDefaultFarClip, kDefaultPos);
-    camera_ = new OrthoCamera(-aspect_ratio, aspect_ratio, -1.0f, 1.0f, glm::vec3(0.0f, 0.0f, 3.0f));
-    //    camera_ = new OrthoCamera(0, fb_size.width() / 32, 0, fb_size.height() / 32, glm::vec3(0.0f, 0.0f, 3.0f));
-    ASSERT(camera_);
-  });
+void Camera::SetZoom(const float rhs) {
+  data_.zoom = rhs;
+  Clamp(data_.zoom, kMinZoom, kMaxZoom);
+  UpdateProjectionMatrix();
 }
 
-auto Camera::Get() -> Camera* {
-  ASSERT(camera_);
-  return camera_;
+auto CameraFinalizer::Visit(Camera* rhs) -> bool {
+  ASSERT(rhs);
+  DVLOG(2) << "finalizing " << rhs->ToString();
+  delete rhs;
+  num_finalized_++;
+  return true;
+}
+
+void CameraFinalizer::FinalizeAll(const std::vector<Camera*>& all) {
+  DVLOG(1) << "finalizing Cameras....";
+  CameraFinalizer finalizer{};
+  for (const auto& cam : all) {
+    LOG_IF(FATAL, !finalizer.Visit(cam)) << "failed to finalize: " << cam->ToString();
+  }
+  DVLOG(1) << "finalized " << finalizer.GetNumberOfObjectsFinalized() << " Cameras";
 }
 }  // namespace prt

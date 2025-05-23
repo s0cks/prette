@@ -1,0 +1,12 @@
+find_program(BLOATY "bloaty")
+if(BLOATY)
+  execute_process(COMMAND ${BLOATY} --version
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    ERROR_QUIET
+    OUTPUT_VARIABLE BLOATY_VERSION
+    OUTPUT_STRIP_TRAILING_WHITESPACE)
+  string(REGEX MATCH "[0-9]+\.[0-9]+(\.[0-9]+)?" BLOATY_VERSION "${BLOATY_VERSION}")
+
+  list(APPEND BLOATY_OPTS)
+  message(STATUS "found bloaty v${BLOATY_VERSION}: ${BLOATY}")
+endif()

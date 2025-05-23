@@ -17,7 +17,9 @@ class Event {
   virtual ~Event() = default;
   virtual auto GetName() const -> const char* = 0;
   virtual auto ToString() const -> std::string = 0;
+#ifdef PRETTE_ENABLE_LUA
   virtual void ToTable(lua_State* L) const;
+#endif  // PRETTE_ENABLE_LUA
 };
 
 #define DEFINE_EVENT_PROTOTYPE_TYPE_CHECK(Name)  \
@@ -49,6 +51,9 @@ class Event {
   DEFINE_NON_COPYABLE_TYPE(Name##Event);                  \
                                                           \
  public:                                                  \
+  using ParentEventType = Proto;                          \
+                                                          \
+ public:                                                  \
   auto ToString() const -> std::string override;          \
   auto GetName() const -> const char* override {          \
     return #Name;                                         \
@@ -64,6 +69,37 @@ class Event {
     ASSERT(event->Is##Name##Event());                     \
     return event->As##Name##Event();                      \
   }
+
+#define __DECLARE_STATE_EVENT_STATE_CHECK(Name) \
+  inline auto Is##Name() const->bool {          \
+    return IsState(StateType::k##Name);         \
+  }
+
+#define __DECLARE_STATE_EVENT_STATE_FILTER(Name)                        \
+  static inline auto FilterBy##Name##State()->ParentEventType::Filter { \
+    return FilterByState(StateType::k##Name);                           \
+  }
+
+#define DECLARE_STATE_EVENT_TYPE(Proto, EventStateType, ForEachState)                                         \
+  DECLARE_EVENT_TYPE(Proto, EventStateType);                                                                  \
+                                                                                                              \
+ public:                                                                                                      \
+  using StateType = EventStateType;                                                                           \
+                                                                                                              \
+ public:                                                                                                      \
+  auto GetState() const -> StateType;                                                                         \
+  inline auto IsState(const StateType rhs) const -> bool {                                                    \
+    return GetState() == rhs;                                                                                 \
+  }                                                                                                           \
+  ForEachState(__DECLARE_STATE_EVENT_STATE_CHECK);                                                            \
+                                                                                                              \
+ public:                                                                                                      \
+  static inline auto FilterByState(const StateType rhs) -> ParentEventType::Filter {                          \
+    return [rhs](ParentEventType* event) {                                                                    \
+      return event && event->Is##EventStateType##Event() && event->As##EventStateType##Event()->IsState(rhs); \
+    };                                                                                                        \
+  }                                                                                                           \
+  ForEachState(__DECLARE_STATE_EVENT_STATE_FILTER);
 
 template <class E>
 class EventSource {

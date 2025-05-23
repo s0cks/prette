@@ -1,9 +1,14 @@
 #include "prette/uri.h"
 
+#include <fmt/format.h>
 #include <regex>
+#include <set>
+#include <sstream>
 #include <string>
 #include <unordered_set>
+#include <vector>
 
+#include "prette/common.h"
 #include "prette/uri_parser.h"
 
 namespace prt::uri {
@@ -46,8 +51,8 @@ auto Uri::OnQueryParsed0(const Parser* parser, const uint64_t idx, const char* k
   return true;
 }
 
-auto Uri::OnQueryParsed1(const Parser* parser, const uint64_t idx, const char* key, const uword key_length, const char* value,
-                         const uword value_length) -> bool {
+auto Uri::OnQueryParsed1(const Parser* parser, const uint64_t idx, const char* key, const uword key_length,
+                         const char* value, const uword value_length) -> bool {
   auto uri = parser->GetData<Uri>();
   ASSERT(uri);
   const auto k = std::string(key, key_length);

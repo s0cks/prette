@@ -1,14 +1,27 @@
 #include "prette/mouse.h"
 
-#include <GLFW/glfw3.h>
-#include <lauxlib.h>
-#include <lua.h>
+#include <gflags/gflags.h>
+#include <utility>
 
-#include "prette/lua.h"
+#include "prette/camera.h"
+#include "prette/common.h"
+#include "prette/glm.h"
+#include "prette/gui_viewport.h"
+#include "prette/mouse_event.h"
 #include "prette/to_string.h"
 #include "prette/window.h"
 
 namespace prt {
+static constexpr const auto kMouseScrollInvertedHelp = "Invert the mouse scroll directions.";
+
+#ifdef OS_IS_OSX
+static constexpr const auto kMouseScrollInvertedDefaultValue = true;
+#else
+static constexpr const auto kMouseScrollInvertedDefaultValue = false
+#endif  // OS_IS_OSX
+
+DEFINE_bool(mouse_scroll_inverted, kMouseScrollInvertedDefaultValue, kMouseScrollInvertedHelp);
+
 static MouseEventSubject events_{};
 static Mouse* mouse_ = nullptr;
 
@@ -27,36 +40,6 @@ auto OnMouseEvent() -> MouseEventObservable {
   return events_.get_observable();
 }
 
-auto MouseCreatedEvent::ToString() const -> std::string {
-  ToStringHelper<MouseCreatedEvent> helper{};
-  return helper;
-}
-
-auto MouseMotionEvent::ToString() const -> std::string {
-  ToStringHelper<MouseMotionEvent> helper{};
-  helper.AddFieldPtr("mouse", GetMouse());
-  helper.AddField("direction", glm::to_string(GetDirection()));
-  return helper;
-}
-
-auto MouseDestroyedEvent::ToString() const -> std::string {
-  ToStringHelper<MouseDestroyedEvent> helper{};
-  return helper;
-}
-
-Mouse::Mouse(Window* owner) :
-  owner_(owner) {
-  ASSERT(owner_);
-  glfwSetMouseButtonCallback(owner_->GetHandle(), &OnMouseButton);
-  glfwSetCursorPosCallback(owner_->GetHandle(), &OnMouseMotion);
-}
-
-Mouse::~Mouse() {
-  ASSERT(owner_);
-  glfwSetMouseButtonCallback(owner_->GetHandle(), nullptr);
-  glfwSetCursorPosCallback(owner_->GetHandle(), nullptr);
-}
-
 auto Mouse::IsInitialized() -> bool {
   return mouse_ != nullptr;
 }
@@ -67,14 +50,33 @@ static inline auto SetMouse(Mouse* rhs) -> Mouse* {
   return rhs;
 }
 
-auto Mouse::GetPos() const -> glm::dvec2 {
-  glm::dvec2 pos;
-  glfwGetCursorPos(GetOwner()->GetHandle(), &pos.x, &pos.y);
-  return pos;
+auto Mouse::GetNormalizedDeviceCoords() const -> glm::vec2 {
+  if (GuiViewport::IsInitialized())
+    return ToNormalizedDeviceCoords(GetPos(), GuiViewport::Get()->GetSize());
+  return ToNormalizedDeviceCoords(GetPos(), GetAppWindow()->GetFramebufferSize());
 }
 
-auto Mouse::IsPressed(const int button) const -> bool {
-  return glfwGetMouseButton(GetOwner()->GetHandle(), button);
+void Mouse::StartDragging(const int button, const glm::vec2 pos, const int mods) {
+  dragging_ = true;
+  drag_state_ = {
+      .button = button,
+      .mods = mods,
+      .start = pos,
+      .finish = glm::vec2(),
+  };
+  Publish<DragStartEvent>(drag_state_);
+}
+
+void Mouse::StopDragging(const glm::vec2 pos) {
+  dragging_ = false;
+  drag_state_.finish = std::move(pos);
+  Publish<DragFinishedEvent>(drag_state_);
+}
+
+auto Mouse::GetWorldPos() const -> glm::vec2 {
+  const auto camera = GetCamera();
+  const auto world_pos = camera->Unproject(GetNormalizedDeviceCoords());
+  return {round(world_pos.x), round(world_pos.y)};
 }
 
 auto Mouse::New(Window* window) -> Mouse* {

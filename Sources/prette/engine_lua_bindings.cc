@@ -1,5 +1,12 @@
 #include "prette/engine.h"
+#ifdef PRETTE_ENABLE_LUA
+
+#include <exception>
+
+#include "prette/common.h"
+#include "prette/engine_event.h"
 #include "prette/exception.h"
+#include "prette/lua.h"
 
 namespace prt {
 class EngineModule : LuaModule {
@@ -13,14 +20,14 @@ class EngineModule : LuaModule {
 #define LUA_ENGINE_F(Name) LUA_F(engine_##Name)
 
 LUA_ENGINE_F(getStateName) {
-  const auto engine = Engine::Get();
+  const auto engine = GetEngine();
   ASSERT(engine);
   lua_pushstring(L, engine->GetState()->GetStateName());
   return 1;
 }
 
 LUA_ENGINE_F(shutdown) {
-  const auto engine = Engine::Get();
+  const auto engine = GetEngine();
   ASSERT(engine);
   std::exception_ptr cause = nullptr;
   if (lua_gettop(L) > 0) {
@@ -32,7 +39,7 @@ LUA_ENGINE_F(shutdown) {
 }
 
 LUA_ENGINE_F(onEvent) {
-  const auto engine = Engine::Get();
+  const auto engine = GetEngine();
   ASSERT(engine);
   OnEngineEvent().subscribe(CreateSubscriber<EngineEvent>(L));
   return 0;
@@ -70,3 +77,5 @@ void Engine::InitLua(lua_State* L) {
   EngineModule::Init(L);
 }
 }  // namespace prt
+
+#endif  // PRETTE_ENABLE_LUA

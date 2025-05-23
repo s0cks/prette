@@ -1,9 +1,13 @@
 #ifndef PRT_WINDOW_EVENT_H
 #define PRT_WINDOW_EVENT_H
 
+#include "prette/common.h"
 #include "prette/dimension.h"
 #include "prette/event.h"
 #include "prette/geometry/shape.h"
+#include "prette/glm.h"
+#include "prette/lua.h"
+#include "prette/platform.h"
 
 namespace prt {
 #define FOR_EACH_WINDOW_EVENT(V) \
@@ -32,7 +36,9 @@ class WindowEvent : public Event {
   WindowEvent() = default;
   ~WindowEvent() override = default;
 
+#ifdef PRETTE_ENABLE_LUA
   void ToTable(lua_State* L) const override;
+#endif  // PRETTE_ENABLE_LUA
   DEFINE_EVENT_PROTOTYPE_TYPE(Window, FOR_EACH_WINDOW_EVENT);
 };
 
@@ -104,7 +110,9 @@ class WindowFocusEvent : public WindowEvent {
     return focused_;
   }
 
+#ifdef PRETTE_ENABLE_LUA
   void ToTable(lua_State* L) const override;
+#endif  // PRETTE_ENABLE_LUA
   DECLARE_WINDOW_EVENT_TYPE(WindowFocus);
 };
 

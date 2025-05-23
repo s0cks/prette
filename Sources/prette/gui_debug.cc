@@ -1,15 +1,17 @@
 #include "prette/gui_debug.h"
 
-#include <imgui.h>
-#include <imgui_impl_glfw.h>
-#include <imgui_impl_vulkan.h>
-#include <implot.h>
+#include <array>
+#include <cstdio>
+#include <units.h>
 
 #include "prette/camera.h"
+#include "prette/common.h"
 #include "prette/engine.h"
-#include "prette/gui_renderer.h"
+#include "prette/engine_event.h"
+#include "prette/gui.h"
+#include "prette/platform.h"
 #include "prette/series.h"
-#include "prette/swapchain.h"
+#include "prette/tick_profiler.h"
 #include "prette/window.h"
 
 namespace prt {
@@ -22,18 +24,18 @@ static TimeSeries<> max_{};
 
 static inline auto TimeFormatter(double value, char* buff, int size, void*) -> int {
   const auto str = units::time::to_string(units::time::millisecond_t(value));
-  return snprintf(buff, size, "%s", str.c_str());
+  return snprintf(buff, size, "%s", str.c_str());  // NOLINT(cppcoreguidelines-pro-type-vararg)
 }
 
 GuiDebug::GuiDebug() :
   Gui("Debug") {
-  const auto camera = Camera::Get();
+  const auto camera = GetCamera();
   ASSERT(camera);
-  Engine::Get()->OnTickProfilerStats().subscribe(([](const TickStats stats) {
-    tpsseries_.Append(Engine::Get()->GetTicksPerSecond().per_sec());
-    avg_.Append(stats.avg / NSEC_PER_MSEC);
-    min_.Append(stats.min / NSEC_PER_MSEC);
-    max_.Append(stats.max / NSEC_PER_MSEC);
+  GetEngine()->OnTickProfilerStats().subscribe(([](const TickStats stats) {
+    tpsseries_.Append(GetEngine()->GetTicksPerSecond().per_sec());
+    avg_.Append(static_cast<uint64_t>(stats.avg) / NSEC_PER_MSEC);
+    min_.Append(static_cast<uint64_t>(stats.min) / NSEC_PER_MSEC);
+    max_.Append(static_cast<uint64_t>(stats.max) / NSEC_PER_MSEC);
   }));
 }
 
@@ -46,7 +48,7 @@ void GuiDebug::Render() {
   ASSERT(window);
   const auto size = window->GetSize();
   ImGui::SetNextWindowPos(ImVec2{0, 0});
-  ImGui::SetNextWindowSize(ImVec2{size.width() / 4, size.height() / 2});
+  ImGui::SetNextWindowSize(ImVec2{static_cast<float>(size.width()) / 4, static_cast<float>(size.height()) / 2});
   ImGui::Begin(GetGuiName(), nullptr, ImGuiWindowFlags_NoCollapse);
   const auto target_items = std::array<const char*, 2>{
       "Full Scene",
@@ -65,11 +67,11 @@ void GuiDebug::Render() {
     ImGui::EndCombo();
   }
 
-  const auto engine = Engine::Get();
+  const auto engine = GetEngine();
   ASSERT(engine);
-  ImGui::Text("tps");
+  ImGui::Text("tps");  // NOLINT(cppcoreguidelines-pro-type-vararg)
   ImGui::SameLine();
-  ImGui::Text("%llu", engine->GetTicksPerSecond().per_sec());
+  ImGui::Text("%llu", engine->GetTicksPerSecond().per_sec());  // NOLINT(cppcoreguidelines-pro-type-vararg)
 
   if (ImPlot::BeginPlot("Profiler")) {
     ImPlot::SetupAxis(ImAxis_Y1, "Tick(s) per Second", ImPlotAxisFlags_Opposite);

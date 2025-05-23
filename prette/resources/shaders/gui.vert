@@ -1,4 +1,7 @@
-#version 460
+#version 460 core
+#extension GL_ARB_shading_language_include : require
+#extension GL_GOOGLE_include_directive : require
+
 layout(location = 0) in vec2 a_pos;
 layout(location = 1) in vec2 a_uv;
 layout(location = 2) in vec4 a_color;

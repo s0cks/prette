@@ -1,14 +1,25 @@
 #ifndef PRT_WINDOW_H
 #define PRT_WINDOW_H
 
+#include <functional>
+#include <gflags/gflags.h>
+#include <ostream>
+#include <set>
+#include <string>
+
+#include "prette/common.h"
+#include "prette/dimension.h"
 #include "prette/event.h"
+#include "prette/geometry/rectangle.h"
+#include "prette/geometry/shape.h"
 #include "prette/gfx.h"
+#include "prette/glm.h"
 #include "prette/lua.h"
 #include "prette/monitor.h"
 #include "prette/window_event.h"
 
 namespace prt {
-static constexpr const auto kDefaultWindowSize = "512x512";
+static constexpr const auto kDefaultWindowSize = "1280x720";
 DECLARE_string(window_size);
 
 static inline auto HasWindowSize() -> bool {

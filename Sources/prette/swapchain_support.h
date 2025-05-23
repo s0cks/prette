@@ -1,10 +1,16 @@
 #ifndef PRT_SWAPCHAIN_SUPPORT_H
 #define PRT_SWAPCHAIN_SUPPORT_H
 
+#include <algorithm>
+#include <functional>
+#include <vector>
+
 #include "prette/gfx.h"
+#include "prette/platform.h"
+#include "prette/vk.h"
 
 namespace prt {
-struct SwapChainSupportDetails {
+struct SwapchainSupportDetails {
   VkSurfaceCapabilitiesKHR surface_capabilities{};
   std::vector<VkSurfaceFormatKHR> surface_formats{};
   std::vector<VkPresentModeKHR> present_modes{};
@@ -17,7 +23,8 @@ struct SwapChainSupportDetails {
     return !present_modes.empty();
   }
 
-  auto FindSurfaceFormat(const std::function<bool(const VkSurfaceFormatKHR&)>& filter) const -> const VkSurfaceFormatKHR& {
+  auto FindSurfaceFormat(const std::function<bool(const VkSurfaceFormatKHR&)>& filter) const
+      -> const VkSurfaceFormatKHR& {
     const auto pos = std::ranges::find_if(surface_formats, filter);
     if (pos != std::end(surface_formats))
       return (*pos);
@@ -53,10 +60,10 @@ struct SwapChainSupportDetails {
   }
 };
 
-auto QuerySwapChainSupport(const VkPhysicalDevice& device, const VkSurfaceKHR& surface) -> SwapChainSupportDetails;
+auto QuerySwapchainSupport(const VkPhysicalDevice& device, const VkSurfaceKHR& surface) -> SwapchainSupportDetails;
 
-static inline auto HasSwapChainSupport(const VkPhysicalDevice& device, const VkSurfaceKHR& surface) -> bool {
-  return QuerySwapChainSupport(device, surface);
+static inline auto HasSwapchainSupport(const VkPhysicalDevice& device, const VkSurfaceKHR& surface) -> bool {
+  return QuerySwapchainSupport(device, surface);
 }
 }  // namespace prt
 

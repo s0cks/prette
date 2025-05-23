@@ -1,17 +1,21 @@
 #ifndef PRT_URI_H
 #define PRT_URI_H
 
-#include <fmt/format.h>
-#include <rocksdb/slice.h>
-
 #include <cstdio>
+#include <fmt/format.h>
 #include <optional>
+#include <ostream>
+#include <rocksdb/slice.h>
 #include <set>
 #include <string>
+#include <string_view>
+#include <unordered_map>
 #include <unordered_set>
 #include <utility>
+#include <vector>
 
 #include "prette/common.h"
+#include "prette/platform.h"
 
 namespace prt::uri {
 using ExtensionSet = std::unordered_set<std::string>;
@@ -57,8 +61,8 @@ struct Uri {
   static auto OnSchemeParsed(const Parser* parser, const char* scheme, const uint64_t length) -> bool;
   static auto OnPathParsed(const Parser* parser, const char* path, const uint64_t length) -> bool;
   static auto OnQueryParsed0(const Parser* parser, const uint64_t idx, const char* key, const uword key_length) -> bool;
-  static auto OnQueryParsed1(const Parser* parser, const uint64_t idx, const char* key, const uword key_length, const char* value,
-                             const uword value_length) -> bool;
+  static auto OnQueryParsed1(const Parser* parser, const uint64_t idx, const char* key, const uword key_length,
+                             const char* value, const uword value_length) -> bool;
   static auto OnFragmentParsed(const Parser* parser, const char* fragment, const uint64_t length) -> bool;
 
  public:

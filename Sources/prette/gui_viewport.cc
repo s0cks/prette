@@ -1,22 +1,40 @@
 #include "prette/gui_viewport.h"
 
-#include <imgui.h>
-#include <imgui_impl_glfw.h>
-#include <imgui_impl_vulkan.h>
-#include <implot.h>
-
 #include "prette/common.h"
-#include "prette/gfx_driver.h"
+#include "prette/glm.h"
+#include "prette/gui.h"
 #include "prette/gui_renderer.h"
-#include "prette/lua.h"
-#include "prette/swapchain.h"
+#include "prette/thread_local.h"
 #include "prette/window.h"
+#include "prette/window_event.h"
+
+// TODO: move
+namespace glm {
+static inline auto to_imvec2(const glm::vec2& rhs) -> ImVec2 {
+  return ImVec2{
+      rhs.x,
+      rhs.y,
+  };
+}
+}  // namespace glm
 
 namespace prt {
 GuiViewport::GuiViewport() :
   Gui("Viewport") {
   LoadLuaScript("gui/viewport.lua");
   InvokeLuaCallback("init");
+  const auto window = GetAppWindow();
+  ASSERT(window);
+  const auto win_size = window->GetSize();
+  pos_ = glm::vec2(win_size.width() / 4, 0);
+  size_ = glm::vec2(win_size.width() - (win_size.width() / 4), win_size.height());
+  OnWindowSizeEvent().subscribe([this](WindowSizeEvent* event) {
+    const auto window = GetAppWindow();
+    ASSERT(window);
+    const auto win_size = window->GetSize();
+    pos_ = glm::vec2(win_size.width() / 4, 0);
+    size_ = glm::vec2(win_size.width() - (win_size.width() / 4), win_size.height());
+  });
 }
 
 void GuiViewport::Update() {
@@ -24,17 +42,30 @@ void GuiViewport::Update() {
 }
 
 void GuiViewport::Render() {
-  const auto window = GetAppWindow();
-  ASSERT(window);
-  const auto size = window->GetSize();
-  ImGui::SetNextWindowPos(ImVec2{(size.width() / 4), 0});
-  ImGui::SetNextWindowSize(ImVec2{size.width() - (size.width() / 4), size.height()});
-  ImGui::Begin(GetGuiName(), nullptr, ImGuiWindowFlags_NoCollapse);
+  ImGui::SetNextWindowPos(glm::to_imvec2(pos_));
+  ImGui::SetNextWindowSize(glm::to_imvec2(size_));
+  ImGui::Begin(GetGuiName(), nullptr, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoDecoration);
   ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
-  ImGui::Image(GuiRenderer::GetSceneDescriptor(SwapChain::GetCurrentFrame()->GetFrame()),
-               ImVec2{viewportPanelSize.x, viewportPanelSize.y});
+  ImGui::Image(GetGuiRenderer()->GetCurrentSceneDescriptor(), ImVec2{viewportPanelSize.x, viewportPanelSize.y});
   ImGui::End();
 }
 
-void GuiViewport::Init() {}
+static ThreadLocal<GuiViewport> instance_{};
+
+auto GuiViewport::IsInitialized() -> bool {
+  return instance_.Get() != nullptr;
+}
+
+auto GuiViewport::Init() -> GuiViewport* {
+  ASSERT(!IsInitialized());
+  const auto instance = new GuiViewport();
+  instance_ = instance;
+  ASSERT(IsInitialized());
+  return instance;
+}
+
+auto GuiViewport::Get() -> GuiViewport* {
+  ASSERT(IsInitialized());
+  return instance_.Get();
+}
 }  // namespace prt

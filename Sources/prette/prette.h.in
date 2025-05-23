@@ -2,20 +2,24 @@
 #define PRT_H
 
 #include <string>
-#include <glog/logging.h>
 
 namespace prt {
+// clang-format off
 #define PRT_VERSION_MAJOR @PROJECT_VERSION_MAJOR@
 #define PRT_VERSION_MINOR @PROJECT_VERSION_MINOR@
 #define PRT_VERSION_PATCH @PROJECT_VERSION_PATCH@
+// clang-format on
 
-#define PRT_GIT_BRANCH    "@GIT_BRANCH@"
-#define PRT_GIT_COMMIT    "@GIT_COMMIT@"
-#define PRT_GIT_TAG       "@GIT_TAG@"
-#define PRT_GIT_DATE      "@GIT_DATE@"
+#define PRT_GIT_BRANCH "@GIT_BRANCH@"
+#define PRT_GIT_COMMIT "@GIT_COMMIT@"
+#define PRT_GIT_TAG    "@GIT_TAG@"
+#define PRT_GIT_DATE   "@GIT_DATE@"
 
-  auto GetVersion() -> std::string;
-  void OnGlfwError(int code, const char* description);
-}
+auto GetVersion() -> std::string;
 
-#endif //PRT_H
+#ifdef PRT_GLFW
+void OnGlfwError(int code, const char* description);
+#endif  // PRT_GLFW
+}  // namespace prt
+
+#endif  // PRT_H

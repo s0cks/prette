@@ -1,17 +1,22 @@
 #include "prette/window.h"
 
-#include <lua.h>
-
-#include <cstdlib>
-#include <unordered_map>
+#include <functional>
+#include <gflags/gflags.h>
+#include <sstream>
+#include <string>
 
 #include "prette/common.h"
 #include "prette/engine.h"
+#include "prette/engine_event.h"
+#include "prette/gfx.h"
+#include "prette/gfx_driver.h"
+#include "prette/gfx_driver_event.h"
 #include "prette/keyboard.h"
 #include "prette/lua.h"
 #include "prette/mouse.h"
 #include "prette/thread_local.h"
 #include "prette/to_string.h"
+#include "prette/window_event.h"
 
 namespace prt {
 static WindowSet all_{};
@@ -53,7 +58,7 @@ Window::Window(Handle* handle) :
     ASSERT(event);
     Show();
   });
-  OnTerminatingEvent().subscribe([this](TerminatingEvent* event) {
+  OnDriverDestroyedEvent().subscribe([this](DriverDestroyedEvent* event) {
     ASSERT(event);
     Close();
   });
@@ -144,7 +149,7 @@ void Window::Init() {
   Mouse::Init(window);
   OnKeyPressed(GLFW_KEY_ESCAPE).subscribe([](KeyStateEvent* event) {
     ASSERT(event);
-    const auto engine = Engine::Get();
+    const auto engine = GetEngine();
     ASSERT(engine);
     engine->Shutdown();
   });

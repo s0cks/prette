@@ -1,0 +1,114 @@
+{
+	"JsonHandlerImpl": {
+		"prefix": "json-handler-impl",
+		"body": [
+			"auto $1::Null() -> bool {",
+			"return InvalidState();",
+			"}",
+			"auto $1::Bool(bool b) -> bool {",
+			"return InvalidState();",
+			"}",
+			"auto $1::Int(int i) -> bool {",
+				"return InvalidState();",
+			"}",
+			"auto $1::Uint(unsigned u) -> bool {",
+				"return InvalidState();",
+			"}",
+			"auto $1::Int64(int64_t i) -> bool {",
+				"return InvalidState();",
+			"}",
+			"auto $1::Uint64(uint64_t u) -> bool {",
+				"return InvalidState();",
+			"}",
+			"auto $1::Double(double d) -> bool {",
+				"return InvalidState();",
+			"}",
+			"auto $1::Key(const char* str, SizeType length, bool copy) -> bool {",
+				"return InvalidState();",
+			"}",
+			"auto $1::String(const char* str, SizeType length, bool copy) -> bool {",
+				"return InvalidState();",
+			"}",
+			"auto $1::StartObject() -> bool {",
+				"return InvalidState();",
+			"}",
+			"auto $1::EndObject(SizeType memberCount) -> bool {",
+				"return InvalidState();",
+			"}",
+			"auto $1::StartArray() -> bool {",
+				"return InvalidState();",
+			"}",
+			"auto $1::EndArray(SizeType elementCount) -> bool {",
+				"return InvalidState();",
+			"}"
+		],
+		"description": "Insert a json::Handler implementation."
+	},
+	"JsonHandlerDecl": {
+		"prefix": "json-handler-decl",
+		"body": [
+			"auto Null() -> bool override;",
+			"auto Bool(bool b) -> bool override;",
+			"auto Int(int i) -> bool override;",
+			"auto Uint(unsigned u) -> bool override;",
+			"auto Int64(int64_t i) -> bool override;",
+			"auto Uint64(uint64_t u) -> bool override;",
+			"auto Double(double d) -> bool override;",
+			"auto Key(const char* str, SizeType length, bool copy) -> bool override;",
+			"auto String(const char* str, SizeType length, bool copy) -> bool override;",
+			"auto StartObject() -> bool override;",
+			"auto EndObject(SizeType memberCount) -> bool override;",
+			"auto StartArray() -> bool override;",
+			"auto EndArray(SizeType elementCount) -> bool override;"
+		],
+		"description": "Insert a json::Handler implementation."
+	},
+	"LogToConsole": {
+		"prefix": "log",
+		"body": "LOG($1) << \"$2\";",
+		"description": "Log using glog",
+	},
+	"LuaOnlyBlock": {
+		"prefix": "prt-lua-only-block",
+		"body": [
+			"#ifdef PRETTE_ENABLE_LUA",
+			"$1",
+			"#endif // PRETTE_ENABLE_LUA"
+		],
+		"description": "Generate a lua only section"
+	},
+	"EngineStateGuard": {
+		"prefix": "prt-engine-state-guard",
+		"body": [
+			"#ifndef PRT_ENGINE_STATE_H",
+			"#error \"Please #include <prette/engine_state.h> instead.\"",
+			"#endif  // PRT_ENGINE_STATE_H"
+		],
+		"description": "Generate an engine state include guard."
+	},
+	"EngineStateDecl": {
+		"prefix": "prt-engine-state-decl",
+		"body": [
+			"class $1State : public EngineState {",
+			"public:",
+			"explicit $1State();",
+			"~$1State() override = default;",
+			"DECLARE_ENGINE_STATE_TYPE($1);",
+			"public:",
+			"static inline auto New() -> std::unique_ptr<$1State> {",
+			"return std::make_unique<$1State>();",
+			"}",
+			"};",
+		],
+		"description": "Generate an engine state include guard."
+	},
+	"ToStringWithHelper": {
+		"prefix": "prt-tostring-helper-default",
+		"body": [
+		"auto $1::ToString() const -> std::string {",
+		"return ToStringHelper<$1>{};",
+		"}"
+		],
+		"description": "Generate a default ToString implementation using ToStringHelper."
+	}
+}

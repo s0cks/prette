@@ -1,65 +1,147 @@
 #ifndef PRT_SWAPCHAIN_H
 #define PRT_SWAPCHAIN_H
 
-#include <vulkan/vulkan_core.h>
+#include <string>
+#include <vector>
 
 #include "prette/common.h"
-#include "prette/event.h"
-#include "prette/gfx.h"
+#include "prette/framebuffer.h"
 #include "prette/pipeline.h"
+#include "prette/relaxed_atomic.h"
 #include "prette/swapchain_event.h"
 #include "prette/swapchain_frame.h"
-#include "prette/swapchain_render_pass.h"
-#include "prette/to_string.h"
+#include "prette/vk.h"
 
 namespace prt {
-auto OnSwapChainEvent() -> SwapChainEventObservable;
+auto OnSwapchainEvent() -> SwapchainEventObservable;
 #define DEFINE_ON_EVENT(Name)                                                     \
   static inline auto On##Name##Event()->Name##EventObservable {                   \
-    return OnSwapChainEvent().filter(Name##Event::Filter).map(Name##Event::Cast); \
+    return OnSwapchainEvent().filter(Name##Event::Filter).map(Name##Event::Cast); \
   }
 FOR_EACH_SWAPCHAIN_EVENT(DEFINE_ON_EVENT);
 #undef DEFINE_ON_EVENT
 
-class Driver;
-class SwapChain {
+class Renderer;
+class Swapchain : public vk::HandleTemplate<VkSwapchainKHR> {
   friend class Renderer;
-
- private:
-  static void InitSwap(const Driver* driver, const bool is_reinit);
-  static void DestroySwap(const Driver* driver, const bool is_reinit);
-  static void ReInitSwap(const Driver* driver);
-  static void InitWindowResizeListener();
-  static void InitRenderPass(const Driver* driver);
-  static void InitPipeline(const Driver* driver);
-
-  static auto AcquireNextImage(const Driver* driver) -> bool;
-  static void Present(const Driver* driver);
-  static void Submit(const Driver* driver, const std::vector<VkCommandBuffer>& cmd_buffers);
-
-  static void InitImages(const Driver* driver);
+  friend class SwapchainFrameScope;
+  friend class SwapchainInitializer;
 
  public:
-  static void Init();
+  static auto CreateRenderPass() -> vk::RenderPass*;
+  static auto CreatePipeline() -> vk::RenderPipeline*;
 
-  static auto GetSwapChain() -> VkSwapchainKHR const&;
-  static auto GetImages() -> std::vector<VkImage> const&;
-  static auto GetImageView(const uint32_t idx) -> VkImageView const&;
-  static auto GetFormat() -> VkFormat const&;
-  static auto GetExtent() -> VkExtent2D const&;
-  static auto GetRenderPass() -> SwapChainRenderPass*;
-  static auto GetGraphicsPipeline() -> GraphicsPipeline* const&;
-  static auto GetCurrentFrame() -> SwapChainFrame*;
-  static auto GetFramebuffer(const uint32_t idx) -> VkFramebuffer const&;
+ private:
+  static void InitImages(const VkSwapchainKHR& swapchain, std::vector<VkImage>& images);
+  static void PublishEvent(SwapchainEvent* event);
 
-  static inline auto GetNumberOfImages() -> uint64_t {
-    return GetImages().size();
+  template <class E, typename... Args>
+  static inline void Publish(Args... args) {
+    E event(args...);
+    return PublishEvent(&event);
   }
 
-  static inline auto GetCurrentImage() -> uint32_t {
-    return GetCurrentFrame()->GetImage();
+ private:
+  VkExtent2D extent_;
+  VkFormat format_;
+  uint32_t num_images_ = 0;
+  std::vector<VkImage> images_{};
+  std::vector<vk::ImageView*> views_{};
+  std::vector<vk::Framebuffer*> framebuffers_{};
+  SwapchainFrameRingBuffer* frames_ = nullptr;
+  RelaxedAtomic<bool> resized_{false};
+
+  void SetResized(const bool rhs = true) {
+    resized_ = rhs;
+  }
+
+  inline void ClearResized() {
+    return SetResized(false);
+  }
+
+ public:
+  explicit Swapchain(const VkSwapchainCreateInfoKHR* create_info);
+  ~Swapchain();
+
+  auto GetExtent() const -> const VkExtent2D& {
+    return extent_;
+  }
+
+  auto GetFormat() const -> const VkFormat& {
+    return format_;
+  }
+
+  auto GetNumberOfImages() const -> uint32_t {
+    return images_.size();
+  }
+
+  auto IsResized() const -> bool {
+    return (bool)resized_;
+  }
+
+  auto GetFramebuffer(const uint32_t idx) const -> vk::Framebuffer*;
+  auto GetImage(const uint32_t idx) const -> const VkImage&;
+  auto GetView(const uint32_t idx) const -> vk::ImageView*;
+  auto ToString() const -> std::string override;
+
+  auto GetViews() const -> const std::vector<vk::ImageView*>& {
+    return views_;
+  }
+
+  auto GetCurrentFrame() const -> SwapchainFrame* {
+    return frames_->GetCurrentFrame();
+  }
+
+  auto GetNextFrame() -> SwapchainFrame* {
+    frames_->NextFrame();
+    return GetCurrentFrame();
+  }
+
+  operator VkSwapchainKHR() const {
+    return GetHandle();
   }
 };
+
+class SwapchainInitializer {
+ private:
+  bool init_;
+  bool reinit_;
+
+ public:
+  explicit SwapchainInitializer(const bool reinit = false, const bool init = true) :
+    reinit_(reinit),
+    init_(init) {}
+  ~SwapchainInitializer() = default;
+
+  auto IsInit() const -> bool {
+    return init_;
+  }
+
+  auto IsReinit() const -> bool {
+    return reinit_;
+  }
+
+  void operator()();
+
+ public:
+  static inline void Init() {
+    SwapchainInitializer init{};
+    return init();
+  }
+
+  static inline void ReInit() {
+    SwapchainInitializer init(true);
+    return init();
+  }
+
+  static inline void DeInit() {
+    SwapchainInitializer init(false, false);
+    return init();
+  }
+};
+
+auto IsSwapchainInitialized() -> bool;
+auto GetSwapchain() -> Swapchain*;
 }  // namespace prt
 
 #endif  // PRT_SWAPCHAIN_H

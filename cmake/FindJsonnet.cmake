@@ -14,18 +14,18 @@ endif()
 
 find_path(
   JSONNET_INCLUDE_DIR
-  NAMES libjsonnet++.h
+  NAMES libjsonnet.h
   PATHS ${JSONNET_SEARCH_PATHS})
-find_library(JSONNET_LIB
-  NAME libjsonnet++.dylib
+find_library(JSONNET_CLIB
+  NAME libjsonnet.dylib
   PATHS ${JSONNET_SEARCH_PATHS})
 
 include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(jsonnet DEFAULT_MSG JSONNET_INCLUDE_DIR)
 if(JSONNET_FOUND)
   set(JSONNET_INCLUDE_DIRS ${JSONNET_INCLUDE_DIR})
-  set(JSONNET_LIBRARIES ${JSONNET_LIB})
-  message(STATUS "Found jsonnet (include: ${JSONNET_INCLUDE_DIRS}; lib: ${JSONNET_LIB})")
+  set(JSONNET_LIBRARIES ${JSONNET_CLIB})
+  message(STATUS "Found jsonnet (include: ${JSONNET_INCLUDE_DIRS}; lib: ${JSONNET_LIBRARIES})")
 endif()
 
 add_library(jsonnet INTERFACE)

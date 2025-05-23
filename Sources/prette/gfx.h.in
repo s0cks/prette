@@ -2,19 +2,24 @@
 #define PRT_GFX_H
 
 #include <glog/logging.h>
+#include <semver/semver.hpp>
 #include <units.h>
 
-#include <iostream>
-#include <semver/semver.hpp>
+#include "prette/common.h"  // IWYU pragma: keep
 
-#include "prette/common.h"
+// IWYU pragma: begin_exports
+#include "prette/gfx_driver.h"
 #include "prette/gfx_vk.h"
-#include "prette/glm.h"
+// IWYU pragma: end_exports
 
 #ifdef PRT_GLFW
 
 #define GLFW_INCLUDE_VULKAN
+
+// IWYU pragma: begin_exports
 #include <GLFW/glfw3.h>
+// IWYU pragma: end_exports
+
 // clang-format off
 #define PRT_GLFW_CTX_VERSION_MAJOR @PROJECT_GLFW_CONTEXT_VERSION_MAJOR@
 #define PRT_GLFW_CTX_VERSION_MINOR @PROJECT_GLFW_CONTEXT_VERSION_MINOR@
@@ -35,9 +40,11 @@ using semver::version;
 
 void Init();
 
+#ifdef PRT_GLFW
 static inline auto GetGlfwVersion() -> version {
   return version(GLFW_VERSION_MAJOR, GLFW_VERSION_MINOR, GLFW_VERSION_REVISION);
 }
+#endif  // PRT_GLFW
 }  // namespace prt::gfx
 
 #endif  // PRT_GFX_H

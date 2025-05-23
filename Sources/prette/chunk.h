@@ -1,13 +1,27 @@
 #ifndef PRT_CHUNK_H
 #define PRT_CHUNK_H
 
+// IWYU pragma: begin_exports
 #include <flatbuffers/flatbuffer_builder.h>
 
 #include "prette/chunk_generated.h"
+// IWYU pragma: end_exports
+
+#include <algorithm>
+#include <array>
+#include <functional>
+#include <ostream>
+#include <string>
+#include <type_traits>
+#include <utility>
+#include <vector>
+
 #include "prette/common.h"
 #include "prette/glm.h"
+#include "prette/relaxed_atomic.h"
 #include "prette/tile.h"
 #include "prette/to_string.h"
+#include "prette/uniform_buffer.h"
 
 namespace prt {
 static constexpr const uint32_t kChunkWidth = 32;
@@ -28,7 +42,19 @@ class ChunkVisitor {
   virtual auto Visit(Chunk* chunk) -> bool = 0;
 };
 
+struct ChunkMetadata {
+  alignas(4) ChunkId id{};
+  alignas(8) ChunkPos pos{};
+};
+
+template <>
+struct vk::is_uniform_t<ChunkMetadata> : std::true_type {};
+
+using ChunkMetadataBuffer = vk::UniformBuffer<ChunkMetadata, 1>;
+
 class Chunk {
+  friend class Tile;
+  friend class World;
   using ChunkIndex = uint32_t;
   friend class ChunkTileIterator;
   DEFINE_DEFAULT_COPYABLE_TYPE(Chunk);
@@ -57,7 +83,7 @@ class Chunk {
 
  private:
   static inline auto GetIndex(const TilePos& pos) -> ChunkIndex {
-    return pos.y * kChunkWidth + pos.x;
+    return static_cast<uint32_t>(pos.y) * kChunkWidth + static_cast<uint32_t>(pos.x);
   }
 
   static inline auto GetChunkPos(const ChunkIndex index) -> ChunkPos {
@@ -65,6 +91,7 @@ class Chunk {
   }
 
  private:
+  RelaxedAtomic<bool> dirty_ = true;
   ChunkPos pos_{};
   ChunkData tiles_{};
 
@@ -98,6 +125,10 @@ class Chunk {
   Chunk(const ChunkPos pos, const raw::Chunk& raw);
   ~Chunk() = default;
 
+  auto IsDirty() const -> bool {
+    return (bool)dirty_;
+  }
+
   auto GetTiles() const -> const ChunkData& {
     return tiles_;
   }
@@ -129,9 +160,22 @@ class Chunk {
   }
 
   auto VisitTiles(TileVisitor* vis) -> bool;
+  auto VisitTiles(std::function<bool(Tile*)> vis) -> bool;
   auto ToString() const -> std::string;
   void Save();
   void Load();
+
+  void SetDirty(const bool rhs) {
+    dirty_ = rhs;
+  }
+
+  inline void MarkDirty() {
+    return SetDirty(true);
+  }
+
+  inline void UnmarkDirty() {
+    return SetDirty(false);
+  }
 
   auto operator[](const TilePos pos) const -> const Tile& {
     return GetTileAt(pos);
@@ -140,15 +184,16 @@ class Chunk {
   auto operator<<(std::vector<raw::Tile>& tiles) -> Chunk& {
     ASSERT(tiles.size() == kTotalChunkSize);
     for (ChunkIndex idx = 0; idx < kTotalChunkSize; idx++) {
-      tile(idx) = Tile(GetChunkPos(idx), tiles[idx]);
+      tile(idx) = Tile(this, GetChunkPos(idx), tiles[idx]);
     }
+    MarkDirty();
     return *this;
   }
 
   auto operator>>(flatbuffers::FlatBufferBuilder& builder) -> flatbuffers::FlatBufferBuilder& {
     std::vector<raw::Tile> tiles{};
     std::ranges::for_each(tiles_, [&tiles](const Tile& tile) {
-      tiles.emplace_back(tile.GetMaterialId());
+      tiles.emplace_back(tile.GetMaterial());
     });
     const auto tiles_vector = builder.CreateVectorOfStructs(tiles);
     raw::ChunkBuilder chunk_builder(builder);

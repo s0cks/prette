@@ -1,97 +1,92 @@
 #ifndef PRT_REGION_H
 #define PRT_REGION_H
 
+#include <ostream>
 #include <units.h>
-#include "prette/gfx.h"
+
 #include "prette/common.h"
 #include "prette/platform.h"
 
 namespace prt {
-  class Region {
-    DEFINE_DEFAULT_COPYABLE_TYPE(Region);
-  protected:
-    uword start_;
-    uword size_;
-  public:
-    Region() = default;
-    Region(const uword start, const uword size):
-      start_(start),
-      size_(size) {
-    }
-    virtual ~Region() = default;
+class Region {
+  DEFINE_DEFAULT_COPYABLE_TYPE(Region);
 
-    uword GetStartingAddress() const {
-      return start_;
-    }
+ protected:
+  uword start_ = 0;
+  uword size_ = 0;
 
-    void* GetStartingAddressPointer() const {
-      return (void*) GetStartingAddress();
-    }
+ public:
+  Region() = default;
+  Region(const uword start, const uword size) :
+    start_(start),
+    size_(size) {}
+  virtual ~Region() = default;
 
-    uword GetSize() const {
-      return size_;
-    }
+  auto GetStartingAddress() const -> uword {
+    return start_;
+  }
 
-    uword GetEndingAddress() const {
-      return GetStartingAddress() + GetSize();
-    }
+  auto GetStartingAddressPointer() const -> void* {
+    return (void*)GetStartingAddress();  // NOLINT(cppcoreguidelines-pro-type-cstyle-cast)
+  }
 
-    void* GetEndingAddressPointer() const {
-      return (void*) GetEndingAddress();
-    }
+  auto GetSize() const -> uword {
+    return size_;
+  }
 
-    bool Contains(const uword address) const {
-      return GetStartingAddress() <= address
-          && GetEndingAddress() >= address;
-    }
+  auto GetEndingAddress() const -> uword {
+    return GetStartingAddress() + GetSize();
+  }
 
-    bool Contains(void* ptr) const {
-      return Contains((uword) ptr);
-    }
+  auto GetEndingAddressPointer() const -> void* {
+    return (void*)GetEndingAddress();  // NOLINT(cppcoreguidelines-pro-type-cstyle-cast)
+  }
 
-    bool IsEmpty() const {
-      return GetSize() == 0;
-    }
+  auto Contains(const uword address) const -> bool {
+    return GetStartingAddress() <= address && GetEndingAddress() >= address;
+  }
 
-    bool operator==(const Region& rhs) const {
-      return GetStartingAddress() == rhs.GetStartingAddress()
-          && GetSize() == rhs.GetSize();
-    }
+  auto Contains(void* ptr) const -> bool {
+    return Contains((uword)ptr);  // NOLINT(cppcoreguidelines-pro-type-cstyle-cast)
+  }
 
-    bool operator!=(const Region& rhs) const {
-      return GetStartingAddress() != rhs.GetStartingAddress()
-          || GetSize() != rhs.GetSize();
-    }
+  auto IsEmpty() const -> bool {
+    return GetSize() == 0;
+  }
 
-    bool operator<(const Region& rhs) const {
-      if(GetStartingAddress() < rhs.GetStartingAddress())
-        return true;
-      return GetSize() < rhs.GetSize();
-    }
+  auto operator==(const Region& rhs) const -> bool {
+    return GetStartingAddress() == rhs.GetStartingAddress() && GetSize() == rhs.GetSize();
+  }
 
-    bool operator>(const Region& rhs) const {
-      if(GetStartingAddress() > rhs.GetStartingAddress())
-        return true;
-      return GetSize() > rhs.GetSize();
-    }
+  auto operator!=(const Region& rhs) const -> bool {
+    return GetStartingAddress() != rhs.GetStartingAddress() || GetSize() != rhs.GetSize();
+  }
 
-    friend std::ostream& operator<<(std::ostream& stream, const Region& rhs) {
-      using namespace units::data;
-      stream << "Region(";
-      stream << "start=" << rhs.GetStartingAddressPointer() << ", ";
-      stream << "size=" << byte_t(rhs.GetSize());
-      stream << ")";
-      return stream;
-    }
-    
-    explicit operator const ubyte* () const {
-      return (const ubyte*) GetStartingAddress();
-    }
+  auto operator<(const Region& rhs) const -> bool {
+    if (GetStartingAddress() < rhs.GetStartingAddress())
+      return true;
+    return GetSize() < rhs.GetSize();
+  }
 
-    explicit operator const GLvoid* () const {
-      return (const GLvoid*) GetStartingAddress();
-    }
-  };
-}
+  auto operator>(const Region& rhs) const -> bool {
+    if (GetStartingAddress() > rhs.GetStartingAddress())
+      return true;
+    return GetSize() > rhs.GetSize();
+  }
 
-#endif //PRT_REGION_H
+  friend auto operator<<(std::ostream& stream, const Region& rhs) -> std::ostream& {
+    using namespace units::data;
+    stream << "Region(";
+    stream << "start=" << rhs.GetStartingAddressPointer() << ", ";
+    stream << "size=" << byte_t(static_cast<double>(rhs.GetSize()));
+    stream << ")";
+    return stream;
+  }
+
+  explicit operator const ubyte*() const {
+    return (const ubyte*)GetStartingAddress();  // NOLINT(cppcoreguidelines-pro-type-cstyle-cast)
+  }
+};
+}  // namespace prt
+
+#endif  // PRT_REGION_H

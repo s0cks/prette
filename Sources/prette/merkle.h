@@ -1,11 +1,14 @@
 #ifndef PRT_MERKLE_H
 #define PRT_MERKLE_H
 
+#include <algorithm>
 #include <ostream>
 #include <string>
 #include <vector>
 
+#include "prette/common.h"
 #include "prette/sha256.h"
+#include "prette/uint256.h"
 
 // TODO: cleanup memory usage
 namespace prt::merkle {
@@ -16,28 +19,25 @@ class NodeVisitor {
 
  public:
   virtual ~NodeVisitor() = default;
-  virtual bool Visit(Node* node) = 0;
+  virtual auto Visit(Node* node) -> bool = 0;
 };
 
 class Node {
   DEFINE_DEFAULT_COPYABLE_TYPE(Node);
 
  protected:
-  Node* parent_;
-  Node* lchild_;
-  Node* rchild_;
-  uint256 hash_;
+  Node* parent_ = nullptr;
+  Node* lchild_ = nullptr;
+  Node* rchild_ = nullptr;
+  uint256 hash_{};
 
-  static inline uint256 ConcatHashes(Node* lhs, Node* rhs) {
+  static inline auto ConcatHashes(Node* lhs, Node* rhs) -> uint256 {
     return sha256::Concat(lhs->GetHash(), rhs->GetHash());
   }
 
  public:
   Node() = default;
   explicit Node(const uint256& hash) :
-    parent_(nullptr),
-    lchild_(nullptr),
-    rchild_(nullptr),
     hash_(hash) {}
   ~Node() {
     if (lchild_)
@@ -46,13 +46,13 @@ class Node {
       delete rchild_;
   }
 
-  std::string ToString() const;
+  auto ToString() const -> std::string;
 
-  Node* GetParent() const {
+  auto GetParent() const -> Node* {
     return parent_;
   }
 
-  bool HasParent() const {
+  auto HasParent() const -> bool {
     return parent_ != nullptr;
   }
 
@@ -60,11 +60,11 @@ class Node {
     parent_ = node;
   }
 
-  Node* GetLeft() const {
+  auto GetLeft() const -> Node* {
     return lchild_;
   }
 
-  bool HasLeft() const {
+  auto HasLeft() const -> bool {
     return lchild_ != nullptr;
   }
 
@@ -72,11 +72,11 @@ class Node {
     lchild_ = node;
   }
 
-  Node* GetRight() const {
+  auto GetRight() const -> Node* {
     return rchild_;
   }
 
-  bool HasRight() const {
+  auto HasRight() const -> bool {
     return rchild_ != nullptr;
   }
 
@@ -84,40 +84,40 @@ class Node {
     rchild_ = node;
   }
 
-  const uint256& GetHash() const {
+  auto GetHash() const -> const uint256& {
     return hash_;
   }
 
-  bool IsLeaf() const {
+  auto IsLeaf() const -> bool {
     return !HasLeft() && !HasRight();
   }
 
-  int GetLeaves() const {
+  auto GetLeaves() const -> int {
     return IsLeaf() ? 1 : GetLeft()->GetLeaves() + GetRight()->GetLeaves();
   }
 
-  bool CanVerifyHash() const {
+  auto CanVerifyHash() const -> bool {
     return HasLeft() && HasRight();
   }
 
-  friend std::ostream& operator<<(std::ostream& stream, const Node& rhs) {
+  friend auto operator<<(std::ostream& stream, const Node& rhs) -> std::ostream& {
     return stream << rhs.ToString();
   }
 
-  bool operator==(const Node& rhs) const {
+  auto operator==(const Node& rhs) const -> bool {
     return GetHash() == rhs.GetHash();
   }
 
-  bool operator!=(const Node& rhs) const {
+  auto operator!=(const Node& rhs) const -> bool {
     return GetHash() != rhs.GetHash();
   }
 
  public:
-  static inline Node* New(const uint256& hash) {
+  static inline auto New(const uint256& hash) -> Node* {
     return new Node(hash);
   }
 
-  static inline Node* Concat(Node* left, Node* right) {
+  static inline auto Concat(Node* left, Node* right) -> Node* {
     ASSERT(left);
     ASSERT(right);
     const auto node = New(ConcatHashes(left, right));
@@ -127,65 +127,63 @@ class Node {
     return node;
   }
 
-  static inline Node* Copy(Node* node) {
+  static inline auto Copy(Node* node) -> Node* {
     ASSERT(node);
     return New(node->GetHash());
   }
 };
 
-typedef std::vector<Node*> NodeList;
+using NodeList = std::vector<Node*>;
 
 class Tree {
  protected:
-  Node* root_;
-  std::vector<Node*> leaves_;
+  Node* root_ = nullptr;
+  std::vector<Node*> leaves_{};
 
   inline void SetRoot(Node* node) {
     ASSERT(node);
     root_ = node;
   }
 
-  static Node* ComputeRoot(const NodeList& nodes);
+  static auto ComputeRoot(const NodeList& nodes) -> Node*;
 
  public:
   Tree() = default;
   explicit Tree(const NodeList& leaves);
   explicit Tree(const std::vector<uint256>& leaves);
-  Tree(const Tree& rhs) :
-    root_(rhs.root_),
-    leaves_(rhs.leaves_) {}
+  Tree(const Tree& rhs) = default;
   ~Tree() {
     if (root_)
       delete root_;
   }
 
-  Node* GetRoot() const {
+  auto GetRoot() const -> Node* {
     return root_;
   }
 
-  bool HasRoot() const {
+  auto HasRoot() const -> bool {
     return root_ != nullptr;
   }
 
-  bool IsEmpty() const {
+  auto IsEmpty() const -> bool {
     return !HasRoot() && leaves_.empty();
   }
 
-  const NodeList& GetLeaves() const {
+  auto GetLeaves() const -> const NodeList& {
     return leaves_;
   }
 
-  const uint256& GetRootHash() const {
+  auto GetRootHash() const -> const uint256& {
     ASSERT(HasRoot());
     return GetRoot()->GetHash();
   }
 
-  bool VisitRoot(NodeVisitor* vis) const {
+  auto VisitRoot(NodeVisitor* vis) const -> bool {
     ASSERT(vis);
     return HasRoot() ? vis->Visit(GetRoot()) : false;
   }
 
-  bool VisitLeaves(NodeVisitor* vis) const {
+  auto VisitLeaves(NodeVisitor* vis) const -> bool {
     ASSERT(vis);
     for (const auto& leaf : leaves_) {
       if (!vis->Visit(leaf))
@@ -194,15 +192,15 @@ class Tree {
     return true;
   }
 
-  bool Accept(NodeVisitor* vis) const {
+  auto Accept(NodeVisitor* vis) const -> bool {
     ASSERT(vis);
     return VisitRoot(vis) && VisitLeaves(vis);
   }
 
-  Tree& operator=(const Tree& rhs) {
+  auto operator=(const Tree& rhs) -> Tree& {
     root_ = rhs.root_;
     leaves_.clear();
-    std::for_each(std::begin(rhs.leaves_), std::begin(rhs.leaves_), [this](Node* node) {
+    std::ranges::for_each(rhs.leaves_, [this](Node* node) {
       leaves_.push_back(node);
     });
     return *this;

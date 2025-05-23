@@ -1,12 +1,17 @@
 #include "prette/world_storage.h"
 
-#include <flatbuffers/flatbuffer_builder.h>
-
 #include <filesystem>
+#include <flatbuffers/flatbuffer_builder.h>
 #include <fstream>
+#include <utility>
+#include <vector>
 
 #include "prette/chunk_generated.h"
+#include "prette/common.h"
+#include "prette/glm.h"
 #include "prette/tile.h"
+
+// IWYU pragma: no_include <ios>
 
 namespace prt {
 WorldStorage::WorldStorage(World* owner, fs::path path) :
@@ -38,7 +43,8 @@ auto WorldStorage::Save(Chunk* chunk) const -> bool {
     LOG(ERROR) << "failed to open " << filename << " for saving " << chunk->ToString();
     return false;
   }
-  stream.write((const char*)builder.GetBufferPointer(), builder.GetSize());  // NOLINT(cppcoreguidelines-pro-type-cstyle-cast)
+  // NOLINTNEXTLINE(cppcoreguidelines-pro-type-cstyle-cast)
+  stream.write((const char*)builder.GetBufferPointer(), builder.GetSize());
   stream.flush();
   stream.close();
   return true;
@@ -46,7 +52,7 @@ auto WorldStorage::Save(Chunk* chunk) const -> bool {
 
 auto WorldStorage::Load(const ChunkKey k, Chunk** result) const -> bool {
   const auto path = GetChunkPath(k);
-  DLOG(INFO) << "loading Chunk at " << glm::to_string(k) << " to " << path << "....";
+  DLOG(INFO) << "loading Chunk at " << glm::to_string(k);
   std::fstream stream(path, std::ios::in | std::ios::binary);
   if (!stream.is_open()) {
     LOG(ERROR) << "failed to open " << path;

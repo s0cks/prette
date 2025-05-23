@@ -1,39 +1,40 @@
 #ifndef PRT_RENDER_TARGET_H
 #define PRT_RENDER_TARGET_H
 
+#include <vector>
+#include <vulkan/vulkan_core.h>
+
 #include "prette/common.h"
-#include "prette/gfx.h"
+#include "prette/framebuffer.h"
+#include "prette/image.h"
+#include "prette/vk.h"
 
 namespace prt {
+static constexpr const auto kDefaultRenderTargetFormat = VK_FORMAT_B8G8R8A8_SRGB;
 class RenderTarget {
-  DEFINE_DEFAULT_COPYABLE_TYPE(RenderTarget);
+  DEFINE_NON_COPYABLE_TYPE(RenderTarget);
 
  private:
-  VkImage image_{};
-  VkImageView view_{};
-  VkDeviceMemory memory_{};
-  VkFramebuffer framebuffer_{};
+  uint64_t index_ = 0;
   VkExtent2D extent_{};
+  vk::Image* image_ = nullptr;
+  vk::ImageView* view_ = nullptr;
+  vk::Framebuffer* framebuffer_ = nullptr;
 
  public:
-  RenderTarget() = default;
-  RenderTarget(const VkRenderPass& pass, const VkExtent2D& extent, const VkImageView depth_view = VK_NULL_HANDLE,
-               const VkFormat format = VK_FORMAT_B8G8R8A8_SRGB);
-  ~RenderTarget() = default;
+  RenderTarget(const uint64_t index, vk::RenderPass* pass, const VkExtent2D& extent,
+               const VkFormat format = kDefaultRenderTargetFormat, vk::ImageView* depth_view = nullptr);
+  ~RenderTarget();
 
-  auto GetImage() const -> VkImage const& {
+  auto GetImage() const -> vk::Image* {
     return image_;
   }
 
-  auto GetView() const -> VkImageView const& {
+  auto GetView() const -> vk::ImageView* {
     return view_;
   }
 
-  auto GetMemory() const -> VkDeviceMemory const& {
-    return memory_;
-  }
-
-  auto GetFramebuffer() const -> VkFramebuffer const& {
+  auto GetFramebuffer() const -> vk::Framebuffer* {
     return framebuffer_;
   }
 
@@ -41,7 +42,17 @@ class RenderTarget {
     return extent_;
   }
 
-  void Destroy() const;
+  auto IsInitialized() const -> bool;
+};
+
+class RenderTargetSet {
+ private:
+  std::vector<RenderTarget*> targets_{};
+
+ public:
+  RenderTargetSet(const uint64_t num_targets, vk::RenderPass* pass, const VkExtent2D& extent, const VkFormat format,
+                  vk::ImageView* depth_view = nullptr);
+  ~RenderTargetSet();
 };
 }  // namespace prt
 

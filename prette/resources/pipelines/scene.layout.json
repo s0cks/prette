@@ -1,0 +1,11 @@
+{
+  "type": "PipelineLayout",
+  "meta": {
+    "name": "scene"
+  },
+  "data": {
+    "descriptor_sets": [
+      "scene"
+    ]
+  }
+}

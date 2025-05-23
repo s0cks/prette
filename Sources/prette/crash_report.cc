@@ -1,5 +1,10 @@
 #include "prette/crash_report.h"
 
+#include <backward.hpp>
+#include <exception>
+#include <ostream>  // IWYU pragma: keep
+#include <string>
+
 namespace prt {
 using backward::Printer;
 using backward::StackTrace;

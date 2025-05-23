@@ -1,7 +1,10 @@
 #include <fmt/format.h>
+#ifdef PRETTE_ENABLE_LUA
 
+#include "prette/common.h"
 #include "prette/lua.h"
 #include "prette/settings.h"
+#include "prette/settings_event.h"
 
 namespace prt {
 #define LUA_SETTINGS_F(Name) LUA_F(settings_##Name)
@@ -25,7 +28,7 @@ LUA_SETTINGS_F(getResolution) {
   const auto key = luaL_checkstring(L, 1);
   const auto resolution = Settings::GetResolution(key);
   if (!resolution) {
-    luaL_error(L, "failed to find Resolution %s in Settings.", key);
+    luaL_error(L, "failed to find Resolution %s in Settings.", key);  // NOLINT(cppcoreguidelines-pro-type-vararg)
     return 1;
   }
 
@@ -95,3 +98,5 @@ void Settings::InitLua(lua_State* L) {
   SettingsModule::Init(L);
 }
 }  // namespace prt
+
+#endif  // PRETTE_ENABLE_LUA

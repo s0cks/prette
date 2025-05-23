@@ -4,11 +4,14 @@
     "name": "SwapchainPipeline"
   },
   "data": {
-    "dynamicStates": [
+    "vertex_class": "default",
+    "layout": "swapchain",
+    "dynamic_states": [
       "viewport",
       "scissor"
     ],
-    "vertexShader": "swapchain",
-    "fragmentShader": "swapchain"
+    "vertex_shader": "simple_colored_2d",
+    "fragment_shader": "simple_colored_2d",
+    "pass": "swapchain"
   }
 }

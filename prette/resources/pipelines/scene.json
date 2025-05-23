@@ -4,9 +4,15 @@
     "name": "ScenePipeline"
   },
   "data": {
-    "cullMode": "back",
-    "frontFace": "clockwise",
-    "vertexShader": "scene",
-    "fragmentShader": "scene"
+    "extent": "swapchain",
+    "vertex_class": "default",
+    "layout": "scene",
+    "rasterizer": {
+      "cullMode": "back",
+      "frontFace": "clockwise"
+    },
+    "vertex_shader": "scene",
+    "fragment_shader": "scene",
+    "pass": "scene"
   }
 }

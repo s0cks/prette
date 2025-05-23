@@ -1,7 +1,10 @@
 #ifndef PRT_WORLD_STORAGE_H
 #define PRT_WORLD_STORAGE_H
 
+#include <filesystem>
 #include <fmt/format.h>
+#include <string>
+#include <utility>
 
 #include "prette/chunk.h"
 #include "prette/common.h"

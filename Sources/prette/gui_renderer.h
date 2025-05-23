@@ -1,11 +1,17 @@
 #ifndef PRT_GUI_RENDERER_H
 #define PRT_GUI_RENDERER_H
 
+#include <vector>
 #include <vulkan/vulkan_core.h>
 
+#include "prette/common.h"
 #include "prette/event.h"
+#include "prette/framebuffer.h"
 #include "prette/gfx.h"
-#include "prette/swapchain.h"
+#include "prette/render_pass.h"
+#include "prette/rx.h"
+#include "prette/sampler.h"
+#include "prette/vk.h"
 
 namespace prt {
 #define FOR_EACH_GUI_RENDERER_EVENT(V) V(GuiRendererInit)
@@ -38,22 +44,51 @@ auto OnGuiRendererEvent() -> GuiRendererEventObservable;
 FOR_EACH_GUI_RENDERER_EVENT(DEFINE_ON_EVENT)
 #undef DEFINE_ON_EVENT
 
-class Driver;
-class GuiRenderer {
- private:
-  static void InitFramebuffers(const Driver* driver);
-  static void InitRenderPass(const Driver* driver);
-  static void InitCommandBuffers(const Driver* driver);
-  static void InitSampler(const Driver* driver);
+namespace vk {
+class RenderPassBuilder;
+}
 
-  static void Destroy(const Driver* driver, const bool is_reinit);
+class Driver;
+class GuiRenderer : public vk::RenderPass {
+  friend class vk::RenderPassBuilder;
+  static auto CreateSampler() -> vk::Sampler*;
+
+ private:
+  vk::Sampler* sampler_ = nullptr;
+  std::vector<vk::Framebuffer*> framebuffers_{};
+  std::vector<VkDescriptorSet> descriptors_{};
+  rx::subscription on_tick_{};
+
+  GuiRenderer(const VkRenderPassCreateInfo* create_info);
+
+  void InitImgui();
+  void InitFramebuffers();
+
+ protected:
+  void OnSwapInit(const bool reinit) override;
+  void OnSwapDestroyed(const bool reinit) override;
 
  public:
-  static void Init();
-  static auto GetPass() -> VkRenderPass const&;
-  static auto GetSceneDescriptor(const uint32_t frame) -> VkDescriptorSet const&;
-  static void Draw(SwapChainFrame* frame, std::vector<VkCommandBuffer>& cmd_buffers);
+  ~GuiRenderer() override;
+
+  auto GetSampler() const -> vk::Sampler* {
+    return sampler_;
+  }
+
+  auto GetSceneDescriptor(const uint32_t frame) const -> VkDescriptorSet const& {
+    return descriptors_[frame];
+  }
+
+  auto GetCurrentSceneDescriptor() const -> VkDescriptorSet const&;
+  void Execute() override;
+
+ public:
+  static auto New() -> GuiRenderer*;
 };
+
+void InitGuiRenderer();
+auto IsGuiRendererInitialized() -> bool;
+auto GetGuiRenderer() -> GuiRenderer*;
 }  // namespace prt
 
 #endif  // PRT_GUI_RENDERER_H

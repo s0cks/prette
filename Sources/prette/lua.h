@@ -1,13 +1,17 @@
 #ifndef PRT_LUA_H
 #define PRT_LUA_H
 
+#ifdef PRETTE_ENABLE_LUA
+
 #include <filesystem>
+#include <functional>
+#include <gflags/gflags.h>
 #include <string>
 
 #include "prette/common.h"
-#include "prette/flags.h"
 #include "prette/lua_event.h"
 
+// IWYU pragma: begin_exports
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -19,6 +23,7 @@ extern "C" {
 #ifdef __cplusplus
 }
 #endif
+// IWYU pragma: end_exports
 
 namespace prt {
 DECLARE_bool(lua_event_logging);
@@ -80,7 +85,8 @@ class LuaModule {
  protected:
   static void InitModule(lua_State* L, const char* name, const char* tname, const struct luaL_Reg* lib_funcs,
                          lua_CFunction tostring, const int nup = 0);
-  static void InitModule(lua_State* L, const char* name, const char* tname, const struct luaL_Reg* lib_funcs, const int nup = 0);
+  static void InitModule(lua_State* L, const char* name, const char* tname, const struct luaL_Reg* lib_funcs,
+                         const int nup = 0);
 };
 
 #ifndef LUA_SUCCESS
@@ -101,4 +107,5 @@ static inline auto CreateSubscriber(lua_State* L, const int index = 1) -> std::f
 }
 }  // namespace prt
 
+#endif  // PRETTE_ENABLE_LUA
 #endif  // PRT_LUA_H

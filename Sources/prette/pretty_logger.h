@@ -2,8 +2,11 @@
 #define PRT_PRETTY_LOGGER_H
 
 #include <glog/logging.h>
+#include <string>
 
 #include "prette/common.h"
+
+// IWYU pragma: no_include <_string.h>
 
 namespace prt {
 class PrettyLogger {
@@ -36,19 +39,19 @@ class PrettyLogger {
     file_ = strdup(parent->GetFile());
   }
 
-  inline const char* GetFile() const {
+  inline auto GetFile() const -> const char* {
     return file_;
   }
 
-  inline int GetLine() const {
+  inline auto GetLine() const -> int {
     return line_;
   }
 
-  inline Severity GetSeverity() const {
+  inline auto GetSeverity() const -> Severity {
     return severity_;
   }
 
-  inline int GetIndent() {
+  inline auto GetIndent() -> int {
     return indent_;
   }
 
@@ -60,8 +63,8 @@ class PrettyLogger {
     indent_--;
   }
 
-  std::string GetIndentString() const {
-    return std::string(indent_ * 2, ' ');
+  auto GetIndentString() const -> std::string {
+    return std::string(indent_ * 2, ' ');  // NOLINT(modernize-return-braced-init-list)
   }
 
  public:

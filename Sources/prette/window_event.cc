@@ -1,14 +1,25 @@
 #include "prette/window_event.h"
 
-#include <lua.h>
+#include <string>
 
+#include "prette/common.h"
+#include "prette/event.h"
+#include "prette/lua.h"
 #include "prette/to_string.h"
 
 namespace prt {
+#ifdef PRETTE_ENABLE_LUA
 void WindowEvent::ToTable(lua_State* L) const {
   ASSERT(L);
   Event::ToTable(L);
 }
+
+void WindowFocusEvent::ToTable(lua_State* L) const {
+  WindowEvent::ToTable(L);
+  lua_pushboolean(L, IsFocused());
+  lua_setfield(L, -2, "focused");
+}
+#endif  // PRETTE_ENABLE_LUA
 
 auto WindowCreatedEvent::ToString() const -> std::string {
   return ToStringHelper<WindowCreatedEvent>{};
@@ -39,12 +50,6 @@ auto WindowSizeEvent::ToString() const -> std::string {
   ToStringHelper<WindowSizeEvent> helper;
   helper.AddFieldRef("size", GetSize());
   return helper;
-}
-
-void WindowFocusEvent::ToTable(lua_State* L) const {
-  WindowEvent::ToTable(L);
-  lua_pushboolean(L, IsFocused());
-  lua_setfield(L, -2, "focused");
 }
 
 auto WindowFocusEvent::ToString() const -> std::string {

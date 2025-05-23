@@ -1,13 +1,16 @@
 #ifndef PRT_MONITOR_H
 #define PRT_MONITOR_H
 
+#include <string>
 #include <units.h>
 
 #include "prette/common.h"
 #include "prette/dimension.h"
 #include "prette/event.h"
 #include "prette/geometry/rectangle.h"
+#include "prette/geometry/shape.h"
 #include "prette/gfx.h"
+#include "prette/glm.h"
 #include "prette/resolution.h"
 #include "prette/rx.h"
 

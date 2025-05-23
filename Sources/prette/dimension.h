@@ -2,11 +2,15 @@
 #define PRT_DIMENSION_H
 
 #include <fmt/format.h>
-#include <vulkan/vulkan_core.h>
+#include <ostream>
+#include <string>
 
+#include "prette/common.h"
 #include "prette/glm.h"
 #include "prette/lua.h"
 #include "prette/parser.h"
+#include "prette/platform.h"
+#include "prette/vk.h"
 
 namespace prt {
 using RawDimension = glm::u32vec2;
@@ -127,6 +131,10 @@ class Dimension {
         .width = width(),
         .height = height(),
     };
+  }
+
+  operator glm::vec2() const {
+    return {width(), height()};
   }
 };
 

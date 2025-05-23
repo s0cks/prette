@@ -1,10 +1,12 @@
 #ifndef PRT_SETTINGS_H
 #define PRT_SETTINGS_H
 
-#include <rocksdb/db.h>
-
+#include <filesystem>
 #include <optional>
+#include <rocksdb/db.h>
+#include <string>
 
+#include "prette/lua.h"
 #include "prette/resolution.h"
 #include "prette/settings_event.h"
 
@@ -20,12 +22,13 @@ FOR_EACH_SETTINGS_EVENT(DEFINE_ON_EVENT);
 
 using SettingsDB = rocksdb::DB;
 
-class LuaState;
 class Settings {
   friend class LuaState;
 
  private:
+#ifdef PRETTE_ENABLE_LUA
   static void InitLua(lua_State* L);
+#endif  // PRETTE_ENABLE_LUA
 
  public:
   static void Load();

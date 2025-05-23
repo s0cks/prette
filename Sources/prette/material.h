@@ -1,7 +1,7 @@
 #ifndef PRT_MATERIAL_H
 #define PRT_MATERIAL_H
 
-#include "prette/common.h"
+#include "prette/platform.h"
 
 namespace prt {
 using MaterialId = uint32_t;

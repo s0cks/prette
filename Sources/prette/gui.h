@@ -2,13 +2,21 @@
 #define PRT_GUI_H
 
 #include <fmt/format.h>
+#include <string>
+
+// IWYU pragma: begin_exports
+#include <imgui.h>
 #include <imgui_freetype.h>
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_vulkan.h>
 #include <implot.h>
+// IWYU pragma: end_exports
 
+#include "prette/common.h"
 #include "prette/event.h"
-#include "prette/gfx.h"
+#include "prette/glm.h"
+#include "prette/lua.h"
+#include "prette/rx.h"
 
 namespace prt {
 #define FOR_EACH_GUI_EVENT(V) \
@@ -111,7 +119,7 @@ class Gui {
   }
 
  public:
-  virtual ~Gui();
+  virtual ~Gui() = default;
   virtual auto GetGuiName() const -> const char* = 0;
 
  public:  // TODO: reduce visibility
@@ -130,7 +138,5 @@ void Shutdown();
 auto Update(const glm::u32vec2& size) -> bool;
 }  // namespace gui
 }  // namespace prt
-
-#include "prette/gui_renderer.h"
 
 #endif  // PRT_GUI_H

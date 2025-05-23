@@ -1,7 +1,19 @@
 #ifndef PRT_PLATFORM_H
 #define PRT_PLATFORM_H
 
+// IWYU pragma: begin_exports
+#include <climits>
+#include <cstddef>
 #include <cstdint>
+#include <cstdlib>
+#include <ctime>
+#include <limits>
+// IWYU pragma: end_exports
+
+// IWYU pragma: no_include <stdint.h>
+// IWYU pragma: no_include <ctype.h>
+// IWYU pragma: no_include <math.h>
+// IWYU pragma: no_include <ios>
 
 #if defined(_M_X64) || defined(__x86_64__)
 #define ARCH_IS_X64 1
@@ -21,22 +33,22 @@
 #define OS_IS_WINDOWS 1
 #endif
 
-namespace prt { //TODO: cleanup this file
- static constexpr int kInt8SizeLog2 = 0;
- static constexpr int kInt8Size = 1 << kInt8SizeLog2;
- static constexpr int kInt16SizeLog2 = 1;
- static constexpr int kInt16Size = 1 << kInt16SizeLog2;
- static constexpr int kInt32SizeLog2 = 2;
- static constexpr int kInt32Size = 1 << kInt32SizeLog2;
- static constexpr int kInt64SizeLog2 = 3;
- static constexpr int kInt64Size = 1 << kInt64SizeLog2;
+namespace prt {  // TODO: cleanup this file
+static constexpr int kInt8SizeLog2 = 0;
+static constexpr int kInt8Size = 1 << kInt8SizeLog2;
+static constexpr int kInt16SizeLog2 = 1;
+static constexpr int kInt16Size = 1 << kInt16SizeLog2;
+static constexpr int kInt32SizeLog2 = 2;
+static constexpr int kInt32Size = 1 << kInt32SizeLog2;
+static constexpr int kInt64SizeLog2 = 3;
+static constexpr int kInt64Size = 1 << kInt64SizeLog2;
 
- static constexpr int kBitsPerByteLog2 = 3;
- static constexpr int kBitsPerByte = 1 << kBitsPerByteLog2;
- static constexpr int kBitsPerInt8 = kInt8Size * kBitsPerByte;
- static constexpr int kBitsPerInt16 = kInt16Size * kBitsPerByte;
- static constexpr int kBitsPerInt32 = kInt32Size * kBitsPerByte;
- static constexpr int kBitsPerInt64 = kInt64Size * kBitsPerByte;
+static constexpr int kBitsPerByteLog2 = 3;
+static constexpr int kBitsPerByte = 1 << kBitsPerByteLog2;
+static constexpr int kBitsPerInt8 = kInt8Size * kBitsPerByte;
+static constexpr int kBitsPerInt16 = kInt16Size * kBitsPerByte;
+static constexpr int kBitsPerInt32 = kInt32Size * kBitsPerByte;
+static constexpr int kBitsPerInt64 = kInt64Size * kBitsPerByte;
 
 using byte = int8_t;
 using ubyte = uint8_t;
@@ -44,17 +56,17 @@ using word = intptr_t;
 using uword = uintptr_t;
 
 #ifdef ARCH_IS_X32
- static constexpr int kWordSizeLog2 = kInt32SizeLog2;
+static constexpr int kWordSizeLog2 = kInt32SizeLog2;
 #elif defined(ARCH_IS_ARM64) || defined(ARCH_IS_X64)
- static constexpr int kWordSizeLog2 = kInt64SizeLog2;
+static constexpr int kWordSizeLog2 = kInt64SizeLog2;
 #endif
-  // cppcheck-suppress truncLongCastAssignment
- static constexpr uint64_t kWordSize = 1 << kWordSizeLog2;
+// cppcheck-suppress truncLongCastAssignment
+static constexpr uint64_t kWordSize = 1 << kWordSizeLog2;
 
- static constexpr int kBitsPerWordLog2 = kWordSizeLog2 + kBitsPerByteLog2;
- static constexpr int kBitsPerWord = 1 << kBitsPerWordLog2;
+static constexpr int kBitsPerWordLog2 = kWordSizeLog2 + kBitsPerByteLog2;
+static constexpr int kBitsPerWord = 1 << kBitsPerWordLog2;
 
- static constexpr uword kUWordOne = 1U;
-}
+static constexpr uword kUWordOne = 1U;
+}  // namespace prt
 
-#endif //PRT_PLATFORM_H
+#endif  // PRT_PLATFORM_H

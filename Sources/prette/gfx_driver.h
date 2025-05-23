@@ -1,6 +1,7 @@
 #ifndef PRT_GFX_DRIVER_H
 #define PRT_GFX_DRIVER_H
 
+#include "prette/common.h"
 #include "prette/gfx_driver_event.h"
 
 namespace prt {
@@ -19,7 +20,11 @@ class InitState;
 
 class LuaState;
 class DriverBase {
+#ifdef PRETTE_ENABLE_LUA
   friend class LuaState;
+#endif  // PRETTE_ENABLE_LUA
+  friend class DriverFinalizer;
+  friend class DriverInitializer;
   friend class engine::InitState;
 
  protected:
@@ -38,14 +43,40 @@ class DriverBase {
   virtual ~DriverBase() = default;
 
  private:
-  static void DestroyDriver();
   static void InitDriver();
+#ifdef PRETTE_ENABLE_LUA
   static void InitLua(lua_State* L);
-
+#endif  // PRETTE_ENABLE_LUA
  public:
-  static auto IsInitialized() -> bool;
   static void Init();
   static auto Get() -> Driver*;
+  static auto IsInitialized() -> bool;
+};
+
+class DriverInitializer {
+ public:
+  DriverInitializer() = default;
+  virtual ~DriverInitializer() = default;
+  void InitDriver();
+
+ public:
+  static inline void Init() {
+    DriverInitializer initializer{};
+    return initializer.InitDriver();
+  }
+};
+
+class DriverFinalizer {
+ public:
+  DriverFinalizer() = default;
+  virtual ~DriverFinalizer() = default;
+  void FinalizeDriver();
+
+ public:
+  static inline void Finalize() {
+    DriverFinalizer finalizer{};
+    return finalizer.FinalizeDriver();
+  }
 };
 }  // namespace prt
 

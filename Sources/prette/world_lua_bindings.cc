@@ -1,14 +1,17 @@
 #include "prette/lua.h"
+#include "prette/world_manager.h"
+#ifdef PRETTE_ENABLE_LUA
+
+#include "prette/common.h"
+#include "prette/world.h"
 #include "prette/world_event.h"
-#include "world.h"
 
 namespace prt {
 #define LUA_WORLD_F(Name) LUA_F(world_##Name)
 
 LUA_WORLD_F(getName) {
-  const auto world = World::Get();
-  ASSERT(world);
-  lua_pushstring(L, world->GetName().c_str());
+  ASSERT(IsWorldInitialized());
+  lua_pushstring(L, GetWorld()->GetName().c_str());
   return 1;
 }
 
@@ -55,3 +58,5 @@ void World::InitLua(lua_State* L) {
   WorldModule::Init(L);
 }
 }  // namespace prt
+
+#endif  // PRETTE_ENABLE_LUA

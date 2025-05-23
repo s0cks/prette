@@ -17,6 +17,21 @@
       }
     },
     {
+      "type": "cmake",
+      "label": "CMake: build all shaders",
+      "detail": "Build the current target",
+      "command": "build",
+      "targets": [
+        "shaders"
+      ],
+      "preset": "${command:cmake.activeBuildPresetName}",
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
       "type": "shell",
       "label": "clean build/",
       "command": "find . '!' -name '.gitkeep' -delete",

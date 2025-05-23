@@ -1,75 +1,32 @@
 #ifndef PRT_FONT_H
 #define PRT_FONT_H
 
-#include <freetype/freetype.h>
-#include <harfbuzz/hb.h>
-
-#include <string>
-
-#include "prette/common.h"
-#include "prette/glm.h"
+#include "prette/freetype.h"
+#include "prette/rect.h"
 
 namespace prt {
-struct ShapingPair {
-  uint32_t glyph_index;
-  glm::u32vec2 advance;
-  glm::u32vec2 offset;
-};
+class TextureAtlas;
+struct Glyph {
+  using Face = FT_Face;
+  using Index = FT_UInt;
+  using GlyphTexture = std::shared_ptr<vk::Image>;
+  static constexpr const auto kDefaultGlyphWidth = 64;
+  static constexpr const auto kDefaultGlyphHeight = 64;
+  static constexpr const auto kDefaultGlyphAdvance = 64;
 
-class ShapingIterator {
- private:
-  hb_glyph_info_t* glyph_infos_;
-  hb_glyph_position_t* glyph_positions_;
-  unsigned index_;
+  Face face;
+  Index index;
+  Rect bounds;
+  int advance;
+  GlyphTexture texture;
 
- public:
-  ShapingIterator(hb_glyph_info_t* glyph_infos, hb_glyph_position_t* glyph_positions, const unsigned index) :
-    glyph_infos_(glyph_infos),
-    glyph_positions_(glyph_positions),
-    index_(index) {}
-  ~ShapingIterator() = default;
-
-  auto operator++() -> ShapingIterator& {
-    index_ += 1;
-    return *this;
-  }
-
-  auto operator==(const ShapingIterator& rhs) {
-    return index_ == rhs.index_;
-  }
-
-  auto operator*() const -> ShapingPair;
-};
-
-class ShapingView {
-  DEFINE_NON_COPYABLE_TYPE(ShapingView);
+  Glyph(Face face, Index index, TextureAtlas* atlas);
 
  private:
-  hb_buffer_t* buffer_;
-  hb_glyph_info_t* glyph_info_;
-  hb_glyph_position_t* glyph_pos_;
-  unsigned glyph_count_;
-
- public:
-  ShapingView(hb_buffer_t* buffer, hb_glyph_info_t* glyph_infos, hb_glyph_position_t* glyph_positiosns,
-              const unsigned glyh_count);
-  ~ShapingView();
+  auto CreateTextureFromBitmap(TextureAtlas* atlas) -> GlyphTexture;
 };
 
-class Font {
- private:
-  FT_Library library_;
-  hb_font_t* font_;
-
- public:
-  Font();
-  ~Font();
-
-  auto Shape(std::string text) const -> ShapingView;
-
- public:
-  static auto Load(std::string name, const long size) -> Font*;
-};
+class Font;
 }  // namespace prt
 
 #endif  // PRT_FONT_H

@@ -1,0 +1,3 @@
+[
+  { include: [ "@\"prette/vertex_.*2d.\"", "private", "\"prette/vertex2d.h\"", "public" ] },
+]

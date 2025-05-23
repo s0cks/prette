@@ -2,6 +2,8 @@
 
 #include <glog/logging.h>
 
+#include "prette/common.h"
+
 namespace prt {
 static inline void OnInterrupt(const int signal) {
   LOG(FATAL) << "interrupt.";

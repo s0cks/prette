@@ -1,14 +1,19 @@
 #ifndef PRT_KEYBOARD_H
 #define PRT_KEYBOARD_H
 
-#include <glfw/glfw3.h>
-
+#include <functional>
+#include <ostream>
+#include <sstream>
 #include <string>
 
 #include "prette/common.h"
 #include "prette/event.h"
 #include "prette/lua.h"
 #include "prette/to_string.h"
+
+#ifdef PRT_GLFW
+#include <GLFW/glfw3.h>
+#endif  // PRT_GLFW
 
 namespace prt {
 class KeyState {
@@ -33,6 +38,7 @@ class KeyState {
     return state_;
   }
 
+#ifdef PRT_GLFW
   inline auto IsRepeat() const -> bool {
     return GetState() == GLFW_REPEAT;
   }
@@ -44,6 +50,7 @@ class KeyState {
   inline auto IsReleased() const -> bool {
     return GetState() == GLFW_RELEASE;
   }
+#endif  // PRT_GLFW
 
   auto ToString() const -> std::string {
     ToStringHelper<KeyState> helper{};
@@ -193,7 +200,9 @@ class KeyStateEvent : public KeyboardEventBase {
     return state_ == rhs;
   }
 
+#ifdef PRETTE_ENABLE_LUA
   void ToTable(lua_State* L) const override;
+#endif  // PRETTE_ENABLE_LUA
   DECLARE_EVENT_TYPE(KeyboardEvent, KeyState);
 
  public:
@@ -209,6 +218,7 @@ class KeyStateEvent : public KeyboardEventBase {
     };
   }
 
+#ifdef PRT_GLFW
   static inline auto FilterByPressed(const int code) -> std::function<bool(KeyboardEvent*)> {
     return FilterBy(KeyState(code, GLFW_PRESS));
   }
@@ -216,6 +226,7 @@ class KeyStateEvent : public KeyboardEventBase {
   static inline auto FilterByReleased(const int code) -> KeyboardEvent::Predicate {
     return FilterBy(KeyState(code, GLFW_RELEASE));
   }
+#endif  // PRT_GLFW
 
   static inline auto FilterByReleased() -> KeyboardEvent::Predicate {
     return [](KeyboardEvent* event) {
@@ -288,7 +299,9 @@ class Keyboard : public EventSourceTemplate<KeyboardEvent> {
 
  private:
   static auto New(Window* owner) -> Keyboard*;
+#ifdef PRETTE_ENABLE_LUA
   static void InitLua(lua_State* L);
+#endif  // PRETTE_ENABLE_LUA
 
  public:
   static void Init(Window* window);

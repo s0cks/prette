@@ -1,16 +1,16 @@
 #ifndef PRT_SHADER_H
 #define PRT_SHADER_H
 
+#include <filesystem>
 #include <fmt/format.h>
-
-#include <fstream>
+#include <optional>
 #include <string>
 #include <vector>
 
 #include "prette/common.h"
-#include "prette/gfx.h"
+#include "prette/vk.h"
 
-namespace prt {
+namespace prt::vk {
 class ShaderCode {
   using ShaderCodeBuffer = std::vector<uint8_t>;
   DEFINE_DEFAULT_COPYABLE_TYPE(ShaderCode);
@@ -21,7 +21,7 @@ class ShaderCode {
 
  public:
   ShaderCode() = default;
-  ShaderCode(fs::path path);
+  explicit ShaderCode(fs::path path);
   ~ShaderCode() = default;
 
   auto GetPath() const -> const fs::path& {
@@ -50,6 +50,9 @@ class ShaderCode {
 };
 
 auto FindShaderCode(std::string name) -> ShaderCode;
+auto GetVertexShader(const std::string name) -> Shader*;
+auto GetFragmentShader(const std::string name) -> Shader*;
+auto ResolveShaderCodePath(std::string p) -> std::optional<fs::path>;
 
 static inline auto FindVertexShaderCode(std::string filename) -> ShaderCode {
   ASSERT(!filename.empty());
@@ -61,53 +64,55 @@ static inline auto FindFragmentShaderCode(std::string filename) -> ShaderCode {
   return FindShaderCode(fmt::format("{}.frag", filename));
 }
 
-class Shader {
-  using Handle = VkShaderModule;
+class Shader;
+class ShaderBuilder : public vk::NamedHandleBuilderTemplate<VkShaderModuleCreateInfo, Shader, ShaderBuilder> {
+  using ParentType = NamedHandleBuilderTemplate<VkShaderModuleCreateInfo, Shader, ShaderBuilder>;
+
+ public:
+  ShaderBuilder();
+  ~ShaderBuilder() override = default;
+
+  auto WithShaderCode(const uint32_t* bytes, const uint64_t num_bytes) -> ShaderBuilder& {
+    info_ptr()->codeSize = num_bytes;
+    info_ptr()->pCode = bytes;
+    return *this;
+  }
+
+  inline auto WithShaderCode(const ShaderCode& rhs) -> ShaderBuilder& {
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-cstyle-cast)
+    return WithShaderCode((const uint32_t*)rhs.data(), rhs.GetSize());
+  }
+
+  auto WithNext(const void* rhs) -> ShaderBuilder& {
+    info_ptr()->pNext = rhs;
+    return *this;
+  }
+
+  auto WithFlags(const VkShaderModuleCreateFlags rhs) -> ShaderBuilder& {
+    info_ptr()->flags = rhs;
+    return *this;
+  }
+
+  auto IsValid() const -> bool override;
+  auto Build() -> Shader* override;
+};
+
+class Shader : public vk::NamedHandleTemplate<VkShaderModule> {
+  using HandleType = VkShaderModule;
+  friend class ShaderBuilder;
   DEFINE_NON_COPYABLE_TYPE(Shader);
 
  private:
-  std::string name_;
-  Handle handle_{};
+  Shader(std::string name, const VkShaderModuleCreateInfo& info);
 
  public:
-  Shader(std::string name, const ShaderCode& code);
-  ~Shader();
+  ~Shader() override;
 
-  auto GetName() const -> const std::string& {
-    return name_;
-  }
-
-  auto GetHandle() const -> const Handle& {
-    return handle_;
-  }
-
-  operator Handle() const {
-    return handle_;
+  auto ToString() const -> std::string override;
+  operator HandleType() const {
+    return GetHandle();
   }
 };
-
-using ShaderPtr = std::shared_ptr<Shader>;
-
-auto GetVertexShader(const std::string& name) -> ShaderPtr;
-auto GetFragmentShader(const std::string& name) -> ShaderPtr;
-
-static inline void InitPipelineShaderStage(VkPipelineShaderStageCreateInfo& create_info, ShaderPtr shader,
-                                           const VkShaderStageFlagBits stage, const char* name = "main") {
-  create_info.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
-  create_info.stage = stage;
-  create_info.module = shader->GetHandle();
-  create_info.pName = name;
-}
-
-static inline void InitPipelineVertexShaderStage(VkPipelineShaderStageCreateInfo& create_info, ShaderPtr shader,
-                                                 const char* name = "main") {
-  return InitPipelineShaderStage(create_info, shader, VK_SHADER_STAGE_VERTEX_BIT, name);
-}
-
-static inline void InitPipelineFragmentShaderStage(VkPipelineShaderStageCreateInfo& create_info, ShaderPtr shader,
-                                                   const char* name = "main") {
-  return InitPipelineShaderStage(create_info, shader, VK_SHADER_STAGE_FRAGMENT_BIT, name);
-}
-}  // namespace prt
+}  // namespace prt::vk
 
 #endif  // PRT_SHADER_H

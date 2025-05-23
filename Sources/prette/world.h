@@ -1,16 +1,20 @@
 #ifndef PRT_WORLD_H
 #define PRT_WORLD_H
 
+#include <functional>
+#include <gflags/gflags.h>
+#include <string>
 #include <unordered_map>
+#include <utility>
 
 #include "prette/chunk.h"
 #include "prette/common.h"
-#include "prette/flags.h"
+#include "prette/lua.h"
 #include "prette/world_event.h"
+#include "prette/world_state.h"
 #include "prette/world_storage.h"
 
 namespace prt {
-DECLARE_string(world_name);
 DECLARE_string(worlds_dir);
 
 auto OnWorldEvent() -> WorldEventObservable;
@@ -25,10 +29,12 @@ class LuaState;
 class World {
   friend class Chunk;
   friend class LuaState;
+  friend class WorldManager;
   struct ChunkPosHash {
     auto operator()(const ChunkPos& pos) const -> size_t {
       size_t hash = 0;
-      Combine(hash, pos);
+      Combine(hash, pos[0]);
+      Combine(hash, pos[1]);
       return hash;
     }
 
@@ -42,7 +48,7 @@ class World {
 
   struct ChunkPosEq {
     auto operator()(const ChunkPos& lhs, const ChunkPos& rhs) const -> bool {
-      return lhs == rhs;
+      return lhs.x == rhs.x && lhs.y == rhs.y;
     }
   };
 
@@ -104,6 +110,18 @@ class World {
     return PublishEvent(&event);
   }
 
+  void RegisterChunk(Chunk* chunk) {
+    const auto [_, success] = chunks_.insert({chunk->GetPos(), chunk});
+    LOG_IF(FATAL, !success) << "failed to register " << chunk->ToString();
+  }
+
+#define DEFINE_PUBLISH_EVENT(Name)            \
+  static inline void Publish##Name##Event() { \
+    return Publish<Name##Event>();            \
+  }
+  FOR_EACH_WORLD_STATE(DEFINE_PUBLISH_EVENT)
+#undef DEFINE_PUBLISH_EVENT
+
  public:
   World(std::string name);
   ~World();
@@ -114,8 +132,7 @@ class World {
 
   auto AddChunk(Chunk* chunk) -> bool {
     ASSERT(chunk);
-    const auto [_, success] = chunks_.insert({chunk->GetPos(), chunk});
-    LOG_IF(FATAL, !success) << "failed to register " << chunk->ToString();
+    RegisterChunk(chunk);
     LOG_IF(FATAL, !GetStorage()->Save(chunk)) << "failed to save " << chunk->ToString();
     return true;
   }
@@ -144,18 +161,15 @@ class World {
   auto VisitChunks(ChunkVisitor* vis) -> bool;
 
  private:
+#ifdef PRETTE_ENABLE_LUA
   static void InitLua(lua_State* L);
-  static void InitWorld();
-  static void DeInitWorld();
+#endif  // PRETTE_ENABLE_LUA
+
+ public:
   static inline auto New(std::string name) -> World* {
     ASSERT(!name.empty());
     return new World(std::move(name));
   }
-
- public:
-  static void Init();
-  static auto IsInitialized() -> bool;
-  static auto Get() -> World*;
 };
 }  // namespace prt
 

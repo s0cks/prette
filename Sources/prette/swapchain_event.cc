@@ -1,13 +1,19 @@
 #include "prette/swapchain_event.h"
 
+#include <string>
+
 #include "prette/to_string.h"
 
 namespace prt {
-auto SwapChainInitEvent::ToString() const -> std::string {
-  return ToStringHelper<SwapChainInitEvent>{};
+auto SwapchainCreatedEvent::ToString() const -> std::string {
+  return ToStringHelper<SwapchainCreatedEvent>();
 }
 
-auto SwapChainDestroyedEvent::ToString() const -> std::string {
-  return ToStringHelper<SwapChainDestroyedEvent>{};
+auto SwapchainInitEvent::ToString() const -> std::string {
+  return ToStringHelper<SwapchainInitEvent>{};
+}
+
+auto SwapchainDestroyedEvent::ToString() const -> std::string {
+  return ToStringHelper<SwapchainDestroyedEvent>{};
 }
 }  // namespace prt

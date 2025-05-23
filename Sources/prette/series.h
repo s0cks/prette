@@ -1,13 +1,12 @@
 #ifndef PRT_SERIES_H
 #define PRT_SERIES_H
 
+#include <ostream>
 #include <units.h>
 
-#include <algorithm>
-#include <functional>
-
 #include "prette/circular_buffer.h"
-#include "prette/rx.h"
+#include "prette/platform.h"
+#include "prette/rx.h"  // IWYU pragma: keep
 
 namespace prt {
 template <typename T, const uint64_t Capacity>
@@ -25,27 +24,27 @@ class Series {
     data_.put(value);
   }
 
-  T* begin() {
+  auto begin() -> T* {
     return data_.begin();
   }
 
-  T* begin() const {
+  auto begin() const -> T* {
     return data_.begin();
   }
 
-  T* end() {
+  auto end() -> T* {
     return data_.end();
   }
 
-  T* end() const {
+  auto end() const -> T* {
     return data_.end();
   }
 
-  uint64_t count() const {
+  auto count() const -> uint64_t {
     return ToObservable().as_blocking().count();
   }
 
-  rx::observable<T> ToObservable() const {
+  auto ToObservable() const -> rx::observable<T> {
     return rx::observable<>::create<T>([this](rx::subscriber<T> s) {
       for (const auto& value : data_) {
         s.on_next(value);
@@ -65,23 +64,23 @@ class NumericSeries : public Series<uint64_t, Capacity> {
   NumericSeries() = default;
   ~NumericSeries() override = default;
 
-  inline uint64_t first() const {
+  inline auto first() const -> uint64_t {
     return Series<uint64_t, Capacity>::ToObservable().as_blocking().first();
   }
 
-  inline uint64_t last() const {
+  inline auto last() const -> uint64_t {
     return Series<uint64_t, Capacity>::ToObservable().as_blocking().last();
   }
 
-  inline uint64_t average() const {
+  inline auto average() const -> uint64_t {
     return Series<uint64_t, Capacity>::ToObservable().as_blocking().average();
   }
 
-  inline uint64_t max() const {
+  inline auto max() const -> uint64_t {
     return Series<uint64_t, Capacity>::ToObservable().as_blocking().max();
   }
 
-  inline uint64_t min() const {
+  inline auto min() const -> uint64_t {
     return Series<uint64_t, Capacity>::ToObservable().as_blocking().min();
   }
 
@@ -100,7 +99,7 @@ class TimeSeries : public NumericSeries<uint64_t, Capacity> {
     return Series<uint64_t, Capacity>::ToObservable();
   }
 
-  friend std::ostream& operator<<(std::ostream& stream, const TimeSeries<Capacity>& rhs) {
+  friend auto operator<<(std::ostream& stream, const TimeSeries<Capacity>& rhs) -> std::ostream& {
     using namespace units::time;
     stream << "TimeSeries(";
     stream << "size=" << (Capacity) << ", ";

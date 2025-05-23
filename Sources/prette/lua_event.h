@@ -1,6 +1,8 @@
 #ifndef PRT_LUA_EVENT_H
 #define PRT_LUA_EVENT_H
 
+#ifdef PRETTE_ENABLE_LUA
+
 #include "prette/event.h"
 
 namespace prt {
@@ -33,5 +35,7 @@ DEFINE_EVENT_SUBJECT(LuaState);
 DEFINE_EVENT_OBSERVABLE(LuaState);
 FOR_EACH_LUA_STATE_EVENT(DEFINE_EVENT_OBSERVABLE);
 }  // namespace prt
+
+#endif  // PRETTE_ENABLE_LUA
 
 #endif  // PRT_LUA_EVENT_H

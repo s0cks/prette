@@ -1,4 +1,7 @@
-#version 460
+#version 460 core
+#extension GL_ARB_shading_language_include : require
+#extension GL_GOOGLE_include_directive : require
+
 layout(binding = 0) uniform sampler2D fontSampler;
 
 layout(location = 0) in vec2 inUV;

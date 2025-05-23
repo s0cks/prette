@@ -1,8 +1,11 @@
 #ifndef PRT_THREAD_LOCAL_H
 #define PRT_THREAD_LOCAL_H
 
+#include <functional>
 #include <glog/logging.h>
+#include <ostream>
 
+#include "prette/common.h"
 #include "prette/os_thread.h"
 
 namespace prt {
@@ -23,6 +26,16 @@ class ThreadLocal {
     return key_;
   }
 
+  auto Clear() -> bool {
+    return Set(nullptr);
+  }
+
+  auto Release() -> bool {
+    const auto value = Get();
+    delete value;
+    return Clear();
+  }
+
   virtual auto Set(T* value) const -> bool {
     return SetCurrentThreadLocal(GetKey(), (void*)value);
   }
@@ -36,6 +49,10 @@ class ThreadLocal {
   }
 
   operator T*() {
+    return Get();
+  }
+
+  auto operator->() -> T* {
     return Get();
   }
 

@@ -1,91 +1,115 @@
 #include "prette/render_target.h"
 
-#include <vulkan/vulkan_core.h>
+#include <algorithm>
+
+#include "prette/common.h"
+#include "prette/framebuffer.h"
+#include "prette/image.h"
+#include "prette/image_builder.h"
+#include "prette/image_view.h"
+#include "prette/image_view_builder.h"
+#include "prette/vk.h"
+#include "prette/vk_cmd_buffers.h"
 
 namespace prt {
-RenderTarget::RenderTarget(const VkRenderPass& pass, const VkExtent2D& extent, const VkImageView depth_view,
-                           const VkFormat format) {
-  const auto driver = Driver::Get();
-  ASSERT(driver);
-
-  VkImageCreateInfo create_info{};
-  create_info.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
-  create_info.imageType = VK_IMAGE_TYPE_2D;
-  create_info.format = format;
-  create_info.extent.width = extent.width;
-  create_info.extent.height = extent.height;
-  create_info.extent.depth = 1.0f;
-  create_info.arrayLayers = 1;
-  create_info.mipLevels = 1;
-  create_info.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
-  create_info.samples = VK_SAMPLE_COUNT_1_BIT;
-  create_info.tiling = VK_IMAGE_TILING_LINEAR;
-  create_info.usage = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | VK_IMAGE_USAGE_SAMPLED_BIT;
-  CHECK_VK(FATAL, vkCreateImage(driver->GetDevice(), &create_info, driver->GetAllocator(), &image_), "failed to create vk image");
-
-  VkMemoryRequirements mem_requirements{};
-  VkMemoryAllocateInfo alloc_info{};
-  alloc_info.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
-  vkGetImageMemoryRequirements(driver->GetDevice(), image_, &mem_requirements);
-  alloc_info.allocationSize = mem_requirements.size;
-  alloc_info.memoryTypeIndex = FindMemoryType(driver->GetPhysicalDevice(), mem_requirements.memoryTypeBits,
-                                              VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);
-  vkAllocateMemory(driver->GetDevice(), &alloc_info, driver->GetAllocator(), &memory_);
-  vkBindImageMemory(driver->GetDevice(), image_, memory_, 0);
-
-  {
-    SingleUseCommandBuffer copy;
-    VkImageMemoryBarrier mem_barrier{};
-    mem_barrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
-    mem_barrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
-    mem_barrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
-    mem_barrier.srcAccessMask = VK_ACCESS_TRANSFER_READ_BIT;
-    mem_barrier.dstAccessMask = VK_ACCESS_MEMORY_READ_BIT;
-    mem_barrier.oldLayout = VK_IMAGE_LAYOUT_UNDEFINED;
-    mem_barrier.newLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
-    mem_barrier.image = image_;
-    mem_barrier.subresourceRange = VkImageSubresourceRange{VK_IMAGE_ASPECT_COLOR_BIT, 0, 1, 0, 1};
-    vkCmdPipelineBarrier(copy, VK_PIPELINE_STAGE_TRANSFER_BIT, VK_PIPELINE_STAGE_TRANSFER_BIT, 0, 0, nullptr, 0, nullptr, 1,
-                         &mem_barrier);
-  }
-
-  VkImageViewCreateInfo view_info{};
-  view_info.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
-  view_info.image = image_;
-  view_info.viewType = VK_IMAGE_VIEW_TYPE_2D;
-  view_info.format = format;
-  view_info.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
-  view_info.subresourceRange.baseMipLevel = 0;
-  view_info.subresourceRange.levelCount = 1;
-  view_info.subresourceRange.baseArrayLayer = 0;
-  view_info.subresourceRange.layerCount = 1;
-  CHECK_VK(FATAL, vkCreateImageView(driver->GetDevice(), &view_info, driver->GetAllocator(), &view_),
-           "failed to create vk image view");
-
-  std::vector<VkImageView> attachments = {
-      view_,
-  };
-  if (depth_view != VK_NULL_HANDLE)
-    attachments.push_back(depth_view);
-
-  VkFramebufferCreateInfo fb_info{};
-  fb_info.sType = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
-  fb_info.renderPass = pass;
-  fb_info.attachmentCount = attachments.size();
-  fb_info.pAttachments = attachments.data();
-  fb_info.width = extent.width;
-  fb_info.height = extent.height;
-  fb_info.layers = 1;
-  CHECK_VK(FATAL, vkCreateFramebuffer(driver->GetDevice(), &fb_info, driver->GetAllocator(), &framebuffer_),
-           "failed to create vk framebuffers");
+static inline auto CreateImage(const VkExtent2D extent, const VkFormat format) -> vk::Image* {
+  vk::ImageBuilder img_builder{};
+  const auto image = img_builder.WithType(VK_IMAGE_TYPE_2D)
+                         .WithFormat(format)
+                         .WithExtent(extent, 1.0f)
+                         .WithArrayLayers(1)
+                         .WithMipLevels(1)
+                         .WithLinearTiling()
+                         .WithUsage(VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | VK_IMAGE_USAGE_SAMPLED_BIT)
+                         .Build();
+  image->BindMemory();
+  vk::SingleUseCommandBuffer buffer{};
+  vk::ImageMemoryBarrier img_barrier(image);
+  img_barrier.WithSourceAccessMask(VK_ACCESS_TRANSFER_READ_BIT)
+      .WithDestAccessMask(VK_ACCESS_MEMORY_READ_BIT)
+      .WithNewLayout(VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL)
+      .WithSubresourceRange(VkImageSubresourceRange{
+          VK_IMAGE_ASPECT_COLOR_BIT,
+          0,
+          1,
+          0,
+          1,
+      });
+  // clang-format off
+  vk::PipelineBarrier barrier{};
+  barrier.WithImageBarrier(img_barrier)
+    .WithStageMask(VK_PIPELINE_STAGE_TRANSFER_BIT)
+    .Apply(buffer);
+  // clang-format on
+  return image;
 }
 
-void RenderTarget::Destroy() const {
-  const auto driver = Driver::Get();
-  ASSERT(driver);
-  vkDestroyImageView(driver->GetDevice(), view_, driver->GetAllocator());
-  vkDestroyImage(driver->GetDevice(), image_, driver->GetAllocator());
-  vkFreeMemory(driver->GetDevice(), memory_, driver->GetAllocator());
-  vkDestroyFramebuffer(driver->GetDevice(), framebuffer_, driver->GetAllocator());
+static inline auto CreateImageView(vk::Image* image, const VkFormat format) -> vk::ImageView* {
+  ASSERT(image);
+  vk::ImageViewBuilder builder{};
+  // clang-format off
+  return builder.WithType(VK_IMAGE_VIEW_TYPE_2D)
+    .WithImage(image)
+    .WithFormat(format)
+    .Build();
+  // clang-format on
+}
+
+static inline auto CreateFramebuffer(vk::RenderPass* pass, const VkExtent2D extent, vk::ImageView* color,
+                                     vk::ImageView* depth) -> vk::Framebuffer* {
+  ASSERT_INITIALIZED(pass);
+  ASSERT_INITIALIZED(color);
+  ASSERT_INITIALIZED(depth);
+  // clang-format off
+  vk::FramebufferBuilder builder{};
+  builder.WithRenderPass(pass)
+    .WithLayers(1)
+    .WithSize(extent)
+    .WithAttachment(color);
+  // clang-format on
+  if (depth != nullptr)
+    builder.WithAttachment(depth);
+  return builder.Build();
+}
+
+RenderTarget::RenderTarget(const uint64_t index, vk::RenderPass* pass, const VkExtent2D& extent, const VkFormat format,
+                           vk::ImageView* depth_view) :
+  index_(index),
+  image_(CreateImage(extent, format)),
+  view_(CreateImageView(image_, format)),
+  framebuffer_(CreateFramebuffer(pass, extent, view_, depth_view)) {
+  ASSERT_INITIALIZED(image_);
+  ASSERT_INITIALIZED(view_);
+  ASSERT_INITIALIZED(framebuffer_);
+}
+
+RenderTarget::~RenderTarget() {
+  delete image_;
+  delete view_;
+  delete framebuffer_;
+}
+
+auto RenderTarget::IsInitialized() const -> bool {
+  return vk::AllInitialized(image_, view_, framebuffer_);
+}
+
+RenderTargetSet::RenderTargetSet(const uint64_t num_targets, vk::RenderPass* pass, const VkExtent2D& extent,
+                                 const VkFormat format, vk::ImageView* depth_view) :
+  targets_(num_targets) {
+  if (num_targets > 0) {
+    for (auto idx = 0; idx < num_targets; idx++) {
+      targets_[idx] = new RenderTarget(idx, pass, extent, format, depth_view);
+      ASSERT_INITIALIZED(targets_[idx]);
+    }
+  }
+}
+
+RenderTargetSet::~RenderTargetSet() {
+  if (targets_.empty())
+    return;
+  std::ranges::for_each(targets_, [this](RenderTarget* target) {
+    ASSERT_INITIALIZED(target);
+    delete target;
+  });
 }
 }  // namespace prt

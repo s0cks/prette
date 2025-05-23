@@ -1,0 +1,18 @@
+{
+  "type": "Pipeline",
+  "meta": {
+    "name": "ChunkPipeline"
+  },
+  "data": {
+    "extent": "swapchain",
+    "vertex_class": "tile",
+    "layout": "chunk",
+    "rasterizer": {
+      "cullMode": "back",
+      "frontFace": "clockwise"
+    },
+    "vertex_shader": "tile",
+    "fragment_shader": "tile",
+    "pass": "scene"
+  }
+}

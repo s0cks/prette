@@ -1,21 +1,21 @@
-#include <GLFW/glfw3.h>
-#include <vulkan/vulkan_core.h>
-
-#include <exception>
-
 #include "prette/window.h"
-#include "prette/window_event.h"
 #ifdef PRT_GLFW
 
+#include <string>
+
+#include "prette/common.h"
+#include "prette/dimension.h"
 #include "prette/engine.h"
 #include "prette/exception.h"
+#include "prette/geometry/shape.h"
 #include "prette/gfx.h"
+#include "prette/glm.h"
 #include "prette/monitor.h"
-#include "prette/thread_local.h"
+#include "prette/window_event.h"
 
 namespace prt {
 void Window::OnWindowClosed(Handle* handle) {
-  const auto engine = Engine::Get();
+  const auto engine = GetEngine();
   ASSERT(engine);
   engine->Shutdown();
 }
@@ -222,7 +222,7 @@ auto WindowBuilder::Build() const -> Window* {
   const auto handle = glfwCreateWindow(static_cast<int>(size_.width()), static_cast<int>(size_.height()), title_.data(),
                                        GetMonitorHandle(), GetShareHandle());
   if (!handle) {
-    const auto engine = Engine::Get();
+    const auto engine = GetEngine();
     ASSERT(engine);
     engine->Shutdown(Exception::New("failed to create glfw window handle"));
     return nullptr;

@@ -1,5 +1,7 @@
 #include "prette/settings_event.h"
 
+#include <string>
+
 #include "prette/to_string.h"
 
 namespace prt {

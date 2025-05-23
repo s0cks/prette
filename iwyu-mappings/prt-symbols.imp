@@ -1,0 +1,5 @@
+[
+    { symbol:  [ "NSEC_PER_MSEC", "private", "\"prette/uv/utils.h\"", "public" ] },
+    { symbol:  [ "M_PI", "private", "\"prette/common.h\"", "public" ] },
+    { symbol:  [ "uv_file", "private", "<uv.h>", "public" ] },
+]

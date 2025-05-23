@@ -1,10 +1,14 @@
 #include "prette/swapchain_support.h"
 
+#include "prette/common.h"
+#include "prette/gfx.h"
+#include "prette/platform.h"
+#include "prette/vk.h"
 #include "prette/window.h"
 
 namespace prt {
 
-auto SwapChainSupportDetails::GetExtent() const -> VkExtent2D {
+auto SwapchainSupportDetails::GetExtent() const -> VkExtent2D {
   if (surface_capabilities.currentExtent.width != std::numeric_limits<uint32_t>::max()) {
     return surface_capabilities.currentExtent;
   }
@@ -15,8 +19,8 @@ auto SwapChainSupportDetails::GetExtent() const -> VkExtent2D {
   return ClampExtent(actual, surface_capabilities);
 }
 
-auto QuerySwapChainSupport(const VkPhysicalDevice& device, const VkSurfaceKHR& surface) -> SwapChainSupportDetails {
-  SwapChainSupportDetails details{};
+auto QuerySwapchainSupport(const VkPhysicalDevice& device, const VkSurfaceKHR& surface) -> SwapchainSupportDetails {
+  SwapchainSupportDetails details{};
   vkGetPhysicalDeviceSurfaceCapabilitiesKHR(device, surface, &details.surface_capabilities);
 
   uint32_t num_formats = 0;

@@ -15,7 +15,7 @@ class Node {
  public:
   virtual ~Node() = default;
 
-  virtual N* GetParent() const {
+  virtual auto GetParent() const -> N* {
     return parent_;
   }
 
@@ -24,11 +24,11 @@ class Node {
     parent_ = node;
   }
 
-  virtual uword GetNumberOfChildren() const {
+  virtual auto GetNumberOfChildren() const -> uword {
     return 0;
   }
 
-  virtual N* GetChildAt(const uword idx) const {
+  virtual auto GetChildAt(const uword idx) const -> N* {
     return nullptr;
   }
 
@@ -40,15 +40,15 @@ class Node {
     // do nothing
   }
 
-  inline bool HasChildren() const {
+  inline auto HasChildren() const -> bool {
     return GetNumberOfChildren() > 0;
   }
 
-  inline bool IsLeaf() const {
+  inline auto IsLeaf() const -> bool {
     return GetNumberOfChildren() == 0;
   }
 
-  inline bool IsRoot() const {
+  inline auto IsRoot() const -> bool {
     return GetParent() == nullptr;
   }
 };

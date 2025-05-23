@@ -1,61 +1,53 @@
 #include "prette/config.h"
 
+#include <filesystem>
+#include <gflags/gflags.h>
+#include <libconfig.h>
+#include <string>
+#include <utility>
+
 #include "prette/common.h"
-#include "prette/thread_local.h"
+#include "prette/config_event.h"
 
 namespace prt {
 DEFINE_string(config, kDefaultConfigFilename, "The name of the config file to load.");
 
-static inline auto GetConfigPath() -> fs::path {
-  ASSERT(!FLAGS_config.empty());
-  return FLAGS_config;
+static ConfigEventSubject events_{};
+
+auto OnConfigEvent() -> ConfigEventObservable {
+  return events_.get_observable();
 }
 
-ConfigFile::ConfigFile(fs::path path) :
+void Config::PublishEvent(ConfigEvent* event) {
+  ASSERT(event);
+  const auto& subscriber = events_.get_subscriber();
+  return subscriber.on_next(event);
+}
+
+Config::Config(fs::path path) :
   path_(std::move(path)) {
   LoadIfExists();
 }
 
-ConfigFile::~ConfigFile() {
+Config::~Config() {
   Save();
 }
 
-void ConfigFile::Load() {
+void Config::Load() {
   if (config_read_file(&config_, GetPath().c_str()) != CONFIG_TRUE)
     LOG(FATAL) << "failed to read config from: " << GetPath();
+  Config::Publish<ConfigLoadEvent>();
 }
 
-void ConfigFile::Save() {
+void Config::Save() {
   if (config_write_file(&config_, GetPath().c_str()) != CONFIG_TRUE)
     LOG(FATAL) << "failed to parse config " << GetPath() << ": " << config_error_text(&config_);
+  Config::Publish<ConfigSaveEvent>();
 }
 
-auto ConfigFile::GetString(std::string key) const -> std::string {
+auto Config::GetString(std::string key) const -> std::string {
   const char* value = nullptr;
   config_lookup_string(&config_, key.c_str(), &value);
   return {value};
-}
-
-static ThreadLocal<ConfigFile> config_{};
-
-auto Config::IsInitialized() -> bool {
-  return config_.Get() != nullptr;
-}
-
-auto Config::Get() -> ConfigFile* {
-  ASSERT(IsInitialized());
-  return config_;
-}
-
-void Config::Init() {
-  ASSERT(!IsInitialized());
-  config_ = new ConfigFile(GetConfigPath());
-  ASSERT(IsInitialized());
-}
-
-void Config::DeInit() {
-  ASSERT(IsInitialized());
-  delete config_.Get();
-  config_.Set(nullptr);
 }
 }  // namespace prt

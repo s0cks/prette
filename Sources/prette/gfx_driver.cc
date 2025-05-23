@@ -1,14 +1,22 @@
 #include "prette/gfx_driver.h"
 
+#include "prette/common.h"
 #include "prette/engine.h"
+#include "prette/engine_event.h"
 #include "prette/gfx.h"
-#include "prette/lua.h"
-#include "prette/lua_event.h"
-#include "prette/to_string.h"
+#include "prette/gfx_driver_event.h"
+#include "prette/pipeline_layout.h"
+#include "prette/thread_local.h"
 
 namespace prt {
 static DriverEventSubject events_{};
-static Driver* driver_ = nullptr;
+static ThreadLocal<Driver> driver_{};
+
+static inline auto SetDriver(Driver* driver) -> Driver* {
+  ASSERT(driver);
+  ASSERT(!Driver::IsInitialized());
+  return driver_ = driver;
+}
 
 auto OnDriverEvent() -> DriverEventObservable {
   return events_.get_observable();
@@ -20,47 +28,35 @@ void DriverBase::PublishEvent(DriverEvent* event) {
   return subscriber.on_next(event);
 }
 
+void DriverBase::Init() {
+  vk::InitPipelineLayoutManager();
+  OnPostInitEvent().subscribe([](PostInitEvent* event) {
+    DriverInitializer::Init();
+  });
+}
+
 auto DriverBase::IsInitialized() -> bool {
-  return driver_ != nullptr;
+  return driver_.Get() != nullptr;
 }
 
 auto DriverBase::Get() -> Driver* {
-  ASSERT(IsInitialized());
-  return driver_;
+  return (Driver*)driver_;
 }
 
-static inline auto SetDriver(Driver* driver) -> Driver* {
-  ASSERT(driver);
-  ASSERT(!DriverBase::IsInitialized());
-  return driver_ = driver;
-}
-
-void DriverBase::DestroyDriver() {
-  ASSERT(driver_);
-  driver_->WaitDeviceIdle();
-  Publish<DestroyingDriverEvent>();
-  delete driver_;
-  Publish<DriverDestroyedEvent>();
-}
-
-void DriverBase::InitDriver() {
-  ASSERT(!DriverBase::IsInitialized());
-  const auto driver = Driver::New();
+void DriverInitializer::InitDriver() {
+  ASSERT(!Driver::IsInitialized());
+  const auto driver = (Driver*)(malloc(sizeof(Driver)));  // NOLINT(cppcoreguidelines-pro-type-cstyle-cast)
   ASSERT(driver);
   SetDriver(driver);
-  Publish<DriverInitEvent>();
+  new (driver) Driver();
+  DriverBase::Publish<DriverInitEvent>();
 }
 
-void DriverBase::Init() {
-  const auto engine = Engine::Get();
-  ASSERT(engine);
-  OnPostInitEvent().subscribe([](PostInitEvent* event) {
-    ASSERT(event);
-    InitDriver();
-  });
-  OnTerminatedEvent().subscribe([](TerminatedEvent* event) {
-    ASSERT(event);
-    DestroyDriver();
-  });
+void DriverFinalizer::FinalizeDriver() {
+  ASSERT(Driver::IsInitialized());
+  driver_->WaitDeviceIdle();
+  DriverBase::Publish<DestroyingDriverEvent>();
+  delete driver_;
+  DriverBase::Publish<DriverDestroyedEvent>();
 }
 }  // namespace prt

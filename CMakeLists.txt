@@ -17,6 +17,10 @@ if(PRT_BUILD_DOCS)
   include(Doxygen)
 endif()
 
+include(CCache)
+include(Mold)
+include(Bloaty)
+
 include(Vulkan)
 find_package(Vulkan REQUIRED)
 
@@ -30,6 +34,11 @@ find_package(PNG REQUIRED)
 find_package(JPEG REQUIRED)
 find_package(rxcpp CONFIG REQUIRED)
 find_package(Jsonnet REQUIRED)
+find_package(ECL REQUIRED)
+find_package(draco CONFIG REQUIRED)
+find_package(re2 CONFIG REQUIRED)
+
+find_package(OpenAL REQUIRED)
 
 set(OPENSSL_USE_STATIC_LIBS FALSE)
 if(APPLE)
@@ -56,8 +65,10 @@ find_package(Stb REQUIRED)
 find_package(libconfig CONFIG REQUIRED)
 find_package(yoga CONFIG REQUIRED)
 find_package(RocksDB CONFIG REQUIRED)
-
-find_path(SEMVER_INCLUDE_DIRS "semver/semver.hpp")
+find_package(unofficial-shaderc CONFIG REQUIRED)
+find_package(harfbuzz CONFIG REQUIRED)
+find_package(CpuFeatures CONFIG REQUIRED)
+find_package(litehtml CONFIG REQUIRED)
 
 list(APPEND PRT_COMPILE_OPTS -frtti -fms-extensions -Wno-deprecated
      -Wno-sizeof-pointer-memaccess)
@@ -100,7 +111,6 @@ endif()
 link_libraries(Threads::Threads glog::glog gflags::gflags)
 
 add_subdirectory(prette)
-add_subdirectory(lib/semver)
 add_subdirectory(Sources)
 
 option(PRT_BUILD_BENCHMARKS "Build the benchmarks" ON)

@@ -1,4 +1,8 @@
 #include "prette/gfx_driver.h"
+#ifdef PRETTE_ENABLE_LUA
+
+#include "prette/common.h"
+#include "prette/gfx_driver_event.h"
 #include "prette/lua.h"
 
 namespace prt {
@@ -51,3 +55,5 @@ void DriverBase::InitLua(lua_State* L) {
   return DriverModule::Init(L);
 }
 }  // namespace prt
+
+#endif  // PRETTE_ENABLE_LUA

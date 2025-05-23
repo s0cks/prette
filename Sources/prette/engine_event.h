@@ -1,6 +1,7 @@
 #ifndef PRT_ENGINE_EVENT_H
 #define PRT_ENGINE_EVENT_H
 
+#include "prette/engine_state.h"
 #include "prette/event.h"
 #include "prette/tick.h"
 
@@ -11,13 +12,10 @@ namespace prt {
   V(PreTick)                     \
   V(Tick)                        \
   V(PostTick)                    \
-  V(Terminating)                 \
-  V(Terminated)                  \
-  V(Error)
+  FOR_EACH_ENGINE_STATE(V)
 
 class Engine;
 class EngineEvent;
-class StateEvent;
 #define FORWARD_DECLARE_ENGINE_EVENT(Name) class Name##Event;
 FOR_EACH_ENGINE_EVENT(FORWARD_DECLARE_ENGINE_EVENT)
 #undef FORWARD_DECLARE_ENGINE_EVENT
@@ -84,15 +82,7 @@ class PostTickEvent : public EngineEvent {
   DECLARE_ENGINE_EVENT_TYPE(PostTick);
 };
 
-DECLARE_ENGINE_EVENT(Terminating);
-DECLARE_ENGINE_EVENT(Terminated);
-
-class ErrorEvent : public EngineEvent {
- public:
-  ErrorEvent() = default;
-  ~ErrorEvent() override = default;
-  DECLARE_ENGINE_EVENT_TYPE(Error);
-};
+FOR_EACH_ENGINE_STATE(DECLARE_ENGINE_EVENT);
 
 DEFINE_EVENT_SUBJECT(Engine);
 DEFINE_EVENT_OBSERVABLE(Engine);
