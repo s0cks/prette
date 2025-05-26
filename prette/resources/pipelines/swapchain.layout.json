@@ -1,7 +1,0 @@
-{
-  "type": "PipelineLayout",
-  "meta": {
-    "name": "swapchain"
-  },
-  "data": {}
-}

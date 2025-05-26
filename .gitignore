@@ -1,10 +1,15 @@
 .cache/
 vcpkg_installed/
 *.env*
+imgui.ini
+prette.cfg
 
 # keep build dir
 build/*
 !/build/.gitkeep
+
+data/*
+!/data/.gitkeep
 
 *.profraw
 

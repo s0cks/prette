@@ -1,9 +1,0 @@
-{
-  "type": "TestDocument",
-  "meta": {
-    "name": "Test"
-  },
-  "data": {
-    "filename": "test"
-  }
-}

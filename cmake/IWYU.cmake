@@ -1,0 +1,5 @@
+find_program(IWYU "include-what-you-use")
+if(IWYU)
+  message(STATUS "found iwyu: ${IWYU}")
+  set(IWYU_OPTS "-Xiwyu" "--mapping_file=${CMAKE_SOURCE_DIR}/iwyu.imp")
+endif()

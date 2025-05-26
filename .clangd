@@ -17,3 +17,4 @@ Diagnostics:
     - "rx-*.hpp"
     - "operators/rx-*.hpp"
     - "subjects/rx-*.hpp"
+    - "glm/.*"

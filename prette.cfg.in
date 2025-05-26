@@ -1,0 +1,9 @@
+motd = "Hello World"
+
+shaders = {
+  paths = ["@CMAKE_SOURCE_DIR@/resources/shaders", "@CMAKE_BINARY_DIR@/resources/shaders"];
+};
+
+textures = {
+  paths = ["@CMAKE_SOURCE_DIR@/resources/textures"];
+};

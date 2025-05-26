@@ -1,0 +1,30 @@
+#ifndef PRT_CHUNK_METADATA_H
+#define PRT_CHUNK_METADATA_H
+
+#include <array>
+#include <cstdint>
+#include <type_traits>
+
+#include "prette/glm.h"
+#include "prette/std140.h"
+#include "prette/tile.h"
+
+namespace prt {
+static constexpr const uint32_t kChunkWidth = 32;
+static constexpr const uint32_t kChunkHeight = 32;
+static constexpr const auto kTotalChunkSize = kChunkWidth * kChunkHeight;
+
+using ChunkId = uint32_t;
+using ChunkPos = glm::u32vec2;
+using ChunkData = std::array<Tile, kTotalChunkSize>;
+
+struct ChunkMetadata {
+  alignas(4) ChunkId id{};
+  alignas(8) ChunkPos pos{};
+};
+
+template <>
+struct std140::is_aligned<ChunkMetadata> : std::true_type {};
+}  // namespace prt
+
+#endif  // PRT_CHUNK_METADATA_H

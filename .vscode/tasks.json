@@ -18,6 +18,36 @@
     },
     {
       "type": "cmake",
+      "label": "CMake: build headless",
+      "detail": "Build the headless target",
+      "command": "build",
+      "targets": [
+        "prette-headless"
+      ],
+      "preset": "${command:cmake.activeBuildPresetName}",
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      }
+    },
+    {
+      "type": "cmake",
+      "label": "CMake: build sandbox",
+      "detail": "Build the sandbox target",
+      "command": "build",
+      "targets": [
+        "prette-sandbox"
+      ],
+      "preset": "${command:cmake.activeBuildPresetName}",
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      }
+    },
+    {
+      "type": "cmake",
       "label": "CMake: build all shaders",
       "detail": "Build the current target",
       "command": "build",

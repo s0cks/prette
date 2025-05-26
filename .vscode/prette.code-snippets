@@ -71,9 +71,9 @@
 	"LuaOnlyBlock": {
 		"prefix": "prt-lua-only-block",
 		"body": [
-			"#ifdef PRETTE_ENABLE_LUA",
+			"#ifdef PRT_ENABLE_LUA",
 			"$1",
-			"#endif // PRETTE_ENABLE_LUA"
+			"#endif // PRT_ENABLE_LUA"
 		],
 		"description": "Generate a lua only section"
 	},

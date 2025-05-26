@@ -1,0 +1,18 @@
+{
+  "type": "Pipeline",
+  "meta": {
+    "name": "ScenePipeline"
+  },
+  "data": {
+    "extent": "swapchain",
+    "vertex_class": "tile",
+    "layout": "scene",
+    "rasterizer": {
+      "cullMode": "back",
+      "frontFace": "clockwise"
+    },
+    "vertex_shader": "scene",
+    "fragment_shader": "scene",
+    "pass": "scene"
+  }
+}

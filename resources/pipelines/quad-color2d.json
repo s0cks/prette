@@ -1,0 +1,18 @@
+{
+  "type": "Pipeline",
+  "meta": {
+    "name": "quad-color2d"
+  },
+  "data": {
+    "extent": "swapchain",
+    "vertex_class": "color2d",
+    "layout": "colored-2d",
+    "rasterizer": {
+      "cullMode": "back",
+      "frontFace": "clockwise"
+    },
+    "vertex_shader": "full_colored2d",
+    "fragment_shader": "simple_colored",
+    "pass": "scene"
+  }
+}

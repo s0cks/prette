@@ -1,0 +1,9 @@
+{
+  "type": "PipelineLayout",
+  "meta": {
+    "name": "colored2d"
+  },
+  "data": {
+    "descriptor_sets": []
+  }
+}

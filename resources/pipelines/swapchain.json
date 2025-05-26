@@ -1,0 +1,17 @@
+{
+  "type": "Pipeline",
+  "meta": {
+    "name": "SwapchainPipeline"
+  },
+  "data": {
+    "vertex_class": "color2d",
+    "layout": "swapchain",
+    "dynamic_states": [
+      "viewport",
+      "scissor"
+    ],
+    "vertex_shader": "simple_colored_2d",
+    "fragment_shader": "simple_colored",
+    "pass": "swapchain"
+  }
+}

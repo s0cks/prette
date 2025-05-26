@@ -59,24 +59,25 @@
       ]
     },
     {
-      "name": "prette",
+      "name": "prette-sandbox",
       "type": "lldb",
       "request": "launch",
-      "program": "${workspaceFolder}/build/Sources/prette-client",
+      "program": "${workspaceFolder}/build/sandbox/prette-sandbox",
       "args": [
         "--resources",
-        "${workspaceFolder}/prette/resources",
+        "${workspaceFolder}/resources",
+        "--config=${workspaceFolder}/prette.cfg",
         "--logtostdout",
         "--colorlogtostdout",
         "-v=${input:vlevel}"
       ],
-      "cwd": "${workspaceFolder}/prette",
+      "cwd": "${workspaceFolder}/data",
       "env": {
         "MTL_DEBUG_LAYER":"0",
         "UV_THREADPOOL_SIZE": "0",
         "TERM": "xterm-256color",
         "METAL_DEVICE_WRAPPER_TYPE": "1",
-        "PRT_PATH": "${workspaceFolder}/prette/resources;${workspaceFolder}/build/prette/resources",
+        "PRT_PATH": "${workspaceFolder}/resources;${workspaceFolder}/build/resources",
         "LUA_PATH": "${env:LUA_PATH};${workspaceFolder}/lib/?/?.lua;${workspaceFolder}/prette/resources/scripts/?/?.lua;${workspaceFolder}/prette/resources/scripts/?.lua"
       },
       "initCommands": [
@@ -118,6 +119,32 @@
       ],
       "cwd": "${workspaceFolder}/prette",
       "env": {
+        "UV_THREADPOOL_SIZE": "0",
+        "TERM": "xterm-256color",
+        "METAL_DEVICE_WRAPPER_TYPE": "1",
+        "PRT_PATH": "${workspaceFolder}/prette/resources;${workspaceFolder}/build/prette/resources",
+        "LUA_PATH": "${env:LUA_PATH};${workspaceFolder}/lib/?/?.lua;${workspaceFolder}/prette/resources/scripts/?/?.lua;${workspaceFolder}/prette/resources/scripts/?.lua"
+      },
+      "initCommands": [
+        "command source ${workspaceFolder}/.lldbinit"
+      ],
+    },
+    {
+      "name": "prette-headless",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/headless/prette-headless/",
+      "args": [
+        "--resources",
+        "${workspaceFolder}/resources",
+        "--config=${workspaceFolder}/prette.cfg",
+        "--logtostdout",
+        "--colorlogtostdout",
+        "-v=${input:vlevel}"
+      ],
+      "cwd": "${workspaceFolder}/data",
+      "env": {
+        "MTL_DEBUG_LAYER":"0",
         "UV_THREADPOOL_SIZE": "0",
         "TERM": "xterm-256color",
         "METAL_DEVICE_WRAPPER_TYPE": "1",

@@ -1,0 +1,11 @@
+{
+  "type": "PipelineLayout",
+  "meta": {
+    "name": "swapchain"
+  },
+  "data": {
+    "descriptor_sets": [
+      "swapchain"
+    ]
+  }
+}
