@@ -2,6 +2,7 @@
 
 #include <array>
 
+#include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/descriptor_set.h"
 #include "prette/descriptor_set_builder.h"

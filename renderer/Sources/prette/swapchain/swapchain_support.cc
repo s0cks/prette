@@ -1,5 +1,6 @@
 #include "prette/swapchain/swapchain_support.h"
 
+#include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/gfx.h"
 #include "prette/platform.h"

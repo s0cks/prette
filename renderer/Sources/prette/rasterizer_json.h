@@ -3,6 +3,7 @@
 
 #include <ostream>
 
+#include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/json.h"
 #include "prette/vk.h"

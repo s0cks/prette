@@ -4,6 +4,7 @@
 #include <functional>
 #include <gflags/gflags.h>
 #include <ostream>
+#include <set>
 #include <string>
 #include <yoga/YGConfig.h>
 
@@ -17,6 +18,10 @@
 #include "prette/glm.h"
 #include "prette/monitor/monitor.h"
 #include "prette/window/window_event.h"
+
+#ifdef PRT_ENABLE_LUA
+struct lua_State;
+#endif  // PRT_ENABLE_LUA
 
 namespace prt {
 static constexpr const auto kDefaultWindowSize = "1280x720";
@@ -116,6 +121,11 @@ class Window : public WindowEventSource {
   static void OnWindowMaximize(Handle* handle, int maximized);
   static void OnWindowContentScale(Handle* handle, float xScale, float yScale);
   static void OnWindowFramebufferSize(Handle* handle, const int width, const int height);
+
+  static inline auto Get(Handle* handle) -> Window* {
+    ASSERT(handle);
+    return ((Window*)glfwGetWindowUserPointer(handle));  // NOLINT(cppcoreguidelines-pro-type-cstyle-cast)
+  }
 #else
 #error "Unsupported Platform."
 #endif  // PRT_WINDOW_H
@@ -270,12 +280,10 @@ class Window : public WindowEventSource {
   }
 
  private:
-  static inline auto Get(Handle* handle) -> Window* {
-    ASSERT(handle);
-    return ((Window*)glfwGetWindowUserPointer(handle));  // NOLINT(cppcoreguidelines-pro-type-cstyle-cast)
-  }
-
+#ifdef PRT_ENABLE_LUA
   static void InitLua(lua_State* L);
+#endif  // PRT_ENABLE_LUA
+
   static auto New(Handle* handle) -> Window*;
 
  public:
@@ -341,7 +349,7 @@ class WindowBuilder {
   void SetTransparentFramebuffer(const bool value);
   void SetFocusOnShow(const bool value);
   void SetScaleToMonitor(const bool value);
-#ifdef __APPLE__
+#ifdef OS_IS_OSX
   void SetRetinaFramebuffer(const bool value);
   void SetGraphicsSwitching(const bool value);
 #endif

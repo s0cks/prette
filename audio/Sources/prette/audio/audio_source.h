@@ -98,7 +98,7 @@ class AudioSource {
   void Play() const;
   void Pause() const;
   void Stop() const;
-
+  void Attach(const AudioBuffer& buffer);
   auto GetCone() const -> AudioCone;
 
   template <AudioProperty Property>
@@ -180,14 +180,14 @@ using AudioSourcePredicate = std::function<bool(const AudioSource&)>;
 
 struct AudioSourceBuffer {
   AudioSource source;
-  BufferId buffer;
+  AudioBuffer buffer;
 
   inline auto source_id_ptr() const -> const SourceId* {
     return &source.GetId();
   }
 
   inline auto buffer_id_ptr() const -> const BufferId* {
-    return &buffer;
+    return &buffer.GetId();
   }
 };
 

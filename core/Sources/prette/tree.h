@@ -1,6 +1,7 @@
 #ifndef PRT_TREE_H
 #define PRT_TREE_H
 
+#include "prette/assertions.h"
 #include "prette/common.h"
 
 namespace prt::tree {

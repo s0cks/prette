@@ -2,6 +2,7 @@
 
 #include <array>
 
+#include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/gfx.h"
 #include "prette/gfx_vk.h"

@@ -6,6 +6,7 @@
 #include <string>
 #include <vector>
 
+#include "prette/assertions.h"
 #include "prette/common.h"
 
 namespace prt::vk {
@@ -50,12 +51,12 @@ class ShaderCode {
 auto FindShaderCode(std::string name) -> ShaderCode;
 
 static inline auto FindVertexShaderCode(std::string filename) -> ShaderCode {
-  ASSERT(!filename.empty());
+  ASSERT_NOT_EMPTY(filename);
   return FindShaderCode(fmt::format("{}.vert", filename));
 }
 
 static inline auto FindFragmentShaderCode(std::string filename) -> ShaderCode {
-  ASSERT(!filename.empty());
+  ASSERT_NOT_EMPTY(filename);
   return FindShaderCode(fmt::format("{}.frag", filename));
 }
 }  // namespace prt::vk

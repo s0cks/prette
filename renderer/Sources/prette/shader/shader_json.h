@@ -47,64 +47,19 @@ class ShaderObjectHandler : public BaseStatefulReaderHandler<ShaderObjectHandler
   FOR_EACH_SHADER_OBJECT_HANDLER_STATE(DEFINE_STATE_CHECK)
 #undef DEFINE_STATE_CHECK
 
-  auto Null() -> bool {
-    return InvalidState();
-  }
-
-  auto Bool(bool b) -> bool {
-    return InvalidState();
-  }
-
-  auto Int(int i) -> bool {
-    return InvalidState();
-  }
-
-  auto Uint(unsigned u) -> bool {
-    return InvalidState();
-  }
-
-  auto Int64(int64_t i) -> bool {
-    return InvalidState();
-  }
-
-  auto Uint64(uint64_t u) -> bool {
-    return InvalidState();
-  }
-
-  auto Double(double d) -> bool {
-    return InvalidState();
-  }
-
-  auto String(const char* str, SizeType length, bool copy) -> bool;
-
-  auto StartObject() -> bool {
-    switch (GetState()) {
-      case ShaderObjectHandlerState::kClosed:
-        return TransitionTo(ShaderObjectHandlerState::kOpen);
-      default:
-        return InvalidState();
-    }
-  }
-
-  auto Key(const char* str, SizeType length, bool copy) -> bool;
-
-  auto EndObject(SizeType memberCount) -> bool {
-    switch (GetState()) {
-      case ShaderObjectHandlerState::kOpen:
-        return TransitionTo(ShaderObjectHandlerState::kClosed);
-      default:
-        break;
-    }
-    return InvalidState();
-  }
-
-  auto StartArray() -> bool {
-    return InvalidState();
-  }
-
-  auto EndArray(SizeType elementCount) -> bool {
-    return InvalidState();
-  }
+  auto Null() -> bool override;
+  auto Bool(bool b) -> bool override;
+  auto Int(int i) -> bool override;
+  auto Uint(unsigned u) -> bool override;
+  auto Int64(int64_t i) -> bool override;
+  auto Uint64(uint64_t u) -> bool override;
+  auto Double(double d) -> bool override;
+  auto String(const char* str, SizeType length, bool copy) -> bool override;
+  auto StartObject() -> bool override;
+  auto Key(const char* str, SizeType length, bool copy) -> bool override;
+  auto EndObject(SizeType memberCount) -> bool override;
+  auto StartArray() -> bool override;
+  auto EndArray(SizeType elementCount) -> bool override;
 };
 }  // namespace prt::json
 

@@ -34,7 +34,7 @@ FOR_EACH_WORLD_EVENT(DEFINE_ON_EVENT)
 
 // clang-format off
 // NOLINTNEXTLINE
-static const struct luaL_Reg kWorldLib[] = {
+DEFINE_LUALIB(World) {
 #define LUA_WORLD_F(Name) \
   {.name = #Name, .func = &lua_world_##Name }
 

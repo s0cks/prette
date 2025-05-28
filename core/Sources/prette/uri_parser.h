@@ -14,7 +14,7 @@
 #include "prette/platform.h"
 #include "prette/uri.h"
 
-namespace prt::uri {
+namespace prt {
 #define FOR_EACH_URI_PARSER_ERROR(V) \
   V(UnexpectedToken)                 \
   V(UnexpectedEndOfStream)
@@ -94,10 +94,11 @@ class Parser : public ParserTemplate<kDefaultParserBufferSize, kDefaultTokenBuff
     class ParseFragmentsField : public FlagsField<kParseFragmentsOffset> {};
 
    public:
-    Scheme default_scheme;
+    std::string default_scheme;
     Flags flags;
-    bool (*OnParseScheme)(const Parser* parser, const char* scheme, const uint64_t length);
-    bool (*OnParsePath)(const Parser* parser, const char* path, const uint64_t length);
+    bool (*OnParseScheme)(const Parser* parser, const char* scheme, const uint64_t pos, const uint64_t length);
+    bool (*OnParsePath)(const Parser* parser, const char* path, const uint64_t pos, const uint64_t length);
+    bool (*OnParseExtension)(const Parser* parser, const char* extension, const uint64_t pos, const uint64_t length);
     bool (*OnParseQuery0)(const Parser* parser, const uint64_t idx, const char* key, const uword key_length);
     bool (*OnParseQuery1)(const Parser* parser, const uint64_t idx, const char* key, const uword key_len,
                           const char* value, const uword value_len);
@@ -149,9 +150,12 @@ class Parser : public ParserTemplate<kDefaultParserBufferSize, kDefaultTokenBuff
   uword key_length_;
   std::array<char, kDefaultTokenBufferSize> value_;
   uword value_length_;
+  Position token_start_pos_{};
+  uint64_t slashcount_ = 0;
 
   auto ParseScheme() -> bool;
   auto ParsePath() -> bool;
+  auto ParseExtension() -> bool;
   auto ParseQueryParameterKey() -> bool;
   auto ParseQueryParameterValue() -> bool;
   auto ParseQueryParameter() -> bool;
@@ -185,12 +189,16 @@ class Parser : public ParserTemplate<kDefaultParserBufferSize, kDefaultTokenBuff
     return func ? func(this, args...) : true;
   }
 
-  inline auto OnParseScheme(const char* scheme, const uint64_t length) const -> bool {
-    return CallIfExists(config_.OnParseScheme, scheme, length);
+  inline auto OnParseScheme(const char* scheme, const uint64_t pos, const uint64_t length) const -> bool {
+    return CallIfExists(config_.OnParseScheme, scheme, pos, length);
   }
 
-  inline auto OnParsePath(const char* path, const uint64_t length) const -> bool {
-    return CallIfExists(config_.OnParsePath, path, length);
+  inline auto OnParsePath(const char* path, const uint64_t pos, const uint64_t length) const -> bool {
+    return CallIfExists(config_.OnParsePath, path, pos, length);
+  }
+
+  inline auto OnParseExtension(const char* path, const uint64_t pos, const uint64_t length) const -> bool {
+    return CallIfExists(config_.OnParseExtension, path, pos, length);
   }
 
   inline auto OnParseQuery0(const uint64_t idx, const char* key, const uword key_length) const -> bool {
@@ -239,6 +247,6 @@ class Parser : public ParserTemplate<kDefaultParserBufferSize, kDefaultTokenBuff
   ~Parser() override = default;
   auto Parse(const basic_uri& raw) -> ParseResult;
 };
-}  // namespace prt::uri
+}  // namespace prt
 
 #endif  // PRT_URI_PARSER_H

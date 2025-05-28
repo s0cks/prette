@@ -2,6 +2,7 @@
 
 #include <cstring>
 
+#include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/device.h"  // IWYU pragma: keep
 #include "prette/gfx.h"

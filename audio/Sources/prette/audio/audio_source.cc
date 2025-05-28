@@ -1,8 +1,10 @@
 #include "prette/audio/audio_source.h"
 
+#include <OpenAL/al.h>
 #include <utility>
 
 #include "prette/al.h"
+#include "prette/assertions.h"
 #include "prette/audio/audio_property.h"
 #include "prette/common.h"
 
@@ -85,6 +87,12 @@ AudioSource::AudioSource() {
 
 void AudioSource::DeleteSource() {
   alDeleteSources(1, &id_);
+  CHECK_AL_ERRORS(FATAL);
+}
+
+void AudioSource::Attach(const AudioBuffer& buffer) {
+  ASSERT(buffer.GetId() != kInvalidBufferId);
+  alSourcei(GetId(), AL_BUFFER, static_cast<int>(buffer.GetId()));
   CHECK_AL_ERRORS(FATAL);
 }
 

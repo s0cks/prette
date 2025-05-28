@@ -1,6 +1,7 @@
 #ifndef PRT_SURFACE_H
 #define PRT_SURFACE_H
 
+#include <string>
 #include <vulkan/vulkan_core.h>
 
 #include "prette/platform.h"

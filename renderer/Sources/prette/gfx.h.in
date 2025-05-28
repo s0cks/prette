@@ -8,6 +8,8 @@
 #include "prette/common.h"  // IWYU pragma: keep
 
 // IWYU pragma: begin_exports
+#include <cmath>
+
 #include "prette/gfx_driver.h"
 #include "prette/gfx_vk.h"
 // IWYU pragma: end_exports

@@ -12,3 +12,4 @@ file(GLOB PRT_FLATBUFFER_GENERATED_SOURCES
 add_library(prt-flatbuffers INTERFACE ${PRT_FLATBUFFER_GENERATED_SOURCES})
 target_include_directories(prt-flatbuffers INTERFACE ${FLATC_BINARY_DIR}/Sources)
 target_link_libraries(prt-flatbuffers INTERFACE flatbuffers::flatbuffers)
+add_dependencies(prt-flatbuffers flatbuffers)

@@ -9,6 +9,7 @@
 #include <vector>
 #include <vulkan/vulkan_core.h>
 
+#include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/descriptor_set.h"
 #include "prette/device.h"  // IWYU pragma: keep

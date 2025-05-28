@@ -6,7 +6,6 @@
 #endif  // PRT_VERTEX2D_H
 
 #include <functional>
-#include <type_traits>
 #include <vulkan/vulkan_core.h>
 
 #include "prette/color.h"  // IWYU pragma: keep
@@ -20,9 +19,6 @@ namespace prt {
   V(1, uv, STD140_VEC2_TYPE, STD140_VEC2_FORMAT, STD140_VEC2_ALIGNMENT)
 
 DECLARE_VERTEX_CLASS(tex2d, FOR_EACH_TEX2D_ATTR, 2);
-
-template <>
-struct is_2d_vertex_t<tex2d::Vertex> : std::true_type {};
 }  // namespace prt
 
 namespace std {

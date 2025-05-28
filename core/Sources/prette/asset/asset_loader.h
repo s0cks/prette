@@ -1,0 +1,4 @@
+#ifndef PRT_ASSET_LOADER_H
+#define PRT_ASSET_LOADER_H
+
+#endif  // PRT_ASSET_LOADER_H

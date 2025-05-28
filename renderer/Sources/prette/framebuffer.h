@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 
+#include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/glm.h"
 #include "prette/image/image_view.h"

@@ -1,235 +1,198 @@
 #ifndef PRT_URI_H
 #define PRT_URI_H
 
-#include <cstdio>
+#include <fmt/base.h>
 #include <fmt/format.h>
-#include <optional>
 #include <ostream>
 #include <rocksdb/slice.h>
-#include <set>
 #include <string>
 #include <string_view>
-#include <unordered_map>
-#include <unordered_set>
-#include <utility>
 #include <vector>
 
 #include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/platform.h"
 
-namespace prt::uri {
-using ExtensionSet = std::unordered_set<std::string>;
-using basic_uri = std::string;
-using Path = std::string;
-using Scheme = std::string;
-using Fragment = std::string;
-using Extension = std::string;
-using QueryMap = std::unordered_map<std::string, std::string>;
-
-void SanitizePath(Path& value, const bool root = true);
-void SanitizeExtension(Extension& value);
-
+namespace prt {
 class Parser;
-struct Uri {
- public:
-  static constexpr const auto kMaxQueryParamNameLength = 512;
-  static constexpr const auto kMaxQueryParamValueLength = 1024;
+using basic_uri = std::string;
 
- public:
-  Scheme scheme;
-  Path path;
-  Fragment fragment;
-  QueryMap query;
+class uri {
+  DEFINE_DEFAULT_COPYABLE_TYPE(uri);
+  struct uri_pos {
+    std::string::size_type pos = std::string::npos;
+    std::string::size_type len = std::string::npos;
+
+    auto operator==(const uri_pos& rhs) const -> bool {
+      return pos == rhs.pos && len == rhs.len;
+    }
+
+    auto operator!=(const uri_pos& rhs) const -> bool {
+      return pos != rhs.pos || len != rhs.len;
+    }
+  };
+
+  static constexpr const uri_pos kInvalidPos = {
+      .pos = std::string::npos,
+      .len = std::string::npos,
+  };
+
+  static auto OnSchemeParsed(const Parser* parser, const char* scheme, const uint64_t pos, const uint64_t len) -> bool;
+  static auto OnPathParsed(const Parser* parser, const char* path, const uint64_t pos, const uint64_t len) -> bool;
+  static auto OnExtensionParsed(const Parser* parser, const char* extension, const uint64_t pos, const uint64_t len)
+      -> bool;
 
  private:
-  Uri(Scheme scheme, Path path) :
-    scheme(std::move(scheme)),
-    path(std::move(path)),
-    fragment(),
-    query() {}
-  Uri(Scheme s, const Uri& other) :
-    scheme(std::move(s)),
-    path(other.path),
-    fragment(other.fragment),
-    query(other.query) {}
-  Uri(Scheme s, const Path& root, const Uri& path) :
-    scheme(std::move(s)),
-    path(fmt::format("{0:s}/{1:s}", root, path.path[0] == '/' ? path.path.substr(1) : path.path)),
-    fragment(path.fragment),
-    query(path.query) {}
+  std::string data_{};
+  uri_pos scheme_ = kInvalidPos;
+  uri_pos path_ = kInvalidPos;
+  uri_pos extension_ = kInvalidPos;
 
-  static auto OnSchemeParsed(const Parser* parser, const char* scheme, const uint64_t length) -> bool;
-  static auto OnPathParsed(const Parser* parser, const char* path, const uint64_t length) -> bool;
-  static auto OnQueryParsed0(const Parser* parser, const uint64_t idx, const char* key, const uword key_length) -> bool;
-  static auto OnQueryParsed1(const Parser* parser, const uint64_t idx, const char* key, const uword key_length,
-                             const char* value, const uword value_length) -> bool;
-  static auto OnFragmentParsed(const Parser* parser, const char* fragment, const uint64_t length) -> bool;
-
- public:
-  Uri() = default;
-  explicit Uri(const basic_uri& uri, const uint8_t flags = 0);
-  Uri(Scheme s, Path p, Fragment f, QueryMap q) :
-    scheme(std::move(s)),
-    path(std::move(p)),
-    fragment(std::move(f)),
-    query(std::move(q)) {}
-  Uri(Uri&& rhs) = default;
-  Uri(const Uri& rhs) = default;
-  ~Uri() = default;
-
-  auto HasScheme() const -> bool;
-  auto HasScheme(const Scheme& a) const -> bool;
-  auto HasScheme(const std::vector<Scheme>& values) const -> bool;
-  auto HasScheme(const std::unordered_set<Scheme>& values) const -> bool;
-  auto HasScheme(const std::set<Scheme>& values) const -> bool;
-
-  auto HasFragment() const -> bool {
-    return !fragment.empty();
+  inline auto scheme_ptr() const -> const char* {
+    return &data_[scheme_pos()];
   }
 
-  auto HasQuery() const -> bool {
-    return !query.empty();
+  inline auto path_ptr() const -> const char* {
+    return &data_[path_pos()];
   }
 
-  auto GetExtension() const -> Extension;
-  auto HasExtension() const -> bool;
-  auto HasExtension(const Extension& a) const -> bool;
-  auto HasExtension(const std::vector<Extension>& extensions) const -> bool;
-  auto HasExtension(const std::set<Extension>& extensions) const -> bool;
-  auto HasExtension(const std::unordered_set<Extension>& extensions) const -> bool;
-
-  auto GetResourceName() const -> std::string {
-    const auto slashpos = path.find_last_of('/');
-    if (slashpos == std::string::npos)
-      return path;
-    return path.substr(slashpos + 1);
-  }
-
-  auto GetPathWithoutExtension() const -> std::string {
-    const auto dotpos = path.find_first_of('.');
-    if (dotpos != std::string::npos)
-      return path.substr(0, path.size() - dotpos);
-    return path;
-  }
-
-  auto GetQuery(const std::string& name) const -> std::optional<std::string> {
-    const auto pos = query.find(name);
-    if (pos == query.end())
-      return std::nullopt;
-    return {pos->second};
-  }
-
-  auto GetParentPath() const -> Path {
-    const auto slashpos = path.find_last_of('/');
-    if (slashpos == std::string::npos)
-      return "/";
-    return path.substr(0, path.size() - (path.size() - slashpos));
-  }
-
-  auto GetParent() const -> Uri {
-    return Uri(scheme, GetParentPath());
-  }
-
-  auto GetChildPath(const Path& child) const -> Path {
-    auto child_path = child;
-    SanitizePath(child_path, false);
-    return fmt::format("{0:s}/{1:s}", path, child_path);
-  }
-
-  auto GetChild(const Path& child) const -> Uri {
-    return Uri{fmt::format("{0:s}://{1:s}", scheme, GetChildPath(child))};
-  }
-
-  auto GetSiblingPath(const Path& sibling) const -> Path {
-    auto sibling_path = sibling;
-    SanitizePath(sibling_path, false);
-    return fmt::format("{0:s}/{1:s}", GetParentPath(), sibling_path);
-  }
-
-  auto GetSibling(const Path& sibling) const -> Uri {
-    return Uri{fmt::format("{0:s}://{1:s}", scheme, GetSiblingPath(sibling))};
-  }
-
-  auto ToFileUri(const Path& root) const -> Uri {
-    return {"file", root, *this};
-  }
-
-  auto ToFileUri() const -> Uri {
-    return {"file", *this};
-  }
-
-  auto IsFile() const -> bool {
-    return EqualsIgnoreCase(scheme, "file");
-  }
-
-  auto IsAbsolutePath() const -> bool {
-    return IsFile() && (FileExists(path));
-  }
-
-  auto OpenFile(const char* mode) const -> FILE* {
-    ASSERT(HasScheme("file"));
-    return fopen(path.c_str(), mode);
-  }
-
-  inline auto OpenFileForReading() const -> FILE* {
-    return OpenFile("rb");
-  }
-
-  inline auto OpenFileForWriting() const -> FILE* {
-    return OpenFile("wb");
-  }
-
-  auto ToString() const -> std::string;
-
-  explicit operator std::string() const {
-    return fmt::format("{0:s}://{1:s}", scheme, path);
-  }
-
-  auto operator=(Uri&& rhs) -> Uri& = default;
-  auto operator=(const Uri& rhs) -> Uri& = default;
-
-  auto operator==(const Uri& rhs) const -> bool {
-    return EqualsIgnoreCase(scheme, rhs.scheme) && EqualsIgnoreCase(path, rhs.path);
-  }
-
-  auto operator!=(const Uri& rhs) const -> bool {
-    return !EqualsIgnoreCase(scheme, rhs.scheme) || !EqualsIgnoreCase(path, rhs.path);
-  }
-
-  friend auto operator<<(std::ostream& stream, const Uri& rhs) -> std::ostream& {
-    return stream << rhs.ToString();
+  inline auto extension_ptr() const -> const char* {
+    return &data_[extension_pos()];
   }
 
  public:
-  static auto TryParse(uri::Uri& result, const basic_uri& uri, const uri::Scheme& default_scheme) -> bool;
+  uri() = default;
+  uri(const std::string& data);
+  ~uri() = default;
+
+  auto data() const -> const std::string& {
+    return data_;
+  }
+
+  auto has_scheme() const -> bool {
+    return scheme_ != kInvalidPos;
+  }
+
+  auto has_scheme(const char* scheme, const std::string::size_type length) const -> bool {
+    if (!has_scheme() && scheme == nullptr && length == 0)
+      return true;
+    else if (!has_scheme() && (scheme != nullptr || scheme_length() != 0))
+      return false;
+    else if (has_scheme() && (scheme == nullptr || scheme_length() != length))
+      return false;
+    ASSERT(has_scheme() && scheme != nullptr && length == scheme_length());
+    return strncmp(scheme_ptr(), scheme, scheme_length()) == 0;
+  }
+
+  auto scheme() const -> std::string {
+    return data_.substr(scheme_.pos, scheme_.len);
+  }
+
+  auto scheme_pos() const -> std::string::size_type {
+    return scheme_.pos;
+  }
+
+  auto scheme_length() const -> std::string::size_type {
+    return scheme_.len;
+  }
+
+  auto path() const -> std::string {
+    return data().substr(path_.pos, path_.len);
+  }
+
+  auto has_path() const -> bool {
+    return path_ != kInvalidPos;
+  }
+
+  auto has_path(const char* path, const std::string::size_type length) const -> bool {
+    if (!has_path() && path == nullptr && length == 0)
+      return true;
+    else if (!has_path() && (path != nullptr || path_length() != 0))
+      return false;
+    else if (has_path() && (path == nullptr || path_length() != length))
+      return false;
+    ASSERT(has_path() && path != nullptr && length == path_length());
+    return strncmp(path_ptr(), path, path_length()) == 0;
+  }
+
+  auto path_pos() const -> std::string::size_type {
+    return path_.pos;
+  }
+
+  auto path_length() const -> std::string::size_type {
+    return path_.len;
+  }
+
+  auto has_extension() const -> bool {
+    return extension_ != kInvalidPos;
+  }
+
+  auto extension() const -> std::string {
+    if (!has_extension())
+      return {};
+    return data().substr(extension_.pos, extension_.len);
+  }
+
+  auto extension_pos() const -> std::string::size_type {
+    return extension_.pos;
+  }
+
+  auto extension_length() const -> std::string::size_type {
+    return extension_.len;
+  }
+
+  auto has_extension(const char* extension, const std::string::size_type length) const -> bool {
+    if (!has_extension() && extension == nullptr && length == 0)
+      return true;
+    else if (!has_extension() && (extension != nullptr || extension_length() != 0))
+      return false;
+    else if (has_extension() && (extension == nullptr || extension_length() != length))
+      return false;
+    ASSERT(has_extension() && extension != nullptr && length == extension_length());
+    return strncmp(extension_ptr(), extension, extension_length()) == 0;
+  }
+
+  operator std::string() const {
+    return data();
+  }
+
+  operator rocksdb::Slice() const {
+    const auto total_length = scheme_length() + path_length() + extension_length();
+    std::vector<char> data(total_length);
+    uint64_t offset = 0;
+    memcpy(&data[offset], scheme_ptr(), scheme_length());
+    offset += scheme_length();
+    memcpy(&data[offset], path_ptr(), path_length());
+    if (has_extension()) {
+      memcpy(&data[offset], extension_ptr(), extension_length());
+      offset += extension_length();
+    }
+    return {data.data(), data.size()};
+  }
+
+  auto operator==(const uri& rhs) const -> bool {
+    return has_scheme(rhs.scheme_ptr(), rhs.scheme_length()) && has_path(rhs.path_ptr(), rhs.path_length()) &&
+           has_extension(rhs.extension_ptr(), rhs.extension_length());
+  }
+
+  auto operator!=(const uri& rhs) const -> bool {
+    return !has_scheme(&rhs.data_[rhs.scheme_pos()], rhs.scheme_length()) ||
+           !has_path(&rhs.data_[rhs.path_pos()], rhs.path_length()) ||
+           !has_extension(&rhs.data_[rhs.extension_pos()], rhs.extension_length());
+  }
+
+  friend auto operator<<(std::ostream& stream, const uri& rhs) -> std::ostream& {
+    return stream << rhs.data();
+  }
 };
-
-static inline auto IsDirectory(const Uri& uri) -> bool {
-  return prt::IsDirectory(uri.path);
-}
-
-static inline auto IsDirectory(const std::string& root, const Uri& uri) -> bool {
-  const auto abs_path = fmt::format("{0:s}/{1:s}", root, uri.path);
-  return prt::IsDirectory(abs_path);
-}
-
-static inline auto FileExists(const uri::Uri& uri) -> bool {
-  return prt::FileExists(uri.path);
-}
-
-auto IsValidUri(const basic_uri& rhs) -> bool;
-auto IsValidUri(const basic_uri& rhs, const std::string& scheme) -> bool;
-auto IsValidUri(const basic_uri& rhs, const std::set<std::string>& schemes) -> bool;
-auto IsValidUri(const basic_uri& rhs, const std::unordered_set<std::string>& schemes) -> bool;
-}  // namespace prt::uri
+}  // namespace prt
 
 namespace fmt {
-using prt::uri::Uri;
+using prt::uri;
 
 template <>
-struct formatter<Uri> : formatter<std::string_view> {
-  auto format(const Uri& uri, format_context& ctx) const {
+struct formatter<uri> : formatter<std::string_view> {
+  auto format(const uri& uri, format_context& ctx) const {
     return formatter<std::string_view>::format((const std::string&)uri, ctx);
   }
 };

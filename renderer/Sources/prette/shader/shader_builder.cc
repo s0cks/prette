@@ -1,5 +1,6 @@
 #include "prette/shader/shader_builder.h"
 
+#include "prette/assertions.h"
 #include "prette/shader/shader.h"
 
 namespace prt::vk {

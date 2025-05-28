@@ -2,8 +2,8 @@
 
 #include <utility>
 
+#include "prette/assertions.h"
 #include "prette/camera.h"
-#include "prette/common.h"
 #include "prette/descriptor_set.h"
 #include "prette/device.h"  // IWYU pragma: keep
 #include "prette/gfx.h"

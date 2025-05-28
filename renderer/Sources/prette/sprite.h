@@ -1,12 +1,9 @@
 #ifndef PRT_SPRITE_H
 #define PRT_SPRITE_H
 
-#include <type_traits>
 #include <vulkan/vulkan_core.h>
 
 #include "prette/glm.h"
-#include "prette/mesh.h"
-#include "prette/uniform_buffer.h"
 #include "prette/vertex/vertex.h"
 
 namespace prt {
@@ -16,11 +13,13 @@ struct SpriteData {
   DEFINE_VERTEX_GET_INSTANCE_BINDING_DESCRIPTION(SpriteData);
 };
 
-template <>
-struct vk::is_mesh_data_t<SpriteData> : std::true_type {};
-
-template <>
-struct vk::is_uniform_t<SpriteData> : std::true_type {};
+static constexpr const auto kDefaultSpriteSheetMaxSize = 65536;
+class SpriteSheet {
+ private:
+ public:
+  SpriteSheet();
+  ~SpriteSheet();
+};
 }  // namespace prt
 
 #endif  // PRT_SPRITE_H

@@ -5,6 +5,7 @@
 #include <unordered_set>
 #include <vector>
 
+#include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/device.h"
 #include "prette/gfx_vk.h"

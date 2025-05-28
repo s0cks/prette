@@ -16,6 +16,7 @@
 #include <vulkan/vulkan_core.h>
 // IWYU pragma: end_exports
 
+#include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/relaxed_atomic.h"
 #include "prette/traits.h"
@@ -183,7 +184,7 @@ class NamedHandleTemplate : public HandleTemplate<H> {
     name_(std::move(name)) {}
 
   void SetName(const std::string rhs) {
-    ASSERT(!rhs.empty());
+    ASSERT_NOT_EMPTY(rhs);
     name_ = std::move(rhs);
   }
 
@@ -216,7 +217,7 @@ class NamedHandleBuilderTemplate : public HandleBuilderTemplate<I, T> {
   }
 
   auto WithName(const std::string rhs) -> B& {
-    ASSERT(!rhs.empty());
+    ASSERT_NOT_EMPTY(rhs);
     name_ = std::move(rhs);
     return (B&)*this;
   }

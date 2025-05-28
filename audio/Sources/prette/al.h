@@ -19,6 +19,7 @@ static constexpr const auto kMaxGain = 1.0f;
 
 using SourceId = ALuint;
 using BufferId = ALuint;
+static constexpr const auto kInvalidBufferId = 0;
 
 #define FOR_EACH_AUDIO_FORMAT(V)      \
   V(Mono8, 1, 8, AL_FORMAT_MONO8)     \
@@ -41,6 +42,26 @@ struct AudioCone {
   float outer_gain;
   float outer_angle;
   float inner_angle;
+};
+
+class AudioBuffer {
+  DEFINE_DEFAULT_COPYABLE_TYPE(AudioBuffer);
+
+ private:
+  BufferId id_ = kInvalidBufferId;
+
+ public:
+  AudioBuffer() = default;
+  AudioBuffer(const AudioFormat format, const uint8_t* bytes, const uint64_t num_bytes, const uint64_t num_samples);
+  ~AudioBuffer();
+
+  auto GetId() const -> const BufferId& {
+    return id_;
+  }
+
+  operator BufferId() const {
+    return id_;
+  }
 };
 }  // namespace prt::audio
 

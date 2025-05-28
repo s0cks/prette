@@ -3,6 +3,7 @@
 
 #include <cstdint>
 
+#include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/vk.h"
 #include "prette/vk_buffer.h"
@@ -15,7 +16,7 @@ class StagingScope {
  public:
   StagingScope(const uint8_t* data, const uint64_t num_bytes) {
     vk::BufferBuilder builder{};
-    buffer_ = builder.BuildStagingBuffer(data, num_bytes);
+    builder.WithTransferSourceUsage();
     ASSERT_INITIALIZED(buffer_);
   }
   ~StagingScope() {

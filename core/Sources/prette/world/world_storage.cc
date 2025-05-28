@@ -3,6 +3,7 @@
 #include <filesystem>
 #include <flatbuffers/flatbuffer_builder.h>
 #include <fstream>
+#include <ios>
 #include <utility>
 #include <vector>
 

@@ -175,7 +175,7 @@ class World {
 
  public:
   static inline auto New(std::string name) -> World* {
-    ASSERT(!name.empty());
+    ASSERT_NOT_EMPTY(name);
     return new World(std::move(name));
   }
 };

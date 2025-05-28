@@ -4,6 +4,7 @@
 #include <glog/logging.h>
 #include <string>
 
+#include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/gfx.h"
 #include "prette/to_string.h"

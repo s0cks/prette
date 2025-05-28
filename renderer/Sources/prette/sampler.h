@@ -10,7 +10,7 @@ class Sampler;
 class SamplerBuilder : public NamedHandleBuilderTemplate<VkSamplerCreateInfo, Sampler, SamplerBuilder> {
  public:
   SamplerBuilder();
-  ~SamplerBuilder();
+  ~SamplerBuilder() override;
 
   auto WithMinFilter(const VkFilter rhs) -> SamplerBuilder& {
     info_ptr()->minFilter = rhs;
@@ -172,7 +172,7 @@ class Sampler : public HandleTemplate<VkSampler> {
   Sampler(const VkSamplerCreateInfo* create_info);
 
  public:
-  virtual ~Sampler();
+  ~Sampler() override;
 
   auto ToString() const -> std::string override;
 

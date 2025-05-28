@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include "prette/common.h"
+#include "prette/assertions.h"
 #include "prette/event.h"
 #include "prette/lua.h"
 #include "prette/to_string.h"

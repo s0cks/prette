@@ -4,6 +4,7 @@
 #include <utility>
 #include <vector>
 
+#include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/pipeline/pipeline.h"
 #include "prette/pipeline/pipeline_layout.h"

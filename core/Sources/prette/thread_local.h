@@ -5,6 +5,7 @@
 #include <glog/logging.h>
 #include <ostream>
 
+#include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/os_thread.h"
 

@@ -1,7 +1,7 @@
 #include "prette/window/window.h"
 #ifdef PRT_ENABLE_LUA
 
-#include "prette/common.h"
+#include "prette/assertions.h"
 #include "prette/lua.h"
 #include "prette/window/window_event.h"
 
@@ -33,7 +33,7 @@ FOR_EACH_WINDOW_EVENT(DEFINE_ON_EVENT_FUNC);
 
 // clang-format off
 // NOLINTNEXTLINE
-static const struct luaL_Reg kWindowLib[] = {
+DEFINE_LUALIB(Window) {
 #define LUA_WINDOW_F(Name) \
   { .name = #Name, .func = &lua_window_##Name }
 

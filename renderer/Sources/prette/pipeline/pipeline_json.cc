@@ -3,6 +3,7 @@
 #include <fmt/format.h>
 #include <string>
 
+#include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/json.h"
 #include "prette/pipeline/pipeline_builder.h"

@@ -9,14 +9,13 @@
 #include <utility>
 #include <vector>
 
+#include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/gfx.h"
 #include "prette/shader/shader_builder.h"
 #include "prette/shader/shader_code.h"
 #include "prette/to_string.h"
 #include "prette/vk.h"
-
-// IWYU pragma: no_include <ios>
 
 namespace prt::vk {
 static inline auto GetFilenameWithoutExtension(const fs::path& path) -> std::string {

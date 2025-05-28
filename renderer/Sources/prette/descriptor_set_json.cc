@@ -1,5 +1,6 @@
 #include "prette/descriptor_set_json.h"
 
+#include "prette/json.h"
 #include "prette/platform.h"
 
 namespace prt::json {

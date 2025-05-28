@@ -1,5 +1,6 @@
 #include "prette/prette.h"
 
+#include <ostream>
 #include <sstream>
 #include <string>
 

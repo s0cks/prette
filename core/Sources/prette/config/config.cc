@@ -29,7 +29,7 @@ auto Config::Load() -> Status {
 }
 
 auto Config::GetString(std::string key) const -> std::string {
-  ASSERT(!key.empty());
+  ASSERT_NOT_EMPTY(key);
   const char* value = nullptr;
   config_lookup_string(&config_, key.c_str(), &value);
   return {value};

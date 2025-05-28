@@ -7,6 +7,7 @@
 #include <vector>
 #include <vulkan/vulkan_core.h>
 
+#include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/gfx_vk.h"
 #include "prette/surface.h"

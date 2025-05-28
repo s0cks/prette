@@ -3,6 +3,7 @@
 
 #include <vector>
 
+#include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/vk.h"
 

@@ -1,7 +1,7 @@
-#include "prette/keyboard/keyboard.h"
 #ifdef PRT_ENABLE_LUA
 
-#include "prette/common.h"
+#include "prette/assertions.h"
+#include "prette/keyboard/keyboard.h"
 #include "prette/lua.h"
 
 namespace prt {

@@ -7,7 +7,8 @@
 namespace prt::audio {
 static AudioWorkerThread* thread_ = nullptr;
 
-AudioWorkerThread::AudioWorkerThread() {
+AudioWorkerThread::AudioWorkerThread(const AudioWorkerId id) :
+  id_(id) {
   pthread_mutex_init(&mixer_mutex_, nullptr);
   LOG_IF(FATAL, !Start()) << "failed to start AudioWorkerThread";
 }
@@ -19,6 +20,7 @@ AudioWorkerThread::~AudioWorkerThread() {
 void AudioWorkerThread::HandleThread(void* data) {
   const auto worker_thread = (AudioWorkerThread*)data;  // NOLINT(cppcoreguidelines-pro-type-cstyle-cast)
   ASSERT(worker_thread->IsStopped());
+  DLOG(INFO) << "starting AudioWorkerThread #" << worker_thread->GetWorkerId() << "....";
   worker_thread->SetState(kStarting);
   // do something?
   worker_thread->SetState(kRunning);
@@ -40,7 +42,7 @@ auto AudioWorkerThread::Start() -> bool {
 void AudioWorkerThread::Init() {
   // TODO: check calling thread is main thread
   ASSERT(thread_ == nullptr);
-  thread_ = new AudioWorkerThread();
+  thread_ = new AudioWorkerThread(1);
 }
 
 auto AudioWorkerThread::GetAudioWorkerThread() -> AudioWorkerThread* {

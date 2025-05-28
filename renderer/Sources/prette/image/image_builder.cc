@@ -1,6 +1,6 @@
 #include "prette/image/image_builder.h"
 
-#include "prette/common.h"
+#include "prette/assertions.h"
 #include "prette/image/image.h"
 #include "prette/vk.h"
 

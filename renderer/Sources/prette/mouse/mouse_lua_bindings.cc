@@ -68,7 +68,7 @@ LUA_MOUSE_F(onButtonReleased),
   FOR_EACH_MOUSE_EVENT(DEFINE_ON_EVENT)
 #undef DEFINE_ON_EVENT
 
-#undef LUA_KEYBOARD_F
+#undef LUA_MOUSE_F
 };
 // clang-format on
 

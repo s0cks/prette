@@ -1,8 +1,11 @@
 #ifndef PRT_FONT_H
 #define PRT_FONT_H
 
+#include <memory>
+
 #include "prette/freetype.h"
 #include "prette/rect.h"
+#include "prette/vk.h"
 
 namespace prt {
 class TextureAtlas;

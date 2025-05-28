@@ -5,6 +5,7 @@
 #include <utility>
 #include <vulkan/vulkan_core.h>
 
+#include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/copy_to_image.h"
 #include "prette/descriptor_set.h"
@@ -88,7 +89,7 @@ auto TextureAtlas::Add(const VkExtent2D extent, const uint8_t* pixels) -> AtlasT
   vk::Buffer* staging = nullptr;
   {
     vk::BufferBuilder builder{};
-    staging = builder.BuildTransferDestBuffer(total_size);
+    staging = builder.WithTransferDestUsage().Build();
     ASSERT_INITIALIZED(staging);
   }
 

@@ -6,13 +6,16 @@
 #include <vector>
 #include <vulkan/vulkan_core.h>
 
+#include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/copy_to_buffer.h"
 #include "prette/gfx.h"
+#include "prette/index_buffer.h"
 #include "prette/pipeline/pipeline_builder.h"
 #include "prette/pipeline/pipeline_cache.h"
 #include "prette/pipeline/pipeline_layout.h"
 #include "prette/relaxed_atomic.h"
+#include "prette/vertex/vertex_buffer.h"
 #include "prette/vk.h"
 #include "prette/vk_buffer.h"
 
@@ -99,21 +102,13 @@ class RenderPipelineTemplate : public RenderPipeline {
                          vk::PipelineLayout* layout, vk::PipelineCache* cache) :
     RenderPipeline(name, extent, create_info, layout, cache) {
     {
-      vk::BufferBuilder builder{};
-      // clang-format off
-      vbuffer_ = builder.WithSize(kTotalVertexBufferSize)
-        .WithVertexBufferUsage()
-        .Build();
-      // clang-format on
+      vk::VertexBufferBuilder<Vertex> builder{};
+      vbuffer_ = builder.WithLength(MaxNumberOfVertices);
       ASSERT_INITIALIZED(vbuffer_);
     }
     {
-      vk::BufferBuilder builder{};
-      // clang-format off
-      ibuffer_ = builder.WithSize(kTotalIndexBufferSize)
-        .WithIndexBufferUsage()
-        .Build();
-      // clang-format on
+      vk::IndexBufferBuilder<Index> builder{};
+      ibuffer_ = builder.WithLength(MaxNumberOfIndices);
       ASSERT_INITIALIZED(ibuffer_);
     }
   }

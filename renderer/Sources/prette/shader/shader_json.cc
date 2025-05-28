@@ -4,6 +4,7 @@
 #include <optional>
 #include <string>
 
+#include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/json.h"
 #include "prette/shader/shader.h"
@@ -25,6 +26,61 @@ auto ShaderObjectHandler::String(const char* str, SizeType length, bool copy) ->
         return TransitionTo(ShaderObjectHandlerState::kError);
       return TransitionTo(ShaderObjectHandlerState::kOpen);
     }
+    default:
+      return InvalidState();
+  }
+}
+
+auto ShaderObjectHandler::EndObject(SizeType memberCount) -> bool {
+  switch (GetState()) {
+    case ShaderObjectHandlerState::kOpen:
+      return TransitionTo(ShaderObjectHandlerState::kClosed);
+    default:
+      break;
+  }
+  return InvalidState();
+}
+
+auto ShaderObjectHandler::Null() -> bool {
+  return InvalidState();
+}
+
+auto ShaderObjectHandler::Bool(bool b) -> bool {
+  return InvalidState();
+}
+
+auto ShaderObjectHandler::Int(int i) -> bool {
+  return InvalidState();
+}
+
+auto ShaderObjectHandler::Uint(unsigned u) -> bool {
+  return InvalidState();
+}
+
+auto ShaderObjectHandler::Int64(int64_t i) -> bool {
+  return InvalidState();
+}
+
+auto ShaderObjectHandler::Uint64(uint64_t u) -> bool {
+  return InvalidState();
+}
+
+auto ShaderObjectHandler::Double(double d) -> bool {
+  return InvalidState();
+}
+
+auto ShaderObjectHandler::StartArray() -> bool {
+  return InvalidState();
+}
+
+auto ShaderObjectHandler::EndArray(SizeType elementCount) -> bool {
+  return InvalidState();
+}
+
+auto ShaderObjectHandler::StartObject() -> bool {
+  switch (GetState()) {
+    case ShaderObjectHandlerState::kClosed:
+      return TransitionTo(ShaderObjectHandlerState::kOpen);
     default:
       return InvalidState();
   }

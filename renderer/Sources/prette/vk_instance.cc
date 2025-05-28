@@ -6,7 +6,7 @@
 #include <vector>
 #include <vulkan/vulkan_core.h>
 
-#include "prette/common.h"
+#include "prette/assertions.h"
 #include "prette/gfx.h"
 #include "prette/to_string.h"
 #include "prette/vk.h"

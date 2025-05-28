@@ -1,6 +1,7 @@
 #include "prette/shader/shader_code.h"
 
 #include <fstream>
+#include <ios>
 #include <units.h>
 
 #include "prette/common.h"

@@ -11,6 +11,7 @@
 #include <vector>
 #include <vulkan/vulkan_core.h>
 
+#include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/gfx_driver.h"
 #include "prette/glm.h"

@@ -1,0 +1,30 @@
+namespace prt.asset.raw;
+
+enum AssetType : byte {
+  Binary = 1,
+  Shader,
+  Texture,
+  Mesh,
+  Sound,
+  Material,
+  Font,
+}
+
+enum ContentType : byte {
+  ApplicationBinary = 1,
+  ApplicationJson,
+  ScriptLua,
+  ImageJpeg,
+  ImagePng,
+  AudioWave,
+  FontTruetype,
+}
+
+table Asset {
+  type: AssetType = Binary;
+  content_type: ContentType = ApplicationBinary;
+  path: string;
+  hash: [ubyte];
+}
+
+root_type Asset;

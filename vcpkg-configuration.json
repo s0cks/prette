@@ -14,7 +14,7 @@
       "kind": "git",
       "repository": "https://github.com/s0cks/vcpkg",
       "reference": "main",
-      "baseline": "11531bca2f0b6404e0daec794370d867c829125d",
+      "baseline": "b88a6b9a87502a0038c9dee699ee1b95b4792437",
       "packages": [
         "ecl",
         "libwave"

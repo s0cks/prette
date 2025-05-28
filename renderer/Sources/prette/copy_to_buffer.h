@@ -4,6 +4,7 @@
 #include <cstdint>
 #include <vulkan/vulkan_core.h>
 
+#include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/vk.h"
 

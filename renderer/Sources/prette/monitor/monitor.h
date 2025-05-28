@@ -4,6 +4,7 @@
 #include <string>
 #include <units.h>
 
+#include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/dimension.h"
 #include "prette/event.h"

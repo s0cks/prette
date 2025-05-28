@@ -10,7 +10,9 @@
 #include "prette/vk.h"
 
 namespace prt {
-Glyph::Glyph(Face face, Index index, TextureAtlas* atlas) {
+Glyph::Glyph(Face f, Index i, TextureAtlas* atlas) :
+  face(f),
+  index(i) {
   auto error = FT_Load_Glyph(face, index, FT_LOAD_DEFAULT);
   if (error)
     throw std::runtime_error("failed to load glyph");

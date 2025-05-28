@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include "prette/common.h"
+#include "prette/assertions.h"
 #include "prette/gfx.h"
 #include "prette/gfx_driver.h"
 #include "prette/gfx_driver_event.h"
@@ -22,11 +22,11 @@ static inline auto IsValidSwapchainPresentMode(const VkPresentModeKHR& mode) -> 
   return mode == VK_PRESENT_MODE_MAILBOX_KHR;
 }
 
-// TODO: use Driver allocator
 Surface::Surface(Driver* driver) {
   const auto window = GetAppWindow();
   ASSERT(window);
-  CHECK_VK(FATAL, glfwCreateWindowSurface(*driver->GetInstance(), window->GetHandle(), nullptr, handle_ptr()),
+  CHECK_VK(FATAL,
+           glfwCreateWindowSurface(*driver->GetInstance(), window->GetHandle(), driver->GetAllocator(), handle_ptr()),
            "failed to create window VkSurfaceKHR");
   OnPhysicalDeviceInitEvent().subscribe([this, driver](PhysicalDeviceInitEvent* event) {
     const auto support = QuerySwapchainSupport(*driver->GetPhysicalDevice(), handle_ref());

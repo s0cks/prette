@@ -77,6 +77,14 @@
 		],
 		"description": "Generate a lua only section"
 	},
+	"ProfilingBlock": {
+		"prefix": "prt-prof-block",
+		"body": [
+			"PRT_PROFILING_BEGIN(${1:section})",
+			"$0",
+			"PRT_PROFILING_END(${1:section})"
+		]
+	},
 	"EngineStateGuard": {
 		"prefix": "prt-engine-state-guard",
 		"body": [

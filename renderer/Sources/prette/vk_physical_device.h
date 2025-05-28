@@ -7,6 +7,7 @@
 #include <vector>
 #include <vulkan/vulkan_core.h>
 
+#include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/gfx_vk.h"
 #include "prette/vk.h"
@@ -117,13 +118,13 @@ class PhysicalDeviceResolver {
   }
 
   auto WithRequiredExtensions(const ExtensionSet& rhs) -> PhysicalDeviceResolver& {
-    ASSERT(!rhs.empty());
+    ASSERT_NOT_EMPTY(rhs);
     required_extensions_.insert(std::begin(rhs), std::end(rhs));
     return *this;
   }
 
   auto WithRequiredExtensions(const ExtensionList& rhs) -> PhysicalDeviceResolver& {
-    ASSERT(!rhs.empty());
+    ASSERT_NOT_EMPTY(rhs);
     return WithRequiredExtensions(rhs.data(), rhs.size());
   }
 

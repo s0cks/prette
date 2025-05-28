@@ -2,7 +2,7 @@
 
 #include <vector>
 
-#include "prette/common.h"
+#include "prette/assertions.h"
 #include "prette/image/image.h"
 #include "prette/image/image_view.h"
 #include "prette/vk.h"

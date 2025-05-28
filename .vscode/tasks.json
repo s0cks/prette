@@ -33,6 +33,21 @@
     },
     {
       "type": "cmake",
+      "label": "CMake: generate C/C++ sources for flatbuffers",
+      "detail": "Run FlatC for the flatbuffer resources",
+      "command": "build",
+      "targets": [
+        "prt-flatbuffers"
+      ],
+      "preset": "${command:cmake.activeBuildPresetName}",
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      }
+    },
+    {
+      "type": "cmake",
       "label": "CMake: build sandbox",
       "detail": "Build the sandbox target",
       "command": "build",

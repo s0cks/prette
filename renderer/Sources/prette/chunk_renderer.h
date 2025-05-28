@@ -11,7 +11,7 @@
 #include "prette/vk.h"
 
 namespace prt {
-using ChunkMetadataBuffer = vk::UniformBuffer<ChunkMetadata, 1>;
+using ChunkMetadataBuffer = vk::UniformBufferTemplate<ChunkMetadata, 1>;
 
 class ChunkRenderer {
  private:

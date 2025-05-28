@@ -1,5 +1,6 @@
 #include "prette/input/input_system.h"
 
+#include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/mouse/mouse_system.h"
 #include "prette/renderer.h"

@@ -1,6 +1,5 @@
 #include "prette/debug.h"
 
-#include <cpuinfo_aarch64.h>
 #include <ostream>
 
 namespace prt {

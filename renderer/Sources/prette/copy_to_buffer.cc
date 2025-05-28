@@ -1,7 +1,6 @@
 #include "prette/copy_to_buffer.h"
 
-#include "vulkan/vulkan_core.h"
-
+#include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/mapped_buffer_scope.h"
 #include "prette/staging_scope.h"

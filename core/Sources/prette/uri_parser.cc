@@ -9,10 +9,10 @@
 #include "prette/platform.h"
 #include "prette/uri.h"
 
-namespace prt::uri {
+namespace prt {
 auto Parser::ParseScheme() -> bool {
   const auto start_pos = pos_;
-
+  slashcount_ = 0;
   token_len_ = 0;
   do {
     auto next = NextChar();
@@ -20,9 +20,11 @@ auto Parser::ParseScheme() -> bool {
       case ':': {
         switch ((next = PeekChar())) {
           case '/':
+            slashcount_++;
             NextChar();
             switch ((next = PeekChar())) {
               case '/':
+                slashcount_++;
                 NextChar();
                 break;
               default:
@@ -33,7 +35,7 @@ auto Parser::ParseScheme() -> bool {
             break;
         }
         token_[token_len_] = '\0';  // NOLINT(cppcoreguidelines-pro-bounds-constant-array-index)
-        return token_len_ > 0;
+        return (token_len_) > 0;
       }
       case EOF:
       case '?':
@@ -52,6 +54,25 @@ auto Parser::ParseScheme() -> bool {
 }
 
 auto Parser::ParsePath() -> bool {
+  token_len_ = 0;
+  do {
+    switch (PeekChar()) {
+      case '?':
+      case '.':
+      case EOF:
+        token_[token_len_] = '\0';  // NOLINT(cppcoreguidelines-pro-bounds-constant-array-index)
+        return true;
+      default:
+        token_[token_len_++] = NextChar();  // NOLINT(cppcoreguidelines-pro-bounds-constant-array-index)
+        continue;
+    }
+  } while (true);
+  return false;
+}
+
+auto Parser::ParseExtension() -> bool {
+  if (PeekChar() == '.')
+    NextChar();
   token_len_ = 0;
   do {
     switch (PeekChar()) {
@@ -162,9 +183,9 @@ auto Parser::TryParseScheme() -> bool {
   if (!ParseScheme()) {
     if (!config_.HasDefaultScheme() && config_.IsStrict())
       return false;
-    return OnParseScheme(config_.default_scheme.data(), config_.default_scheme.length());
+    return OnParseScheme(config_.default_scheme.data(), 0, 0);
   }
-  return OnParseScheme(token_.data(), token_len_);
+  return OnParseScheme(token_.data(), column() - token_len_ - 1 - slashcount_, token_len_);
 }
 
 auto Parser::Parse(const basic_uri& uri) -> ParseResult {
@@ -176,8 +197,13 @@ auto Parser::Parse(const basic_uri& uri) -> ParseResult {
 
   if (!ParsePath())
     return ParseResult::Failure("Failed to parse uri path.");
-  if (!OnParsePath(token_.data(), token_len_))
+  if (!OnParsePath(token_.data(), column() - token_len_, token_len_))
     return ParseResult::Failure(fmt::format("Failed to parse uri path: {0:s}", token()));
+
+  if (!ParseExtension())
+    return ParseResult::Failure("Failed to parse uri extension.");
+  if (!OnParseExtension(token_.data(), column() - token_len_, token_len_))
+    return ParseResult::Failure(fmt::format("Failed to parse uri extension: {0:s}", token()));
 
   do {
     switch (PeekChar()) {
@@ -209,4 +235,4 @@ auto Parser::Parse(const basic_uri& uri) -> ParseResult {
   } while (true);
   return ParseResult::Failure("unexpected end of stream.");
 }
-}  // namespace prt::uri
+}  // namespace prt

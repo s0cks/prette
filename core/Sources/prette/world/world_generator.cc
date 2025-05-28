@@ -50,14 +50,11 @@ DefaultWorldGenerator::~DefaultWorldGenerator() {
 }
 
 auto DefaultWorldGenerator::Generate() -> World* {
-  const auto name = GetWorldName();
-#ifdef PRT_DEBUG
-  VLOG(1) << "generating " << name << " World....";
-  const auto start = std::chrono::high_resolution_clock::now();
-#endif  // PRT_DEBUG
+  const auto& name = GetWorldName();
+  DVLOG(2) << "generating " << name << " world....";
+  PRT_PROFILING_BEGIN(world_gen)
   const auto world = World::New(name);
   ASSERT(world);
-
   WorldInitializerIterator iter(GetInitializerList());
   while (iter.HasNext()) {
     const auto next = iter.Next();
@@ -66,12 +63,9 @@ auto DefaultWorldGenerator::Generate() -> World* {
       throw WorldGenerationException(fmt::format("failed to apply `{0:s}` WorldInitializer", next->GetName()));
     }
   }
-
-#ifdef PRT_DEBUG
-  const auto finished = std::chrono::high_resolution_clock::now();
-  const auto total_ns = std::chrono::duration_cast<std::chrono::nanoseconds>((finished - start));
-  VLOG(1) << name << " generated in " << units::time::nanosecond_t(static_cast<double>(total_ns.count())) << "!";
-#endif  // PRT_DEBUG
+  PRT_PROFILING_END(world_gen)
+  DVLOG(1) << name
+           << " world generated in: " << std::chrono::duration_cast<std::chrono::milliseconds>(world_gen_duration);
   return world;
 }
 }  // namespace prt

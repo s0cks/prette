@@ -1,7 +1,7 @@
 #include "prette/gfx_driver.h"
 #ifdef PRT_ENABLE_LUA
 
-#include "prette/common.h"
+#include "prette/assertions.h"
 #include "prette/gfx_driver_event.h"
 #include "prette/lua.h"
 

@@ -3,6 +3,7 @@
 
 #include <string>
 
+#include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/dimension.h"
 #include "prette/engine/engine.h"

@@ -1,16 +1,18 @@
 #ifndef PRT_DEBUG_H
 #define PRT_DEBUG_H
 
-#include <string>
-#include <utility>
 #ifdef PRT_DEBUG
 
 #include <glog/logging.h>
+#include <string>
+#include <utility>
 
 #include "prette/platform.h"
 #ifdef ARCH_IS_ARM64
 
+// IWYU pragma: begin_exports
 #include <cpuinfo_aarch64.h>
+// IWYU pragma: end_exports
 
 #else
 #error "Unsupported CPU architecture"

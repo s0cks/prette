@@ -99,6 +99,19 @@ class ALCStatus {
   }
 };
 
+AudioBuffer::AudioBuffer(const AudioFormat format, const uint8_t* bytes, const uint64_t num_bytes,
+                         const uint64_t num_samples) :
+  id_(kInvalidBufferId) {
+  alGenBuffers(1, &id_);
+  CHECK_AL_ERRORS(FATAL);
+  alBufferData(id_, format, (const ALvoid*)bytes, (const ALsizei)num_bytes, (const ALsizei)num_samples);
+  CHECK_AL_ERRORS(FATAL);
+}
+
+AudioBuffer::~AudioBuffer() {
+  alDeleteBuffers(1, &id_);
+}
+
 void CheckALErrors(const google::LogSeverity severity, const char* file, const int line) {
   ALStatus status = AL_NO_ERROR;
   while (!(status = alGetError()))

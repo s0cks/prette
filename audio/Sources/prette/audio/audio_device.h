@@ -1,0 +1,4 @@
+#ifndef PRT_AUDIO_DEVICE_H
+#define PRT_AUDIO_DEVICE_H
+
+#endif  // PRT_AUDIO_DEVICE_H

@@ -5,6 +5,7 @@
 #include <string>
 #include <vulkan/vulkan_core.h>
 
+#include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/vk.h"
 #include "prette/vk_debug_messenger.h"
@@ -49,7 +50,7 @@ class InstanceBuilder : public vk::HandleBuilderTemplate<VkInstanceCreateInfo, I
   }
 
   auto WithLayers(const LayerSet& rhs) -> InstanceBuilder& {
-    ASSERT(!rhs.empty());
+    ASSERT_NOT_EMPTY(rhs);
     required_layers_.insert(std::begin(rhs), std::end(rhs));
     return *this;
   }
@@ -61,7 +62,7 @@ class InstanceBuilder : public vk::HandleBuilderTemplate<VkInstanceCreateInfo, I
   }
 
   auto WithExtensions(const ExtensionSet& rhs) -> InstanceBuilder& {
-    ASSERT(!rhs.empty());
+    ASSERT_NOT_EMPTY(rhs);
     required_extensions_.insert(std::begin(rhs), std::end(rhs));
     return *this;
   }

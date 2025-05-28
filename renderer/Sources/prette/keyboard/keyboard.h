@@ -6,6 +6,7 @@
 #include <sstream>
 #include <string>
 
+#include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/event.h"
 #include "prette/to_string.h"

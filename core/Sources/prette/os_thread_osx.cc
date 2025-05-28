@@ -1,3 +1,5 @@
+#include <ios>
+
 #include "prette/os_thread.h"
 #ifdef OS_IS_OSX
 

@@ -3,7 +3,9 @@
 
 #include <string>
 #include <vector>
+#include <vulkan/vulkan_core.h>
 
+#include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/vk.h"
 
@@ -77,6 +79,10 @@ class QueueSubmit {
   operator VkSubmitInfo() const {
     return GetHandle();
   }
+
+  auto operator()(const VkFence& rhs) -> Result {
+    return Submit(rhs);
+  }
 };
 
 class QueuePresent {
@@ -126,6 +132,10 @@ class QueuePresent {
   }
 
   auto Present() -> Result;
+
+  auto operator()() -> Result {
+    return Present();
+  }
 
   operator VkPresentInfoKHR() const {
     return info_ref();

@@ -5,6 +5,7 @@
 #include <type_traits>
 #include <utility>
 
+#include "prette/assertions.h"
 #include "prette/common.h"
 
 namespace prt {

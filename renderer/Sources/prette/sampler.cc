@@ -2,8 +2,7 @@
 
 #include <string>
 
-#include "prette/common.h"
-#include "prette/device.h"
+#include "prette/assertions.h"
 #include "prette/gfx.h"
 #include "prette/to_string.h"
 #include "prette/vk.h"

@@ -1,6 +1,6 @@
 #include "prette/component/component_system.h"
 
-#include "prette/common.h"
+#include "prette/assertions.h"
 #include "prette/thread_local.h"
 #include "prette/tick.h"
 

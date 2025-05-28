@@ -6,6 +6,7 @@
 #include <vector>
 #include <vulkan/vulkan_core.h>
 
+#include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/platform.h"
 #include "prette/vk.h"
@@ -280,7 +281,7 @@ class RenderPassBuilder : public NamedHandleBuilderTemplate<VkRenderPassCreateIn
   ~RenderPassBuilder();
 
   auto WithName(const std::string rhs) -> RenderPassBuilder& {
-    ASSERT(!rhs.empty());
+    ASSERT_NOT_EMPTY(rhs);
     name_ = std::move(rhs);
     return *this;
   }

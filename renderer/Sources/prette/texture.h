@@ -7,6 +7,7 @@
 #include <utility>
 #include <vulkan/vulkan_core.h>
 
+#include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/image/image.h"
 #include "prette/image/image_view.h"

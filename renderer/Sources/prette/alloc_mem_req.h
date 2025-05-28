@@ -2,7 +2,9 @@
 #define PRT_ALLOC_MEM_REQ_H
 
 #include <cstdint>
+#include <vulkan/vulkan_core.h>
 
+#include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/vk.h"
 
@@ -19,6 +21,7 @@ class AllocMemoryRequest {
   AllocMemoryRequest(const VkDeviceSize alloc_size, const uint32_t type);
   AllocMemoryRequest(const VkMemoryRequirements requirements, const VkMemoryPropertyFlags flags);
   AllocMemoryRequest(const VkImage image, const VkMemoryPropertyFlags flags);
+  AllocMemoryRequest(const VkBuffer buffer, const VkMemoryPropertyFlags flags);
   ~AllocMemoryRequest() = default;
 
   auto info() const -> const VkMemoryAllocateInfo& {
@@ -43,6 +46,10 @@ class AllocMemoryRequest {
   }
 
   void Allocate(VkDeviceMemory* result);
+
+  void operator()(VkDeviceMemory* result) {
+    return Allocate(result);
+  }
 };
 }  // namespace prt::vk
 

@@ -10,7 +10,6 @@
     "flatbuffers",
     "libnoise",
     "fmt",
-    "fruit",
     "freetype",
     "gflags",
     "glfw3",

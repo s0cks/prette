@@ -1,6 +1,7 @@
 #include "prette/json.h"
 
 #include <fstream>
+#include <ios>
 #include <string>
 
 #include "prette/common.h"

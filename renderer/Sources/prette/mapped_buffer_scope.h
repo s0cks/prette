@@ -3,7 +3,7 @@
 
 #include <vulkan/vulkan_core.h>
 
-#include "prette/common.h"
+#include "prette/assertions.h"
 #include "prette/vk.h"
 
 namespace prt::vk {

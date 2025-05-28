@@ -3,18 +3,16 @@ CompileFlags:
 Completion:
   AllScopes: Yes
 Style:
-  QuotedHeaders:
-  - "prette/.*"
-  AngledHeaders:
-  - "GLFW/.*"
-  - "vulkan/.*"
+  QuotedHeaders: [ "prette/.*" ]
+  AngledHeaders: [ "GLFW/.*", "vulkan/.*" ]
 Diagnostics:
   UnusedIncludes: Strict
   MissingIncludes: Strict
   Includes:
     IgnoreHeader:
-    - vulkan\.h
-    - "rx-*.hpp"
-    - "operators/rx-*.hpp"
-    - "subjects/rx-*.hpp"
+    - "vulkan/.*"
+    - "rx-.*"
+    - "operators/rx-.*"
+    - "subjects/rx-.*"
     - "glm/.*"
+    - "fmt\base.h"

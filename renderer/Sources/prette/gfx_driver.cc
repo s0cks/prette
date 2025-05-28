@@ -1,5 +1,6 @@
 #include "prette/gfx_driver.h"
 
+#include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/engine/engine.h"
 #include "prette/engine/engine_event.h"

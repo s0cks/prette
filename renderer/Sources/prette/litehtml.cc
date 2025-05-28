@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 
+#include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/thread_local.h"
 #include "prette/window/window.h"

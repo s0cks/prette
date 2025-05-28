@@ -1,3 +1,4 @@
+#include "prette/assertions.h"
 #include "prette/monitor/monitor.h"
 #ifdef PRT_GLFW
 

@@ -1,6 +1,7 @@
 #ifndef PRT_RENDERER_H
 #define PRT_RENDERER_H
 
+#include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/engine/engine.h"
 #include "prette/platform.h"

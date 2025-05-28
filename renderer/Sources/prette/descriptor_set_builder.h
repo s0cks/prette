@@ -5,6 +5,7 @@
 #include <utility>
 #include <vector>
 
+#include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/vk.h"
 
@@ -75,7 +76,7 @@ class DescriptorSetBuilder {
   }
 
   auto WithName(const std::string rhs) -> DescriptorSetBuilder& {
-    ASSERT(!rhs.empty());
+    ASSERT_NOT_EMPTY(rhs);
     name_ = std::move(rhs);
     return *this;
   }

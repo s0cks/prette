@@ -25,7 +25,7 @@ FOR_EACH_RENDERER_EVENT(DEFINE_ON_EVENT_FUNC);
 
 // clang-format off
 // NOLINTNEXTLINE
-static const struct luaL_Reg kRendererLib[] = {
+DEFINE_LUALIB(Renderer) {
 #define LUA_RENDERER_F(Name) \
   { .name = #Name, .func = &lua_renderer_##Name }
 

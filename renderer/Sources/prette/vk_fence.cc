@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include "prette/device.h"
+#include "prette/device.h"  // IWYU pragma: keep
 #include "prette/gfx.h"
 #include "prette/platform.h"
 #include "prette/to_string.h"

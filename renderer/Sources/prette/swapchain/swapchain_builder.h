@@ -1,6 +1,7 @@
 #ifndef PRT_SWAPCHAIN_BUILDER_H
 #define PRT_SWAPCHAIN_BUILDER_H
 
+#include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/gfx_vk.h"
 #include "prette/vk.h"

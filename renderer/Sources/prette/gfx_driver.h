@@ -3,6 +3,10 @@
 
 #include "prette/gfx_driver_event.h"
 
+#ifdef PRT_ENABLE_LUA
+struct lua_State;
+#endif  // PRT_ENABLE_LUA
+
 namespace prt {
 auto OnDriverEvent() -> DriverEventObservable;
 

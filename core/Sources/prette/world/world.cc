@@ -33,7 +33,10 @@ static inline auto GetWorldStorageDir(const std::string& name) -> fs::path {
 
 World::World(std::string name) :
   name_(std::move(name)),
-  storage_(new WorldStorage(this, GetWorldStorageDir(GetName()))) {}
+  storage_(new WorldStorage(this, GetWorldStorageDir(GetName()))) {
+  ASSERT_NOT_EMPTY(name_);
+  ASSERT(storage_);
+}
 
 World::~World() {
   delete storage_;

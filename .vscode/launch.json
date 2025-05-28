@@ -155,5 +155,31 @@
         "command source ${workspaceFolder}/.lldbinit"
       ],
     },
+    {
+      "name": "prette-audio-example",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/audio/Sources/prette-audio-example",
+      "args": [
+        "--resources",
+        "${workspaceFolder}/resources",
+        "--config=${workspaceFolder}/prette.cfg",
+        "--logtostdout",
+        "--colorlogtostdout",
+        "-v=${input:vlevel}"
+      ],
+      "cwd": "${workspaceFolder}/data",
+      "env": {
+        "MTL_DEBUG_LAYER":"0",
+        "UV_THREADPOOL_SIZE": "0",
+        "TERM": "xterm-256color",
+        "METAL_DEVICE_WRAPPER_TYPE": "1",
+        "PRT_PATH": "${workspaceFolder}/prette/resources;${workspaceFolder}/build/prette/resources",
+        "LUA_PATH": "${env:LUA_PATH};${workspaceFolder}/lib/?/?.lua;${workspaceFolder}/prette/resources/scripts/?/?.lua;${workspaceFolder}/prette/resources/scripts/?.lua"
+      },
+      "initCommands": [
+        "command source ${workspaceFolder}/.lldbinit"
+      ],
+    },
   ]
 }

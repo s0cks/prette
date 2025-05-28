@@ -32,6 +32,7 @@ class AudioWorkerThread {
   };
 
  private:
+  AudioWorkerId id_;
   RelaxedAtomic<State> state_ = kStopped;
   ThreadId thid_{};
   pthread_mutex_t mixer_mutex_{};
@@ -52,8 +53,12 @@ class AudioWorkerThread {
   }
 
  public:
-  AudioWorkerThread();
+  AudioWorkerThread(const AudioWorkerId id);
   ~AudioWorkerThread();
+
+  auto GetWorkerId() const -> AudioWorkerId {
+    return id_;
+  }
 
   auto GetState() const -> State {
     return (State)state_;

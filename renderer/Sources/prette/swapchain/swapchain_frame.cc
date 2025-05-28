@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 
+#include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/device.h"       // IWYU pragma: keep
 #include "prette/image/image.h"  // IWYU pragma: keep
@@ -106,7 +107,7 @@ void SwapchainFrameScope::Present() {
     .WithSwap(swap)
     .WithWaitSemaphore(frame_->GetFinishedSemaphore());
   // clang-format on
-  const auto result = present.Present();
+  const auto result = present();
   if (result.IsSubOptimal() || result.IsOutOfDate() || GetSwapchain()->IsResized()) {
     SwapchainInitializer::ReInit();
     return;
@@ -119,7 +120,7 @@ void SwapchainFrameScope::Submit() {
       .WithWaitSemaphore(frame_->GetAvailableSemaphore())
       .WithSignalSemaphore(frame_->GetFinishedSemaphore())
       .WithCommandBuffers(frame_->GetComamndBuffers());
-  const auto status = submit.Submit(frame_->GetFence());
+  const auto status = submit(frame_->GetFence());
   LOG_IF(FATAL, !status) << "failed to submit swapchain frame: " << status;
 }
 }  // namespace prt

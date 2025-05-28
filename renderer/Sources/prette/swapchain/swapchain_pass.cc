@@ -12,6 +12,7 @@
 #include "prette/descriptor_set_builder.h"
 #include "prette/descriptor_set_update.h"
 #include "prette/gfx_vk.h"
+#include "prette/glm.h"
 #include "prette/pipeline/pipeline_layout.h"
 #include "prette/render_pass/render_pass.h"
 #include "prette/render_pass/render_pass_builder.h"

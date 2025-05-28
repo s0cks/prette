@@ -6,7 +6,6 @@
 
 #include "prette/descriptor_set.h"
 #include "prette/index_class.h"
-#include "prette/mesh.h"
 #include "prette/mesh_class.h"
 #include "prette/pipeline/pipeline.h"
 #include "prette/platform.h"
