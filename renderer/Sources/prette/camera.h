@@ -13,10 +13,10 @@
 #include "prette/vk_buffer.h"
 
 namespace prt {
-static constexpr const auto kWorldUp = glm::vec3(0.0f, -1.0f, 0.0f);
-static constexpr const auto kWorldDown = glm::vec3(0.0f, 1.0f, 0.0f);
-static constexpr const auto kWorldRight = glm::vec3(1.0f, 0.0f, 0.0f);
-static constexpr const auto kWorldLeft = glm::vec3(-1.0f, 0.0f, 0.0f);
+static constexpr const auto kWorldUp = glm::vec3(0.0f, 1.0f, 0.0f);
+static constexpr const auto kWorldDown = glm::vec3(0.0f, -1.0f, 0.0f);
+static constexpr const auto kWorldRight = glm::vec3(-1.0f, 0.0f, 0.0f);
+static constexpr const auto kWorldLeft = glm::vec3(1.0f, 0.0f, 0.0f);
 
 static constexpr const auto kDefaultZoom = 100.0f;
 static constexpr const auto kZoomInterval = 2.0f;

@@ -3,7 +3,6 @@
 #include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/mapped_buffer_scope.h"
-#include "prette/staging_scope.h"
 #include "prette/vk_buffer.h"
 #include "prette/vk_cmd_buffers.h"
 
@@ -17,9 +16,17 @@ void CopyBytesToBuffer::operator()(Buffer* dst) const {
 
 void CopyBytesToBufferWithStaging::operator()(Buffer* dst) const {
   ASSERT_INITIALIZED(dst);
-  StagingScope staging(data(), size());
-  CopyBufferToBuffer copy(staging);
-  return copy(dst);
+  vk::BufferBuilder staging_builder{};
+  staging_builder.WithTransferSourceUsage().WithSize(size());
+  vk::ScopedBuffer staging(staging_builder);
+  {
+    vk::CopyBytesToBuffer copy(data(), size());
+    copy(staging);
+  }
+  {
+    vk::CopyBufferToBuffer copy(staging);
+    copy(dst);
+  }
 }
 
 CopyBufferToBuffer::CopyBufferToBuffer(Buffer* source, const uint64_t num_bytes, const uint64_t source_offset,

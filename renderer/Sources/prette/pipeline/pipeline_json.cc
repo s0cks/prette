@@ -32,7 +32,11 @@ void PipelineHandler::OnParseFragmentShader(const std::string& value) {
 }
 
 auto PipelineHandler::OnParseVertexClass(const std::string& value) -> bool {
-  if (EqualsIgnoreCase(value, "tile") || EqualsIgnoreCase("color2d", value) || EqualsIgnoreCase("color2d", value)) {
+  if (EqualsIgnoreCase(value, "tile")) {
+    builder_->AddVertexBinding(tex2d::Vertex::GetBindingDescription());
+    builder_->AddVertexAttributes(tex2d::Vertex::GetAttributeDescriptions());
+    return TransitionTo(PipelineHandlerState::kOpenDoc);
+  } else if (EqualsIgnoreCase("color2d", value) || EqualsIgnoreCase("color2d", value)) {
     builder_->AddVertexBinding(color2d::Vertex::GetBindingDescription());
     builder_->AddVertexAttributes(color2d::Vertex::GetAttributeDescriptions());
     return TransitionTo(PipelineHandlerState::kOpenDoc);
@@ -68,6 +72,14 @@ auto PipelineHandler::String(const char* str, SizeType length, bool copy) -> boo
       return TransitionTo(PipelineHandlerState::kOpenDoc);
     case PipelineHandlerState::kParsingDynamicStates:
       OnParseDynamicState(value);
+      return Continue();
+    case PipelineHandlerState::kParsingViewport:
+      if (!viewport_.String(str, length, copy))
+        return Error("error parsing viewport");
+      if (viewport_.IsClosedDoc()) {
+        builder_->SetViewport(viewport_);
+        return TransitionTo(PipelineHandlerState::kOpenDoc);
+      }
       return Continue();
     case PipelineHandlerState::kParsingExtent: {
       if (EqualsIgnoreCase(value, "swapchain")) {
@@ -110,6 +122,8 @@ auto PipelineHandler::StartObject() -> bool {
       return rasterizer_.StartObject();
     case PipelineHandlerState::kParsingRenderPass:
       return pass_.StartObject();
+    case PipelineHandlerState::kParsingViewport:
+      return viewport_.StartObject();
     default:
       break;
   }
@@ -140,6 +154,8 @@ auto PipelineHandler::EndObject(SizeType memberCount) -> bool {
   switch (GetState()) {
     case PipelineHandlerState::kOpenDoc:
       return TransitionToClosed();
+    case PipelineHandlerState::kParsingViewport:
+      return viewport_.EndObject(memberCount);
 #define DELEGATE(S, Delegate)             \
   case S: {                               \
     if (!Delegate.EndObject(memberCount)) \
@@ -176,7 +192,8 @@ auto PipelineHandler::Key(const char* str, SizeType length, bool copy) -> bool {
   V("vertex_class", PipelineHandlerState::kParsingVertexClass)       \
   V("layout", PipelineHandlerState::kParsingLayout)                  \
   V("extent", PipelineHandlerState::kParsingExtent)                  \
-  V("shader_stages", PipelineHandlerState::kParsingShaderStages)
+  V("shader_stages", PipelineHandlerState::kParsingShaderStages)     \
+  V("viewport", PipelineHandlerState::kParsingViewport)
 
       // clang-format off
 #define CHECK_KEY(Key, State) \

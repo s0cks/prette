@@ -99,7 +99,7 @@ class ImageBuilder : public HandleBuilderTemplate<VkImageCreateInfo, Image> {
   }
 
   inline auto WithTransferSourceUsage() -> ImageBuilder& {
-    return WithUsage(GetUsage() | VK_IMAGE_USAGE_TRANSFER_DST_BIT);
+    return WithUsage(GetUsage() | VK_IMAGE_USAGE_TRANSFER_SRC_BIT);
   }
 
   inline auto WithDepthStencilAttachmentUsage() -> ImageBuilder& {
@@ -148,4 +148,4 @@ class ImageBuilder : public HandleBuilderTemplate<VkImageCreateInfo, Image> {
 };
 }  // namespace prt::vk
 
-#endif  // PRT_IMAGE_BUILDER_H
+#endif // PRT_IMAGE_BUILDER_H

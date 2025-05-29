@@ -14,6 +14,7 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <vulkan/vulkan_core.h>
 
 #include "prette/assertions.h"
 #include "prette/common.h"

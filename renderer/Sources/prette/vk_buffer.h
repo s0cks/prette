@@ -91,7 +91,7 @@ class BaseBufferBuilder {
   BaseBufferBuilder() {
     info_ptr()->sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
     info_ptr()->sharingMode = kDefaultBufferSharingMode;
-    info_ptr()->flags = kDefaultBufferMemoryProperties;
+    info_ptr()->flags = 0;  // kDefaultBufferMemoryProperties;
     info_ptr()->pNext = nullptr;
   }
 
@@ -104,7 +104,7 @@ class BaseBufferBuilder {
   }
 
  public:
-  virtual ~BaseBufferBuilder();
+  virtual ~BaseBufferBuilder() = default;
 
   inline auto info() const -> const VkBufferCreateInfo& {
     return info_;
@@ -126,8 +126,46 @@ class BaseBufferBuilder {
   virtual auto Build(const VkMemoryPropertyFlags mem_flags = kDefaultBufferMemoryProperties) -> Buffer*;
 };
 
+class ScopedBuffer {
+ private:
+  Buffer* buffer_ = nullptr;
+
+ public:
+  ScopedBuffer(BaseBufferBuilder& builder, const VkMemoryPropertyFlags mem_flags = kDefaultBufferMemoryProperties) :
+    buffer_(builder.Build(mem_flags)) {
+    ASSERT_INITIALIZED(buffer_);
+  }
+  ~ScopedBuffer() {
+    delete buffer_;
+  }
+
+  auto Get() const -> Buffer* {
+    return buffer_;
+  }
+
+  auto IsInitialized() const -> bool {
+    return vk::IsInitialized(buffer_);
+  }
+
+  auto operator->() const -> Buffer* {
+    return buffer_;
+  }
+
+  operator Buffer*() {
+    return buffer_;
+  }
+};
+
 class BufferBuilder : public BaseBufferBuilder {
  public:
+  BufferBuilder() = default;
+  ~BufferBuilder() override = default;
+
+  auto WithSize(const VkDeviceSize rhs) -> BufferBuilder& {
+    info_ptr()->size = rhs;
+    return *this;
+  }
+
   auto WithSharingMode(const VkSharingMode rhs) -> BufferBuilder& {
     info_ptr()->sharingMode = rhs;
     return *this;
@@ -145,6 +183,14 @@ class BufferBuilder : public BaseBufferBuilder {
 
   inline auto WithExclusiveSharingMode() -> BufferBuilder& {
     return WithSharingMode(VK_SHARING_MODE_EXCLUSIVE);
+  }
+
+  auto operator()(const VkMemoryPropertyFlags mem_flags = kDefaultBufferMemoryProperties) -> Buffer* {
+    return Build(mem_flags);
+  }
+
+  operator Buffer*() {
+    return Build();
   }
 };
 

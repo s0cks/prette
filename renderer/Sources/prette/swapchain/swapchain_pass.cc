@@ -75,11 +75,10 @@ auto SwapchainRenderPass::New() -> SwapchainRenderPass* {
   builder.WithName("swapchain");
   const auto color_ref = builder.AddAttachment()
                              .WithFormat(driver->GetSurface()->GetImageFormat())
-                             .WithSamples(VK_SAMPLE_COUNT_1_BIT)
-                             .WithLoadOp(VK_ATTACHMENT_LOAD_OP_CLEAR)
-                             .WithStoreOp(VK_ATTACHMENT_STORE_OP_STORE)
-                             .WithInitialLayout(VK_IMAGE_LAYOUT_UNDEFINED)
-                             .WithFinalLayout(VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL)
+                             .WithLoadOpClear()
+                             .WithStoreOpStore()
+                             .WithInitialLayoutUndefined()
+                             .WithFinalLayoutColorAttachmentOptimal()
                              .Build();
 
   // clang-format off
@@ -89,16 +88,16 @@ auto SwapchainRenderPass::New() -> SwapchainRenderPass* {
   // clang-format on
 
   builder.AddSubpassDependency()
-      .WithDependencyFlags(VK_DEPENDENCY_BY_REGION_BIT)
-      .WithDest({
-          .subpass = 0,
-          .stage = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
-          .access = VK_ACCESS_COLOR_ATTACHMENT_READ_BIT | VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,
-      })
+      .WithDependencyByRegion()
       .WithSource({
           .subpass = VK_SUBPASS_EXTERNAL,
           .stage = VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT,
           .access = VK_ACCESS_MEMORY_READ_BIT,
+      })
+      .WithDest({
+          .subpass = 0,
+          .stage = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
+          .access = VK_ACCESS_COLOR_ATTACHMENT_READ_BIT | VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,
       });
   return builder.BuildNamedType<SwapchainRenderPass>();
 }

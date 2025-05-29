@@ -1,7 +1,6 @@
 #include "prette/gui/gui_render_pass.h"
 
 #include <algorithm>
-#include <vector>
 #include <vulkan/vulkan_core.h>
 
 #include "prette/assertions.h"
@@ -107,12 +106,11 @@ auto GuiRenderPass::New() -> GuiRenderPass* {
   vk::RenderPassBuilder builder{};
   const auto color_ref = builder.AddAttachment()
                              .WithFormat(GetSwapchain()->GetFormat())
-                             .WithSamples(VK_SAMPLE_COUNT_1_BIT)
-                             .WithLoadOp(VK_ATTACHMENT_LOAD_OP_LOAD)
-                             .WithStoreOp(VK_ATTACHMENT_STORE_OP_STORE)
-                             .WithInitialLayout(VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL)
-                             .WithFinalLayout(VK_IMAGE_LAYOUT_PRESENT_SRC_KHR)
-                             .Build();
+                             .WithLoadOpLoad()
+                             .WithStoreOpStore()
+                             .WithInitialLayoutUndefined()
+                             .WithFinalLayoutPresentSrc()
+                             .BuildWithColorAttachmentOptimalRef();
 
   // clang-format off
   auto subpass = builder.AddSubpass()
@@ -120,17 +118,19 @@ auto GuiRenderPass::New() -> GuiRenderPass* {
   subpass.BindGraphics();
   // clang-format on
 
-  vk::RenderPassBuilder::SubpassDepBuilder subpass_dep = builder.AddSubpassDependency()
-                                                             .WithDependencyByRegion()
-                                                             .WithSource({
-                                                                 .subpass = VK_SUBPASS_EXTERNAL,
-                                                                 .stage = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
-                                                             })
-                                                             .WithDest({
-                                                                 .subpass = 0,
-                                                                 .stage = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
-                                                                 .access = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,
-                                                             });
+  vk::RenderPassBuilder::SubpassDepBuilder subpass_dep =
+      builder.AddSubpassDependency()
+          .WithDependencyByRegion()
+          .WithSource({
+              .subpass = VK_SUBPASS_EXTERNAL,
+              .stage = VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT,
+              .access = VK_ACCESS_MEMORY_READ_BIT,
+          })
+          .WithDest({
+              .subpass = 0,
+              .stage = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
+              .access = VK_ACCESS_COLOR_ATTACHMENT_READ_BIT | VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,
+          });
   return builder.BuildTyped<GuiRenderPass>();
 }
 }  // namespace prt

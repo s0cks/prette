@@ -22,6 +22,8 @@ Image::Image(const VkImageCreateInfo* create_info, const VkMemoryPropertyFlags m
 
   vk::AllocMemoryRequest alloc(handle_ref(), mem_flags);
   alloc.Allocate(&memory_);
+
+  vkBindImageMemory(*driver->GetDevice(), handle_ref(), memory_, 0);
 }
 
 Image::~Image() {

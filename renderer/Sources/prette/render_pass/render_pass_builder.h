@@ -131,8 +131,20 @@ class RenderPassBuilder : public NamedHandleBuilderTemplate<VkRenderPassCreateIn
       return *this;
     }
 
+    inline auto WithFinalLayoutColorAttachmentOptimal() -> AttachmentDescBuilder& {
+      return WithFinalLayout(VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL);
+    }
+
     inline auto WithFinalLayoutUndefined() -> AttachmentDescBuilder& {
       return WithFinalLayout(VK_IMAGE_LAYOUT_UNDEFINED);
+    }
+
+    inline auto WithFinalLayoutPresentSrc() -> AttachmentDescBuilder& {
+      return WithFinalLayout(VK_IMAGE_LAYOUT_PRESENT_SRC_KHR);
+    }
+
+    inline auto WithFinalLayoutSharedPresent() -> AttachmentDescBuilder& {
+      return WithFinalLayout(VK_IMAGE_LAYOUT_SHARED_PRESENT_KHR);
     }
 
     inline auto WithFinalLayoutShaderReadOptimal() -> AttachmentDescBuilder& {

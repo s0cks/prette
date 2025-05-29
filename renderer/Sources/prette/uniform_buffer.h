@@ -7,13 +7,17 @@
 #include "prette/vk_buffer.h"
 
 namespace prt::vk {
+static constexpr const auto kDefaultUniformBufferUsage = VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT;
 template <std140::IsAligned U>
-class UniformBufferBuilder :
-  public BaseBufferBuilderTemplate<U, VK_BUFFER_USAGE_VERTEX_BUFFER_BIT, UniformBufferBuilder<U>> {
+class UniformBufferBuilder : public BaseBufferBuilderTemplate<U, kDefaultUniformBufferUsage, UniformBufferBuilder<U>> {
  public:
   explicit UniformBufferBuilder(const VkDeviceSize init_length = 0) :
-    BaseBufferBuilderTemplate<U, VK_BUFFER_USAGE_VERTEX_BUFFER_BIT, UniformBufferBuilder<U>>(init_length) {}
+    BaseBufferBuilderTemplate<U, kDefaultUniformBufferUsage, UniformBufferBuilder<U>>(init_length) {}
   ~UniformBufferBuilder() override = default;
+
+  operator vk::Buffer*() {
+    return BaseBufferBuilderTemplate<U, kDefaultUniformBufferUsage, UniformBufferBuilder<U>>::Build();
+  }
 };
 }  // namespace prt::vk
 

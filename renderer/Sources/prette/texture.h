@@ -52,6 +52,7 @@ class Texture {
   vk::Image* image_ = nullptr;
   vk::ImageView* view_ = nullptr;
   vk::Sampler* sampler_ = nullptr;
+  VkDescriptorImageInfo descriptor_{};
 
  public:
   explicit Texture(const std::string name) :
@@ -94,6 +95,10 @@ class Texture {
   void SetSampler(vk::Sampler* rhs) {
     ASSERT_INITIALIZED(rhs);
     sampler_ = rhs;
+  }
+
+  auto GetDescriptor() const -> const VkDescriptorImageInfo& {
+    return descriptor_;
   }
 
   auto IsInitialized() const -> bool;

@@ -6,6 +6,7 @@
   "data": {
     "extent": "swapchain",
     "vertex_class": "tile",
+    "viewport": "full",
     "layout": "chunk",
     "rasterizer": {
       "cullMode": "back",

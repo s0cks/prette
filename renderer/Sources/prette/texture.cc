@@ -8,6 +8,7 @@
 
 #include "prette/assertions.h"
 #include "prette/common.h"
+#include "prette/copy_to_buffer.h"
 #include "prette/copy_to_image.h"
 #include "prette/flags.h"
 #include "prette/image/image.h"
@@ -17,9 +18,9 @@
 #include "prette/image/image_view_builder.h"
 #include "prette/platform.h"
 #include "prette/sampler.h"
-#include "prette/staging_scope.h"
 #include "prette/to_string.h"
 #include "prette/vk.h"
+#include "prette/vk_buffer.h"
 
 namespace prt {
 auto ReadTexture(const std::string& filename, const bool flip) -> TextureData {
@@ -40,6 +41,10 @@ Texture::Texture(const std::string name, vk::Image* image, vk::ImageView* view, 
   ASSERT_NOT_EMPTY(name);
   ASSERT_INITIALIZED(image);
   ASSERT_INITIALIZED(view_);
+  descriptor_.imageView = *view_;
+  if (sampler_)
+    descriptor_.sampler = *sampler_;
+  descriptor_.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;  // TODO: this should be configurable
 }
 
 Texture::~Texture() {
@@ -79,11 +84,21 @@ auto TextureBuilder::WithTextureData(const TextureData& rhs, const VkFormat form
     // clang-format on
     ASSERT_INITIALIZED(image_);
   }
-  image_->BindMemory();
   {
-    vk::StagingScope staging(&rhs.data[0], rhs.GetTotalBufferSize());
-    vk::CopyBufferToImageWithTransitions<vk::UndefinedToTransferDest, vk::TransferDestToShaderReadOnly> copy(rhs);
-    copy(staging, image_);
+    vk::BufferBuilder staging_builder{};
+    // clang-format off
+    staging_builder.WithTransferSourceUsage()
+      .WithSize(rhs.GetTotalBufferSize());
+    // clang-format on
+    vk::ScopedBuffer staging(staging_builder);
+    {
+      vk::CopyBytesToBuffer copy(&rhs.data[0], rhs.GetTotalBufferSize());
+      copy(staging);
+    }
+    {
+      vk::CopyBufferToImageWithTransitions<vk::UndefinedToTransferDest, vk::TransferDestToShaderReadOnly> copy(rhs);
+      copy(staging, image_);
+    }
   }
   {
     vk::ImageViewBuilder builder{};

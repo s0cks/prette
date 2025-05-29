@@ -2,6 +2,7 @@
 #define PRT_DESCRIPTOR_SET_UPDATE_H
 
 #include <vector>
+#include <vulkan/vulkan_core.h>
 
 #include "prette/assertions.h"
 #include "prette/common.h"
@@ -12,6 +13,7 @@ class Camera;
 }
 
 namespace prt::vk {
+class Sampler;
 class DescriptorSetUpdate {
  public:
   using Write = VkWriteDescriptorSet;
@@ -45,6 +47,12 @@ class DescriptorSetUpdate {
       return write_;
     }
 
+    auto WithImageInfo(const VkDescriptorImageInfo* rhs) -> WriteBuilder& {
+      write_->pImageInfo = rhs;
+      write_->descriptorCount = 1;
+      return *this;
+    }
+
     auto WithBufferInfo(const VkDescriptorBufferInfo* rhs) -> WriteBuilder& {
       write_->pBufferInfo = rhs;
       write_->descriptorCount = 1;
@@ -53,6 +61,7 @@ class DescriptorSetUpdate {
 
     auto WithBufferInfo(Buffer* rhs) -> WriteBuilder&;
     auto WithCameraBuffer(Camera* rhs) -> WriteBuilder&;
+    auto WithImage(vk::ImageView* view, vk::Sampler* sampler, const VkFormat format) -> WriteBuilder&;
   };
 
  private:
@@ -97,6 +106,10 @@ class DescriptorSetUpdate {
 
   inline auto AddWriteSampler(const uint32_t binding) -> WriteBuilder {
     return AddWrite(binding, VK_DESCRIPTOR_TYPE_SAMPLER);
+  }
+
+  inline auto AddWriteCombinedImageSampler(const uint32_t binding) -> WriteBuilder {
+    return AddWrite(binding, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER);
   }
 
   void Commit();

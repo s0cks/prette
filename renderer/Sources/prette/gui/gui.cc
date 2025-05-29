@@ -23,14 +23,18 @@ auto Gui::CreateYogaNode() const -> YGNodeRef {
 }
 
 void Gui::Render() {
-  ImGui::SetNextWindowPos(ImVec2{
-      bounds_.x,
-      bounds_.y,
-  });
-  ImGui::SetNextWindowSize(ImVec2{
-      bounds_.z,
-      bounds_.w,
-  });
+  ImGui::SetNextWindowPos(
+      ImVec2{
+          bounds_.x,
+          bounds_.y,
+      },
+      ImGuiCond_Once);
+  ImGui::SetNextWindowSize(
+      ImVec2{
+          bounds_.z,
+          bounds_.w,
+      },
+      ImGuiCond_Once);
   ImGui::Begin(GetGuiName(), nullptr, GetWindowFlags());
   RenderChildren();
   ImGui::End();

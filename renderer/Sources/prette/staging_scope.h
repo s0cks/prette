@@ -15,8 +15,12 @@ class StagingScope {
 
  public:
   StagingScope(const uint8_t* data, const uint64_t num_bytes) {
+    ASSERT(data && num_bytes);
     vk::BufferBuilder builder{};
-    builder.WithTransferSourceUsage();
+    // clang-format off
+    buffer_ = builder.WithSize(num_bytes)
+      .WithTransferSourceUsage();
+    // clang-format on
     ASSERT_INITIALIZED(buffer_);
   }
   ~StagingScope() {

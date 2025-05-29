@@ -52,7 +52,6 @@ class RenderPassHandler : public BaseStatefulReaderHandler<RenderPassHandlerStat
   auto EndObject(SizeType memberCount) -> bool override;
   auto StartArray() -> bool override;
   auto EndArray(SizeType elementCount) -> bool override;
-
   auto Null() -> bool override;
   auto Bool(bool b) -> bool override;
   auto Int(int i) -> bool override;

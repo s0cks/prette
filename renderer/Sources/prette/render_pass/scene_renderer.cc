@@ -22,7 +22,6 @@
 #include "prette/gfx_vk.h"
 #include "prette/gui/gui.h"
 #include "prette/pipeline/pipeline.h"
-#include "prette/quad.h"
 #include "prette/render_pass/render_pass.h"
 #include "prette/render_pass/render_pass_builder.h"
 #include "prette/render_pass/render_target.h"
@@ -56,12 +55,11 @@ SceneRenderPass::~SceneRenderPass() {
 void SceneRenderPass::OnSwapInit(const bool reinit) {
   RenderPass::OnSwapInit(reinit);
   InitFramebuffers();
-  // for (auto idx = 0; idx < GetSwapchain()->GetNumberOfImages(); idx++) {
-  //   const auto target = new RenderTarget(idx, this, GetSwapchain()->GetExtent(), kDefaultRenderTargetFormat,
-  //                                        GetSceneRenderer()->GetDepthTexture()->GetImageView());
-  //   ASSERT_INITIALIZED(target);
-  //   targets_.at(idx) = target;
-  // }
+  for (auto idx = 0; idx < GetSwapchain()->GetNumberOfImages(); idx++) {
+    const auto target = new RenderTarget(idx, this, GetSwapchain()->GetExtent(), kDefaultRenderTargetFormat);
+    ASSERT_INITIALIZED(target);
+    targets_.at(idx) = target;
+  }
 }
 
 void SceneRenderPass::OnSwapDestroyed(const bool reinit) {
@@ -77,11 +75,10 @@ auto SceneRenderPass::New() -> SceneRenderPass* {
   const auto driver = Driver::Get();
   auto color_ref = builder.AddAttachment()
                        .WithFormat(GetSwapchain()->GetFormat())
-                       .WithSamples(VK_SAMPLE_COUNT_1_BIT)
-                       .WithLoadOp(VK_ATTACHMENT_LOAD_OP_LOAD)
-                       .WithStoreOp(VK_ATTACHMENT_STORE_OP_STORE)
-                       .WithInitialLayout(VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL)
-                       .WithFinalLayout(VK_IMAGE_LAYOUT_PRESENT_SRC_KHR)
+                       .WithLoadOpLoad()
+                       .WithStoreOpStore()
+                       .WithInitialLayoutUndefined()
+                       .WithFinalLayoutColorAttachmentOptimal()
                        .Build();
 
   // auto depth_ref = builder.AddAttachment()
@@ -101,12 +98,13 @@ auto SceneRenderPass::New() -> SceneRenderPass* {
       .WithDependencyByRegion()
       .WithSource({
           .subpass = VK_SUBPASS_EXTERNAL,
-          .stage = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
+          .stage = VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT,
+          .access = VK_ACCESS_MEMORY_READ_BIT,
       })
       .WithDest({
           .subpass = 0,
           .stage = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
-          .access = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,
+          .access = VK_ACCESS_COLOR_ATTACHMENT_READ_BIT | VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,
       });
   return builder.BuildTyped<SceneRenderPass>();
 }
@@ -138,18 +136,16 @@ SceneRenderer::SceneRenderer() {
     InitDepthTexture();
     pass_ = SceneRenderPass::New();
     ASSERT_INITIALIZED(pass_);
-    colored_quads_ = new color2d::SingleQuadPipeline();
-    ASSERT_INITIALIZED(colored_quads_);
   });
   OnSwapchainInit([this](SwapchainInitEvent* event) {
     sampler_ = CreateSampler();
     ASSERT(sampler_ && sampler_->IsInitialized());
     scene_descriptors_.resize(pass_->GetNumberOfTargets());
-    // for (auto idx = 0; idx < pass_->GetNumberOfTargets(); idx++) {
-    //   const auto target = pass_->GetTarget(idx);
-    //   GetSceneRenderer()->scene_descriptors_[idx] =
-    //       ImGui_ImplVulkan_AddTexture(*GetSampler(), *target->GetView(), VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
-    // }
+    for (auto idx = 0; idx < pass_->GetNumberOfTargets(); idx++) {
+      const auto target = pass_->GetTarget(idx);
+      GetSceneRenderer()->scene_descriptors_[idx] =
+          ImGui_ImplVulkan_AddTexture(*GetSampler(), *target->GetView(), VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+    }
   });
   OnSwapchainDestroyed([this](SwapchainDestroyedEvent* event) {
     delete depth_texture_;
@@ -228,11 +224,10 @@ void SceneRenderPass::Execute() {
   ASSERT(GetSceneRenderer()->IsInitialized());
   const auto frame = GetSwapchain()->GetCurrentFrame();
   vk::CommandBufferScope buffer(GetCommandBuffer(frame->GetImage()), true);
-  vk::RenderPassScope render_pass(buffer, this, *framebuffers_[frame->GetImage()], kClearValues);
+  vk::RenderPassScope render_pass(buffer, this, *GetSwapchain()->GetFramebuffer(frame->GetImage()), kClearValues);
   ASSERT(IsWorldInitialized());
   const auto chunk = GetWorld()->GetChunkAt(ChunkPos(0, 0));
   GetSceneRenderer()->chunk_renderer_.Render(buffer, chunk);
-  GetSceneRenderer()->colored_quads_->Render(buffer);
 }
 
 static rx::subscription on_renderer_init_{};

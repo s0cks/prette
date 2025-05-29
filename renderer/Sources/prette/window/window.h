@@ -10,6 +10,7 @@
 
 #include "prette/assertions.h"
 #include "prette/common.h"
+#include "prette/cursor.h"
 #include "prette/dimension.h"
 #include "prette/event.h"
 #include "prette/geometry/rectangle.h"
@@ -135,10 +136,20 @@ class Window : public WindowEventSource {
   Handle* handle_;
   Keyboard* keyboard_ = nullptr;
   Mouse* mouse_ = nullptr;
+  // cursor
+#ifdef PRT_GLFW
+  CursorMap cursors_{};
+  GLFWcursor* default_cursor_ = nullptr;
+  GLFWcursor* current_cursor_ = nullptr;
+#endif  // PRT_GLFW
 
   explicit Window(Handle* handle);
   void PublishEvent(WindowEvent* event) const override;
   auto CreateRootYogaNode() const -> YGNodeRef;
+
+#ifdef PRT_GLFW
+  void SetCurrentCursor(GLFWcursor* rhs);
+#endif  // PRT_GLFW
 
   void SetKeyboard(Keyboard* rhs) {
     ASSERT(rhs);
@@ -277,6 +288,49 @@ class Window : public WindowEventSource {
 
   friend auto operator<<(std::ostream& stream, Window* rhs) -> std::ostream& {
     return stream << rhs->ToString();
+  }
+
+  void AddCursor(const std::string& name, GLFWcursor* cursor, const bool is_default = false) {
+    ASSERT_NOT_EMPTY(name);
+    ASSERT(cursor);
+    const auto [_, success] = cursors_.insert({name, cursor});
+    LOG_IF(ERROR, !success) << "failed to add " << name << " cursor.";
+    if (success && is_default)
+      default_cursor_ = cursor;
+  }
+
+  void SetCursor(const std::string& rhs) {
+    const auto cursor = GetCursor(rhs);
+    if (!cursor) {
+      LOG(WARNING) << "failed to find cursor named: " << rhs;
+      return;
+    }
+    SetCurrentCursor(cursor);
+  }
+
+  auto GetCursor(const std::string& rhs) const -> GLFWcursor* {
+    ASSERT_NOT_EMPTY(rhs);
+    const auto pos = cursors_.find(rhs);
+    return pos != std::end(cursors_) ? pos->second : nullptr;
+  }
+
+  void RemoveCursor(const std::string& rhs) {
+    ASSERT_NOT_EMPTY(rhs);
+    const auto num_removed = cursors_.erase(rhs);
+    LOG_IF(ERROR, num_removed != 1) << "failed to remove " << rhs << " cursor.";
+  }
+
+  auto GetDefaultCursor() const -> GLFWcursor* {
+    return default_cursor_;
+  }
+
+  inline auto HasDefaultCursor() const -> bool {
+    return GetDefaultCursor() != nullptr;
+  }
+
+  inline void SetCurrentCursorToDefault() {
+    ASSERT(HasDefaultCursor());
+    return SetCurrentCursor(GetDefaultCursor());
   }
 
  private:

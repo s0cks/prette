@@ -3,47 +3,87 @@
 #include <array>
 
 #include "prette/chunk/chunk.h"
+#include "prette/chunk/chunk_metadata.h"
 #include "prette/common.h"
+#include "prette/copy_to_buffer.h"
+#include "prette/index_buffer.h"
 #include "prette/tile.h"
 #include "prette/vertex/vertex2d.h"
+#include "prette/vertex/vertex_buffer.h"
+#include "prette/vk_buffer.h"
 
 namespace prt {
-static const ChunkMesh::VertexArray kTileVertices = {
-    color2d::Vertex{
+static const ChunkMeshClass::VertexArray kTileVertices = {
+    tex2d::Vertex{
         .pos = {-0.5f, -0.5f},
-        .color = {0.0f, 0.0f, 0.0f, 1.0f},
+        .uv = {1.0f, 0.0f},
     },
     {
         .pos = {0.5f, -0.5f},
-        .color = {0.0f, 0.0f, 0.0f, 1.0f},
+        .uv = {0.0f, 0.0f},
     },
     {
         .pos = {0.5f, 0.5f},
-        .color = {0.0f, 0.0f, 0.0f, 1.0f},
+        .uv = {0.0f, 1.0f},
     },
     {
         .pos = {-0.5f, 0.5f},
-        .color = {0.0f, 0.0f, 0.0f, 1.0f},
+        .uv = {1.0f, 1.0f},
     },
 };
-static const ChunkMesh::IndexArray kTileIndices = {
+static const ChunkMeshClass::IndexArray kTileIndices = {
     0, 1, 2, 2, 3, 0,
 };
 
-auto NewChunkMesh(const uint64_t num_tiles) -> ChunkMesh* {
-  return new ChunkMesh(num_tiles, kTileVertices, kTileIndices);
+static inline auto CreateChunkVertexBuffer() -> vk::Buffer* {
+  vk::VertexBufferBuilder<ChunkMeshClass::VertexType> builder{};
+  // clang-format off
+  const auto buffer = builder.WithLength(ChunkMeshClass::kTotalNumberOfVertices)
+    .WithTransferDestUsage()
+    .Build();
+  // clang-format on
+  ASSERT(buffer);
+  vk::CopyBytesToBufferWithStaging copy(&kTileVertices[0], kTileVertices.size() * sizeof(ChunkMeshClass::VertexType));
+  copy(buffer);
+  return buffer;
+}
+
+static inline auto CreateChunkIndexBuffer() -> vk::Buffer* {
+  vk::IndexBufferBuilder<ChunkMeshClass::IndexType> builder{};
+  // clang-format off
+  const auto buffer = builder.WithLength(ChunkMeshClass::kTotalNumberOfIndices)
+    .WithTransferDestUsage()
+    .Build();
+  // clang-format on
+  ASSERT(buffer);
+  vk::CopyBytesToBufferWithStaging copy(&kTileIndices[0], kTileIndices.size() * sizeof(ChunkMeshClass::IndexType));
+  copy(buffer);
+  return buffer;
+}
+
+auto NewChunkMesh() -> ChunkMesh* {
+  return new ChunkMesh(CreateChunkVertexBuffer(), CreateChunkIndexBuffer());
 }
 
 class ChunkMeshifier : public TileVisitor {
   using InstanceData = std::array<TileData, kTotalChunkSize>;
 
  private:
+  ChunkMesh* mesh_;
   InstanceData data_{};
   uint64_t current_ = 0;
 
  public:
-  ChunkMeshifier() = default;
+  explicit ChunkMeshifier(ChunkMesh* mesh) :
+    TileVisitor(),
+    mesh_(mesh) {
+    ASSERT(mesh_);
+  }
   ~ChunkMeshifier() override = default;
+
+  auto GetMesh() const -> ChunkMesh* {
+    return mesh_;
+  }
 
   auto data() const -> const InstanceData& {
     return data_;
@@ -56,18 +96,25 @@ class ChunkMeshifier : public TileVisitor {
     return true;
   }
 
-  auto operator()(Chunk* chunk) -> bool {
+  auto Meshify(Chunk* chunk) -> bool {
     ASSERT(chunk);
-    return chunk->VisitTiles(this);
+    if (!chunk->VisitTiles(this))
+      return false;
+    vk::CopyBytesToBufferWithStaging copy(data_);
+    copy(GetMesh()->GetTileBuffer());
+    return true;
+  }
+
+  auto operator()(Chunk* chunk) -> bool {
+    return Meshify(chunk);
   }
 };
 
-auto MeshifyChunk(Chunk* chunk, ChunkMesh* mesh) -> ChunkMesh* {
+auto MeshifyChunk(Chunk* chunk, ChunkMesh* mesh) -> bool {
   ASSERT(chunk);
   ASSERT_INITIALIZED(mesh);
-  ChunkMeshifier meshifier{};
+  ChunkMeshifier meshifier(mesh);
   LOG_IF(FATAL, !meshifier(chunk)) << "failed to instance chunk tiles.";
-  mesh->SetInstances(meshifier.data());
   return mesh;
 }
 }  // namespace prt

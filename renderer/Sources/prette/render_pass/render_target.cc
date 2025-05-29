@@ -60,7 +60,6 @@ static inline auto CreateFramebuffer(vk::RenderPass* pass, const VkExtent2D exte
                                      vk::ImageView* depth) -> vk::Framebuffer* {
   ASSERT_INITIALIZED(pass);
   ASSERT_INITIALIZED(color);
-  ASSERT_INITIALIZED(depth);
   // clang-format off
   vk::FramebufferBuilder builder{};
   builder.WithRenderPass(pass)

@@ -1,27 +1,27 @@
 #ifndef PRT_CHUNK_RENDERER_H
 #define PRT_CHUNK_RENDERER_H
 
+#include <cstdint>
+
 #include "prette/chunk/chunk.h"
-#include "prette/chunk/chunk_metadata.h"
 #include "prette/chunk_mesh.h"
 #include "prette/descriptor_set.h"
 #include "prette/pipeline/pipeline.h"
+#include "prette/texture.h"
 #include "prette/tile.h"
-#include "prette/uniform_buffer.h"
 #include "prette/vk.h"
 
 namespace prt {
-using ChunkMetadataBuffer = vk::UniformBufferTemplate<ChunkMetadata, 1>;
-
 class ChunkRenderer {
  private:
   vk::RenderPipeline* pipeline_ = nullptr;
-  ChunkMetadataBuffer* chunk_ = nullptr;
   ChunkMesh* mesh_ = nullptr;
   vk::DescriptorSet* descriptors_ = nullptr;
+  Texture* texture_ = nullptr;
 
   void UpdateChunkBuffer(Chunk* chunk, const bool staging = true);
   void UpdateDescriptorSet();
+  void RenderChunkMesh(VkCommandBuffer buffer, ChunkMesh* chunk, const uint64_t num_instances = 1);
 
  public:
   ChunkRenderer();
@@ -29,10 +29,6 @@ class ChunkRenderer {
 
   auto GetMesh() const -> ChunkMesh* {
     return mesh_;
-  }
-
-  auto GetChunkBuffer() const -> ChunkMetadataBuffer* {
-    return chunk_;
   }
 
   auto GetPipeline() const -> vk::RenderPipeline* {
@@ -44,7 +40,7 @@ class ChunkRenderer {
   }
 
   auto IsInitialized() const -> bool {
-    return vk::AllInitialized(pipeline_, chunk_, descriptors_) && mesh_;
+    return vk::AllInitialized(pipeline_, descriptors_) && mesh_;
   }
 
   void Render(VkCommandBuffer buffer, Chunk* chunk);

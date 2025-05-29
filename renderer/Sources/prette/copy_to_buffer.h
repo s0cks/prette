@@ -6,6 +6,7 @@
 
 #include "prette/assertions.h"
 #include "prette/common.h"
+#include "prette/std140.h"
 #include "prette/vk.h"
 
 namespace prt::vk {
@@ -39,6 +40,9 @@ class CopyBytesToBuffer : public CopyBytesToBufferTemplate {
  public:
   CopyBytesToBuffer(const uint8_t* source, const uint64_t source_len) :
     CopyBytesToBufferTemplate(source, source_len) {}
+  template <std140::IsAligned T>
+  explicit CopyBytesToBuffer(const T& source) :
+    CopyBytesToBuffer((const uint8_t*)&source, sizeof(T)) {}
   ~CopyBytesToBuffer() override = default;
   void operator()(Buffer* dst) const;
 };
@@ -73,4 +77,4 @@ class CopyBufferToBuffer {
 };
 }  // namespace prt::vk
 
-#endif  // PRT_COPY_TO_BUFFER_H
+#endif // PRT_COPY_TO_BUFFER_H

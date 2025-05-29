@@ -46,7 +46,10 @@ list(APPEND
 
 add_library(prette-renderer SHARED ${PRT_RENDERER_SOURCES})
 target_link_libraries(prette-renderer
-  PUBLIC prette-core ${PRT_RENDERER_LIBRARIES}
+  PUBLIC
+    prette::cursor-bibata-modern-ice
+    prette-core
+    ${PRT_RENDERER_LIBRARIES}
   PRIVATE)
 target_include_directories(prette-renderer
   PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}

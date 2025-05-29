@@ -1,6 +1,7 @@
 #include "prette/descriptor_set_update.h"
 
 #include <utility>
+#include <vulkan/vulkan_core.h>
 
 #include "prette/assertions.h"
 #include "prette/camera.h"

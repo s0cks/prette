@@ -258,6 +258,10 @@ class BaseRenderPipelineBuilder {
     render_pass_ = rhs;
   }
 
+  void SetViewport(const VkViewport rhs) {
+    vp_ = rhs;
+  }
+
   inline auto HasRenderPass() const -> bool {
     return GetRenderPass() != VK_NULL_HANDLE;
   }

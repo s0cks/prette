@@ -14,6 +14,7 @@
 #include "prette/pipeline/pipeline_layout.h"
 #include "prette/rasterizer_json.h"
 #include "prette/render_pass/render_pass_json.h"
+#include "prette/viewport_json.h"
 #include "prette/vk.h"  // IWYU pragma: keep
 
 namespace prt {
@@ -36,6 +37,7 @@ using namespace rapidjson;
   V(ParsingLayout)                         \
   V(ParsingExtent)                         \
   V(ParsingShaderStages)                   \
+  V(ParsingViewport)                       \
   V(ClosedDoc)                             \
   V(Error)
 
@@ -80,6 +82,7 @@ class PipelineHandler : public BaseStatefulReaderHandler<PipelineHandlerState, P
   RasterizerHandler rasterizer_;
   RenderPassHandler pass_{};
   PipelineLayoutHandler layout_{};
+  ViewportReaderHandler viewport_{};
 
   inline auto builder() const -> vk::BaseRenderPipelineBuilder* {
     return builder_;

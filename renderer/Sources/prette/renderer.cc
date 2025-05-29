@@ -150,7 +150,7 @@ void Renderer::DrawFrame(const Tick& current, const Tick& previous) {
   SwapchainFrameScope frame{};
   pass_->Execute();
   GetSceneRenderer()->GetScenePass()->Execute();
-  // GuiSystem::GetSystem()->GetGuiPass()->Execute();
+  GuiSystem::GetSystem()->GetGuiPass()->Execute();
   // vk::RenderPassIterator iter(GetRenderPassList());
   // while (iter.HasNext())
   //   iter.Next()->Execute();

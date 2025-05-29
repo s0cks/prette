@@ -64,6 +64,7 @@ void BaseRenderPipelineBuilder::SetPipelineLayout(vk::PipelineLayout* rhs) {
 }
 
 void BaseRenderPipelineBuilder::InitPipelineInfo(VkGraphicsPipelineCreateInfo& info) {
+  InitViewportCreateInfo(viewport_, vp_, scissor_);
   InitInput(vertex_input_, input_assembly_, vertex_bindings_, vertex_attrs_);
   info.sType = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
   info.stageCount = shader_stages_.size();

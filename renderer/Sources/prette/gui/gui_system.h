@@ -3,6 +3,7 @@
 
 #include <vector>
 
+#include "prette/gui/gui_render_pass.h"
 #include "prette/relaxed_atomic.h"
 #include "prette/rx.h"
 
@@ -12,6 +13,7 @@ class RenderPass;
 }
 
 class Gui;
+class GuiRenderPass;
 class GuiSystem {
  private:
   RelaxedAtomic<bool> layouts_changed_ = true;
@@ -20,7 +22,7 @@ class GuiSystem {
   rx::subscription on_destroying_device_{};
   rx::subscription on_swap_created_{};
   std::vector<Gui*> guis_{};
-  vk::RenderPass* pass_ = nullptr;
+  GuiRenderPass* pass_ = nullptr;
 
   void UpdateImGui();
   void Shutdown();
@@ -42,7 +44,7 @@ class GuiSystem {
   GuiSystem();
   ~GuiSystem();
 
-  auto GetGuiPass() const -> vk::RenderPass* {
+  auto GetGuiPass() const -> GuiRenderPass* {
     return pass_;
   }
 

@@ -14,12 +14,14 @@ struct is_mesh_class_t : std::false_type {};
 
 template <typename D, VertexType V, const uint64_t NumberOfVertices, IndexType I, const uint64_t NumberOfIndices>
 struct MeshClass {
-  using DataType = D;
   using VertexType = V;
   static constexpr const auto kTotalNumberOfVertices = NumberOfVertices;
+  using VertexArray = std::array<V, kTotalNumberOfVertices>;
+
   using IndexType = I;
   using IndexClass = IndexClass<I>;
   static constexpr const auto kTotalNumberOfIndices = NumberOfIndices;
+  using IndexArray = std::array<I, kTotalNumberOfIndices>;
 };
 
 template <typename T>

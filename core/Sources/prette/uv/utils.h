@@ -4,7 +4,6 @@
 #include <functional>
 #include <ostream>
 #include <string>
-#include <type_traits>
 #include <utility>
 
 // IWYU pragma: begin_exports
@@ -74,21 +73,11 @@ class Status {
 };
 
 template <typename T>
-struct is_uv_handle {
-  static constexpr const auto value = false;
+concept HandleType = requires(T value) {
+  { value.loop };
+  { value.type };
+  { value.data };
 };
-
-#define DECLARE_IS_UV_HANDLE(Name)            \
-  template <>                                 \
-  struct is_uv_handle<Name> {                 \
-    static constexpr const auto value = true; \
-  };
-DECLARE_IS_UV_HANDLE(uv_idle_t);
-DECLARE_IS_UV_HANDLE(uv_check_t);
-DECLARE_IS_UV_HANDLE(uv_prepare_t);
-DECLARE_IS_UV_HANDLE(uv_async_t);
-DECLARE_IS_UV_HANDLE(uv_work_t);
-DECLARE_IS_UV_HANDLE(uv_fs_t);
 
 #define CHECK_UV_RESULT(Severity, Result, Message) \
   LOG_IF(Severity, (Result) != UV_OK) << (Message) << ": " << uv_strerror((Result));
@@ -107,9 +96,8 @@ static inline void Close(uv_handle_t* handle, uv_close_cb on_close = nullptr) {
   uv_close(handle, on_close);
 }
 
-template <typename T>
-static inline void Close(T* handle, uv_close_cb on_close = nullptr,
-                         std::enable_if_t<is_uv_handle<T>::value>* = nullptr) {
+template <HandleType H>
+static inline void Close(H* handle, uv_close_cb on_close = nullptr) {
   return Close((uv_handle_t*)handle, on_close);
 }
 
@@ -120,8 +108,8 @@ static inline void SetHandleData(uv_handle_t* handle, D* data) {
   return uv_handle_set_data(handle, data);
 }
 
-template <typename T, typename D>
-static inline void SetHandleData(T* handle, D* data, std::enable_if_t<is_uv_handle<T>::value>* = nullptr) {
+template <HandleType H, typename D>
+static inline void SetHandleData(H* handle, D* data) {
   ASSERT(handle);
   ASSERT(data);
   return SetHandleData<D>((uv_handle_t*)handle, data);
@@ -133,8 +121,8 @@ static inline auto GetHandleData(uv_handle_t* handle) -> D* {
   return (D*)uv_handle_get_data(handle);
 }
 
-template <typename T, typename D>
-static inline auto GetHandleData(T* handle, std::enable_if_t<is_uv_handle<T>::value>* = nullptr) -> D* {
+template <HandleType H, typename D>
+static inline auto GetHandleData(H* handle) -> D* {
   ASSERT(handle);
   return GetHandleData<D>((uv_handle_t*)handle);
 }
@@ -171,10 +159,9 @@ class HandleBase {
   virtual ~HandleBase() = default;
 };
 
-template <typename H>
+template <HandleType H>
 class HandleTemplate : public HandleBase {
   DEFINE_NON_COPYABLE_TYPE(HandleTemplate<H>);
-  static_assert(is_uv_handle<H>::value, "expected handle type to be a uv_handle_t.");
 
  public:
   using Handle = H;

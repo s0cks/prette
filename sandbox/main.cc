@@ -1,6 +1,8 @@
+#include <imgui.h>
 #include <stb_include.h>
 #include <vulkan/vulkan_core.h>
 
+#include "prette/assertions.h"
 #include "prette/chunk/chunk_metadata.h"
 #include "prette/config/config.h"  // IWYU pragma: keep
 #include "prette/keyboard/keyboard.h"
@@ -91,6 +93,7 @@ auto main(int argc, char** argv) -> int {
       return true;
     });
   });
+
   // OnMousePressed(GLFW_MOUSE_BUTTON_1).subscribe([](MouseButtonStateEvent* event) {
   //   const auto pos = Mouse::Get()->GetWorldPos();
   //   ChunkPos chunk_pos(static_cast<uint32_t>(pos.x) / kChunkWidth, static_cast<uint32_t>(pos.y) / kChunkHeight);

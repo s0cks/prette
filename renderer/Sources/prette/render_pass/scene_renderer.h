@@ -8,7 +8,6 @@
 #include "prette/chunk_renderer.h"
 #include "prette/descriptor_set.h"
 #include "prette/pipeline/pipeline.h"
-#include "prette/quad.h"
 #include "prette/render_pass/render_pass.h"
 #include "prette/render_pass/render_target.h"
 #include "prette/rx.h"
@@ -57,7 +56,6 @@ class SceneRenderer {
   vk::DescriptorSet* descriptors_ = nullptr;
   vk::RenderPipeline* pipeline_ = nullptr;
   ChunkRenderer chunk_renderer_{};
-  color2d::SingleQuadPipeline* colored_quads_ = nullptr;
   rx::subscription on_swap_created_{};
 
   void InitDepthTexture();

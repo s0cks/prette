@@ -1,0 +1,90 @@
+#ifndef PRT_BUNDLED_CURSOR_H
+#define PRT_BUNDLED_CURSOR_H
+
+#include <cstdint>
+
+namespace prt::cursor::bmi {
+static constexpr const auto kCursorSetName = "@PRT_CURSOR_NAME@";
+
+struct left_ptr {
+  static constexpr const auto kCursorName = "left_ptr";
+  // clang-format off
+  static constexpr const auto kTotalNumberOfBytes = @PRT_CURSOR_LEFT_PTR_NUM_BYTES@;
+  static constexpr const uint8_t kBytes[kTotalNumberOfBytes] = {
+    @PRT_CURSOR_LEFT_PTR_BYTES@
+  };
+  // clang-format on
+};
+
+struct right_ptr {
+  static constexpr const auto kCursorName = "right_ptr";
+  // clang-format off
+  static constexpr const auto kTotalNumberOfBytes = @PRT_CURSOR_RIGHT_PTR_NUM_BYTES@;
+  static constexpr const uint8_t kBytes[kTotalNumberOfBytes] = {
+    @PRT_CURSOR_RIGHT_PTR_BYTES@
+  };
+  // clang-format on
+};
+
+struct hand1 {
+  static constexpr const auto kCursorName = "hand1";
+  // clang-format off
+  static constexpr const auto kTotalNumberOfBytes = @PRT_CURSOR_HAND1_NUM_BYTES@;
+  static constexpr const uint8_t kBytes[kTotalNumberOfBytes] = {
+    @PRT_CURSOR_HAND1_BYTES@
+  };
+  // clang-format on
+};
+
+struct hand2 {
+  static constexpr const auto kCursorName = "hand2";
+  // clang-format off
+  static constexpr const auto kTotalNumberOfBytes = @PRT_CURSOR_HAND2_NUM_BYTES@;
+  static constexpr const uint8_t kBytes[kTotalNumberOfBytes] = {
+    @PRT_CURSOR_HAND2_BYTES@
+  };
+  // clang-format on
+};
+
+struct grabbing {
+  static constexpr const auto kCursorName = "grabbing";
+  // clang-format off
+  static constexpr const auto kTotalNumberOfBytes = @PRT_CURSOR_GRABBING_NUM_BYTES@;
+  static constexpr const uint8_t kBytes[kTotalNumberOfBytes] = {
+    @PRT_CURSOR_GRABBING_BYTES@
+  };
+  // clang-format on
+};
+
+struct move {
+  static constexpr const auto kCursorName = "move";
+  // clang-format off
+  static constexpr const auto kTotalNumberOfBytes = @PRT_CURSOR_MOVE_NUM_BYTES@;
+  static constexpr const uint8_t kBytes[kTotalNumberOfBytes] = {
+    @PRT_CURSOR_MOVE_BYTES@
+  };
+  // clang-format on
+};
+
+struct zoom_in {
+  static constexpr const auto kCursorName = "zoom_in";
+  // clang-format off
+  static constexpr const auto kTotalNumberOfBytes = @PRT_CURSOR_ZOOM_IN_NUM_BYTES@;
+  static constexpr const uint8_t kBytes[kTotalNumberOfBytes] = {
+    @PRT_CURSOR_ZOOM_IN_BYTES@
+  };
+  // clang-format on
+};
+
+struct zoom_out {
+  static constexpr const auto kCursorName = "zoom_out";
+  // clang-format off
+  static constexpr const auto kTotalNumberOfBytes = @PRT_CURSOR_ZOOM_OUT_NUM_BYTES@;
+  static constexpr const uint8_t kBytes[kTotalNumberOfBytes] = {
+    @PRT_CURSOR_ZOOM_OUT_BYTES@
+  };
+  // clang-format on
+};
+}  // namespace prt::cursor::bmi
+
+#endif  // PRT_BUNDLED_CURSOR_H

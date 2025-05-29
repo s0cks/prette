@@ -22,7 +22,10 @@ Instance::Instance(const VkInstanceCreateInfo* create_info) {
   // clang-format off
   builder.WithErrorSeverity()
     .WithWarningSeverity()
-    .WithMaxMessageType()
+    .WithGeneralMessageType()
+    .WithPerformanceMessageType()
+    .WithValidationMessageType()
+    .WithDeviceAddressBindingMessageType()
     .WithCallback(DebugMessenger::OnDebugMessage);
   // clang-format on
   debug_ = builder.Build();

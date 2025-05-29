@@ -10,6 +10,7 @@
     "flatbuffers",
     "libnoise",
     "fmt",
+    "zstd",
     "freetype",
     "gflags",
     "glfw3",

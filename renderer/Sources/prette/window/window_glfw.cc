@@ -1,3 +1,5 @@
+#include <GLFW/glfw3.h>
+
 #include "prette/window/window.h"
 #ifdef PRT_GLFW
 
@@ -19,6 +21,12 @@ void Window::OnWindowClosed(Handle* handle) {
   const auto engine = GetEngine();
   ASSERT(engine);
   engine->Shutdown();
+}
+
+void Window::SetCurrentCursor(GLFWcursor* rhs) {
+  ASSERT(rhs);
+  current_cursor_ = rhs;
+  glfwSetCursor(GetHandle(), rhs);
 }
 
 void Window::OnWindowPos(Handle* handle, const int xPos, const int yPos) {
@@ -229,6 +237,7 @@ auto WindowBuilder::Build() const -> Window* {
     return nullptr;
   }
 
+  glfwSetInputMode(handle, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
   glfwSetWindowCloseCallback(handle, &Window::OnWindowClosed);
   glfwSetWindowPosCallback(handle, &Window::OnWindowPos);
   glfwSetWindowSizeCallback(handle, &Window::OnWindowSize);
