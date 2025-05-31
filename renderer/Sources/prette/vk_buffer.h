@@ -229,6 +229,11 @@ class BaseBufferBuilderTemplate : public BaseBufferBuilder {
     return (B&)(*this);
   }
 
+  inline auto WithStorageUsage() -> B& {
+    SetUsage(GetUsage() | VK_BUFFER_USAGE_STORAGE_BUFFER_BIT);
+    return (B&)(*this);
+  }
+
   inline auto WithExclusiveSharingMode() -> B& {
     return (B&)WithSharingMode(VK_SHARING_MODE_EXCLUSIVE);
   }

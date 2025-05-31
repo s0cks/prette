@@ -79,10 +79,12 @@ if(PRT_BUILD_BENCHMARKS)
 endif()
 
 add_subdirectory(core)
+add_subdirectory(lib)
 add_subdirectory(renderer)
 add_subdirectory(audio)
 add_subdirectory(sandbox)
 add_subdirectory(headless)
+add_subdirectory(tools)
 
 add_subdirectory(resources)
 configure_file(prette.cfg.in ${CMAKE_CURRENT_SOURCE_DIR}/prette.cfg)

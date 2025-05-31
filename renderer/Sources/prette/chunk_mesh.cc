@@ -2,6 +2,7 @@
 
 #include <array>
 
+#include "prette/atlas1.h"
 #include "prette/chunk/chunk.h"
 #include "prette/chunk/chunk_metadata.h"
 #include "prette/common.h"
@@ -15,20 +16,24 @@
 namespace prt {
 static const ChunkMeshClass::VertexArray kTileVertices = {
     tex2d::Vertex{
+        // top left
         .pos = {-0.5f, -0.5f},
-        .uv = {1.0f, 0.0f},
+        .uv = atlas1::container::kMinUV,
     },
     {
+        // top right
         .pos = {0.5f, -0.5f},
-        .uv = {0.0f, 0.0f},
+        .uv = {atlas1::container::kMaxUV.x, atlas1::container::kMinUV.y},
     },
     {
+        // bottom right
         .pos = {0.5f, 0.5f},
-        .uv = {0.0f, 1.0f},
+        .uv = atlas1::container::kMaxUV,
     },
     {
+        // bottom left
         .pos = {-0.5f, 0.5f},
-        .uv = {1.0f, 1.0f},
+        .uv = {atlas1::container::kMinUV.x, atlas1::container::kMaxUV.y},
     },
 };
 static const ChunkMeshClass::IndexArray kTileIndices = {
@@ -43,8 +48,7 @@ static inline auto CreateChunkVertexBuffer() -> vk::Buffer* {
     .Build();
   // clang-format on
   ASSERT(buffer);
-  vk::CopyBytesToBufferWithStaging copy(&kTileVertices[0], kTileVertices.size() * sizeof(ChunkMeshClass::VertexType));
-  copy(buffer);
+  vk::CopyBytesToBufferWithStaging::Copy(&kTileVertices[0], kTileVertices.size(), buffer);
   return buffer;
 }
 
@@ -56,8 +60,7 @@ static inline auto CreateChunkIndexBuffer() -> vk::Buffer* {
     .Build();
   // clang-format on
   ASSERT(buffer);
-  vk::CopyBytesToBufferWithStaging copy(&kTileIndices[0], kTileIndices.size() * sizeof(ChunkMeshClass::IndexType));
-  copy(buffer);
+  vk::CopyBytesToBufferWithStaging::Copy(&kTileIndices[0], kTileIndices.size(), buffer);
   return buffer;
 }
 
@@ -100,8 +103,7 @@ class ChunkMeshifier : public TileVisitor {
     ASSERT(chunk);
     if (!chunk->VisitTiles(this))
       return false;
-    vk::CopyBytesToBufferWithStaging copy(data_);
-    copy(GetMesh()->GetTileBuffer());
+    vk::CopyBytesToBufferWithStaging::Copy(data_, GetMesh()->GetTileBuffer());
     return true;
   }
 

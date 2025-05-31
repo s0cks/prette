@@ -3,10 +3,12 @@
 
 #include <type_traits>
 
+#include "prette/index_buffer.h"
 #include "prette/index_class.h"
 #include "prette/platform.h"
 #include "prette/traits.h"
 #include "prette/vertex/vertex.h"
+#include "prette/vertex/vertex_buffer.h"
 
 namespace prt::vk {
 template <typename C>
@@ -17,11 +19,13 @@ struct MeshClass {
   using VertexType = V;
   static constexpr const auto kTotalNumberOfVertices = NumberOfVertices;
   using VertexArray = std::array<V, kTotalNumberOfVertices>;
+  using VertexBufferBuilder = vk::VertexBufferBuilder<VertexType>;
 
   using IndexType = I;
   using IndexClass = IndexClass<I>;
   static constexpr const auto kTotalNumberOfIndices = NumberOfIndices;
   using IndexArray = std::array<I, kTotalNumberOfIndices>;
+  using IndexBufferBuilder = vk::IndexBufferBuilder<IndexType>;
 };
 
 template <typename T>

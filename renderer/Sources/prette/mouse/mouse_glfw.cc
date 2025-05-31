@@ -4,7 +4,6 @@
 #include "prette/assertions.h"
 #include "prette/gfx.h"
 #include "prette/glm.h"
-#include "prette/gui/gui_viewport.h"
 #include "prette/mouse/mouse_event.h"
 #include "prette/window/window.h"
 
@@ -26,8 +25,8 @@ Mouse::~Mouse() {
 auto Mouse::GetPos() const -> glm::dvec2 {
   glm::dvec2 pos;
   glfwGetCursorPos(GetOwner()->GetHandle(), &pos.x, &pos.y);
-  if (GuiViewport::IsInitialized())
-    pos -= GuiViewport::Get()->GetPos();
+  // if (GuiViewport::IsInitialized())
+  //   pos -= GuiViewport::Get()->GetPos();
   return pos;
 }
 

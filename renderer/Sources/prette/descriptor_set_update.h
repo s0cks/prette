@@ -10,7 +10,8 @@
 
 namespace prt {
 class Camera;
-}
+class Texture;
+}  // namespace prt
 
 namespace prt::vk {
 class Sampler;
@@ -62,6 +63,7 @@ class DescriptorSetUpdate {
     auto WithBufferInfo(Buffer* rhs) -> WriteBuilder&;
     auto WithCameraBuffer(Camera* rhs) -> WriteBuilder&;
     auto WithImage(vk::ImageView* view, vk::Sampler* sampler, const VkFormat format) -> WriteBuilder&;
+    auto WithImageInfo(Texture* rhs) -> WriteBuilder&;
   };
 
  private:
@@ -97,6 +99,10 @@ class DescriptorSetUpdate {
 
   inline auto AddWriteUniformBuffer(const uint32_t binding) -> WriteBuilder {
     return AddWrite(binding, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER);
+  }
+
+  inline auto AddWriteStorageBuffer(const uint32_t idx) -> WriteBuilder {
+    return AddWrite(idx, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER);
   }
 
   inline auto AddWriteCameraUniformBuffer(const uint32_t binding, Camera* camera) -> WriteBuilder {

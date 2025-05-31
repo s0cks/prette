@@ -1,19 +1,18 @@
 #include "prette/mesh/mesh.h"
 
+#include <cstdint>
 #include <vulkan/vulkan_core.h>
 
+#include "prette/index_buffer.h"
+#include "prette/vertex/vertex_buffer.h"
+
 namespace prt::vk {
+void Mesh::Bind(VkCommandBuffer cmd) {
+  vk::BindVertexBuffer(cmd, GetVertexBuffer());
+}
 
-// void Mesh::Render(VkCommandBuffer buffer) {
-// std::array<VkDeviceSize, 1> offsets = {0};
-// vkCmdBindVertexBuffers(buffer, 0, 1, &GetVertexBuffer()->GetBuffer(), offsets.data());
-// vkCmdDrawIndexed(buffer, kNumberOfIndicesPerInstance, 1, 0, 0, 0);
-// }
-
-// void IndexedMesh::Render(VkCommandBuffer buffer) {
-// std::array<VkDeviceSize, 1> offsets = {0};
-// vkCmdBindVertexBuffers(buffer, 0, 1, &GetVertexBuffer()->GetBuffer(), offsets.data());
-// vkCmdBindIndexBuffer(buffer, GetIndexBuffer()->GetBuffer(), 0, M::IndexClass::kFormat);
-// vkCmdDrawIndexed(buffer, kNumberOfIndicesPerInstance, 1, 0, 0, 0);
-// }
+void IndexedMesh::Bind(VkCommandBuffer cmd) {
+  Mesh::Bind(cmd);
+  vk::BindIndexBuffer<uint16_t>(cmd, GetIndexBuffer());
+}
 }  // namespace prt::vk

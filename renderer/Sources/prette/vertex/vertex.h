@@ -9,7 +9,11 @@
 #include "prette/platform.h"
 #include "prette/vk.h"
 
+// #define STD140_MAT4_FORMAT         VK_FORMAT_R32G32_SFLOAT
+// #define STD140_MAT4_ALIGNMENT      alignas(8)
+// #define STD140_MAT4_TYPE           glm::vec2
 #define STD140_MAT4(Name)          alignas(16) glm::mat4 Name
+
 #define STD140_BOOL(Name)          alignas(4) bool Name
 
 #define STD140_ALIGNED(Type, Name) STD140_##Type##_ALIGNMENT STD140_##Type##_TYPE Name

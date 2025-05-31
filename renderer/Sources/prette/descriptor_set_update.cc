@@ -8,6 +8,7 @@
 #include "prette/descriptor_set.h"
 #include "prette/device.h"  // IWYU pragma: keep
 #include "prette/gfx.h"
+#include "prette/texture.h"
 #include "prette/vk.h"
 #include "prette/vk_buffer.h"
 
@@ -32,6 +33,11 @@ auto DescriptorSetUpdate::WriteBuilder::WithBufferInfo(Buffer* rhs) -> WriteBuil
 auto DescriptorSetUpdate::WriteBuilder::WithCameraBuffer(Camera* rhs) -> WriteBuilder& {
   ASSERT(rhs);
   return WithBufferInfo(rhs->GetBuffer());
+}
+
+auto DescriptorSetUpdate::WriteBuilder::WithImageInfo(Texture* rhs) -> WriteBuilder& {
+  ASSERT(rhs);
+  return WithImageInfo(&rhs->GetDescriptor());
 }
 
 void DescriptorSetUpdate::Commit() {

@@ -8,6 +8,8 @@
 #include <rapidjson/rapidjson.h>
 #include <rapidjson/reader.h>
 #include <rapidjson/stream.h>
+#include <rapidjson/stringbuffer.h>
+#include <rapidjson/writer.h>
 // IWYU pragma: end_exports
 
 #include <iostream>

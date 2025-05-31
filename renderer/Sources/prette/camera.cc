@@ -100,8 +100,7 @@ void Camera::UpdateViewMatrix() {
 void Camera::Update() {
   UpdateViewMatrix();
   ASSERT_INITIALIZED(GetBuffer());
-  vk::CopyBytesToBufferWithStaging copy(data_);
-  copy(GetBuffer());
+  vk::CopyBytesToBufferWithStaging::Copy(data_, GetBuffer());
 }
 
 auto Camera::Unproject(const glm::vec2 ndc) const -> glm::vec3 {
@@ -116,7 +115,7 @@ void Camera::UpdateProjectionMatrix() {
   const auto ar = GetViewportAspectRatio();
   const auto w = (GetViewportWidth() / kTileSizeInPixels) * 0.5f;
   const auto h = (GetViewportHeight() / kTileSizeInPixels) * 0.5f * ar;
-  const auto z = GetZoomPercent() + 0.6f;
+  const auto z = GetZoomPercent() + 0.2f;
   data_.projection = glm::ortho(-w * z, w * z, -h * z, h * z, kNearClip, kFarClip);
 }
 

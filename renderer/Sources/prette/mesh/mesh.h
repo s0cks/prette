@@ -28,6 +28,8 @@ class Mesh {
   virtual auto IsInitialized() const -> bool {
     return vk::IsInitialized(vertices_);
   }
+
+  virtual void Bind(VkCommandBuffer cmd);
 };
 
 class IndexedMesh : public Mesh {
@@ -49,6 +51,8 @@ class IndexedMesh : public Mesh {
   auto IsInitialized() const -> bool override {
     return Mesh::IsInitialized() && vk::IsInitialized(indices_);
   }
+
+  void Bind(VkCommandBuffer cmd) override;
 };
 }  // namespace prt::vk
 

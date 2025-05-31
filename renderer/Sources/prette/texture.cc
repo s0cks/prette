@@ -8,7 +8,6 @@
 
 #include "prette/assertions.h"
 #include "prette/common.h"
-#include "prette/copy_to_buffer.h"
 #include "prette/copy_to_image.h"
 #include "prette/flags.h"
 #include "prette/image/image.h"
@@ -20,7 +19,6 @@
 #include "prette/sampler.h"
 #include "prette/to_string.h"
 #include "prette/vk.h"
-#include "prette/vk_buffer.h"
 
 namespace prt {
 auto ReadTexture(const std::string& filename, const bool flip) -> TextureData {
@@ -85,20 +83,8 @@ auto TextureBuilder::WithTextureData(const TextureData& rhs, const VkFormat form
     ASSERT_INITIALIZED(image_);
   }
   {
-    vk::BufferBuilder staging_builder{};
-    // clang-format off
-    staging_builder.WithTransferSourceUsage()
-      .WithSize(rhs.GetTotalBufferSize());
-    // clang-format on
-    vk::ScopedBuffer staging(staging_builder);
-    {
-      vk::CopyBytesToBuffer copy(&rhs.data[0], rhs.GetTotalBufferSize());
-      copy(staging);
-    }
-    {
-      vk::CopyBufferToImageWithTransitions<vk::UndefinedToTransferDest, vk::TransferDestToShaderReadOnly> copy(rhs);
-      copy(staging, image_);
-    }
+    vk::CopyBytesToImageWithStagingAndTransitions<vk::UndefinedToTransferDest, vk::TransferDestToShaderReadOnly>::Copy(
+        &rhs.data[0], rhs.GetTotalBufferSize(), rhs, image_);
   }
   {
     vk::ImageViewBuilder builder{};

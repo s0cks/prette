@@ -45,6 +45,23 @@ class CopyBytesToBuffer : public CopyBytesToBufferTemplate {
     CopyBytesToBuffer((const uint8_t*)&source, sizeof(T)) {}
   ~CopyBytesToBuffer() override = default;
   void operator()(Buffer* dst) const;
+
+ public:
+  static inline void Copy(const uint8_t* bytes, const uint64_t num_bytes, Buffer* dest) {
+    CopyBytesToBuffer copy(bytes, num_bytes);
+    return copy(dest);
+  }
+
+  template <typename T>
+  static inline void Copy(const T* values, const uint64_t num_values, Buffer* dest) {
+    CopyBytesToBuffer copy((const uint8_t*)values, num_values * sizeof(T));
+    return copy(dest);
+  }
+
+  template <typename T>
+  static inline void Copy(const T& value, Buffer* dest) {
+    return Copy(&value, 1, dest);
+  }
 };
 
 class CopyBytesToBufferWithStaging : public CopyBytesToBufferTemplate {
@@ -61,6 +78,22 @@ class CopyBytesToBufferWithStaging : public CopyBytesToBufferTemplate {
     CopyBytesToBufferWithStaging((const uint8_t*)&source, sizeof(T)) {}
   ~CopyBytesToBufferWithStaging() override = default;
   void operator()(Buffer* dst) const;
+
+ public:
+  static inline void Copy(const uint8_t* bytes, const uint64_t num_bytes, Buffer* dest) {
+    CopyBytesToBufferWithStaging copy(bytes, num_bytes);
+    return copy(dest);
+  }
+
+  template <typename T>
+  static inline void Copy(const T* values, const uint64_t num_values, Buffer* dest) {
+    return Copy((const uint8_t*)values, num_values * sizeof(T), dest);
+  }
+
+  template <typename T>
+  static inline void Copy(const T& value, Buffer* dest) {
+    return Copy(&value, 1, dest);
+  }
 };
 
 class CopyBufferToBuffer {
@@ -74,7 +107,13 @@ class CopyBufferToBuffer {
   ~CopyBufferToBuffer() = default;
 
   void operator()(Buffer* dst) const;
+
+ public:
+  static inline void Copy(Buffer* source, Buffer* dest) {
+    CopyBufferToBuffer copy(source);
+    return copy(dest);
+  }
 };
 }  // namespace prt::vk
 
-#endif // PRT_COPY_TO_BUFFER_H
+#endif  // PRT_COPY_TO_BUFFER_H

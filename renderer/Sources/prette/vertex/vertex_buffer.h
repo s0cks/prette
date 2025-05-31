@@ -21,6 +21,10 @@ class VertexBufferBuilder : public BaseBufferBuilderTemplate<V, kDefaultVertexBu
   auto operator()() -> Buffer* {
     return BaseBufferBuilderTemplate<V, kDefaultVertexBufferUsage, VertexBufferBuilder<V>>::Build();
   }
+
+  operator Buffer*() {
+    return BaseBufferBuilderTemplate<V, kDefaultVertexBufferUsage, VertexBufferBuilder<V>>::Build();
+  }
 };
 
 static inline void BindVertexBuffer(VkCommandBuffer& cmd, vk::Buffer* buffer, const uint64_t first_binding = 0,

@@ -14,13 +14,11 @@
 #include "prette/descriptor_set_builder.h"
 #include "prette/descriptor_set_update.h"
 #include "prette/flags.h"
-#include "prette/index_buffer.h"
 #include "prette/pipeline/pipeline.h"
 #include "prette/renderer.h"
 #include "prette/renderer_event.h"
 #include "prette/texture.h"
 #include "prette/tile.h"
-#include "prette/vertex/vertex_buffer.h"
 #include "prette/vk.h"
 
 namespace prt {
@@ -45,8 +43,8 @@ ChunkRenderer::ChunkRenderer() {
   });
   OnInitBuffers([this](InitBuffersEvent* event) {
     TextureBuilder builder("wood");
-    texture_ = builder.WithTextureData(ReadTexture(fs::path(FLAGS_resources) / "textures" / "wood.png", true),
-                                       VK_FORMAT_R8G8B8A8_SRGB);
+    texture_ = builder.WithTextureData(
+        ReadTexture(fs::path(FLAGS_resources) / "textures" / "atlas1" / "atlas1.png", true), VK_FORMAT_R8G8B8A8_SRGB);
     ASSERT_INITIALIZED(texture_);
     mesh_ = NewChunkMesh();
     ASSERT_INITIALIZED(mesh_);
@@ -73,19 +71,16 @@ void ChunkRenderer::UpdateChunkBuffer(Chunk* chunk, const bool staging) {
   data.id = 0;  // TODO: fill in
   data.pos = chunk->GetPos();
   if (staging) {
-    vk::CopyBytesToBufferWithStaging copy(data);
-    copy(GetMesh()->GetMetadataBuffer());
+    vk::CopyBytesToBufferWithStaging::Copy(data, GetMesh()->GetMetadataBuffer());
   } else {
-    vk::CopyBytesToBuffer copy(data);
-    copy(GetMesh()->GetMetadataBuffer());
+    vk::CopyBytesToBuffer::Copy(data, GetMesh()->GetMetadataBuffer());
   }
 }
 
 void ChunkRenderer::RenderChunkMesh(VkCommandBuffer buffer, ChunkMesh* mesh, const uint64_t num_instances) {
   ASSERT_INITIALIZED(mesh);
   ASSERT(num_instances >= 1);
-  vk::BindVertexBuffer(buffer, mesh->GetVertexBuffer());
-  vk::BindIndexBuffer<uint16_t>(buffer, mesh->GetIndexBuffer());
+  mesh->Bind(buffer);
   vkCmdDrawIndexed(buffer, ChunkMeshClass::kTotalNumberOfIndices, num_instances, 0, 0, 0);
 }
 

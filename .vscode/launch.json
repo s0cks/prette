@@ -5,6 +5,21 @@
       "default": "0",
       "description": "The verbose level",
       "type": "promptString"
+    },
+    {
+      "id": "extra_args",
+      "default": "",
+      "description": "Extra args to pass",
+      "type": "promptString"
+    },
+    {
+      "id": "texture-atlas",
+      "default": "atlas1",
+      "description": "",
+      "type": "pickString",
+      "options": [
+        "atlas1",
+      ]
     }
   ],
   "configurations": [
@@ -169,6 +184,38 @@
         "-v=${input:vlevel}"
       ],
       "cwd": "${workspaceFolder}/data",
+      "env": {
+        "MTL_DEBUG_LAYER":"0",
+        "UV_THREADPOOL_SIZE": "0",
+        "TERM": "xterm-256color",
+        "METAL_DEVICE_WRAPPER_TYPE": "1",
+        "PRT_PATH": "${workspaceFolder}/prette/resources;${workspaceFolder}/build/prette/resources",
+        "LUA_PATH": "${env:LUA_PATH};${workspaceFolder}/lib/?/?.lua;${workspaceFolder}/prette/resources/scripts/?/?.lua;${workspaceFolder}/prette/resources/scripts/?.lua"
+      },
+      "initCommands": [
+        "command source ${workspaceFolder}/.lldbinit"
+      ],
+    },
+    {
+      "name": "prette-stitcher",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/tools/stitcher/prette-stitcher",
+      "args": [
+        "--resources",
+        "${workspaceFolder}/resources",
+        "--config=${workspaceFolder}/prette.cfg",
+        "--logtostdout",
+        "--colorlogtostdout",
+        "-v=${input:vlevel}",
+        "--scan",
+        "--atlas_name=${input:texture-atlas}",
+        "--atlas_width=4096",
+        "--atlas_height=2048",
+        "--out_header_filename=${workspaceFolder}/${input:texture-atlas}.h",
+        "${input:extra_args}",
+      ],
+      "cwd": "${workspaceFolder}/resources/textures/${input:texture-atlas}",
       "env": {
         "MTL_DEBUG_LAYER":"0",
         "UV_THREADPOOL_SIZE": "0",

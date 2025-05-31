@@ -29,14 +29,12 @@ layout(binding = 2) uniform tiles_data {
 
 layout(location = 0) out vec2 Frag_TexPos;
 layout(location = 1) out uint Frag_Material;
+layout(location = 2) out uint Frag_Hovering;
 
 void main() {
   TileData tile = tiles[gl_InstanceIndex];
   gl_Position = camera.projection * camera.view * tile.model * vec4(In_Pos.xy, 1.1f, 1.0f);
   Frag_TexPos = In_TexPos;
-  if (tile.hovering) {
-    Frag_Material = 3;
-  } else {
-    Frag_Material = tile.material;
-  }
+  Frag_Material = tile.material;
+  Frag_Hovering = tile.hovering ? 1 : 0;
 }

@@ -4,6 +4,7 @@ add_shader_target(scene-shader ${CMAKE_CURRENT_SOURCE_DIR}/scene.vert ${CMAKE_CU
 add_shader_target(gui-shader ${CMAKE_CURRENT_SOURCE_DIR}/gui.vert ${CMAKE_CURRENT_SOURCE_DIR}/gui.frag)
 add_shader_target(tile-shader ${CMAKE_CURRENT_SOURCE_DIR}/tile.vert ${CMAKE_CURRENT_SOURCE_DIR}/tile.frag)
 add_shader_target(grid-shader ${CMAKE_CURRENT_SOURCE_DIR}/grid.vert ${CMAKE_CURRENT_SOURCE_DIR}/grid.frag)
+add_shader_target(sprite-shader ${CMAKE_CURRENT_SOURCE_DIR}/sprite.vert ${CMAKE_CURRENT_SOURCE_DIR}/sprite.frag)
 
 add_glslc_target(full-colored2d-vert ${CMAKE_CURRENT_SOURCE_DIR}/full_colored2d.vert)
 add_glslc_target(simple-colored2d-vert ${CMAKE_CURRENT_SOURCE_DIR}/simple_colored_2d.vert)
@@ -14,6 +15,7 @@ add_custom_target(shaders ALL
     scene-shader
     full-colored2d-vert
     simple-colored2d-vert
+    sprite-shader
     simple_textured2d
     gui-shader
     tile-shader

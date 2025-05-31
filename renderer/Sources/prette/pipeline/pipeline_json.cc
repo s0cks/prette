@@ -40,6 +40,10 @@ auto PipelineHandler::OnParseVertexClass(const std::string& value) -> bool {
     builder_->AddVertexBinding(color2d::Vertex::GetBindingDescription());
     builder_->AddVertexAttributes(color2d::Vertex::GetAttributeDescriptions());
     return TransitionTo(PipelineHandlerState::kOpenDoc);
+  } else if (EqualsIgnoreCase(value, "texture2d") || EqualsIgnoreCase("tex2d", value)) {
+    builder_->AddVertexBinding(tex2d::Vertex::GetBindingDescription());
+    builder_->AddVertexAttributes(tex2d::Vertex::GetAttributeDescriptions());
+    return TransitionTo(PipelineHandlerState::kOpenDoc);
   }
   return Error(fmt::format("Invalid vertex_class `{}`", value));
 }

@@ -14,19 +14,16 @@ void CopyBytesToBuffer::operator()(Buffer* dst) const {
   memcpy(mapped, data(), size());
 }
 
-void CopyBytesToBufferWithStaging::operator()(Buffer* dst) const {
-  ASSERT_INITIALIZED(dst);
+void CopyBytesToBufferWithStaging::operator()(Buffer* dest) const {
+  ASSERT_INITIALIZED(dest);
   vk::BufferBuilder staging_builder{};
-  staging_builder.WithTransferSourceUsage().WithSize(size());
+  // clang-format off
+  staging_builder.WithTransferSourceUsage()
+    .WithSize(size());
+  // clang-format on
   vk::ScopedBuffer staging(staging_builder);
-  {
-    vk::CopyBytesToBuffer copy(data(), size());
-    copy(staging);
-  }
-  {
-    vk::CopyBufferToBuffer copy(staging);
-    copy(dst);
-  }
+  vk::CopyBytesToBuffer::Copy(data(), size(), staging);
+  vk::CopyBufferToBuffer::Copy(staging, dest);
 }
 
 CopyBufferToBuffer::CopyBufferToBuffer(Buffer* source, const uint64_t num_bytes, const uint64_t source_offset,

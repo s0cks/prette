@@ -228,6 +228,7 @@ void SceneRenderPass::Execute() {
   ASSERT(IsWorldInitialized());
   const auto chunk = GetWorld()->GetChunkAt(ChunkPos(0, 0));
   GetSceneRenderer()->chunk_renderer_.Render(buffer, chunk);
+  GetSceneRenderer()->sprites_.Render(buffer);
 }
 
 static rx::subscription on_renderer_init_{};

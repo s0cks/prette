@@ -54,7 +54,6 @@ list(APPEND PRT_CORE_LIBRARIES
   stduuid
   rapidjson
   RocksDB::rocksdb RocksDB::rocksdb-shared
-  glm::glm
   Backward::Backward
   OpenSSL::Crypto
   CpuFeatures::cpu_features
@@ -77,7 +76,9 @@ target_link_libraries(prette-core
   PUBLIC ${PRT_CORE_LIBRARIES})
 target_include_directories(prette-core
   PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}
-  PRIVATE ${LUA_INCLUDE_DIR} ${Stb_INCLUDE_DIR})
+  PRIVATE ${LUA_INCLUDE_DIR})
 set_property(TARGET prette-core PROPERTY CXX_INCLUDE_WHAT_YOU_USE "${IWYU};;${IWYU_OPTS}")
 add_dependencies(prette-core
   prt-flatbuffers)
+
+add_library(prette::core ALIAS prette-core)

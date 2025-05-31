@@ -1,0 +1,19 @@
+{
+  "type": "Pipeline",
+  "meta": {
+    "name": "sprite"
+  },
+  "data": {
+    "extent": "swapchain",
+    "vertex_class": "tex2d",
+    "viewport": "full",
+    "layout": "sprite",
+    "rasterizer": {
+      "cullMode": "back",
+      "frontFace": "clockwise"
+    },
+    "vertex_shader": "sprite",
+    "fragment_shader": "sprite",
+    "pass": "scene"
+  }
+}

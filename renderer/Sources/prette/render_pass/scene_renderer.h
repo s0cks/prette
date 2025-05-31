@@ -12,6 +12,7 @@
 #include "prette/render_pass/render_target.h"
 #include "prette/rx.h"
 #include "prette/sampler.h"
+#include "prette/sprite.h"
 #include "prette/texture.h"
 #include "prette/vk.h"
 
@@ -56,6 +57,7 @@ class SceneRenderer {
   vk::DescriptorSet* descriptors_ = nullptr;
   vk::RenderPipeline* pipeline_ = nullptr;
   ChunkRenderer chunk_renderer_{};
+  SpriteRenderer sprites_{};
   rx::subscription on_swap_created_{};
 
   void InitDepthTexture();

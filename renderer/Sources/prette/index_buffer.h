@@ -20,6 +20,10 @@ class IndexBufferBuilder : public BaseBufferBuilderTemplate<I, kDefaultIndexBuff
   auto operator()() -> Buffer* {
     return BaseBufferBuilderTemplate<I, kDefaultIndexBufferUsage, IndexBufferBuilder<I>>::Build();
   }
+
+  operator Buffer*() {
+    return BaseBufferBuilderTemplate<I, kDefaultIndexBufferUsage, IndexBufferBuilder<I>>::Build();
+  }
 };
 
 template <IndexType I>

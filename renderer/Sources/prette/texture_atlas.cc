@@ -95,8 +95,7 @@ auto TextureAtlas::Add(const VkExtent2D extent, const uint8_t* pixels) -> AtlasT
 
   {
     vk::ReadOnlyShaderImageTransferDestScope layout_scope(image_);
-    vk::CopyBufferToImage copy(bounds);
-    copy(staging, image_);
+    vk::CopyBufferToImage::Copy(staging, bounds, image_);
   }
   delete staging;
   return new AtlasTexture(this, bounds);
