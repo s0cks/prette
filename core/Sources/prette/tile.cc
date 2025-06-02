@@ -6,10 +6,22 @@
 
 #include "prette/chunk/chunk.h"
 #include "prette/glm.h"
-// #include "prette/material.h"
 #include "prette/to_string.h"
 
 namespace prt {
+Tile::Tile(Chunk* owner, const TilePos pos, const raw::Tile raw) :
+  owner_(owner),
+  data_() {
+  SetPos(std::move(pos));
+  SetMaterial(raw.material());
+}
+Tile::Tile(Chunk* owner, const TilePos pos, const uint64_t material) :
+  owner_(owner),
+  data_() {
+  SetPos(pos);
+  SetMaterial(material);
+}
+
 auto Tile::ToString() const -> std::string {
   ToStringHelper<Tile> helper{};
   helper.AddFieldRef("pos", glm::to_string(GetPos()));
@@ -27,14 +39,8 @@ void Tile::SetHovering(const bool rhs) {
   GetOwner()->MarkDirty();
 }
 
-void Tile::SetModel(const glm::mat4 rhs) {
-  data_.model = std::move(rhs);
-  GetOwner()->MarkDirty();
-}
-
 void Tile::SetPos(const TilePos rhs) {
   data_.pos = std::move(rhs);
-  data_.model = glm::translate(glm::mat4(1.0f), glm::vec3(rhs, 0.0f));
   GetOwner()->MarkDirty();
 }
 

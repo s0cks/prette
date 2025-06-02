@@ -3,6 +3,12 @@
 #include "prette/glm.h"  // IWYU pragma: keep
 
 namespace prt {
+namespace bare2d {
+auto Vertex::operator==(const Vertex& rhs) const -> bool {
+  return pos == rhs.pos;
+}
+}  // namespace bare2d
+
 namespace tex2d {
 auto Vertex::operator==(const Vertex& rhs) const -> bool {
   return pos == rhs.pos && uv == rhs.uv;

@@ -30,6 +30,10 @@ DeviceBuilder::DeviceBuilder() :
   vk::HandleBuilderTemplate<VkDeviceCreateInfo, Device>() {
   device_features_.samplerAnisotropy = VK_TRUE;
   device_features_.fillModeNonSolid = VK_TRUE;
+  device_features_.shaderUniformBufferArrayDynamicIndexing = VK_TRUE;
+  device_features_.shaderSampledImageArrayDynamicIndexing = VK_TRUE;
+  device_features_.shaderStorageBufferArrayDynamicIndexing = VK_TRUE;
+  device_features_.shaderStorageImageArrayDynamicIndexing = VK_TRUE;
 }
 
 DeviceBuilder::~DeviceBuilder() {}

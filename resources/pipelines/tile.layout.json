@@ -1,11 +1,13 @@
 {
   "type": "PipelineLayout",
   "meta": {
-    "name": "chunk"
+    "name": "tile"
   },
   "data": {
     "descriptor_sets": [
-      "chunk"
+      "camera",
+      "material",
+      "tile"
     ]
   }
 }

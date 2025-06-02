@@ -141,8 +141,8 @@ class Chunk {
   }
 
   auto operator<<(std::vector<raw::Tile>& tiles) -> Chunk& {
-    ASSERT(tiles.size() == kTotalChunkSize);
-    for (ChunkIndex idx = 0; idx < kTotalChunkSize; idx++) {
+    ASSERT(tiles.size() == kTotalNumberOfTilesPerChunk);
+    for (ChunkIndex idx = 0; idx < kTotalNumberOfTilesPerChunk; idx++) {
       tile(idx) = Tile(this, GetChunkPos(idx), tiles[idx]);
     }
     MarkDirty();
@@ -180,7 +180,7 @@ class ChunkTileIterator {
   ~ChunkTileIterator() = default;
 
   auto HasNext() const -> bool {
-    return current_ < kTotalChunkSize;
+    return current_ < kTotalNumberOfTilesPerChunk;
   }
 
   auto Next() -> Tile* {

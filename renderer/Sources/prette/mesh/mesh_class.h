@@ -19,12 +19,14 @@ struct MeshClass {
   using VertexType = V;
   static constexpr const auto kTotalNumberOfVertices = NumberOfVertices;
   using VertexArray = std::array<V, kTotalNumberOfVertices>;
+  using VertexList = std::vector<V>;
   using VertexBufferBuilder = vk::VertexBufferBuilder<VertexType>;
 
   using IndexType = I;
   using IndexClass = IndexClass<I>;
   static constexpr const auto kTotalNumberOfIndices = NumberOfIndices;
   using IndexArray = std::array<I, kTotalNumberOfIndices>;
+  using IndexList = std::vector<I>;
   using IndexBufferBuilder = vk::IndexBufferBuilder<IndexType>;
 };
 
@@ -33,6 +35,8 @@ concept MeshClassType = requires {
   HasClassName<T>;
   VertexType<typename T::VertexType>;
   T::kTotalNumberOfVertices;
+  typename T::VertexList;
+  typename T::VertexArray;
 };
 
 template <typename T>
@@ -41,6 +45,8 @@ concept IndexedMeshClassType = requires {
   IndexType<typename T::IndexType>;
   IndexClassType<typename T::IndexClass>;
   T::kTotalNumberOfIndices;
+  typename T::IndexList;
+  typename T::IndexArray;
 };
 }  // namespace prt::vk
 

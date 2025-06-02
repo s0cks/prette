@@ -17,6 +17,9 @@ DEFINE_TOSTRING(InitDescriptorSets);
 DEFINE_TOSTRING(InitPipelineLayouts);
 DEFINE_TOSTRING(InitGraphicsPipelines);
 DEFINE_TOSTRING(InitBuffers);
+DEFINE_TOSTRING(InitTextures);
+DEFINE_TOSTRING(InitMeshes);
+DEFINE_TOSTRING(InitMaterials);
 DEFINE_TOSTRING(RendererDestroyed);
 #undef DEFINE_TOSTRING
 

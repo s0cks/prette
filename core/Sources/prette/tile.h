@@ -1,10 +1,10 @@
 #ifndef PRT_TILE_H
 #define PRT_TILE_H
 
+#include <glm/ext/vector_float2.hpp>
 #include <ostream>
 #include <string>
 #include <type_traits>
-#include <utility>
 #include <vulkan/vulkan_core.h>
 
 #include "prette/assertions.h"
@@ -17,10 +17,9 @@ namespace prt {
 using TilePos = glm::vec2;
 
 struct TileData {
-  alignas(8) glm::vec2 pos = glm::vec2(0.0f, 0.0f);
-  alignas(4) uint32_t material = 0;
-  alignas(16) glm::mat4 model = glm::mat4(1.0f);
-  alignas(4) bool hovering = false;
+  STD140_VEC2(pos) = glm::vec2(0.0f, 0.0f);
+  STD140_UINT32(material) = 0;
+  STD140_BOOL(hovering) = false;
 
   static inline auto GetBindingDescription(const uint32_t bidx = 0) -> VkVertexInputBindingDescription {
     VkVertexInputBindingDescription binding{};
@@ -59,18 +58,8 @@ class Tile {
 
  public:
   Tile() = default;
-  Tile(Chunk* owner, const TilePos pos, const raw::Tile raw) :
-    owner_(owner),
-    data_() {
-    SetPos(std::move(pos));
-    SetMaterial(raw.material());
-  }
-  Tile(Chunk* owner, const TilePos pos, const uint64_t material = kDefaultTileMaterial) :
-    owner_(owner),
-    data_() {
-    SetPos(pos);
-    SetMaterial(material);
-  }
+  Tile(Chunk* owner, const TilePos pos, const raw::Tile raw);
+  Tile(Chunk* owner, const TilePos pos, const uint64_t material = kDefaultTileMaterial);
   Tile(Chunk* owner, const uint32_t x, const uint32_t y, const uint64_t material) :
     Tile(owner, TilePos(x, y), material) {}
   ~Tile() = default;
@@ -109,12 +98,6 @@ class Tile {
   }
 
   void SetHovering(const bool rhs);
-
-  auto GetModel() const -> const glm::mat4& {
-    return data().model;
-  }
-
-  void SetModel(const glm::mat4 rhs);
 
   auto Contains(const glm::vec2& pos) const -> bool;
   auto ToString() const -> std::string;

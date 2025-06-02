@@ -22,15 +22,7 @@ layout(std140, binding = 1) readonly buffer SpriteBlock {
 
 layout(location = 0) out vec2 Frag_TexPos;
 
-mat4 translate(vec3 translation) {
-  // clang-format off
-  return mat4(
-    1.0, 0.0, 0.0, 0.0,
-    0.0, 1.0, 0.0, 0.0,
-    0.0, 0.0, 1.0, 0.0,
-    translation.xyz, 1.0);
-  // clang-format on
-}
+#include "util.glsl"
 
 void main() {
   SpriteData sprite = sprites[gl_InstanceIndex];

@@ -77,6 +77,9 @@ class Renderer {
   void InitRenderPasses();
   void InitPipelineLayouts();
   void InitBuffers();
+  void InitMeshes();
+  void InitMaterials();
+  void InitTextures();
 
   void InitSwap(const bool reinit);
   void DestroySwap(const bool reinit);

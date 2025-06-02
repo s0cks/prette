@@ -12,11 +12,11 @@
 namespace prt {
 static constexpr const uint32_t kChunkWidth = 32;
 static constexpr const uint32_t kChunkHeight = 32;
-static constexpr const auto kTotalChunkSize = kChunkWidth * kChunkHeight;
+static constexpr const auto kTotalNumberOfTilesPerChunk = kChunkWidth * kChunkHeight;
 
 using ChunkId = uint32_t;
 using ChunkPos = glm::u32vec2;
-using ChunkData = std::array<Tile, kTotalChunkSize>;
+using ChunkData = std::array<Tile, kTotalNumberOfTilesPerChunk>;
 
 struct ChunkMetadata {
   alignas(4) ChunkId id{};

@@ -69,7 +69,7 @@ auto NewChunkMesh() -> ChunkMesh* {
 }
 
 class ChunkMeshifier : public TileVisitor {
-  using InstanceData = std::array<TileData, kTotalChunkSize>;
+  using InstanceData = std::array<TileData, kTotalNumberOfTilesPerChunk>;
 
  private:
   ChunkMesh* mesh_;

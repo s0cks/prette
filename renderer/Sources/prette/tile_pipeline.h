@@ -1,0 +1,4 @@
+#ifndef PRT_TILE_PIPELINE_H
+#define PRT_TILE_PIPELINE_H
+
+#endif  // PRT_TILE_PIPELINE_H

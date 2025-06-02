@@ -27,7 +27,7 @@ Chunk::Chunk(const ChunkPos pos) :
 
 Chunk::Chunk(const ChunkPos pos, const raw::Chunk& raw) :
   pos_(std::move(pos)) {
-  ASSERT(raw.tiles()->size() >= kTotalChunkSize);  // TODO: this probably should be an equals
+  ASSERT(raw.tiles()->size() >= kTotalNumberOfTilesPerChunk);  // TODO: this probably should be an equals
   for (uint32_t y = 0; y < kChunkHeight; y++) {
     for (uint32_t x = 0; x < kChunkWidth; x++) {
       TilePos pos(x, y);
@@ -65,10 +65,10 @@ auto Chunk::ToString() const -> std::string {
 
   std::stringstream tiles;
   tiles << "[";
-  for (auto idx = 0; idx < kTotalChunkSize; idx++) {
+  for (auto idx = 0; idx < kTotalNumberOfTilesPerChunk; idx++) {
     const auto& t = tile(idx);
     tiles << t.ToString();
-    if ((idx + 1) < kTotalChunkSize)
+    if ((idx + 1) < kTotalNumberOfTilesPerChunk)
       tiles << ", ";
   }
   tiles << "]";

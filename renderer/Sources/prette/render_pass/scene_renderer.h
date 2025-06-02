@@ -7,6 +7,7 @@
 
 #include "prette/chunk_renderer.h"
 #include "prette/descriptor_set.h"
+#include "prette/descriptor_set_layout.h"
 #include "prette/pipeline/pipeline.h"
 #include "prette/render_pass/render_pass.h"
 #include "prette/render_pass/render_target.h"
@@ -57,7 +58,7 @@ class SceneRenderer {
   vk::DescriptorSet* descriptors_ = nullptr;
   vk::RenderPipeline* pipeline_ = nullptr;
   ChunkRenderer chunk_renderer_{};
-  SpriteRenderer sprites_{};
+  // SpriteRenderer sprites_{};
   rx::subscription on_swap_created_{};
 
   void InitDepthTexture();
@@ -88,6 +89,10 @@ class SceneRenderer {
     if (scene_descriptors_.empty())
       return VK_NULL_HANDLE;
     return scene_descriptors_[frame];
+  }
+
+  auto GetTileDescriptorSetLayout() const -> vk::DescriptorSetLayout* {
+    return chunk_renderer_.GetTileDescriptorSetLayout();
   }
 
   auto IsInitialized() const -> bool {

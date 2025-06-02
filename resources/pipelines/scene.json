@@ -5,7 +5,7 @@
   },
   "data": {
     "extent": "swapchain",
-    "vertex_class": "tile",
+    "vertex_class": "color2d",
     "layout": "scene",
     "rasterizer": {
       "cullMode": "back",

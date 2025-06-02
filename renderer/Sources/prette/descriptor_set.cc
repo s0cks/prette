@@ -47,7 +47,7 @@ void DescriptorSet::AllocSets(const VkDescriptorSetLayout& layout, VkDescriptorS
            fmt::format("failed to allocate {} VkDescriptorSets", num_sets));
 }
 
-DescriptorSet::DescriptorSet(const std::string name, const VkDescriptorSetLayout layout) :
+DescriptorSet::DescriptorSet(const std::string name, VkDescriptorSetLayout layout) :
   NamedHandleTemplate<VkDescriptorSet>(std::move(name)),
   layout_(layout) {
   AllocSets(layout_, handle_ptr(), 1);
@@ -81,6 +81,16 @@ auto DescriptorSet::New(const std::string name, const VkDescriptorSetLayoutBindi
   VkDescriptorSetLayout layout = VK_NULL_HANDLE;
   InitLayout(bindings, num_bindings, layout);
   return New(std::move(name), std::move(layout));
+}
+
+auto DescriptorSet::FromJsonFile(const fs::path path) -> DescriptorSet* {
+  // using namespace prt::json;
+  // DescriptorSetBuilder builder{};
+  // DocumentHandler<DescriptorSetHandler> handler(&builder);
+  // ParseJsonDocumentFrom(path, handler);
+  // return builder;
+  NOT_IMPLEMENTED(FATAL);  // TODO: implement
+  return nullptr;
 }
 
 void InitDescriptorSets() {

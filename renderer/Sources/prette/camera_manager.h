@@ -3,6 +3,7 @@
 
 #include "prette/camera.h"
 #include "prette/common.h"
+#include "prette/descriptor_set.h"
 #include "prette/rx.h"
 
 namespace prt {
@@ -11,6 +12,7 @@ class CameraManager {
   friend class TerminatedState;
 
  private:
+  vk::DescriptorSet* descriptors_ = nullptr;
   CameraSet cameras_{};
   rx::subscription on_swap_created_{};
   rx::subscription on_pre_frame_{};
@@ -26,6 +28,10 @@ class CameraManager {
 
   auto GetNumberOfRegisteredCameras() const -> uint64_t {
     return cameras_.size();
+  }
+
+  auto GetDescriptorSet() const -> vk::DescriptorSet* {
+    return descriptors_;
   }
 
   auto VisitAllCameras(CameraPredicate vis) const -> bool;

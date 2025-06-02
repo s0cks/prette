@@ -16,6 +16,7 @@
 #include "prette/gui/gui_system.h"
 #include "prette/lua.h"
 #include "prette/lua_event.h"
+#include "prette/material/material_system.h"
 #include "prette/relaxed_atomic.h"
 #include "prette/render_pass/render_pass.h"
 #include "prette/render_pass/scene_renderer.h"
@@ -90,11 +91,12 @@ void Renderer::OnWindowResized() {
 }
 
 void Renderer::InitRenderPasses() {
-  // init render pass
+  DVLOG(1) << "initializing render passes.....";
   PublishInitRenderPassesEvent();
 }
 
 void Renderer::InitPipelines() {
+  DVLOG(1) << "initializing pipelines.....";
   PublishInitGraphicsPipelinesEvent();
 }
 
@@ -104,15 +106,30 @@ void Renderer::InitPipelineLayouts() {
 }
 
 void Renderer::InitBuffers() {
+  DVLOG(1) << "initializing buffers.....";
   command_buffers_ = vk::CommandBufferPool<>::New();  // NOLINT(cppcoreguidelines-prefer-member-initializer)
   ASSERT(command_buffers_);
   PublishInitBuffersEvent();
 }
 
 void Renderer::InitDescriptorSets() {
-  ASSERT(descriptors_ == nullptr);
   DVLOG(1) << "initializing descriptor sets....";
   PublishInitDescriptorSetsEvent();
+}
+
+void Renderer::InitMeshes() {
+  DVLOG(1) << "initializing meshes.....";
+  PublishInitMeshesEvent();
+}
+
+void Renderer::InitTextures() {
+  DVLOG(1) << "initializing textures.....";
+  PublishInitTexturesEvent();
+}
+
+void Renderer::InitMaterials() {
+  DVLOG(1) << "initializing materials.....";
+  PublishInitMaterialsEvent();
 }
 
 void Renderer::InitSwap(const bool reinit) {
@@ -125,7 +142,10 @@ void Renderer::InitSwap(const bool reinit) {
     InitPipelineLayouts();
     InitRenderPasses();
     InitPipelines();
+    InitTextures();
+    InitMaterials();
     InitBuffers();
+    InitMeshes();
   }
   on_tick_ = StartTicker();
 }
@@ -162,6 +182,7 @@ void Renderer::Init() {
   Window::Init();
   Driver::Init();
   InitCameraManager();
+  MaterialSystem::InitSystem();
   GuiSystem::InitSystem();
   InitSceneRenderer();
 

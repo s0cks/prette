@@ -33,8 +33,8 @@ void PipelineHandler::OnParseFragmentShader(const std::string& value) {
 
 auto PipelineHandler::OnParseVertexClass(const std::string& value) -> bool {
   if (EqualsIgnoreCase(value, "tile")) {
-    builder_->AddVertexBinding(tex2d::Vertex::GetBindingDescription());
-    builder_->AddVertexAttributes(tex2d::Vertex::GetAttributeDescriptions());
+    builder_->AddVertexBinding(bare2d::Vertex::GetBindingDescription());
+    builder_->AddVertexAttributes(bare2d::Vertex::GetAttributeDescriptions());
     return TransitionTo(PipelineHandlerState::kOpenDoc);
   } else if (EqualsIgnoreCase("color2d", value) || EqualsIgnoreCase("color2d", value)) {
     builder_->AddVertexBinding(color2d::Vertex::GetBindingDescription());

@@ -11,6 +11,7 @@
 #include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/descriptor_set.h"
+#include "prette/descriptor_set_layout.h"
 #include "prette/json.h"
 #include "prette/platform.h"
 #include "prette/rx.h"
@@ -101,13 +102,20 @@ class PipelineLayoutBuilder {
 
   auto WithDescriptorSetLayouts(const VkDescriptorSetLayout* data, const uint64_t num_layouts)
       -> PipelineLayoutBuilder& {
-    descriptor_set_layouts_.insert(std::end(descriptor_set_layouts_), data, data + num_layouts);
+    for (auto idx = 0; idx < num_layouts; idx++)
+      descriptor_set_layouts_.push_back(data[idx]);
     return *this;
   }
 
   inline auto WithDescriptorSetLayout(const VkDescriptorSetLayout* rhs) -> PipelineLayoutBuilder& {
     ASSERT(rhs);
     return WithDescriptorSetLayouts(rhs, 1);
+  }
+
+  inline auto WithDescriptorSetLayout(vk::DescriptorSetLayout* rhs) -> PipelineLayoutBuilder& {
+    ASSERT_INITIALIZED(rhs);
+    descriptor_set_layouts_.push_back(rhs->GetHandle());
+    return *this;
   }
 
   inline auto WithDescriptorSetLayouts(DescriptorSet* rhs) -> PipelineLayoutBuilder& {

@@ -35,7 +35,7 @@ class ChunkMesh : public vk::IndexedMesh {
       ASSERT_INITIALIZED(meta_);
     }
     {
-      vk::UniformBufferBuilder<TileData> builder(kTotalChunkSize);
+      vk::UniformBufferBuilder<TileData> builder(kTotalNumberOfTilesPerChunk);
       tiles_ = builder.WithTransferDestUsage();
       ASSERT_INITIALIZED(tiles_);
     }

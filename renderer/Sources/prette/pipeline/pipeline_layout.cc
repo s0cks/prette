@@ -10,12 +10,15 @@
 #include <vulkan/vulkan_core.h>
 
 #include "prette/assertions.h"
+#include "prette/camera_manager.h"
 #include "prette/common.h"
 #include "prette/descriptor_set.h"
 #include "prette/device.h"  // IWYU pragma: keep
 #include "prette/gfx.h"
 #include "prette/gfx_driver_event.h"
 #include "prette/json.h"
+#include "prette/material/material_system.h"
+#include "prette/render_pass/scene_renderer.h"
 #include "prette/thread_local.h"
 #include "prette/to_string.h"
 #include "prette/vk.h"
@@ -232,6 +235,17 @@ auto PipelineLayoutHandler::String(const char* str, SizeType length, bool copy) 
     SetResult(layout);
     return TransitionTo(PipelineLayoutHandlerState::kClosedDoc);
   } else if (IsParsingDescriptorSets()) {
+    if (EqualsIgnoreCase(value, "material")) {
+      builder_->WithDescriptorSetLayout(MaterialSystem::GetSystem()->GetMaterialDescriptorSetLayout());
+      return Continue();
+    } else if (EqualsIgnoreCase(value, "camera")) {
+      builder_->WithDescriptorSetLayouts(GetCameraManager()->GetDescriptorSet());
+      return Continue();
+    } else if (EqualsIgnoreCase(value, "tile")) {
+      builder_->WithDescriptorSetLayout(GetSceneRenderer()->GetTileDescriptorSetLayout());
+      return Continue();
+    }
+
     const auto dset = vk::FindDescriptorSet(value);
     LOG_IF(FATAL, !vk::IsInitialized(dset)) << "failed to find descriptor set: " << value;
     builder_->WithDescriptorSetLayout(&dset->GetLayout());

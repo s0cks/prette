@@ -35,7 +35,7 @@ class DescriptorSet : public NamedHandleTemplate<VkDescriptorSet> {
   static void AllocSets(const VkDescriptorSetLayout& layout, VkDescriptorSet* sets, const uint64_t num_sets);
 
  public:
-  explicit DescriptorSet(std::string name, const VkDescriptorSetLayout layout);
+  explicit DescriptorSet(std::string name, VkDescriptorSetLayout layout);
   ~DescriptorSet();
 
   auto GetLayout() const -> const VkDescriptorSetLayout& {
@@ -63,6 +63,8 @@ class DescriptorSet : public NamedHandleTemplate<VkDescriptorSet> {
   static inline auto New(const std::string name, const BindingsContainer& bindings) -> DescriptorSet* {
     return New(std::move(name), bindings.data(), bindings.size());
   }
+
+  static auto FromJsonFile(const fs::path path) -> DescriptorSet*;
 };
 
 void BindDescriptorSet(VkCommandBuffer buffer, DescriptorSet* dset, PipelineLayout* layout);

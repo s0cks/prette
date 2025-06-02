@@ -7,7 +7,7 @@
     "extent": "swapchain",
     "vertex_class": "tile",
     "viewport": "full",
-    "layout": "chunk",
+    "layout": "tile",
     "rasterizer": {
       "cullMode": "back",
       "frontFace": "clockwise"

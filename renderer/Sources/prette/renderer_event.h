@@ -13,7 +13,10 @@ namespace prt {
   V(InitPipelineLayouts)           \
   V(InitGraphicsPipelines)         \
   V(InitRenderPasses)              \
+  V(InitTextures)                  \
   V(InitBuffers)                   \
+  V(InitMeshes)                    \
+  V(InitMaterials)                 \
   V(PreFrame)                      \
   V(PostFrame)
 
@@ -56,6 +59,9 @@ DECLARE_RENDERER_EVENT(InitDescriptorSets);
 DECLARE_RENDERER_EVENT(InitPipelineLayouts);
 DECLARE_RENDERER_EVENT(InitGraphicsPipelines);
 DECLARE_RENDERER_EVENT(InitBuffers);
+DECLARE_RENDERER_EVENT(InitTextures);
+DECLARE_RENDERER_EVENT(InitMeshes);
+DECLARE_RENDERER_EVENT(InitMaterials);
 DECLARE_RENDERER_EVENT(RendererDestroyed);
 #undef DECLARE_RENDERER_EVENT
 

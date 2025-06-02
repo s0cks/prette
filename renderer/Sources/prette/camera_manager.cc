@@ -1,10 +1,13 @@
 #include "prette/camera_manager.h"
 
 #include <iterator>
+#include <vulkan/vulkan_core.h>
 
 #include "prette/assertions.h"
 #include "prette/camera.h"
 #include "prette/common.h"
+#include "prette/descriptor_set_builder.h"
+#include "prette/descriptor_set_update.h"
 #include "prette/glm.h"
 #include "prette/renderer.h"
 #include "prette/renderer_event.h"
@@ -17,6 +20,20 @@ static ThreadLocal<Camera> camera_{};
 static ThreadLocal<CameraManager> manager_{};
 
 CameraManager::CameraManager() {
+  OnInitDescriptorSets([this](InitDescriptorSetsEvent* event) {
+    {
+      vk::DescriptorSetBuilder builder{};
+      builder.WithName("camera");
+      builder.AddUniformBufferBinding(VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT);  // camera
+      descriptors_ = builder;
+      ASSERT_INITIALIZED(descriptors_);
+    }
+
+    {
+      vk::DescriptorSetUpdate update(GetDescriptorSet());
+      update.AddWriteCameraUniformBuffer(0, camera_);
+    }
+  });
   on_swap_created_ = OnSwapchainCreated([this](SwapchainCreatedEvent* event) {
     const auto camera = new Camera(glm::vec2(1920, 1080));
     ASSERT(camera);
