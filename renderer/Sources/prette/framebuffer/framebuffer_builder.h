@@ -1,21 +1,20 @@
-#ifndef PRT_FRAMEBUFFER_H
-#define PRT_FRAMEBUFFER_H
+#ifndef PRT_FRAMEBUFFER_BUILDER_H
+#define PRT_FRAMEBUFFER_BUILDER_H
 
-#include <string>
 #include <vector>
+#include <vulkan/vulkan_core.h>
 
 #include "prette/assertions.h"
 #include "prette/common.h"
+#include "prette/framebuffer/framebuffer.h"
 #include "prette/glm.h"
 #include "prette/image/image_view.h"
 #include "prette/platform.h"
-#include "prette/render_pass/render_pass.h"
 #include "prette/vk.h"
 
 namespace prt {
 class RenderPass;
-namespace vk {
-class FramebufferBuilder : public HandleBuilderTemplate<VkFramebufferCreateInfo, Framebuffer> {
+class FramebufferBuilder : public vk::HandleBuilderTemplate<VkFramebufferCreateInfo, Framebuffer> {
   using ParentType = HandleBuilderTemplate<VkFramebufferCreateInfo, Framebuffer>;
 
  private:
@@ -30,7 +29,7 @@ class FramebufferBuilder : public HandleBuilderTemplate<VkFramebufferCreateInfo,
     return *this;
   }
 
-  auto WithRenderPass(RenderPass* rhs) -> FramebufferBuilder&;
+  auto WithRenderPass(vk::RenderPass* rhs) -> FramebufferBuilder&;
 
   auto WithFlags(const VkFramebufferCreateFlags rhs) -> FramebufferBuilder& {
     info_ptr()->flags = rhs;
@@ -82,29 +81,12 @@ class FramebufferBuilder : public HandleBuilderTemplate<VkFramebufferCreateInfo,
     return *this;
   }
 
-  auto WithAttachment(ImageView* rhs) -> FramebufferBuilder&;
+  auto WithAttachment(vk::ImageView* rhs) -> FramebufferBuilder&;
   auto IsValid() const -> bool override;
   auto Build() -> Framebuffer* override;
-  void BuildWithAttachments(const std::vector<ImageView*>& attachments, std::vector<vk::Framebuffer*>& results,
+  void BuildWithAttachments(const std::vector<vk::ImageView*>& attachments, std::vector<Framebuffer*>& results,
                             vk::ImageView* depth = nullptr);
 };
-
-class Framebuffer : public HandleTemplate<VkFramebuffer> {
-  friend class FramebufferBuilder;
-
- private:
-  Framebuffer(const VkFramebufferCreateInfo* create_info);
-
- public:
-  ~Framebuffer() override;
-
-  auto ToString() const -> std::string override;
-
-  operator VkFramebuffer() const {
-    return GetHandle();
-  }
-};
-}  // namespace vk
 }  // namespace prt
 
-#endif  // PRT_FRAMEBUFFER_H
+#endif  // PRT_FRAMEBUFFER_BUILDER_H

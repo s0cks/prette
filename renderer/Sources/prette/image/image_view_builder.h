@@ -60,7 +60,7 @@ class ImageViewBuilder : public HandleBuilderTemplate<VkImageViewCreateInfo, Ima
     return info().subresourceRange.aspectMask;
   }
 
-  auto WithAspectMask(const VkImageAspectFlagBits rhs) -> ImageViewBuilder& {
+  auto WithAspectMask(const VkImageAspectFlags rhs) -> ImageViewBuilder& {
     info_ptr()->subresourceRange.aspectMask = rhs;
     return *this;
   }

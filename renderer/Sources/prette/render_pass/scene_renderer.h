@@ -1,11 +1,13 @@
 #ifndef PRT_SCENE_RENDERER_H
 #define PRT_SCENE_RENDERER_H
 
+#include <array>
 #include <cstdint>
 #include <vector>
 #include <vulkan/vulkan_core.h>
 
 #include "prette/chunk_renderer.h"
+#include "prette/common.h"
 #include "prette/descriptor_set.h"
 #include "prette/descriptor_set_layout.h"
 #include "prette/pipeline/pipeline.h"
@@ -26,9 +28,10 @@ namespace vk {
 class RenderPassBuilder;
 }
 
-class SceneRenderPass : public vk::RenderPassTemplate<RenderTarget> {
+class SceneRenderPass : public vk::RenderPass {
  private:
-  std::vector<vk::Framebuffer*> framebuffers_{};
+  std::vector<Framebuffer*> framebuffers_{};
+  std::array<RenderTarget*, MAX_NUMBER_OF_FRAMES_IN_FLIGHT + 1> targets_{};
 
   void InitFramebuffers();
   void OnSwapInit(const bool reinit) override;
@@ -37,6 +40,15 @@ class SceneRenderPass : public vk::RenderPassTemplate<RenderTarget> {
  public:
   explicit SceneRenderPass(const VkRenderPassCreateInfo* create_info);
   ~SceneRenderPass() override;
+
+  auto GetNumberOfTargets() const -> uint64_t {
+    return targets_.size();
+  }
+
+  auto GetTarget(const uint64_t idx) const -> RenderTarget* {
+    return targets_.at(idx);
+  }
+
   void Execute() override;
 
  public:

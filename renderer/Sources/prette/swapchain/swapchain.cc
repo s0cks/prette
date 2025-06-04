@@ -11,7 +11,8 @@
 #include "prette/common.h"
 #include "prette/device.h"  // IWYU pragma: keep
 #include "prette/event.h"
-#include "prette/framebuffer.h"
+#include "prette/framebuffer/framebuffer.h"
+#include "prette/framebuffer/framebuffer_builder.h"
 #include "prette/gfx_driver_event.h"
 #include "prette/gfx_vk.h"
 #include "prette/image/image_view.h"
@@ -65,7 +66,7 @@ Swapchain::Swapchain(const VkSwapchainCreateInfoKHR* create_info) :
 
   {
     // init framebuffers
-    vk::FramebufferBuilder builder{};
+    FramebufferBuilder builder{};
     // clang-format off
     builder.WithRenderPass(GetRenderer()->GetRenderPass())
       .WithSize(GetExtent())
@@ -85,7 +86,7 @@ Swapchain::~Swapchain() {
   const auto driver = Driver::Get();
   driver->DestroySwapchain(handle_ref());
   delete frames_;
-  std::ranges::for_each(framebuffers_, [](vk::Framebuffer* framebuffer) {
+  std::ranges::for_each(framebuffers_, [](Framebuffer* framebuffer) {
     delete framebuffer;
   });
   std::ranges::for_each(views_, [](vk::ImageView* view) {
@@ -105,7 +106,7 @@ auto Swapchain::GetView(const uint32_t idx) const -> vk::ImageView* {
   return views_.at(idx);
 }
 
-auto Swapchain::GetFramebuffer(const uint32_t idx) const -> vk::Framebuffer* {
+auto Swapchain::GetFramebuffer(const uint32_t idx) const -> Framebuffer* {
   return framebuffers_.at(idx);
 }
 

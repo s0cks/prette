@@ -37,7 +37,7 @@ auto SwapchainFrame::GetView() const -> vk::ImageView* {
   return GetOwner()->GetView(GetImage());
 }
 
-auto SwapchainFrame::GetFramebuffer() const -> vk::Framebuffer* {
+auto SwapchainFrame::GetFramebuffer() const -> Framebuffer* {
   return GetOwner()->GetFramebuffer(GetImage());
 }
 

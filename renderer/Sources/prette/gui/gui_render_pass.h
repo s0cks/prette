@@ -5,7 +5,7 @@
 #include <vulkan/vulkan_core.h>
 
 #include "prette/event.h"
-#include "prette/framebuffer.h"
+#include "prette/framebuffer/framebuffer.h"
 #include "prette/gfx.h"
 #include "prette/render_pass/render_pass.h"
 #include "prette/rx.h"
@@ -51,7 +51,7 @@ class GuiRenderPass : public vk::RenderPass {
   friend class vk::RenderPassBuilder;
 
  private:
-  std::vector<vk::Framebuffer*> framebuffers_{};
+  std::vector<Framebuffer*> framebuffers_{};
   rx::subscription on_tick_{};
 
   GuiRenderPass(const VkRenderPassCreateInfo* create_info);

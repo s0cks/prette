@@ -9,6 +9,7 @@
 #include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/platform.h"
+#include "prette/render_pass/attachment_desc_builder.h"
 #include "prette/vk.h"
 
 namespace prt::vk {
@@ -43,130 +44,6 @@ class RenderPassBuilder : public NamedHandleBuilderTemplate<VkRenderPassCreateIn
   };
 
  public:
-  class AttachmentDescBuilder : public ChildBuilderTemplate<VkAttachmentDescription> {
-    friend class RenderPassBuilder;
-    DEFINE_DEFAULT_COPYABLE_TYPE(AttachmentDescBuilder);
-
-   private:
-    explicit AttachmentDescBuilder(const Id id, ValuePtr value) :
-      ChildBuilderTemplate(id, value) {
-      value_ptr()->format = VK_FORMAT_UNDEFINED;
-      value_ptr()->samples = VK_SAMPLE_COUNT_1_BIT;
-      value_ptr()->loadOp = VK_ATTACHMENT_LOAD_OP_DONT_CARE;
-      value_ptr()->storeOp = VK_ATTACHMENT_STORE_OP_DONT_CARE;
-      value_ptr()->stencilLoadOp = VK_ATTACHMENT_LOAD_OP_DONT_CARE;
-      value_ptr()->stencilStoreOp = VK_ATTACHMENT_STORE_OP_DONT_CARE;
-      value_ptr()->initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
-      value_ptr()->finalLayout = VK_IMAGE_LAYOUT_UNDEFINED;
-    }
-
-   public:
-    ~AttachmentDescBuilder() = default;
-
-    auto WithSamples(const VkSampleCountFlagBits rhs) -> AttachmentDescBuilder& {
-      value_ptr()->samples = rhs;
-      return *this;
-    }
-
-    auto WithFormat(const VkFormat rhs) -> AttachmentDescBuilder& {
-      value_ptr()->format = rhs;
-      return *this;
-    }
-
-    auto WithLoadOp(const VkAttachmentLoadOp rhs) -> AttachmentDescBuilder& {
-      value_ptr()->loadOp = rhs;
-      return *this;
-    }
-
-    inline auto WithLoadOpClear() -> AttachmentDescBuilder& {
-      return WithLoadOp(VK_ATTACHMENT_LOAD_OP_CLEAR);
-    }
-
-    inline auto WithLoadOpLoad() -> AttachmentDescBuilder& {
-      return WithLoadOp(VK_ATTACHMENT_LOAD_OP_LOAD);
-    }
-
-    inline auto WithLoadOpDontCare() -> AttachmentDescBuilder& {
-      return WithLoadOp(VK_ATTACHMENT_LOAD_OP_DONT_CARE);
-    }
-
-    auto WithStoreOp(const VkAttachmentStoreOp rhs) -> AttachmentDescBuilder& {
-      value_ptr()->storeOp = rhs;
-      return *this;
-    }
-
-    inline auto WithStoreOpNone() -> AttachmentDescBuilder& {
-      return WithStoreOp(VK_ATTACHMENT_STORE_OP_NONE);
-    }
-
-    inline auto WithStoreOpStore() -> AttachmentDescBuilder& {
-      return WithStoreOp(VK_ATTACHMENT_STORE_OP_STORE);
-    }
-
-    inline auto WithStoreOpDontCare() -> AttachmentDescBuilder& {
-      return WithStoreOp(VK_ATTACHMENT_STORE_OP_DONT_CARE);
-    }
-
-    auto WithStencilLoadOp(const VkAttachmentLoadOp rhs) -> AttachmentDescBuilder& {
-      value_ptr()->stencilLoadOp = rhs;
-      return *this;
-    }
-
-    auto WithStencilStoreOp(const VkAttachmentStoreOp rhs) -> AttachmentDescBuilder& {
-      value_ptr()->stencilStoreOp = rhs;
-      return *this;
-    }
-
-    auto WithInitialLayout(const VkImageLayout rhs) -> AttachmentDescBuilder& {
-      value_ptr()->initialLayout = rhs;
-      return *this;
-    }
-
-    inline auto WithInitialLayoutUndefined() -> AttachmentDescBuilder& {
-      return WithInitialLayout(VK_IMAGE_LAYOUT_UNDEFINED);
-    }
-
-    auto WithFinalLayout(const VkImageLayout rhs) -> AttachmentDescBuilder& {
-      value_ptr()->finalLayout = rhs;
-      return *this;
-    }
-
-    inline auto WithFinalLayoutColorAttachmentOptimal() -> AttachmentDescBuilder& {
-      return WithFinalLayout(VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL);
-    }
-
-    inline auto WithFinalLayoutUndefined() -> AttachmentDescBuilder& {
-      return WithFinalLayout(VK_IMAGE_LAYOUT_UNDEFINED);
-    }
-
-    inline auto WithFinalLayoutPresentSrc() -> AttachmentDescBuilder& {
-      return WithFinalLayout(VK_IMAGE_LAYOUT_PRESENT_SRC_KHR);
-    }
-
-    inline auto WithFinalLayoutSharedPresent() -> AttachmentDescBuilder& {
-      return WithFinalLayout(VK_IMAGE_LAYOUT_SHARED_PRESENT_KHR);
-    }
-
-    inline auto WithFinalLayoutShaderReadOptimal() -> AttachmentDescBuilder& {
-      return WithFinalLayout(VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
-    }
-
-    inline auto WithFinalLayoutDepthStecilOptimal() -> AttachmentDescBuilder& {
-      return WithFinalLayout(VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL);
-    }
-
-    auto Build(const VkImageLayout ref_layout = VK_IMAGE_LAYOUT_UNDEFINED) const -> VkAttachmentReference {
-      return {
-          .attachment = static_cast<uint32_t>(GetId()),
-          .layout = ref_layout != VK_IMAGE_LAYOUT_UNDEFINED ? ref_layout : value_ptr()->finalLayout,
-      };
-    }
-
-    inline auto BuildWithColorAttachmentOptimalRef() const -> VkAttachmentReference {
-      return Build(VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL);
-    }
-  };
-
   class SubpassBuilder : public ChildBuilderTemplate<VkSubpassDescription> {
     friend class RenderPassBuilder;
     DEFINE_DEFAULT_COPYABLE_TYPE(SubpassBuilder);
@@ -290,7 +167,7 @@ class RenderPassBuilder : public NamedHandleBuilderTemplate<VkRenderPassCreateIn
 
  public:
   RenderPassBuilder();
-  ~RenderPassBuilder();
+  ~RenderPassBuilder() override;
 
   auto WithName(const std::string rhs) -> RenderPassBuilder& {
     ASSERT_NOT_EMPTY(rhs);

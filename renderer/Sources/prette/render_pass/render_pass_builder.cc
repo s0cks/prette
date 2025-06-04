@@ -7,13 +7,13 @@
 
 namespace prt::vk {
 RenderPassBuilder::RenderPassBuilder() {
+  info_ptr()->sType = VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO;
   attachments_.reserve(2);
   subpass_deps_.reserve(2);
   subpasses_.reserve(2);
-  info_ptr()->sType = VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO;
 }
 
-RenderPassBuilder::~RenderPassBuilder() {}
+RenderPassBuilder::~RenderPassBuilder() = default;
 
 auto RenderPassBuilder::IsValid() const -> bool {
   return true;

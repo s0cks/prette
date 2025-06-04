@@ -5,7 +5,7 @@
 #include <vector>
 
 #include "prette/common.h"
-#include "prette/framebuffer.h"
+#include "prette/framebuffer/framebuffer.h"
 #include "prette/pipeline/pipeline.h"
 #include "prette/relaxed_atomic.h"
 #include "prette/rx.h"  // IWYU pragma: keep
@@ -66,7 +66,7 @@ class Swapchain : public vk::HandleTemplate<VkSwapchainKHR> {
   uint32_t num_images_ = 0;
   std::vector<VkImage> images_{};
   std::vector<vk::ImageView*> views_{};
-  std::vector<vk::Framebuffer*> framebuffers_{};
+  std::vector<Framebuffer*> framebuffers_{};
   SwapchainFrameRingBuffer* frames_ = nullptr;
   RelaxedAtomic<bool> resized_{false};
 
@@ -98,7 +98,7 @@ class Swapchain : public vk::HandleTemplate<VkSwapchainKHR> {
     return (bool)resized_;
   }
 
-  auto GetFramebuffer(const uint32_t idx) const -> vk::Framebuffer*;
+  auto GetFramebuffer(const uint32_t idx) const -> Framebuffer*;
   auto GetImage(const uint32_t idx) const -> const VkImage&;
   auto GetView(const uint32_t idx) const -> vk::ImageView*;
   auto ToString() const -> std::string override;

@@ -6,7 +6,8 @@
 #include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/device.h"
-#include "prette/framebuffer.h"
+#include "prette/framebuffer/framebuffer.h"
+#include "prette/framebuffer/framebuffer_builder.h"
 #include "prette/gfx.h"
 #include "prette/gfx_driver_event.h"
 #include "prette/gfx_vk.h"
@@ -50,7 +51,7 @@ GuiRenderPass::GuiRenderPass(const VkRenderPassCreateInfo* create_info) :
 
 GuiRenderPass::~GuiRenderPass() {
   const auto driver = Driver::Get();
-  std::ranges::for_each(framebuffers_, [this](vk::Framebuffer* framebuffer) {
+  std::ranges::for_each(framebuffers_, [this](Framebuffer* framebuffer) {
     delete framebuffer;
   });
 }
@@ -79,14 +80,14 @@ void GuiRenderPass::OnSwapInit(const bool reinit) {
 }
 
 void GuiRenderPass::OnSwapDestroyed(const bool is_reinit) {
-  std::ranges::for_each(framebuffers_, [](vk::Framebuffer* framebuffer) {
+  std::ranges::for_each(framebuffers_, [](Framebuffer* framebuffer) {
     delete framebuffer;
   });
 }
 
 void GuiRenderPass::InitFramebuffers() {
   const auto swap = GetSwapchain();
-  vk::FramebufferBuilder builder{};
+  FramebufferBuilder builder{};
   // clang-format off
   builder.WithSize(swap->GetExtent())
       .WithLayers(1)
@@ -108,8 +109,8 @@ auto GuiRenderPass::New() -> GuiRenderPass* {
                              .WithFormat(GetSwapchain()->GetFormat())
                              .WithLoadOpLoad()
                              .WithStoreOpStore()
-                             .WithInitialLayoutUndefined()
-                             .WithFinalLayoutPresentSrc()
+                             .WithInitialLayoutColorAttachmentOptimal()
+                             .WithFinalLayoutPresentSource()
                              .BuildWithColorAttachmentOptimalRef();
 
   // clang-format off

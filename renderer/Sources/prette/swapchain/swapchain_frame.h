@@ -36,7 +36,7 @@ class SwapchainFrame {
   }
 
   auto GetView() const -> vk::ImageView*;
-  auto GetFramebuffer() const -> vk::Framebuffer*;
+  auto GetFramebuffer() const -> Framebuffer*;
 
   auto GetComamndBuffers() const -> const CommandBufferList& {
     return buffers_;

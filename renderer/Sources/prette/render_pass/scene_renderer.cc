@@ -16,7 +16,7 @@
 #include "prette/descriptor_set_builder.h"
 #include "prette/descriptor_set_update.h"
 #include "prette/device.h"  // IWYU pragma: keep
-#include "prette/framebuffer.h"
+#include "prette/framebuffer/framebuffer_builder.h"
 #include "prette/gfx.h"
 #include "prette/gfx_driver_event.h"
 #include "prette/gfx_vk.h"
@@ -42,7 +42,7 @@
 
 namespace prt {
 SceneRenderPass::SceneRenderPass(const VkRenderPassCreateInfo* create_info) :
-  RenderPassTemplate<RenderTarget>("scene", create_info) {
+  RenderPass("scene", create_info) {
   OnSwapInit(false);
 }
 
@@ -75,7 +75,7 @@ auto SceneRenderPass::New() -> SceneRenderPass* {
   const auto driver = Driver::Get();
   auto color_ref = builder.AddAttachment()
                        .WithFormat(GetSwapchain()->GetFormat())
-                       .WithLoadOpLoad()
+                       .WithLoadOpClear()
                        .WithStoreOpStore()
                        .WithInitialLayoutUndefined()
                        .WithFinalLayoutColorAttachmentOptimal()
@@ -122,7 +122,7 @@ auto SceneRenderer::CreateDescriptorSet() -> vk::DescriptorSet* {
 
 void SceneRenderPass::InitFramebuffers() {
   const auto swap = GetSwapchain();
-  vk::FramebufferBuilder builder{};
+  FramebufferBuilder builder{};
   // clang-format off
   builder.WithSize(swap->GetExtent())
       .WithLayers(1)

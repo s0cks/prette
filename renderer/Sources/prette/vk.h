@@ -23,6 +23,7 @@
 
 namespace prt {
 class Driver;
+class Framebuffer;
 namespace vk {
 class Surface;
 
@@ -47,7 +48,6 @@ class Buffer;
 class Shader;
 class Image;
 class ImageView;
-class Framebuffer;
 class Pipeline;
 class PipelineLayout;
 class PipelineCache;

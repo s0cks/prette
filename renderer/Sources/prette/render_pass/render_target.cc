@@ -4,11 +4,13 @@
 
 #include "prette/assertions.h"
 #include "prette/common.h"
-#include "prette/framebuffer.h"
+#include "prette/framebuffer/framebuffer.h"
+#include "prette/framebuffer/framebuffer_builder.h"
 #include "prette/image/image.h"
 #include "prette/image/image_builder.h"
 #include "prette/image/image_view.h"
 #include "prette/image/image_view_builder.h"
+#include "prette/render_pass/render_pass.h"
 #include "prette/vk.h"
 #include "prette/vk_cmd_buffers.h"
 
@@ -57,11 +59,11 @@ static inline auto CreateImageView(vk::Image* image, const VkFormat format) -> v
 }
 
 static inline auto CreateFramebuffer(vk::RenderPass* pass, const VkExtent2D extent, vk::ImageView* color,
-                                     vk::ImageView* depth) -> vk::Framebuffer* {
+                                     vk::ImageView* depth) -> Framebuffer* {
   ASSERT_INITIALIZED(pass);
   ASSERT_INITIALIZED(color);
   // clang-format off
-  vk::FramebufferBuilder builder{};
+  FramebufferBuilder builder{};
   builder.WithRenderPass(pass)
     .WithLayers(1)
     .WithSize(extent)

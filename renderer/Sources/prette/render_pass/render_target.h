@@ -5,7 +5,7 @@
 #include <vulkan/vulkan_core.h>
 
 #include "prette/common.h"
-#include "prette/framebuffer.h"
+#include "prette/framebuffer/framebuffer.h"
 #include "prette/image/image.h"
 #include "prette/vk.h"
 
@@ -19,7 +19,7 @@ class RenderTarget {
   VkExtent2D extent_{};
   vk::Image* image_ = nullptr;
   vk::ImageView* view_ = nullptr;
-  vk::Framebuffer* framebuffer_ = nullptr;
+  Framebuffer* framebuffer_ = nullptr;
 
  public:
   RenderTarget(const uint64_t index, vk::RenderPass* pass, const VkExtent2D& extent,
@@ -34,7 +34,7 @@ class RenderTarget {
     return view_;
   }
 
-  auto GetFramebuffer() const -> vk::Framebuffer* {
+  auto GetFramebuffer() const -> Framebuffer* {
     return framebuffer_;
   }
 

@@ -1,10 +1,8 @@
 #ifndef PRT_RENDER_PASS_H
 #define PRT_RENDER_PASS_H
 
-#include <array>
 #include <functional>
 #include <string>
-#include <utility>
 #include <vector>
 
 #include "prette/assertions.h"
@@ -101,30 +99,6 @@ auto VisitAllRenderPasses(RenderPassVisitor* vis) -> bool;
 auto VisitAllRenderPasses(RenderPassPredicate vis) -> bool;
 
 auto FindRenderPass(const std::string name) -> RenderPass*;
-
-template <class Target, const uint64_t NumberOfTargets = MAX_NUMBER_OF_FRAMES_IN_FLIGHT + 1>
-class RenderPassTemplate : public RenderPass {
- protected:
-  std::array<Target*, NumberOfTargets> targets_{};
-
-  RenderPassTemplate(const std::string name, const VkRenderPassCreateInfo* create_info) :
-    RenderPass(std::move(name), create_info) {}
-
-  inline auto GetTargetFramebuffer(const uint32_t idx) const -> vk::Framebuffer* {
-    return GetTarget(idx)->GetFramebuffer();
-  }
-
- public:
-  ~RenderPassTemplate() override = default;
-
-  auto GetTarget(const uint64_t idx) const -> Target* {
-    return targets_.at(idx);
-  }
-
-  auto GetNumberOfTargets() const -> uint64_t {
-    return targets_.size();
-  }
-};
 
 class RenderPassScope {
  private:

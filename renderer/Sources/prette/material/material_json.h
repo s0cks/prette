@@ -15,7 +15,8 @@ namespace prt::json {
   V(ParsingNormal)                         \
   V(ParsingRoughness)                      \
   V(ParsingAo)                             \
-  V(ClosedDoc)
+  V(ClosedDoc)                             \
+  V(Error)
 
 enum class MaterialReaderHandlerState {
 #define DEFINE_STATE(Name) k##Name,

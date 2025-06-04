@@ -1,16 +1,15 @@
-#include "prette/framebuffer.h"
+#include "prette/framebuffer/framebuffer_builder.h"
 
-#include <string>
 #include <vector>
 
 #include "prette/assertions.h"
-#include "prette/gfx_vk.h"
+#include "prette/common.h"
+#include "prette/framebuffer/framebuffer.h"
 #include "prette/image/image_view.h"
 #include "prette/render_pass/render_pass.h"
-#include "prette/to_string.h"
 #include "prette/vk.h"
 
-namespace prt::vk {
+namespace prt {
 FramebufferBuilder::FramebufferBuilder() :
   ParentType() {
   info_ptr()->sType = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
@@ -24,17 +23,18 @@ FramebufferBuilder::FramebufferBuilder() :
   info_ptr()->layers = 0;
 }
 
-auto FramebufferBuilder::WithAttachment(ImageView* rhs) -> FramebufferBuilder& {
+auto FramebufferBuilder::WithAttachment(vk::ImageView* rhs) -> FramebufferBuilder& {
   ASSERT_INITIALIZED(rhs);
   return WithAttachment(*rhs);
 }
 
-auto FramebufferBuilder::WithRenderPass(RenderPass* rhs) -> FramebufferBuilder& {
+auto FramebufferBuilder::WithRenderPass(vk::RenderPass* rhs) -> FramebufferBuilder& {
   ASSERT(rhs);
   return WithRenderPass(*rhs);
 }
 
 auto FramebufferBuilder::IsValid() const -> bool {
+  NOT_IMPLEMENTED(WARNING);  // TODO: implement @s0cks
   return true;
 }
 
@@ -46,7 +46,7 @@ auto FramebufferBuilder::Build() -> Framebuffer* {
 }
 
 void FramebufferBuilder::BuildWithAttachments(const std::vector<vk::ImageView*>& attachments,
-                                              std::vector<vk::Framebuffer*>& results, vk::ImageView* depth) {
+                                              std::vector<Framebuffer*>& results, vk::ImageView* depth) {
   results.resize(attachments.size());
   for (auto idx = 0; idx < attachments.size(); idx++) {
     ResetAttachments().WithAttachment(attachments[idx]);
@@ -56,19 +56,4 @@ void FramebufferBuilder::BuildWithAttachments(const std::vector<vk::ImageView*>&
     ASSERT_INITIALIZED(results[idx]);
   }
 }
-
-Framebuffer::Framebuffer(const VkFramebufferCreateInfo* create_info) :
-  HandleTemplate<VkFramebuffer>() {
-  const auto driver = Driver::Get();
-  driver->CreateFramebuffer(create_info, handle_ptr());
-}
-
-Framebuffer::~Framebuffer() {
-  const auto driver = Driver::Get();
-  driver->DestroyFramebuffer(handle_ref());
-}
-
-auto Framebuffer::ToString() const -> std::string {
-  return ToStringHelper<Framebuffer>{};
-}
-}  // namespace prt::vk
+}  // namespace prt
