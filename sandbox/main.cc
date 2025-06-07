@@ -76,8 +76,7 @@ auto main(int argc, char** argv) -> int {
     ASSERT(chunk);
     chunk->VisitTiles([&pos](Tile* tile) {
       if (!tile->Contains(pos)) {
-        if (tile->IsHovering())
-          tile->SetHovering(false);
+        tile->SetHovering(false);
         return true;  // skip
       }
       tile->SetHovering(true);

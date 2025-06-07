@@ -3,7 +3,6 @@
 #include <functional>
 #include <sstream>
 #include <string>
-#include <utility>
 
 #include "prette/chunk/chunk_metadata.h"
 #include "prette/common.h"
@@ -15,8 +14,8 @@
 #include "prette/world/world_manager.h"
 
 namespace prt {
-Chunk::Chunk(const ChunkPos pos) :
-  pos_(std::move(pos)) {
+Chunk::Chunk(const ChunkPos pos) {
+  SetPos(pos);
   for (uint32_t y = 0; y < kChunkHeight; y++) {
     for (uint32_t x = 0; x < kChunkWidth; x++) {
       TilePos pos(x, y);
@@ -25,8 +24,8 @@ Chunk::Chunk(const ChunkPos pos) :
   }
 }
 
-Chunk::Chunk(const ChunkPos pos, const raw::Chunk& raw) :
-  pos_(std::move(pos)) {
+Chunk::Chunk(const ChunkPos pos, const raw::Chunk& raw) {
+  SetPos(pos);
   ASSERT(raw.tiles()->size() >= kTotalNumberOfTilesPerChunk);  // TODO: this probably should be an equals
   for (uint32_t y = 0; y < kChunkHeight; y++) {
     for (uint32_t x = 0; x < kChunkWidth; x++) {

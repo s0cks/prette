@@ -1,6 +1,7 @@
 #include "prette/world/world.h"
 
 #include <fmt/format.h>
+#include <functional>
 #include <gflags/gflags.h>
 #include <imgui.h>
 #include <string>
@@ -72,6 +73,40 @@ auto World::VisitChunks(ChunkVisitor* vis) -> bool {
     ASSERT(next);
     if (!next->Accept(vis))
       return false;
+  }
+  return true;
+}
+
+auto World::VisitChunksAround(const ChunkPos pos, const uint32_t radius, std::function<bool(Chunk*)> vis) -> bool {
+  ASSERT(vis);
+  ChunkIterator iter(this);
+  const auto start_pos = pos - glm::u32vec2(radius / 2, radius / 2);
+  for (auto row = 0; row < radius * 2; row++) {
+    for (auto col = 0; col < radius * 2; col++) {
+      auto curr_pos = start_pos + glm::u32vec2(row, col);
+      const auto chunk = GetChunkAt(curr_pos);
+      if (!chunk)
+        continue;
+      if (!vis(chunk))
+        return false;
+    }
+  }
+  return true;
+}
+
+auto World::VisitChunksAround(const ChunkPos pos, const uint32_t radius, ChunkVisitor* vis) -> bool {
+  ASSERT(vis);
+  ChunkIterator iter(this);
+  const auto start_pos = pos - glm::u32vec2(radius / 2, radius / 2);
+  for (auto row = 0; row < radius * 2; row++) {
+    for (auto col = 0; col < radius * 2; col++) {
+      auto curr_pos = start_pos + glm::u32vec2(row, col);
+      const auto chunk = GetChunkAt(curr_pos);
+      if (!chunk)
+        continue;
+      if (!vis->Visit(chunk))
+        return false;
+    }
   }
   return true;
 }

@@ -10,6 +10,7 @@
 #include "prette/chunk/chunk.h"
 #include "prette/chunk/chunk_metadata.h"
 #include "prette/common.h"
+#include "prette/glm.h"
 #include "prette/tile.h"
 #include "prette/world/world.h"
 
@@ -26,10 +27,19 @@ class TestWorldInitializer : public WorldInitializer {
   }
 
   auto Apply(World* world) -> bool override {
-    const auto chunk = world->GetOrCreateChunkAt(0, 0);
-    ASSERT(chunk);
-    chunk->GetTileAt(TilePos(0, 0)).SetMaterial(0);
-    chunk->GetTileAt(TilePos(kChunkWidth / 2, kChunkHeight / 2)).SetMaterial(0);
+    static constexpr const auto kInitChunkRadius = 4;
+    for (auto x = -kInitChunkRadius; x < 1 + (kInitChunkRadius * 2); x++) {
+      for (auto y = -kInitChunkRadius; y < 1 + (kInitChunkRadius * 2); y++) {
+        const auto chunk_pos = ChunkPos(x, y);
+        DLOG(INFO) << "generating chunk at: " << glm::to_string(chunk_pos);
+        const auto c = world->GetOrCreateChunkAt(chunk_pos);
+        ASSERT(c);
+        if (chunk_pos == ChunkPos(0)) {
+          c->GetTileAt(TilePos(0, 0)).SetMaterial(0);
+          c->GetTileAt(TilePos(kChunkWidth / 2, kChunkHeight / 2)).SetMaterial(0);
+        }
+      }
+    }
     return true;
   }
 };

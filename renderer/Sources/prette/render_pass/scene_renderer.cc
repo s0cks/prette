@@ -10,7 +10,6 @@
 #include "prette/assertions.h"
 #include "prette/camera.h"
 #include "prette/chunk/chunk.h"
-#include "prette/chunk/chunk_metadata.h"
 #include "prette/chunk_renderer.h"
 #include "prette/descriptor_set.h"
 #include "prette/descriptor_set_builder.h"
@@ -37,7 +36,6 @@
 #include "prette/vk.h"
 #include "prette/vk_cmd_buffers.h"
 #include "prette/vk_physical_device.h"
-#include "prette/world/world.h"
 #include "prette/world/world_manager.h"
 
 namespace prt {
@@ -80,14 +78,6 @@ auto SceneRenderPass::New() -> SceneRenderPass* {
                        .WithInitialLayoutUndefined()
                        .WithFinalLayoutColorAttachmentOptimal()
                        .Build();
-
-  // auto depth_ref = builder.AddAttachment()
-  //                      .WithFormat(Driver::Get()->GetDepthFormat())
-  //                      .WithLoadOpClear()
-  //                      .WithStoreOpStore()
-  //                      .WithInitialLayoutUndefined()
-  //                      .WithFinalLayoutDepthStecilOptimal()
-  //                      .Build();
 
   // clang-format off
   vk::RenderPassBuilder::SubpassBuilder subpass_builder = builder.AddSubpass()
@@ -226,9 +216,7 @@ void SceneRenderPass::Execute() {
   vk::CommandBufferScope buffer(GetCommandBuffer(frame->GetImage()), true);
   vk::RenderPassScope render_pass(buffer, this, *GetSwapchain()->GetFramebuffer(frame->GetImage()), kClearValues);
   ASSERT(IsWorldInitialized());
-  const auto chunk = GetWorld()->GetChunkAt(ChunkPos(0, 0));
-  GetSceneRenderer()->chunk_renderer_.Render(buffer, chunk);
-  // GetSceneRenderer()->sprites_.Render(buffer);
+  GetSceneRenderer()->chunk_renderer_.RenderChunks(buffer);
 }
 
 static rx::subscription on_renderer_init_{};

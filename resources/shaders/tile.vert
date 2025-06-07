@@ -10,22 +10,21 @@ layout(std140, set = 0, binding = 0) uniform CameraBlock {
   Camera camera;
 };
 
+#include "util.glsl"
+
 struct TileData {
   vec2 pos;
   uint material;
   bool hovering;
 };
 
-#include "util.glsl"
-
 layout(std140, set = 2, binding = 0) readonly buffer tiles_data {
   TileData tiles[];
 };
 
-layout(location = 0) out uint Frag_Hovering;
-layout(location = 1) out vec2 Frag_TexCoord;
-layout(location = 2) out vec3 World_Pos;
-layout(location = 3) out vec3 Local_Pos;
+layout(location = 0) out vec2 Frag_TexCoord;
+layout(location = 1) out vec3 World_Pos;
+layout(location = 2) out uint Tile_Index;
 
 void main() {
   TileData tile = tiles[gl_InstanceIndex];
@@ -34,10 +33,9 @@ void main() {
 
   vec3 world = vec3(model * vec4(Frag_Pos, 1.1, 1.0f));
   World_Pos = world;
-  Local_Pos = vec3(inverse_model * vec4(World_Pos, 1.0f));
+  Tile_Index = gl_InstanceIndex;
 
   gl_Position = camera.projection * camera.view * vec4(world, 1.0f);
-  Frag_Hovering = tile.hovering ? 1 : 0;
 
   if (gl_VertexIndex == 0) {
     Frag_TexCoord = vec2(0.0f, 0.0f);

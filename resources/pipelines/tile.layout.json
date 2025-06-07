@@ -4,6 +4,7 @@
     "name": "tile"
   },
   "data": {
+    "push_constants": "chunk",
     "descriptor_sets": [
       "camera",
       "material",

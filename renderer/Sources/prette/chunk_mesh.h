@@ -30,7 +30,7 @@ class ChunkMesh : public vk::IndexedMesh {
   ChunkMesh(vk::Buffer* vertices, vk::Buffer* indices) :
     vk::IndexedMesh(vertices, indices) {
     {
-      vk::UniformBufferBuilder<ChunkMetadata> builder(1);
+      vk::UniformBufferBuilder<ChunkData> builder(1);
       meta_ = builder.WithTransferDestUsage();
       ASSERT_INITIALIZED(meta_);
     }

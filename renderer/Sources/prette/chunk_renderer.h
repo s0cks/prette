@@ -4,17 +4,16 @@
 #include <cstdint>
 #include <vector>
 
-#include "prette/chunk/chunk.h"
 #include "prette/chunk_mesh.h"
 #include "prette/common.h"
 #include "prette/descriptor_set.h"
 #include "prette/descriptor_set_layout.h"
 #include "prette/texture.h"
-#include "prette/tile.h"
 #include "prette/tile_mesh.h"
 #include "prette/vk.h"
 
 namespace prt {
+static constexpr const auto kMaxNumberOfChunks = 32;
 class ChunkRenderer {
  private:
   vk::RenderPipeline* tile_pipeline_ = nullptr;
@@ -22,9 +21,10 @@ class ChunkRenderer {
   std::vector<vk::Buffer*> material_buffers_{};
   vk::DescriptorSetLayout* tile_descriptors_layout_ = nullptr;
   std::vector<vk::DescriptorSet*> tile_descriptors_{};
+  vk::DescriptorSet* chunk_descriptors_ = nullptr;
+  vk::Buffer* chunk_data_ = nullptr;
   Texture* texture_ = nullptr;
 
-  void UpdateChunkBuffer(Chunk* chunk, const bool staging = true);
   void RenderChunkMesh(VkCommandBuffer buffer, ChunkMesh* chunk, const uint64_t num_instances = 1);
 
  public:
@@ -43,7 +43,7 @@ class ChunkRenderer {
     return true;
   }
 
-  void Render(VkCommandBuffer buffer, Chunk* chunk);
+  void RenderChunks(VkCommandBuffer buffer);
 };
 }  // namespace prt
 

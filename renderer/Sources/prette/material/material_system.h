@@ -21,6 +21,7 @@ class MaterialSystem {
   std::vector<fs::path> roots_{};
   std::vector<Material*> materials_{};
 
+  void LoadDefaultMaterial();
   auto LoadMaterialFromDirectory(const fs::path dir) -> Material*;
   auto NewMaterialDescriptorSet(const std::string name) -> vk::DescriptorSet*;
 

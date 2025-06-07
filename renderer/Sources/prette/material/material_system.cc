@@ -30,6 +30,13 @@ auto MaterialSystem::CreateMaterialDescriptorSetLayout() -> vk::DescriptorSetLay
   return builder;
 }
 
+void MaterialSystem::LoadDefaultMaterial() {
+  const auto material = LoadMaterial("fabrics/leather_black");
+  ASSERT(material);
+  DLOG(INFO) << material->GetName() << " loaded!";
+  materials_.push_back(material);
+}
+
 MaterialSystem::MaterialSystem() {
   AddRoot(fs::path(FLAGS_resources) / "materials");
   OnInitDescriptorSets([this](InitDescriptorSetsEvent* event) {
@@ -37,6 +44,14 @@ MaterialSystem::MaterialSystem() {
     ASSERT_INITIALIZED(material_descriptor_layout_);
   });
   OnInitMaterials([this](InitMaterialsEvent* event) {
+    LoadDefaultMaterial();
+    {
+      const auto material = LoadMaterial("grass/stylized");
+      ASSERT(material);
+      DLOG(INFO) << material->GetName() << " loaded!";
+      materials_.push_back(material);
+    }
+
     {
       const auto material = LoadMaterial("fabrics/leather_black");
       ASSERT(material);

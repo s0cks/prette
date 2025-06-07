@@ -6,7 +6,7 @@
 #include "prette/engine/engine_event.h"
 #include "prette/gfx.h"
 #include "prette/gfx_driver_event.h"
-#include "prette/pipeline/pipeline_layout.h"
+#include "prette/pipeline/pipeline_layout_manager.h"
 #include "prette/thread_local.h"
 
 namespace prt {

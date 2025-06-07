@@ -14,6 +14,7 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <vulkan/vulkan_core.h>
 
 #include "prette/chunk/chunk_metadata.h"
 #include "prette/common.h"
@@ -51,10 +52,10 @@ class Chunk {
 
  private:
   RelaxedAtomic<bool> dirty_ = true;
-  ChunkPos pos_{};
-  ChunkData tiles_{};
+  ChunkData data_{};
+  ChunkTileData tiles_{};
 
-  inline auto data() -> ChunkData& {
+  inline auto data() -> ChunkTileData& {
     return tiles_;
   }
 
@@ -76,6 +77,10 @@ class Chunk {
     return tile(GetIndex(pos));
   }
 
+  void SetPos(const ChunkPos rhs) {
+    data_.pos = std::move(rhs);
+  }
+
  public:
   Chunk() = default;
   explicit Chunk(const ChunkPos pos);
@@ -84,16 +89,20 @@ class Chunk {
   Chunk(const ChunkPos pos, const raw::Chunk& raw);
   ~Chunk() = default;
 
+  auto GetData() const -> const ChunkData& {
+    return data_;
+  }
+
   auto IsDirty() const -> bool {
     return (bool)dirty_;
   }
 
-  auto GetTiles() const -> const ChunkData& {
+  auto GetTiles() const -> const ChunkTileData& {
     return tiles_;
   }
 
   auto GetPos() const -> const ChunkPos& {
-    return pos_;
+    return data_.pos;
   }
 
   auto GetTileAt(const TilePos pos) -> Tile& {

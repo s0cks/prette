@@ -172,6 +172,8 @@ class World {
   }
 
   auto VisitChunks(ChunkVisitor* vis) -> bool;
+  auto VisitChunksAround(const ChunkPos pos, const uint32_t radius, ChunkVisitor* vis) -> bool;
+  auto VisitChunksAround(const ChunkPos pos, const uint32_t radius, std::function<bool(Chunk*)> vis) -> bool;
 
  public:
   static inline auto New(std::string name) -> World* {

@@ -2,9 +2,9 @@
 #extension GL_ARB_shading_language_include : require
 #extension GL_GOOGLE_include_directive : require
 
-layout(location = 0) in flat uint Frag_Hovering;
-layout(location = 1) in vec2 Frag_TexCoord;
-layout(location = 2) in vec3 World_Pos;
+layout(location = 0) in vec2 Frag_TexCoord;
+layout(location = 1) in vec3 World_Pos;
+layout(location = 2) in flat uint Tile_Index;
 
 #include "camera.glsl"
 
@@ -25,6 +25,16 @@ const vec3 Light_Color = vec3(1.0f, 1.0f, 1.0f);
 const vec3 vNormal = vec3(0.0f, 1.0f, 0.0f);
 
 const float PI = 3.14159265359;
+
+struct TileData {
+  vec2 pos;
+  uint material;
+  bool hovering;
+};
+
+layout(std140, set = 2, binding = 0) readonly buffer tiles_data {
+  TileData tiles[];
+};
 
 vec3 getNormalFromMap() {
   vec3 tangentNormal = texture(normal, Frag_TexCoord).xyz * 2.0 - 1.0;
@@ -123,11 +133,9 @@ void main() {
   color = pow(color, vec3(1.0 / 2.2));
   Out_Color = vec4(color, 1.0);
 
-  // vec4 color = texture(albedo, Frag_TexCoord);
-  if (Frag_Hovering == 1) {
-    vec3 tint = vec3(1.0f, 0.0f, 1.0f);
-    Out_Color.rgb *= tint.rgb;
-  }
-
-  // Out_Color = color;
+  // TileData tile = tiles[Tile_Index];
+  // if (tile.hovering) {
+  //   vec3 tint = vec3(1.0f, 0.0f, 1.0f);
+  //   Out_Color.rgb *= tint.rgb;
+  // }
 }

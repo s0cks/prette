@@ -24,6 +24,11 @@
 #define STD140_VEC2_TYPE           glm::vec2
 #define STD140_VEC2(Name)          STD140_ALIGNED(VEC2, Name)
 
+#define STD140_U32VEC2_FORMAT      VK_FORMAT_R32G32_UINT
+#define STD140_U32VEC2_ALIGNMENT   alignas(8)
+#define STD140_U32VEC2_TYPE        glm::u32vec2
+#define STD140_U32VEC2(Name)       STD140_ALIGNED(U32VEC2, Name)
+
 #define STD140_VEC3_FORMAT         VK_FORMAT_R32G32B32_SFLOAT
 #define STD140_VEC3_ALIGNMENT      alignas(16)
 #define STD140_VEC3_TYPE           glm::vec3

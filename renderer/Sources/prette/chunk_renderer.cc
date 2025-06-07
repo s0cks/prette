@@ -25,17 +25,19 @@
 #include "prette/tile_mesh.h"
 #include "prette/uniform_buffer.h"
 #include "prette/vk.h"
+#include "prette/world/world.h"
+#include "prette/world/world_manager.h"
 
 namespace prt {
 static inline auto CreateTileDescriptors() -> vk::DescriptorSet* {
   vk::DescriptorSetBuilder builder;
   builder.WithName("tiles");
-  builder.AddBinding(VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, VK_SHADER_STAGE_VERTEX_BIT);  // tiles
+  builder.AddStorageBufferBinding(VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT);  // tiles
   return builder.Build();
 }
 
 static inline auto NewMaterialBuffer() -> vk::Buffer* {
-  vk::UniformBufferBuilder<TileData> builder(kTotalNumberOfTilesPerChunk);
+  vk::UniformBufferBuilder<TileData> builder(kTotalNumberOfTilesPerChunk * 16);
   builder.WithTransferDestUsage().WithStorageUsage();
   return builder;
 }
@@ -44,8 +46,14 @@ ChunkRenderer::ChunkRenderer() {
   OnInitDescriptorSets([this](InitDescriptorSetsEvent* event) {
     {
       vk::DescriptorSetLayoutBuilder builder{};
-      builder.AddStorageBufferBinding().WithStageFlags(VK_SHADER_STAGE_VERTEX_BIT);
+      builder.AddStorageBufferBinding().WithStageFlags(VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT);
       tile_descriptors_layout_ = builder;
+    }
+    {
+      vk::DescriptorSetBuilder builder{};
+      builder.WithName("chunk");
+      builder.AddStorageBufferBinding(VK_SHADER_STAGE_VERTEX_BIT);
+      chunk_descriptors_ = builder;
     }
   });
   OnInitGraphicsPipelines([this](InitGraphicsPipelinesEvent* event) {
@@ -61,18 +69,34 @@ ChunkRenderer::ChunkRenderer() {
     tile_descriptors_.resize(num_mats);
     for (auto idx = 0; idx < num_mats; idx++) {
       material_buffers_[idx] = NewMaterialBuffer();
+      ASSERT_INITIALIZED(material_buffers_[idx]);
       tile_descriptors_[idx] = new vk::DescriptorSet("tile", *tile_descriptors_layout_);
-
+      ASSERT_INITIALIZED(tile_descriptors_[idx]);
       {
         vk::DescriptorSetUpdate update(tile_descriptors_[idx]);
         update.AddWriteStorageBuffer(0).WithBufferInfo(material_buffers_[idx]);
       }
+    }
+    {
+      vk::UniformBufferBuilder<ChunkData> builder{};
+      // clang-format off
+      builder.WithLength(kMaxNumberOfChunks)
+        .WithTransferDestUsage()
+        .WithStorageUsage();
+      // clang-format on
+      chunk_data_ = builder;
+      ASSERT_INITIALIZED(chunk_data_);
+    }
+    {
+      vk::DescriptorSetUpdate update(chunk_descriptors_);
+      update.AddWriteStorageBuffer(0).WithBufferInfo(chunk_data_);
     }
   });
 }
 
 ChunkRenderer::~ChunkRenderer() {
   delete tile_mesh_;
+  delete chunk_data_;
   delete texture_;
 }
 
@@ -83,10 +107,11 @@ void ChunkRenderer::RenderChunkMesh(VkCommandBuffer buffer, ChunkMesh* mesh, con
   vkCmdDrawIndexed(buffer, ChunkMeshClass::kTotalNumberOfIndices, num_instances, 0, 0, 0);
 }
 
-class TileMeshifier : public TileVisitor {
+class TileMeshifier : public TileVisitor, public ChunkVisitor {
   DEFINE_NON_COPYABLE_TYPE(TileMeshifier);
 
  private:
+  Chunk* current_chunk_ = nullptr;
   std::vector<std::vector<TileData>>& results_;
 
  public:
@@ -95,29 +120,44 @@ class TileMeshifier : public TileVisitor {
     results_(results) {
     results_.resize(num_materials);
     for (auto idx = 0; idx < num_materials; idx++)
-      results_[idx].reserve(kTotalNumberOfTilesPerChunk);
+      results_[idx].reserve(kTotalNumberOfTilesPerChunk * (3 * 3));
   }
   ~TileMeshifier() override = default;
 
   auto Visit(Tile* tile) -> bool override {
     ASSERT(tile);
-    results_[tile->GetMaterial()].push_back(tile->data());
+    ASSERT(current_chunk_);
+    auto& results = results_[tile->GetMaterial()];
+    auto idx = results.size();
+    results.resize(idx + 1);
+    results[idx] = tile->data();
+    const auto& chunk_pos = current_chunk_->GetPos();
+    results[idx].pos += glm::vec2(chunk_pos.x * kChunkWidth, chunk_pos.y * kChunkHeight);
+    return true;
+  }
+
+  auto Visit(Chunk* chunk) -> bool override {
+    ASSERT(chunk);
+    current_chunk_ = chunk;
+    LOG_IF(FATAL, !chunk->VisitTiles(this)) << "failed to visit tiles of: " << chunk->ToString();
     return true;
   }
 };
 
-void ChunkRenderer::Render(VkCommandBuffer buffer, Chunk* chunk) {
+void ChunkRenderer::RenderChunks(VkCommandBuffer buffer) {
   const auto mat_system = MaterialSystem::GetSystem();
   const auto num_materials = mat_system->GetNumberOfMaterialsLoaded();
-
   std::vector<std::vector<TileData>> data{};
   TileMeshifier meshifier(data, num_materials);
-  LOG_IF(FATAL, !chunk->VisitTiles(&meshifier)) << "failed to meshify chunk.";
-
+  const auto world = GetWorld();
+  if (!world->VisitChunksAround(ChunkPos(0), 2, &meshifier))
+    LOG(FATAL) << "failed to visit chunks.";
   tile_pipeline_->Bind(&buffer);
   tile_mesh_->Bind(buffer);
   for (auto idx = 0; idx < num_materials; idx++) {
     const auto& tiles = data[idx];
+    if (tiles.empty())
+      continue;
     const auto& mat_buffer = material_buffers_[idx];
     const auto material = mat_system->GetMaterial(idx);
     vk::CopyBytesToBufferWithStaging::Copy(&tiles[0], tiles.size(), mat_buffer);

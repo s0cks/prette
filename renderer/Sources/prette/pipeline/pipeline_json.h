@@ -11,7 +11,7 @@
 #include "prette/common.h"
 #include "prette/json.h"
 #include "prette/pipeline/pipeline_builder.h"
-#include "prette/pipeline/pipeline_layout.h"
+#include "prette/pipeline/pipeline_layout_json.h"
 #include "prette/rasterizer_json.h"
 #include "prette/render_pass/render_pass_json.h"
 #include "prette/viewport_json.h"

@@ -8,6 +8,7 @@
 #include "prette/descriptor_set_builder.h"
 #include "prette/pipeline/pipeline.h"
 #include "prette/pipeline/pipeline_layout.h"
+#include "prette/pipeline/pipeline_layout_builder.h"
 #include "prette/shader/shader.h"
 #include "prette/swapchain/swapchain.h"
 #include "prette/vk.h"

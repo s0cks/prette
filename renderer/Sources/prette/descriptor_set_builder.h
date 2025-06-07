@@ -4,6 +4,7 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <vulkan/vulkan_core.h>
 
 #include "prette/assertions.h"
 #include "prette/common.h"
@@ -95,6 +96,10 @@ class DescriptorSetBuilder {
     binding.stageFlags = stages;
     binding.pImmutableSamplers = nullptr;
     return LayoutBindingBuilder(&binding);
+  }
+
+  inline auto AddStorageBufferBinding(const VkShaderStageFlags stages = kDefaultBindingStages) -> LayoutBindingBuilder {
+    return AddBinding(VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, stages);
   }
 
   inline auto AddUniformBufferBinding(const VkShaderStageFlags stages = kDefaultBindingStages) -> LayoutBindingBuilder {

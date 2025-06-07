@@ -16,15 +16,15 @@ static constexpr const auto kTotalNumberOfTilesPerChunk = kChunkWidth * kChunkHe
 
 using ChunkId = uint32_t;
 using ChunkPos = glm::u32vec2;
-using ChunkData = std::array<Tile, kTotalNumberOfTilesPerChunk>;
+using ChunkTileData = std::array<Tile, kTotalNumberOfTilesPerChunk>;
 
-struct ChunkMetadata {
-  alignas(4) ChunkId id{};
-  alignas(8) ChunkPos pos{};
+struct ChunkData {
+  STD140_UINT32(id);
+  STD140_U32VEC2(pos);
 };
 
 template <>
-struct std140::is_aligned<ChunkMetadata> : std::true_type {};
+struct std140::is_aligned<ChunkData> : std::true_type {};
 }  // namespace prt
 
 #endif  // PRT_CHUNK_METADATA_H
