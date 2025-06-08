@@ -45,6 +45,14 @@ MaterialSystem::MaterialSystem() {
   });
   OnInitMaterials([this](InitMaterialsEvent* event) {
     LoadDefaultMaterial();
+
+    {
+      const auto material = LoadMaterial("floors/old_wood");
+      ASSERT(material);
+      DLOG(INFO) << material->GetName() << " loaded!";
+      materials_.push_back(material);
+    }
+
     {
       const auto material = LoadMaterial("grass/stylized");
       ASSERT(material);
@@ -54,13 +62,6 @@ MaterialSystem::MaterialSystem() {
 
     {
       const auto material = LoadMaterial("fabrics/leather_black");
-      ASSERT(material);
-      DLOG(INFO) << material->GetName() << " loaded!";
-      materials_.push_back(material);
-    }
-
-    {
-      const auto material = LoadMaterial("floors/old_wood");
       ASSERT(material);
       DLOG(INFO) << material->GetName() << " loaded!";
       materials_.push_back(material);

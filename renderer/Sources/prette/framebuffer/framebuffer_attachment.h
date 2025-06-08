@@ -42,11 +42,14 @@ class FramebufferAttachment {
     return view_;
   }
 
+  auto IsInitialized() const -> bool;
+
   auto Accept(FramebufferAttachmentVisitor* vis) -> bool {
     ASSERT(vis);
     return vis->Visit(this);
   }
 };
+
 }  // namespace prt
 
 #endif  // PRT_FRAMEBUFFER_ATTACHMENT_H

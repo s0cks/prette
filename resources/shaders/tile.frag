@@ -132,10 +132,4 @@ void main() {
   color = color / (color + vec3(1.0));
   color = pow(color, vec3(1.0 / 2.2));
   Out_Color = vec4(color, 1.0);
-
-  // TileData tile = tiles[Tile_Index];
-  // if (tile.hovering) {
-  //   vec3 tint = vec3(1.0f, 0.0f, 1.0f);
-  //   Out_Color.rgb *= tint.rgb;
-  // }
 }

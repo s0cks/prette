@@ -9,6 +9,7 @@
 namespace prt {
 #define FOR_EACH_RENDERER_EVENT(V) \
   FOR_EACH_RENDERER_STATE(V)       \
+  V(UpdateBuffers)                 \
   V(InitDescriptorSets)            \
   V(InitPipelineLayouts)           \
   V(InitGraphicsPipelines)         \
@@ -53,7 +54,8 @@ class RendererEvent : public Event {
     ~Name##Event() override = default;       \
     DECLARE_EVENT_TYPE(RendererEvent, Name); \
   };
-DECLARE_RENDERER_EVENT(RendererCreated);
+FOR_EACH_RENDERER_STATE(DECLARE_RENDERER_EVENT);
+DECLARE_RENDERER_EVENT(UpdateBuffers);
 DECLARE_RENDERER_EVENT(InitRenderPasses);
 DECLARE_RENDERER_EVENT(InitDescriptorSets);
 DECLARE_RENDERER_EVENT(InitPipelineLayouts);
@@ -62,7 +64,6 @@ DECLARE_RENDERER_EVENT(InitBuffers);
 DECLARE_RENDERER_EVENT(InitTextures);
 DECLARE_RENDERER_EVENT(InitMeshes);
 DECLARE_RENDERER_EVENT(InitMaterials);
-DECLARE_RENDERER_EVENT(RendererDestroyed);
 #undef DECLARE_RENDERER_EVENT
 
 class FrameEvent : public RendererEvent {

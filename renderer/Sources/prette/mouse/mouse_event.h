@@ -223,7 +223,7 @@ class MouseMotionEvent : public MouseEventBase {
     direction_(dir) {}
   MouseMotionEvent(const Mouse* mouse, const double xPos, const double yPos) :
     MouseMotionEvent(mouse, glm::vec2(xPos, yPos)) {}
-  ~MouseMotionEvent() = default;
+  ~MouseMotionEvent() override = default;
 
   auto GetDirection() const -> glm::vec2 const& {
     return direction_;
@@ -234,12 +234,12 @@ class MouseMotionEvent : public MouseEventBase {
 
   inline auto IsLeft() const -> bool {
     const auto delta = GetDirection();
-    return (delta.x < 0.0f);
+    return (delta.x > 0.0f);
   }
 
   inline auto IsRight() const -> bool {
     const auto delta = GetDirection();
-    return (delta.x > 0.0f);
+    return (delta.x < 0.0f);
   }
 
   DECLARE_EVENT_TYPE(MouseEvent, MouseMotion);
@@ -334,6 +334,38 @@ class DragStartEvent : public DragEvent {
 
   DECLARE_EVENT_TYPE(MouseEvent, DragStart);
 };
+
+// class DragMotionEvent : public MouseEventBase {
+//  private:
+//   glm::vec2 direction_;
+
+//  public:
+//   DragMotionEvent(const Mouse* mouse, const glm::vec2& dir) :
+//     MouseEventBase(mouse),
+//     direction_(dir) {}
+//   DragMotionEvent(const Mouse* mouse, const double xPos, const double yPos) :
+//     DragMotionEvent(mouse, glm::vec2(xPos, yPos)) {}
+//   ~DragMotionEvent() override = default;
+
+//   auto GetDirection() const -> glm::vec2 const& {
+//     return direction_;
+//   }
+
+//   auto IsDown() const -> bool;
+//   auto IsUp() const -> bool;
+
+//   inline auto IsLeft() const -> bool {
+//     const auto delta = GetDirection();
+//     return (delta.x > 0.0f);
+//   }
+
+//   inline auto IsRight() const -> bool {
+//     const auto delta = GetDirection();
+//     return (delta.x < 0.0f);
+//   }
+
+//   DECLARE_EVENT_TYPE(MouseEvent, DragMotion);
+// };
 
 class DragFinishedEvent : public DragEvent {
  private:

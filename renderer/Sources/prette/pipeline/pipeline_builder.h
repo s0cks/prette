@@ -214,8 +214,10 @@ class BaseRenderPipelineBuilder {
     InitRasterizer(rasterizer_);
     InitMultisampling(multisampling_);
 
-    blending_attachments_.resize(1);
-    InitColorBlendAttachment(blending_attachments_[0]);
+    blending_attachments_.resize(6);
+    for (auto idx = 0; idx < 6; idx++) {
+      InitColorBlendAttachment(blending_attachments_[idx]);
+    }
     InitBlending(blending_, blending_attachments_);
 
     attached_shaders_.reserve(2);

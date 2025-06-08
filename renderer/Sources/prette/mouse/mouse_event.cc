@@ -15,13 +15,13 @@ auto MouseCreatedEvent::ToString() const -> std::string {
 auto MouseMotionEvent::IsDown() const -> bool {
   const auto delta = GetDirection();
   const auto& settings = GetMouseSettings();
-  return settings.IsInverted() ? (delta.y > 0.0f) : (delta.y < 0.0f);
+  return settings.IsInverted() ? (delta.y < 0.0f) : (delta.y < 0.0f);
 }
 
 auto MouseMotionEvent::IsUp() const -> bool {
   const auto delta = GetDirection();
   const auto& settings = GetMouseSettings();
-  return settings.IsInverted() ? (delta.y < 0.0f) : (delta.y > 0.0f);
+  return settings.IsInverted() ? (delta.y > 0.0f) : (delta.y > 0.0f);
 }
 
 auto MouseMotionEvent::ToString() const -> std::string {

@@ -16,7 +16,7 @@ class FramebufferAttachmentBuilder {
  public:
   explicit FramebufferAttachmentBuilder(const VkFormat format) :
     format_(format) {}
-  ~FramebufferAttachmentBuilder();
+  ~FramebufferAttachmentBuilder() = default;
 
   auto GetFormat() const -> const VkFormat& {
     return format_;
@@ -40,8 +40,16 @@ class FramebufferAttachmentBuilder {
   }
 
   auto IsValid() const -> bool;
-  auto WithUsage(const VkImageUsageFlags rhs) -> FramebufferAttachmentBuilder&;
+  auto WithUsage(const VkImageUsageFlagBits rhs) -> FramebufferAttachmentBuilder&;
   auto Build() -> FramebufferAttachment*;
+
+  auto operator()() -> FramebufferAttachment* {
+    return Build();
+  }
+
+  operator FramebufferAttachment*() {
+    return Build();
+  }
 };
 }  // namespace prt
 

@@ -7,6 +7,8 @@
 namespace prt {
 #define FOR_EACH_RENDERER_STATE(V) \
   V(RendererCreated)               \
+  V(RendererStarted)               \
+  V(RendererStopped)               \
   V(RendererDestroyed)
 
 enum class RendererState {

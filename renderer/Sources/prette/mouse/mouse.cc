@@ -41,8 +41,6 @@ static inline auto SetMouse(Mouse* rhs) -> Mouse* {
 }
 
 auto Mouse::GetNormalizedDeviceCoords() const -> glm::vec2 {
-  // if (GuiViewport::IsInitialized())
-  //   return ToNormalizedDeviceCoords(GetPos(), GuiViewport::Get()->GetSize());
   return ToNormalizedDeviceCoords(GetPos(), GetAppWindow()->GetSize());
 }
 

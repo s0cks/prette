@@ -2,7 +2,6 @@
 
 #include <sys/param.h>
 #include <tweeny.h>
-#include <vector>
 
 #include "prette/assertions.h"
 #include "prette/camera_manager.h"
@@ -37,11 +36,6 @@
 namespace prt {
 static RendererEventSubject events_{};
 static ThreadLocal<Renderer> renderer_{};
-static const std::vector<VkClearValue> kDefaultClearValues = {
-    VkClearValue{
-        .color = {0.1f, 0.1f, 0.1f, 1.0f},
-    },
-};
 
 void Renderer::PublishEvent(RendererEvent* event) {
   ASSERT(event);
@@ -154,6 +148,7 @@ void Renderer::UpdateDescriptors() {}
 
 auto Renderer::StartTicker() -> rx::composite_subscription {
   ticker_.Start();
+  PublishRendererStartedEvent();
   return OnTick().subscribe([this](Tick tick) {
     DrawFrame(ticker_.GetCurrentTick(), ticker_.GetPreviousTick());
   });
@@ -168,12 +163,8 @@ void Renderer::DestroySwap(const bool reinit) {
 
 void Renderer::DrawFrame(const Tick& current, const Tick& previous) {
   SwapchainFrameScope frame{};
-  pass_->Execute();
   GetSceneRenderer()->GetScenePass()->Execute();
-  GuiSystem::GetSystem()->GetGuiPass()->Execute();
-  // vk::RenderPassIterator iter(GetRenderPassList());
-  // while (iter.HasNext())
-  //   iter.Next()->Execute();
+  // GuiSystem::GetSystem()->GetGuiPass()->Execute();
 }
 
 void Renderer::Init() {

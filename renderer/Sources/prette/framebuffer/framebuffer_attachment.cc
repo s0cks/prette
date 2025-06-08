@@ -5,6 +5,7 @@
 #include "prette/assertions.h"
 #include "prette/image/image.h"       // IWYU pragma: keep
 #include "prette/image/image_view.h"  // IWYU pragma: keep
+#include "prette/vk.h"
 
 namespace prt {
 FramebufferAttachment::FramebufferAttachment(VkFormat format, vk::Image* image, vk::ImageView* view) :
@@ -18,5 +19,9 @@ FramebufferAttachment::FramebufferAttachment(VkFormat format, vk::Image* image, 
 FramebufferAttachment::~FramebufferAttachment() {
   delete image_;
   delete view_;
+}
+
+auto FramebufferAttachment::IsInitialized() const -> bool {
+  return vk::AllInitialized(image_, view_);
 }
 }  // namespace prt

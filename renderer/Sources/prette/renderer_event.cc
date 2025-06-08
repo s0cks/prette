@@ -2,6 +2,7 @@
 
 #include <string>
 
+#include "prette/renderer_state.h"
 #include "prette/to_string.h"
 
 namespace prt {
@@ -11,7 +12,8 @@ namespace prt {
     ToStringHelper<Name##Event> helper{};           \
     return helper;                                  \
   }
-DEFINE_TOSTRING(RendererCreated);
+FOR_EACH_RENDERER_STATE(DEFINE_TOSTRING);
+DEFINE_TOSTRING(UpdateBuffers);
 DEFINE_TOSTRING(InitRenderPasses);
 DEFINE_TOSTRING(InitDescriptorSets);
 DEFINE_TOSTRING(InitPipelineLayouts);
@@ -20,7 +22,6 @@ DEFINE_TOSTRING(InitBuffers);
 DEFINE_TOSTRING(InitTextures);
 DEFINE_TOSTRING(InitMeshes);
 DEFINE_TOSTRING(InitMaterials);
-DEFINE_TOSTRING(RendererDestroyed);
 #undef DEFINE_TOSTRING
 
 // frame events

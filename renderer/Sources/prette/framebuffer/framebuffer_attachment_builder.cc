@@ -12,7 +12,7 @@
 #include "prette/vk.h"
 
 namespace prt {
-auto FramebufferAttachmentBuilder::WithUsage(const VkImageUsageFlags rhs) -> FramebufferAttachmentBuilder& {
+auto FramebufferAttachmentBuilder::WithUsage(const VkImageUsageFlagBits rhs) -> FramebufferAttachmentBuilder& {
   usage_ = rhs;
   if ((rhs & VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT)) {
     aspect_ = VK_IMAGE_ASPECT_COLOR_BIT;
@@ -47,6 +47,7 @@ auto FramebufferAttachmentBuilder::Build() -> FramebufferAttachment* {
     vk::ImageViewBuilder builder{};
     // clang-format off
     view = builder.WithType(VK_IMAGE_VIEW_TYPE_2D)
+               .WithImage(image)
                .WithFormat(GetFormat())
                .WithAspectMask(GetAspectMask());
     // clang-format on

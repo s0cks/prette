@@ -94,7 +94,8 @@ class Renderer {
 
   inline void StopTicker() {
     on_tick_.unsubscribe();
-    return ticker_.Stop();
+    ticker_.Stop();
+    return PublishRendererStoppedEvent();
   }
 
   auto GetRenderPass() const -> vk::RenderPass* {

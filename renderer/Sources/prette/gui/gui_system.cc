@@ -51,7 +51,6 @@ GuiSystem::GuiSystem() {
     UpdateImGui();
   });
   on_post_init_ = OnPostInit([this](PostInitEvent* event) {
-    // guis_.push_back(GuiViewport::Init());
     guis_.push_back(new GuiDebug());
   });
   on_swap_created_ = OnSwapchainCreated([this](SwapchainCreatedEvent* event) {

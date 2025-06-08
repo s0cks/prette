@@ -204,6 +204,10 @@ class AttachmentDescBuilder {
   inline auto BuildWithColorAttachmentOptimalRef() const -> VkAttachmentReference {
     return Build(VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL);
   }
+
+  inline auto BuildWithDepthStencilOptimalRef() const -> VkAttachmentReference {
+    return Build(VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL);
+  }
 };
 
 #undef FOR_EACH_LOAD_OP

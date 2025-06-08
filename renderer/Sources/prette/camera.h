@@ -13,10 +13,10 @@
 #include "prette/vk_buffer.h"
 
 namespace prt {
-static constexpr const auto kWorldUp = glm::vec3(0.0f, 1.0f, 0.0f);
-static constexpr const auto kWorldDown = glm::vec3(0.0f, -1.0f, 0.0f);
-static constexpr const auto kWorldRight = glm::vec3(-1.0f, 0.0f, 0.0f);
-static constexpr const auto kWorldLeft = glm::vec3(1.0f, 0.0f, 0.0f);
+static constexpr const auto kWorldUp = glm::vec3(0.0f, -1.0f, 0.0f);
+static constexpr const auto kWorldDown = glm::vec3(0.0f, 1.0f, 0.0f);
+static constexpr const auto kWorldRight = glm::vec3(1.0f, 0.0f, 0.0f);
+static constexpr const auto kWorldLeft = glm::vec3(-1.0f, 0.0f, 0.0f);
 
 static constexpr const auto kDefaultZoom = 100.0f;
 static constexpr const auto kZoomInterval = 2.0f;
@@ -66,8 +66,8 @@ class Camera {
   friend class CameraManager;
 
  public:
-  static constexpr const auto kDefaultDirection = glm::vec3(0.0f, 0.0f, 1.0f);
-  static constexpr const auto kDefaultPos = glm::vec3(16.0f, 16.0f, 1.0f);
+  static constexpr const auto kDefaultDirection = glm::vec3(0.0f, 0.0f, 10.0f);
+  static constexpr const auto kDefaultPos = glm::vec3(16.0f, 16.0f, 0.0f);
 
  protected:
   CameraData data_{};

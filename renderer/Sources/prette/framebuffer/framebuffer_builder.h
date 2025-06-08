@@ -86,6 +86,14 @@ class FramebufferBuilder : public vk::HandleBuilderTemplate<VkFramebufferCreateI
   auto Build() -> Framebuffer* override;
   void BuildWithAttachments(const std::vector<vk::ImageView*>& attachments, std::vector<Framebuffer*>& results,
                             vk::ImageView* depth = nullptr);
+
+  auto operator()() -> Framebuffer* {
+    return Build();
+  }
+
+  operator Framebuffer*() {
+    return Build();
+  }
 };
 }  // namespace prt
 

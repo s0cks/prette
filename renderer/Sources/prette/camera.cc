@@ -94,7 +94,7 @@ auto Camera::ToString() const -> std::string {
 }
 
 void Camera::UpdateViewMatrix() {
-  data_.view = glm::lookAt(GetPos(), GetPos() + GetDirection(), GetUp());
+  data_.view = glm::lookAt(GetPos() + GetDirection(), GetPos(), GetUp());
 }
 
 void Camera::Update() {
@@ -113,10 +113,11 @@ auto Camera::Unproject(const glm::vec2 ndc) const -> glm::vec3 {
 
 void Camera::UpdateProjectionMatrix() {
   const auto ar = GetViewportAspectRatio();
-  const auto w = (GetViewportWidth() / kTileSizeInPixels) * 0.5f;
-  const auto h = (GetViewportHeight() / kTileSizeInPixels) * 0.5f * ar;
+  const auto w = (GetViewportWidth() / (kTileSizeInPixels * 3)) * 0.5f;
+  const auto h = (GetViewportHeight() / (kTileSizeInPixels * 3)) * 0.5f * ar;
   const auto z = GetZoomPercent() + 0.2f;
   data_.projection = glm::ortho(-w * z, w * z, -h * z, h * z, kNearClip, kFarClip);
+  data_.projection[1][1] *= -1.0f;
 }
 
 void Camera::SetPos(const glm::vec3& pos) {
