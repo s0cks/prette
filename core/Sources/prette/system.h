@@ -70,19 +70,26 @@ class SystemTemplate : public System {
   }
 };
 
-#define DECLARE_SYSTEM_TYPE(Name)                                  \
- protected:                                                        \
-  void OnTick(const Tick& current, const Tick& previous) override; \
-                                                                   \
- public:                                                           \
-  auto GetSystemName() const -> const char* override {             \
-    return #Name;                                                  \
-  }                                                                \
-                                                                   \
- public:                                                           \
-  static void InitSystem();                                        \
-  static auto IsSystemInitialized() -> bool;                       \
+#define DECLARE_SYSTEM_TYPE(Name)                  \
+ public:                                           \
+  static constexpr const auto kSystemName = #Name; \
+  static void InitSystem();                        \
+  static auto IsSystemInitialized() -> bool;       \
   static auto GetSystem() -> Name##System*;
+
+#define DEFINE_THREAD_LOCAL_SYSTEM_TYPE(Name)      \
+  static ThreadLocal<Name##System> system_{};      \
+  void Name##System::InitSystem() {                \
+    ASSERT(!IsSystemInitialized());                \
+    system_ = new Name##System();                  \
+  }                                                \
+  auto Name##System::GetSystem()->Name##System* {  \
+    ASSERT(IsSystemInitialized());                 \
+    return system_;                                \
+  }                                                \
+  auto Name##System::IsSystemInitialized()->bool { \
+    return system_.Get() != nullptr;               \
+  }
 
 using SystemListIterator = SinglyLinkedListIteratorTemplate<System>;
 }  // namespace prt

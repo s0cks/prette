@@ -28,7 +28,7 @@ template <>
 auto AudioSource::GetProperty<float>(const PropertyId prop) const -> float {
   float value = 0.0f;
   alGetSourcef(GetId(), prop, &value);
-  CHECK_AL_ERRORS(ERROR);
+  CHECK_AL_ERRORS(FATAL);
   return value;
 }
 
@@ -36,7 +36,7 @@ template <>
 auto AudioSource::GetProperty<AudioPos>(const PropertyId prop) const -> AudioPos {
   AudioPos value{};
   alGetSource3f(GetId(), prop, &value[0], &value[1], &value[2]);
-  CHECK_AL_ERRORS(ERROR);
+  CHECK_AL_ERRORS(FATAL);
   return std::move(value);
 }
 
@@ -44,7 +44,7 @@ template <>
 auto AudioSource::GetProperty<bool>(const PropertyId prop) const -> bool {
   ALint value = false;
   alGetSourcei(GetId(), prop, &value);
-  CHECK_AL_ERRORS(ERROR);
+  CHECK_AL_ERRORS(FATAL);
   return value == AL_TRUE;
 }
 
@@ -52,36 +52,31 @@ template <>
 auto AudioSource::GetProperty<int32_t>(const PropertyId prop) const -> int32_t {
   int32_t value = false;
   alGetSourcei(GetId(), prop, &value);
-  CHECK_AL_ERRORS(ERROR);
+  CHECK_AL_ERRORS(FATAL);
   return value;
 }
 
 template <>
 void AudioSource::SetProperty<float>(const PropertyId prop, const float& value) const {
   alSourcef(GetId(), prop, value);
-  CHECK_AL_ERRORS(ERROR);
+  CHECK_AL_ERRORS(FATAL);
 }
 
 template <>
 void AudioSource::SetProperty<AudioPos>(const PropertyId prop, const AudioPos& value) const {
   alSource3f(GetId(), prop, value.x, value.y, value.z);
-  CHECK_AL_ERRORS(ERROR);
+  CHECK_AL_ERRORS(FATAL);
 }
 
 template <>
 void AudioSource::SetProperty<bool>(const PropertyId prop, const bool& value) const {
   alSourcei(GetId(), prop, static_cast<ALint>(value));
-  CHECK_AL_ERRORS(ERROR);
+  CHECK_AL_ERRORS(FATAL);
 }
 
 template <>
 void AudioSource::SetProperty<int32_t>(const PropertyId prop, const int32_t& value) const {
   alSourcei(GetId(), prop, value);
-  CHECK_AL_ERRORS(ERROR);
-}
-
-AudioSource::AudioSource() {
-  alGenSources(1, &id_);
   CHECK_AL_ERRORS(FATAL);
 }
 
@@ -102,5 +97,17 @@ auto AudioSource::GetCone() const -> AudioCone {
       .outer_angle = Get<ConeOuterAngle>(),
       .inner_angle = Get<ConeInnerAngle>(),
   };
+}
+
+void GenSourceIds(const uint64_t num_ids, SourceId* ids) {
+  alGenSources(static_cast<ALsizei>(num_ids), ids);
+  CHECK_AL_ERRORS(FATAL);
+}
+
+void GenSources(const uint64_t num_sources, AudioSource* sources) {
+  std::vector<SourceId> ids(num_sources);
+  GenSourceIds(ids);
+  for (auto idx = 0; idx < num_sources; idx++)
+    sources[idx] = AudioSource(ids[idx]);
 }
 }  // namespace prt::audio

@@ -1,1 +1,2 @@
 add_subdirectory(stitcher)
+add_subdirectory(shader-reflector)

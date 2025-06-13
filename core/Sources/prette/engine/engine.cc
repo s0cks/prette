@@ -70,17 +70,18 @@ static inline auto CreateTickDeltaObservable(const Engine* engine) -> rx::observ
 
 Engine::Engine() :
   loop_(),
-  ticker_(&loop_),
+  ticker_(loop_),
   scheduler_(&loop_),
   mscheduler_((marl::Scheduler::Config::allCores())),
 #ifdef PRT_DEBUG
   tick_profiler_(CreateTickDeltaObservable(this)),
 #endif  // PRT_DEBUG
-  on_shutdown_(loop_, &OnShutdown, this) {
+  on_shutdown_(loop_, [this]() {
+    return Terminate();
+  }) {
 
   // marl scheduler
   mscheduler_.bind();
-  defer(mscheduler_.unbind());  // Automatically unbind before returning.
 
   // lua bindings
 #ifdef PRT_ENABLE_LUA
@@ -94,6 +95,7 @@ Engine::~Engine() {
 #ifdef PRT_ENABLE_LUA
   on_lua_init_.unsubscribe();
 #endif  // PRT_ENABLE_LUA
+  mscheduler_.unbind();
 }
 
 auto Engine::Run() -> int {

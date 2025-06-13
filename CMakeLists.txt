@@ -18,7 +18,7 @@ if(PRT_BUILD_DOCS)
 endif()
 
 include(CCache)
-include(Mold)
+include(BuildDate)
 include(Bloaty)
 include(IWYU)
 

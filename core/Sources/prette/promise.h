@@ -8,12 +8,12 @@
 #include "prette/common.h"
 
 namespace prt {
-template <typename Result>
+template <typename... Rs>
 class Promise {
-  DEFINE_DEFAULT_COPYABLE_TYPE(Promise<Result>);
+  DEFINE_DEFAULT_COPYABLE_TYPE(Promise<Rs...>);
 
  public:
-  using OnSuccessCallback = std::function<void(Result)>;
+  using OnSuccessCallback = std::function<void(Rs...)>;
   using OnErrorCallback = std::function<void(std::exception_ptr)>;
   using OnCompleteCallback = std::function<void()>;
 
@@ -29,9 +29,9 @@ class Promise {
     on_complete_(std::move(on_complete)) {}
   ~Promise() = default;
 
-  auto on_success(Result value) {
+  auto on_success(Rs... values) {
     if (on_success_)
-      on_success_(value);
+      on_success_(values...);
   }
 
   auto on_complete() {

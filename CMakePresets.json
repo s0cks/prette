@@ -56,10 +56,7 @@
       "name": "debug",
       "displayName": "Debug",
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": {
-          "value": "Debug",
-          "type": "STRING"
-        }
+        "CMAKE_BUILD_TYPE": "Debug"
       },
       "environment": {
         "BUILD_ENVIRONMENT": "dev"
@@ -96,10 +93,7 @@
       "name": "release",
       "displayName": "Release",
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": {
-          "value": "Release",
-          "type": "STRING"
-        }
+        "CMAKE_BUILD_TYPE": "Release"
       },
       "environment": {
         "BUILD_ENVIRONMENT": "release"

@@ -23,6 +23,7 @@ namespace prt::audio {
   V(Looping, AL_LOOPING, bool)
 
 class AudioSource {
+  friend class AudioWorker;
   DEFINE_DEFAULT_COPYABLE_TYPE(AudioSource);
 
  public:
@@ -76,8 +77,6 @@ class AudioSource {
  private:
   SourceId id_ = 0;
 
-  AudioSource();
-
   template <typename T>
   auto GetProperty(const PropertyId property) const -> T;
 
@@ -87,7 +86,7 @@ class AudioSource {
   void DeleteSource();
 
  public:
-  AudioSource(const SourceId id) :
+  explicit AudioSource(const SourceId id = kInvalidBufferId) :
     id_(id) {}
   ~AudioSource() = default;
 
@@ -174,7 +173,33 @@ class AudioSource {
   operator SourceId() const {
     return GetId();
   }
+
+  operator bool() const {
+    return GetId() != kInvalidSourceId;
+  }
 };
+
+void GenSourceIds(const uint64_t num_ids, SourceId* ids);
+
+static inline void GenSourceIds(std::vector<SourceId>& ids) {
+  return GenSourceIds(ids.size(), ids.data());
+}
+
+static inline void GenSourceIds(const uint64_t num_ids, std::vector<SourceId>& ids) {
+  ids.resize(num_ids);
+  return GenSourceIds(ids);
+}
+
+void GenSources(const uint64_t num_sources, AudioSource* sources);
+
+static inline void GenSources(std::vector<AudioSource>& ids) {
+  return GenSources(ids.size(), ids.data());
+}
+
+static inline void GenSources(const uint64_t num_ids, std::vector<AudioSource>& ids) {
+  ids.resize(num_ids);
+  return GenSources(ids);
+}
 
 using AudioSourcePredicate = std::function<bool(const AudioSource&)>;
 

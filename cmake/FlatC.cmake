@@ -21,15 +21,15 @@ set(FLATC_TARGET "--cpp")
 set(FLATC_OPTS ${FLATC_TARGET} -o ${FLATC_OUTPUT_DIR} -I ${FLATC_SOURCE_DIR})
 
 message(STATUS "flatc options: ${FLATC_OPTS}")
-function(add_flatc_target target_name target_sources)
+function(add_flatc_target target_name target_source)
   add_custom_target(
     ${target_name} ALL
-    COMMENT "Compiling flatbuffers"
+    COMMENT "Compiling ${target_name}"
     SOURCES
-      ${target_sources}
+      ${target_source}
     WORKING_DIRECTORY ${FLATC_SOURCE_DIR}
     VERBATIM
     COMMAND
-      ${FLATC} ${FLATC_OPTS} ${target_sources}
+      ${FLATC} ${FLATC_OPTS} ${target_source}
   )
 endfunction()

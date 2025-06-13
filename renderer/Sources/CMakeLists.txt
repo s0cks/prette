@@ -46,3 +46,5 @@ target_include_directories(prette-renderer
   PRIVATE)
 set_property(TARGET prette-renderer PROPERTY CXX_INCLUDE_WHAT_YOU_USE "${IWYU};;${IWYU_OPTS}")
 
+add_dependencies(prette-renderer
+  shaders)

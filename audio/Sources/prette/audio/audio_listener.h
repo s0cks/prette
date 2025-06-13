@@ -6,13 +6,16 @@
 #include "prette/glm.h"
 
 namespace prt::audio {
-// TODO: orientation
 #define FOR_EACH_AUDIO_LISTENER_PROPERTY(V) \
   V(Gain, AL_GAIN, float)                   \
-  V(Position, AL_POSITION, glm::fvec3)      \
+  V(Pos, AL_POSITION, glm::fvec3)           \
   V(Velocity, AL_VELOCITY, glm::fvec3)
 
+static constexpr const auto kDefaultGain = 0.25f;
+static constexpr const auto kDefaultPos = AudioPos(0.0f);
 class AudioListener {
+  friend class AudioSystem;
+
  public:
 #define DEFINE_PROPERTY(Name, Id, Type)                    \
   struct Name : public MutablePropertyTemplate<Id, Type> { \
@@ -20,7 +23,7 @@ class AudioListener {
   };
   FOR_EACH_AUDIO_LISTENER_PROPERTY(DEFINE_PROPERTY)
 #undef DEFINE_PROPERTY
- protected:
+ private:
   AudioListener();
 
   template <typename T>
@@ -30,7 +33,7 @@ class AudioListener {
   void SetProperty(const PropertyId property, const T& value);
 
  public:
-  virtual ~AudioListener();
+  ~AudioListener();
 
   template <AudioProperty Property>
   inline auto Get() const -> typename Property::Type {
@@ -56,8 +59,6 @@ class AudioListener {
   FOR_EACH_AUDIO_LISTENER_PROPERTY(DEFINE_SETTER)
 #undef DEFINE_SETTER
 };
-
-#undef FOR_EACH_MUTABLE_AUDIO_LISTENER_PROPERTY
 }  // namespace prt::audio
 
 #endif  // PRT_AUDIO_LISTENER_H

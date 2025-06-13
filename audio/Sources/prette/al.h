@@ -8,6 +8,7 @@
 #include <OpenAL/OpenAL.h>
 #include <OpenAL/al.h>
 #include <OpenAL/alc.h>
+#include <vector>
 // IWYU pragma: end_exports
 
 namespace prt::audio {
@@ -18,6 +19,7 @@ static constexpr const auto kMinGain = 0.0f;
 static constexpr const auto kMaxGain = 1.0f;
 
 using SourceId = ALuint;
+static constexpr const auto kInvalidSourceId = 0;
 using BufferId = ALuint;
 static constexpr const auto kInvalidBufferId = 0;
 
@@ -52,7 +54,9 @@ class AudioBuffer {
 
  public:
   AudioBuffer() = default;
-  AudioBuffer(const AudioFormat format, const uint8_t* bytes, const uint64_t num_bytes, const uint64_t num_samples);
+  AudioBuffer(const AudioFormat format, const uint8_t* bytes, const uint64_t num_bytes, const uint64_t sample_rate);
+  AudioBuffer(const AudioFormat format, const std::vector<uint8_t>& bytes, const uint64_t sample_rate) :
+    AudioBuffer(format, bytes.data(), bytes.size(), sample_rate) {}
   ~AudioBuffer();
 
   auto GetId() const -> const BufferId& {
@@ -61,6 +65,10 @@ class AudioBuffer {
 
   operator BufferId() const {
     return id_;
+  }
+
+  operator bool() const {
+    return GetId() != kInvalidBufferId;
   }
 };
 }  // namespace prt::audio

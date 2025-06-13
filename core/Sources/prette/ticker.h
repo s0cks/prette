@@ -3,11 +3,14 @@
 
 #include <utility>
 
-#include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/platform.h"
 #include "prette/rx.h"
 #include "prette/tick.h"
+#include "prette/uv/check.h"
+#include "prette/uv/handle.h"
+#include "prette/uv/idle.h"
+#include "prette/uv/prepare.h"
 #include "prette/uv/utils.h"
 
 namespace prt {
@@ -19,7 +22,6 @@ class Ticker {
   Tick previous_{};
   rx::subject<Tick> ticks_;
   // handles
-  uv::Loop* loop_;
   uv::Idle idle_;
   uv::Prepare prepare_;
   uv::Check check_;
@@ -50,24 +52,6 @@ class Ticker {
   }
 
  private:
-  static inline void OnIdle(uv_idle_t* handle) {
-    const auto ticker = uv::GetHandleData<uv_idle_t, Ticker>(handle);
-    ASSERT(ticker);
-    return ticker->Idle();
-  }
-
-  static inline void OnPrepare(uv_prepare_t* handle) {
-    const auto ticker = uv::GetHandleData<uv_prepare_t, Ticker>(handle);
-    ASSERT(ticker);
-    return ticker->Prepare();
-  }
-
-  static inline void OnCheck(uv_check_t* handle) {
-    const auto ticker = uv::GetHandleData<uv_check_t, Ticker>(handle);
-    ASSERT(ticker);
-    return ticker->Check();
-  }
-
   inline void SetEpoch(const Tick& rhs) {
     epoch_ = previous_ = current_ = rhs;
   }
@@ -77,11 +61,18 @@ class Ticker {
   }
 
  public:
-  explicit Ticker(uv::Loop* loop, const uint64_t start_ns = uv::Now()) :
-    loop_(loop),
-    idle_(loop, &OnIdle, this),
-    prepare_(loop, &OnPrepare, this),
-    check_(loop, &OnCheck, this) {
+  explicit Ticker(uv::Loop& loop, const uint64_t start_ns = uv::Now()) :
+    idle_(loop,
+          [this]() {
+            return Idle();
+          }),
+    prepare_(loop,
+             [this]() {
+               return Prepare();
+             }),
+    check_(loop, [this]() {
+      return Check();
+    }) {
     SetEpoch(start_ns);
   }
   virtual ~Ticker() = default;
@@ -184,7 +175,7 @@ class RateLimitedTicker : public Ticker {
   }
 
  public:
-  explicit RateLimitedTicker(uv::Loop* loop, const uword start_ns = uv::Now()) :
+  explicit RateLimitedTicker(uv::Loop& loop, const uword start_ns = uv::Now()) :
     Ticker(loop, start_ns) {}
   ~RateLimitedTicker() override = default;
 

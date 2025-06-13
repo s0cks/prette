@@ -2,14 +2,23 @@
 #define PRT_AUDIO_SYSTEM_H
 
 #include <absl/container/flat_hash_map.h>
-#include <string>
-#include <unordered_map>
+#include <filesystem>
+#include <functional>
+#include <gflags/gflags.h>
 
 #include "prette/al.h"
+#include "prette/audio/audio_context.h"
+#include "prette/audio/audio_device.h"
 #include "prette/audio/audio_event.h"
+#include "prette/audio/audio_listener.h"
+#include "prette/audio/audio_source.h"
+#include "prette/audio/audio_worker.h"
 #include "prette/rx.h"
+#include "prette/system.h"
 
 namespace prt::audio {
+DECLARE_uint64(num_audio_workers);
+
 auto GetAudioEventObservable() -> AudioEventObservable;
 
 template <typename... ArgN>
@@ -17,31 +26,54 @@ static inline auto OnAudioEvent(ArgN... args) -> rx::composite_subscription {
   return GetAudioEventObservable().subscribe(args...);
 }
 
-static constexpr const auto kDefaultGain = 0.25f;
-static constexpr const auto kDefaultPos = AudioPos(0.0f);
+#define ON_EVENT(Name)                                                                   \
+  static inline auto Get##Name##EventObservable()->Name##EventObservable {               \
+    return GetAudioEventObservable().filter(Name##Event::Filter).map(Name##Event::Cast); \
+  }                                                                                      \
+  template <typename... ArgN>                                                            \
+  static inline auto On##Name##Event(ArgN... args)->r::composite_subscription {          \
+    return GetName##EventObservable().subscribe(args...);                                \
+  }
+FOR_EACH_AUDIO_EVENT(ON_EVENT)
+#undef ON_EVENT
+
 class AudioSystem {
- public:
-  static constexpr const auto kSystemName = "audio";
+  friend class AudioWorker;
 
  private:
-  ALCdevice* device_;
-  ALCcontext* context_;
-  std::unordered_map<std::string, AudioBuffer> sfxs_{};
+  AudioDevice device_;
+  AudioContext context_;
+  AudioListener listener_{};
+  AudioWorkerPool workers_;
 
-  void LoadSoundEffects();
+  auto LoadAudioBufferFrom(const fs::path path) -> AudioBuffer;
+
+  static void RemoveFromPlayingIf(std::function<bool(const AudioSourceBuffer&)> filter);
+  static void AddToPlaying(const AudioSourceBuffer rhs);
 
  public:
   AudioSystem();
   ~AudioSystem();
 
-  void SetGain(const float rhs);
-  auto GetGain() const -> float;
-  void SetPos(const AudioPos& rhs);
+  auto GetDevice() const -> const AudioDevice& {
+    return device_;
+  }
 
- public:
-  static void InitSystem();
-  static auto GetSystem() -> AudioSystem*;
-  static auto IsSystemInitialized() -> bool;
+  auto GetContext() const -> const AudioContext& {
+    return context_;
+  }
+
+  auto GetListener() const -> const AudioListener& {
+    return listener_;
+  }
+
+  auto GetWorkers() const -> const AudioWorkerPool& {
+    return workers_;
+  }
+
+  void Play(const fs::path path);
+
+  DECLARE_SYSTEM_TYPE(Audio);
 };
 }  // namespace prt::audio
 

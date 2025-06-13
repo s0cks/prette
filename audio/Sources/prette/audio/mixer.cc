@@ -1,36 +1,17 @@
 #include "prette/audio/mixer.h"
 
 #include <algorithm>
+#include <functional>
+#include <mutex>
 
 #include "prette/al.h"
 #include "prette/audio/audio_source.h"
 #include "prette/common.h"
 
 namespace prt::audio {
-Mixer::Mixer() = default;
-Mixer::~Mixer() = default;
-
-void Mixer::PauseAll() {
+void Mixer::VisitAll(std::function<void(const AudioSourceBuffer&)> vis) {
   mutex_.try_lock();
-  std::ranges::for_each(data_, [this](const AudioSourceBuffer& buffer) {
-    buffer.source.Pause();
-  });
-  mutex_.unlock();
-}
-
-void Mixer::ResumeAll() {
-  mutex_.try_lock();
-  std::ranges::for_each(data_, [this](const AudioSourceBuffer& buffer) {
-    buffer.source.Play();
-  });
-  mutex_.unlock();
-}
-
-void Mixer::StopAll() {
-  mutex_.try_lock();
-  std::ranges::for_each(data_, [this](const AudioSourceBuffer& buffer) {
-    buffer.source.Stop();
-  });
+  std::ranges::for_each(data_, vis);
   mutex_.unlock();
 }
 
@@ -42,13 +23,12 @@ void Mixer::DeleteSourceBuffer(const AudioSourceBuffer& rhs) {
 }
 
 void Mixer::CleanupStoppedSources() {
-  mutex_.try_lock();
+  std::lock_guard<std::mutex> guard(mutex_);
   std::erase_if(data_, [this](const AudioSourceBuffer& source_buffer) {
     if (!source_buffer.source.IsStopped())
       return false;
     DeleteSourceBuffer(source_buffer);
     return true;
   });
-  mutex_.unlock();
 }
 }  // namespace prt::audio

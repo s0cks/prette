@@ -1,6 +1,7 @@
 #include "prette/audio/audio_listener.h"
 
 #include <OpenAL/al.h>
+#include <glm/ext/vector_int3.hpp>
 #include <utility>
 
 #include "prette/al.h"
@@ -9,6 +10,13 @@
 #include "prette/glm.h"
 
 namespace prt::audio {
+AudioListener::AudioListener() {
+  SetGain(kDefaultGain);
+  SetPos(kDefaultPos);
+}
+
+AudioListener::~AudioListener() = default;
+
 template <>
 auto AudioListener::GetProperty<float>(const PropertyId prop) const -> float {
   float value = 0.0f;
@@ -42,6 +50,14 @@ auto AudioListener::GetProperty<int32_t>(const PropertyId prop) const -> int32_t
 }
 
 template <>
+auto AudioListener::GetProperty<glm::ivec3>(const PropertyId prop) const -> glm::ivec3 {
+  glm::ivec3 result{};
+  alGetListener3i(prop, &result[0], &result[1], &result[2]);
+  CHECK_AL_ERRORS(ERROR);
+  return std::move(result);
+}
+
+template <>
 void AudioListener::SetProperty<float>(const PropertyId prop, const float& value) {
   alListenerf(prop, value);
   CHECK_AL_ERRORS(ERROR);
@@ -50,6 +66,12 @@ void AudioListener::SetProperty<float>(const PropertyId prop, const float& value
 template <>
 void AudioListener::SetProperty<glm::fvec3>(const PropertyId prop, const glm::fvec3& value) {
   alListener3f(prop, value.x, value.y, value.z);
+  CHECK_AL_ERRORS(ERROR);
+}
+
+template <>
+void AudioListener::SetProperty<glm::ivec3>(const PropertyId prop, const glm::ivec3& value) {
+  alListener3i(prop, value.x, value.y, value.z);
   CHECK_AL_ERRORS(ERROR);
 }
 

@@ -1,4 +1,6 @@
 [
+    { symbol:  [ "uv_file", "private", "<uv.h>", "public" ] },
+    { symbol:  [ "uv_buf_t", "private", "<uv.h>", "public" ] },
     { include: [ "<fmt/base.h>", "private", "<fmt/format.h>", "public" ] },
     { include: [ "@<subjects/rx-.*>", "private", "\"prette/rx.h\"", "public" ] },
     { include: [ "@<rx-.*>", "private", "\"prette/rx.h\"", "public" ] },

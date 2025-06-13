@@ -50,6 +50,7 @@
     "spirv-cross",
     "spirv-headers",
     "spirv-tools",
+    "http-parser",
     "stb",
     {
       "name": "stduuid",

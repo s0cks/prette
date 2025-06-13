@@ -41,7 +41,7 @@ file(
   "${CMAKE_CURRENT_BINARY_DIR}/prette/**/*.h")
 
 list(APPEND PRT_CORE_LIBRARIES
-  prt-flatbuffers
+  prette::flatbuffers
   Threads::Threads
   glog::glog
   gflags::gflags
@@ -78,7 +78,5 @@ target_include_directories(prette-core
   PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}
   PRIVATE ${LUA_INCLUDE_DIR})
 set_property(TARGET prette-core PROPERTY CXX_INCLUDE_WHAT_YOU_USE "${IWYU};;${IWYU_OPTS}")
-add_dependencies(prette-core
-  prt-flatbuffers)
 
 add_library(prette::core ALIAS prette-core)

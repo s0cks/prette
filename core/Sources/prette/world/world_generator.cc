@@ -10,7 +10,6 @@
 #include "prette/chunk/chunk.h"
 #include "prette/chunk/chunk_metadata.h"
 #include "prette/common.h"
-#include "prette/glm.h"
 #include "prette/tile.h"
 #include "prette/world/world.h"
 
@@ -31,7 +30,6 @@ class TestWorldInitializer : public WorldInitializer {
     for (auto x = -kInitChunkRadius; x < 1 + (kInitChunkRadius * 2); x++) {
       for (auto y = -kInitChunkRadius; y < 1 + (kInitChunkRadius * 2); y++) {
         const auto chunk_pos = ChunkPos(x, y);
-        DLOG(INFO) << "generating chunk at: " << glm::to_string(chunk_pos);
         const auto c = world->GetOrCreateChunkAt(chunk_pos);
         ASSERT(c);
         if (chunk_pos == ChunkPos(0)) {

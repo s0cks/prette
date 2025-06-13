@@ -4,18 +4,18 @@ file(GLOB PRT_STB_SOURCES
   "${CMAKE_CURRENT_SOURCE_DIR}/prette/*.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/prette/*.cc")
 
-add_library(prt-stb SHARED ${PRT_STB_SOURCES})
-target_include_directories(prt-stb
+add_library(prette-stb-impl SHARED ${PRT_STB_SOURCES})
+target_include_directories(prette-stb-impl
   PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${Stb_INCLUDE_DIR}
   PRIVATE)
-set_property(TARGET prt-stb PROPERTY CXX_INCLUDE_WHAT_YOU_USE "${IWYU};;${IWYU_OPTS}")
+set_property(TARGET prette-stb-impl PROPERTY CXX_INCLUDE_WHAT_YOU_USE "${IWYU};;${IWYU_OPTS}")
 
 if(APPLE)
-target_compile_options(prt-stb
+target_compile_options(prette-stb-impl
   PRIVATE
     -Wno-deprecated-declarations)
 endif()
 
-add_library(prette::stb ALIAS prt-stb)
+add_library(prette::stb ALIAS prette-stb-impl)

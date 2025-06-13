@@ -2,6 +2,7 @@
 #define PRT_OS_THREAD_H
 
 #include <string>
+#include <utility>
 
 #include "prette/common.h"
 #include "prette/platform.h"  // IWYU pragma: keep
@@ -37,6 +38,33 @@ static inline auto GetCurrentThreadName() -> std::string {
 static inline auto SetCurrentThreadName(const std::string& name) -> bool {
   return SetThreadName(GetCurrentThreadId(), name);
 }
+
+class OSThread {
+ private:
+  ThreadId id_{};
+  std::string name_;
+
+  static void HandleThread(void* data);
+
+ protected:
+  explicit OSThread(const std::string name) :
+    name_(std::move(name)) {}
+  virtual void Run() = 0;
+
+ public:
+  virtual ~OSThread() = default;
+
+  auto GetThreadId() const -> ThreadId {
+    return id_;
+  }
+
+  auto GetThreadName() const -> const std::string& {
+    return name_;
+  }
+
+  auto Start() -> bool;
+  auto Join() -> bool;
+};
 
 class MainThread {
   DEFINE_NON_INSTANTIABLE_TYPE(MainThread);

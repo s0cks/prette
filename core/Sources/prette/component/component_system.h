@@ -11,6 +11,7 @@
 #include "prette/component/component_event.h"
 #include "prette/component/component_table.h"
 #include "prette/system.h"
+#include "prette/tick.h"
 
 namespace prt {
 auto GetComponentEventObservable() -> ComponentEventObservable;
@@ -63,6 +64,8 @@ class ComponentSystem : public SystemTemplate<kNormal> {
     return nullptr;
   }
 
+  void OnTick(const Tick& current, const Tick& previous) override;
+
  public:
   ~ComponentSystem() override;
 
@@ -70,6 +73,11 @@ class ComponentSystem : public SystemTemplate<kNormal> {
     return tables_.size();
   }
 
+  auto GetSystemName() const -> const char* override {
+    return kSystemName;
+  }
+
+ public:
   DECLARE_SYSTEM_TYPE(Component);
 };
 }  // namespace prt
