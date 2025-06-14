@@ -3,9 +3,13 @@
 
 #include <OpenAL/al.h>
 #include <functional>
+#include <ostream>
+#include <string>
+#include <utility>
 #include <vector>
 
 #include "prette/al.h"
+#include "prette/audio/audio_buffer.h"
 #include "prette/audio/audio_property.h"
 #include "prette/common.h"
 #include "prette/os_thread.h"  // IWYU pragma: keep
@@ -22,60 +26,61 @@ namespace prt::audio {
   V(ConeOuterAngle, AL_CONE_OUTER_ANGLE, float) \
   V(Looping, AL_LOOPING, bool)
 
-class AudioSource {
-  friend class AudioWorker;
-  DEFINE_DEFAULT_COPYABLE_TYPE(AudioSource);
-
+class BaseAudioSource {
  public:
-#define DEFINE_PROPERTY(Name, Id, Type)                    \
-  struct Name : public MutablePropertyTemplate<Id, Type> { \
-    static constexpr const auto kName = #Name;             \
+#define DEFINE_PROPERTY(Name, Id, Type)             \
+  struct Name : public PropertyTemplate<Id, Type> { \
+    static constexpr const auto kName = #Name;      \
   };
   FOR_EACH_AUDIO_SOURCE_PROPERTY(DEFINE_PROPERTY)
 #undef DEFINE_PROPERTY
 
-  struct MinGain : public ImmutableFloatPropertyTemplate<AL_MIN_GAIN> {
+  struct MinGain : public FloatPropertyTemplate<AL_MIN_GAIN> {
     static constexpr const auto kName = "MinGain";
   };
-  struct MaxGain : public ImmutableFloatPropertyTemplate<AL_MAX_GAIN> {
+  struct MaxGain : public FloatPropertyTemplate<AL_MAX_GAIN> {
     static constexpr const auto kName = "MaxGain";
   };
-  struct RolloffFactor : public ImmutableFloatPropertyTemplate<AL_ROLLOFF_FACTOR> {
+  struct RolloffFactor : public FloatPropertyTemplate<AL_ROLLOFF_FACTOR> {
     static constexpr const auto kName = "RolloffFactor";
   };
-  struct ReferenceDistance : public ImmutableFloatPropertyTemplate<AL_REFERENCE_DISTANCE> {
+  struct ReferenceDistance : public FloatPropertyTemplate<AL_REFERENCE_DISTANCE> {
     static constexpr const auto kName = "ReferenceDistance";
   };
-  struct SourceRelative : public ImmutableBoolPropertyTemplate<AL_SOURCE_RELATIVE> {
+  struct SourceRelative : public BoolPropertyTemplate<AL_SOURCE_RELATIVE> {
     static constexpr const auto kName = "SourceRelative";
   };
-  struct SourceState : public ImmutableIntPropertyTemplate<AL_SOURCE_STATE> {
+  struct SourceState : public IntPropertyTemplate<AL_SOURCE_STATE> {
     static constexpr const auto kName = "SourceState";
   };
-  struct SourceType : public ImmutableIntPropertyTemplate<AL_SOURCE_TYPE> {
+  struct SourceType : public IntPropertyTemplate<AL_SOURCE_TYPE> {
     static constexpr const auto kName = "SourceType";
   };
-  struct Buffer : public ImmutableIntPropertyTemplate<AL_BUFFER> {
+  struct Buffer : public IntPropertyTemplate<AL_BUFFER> {
     static constexpr const auto kName = "Buffer";
   };
-  struct NumberOfBuffersQueued : public ImmutableIntPropertyTemplate<AL_BUFFERS_QUEUED> {
+  struct NumberOfBuffersQueued : public IntPropertyTemplate<AL_BUFFERS_QUEUED> {
     static constexpr const auto kName = "NumberOfBuffersQueued";
   };
-  struct NumberOfBuffersProcessed : public ImmutableIntPropertyTemplate<AL_BUFFERS_PROCESSED> {
+  struct NumberOfBuffersProcessed : public IntPropertyTemplate<AL_BUFFERS_PROCESSED> {
     static constexpr const auto kName = "NumberOfBuffersProcessed";
   };
-  struct SecondsOffset : public ImmutableFloatPropertyTemplate<AL_SEC_OFFSET> {
+  struct SecondsOffset : public FloatPropertyTemplate<AL_SEC_OFFSET> {
     static constexpr const auto kName = "SecondsOffset";
   };
-  struct SampleOffset : public ImmutableFloatPropertyTemplate<AL_SAMPLE_OFFSET> {
+  struct SampleOffset : public FloatPropertyTemplate<AL_SAMPLE_OFFSET> {
     static constexpr const auto kName = "SampleOffset";
   };
-  struct ByteOffset : public ImmutableFloatPropertyTemplate<AL_BYTE_OFFSET> {
+  struct ByteOffset : public FloatPropertyTemplate<AL_BYTE_OFFSET> {
     static constexpr const auto kName = "ByteOffset";
   };
 
  private:
-  SourceId id_ = 0;
+  SourceId id_;
+
+ protected:
+  explicit BaseAudioSource(const SourceId id) :
+    id_(id) {}
 
   template <typename T>
   auto GetProperty(const PropertyId property) const -> T;
@@ -83,99 +88,178 @@ class AudioSource {
   template <typename T>
   void SetProperty(const PropertyId property, const T& value) const;
 
+  template <AudioProperty Property>
+  inline auto Get() const -> typename Property::Type {
+    return GetProperty<typename Property::Type>(Property::kId);
+  }
+
+  template <AudioProperty Property>
+  inline void Set(const typename Property::Type& rhs) const {
+    return SetProperty<typename Property::Type>(Property::kId, rhs);
+  }
+
+  void SetId(const SourceId id) {
+    ASSERT_VALID_AUDIO_SOURCE_ID(id);
+    id_ = id;
+  }
+
+ public:
+  ~BaseAudioSource() = default;
+
+  auto GetSourceId() const -> const SourceId& {
+    return id_;
+  }
+
+  inline void SetPitch(const float rhs) {
+    return Set<Pitch>(rhs);
+  }
+
+  inline auto GetPitch() const -> float {
+    return Get<Pitch>();
+  }
+
+  inline void SetGain(const float rhs) {
+    return Set<Gain>(rhs);
+  }
+
+  inline auto GetGain() const -> float {
+    return Get<Gain>();
+  }
+
+  inline void SetPos(const AudioPos rhs) {
+    return Set<Position>(rhs);
+  }
+
+  inline void SetPos(const float x, const float y, const float z) {
+    return SetPos(AudioPos(x, y, z));
+  }
+
+  inline void SetPos(const float xyz) {
+    return SetPos(AudioPos(xyz));
+  }
+
+  inline auto GetPos() const -> AudioPos {
+    return Get<Position>();
+  }
+
+  inline void SetLooping(const bool rhs = true) {
+    return Set<Looping>(rhs);
+  }
+
+  inline void ClearLooping() {
+    return SetLooping(false);
+  }
+
+  inline auto GetMinGain() const -> float {
+    return Get<MinGain>();
+  }
+
+  inline auto GetMaxGain() const -> float {
+    return Get<MaxGain>();
+  }
+
+  inline auto GetRolloffFactor() const -> float {
+    return Get<RolloffFactor>();
+  }
+
+  inline auto GetReferenceDistance() const -> float {
+    return Get<ReferenceDistance>();
+  }
+
+  inline auto IsSourceRelative() const -> bool {
+    return Get<SourceRelative>();
+  }
+
+  inline auto GetSourceState() const -> int {
+    return Get<SourceState>();
+  }
+
+  inline auto IsPlaying() const -> bool {
+    return GetSourceState() == AL_PLAYING;
+  }
+
+  inline auto IsStopped() const -> bool {
+    return GetSourceState() == AL_STOPPED;
+  }
+
+  inline auto GetSourceType() const -> int {
+    return Get<SourceType>();
+  }
+
+  inline auto GetBuffer() const -> int {
+    return Get<Buffer>();
+  }
+
+  inline auto GetNumberOfBuffersQueued() const -> int {
+    return Get<NumberOfBuffersQueued>();
+  }
+
+  inline auto GetNumberOfBuffersProcessed() const -> int {
+    return Get<NumberOfBuffersProcessed>();
+  }
+
+  inline auto GetSampleOffset() const -> float {
+    return Get<SampleOffset>();
+  }
+
+  inline auto GetSecondsOffset() const -> float {
+    return Get<SecondsOffset>();
+  }
+
+  inline auto GetByteOffset() const -> float {
+    return Get<ByteOffset>();
+  }
+
+  auto GetAudioCone() const -> AudioCone {
+    return {
+        .outer_gain = Get<ConeOuterGain>(),
+        .outer_angle = Get<ConeOuterAngle>(),
+        .inner_angle = Get<ConeInnerAngle>(),
+    };
+  }
+};
+
+class AudioSource : public BaseAudioSource {
+  friend class AudioWorker;
+  DEFINE_DEFAULT_COPYABLE_TYPE(AudioSource);
+
+ public:
+  static void Destroy(const SourceId* ids, const uint64_t num_ids);
+
+  static inline void Destroy(SourceId id) {
+    return Destroy(&id, 1);
+  }
+
+  static inline void Destroy(const AudioSource& source) {
+    DVLOG(1) << "destroying: " << source;
+    return Destroy(source.GetSourceId());
+  }
+
+ private:
   void DeleteSource();
 
  public:
-  explicit AudioSource(const SourceId id = kInvalidBufferId) :
-    id_(id) {}
+  explicit AudioSource(const SourceId id = kInvalidAudioFormat) :
+    BaseAudioSource(id) {}
   ~AudioSource() = default;
-
-  auto GetId() const -> const SourceId& {
-    return id_;
-  }
 
   void Play() const;
   void Pause() const;
   void Stop() const;
   void Attach(const AudioBuffer& buffer);
   auto GetCone() const -> AudioCone;
-
-  template <AudioProperty Property>
-  auto Get() const -> typename Property::Type {
-    return GetProperty<typename Property::Type>(Property::kId);
-  }
-
-  template <MutableAudioProperty Property>
-  void Set(const typename Property::Type& rhs) const {
-    return SetProperty<typename Property::Type>(Property::kId, rhs);
-  }
-
-  auto GetMinGain() const -> float {
-    return Get<MinGain>();
-  }
-
-  auto GetMaxGain() const -> float {
-    return Get<MaxGain>();
-  }
-
-  auto GetRolloffFactor() const -> float {
-    return Get<RolloffFactor>();
-  }
-
-  auto GetReferenceDistance() const -> float {
-    return Get<ReferenceDistance>();
-  }
-
-  auto IsSourceRelative() const -> bool {
-    return Get<SourceRelative>();
-  }
-
-  auto GetSourceState() const -> int {
-    return Get<SourceState>();
-  }
-
-  auto IsPlaying() const -> bool {
-    return GetSourceState() == AL_PLAYING;
-  }
-
-  auto IsStopped() const -> bool {
-    return GetSourceState() == AL_STOPPED;
-  }
-
-  auto GetSourceType() const -> int {
-    return Get<SourceType>();
-  }
-
-  auto GetBuffer() const -> int {
-    return Get<Buffer>();
-  }
-
-  auto GetNumberOfBuffersQueued() const -> int {
-    return Get<NumberOfBuffersQueued>();
-  }
-
-  auto GetNumberOfBuffersProcessed() const -> int {
-    return Get<NumberOfBuffersProcessed>();
-  }
-
-  auto GetSampleOffset() const -> float {
-    return Get<SampleOffset>();
-  }
-
-  auto GetSecondsOffset() const -> float {
-    return Get<SecondsOffset>();
-  }
-
-  auto GetByteOffset() const -> float {
-    return Get<ByteOffset>();
-  }
+  auto ToString() const -> std::string;
 
   operator SourceId() const {
-    return GetId();
+    return GetSourceId();
   }
 
   operator bool() const {
-    return GetId() != kInvalidSourceId;
+    return GetSourceId() != kInvalidSourceId;
+  }
+
+  friend auto operator<<(std::ostream& stream, const AudioSource& rhs) -> std::ostream& {
+    return stream << rhs.ToString();
   }
 };
 
@@ -192,27 +276,29 @@ static inline void GenSourceIds(const uint64_t num_ids, std::vector<SourceId>& i
 
 void GenSources(const uint64_t num_sources, AudioSource* sources);
 
-static inline void GenSources(std::vector<AudioSource>& ids) {
-  return GenSources(ids.size(), ids.data());
-}
-
-static inline void GenSources(const uint64_t num_ids, std::vector<AudioSource>& ids) {
-  ids.resize(num_ids);
-  return GenSources(ids);
-}
-
 using AudioSourcePredicate = std::function<bool(const AudioSource&)>;
 
 struct AudioSourceBuffer {
   AudioSource source;
   AudioBuffer buffer;
 
+  AudioSourceBuffer(AudioSource src, AudioBuffer buff) :
+    source(std::move(src)),
+    buffer(std::move(buff)) {
+    source.Attach(buffer);
+  }
+
   inline auto source_id_ptr() const -> const SourceId* {
-    return &source.GetId();
+    return &source.GetSourceId();
   }
 
   inline auto buffer_id_ptr() const -> const BufferId* {
     return &buffer.GetId();
+  }
+
+  static inline void Destroy(const AudioSourceBuffer& buffer) {
+    AudioSource::Destroy(buffer.source);
+    AudioBuffer::Destroy(buffer.buffer);
   }
 };
 

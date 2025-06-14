@@ -17,18 +17,17 @@ struct SoundEffectData {
   float gain = kDefaultSoundEffectGain;
   AudioPos pos = kDefaultSoundEffectPos;
   bool looped = false;
+};
 
-  void ApplyTo(const AudioSource& source) {
-    source.Set<AudioSource::Pitch>(pitch);
-    source.Set<AudioSource::Gain>(gain);
-    source.Set<AudioSource::Position>(pos);
-    source.Set<AudioSource::Looping>(looped);
-  }
+class SoundEffect {
+ private:
+  SoundEffectData data_;
+  AudioSource source_;
+  AudioBuffer buffer_;
 
-  auto operator>>(const AudioSource& source) -> const AudioSource& {
-    ApplyTo(source);
-    return source;
-  }
+ public:
+  SoundEffect();
+  ~SoundEffect();
 };
 }  // namespace prt::audio
 

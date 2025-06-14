@@ -1,102 +1,102 @@
 #include "prette/audio/audio_source.h"
 
 #include <OpenAL/al.h>
-#include <utility>
+#include <string>
 
 #include "prette/al.h"
 #include "prette/assertions.h"
+#include "prette/audio/audio_buffer.h"
 #include "prette/audio/audio_property.h"
 #include "prette/common.h"
+#include "prette/to_string.h"
 
 namespace prt::audio {
 void AudioSource::Play() const {
-  alSourcePlay(GetId());
+  alSourcePlay(GetSourceId());
   CHECK_AL_ERRORS(FATAL);
 }
 
 void AudioSource::Pause() const {
-  alSourcePause(GetId());
+  alSourcePause(GetSourceId());
   CHECK_AL_ERRORS(FATAL);
 }
 
 void AudioSource::Stop() const {
-  alSourceStop(GetId());
+  alSourceStop(GetSourceId());
   CHECK_AL_ERRORS(FATAL);
 }
 
+auto AudioSource::ToString() const -> std::string {
+  ToStringHelper<AudioSource> helper{};
+  helper.AddFieldRef("id", GetSourceId());
+  return helper;
+}
+
 template <>
-auto AudioSource::GetProperty<float>(const PropertyId prop) const -> float {
+auto BaseAudioSource::GetProperty<float>(const PropertyId prop) const -> float {
   float value = 0.0f;
-  alGetSourcef(GetId(), prop, &value);
+  alGetSourcef(GetSourceId(), prop, &value);
   CHECK_AL_ERRORS(FATAL);
   return value;
 }
 
 template <>
-auto AudioSource::GetProperty<AudioPos>(const PropertyId prop) const -> AudioPos {
+auto BaseAudioSource::GetProperty<AudioPos>(const PropertyId prop) const -> AudioPos {
   AudioPos value{};
-  alGetSource3f(GetId(), prop, &value[0], &value[1], &value[2]);
+  alGetSource3f(GetSourceId(), prop, &value[0], &value[1], &value[2]);
   CHECK_AL_ERRORS(FATAL);
-  return std::move(value);
+  return value;
 }
 
 template <>
-auto AudioSource::GetProperty<bool>(const PropertyId prop) const -> bool {
+auto BaseAudioSource::GetProperty<bool>(const PropertyId prop) const -> bool {
   ALint value = false;
-  alGetSourcei(GetId(), prop, &value);
+  alGetSourcei(GetSourceId(), prop, &value);
   CHECK_AL_ERRORS(FATAL);
   return value == AL_TRUE;
 }
 
 template <>
-auto AudioSource::GetProperty<int32_t>(const PropertyId prop) const -> int32_t {
+auto BaseAudioSource::GetProperty<int32_t>(const PropertyId prop) const -> int32_t {
   int32_t value = false;
-  alGetSourcei(GetId(), prop, &value);
+  alGetSourcei(GetSourceId(), prop, &value);
   CHECK_AL_ERRORS(FATAL);
   return value;
 }
 
 template <>
-void AudioSource::SetProperty<float>(const PropertyId prop, const float& value) const {
-  alSourcef(GetId(), prop, value);
+void BaseAudioSource::SetProperty<float>(const PropertyId prop, const float& value) const {
+  alSourcef(GetSourceId(), prop, value);
   CHECK_AL_ERRORS(FATAL);
 }
 
 template <>
-void AudioSource::SetProperty<AudioPos>(const PropertyId prop, const AudioPos& value) const {
-  alSource3f(GetId(), prop, value.x, value.y, value.z);
+void BaseAudioSource::SetProperty<AudioPos>(const PropertyId prop, const AudioPos& value) const {
+  alSource3f(GetSourceId(), prop, value.x, value.y, value.z);
   CHECK_AL_ERRORS(FATAL);
 }
 
 template <>
-void AudioSource::SetProperty<bool>(const PropertyId prop, const bool& value) const {
-  alSourcei(GetId(), prop, static_cast<ALint>(value));
+void BaseAudioSource::SetProperty<bool>(const PropertyId prop, const bool& value) const {
+  alSourcei(GetSourceId(), prop, static_cast<ALint>(value));
   CHECK_AL_ERRORS(FATAL);
 }
 
 template <>
-void AudioSource::SetProperty<int32_t>(const PropertyId prop, const int32_t& value) const {
-  alSourcei(GetId(), prop, value);
+void BaseAudioSource::SetProperty<int32_t>(const PropertyId prop, const int32_t& value) const {
+  alSourcei(GetSourceId(), prop, value);
   CHECK_AL_ERRORS(FATAL);
 }
 
-void AudioSource::DeleteSource() {
-  alDeleteSources(1, &id_);
+void AudioSource::Destroy(const SourceId* ids, const uint64_t num_ids) {
+  alDeleteSources(static_cast<ALsizei>(num_ids), ids);
   CHECK_AL_ERRORS(FATAL);
 }
 
 void AudioSource::Attach(const AudioBuffer& buffer) {
   ASSERT(buffer.GetId() != kInvalidBufferId);
-  alSourcei(GetId(), AL_BUFFER, static_cast<int>(buffer.GetId()));
+  alSourcei(GetSourceId(), AL_BUFFER, static_cast<int>(buffer.GetId()));
   CHECK_AL_ERRORS(FATAL);
-}
-
-auto AudioSource::GetCone() const -> AudioCone {
-  return AudioCone{
-      .outer_gain = Get<ConeOuterGain>(),
-      .outer_angle = Get<ConeOuterAngle>(),
-      .inner_angle = Get<ConeInnerAngle>(),
-  };
 }
 
 void GenSourceIds(const uint64_t num_ids, SourceId* ids) {

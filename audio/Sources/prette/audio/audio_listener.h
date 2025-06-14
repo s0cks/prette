@@ -17,9 +17,9 @@ class AudioListener {
   friend class AudioSystem;
 
  public:
-#define DEFINE_PROPERTY(Name, Id, Type)                    \
-  struct Name : public MutablePropertyTemplate<Id, Type> { \
-    static constexpr const auto kName = #Name;             \
+#define DEFINE_PROPERTY(Name, Id, Type)             \
+  struct Name : public PropertyTemplate<Id, Type> { \
+    static constexpr const auto kName = #Name;      \
   };
   FOR_EACH_AUDIO_LISTENER_PROPERTY(DEFINE_PROPERTY)
 #undef DEFINE_PROPERTY
@@ -40,7 +40,7 @@ class AudioListener {
     return GetProperty<typename Property::Type>(Property::kId);
   }
 
-  template <MutableAudioProperty Property>
+  template <AudioProperty Property>
   inline void Set(const typename Property::Type& rhs) {
     return SetProperty<typename Property::Type>(Property::kId, rhs);
   }

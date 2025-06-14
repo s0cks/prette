@@ -2,6 +2,7 @@
 #ifndef PRT_TO_STRING_H
 #define PRT_TO_STRING_H
 
+#include <concepts>
 #include <functional>
 #include <ostream>
 #include <type_traits>
@@ -20,19 +21,11 @@ namespace prt {
 class Window;
 
 namespace tostring {
+
 template <typename T>
-struct has_to_string {
-  static constexpr const auto value = false;
+concept HasToString = requires(T value) {
+  { value.ToString() } -> std::convertible_to<std::string>;
 };
-
-#define DECLARE_HAS_TO_STRING(Name)           \
-  template <>                                 \
-  struct has_to_string<Name> {                \
-    static constexpr const auto value = true; \
-  };
-
-DECLARE_HAS_TO_STRING(prt::Window);
-#undef DECLARE_HAS_TO_STRING
 
 class ToStringHelperBase {
   DEFINE_DEFAULT_COPYABLE_TYPE(ToStringHelperBase);
@@ -146,16 +139,11 @@ class ToStringHelper : public ToStringHelperBase {
     return *this;
   }
 
-  template <typename V>
-  auto AddFieldPtr(std::string name, const V* value, std::enable_if_t<has_to_string<V>::value>* = nullptr)
-      -> ToStringHelper<T>& {
+  template <HasToString V>
+  auto AddFieldPtr(std::string name, const V* value) -> ToStringHelper<T>& {
     ASSERT(!name.empty());
     EmplaceBackField(Identity(name), [value]() -> std::string {
-      if (value == nullptr)
-        return "nullptr";
-      std::stringstream ss;
-      ss << value->ToString();
-      return ss.str();
+      return value ? value->ToString() : "null";
     });
     return *this;
   }

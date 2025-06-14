@@ -5,7 +5,7 @@
 
 namespace prt::tostring {
 auto ToStringHelperBase::ToString() const -> std::string {
-  std::stringstream ss;
+  std::stringstream ss{};
   ss << GetTypename() << "{";
   auto remaining = fields_.size();
   for (const auto& field : fields_) {

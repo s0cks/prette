@@ -1,6 +1,7 @@
 #ifndef PRT_AL_H
 #define PRT_AL_H
 
+#include "prette/assertions.h"
 #include "prette/common.h"
 #include "prette/glm.h"
 
@@ -20,8 +21,31 @@ static constexpr const auto kMaxGain = 1.0f;
 
 using SourceId = ALuint;
 static constexpr const auto kInvalidSourceId = 0;
+
+static inline constexpr auto IsValidSourceId(const SourceId id) -> bool {
+  return id != kInvalidSourceId;
+}
+
+static inline constexpr auto IsInvalidSouceId(const SourceId id) -> bool {
+  return id == kInvalidSourceId;
+}
+
+#define ASSERT_VALID_AUDIO_SOURCE_ID(Id)   ASSERT(prt::audio::IsValidSourceId((Id)))
+#define ASSERT_INVALID_AUDIO_SOURCE_ID(Id) ASSERT(prt::audio::IsInvalidSourceId((Id)))
+
 using BufferId = ALuint;
 static constexpr const auto kInvalidBufferId = 0;
+
+static inline constexpr auto IsValidBufferId(const BufferId id) -> bool {
+  return id != kInvalidBufferId;
+}
+
+static inline constexpr auto IsInvalidBufferId(const BufferId id) -> bool {
+  return id == kInvalidBufferId;
+}
+
+#define ASSERT_VALID_AUDIO_BUFFER_ID(Id)   ASSERT(prt::audio::IsValidBufferId((Id)))
+#define ASSERT_INVALID_AUDIO_BUFFER_ID(Id) ASSERT(prt::audio::IsInvalidBufferId((Id)))
 
 #define FOR_EACH_AUDIO_FORMAT(V)      \
   V(Mono8, 1, 8, AL_FORMAT_MONO8)     \
@@ -44,32 +68,6 @@ struct AudioCone {
   float outer_gain;
   float outer_angle;
   float inner_angle;
-};
-
-class AudioBuffer {
-  DEFINE_DEFAULT_COPYABLE_TYPE(AudioBuffer);
-
- private:
-  BufferId id_ = kInvalidBufferId;
-
- public:
-  AudioBuffer() = default;
-  AudioBuffer(const AudioFormat format, const uint8_t* bytes, const uint64_t num_bytes, const uint64_t sample_rate);
-  AudioBuffer(const AudioFormat format, const std::vector<uint8_t>& bytes, const uint64_t sample_rate) :
-    AudioBuffer(format, bytes.data(), bytes.size(), sample_rate) {}
-  ~AudioBuffer();
-
-  auto GetId() const -> const BufferId& {
-    return id_;
-  }
-
-  operator BufferId() const {
-    return id_;
-  }
-
-  operator bool() const {
-    return GetId() != kInvalidBufferId;
-  }
 };
 }  // namespace prt::audio
 

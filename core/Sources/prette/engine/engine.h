@@ -26,6 +26,7 @@
 #include "prette/tick_profiler.h"
 #include "prette/ticker.h"
 #include "prette/uv/async.h"
+#include "prette/uv/handle.h"
 #include "prette/uv/utils.h"
 
 namespace prt {
