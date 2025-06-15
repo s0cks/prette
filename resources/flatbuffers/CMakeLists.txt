@@ -4,6 +4,7 @@ include(FlatC)
 
 add_flatc_target(flatc-asset "${CMAKE_CURRENT_SOURCE_DIR}/asset.fbs")
 add_flatc_target(flatc-chunk "${CMAKE_CURRENT_SOURCE_DIR}/chunk.fbs")
+add_flatc_target(flatc-city "${CMAKE_CURRENT_SOURCE_DIR}/city.fbs")
 
 file(GLOB PRT_FLATBUFFER_GENERATED_SOURCES
   "${FLATC_OUTPUT_DIR}/*.h"
@@ -17,6 +18,7 @@ target_link_libraries(prette-flatbuffers
   INTERFACE flatbuffers::flatbuffers)
 add_dependencies(prette-flatbuffers
   flatc-asset
-  flatc-chunk)
+  flatc-chunk
+  flatc-city)
 
 add_library(prette::flatbuffers ALIAS prette-flatbuffers)

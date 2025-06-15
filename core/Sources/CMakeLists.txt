@@ -23,6 +23,7 @@ find_package(absl CONFIG REQUIRED)
 find_package(libconfig CONFIG REQUIRED)
 find_package(CpuFeatures CONFIG REQUIRED)
 find_package(RocksDB CONFIG REQUIRED)
+find_package(EnTT CONFIG REQUIRED)
 
 set(OPENSSL_USE_STATIC_LIBS FALSE)
 if(APPLE)
@@ -53,11 +54,13 @@ list(APPEND PRT_CORE_LIBRARIES
   rxcpp
   stduuid
   rapidjson
+  EnTT::EnTT
   RocksDB::rocksdb RocksDB::rocksdb-shared
   Backward::Backward
   OpenSSL::Crypto
   CpuFeatures::cpu_features
   ecl::ecl
+  prette::namesdb
   rapidjson
   re2::re2
   stduuid

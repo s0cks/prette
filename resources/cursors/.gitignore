@@ -6,3 +6,4 @@
 !/.gitignore
 !/.gitkeep
 !/bibata-modern-*/
+!/CMakeLists.txt

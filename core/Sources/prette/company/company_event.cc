@@ -1,14 +1,14 @@
-#include "prette/entity/entity_event.h"
+#include "prette/company/company_event.h"
 
 #include "prette/to_string.h"
 
 namespace prt {
-#define DEFINE_TO_STRING(Name)                      \
+#define DEFINE_TOSTRING(Name)                       \
   auto Name##Event::ToString() const->std::string { \
     ToStringHelper<Name##Event> helper{};           \
+    helper.AddFieldPtr("company", GetCompany());    \
     return helper;                                  \
   }
-FOR_EACH_ENTITY_EVENT(DEFINE_TO_STRING)
-#undef DEFINE_TO_STRING
-
+FOR_EACH_COMPANY_EVENT(DEFINE_TOSTRING)
+#undef DEFINE_TOSTRING
 }  // namespace prt

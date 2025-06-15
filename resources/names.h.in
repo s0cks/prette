@@ -1,0 +1,37 @@
+#ifndef PRT_NAMES_H
+#define PRT_NAMES_H
+
+#include "prette/platform.h"
+
+namespace prt {
+namespace forenames {
+namespace female {
+// clang-format off
+  static constexpr const auto kTotalNumberOfBytes = @PRT_FORENAMES_FEMALE_NUM_BYTES@;
+  static constexpr const uint8_t kBytes[kTotalNumberOfBytes] = {
+    @PRT_FORENAMES_FEMALE_BYTES@
+  };
+// clang-format on
+}  // namespace female
+
+namespace male {
+// clang-format off
+  static constexpr const auto kTotalNumberOfBytes = @PRT_FORENAMES_MALE_NUM_BYTES@;
+  static constexpr const uint8_t kBytes[kTotalNumberOfBytes] = {
+    @PRT_FORENAMES_MALE_BYTES@
+  };
+// clang-format on
+}  // namespace male
+}  // namespace forenames
+
+namespace surnames {
+// clang-format off
+  static constexpr const auto kTotalNumberOfBytes = @PRT_SURNAMES_NUM_BYTES@;
+  static constexpr const uint8_t kBytes[kTotalNumberOfBytes] = {
+    @PRT_SURNAMES_BYTES@
+  };
+// clang-format on
+}  // namespace surnames
+}  // namespace prt
+
+#endif  // PRT_NAMES_H

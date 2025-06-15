@@ -27,6 +27,14 @@ class TickDelta {
     return value_;
   }
 
+  constexpr auto nanos() const -> units::time::nanosecond_t {
+    return units::time::nanosecond_t(static_cast<double>(value()));
+  }
+
+  constexpr auto millis() const -> units::time::millisecond_t {
+    return nanos().convert<units::time::milliseconds>();
+  }
+
   auto operator=(const uint64_t& rhs) -> TickDelta& {
     value_ = rhs;
     return *this;
@@ -71,7 +79,7 @@ class TickDelta {
   }
 
   friend auto operator<<(std::ostream& stream, const TickDelta& rhs) -> std::ostream& {
-    return stream << units::time::nanosecond_t(rhs.value());  // NOLINT(cppcoreguidelines-narrowing-conversions)
+    return stream << rhs.millis();  // NOLINT(cppcoreguidelines-narrowing-conversions)
   }
 };
 

@@ -1,0 +1,8 @@
+namespace prt.raw;
+
+table City {
+  id: int32;
+  name: string;
+}
+
+root_type City;
