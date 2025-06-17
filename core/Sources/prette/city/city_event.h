@@ -3,12 +3,12 @@
 
 #include "prette/assertions.h"
 #include "prette/event.h"
+
 namespace prt {
 #define FOR_EACH_CITY_EVENT(V) \
-  V(CityCreated)               \
-  V(CityLoaded)                \
   V(CitySaved)                 \
-  V(CityDestroyed)
+  V(CityLoaded)                \
+  V(CityUpdated)
 
 class CityEvent;
 #define FORWARD_DECLARE(Name) class Name##Event;
@@ -49,6 +49,7 @@ FOR_EACH_CITY_EVENT(DECLARE_CITY_EVENT)
 
 DEFINE_EVENT_OBSERVABLE(City);
 DEFINE_EVENT_SUBJECT(City);
+FOR_EACH_CITY_EVENT(DEFINE_EVENT_SUBJECT);
 FOR_EACH_CITY_EVENT(DEFINE_EVENT_OBSERVABLE);
 }  // namespace prt
 

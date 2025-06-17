@@ -42,7 +42,7 @@ file(
   "${CMAKE_CURRENT_BINARY_DIR}/prette/**/*.h")
 
 list(APPEND PRT_CORE_LIBRARIES
-  prette::flatbuffers
+  prette::schema
   Threads::Threads
   glog::glog
   gflags::gflags

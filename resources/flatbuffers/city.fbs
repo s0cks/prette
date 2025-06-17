@@ -1,8 +1,8 @@
 namespace prt.raw;
 
 table City {
-  id: int32;
   name: string;
+  seed: uint64;
 }
 
 root_type City;

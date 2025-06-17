@@ -15,6 +15,8 @@ namespace prt {
 class World;
 class WorldStorage {
   friend class World;
+
+ public:
   using ChunkKey = ChunkPos;
 
  private:

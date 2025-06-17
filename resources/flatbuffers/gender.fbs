@@ -1,0 +1,6 @@
+namespace prt.raw;
+
+enum Gender : byte {
+  Male,
+  Female,
+}

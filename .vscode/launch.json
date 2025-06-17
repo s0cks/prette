@@ -146,9 +146,9 @@
     },
     {
       "name": "prette-headless",
-      "type": "lldb",
+      "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/build/headless/prette-headless/",
+      "program": "${workspaceFolder}/build/headless/prette-headless",
       "args": [
         "--resources",
         "${workspaceFolder}/resources",
@@ -158,17 +158,42 @@
         "-v=${input:vlevel}"
       ],
       "cwd": "${workspaceFolder}/data",
-      "env": {
-        "MTL_DEBUG_LAYER":"0",
-        "UV_THREADPOOL_SIZE": "0",
-        "TERM": "xterm-256color",
-        "METAL_DEVICE_WRAPPER_TYPE": "1",
-        "PRT_PATH": "${workspaceFolder}/prette/resources;${workspaceFolder}/build/prette/resources",
-        "LUA_PATH": "${env:LUA_PATH};${workspaceFolder}/lib/?/?.lua;${workspaceFolder}/prette/resources/scripts/?/?.lua;${workspaceFolder}/prette/resources/scripts/?.lua"
-      },
-      "initCommands": [
-        "command source ${workspaceFolder}/.lldbinit"
+      "environment": [
+        {
+          "name": "MTL_DEBUG_LAYER",
+          "value": "0"
+        },
+        {
+          "name": "METAL_DEVICE_WRAPPER_TYPE",
+          "value": "1"
+        },
+        {
+          "name": "UV_THREADPOOL_SIZE",
+          "value": "0"
+        },
+        {
+          "name": "TERM",
+          "value": "xterm-256color"
+        },
+        {
+          "name": "PRT_PATH",
+          "value": "${workspaceFolder}/prette/resources;${workspaceFolder}/build/prette/resources",
+        },
+        {
+          "name": "LUA_PATH",
+          "value": "${env:LUA_PATH};${workspaceFolder}/lib/?/?.lua;${workspaceFolder}/prette/resources/scripts/?/?.lua;${workspaceFolder}/prette/resources/scripts/?.lua"
+        }
       ],
+      "osx": {
+        "MIMode": "lldb",
+        "setupCommands": [
+          {
+            "description": "Load .lldbinit",
+            "text": "command source ~/.lldbinit"
+          }
+        ],
+      },
+      "visualizerFile": "${workspaceFolder}/prette.natvis"
     },
     {
       "name": "prette-audio-example",

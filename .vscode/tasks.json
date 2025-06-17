@@ -37,7 +37,7 @@
       "detail": "Run FlatC for the flatbuffer resources",
       "command": "build",
       "targets": [
-        "prette-flatbuffers"
+        "prt-schema"
       ],
       "preset": "${command:cmake.activeBuildPresetName}",
       "problemMatcher": [],

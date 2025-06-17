@@ -1,5 +1,5 @@
-#ifndef PRT_PERSON_GEN_H
-#define PRT_PERSON_GEN_H
+#ifndef PRT_CITIZEN_GEN_H
+#define PRT_CITIZEN_GEN_H
 
 #include <cstdint>
 #include <glog/logging.h>
@@ -7,12 +7,12 @@
 #include <string>
 #include <utility>
 
-#include "prette/gender.h"
+#include "prette/citizen/gender.h"
 #include "prette/name_gen.h"
 
 namespace prt {
-class Person;
-class PersonGenerator {
+class Citizen;
+class CitizenGenerator {
  private:
   std::mt19937 gen_;
   FullnameGenerator female_name_gen_;
@@ -35,11 +35,11 @@ class PersonGenerator {
   }
 
  public:
-  explicit PersonGenerator(const uint64_t seed);
-  ~PersonGenerator();
-  auto GenerateWithGender(Gender gender, Person* person) -> bool;
-  auto Generate(Person* result) -> bool;
+  explicit CitizenGenerator(const uint64_t seed);
+  ~CitizenGenerator();
+  auto GenerateWithGender(Gender gender, Citizen* citizen) -> bool;
+  auto Generate(Citizen* result) -> bool;
 };
 }  // namespace prt
 
-#endif  // PRT_PERSON_GEN_H
+#endif  // PRT_CITIZEN_GEN_H

@@ -105,7 +105,10 @@
   "cmake.useCMakePresets": "always",
   "cmake.options.statusBarVisibility": "compact",
   "workbench.colorCustomizations": {
-    "debugConsole.errorForeground": "#ff0000"
+    "debugConsole.errorForeground": "#ff0000",
+    "debugConsole.infoForeground": "#ffffff",
+    "debugConsole.sourceForeground": "#ffffff",
+    "debugConsole.warningForeground": "#ffffff"
   },
   "githubIssues.queries": [
     {

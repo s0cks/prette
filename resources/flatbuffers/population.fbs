@@ -1,0 +1,9 @@
+include "citizen.fbs";
+
+namespace prt.raw;
+
+table Population {
+  data: [Citizen];
+}
+
+root_type Population;

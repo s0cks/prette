@@ -15,12 +15,10 @@
 #include "prette/common.h"
 #include "prette/config/config_system.h"
 #include "prette/crash_report.h"
-#include "prette/ecl.h"
 #include "prette/engine/engine_event.h"
 #include "prette/engine/engine_lua_bindings.h"
 #include "prette/engine/engine_states.h"
 #include "prette/event.h"
-#include "prette/jsonnet.h"
 #include "prette/lua.h"
 #include "prette/lua_event.h"
 #include "prette/os_thread.h"
@@ -147,8 +145,9 @@ void Engine::Init(int argc, char** argv) {
   ConfigSystem::Init();
   SettingsSystem::InitSystem();
   InitLua();
-  InitLisp(argc, argv);
-  InitJsonnet();
+  // TODO:
+  //  InitLisp(argc, argv);
+  //  InitJsonnet();
   WorldManager::Init();
 }
 }  // namespace prt

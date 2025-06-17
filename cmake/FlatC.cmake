@@ -33,3 +33,23 @@ function(add_flatc_target target_name target_source)
       ${FLATC} ${FLATC_OPTS} ${target_source}
   )
 endfunction()
+
+function(add_schema_library lib_name schema_sources)
+  foreach(schema_source IN LISTS schema_sources)
+    get_filename_component(target_name ${schema_source} NAME_WLE)
+    set(target_name "${target_name}-schema")
+    list(APPEND lib_targets ${target_name})
+    add_flatc_target(${target_name} ${schema_source})
+  endforeach()
+  file(GLOB generated_sources
+    "${FLATC_OUTPUT_DIR}/*.h"
+    "${FLATC_OUTPUT_DIR}/*.cc")
+
+  add_library(${lib_name}
+    INTERFACE ${generated_sources})
+  target_include_directories(${lib_name}
+    INTERFACE ${FLATC_BINARY_DIR}/Sources)
+  target_link_libraries(${lib_name}
+    INTERFACE flatbuffers::flatbuffers)
+  add_dependencies(${lib_name} ${lib_targets})
+endfunction()

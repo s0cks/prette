@@ -1,6 +1,6 @@
 #include "prette/engine/engine_state_init.h"
 
-#include "prette/city_manager.h"
+#include "prette/city/city_manager.h"
 #include "prette/engine/engine.h"
 #include "prette/engine/engine_event.h"
 #include "prette/engine/engine_state.h"

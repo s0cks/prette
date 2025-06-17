@@ -7,7 +7,7 @@
 #include <utility>
 #include <vector>
 
-#include "prette/gender.h"
+#include "prette/citizen/gender.h"
 
 namespace prt {
 class ForenameGenerator {
@@ -65,7 +65,7 @@ class FullnameGenerator {
   ~FullnameGenerator() = default;
 
   auto Generate() -> std::pair<std::string, std::string> {
-    return std::make_pair(forename_, surname_);
+    return std::make_pair(forename_(), surname_());
   }
 
   inline auto operator()() -> std::pair<std::string, std::string> {

@@ -4,6 +4,7 @@
 #include <flatbuffers/flatbuffer_builder.h>
 #include <fstream>
 #include <ios>
+#include <ostream>
 #include <utility>
 #include <vector>
 
@@ -52,9 +53,13 @@ auto WorldStorage::Save(Chunk* chunk) const -> bool {
   return true;
 }
 
+static inline auto operator<<(std::ostream& stream, const WorldStorage::ChunkKey& k) -> std::ostream& {
+  return stream << glm::to_string(k);
+}
+
 auto WorldStorage::Load(const ChunkKey k, Chunk** result) const -> bool {
   const auto path = GetChunkPath(k);
-  DLOG(INFO) << "loading Chunk at " << glm::to_string(k);
+  DVLOG(2) << "loading chunk " << k << " from: " << path;
   std::fstream stream(path, std::ios::in | std::ios::binary);
   if (!stream.is_open()) {
     LOG(ERROR) << "failed to open " << path;

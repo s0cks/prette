@@ -5,8 +5,8 @@
 #include <string>
 #include <vector>
 
+#include "prette/citizen/gender.h"
 #include "prette/common.h"
-#include "prette/gender.h"
 #include "prette/names.h"
 
 namespace prt {

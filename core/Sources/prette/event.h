@@ -121,6 +121,21 @@ class EventSource {
   virtual auto OnEvent() const -> rx::observable<E*> = 0;
 };
 
+class Topic {
+ protected:
+  Topic() = default;
+
+  template <class E>
+  void PublishEventTo(const rx::subject<E*>& subject, E* event) const {
+    ASSERT(event);
+    const auto& subscriber = subject.get_subscriber();
+    return subscriber.on_next(event);
+  }
+
+ public:
+  ~Topic() = default;
+};
+
 template <class E>
 class EventSourceTemplate : public EventSource<E> {
  protected:

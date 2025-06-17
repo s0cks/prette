@@ -1,0 +1,11 @@
+include "gender.fbs";
+
+namespace prt.raw;
+
+table Citizen {
+  gender: Gender;
+  forename: string;
+  surname: string;
+}
+
+root_type Citizen;

@@ -6,7 +6,7 @@
 
 namespace prt {
 enum Gender : uint8_t {
-  kMale,
+  kMale = 0,
   kFemale,
 };
 
