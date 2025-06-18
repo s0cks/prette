@@ -1,6 +1,6 @@
-#include "prette/citizen/citizen_event.h"
+#include "prette/city/citizen_event.h"
 
-#include "prette/citizen/citizen.h"  // IWYU pragma: keep
+#include "prette/city/citizen.h"  // IWYU pragma: keep
 #include "prette/to_string.h"
 
 namespace prt {

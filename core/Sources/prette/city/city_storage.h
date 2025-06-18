@@ -28,7 +28,7 @@ class CityStorage {
   }
 
   void LoadIndex();
-  void SavePopulationTo(const fs::path& p, const Population& population);
+  void SavePopulationTo(const fs::path& p, Population& population);
   void LoadPopulationFrom(const fs::path& p, Population& population);
 
  public:
@@ -47,7 +47,7 @@ class CityStorage {
     return GetRoot() / fmt::format("{0:s}.dat", rhs.GetName());
   }
 
-  auto Save(const City& rhs) -> bool;
+  auto Save(City& rhs) -> bool;
   auto Load(const std::string& name) -> std::unique_ptr<City>;
   auto VisitAllCities(std::function<bool(const City&)> vis) -> bool;
 };

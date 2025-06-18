@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-#include "prette/citizen/gender.h"
+#include "prette/city/gender.h"
 #include "prette/common.h"
 #include "prette/names.h"
 
@@ -47,7 +47,7 @@ ForenameGenerator::ForenameGenerator(const uint64_t seed, const Gender gender) :
 }
 
 auto ForenameGenerator::Generate() -> std::string {
-  std::uniform_int_distribution<uint64_t> distribution(0, names_.size());
+  std::uniform_int_distribution<uint64_t> distribution(0, names_.size() - 1);
   return names_.at(distribution(random_));
 }
 
@@ -64,7 +64,7 @@ SurnameGenerator::SurnameGenerator(const uint64_t seed) :
 }
 
 auto SurnameGenerator::Generate() -> std::string {
-  std::uniform_int_distribution<uint64_t> distribution(0, names_.size());
+  std::uniform_int_distribution<uint64_t> distribution(0, names_.size() - 1);
   return names_.at(distribution(random_));
 }
 }  // namespace prt

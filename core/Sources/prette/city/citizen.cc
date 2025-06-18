@@ -1,4 +1,4 @@
-#include "prette/citizen/citizen.h"
+#include "prette/city/citizen.h"
 
 #include <flatbuffers/buffer.h>
 #include <flatbuffers/flatbuffer_builder.h>

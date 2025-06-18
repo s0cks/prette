@@ -7,7 +7,7 @@
 #include <utility>
 #include <vector>
 
-#include "prette/citizen/gender.h"
+#include "prette/city/gender.h"
 
 namespace prt {
 class ForenameGenerator {

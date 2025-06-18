@@ -13,7 +13,7 @@
 #include <uv.h>
 
 #include "prette/assertions.h"
-#include "prette/citizen/citizen.h"
+#include "prette/city/citizen.h"
 #include "prette/city/city_event.h"
 #include "prette/city/city_topic.h"
 #include "prette/city/population.h"

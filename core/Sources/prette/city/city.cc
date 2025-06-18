@@ -55,6 +55,7 @@ void City::CalculateTransplants() {
                                                               kMaxNumberOfImmigrantsPerTick);
   auto num_immigrants = static_cast<uint32_t>(distribution(random_));
   num_immigrants = static_cast<uint32_t>(round(static_cast<float>(num_immigrants) * attractiveness_));
+  DVLOG(2) << "creating " << num_immigrants << " immigrants....";
   for (auto idx = 0; idx < num_immigrants; idx++) {
     auto new_person = GetPopulation().CreateCitizen();
     ASSERT(new_person);
@@ -86,7 +87,7 @@ void City::UpdateTime() {
 
 void City::Update(const TickDelta delta) {
   UpdateTime();
-  CalculateAttractiveness();
+  // CalculateAttractiveness();
   population_.Update(delta);
   CalculateTransplants();
   topic_.PublishCityUpdatedEvent();

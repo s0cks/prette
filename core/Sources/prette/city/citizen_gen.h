@@ -7,7 +7,7 @@
 #include <string>
 #include <utility>
 
-#include "prette/citizen/gender.h"
+#include "prette/city/gender.h"
 #include "prette/name_gen.h"
 
 namespace prt {
@@ -42,4 +42,4 @@ class CitizenGenerator {
 };
 }  // namespace prt
 
-#endif  // PRT_CITIZEN_GEN_H
+#endif // PRT_CITIZEN_GEN_H

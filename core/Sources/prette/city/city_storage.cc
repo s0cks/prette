@@ -59,7 +59,7 @@ static inline void WriteTo(const flatbuffers::FlatBufferBuilder& fbb, const fs::
   stream.close();
 }
 
-auto CityStorage::Save(const City& rhs) -> bool {
+auto CityStorage::Save(City& rhs) -> bool {
   const auto& key = rhs.GetName();
 
   flatbuffers::FlatBufferBuilder fbb{};
@@ -79,7 +79,7 @@ auto CityStorage::Save(const City& rhs) -> bool {
   return true;
 }
 
-void CityStorage::SavePopulationTo(const fs::path& p, const Population& population) {
+void CityStorage::SavePopulationTo(const fs::path& p, Population& population) {
   std::fstream stream(p, std::ios::out | std::ios::binary | std::ios::trunc);
   flatbuffers::FlatBufferBuilder fbb{};
   const auto pop_offset = population.WriteTo(fbb);

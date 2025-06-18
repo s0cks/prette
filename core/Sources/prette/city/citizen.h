@@ -14,8 +14,8 @@
 #include "prette/rx.h"
 
 // IWYU pragma: begin_exports
-#include "prette/citizen/gender.h"
 #include "prette/citizen_generated.h"
+#include "prette/city/gender.h"
 #include "prette/needs.h"
 #include "prette/tick.h"
 // IWYU pragma: end_exports
@@ -28,6 +28,15 @@ using CitizenPredicate = std::function<bool(Citizen*)>;
 template <typename T>
 concept CitizenPredicateLike = requires(T predicate, Citizen* citizen) {
   { predicate(citizen) } -> std::convertible_to<bool>;
+};
+
+class CitizenVisitor {
+ protected:
+  CitizenVisitor() = default;
+
+ public:
+  virtual ~CitizenVisitor() = default;
+  virtual auto Visit(Citizen* rhs) -> bool = 0;
 };
 
 class Citizen {
@@ -46,11 +55,20 @@ class Citizen {
 
   void Update(const TickDelta delta);
 
+  inline auto LoadFrom(const raw::Citizen& rhs) -> Citizen& {
+    gender_ = static_cast<Gender>(rhs.gender());
+    forename_ = rhs.forename()->str();
+    surname_ = rhs.surname()->str();
+    return *this;
+  }
+
  public:
   Citizen() = default;
   Citizen(const Gender gender, const std::string forename, const std::string surname);
   explicit Citizen(const raw::Citizen& raw) :
-    Citizen(static_cast<Gender>(raw.gender()), raw.forename()->str(), raw.surname()->str()) {}
+    Citizen() {
+    LoadFrom(raw);
+  }
   ~Citizen();
 
   auto GetForename() const -> const std::string& {
@@ -73,8 +91,18 @@ class Citizen {
     return GetGender() == kFemale;
   }
 
+  inline auto Accept(CitizenVisitor* vis) -> bool {
+    ASSERT(vis);
+    return vis->Visit(this);
+  }
+
   auto ToString() const -> std::string;
   auto WriteTo(flatbuffers::FlatBufferBuilder& fbb) const -> flatbuffers::Offset<raw::Citizen>;
+
+  auto operator=(const raw::Citizen& rhs) -> Citizen& {
+    LoadFrom(rhs);
+    return *this;
+  }
 
   friend auto operator<<(std::ostream& stream, const Citizen& rhs) -> std::ostream& {
     return stream << rhs.ToString();

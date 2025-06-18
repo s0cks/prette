@@ -45,9 +45,9 @@ auto main(int argc, char** argv) -> int {
     const auto& city = manager->GetCity();
     ASSERT(city);
     DLOG(INFO) << "city: " << city->ToString();
-    // SUBSCRIBE_AND_LOG(city->GetTopic().GetNewDayEventObservable(), INFO);
-    // SUBSCRIBE_AND_LOG(city->GetTopic().GetNewMonthEventObservable(), INFO);
-    // SUBSCRIBE_AND_LOG(city->GetTopic().GetNewYearEventObservable(), INFO);
+    SUBSCRIBE_AND_LOG(city->GetTopic().GetNewDayEventObservable(), INFO);
+    SUBSCRIBE_AND_LOG(city->GetTopic().GetNewMonthEventObservable(), INFO);
+    SUBSCRIBE_AND_LOG(city->GetTopic().GetNewYearEventObservable(), INFO);
     // auto& population = city->GetPopulation();
     // if (population.IsEmpty()) {
     //   static constexpr const auto kMinCitizens = 2;

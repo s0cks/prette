@@ -104,7 +104,7 @@ class StateMachineTemplate {
 using InitCallback = Callback<void>;
 using ShutdownCallback = Callback<void>;
 
-static constexpr const auto kTargetTicksPerSecond = 120;
+static constexpr const auto kTargetTicksPerSecond = 60;
 static constexpr const auto kTargetTickRate = NSEC_PER_SEC / kTargetTicksPerSecond;
 class Engine : public StateMachineTemplate<EngineState> {
   friend class EngineTicker;

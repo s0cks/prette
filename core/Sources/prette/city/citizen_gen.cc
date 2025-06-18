@@ -1,9 +1,9 @@
-#include "prette/citizen/citizen_gen.h"
+#include "prette/city/citizen_gen.h"
 
 #include <cstdint>
 
 #include "prette/assertions.h"
-#include "prette/citizen/citizen.h"
+#include "prette/city/citizen.h"
 
 namespace prt {
 CitizenGenerator::CitizenGenerator(const uint64_t seed) :
