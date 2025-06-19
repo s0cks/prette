@@ -3,12 +3,14 @@
 
 #include <algorithm>
 #include <array>
+#include <chrono>
 #include <functional>
 #include <optional>
 #include <sstream>
 #include <string>
 #include <sys/unistd.h>
 #include <units.h>
+#include <utility>
 #include <uuid.h>
 #include <uv.h>
 #include <vector>
@@ -66,10 +68,12 @@
   auto operator=(const Name& rhs)->Name& = default;
 
 #if defined(__clang__) || defined(__GNUC__)
-#define NOT_IMPLEMENTED(Level) LOG(Level) << __PRETTY_FUNCTION__ << " is not implemented!";
+#define __PRT_FUNC_NAME__ __PRETTY_FUNCTION__
 #else
-#define NOT_IMPLEMENTED(Level) LOG(Level) << __FUNCTION__ << " is not implemented!";
+#define __PRT_FUNC_NAME__ __FUNCTION__
 #endif
+
+#define NOT_IMPLEMENTED(Level) LOG(Level) << __PRT_FUNC_NAME__ << " is not implemented!";
 
 struct lua_State;
 namespace prt {
@@ -371,6 +375,43 @@ class SinglyLinkedListIteratorTemplate {
     return next;
   }
 };
+
+class ScopeProfiler {
+  using Clock = std::chrono::high_resolution_clock;
+
+ private:
+  std::string name_;
+  Clock::time_point start_{};
+  Clock::time_point finish_{};
+
+ public:
+  explicit ScopeProfiler(const std::string name, const Clock::time_point start = Clock::now()) :
+    name_(std::move(name)),
+    start_(start) {}
+  ~ScopeProfiler() {
+    finish_ = Clock::now();
+    LOG(INFO) << name() << " finished in " << duration();
+  }
+
+  auto name() const -> const std::string& {
+    return name_;
+  }
+
+  auto start() const -> const Clock::time_point& {
+    return start_;
+  }
+
+  auto finish() const -> const Clock::time_point& {
+    return finish_;
+  }
+
+  template <typename Rep = std::chrono::milliseconds>
+  auto duration() const -> Rep {
+    return std::chrono::duration_cast<Rep>(finish() - start());
+  }
+};
+
+#define SCOPE_PROFILER(Name) ScopeProfiler Name(__PRT_FUNC_NAME__);
 }  // namespace prt
 
 #ifndef MAX_NUMBER_OF_FRAMES_IN_FLIGHT

@@ -3,7 +3,6 @@
 #include <vulkan/vulkan_core.h>
 
 #include "prette/assertions.h"
-#include "prette/chunk/chunk_metadata.h"
 #include "prette/config/config.h"  // IWYU pragma: keep
 #include "prette/glm.h"
 #include "prette/keyboard/keyboard.h"
@@ -14,10 +13,7 @@
 #include "prette/renderer_event.h"
 #include "prette/rx.h"
 #include "prette/settings/settings.h"
-#include "prette/tile.h"
 #include "prette/tile_mesh.h"
-#include "prette/world/world.h"
-#include "prette/world/world_manager.h"
 
 // clang-format on
 #define TINYOBJLOADER_IMPLEMENTATION
@@ -49,7 +45,6 @@ auto main(int argc, char** argv) -> int {
   if (VLOG_IS_ON(1)) {
     SUBSCRIBE_AND_LOG(GetConfigEventObservable(), INFO);
     SUBSCRIBE_AND_LOG(GetSettingsEventObservable(), INFO);
-    SUBSCRIBE_AND_LOG(GetWorldEventObservable(), INFO);
     SUBSCRIBE_AND_LOG(GetNonTickEngineEventObservable(), INFO);
     SUBSCRIBE_AND_LOG(GetNonFrameRendererEventObservable(), INFO);
 #ifdef PRT_ENABLE_LUA
@@ -69,19 +64,6 @@ auto main(int argc, char** argv) -> int {
 
   OnMouseMotion([](MouseMotionEvent* event) {
     const auto pos = Mouse::Get()->GetWorldPos();
-    ChunkPos chunk_pos(static_cast<uint32_t>(pos.x) / kChunkWidth, static_cast<uint32_t>(pos.y) / kChunkHeight);
-    const auto chunk = GetWorld()->GetChunkAt(chunk_pos);
-    if (!chunk)
-      return;
-    ASSERT(chunk);
-    chunk->VisitTiles([&pos](Tile* tile) {
-      if (!tile->Contains(pos)) {
-        tile->SetHovering(false);
-        return true;  // skip
-      }
-      tile->SetHovering(true);
-      return true;
-    });
   });
   const auto engine = GetEngine();
   ASSERT(engine);

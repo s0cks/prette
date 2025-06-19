@@ -11,7 +11,6 @@
 #include "prette/lua.h"
 #include "prette/rx.h"
 #include "prette/settings/settings.h"
-#include "prette/world/world.h"
 
 using namespace prt;
 
@@ -21,7 +20,6 @@ auto main(int argc, char** argv) -> int {
     SUBSCRIBE_AND_LOG(GetConfigEventObservable(), INFO);
     SUBSCRIBE_AND_LOG(GetSettingsEventObservable(), INFO);
     SUBSCRIBE_AND_LOG(GetLuaStateEventObservable(), INFO);
-    SUBSCRIBE_AND_LOG(GetWorldEventObservable(), INFO);
     SUBSCRIBE_AND_LOG(GetNonTickEngineEventObservable(), INFO);
   }
 

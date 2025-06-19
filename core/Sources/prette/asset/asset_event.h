@@ -1,4 +1,0 @@
-#ifndef PRT_ASSET_EVENT_H
-#define PRT_ASSET_EVENT_H
-
-#endif  // PRT_ASSET_EVENT_H

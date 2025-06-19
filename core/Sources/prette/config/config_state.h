@@ -5,18 +5,20 @@
 
 namespace prt {
 #define FOR_EACH_CONFIG_STATE(V) \
-  V(Loading)                     \
-  V(Loaded)                      \
-  V(Generated)                   \
-  V(Saving)                      \
-  V(Saved)
+  V(ConfigLoading)               \
+  V(ConfigLoaded)                \
+  V(ConfigGenerated)             \
+  V(ConfigSaving)                \
+  V(ConfigSaved)
 
 enum ConfigState {
+  // clang-format off
   kNoConfig = 0,
 #define DEFINE_STATE(Name) kConfig##Name,
   FOR_EACH_CONFIG_STATE(DEFINE_STATE)
 #undef DEFINE_STATE
-      kTotalNumberOfConfigStates,
+  // clang-format on
+  kTotalNumberOfConfigStates,
 };
 
 static inline auto operator<<(std::ostream& stream, const ConfigState& rhs) -> std::ostream& {

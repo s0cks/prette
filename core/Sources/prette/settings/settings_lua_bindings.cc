@@ -11,15 +11,11 @@
 namespace prt {
 #define LUA_SETTINGS_F(Name) LUA_F(settings_##Name)
 
-LUA_SETTINGS_F(onEvent) {
-  OnSettingsEvent(CreateSubscriber<SettingsEvent>(L));
-  return 0;
-}
-
-#define DEFINE_ON_EVENT_FUNC(Name)              \
-  LUA_SETTINGS_F(on##Name##Event) {             \
-    On##Name(CreateSubscriber<Name##Event>(L)); \
-    return 0;                                   \
+#define DEFINE_ON_EVENT_FUNC(Name)                           \
+  LUA_SETTINGS_F(on##Name##Event) {                          \
+    auto& topic = Settings::Get()->GetTopic();               \
+    topic.On##Name##Event(CreateSubscriber<Name##Event>(L)); \
+    return 0;                                                \
   }
 FOR_EACH_SETTINGS_EVENT(DEFINE_ON_EVENT_FUNC);
 #undef DEFINE_ON_EVENT_FUNC
@@ -32,7 +28,6 @@ DEFINE_LUALIB(Settings) {
 #define LUA_SETTINGS_F(Name) \
   {.name = #Name, .func = &lua_settings_##Name }
 
-LUA_SETTINGS_F(onEvent),
 #define DEFINE_ON_EVENT(Name) \
   LUA_SETTINGS_F(on##Name##Event),
   FOR_EACH_SETTINGS_EVENT(DEFINE_ON_EVENT)

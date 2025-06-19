@@ -13,7 +13,7 @@
 
 #include "prette/assertions.h"
 #include "prette/common.h"
-#include "prette/config/config_system.h"
+#include "prette/config/config.h"
 #include "prette/crash_report.h"
 #include "prette/engine/engine_event.h"
 #include "prette/engine/engine_lua_bindings.h"
@@ -23,11 +23,10 @@
 #include "prette/lua_event.h"
 #include "prette/os_thread.h"
 #include "prette/rx.h"
-#include "prette/settings/settings_system.h"
+#include "prette/settings/settings.h"
 #include "prette/signals.h"
 #include "prette/thread_local.h"
 #include "prette/uv/utils.h"
-#include "prette/world/world_manager.h"
 
 namespace prt {
 DEFINE_GLOBAL_EVENT_SUBJECT(EngineEvent, engine_events);
@@ -142,12 +141,11 @@ void Engine::Init(int argc, char** argv) {
   SetEngine(new Engine());
   ASSERT(IsEngineInitialized());
 
-  ConfigSystem::Init();
-  SettingsSystem::InitSystem();
+  InitConfig();
+  Settings::Init();
   InitLua();
   // TODO:
   //  InitLisp(argc, argv);
   //  InitJsonnet();
-  WorldManager::Init();
 }
 }  // namespace prt

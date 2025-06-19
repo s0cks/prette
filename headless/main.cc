@@ -11,12 +11,13 @@
 #include "prette/city/city_manager.h"
 #include "prette/common.h"
 #include "prette/config/config.h"
+#include "prette/config/config_topic.h"
 #include "prette/engine/engine.h"
 #include "prette/engine/engine_event.h"
 #include "prette/lua.h"
 #include "prette/rx.h"
 #include "prette/settings/settings.h"
-#include "prette/world/world.h"
+#include "prette/settings/settings_event.h"
 
 using std::toupper;
 
@@ -25,10 +26,16 @@ using namespace prt;
 auto main(int argc, char** argv) -> int {
   Engine::Init(argc, argv);
   if (VLOG_IS_ON(1)) {
-    SUBSCRIBE_AND_LOG(GetConfigEventObservable(), INFO);
-    SUBSCRIBE_AND_LOG(GetSettingsEventObservable(), INFO);
+#define DEFINE_SUBSCRIBE_AND_LOG(Name) SUBSCRIBE_AND_LOG(GetConfig()->GetTopic().Get##Name##EventObservable(), INFO);
+    FOR_EACH_CONFIG_TOPIC_EVENT(DEFINE_SUBSCRIBE_AND_LOG);
+#undef DEFINE_SUBSCRIBE_AND_LOG
+
+#define DEFINE_SUBSCRIBE_AND_LOG(Name) \
+  SUBSCRIBE_AND_LOG(Settings::Get()->GetTopic().Get##Name##EventObservable(), INFO);
+    FOR_EACH_SETTINGS_EVENT(DEFINE_SUBSCRIBE_AND_LOG);
+#undef DEFINE_SUBSCRIBE_AND_LOG
+
     SUBSCRIBE_AND_LOG(GetLuaStateEventObservable(), INFO);
-    SUBSCRIBE_AND_LOG(GetWorldEventObservable(), INFO);
     SUBSCRIBE_AND_LOG(GetNonTickEngineEventObservable(), INFO);
   }
 

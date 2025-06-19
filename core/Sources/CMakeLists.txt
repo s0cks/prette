@@ -63,6 +63,7 @@ list(APPEND PRT_CORE_LIBRARIES
   prette::namesdb
   rapidjson
   re2::re2
+  absl::status
   stduuid
   ${LUA_LIBRARIES}
   libuv::uv)

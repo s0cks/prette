@@ -25,8 +25,6 @@
 #include "prette/tile_mesh.h"
 #include "prette/uniform_buffer.h"
 #include "prette/vk.h"
-#include "prette/world/world.h"
-#include "prette/world/world_manager.h"
 
 namespace prt {
 static inline auto CreateTileDescriptors() -> vk::DescriptorSet* {

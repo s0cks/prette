@@ -35,7 +35,6 @@
 #include "prette/vk.h"
 #include "prette/vk_cmd_buffers.h"
 #include "prette/vk_physical_device.h"
-#include "prette/world/world_manager.h"
 
 namespace prt {
 SceneRenderPass::SceneRenderPass(const VkRenderPassCreateInfo* create_info) :
