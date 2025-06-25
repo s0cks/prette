@@ -11,6 +11,7 @@
 #include <utility>
 
 #include "prette/assertions.h"
+#include "prette/common.h"
 #include "prette/rx.h"
 
 // IWYU pragma: begin_exports
@@ -43,6 +44,7 @@ class Citizen {
   friend class City;
   friend class Population;
   friend class CitizenGenerator;
+  DEFINE_DEFAULT_COPYABLE_TYPE(Citizen);
 
  public:
   using NeedsData = std::array<float, kTotalNumberOfNeeds>;

@@ -1,6 +1,7 @@
 #include "prette/city/city.h"
 
 #include <chrono>
+#include <entt/entity/fwd.hpp>
 #include <flatbuffers/buffer.h>
 #include <flatbuffers/flatbuffer_builder.h>
 #include <marl/defer.h>
@@ -12,7 +13,9 @@
 #include <utility>
 
 #include "prette/assertions.h"
+#include "prette/city/building.h"
 #include "prette/city/city_event.h"
+#include "prette/city/housing.h"
 #include "prette/common.h"
 #include "prette/engine/engine.h"
 #include "prette/engine/engine_event.h"
@@ -46,50 +49,17 @@ City::~City() {
   on_tick_.unsubscribe();
 }
 
-void City::CalculateAttractiveness() {
-  attractiveness_ = 0.1f;
-}
-
-void City::CalculateTransplants() {
-  static std::uniform_int_distribution<uint32_t> distribution(kMinNumberOfImmigrantsPerTick,
-                                                              kMaxNumberOfImmigrantsPerTick);
-  auto num_immigrants = static_cast<uint32_t>(distribution(random_));
-  num_immigrants = static_cast<uint32_t>(round(static_cast<float>(num_immigrants) * attractiveness_));
-  DVLOG(2) << "creating " << num_immigrants << " immigrants....";
-  for (auto idx = 0; idx < num_immigrants; idx++) {
-    auto new_person = GetPopulation().CreateCitizen();
-    ASSERT(new_person);
-  }
-}
-
-void City::UpdateTime() {
-  hour_ += 1;
-  if (hour_ >= 24) {
-    hour_ = 0;
-    day_ += 1;
-    if ((month_ == 2 && day_ >= 27) || day_ >= 30) {
-      day_ = 0;
-      topic_.PublishNewDayEvent();
-      month_ += 1;
-      topic_.PublishNewMonthEvent();
-      if (month_ >= 12) {
-        month_ = 0;
-        year_ += 1;
-        topic_.PublishNewYearEvent();
-      } else {
-        topic_.PublishNewMonthEvent();
-      }
-    } else {
-      topic_.PublishNewDayEvent();
-    }
-  }
+auto City::NewHousing(const HousingType type, const uint64_t num_units, const glm::fvec2 pos) -> entt::entity {
+  const auto entity = registry_.create();
+  registry_.emplace<Housing>(entity, type, num_units);
+  registry_.emplace<Building>(entity, std::move(pos));
+  return entity;
 }
 
 void City::Update(const TickDelta delta) {
-  UpdateTime();
+  calendar_.Update(delta);
   // CalculateAttractiveness();
   population_.Update(delta);
-  CalculateTransplants();
   topic_.PublishCityUpdatedEvent();
 }
 

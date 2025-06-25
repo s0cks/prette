@@ -36,8 +36,9 @@ void Population::Update(const TickDelta delta) {
     num_updated += 1;
   }
   PRT_PROFILING_END(update_citizens);
-  VLOG_IF_EVERY_N(1, num_updated > 0, 100000) << "updated " << num_updated << " Citizens for " << GetOwner()->ToString()
-                                              << " (" << update_citizens_duration.count() << "ns)";
+  VLOG_IF_EVERY_N(1, ((uint64_t)num_updated) > 0, 100000)
+      << "updated " << num_updated << " Citizens for " << GetOwner()->ToString() << " ("
+      << update_citizens_duration.count() << "ns)";
 }
 
 void Population::LoadFrom(const raw::Population& raw) {

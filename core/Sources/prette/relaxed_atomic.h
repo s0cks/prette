@@ -43,7 +43,7 @@ class RelaxedAtomic {
     return value_.compare_exchange_strong(expected, desired, order, order);
   }
 
-  explicit operator T() const {
+  operator T() const {
     return load();
   }
 

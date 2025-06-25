@@ -11,4 +11,12 @@
           </ArrayItems>
       </Expand>
   </Type>
+  <Type Name="prt::CalendarState">
+    <Expand>
+        <Item Name="[hour]">(uint64_t)hour</Item>
+        <Item Name="[day]">(uint64_t)day</Item>
+        <Item Name="[month]">(uint64_t)month</Item>
+        <Item Name="[year]">(uint64_t)year</Item>
+    </Expand>
+</Type>
 </AutoVisualizer>
